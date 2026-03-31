@@ -43,10 +43,6 @@ export default {
           role: 'user',
           content: `Check local search visibility for:\nBusiness: ${businessName}\nCategory: ${category}\nSearch term: "${searchTerm}"\n\nReturn this JSON:\n{"positive": true, "headline": "One sentence max 12 words", "body": "2-3 sentences about the result.", "search_term_used": "${searchTerm}"}`
         }],
-        tools: [{
-          type: 'web_search_20250305',
-          name: 'web_search'
-        }]
       })
     });
 
