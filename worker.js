@@ -1,3 +1,5 @@
+// papamoa-claude-proxy v1?
+?
 export default {
   async fetch(request, env) {
     if (request.method === 'OPTIONS') {
