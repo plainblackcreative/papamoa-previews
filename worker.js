@@ -1,5 +1,4 @@
 // papamoa-claude-proxy v1
-
 export default {
   async fetch(request, env) {
     if (request.method === 'OPTIONS') {
@@ -39,22 +38,10 @@ export default {
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 600,
-        system: 'You are a local search visibility checker for Papamoa.info, a business directory in Pāpāmoa, New Zealand. Always return valid JSON only — no markdown, no preamble.',
+        system: 'You are a local search visibility checker for Papamoa.info, a business directory in Papamoa, New Zealand. Always return valid JSON only.',
         messages: [{
           role: 'user',
-          content: `Check local search visibility for:
-Business: ${businessName}
-Category: ${category}
-Search term: "${searchTerm}"
-
-Search the web for this term and Papamoa-specific variations.
-Return this exact JSON:
-{
-  "positive": true or false,
-  "headline": "One punchy sentence, max 12 words",
-  "body": "2-3 sentences explaining the result and how papamoa.info helps.",
-  "search_term_used": "the exact term searched"
-}`
+          content: `Check local search visibility for:\nBusiness: ${businessName}\nCategory: ${category}\nSearch term: "${searchTerm}"\n\nReturn this JSON:\n{"positive": true, "headline": "One sentence max 12 words", "body": "2-3 sentences about the result.", "search_term_used": "${searchTerm}"}`
         }],
         tools: [{
           type: 'web_search_20250305',
@@ -78,17 +65,17 @@ Return this exact JSON:
     }
 
     const data = await claudeResponse.json();
-    const textBlock = data.content?.find(b => b.type === 'text');
-    const rawText = textBlock?.text || '';
+    const textBlock = data.content && data.content.find(function(b) { return b.type === 'text'; });
+    const rawText = textBlock ? textBlock.text : '';
 
     let result;
     try {
       result = JSON.parse(rawText.replace(/```json|```/g, '').trim());
-    } catch {
+    } catch(e) {
       result = {
         positive: false,
         headline: 'Try a more specific search term',
-        body: 'Try something like "best café in Papamoa" or "plumber Papamoa Beach."',
+        body: 'Try something like "best cafe in Papamoa" or "plumber Papamoa Beach."',
         search_term_used: searchTerm
       };
     }
