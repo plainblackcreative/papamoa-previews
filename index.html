@@ -779,7 +779,7 @@ body {
           <input type="text" name="first_name" placeholder="Your first name" required class="vis-input">
           <input type="text" name="business_name" placeholder="Business name" required class="vis-input">
         </div>
-        <input type="url" name="website" placeholder="Website URL (e.g. yourbusiness.co.nz)" class="vis-input">
+        <input type="text" name="website" placeholder="Website (e.g. yourbusiness.co.nz)" class="vis-input">
         <select name="category" required class="vis-select">
           <option value="" disabled selected>Business category</option>
           <option>Accommodation</option>
@@ -816,7 +816,7 @@ body {
     </div>
     <div class="jayden-contact">
       <a href="tel:0275332970" class="jayden-btn primary">027 533 2970</a>
-      <a href="mailto:jayden@papamoa.info" class="jayden-btn secondary">jayden@papamoa.info</a>
+      <a href="/cdn-cgi/l/email-protection#771d160e13121937071607161a1816591e191118" class="jayden-btn secondary"><span class="__cf_email__" data-cfemail="385259415c5d5678485948595557591651565e57">[email&#160;protected]</span></a>
     </div>
   </div>
 </div>
@@ -824,10 +824,10 @@ body {
 <!-- FOOTER -->
 <footer class="footer">
   <a href="https://papamoa.info">papamoa.info</a> · Part of the TaurangaNZ.info network — trusted since 2005<br>
-  © 2026 Papamoa.info · <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a> · 027 533 2970
+  © 2026 Papamoa.info · <a href="/cdn-cgi/l/email-protection#bcd6ddc5d8d9d2fcccddccddd1d3dd92d5d2dad3"><span class="__cf_email__" data-cfemail="e58f849c81808ba595849584888a84cb8c8b838a">[email&#160;protected]</span></a> · 027 533 2970
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 async function submitVisibility(e) {
   e.preventDefault();
   const btn = document.getElementById('submit-btn');
@@ -841,21 +841,3 @@ async function submitVisibility(e) {
     const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       body: data
-    });
-    const result = await response.json();
-    if (result.success) {
-      form.style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    } else {
-      btn.textContent = 'Try again';
-      btn.disabled = false;
-    }
-  } catch (err) {
-    btn.textContent = 'Try again';
-    btn.disabled = false;
-  }
-}
-</script>
-
-</body>
-</html>
