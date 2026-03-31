@@ -28,6 +28,20 @@ export default {
       return new Response('Missing required fields', { status: 400 });
     }
 
+    if (!env.CLAUDE_API_KEY) {
+      return new Response(JSON.stringify({
+        positive: false,
+        headline: 'Configuration error',
+        body: 'API key not found in environment.',
+        search_term_used: searchTerm
+      }), {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      });
+    }
+
     const claudeResponse = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -36,21 +50,35 @@ export default {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-5',
         max_tokens: 600,
-        system: 'You are a local search visibility checker for Papamoa.info, a business directory in Papamoa, New Zealand. Always return valid JSON only.',
+        system: 'You are a local search visibility checker for Papamoa.info, a business directory in Papamoa, New Zealand. Always return valid JSON only — no markdown, no preamble, no explanation outside the JSON.',
         messages: [{
           role: 'user',
-          content: `Check local search visibility for:\nBusiness: ${businessName}\nCategory: ${category}\nSearch term: "${searchTerm}"\n\nReturn this JSON:\n{"positive": true, "headline": "One sentence max 12 words", "body": "2-3 sentences about the result.", "search_term_used": "${searchTerm}"}`
-        }],
+          content: `Check local search visibility for this business:
+Business: ${businessName}
+Category: ${category}
+Search term: "${searchTerm}"
+
+Based on your knowledge of local NZ search and this business type, assess whether this business is likely visible for this search term in Papamoa.
+
+Return this exact JSON:
+{
+  "positive": true or false,
+  "headline": "One punchy sentence, max 12 words",
+  "body": "2-3 sentences explaining the result and how a papamoa.info listing helps.",
+  "search_term_used": "${searchTerm}"
+}`
+        }]
       })
     });
 
     if (!claudeResponse.ok) {
+      const errorText = await claudeResponse.text();
       return new Response(JSON.stringify({
         positive: false,
         headline: 'Search check temporarily unavailable',
-        body: 'Please try again or call Jayden on 027 533 2970.',
+        body: 'Please try again or call Jayden on 027 533 2970. Error: ' + claudeResponse.status,
         search_term_used: searchTerm
       }), {
         headers: {
@@ -84,4 +112,3 @@ export default {
     });
   }
 };
-
