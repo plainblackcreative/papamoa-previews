@@ -747,6 +747,138 @@ body {
   color: rgba(255,255,255,0.4);
 }
 
+/* CTA SECTION */
+.cta-section {
+  background: white;
+  border-radius: var(--r);
+  padding: 40px 32px;
+  text-align: center;
+  margin-top: 48px;
+  box-shadow: var(--shadow-md);
+  animation: fadeUp 0.5s ease 0.4s both;
+}
+.cta-inner { max-width: 600px; margin: 0 auto; }
+.cta-section h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--navy);
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+.cta-section > .cta-inner > p {
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+/* TIER CARDS */
+.pricing-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+@media (max-width: 520px) { .pricing-row { grid-template-columns: 1fr; } }
+
+.price-card {
+  border: 2px solid var(--sand-dark);
+  border-radius: 10px;
+  padding: 18px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  background: var(--sand);
+}
+.price-card:hover { border-color: var(--blue); background: white; }
+.price-card.selected { border-color: var(--gold); background: var(--gold-pale); }
+.price-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.price-tier-name {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.price-tier-name.gold { color: var(--gold); }
+.price-tier-name.silver { color: var(--navy); }
+.price-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: var(--gold);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.price-amount {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1;
+}
+.price-amount span { font-size: 13px; font-weight: 400; color: var(--ink-muted); }
+.price-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.price-features li {
+  font-size: 12px;
+  color: var(--ink-soft);
+  padding: 3px 0;
+  line-height: 1.4;
+}
+.price-card.selected .price-features li { color: var(--ink); }
+
+/* CLAIM FORM */
+#claim-form { margin-top: 4px; }
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.claim-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1.5px solid var(--sand-dark);
+  background: white;
+  color: var(--ink);
+  font-family: 'Figtree', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.claim-input:focus { border-color: var(--blue); }
+.claim-input::placeholder { color: var(--ink-muted); }
+.btn-claim {
+  width: 100%;
+  background: var(--navy);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+}
+.btn-claim:hover { background: var(--navy-light); transform: translateY(-1px); }
+.btn-claim:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.cta-fine {
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
 /* JAYDEN SIGN-OFF */
 .signoff {
   display: flex;
@@ -1293,28 +1425,39 @@ function switchMockup(tier) {
   <div class="cta-section" id="claim">
     <div class="cta-inner">
       <h2>Ready to claim <span data-biz="name">your listing</span>?</h2>
-      <p>
-        Listing live within 24 hours of approval. We write everything —
-        you just review and sign off. Founding member price locked for life.
-      </p>
+      <p>Listing live within 24 hours of approval. We write everything — you just review and sign off. Founding member price locked for life.</p>
 
       <!-- TIER SELECTOR -->
-      <div class="pricing-row" style="margin-bottom:20px">
+      <div class="pricing-row">
         <div class="price-card selected" id="card-gold" onclick="selectTier('Gold')">
-          <div class="tier-name">Gold</div>
-          <div class="amount">$1,200 <span>+GST/yr</span></div>
-          <div class="desc">Spotlight position + unlimited AI sub-pages + TaurangaNZ.info listing free</div>
-          <span class="popular">Founding Member</span>
+          <div class="price-card-header">
+            <div class="price-tier-name gold">Gold</div>
+            <span class="price-badge">Founding Member</span>
+          </div>
+          <div class="price-amount">$1,200 <span>+GST/yr</span></div>
+          <ul class="price-features">
+            <li>✓ Spotlight — top of your sub-category</li>
+            <li>✓ Unlimited AI sub-pages included free</li>
+            <li>✓ TaurangaNZ.info Silver listing free</li>
+            <li>✓ Lifetime price lock</li>
+          </ul>
         </div>
         <div class="price-card" id="card-silver" onclick="selectTier('Silver')">
-          <div class="tier-name">Silver</div>
-          <div class="amount">$599 <span>+GST/yr</span></div>
-          <div class="desc">Full SEO listing, up to 9 images, all contact links</div>
+          <div class="price-card-header">
+            <div class="price-tier-name silver">Silver</div>
+          </div>
+          <div class="price-amount">$599 <span>+GST/yr</span></div>
+          <ul class="price-features">
+            <li>✓ Full SEO listing</li>
+            <li>✓ Up to 9 images</li>
+            <li>✓ All contact &amp; social links</li>
+            <li>✓ Lifetime price lock</li>
+          </ul>
         </div>
       </div>
 
       <!-- WEB3FORMS CLAIM FORM -->
-      <form id="claim-form" onsubmit="submitClaim(event)" style="max-width:420px;margin:0 auto 16px">
+      <form id="claim-form" onsubmit="submitClaim(event)">
         <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
         <input type="hidden" name="form_name" value="ppp-claim">
         <input type="hidden" name="subject" id="form-subject" value="New listing claim — Gold — The Driftwood Café">
@@ -1323,37 +1466,21 @@ function switchMockup(tier) {
         <input type="hidden" name="tier" id="form-tier" value="Gold">
         <input type="hidden" name="redirect" value="false">
         <input type="hidden" name="botcheck" style="display:none">
-
-        <input
-          type="text"
-          name="contact_name"
-          placeholder="Your name"
-          required
-          style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:white;font-family:'Figtree',sans-serif;font-size:14px;margin-bottom:10px;outline:none;"
-        >
-        <input
-          type="email"
-          name="email"
-          placeholder="Email address"
-          required
-          style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:white;font-family:'Figtree',sans-serif;font-size:14px;margin-bottom:10px;outline:none;"
-        >
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone number"
-          style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:white;font-family:'Figtree',sans-serif;font-size:14px;margin-bottom:16px;outline:none;"
-        >
+        <div class="form-fields">
+          <input type="text" name="contact_name" placeholder="Your name" required class="claim-input">
+          <input type="email" name="email" placeholder="Email address" required class="claim-input">
+          <input type="tel" name="phone" placeholder="Phone number" class="claim-input">
+        </div>
         <button type="submit" class="btn-claim" id="claim-btn">Claim this listing →</button>
+        <div class="cta-fine">Annual subscription · GST invoice on approval</div>
       </form>
 
-      <div id="claim-success" style="display:none;text-align:center;padding:20px">
-        <div style="font-size:32px;margin-bottom:12px">✓</div>
-        <div style="color:white;font-size:16px;font-weight:600;margin-bottom:8px">Got it — Jayden will be in touch within 24 hours.</div>
-        <div style="color:rgba(255,255,255,0.6);font-size:13px">Or call directly: <a href="tel:0275332970" style="color:var(--blue)">027 533 2970</a></div>
+      <div id="claim-success" style="display:none;text-align:center;padding:24px 0">
+        <div style="font-size:40px;margin-bottom:12px">✓</div>
+        <div style="color:var(--ink);font-size:17px;font-weight:600;margin-bottom:8px">Got it — Jayden will be in touch within 24 hours.</div>
+        <div style="color:var(--ink-soft);font-size:14px">Or call directly: <a href="tel:0275332970" style="color:var(--blue);font-weight:600">027 533 2970</a></div>
       </div>
 
-      <div class="cta-fine">Annual subscription · GST invoice on approval · 2027 ROI guarantee</div>
     </div>
   </div>
 
