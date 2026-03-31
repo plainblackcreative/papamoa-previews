@@ -73,14 +73,14 @@ Return this exact JSON:
       })
     });
 
-    if (!claudeResponse.ok) {
-      const errorText = await claudeResponse.text();
-      return new Response(JSON.stringify({
-        positive: false,
-        headline: 'Search check temporarily unavailable',
-        body: 'Please try again or call Jayden on 027 533 2970. Error: ' + claudeResponse.status,
-        search_term_used: searchTerm
-      }), {
+if (!claudeResponse.ok) {
+  const errorText = await claudeResponse.text();
+  return new Response(JSON.stringify({
+    positive: false,
+    headline: 'Search check temporarily unavailable',
+    body: errorText,
+    search_term_used: searchTerm
+  }), {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
