@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papamoa.info — Site Index</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-ocean: #3AABDE;
+      --color-ocean-deep: #2B3F5C;
+      --color-ocean-light: #e8f6fc;
+      --color-sand: #f5f0e8;
+      --color-sand-dark: #e8e0d0;
+      --color-dune: #c4a882;
+      --color-text: #1a1a1a;
+      --color-text-soft: #555;
+      --color-text-light: #888;
+      --color-white: #ffffff;
+      --color-border: #e2ddd5;
+      --color-green: #7DC143;
+      --color-green-light: #f0f8e8;
+      --color-red: #E8344A;
+      --color-amber: #f59e0b;
+      --radius: 8px;
+      --font-body: 'Figtree', sans-serif;
+      --font-display: 'Playfair Display', serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-sand);
+      color: var(--color-text);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    .site-header {
+      background: var(--color-ocean-deep);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .site-header h1 {
+      font-family: var(--font-display);
+      color: var(--color-white);
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+    .site-header h1 span { color: var(--color-ocean); }
+    .site-header p {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.8rem;
+      margin-top: 3px;
+    }
+    .repo-badge {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.75rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .repo-badge:hover { background: rgba(255,255,255,0.18); color: #fff; }
+
+    /* CONTROLS */
+    .controls {
+      background: var(--color-white);
+      border-bottom: 1px solid var(--color-border);
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 180px;
+      max-width: 320px;
+    }
+    .search-wrap svg {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text-light);
+      pointer-events: none;
+    }
+    #search {
+      width: 100%;
+      padding: 8px 12px 8px 34px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--color-text);
+      background: var(--color-sand);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    #search:focus { border-color: var(--color-ocean); background: #fff; }
+
+    .filter-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+    .pill {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid var(--color-border);
+      background: transparent;
+      color: var(--color-text-soft);
+      transition: all 0.15s;
+      font-family: var(--font-body);
+    }
+    .pill:hover { border-color: var(--color-ocean); color: var(--color-ocean-deep); }
+    .pill.active { background: var(--color-ocean-deep); border-color: var(--color-ocean-deep); color: #fff; }
+
+    .page-count {
+      margin-left: auto;
+      font-size: 0.78rem;
+      color: var(--color-text-light);
+      white-space: nowrap;
+    }
+
+    /* MAIN */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 36px 24px 64px;
+    }
+
+    /* SECTION */
+    .section { margin-bottom: 44px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--color-border);
+    }
+    .section-icon {
+      width: 30px; height: 30px;
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--color-ocean-deep);
+    }
+    .section-count {
+      margin-left: auto;
+      font-size: 0.73rem;
+      color: var(--color-text-light);
+      background: var(--color-sand-dark);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+      gap: 10px;
+    }
+    .card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--color-ocean);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    a.card:hover {
+      box-shadow: 0 4px 18px rgba(43,63,92,0.1);
+      border-color: var(--color-ocean);
+      transform: translateY(-1px);
+    }
+    a.card:hover::before { opacity: 1; }
+
+    .card-icon { font-size: 1.1rem; line-height: 1; margin-top: 1px; flex-shrink: 0; }
+    .card-body { flex: 1; min-width: 0; }
+    .card-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-path {
+      font-size: 0.7rem;
+      color: var(--color-text-light);
+      margin-top: 2px;
+      font-family: 'Courier New', monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-desc {
+      font-size: 0.78rem;
+      color: var(--color-text-soft);
+      margin-top: 5px;
+      line-height: 1.45;
+    }
+    .card-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 7px; }
+    .tag {
+      font-size: 0.63rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .tag-gold     { background: #fef3c7; color: #92400e; }
+    .tag-silver   { background: #f1f5f9; color: #475569; }
+    .tag-placeholder { background: var(--color-green-light); color: #3a6b10; }
+    .tag-demo     { background: var(--color-ocean-light); color: #1a6b9a; }
+    .tag-ppp      { background: #fdf2f8; color: #9d174d; }
+    .tag-admin    { background: #fff7ed; color: #9a3412; }
+    .tag-wip      { background: #fef9c3; color: #854d0e; }
+
+    /* Disabled card (not-yet-built) */
+    .card.disabled {
+      opacity: 0.45;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* No results */
+    .no-results { display: none; text-align: center; padding: 64px 20px; }
+    .no-results.visible { display: block; }
+    .no-results h3 { font-size: 1rem; margin-bottom: 6px; color: var(--color-text-soft); }
+    .no-results p { font-size: 0.85rem; color: var(--color-text-light); }
+
+    .section.hidden { display: none; }
+    .card.hidden { display: none; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.78rem;
+      color: var(--color-text-light);
+      border-top: 1px solid var(--color-border);
+    }
+
+    @media (max-width: 600px) {
+      .site-header { padding: 20px 16px; }
+      .controls { padding: 10px 16px; }
+      .main { padding: 24px 14px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <h1>Papamoa.info <span>/ Site Index</span></h1>
+    <p>plainblackcreative/papamoa-previews · GitHub Pages</p>
+  </div>
+  <a href="https://github.com/plainblackcreative/papamoa-previews" class="repo-badge" target="_blank">↗ GitHub Repo</a>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="search" type="text" placeholder="Search pages…" autocomplete="off">
+  </div>
+  <div class="filter-pills">
+    <button class="pill active" data-filter="all">All</button>
+    <button class="pill" data-filter="root">Root</button>
+    <button class="pill" data-filter="listings">Listings</button>
+    <button class="pill" data-filter="categories">Categories</button>
+    <button class="pill" data-filter="sales">Sales</button>
+    <button class="pill" data-filter="previews">Previews</button>
+    <button class="pill" data-filter="onboarding">Onboarding</button>
+    <button class="pill" data-filter="admin">Admin</button>
+    <button class="pill" data-filter="docs">Docs</button>
+  </div>
+  <span class="page-count" id="page-count"></span>
+</div>
+
+<main class="main">
+
+  <!-- ROOT -->
+  <section class="section" data-section="root">
+    <div class="section-header">
+      <div class="section-icon" style="background:#e8f6fc">🏠</div>
+      <span class="section-title">Root</span>
+      <span class="section-count"></span>
+    </div>
+    <div class="cards">
+      <a href="/index.html" class="card" data-name="Sales Landing" data-section="root sales">
+        <span class="card-icon">🎯</span>
+        <div class="card-body">
+          <div class="card-name">Sales Landing</div>
+          <div class="card-path">/index.html</div>
+          <div class="card-desc">Main entry — cold email CTA destination with Web3Forms visibility form</div>
+        </div>
+      </a>
+      <a href="/homepage.html" class="card" data-name="Directory Homepage" data-section="root">
+        <span class="card-icon">🗂️</span>
+        <div class="card-body">
+          <div class="card-name">Directory Homepage</div>
+          <div class="card-path">/homepage.html</div>
+          <div class="card-desc">Category browse — Food & Drink, Surf & Tides, and more</div>
+        </div>
+      </a>
+      <a href="/all-listings.html" class="card" data-name="All Listings Showcase" data-section="root">
+        <span class="card-icon">📋</span>
+        <div class="card-body">
+          <div class="card-name">All Listings Showcase</div>
+          <div class="card-path">/all-listings.html</div>
+          <div class="card-desc">Demo of all live listings — directory overview for prospects</div>
+        </div>
+      </a>
+      <a href="/sitemap.html" class="card" data-name="Site Index" data-section="root">
+        <span class="card-icon">🗺️</span>
+        <div class="card-body">
+          <div class="card-name">Site Index</div>
+          <div class="card-path">/sitemap.html</div>
+          <div class="card-desc">You are here</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- LISTINGS -->
+  <section class="section" data-section="listings">
+    <div class="section-header">
+      <div class="section-icon" style="background:#f0f8e8">📍</div>
+      <span class="section-title">Listings</span>
+      <span class="section-count"></span>
+    </div>
+    <div class="cards">
+      <a href="/listings/the-wagon-papamoa.html" class="card" data-name="The Wagon Pāpāmoa" data-section="listings">
+        <span class="card-icon">🍔</span>
+        <div class="card-body">
+          <div class="card-name">The Wagon Pāpāmoa</div>
+          <div class="card-path">/listings/the-wagon-papamoa.html</div>
+          <div class="card-desc">Gold listing demo with Menu Add-On — Food & Drink</div>
+          <div class="card-tags"><span class="tag tag-gold">Gold</span><span class="tag tag-demo">Demo</span></div>
+        </div>
+      </a>
+      <a href="/listings/papamoa-orthodontist.html" class="card" data-name="Pāpāmoa Orthodontist" data-section="listings">
+        <span class="card-icon">🦷</span>
+        <div class="card-body">
+          <div class="card-name">Pāpāmoa Orthodontist</div>
+          <div class="card-path">/listings/papamoa-orthodontist.html</div>
+          <div class="card-desc">Professional services listing demo</div>
+          <div class="card-tags"><span class="tag tag-demo">Demo</span></div>
+        </div>
+      </a>
+      <a href="/listings/lawn-mowing-papamoa.html" class="card" data-name="Lawn Mowing Pāpāmoa" data-section="listings">
+        <span class="card-icon">🌿</span>
+        <div class="card-body">
+          <div class="card-name">Lawn Mowing Pāpāmoa</div>
+          <div class="card-path">/listings/lawn-mowing-papamoa.html</div>
+          <div class="card-desc">Placeholder — captures enquiries while sub-category is empty</div>
+          <div class="card-tags"><span class="tag tag-placeholder">Placeholder</span></div>
+        </div>
+      </a>
+      <a href="/listings/greencut-papamoa.html" class="card" data-name="Greencut Pāpāmoa" data-section="listings">
+        <span class="card-icon">✂️</span>
+        <div class="card-body">
+          <div class="card-name">Greencut Pāpāmoa</div>
+          <div class="card-path">/listings/greencut-papamoa.html</div>
+          <div class="card-desc">Lawn & garden listing demo</div>
+          <div class="card-tags"><span class="tag tag-demo">Demo</span></div>
+        </div>
+      </a>
+      <a href="/listings/speedy-screens-papamoa.html" class="card" data-name="Speedy Screens Pāpāmoa" data-section="listings">
+        <span class="card-icon">🔧</span>
+        <div class="card-body">
+          <div class="card-name">Speedy Screens Pāpāmoa</div>
+          <div class="card-path">/listings/speedy-screens-papamoa.html</div>
+          <div class="card-desc">Trades listing demo</div>
+          <div class="card-tags"><span class="tag tag-demo">Demo</span></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section" data-section="categories">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fdf2f8">🗃️</div>
+      <span class="section-title">Categories</span>
+      <span class="section-count"></span>
+    </div>
+    <div class="cards">
+      <a href="/categories/lawn-mowing.html" class="card" data-name="Lawn Mowing" data-section="categories">
+        <span class="card-icon">🌱</span>
+        <div class="card-body">
+          <div class="card-name">Lawn Mowing</div>
+          <div class="card-path">/categories/lawn-mowing.html</div>
+          <div class="card-desc">Sub-category listing page</div>
+        </div>
+      </a>
+      <a href="/categories/fishing.html" class="card" data-name="Fishing & Surf" data-section="categories">
+        <span class="card-icon">🎣</span>
+        <div class="card-body">
+          <div class="card-name">Fishing & Surf</div>
+          <div class="card-path">/categories/fishing.html</div>
+          <div class="card-desc">Surf & Tides sub-category page</div>
+        </div>
+      </a>
+      <a href="/categories/gardening.html" class="card" data-name="Gardening" data-section="categories">
+        <span class="card-icon">🪴</span>
+        <div class="card-body">
+          <div class="card-name">Gardening</div>
+          <div class="card-path">/categories/gardening.html</div>
+          <div class="card-desc">Gardening sub-category page</div>
+        </div>
+      </a>
+      <div class="card disabled" data-name="Entertainment" data-section="categories">
+        <span class="card-icon">🎭</span>
+        <div class="card-body">
+          <div class="card-name">Entertainment</div>
+          <div class="card-path">/categories/entertainment.html</div>
+          <div class="card-tags"><span class="tag tag-wip">Not built</span></div>
+        </div>
+      </div>
+      <div class="card disabled" data-name="Shopping" data-section="categories">
+        <span class="card-icon">🛍️</span>
+        <div class="card-body">
+          <div class="card-name">Shopping</div>
+          <div class="card-path">/categories/shopping.html</div>
+          <div class="card-tags"><span class="tag tag-wip">Not built</span></div>
+        </div>
+      </div>
+      <div class="card disabled" data-name="Services" data-section="categories">
+        <span class="card-icon">🛠️</span>
+        <div class="card-body">
+          <div class="card-name">Services</div>
+          <div class="card-path">/categories/services.html</div>
+          <div class="card-tags"><span class="tag tag-wip">Not built</span></div>
+        </div>
+      </div>
+      <div class="card disabled" data-name="Accommodation" data-section="categories">
+        <span class="card-icon">🏨</span>
+        <div class="card-body">
+          <div class="card-name">Accommodation</div>
+          <div class="card-path">/categories/accommodation.html</div>
+          <div class="card-tags"><span class="tag tag-wip">Not built</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SALES -->
+  <section class="section" data-section="sales">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fff7ed">💼</div>
+      <span class="section-title">Sales</span>
+      <span class="section-count"></span>
+    </div>
+    <div class="cards">
+      <a href="/sales/landing.html" class="card" data-name="Sales Landing copy" data-section="sales">
+        <span class="card-icon">🎯</span>
+        <div class="card-body">
+          <div class="card-name">Sales Landing (copy)</div>
+          <div class="card-path">/sales/landing.html</div>
+          <div class="card-desc">Mirror of index.html — brand green logo fix still needed</div>
+          <div class="card-tags"><span class="tag tag-wip">Logo fix needed</span></div>
+        </div>
+      </a>
+      <a href="/sales/main-lander.html" class="card" data-name="Main Lander" data-section="sales">
+        <span class="card-icon">📣</span>
+        <div class="card-body">
+          <div class="card-name">Main Lander</div>
+          <div class="card-path">/sales/main-lander.html</div>
+          <div class="card-desc">Main sales lander with Web3Forms CTA</div>
+        </div>
+      </a>
+      <a href="/sales/menu-addon.html" class="card" data-name="Menu Add-On Sales Page" data-section="sales">
+        <span class="card-icon">🍽️</span>
+        <div class="card-body">
+          <div class="card-name">Menu Add-On Sales Page</div>
+          <div class="card-path">/sales/menu-addon.html</div>
+          <div class="card-desc">Dedicated pitch page for the $199/yr Menu Add-On</div>
+        </div>
+      </a>
+      <a href="/sales/why-list.html" class="card" data-name="Why List Editorial" data-section="sales">
+        <span class="card-icon">📰</span>
+        <div class="card-body">
+          <div class="card-name">Why List — Editorial</div>
+          <div class="card-path">/sales/why-list.html</div>
+          <div class="card-desc">AEO/SEO pitch article for prospects</div>
+        </div>
+      </a>
+      <a href="/sales/post-call-landing.html" class="card" data-name="Post-Call Landing" data-section="sales">
+        <span class="card-icon">📞</span>
+        <div class="card-body">
+          <div class="card-name">Post-Call Landing</div>
+          <div class="card-path">/sales/post-call-landing.html</div>
+          <div class="card-desc">Sent after a sales call — recap + next steps CTA</div>
+        </div>
+      </a>
+      <a href="/sales/followup-emails.html" class="card" data-name="Follow-Up Email Sequence" data-section="sales">
+        <span class="card-icon">📧</span>
+        <div class="card-body">
+          <div class="card-name">Follow-Up Email Sequence</div>
+          <div class="card-path">/sales/followup-emails.html</div>
+          <div class="card-desc">Day 3 / Day 6 / Day 10 Brevo sequence templates</div>
+        </div>
+      </a>
+      <a href="/sales/email-template.html" class="card" data-name="Cold Email Template" data-section="sales">
+        <span class="card-icon">✉️</span>
+        <div class="card-body">
+          <div class="card-name">Cold Email Template</div>
+          <div class="card-path">/sales/email-template.html</div>
+          <div class="card-desc">Brevo-ready HTML cold email template</div>
+        </div>
+      </a>
+      <a href="/sales/sales-scripts.html" class="card" data-name="Sales Call Scripts" data-section="sales">
+        <span class="card-icon">🗣️</span>
+        <div class="card-body">
+          <div class="card-name">Sales Call Scripts</div>
+          <div class="card-path">/sales/sales-scripts.html</div>
+          <div class="card-desc">Phone frameworks and objection handling</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- PREVIEWS -->
+  <section class="section" data-section="previews">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fdf2f8">👁️</div>
+      <span class="section-title">Client Previews (PPPs)</span>
+      <span class="section-count"></span>
+    </div>
+    <div class="cards">
+      <a href="/previews/driftwood-cafe.html" class="card" data-name="Driftwood Café" data-section="previews">
+        <span class="card-icon">☕</span>
+        <div class="card-body">
+          <div class="card-name">Driftwood Café</div>
+          <div class="card-path">/previews/driftwood-cafe.html</div>
+          <div class="card-desc">PPP template — pre-payment Gold client preview with demo data</div>
+          <div class="card-tags"><span class="tag tag-ppp">PPP</span><span class="tag tag-gold">Gold</span></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ONBOARDING -->
+  <section class="section" data-section="onboarding">
+    <div class="section-header">
+      <div class="section-icon" style="background:#f0f8e8">✅</div>
+      <span class="section-title">Onboarding</span>
+      <span class="section-count"></span>
+    </div>
+    <div class="cards">
+      <a href="/onboarding/confirm-listing.html" class="card" data-name="Confirm Listing" data-section="onboarding">
+        <span class="card-icon">✍️</span>
+        <div class="card-body">
+          <div class="card-name">Confirm Listing</div>
+          <div class="card-path">/onboarding/confirm-listing.html</div>
+          <div class="card-desc">Client approval — step 2 of Draft → Approval → Go Live</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ADMIN -->
+  <section class="section" data-section="admin">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fff7ed">⚙️</div>
+      <span class="section-title">Admin</span>
+      <span class="section-count"></span>
+    </div>
+    <div class="cards">
+      <a href="/admin/listing-health.html" class="card" data-name="Listing Health Dashboard" data-section="admin">
+        <span class="card-icon">📊</span>
+        <div class="card-body">
+          <div class="card-name">Listing Health Dashboard</div>
+          <div class="card-path">/admin/listing-health.html</div>
+          <div class="card-desc">Quality scoring across all active listings</div>
+          <div class="card-tags"><span class="tag tag-admin">Internal</span></div>
+        </div>
+      </a>
+      <a href="/admin/sales-funnel.html" class="card" data-name="Sales Funnel Dashboard" data-section="admin">
+        <span class="card-icon">🔀</span>
+        <div class="card-body">
+          <div class="card-name">Sales Funnel Dashboard</div>
+          <div class="card-path">/admin/sales-funnel.html</div>
+          <div class="card-desc">Interactive sales process — lead to close stages</div>
+          <div class="card-tags"><span class="tag tag-admin">Internal</span></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- DOCS -->
+  <section class="section" data-section="docs">
+    <div class="section-header">
+      <div class="section-icon" style="background:#e8f6fc">📚</div>
+      <span class="section-title">Docs</span>
+      <span class="section-count"></span>
+    </div>
+    <div class="cards">
+      <a href="/docs/current-state-report.html" class="card" data-name="Current State Report" data-section="docs">
+        <span class="card-icon">📄</span>
+        <div class="card-body">
+          <div class="card-name">Current State Report</div>
+          <div class="card-path">/docs/current-state-report.html</div>
+          <div class="card-desc">Internal project status report</div>
+        </div>
+      </a>
+      <a href="/docs/crm-sheet-reference.html" class="card" data-name="CRM Sheet Reference" data-section="docs">
+        <span class="card-icon">🗒️</span>
+        <div class="card-body">
+          <div class="card-name">CRM Sheet Reference</div>
+          <div class="card-path">/docs/crm-sheet-reference.html</div>
+          <div class="card-desc">Google Sheets CRM column definitions and usage guide</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ARCHIVE -->
+  <section class="section" data-section="archive">
+    <div class="section-header">
+      <div class="section-icon" style="background:#f0f0f0">🗄️</div>
+      <span class="section-title">Archive</span>
+      <span class="section-count"></span>
+    </div>
+    <div class="cards">
+      <a href="/archive/papamoa-info-site-old.html" class="card" data-name="Old Site pre-migration" data-section="archive" style="opacity:0.6">
+        <span class="card-icon">🕰️</span>
+        <div class="card-body">
+          <div class="card-name">Old Site (pre-migration)</div>
+          <div class="card-path">/archive/papamoa-info-site-old.html</div>
+          <div class="card-desc">Original HTML before design system migration — for reference only</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="no-results" id="no-results">
+    <h3>No pages match that search.</h3>
+    <p>Try a different keyword or clear the filter.</p>
+  </div>
+
+</main>
+
+<footer>
+  Papamoa.info internal use only &nbsp;·&nbsp; plainblackcreative/papamoa-previews
+</footer>
+
+<script>
+  const searchInput = document.getElementById('search');
+  const pills = document.querySelectorAll('.pill');
+  const allSections = document.querySelectorAll('.section');
+  const allCards = document.querySelectorAll('.card');
+  const noResults = document.getElementById('no-results');
+  const pageCount = document.getElementById('page-count');
+  let activeFilter = 'all';
+
+  // Set initial section counts
+  allSections.forEach(section => {
+    const total = section.querySelectorAll('a.card').length;
+    section.querySelector('.section-count').textContent = total + ' page' + (total !== 1 ? 's' : '');
+  });
+
+  function update() {
+    const q = searchInput.value.toLowerCase().trim();
+
+    allCards.forEach(card => {
+      const name = (card.dataset.name || '').toLowerCase();
+      const path = (card.querySelector('.card-path')?.textContent || '').toLowerCase();
+      const desc = (card.querySelector('.card-desc')?.textContent || '').toLowerCase();
+      const cardSection = (card.dataset.section || '');
+
+      const matchesQuery = !q || name.includes(q) || path.includes(q) || desc.includes(q);
+      const matchesFilter = activeFilter === 'all' || cardSection.includes(activeFilter);
+
+      card.classList.toggle('hidden', !(matchesQuery && matchesFilter));
+    });
+
+    // Hide empty sections
+    allSections.forEach(section => {
+      const anyVisible = [...section.querySelectorAll('.card')].some(c => !c.classList.contains('hidden'));
+      section.classList.toggle('hidden', !anyVisible);
+    });
+
+    // Count only <a> cards (not disabled divs)
+    const visible = [...allCards].filter(c => c.tagName === 'A' && !c.classList.contains('hidden')).length;
+    pageCount.textContent = visible + ' page' + (visible !== 1 ? 's' : '');
+    noResults.classList.toggle('visible', visible === 0);
+  }
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeFilter = pill.dataset.filter;
+      update();
+    });
+  });
+
+  searchInput.addEventListener('input', update);
+  update();
+</script>
+
+</body>
+</html>
