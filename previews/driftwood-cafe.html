@@ -1,38 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-NZ">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Papamoa.info Preview — [BUSINESS_NAME]</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
 <style>
 /* ============================================================
    MASTER TOGGLE — set to true to show Bronze tier everywhere
    ============================================================ */
 
 :root {
-  --navy:       #2B3F5C;
-  --navy-light: #3a5478;
-  --blue:       #3AABDE;
-  --blue-pale:  #e3f5fc;
-  --green:      #7DC143;
-  --green-pale: #eef7e3;
-  --red:        #E8344A;
-  --sand:       #f7f4ee;
-  --sand-dark:  #ece7dc;
-  --ink:        #1a1a1a;
-  --ink-soft:   #4a4a4a;
-  --ink-muted:  #888;
-  --white:      #ffffff;
-  --gold:       #c4892a;
-  --gold-pale:  #fdf3e3;
-  --bronze:     #a0704a;
-  --bronze-pale:#f7ede4;
-  --shadow-sm:  0 2px 12px rgba(43,63,92,0.08);
-  --shadow-md:  0 6px 32px rgba(43,63,92,0.12);
-  --shadow-lg:  0 16px 60px rgba(43,63,92,0.16);
-  --r:          12px;
+  --color-ocean-deep: #134B58;
+  --color-ocean: #1B6B7D;
+  --color-ocean-accent: #3AABDE;
+  --color-ocean-light: #E8F4F6;
+  --color-green: #2E7D32;
+  --color-green-light: #E8F5E9;
+  --color-red: #DC2626;
+  --color-sand: #F7F3ED;
+  --color-sand-dark: #EDE7DB;
+  --color-text: #2C2C2C;
+  --color-text-soft: #4a4a4a;
+  --color-text-light: #6B6B6B;
+  --color-white: #FFFFFF;
+  --color-dune: #C4985A;
+  --color-dune-light: #F5EDD8;
+  --color-bronze: #a0704a;
+  --color-bronze-light: #f7ede4;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+  --radius: 12px;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -40,15 +41,15 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Figtree', sans-serif;
-  background: var(--sand);
-  color: var(--ink);
+  background: var(--color-sand);
+  color: var(--color-text);
   min-height: 100vh;
   overflow-x: hidden;
 }
 
 /* HEADER */
 .site-header {
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   padding: 16px 24px;
   display: flex;
   align-items: center;
@@ -64,12 +65,12 @@ body {
   color: white;
   letter-spacing: 0.02em;
 }
-.logo-text span { color: var(--blue); }
-.logo-text em { color: var(--green); font-style: normal; }
+.logo-text span { color: var(--color-ocean-accent); }
+.logo-text em { color: var(--color-green); font-style: normal; }
 .header-badge {
   background: rgba(58,171,222,0.15);
   border: 1px solid rgba(58,171,222,0.3);
-  color: var(--blue);
+  color: var(--color-ocean-accent);
   font-size: 11px;
   font-weight: 500;
   padding: 4px 12px;
@@ -79,7 +80,7 @@ body {
 
 /* HERO */
 .hero {
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   padding: 56px 24px 80px;
   text-align: center;
   position: relative;
@@ -98,7 +99,7 @@ body {
   position: absolute;
   bottom: -2px; left: 0; right: 0;
   height: 64px;
-  background: var(--sand);
+  background: var(--color-sand);
   clip-path: ellipse(65% 100% at 50% 100%);
 }
 .hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
@@ -118,7 +119,7 @@ body {
 }
 .pulse {
   width: 7px; height: 7px;
-  background: var(--green);
+  background: var(--color-green);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
@@ -132,7 +133,7 @@ body {
   line-height: 1.2;
   margin-bottom: 12px;
 }
-.hero h1 em { color: var(--blue); font-style: italic; }
+.hero h1 em { color: var(--color-ocean-accent); font-style: italic; }
 .hero-sub {
   color: rgba(255,255,255,0.65);
   font-size: 16px;
@@ -154,7 +155,7 @@ body {
 }
 .business-chip .icon {
   width: 28px; height: 28px;
-  background: var(--blue);
+  background: var(--color-ocean-accent);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -173,15 +174,15 @@ body {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--ink-muted);
+  color: var(--color-text-light);
   font-weight: 600;
   margin-bottom: 12px;
 }
 
 /* SEO SCORE CARD */
 .score-card {
-  background: var(--white);
-  border-radius: var(--r);
+  background: var(--color-white);
+  border-radius: var(--radius);
   box-shadow: var(--shadow-md);
   padding: 28px;
   margin: 40px 0 32px;
@@ -199,10 +200,10 @@ body {
   font-family: 'Playfair Display', serif;
   font-size: 20px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--color-text);
   margin-bottom: 4px;
 }
-.score-title p { font-size: 13px; color: var(--ink-soft); }
+.score-title p { font-size: 13px; color: var(--color-text-soft); }
 .score-badge {
   text-align: center;
   flex-shrink: 0;
@@ -217,18 +218,18 @@ body {
   border: 3px solid;
   margin: 0 auto 6px;
 }
-.score-ring.poor  { border-color: var(--red);   background: #fef2f3; }
-.score-ring.fair  { border-color: var(--gold);  background: var(--gold-pale); }
-.score-ring.good  { border-color: var(--green); background: var(--green-pale); }
+.score-ring.poor  { border-color: var(--color-red);   background: #fef2f3; }
+.score-ring.fair  { border-color: var(--color-dune);  background: var(--color-dune-light); }
+.score-ring.good  { border-color: var(--color-green); background: var(--color-green-light); }
 .score-num {
   font-size: 22px;
   font-weight: 700;
   line-height: 1;
 }
-.score-ring.poor  .score-num { color: var(--red); }
-.score-ring.fair  .score-num { color: var(--gold); }
-.score-ring.good  .score-num { color: var(--green); }
-.score-label { font-size: 10px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.score-ring.poor  .score-num { color: var(--color-red); }
+.score-ring.fair  .score-num { color: var(--color-dune); }
+.score-ring.good  .score-num { color: var(--color-green); }
+.score-label { font-size: 10px; color: var(--color-text-light); text-transform: uppercase; letter-spacing: 0.05em; }
 
 .score-items { display: flex; flex-direction: column; gap: 12px; }
 .score-item {
@@ -237,21 +238,21 @@ body {
   gap: 12px;
   padding: 10px 14px;
   border-radius: 8px;
-  background: var(--sand);
+  background: var(--color-sand);
 }
-.score-item.pass { background: var(--green-pale); }
+.score-item.pass { background: var(--color-green-light); }
 .score-item.fail { background: #fef2f3; }
-.score-item.warn { background: var(--gold-pale); }
+.score-item.warn { background: var(--color-dune-light); }
 .score-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-.pass .score-dot { background: var(--green); }
-.fail .score-dot { background: var(--red); }
-.warn .score-dot { background: var(--gold); }
-.score-item-text { font-size: 13px; color: var(--ink-soft); flex: 1; }
-.score-item-text strong { color: var(--ink); font-weight: 600; }
+.pass .score-dot { background: var(--color-green); }
+.fail .score-dot { background: var(--color-red); }
+.warn .score-dot { background: var(--color-dune); }
+.score-item-text { font-size: 13px; color: var(--color-text-soft); flex: 1; }
+.score-item-text strong { color: var(--color-text); font-weight: 600; }
 .score-item-tag {
   font-size: 10px;
   font-weight: 600;
@@ -260,14 +261,14 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-.pass .score-item-tag { background: var(--green); color: white; }
-.fail .score-item-tag { background: var(--red); color: white; }
-.warn .score-item-tag { background: var(--gold); color: white; }
+.pass .score-item-tag { background: var(--color-green); color: white; }
+.fail .score-item-tag { background: var(--color-red); color: white; }
+.warn .score-item-tag { background: var(--color-dune); color: white; }
 
 /* SEARCH TERM CHECKER */
 .search-checker {
-  background: var(--navy);
-  border-radius: var(--r);
+  background: var(--color-ocean-deep);
+  border-radius: var(--radius);
   padding: 28px;
   margin-bottom: 32px;
   animation: fadeUp 0.5s ease 0.1s both;
@@ -303,9 +304,9 @@ body {
   transition: border-color 0.2s;
 }
 .search-input-row input::placeholder { color: rgba(255,255,255,0.35); }
-.search-input-row input:focus { border-color: var(--blue); }
+.search-input-row input:focus { border-color: var(--color-ocean-accent); }
 .btn-check {
-  background: var(--blue);
+  background: var(--color-ocean-accent);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -333,7 +334,7 @@ body {
   font-weight: 600;
   margin-bottom: 6px;
 }
-.positive .result-headline { color: var(--green); }
+.positive .result-headline { color: var(--color-green); }
 .negative .result-headline { color: #ff6b7a; }
 .result-body { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
 .btn-retry {
@@ -355,10 +356,10 @@ body {
 .tiers-section h2 {
   font-family: 'Playfair Display', serif;
   font-size: 22px;
-  color: var(--ink);
+  color: var(--color-text);
   margin-bottom: 6px;
 }
-.tiers-section .sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 24px; line-height: 1.5; }
+.tiers-section .sub { font-size: 14px; color: var(--color-text-soft); margin-bottom: 24px; line-height: 1.5; }
 
 .tiers-grid {
   display: grid;
@@ -370,8 +371,8 @@ body {
 .tiers-grid.with-bronze { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
 
 .tier-card {
-  background: var(--white);
-  border-radius: var(--r);
+  background: var(--color-white);
+  border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   border: 2px solid transparent;
@@ -379,8 +380,8 @@ body {
   position: relative;
 }
 .tier-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-.tier-card.featured { border-color: var(--blue); }
-.tier-card.gold-card { border-color: var(--gold); }
+.tier-card.featured { border-color: var(--color-ocean-accent); }
+.tier-card.gold-card { border-color: var(--color-dune); }
 
 .tier-badge {
   position: absolute;
@@ -392,12 +393,12 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-.tier-card.featured .tier-badge { background: var(--blue); color: white; }
-.tier-card.gold-card .tier-badge { background: var(--gold); color: white; }
+.tier-card.featured .tier-badge { background: var(--color-ocean-accent); color: white; }
+.tier-card.gold-card .tier-badge { background: var(--color-dune); color: white; }
 
 .tier-header {
   padding: 20px 20px 16px;
-  border-bottom: 1px solid var(--sand-dark);
+  border-bottom: 1px solid var(--color-sand-dark);
 }
 .tier-name {
   font-size: 11px;
@@ -406,20 +407,20 @@ body {
   font-weight: 600;
   margin-bottom: 8px;
 }
-.tier-card.bronze-card .tier-name { color: var(--bronze); }
-.tier-card.silver-card .tier-name { color: var(--navy); }
-.tier-card.featured .tier-name { color: var(--blue); }
-.tier-card.gold-card .tier-name { color: var(--gold); }
+.tier-card.bronze-card .tier-name { color: var(--color-bronze); }
+.tier-card.silver-card .tier-name { color: var(--color-ocean-deep); }
+.tier-card.featured .tier-name { color: var(--color-ocean-accent); }
+.tier-card.gold-card .tier-name { color: var(--color-dune); }
 
 .tier-price {
   font-size: 26px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--color-text);
   line-height: 1;
   margin-bottom: 2px;
 }
-.tier-price span { font-size: 13px; font-weight: 400; color: var(--ink-muted); }
-.tier-desc { font-size: 12px; color: var(--ink-soft); margin-top: 6px; line-height: 1.4; }
+.tier-price span { font-size: 13px; font-weight: 400; color: var(--color-text-light); }
+.tier-desc { font-size: 12px; color: var(--color-text-soft); margin-top: 6px; line-height: 1.4; }
 
 .tier-features { padding: 16px 20px 20px; }
 .tier-feature {
@@ -427,9 +428,9 @@ body {
   align-items: flex-start;
   gap: 8px;
   font-size: 12.5px;
-  color: var(--ink-soft);
+  color: var(--color-text-soft);
   padding: 5px 0;
-  border-bottom: 1px solid var(--sand);
+  border-bottom: 1px solid var(--color-sand);
   line-height: 1.4;
 }
 .tier-feature:last-child { border-bottom: none; }
@@ -443,17 +444,17 @@ body {
   flex-shrink: 0;
   margin-top: 1px;
 }
-.feat-icon.yes { background: var(--green); color: white; }
-.feat-icon.no  { background: var(--sand-dark); color: var(--ink-muted); }
-.feat-icon.par { background: var(--gold-pale); color: var(--gold); border: 1px solid var(--gold); }
+.feat-icon.yes { background: var(--color-green); color: white; }
+.feat-icon.no  { background: var(--color-sand-dark); color: var(--color-text-light); }
+.feat-icon.par { background: var(--color-dune-light); color: var(--color-dune); border: 1px solid var(--color-dune); }
 
 .tier-scarcity {
   margin: 12px 20px 0;
   padding: 8px 12px;
-  background: var(--gold-pale);
+  background: var(--color-dune-light);
   border-radius: 6px;
   font-size: 11px;
-  color: var(--gold);
+  color: var(--color-dune);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -478,12 +479,12 @@ body {
   transition: all 0.2s;
   text-decoration: none;
 }
-.bronze-card .tier-cta { background: var(--bronze-pale); color: var(--bronze); }
-.silver-card .tier-cta { background: var(--navy); color: white; }
-.silver-card .tier-cta:hover { background: var(--navy-light); }
-.featured .tier-cta { background: var(--blue); color: white; }
+.bronze-card .tier-cta { background: var(--color-bronze-light); color: var(--color-bronze); }
+.silver-card .tier-cta { background: var(--color-ocean-deep); color: white; }
+.silver-card .tier-cta:hover { background: var(--color-ocean); }
+.featured .tier-cta { background: var(--color-ocean-accent); color: white; }
 .featured .tier-cta:hover { background: #2d95c4; transform: translateY(-1px); }
-.gold-card .tier-cta { background: var(--gold); color: white; }
+.gold-card .tier-cta { background: var(--color-dune); color: white; }
 .gold-card .tier-cta:hover { filter: brightness(1.1); }
 
 /* LISTING MOCKUP PREVIEWS */
@@ -494,10 +495,10 @@ body {
 .mockups-section h2 {
   font-family: 'Playfair Display', serif;
   font-size: 22px;
-  color: var(--ink);
+  color: var(--color-text);
   margin-bottom: 6px;
 }
-.mockups-section .sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 24px; }
+.mockups-section .sub { font-size: 14px; color: var(--color-text-soft); margin-bottom: 24px; }
 
 .mockup-tabs {
   display: flex;
@@ -511,13 +512,13 @@ body {
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  border: 1.5px solid var(--sand-dark);
+  border: 1.5px solid var(--color-sand-dark);
   background: white;
-  color: var(--ink-soft);
+  color: var(--color-text-soft);
   font-family: 'Figtree', sans-serif;
   transition: all 0.2s;
 }
-.mockup-tab.active { border-color: var(--navy); background: var(--navy); color: white; }
+.mockup-tab.active { border-color: var(--color-ocean-deep); background: var(--color-ocean-deep); color: white; }
 .mockup-tab.bronze-tab { display: none; }
 
 .mockup-panel { display: none; }
@@ -525,7 +526,7 @@ body {
 
 .mockup-card {
   background: white;
-  border-radius: var(--r);
+  border-radius: var(--radius);
   box-shadow: var(--shadow-md);
   overflow: hidden;
   position: relative;
@@ -548,15 +549,13 @@ body {
   padding: 16px 20px;
   position: relative;
 }
-.bronze-mockup .mockup-header { background: var(--sand-dark); }
-.silver-mockup .mockup-header { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); }
-.standard-mockup .mockup-header { background: linear-gradient(135deg, #1e5c72 0%, var(--blue) 100%); }
-.gold-mockup .mockup-header { background: linear-gradient(135deg, #2a1f00 0%, var(--gold) 100%); }
+.bronze-mockup .mockup-header { background: var(--color-sand-dark); }
+.silver-mockup .mockup-header { background: linear-gradient(135deg, var(--color-ocean-deep) 0%, var(--color-ocean) 100%); }
+.gold-mockup .mockup-header { background: linear-gradient(135deg, #2a1f00 0%, var(--color-dune) 100%); }
 
-.bronze-mockup .mockup-tier-label { background: var(--bronze); color: white; }
-.silver-mockup .mockup-tier-label { background: var(--navy); color: white; }
-.standard-mockup .mockup-tier-label { background: var(--blue); color: white; }
-.gold-mockup .mockup-tier-label { background: var(--gold); color: white; }
+.bronze-mockup .mockup-tier-label { background: var(--color-bronze); color: white; }
+.silver-mockup .mockup-tier-label { background: var(--color-ocean-deep); color: white; }
+.gold-mockup .mockup-tier-label { background: var(--color-dune); color: white; }
 
 .mockup-logo-placeholder {
   width: 48px; height: 48px;
@@ -571,10 +570,9 @@ body {
   flex-shrink: 0;
   box-shadow: 0 2px 12px rgba(0,0,0,0.15);
 }
-.bronze-mockup .mockup-logo-placeholder { color: var(--bronze); }
+.bronze-mockup .mockup-logo-placeholder { color: var(--color-bronze); }
 .silver-mockup .mockup-logo-placeholder,
-.standard-mockup .mockup-logo-placeholder { color: var(--navy); }
-.gold-mockup .mockup-logo-placeholder { color: var(--gold); }
+.gold-mockup .mockup-logo-placeholder { color: var(--color-dune); }
 
 .mockup-name {
   margin-left: 12px;
@@ -583,13 +581,13 @@ body {
   color: white;
   line-height: 1.2;
 }
-.bronze-mockup .mockup-name { color: var(--ink); }
+.bronze-mockup .mockup-name { color: var(--color-text); }
 .mockup-cat {
   font-size: 11px;
   color: rgba(255,255,255,0.7);
   margin-top: 3px;
 }
-.bronze-mockup .mockup-cat { color: var(--ink-muted); }
+.bronze-mockup .mockup-cat { color: var(--color-text-light); }
 
 .mockup-body { padding: 18px 20px; }
 .mockup-meta {
@@ -600,18 +598,18 @@ body {
 }
 .mockup-meta-item {
   font-size: 12px;
-  color: var(--ink-soft);
+  color: var(--color-text-soft);
   display: flex;
   align-items: center;
   gap: 4px;
 }
 .mockup-desc {
   font-size: 13px;
-  color: var(--ink-soft);
+  color: var(--color-text-soft);
   line-height: 1.7;
   margin-bottom: 14px;
   padding-top: 12px;
-  border-top: 1px solid var(--sand-dark);
+  border-top: 1px solid var(--color-sand-dark);
 }
 .mockup-tags {
   display: flex;
@@ -623,8 +621,8 @@ body {
   font-size: 11px;
   padding: 3px 10px;
   border-radius: 100px;
-  background: var(--blue-pale);
-  color: var(--navy);
+  background: var(--color-ocean-light);
+  color: var(--color-ocean-deep);
   font-weight: 500;
 }
 
@@ -646,26 +644,26 @@ body {
   border-radius: 100px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   color: white;
 }
 
 /* MISSING SECTION indicator for Bronze */
 .missing-section {
   padding: 20px;
-  border: 2px dashed var(--sand-dark);
+  border: 2px dashed var(--color-sand-dark);
   border-radius: 8px;
   text-align: center;
-  color: var(--ink-muted);
+  color: var(--color-text-light);
   font-size: 12px;
   margin-bottom: 14px;
 }
-.missing-section strong { display: block; color: var(--ink-soft); margin-bottom: 4px; font-size: 13px; }
+.missing-section strong { display: block; color: var(--color-text-soft); margin-bottom: 4px; font-size: 13px; }
 
 /* CTA SECTION */
 .cta-section {
-  background: var(--navy);
-  border-radius: var(--r);
+  background: var(--color-ocean-deep);
+  border-radius: var(--radius);
   padding: 36px 28px;
   text-align: center;
   margin-top: 48px;
@@ -713,7 +711,7 @@ body {
   margin-bottom: 16px;
 }
 .btn-primary {
-  background: var(--blue);
+  background: var(--color-ocean-accent);
   color: white;
   border: none;
   padding: 14px 28px;
@@ -726,7 +724,7 @@ body {
   text-decoration: none;
   display: inline-block;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(58,171,222,0.35); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 .btn-secondary {
   background: rgba(255,255,255,0.08);
   color: white;
@@ -750,7 +748,7 @@ body {
 /* CTA SECTION */
 .cta-section {
   background: white;
-  border-radius: var(--r);
+  border-radius: var(--radius);
   padding: 40px 32px;
   text-align: center;
   margin-top: 48px;
@@ -760,12 +758,12 @@ body {
 .cta-inner { max-width: 600px; margin: 0 auto; }
 .cta-section h2 {
   font-family: 'Playfair Display', serif;
-  color: var(--navy);
+  color: var(--color-ocean-deep);
   font-size: 26px;
   margin-bottom: 10px;
 }
 .cta-section > .cta-inner > p {
-  color: var(--ink-soft);
+  color: var(--color-text-soft);
   font-size: 14px;
   line-height: 1.6;
   margin-bottom: 28px;
@@ -781,16 +779,16 @@ body {
 @media (max-width: 520px) { .pricing-row { grid-template-columns: 1fr; } }
 
 .price-card {
-  border: 2px solid var(--sand-dark);
+  border: 2px solid var(--color-sand-dark);
   border-radius: 10px;
   padding: 18px;
   cursor: pointer;
   text-align: left;
   transition: all 0.2s;
-  background: var(--sand);
+  background: var(--color-sand);
 }
-.price-card:hover { border-color: var(--blue); background: white; }
-.price-card.selected { border-color: var(--gold); background: var(--gold-pale); }
+.price-card:hover { border-color: var(--color-ocean-accent); background: white; }
+.price-card.selected { border-color: var(--color-dune); background: var(--color-dune-light); }
 .price-card-header {
   display: flex;
   align-items: center;
@@ -803,14 +801,14 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
-.price-tier-name.gold { color: var(--gold); }
-.price-tier-name.silver { color: var(--navy); }
+.price-tier-name.gold { color: var(--color-dune); }
+.price-tier-name.silver { color: var(--color-ocean-deep); }
 .price-badge {
   font-size: 10px;
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 100px;
-  background: var(--gold);
+  background: var(--color-dune);
   color: white;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -818,11 +816,11 @@ body {
 .price-amount {
   font-size: 22px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--color-text);
   margin-bottom: 12px;
   line-height: 1;
 }
-.price-amount span { font-size: 13px; font-weight: 400; color: var(--ink-muted); }
+.price-amount span { font-size: 13px; font-weight: 400; color: var(--color-text-light); }
 .price-features {
   list-style: none;
   padding: 0;
@@ -830,11 +828,11 @@ body {
 }
 .price-features li {
   font-size: 12px;
-  color: var(--ink-soft);
+  color: var(--color-text-soft);
   padding: 3px 0;
   line-height: 1.4;
 }
-.price-card.selected .price-features li { color: var(--ink); }
+.price-card.selected .price-features li { color: var(--color-text); }
 
 /* CLAIM FORM */
 #claim-form { margin-top: 4px; }
@@ -848,19 +846,19 @@ body {
   width: 100%;
   padding: 12px 16px;
   border-radius: 8px;
-  border: 1.5px solid var(--sand-dark);
+  border: 1.5px solid var(--color-sand-dark);
   background: white;
-  color: var(--ink);
+  color: var(--color-text);
   font-family: 'Figtree', sans-serif;
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s;
 }
-.claim-input:focus { border-color: var(--blue); }
-.claim-input::placeholder { color: var(--ink-muted); }
+.claim-input:focus { border-color: var(--color-ocean-accent); }
+.claim-input::placeholder { color: var(--color-text-light); }
 .btn-claim {
   width: 100%;
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   color: white;
   border: none;
   padding: 14px;
@@ -872,11 +870,11 @@ body {
   transition: all 0.2s;
   margin-bottom: 12px;
 }
-.btn-claim:hover { background: var(--navy-light); transform: translateY(-1px); }
+.btn-claim:hover { background: var(--color-ocean); transform: translateY(-1px); }
 .btn-claim:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 .cta-fine {
   font-size: 12px;
-  color: var(--ink-muted);
+  color: var(--color-text-light);
 }
 
 /* JAYDEN SIGN-OFF */
@@ -885,7 +883,7 @@ body {
   align-items: center;
   gap: 16px;
   background: white;
-  border-radius: var(--r);
+  border-radius: var(--radius);
   padding: 20px 24px;
   margin-top: 24px;
   box-shadow: var(--shadow-sm);
@@ -894,31 +892,31 @@ body {
 .signoff-avatar {
   width: 52px; height: 52px;
   border-radius: 50%;
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Playfair Display', serif;
   font-size: 20px;
-  color: var(--blue);
+  color: var(--color-ocean-accent);
   font-weight: 700;
   flex-shrink: 0;
 }
 .signoff-text { flex: 1; }
-.signoff-text strong { display: block; font-size: 14px; color: var(--ink); margin-bottom: 2px; }
-.signoff-text span { font-size: 12px; color: var(--ink-soft); }
-.signoff-contact { font-size: 13px; color: var(--navy); font-weight: 600; text-decoration: none; }
+.signoff-text strong { display: block; font-size: 14px; color: var(--color-text); margin-bottom: 2px; }
+.signoff-text span { font-size: 12px; color: var(--color-text-soft); }
+.signoff-contact { font-size: 13px; color: var(--color-ocean-deep); font-weight: 600; text-decoration: none; }
 
 /* FOOTER */
 .page-footer {
   text-align: center;
   padding: 24px;
   font-size: 12px;
-  color: var(--ink-muted);
-  border-top: 1px solid var(--sand-dark);
+  color: var(--color-text-light);
+  border-top: 1px solid var(--color-sand-dark);
   margin-top: 60px;
 }
-.page-footer a { color: var(--blue); text-decoration: none; }
+.page-footer a { color: var(--color-ocean-accent); text-decoration: none; }
 
 /* ANIMATIONS */
 @keyframes fadeUp {
@@ -964,7 +962,7 @@ const BUSINESS = {
     { status: "warn", label: "Directory citations",     note: "Found on Finda, not on 4 major NZ directories" },
     { status: "fail", label: "AI search visibility",    note: "Not appearing in ChatGPT or Perplexity results" },
     { status: "pass", label: "Website present",         note: "Live website found at driftwoodcafe.co.nz" },
-    { status: "warn", label: "Local keywords",          note: "Weak use of 'Papamoa' on website pages" }
+    { status: "warn", label: "Local keywords",          note: "Weak use of 'Pāpāmoa' on website pages" }
   ]
 };
 
@@ -1146,7 +1144,7 @@ function switchMockup(tier) {
       <span class="pulse"></span>
       Built for <span data-biz="name">your business</span>
     </div>
-    <h1>Here's how <em data-biz="name">The Driftwood Café</em><br>looks to Papamoa searchers</h1>
+    <h1>Here's how <em data-biz="name">The Driftwood Café</em><br>looks to Pāpāmoa searchers</h1>
     <p class="hero-sub">
       Hi <span data-biz="firstname">there</span> — this is your personalised visibility report and listing preview.
       See your current SEO score, check any search term, and compare what each listing tier gets you.
@@ -1190,7 +1188,7 @@ function switchMockup(tier) {
       <input
         type="text"
         id="search-term-input"
-        placeholder="e.g. best café in Papamoa, brunch Papamoa Beach..."
+        placeholder="e.g. best café in Pāpāmoa, brunch Pāpāmoa Beach..."
         onkeydown="if(event.key==='Enter') checkSearchTerm()"
       />
       <button class="btn-check" id="check-btn" onclick="checkSearchTerm()">Check</button>
@@ -1270,7 +1268,7 @@ function switchMockup(tier) {
 
     </div>
 
-    <p style="font-size:12px; color:var(--ink-muted); text-align:center; margin-top:12px;">
+    <p style="font-size:12px; color:var(--color-text-light); text-align:center; margin-top:12px;">
       Annual subscription · Lifetime price lock for founding members · 2027 ROI guarantee
     </p>
   </div>
@@ -1284,7 +1282,6 @@ function switchMockup(tier) {
     <div class="mockup-tabs">
       <button class="mockup-tab bronze-tab" data-tab="bronze" onclick="switchMockup('bronze')">Bronze</button>
       <button class="mockup-tab active" data-tab="silver" onclick="switchMockup('silver')">Silver</button>
-      <button class="mockup-tab" data-tab="standard" onclick="switchMockup('standard')">Standard+</button>
       <button class="mockup-tab" data-tab="gold" onclick="switchMockup('gold')">Gold</button>
     </div>
 
@@ -1295,8 +1292,8 @@ function switchMockup(tier) {
         <div class="mockup-header">
           <div class="mockup-logo-placeholder" data-biz="logo">D</div>
           <div style="margin-left:12px">
-            <div class="mockup-name" style="color:var(--ink)" data-biz="name">The Driftwood Café</div>
-            <div class="mockup-cat" style="color:var(--ink-muted)" data-biz="category">Food &amp; Drink</div>
+            <div class="mockup-name" style="color:var(--color-text)" data-biz="name">The Driftwood Café</div>
+            <div class="mockup-cat" style="color:var(--color-text-light)" data-biz="category">Food &amp; Drink</div>
           </div>
         </div>
         <div class="mockup-body">
@@ -1342,43 +1339,6 @@ function switchMockup(tier) {
       </div>
     </div>
 
-    <!-- Standard+ mockup -->
-    <div class="mockup-panel" id="mockup-standard">
-      <div class="mockup-card standard-mockup">
-        <span class="mockup-tier-label">Silver + Sub-pages</span>
-        <div class="mockup-header">
-          <div class="mockup-logo-placeholder" data-biz="logo">D</div>
-          <div class="mockup-name" data-biz="name">The Driftwood Café</div>
-        </div>
-        <div class="mockup-body">
-          <div class="mockup-meta">
-            <div class="mockup-meta-item">📍 <span data-biz="address">17 Parton Road</span></div>
-            <div class="mockup-meta-item">📞 <span data-biz="phone">07 542 0000</span></div>
-            <div class="mockup-meta-item">🌐 <span data-biz="website">driftwoodcafe.co.nz</span></div>
-          </div>
-          <div class="mockup-desc">
-            Tucked behind the dunes on Parton Road, The Driftwood Café is Pāpāmoa's go-to spot for
-            freshly brewed specialty coffee and all-day brunch. Cabinet food refreshed daily using
-            local Bay of Plenty produce. Dog friendly, gluten-free options always available.
-          </div>
-          <div class="mockup-tags">
-            <span class="mockup-tag">Specialty Coffee</span>
-            <span class="mockup-tag">Brunch Papamoa</span>
-            <span class="mockup-tag">Café near me</span>
-            <span class="mockup-tag">Dog Friendly</span>
-            <span class="mockup-tag">+ Sub-page: Catering</span>
-          </div>
-          <div class="blur-wrap">
-            <div class="blur-inner" style="padding:12px 0; border-top:1px solid var(--sand-dark); margin-top:12px">
-              <div style="font-size:12px;font-weight:600;margin-bottom:8px;color:var(--ink)">Service sub-pages</div>
-              <div style="font-size:12px;color:var(--ink-soft)">Catering Papamoa · Corporate Breakfast · Private Events</div>
-            </div>
-            <div class="blur-overlay"><span class="lock-pill">$150 +GST per sub-page</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Gold mockup -->
     <div class="mockup-panel" id="mockup-gold">
       <div class="mockup-card gold-mockup">
@@ -1401,19 +1361,19 @@ function switchMockup(tier) {
           </div>
           <div class="mockup-tags">
             <span class="mockup-tag">Specialty Coffee</span>
-            <span class="mockup-tag">Best Café Papamoa</span>
+            <span class="mockup-tag">Best Café Pāpāmoa</span>
             <span class="mockup-tag">Brunch near me</span>
             <span class="mockup-tag">Dog Friendly</span>
             <span class="mockup-tag">Gluten-Free</span>
           </div>
-          <div style="border-top:1px solid var(--sand-dark); padding-top:14px; margin-top:4px">
-            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink-muted);margin-bottom:10px;font-weight:600">AI-ready FAQ</div>
-            <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px">Does The Driftwood Café take bookings?</div>
-            <div style="font-size:13px;color:var(--ink-soft);margin-bottom:12px;line-height:1.6">Walk-ins are always welcome. Groups of 6 or more can reserve the back deck by calling ahead.</div>
-            <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px">Is The Driftwood Café good for families?</div>
-            <div style="font-size:13px;color:var(--ink-soft);line-height:1.6">Yes — kids menu, high chairs, and outdoor seating. One of the most family-friendly cafés in Pāpāmoa East.</div>
+          <div style="border-top:1px solid var(--color-sand-dark); padding-top:14px; margin-top:4px">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-text-light);margin-bottom:10px;font-weight:600">AI-ready FAQ</div>
+            <div style="font-size:13px;font-weight:600;color:var(--color-text);margin-bottom:4px">Does The Driftwood Café take bookings?</div>
+            <div style="font-size:13px;color:var(--color-text-soft);margin-bottom:12px;line-height:1.6">Walk-ins are always welcome. Groups of 6 or more can reserve the back deck by calling ahead.</div>
+            <div style="font-size:13px;font-weight:600;color:var(--color-text);margin-bottom:4px">Is The Driftwood Café good for families?</div>
+            <div style="font-size:13px;color:var(--color-text-soft);line-height:1.6">Yes — kids menu, high chairs, and outdoor seating. One of the most family-friendly cafés in Pāpāmoa East.</div>
           </div>
-          <div style="margin-top:14px;padding:10px 12px;background:var(--gold-pale);border-radius:8px;font-size:12px;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:8px">
+          <div style="margin-top:14px;padding:10px 12px;background:var(--color-dune-light);border-radius:8px;font-size:12px;color:var(--color-dune);font-weight:600;display:flex;align-items:center;gap:8px">
             <span>⭐</span> Spotlight position — top of Food &amp; Drink category · One per sub-category
           </div>
         </div>
@@ -1477,8 +1437,8 @@ function switchMockup(tier) {
 
       <div id="claim-success" style="display:none;text-align:center;padding:24px 0">
         <div style="font-size:40px;margin-bottom:12px">✓</div>
-        <div style="color:var(--ink);font-size:17px;font-weight:600;margin-bottom:8px">Got it — Jayden will be in touch within 24 hours.</div>
-        <div style="color:var(--ink-soft);font-size:14px">Or call directly: <a href="tel:0275332970" style="color:var(--blue);font-weight:600">027 533 2970</a></div>
+        <div style="color:var(--color-text);font-size:17px;font-weight:600;margin-bottom:8px">Got it — Jayden will be in touch within 24 hours.</div>
+        <div style="color:var(--color-text-soft);font-size:14px">Or call directly: <a href="tel:0275332970" style="color:var(--color-ocean-accent);font-weight:600">027 533 2970</a></div>
       </div>
 
     </div>
@@ -1489,7 +1449,7 @@ function switchMockup(tier) {
     <div class="signoff-avatar">J</div>
     <div class="signoff-text">
       <strong>Jayden Brown — Local Partner, Papamoa.info</strong>
-      <span>Questions? I'm a Papamoa local and happy to chat through any of this.</span>
+      <span>Questions? I'm a Pāpāmoa local and happy to chat through any of this.</span>
     </div>
     <a href="tel:0275332970" class="signoff-contact">027 533 2970</a>
   </div>
