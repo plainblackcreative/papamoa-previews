@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papamoa.info — Get Your Business Found</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+  /* ============================
+     RESET & BASE
+  ============================ */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --color-ocean-deep: #134B58;
+    --color-ocean: #1B6B7D;
+    --color-green: #2E7D32;
+    --color-green-muted: rgba(46,125,50,0.15);
+    --color-green-light: #E8F5E9;
+    --color-sand-dark: #EDE7DB;
+    --color-sand: #F7F3ED;
+    --color-border: #E0D9CE;
+    --color-text: #2C2C2C;
+    --color-text-soft: #4a4a4a;
+    --color-text-light: #6B6B6B;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--color-sand-dark);
+    font-family: 'Figtree', sans-serif;
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ============================
+     NAV
+  ============================ */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-ocean-deep);
+    border-bottom: 2px solid rgba(200,232,107,0.15);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--color-green);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .nav-links a {
+    color: var(--color-green-light);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-links a:hover { background: rgba(200,232,107,0.12); color: var(--color-green); }
+
+  .nav-cta {
+    background: var(--color-green);
+    color: var(--color-ocean-deep) !important;
+    font-weight: 700 !important;
+    border-radius: 6px;
+  }
+
+  .nav-cta:hover { background: #d6f278 !important; }
+
+  /* ============================
+     HERO
+  ============================ */
+  .hero {
+    background: var(--color-ocean-deep);
+    padding: 90px 32px 80px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200,232,107,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(26,107,74,0.4) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero-kicker {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-green);
+    background: rgba(200,232,107,0.1);
+    border: 1px solid rgba(200,232,107,0.25);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.12;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 em {
+    color: var(--color-green);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.72);
+    max-width: 560px;
+    margin: 0 auto 36px;
+  }
+
+  .hero-question {
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(200,232,107,0.3);
+    border-left: 4px solid var(--color-green);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 24px;
+    text-align: left;
+    max-width: 560px;
+    margin: 0 auto 36px;
+  }
+
+  .hero-question p {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-green-light);
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--color-green);
+    color: var(--color-ocean-deep);
+    font-family: 'Figtree', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.15s, background 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: #d6f278; transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-green-light);
+    font-family: 'Figtree', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(200,232,107,0.3);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { border-color: var(--color-green); color: var(--color-green); }
+
+  /* ============================
+     CONTENT LAYOUT
+  ============================ */
+  .page-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ============================
+     SECTION HEADERS
+  ============================ */
+  .section-wrap {
+    padding: 60px 0 20px;
+  }
+
+  .section-wrap + .section-wrap {
+    border-top: 1.5px solid var(--color-border);
+    padding-top: 52px;
+  }
+
+  .section-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-ocean-deep);
+    padding-bottom: 12px;
+    border-bottom: 2.5px solid var(--color-green);
+    display: inline-block;
+    margin-bottom: 22px;
+  }
+
+  .section-wrap p {
+    font-size: 15px;
+    line-height: 1.78;
+    color: var(--color-text-soft);
+    margin-bottom: 16px;
+  }
+
+  /* ============================
+     FEATURE LIST (3 points)
+  ============================ */
+  .feature-list {
+    list-style: none;
+    margin: 8px 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .feature-list li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px 20px;
+    border: 1px solid var(--color-border);
+  }
+
+  .feature-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--color-ocean-deep);
+    color: var(--color-green);
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .feature-text {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--color-text-soft);
+  }
+
+  .feature-text strong { color: var(--color-ocean-deep); }
+
+  /* ============================
+     TRUST BOX
+  ============================ */
+  .trust-box {
+    background: var(--color-sand);
+    border: 1.5px solid var(--color-border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 8px 0 24px;
+  }
+
+  .trust-box p {
+    font-size: 14.5px;
+    color: var(--color-text-light);
+    margin: 0;
+    line-height: 1.75;
+  }
+
+  /* ============================
+     AI GRID
+  ============================ */
+  .ai-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 8px 0 24px;
+  }
+
+  @media (max-width: 540px) { .ai-grid { grid-template-columns: 1fr; } }
+
+  .ai-card {
+    background: var(--color-ocean-deep);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+
+  .ai-card-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-green);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .ai-card-body {
+    font-size: 13px;
+    color: var(--color-green-light);
+    line-height: 1.65;
+  }
+
+  /* ============================
+     BILLBOARD LIST
+  ============================ */
+  .billboard-list {
+    list-style: none;
+    margin: 8px 0 20px;
+  }
+
+  .billboard-list li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid #e0ddd7;
+  }
+
+  .billboard-list li:last-child { border-bottom: none; }
+
+  .bill-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: var(--color-green);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .bill-content strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-ocean-deep);
+    margin-bottom: 3px;
+  }
+
+  .bill-content span {
+    font-size: 13.5px;
+    color: var(--color-text-light);
+    line-height: 1.62;
+  }
+
+  /* ============================
+     CHECKLIST
+  ============================ */
+  .checklist {
+    list-style: none;
+    margin: 8px 0 20px;
+    background: var(--color-sand);
+    border-radius: 12px;
+    padding: 20px 22px;
+    border: 1px solid var(--color-border);
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 11px;
+    font-size: 14px;
+    color: var(--color-text-soft);
+    line-height: 1.65;
+  }
+
+  .checklist li:last-child { margin-bottom: 0; }
+
+  .check-tick {
+    flex-shrink: 0;
+    color: var(--color-ocean);
+    font-weight: 800;
+    font-size: 15px;
+    margin-top: 1px;
+  }
+
+  /* ============================
+     PRICING
+  ============================ */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 18px 0 22px;
+  }
+
+  @media (max-width: 580px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+  .price-card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .price-card-header {
+    padding: 22px 20px 18px;
+  }
+
+  .price-card.gold .price-card-header { background: var(--color-ocean-deep); }
+  .price-card.silver .price-card-header { background: var(--color-ocean); }
+
+  .price-tier {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-green);
+    margin-bottom: 8px;
+  }
+
+  .price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 900;
+    color: var(--color-green);
+    line-height: 1;
+  }
+
+  .price-period {
+    font-size: 11.5px;
+    color: var(--color-green-muted);
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  .price-card-body {
+    background: #fff;
+    padding: 18px 20px;
+    border: 1.5px solid var(--color-border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .price-feature {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--color-text-soft);
+    line-height: 1.6;
+  }
+
+  .price-feature:last-child { margin-bottom: 0; }
+
+  .pf-dot {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--color-green);
+    border-radius: 50%;
+    margin-top: 6px;
+  }
+
+  .pf-label { font-weight: 700; color: var(--color-ocean-deep); }
+
+  .results-links {
+    background: var(--color-ocean-deep);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+
+  .results-links p {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-green);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .results-links a {
+    display: inline-block;
+    color: var(--color-green-light);
+    font-size: 13px;
+    text-decoration: underline;
+    margin-right: 16px;
+    line-height: 2;
+  }
+
+  .gold-note {
+    background: #fffde8;
+    border: 1.5px solid var(--color-green);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+  }
+
+  .gold-note p {
+    font-size: 13.5px;
+    color: var(--color-text-soft);
+    line-height: 1.68;
+    margin: 0;
+  }
+
+  /* ============================
+     OFFERS
+  ============================ */
+  .offers-band {
+    background: var(--color-green);
+    border-radius: 10px;
+    padding: 13px 18px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .offers-band span {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-ocean-deep);
+    letter-spacing: 0.2px;
+  }
+
+  .offer-card {
+    background: var(--color-ocean-deep);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .offer-badge {
+    flex-shrink: 0;
+    background: var(--color-green);
+    color: var(--color-ocean-deep);
+    font-weight: 800;
+    font-size: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+
+  .offer-content strong {
+    display: block;
+    color: var(--color-green);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .offer-content span {
+    font-size: 13.5px;
+    color: var(--color-green-light);
+    line-height: 1.65;
+  }
+
+  /* ============================
+     GUARANTEES
+  ============================ */
+  .guarantee-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid #e0ddd7;
+  }
+
+  .guarantee-row:last-child { border-bottom: none; }
+
+  .guarantee-dot {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    background: var(--color-green);
+    border-radius: 50%;
+    margin-top: 6px;
+  }
+
+  .guarantee-text {
+    font-size: 14.5px;
+    color: var(--color-text-soft);
+    line-height: 1.72;
+  }
+
+  .guarantee-text strong { color: var(--color-ocean-deep); }
+
+  /* ============================
+     CLOSE / CTA
+  ============================ */
+  .availability-box {
+    background: var(--color-ocean-deep);
+    border-radius: 12px;
+    padding: 26px 30px;
+    margin-bottom: 28px;
+  }
+
+  .availability-box p {
+    color: var(--color-sand-dark);
+    font-size: 15px;
+    line-height: 1.78;
+    margin: 0;
+  }
+
+  .availability-box p + p {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(200,232,107,0.2);
+  }
+
+  .availability-box strong { color: var(--color-green); }
+
+  .close-section {
+    padding: 52px 0 64px;
+    border-top: 1.5px solid var(--color-border);
+  }
+
+  .close-section > p {
+    font-size: 15px;
+    line-height: 1.78;
+    color: var(--color-text-soft);
+    margin-bottom: 16px;
+  }
+
+  /* ============================
+     SIGNATURE
+  ============================ */
+  .sig {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1.5px solid var(--color-border);
+    font-size: 14.5px;
+    color: var(--color-text-light);
+    line-height: 2;
+  }
+
+  .sig strong {
+    color: var(--color-ocean-deep);
+    font-size: 16px;
+    display: block;
+  }
+
+  .sig a {
+    color: var(--color-ocean-deep);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-green);
+  }
+
+  /* ============================
+     FOOTER
+  ============================ */
+  footer {
+    background: var(--color-ocean-deep);
+    padding: 28px 32px;
+    text-align: center;
+  }
+
+  footer .foot-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--color-green);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: rgba(200,232,107,0.45);
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+  }
+
+  footer a {
+    color: rgba(200,232,107,0.6);
+    text-decoration: none;
+  }
+
+  /* ============================
+     RESPONSIVE
+  ============================ */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hero { padding: 64px 20px 60px; }
+    .page-content { padding: 0 18px; }
+    .section-wrap { padding: 44px 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">papamoa.info</a>
+    <ul class="nav-links">
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#more-than-billboard">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#offers">Offers</a></li>
+      <li><a href="#contact" class="nav-cta">Get Listed</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker">&#128640; Pāpāmoa's AI-First Business Directory</div>
+    <h1>Get <em>[Business Name]</em> Found<br>in 2026 and Beyond</h1>
+    <p class="hero-sub">As promised, here is the full breakdown of how we are positioning Pāpāmoa businesses for the AI-first search era.</p>
+
+    <div class="hero-question">
+      <p>Quick question: if someone searched "best [CATEGORY] in Pāpāmoa" right now, would they find you?</p>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary">See Listing Options</a>
+      <a href="#contact" class="btn-secondary">Request a Free Mockup</a>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="page-content">
+
+  <!-- HOW WE GET YOU FOUND -->
+  <div class="section-wrap" id="how-it-works">
+    <div class="section-label">Three ways we get [Business Name] found</div>
+    <p>If the answer to that question is uncertain, that is exactly why I am reaching out. Beyond just a listing, here are three ways we make sure you get found:</p>
+
+    <ul class="feature-list">
+      <li>
+        <div class="feature-num">1</div>
+        <div class="feature-text"><strong>Dominating Local Search:</strong> We optimise every listing for "Pāpāmoa [CATEGORY]" keywords so you show up on Page 1 exactly when locals are ready to book or buy.</div>
+      </li>
+      <li>
+        <div class="feature-num">2</div>
+        <div class="feature-text"><strong>AI-Ready Visibility:</strong> Unlike older directories, our site is built for AI Search (like Gemini and ChatGPT). We ensure your business data is structured so AI engines recommend you first.</div>
+      </li>
+      <li>
+        <div class="feature-num">3</div>
+        <div class="feature-text"><strong>Boosting Your Own Website:</strong> A high-authority link from papamoa.info acts as a "vote of confidence" for Google, helping your own website climb higher in search rankings.</div>
+      </li>
+    </ul>
+
+    <div class="trust-box">
+      <p>I am a Papamoa local and actually started as a client of our sister site, <strong>tauranganz.info</strong>. It has been a local staple since 2005, and because of that 20-year history, Google trusts it immensely. I renewed my own listing on autopilot for years because the ROI was always there — now I am bringing that same battle-tested SEO to papamoa.info.</p>
+    </div>
+  </div>
+
+  <!-- WHY DIFFERENT -->
+  <div class="section-wrap">
+    <div class="section-label">Why this is different from every other directory</div>
+    <p>Most online advertising puts your name in front of people and hopes for the best. A listing on papamoa.info works differently. Google rankings are still valuable, but they are no longer the whole game.</p>
+    <p>In 2026, when someone searches for your services, they are increasingly getting an AI-generated answer (from ChatGPT, Perplexity, or Google AI Overviews) before they ever see a list of websites. If your business is not formatted for AI to "read" it, you simply do not exist in that answer.</p>
+    <p>Papamoa.info is built to be the primary source for those AI engines. Here is how:</p>
+
+    <div class="ai-grid">
+      <div class="ai-card">
+        <div class="ai-card-title">Structured Content</div>
+        <div class="ai-card-body">Information is written so AI can easily extract and quote your business directly.</div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-title">Schema Markup</div>
+        <div class="ai-card-body">Specialist code that explicitly tells AI: this is the business, these are the services, this is the location.</div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-title">Directory Authority</div>
+        <div class="ai-card-body">AI prioritises well-organised, trusted local networks over vague, unoptimised websites.</div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-title">Built for Citations</div>
+        <div class="ai-card-body">"According to Papamoa.info, the top [CATEGORY] in Pāpāmoa is [BUSINESS NAME]."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MORE THAN A BILLBOARD -->
+  <div class="section-wrap" id="more-than-billboard">
+    <div class="section-label">More than just a billboard</div>
+    <p>Unlike a standard ad that disappears the moment you stop paying, a directory listing is a long-term asset.</p>
+
+    <ul class="billboard-list">
+      <li>
+        <div class="bill-icon">&#128279;</div>
+        <div class="bill-content">
+          <strong>Backlinks that build your ranking</strong>
+          <span>Every listing includes a "vote of confidence" from our network to your website. This boosts your own Google ranking 24/7.</span>
+        </div>
+      </li>
+      <li>
+        <div class="bill-icon">&#128101;</div>
+        <div class="bill-content">
+          <strong>Warm, qualified leads</strong>
+          <span>We regularly receive direct enquiries from locals asking us who to trust. These people are ready to book, not just shopping around.</span>
+        </div>
+      </li>
+      <li>
+        <div class="bill-icon">&#128308;</div>
+        <div class="bill-content">
+          <strong>Always on, zero maintenance</strong>
+          <span>One fixed annual cost. No budget to manage and no ads to monitor. Your listing compounds in value over time.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- IS THIS A GOOD FIT -->
+  <div class="section-wrap">
+    <div class="section-label">Is this a good fit for [Business Name]?</div>
+    <p>This is particularly effective if you:</p>
+    <ul class="checklist">
+      <li><span class="check-tick">&#10003;</span><span>Are spending money on Google Ads and want a result that does not "turn off" when the budget runs out.</span></li>
+      <li><span class="check-tick">&#10003;</span><span>Want to be seen as the primary [CATEGORY] in Pāpāmoa rather than just one of many options.</span></li>
+      <li><span class="check-tick">&#10003;</span><span>Want to ensure your business is recommended by AI tools like ChatGPT and Google Gemini.</span></li>
+      <li><span class="check-tick">&#10003;</span><span>Need a professional online presence that actually generates a return.</span></li>
+    </ul>
+  </div>
+
+  <!-- PRICING -->
+  <div class="section-wrap" id="pricing">
+    <div class="section-label">Which spot is right for [Business Name]?</div>
+    <p>Both tiers are designed to be high-impact, but the Gold tier is built specifically for businesses that want to own the top of the search results.</p>
+
+    <div class="pricing-grid">
+      <!-- GOLD -->
+      <div class="price-card gold">
+        <div class="price-card-header">
+          <div class="price-tier">&#11088; Gold Listing</div>
+          <div class="price-amount">$1,200</div>
+          <div class="price-period">+GST per year</div>
+        </div>
+        <div class="price-card-body">
+          <div class="price-feature"><div class="pf-dot"></div><span><span class="pf-label">Spotlight Position:</span> Top of every category page you appear in.</span></div>
+          <div class="price-feature"><div class="pf-dot"></div><span><span class="pf-label">Advanced AI Depth:</span> Enhanced sub-pages for deeper SEO.</span></div>
+          <div class="price-feature"><div class="pf-dot"></div><span><span class="pf-label">Visual Portfolio:</span> Unlimited images.</span></div>
+          <div class="price-feature"><div class="pf-dot"></div><span><span class="pf-label">Social Reach:</span> Monthly Facebook promotions.</span></div>
+          <div class="price-feature"><div class="pf-dot"></div><span><span class="pf-label">Authority Links:</span> Website, email, phone &amp; socials.</span></div>
+        </div>
+      </div>
+
+      <!-- SILVER -->
+      <div class="price-card silver">
+        <div class="price-card-header">
+          <div class="price-tier">Silver Listing</div>
+          <div class="price-amount">$599</div>
+          <div class="price-period">+GST per year</div>
+        </div>
+        <div class="price-card-body">
+          <div class="price-feature"><div class="pf-dot"></div><span><span class="pf-label">Featured Positioning:</span> All relevant sub-categories.</span></div>
+          <div class="price-feature"><div class="pf-dot"></div><span><span class="pf-label">Standard SEO:</span> Full local keyword exposure.</span></div>
+          <div class="price-feature"><div class="pf-dot"></div><span><span class="pf-label">Image Gallery:</span> Up to 9 high-res images.</span></div>
+          <div class="price-feature"><div class="pf-dot"></div><span><span class="pf-label">Social Reach:</span> Dedicated welcome post.</span></div>
+          <div class="price-feature"><div class="pf-dot"></div><span><span class="pf-label">Authority Links:</span> Website, email, phone &amp; socials.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-links">
+      <p>See the results in action</p>
+      <a href="https://papamoa.info" target="_blank">Gold Example: Glenn's Glass &amp; Aluminium</a>
+      <a href="https://papamoa.info" target="_blank">Silver Example: The Phoenix</a>
+      <a href="https://papamoa.info" target="_blank">Category View: Bars</a>
+    </div>
+
+    <div class="gold-note">
+      <p><strong>Why Gold is our "Best Value" choice:</strong> While Silver gets you on the map, Gold ensures you are the first name locals see. The Gold tier includes Advanced AI Sub-pages ($150 value each) giving Google and AI tools significantly more data to "read," making it much more likely that your business is cited as the primary recommendation in Pāpāmoa.</p>
+    </div>
+  </div>
+
+  <!-- OFFERS -->
+  <div class="section-wrap" id="offers">
+    <div class="offers-band">
+      <span>&#128640; Special Launch Offers &mdash; Strictly First-In, First-Served</span>
+    </div>
+
+    <p>Because we are in the launch phase, I am looking for a few "Founding Member" businesses to anchor the directory. To make this an easy decision, I have put together three exclusive offers:</p>
+
+    <div class="offer-card">
+      <div class="offer-badge">Offer 1</div>
+      <div class="offer-content">
+        <strong>The $601 Gold Upgrade</strong>
+        <span>If you are among the first businesses to join the [CATEGORY] category, I will upgrade you from Silver to Gold for free. You get the top "Spotlight" position and advanced AI sub-pages for the $599 Silver price.</span>
+      </div>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-badge">Offer 2</div>
+      <div class="offer-content">
+        <strong>The "Two-for-One" Network Boost</strong>
+        <span>Sign up for papamoa.info today and I will include a Featured Listing on tauranganz.info at no extra cost. This doubles your backlink power immediately.</span>
+      </div>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-badge">Offer 3</div>
+      <div class="offer-content">
+        <strong>Unlimited AI Sub-Pages (Value $150 each)</strong>
+        <span>I will build as many service-specific sub-pages as you need to help ChatGPT and Google AI cite you as the local authority.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUARANTEES -->
+  <div class="section-wrap">
+    <div class="section-label">My "Local-to-Local" Guarantees</div>
+
+    <div class="guarantee-row">
+      <div class="guarantee-dot"></div>
+      <div class="guarantee-text"><strong>Lifetime Price Lock:</strong> Your launch price is locked in for life. As long as you renew consecutively, your rate will never increase.</div>
+    </div>
+    <div class="guarantee-row">
+      <div class="guarantee-dot"></div>
+      <div class="guarantee-text"><strong>The 2027 ROI Guarantee:</strong> If we do not track a clear return for you in 2026, your 2027 listing is completely on the house.</div>
+    </div>
+    <div class="guarantee-row">
+      <div class="guarantee-dot"></div>
+      <div class="guarantee-text"><strong>Done-for-you Setup:</strong> I personally write all your SEO content, upload your images, and handle the technical schema markup. You do not have to lift a finger.</div>
+    </div>
+  </div>
+
+  <!-- CLOSE -->
+  <div class="close-section" id="contact">
+    <div class="availability-box">
+      <p>I am only approaching <strong>One Gold Spotlight per sub-category</strong>. The top spot in [CATEGORY] is still available. First in wins.</p>
+      <p>I would love to show you exactly how <strong>[BUSINESS NAME]</strong> will stand out on the site. If you are interested, I can whip up a <strong>free mockup of your listing</strong> so you can see the layout and SEO features in action before we go live.</p>
+    </div>
+
+    <p>Just reach out below or give me a call. No strings attached.</p>
+
+    <div class="sig">
+      <strong>Jayden Brown</strong>
+      Local Partner &nbsp;&bull;&nbsp; Papamoa.info<br>
+      <a href="tel:0275332970">027 533 2970</a> &nbsp;|&nbsp; <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a><br>
+      <a href="https://www.papamoa.info">www.papamoa.info</a>
+    </div>
+  </div>
+
+</div><!-- /page-content -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">papamoa.info</div>
+  <p>Pāpāmoa's local business directory &nbsp;&bull;&nbsp; Built for the AI-first search era<br>
+  &copy; 2026 Papamoa.info &nbsp;&bull;&nbsp; <a href="https://tauranganz.info">tauranganz.info</a></p>
+</footer>
+
+</body>
+</html>
