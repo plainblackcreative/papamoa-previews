@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papamoa.info — Current State Report · PlainBlack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+  :root {
+    --color-ocean-deep: #134B58;
+    --color-ocean-accent: #3AABDE;
+    --color-green: #2E7D32;
+    --color-red: #DC2626;
+    --color-dune: #C4985A;
+    --color-sand: #F7F3ED;
+    --color-sand-dark: #EDE7DB;
+    --color-text: #2C2C2C;
+    --color-text-soft: #4a4a4a;
+    --color-text-light: #6B6B6B;
+    --color-white: #FFFFFF;
+    --color-black: #0A0A0A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Figtree', sans-serif;
+    background: var(--color-white);
+    color: var(--color-text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* COVER PAGE */
+  .cover {
+    background: var(--color-black);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(58,171,222,0.08) 0%, transparent 70%);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(125,193,67,0.06) 0%, transparent 70%);
+  }
+  .cover-top { position: relative; z-index: 1; }
+  .cover-brand {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 80px;
+  }
+  .cover-brand span { color: var(--color-ocean-accent); }
+  .cover-mid { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .cover-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-green);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    color: var(--color-white);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  .cover h1 em { color: var(--color-ocean-accent); font-style: italic; }
+  .cover-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    max-width: 520px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .cover-bottom {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .cover-meta { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.8; }
+  .cover-meta strong { color: rgba(255,255,255,0.7); display: block; }
+  .cover-logo {
+    font-family: 'Figtree', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+  .cover-logo span { color: var(--color-ocean-accent); }
+
+  /* MAIN CONTENT */
+  .report {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  /* SECTION HEADERS */
+  .section {
+    margin-bottom: 60px;
+    page-break-inside: avoid;
+  }
+  .section-number {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ocean-accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--color-ocean-deep);
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-sand-dark);
+  }
+  .section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-ocean-deep);
+    margin: 28px 0 10px;
+  }
+  .section p {
+    color: var(--color-text-soft);
+    margin-bottom: 14px;
+  }
+
+  /* EXECUTIVE SUMMARY BOX */
+  .exec-summary {
+    background: var(--color-ocean-deep);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 48px;
+  }
+  .exec-summary h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--color-white);
+    margin-bottom: 16px;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .exec-summary p {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .exec-summary p:last-child { margin-bottom: 0; }
+
+  /* SCORE CARDS */
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .score-card {
+    background: var(--color-sand);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--color-sand-dark);
+  }
+  .score-card .score {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score-card.poor .score { color: var(--color-red); }
+  .score-card.fair .score { color: var(--color-dune); }
+  .score-card.good .score { color: var(--color-green); }
+  .score-card .label {
+    font-size: 12px;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .score-card .sublabel {
+    font-size: 11px;
+    color: var(--color-text-light);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* FINDING ITEMS */
+  .finding {
+    display: flex;
+    gap: 16px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border-left: 3px solid;
+  }
+  .finding.issue { background: #fef2f3; border-color: var(--color-red); }
+  .finding.warning { background: #fdf6e8; border-color: var(--color-dune); }
+  .finding.positive { background: #eef7e3; border-color: var(--color-green); }
+  .finding.info { background: #e8f4fb; border-color: var(--color-ocean-accent); }
+  .finding-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .finding-content { flex: 1; }
+  .finding-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .finding.issue .finding-title { color: var(--color-red); }
+  .finding.warning .finding-title { color: var(--color-dune); }
+  .finding.positive .finding-title { color: #3a7d1a; }
+  .finding.info .finding-title { color: #1a6e96; }
+  .finding-text {
+    font-size: 13px;
+    color: var(--color-text-soft);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* RECOMMENDATION ITEMS */
+  .rec {
+    background: var(--color-white);
+    border: 1px solid var(--color-sand-dark);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .rec-priority {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .rec-priority.high { background: var(--color-red); color: white; }
+  .rec-priority.medium { background: var(--color-dune); color: white; }
+  .rec-priority.low { background: var(--color-ocean-deep); color: white; }
+  .rec-content { flex: 1; }
+  .rec-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-ocean-deep);
+    margin-bottom: 6px;
+  }
+  .rec-text {
+    font-size: 13px;
+    color: var(--color-text-soft);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .rec-impact {
+    font-size: 11px;
+    color: var(--color-green);
+    font-weight: 600;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: var(--color-ocean-deep);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+  }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 8px 0 0; }
+  .compare-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-sand-dark);
+    color: var(--color-text-soft);
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: var(--color-sand); }
+  .compare-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .compare-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+  .compare-table .yes { color: var(--color-green); font-weight: 600; }
+  .compare-table .no { color: var(--color-red); }
+  .compare-table .partial { color: var(--color-dune); }
+  .compare-table td strong { color: var(--color-ocean-deep); font-weight: 600; }
+
+  /* CATEGORY LIST */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .cat-card {
+    background: var(--color-sand);
+    border-radius: 8px;
+    padding: 14px 16px;
+    border: 1px solid var(--color-sand-dark);
+  }
+  .cat-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ocean-deep);
+    margin-bottom: 4px;
+  }
+  .cat-sub {
+    font-size: 11px;
+    color: var(--color-text-light);
+    line-height: 1.5;
+  }
+
+  /* OPPORTUNITY BOX */
+  .opportunity {
+    background: linear-gradient(135deg, var(--color-ocean-deep) 0%, #1a2d45 100%);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin: 32px 0;
+  }
+  .opportunity h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--color-white);
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .opportunity p {
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .opportunity .stat {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 6px 6px 0 0;
+    font-size: 13px;
+    color: white;
+  }
+  .opportunity .stat strong { color: var(--color-ocean-accent); display: block; font-size: 20px; line-height: 1.2; }
+
+  /* PHASE TIMELINE */
+  .timeline { margin: 20px 0; }
+  .timeline-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+  .timeline-dot {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .timeline-dot.phase1 { background: var(--color-ocean-accent); }
+  .timeline-dot.phase2 { background: var(--color-green); }
+  .timeline-dot.phase3 { background: var(--color-dune); }
+  .timeline-content { flex: 1; }
+  .timeline-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-ocean-deep);
+    margin-bottom: 4px;
+  }
+  .timeline-text {
+    font-size: 13px;
+    color: var(--color-text-soft);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .report-footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-sand-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-brand {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-ocean-deep);
+  }
+  .footer-brand span { color: var(--color-ocean-accent); }
+  .footer-meta {
+    font-size: 12px;
+    color: var(--color-text-light);
+    text-align: right;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--color-sand-dark);
+    margin: 40px 0;
+  }
+
+  /* PRINT */
+  @media print {
+    .cover { min-height: auto; padding: 40px; }
+    .report { padding: 40px 20px; }
+    .section { page-break-inside: avoid; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .cover { padding: 32px 24px; }
+    .report { padding: 40px 20px; }
+    .score-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="cover-brand">Prepared by <span>PlainBlack</span> · Confidential</div>
+  </div>
+  <div class="cover-mid">
+    <div class="cover-eyebrow">Website & SEO Audit · March 2026</div>
+    <h1>Current State<br><em>papamoa.info</em></h1>
+    <p class="cover-sub">
+      An independent audit of the directory's current SEO, AEO, and technical setup —
+      with a roadmap for aligning the platform with a new paid listing system
+      and AI-first search optimisation strategy.
+    </p>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-meta">
+      <strong>Prepared for</strong>
+      Papamoa.info — Site Owner
+    </div>
+    <div class="cover-meta" style="text-align:center">
+      <strong>Prepared by</strong>
+      PlainBlack · Jayden Brown
+    </div>
+    <div class="cover-meta" style="text-align:right">
+      <strong>Date</strong>
+      March 2026
+    </div>
+  </div>
+</div>
+
+<!-- REPORT CONTENT -->
+<div class="report">
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="exec-summary">
+    <h2>Executive Summary</h2>
+    <p>
+      Papamoa.info has a strong foundation — an established domain with over 20 years of network authority,
+      a clean URL structure, active category pages, and real community content. These are genuine assets that
+      most new directories would take years to build.
+    </p>
+    <p>
+      However, the site is currently underperforming its potential in three critical areas:
+      AI search visibility, structured data, and commercial monetisation. In 2026, AI-generated answers
+      from ChatGPT, Perplexity, and Google AI Overviews are increasingly the first thing users see —
+      before any website links. The current site structure is not optimised to appear in those answers.
+    </p>
+    <p>
+      This report identifies the gaps, scores the current state, and outlines a clear set of
+      recommendations to align the platform with a new paid listing system designed to generate
+      sustainable recurring revenue while delivering genuine, measurable value to listed businesses.
+    </p>
+  </div>
+
+  <!-- SECTION 1: CURRENT SCORES -->
+  <div class="section">
+    <div class="section-number">Section 01</div>
+    <h2>Current State Scores</h2>
+    <p>
+      The following scores are based on a technical audit of the live site conducted in March 2026,
+      assessing SEO foundations, AI/AEO readiness, commercial setup, and content quality.
+      Google Analytics and Search Console data is not yet available — scores will be refined
+      once access is provided.
+    </p>
+
+    <div class="score-grid">
+      <div class="score-card fair">
+        <div class="score">52</div>
+        <div class="label">Overall SEO</div>
+        <div class="sublabel">Strong domain age, weak on-page signals</div>
+      </div>
+      <div class="score-card poor">
+        <div class="score">18</div>
+        <div class="label">AEO / AI Visibility</div>
+        <div class="sublabel">No schema, no FAQ structure, not AI-ready</div>
+      </div>
+      <div class="score-card good">
+        <div class="score">78</div>
+        <div class="label">Domain Authority</div>
+        <div class="sublabel">20+ years, strong network trust signal</div>
+      </div>
+      <div class="score-card poor">
+        <div class="score">12</div>
+        <div class="label">Commercial Setup</div>
+        <div class="sublabel">No paid listing system, no CRM, no tracking</div>
+      </div>
+      <div class="score-card fair">
+        <div class="score">61</div>
+        <div class="label">Content Quality</div>
+        <div class="sublabel">Good depth on some listings, inconsistent voice</div>
+      </div>
+      <div class="score-card fair">
+        <div class="score">55</div>
+        <div class="label">Technical Health</div>
+        <div class="sublabel">Clean URLs, JS-dependent forms, no LLMs.txt</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: WHAT'S WORKING -->
+  <div class="section">
+    <div class="section-number">Section 02</div>
+    <h2>What Is Working</h2>
+
+    <div class="finding positive">
+      <div class="finding-icon">✓</div>
+      <div class="finding-content">
+        <div class="finding-title">20-Year Domain Authority</div>
+        <p class="finding-text">The TaurangaNZ.info network has been operating since 2005. Google assigns significant trust to aged domains with consistent history. This is the single most valuable SEO asset on the platform and cannot be replicated by any competitor starting fresh today.</p>
+      </div>
+    </div>
+
+    <div class="finding positive">
+      <div class="finding-icon">✓</div>
+      <div class="finding-content">
+        <div class="finding-title">Clean, Logical URL Structure</div>
+        <p class="finding-text">Category and listing URLs follow a consistent, keyword-friendly pattern — papamoa.info/services/dentist, papamoa.info/food-drink/cafes. These are indexable, crawlable, and already receiving search traffic. No restructuring required.</p>
+      </div>
+    </div>
+
+    <div class="finding positive">
+      <div class="finding-icon">✓</div>
+      <div class="finding-content">
+        <div class="finding-title">Active Community Content</div>
+        <p class="finding-text">The site has news, events, classifieds, and community information sections actively updated. This non-commercial content drives repeat visits and builds topical authority around Pāpāmoa as a subject — which benefits all listings on the domain.</p>
+      </div>
+    </div>
+
+    <div class="finding positive">
+      <div class="finding-icon">✓</div>
+      <div class="finding-content">
+        <div class="finding-title">Real Listing Depth on Premium Content</div>
+        <p class="finding-text">Listings like the Pāpāmoa Orthodontist page demonstrate strong content depth — detailed service descriptions, business hours, service links, social profiles, and affiliate logos. This is the content standard all paid listings should meet and exceed.</p>
+      </div>
+    </div>
+
+    <div class="finding positive">
+      <div class="finding-icon">✓</div>
+      <div class="finding-content">
+        <div class="finding-title">6 Commercial Category Structure</div>
+        <p class="finding-text">Accommodation, Activities, Food & Drink, Shops, Services, and Essential Information provide a solid taxonomy for a paid tier system. The sub-category depth under Services and Shops in particular is extensive and covers the highest-value lead industries.</p>
+      </div>
+    </div>
+
+    <div class="finding positive">
+      <div class="finding-icon">✓</div>
+      <div class="finding-content">
+        <div class="finding-title">Drupal CMS with REST API Capability</div>
+        <p class="finding-text">The site runs on Drupal (built by Klixo), which has native REST API and JSON:API modules. This opens the door to automated listing creation and updates as part of a future fully automated publishing workflow — without rebuilding the site.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: GAPS & ISSUES -->
+  <div class="section">
+    <div class="section-number">Section 03</div>
+    <h2>Gaps and Issues</h2>
+
+    <h3>Critical — AEO & Schema</h3>
+
+    <div class="finding issue">
+      <div class="finding-icon">✕</div>
+      <div class="finding-content">
+        <div class="finding-title">No Schema Markup on Any Listing Page</div>
+        <p class="finding-text">None of the current listing pages include LocalBusiness, GeoCoordinates, OpeningHoursSpecification, or FAQPage schema. This is the single biggest gap for AI search visibility. Without schema markup, AI engines like ChatGPT, Perplexity, and Google AI Overviews cannot reliably extract and cite business information. Google's own documentation confirms structured data is a primary factor in AI Overview inclusion.</p>
+      </div>
+    </div>
+
+    <div class="finding issue">
+      <div class="finding-icon">✕</div>
+      <div class="finding-content">
+        <div class="finding-title">No FAQ Sections on Listings</div>
+        <p class="finding-text">FAQPage schema is one of the highest-value AEO signals available. When someone asks "Is there a dentist in Pāpāmoa that does braces?" — a listing with a structured FAQ section answering that question will be cited by AI. Currently no listing on the site has this. It is a core feature of the proposed Gold tier and will immediately differentiate paid listings from existing free ones.</p>
+      </div>
+    </div>
+
+    <div class="finding issue">
+      <div class="finding-icon">✕</div>
+      <div class="finding-content">
+        <div class="finding-title">No LLMs.txt File</div>
+        <p class="finding-text">An LLMs.txt file tells AI crawlers (Perplexity, Common Crawl, and others) which parts of the site to index and prioritise. Without it, AI engines make their own decisions about what to include. Platforms like Perplexity have begun honouring this file. Early adoption gives the directory more control over how its content appears in AI-generated answers.</p>
+      </div>
+    </div>
+
+    <h3>Significant — Content & Voice</h3>
+
+    <div class="finding warning">
+      <div class="finding-icon">!</div>
+      <div class="finding-content">
+        <div class="finding-title">Listings Written in First-Person Business Voice</div>
+        <p class="finding-text">Current listings use "our clinic," "we offer," "you will be treated" — self-promotional language written from the business's own perspective. AI engines weight third-party editorial content as more authoritative than self-promotion. All paid listings going forward should be written from the directory's perspective: "they offer," "the clinic provides," "customers can expect." This also creates consistency across all listings, which strengthens site-wide SEO cohesion.</p>
+      </div>
+    </div>
+
+    <div class="finding warning">
+      <div class="finding-icon">!</div>
+      <div class="finding-content">
+        <div class="finding-title">Weak Page Title Tags</div>
+        <p class="finding-text">Page titles are currently formatted as "BUSINESS NAME | Papamoa Information" — no keywords, no service descriptor, no location context beyond the site name. A title like "Pāpāmoa Orthodontist — Braces & Aligners in Pāpāmoa, NZ | Papamoa.info" performs significantly better in both Google search and AI citation. Every paid listing should have a unique, keyword-rich title generated as part of the listing build.</p>
+      </div>
+    </div>
+
+    <div class="finding warning">
+      <div class="finding-icon">!</div>
+      <div class="finding-content">
+        <div class="finding-title">Inconsistent Content Depth Across Listings</div>
+        <p class="finding-text">Some listings are detailed and well-structured (Orthodontist). Others are minimal placeholders. This inconsistency weakens the overall site authority. A paid tier system with mandatory content standards — minimum word count, required sections, schema markup — brings every new listing to a consistent quality floor and gradually raises the site-wide average.</p>
+      </div>
+    </div>
+
+    <h3>Moderate — Technical</h3>
+
+    <div class="finding warning">
+      <div class="finding-icon">!</div>
+      <div class="finding-content">
+        <div class="finding-title">Contact Forms Require JavaScript</div>
+        <p class="finding-text">The "You must have JavaScript enabled to use this form" message on listing pages means some crawlers and accessibility tools cannot interact with contact forms. Replacing with Web3Forms provides a JS-independent, accessible form solution that also integrates with the CRM and lead tracking system.</p>
+      </div>
+    </div>
+
+    <div class="finding warning">
+      <div class="finding-icon">!</div>
+      <div class="finding-content">
+        <div class="finding-title">No Robots.txt Review Completed</div>
+        <p class="finding-text">The robots.txt file has not been reviewed as part of this audit. If key listing pages or category pages are inadvertently blocked, AI crawlers cannot access them regardless of content quality. This should be reviewed and updated to explicitly allow AI crawlers access to all commercial listing pages.</p>
+      </div>
+    </div>
+
+    <div class="finding info">
+      <div class="finding-icon">i</div>
+      <div class="finding-content">
+        <div class="finding-title">Google Ads Conversion Pixel Active Site-Wide</div>
+        <p class="finding-text">A Google Ads conversion tracking pixel is embedded on every page, indicating active ad spend driving traffic to the site. This is useful context — it means the site already has measurable inbound traffic. Connecting Google Analytics and Search Console will quantify this and provide the data needed for ROI reporting to listed businesses.</p>
+      </div>
+    </div>
+
+    <div class="finding info">
+      <div class="finding-icon">i</div>
+      <div class="finding-content">
+        <div class="finding-title">No Commercial Monetisation System</div>
+        <p class="finding-text">The site currently has no paid listing tiers, no signup process, no payment system, and no CRM. The "List your business" link in the footer goes to a generic contact form. The new system addresses this in full — this is noted here as context for the scope of change proposed.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: MARKET OPPORTUNITY -->
+  <div class="section">
+    <div class="section-number">Section 04</div>
+    <h2>Market Opportunity</h2>
+    <p>
+      Papamoa.info operates in a category of one. No other directory targets Papamoa specifically.
+      National directories (Yellow Pages, Finda, Cylex, BizWin) list Pāpāmoa businesses
+      alongside tens of thousands of others, providing no local advantage. The site's geographic
+      specificity is its commercial moat.
+    </p>
+
+    <div class="opportunity">
+      <h3>The Numbers</h3>
+      <p>Based on February 2025 Statistics NZ and Tauranga City Council data:</p>
+      <div>
+        <div class="stat"><strong>37,800</strong> Pāpāmoa residents (June 2024)</div>
+        <div class="stat"><strong>20,364</strong> Active businesses in Tauranga City</div>
+        <div class="stat"><strong>30,030</strong> W. Bay of Plenty total</div>
+        <div class="stat"><strong>~5,000</strong> Tier 1 target businesses</div>
+        <div class="stat"><strong>2,907</strong> Construction & Trades</div>
+        <div class="stat"><strong>2,313</strong> Professional Services</div>
+        <div class="stat"><strong>1,167</strong> Health & Wellness</div>
+        <div class="stat"><strong>750</strong> Accommodation & Food</div>
+      </div>
+    </div>
+
+    <h3>Why Now</h3>
+    <p>
+      Pāpāmoa is NZ's fastest-growing suburb, projected to exceed 40,000 residents by 2028.
+      New businesses are opening continuously, and new residents actively search for local
+      services they haven't yet discovered. The directory is positioned at exactly the right
+      time to capture this growth as an established, trusted local authority.
+    </p>
+    <p>
+      The AI search shift adds a second layer of urgency. Businesses that aren't structured
+      for AI citation in 2026 will be invisible in an increasingly large share of searches.
+      Papamoa.info, with its domain authority and local specificity, is better positioned
+      than any individual business website to be cited as the authoritative local source.
+      That's the core value proposition of the new paid listing system.
+    </p>
+  </div>
+
+  <!-- SECTION 5: COMPETITOR COMPARISON -->
+  <div class="section">
+    <div class="section-number">Section 05</div>
+    <h2>Competitive Landscape</h2>
+    <p>
+      The following comparison shows how papamoa.info stacks up against the key national
+      directory competitors for local Pāpāmoa search visibility.
+    </p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Papamoa.info</th>
+          <th>Yellow NZ</th>
+          <th>Finda</th>
+          <th>Google Maps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Pāpāmoa-specific focus</strong></td>
+          <td class="yes">Yes — only us</td>
+          <td class="no">No</td>
+          <td class="no">No</td>
+          <td class="no">No</td>
+        </tr>
+        <tr>
+          <td><strong>Domain age / authority</strong></td>
+          <td class="yes">20+ years</td>
+          <td class="yes">High</td>
+          <td class="partial">Medium</td>
+          <td class="yes">Very high</td>
+        </tr>
+        <tr>
+          <td><strong>Third-party editorial voice</strong></td>
+          <td class="partial">Proposed</td>
+          <td class="no">No</td>
+          <td class="no">No</td>
+          <td class="no">No</td>
+        </tr>
+        <tr>
+          <td><strong>Schema markup on listings</strong></td>
+          <td class="partial">Proposed</td>
+          <td class="partial">Basic</td>
+          <td class="partial">Basic</td>
+          <td class="yes">Yes</td>
+        </tr>
+        <tr>
+          <td><strong>AI-optimised FAQ sections</strong></td>
+          <td class="partial">Proposed (Gold)</td>
+          <td class="no">No</td>
+          <td class="no">No</td>
+          <td class="no">No</td>
+        </tr>
+        <tr>
+          <td><strong>Done-for-you content</strong></td>
+          <td class="yes">Yes</td>
+          <td class="no">No</td>
+          <td class="no">No</td>
+          <td class="no">No</td>
+        </tr>
+        <tr>
+          <td><strong>Backlink to business website</strong></td>
+          <td class="yes">Yes</td>
+          <td class="partial">Paid only</td>
+          <td class="partial">Paid only</td>
+          <td class="no">No</td>
+        </tr>
+        <tr>
+          <td><strong>Paid tier with Spotlight</strong></td>
+          <td class="yes">Proposed</td>
+          <td class="yes">Yes</td>
+          <td class="yes">Yes</td>
+          <td class="partial">Ads only</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:12px; color:var(--color-text-light); margin-top:8px;">
+      "Proposed" indicates features that will be delivered as part of the new paid listing system.
+    </p>
+  </div>
+
+  <!-- SECTION 6: RECOMMENDATIONS -->
+  <div class="section">
+    <div class="section-number">Section 06</div>
+    <h2>Recommendations</h2>
+    <p>
+      The following recommendations are prioritised by impact on AI search visibility,
+      commercial performance, and alignment with the new paid listing system.
+    </p>
+
+    <h3>Priority 1 — Immediate Technical Fixes</h3>
+
+    <div class="rec">
+      <span class="rec-priority high">High</span>
+      <div class="rec-content">
+        <div class="rec-title">Add LocalBusiness JSON-LD Schema to All Listing Pages</div>
+        <p class="rec-text">Implement structured data markup on every listing page including business name, address, phone, website, opening hours, geo-coordinates, and category. This is the single highest-impact AEO improvement available and can be templated so every new paid listing generates it automatically.</p>
+        <div class="rec-impact">Impact: AI citation visibility, Google rich results, ChatGPT & Perplexity indexing</div>
+      </div>
+    </div>
+
+    <div class="rec">
+      <span class="rec-priority high">High</span>
+      <div class="rec-content">
+        <div class="rec-title">Create and Configure LLMs.txt</div>
+        <p class="rec-text">Add an LLMs.txt file to the root of the domain directing AI crawlers to prioritise listing pages and category pages. Explicitly allow Perplexity, Common Crawl, and Google crawlers access to all commercial content. This is a quick technical change with outsized AI visibility impact.</p>
+        <div class="rec-impact">Impact: AI crawler access, Perplexity citation, Google AI Overview inclusion</div>
+      </div>
+    </div>
+
+    <div class="rec">
+      <span class="rec-priority high">High</span>
+      <div class="rec-content">
+        <div class="rec-title">Review and Update Robots.txt</div>
+        <p class="rec-text">Audit the current robots.txt to ensure no commercial listing or category pages are blocked. Add explicit Allow directives for known AI crawlers (GPTBot, PerplexityBot, ClaudeBot). Disallow only low-value pages such as admin, thank-you, and test pages.</p>
+        <div class="rec-impact">Impact: Ensures all listing content is accessible to AI and search crawlers</div>
+      </div>
+    </div>
+
+    <div class="rec">
+      <span class="rec-priority high">High</span>
+      <div class="rec-content">
+        <div class="rec-title">Replace JS-Dependent Contact Forms with Web3Forms</div>
+        <p class="rec-text">Replace the current JavaScript-required contact forms on listing pages with Web3Forms integration. This removes the accessibility barrier, enables form submissions to feed directly into the CRM, and supports lead tracking through the funnel. Free tier supports up to 250 submissions per month.</p>
+        <div class="rec-impact">Impact: Lead capture, CRM integration, accessibility compliance</div>
+      </div>
+    </div>
+
+    <h3>Priority 2 — Content & Voice</h3>
+
+    <div class="rec">
+      <span class="rec-priority high">High</span>
+      <div class="rec-content">
+        <div class="rec-title">Establish Third-Party Directory Voice Standard</div>
+        <p class="rec-text">All new paid listings must be written from the directory's editorial perspective — "they offer," "the business provides," "customers can expect" — never first-person business voice. This positions each listing as independent editorial content rather than self-promotion, which AI engines weight as significantly more authoritative. Apply retrospectively to existing high-value listings.</p>
+        <div class="rec-impact">Impact: AI citation authority, SEO cohesion, perceived editorial credibility</div>
+      </div>
+    </div>
+
+    <div class="rec">
+      <span class="rec-priority high">High</span>
+      <div class="rec-content">
+        <div class="rec-title">Update Page Title Tags to Include Keywords</div>
+        <p class="rec-text">Change listing page titles from "BUSINESS NAME | Papamoa Information" to a keyword-rich format: "Business Name — Service Type in Pāpāmoa, NZ | Papamoa.info". This improves click-through rates from search results and gives AI engines clearer topical signals about each page.</p>
+        <div class="rec-impact">Impact: SERP click-through, AI topical relevance, search ranking</div>
+      </div>
+    </div>
+
+    <div class="rec">
+      <span class="rec-priority medium">Medium</span>
+      <div class="rec-content">
+        <div class="rec-title">Add FAQ Sections to Gold Tier Listings</div>
+        <p class="rec-text">Every Gold listing should include a structured FAQ section of 3–5 questions and answers, formatted with FAQPage schema. Questions should mirror real search queries ("Is there a [service] in Pāpāmoa?", "How much does [service] cost in Pāpāmoa?"). This is the primary mechanism for AI citation and should be generated automatically by Claude as part of the listing build workflow.</p>
+        <div class="rec-impact">Impact: Direct AI citation, Google AI Overview inclusion, featured snippet capture</div>
+      </div>
+    </div>
+
+    <h3>Priority 3 — Commercial System</h3>
+
+    <div class="rec">
+      <span class="rec-priority high">High</span>
+      <div class="rec-content">
+        <div class="rec-title">Launch Paid Listing Tiers (Silver & Gold)</div>
+        <p class="rec-text">Implement a two-tier paid listing system — Silver at $599+GST/year and Gold at $1,200+GST/year — with one Gold Spotlight position per sub-category. Gold listings appear at the top of their category page. If no Gold listing exists in a sub-category, display a "Spotlight available" indicator. Annual recurring subscription with Lifetime Price Lock for founding members.</p>
+        <div class="rec-impact">Impact: Revenue generation, directory quality floor, competitive scarcity dynamic</div>
+      </div>
+    </div>
+
+    <div class="rec">
+      <span class="rec-priority high">High</span>
+      <div class="rec-content">
+        <div class="rec-title">Connect Google Analytics and Search Console</div>
+        <p class="rec-text">Enable GA4 and Search Console to track listing page performance, category page traffic, and search query data. This data directly supports the ROI reporting promised to paid listing clients and provides the evidence base for the 2027 ROI Guarantee. Request access from the site owner as a priority.</p>
+        <div class="rec-impact">Impact: Client ROI reporting, keyword opportunity identification, conversion tracking</div>
+      </div>
+    </div>
+
+    <div class="rec">
+      <span class="rec-priority medium">Medium</span>
+      <div class="rec-content">
+        <div class="rec-title">Investigate Drupal REST API for Automated Listing Creation</div>
+        <p class="rec-text">The site runs on Drupal, which has native REST API capability. Enabling this would allow listing content to be published automatically via the sales funnel automation, removing the manual CMS step entirely. Engage Klixo to confirm API availability and document the listing node structure for integration planning.</p>
+        <div class="rec-impact">Impact: Automation efficiency, scalability, reduced time-per-listing from payment to live</div>
+      </div>
+    </div>
+
+    <div class="rec">
+      <span class="rec-priority medium">Medium</span>
+      <div class="rec-content">
+        <div class="rec-title">Add Tide Times as a Standalone SEO Page</div>
+        <p class="rec-text">Create a dedicated "Papamoa Beach Tide Times" page using a free tide API. "Papamoa Beach tide times today" is a high-frequency local search with no strong existing local result. A well-structured page on papamoa.info could rank quickly given the domain authority, driving repeat organic traffic and increasing the overall value of the directory to the local community.</p>
+        <div class="rec-impact">Impact: Organic traffic, repeat visits, community value, domain topical authority</div>
+      </div>
+    </div>
+
+    <div class="rec">
+      <span class="rec-priority low">Low</span>
+      <div class="rec-content">
+        <div class="rec-title">Bronze Tier — Free Claimed Listings (Pending Owner Approval)</div>
+        <p class="rec-text">A Bronze tier at $99 lifetime would allow businesses to claim a basic citation listing (name, address, phone, website — no SEO content, no images). Each claimed listing adds a real indexed page to the domain, building SEO depth at near-zero labour cost via Claude automation. The comparison with Silver and Gold on the preview page makes the upgrade value immediately visible. Recommended for consideration after the first paid listings are converted.</p>
+        <div class="rec-impact">Impact: Domain SEO depth, lead pipeline, upsell opportunities</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: PROPOSED SYSTEM -->
+  <div class="section">
+    <div class="section-number">Section 07</div>
+    <h2>Proposed System Overview</h2>
+    <p>
+      The following outlines the new sales and listing automation system being built to
+      support the paid directory launch. This system is designed to run with minimal
+      ongoing effort while delivering a professional, personalised experience to every prospect.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot phase1">1</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Phase 1 — Manual Launch (Immediate)</div>
+          <p class="timeline-text">Full funnel operational but executed manually. Outreach via call, email, and DM. Personalised preview pages built per lead and hosted on GitHub. Onboarding, mockup approval, and invoicing handled by Jayden. Goal: first 10 converted leads to prove the system and generate social proof.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot phase2">2</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Phase 2 — Automation (Post First Sales)</div>
+          <p class="timeline-text">URL drop triggers Claude to build the full outreach stack automatically — email, landing page, personalised preview page, CRM entry. Stripe payment webhook triggers GitHub redirect, welcome email, and publish notification. Renewal reminders automated. Jayden's role: review, post Facebook welcome, publish to CMS.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot phase3">3</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Phase 3 — Full Hands-Off (Drupal API)</div>
+          <p class="timeline-text">If Drupal API access is confirmed with Klixo, listing creation can be fully automated on payment — from GitHub preview to live published listing with no manual CMS step. This unlocks the ability to scale without proportional increases in labour.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Revenue Projections</h3>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th>Listings</th>
+          <th>Mix</th>
+          <th>Annual Revenue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Conservative</strong></td>
+          <td>50 listings</td>
+          <td>70% Silver / 30% Gold</td>
+          <td>~$46,000–$55,000 + GST</td>
+        </tr>
+        <tr>
+          <td><strong>Target</strong></td>
+          <td>100 listings</td>
+          <td>60% Silver / 40% Gold</td>
+          <td>~$92,000–$115,000 + GST</td>
+        </tr>
+        <tr>
+          <td><strong>Optimistic</strong></td>
+          <td>150 listings</td>
+          <td>50% Silver / 50% Gold</td>
+          <td>~$135,000–$165,000 + GST</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px; color:var(--color-text-light); margin-top:8px;">
+      Projections based on annual recurring subscriptions only. Sub-page add-ons ($150+GST each) and additional sub-category fees ($99+GST each) are not included and represent meaningful additional revenue.
+    </p>
+  </div>
+
+  <!-- SECTION 8: NEXT STEPS -->
+  <div class="section">
+    <div class="section-number">Section 08</div>
+    <h2>Recommended Next Steps</h2>
+
+    <div class="finding info">
+      <div class="finding-icon">1</div>
+      <div class="finding-content">
+        <div class="finding-title">Provide Google Analytics & Search Console Access</div>
+        <p class="finding-text">This unlocks current traffic data, keyword performance, and the ability to set up ROI tracking for paid listings. Required before making any specific traffic-based claims to prospects.</p>
+      </div>
+    </div>
+
+    <div class="finding info">
+      <div class="finding-icon">2</div>
+      <div class="finding-content">
+        <div class="finding-title">Confirm Drupal API Availability with Klixo</div>
+        <p class="finding-text">Ask Klixo whether the Drupal REST API or JSON:API module is enabled, and whether listing nodes can be created programmatically. This determines the Phase 3 automation timeline.</p>
+      </div>
+    </div>
+
+    <div class="finding info">
+      <div class="finding-icon">3</div>
+      <div class="finding-content">
+        <div class="finding-title">Approve Paid Listing Tier Structure</div>
+        <p class="finding-text">Confirm Silver ($599+GST/yr) and Gold ($1,200+GST/yr) pricing, the one-Gold-per-sub-category scarcity model, sub-page add-on pricing ($150+GST), and the Bronze tier decision ($99 lifetime, pending).</p>
+      </div>
+    </div>
+
+    <div class="finding info">
+      <div class="finding-icon">4</div>
+      <div class="finding-content">
+        <div class="finding-title">Review and Sign Off on Founding Member Offer</div>
+        <p class="finding-text">The launch offer — Gold on Papamoa.info includes a Silver listing on TaurangaNZ.info free — requires confirmation that TaurangaNZ.info listings can be created as part of this package. Confirm scope and sign off before outreach begins.</p>
+      </div>
+    </div>
+
+    <div class="finding info">
+      <div class="finding-icon">5</div>
+      <div class="finding-content">
+        <div class="finding-title">Attend System Demo</div>
+        <p class="finding-text">PlainBlack will present a full working demo of the sales funnel — including the personalised preview page, automated content generation, and CRM dashboard — before any external outreach begins. This demo will use real Pāpāmoa businesses as examples.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FOOTER -->
+  <div class="report-footer">
+    <div>
+      <div class="footer-brand">Plain<span>Black</span></div>
+      <div style="font-size:12px; color:var(--color-text-light); margin-top:4px;">Jayden Brown · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91fbf0e8f5f4ffd1e1f0e1f0fcfef0bff8fff7fe">[email&#160;protected]</a> · 027 533 2970</div>
+    </div>
+    <div class="footer-meta">
