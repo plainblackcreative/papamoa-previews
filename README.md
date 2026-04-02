@@ -22,7 +22,7 @@ Demo site and preview pages for [Papamoa.info](https://www.papamoa.info) — the
 
 ## Design System
 
-- **Fonts:** DM Sans (body) + Fraunces (display)
+- **Fonts:** Figtree (body) + Playfair Display (headings)
 - **Palette:** Ocean / Sand / Dune
 - **Shared CSS:** `assets/css/styles.css`
 
