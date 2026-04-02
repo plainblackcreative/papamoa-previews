@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gardening in Pāpāmoa | Papamoa.info</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+:root{
+  --color-ocean-deep: #134B58;--color-ocean: #1B6B7D;--color-green: #2E7D32;--color-green-light: #E8F5E9;--color-meadow: #d4edda;--color-ocean-light: #E8F4F6;
+  --color-soil: #3e2a1a;--color-clay: #6b4c30;--color-bark: #9c7a52;
+  --color-sand: #F7F3ED;--color-white: #FFFFFF;--color-sand-dark: #EDE7DB;
+  --color-text: #2C2C2C;--color-text-soft: #4a4a4a;--color-text-light: #6B6B6B;--color-border: #E0D9CE;
+  --color-dune: #C4985A;--color-dune-light: #F5EDD8;--color-dune-border: #e8c860;
+  --color-sun: #f0a050;--color-ocean-accent: #3AABDE;
+  --radius: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);--shadow-md: 0 4px 16px rgba(0,0,0,0.08);--shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Figtree', sans-serif;background:var(--color-white);color:var(--color-text);-webkit-font-smoothing:antialiased}
+::selection{background:var(--color-meadow);color:var(--color-ocean-deep)}
+
+/* NAV */
+.nav{background:#162b21;position:sticky;top:0;z-index:500}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-family:'Playfair Display', serif;color:#fff;font-size:1.2rem;font-weight:700}
+.logo i{font-style:italic;color:var(--color-green);font-weight:400}
+.nav-links{display:flex;gap:8px}
+.nav-links a{color:rgba(255,255,255,.55);font-size:.78rem;font-weight:500;text-decoration:none;padding:6px 14px;border-radius:100px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-links a.on{color:var(--color-green-light);background:rgba(82,183,106,.12)}
+
+/* HERO */
+.hero{background:var(--color-ocean-deep);position:relative;overflow:hidden;padding:56px 28px 52px}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse at 25% 85%,rgba(82,183,106,.1) 0%,transparent 50%),
+  radial-gradient(ellipse at 75% 20%,rgba(156,122,82,.08) 0%,transparent 40%),
+  radial-gradient(ellipse at 50% 100%,rgba(45,106,58,.15) 0%,transparent 60%)}
+.hero-grain{position:absolute;inset:0;opacity:.035;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:.75rem;color:rgba(255,255,255,.35);margin-bottom:14px}
+.breadcrumb a{color:rgba(255,255,255,.5);text-decoration:none}
+.hero-inner h1{font-family:'Playfair Display', serif;font-size:clamp(2rem,4.5vw,3rem);color:#fff;font-weight:700;line-height:1.12}
+.hero-inner h1 span{color:var(--color-green)}
+.hero-inner p{color:rgba(255,255,255,.45);font-size:.92rem;margin-top:8px;max-width:640px;font-weight:300;line-height:1.65}
+
+/* CLIMATE DASHBOARD */
+.dash{max-width:1200px;margin:-28px auto 0;padding:0 28px;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.card{background:#fff;border:1px solid var(--color-border);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow-md);animation:fadeUp .5s ease both}
+.card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.16s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.card-title{font-family:'Playfair Display', serif;font-size:.95rem;font-weight:700;color:var(--color-ocean-deep)}
+.card-tag{font-size:.65rem;font-weight:600;padding:3px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:.04em}
+
+/* CLIMATE STATS */
+.climate-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.clim-item{background:var(--color-ocean-light);border-radius:8px;padding:14px 16px;text-align:center}
+.clim-icon{font-size:1.4rem;margin-bottom:4px}
+.clim-val{font-family:'Playfair Display', serif;font-size:1.3rem;font-weight:700;color:var(--color-ocean-deep)}
+.clim-label{font-size:.68rem;color:var(--color-text-light);margin-top:1px}
+
+/* SOIL CARD */
+.soil-list{display:flex;flex-direction:column;gap:8px}
+.soil-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;border-radius:8px;background:var(--color-sand)}
+.soil-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.soil-info h4{font-size:.82rem;font-weight:600;color:var(--color-ocean-deep)}
+.soil-info p{font-size:.75rem;color:var(--color-text-soft);line-height:1.5;margin-top:2px}
+
+/* ZONE CARD */
+.zone-badge{display:flex;align-items:center;gap:12px;padding:16px;background:var(--color-ocean-light);border-radius:10px;margin-bottom:12px}
+.zone-badge .zone-num{font-family:'Playfair Display', serif;font-size:2rem;font-weight:700;color:var(--color-ocean);line-height:1}
+.zone-badge .zone-text{font-size:.78rem;color:var(--color-text-soft);line-height:1.5}
+.zone-badge .zone-text strong{color:var(--color-ocean-deep)}
+.zone-extra{font-size:.78rem;color:var(--color-text-soft);line-height:1.6}
+
+/* PLANTING CALENDAR */
+.section{max-width:1200px;margin:0 auto;padding:40px 28px 0}
+.sec-title{font-family:'Playfair Display', serif;font-size:1.5rem;font-weight:700;color:var(--color-ocean-deep)}
+.sec-sub{font-size:.85rem;color:var(--color-text-light);margin-top:4px;font-weight:300;max-width:700px}
+
+.month-tabs{display:flex;gap:4px;margin-top:20px;flex-wrap:wrap}
+.m-tab{padding:8px 16px;border-radius:100px;background:#fff;border:1.5px solid var(--color-border);font-size:.75rem;font-weight:600;color:var(--color-text-soft);cursor:pointer;transition:all .2s;font-family:'Figtree', sans-serif}
+.m-tab:hover{border-color:var(--color-ocean);color:var(--color-ocean)}
+.m-tab.active{background:var(--color-ocean-deep);color:#fff;border-color:var(--color-ocean-deep)}
+
+.month-panel{display:none;margin-top:20px}
+.month-panel.active{display:block;animation:fadeUp .35s ease both}
+.month-head{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.month-head .m-emoji{font-size:2rem}
+.month-head h3{font-family:'Playfair Display', serif;font-size:1.2rem;font-weight:700;color:var(--color-ocean-deep)}
+.month-head .m-season{font-size:.78rem;color:var(--color-text-light);font-weight:400}
+
+.plant-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.plant-col{background:#fff;border:1px solid var(--color-border);border-radius:var(--radius);padding:20px 22px}
+.plant-col h4{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.plant-col h4.veg{color:var(--color-ocean)}
+.plant-col h4.fruit{color:var(--color-sun)}
+.plant-col h4.flowers{color:#b05090}
+.plant-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.plant-list li{font-size:.82rem;color:var(--color-text-soft);padding:6px 12px;background:var(--color-ocean-light);border-radius:6px;line-height:1.45}
+.plant-list li strong{color:var(--color-ocean-deep);font-weight:600}
+
+.month-tips{margin-top:16px;background:var(--color-sand-dark);border-radius:var(--radius);padding:20px 22px}
+.month-tips h4{font-size:.82rem;font-weight:600;color:var(--color-soil);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.month-tips p{font-size:.8rem;color:var(--color-text-soft);line-height:1.65}
+
+/* COASTAL TIPS */
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.tip-card{background:#fff;border:1px solid var(--color-border);border-radius:var(--radius);padding:24px 26px;transition:box-shadow .2s}
+.tip-card:hover{box-shadow:var(--shadow-md)}
+.tip-num{font-family:'Playfair Display', serif;font-size:2rem;font-weight:700;color:var(--color-green-light);line-height:1;margin-bottom:8px}
+.tip-card h3{font-size:.92rem;font-weight:600;color:var(--color-ocean-deep);margin-bottom:6px}
+.tip-card p{font-size:.82rem;color:var(--color-text-soft);line-height:1.65}
+
+/* PLANT GUIDE (species-like cards) */
+.plant-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:20px}
+.pc{background:#fff;border:1px solid var(--color-border);border-radius:var(--radius);overflow:hidden;transition:box-shadow .2s,transform .2s}
+.pc:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.pc-top{height:90px;display:flex;align-items:center;justify-content:center}
+.pc-emoji{font-size:2.6rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,.08))}
+.pc-body{padding:14px 18px}
+.pc-body h3{font-family:'Playfair Display', serif;font-size:.92rem;font-weight:700;color:var(--color-ocean-deep);line-height:1.25}
+.pc-body .pc-type{font-size:.68rem;color:var(--color-text-light);text-transform:uppercase;letter-spacing:.04em;font-weight:600;margin-top:1px}
+.pc-body .pc-desc{font-size:.78rem;color:var(--color-text-soft);margin-top:6px;line-height:1.55}
+.pc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.pc-tag{font-size:.66rem;padding:3px 9px;border-radius:100px;font-weight:500}
+.pc-tag.salt{background:rgba(74,184,232,.1);color:#1a6fa0}
+.pc-tag.wind{background:rgba(138,133,126,.1);color:var(--color-text-light)}
+.pc-tag.sandy{background:rgba(240,160,80,.1);color:#b07030}
+.pc-tag.edible{background:rgba(82,183,106,.1);color:var(--color-ocean)}
+
+/* SPOTLIGHT */
+.spot-section{max-width:1200px;margin:40px auto 0;padding:0 28px}
+.spot-card{background:linear-gradient(135deg,var(--color-dune-light),#fffdf5);border:2px solid var(--color-dune-border);border-radius:var(--radius);display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;transition:box-shadow .3s;cursor:pointer}
+.spot-card:hover{box-shadow:0 8px 32px rgba(201,149,45,.12)}
+.spot-left{padding:32px 36px;display:flex;flex-direction:column;justify-content:center}
+.spot-badge{display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-dune);margin-bottom:10px;width:fit-content}
+.spot-left h2{font-family:'Playfair Display', serif;font-size:1.2rem;font-weight:700;color:var(--color-ocean-deep);line-height:1.25}
+.spot-left .sp-desc{font-size:.82rem;color:var(--color-text-soft);margin-top:8px;line-height:1.65}
+.spot-cta{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:10px 22px;background:var(--color-ocean);color:#fff;border-radius:8px;font-size:.82rem;font-weight:600;text-decoration:none;transition:background .2s;width:fit-content}
+.spot-cta:hover{background:var(--color-green)}
+.spot-right{min-height:220px;position:relative}
+.spot-img{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.82rem;color:rgba(255,255,255,.5);font-weight:500}
+
+/* EMPTY */
+.empties{max-width:1200px;margin:20px auto 0;padding:0 28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.empty-spot{border:2px dashed var(--color-border);border-radius:var(--radius);padding:22px 24px;text-align:center}
+.empty-spot h3{font-family:'Playfair Display', serif;font-size:.88rem;color:var(--color-text-light);font-weight:400}
+.empty-spot p{font-size:.75rem;color:var(--color-text-light);margin-top:4px;line-height:1.5}
+.empty-spot .es-cta{display:inline-block;margin-top:10px;padding:7px 16px;border:1.5px solid var(--color-ocean);border-radius:8px;color:var(--color-ocean);font-size:.76rem;font-weight:600;text-decoration:none;transition:all .2s}
+.empty-spot .es-cta:hover{background:var(--color-ocean);color:#fff}
+
+footer{background:#162b21;padding:36px 28px;text-align:center;margin-top:48px}
+footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
+footer a{color:var(--color-green);text-decoration:none}
+
+@media(max-width:900px){
+  .dash{grid-template-columns:1fr}
+  .plant-grid{grid-template-columns:1fr}
+  .tips-grid{grid-template-columns:1fr}
+  .spot-card{grid-template-columns:1fr}
+  .empties{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .month-tabs{gap:3px}
+  .m-tab{padding:6px 10px;font-size:.68rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">papamoa<i>.info</i></div>
+    <div class="nav-links">
+      <a>Home</a>
+      <a>Essential Services</a>
+      <a>Food & Drink</a>
+      <a class="on">Gardening</a>
+      <a>Accommodation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb"><a>Home</a> / <a>Home & Property</a> / Gardening</div>
+    <h1>Gardening in <span>Pāpāmoa</span></h1>
+    <p>Coastal climate conditions, monthly planting calendars, salt-tolerant species, sandy soil management, and the local businesses that can help. Written for Pāpāmoa's unique growing environment.</p>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<div class="dash">
+
+  <!-- CLIMATE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Pāpāmoa Climate</div>
+      <div class="card-tag" style="background:rgba(82,183,106,.1);color:var(--color-ocean)">Temperate Oceanic</div>
+    </div>
+    <div class="climate-grid">
+      <div class="clim-item">
+        <div class="clim-icon">&#9728;&#65039;</div>
+        <div class="clim-val">15.5&deg;C</div>
+        <div class="clim-label">Avg. yearly temp</div>
+      </div>
+      <div class="clim-item">
+        <div class="clim-icon">&#127782;&#65039;</div>
+        <div class="clim-val">1,358mm</div>
+        <div class="clim-label">Annual rainfall</div>
+      </div>
+      <div class="clim-item">
+        <div class="clim-icon">&#127774;</div>
+        <div class="clim-val">23&deg;C</div>
+        <div class="clim-label">Summer avg. high</div>
+      </div>
+      <div class="clim-item">
+        <div class="clim-icon">&#10052;&#65039;</div>
+        <div class="clim-val">9&deg;C</div>
+        <div class="clim-label">Winter avg. low</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;font-size:.75rem;color:var(--color-text-soft);line-height:1.55">Mild winters, warm humid summers. Frost is rare along the coast. Humidity peaks at 86% in June. Ideal conditions for year-round growing with some protection.</div>
+  </div>
+
+  <!-- SOIL -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Pāpāmoa Soils</div>
+      <div class="card-tag" style="background:rgba(240,160,80,.1);color:#b07030">Sandy Coastal</div>
+    </div>
+    <div class="soil-list">
+      <div class="soil-item">
+        <div class="soil-icon" style="background:rgba(240,160,80,.12);color:var(--color-sun)">&#127758;</div>
+        <div class="soil-info">
+          <h4>Sandy and free-draining</h4>
+          <p>Most Pāpāmoa sections sit on sandy soils that drain quickly. Great for root rot prevention but nutrients wash through fast. Add compost and sheep pellets generously.</p>
+        </div>
+      </div>
+      <div class="soil-item">
+        <div class="soil-icon" style="background:rgba(74,184,232,.1);color:var(--color-ocean-accent)">&#128167;</div>
+        <div class="soil-info">
+          <h4>Low water retention</h4>
+          <p>Sandy soil dries out fast, especially in summer easterlies. Mulch heavily with pea straw or bark to hold moisture. Consider drip irrigation for veggie beds.</p>
+        </div>
+      </div>
+      <div class="soil-item">
+        <div class="soil-icon" style="background:rgba(82,183,106,.1);color:var(--color-ocean)">&#129716;</div>
+        <div class="soil-info">
+          <h4>Nutrient-poor baseline</h4>
+          <p>Raw sandy soil lacks organic matter. Build it up over seasons with compost, seaweed, and green manure crops like lupins or mustard in winter fallow beds.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZONE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Growing Zone</div>
+      <div class="card-tag" style="background:var(--color-meadow);color:var(--color-ocean)">Zone 2 (NZ)</div>
+    </div>
+    <div class="zone-badge">
+      <div class="zone-num">2</div>
+      <div class="zone-text"><strong>NZ Temperate Zone.</strong> Bay of Plenty east coast. Mild enough for subtropicals. Rarely drops below 5&deg;C on the coast. Pāpāmoa sits warmer than inland BOP areas.</div>
+    </div>
+    <div class="zone-extra">
+      <strong>What this means for your garden:</strong> You can grow many subtropical species that would not survive further south. Citrus, feijoas, tamarillos, and passionfruit all do well here. The challenge is salt spray and wind, not cold. Protect with windbreaks and you can grow nearly anything.
+    </div>
+  </div>
+
+</div>
+
+<!-- SPOTLIGHT -->
+<div class="spot-section">
+  <div class="spot-card">
+    <div class="spot-left">
+      <div class="spot-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+        Spotlight: Garden Centre
+      </div>
+      <h2>Pacifica Home & Garden Store</h2>
+      <div class="sp-desc">A combined garden centre, gift shop, and cafe in Pāpāmoa. They specialise in plants suited to the coastal Bay of Plenty climate and can advise on what actually thrives in Pāpāmoa's sandy, salt-exposed conditions. The cafe makes it more than just a plant-buying trip. Display gardens on site offer a useful preview of how mature specimens look in a coastal setting.</div>
+      <a class="spot-cta" href="#">View Full Listing &rarr;</a>
+    </div>
+    <div class="spot-right">
+      <div class="spot-img" style="background:linear-gradient(135deg,var(--color-ocean-deep),var(--color-ocean))">Pacifica Home & Garden</div>
+    </div>
+  </div>
+</div>
+
+<!-- PLANTING CALENDAR -->
+<section class="section">
+  <h2 class="sec-title">Monthly Planting Calendar</h2>
+  <div class="sec-sub">What to plant in Pāpāmoa each month, based on Bay of Plenty coastal conditions. Click a month to see what goes in the ground.</div>
+
+  <div class="month-tabs">
+    <span class="m-tab" onclick="showMonth('jan')">Jan</span>
+    <span class="m-tab" onclick="showMonth('feb')">Feb</span>
+    <span class="m-tab" onclick="showMonth('mar')">Mar</span>
+    <span class="m-tab active" onclick="showMonth('apr')">Apr</span>
+    <span class="m-tab" onclick="showMonth('may')">May</span>
+    <span class="m-tab" onclick="showMonth('jun')">Jun</span>
+    <span class="m-tab" onclick="showMonth('jul')">Jul</span>
+    <span class="m-tab" onclick="showMonth('aug')">Aug</span>
+    <span class="m-tab" onclick="showMonth('sep')">Sep</span>
+    <span class="m-tab" onclick="showMonth('oct')">Oct</span>
+    <span class="m-tab" onclick="showMonth('nov')">Nov</span>
+    <span class="m-tab" onclick="showMonth('dec')">Dec</span>
+  </div>
+
+  <!-- APRIL -->
+  <div class="month-panel active" id="m-apr">
+    <div class="month-head">
+      <div class="m-emoji">&#127810;</div>
+      <div><h3>April</h3><div class="m-season">Autumn &middot; Days shortening, soil still warm</div></div>
+    </div>
+    <div class="plant-grid">
+      <div class="plant-col">
+        <h4 class="veg">&#129382; Vegetables</h4>
+        <ul class="plant-list">
+          <li><strong>Broad beans</strong> - direct sow now, harvest Oct/Nov. Easy and nitrogen-fixing.</li>
+          <li><strong>Broccoli & cabbage</strong> - transplant seedlings. Space 45-60cm apart.</li>
+          <li><strong>Spinach & silverbeet</strong> - direct sow or seedlings. Quick returns through winter.</li>
+          <li><strong>Carrots & beetroot</strong> - direct sow in rows. Sandy Pāpāmoa soil is ideal for roots.</li>
+          <li><strong>Garlic</strong> - plant cloves pointy end up, 5cm deep. Needs cold to form bulbs.</li>
+          <li><strong>Lettuce</strong> - winter varieties like cos and red-leaf grow well through to spring.</li>
+          <li><strong>Kale & cavolo nero</strong> - extremely hardy. One of the best winter performers.</li>
+          <li><strong>Peas</strong> - direct sow early dwarf varieties. Will crop through winter in Pāpāmoa's mild climate.</li>
+        </ul>
+      </div>
+      <div class="plant-col">
+        <h4 class="fruit">&#127818; Fruit & Trees</h4>
+        <ul class="plant-list">
+          <li><strong>Citrus</strong> - feed established trees with citrus fertiliser before winter. Mulch heavily.</li>
+          <li><strong>Feijoas</strong> - harvest season. Pick up fallen fruit daily for best flavour.</li>
+          <li><strong>Strawberry runners</strong> - transplant now for spring fruiting next year.</li>
+          <li><strong>Deciduous fruit trees</strong> - prepare planting holes for bare-root trees arriving in Jun/Jul.</li>
+          <li><strong>Passionfruit</strong> - last feed before winter dormancy. Remove dead vines.</li>
+        </ul>
+      </div>
+      <div class="plant-col">
+        <h4 class="flowers">&#127800; Flowers & Ornamentals</h4>
+        <ul class="plant-list">
+          <li><strong>Spring bulbs</strong> - plant daffodils, tulips, hyacinths, and freesias now.</li>
+          <li><strong>Sweet peas</strong> - direct sow for winter/spring flowers. Need support to climb.</li>
+          <li><strong>Pansies & violas</strong> - instant winter colour in beds and pots.</li>
+          <li><strong>Alyssum</strong> - groundcover that handles Pāpāmoa's sandy soil well.</li>
+          <li><strong>Snapdragons</strong> - cold-tolerant and long-flowering through winter.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="month-tips">
+      <h4>&#128161; April Tips for Pāpāmoa</h4>
+      <p>Dig in remaining summer mulch around established trees and shrubs. Cut tomato plants back hard or remove entirely. Compost anything diseased rather than leaving it in the bed. Autumn is the ideal time to add thick layers of compost to empty beds and let it break down over winter. Pāpāmoa's sandy soil benefits enormously from this. If you are growing in raised beds, top up with quality vegetable mix before planting winter crops. Slug and snail pressure increases with autumn moisture, so bait regularly around new seedlings.</p>
+    </div>
+  </div>
+
+  <!-- PLACEHOLDER PANELS FOR OTHER MONTHS -->
+  <div class="month-panel" id="m-jan">
+    <div class="month-head"><div class="m-emoji">&#9728;&#65039;</div><div><h3>January</h3><div class="m-season">Mid-summer &middot; Hot, dry, long days</div></div></div>
+    <div class="plant-grid">
+      <div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list">
+        <li><strong>Beans (dwarf & climbing)</strong> - direct sow. Fast growing in summer heat.</li>
+        <li><strong>Beetroot & carrots</strong> - succession sow every 2-3 weeks for continuous harvest.</li>
+        <li><strong>Lettuce</strong> - heat-tolerant varieties only. Sow in partial shade.</li>
+        <li><strong>Sweetcorn</strong> - last chance for a late crop. Plant in blocks for pollination.</li>
+        <li><strong>Courgettes</strong> - still time for a late planting. Harvest daily once producing.</li>
+        <li><strong>Spring onions</strong> - direct sow for autumn pulling.</li>
+      </ul></div>
+      <div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list">
+        <li><strong>Strawberry runners</strong> - plant now to establish before autumn.</li>
+        <li><strong>Passionfruit</strong> - plant seedlings while soil is warm.</li>
+        <li><strong>Blueberries</strong> - plant potted bushes, keep well watered.</li>
+        <li><strong>Tomatoes</strong> - harvest regularly. Remove diseased foliage immediately.</li>
+      </ul></div>
+      <div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list">
+        <li><strong>Marigolds</strong> - companion plant near veggies for pest deterrence.</li>
+        <li><strong>Dahlias</strong> - continue feeding and staking tall varieties.</li>
+        <li><strong>Lavender</strong> - handles Pāpāmoa's sandy soil and salt brilliantly.</li>
+      </ul></div>
+    </div>
+    <div class="month-tips"><h4>&#128161; January Tips</h4><p>Watering is critical. Sandy Pāpāmoa soil dries fast. Water deeply in early morning or evening, never in midday heat. Mulch everything. Summer easterlies can desiccate exposed beds. Harvest tomatoes, beans, and courgettes regularly to keep plants producing.</p></div>
+  </div>
+
+  <div class="month-panel" id="m-feb"><div class="month-head"><div class="m-emoji">&#127774;</div><div><h3>February</h3><div class="m-season">Late summer &middot; Still hot, days beginning to shorten</div></div></div>
+    <div class="plant-grid"><div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list"><li><strong>Cabbage, broccoli, cauliflower</strong> - sow seeds in trays for autumn transplanting.</li><li><strong>Beetroot & carrots</strong> - continue succession sowing.</li><li><strong>Spinach</strong> - direct sow as temps begin to ease. Bolts less than in peak summer.</li><li><strong>Silverbeet</strong> - plant seedlings for reliable autumn/winter greens.</li></ul></div><div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list"><li><strong>Citrus</strong> - summer feed. Deep water during dry spells.</li><li><strong>Grapes</strong> - ripening now. Net to protect from birds.</li><li><strong>Stone fruit</strong> - harvest peaches, nectarines. Prune after fruiting.</li></ul></div><div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list"><li><strong>Calendula & wildflowers</strong> - direct sow for autumn colour.</li><li><strong>Roses</strong> - last prune for an autumn flush before winter.</li></ul></div></div>
+    <div class="month-tips"><h4>&#128161; February Tips</h4><p>Start planning winter beds. Add compost to empty areas now so it breaks down before April planting. Aphids and whitefly are still active. Blast off with the hose or spray at first sign. Cut back any perennials that have finished flowering.</p></div>
+  </div>
+
+  <div class="month-panel" id="m-mar"><div class="month-head"><div class="m-emoji">&#127811;</div><div><h3>March</h3><div class="m-season">Early autumn &middot; Warm soil, cooling air</div></div></div>
+    <div class="plant-grid"><div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list"><li><strong>Broad beans</strong> - direct sow for winter cropping. Pāpāmoa's mild winters are ideal.</li><li><strong>Garlic</strong> - start planting cloves from mid-March onwards.</li><li><strong>Broccoli, cauliflower, kale</strong> - transplant seedlings into prepared beds.</li><li><strong>Rocket, coriander, mizuna</strong> - fast-growing Asian greens love autumn.</li><li><strong>Onions</strong> - sow seed of overwintering varieties like Pukekohe Longkeeper.</li></ul></div><div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list"><li><strong>Feijoas</strong> - season starting. Check daily for fallen fruit.</li><li><strong>Passionfruit</strong> - last harvest. Feed once more before dormancy.</li></ul></div><div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list"><li><strong>Sweet peas</strong> - sow seeds directly. Soak overnight first.</li><li><strong>Camellias</strong> - plant new specimens now. Evergreen hedge option.</li><li><strong>Spring bulbs</strong> - start buying. Plant from April when soil cools.</li></ul></div></div>
+    <div class="month-tips"><h4>&#128161; March Tips</h4><p>Autumn is compost season in Pāpāmoa. Dig generous amounts into any bed you plan to plant. Sandy soil cannot hold nutrients on its own. Add seaweed from the beach (rinse salt off first) as a free mulch and soil conditioner. Prepare support structures for broad beans and peas.</p></div>
+  </div>
+
+  <div class="month-panel" id="m-may"><div class="month-head"><div class="m-emoji">&#127787;&#65039;</div><div><h3>May</h3><div class="m-season">Late autumn &middot; Cooling down, shorter days</div></div></div>
+    <div class="plant-grid"><div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list"><li><strong>Spinach, bok choy, Asian greens</strong> - thrive in Bay of Plenty's mild winter.</li><li><strong>Coriander</strong> - grows well without bolting in cooler weather.</li><li><strong>Broad beans</strong> - still time to sow if you missed April.</li><li><strong>Garlic</strong> - traditional "plant on shortest day" but May works fine in BOP.</li></ul></div><div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list"><li><strong>Rhubarb crowns</strong> - plant now. Heavy feeder, add lots of compost.</li><li><strong>Bare-root trees</strong> - start arriving. Prepare holes in advance.</li></ul></div><div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list"><li><strong>Pansies & primulas</strong> - winter bedding colour.</li><li><strong>Forget-me-nots</strong> - self-seed freely and naturalise well.</li></ul></div></div>
+    <div class="month-tips"><h4>&#128161; May Tips</h4><p>Cut back and clean up summer beds completely. Compost all healthy plant material. Mulch established trees and shrubs with a thick layer of bark or pea straw before winter rains. In Pāpāmoa's free-draining soil, mulch is more about water retention than frost protection.</p></div>
+  </div>
+
+  <div class="month-panel" id="m-jun"><div class="month-head"><div class="m-emoji">&#10052;&#65039;</div><div><h3>June</h3><div class="m-season">Early winter &middot; Shortest day, mild on the coast</div></div></div>
+    <div class="plant-grid"><div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list"><li><strong>Garlic</strong> - "Plant on the shortest day." Traditional timing, works well.</li><li><strong>Winter lettuce & mesclun</strong> - grow in a sheltered spot or cold frame.</li><li><strong>Shallots</strong> - plant sets now for summer harvest.</li></ul></div><div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list"><li><strong>Bare-root fruit trees</strong> - peak planting time. Apple, pear, plum, peach.</li><li><strong>Citrus</strong> - plant new trees in a sheltered, sunny position.</li></ul></div><div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list"><li><strong>Roses</strong> - prune established bushes. Shape, remove dead wood.</li><li><strong>Hydrangeas</strong> - prune after flowers finish.</li></ul></div></div>
+    <div class="month-tips"><h4>&#128161; June Tips</h4><p>Papamoa rarely gets hard frosts on the coast, but sections backing onto the hills can get cold pockets. If you are in a low-lying area of Pāpāmoa East, protect tender citrus and subtropicals with frost cloth on still, clear nights. Apply lime to acidic beds, but keep it away from blueberries and azaleas.</p></div>
+  </div>
+
+  <div class="month-panel" id="m-jul"><div class="month-head"><div class="m-emoji">&#129522;</div><div><h3>July</h3><div class="m-season">Mid-winter &middot; Cool, wet, but rarely harsh</div></div></div>
+    <div class="plant-grid"><div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list"><li><strong>Seed potatoes</strong> - chit indoors on a windowsill, ready for August planting.</li><li><strong>Harvest brassicas</strong> - broccoli, cauliflower, cabbage should be producing now.</li></ul></div><div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list"><li><strong>Continue planting bare-root trees</strong> - last chance before spring growth.</li><li><strong>Prune grape vines</strong> - hard prune while dormant.</li></ul></div><div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list"><li><strong>Lily bulbs</strong> - plant for summer flowering.</li><li><strong>Planning</strong> - order seeds and plan spring garden layout.</li></ul></div></div>
+    <div class="month-tips"><h4>&#128161; July Tips</h4><p>Mid-winter is planning time. Sketch out your spring and summer beds. Order seeds early for best selection. Pāpāmoa's mild winters mean you can start seed trays indoors or in a greenhouse earlier than many parts of NZ. A simple cold frame on the north side of the house works well.</p></div>
+  </div>
+
+  <div class="month-panel" id="m-aug"><div class="month-head"><div class="m-emoji">&#127793;</div><div><h3>August</h3><div class="m-season">Late winter &middot; Spring stirring, soil warming</div></div></div>
+    <div class="plant-grid"><div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list"><li><strong>Potatoes</strong> - plant sprouted seed potatoes into prepared beds.</li><li><strong>Peas & sugar snaps</strong> - direct sow against a trellis or fence.</li><li><strong>Kale, spring onions, cabbage</strong> - transplant seedlings for early spring harvest.</li></ul></div><div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list"><li><strong>Strawberries</strong> - tidy existing beds. Remove dead runners.</li><li><strong>Citrus</strong> - start feeding as growth resumes.</li></ul></div><div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list"><li><strong>Dahlias</strong> - plant tubers in a sheltered spot. Pāpāmoa is warm enough.</li><li><strong>Sweet peas</strong> - should be flowering or about to. Feed weekly.</li></ul></div></div>
+    <div class="month-tips"><h4>&#128161; August Tips</h4><p>Prepare soil for the spring planting rush. Dig over beds, add compost and fertiliser. Start tomato and pepper seeds in trays indoors. In Pāpāmoa, you can generally plant tomato seedlings outside from late October once risk of cold snaps passes.</p></div>
+  </div>
+
+  <div class="month-panel" id="m-sep"><div class="month-head"><div class="m-emoji">&#127800;</div><div><h3>September</h3><div class="m-season">Early spring &middot; Warming up, growth accelerating</div></div></div>
+    <div class="plant-grid"><div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list"><li><strong>Tomatoes, peppers, chillies</strong> - start seeds in trays indoors or greenhouse.</li><li><strong>Lettuce, rocket, radish</strong> - direct sow for fast spring harvests.</li><li><strong>Beans</strong> - direct sow dwarf varieties from late September.</li></ul></div><div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list"><li><strong>Blueberries</strong> - feed with acid fertiliser as growth starts.</li><li><strong>Passionfruit</strong> - new growth appearing. Feed and train on supports.</li></ul></div><div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list"><li><strong>Annuals</strong> - petunias, marigolds, lobelia. Mass plant for summer colour.</li><li><strong>Perennials</strong> - divide and replant established clumps.</li></ul></div></div>
+    <div class="month-tips"><h4>&#128161; September Tips</h4><p>Spring growth explodes in Pāpāmoa. Stay on top of weeds before they take hold. Slug and snail bait around new seedlings. Feed roses, fruit trees, and established shrubs with appropriate fertilisers. Coastal wind picks up in spring, so stake tall plants early.</p></div>
+  </div>
+
+  <div class="month-panel" id="m-oct"><div class="month-head"><div class="m-emoji">&#127803;</div><div><h3>October</h3><div class="m-season">Mid-spring &middot; Warm days, still cool nights</div></div></div>
+    <div class="plant-grid"><div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list"><li><strong>Tomatoes</strong> - transplant seedlings outside from late October in Pāpāmoa.</li><li><strong>Courgettes, pumpkins, cucumbers</strong> - direct sow into warm, composted soil.</li><li><strong>Sweetcorn</strong> - sow in blocks. Needs warm soil to germinate.</li></ul></div><div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list"><li><strong>Strawberries</strong> - flowering and setting fruit. Feed fortnightly.</li><li><strong>Citrus</strong> - spring feed. Mulch to retain moisture for summer.</li></ul></div><div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list"><li><strong>Dahlias</strong> - shoots emerging. Protect from slugs.</li><li><strong>Hanging baskets & pots</strong> - plant up for summer display.</li></ul></div></div>
+    <div class="month-tips"><h4>&#128161; October Tips</h4><p>Broad beans and peas planted in autumn should be cropping now. Harvest to keep plants producing. Prepare tomato supports. In Pāpāmoa, tomatoes grow vigorously through summer and need strong staking from the start.</p></div>
+  </div>
+
+  <div class="month-panel" id="m-nov"><div class="month-head"><div class="m-emoji">&#127774;</div><div><h3>November</h3><div class="m-season">Late spring &middot; Warm, long days</div></div></div>
+    <div class="plant-grid"><div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list"><li><strong>Beans (climbing & dwarf)</strong> - direct sow. Fast growing in warm soil.</li><li><strong>Capsicums & chillies</strong> - transplant outside. Sheltered, sunny spot.</li><li><strong>Basil, coriander, parsley</strong> - direct sow or seedlings.</li></ul></div><div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list"><li><strong>Strawberries</strong> - fruiting now. Pick daily.</li><li><strong>Melons & watermelons</strong> - Pāpāmoa is warm enough. Needs rich soil and space.</li></ul></div><div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list"><li><strong>Summer annuals</strong> - fill gaps with instant colour.</li><li><strong>Roses</strong> - peak flowering. Deadhead regularly and spray for pests.</li></ul></div></div>
+    <div class="month-tips"><h4>&#128161; November Tips</h4><p>Mulch everything before summer heat hits. Pāpāmoa's sandy soil will dry out fast from December. Set up watering systems now. Watch for white butterfly on brassicas and spray or net immediately.</p></div>
+  </div>
+
+  <div class="month-panel" id="m-dec"><div class="month-head"><div class="m-emoji">&#127796;</div><div><h3>December</h3><div class="m-season">Early summer &middot; Peak growing, longest days</div></div></div>
+    <div class="plant-grid"><div class="plant-col"><h4 class="veg">&#129382; Vegetables</h4><ul class="plant-list"><li><strong>Harvest everything</strong> - tomatoes, beans, courgettes, cucumbers producing hard.</li><li><strong>Succession sow</strong> - lettuce, radish, spring onions every 2 weeks.</li><li><strong>Sweetcorn</strong> - harvest when silk turns brown and kernels are milky.</li></ul></div><div class="plant-col"><h4 class="fruit">&#127818; Fruit</h4><ul class="plant-list"><li><strong>Stone fruit</strong> - cherries, peaches, nectarines ripening.</li><li><strong>Blueberries</strong> - net against birds. Harvest as berries turn deep blue.</li></ul></div><div class="plant-col"><h4 class="flowers">&#127800; Flowers</h4><ul class="plant-list"><li><strong>Dahlias</strong> - peak flowering. Deadhead and feed fortnightly.</li><li><strong>Lavender</strong> - thriving in sandy soil. Prune after flowering.</li></ul></div></div>
+    <div class="month-tips"><h4>&#128161; December Tips</h4><p>Water deeply and less frequently rather than light daily sprinkles. Pāpāmoa's sandy soil lets water through fast, so deep watering encourages roots to grow down. Harvest crops promptly. Leaving beans and courgettes too long reduces quality and slows production. Enjoy your garden.</p></div>
+  </div>
+
+</section>
+
+<!-- COASTAL GARDENING TIPS -->
+<section class="section">
+  <h2 class="sec-title">Coastal Gardening Tips for Pāpāmoa</h2>
+  <div class="sec-sub">The unique challenges and advantages of growing on the Bay of Plenty coast</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-num">01</div>
+      <h3>Build Windbreaks Before Planting</h3>
+      <p>Pāpāmoa's coastal breeze carries salt spray that burns foliage on sensitive plants. Use hardy species like pohutukawa, flax, griselinia, or corokia as living windbreaks. Establish these first and plant less tolerant species in their shelter. Even a single row of flax makes a measurable difference.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">02</div>
+      <h3>Improve Sandy Soil Every Season</h3>
+      <p>Raw Pāpāmoa sand drains fast and holds almost no nutrients. The fix is ongoing: add compost every time you plant, dig in sheep pellets, layer on mulch, and grow green manure crops (lupins, mustard, oats) through winter fallow periods. Over two or three years, the difference is dramatic. Seaweed from the beach is a free, excellent soil conditioner. Rinse excess salt off first.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">03</div>
+      <h3>Choose Salt-tolerant Species for Exposed Areas</h3>
+      <p>In the most wind-exposed parts of your section, work with the conditions rather than fighting them. Pohutukawa, flax, coprosma, hebe, agapanthus, and lavender all thrive in salt spray. Save the tomatoes and delicate herbs for the sheltered side of the house or behind your windbreak planting.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">04</div>
+      <h3>Mulch Is Non-Negotiable</h3>
+      <p>In free-draining sandy soil, unmulched beds lose moisture within hours on a hot day. Use pea straw, bark, or sugar cane mulch around all plants and spread it 5-10cm thick. It also suppresses weeds and gradually adds organic matter to the soil as it breaks down. Top up every few months.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">05</div>
+      <h3>Take Advantage of Pāpāmoa's Mild Winters</h3>
+      <p>Frost is rare on the Pāpāmoa beachfront. This means you can grow subtropical species (citrus, feijoas, passionfruit, tamarillos) that would struggle further south. It also means the vegetable garden never needs to go completely dormant. There is something productive to plant in every month of the year.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">06</div>
+      <h3>Water Deeply, Not Often</h3>
+      <p>Sandy soil needs a different watering strategy than clay. Light daily sprinkles evaporate before reaching roots. Instead, water deeply two to three times per week to encourage root growth downwards. Drip irrigation on a timer is the most efficient option for Pāpāmoa veggie gardens. Water in early morning to reduce evaporation and fungal issues.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SALT-TOLERANT PLANT GUIDE -->
+<section class="section">
+  <h2 class="sec-title">Plants That Thrive in Pāpāmoa</h2>
+  <div class="sec-sub">Salt-tolerant, wind-hardy, and sandy-soil-adapted species for coastal Pāpāmoa gardens</div>
+  <div class="plant-cards">
+    <div class="pc"><div class="pc-top" style="background:linear-gradient(135deg,#e0f0e4,#c8e4cc)"><div class="pc-emoji">&#127794;</div></div><div class="pc-body"><h3>Pohutukawa</h3><div class="pc-type">Native Tree</div><div class="pc-desc">New Zealand's coastal icon. Thrives in full salt exposure and sandy soil. Excellent as a windbreak or specimen tree. Iconic red flowers in December.</div><div class="pc-tags"><span class="pc-tag salt">Salt tolerant</span><span class="pc-tag wind">Wind hardy</span><span class="pc-tag sandy">Sandy soil</span></div></div></div>
+    <div class="pc"><div class="pc-top" style="background:linear-gradient(135deg,#e8ece0,#d4dcc8)"><div class="pc-emoji">&#127807;</div></div><div class="pc-body"><h3>NZ Flax (Harakeke)</h3><div class="pc-type">Native</div><div class="pc-desc">Extremely tough and versatile. Works as a windbreak, border, or feature. Many cultivars with coloured foliage. Birds love the nectar. Zero maintenance once established.</div><div class="pc-tags"><span class="pc-tag salt">Salt tolerant</span><span class="pc-tag wind">Wind hardy</span><span class="pc-tag sandy">Sandy soil</span></div></div></div>
+    <div class="pc"><div class="pc-top" style="background:linear-gradient(135deg,#f0e8f0,#e0d4e0)"><div class="pc-emoji">&#127802;</div></div><div class="pc-body"><h3>Lavender</h3><div class="pc-type">Herb / Ornamental</div><div class="pc-desc">Loves Pāpāmoa's sandy, free-draining soil. Full sun, minimal water once established. Prune after flowering to maintain shape. Attracts pollinators.</div><div class="pc-tags"><span class="pc-tag salt">Salt tolerant</span><span class="pc-tag sandy">Sandy soil</span><span class="pc-tag edible">Edible flowers</span></div></div></div>
+    <div class="pc"><div class="pc-top" style="background:linear-gradient(135deg,#e0e8f0,#c8d8e8)"><div class="pc-emoji">&#127819;</div></div><div class="pc-body"><h3>Feijoa</h3><div class="pc-type">Fruit Tree</div><div class="pc-desc">Perfect for Pāpāmoa's climate. Handles wind and moderate salt. Produces reliably in BOP. Plant two varieties for cross-pollination. Fruit drops March through May.</div><div class="pc-tags"><span class="pc-tag wind">Wind hardy</span><span class="pc-tag edible">Edible</span><span class="pc-tag sandy">Sandy soil OK</span></div></div></div>
+    <div class="pc"><div class="pc-top" style="background:linear-gradient(135deg,#f0f0e0,#e4e4c8)"><div class="pc-emoji">&#127819;</div></div><div class="pc-body"><h3>Citrus (Lemon, Lime, Orange)</h3><div class="pc-type">Fruit Tree</div><div class="pc-desc">Pāpāmoa is warm enough for excellent citrus. Plant in a sheltered, sunny position behind a windbreak. Feed regularly. Sandy soil drains well but add compost for nutrition.</div><div class="pc-tags"><span class="pc-tag edible">Edible</span><span class="pc-tag sandy">Needs compost</span></div></div></div>
+    <div class="pc"><div class="pc-top" style="background:linear-gradient(135deg,#e0f0e8,#c8e8d8)"><div class="pc-emoji">&#127813;</div></div><div class="pc-body"><h3>Griselinia</h3><div class="pc-type">Native Hedge</div><div class="pc-desc">One of NZ's best hedging plants. Tough, evergreen, and salt-tolerant. Grows quickly into a dense windbreak. Ideal for creating sheltered garden rooms in exposed Pāpāmoa sections.</div><div class="pc-tags"><span class="pc-tag salt">Salt tolerant</span><span class="pc-tag wind">Wind hardy</span></div></div></div>
+  </div>
+</section>
+
+<!-- EMPTY SPOTLIGHTS -->
+<div class="empties">
+  <div class="empty-spot">
+    <h3>Spotlight: Landscaper</h3>
+    <p>No Gold Spotlight claimed for landscaping services in Pāpāmoa.</p>
+    <a class="es-cta" href="#">Claim Spotlight</a>
+  </div>
+  <div class="empty-spot">
+    <h3>Spotlight: Lawn Mowing</h3>
+    <p>No listing claimed for lawn mowing and garden maintenance in Pāpāmoa.</p>
+    <a class="es-cta" href="#">Claim Spotlight</a>
+  </div>
+  <div class="empty-spot">
+    <h3>Spotlight: Tree Services</h3>
+    <p>No listing claimed for arborist or tree services in Pāpāmoa.</p>
+    <a class="es-cta" href="#">Claim Spotlight</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 <a href="#">papamoa.info</a> &middot; Pāpāmoa's Local Business Directory &middot; <a href="#">List Your Business</a></p>
+</footer>
+
+<script>
+function showMonth(id){
+  document.querySelectorAll('.month-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('m-'+id).classList.add('active');
+  document.querySelectorAll('.m-tab').forEach(t=>{
+    t.classList.remove('active');
+    if(t.textContent.trim().toLowerCase()===id) t.classList.add('active');
+  });
+}
+</script>
+</body>
+</html>
