@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>papamoa.info — Sales Scripts</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+  :root {
+    --color-ocean: #1B6B7D;
+    --color-ocean-accent: #3AABDE;
+    --color-ocean-light: #E8F4F6;
+    --color-dune: #C4985A;
+    --color-dune-light: #F5EDD8;
+    --color-text: #2C2C2C;
+    --color-text-soft: #4a4a4a;
+    --color-text-light: #6B6B6B;
+    --color-border: #E0D9CE;
+    --color-sand: #F7F3ED;
+    --color-white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Figtree', sans-serif;
+    background: var(--color-sand);
+    color: var(--color-text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--color-text);
+    padding: 48px 24px 40px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(42,157,143,0.18) 0%, transparent 70%);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  }
+
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .wordmark {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--color-ocean-accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 300;
+    color: var(--color-white);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  header h1 span {
+    color: var(--color-dune);
+    font-style: italic;
+  }
+
+  .header-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(42,157,143,0.15);
+    border: 1px solid rgba(42,157,143,0.3);
+    color: var(--color-ocean-accent);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+  }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ocean);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  /* SCRIPT CARDS */
+  .script-card {
+    background: var(--color-white);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+
+  .card-header {
+    background: var(--color-text);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .card-header.teal { background: var(--color-ocean); }
+  .card-header.gold { background: linear-gradient(135deg, #7a5c1e, #c9a84c); }
+  .card-header.fb { background: #1877f2; }
+  .card-header.ig { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+  .card-header.li { background: #0a66c2; }
+
+  .platform-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .card-header-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--color-white);
+    line-height: 1.2;
+  }
+
+  .card-header-text p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 2px;
+  }
+
+  .card-body {
+    padding: 28px 28px;
+  }
+
+  /* SCRIPT BLOCKS */
+  .script-block {
+    margin-bottom: 24px;
+  }
+
+  .script-block:last-child { margin-bottom: 0; }
+
+  .block-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-ocean);
+    margin-bottom: 8px;
+  }
+
+  .speech {
+    background: var(--color-ocean-light);
+    border-left: 3px solid var(--color-ocean-accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--color-text);
+  }
+
+  .speech strong {
+    color: var(--color-ocean);
+  }
+
+  .note {
+    font-size: 13px;
+    color: var(--color-text-light);
+    font-style: italic;
+    margin-top: 8px;
+    padding-left: 4px;
+  }
+
+  /* OBJECTION TABLE */
+  .objection-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .objection-item {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .objection-q {
+    background: #f0f2f7;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-soft);
+  }
+
+  .objection-a {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--color-text);
+    line-height: 1.65;
+  }
+
+  /* TIPS */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 4px;
+  }
+
+  .tip-card {
+    background: var(--color-ocean-light);
+    border-radius: 10px;
+    padding: 18px;
+    border: 1px solid rgba(42,157,143,0.15);
+  }
+
+  .tip-icon {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .tip-card h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ocean);
+    margin-bottom: 6px;
+  }
+
+  .tip-card p {
+    font-size: 13px;
+    color: var(--color-text-soft);
+    line-height: 1.6;
+  }
+
+  /* DM VERSIONS */
+  .dm-version {
+    margin-bottom: 20px;
+  }
+
+  .dm-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-dune);
+    background: var(--color-text);
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+
+  .dm-text {
+    background: #f7f8fc;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--color-text);
+    white-space: pre-wrap;
+    font-family: 'Figtree', sans-serif;
+  }
+
+  .dm-text .placeholder {
+    background: rgba(201,168,76,0.15);
+    color: #7a5c1e;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  /* FOLLOW UP */
+  .followup-block {
+    background: var(--color-text);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+
+  .followup-block .speech {
+    background: rgba(255,255,255,0.07);
+    border-left-color: var(--color-dune);
+    color: rgba(255,255,255,0.9);
+  }
+
+  .followup-block .block-label {
+    color: var(--color-dune);
+  }
+
+  .followup-block .note {
+    color: rgba(255,255,255,0.4);
+  }
+
+  .response-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .response-pill {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .response-pill .rp-trigger {
+    background: var(--color-border);
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-soft);
+  }
+
+  .response-pill .rp-reply {
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 40px 0;
+  }
+
+  /* TIMING BAR */
+  .timing-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-text);
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 24px;
+  }
+
+  .timing-bar span {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .timing-bar strong {
+    color: var(--color-dune);
+    font-size: 14px;
+  }
+
+  @media (max-width: 600px) {
+    .card-body { padding: 20px 18px; }
+    header { padding: 36px 18px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badge">Jayden Brown</div>
+    <p class="wordmark">papamoa.info</p>
+    <h1>Sales Scripts &amp; <span>Outreach Templates</span></h1>
+    <p class="header-sub">Cold call script · Facebook · Instagram · LinkedIn · Follow-up</p>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- ======== COLD CALL ======== -->
+  <div class="section-label">Cold Call Script</div>
+
+  <div class="script-card">
+    <div class="card-header teal">
+      <div class="platform-icon">📞</div>
+      <div class="card-header-text">
+        <h2>Phone Script</h2>
+        <p>Service businesses, tradies, clinics, accountants, real estate</p>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="timing-bar">
+        <span>Target talk time:</span>
+        <strong>Under 60 seconds</strong>
+        <span style="margin-left:auto; font-size:12px; color:rgba(255,255,255,0.35)">Tone: friendly local, not salesperson</span>
+      </div>
+
+      <div class="script-block">
+        <div class="block-label">The Opening</div>
+        <div class="speech">
+          "Hi [Name], it's Jayden here. I'm local, just based here in Pāpāmoa. Not a telemarketer, I promise. Do you have 30 seconds?"
+        </div>
+        <p class="note">Wait. If hesitant: "I'll be really quick."</p>
+      </div>
+
+      <div class="script-block">
+        <div class="block-label">The Hook</div>
+        <div class="speech">
+          "I've just launched a local directory called papamoa.info. And I mean genuinely local. Every business on it is Papamoa-owned or run by someone who actually lives here. It's live now if you want to check it out.<br><br>
+          The reason I'm calling you specifically is that I'm only listing One Gold Spotlight per sub-category, and I wanted to give [Business Name] first option on [their category] before I move on."
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="block-label">The Credibility Bridge</div>
+        <div class="speech">
+          "We're backed by TaurangaNZ.info, which has been running since 2005, so there's real domain authority and SEO behind it from day one. You're not taking a punt on something new, you're getting in first on something with solid backing behind it."
+        </div>
+      </div>
+
+      <div class="script-block">
+        <div class="block-label">The Permission Ask</div>
+        <div class="speech">
+          "I don't want to take up your time right now. Can I send you two simple options? It's a two-minute read, no obligation at all."
+        </div>
+        <p class="note">Get their preferred contact: email, text, or DM.</p>
+      </div>
+
+      <div class="script-block">
+        <div class="block-label">The Close</div>
+        <div class="speech">
+          "Perfect. I'll send that through right now. Could you take a quick look by [Friday / end of week]? I'll give you a call back [specific day] to answer any questions."
+        </div>
+        <p class="note">Confirm the callback day and time before hanging up.</p>
+        <div class="speech" style="margin-top:10px;">
+          "Brilliant, thanks [Name]. Email is on its way. Enjoy your day!"
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- OBJECTIONS -->
+  <div class="script-card">
+    <div class="card-header" style="background: var(--color-text-soft);">
+      <div class="platform-icon">🛡</div>
+      <div class="card-header-text">
+        <h2>Objection Handling</h2>
+        <p>Common responses and how to handle them</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="objection-list">
+
+        <div class="objection-item">
+          <div class="objection-q">"Not interested" / "We already do marketing"</div>
+          <div class="objection-a">"Totally fair. This works alongside whatever you're already doing. It's purely about local visibility when someone in Pāpāmoa searches for [their service]. And because it's sub-category exclusive, if you're not on it, your local competitor will be. Can I still send it? Worst case, you delete it."</div>
+        </div>
+
+        <div class="objection-item">
+          <div class="objection-q">"How much is it?"</div>
+          <div class="objection-a">"Two options in the email. Starts from $599 plus GST. Let me send it through so you can see exactly what you'd get, and I'll call back to chat it through. If the numbers don't stack up for you, no hard feelings."</div>
+        </div>
+
+        <div class="objection-item">
+          <div class="objection-q">"Just tell me now"</div>
+          <div class="objection-a">"Sure. Silver at $599 gets you a full SEO-optimised listing. Gold at $1,200 puts you in the featured Spotlight at the top of your category, locked in for 12 months. The email has it all laid out. Can I send it and call you back [specific day]?"</div>
+        </div>
+
+        <div class="objection-item">
+          <div class="objection-q">"I'm busy right now"</div>
+          <div class="objection-a">"Perfect timing then. Give me your email, I'll send it now, and I'll call you back [day]. Two seconds."</div>
+        </div>
+
+        <div class="objection-item">
+          <div class="objection-q">"Send it to info@..."</div>
+          <div class="objection-a">"Done. And what's the best number for you when I follow up on [day]?"</div>
+        </div>
+
+        <div class="objection-item">
+          <div class="objection-q">"Why should I trust a new site?"</div>
+          <div class="objection-a">"Fair question. Two reasons. First, it's backed by TaurangaNZ.info which has been running since 2005, so the SEO foundation is already there. Second, being first is the actual advantage. You lock in the top spot in your category before anyone else can. Early movers always win on directories."</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOLLOW UP -->
+  <div class="script-card">
+    <div class="card-header" style="background: #2c3347;">
+      <div class="platform-icon">🔁</div>
+      <div class="card-header-text">
+        <h2>Follow-Up Call</h2>
+        <p>Call back on the day you committed to</p>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="script-block">
+        <div class="block-label">The Opener</div>
+        <div class="speech">
+          "Hi [Name], Jayden here, calling back as promised about papamoa.info. Did you get a chance to look at those two options?"
+        </div>
+      </div>
+
+      <div class="response-row">
+        <div class="response-pill">
+          <div class="rp-trigger">If YES</div>
+          <div class="rp-reply">"Great. Any questions, or are you ready to lock in your spot?"</div>
+        </div>
+        <div class="response-pill">
+          <div class="rp-trigger">If NO</div>
+          <div class="rp-reply">"No worries. I've got two minutes if you want me to run through it quickly right now?"</div>
+        </div>
+        <div class="response-pill">
+          <div class="rp-trigger">If HESITANT</div>
+          <div class="rp-reply">"Look, I'm so confident this will work that I'm happy to talk about a guarantee. If you don't see a return, we'll make it right. Fair?"</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ======== FACEBOOK ======== -->
+  <div class="section-label">Facebook DMs</div>
+
+  <div class="script-card">
+    <div class="card-header fb">
+      <div class="platform-icon">f</div>
+      <div class="card-header-text">
+        <h2>Facebook</h2>
+        <p>Cafes, retailers, salons, local services with Facebook pages</p>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="dm-version">
+        <div class="dm-label">Version 1 — The Founding Member</div>
+        <div class="dm-text">Hey [Name], Jayden here. I'm a Papamoa local and I've just launched a directory called papamoa.info, specifically for businesses that are owned or run by people who actually live here.
+
+I'm only listing One Gold Spotlight per sub-category, and I wanted to reach out to [Business Name] first before moving on to others in [category].
+
+It's live now at papamoa.info if you want to take a look. We're backed by TaurangaNZ.info which has been running since 2005, so there's real SEO weight behind it.
+
+Would it be alright if I sent you two simple options? Two-minute read, no obligation. Happy to answer any questions too.</div>
+      </div>
+
+      <div class="dm-version">
+        <div class="dm-label">Version 2 — The Local Angle</div>
+        <div class="dm-text">Hi [Name], I'm Jayden, based here in Pāpāmoa. I've just launched a directory called papamoa.info and I'm keeping it strictly local. Every listing is a business owned or run by someone from the area.
+
+I've got one spot available for [category] and thought of [Business Name] first.
+
+Check it out at papamoa.info. We're backed by TaurangaNZ.info (running since 2005) so the Google visibility is already there.
+
+Can I send you a quick overview? No pressure at all.</div>
+      </div>
+
+      <div class="dm-version">
+        <div class="dm-label">Version 3 — Short and Sharp</div>
+        <div class="dm-text">Hey [Name], Jayden here from Pāpāmoa. Quick one.
+
+I've just launched papamoa.info, a local directory strictly for Pāpāmoa businesses. One listing per category, live now, backed by TaurangaNZ.info (since 2005).
+
+I've held the [category] spot for [Business Name]. Keen to send you the details?
+
+Two options, two minutes to read, no obligation.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======== INSTAGRAM ======== -->
+  <div class="section-label">Instagram DMs</div>
+
+  <div class="script-card">
+    <div class="card-header ig">
+      <div class="platform-icon">📷</div>
+      <div class="card-header-text">
+        <h2>Instagram</h2>
+        <p>Cafes, salons, gyms, retail, food. Keep it short — IG DMs get skimmed.</p>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="dm-version">
+        <div class="dm-label">Version 1 — Clean and Casual</div>
+        <div class="dm-text">Hey [Name], Jayden here, local to Pāpāmoa.
+
+I've just launched papamoa.info, a directory just for genuinely local Papamoa businesses. One spot per category, live now, backed by a site that's been running since 2005.
+
+I've saved the [category] spot for you. Can I send a quick overview? No pressure, two-minute read.</div>
+      </div>
+
+      <div class="dm-version">
+        <div class="dm-label">Version 2 — Community Hook</div>
+        <div class="dm-text">Hi [Name], love what you're doing with [Business Name].
+
+I'm Jayden, Papamoa local. I've just launched a directory called papamoa.info, strictly for businesses owned by people who actually live here.
+
+Only one listing per category. Yours came to mind first for [category].
+
+Happy to send two simple options if you're keen. No obligation at all.</div>
+      </div>
+
+      <div class="dm-version">
+        <div class="dm-label">Version 3 — Ultra Short</div>
+        <div class="dm-text">Hey [Name], Jayden here from Pāpāmoa.
+
+Just launched papamoa.info, a local-only directory. One Gold Spotlight per sub-category. Backed by TaurangaNZ.info (since 2005).
+
+Saved the [category] spot for [Business Name]. Want the details?</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======== LINKEDIN ======== -->
+  <div class="section-label">LinkedIn DMs</div>
+
+  <div class="script-card">
+    <div class="card-header li">
+      <div class="platform-icon">in</div>
+      <div class="card-header-text">
+        <h2>LinkedIn</h2>
+        <p>Tradies, accountants, lawyers, consultants, real estate, health clinics</p>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="dm-version">
+        <div class="dm-label">Version 1 — Professional and Direct</div>
+        <div class="dm-text">Hi [Name], I hope you're well.
+
+I'm Jayden Brown, based here in Pāpāmoa. I've just launched a local business directory called papamoa.info, designed specifically for businesses that are owned or operated by Pāpāmoa locals.
+
+The directory is backed by TaurangaNZ.info, which has been established since 2005 and carries strong domain authority with Google. You can see it live at papamoa.info.
+
+I'm keeping it to One Gold Spotlight per sub-category, and I wanted to reach out to [Business Name] before offering the [category] spot to anyone else.
+
+Would you be open to me sending through two simple options? It's a short read and there's no obligation. Happy to jump on a quick call if that's easier.</div>
+      </div>
+
+      <div class="dm-version">
+        <div class="dm-label">Version 2 — The Founding Member Frame</div>
+        <div class="dm-text">Hi [Name], Jayden Brown here, local to Pāpāmoa.
+
+I've just launched papamoa.info, a directory built exclusively for Pāpāmoa-based businesses. Every listing is a business run by someone who actually lives in the community. It's live now if you'd like to take a look.
+
+We're backed by TaurangaNZ.info, operating since 2005, which gives us established SEO credibility from day one.
+
+I'm currently securing Founding Member spots, one per business category, and [Business Name] came to mind immediately for [category].
+
+Would it be okay if I sent you a brief overview of the two listing options? No pressure, and happy to answer any questions you have.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======== FOLLOW UP DM ======== -->
+  <div class="section-label">Follow-Up DM</div>
+
+  <div class="script-card">
+    <div class="card-header" style="background: var(--color-text-soft);">
+      <div class="platform-icon">💬</div>
+      <div class="card-header-text">
+        <h2>Follow-Up Message</h2>
+        <p>Send 3 to 5 days after first DM if no reply</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="dm-version">
+        <div class="dm-label">Universal — All Platforms</div>
+        <div class="dm-text">Hey [Name], just bumping this up in case it got buried. Still happy to send those details about papamoa.info if you're keen. No pressure either way — just didn't want you to miss out on the [category] spot.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ======== TIPS ======== -->
+  <div class="section-label">Key Principles</div>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">📍</div>
+      <h4>Lead with the live site</h4>
+      <p>A live URL proves you're real. Drop "papamoa.info is live now" early. It ends the "is this legit?" question instantly.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🏆</div>
+      <h4>One per category is your strongest tool</h4>
+      <p>Say it early and let it do the work. It creates genuine scarcity without any pressure tactics needed.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🤝</div>
+      <h4>Genuinely local is the hook</h4>
+      <p>Pāpāmoa locals are proud of their community. Being part of something built for them, by one of them, matters more than price.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🗓</div>
+      <h4>Always lock in a callback day</h4>
+      <p>Without a specific day, your email is junk mail. With one, it's a to-do item. Confirm it before you hang up.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">✉️</div>
+      <h4>Never price in the first DM</h4>
+      <p>Your only goal is permission to send the overview. Price conversations belong in the follow-up call.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🌐</div>
+      <h4>TaurangaNZ.info is proof, not pitch</h4>
+      <p>Drop it once to answer the credibility question, then move on. The story is papamoa.info.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
