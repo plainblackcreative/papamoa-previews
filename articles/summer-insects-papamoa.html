@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summer Insects in Pāpāmoa — Flies, Mosquitoes & How to Keep Them Out</title>
+  <meta name="description" content="What insects appear in Pāpāmoa over summer, why they're worse near the beach, and practical ways to keep them out of your home. Plus local screen installers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ocean:        #3AABDE;
+      --ocean-deep:   #2B3F5C;
+      --ocean-light:  #e8f6fd;
+      --sand:         #f5f0e8;
+      --sand-dark:    #e8dfc8;
+      --dune:         #c4a96a;
+      --dune-light:   #f0e6cc;
+      --text:         #1a1a1a;
+      --text-soft:    #555;
+      --text-light:   #888;
+      --white:        #ffffff;
+      --border:       #e2ddd4;
+      --green:        #7DC143;
+      --green-light:  #edf7e1;
+      --red:          #E8344A;
+      --amber:        #f59e0b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--sand);
+      color: var(--text);
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: var(--ocean-deep);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); text-decoration: none; }
+    .nav-brand span { color: var(--ocean); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.82rem; font-weight: 500; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--ocean-deep);
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 2rem 3.5rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 90% 40%, rgba(58,171,222,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 80% at 10% 80%, rgba(196,169,106,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.25rem;
+    }
+    .breadcrumb a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.15s; }
+    .breadcrumb a:hover { color: var(--ocean); }
+    .breadcrumb span { color: rgba(255,255,255,0.2); }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(232,52,74,0.15);
+      border: 1px solid rgba(232,52,74,0.3);
+      color: #ff8096;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 0.9rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--ocean); }
+    .hero-intro {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      max-width: 600px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .hero-meta span {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* ── Layout ── */
+    .page-wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* ── Article body ── */
+    .article {  }
+
+    .article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      color: var(--ocean-deep);
+      margin: 2.5rem 0 0.9rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--border);
+    }
+    .article h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+    .article p {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: var(--text-soft);
+      margin-bottom: 1rem;
+    }
+
+    .article p strong { color: var(--text); font-weight: 600; }
+
+    /* insect cards */
+    .insect-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      margin: 1.25rem 0 1.5rem;
+    }
+    .insect-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem;
+      transition: box-shadow 0.15s;
+    }
+    .insect-card:hover { box-shadow: 0 3px 14px rgba(0,0,0,0.07); }
+    .insect-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.6rem;
+    }
+    .insect-emoji {
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--sand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .insect-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--ocean-deep);
+    }
+    .insect-latin {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+    .insect-annoyance {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 0.5rem;
+    }
+    .annoy-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+    .annoy-dot.on { background: var(--red); }
+    .insect-desc {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: var(--text-soft);
+    }
+    .insect-peak {
+      display: inline-block;
+      background: var(--dune-light);
+      color: #7a5c1e;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* tip boxes */
+    .tip-box {
+      background: var(--green-light);
+      border: 1px solid #c3e8a0;
+      border-left: 4px solid var(--green);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .tip-box-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #4a7a1e;
+      margin-bottom: 0.5rem;
+    }
+    .tip-box p {
+      font-size: 0.85rem;
+      color: #3a5c18;
+      margin: 0;
+    }
+
+    .warning-box {
+      background: #fff8e6;
+      border: 1px solid #f5d87a;
+      border-left: 4px solid var(--amber);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .warning-box p { font-size: 0.85rem; color: #7a5000; margin: 0; }
+
+    /* prevention checklist */
+    .checklist {
+      list-style: none;
+      margin: 1rem 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text-soft);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+    }
+    .checklist li .check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--green-light);
+      border: 2px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 0.7rem;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* month calendar */
+    .month-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 3px;
+      margin: 1rem 0 1.5rem;
+    }
+    .month-cell {
+      text-align: center;
+      border-radius: 5px;
+      padding: 0.4rem 0.1rem;
+    }
+    .month-cell .m-name {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      color: var(--text-light);
+    }
+    .month-cell .m-bar {
+      height: 28px;
+      border-radius: 4px;
+      background: var(--border);
+    }
+    .month-cell.low    .m-bar { background: #d4edda; }
+    .month-cell.medium .m-bar { background: var(--amber); opacity: 0.5; }
+    .month-cell.high   .m-bar { background: var(--red); opacity: 0.6; }
+    .month-cell.peak   .m-bar { background: var(--red); }
+    .month-cell .m-label {
+      font-size: 0.58rem;
+      color: var(--text-light);
+      margin-top: 0.25rem;
+    }
+    .month-cell.high .m-label, .month-cell.peak .m-label { color: var(--red); font-weight: 600; }
+
+    /* ── Sidebar ── */
+    .sidebar { position: sticky; top: 72px; display: flex; flex-direction: column; gap: 1.25rem; }
+
+    /* spotlight ad */
+    .spotlight-ad {
+      background: var(--ocean-deep);
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+    }
+    .spotlight-ad::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(58,171,222,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ad-badge {
+      background: rgba(255,215,0,0.15);
+      border-bottom: 1px solid rgba(255,215,0,0.15);
+      padding: 0.4rem 1rem;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ffd700;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .ad-body { padding: 1.25rem 1.25rem 1.5rem; position: relative; z-index: 1; }
+    .ad-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+    .ad-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 0.3rem;
+    }
+    .ad-tagline {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .ad-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1.1rem;
+    }
+    .ad-tag {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      font-size: 0.68rem;
+      padding: 0.15rem 0.5rem;
+      color: rgba(255,255,255,0.55);
+    }
+    .ad-why {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.55;
+    }
+    .ad-why strong { color: var(--ocean); }
+    .ad-cta {
+      display: block;
+      background: var(--ocean);
+      color: var(--white);
+      text-align: center;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.7rem;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .ad-cta:hover { background: #2d9ac7; }
+    .ad-sub {
+      text-align: center;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.25);
+      margin-top: 0.5rem;
+    }
+
+    /* toc */
+    .toc {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+    }
+    .toc-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.7rem;
+    }
+    .toc ol { list-style: none; counter-reset: toc; }
+    .toc ol li { counter-increment: toc; margin-bottom: 0.3rem; }
+    .toc ol li::before {
+      content: counter(toc) '.';
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin-right: 0.4rem;
+    }
+    .toc a {
+      font-size: 0.8rem;
+      color: var(--ocean-deep);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .toc a:hover { color: var(--ocean); }
+
+    /* fact card */
+    .fact-card {
+      background: var(--dune-light);
+      border: 1px solid var(--sand-dark);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .fact-card-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--dune);
+      margin-bottom: 0.6rem;
+    }
+    .fact-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--sand-dark);
+      font-size: 0.8rem;
+    }
+    .fact-item:last-child { border-bottom: none; }
+    .fact-item span:first-child { color: var(--text-soft); }
+    .fact-item span:last-child { font-weight: 600; color: var(--ocean-deep); }
+
+    @media (max-width: 820px) {
+      .page-wrap { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .insect-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 2.5rem 1rem 2rem; }
+      .page-wrap { padding: 1.5rem 1rem 3rem; }
+      .month-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Papamoa<span>.info</span></a>
+  <ul class="nav-links">
+    <li><a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Home</a></li>
+    <li><a href="https://plainblackcreative.github.io/papamoa-previews/all-listings.html">All Listings</a></li>
+    <li><a href="https://plainblackcreative.github.io/papamoa-previews/index.html">List Your Business</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Home</a>
+      <span>›</span>
+      <a href="#">Guides</a>
+      <span>›</span>
+      Summer Insects
+    </div>
+    <div class="hero-tag">🦟 Summer Guide</div>
+    <h1>Flies, Mozzies &amp; Summer <em>Insects</em> in Pāpāmoa</h1>
+    <p class="hero-intro">Living near the beach in summer is brilliant — until the flies arrive. Here's what insects you can expect in Pāpāmoa over summer, why coastal homes get hit harder, and how to actually keep them out.</p>
+    <div class="hero-meta">
+      <span>📍 Pāpāmoa, Bay of Plenty</span>
+      <span>📅 Updated for summer 2025–26</span>
+      <span>⏱ 5 min read</span>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- Article -->
+  <article class="article">
+
+    <h2 id="why-worse">Why Pāpāmoa Gets It Worse Than Inland</h2>
+    <p>Pāpāmoa's coastal position is a big part of what makes it such a desirable place to live — but that same warm, humid microclimate that keeps the beach season long also creates ideal breeding conditions for summer insects. The combination of heat, proximity to water, native vegetation, and the steady flow of organic matter that comes with beach living (barbecues, outdoor dining, bins sitting in the sun) means insect activity here runs longer and more intensely than in cooler inland suburbs.</p>
+    <p>The Bay of Plenty's warm summers — regularly reaching the high 20s and low 30s — accelerate insect breeding cycles significantly. A house fly that takes 25 days to mature in cooler temperatures can complete its lifecycle in under 10 days when temperatures climb. The result: populations build fast, particularly from December through March.</p>
+
+    <div class="tip-box">
+      <div class="tip-box-title">💡 The Pāpāmoa Factor</div>
+      <p>Coastal homes also tend to keep windows and doors open longer. That open-door living style is part of the appeal — and the main reason flies and mosquitoes get in so easily. Fly screens are the single most effective fix for homes that like to live with doors open.</p>
+    </div>
+
+    <h2 id="insects">The Main Offenders</h2>
+    <p>Not all summer insects are created equal. Some are a minor nuisance; others are genuinely worth dealing with. Here's what you're likely to encounter in Pāpāmoa over summer.</p>
+
+    <div class="insect-grid">
+
+      <div class="insect-card">
+        <div class="insect-header">
+          <div class="insect-emoji">🪰</div>
+          <div>
+            <div class="insect-name">House Fly</div>
+            <div class="insect-latin">Musca domestica</div>
+          </div>
+        </div>
+        <div class="insect-annoyance">
+          <div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div>
+        </div>
+        <p class="insect-desc">The most common household fly in New Zealand. Grey-bodied, 5–6mm, and capable of carrying over 100 disease-causing pathogens. They vomit digestive fluid onto solid food before eating it — which is as unpleasant as it sounds. A single female can lay up to 9,000 eggs in her lifetime.</p>
+        <span class="insect-peak">Peak: Nov – Mar</span>
+      </div>
+
+      <div class="insect-card">
+        <div class="insect-header">
+          <div class="insect-emoji">🍑</div>
+          <div>
+            <div class="insect-name">Fruit Fly</div>
+            <div class="insect-latin">Drosophila melanogaster</div>
+          </div>
+        </div>
+        <div class="insect-annoyance">
+          <div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot"></div>
+        </div>
+        <p class="insect-desc">Tiny (2–3mm) and attracted to overripe fruit, wine, vinegar, and anything fermenting. They appear almost out of nowhere and multiply quickly. A major problem in Pāpāmoa kitchens through summer when fresh fruit is left out. They can breed in drains and even in the residue at the bottom of recycling bins.</p>
+        <span class="insect-peak">Peak: Jan – Apr</span>
+      </div>
+
+      <div class="insect-card">
+        <div class="insect-header">
+          <div class="insect-emoji">🦟</div>
+          <div>
+            <div class="insect-name">Mosquito</div>
+            <div class="insect-latin">Culex quinquefasciatus</div>
+          </div>
+        </div>
+        <div class="insect-annoyance">
+          <div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot"></div>
+        </div>
+        <p class="insect-desc">New Zealand has 15 mosquito species, and the good news is none of them carry malaria or dengue fever locally. The bad news: they still bite, and coastal gardens with ornamental water features, birdbaths, or even pot plant saucers provide perfect breeding grounds. Most active at dawn and dusk.</p>
+        <span class="insect-peak">Peak: Dec – Mar</span>
+      </div>
+
+      <div class="insect-card">
+        <div class="insect-header">
+          <div class="insect-emoji">🐝</div>
+          <div>
+            <div class="insect-name">Wasp</div>
+            <div class="insect-latin">Vespula germanica</div>
+          </div>
+        </div>
+        <div class="insect-annoyance">
+          <div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot"></div>
+        </div>
+        <p class="insect-desc">German wasps are the main species in the Bay of Plenty. They become more aggressive towards late summer (Feb–Mar) as their colony peaks and food sources dwindle. Unlike bees, they can sting multiple times. Nests are often found in roof cavities, wall spaces, or in the ground. Outdoor eating areas attract them strongly.</p>
+        <span class="insect-peak">Peak: Feb – Apr</span>
+      </div>
+
+      <div class="insect-card">
+        <div class="insect-header">
+          <div class="insect-emoji">🐜</div>
+          <div>
+            <div class="insect-name">Ant</div>
+            <div class="insect-latin">Lasius niger</div>
+          </div>
+        </div>
+        <div class="insect-annoyance">
+          <div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot"></div><div class="annoy-dot"></div>
+        </div>
+        <p class="insect-desc">Garden ants are particularly active in warmer coastal areas. They don't carry disease but will infiltrate kitchens, pantries, and pet food bowls quickly. If you see one ant on a bench, there are likely thousands nearby. They send scouts ahead, so quick action when you spot the first one matters.</p>
+        <span class="insect-peak">Peak: Oct – Mar</span>
+      </div>
+
+      <div class="insect-card">
+        <div class="insect-header">
+          <div class="insect-emoji">🪲</div>
+          <div>
+            <div class="insect-name">Carpet Beetle</div>
+            <div class="insect-latin">Anthrenus verbasci</div>
+          </div>
+        </div>
+        <div class="insect-annoyance">
+          <div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot on"></div><div class="annoy-dot"></div><div class="annoy-dot"></div>
+        </div>
+        <p class="insect-desc">Adults are harmless outdoor insects but towards late summer they enter homes to lay eggs in natural fibres — carpet, curtains, wool blankets, even stored clothing. The larvae (called woolly bears) are the actual problem: they chew through fibres and are hard to spot until damage is done.</p>
+        <span class="insect-peak">Peak: Feb – May (entering homes)</span>
+      </div>
+
+    </div>
+
+    <!-- Activity calendar -->
+    <h2 id="calendar">When Are They Worst?</h2>
+    <p>Insect activity in Pāpāmoa roughly follows the temperature curve, but each species has its own peak. The chart below shows relative activity levels through the year for the main summer insects.</p>
+
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin:1rem 0 1.5rem;">
+      <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-light);margin-bottom:1rem;">Insect Activity — Pāpāmoa</div>
+
+      <div style="display:flex;flex-direction:column;gap:0.6rem;">
+        <!-- Flies -->
+        <div style="display:grid;grid-template-columns:90px 1fr;gap:0.75rem;align-items:center;">
+          <span style="font-size:0.78rem;color:var(--text-soft);">🪰 House Fly</span>
+          <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:2px;">
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.4;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.6;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;opacity:0.7;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;opacity:0.8;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.5;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+          </div>
+        </div>
+        <!-- Mosquito -->
+        <div style="display:grid;grid-template-columns:90px 1fr;gap:0.75rem;align-items:center;">
+          <span style="font-size:0.78rem;color:var(--text-soft);">🦟 Mosquito</span>
+          <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:2px;">
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.4;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.7;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;opacity:0.8;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;opacity:0.7;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.5;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+          </div>
+        </div>
+        <!-- Wasp -->
+        <div style="display:grid;grid-template-columns:90px 1fr;gap:0.75rem;align-items:center;">
+          <span style="font-size:0.78rem;color:var(--text-soft);">🐝 Wasp</span>
+          <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:2px;">
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.3;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.6;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;opacity:0.7;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;opacity:0.8;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+          </div>
+        </div>
+        <!-- Ants -->
+        <div style="display:grid;grid-template-columns:90px 1fr;gap:0.75rem;align-items:center;">
+          <span style="font-size:0.78rem;color:var(--text-soft);">🐜 Ants</span>
+          <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:2px;">
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.4;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.7;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;opacity:0.7;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;"></div>
+            <div style="height:12px;border-radius:2px;background:#E8344A;opacity:0.8;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.6;"></div>
+            <div style="height:12px;border-radius:2px;background:#f59e0b;opacity:0.3;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+            <div style="height:12px;border-radius:2px;background:#e2ddd4;"></div>
+          </div>
+        </div>
+        <!-- month labels -->
+        <div style="display:grid;grid-template-columns:90px 1fr;gap:0.75rem;">
+          <span></span>
+          <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:2px;">
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">J</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">F</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">M</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">A</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">M</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">J</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">J</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">A</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">S</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">O</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">N</span>
+            <span style="font-size:0.55rem;color:var(--text-light);text-align:center;">D</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;margin-top:0.75rem;flex-wrap:wrap;">
+        <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.68rem;color:var(--text-light);"><span style="width:10px;height:10px;border-radius:2px;background:#E8344A;display:inline-block;"></span>High activity</span>
+        <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.68rem;color:var(--text-light);"><span style="width:10px;height:10px;border-radius:2px;background:#f59e0b;opacity:0.6;display:inline-block;"></span>Moderate</span>
+        <span style="display:flex;align-items:center;gap:0.3rem;font-size:0.68rem;color:var(--text-light);"><span style="width:10px;height:10px;border-radius:2px;background:#e2ddd4;display:inline-block;"></span>Low / dormant</span>
+      </div>
+    </div>
+
+    <h2 id="prevention">How to Keep Them Out</h2>
+    <p>The most effective approach is layered — no single fix covers everything, but combining physical barriers with good habits makes a significant difference. Coastal homes in Pāpāmoa have one clear advantage over solutions like sprays and zappers: <strong>fly screens work passively, 24 hours a day, without any ongoing effort or cost.</strong></p>
+
+    <ul class="checklist">
+      <li><div class="check">✓</div><div><strong>Install fly screens on all openings.</strong> Windows, doors, ranch sliders — anything that gets opened in summer. A properly fitted screen is the most reliable, lowest-maintenance insect barrier available. Custom-fitted screens from a local installer last 10+ years.</div></li>
+      <li><div class="check">✓</div><div><strong>Eliminate standing water.</strong> Mosquitoes need only a bottle cap of water to breed. Check pot plant saucers, birdbaths, gutters, and any containers that collect rainwater. Empty or change water weekly.</div></li>
+      <li><div class="check">✓</div><div><strong>Keep rubbish bins sealed and away from the house.</strong> Flies breed in organic waste. Lidded bins, emptied regularly, and kept in shade or a bin store make a noticeable difference.</div></li>
+      <li><div class="check">✓</div><div><strong>Don't leave fruit out on the bench.</strong> Overripe fruit is a fruit fly magnet. Refrigerate anything borderline, and check the bottom of your fruit bowl regularly. Rinse your recycling, especially wine and juice containers.</div></li>
+      <li><div class="check">✓</div><div><strong>Cut vegetation back from the house.</strong> Dense plants against walls and under decks shelter mosquitoes and ants. A clear border around the house perimeter reduces harbouring spots significantly.</div></li>
+      <li><div class="check">✓</div><div><strong>Deal with wasp nests early.</strong> Small nests in spring (golf ball size) are far easier and safer to treat than large summer colonies. If you find a nest in a roof cavity or wall, get a professional in — DIY on large nests carries real sting risk.</div></li>
+      <li><div class="check">✓</div><div><strong>Keep drains clean.</strong> Fruit flies and drain flies breed in the organic residue inside kitchen and bathroom drains. A weekly flush with boiling water or a baking soda and vinegar treatment disrupts their lifecycle.</div></li>
+    </ul>
+
+    <div class="warning-box">
+      <p>⚠️ <strong>Insect sprays and zappers have limitations.</strong> They reduce numbers temporarily but don't address the source. If you're dealing with ongoing fly problems, the entry point — not the insect itself — is what needs fixing. Screens address the entry point permanently.</p>
+    </div>
+
+    <h2 id="bbq">Summer Entertaining Outside</h2>
+    <p>Outdoor dining and barbecues are central to Pāpāmoa summer life, and they attract insects reliably. A few habits that actually help:</p>
+    <p><strong>Cover food immediately.</strong> Flies land on food within seconds of it being set out. Mesh food covers are inexpensive and genuinely effective for outdoor entertaining. <strong>Use fans near the table.</strong> Flies and mosquitoes struggle in moderate airflow — a portable fan pointed across the table disrupts them effectively. <strong>Clear plates quickly.</strong> The longer food scraps sit on a table, the more insects arrive and the more they signal others. A clean table between courses matters more than you'd think.</p>
+    <p>For the house itself, <strong>close up before dusk.</strong> Mosquitoes peak at dawn and dusk. If your home has no fly screens, closing windows and doors in that window (and opening them again after dark when mosquito activity drops) is a practical workaround — though significantly more inconvenient than screened windows that can stay open all day.</p>
+
+    <h2 id="natural">Natural Deterrents That Actually Work</h2>
+    <p>Not everything marketed as a "natural" insect deterrent actually works at meaningful scale. These ones have decent evidence behind them for home use:</p>
+    <p><strong>Basil near doors and windows</strong> is a genuine fly deterrent — flies dislike the aromatic oils. A pot on the windowsill is both useful and practical. <strong>Citronella candles</strong> reduce mosquitoes in a small radius (roughly 1 metre) during outdoor entertaining — useful on a table, limited as a room solution. <strong>Essential oil diffusers</strong> with eucalyptus or tea tree oils have some effect in enclosed spaces. <strong>Apple cider vinegar traps</strong> work well for fruit flies: a small jar with cider vinegar and a drop of dish soap, covered with cling film pierced with holes. They're genuinely effective if placed near the source.</p>
+
+  </article>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <!-- Spotlight Ad -->
+    <div class="spotlight-ad">
+      <div class="ad-badge">⭐ Gold Spotlight · Window & Door Screens</div>
+      <div class="ad-body">
+        <span class="ad-icon">🪟</span>
+        <div class="ad-name">Speedy Screens Pāpāmoa</div>
+        <div class="ad-tagline">Custom-fitted fly screens for windows, doors, and ranch sliders — measured and installed locally.</div>
+        <div class="ad-services">
+          <span class="ad-tag">Window Screens</span>
+          <span class="ad-tag">Door Screens</span>
+          <span class="ad-tag">Ranch Slider Screens</span>
+          <span class="ad-tag">Custom Sizing</span>
+          <span class="ad-tag">Repairs & Reframes</span>
+          <span class="ad-tag">Pet-resistant Mesh</span>
+        </div>
+        <div class="ad-why">
+          <strong>The most effective fix</strong> for summer flies and mosquitoes in coastal homes. Screens work passively — no sprays, no zappers, no maintenance. A properly fitted screen from a local installer lasts over a decade.
+        </div>
+        <a href="https://plainblackcreative.github.io/papamoa-previews/listings/speedy-screens-papamoa.html" class="ad-cta">View Full Listing →</a>
+        <div class="ad-sub">Local installer · Pāpāmoa based</div>
+      </div>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc">
+      <div class="toc-title">In this guide</div>
+      <ol>
+        <li><a href="#why-worse">Why Pāpāmoa gets it worse</a></li>
+        <li><a href="#insects">The main offenders</a></li>
+        <li><a href="#calendar">When are they worst?</a></li>
+        <li><a href="#prevention">How to keep them out</a></li>
+        <li><a href="#bbq">Summer entertaining</a></li>
+        <li><a href="#natural">Natural deterrents</a></li>
+      </ol>
+    </div>
+
+    <!-- Quick facts -->
+    <div class="fact-card">
+      <div class="fact-card-title">🌡️ Why Bay of Plenty Is Worse</div>
+      <div class="fact-item"><span>Summer avg temp</span><span>24–28°C</span></div>
+      <div class="fact-item"><span>Fly lifecycle at 28°C</span><span>~8 days</span></div>
+      <div class="fact-item"><span>Fly lifecycle at 18°C</span><span>~25 days</span></div>
+      <div class="fact-item"><span>NZ mosquito species</span><span>15</span></div>
+      <div class="fact-item"><span>Diseases from NZ mozzies</span><span>None locally</span></div>
+      <div class="fact-item"><span>Peak fly season</span><span>Dec – Mar</span></div>
+    </div>
+
+  </aside>
+
+</div>
+
+<footer style="background:var(--ocean-deep);color:rgba(255,255,255,0.4);text-align:center;padding:1.5rem;font-size:0.78rem;">
+  © 2026 <a href="https://plainblackcreative.github.io/papamoa-previews/" style="color:var(--ocean);text-decoration:none;">papamoa.info</a> · Pāpāmoa's Local Business Directory ·
+  <a href="https://plainblackcreative.github.io/papamoa-previews/index.html" style="color:var(--ocean);text-decoration:none;">List Your Business</a>
+</footer>
+
+</body>
+</html>
