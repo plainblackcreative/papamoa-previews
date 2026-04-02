@@ -1,46 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-NZ">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Papamoa.info — Get Found by Papamoa Customers</title>
+<title>Papamoa.info — Get Found by Pāpāmoa Customers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
 <style>
 :root {
-  --navy: #2B3F5C;
-  --navy-light: #3a5478;
-  --blue: #3AABDE;
-  --blue-pale: #e3f5fc;
+  --color-ocean-deep: #134B58;
+  --color-ocean: #1B6B7D;
+  --color-ocean-accent: #3AABDE;
+  --color-ocean-light: #E8F4F6;
   --green: #7DC143;
-  --green-pale: #eef7e3;
-  --gold: #c4892a;
-  --gold-pale: #fdf3e3;
+  --color-green-light: #E8F5E9;
+  --color-dune: #C4985A;
+  --color-dune-light: #F5EDD8;
   --red: #E8344A;
   --sand: #f7f4ee;
-  --sand-dark: #ece7dc;
-  --ink: #1a1a1a;
-  --ink-soft: #4a4a4a;
-  --ink-muted: #888;
+  --color-sand-dark: #EDE7DB;
+  --color-text: #2C2C2C;
+  --color-text-soft: #4a4a4a;
+  --color-text-light: #6B6B6B;
   --white: #fff;
-  --shadow-sm: 0 2px 12px rgba(43,63,92,0.08);
-  --shadow-md: 0 6px 32px rgba(43,63,92,0.12);
-  --shadow-lg: 0 16px 60px rgba(43,63,92,0.16);
-  --r: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+  --radius: 12px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Figtree', sans-serif;
-  background: var(--sand);
-  color: var(--ink);
+  background: var(--color-sand);
+  color: var(--color-text);
   overflow-x: hidden;
 }
 
 /* NAV */
 .nav {
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   padding: 16px 24px;
   display: flex;
   align-items: center;
@@ -57,10 +58,10 @@ body {
   letter-spacing: 0.02em;
   text-decoration: none;
 }
-.nav-logo em { color: var(--green); font-style: normal; }
-.nav-logo span { color: var(--blue); }
+.nav-logo em { color: var(--color-green); font-style: normal; }
+.nav-logo span { color: var(--color-ocean-accent); }
 .nav-cta {
-  background: var(--blue);
+  background: var(--color-ocean-accent);
   color: white;
   padding: 8px 18px;
   border-radius: 100px;
@@ -73,7 +74,7 @@ body {
 
 /* HERO */
 .hero {
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   padding: 80px 24px 100px;
   text-align: center;
   position: relative;
@@ -93,7 +94,7 @@ body {
   position: absolute;
   bottom: -2px; left: 0; right: 0;
   height: 80px;
-  background: var(--sand);
+  background: var(--color-sand);
   clip-path: ellipse(65% 100% at 50% 100%);
 }
 .hero-inner {
@@ -118,7 +119,7 @@ body {
 }
 .pulse {
   width: 7px; height: 7px;
-  background: var(--green);
+  background: var(--color-green);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
@@ -132,7 +133,7 @@ body {
   line-height: 1.15;
   margin-bottom: 20px;
 }
-.hero h1 em { color: var(--blue); font-style: italic; }
+.hero h1 em { color: var(--color-ocean-accent); font-style: italic; }
 .hero-sub {
   color: rgba(255,255,255,0.65);
   font-size: 17px;
@@ -160,7 +161,7 @@ body {
   line-height: 1;
   margin-bottom: 4px;
 }
-.hero-stat-num span { color: var(--blue); }
+.hero-stat-num span { color: var(--color-ocean-accent); }
 .hero-stat-label {
   font-size: 12px;
   color: rgba(255,255,255,0.5);
@@ -171,7 +172,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--blue);
+  background: var(--color-ocean-accent);
   color: white;
   padding: 16px 32px;
   border-radius: 100px;
@@ -198,20 +199,20 @@ body {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--blue);
+  color: var(--color-ocean-accent);
   font-weight: 600;
   margin-bottom: 12px;
 }
 .section h2 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(22px, 3.5vw, 34px);
-  color: var(--navy);
+  color: var(--color-ocean-deep);
   margin-bottom: 16px;
   line-height: 1.25;
 }
 .section .lead {
   font-size: 16px;
-  color: var(--ink-soft);
+  color: var(--color-text-soft);
   line-height: 1.7;
   max-width: 600px;
   margin-bottom: 48px;
@@ -225,16 +226,16 @@ body {
 }
 .why-card {
   background: white;
-  border-radius: var(--r);
+  border-radius: var(--radius);
   padding: 28px;
   box-shadow: var(--shadow-sm);
   border-left: 3px solid transparent;
   transition: all 0.2s;
 }
 .why-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-.why-card.blue { border-left-color: var(--blue); }
-.why-card.green { border-left-color: var(--green); }
-.why-card.gold { border-left-color: var(--gold); }
+.why-card.blue { border-left-color: var(--color-ocean-accent); }
+.why-card.green { border-left-color: var(--color-green); }
+.why-card.gold { border-left-color: var(--color-dune); }
 .why-icon {
   font-size: 28px;
   margin-bottom: 14px;
@@ -243,20 +244,20 @@ body {
 .why-card h3 {
   font-size: 16px;
   font-weight: 600;
-  color: var(--navy);
+  color: var(--color-ocean-deep);
   margin-bottom: 8px;
 }
 .why-card p {
   font-size: 13px;
-  color: var(--ink-soft);
+  color: var(--color-text-soft);
   line-height: 1.6;
 }
 
 /* NETWORK STRIP */
 .network-strip {
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   padding: 28px 32px;
-  border-radius: var(--r);
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
   gap: 24px;
@@ -277,7 +278,7 @@ body {
 .network-badge {
   background: rgba(58,171,222,0.15);
   border: 1px solid rgba(58,171,222,0.3);
-  color: var(--blue);
+  color: var(--color-ocean-accent);
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 12px;
@@ -296,19 +297,19 @@ body {
 
 .tier-card {
   background: white;
-  border-radius: var(--r);
+  border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   border: 2px solid transparent;
   transition: all 0.2s;
 }
 .tier-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-.tier-card.gold-card { border-color: var(--gold); }
-.tier-card.silver-card { border-color: var(--sand-dark); }
+.tier-card.gold-card { border-color: var(--color-dune); }
+.tier-card.silver-card { border-color: var(--color-sand-dark); }
 
 .tier-card-top {
   padding: 24px 24px 20px;
-  border-bottom: 1px solid var(--sand-dark);
+  border-bottom: 1px solid var(--color-sand-dark);
 }
 .tier-label {
   font-size: 11px;
@@ -317,17 +318,17 @@ body {
   letter-spacing: 0.08em;
   margin-bottom: 8px;
 }
-.gold-card .tier-label { color: var(--gold); }
-.silver-card .tier-label { color: var(--navy); }
+.gold-card .tier-label { color: var(--color-dune); }
+.silver-card .tier-label { color: var(--color-ocean-deep); }
 .tier-price {
   font-size: 30px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--color-text);
   line-height: 1;
   margin-bottom: 6px;
 }
-.tier-price span { font-size: 14px; font-weight: 400; color: var(--ink-muted); }
-.tier-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+.tier-price span { font-size: 14px; font-weight: 400; color: var(--color-text-light); }
+.tier-desc { font-size: 13px; color: var(--color-text-soft); line-height: 1.5; }
 .tier-badge {
   display: inline-block;
   margin-top: 10px;
@@ -338,7 +339,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-.gold-card .tier-badge { background: var(--gold); color: white; }
+.gold-card .tier-badge { background: var(--color-dune); color: white; }
 
 .tier-card-features { padding: 20px 24px; }
 .tier-feature {
@@ -346,9 +347,9 @@ body {
   align-items: flex-start;
   gap: 10px;
   font-size: 13px;
-  color: var(--ink-soft);
+  color: var(--color-text-soft);
   padding: 5px 0;
-  border-bottom: 1px solid var(--sand);
+  border-bottom: 1px solid var(--color-sand);
   line-height: 1.4;
 }
 .tier-feature:last-child { border-bottom: none; }
@@ -364,14 +365,14 @@ body {
   margin-top: 1px;
   color: white;
 }
-.feat-dot.yes { background: var(--green); }
-.feat-dot.no { background: var(--sand-dark); color: var(--ink-muted); }
+.feat-dot.yes { background: var(--color-green); }
+.feat-dot.no { background: var(--color-sand-dark); color: var(--color-text-light); }
 .scarcity-note {
   font-size: 12px;
-  color: var(--gold);
+  color: var(--color-dune);
   font-weight: 600;
   padding: 8px 12px;
-  background: var(--gold-pale);
+  background: var(--color-dune-light);
   border-radius: 6px;
   margin: 12px 24px 20px;
   display: flex;
@@ -385,14 +386,14 @@ body {
   display: flex;
   gap: 24px;
   padding: 28px 0;
-  border-bottom: 1px solid var(--sand-dark);
+  border-bottom: 1px solid var(--color-sand-dark);
   align-items: flex-start;
 }
 .step:last-child { border-bottom: none; }
 .step-num {
   width: 40px; height: 40px;
   border-radius: 50%;
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   color: white;
   font-size: 15px;
   font-weight: 700;
@@ -404,18 +405,18 @@ body {
 .step-content h3 {
   font-size: 16px;
   font-weight: 600;
-  color: var(--navy);
+  color: var(--color-ocean-deep);
   margin-bottom: 6px;
 }
 .step-content p {
   font-size: 14px;
-  color: var(--ink-soft);
+  color: var(--color-text-soft);
   line-height: 1.6;
 }
 .step-time {
   font-size: 11px;
   font-weight: 600;
-  color: var(--blue);
+  color: var(--color-ocean-accent);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-top: 6px;
@@ -423,8 +424,8 @@ body {
 
 /* VISIBILITY FORM */
 .form-section {
-  background: var(--navy);
-  border-radius: var(--r);
+  background: var(--color-ocean-deep);
+  border-radius: var(--radius);
   padding: 48px 40px;
   text-align: center;
   position: relative;
@@ -474,7 +475,7 @@ body {
   outline: none;
   transition: border-color 0.2s;
 }
-.vis-input:focus { border-color: var(--blue); }
+.vis-input:focus { border-color: var(--color-ocean-accent); }
 .vis-input::placeholder { color: rgba(255,255,255,0.35); }
 .vis-select {
   width: 100%;
@@ -489,10 +490,10 @@ body {
   cursor: pointer;
   appearance: none;
 }
-.vis-select option { background: var(--navy); color: white; }
+.vis-select option { background: var(--color-ocean-deep); color: white; }
 .btn-submit {
   width: 100%;
-  background: var(--blue);
+  background: var(--color-ocean-accent);
   color: white;
   border: none;
   padding: 15px;
@@ -523,7 +524,7 @@ body {
 /* JAYDEN */
 .jayden-section {
   background: white;
-  border-radius: var(--r);
+  border-radius: var(--radius);
   padding: 32px;
   box-shadow: var(--shadow-sm);
   display: flex;
@@ -535,19 +536,19 @@ body {
 .jayden-avatar {
   width: 64px; height: 64px;
   border-radius: 50%;
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Playfair Display', serif;
   font-size: 24px;
-  color: var(--blue);
+  color: var(--color-ocean-accent);
   font-weight: 700;
   flex-shrink: 0;
 }
 .jayden-text { flex: 1; min-width: 180px; }
-.jayden-text strong { display: block; font-size: 16px; color: var(--navy); margin-bottom: 4px; }
-.jayden-text p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+.jayden-text strong { display: block; font-size: 16px; color: var(--color-ocean-deep); margin-bottom: 4px; }
+.jayden-text p { font-size: 13px; color: var(--color-text-soft); line-height: 1.5; }
 .jayden-contact {
   display: flex;
   flex-direction: column;
@@ -564,21 +565,21 @@ body {
   text-align: center;
   transition: all 0.2s;
 }
-.jayden-btn.primary { background: var(--navy); color: white; }
-.jayden-btn.primary:hover { background: var(--navy-light); }
-.jayden-btn.secondary { background: var(--sand); color: var(--navy); border: 1px solid var(--sand-dark); }
-.jayden-btn.secondary:hover { background: var(--sand-dark); }
+.jayden-btn.primary { background: var(--color-ocean-deep); color: white; }
+.jayden-btn.primary:hover { background: var(--color-ocean); }
+.jayden-btn.secondary { background: var(--color-sand); color: var(--color-ocean-deep); border: 1px solid var(--color-sand-dark); }
+.jayden-btn.secondary:hover { background: var(--color-sand-dark); }
 
 /* FOOTER */
 .footer {
-  background: var(--navy);
+  background: var(--color-ocean-deep);
   padding: 32px 24px;
   text-align: center;
   color: rgba(255,255,255,0.4);
   font-size: 12px;
   line-height: 2;
 }
-.footer a { color: var(--blue); text-decoration: none; }
+.footer a { color: var(--color-ocean-accent); text-decoration: none; }
 
 /* ANIMATIONS */
 @keyframes fadeUp {
@@ -620,7 +621,7 @@ body {
     <div class="hero-stats">
       <div class="hero-stat">
         <div class="hero-stat-num">37<span>,800</span></div>
-        <div class="hero-stat-label">Papamoa residents</div>
+        <div class="hero-stat-label">Pāpāmoa residents</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">20<span>yrs</span></div>
@@ -641,7 +642,7 @@ body {
   <!-- WHY NOW -->
   <div class="section">
     <div class="section-label">Why it matters now</div>
-    <h2>Search has changed. Most Papamoa businesses haven't.</h2>
+    <h2>Search has changed. Most Pāpāmoa businesses haven't.</h2>
     <p class="lead">Google now answers questions directly. ChatGPT recommends local businesses. If your business isn't structured for AI search, you're invisible to a growing share of customers — no matter how good your website is.</p>
 
     <div class="why-grid">
@@ -714,7 +715,7 @@ body {
         </div>
       </div>
     </div>
-    <p style="font-size:12px;color:var(--ink-muted);text-align:center;margin-top:12px">Annual subscription · We write everything · You review and approve · Listing live within 24 hours</p>
+    <p style="font-size:12px;color:var(--color-text-light);text-align:center;margin-top:12px">Annual subscription · We write everything · You review and approve · Listing live within 24 hours</p>
   </div>
 
   <!-- HOW IT WORKS -->
@@ -752,7 +753,7 @@ body {
         <div class="step-num">4</div>
         <div class="step-content">
           <h3>Go live + Facebook welcome</h3>
-          <p>Your listing publishes on Papamoa.info. We post a welcome to the Papamoa community Facebook groups — your first boost of local visibility.</p>
+          <p>Your listing publishes on Papamoa.info. We post a welcome to the Pāpāmoa community Facebook groups — your first boost of local visibility.</p>
           <div class="step-time">Live within 24 hours of approval</div>
         </div>
       </div>
@@ -765,7 +766,7 @@ body {
 <div class="container">
   <div class="form-section" id="get-found">
     <div class="form-inner">
-      <h2>Check your Papamoa visibility — free</h2>
+      <h2>Check your Pāpāmoa visibility — free</h2>
       <p>Enter your details below. We'll analyse your current search presence and send you a personalised preview within 24 hours. No obligation, no sales pressure.</p>
 
       <form class="visibility-form" id="visibility-form" onsubmit="submitVisibility(event)">
@@ -800,7 +801,7 @@ body {
       <div class="form-success" id="form-success">
         <div class="tick">✓</div>
         <h3>Got it — your preview is on its way.</h3>
-        <p>Jayden will have your personalised visibility report ready within 24 hours.<br>In the meantime, call <a href="tel:0275332970" style="color:var(--blue)">027 533 2970</a> if you have questions.</p>
+        <p>Jayden will have your personalised visibility report ready within 24 hours.<br>In the meantime, call <a href="tel:0275332970" style="color:var(--color-ocean-accent)">027 533 2970</a> if you have questions.</p>
       </div>
     </div>
   </div>
@@ -812,7 +813,7 @@ body {
     <div class="jayden-avatar">J</div>
     <div class="jayden-text">
       <strong>Jayden Brown — Local Partner, Papamoa.info</strong>
-      <p>I'm a Papamoa local and I run the listings for this directory. I build every preview personally and I'm always happy to chat through whether a listing makes sense for your business — no pressure.</p>
+      <p>I'm a Pāpāmoa local and I run the listings for this directory. I build every preview personally and I'm always happy to chat through whether a listing makes sense for your business — no pressure.</p>
     </div>
     <div class="jayden-contact">
       <a href="tel:0275332970" class="jayden-btn primary">027 533 2970</a>
