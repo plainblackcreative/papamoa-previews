@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papamoa.info — Master CRM Sheet Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+  :root {
+    --navy: #2B3F5C; --blue: #3AABDE; --green: #7DC143;
+    --gold: #C4892A; --red: #E8344A; --sand: #F7F4EE;
+    --color-sand-dark: #EDE7DB; --ink: #1A1A1A; --ink-soft: #4A4A4A;
+    --color-text-light: #6B6B6B; --white: #fff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Figtree',sans-serif; background:var(--color-sand); color:var(--color-text); font-size:14px; }
+  .header { background:var(--color-ocean-deep); padding:24px 32px; display:flex; align-items:center; justify-content:space-between; }
+  .header h1 { font-size:18px; font-weight:600; color:white; }
+  .header span { font-size:12px; color:rgba(255,255,255,0.5); }
+  .tabs { display:flex; gap:4px; padding:20px 32px 0; border-bottom:2px solid var(--color-sand-dark); background:white; }
+  .tab { padding:10px 20px; font-size:13px; font-weight:500; cursor:pointer; border-radius:8px 8px 0 0; border:1px solid var(--color-sand-dark); border-bottom:none; color:var(--color-text-soft); background:var(--color-sand); transition:all 0.15s; }
+  .tab.active { background:white; color:var(--color-ocean-deep); border-color:var(--color-sand-dark); font-weight:600; }
+  .content { padding:24px 32px; display:none; }
+  .content.active { display:block; }
+  .desc { font-size:13px; color:var(--color-text-soft); margin-bottom:20px; line-height:1.6; padding:12px 16px; background:var(--color-ocean-accent); background:rgba(58,171,222,0.1); border-left:3px solid var(--color-ocean-accent); border-radius:0 6px 6px 0; }
+  table { width:100%; border-collapse:collapse; background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 12px rgba(43,63,92,0.08); margin-bottom:24px; }
+  thead tr { background:var(--color-ocean-deep); }
+  thead th { padding:11px 14px; text-align:left; font-size:11px; font-weight:600; color:white; letter-spacing:0.04em; text-transform:uppercase; }
+  tbody tr:nth-child(even) { background:var(--color-sand); }
+  tbody tr:hover { background:rgba(58,171,222,0.06); }
+  td { padding:10px 14px; font-size:12.5px; color:var(--color-text-soft); border-bottom:1px solid var(--color-sand-dark); vertical-align:top; }
+  td:first-child { font-weight:600; color:var(--color-ocean-deep); width:40px; }
+  td:nth-child(2) { font-weight:500; color:var(--color-text); width:180px; }
+  .type-badge { display:inline-block; font-size:10px; font-weight:600; padding:2px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:0.04em; }
+  .type-text { background:#e8f4fb; color:#1a6e96; }
+  .type-dropdown { background:#eef7e3; color:#3a7d1a; }
+  .type-date { background:#fdf6e8; color:var(--color-dune); }
+  .type-checkbox { background:#fef2f3; color:var(--color-red); }
+  .type-formula { background:#f3f0fb; color:#5a3d9e; }
+  .type-currency { background:var(--color-sand); color:var(--color-text-soft); }
+  .type-number { background:var(--color-sand); color:var(--color-text-soft); }
+  .dropdown-values { font-size:11px; color:var(--color-text-light); margin-top:4px; }
+  .dropdown-values span { display:inline-block; background:var(--color-sand); border:1px solid var(--color-sand-dark); border-radius:4px; padding:1px 6px; margin:2px 2px 0 0; }
+  .section-title { font-size:14px; font-weight:600; color:var(--color-ocean-deep); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--color-sand-dark); }
+  .tip { background:#eef7e3; border:1px solid #c0dd97; border-radius:8px; padding:12px 16px; margin-bottom:16px; font-size:12px; color:#3a7d1a; line-height:1.6; }
+  .tip strong { display:block; margin-bottom:4px; font-size:13px; }
+  .formula-block { background:var(--color-ocean-deep); color:#7DC143; font-family:monospace; font-size:12px; padding:10px 14px; border-radius:6px; margin:8px 0; }
+  .format-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; }
+  .format-card { padding:14px; border-radius:8px; border:1px solid var(--color-sand-dark); }
+  .format-card.red { background:#fef2f3; border-color:#f7c1c1; }
+  .format-card.amber { background:#fdf6e8; border-color:#FAC775; }
+  .format-card.green { background:#eef7e3; border-color:#c0dd97; }
+  .format-card .fc-label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
+  .format-card.red .fc-label { color:var(--color-red); }
+  .format-card.amber .fc-label { color:var(--color-dune); }
+  .format-card.green .fc-label { color:var(--color-green); }
+  .format-card .fc-formula { font-family:monospace; font-size:11px; color:var(--color-text-soft); }
+  .status-flow { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 20px; }
+  .status-pill { padding:5px 12px; border-radius:100px; font-size:11px; font-weight:600; border:1px solid; }
+  .s1 { background:#e8f4fb; border-color:#3AABDE; color:#1a6e96; }
+  .s2 { background:#eef7e3; border-color:#7DC143; color:#3a7d1a; }
+  .s3 { background:#fdf6e8; border-color:#C4892A; color:#8a5e1a; }
+  .s4 { background:#fef2f3; border-color:#E8344A; color:var(--color-red); }
+  .arrow { color:var(--color-text-light); font-size:14px; padding-top:4px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Papamoa.info — Master CRM Sheet</h1>
+  <span>PlainBlack · Setup Reference · March 2026</span>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('leads')">Tab 1 — LEADS</div>
+  <div class="tab" onclick="showTab('listings')">Tab 2 — LISTINGS</div>
+  <div class="tab" onclick="showTab('renewals')">Tab 3 — RENEWALS</div>
+  <div class="tab" onclick="showTab('setup')">Setup Instructions</div>
+</div>
+
+<!-- LEADS TAB -->
+<div class="content active" id="tab-leads">
+  <div class="desc">Every prospect goes here the moment they are identified. One row per business. Add manually during Phase 1. Make.com adds rows automatically in Phase 2. Never delete rows — change Status to Lost or Not Now instead.</div>
+
+  <div class="section-title">Status Flow</div>
+  <div class="status-flow">
+    <span class="status-pill s1">New Lead</span><span class="arrow">→</span>
+    <span class="status-pill s1">Contacted</span><span class="arrow">→</span>
+    <span class="status-pill s1">PPP Sent</span><span class="arrow">→</span>
+    <span class="status-pill s2">Engaged</span><span class="arrow">→</span>
+    <span class="status-pill s2">Form Submitted</span><span class="arrow">→</span>
+    <span class="status-pill s2">Onboarding</span><span class="arrow">→</span>
+    <span class="status-pill s2">Approved</span><span class="arrow">→</span>
+    <span class="status-pill s3">Invoiced</span><span class="arrow">→</span>
+    <span class="status-pill s3">Paid</span><span class="arrow">→</span>
+    <span class="status-pill s2">Published</span>
+    <span style="width:100%;"></span>
+    <span class="status-pill s4">Lost</span>
+    <span class="status-pill s4">Not Now</span>
+    <span class="status-pill s4">Wrong Fit</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Col</th><th>Field Name</th><th>Type</th><th>Notes & Dropdown Values</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>ID</td><td><span class="type-badge type-text">Text</span></td><td>Manual: PPI-001, PPI-002... Sequential, never reuse</td></tr>
+      <tr><td>B</td><td>Business Name</td><td><span class="type-badge type-text">Text</span></td><td>Official trading name</td></tr>
+      <tr><td>C</td><td>Slug</td><td><span class="type-badge type-text">Text</span></td><td>URL-safe: driftwood-cafe, papamoa-surf-school (lowercase, hyphens only)</td></tr>
+      <tr><td>D</td><td>Contact Name</td><td><span class="type-badge type-text">Text</span></td><td>Person Jayden spoke to</td></tr>
+      <tr><td>E</td><td>Email</td><td><span class="type-badge type-text">Text</span></td><td>Primary outreach email</td></tr>
+      <tr><td>F</td><td>Phone</td><td><span class="type-badge type-text">Text</span></td><td>Primary outreach phone</td></tr>
+      <tr><td>G</td><td>Website</td><td><span class="type-badge type-text">Text</span></td><td>Full URL incl. https://</td></tr>
+      <tr><td>H</td><td>Category</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Accommodation</span><span>Activities</span><span>Food & Drink</span><span>Shops</span><span>Services</span></div></td></tr>
+      <tr><td>I</td><td>Sub-Category</td><td><span class="type-badge type-text">Text</span></td><td>e.g. Cafes, Plumbers, Motels — free text until full subcat list is confirmed</td></tr>
+      <tr><td>J</td><td>Tier Interest</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Silver</span><span>Gold</span><span>Unknown</span></div></td></tr>
+      <tr><td>K</td><td>Lead Source</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Cold Call</span><span>Facebook DM</span><span>Instagram DM</span><span>LinkedIn DM</span><span>Cold Email</span><span>Referral</span><span>Inbound</span></div></td></tr>
+      <tr><td>L</td><td>Status</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>New Lead</span><span>Contacted</span><span>PPP Sent</span><span>Engaged</span><span>Form Submitted</span><span>Onboarding</span><span>Approved</span><span>Invoiced</span><span>Paid</span><span>Published</span><span>Lost</span><span>Not Now</span><span>Wrong Fit</span></div></td></tr>
+      <tr><td>M</td><td>Preview URL</td><td><span class="type-badge type-text">Text</span></td><td>https://preview.papamoa.info/{slug} — add when PPP is built</td></tr>
+      <tr><td>N</td><td>PPP Built</td><td><span class="type-badge type-checkbox">Checkbox</span></td><td>Tick when PPP is live and verified on GitHub</td></tr>
+      <tr><td>O</td><td>Date First Contact</td><td><span class="type-badge type-date">Date</span></td><td>DD/MM/YYYY — when Jayden first called or messaged</td></tr>
+      <tr><td>P</td><td>Date Email 1 Sent</td><td><span class="type-badge type-date">Date</span></td><td>Day 3 follow-up send date</td></tr>
+      <tr><td>Q</td><td>Date Email 2 Sent</td><td><span class="type-badge type-date">Date</span></td><td>Day 6 follow-up send date</td></tr>
+      <tr><td>R</td><td>Date Email 3 Sent</td><td><span class="type-badge type-date">Date</span></td><td>Day 10 final check-in send date</td></tr>
+      <tr><td>S</td><td>Date PPP Sent</td><td><span class="type-badge type-date">Date</span></td><td>When preview link was shared with prospect</td></tr>
+      <tr><td>T</td><td>Call Back Date</td><td><span class="type-badge type-date">Date</span></td><td>The specific day committed to during the call</td></tr>
+      <tr><td>U</td><td>Response</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>No Reply</span><span>Interested</span><span>Requested More Info</span><span>Not Now</span><span>Not Interested</span><span>Wrong Fit</span></div></td></tr>
+      <tr><td>V</td><td>Notes</td><td><span class="type-badge type-text">Text</span></td><td>Free text — call notes, objections, personal details, anything useful</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- LISTINGS TAB -->
+<div class="content" id="tab-listings">
+  <div class="desc">Only businesses that have paid and gone live on papamoa.info. Rows move here from the LEADS tab when Status = Published. This is the active client database. Renewal tracking lives here.</div>
+
+  <table>
+    <thead>
+      <tr><th>Col</th><th>Field Name</th><th>Type</th><th>Notes & Values</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>ID</td><td><span class="type-badge type-text">Text</span></td><td>Matches LEADS tab ID — PPI-001 etc.</td></tr>
+      <tr><td>B</td><td>Business Name</td><td><span class="type-badge type-text">Text</span></td><td></td></tr>
+      <tr><td>C</td><td>Slug</td><td><span class="type-badge type-text">Text</span></td><td></td></tr>
+      <tr><td>D</td><td>Tier</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Silver</span><span>Gold</span><span>Bronze</span></div></td></tr>
+      <tr><td>E</td><td>Category</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Accommodation</span><span>Activities</span><span>Food & Drink</span><span>Shops</span><span>Services</span></div></td></tr>
+      <tr><td>F</td><td>Primary Sub-Category</td><td><span class="type-badge type-text">Text</span></td><td>Main category the Spotlight applies to (Gold only)</td></tr>
+      <tr><td>G</td><td>Additional Sub-Categories</td><td><span class="type-badge type-text">Text</span></td><td>Comma separated — Gold only, $99+GST each</td></tr>
+      <tr><td>H</td><td>Sub-Pages Count</td><td><span class="type-badge type-number">Number</span></td><td>Total published sub-pages. Gold Founding Members = unlimited free</td></tr>
+      <tr><td>I</td><td>Founding Member</td><td><span class="type-badge type-checkbox">Checkbox</span></td><td>Tick if signed up during founding member period — locks in all perks</td></tr>
+      <tr><td>J</td><td>Live URL</td><td><span class="type-badge type-text">Text</span></td><td>https://papamoa.info/business/{slug}</td></tr>
+      <tr><td>K</td><td>TaurangaNZ URL</td><td><span class="type-badge type-text">Text</span></td><td>Gold only — their TaurangaNZ.info listing URL</td></tr>
+      <tr><td>L</td><td>Admin Email</td><td><span class="type-badge type-text">Text</span></td><td>Invoice and admin contact</td></tr>
+      <tr><td>M</td><td>Customer Email</td><td><span class="type-badge type-text">Text</span></td><td>Public-facing contact email on listing</td></tr>
+      <tr><td>N</td><td>Admin Phone</td><td><span class="type-badge type-text">Text</span></td><td></td></tr>
+      <tr><td>O</td><td>Customer Phone</td><td><span class="type-badge type-text">Text</span></td><td></td></tr>
+      <tr><td>P</td><td>Payment Date</td><td><span class="type-badge type-date">Date</span></td><td>Date Stripe payment confirmed</td></tr>
+      <tr><td>Q</td><td>Invoice Number</td><td><span class="type-badge type-text">Text</span></td><td>Stripe invoice number for records</td></tr>
+      <tr><td>R</td><td>Annual Value (excl GST)</td><td><span class="type-badge type-currency">Currency</span></td><td>NZD — Silver: $599, Gold: $1,200 + any add-ons</td></tr>
+      <tr><td>S</td><td>Renewal Date</td><td><span class="type-badge type-formula">Formula</span></td><td><div class="formula-block">=P2+365</div>Auto-calculates from payment date</td></tr>
+      <tr><td>T</td><td>Renewal Status</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Active</span><span>Renewal Due</span><span>30-Day Notice Sent</span><span>7-Day Notice Sent</span><span>Renewed</span><span>Lapsed</span></div></td></tr>
+      <tr><td>U</td><td>Facebook Post Date</td><td><span class="type-badge type-date">Date</span></td><td>When welcome post was published to Pāpāmoa groups</td></tr>
+      <tr><td>V</td><td>GA Connected</td><td><span class="type-badge type-checkbox">Checkbox</span></td><td>Tick once Google Analytics is tracking this listing's page</td></tr>
+      <tr><td>W</td><td>Notes</td><td><span class="type-badge type-text">Text</span></td><td>Anything useful — special requests, communication history</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- RENEWALS TAB -->
+<div class="content" id="tab-renewals">
+  <div class="desc">Shows all listings with upcoming renewals. At launch, populate manually from LISTINGS tab. In Phase 2, Make.com checks this daily and sends renewal reminder emails automatically via Brevo.</div>
+
+  <div class="section-title">Conditional Formatting — Days Until Renewal</div>
+  <div class="format-grid">
+    <div class="format-card red">
+      <div class="fc-label">Urgent — Red</div>
+      <div class="fc-formula">Rule: =D2&lt;7</div>
+      <div style="font-size:12px; color:var(--color-text-soft); margin-top:6px;">Renewal in less than 7 days — call immediately</div>
+    </div>
+    <div class="format-card amber">
+      <div class="fc-label">Due Soon — Amber</div>
+      <div class="fc-formula">Rule: =AND(D2&gt;=7,D2&lt;=30)</div>
+      <div style="font-size:12px; color:var(--color-text-soft); margin-top:6px;">Renewal in 7–30 days — send reminder email</div>
+    </div>
+    <div class="format-card green">
+      <div class="fc-label">On Track — Green</div>
+      <div class="fc-formula">Rule: =D2&gt;30</div>
+      <div style="font-size:12px; color:var(--color-text-soft); margin-top:6px;">More than 30 days — no action needed</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Col</th><th>Field Name</th><th>Type</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>Business Name</td><td><span class="type-badge type-text">Text</span></td><td>Pull from LISTINGS tab or enter manually</td></tr>
+      <tr><td>B</td><td>Tier</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Silver</span><span>Gold</span><span>Bronze</span></div></td></tr>
+      <tr><td>C</td><td>Renewal Date</td><td><span class="type-badge type-date">Date</span></td><td>Copy from LISTINGS tab column S</td></tr>
+      <tr><td>D</td><td>Days Until Renewal</td><td><span class="type-badge type-formula">Formula</span></td><td><div class="formula-block">=C2-TODAY()</div>Auto-calculates. Apply conditional formatting to this column.</td></tr>
+      <tr><td>E</td><td>Status</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Active</span><span>30-Day Notice Sent</span><span>7-Day Notice Sent</span><span>Renewed</span><span>Lapsed</span></div></td></tr>
+      <tr><td>F</td><td>Renewal Value</td><td><span class="type-badge type-currency">Currency</span></td><td>NZD excl. GST — same as original for Founding Members (price locked)</td></tr>
+      <tr><td>G</td><td>Admin Email</td><td><span class="type-badge type-text">Text</span></td><td>For sending renewal invoice</td></tr>
+      <tr><td>H</td><td>Notes</td><td><span class="type-badge type-text">Text</span></td><td>Renewal conversation notes</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Renewal email sequence (Phase 2 — Make.com automated)</strong>
+    Day -30: "Your listing renews in 30 days — here's what it delivered this year."
+    Day -7: "Final reminder — your Papamoa.info listing renews in 7 days."
+    Day 0: Invoice sent automatically via Stripe.
+    Day +7: If unpaid — "Your listing has lapsed. Reply to reinstate."
+  </div>
+</div>
+
+<!-- SETUP TAB -->
+<div class="content" id="tab-setup">
+  <div class="desc">Step-by-step instructions to create this Google Sheet from scratch. Complete in order.</div>
+
+  <div class="section-title">Step 1 — Create the Sheet</div>
+  <ol style="padding-left:20px; font-size:13px; color:var(--color-text-soft); line-height:2;">
+    <li>Go to <strong>sheets.google.com</strong></li>
+    <li>Click <strong>Blank spreadsheet</strong></li>
+    <li>Click "Untitled spreadsheet" at the top → rename to <strong>Papamoa.info — Master CRM</strong></li>
+    <li>Rename Sheet1 to <strong>LEADS</strong></li>
+    <li>Click + at the bottom to add sheets → rename to <strong>LISTINGS</strong> and <strong>RENEWALS</strong></li>
+  </ol>
+
+  <div class="section-title" style="margin-top:24px;">Step 2 — Add Column Headers</div>
+  <div class="tip">
+    <strong>Quick tip:</strong> Row 1 of each tab = headers. Type each column name exactly as shown in the tabs above.
+    Bold row 1: select it → Format → Bold. Freeze row 1: View → Freeze → 1 row.
+    Make the header row background colour navy (#2B3F5C) with white text for each tab.
+  </div>
+
+  <div class="section-title">Step 3 — Add Data Validation (Dropdowns)</div>
+  <ol style="padding-left:20px; font-size:13px; color:var(--color-text-soft); line-height:2;">
+    <li>Click the column letter to select the whole column</li>
+    <li>Data → <strong>Data Validation</strong> → <strong>Add a Rule</strong></li>
+    <li>Criteria: <strong>Dropdown</strong></li>
+    <li>Enter values from the table above, one per line</li>
+    <li>On invalid data: <strong>Show a warning</strong></li>
+    <li>Click <strong>Done</strong></li>
+    <li>Repeat for each dropdown column</li>
+  </ol>
+
+  <div class="section-title">Step 4 — Add Formulas</div>
+  <div class="tip">
+    <strong>LISTINGS tab — Renewal Date (column S):</strong>
+    Click cell S2, type <code>=P2+365</code>, press Enter.
+    Then click S2, copy it (Ctrl+C), select S2:S1000, paste (Ctrl+V).
+    This calculates renewal date for every row automatically.
+  </div>
+  <div class="tip" style="margin-top:8px;">
+    <strong>RENEWALS tab — Days Until Renewal (column D):</strong>
+    Click cell D2, type <code>=C2-TODAY()</code>, press Enter.
+    Copy down to D1000.
+    Then select D2:D1000 → Format → Conditional Formatting → add the three rules shown in the Renewals tab.
+  </div>
+
+  <div class="section-title">Step 5 — Connect to Make.com (Phase 2)</div>
+  <ol style="padding-left:20px; font-size:13px; color:var(--color-text-soft); line-height:2;">
+    <li>In Make.com: Create scenario → Add Google Sheets module</li>
+    <li>Connection → Add → Sign in with <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb818a928f8e85ab9b8a9b8a86848ac582858d84">[email&#160;protected]</a> Google account</li>
+    <li>Allow Make.com access to Google Sheets</li>
+    <li>Select spreadsheet: <strong>Papamoa.info — Master CRM</strong></li>
+    <li>Select sheet: <strong>LEADS</strong></li>
+    <li>Make.com can now read, write, and update rows automatically</li>
+  </ol>
+
+  <div class="section-title">Step 6 — Share with Make.com Service Account (if needed)</div>
+  <p style="font-size:13px; color:var(--color-text-soft); line-height:1.8;">
+    If Make.com requires a service account email for access, share the sheet with that email address:
+    File → Share → Share with people → enter the service account email → set to Editor.
+  </p>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function showTab(id) {
+  document.querySelectorAll('.content').forEach(c => c.classList.r
