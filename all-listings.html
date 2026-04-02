@@ -1,866 +1,945 @@
 <!DOCTYPE html>
 <html lang="en-NZ">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Papamoa.info - Local Business Directory</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pāpāmoa Business Directory — All Listings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/styles.css">
-<style>
-:root {
-  --color-ocean-deep: #134B58; --color-ocean: #1B6B7D; --color-green: #2E7D32;
-  --color-green-light: #E8F5E9; --color-ocean-light: #E8F4F6; --color-white: #FFFFFF;
-  --color-text-light: #6B6B6B; --color-text: #2C2C2C; --color-text-soft: #4a4a4a;
-  --color-dune: #C4985A; --color-dune-light: #F5EDD8; --color-dune-border: #e8c860;
-  --color-border: #E0D9CE; --radius: 12px;
-  --shadow-sm:0 1px 3px rgba(0,0,0,.06);
-  --shadow-md:0 4px 16px rgba(0,0,0,.08);
-  --shadow-lg:0 8px 32px rgba(0,0,0,.1);
-  --color-navy: #0f2b46; --color-ocean-accent: #3AABDE; --color-blue-light: #4fc3f7;
-  --color-blue-wash: #eaf6fd; --color-sand: #F7F3ED;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Figtree', sans-serif;background:var(--color-white);color:var(--color-text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* NAV */
-.site-nav{background:var(--color-ocean-deep);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200}
-.site-logo{font-family:'Playfair Display', serif;color:#fff;font-size:1.15rem;font-weight:700;letter-spacing:-.02em;cursor:pointer}
-.site-logo span{color:var(--color-green)}
-.nav-links{display:flex;gap:20px}
-.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.82rem;font-weight:500;transition:color .2s;cursor:pointer}
-.nav-links a:hover{color:#fff}
+    :root {
+      --color-ocean:        #3AABDE;
+      --color-ocean-deep:   #2B3F5C;
+      --color-ocean-light:  #e8f6fd;
+      --color-sand:         #f5f0e8;
+      --color-sand-dark:    #e8dfc8;
+      --color-dune:         #c4a96a;
+      --color-dune-light:   #f0e6cc;
+      --color-text:         #1a1a1a;
+      --color-text-soft:    #555;
+      --color-text-light:   #888;
+      --color-white:        #ffffff;
+      --color-border:       #e2ddd4;
+      --color-green:        #7DC143;
+      --color-green-light:  #edf7e1;
+      --color-red:          #E8344A;
+      --color-amber:        #f59e0b;
+    }
 
-/* TABS */
-.tab-bar{max-width:1120px;margin:0 auto;padding:16px 24px 0;display:flex;gap:6px;flex-wrap:wrap}
-.tab-btn{padding:8px 18px;border-radius:100px;border:1.5px solid var(--color-border);background:#fff;font-family:'Figtree', sans-serif;font-size:.78rem;font-weight:600;color:var(--color-text-soft);cursor:pointer;transition:all .2s;white-space:nowrap}
-.tab-btn:hover{border-color:var(--color-ocean);color:var(--color-ocean)}
-.tab-btn.active{background:var(--color-ocean-deep);color:#fff;border-color:var(--color-ocean-deep)}
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--color-sand);
+      color: var(--color-text);
+      min-height: 100vh;
+    }
 
-/* PAGE CONTAINER */
-.page{display:none;max-width:1120px;margin:0 auto;padding:24px}
-.page.active{display:block}
-.page-title{font-family:'Playfair Display', serif;font-size:1.8rem;font-weight:700;color:var(--color-ocean-deep);margin-bottom:4px}
-.page-sub{color:var(--color-text-soft);font-size:.88rem;margin-bottom:24px}
+    /* ── Nav ── */
+    nav {
+      background: var(--color-ocean-deep);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--color-white);
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--color-ocean); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: #8fafc6;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--color-white); }
 
-/* LISTING CARD (inside listing page) */
-.listing-page .listing-grid{display:grid;grid-template-columns:1fr 340px;gap:36px;align-items:start}
-.listing-page .hero-bar{height:260px;border-radius:var(--radius);overflow:hidden;margin-bottom:20px;position:relative}
-.listing-page .hero-bar img,.listing-page .hero-bar .hero-placeholder{width:100%;height:100%;object-fit:cover}
-.hero-placeholder{display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#fff;font-weight:500}
+    /* ── Hero / filter bar ── */
+    .hero {
+      background: var(--color-ocean-deep);
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--color-white);
+      margin-bottom: 0.4rem;
+    }
+    .hero p {
+      color: #8fafc6;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
 
-/* GOLD / SILVER BADGE */
-.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}
-.badge-gold{background:var(--color-dune-light);border:1.5px solid var(--color-dune-border);color:var(--color-dune)}
-.badge-silver{background:#f4f4f2;border:1.5px solid #d0cdc7;color:#8a8580}
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      max-width: 560px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+      transition: border-color 0.2s;
+    }
+    .filter-bar:focus-within {
+      border-color: var(--color-ocean);
+      background: rgba(255,255,255,0.12);
+    }
+    .filter-bar svg { color: #8fafc6; flex-shrink: 0; }
+    #search {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--color-white);
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.92rem;
+    }
+    #search::placeholder { color: #8fafc6; }
+    #clear-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #8fafc6;
+      padding: 0;
+      display: none;
+      line-height: 1;
+      transition: color 0.15s;
+    }
+    #clear-btn:hover { color: var(--color-white); }
 
-.listing-page h1{font-family:'Playfair Display', serif;font-size:1.7rem;font-weight:700;color:var(--color-ocean-deep);line-height:1.2}
-.listing-page .tagline{color:var(--color-text-soft);font-size:.9rem;margin-top:2px}
-.listing-page .meta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:.8rem;color:var(--color-text-light)}
-.listing-page .meta-row .mi{display:flex;align-items:center;gap:4px}
+    .filter-meta {
+      text-align: center;
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: #8fafc6;
+      min-height: 1.2em;
+    }
 
-.sec-title{font-family:'Playfair Display', serif;font-size:1.1rem;font-weight:500;color:var(--color-ocean-deep);margin:28px 0 8px}
-.desc{color:var(--color-text-soft);font-size:.88rem;line-height:1.75}
-.desc p+p{margin-top:12px}
+    /* ── Quick filters ── */
+    .quick-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-top: 0.75rem;
+    }
+    .qf {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      color: #8fafc6;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.25rem 0.75rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      font-family: 'Figtree', sans-serif;
+    }
+    .qf:hover, .qf.active {
+      background: var(--color-ocean);
+      border-color: var(--color-ocean);
+      color: var(--color-white);
+    }
 
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.tag{background:var(--color-ocean-light);color:var(--color-ocean);font-size:.75rem;font-weight:500;padding:5px 12px;border-radius:100px;border:1px solid rgba(45,106,79,.12)}
+    /* ── Layout ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
 
-/* SIDEBAR */
-.sidebar{position:sticky;top:70px}
-.contact-card{background:#fff;border:1px solid var(--color-border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow-md)}
-.contact-card h3{font-family:'Playfair Display', serif;font-size:1.05rem;font-weight:600;color:var(--color-ocean-deep);margin-bottom:2px}
-.contact-card .sub{font-size:.78rem;color:var(--color-text-light);margin-bottom:14px}
-.cta{display:block;width:100%;padding:12px;border:none;border-radius:8px;font-family:'Figtree', sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:transform .15s,box-shadow .15s}
-.cta:hover{transform:translateY(-1px);box-shadow:var(--shadow-md)}
-.cta-pri{background:var(--color-ocean);color:#fff;margin-bottom:8px}
-.cta-sec{background:transparent;color:var(--color-ocean);border:1.5px solid var(--color-ocean)}
-.sidebar-block{margin-top:14px;background:#fff;border:1px solid var(--color-border);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow-sm)}
-.sidebar-block h4{font-size:.82rem;font-weight:600;color:var(--color-ocean-deep);margin-bottom:8px}
-.hours-row{display:flex;justify-content:space-between;font-size:.76rem;padding:3px 0;color:var(--color-text-soft)}
-.contact-row{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--color-text-soft);margin-top:8px}
-.contact-row a{color:var(--color-ocean);text-decoration:none}
+    /* ── Sidebar nav (jump links) ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
 
-/* SEO SCORE */
-.seo-bar{margin-top:24px;background:var(--color-ocean-light);border-radius:var(--radius);padding:14px 18px;display:flex;align-items:center;gap:14px}
-.seo-ring{width:50px;height:50px;flex-shrink:0;position:relative}
-.seo-ring svg{transform:rotate(-90deg)}
-.seo-ring .st{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.88rem;color:var(--color-ocean-deep)}
-.seo-label{font-size:.78rem;color:var(--color-text-soft);line-height:1.5}
-.seo-label strong{color:var(--color-ocean-deep)}
+    .sidebar {
+      position: sticky;
+      top: 72px;
+    }
+    .sidebar-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      margin-bottom: 0.6rem;
+    }
+    .sidebar-links { list-style: none; }
+    .sidebar-links li { margin-bottom: 0.1rem; }
+    .sidebar-links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.82rem;
+      color: var(--color-text-soft);
+      transition: background 0.12s, color 0.12s;
+      gap: 0.4rem;
+    }
+    .sidebar-links a:hover {
+      background: var(--color-sand-dark);
+      color: var(--color-ocean-deep);
+    }
+    .sidebar-links a.hidden-link { opacity: 0.3; pointer-events: none; }
+    .sbl-tier {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .sbl-gold   { background: #fff3cc; color: #9a6f00; }
+    .sbl-silver { background: #eff1f5; color: #556; }
 
-/* CATEGORY PAGE (Surf & Tides) */
-.cat-hero{background:linear-gradient(135deg,var(--color-navy) 0%,#14496e 100%);border-radius:var(--radius);padding:40px 36px;margin-bottom:28px;position:relative;overflow:hidden}
-.cat-hero::after{content:'';position:absolute;right:-40px;bottom:-40px;width:260px;height:260px;border-radius:50%;background:rgba(79,195,247,.08)}
-.cat-hero h1{font-family:'Playfair Display', serif;font-size:2rem;font-weight:700;color:#fff;position:relative;z-index:1}
-.cat-hero p{color:rgba(255,255,255,.7);font-size:.92rem;max-width:600px;margin-top:6px;position:relative;z-index:1}
+    /* ── No results ── */
+    #no-results {
+      display: none;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--color-text-soft);
+    }
+    #no-results strong { display: block; font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--color-text); }
 
-/* SPOTLIGHT AD */
-.spotlight-ad{background:linear-gradient(135deg,var(--color-dune-light) 0%,#fff8e8 100%);border:2px solid var(--color-dune-border);border-radius:var(--radius);padding:24px 28px;margin-bottom:28px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;cursor:pointer;transition:box-shadow .3s}
-.spotlight-ad:hover{box-shadow:0 6px 24px rgba(201,149,45,.15)}
-.spotlight-ad .sp-badge{display:inline-flex;align-items:center;gap:5px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-dune);margin-bottom:8px}
-.spotlight-ad h2{font-family:'Playfair Display', serif;font-size:1.35rem;font-weight:700;color:var(--color-ocean-deep);line-height:1.25}
-.spotlight-ad .sp-desc{font-size:.84rem;color:var(--color-text-soft);margin-top:6px;line-height:1.6}
-.spotlight-ad .sp-cta{display:inline-block;margin-top:14px;padding:10px 22px;background:var(--color-ocean);color:#fff;border-radius:8px;font-size:.82rem;font-weight:600;text-decoration:none;transition:transform .15s}
-.spotlight-ad .sp-cta:hover{transform:translateY(-1px)}
-.spotlight-ad .sp-img{height:200px;border-radius:8px;background:linear-gradient(135deg,var(--color-navy),var(--color-ocean-accent));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.82rem}
+    /* ── Listing cards ── */
+    .listing-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+      scroll-margin-top: 72px;
+    }
+    .listing-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .listing-card.hidden { display: none; }
 
-/* LISTING GRID (category page) */
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
-.cat-card{background:#fff;border:1px solid var(--color-border);border-radius:var(--radius);overflow:hidden;transition:box-shadow .2s,transform .2s;cursor:pointer}
-.cat-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.cat-card .card-img{height:160px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.82rem;font-weight:500}
-.cat-card .card-body{padding:16px 18px}
-.cat-card .card-body h3{font-family:'Playfair Display', serif;font-size:1rem;font-weight:600;color:var(--color-ocean-deep)}
-.cat-card .card-body .card-sub{font-size:.78rem;color:var(--color-text-light);margin-top:2px}
-.cat-card .card-body .card-desc{font-size:.8rem;color:var(--color-text-soft);margin-top:8px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.cat-card .card-badge{display:inline-block;margin:12px 0 0;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:3px 10px;border-radius:100px}
-.cat-card .card-badge.g{background:var(--color-dune-light);color:var(--color-dune);border:1px solid var(--color-dune-border)}
-.cat-card .card-badge.s{background:#f4f4f2;color:#8a8580;border:1px solid #d0cdc7}
-.cat-card .card-badge.open{background:var(--color-ocean-light);color:var(--color-ocean);border:1px solid rgba(45,106,79,.15);font-weight:500;text-transform:none;letter-spacing:0;margin-left:6px}
+    /* card header */
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .card-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      background: var(--color-sand-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .card-header-text { flex: 1; min-width: 0; }
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--color-ocean-deep);
+      line-height: 1.2;
+    }
+    .card-tagline {
+      font-size: 0.82rem;
+      color: var(--color-text-soft);
+      margin-top: 0.2rem;
+    }
+    .card-address {
+      font-size: 0.78rem;
+      color: var(--color-text-light);
+      margin-top: 0.25rem;
+    }
+    .tier-badge {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+    }
+    .tier-gold   { background: #fff3cc; color: #9a6f00; }
+    .tier-silver { background: #eff1f5; color: #4a5568; }
 
-/* TIDE WIDGET */
-.tide-widget{background:#fff;border:1px solid var(--color-border);border-radius:var(--radius);padding:20px 24px;margin-bottom:28px;box-shadow:var(--shadow-sm)}
-.tide-widget h3{font-family:'Playfair Display', serif;font-size:1.1rem;color:var(--color-navy);margin-bottom:12px}
-.tide-row{display:flex;justify-content:space-around;text-align:center;gap:12px}
-.tide-item{flex:1}
-.tide-item .tide-icon{font-size:1.4rem;margin-bottom:2px}
-.tide-item .tide-time{font-size:.82rem;font-weight:600;color:var(--color-text)}
-.tide-item .tide-label{font-size:.7rem;color:var(--color-text-light);text-transform:uppercase;letter-spacing:.03em}
-.tide-item .tide-height{font-size:.75rem;color:var(--color-ocean-accent);font-weight:500}
-.surf-conditions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--color-border)}
-.surf-cond{text-align:center}
-.surf-cond .sc-val{font-size:1rem;font-weight:700;color:var(--color-navy)}
-.surf-cond .sc-lbl{font-size:.7rem;color:var(--color-text-light);text-transform:uppercase;letter-spacing:.02em}
+    /* card body */
+    .card-body { padding: 1rem 1.5rem; display: flex; gap: 1.5rem; }
 
-/* FOOTER */
-.site-footer{background:var(--color-ocean-deep);color:rgba(255,255,255,.5);text-align:center;padding:28px 24px;font-size:.75rem;margin-top:40px}
-.site-footer a{color:var(--color-green);text-decoration:none}
+    .card-description {
+      flex: 1;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--color-text-soft);
+    }
 
-/* BACK BTN */
-.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:500;color:var(--color-ocean);cursor:pointer;margin-bottom:16px;padding:6px 0;border:none;background:none;font-family:'Figtree', sans-serif}
-.back-btn:hover{text-decoration:underline}
+    .card-services {
+      flex-shrink: 0;
+      width: 200px;
+    }
+    .services-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      margin-bottom: 0.5rem;
+    }
+    .services-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+    .service-tag {
+      background: var(--color-sand);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      font-size: 0.72rem;
+      padding: 0.15rem 0.45rem;
+      color: var(--color-text-soft);
+    }
+    .service-tag.highlight {
+      background: var(--color-ocean-light);
+      border-color: #b3dff2;
+      color: var(--color-ocean-deep);
+      font-weight: 600;
+    }
 
-/* RESPONSIVE */
-@media(max-width:860px){
-  .listing-page .listing-grid{grid-template-columns:1fr}
-  .sidebar{position:static}
-  .spotlight-ad{grid-template-columns:1fr}
-  .spotlight-ad .sp-img{height:140px}
-  .cat-grid{grid-template-columns:1fr}
-  .tab-bar{gap:4px}
-  .tab-btn{font-size:.72rem;padding:6px 12px}
-}
+    /* card footer */
+    .card-footer {
+      padding: 0.75rem 1.5rem;
+      background: var(--color-sand);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .card-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .meta-item {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .seo-score {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+    }
+    .score-bar {
+      width: 60px;
+      height: 5px;
+      background: var(--color-border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .score-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--color-green);
+    }
+    .card-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-ocean);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.15s;
+    }
+    .card-link:hover { color: var(--color-ocean-deep); }
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.page.active{animation:fadeUp .4s ease both}
-</style>
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .card-body { flex-direction: column; }
+      .card-services { width: 100%; }
+    }
+    @media (max-width: 560px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 1.5rem 1rem 1.5rem; }
+      .hero h1 { font-size: 1.5rem; }
+      .container { padding: 1.25rem 1rem 3rem; }
+      .card-header { padding: 1rem; }
+      .card-body { padding: 0.75rem 1rem; }
+      .card-footer { padding: 0.6rem 1rem; }
+    }
+  </style>
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="site-logo" onclick="showPage('home')">papamoa<span>.info</span></div>
-  <div class="nav-links">
-    <a onclick="showPage('home')">Home</a>
-    <a onclick="showPage('surf')">Surf & Tides</a>
-    <a>List Your Business</a>
-    <a>About</a>
-  </div>
+<!-- Nav -->
+<nav>
+  <a class="nav-brand" href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Papamoa<span>.info</span></a>
+  <ul class="nav-links">
+    <li><a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Home</a></li>
+    <li><a href="https://plainblackcreative.github.io/papamoa-previews/categories/fishing.html">Surf & Tides</a></li>
+    <li><a href="https://plainblackcreative.github.io/papamoa-previews/index.html">List Your Business</a></li>
+    <li><a href="https://plainblackcreative.github.io/papamoa-previews/sitemap.html">Site Index</a></li>
+  </ul>
 </nav>
 
-<div class="tab-bar">
-  <button class="tab-btn active" onclick="showPage('home')">All Listings</button>
-  <button class="tab-btn" onclick="showPage('barber-toms')">Barber Toms</button>
-  <button class="tab-btn" onclick="showPage('redefined')">ReDefined</button>
-  <button class="tab-btn" onclick="showPage('coastal')">Coastal Autos</button>
-  <button class="tab-btn" onclick="showPage('blackberry')">Blackberry Eatery</button>
-  <button class="tab-btn" onclick="showPage('wagon')">The Wagon</button>
-  <button class="tab-btn" onclick="showPage('pizza')">Pizza Pundits</button>
-  <button class="tab-btn" onclick="showPage('prosupps')">Pro Supplements</button>
-  <button class="tab-btn" onclick="showPage('hakanini')">Hakanini Surf</button>
-  <button class="tab-btn" onclick="showPage('paphouse')">PAP House</button>
-  <button class="tab-btn" onclick="showPage('surf')" style="background:var(--color-navy);color:#fff;border-color:var(--color-navy)">Surf & Tides</button>
-</div>
+<!-- Hero + filter -->
+<div class="hero">
+  <h1>Pāpāmoa Business Directory</h1>
+  <p>Locally written listings for Pāpāmoa's best businesses</p>
 
-<!-- =============== HOME =============== -->
-<div class="page active" id="page-home">
-  <h1 class="page-title">Pāpāmoa Business Directory</h1>
-  <p class="page-sub">Locally written listings for Pāpāmoa's best businesses</p>
-  <div class="cat-grid">
-
-    <div class="cat-card" onclick="showPage('barber-toms')">
-      <div class="card-img" style="background:linear-gradient(135deg,#2c2c2c,#444)">Barber Toms</div>
-      <div class="card-body">
-        <h3>Barber Toms</h3>
-        <div class="card-sub">80 Parton Road, Pāpāmoa</div>
-        <div class="card-desc">A neighbourhood barbershop on Parton Road with a relaxed, welcoming atmosphere. They handle everything from classic cuts and fades to beard trims and razor work.</div>
-        <span class="card-badge s">Silver</span>
-      </div>
-    </div>
-
-    <div class="cat-card" onclick="showPage('redefined')">
-      <div class="card-img" style="background:linear-gradient(135deg,#1a1a2e,#3a3a5c)">ReDefined</div>
-      <div class="card-body">
-        <h3>ReDefined Wellbeing Hub</h3>
-        <div class="card-sub">Pāpāmoa</div>
-        <div class="card-desc">An award-winning gym and wellbeing hub offering reformer pilates, functional training, yoga, open gym, and a recovery lab under one roof with on-site health practitioners.</div>
-        <span class="card-badge g">Gold Spotlight</span>
-      </div>
-    </div>
-
-    <div class="cat-card" onclick="showPage('coastal')">
-      <div class="card-img" style="background:linear-gradient(135deg,#1b3a5c,#2a6496)">Coastal Autos</div>
-      <div class="card-body">
-        <h3>Coastal Autos</h3>
-        <div class="card-sub">Pāpāmoa</div>
-        <div class="card-desc">An MTA-approved workshop offering WOFs, full servicing, auto electrical, wheel alignments, tyres, brakes, and vehicle licensing all from one location.</div>
-        <span class="card-badge s">Silver</span>
-      </div>
-    </div>
-
-    <div class="cat-card" onclick="showPage('blackberry')">
-      <div class="card-img" style="background:linear-gradient(135deg,#2d1b3d,#5c2d82)">Blackberry Eatery</div>
-      <div class="card-body">
-        <h3>Blackberry Eatery</h3>
-        <div class="card-sub">Fashion Island, Gravatt Road</div>
-        <div class="card-desc">A cafe and eatery at Fashion Island serving Allpress coffee, an all-day brunch menu, and evening dining Thursday through Sunday with a fully licensed bar.</div>
-        <span class="card-badge s">Silver</span>
-      </div>
-    </div>
-
-    <div class="cat-card" onclick="showPage('wagon')">
-      <div class="card-img" style="background:linear-gradient(135deg,#3d2b1b,#7a5530)">The Wagon</div>
-      <div class="card-body">
-        <h3>The Wagon</h3>
-        <div class="card-sub">Pāpāmoa</div>
-        <div class="card-desc">A gourmet burger bar and grill with a lively atmosphere, walk-ins welcome. Part of a small chain with a second location in Whakatane.</div>
-        <span class="card-badge s">Silver</span>
-      </div>
-    </div>
-
-    <div class="cat-card" onclick="showPage('pizza')">
-      <div class="card-img" style="background:linear-gradient(135deg,#8b2500,#c44200)">Pizza Pundits</div>
-      <div class="card-body">
-        <h3>The Pizza Pundits</h3>
-        <div class="card-sub">1/898 Pāpāmoa Beach Road</div>
-        <div class="card-desc">A takeaway and dine-in pizzeria on Pāpāmoa Beach Road known for creative toppings that blend traditional and Indian-inspired flavours, with vegan and gluten-free options.</div>
-        <span class="card-badge s">Silver</span>
-      </div>
-    </div>
-
-    <div class="cat-card" onclick="showPage('prosupps')">
-      <div class="card-img" style="background:linear-gradient(135deg,#1a1a1a,#333)">Pro Supplements</div>
-      <div class="card-body">
-        <h3>Pro Supplements</h3>
-        <div class="card-sub">45 Grey Street, Tauranga</div>
-        <div class="card-desc">A supplement retailer based on Grey Street in Tauranga carrying whey protein, pre-workouts, creatine, BCAAs, and accessories from brands like Optimum Nutrition and EHP Labs.</div>
-        <span class="card-badge s">Silver</span>
-      </div>
-    </div>
-
-    <div class="cat-card" onclick="showPage('hakanini')">
-      <div class="card-img" style="background:linear-gradient(135deg,var(--color-navy),var(--color-ocean-accent))">Hakanini Surf</div>
-      <div class="card-body">
-        <h3>Hakanini Surf School & Rentals</h3>
-        <div class="card-sub">Pāpāmoa Domain</div>
-        <div class="card-desc">Pāpāmoa's dedicated surf school operating from the Domain. They run group and private lessons for all ages, school holiday programmes, and board rentals from $35 half-day.</div>
-        <span class="card-badge g">Gold Spotlight</span>
-      </div>
-    </div>
-
-    <div class="cat-card" onclick="showPage('paphouse')">
-      <div class="card-img" style="background:linear-gradient(135deg,#2b3a1b,#4a6630)">PAP House</div>
-      <div class="card-body">
-        <h3>PAP House</h3>
-        <div class="card-sub">1072 Pāpāmoa Beach Road</div>
-        <div class="card-desc">A restaurant and bar on Pāpāmoa Beach Road that locals treat as a second living room. Dog-friendly, indoor and outdoor seating, open seven days with online ordering.</div>
-        <span class="card-badge g">Gold Spotlight</span>
-      </div>
-    </div>
-
+  <div class="filter-bar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search" placeholder="Search by name, service, category, or keyword…" autocomplete="off" spellcheck="false">
+    <button id="clear-btn" aria-label="Clear search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
   </div>
+
+  <div class="quick-filters">
+    <button class="qf" data-q="gold">Gold Spotlight</button>
+    <button class="qf" data-q="cafe coffee">Cafes</button>
+    <button class="qf" data-q="food restaurant bar dining">Dining</button>
+    <button class="qf" data-q="fitness gym pilates yoga">Fitness</button>
+    <button class="qf" data-q="automotive mechanic wof">Automotive</button>
+    <button class="qf" data-q="surf lessons board hire">Surf</button>
+    <button class="qf" data-q="vegan gluten-free">Dietary</button>
+    <button class="qf" data-q="takeaway delivery">Takeaway</button>
+  </div>
+
+  <div class="filter-meta" id="filter-meta">Showing all 9 listings</div>
 </div>
 
-<!-- =============== BARBER TOMS =============== -->
-<div class="page listing-page" id="page-barber-toms">
-  <button class="back-btn" onclick="showPage('home')">&larr; Back to listings</button>
-  <div class="hero-bar"><div class="hero-placeholder" style="background:linear-gradient(135deg,#2c2c2c,#444)">Barber Toms - 80 Parton Road, Pāpāmoa</div></div>
-  <div class="listing-grid">
-    <div>
-      <div class="badge badge-silver">&#9733; Silver Listing</div>
-      <h1>Barber Toms</h1>
-      <div class="tagline">Neighbourhood barbershop in Pāpāmoa and Mount Maunganui</div>
-      <div class="meta-row">
-        <span class="mi">80 Parton Road, Pāpāmoa</span>
-        <span class="mi">Also at 1 Newton Street, Mt Maunganui</span>
+<div class="container">
+  <div class="layout">
+
+    <!-- Sidebar jump nav -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Jump to</div>
+      <ul class="sidebar-links" id="sidebar-links">
+        <li><a href="#barber-toms" data-id="barber-toms">Barber Toms <span class="sbl-tier sbl-silver">Silver</span></a></li>
+        <li><a href="#redefined" data-id="redefined">ReDefined <span class="sbl-tier sbl-gold">Gold</span></a></li>
+        <li><a href="#coastal-autos" data-id="coastal-autos">Coastal Autos <span class="sbl-tier sbl-silver">Silver</span></a></li>
+        <li><a href="#blackberry-eatery" data-id="blackberry-eatery">Blackberry Eatery <span class="sbl-tier sbl-silver">Silver</span></a></li>
+        <li><a href="#the-wagon" data-id="the-wagon">The Wagon <span class="sbl-tier sbl-silver">Silver</span></a></li>
+        <li><a href="#pizza-pundits" data-id="pizza-pundits">Pizza Pundits <span class="sbl-tier sbl-silver">Silver</span></a></li>
+        <li><a href="#pro-supplements" data-id="pro-supplements">Pro Supplements <span class="sbl-tier sbl-silver">Silver</span></a></li>
+        <li><a href="#hakanini" data-id="hakanini">Hakanini Surf <span class="sbl-tier sbl-gold">Gold</span></a></li>
+        <li><a href="#pap-house" data-id="pap-house">PAP House <span class="sbl-tier sbl-gold">Gold</span></a></li>
+      </ul>
+    </aside>
+
+    <!-- Listings -->
+    <main>
+      <div id="no-results">
+        <strong>No listings match your search.</strong>
+        Try a different keyword, or <button onclick="clearSearch()" style="background:none;border:none;cursor:pointer;color:var(--color-ocean);font-family:inherit;font-size:inherit;font-weight:600;padding:0;">clear the filter</button>.
       </div>
 
-      <h2 class="sec-title">About This Business</h2>
-      <div class="desc">
-        <p>Barber Toms is a walk-in-friendly barbershop on Parton Road that has built a solid following around straightforward service and a relaxed atmosphere. They handle men's and kids' cuts, beard trims, razor fades, and a full "The Works" package that covers everything in one sitting. Bookings are taken through Fresha, and they also accept walk-ins when chairs are free.</p>
-        <p>The shop also carries its own range of grooming products available through their online store. A second location recently opened on Newton Street in Mount Maunganui, giving Mount locals the same service without the drive out to Pāpāmoa. Both shops maintain the same pricing and booking system.</p>
-        <p>Worth knowing: Barber Toms is a barber rather than a unisex salon, so the service is focused on men's and boys' cuts. The vibe is casual and unpretentious, which regulars seem to appreciate.</p>
-      </div>
-
-      <h2 class="sec-title">Services</h2>
-      <div class="tags">
-        <span class="tag">Men's Haircuts</span>
-        <span class="tag">Kids' Cuts</span>
-        <span class="tag">Beard Trims</span>
-        <span class="tag">Razor Fades</span>
-        <span class="tag">The Works Package</span>
-        <span class="tag">Grooming Products</span>
-      </div>
-      <div class="seo-bar"><div class="seo-ring"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="23" fill="none" stroke="#e5e2dc" stroke-width="5"/><circle cx="28" cy="28" r="23" fill="none" stroke="var(--color-green)" stroke-width="5" stroke-dasharray="144.51" stroke-dashoffset="28.9" stroke-linecap="round"/></svg><div class="st">80</div></div><div class="seo-label"><strong>SEO Score: 80/100</strong><br>Optimised for Pāpāmoa barber search terms</div></div>
-    </div>
-    <div class="sidebar">
-      <div class="contact-card">
-        <h3>Book a Cut</h3>
-        <div class="sub">Book online via Fresha or walk in</div>
-        <a class="cta cta-pri" href="https://www.fresha.com/book-now/barber-toms-r0c5zvjr/all-offer?id=806800" target="_blank">Book Pāpāmoa</a>
-        <a class="cta cta-sec" href="https://www.fresha.com/book-now/barber-toms-r0c5zvjr/all-offer?id=2635568" target="_blank">Book Mt Maunganui</a>
-        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--color-border)">
-          <div class="contact-row"><a href="https://barbertoms.co.nz" target="_blank">barbertoms.co.nz</a></div>
-          <div class="contact-row"><a href="https://www.facebook.com/profile.php?id=100070478716915" target="_blank">Facebook</a></div>
-          <div class="contact-row"><a href="https://www.instagram.com/barbertomspapamoa" target="_blank">Instagram</a></div>
+      <!-- BARBER TOMS -->
+      <article class="listing-card" id="barber-toms"
+        data-keywords="barber toms haircut men kids beard trim fade razor grooming walk-in parton road papamoa barbershop salon fresha mount maunganui newton street">
+        <div class="card-header">
+          <div class="card-thumb">✂️</div>
+          <div class="card-header-text">
+            <div class="card-name">Barber Toms</div>
+            <div class="card-tagline">Neighbourhood barbershop in Pāpāmoa and Mount Maunganui</div>
+            <div class="card-address">80 Parton Road, Pāpāmoa · Also at 1 Newton Street, Mt Maunganui</div>
+          </div>
+          <span class="tier-badge tier-silver">★ Silver</span>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============== REDEFINED =============== -->
-<div class="page listing-page" id="page-redefined">
-  <button class="back-btn" onclick="showPage('home')">&larr; Back to listings</button>
-  <div class="hero-bar"><div class="hero-placeholder" style="background:linear-gradient(135deg,#1a1a2e,#3a3a5c)">ReDefined Wellbeing Hub - Pāpāmoa</div></div>
-  <div class="listing-grid">
-    <div>
-      <div class="badge badge-gold">&#9733; Gold Spotlight</div>
-      <h1>ReDefined Wellbeing Hub</h1>
-      <div class="tagline">Award-winning gym, pilates studio, and recovery centre in Pāpāmoa</div>
-      <div class="meta-row">
-        <span class="mi">Pāpāmoa</span>
-        <span class="mi">Also in Takapuna, Auckland</span>
-        <span class="mi">Exercise NZ Award Winner</span>
-      </div>
-
-      <h2 class="sec-title">About This Business</h2>
-      <div class="desc">
-        <p>ReDefined is more than a gym, though calling it a "wellbeing hub" only partly captures what they have assembled under one roof. The Pāpāmoa studio houses five specialised spaces: a reformer pilates studio, a yoga and meditation room, a functional strength and conditioning area, an open gym, and a dedicated recovery lab. On-site health practitioners cover nutrition, physiotherapy, massage, and counselling.</p>
-        <p>They won the Exercise New Zealand Supreme Facility of the Year award in 2023, which gives some indication of how the fitness industry views what they have built. Membership is structured as a single pass that covers all studios and classes rather than charging separately for each discipline. That model works well for people who want variety without juggling multiple subscriptions.</p>
-        <p>The atmosphere leans towards community-driven rather than hardcore gym culture. ReDefined clearly pitches itself at people looking for long-term habits rather than short-term intensity. Their trial offer lets newcomers test the full range of classes before committing. It is worth noting the Pāpāmoa location can get busy during peak morning and evening class slots, so booking ahead is recommended.</p>
-      </div>
-
-      <h2 class="sec-title">What They Offer</h2>
-      <div class="tags">
-        <span class="tag">Reformer Pilates</span>
-        <span class="tag">Mat Pilates</span>
-        <span class="tag">Yoga & Meditation</span>
-        <span class="tag">Functional Training</span>
-        <span class="tag">Open Gym</span>
-        <span class="tag">Recovery Lab</span>
-        <span class="tag">Physiotherapy</span>
-        <span class="tag">Nutrition</span>
-        <span class="tag">Massage</span>
-        <span class="tag">Counselling</span>
-      </div>
-      <div class="seo-bar"><div class="seo-ring"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="23" fill="none" stroke="#e5e2dc" stroke-width="5"/><circle cx="28" cy="28" r="23" fill="none" stroke="var(--color-green)" stroke-width="5" stroke-dasharray="144.51" stroke-dashoffset="14.45" stroke-linecap="round"/></svg><div class="st">90</div></div><div class="seo-label"><strong>SEO Score: 90/100</strong><br>Strong coverage across gym, pilates, and wellness terms for Pāpāmoa</div></div>
-    </div>
-    <div class="sidebar">
-      <div class="contact-card">
-        <h3>Book a Trial</h3>
-        <div class="sub">Try the full range of classes before committing</div>
-        <a class="cta cta-pri" href="https://www.redefined.nz/bookyourtrial" target="_blank">Book Your Trial</a>
-        <a class="cta cta-sec" href="https://www.redefined.nz/membership-papamoa" target="_blank">View Memberships</a>
-        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--color-border)">
-          <div class="contact-row"><a href="https://www.redefined.nz" target="_blank">redefined.nz</a></div>
+        <div class="card-body">
+          <div class="card-description">
+            Barber Toms is a walk-in-friendly barbershop on Parton Road that has built a solid following around straightforward service and a relaxed atmosphere. They handle men's and kids' cuts, beard trims, razor fades, and a full "The Works" package that covers everything in one sitting. Bookings are taken through Fresha, and they also accept walk-ins when chairs are free. A second location recently opened on Newton Street in Mount Maunganui. Worth knowing: this is a barber rather than a unisex salon — service is focused on men's and boys' cuts.
+          </div>
+          <div class="card-services">
+            <div class="services-label">Services</div>
+            <div class="services-list">
+              <span class="service-tag">Men's Haircuts</span>
+              <span class="service-tag">Kids' Cuts</span>
+              <span class="service-tag">Beard Trims</span>
+              <span class="service-tag">Razor Fades</span>
+              <span class="service-tag">The Works Package</span>
+              <span class="service-tag">Grooming Products</span>
+              <span class="service-tag">Walk-ins Welcome</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============== COASTAL AUTOS =============== -->
-<div class="page listing-page" id="page-coastal">
-  <button class="back-btn" onclick="showPage('home')">&larr; Back to listings</button>
-  <div class="hero-bar"><div class="hero-placeholder" style="background:linear-gradient(135deg,#1b3a5c,#2a6496)">Coastal Autos - Your Local Mechanic, Pāpāmoa</div></div>
-  <div class="listing-grid">
-    <div>
-      <div class="badge badge-silver">&#9733; Silver Listing</div>
-      <h1>Coastal Autos</h1>
-      <div class="tagline">One-stop automotive workshop in Pāpāmoa</div>
-      <div class="meta-row">
-        <span class="mi">Pāpāmoa</span>
-        <span class="mi">07 282 7100</span>
-        <span class="mi">MTA Approved</span>
-      </div>
-
-      <h2 class="sec-title">About This Business</h2>
-      <div class="desc">
-        <p>Coastal Autos positions itself as a one-stop shop, and the service list backs that up. They handle WOFs, full vehicle servicing, tyres, wheel alignments, brakes, auto electrical work, air conditioning, batteries, transmission, suspension, diagnostics, and even vehicle licensing. That last one is convenient: you can get your WOF and handle the rego paperwork in the same visit rather than making a separate trip.</p>
-        <p>The workshop is MTA approved, which provides a baseline of industry standards and access to dispute resolution if anything goes wrong. They also handle fleet servicing, which suggests the operation is set up to manage volume and scheduling rather than working purely on a one-car-at-a-time basis.</p>
-        <p>The team makes a point of presenting themselves as people-first rather than purely transactional. Reviews tend to mention the communication and transparency around what work is actually needed, which matters in an industry where trust can be an issue. Online booking is available through their website.</p>
-      </div>
-
-      <h2 class="sec-title">Services</h2>
-      <div class="tags">
-        <span class="tag">WOF Inspections</span>
-        <span class="tag">Vehicle Servicing</span>
-        <span class="tag">Vehicle Licensing</span>
-        <span class="tag">Tyres</span>
-        <span class="tag">Wheel Alignment</span>
-        <span class="tag">Brakes</span>
-        <span class="tag">Auto Electrical</span>
-        <span class="tag">Air Conditioning</span>
-        <span class="tag">Diagnostics</span>
-        <span class="tag">Transmission</span>
-        <span class="tag">Fleet Servicing</span>
-        <span class="tag">Suspension</span>
-      </div>
-      <div class="seo-bar"><div class="seo-ring"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="23" fill="none" stroke="#e5e2dc" stroke-width="5"/><circle cx="28" cy="28" r="23" fill="none" stroke="var(--color-green)" stroke-width="5" stroke-dasharray="144.51" stroke-dashoffset="21.68" stroke-linecap="round"/></svg><div class="st">85</div></div><div class="seo-label"><strong>SEO Score: 85/100</strong><br>Strong for mechanic, WOF, and auto repair terms in Pāpāmoa</div></div>
-    </div>
-    <div class="sidebar">
-      <div class="contact-card">
-        <h3>Book Your Vehicle In</h3>
-        <div class="sub">Online booking available</div>
-        <a class="cta cta-pri" href="https://www.coastalautos.nz/bookonline" target="_blank">Book Online</a>
-        <a class="cta cta-sec" href="tel:072827100">Call 07 282 7100</a>
-        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--color-border)">
-          <div class="contact-row"><a href="https://www.coastalautos.nz" target="_blank">coastalautos.nz</a></div>
+        <div class="card-footer">
+          <div class="card-meta">
+            <span class="meta-item">📍 Parton Road, Pāpāmoa</span>
+            <span class="meta-item">💈 Barbershop</span>
+          </div>
+          <div class="seo-score">
+            SEO <div class="score-bar"><div class="score-fill" style="width:80%"></div></div> 80
+          </div>
+          <a class="card-link" href="https://plainblackcreative.github.io/papamoa-previews/listings/the-wagon-papamoa.html">View listing →</a>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+      </article>
 
-<!-- =============== BLACKBERRY EATERY =============== -->
-<div class="page listing-page" id="page-blackberry">
-  <button class="back-btn" onclick="showPage('home')">&larr; Back to listings</button>
-  <div class="hero-bar"><div class="hero-placeholder" style="background:linear-gradient(135deg,#2d1b3d,#5c2d82)">Blackberry Eatery - Fashion Island, Pāpāmoa</div></div>
-  <div class="listing-grid">
-    <div>
-      <div class="badge badge-silver">&#9733; Silver Listing</div>
-      <h1>Blackberry Eatery</h1>
-      <div class="tagline">All-day cafe and evening dining at Fashion Island, Pāpāmoa</div>
-      <div class="meta-row">
-        <span class="mi">Shop 1/42 Gravatt Road, Fashion Island</span>
-        <span class="mi">07 572 1724</span>
-      </div>
-
-      <h2 class="sec-title">About This Business</h2>
-      <div class="desc">
-        <p>Blackberry Eatery sits inside Fashion Island on Gravatt Road and runs a split-format operation: cafe-style breakfast and lunch during the day, then a more substantial dinner service Thursday through Sunday evenings. The coffee programme is built around Allpress beans with trained baristas, and the cabinet food is made in-house.</p>
-        <p>The dinner menu covers a broader range than you might expect from a daytime cafe. Previous menus have featured items like lamb shanks, pasta dishes, and dumplings alongside more standard evening fare. They also mix handcrafted cocktails and carry a wine list, so the evening offering is a genuine sit-down dining experience rather than a cafe that stays open late.</p>
-        <p>Functions are a meaningful part of the business. They can seat up to 120 people for private events and offer buffet, cocktail, and working lunch formats. The venue is fully licensed with both indoor and outdoor seating. Takeaway and delivery are available with online ordering, and they occasionally run promotions through their website.</p>
-      </div>
-
-      <h2 class="sec-title">What They Offer</h2>
-      <div class="tags">
-        <span class="tag">Allpress Coffee</span>
-        <span class="tag">Breakfast</span>
-        <span class="tag">Brunch</span>
-        <span class="tag">Lunch</span>
-        <span class="tag">Dinner (Thu-Sun)</span>
-        <span class="tag">Cocktails & Wine</span>
-        <span class="tag">Functions up to 120</span>
-        <span class="tag">Outdoor Catering</span>
-        <span class="tag">Gift Cards</span>
-        <span class="tag">Online Ordering</span>
-      </div>
-      <div class="seo-bar"><div class="seo-ring"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="23" fill="none" stroke="#e5e2dc" stroke-width="5"/><circle cx="28" cy="28" r="23" fill="none" stroke="var(--color-green)" stroke-width="5" stroke-dasharray="144.51" stroke-dashoffset="24.57" stroke-linecap="round"/></svg><div class="st">83</div></div><div class="seo-label"><strong>SEO Score: 83/100</strong><br>Good coverage for cafe, restaurant, and function venue searches in Pāpāmoa</div></div>
-    </div>
-    <div class="sidebar">
-      <div class="contact-card">
-        <h3>Visit or Order</h3>
-        <div class="sub">Reservations and online ordering available</div>
-        <a class="cta cta-pri" href="https://blackberryeatery.co.nz/order-now/menu" target="_blank">Order Online</a>
-        <a class="cta cta-sec" href="tel:075721724">Call 07 572 1724</a>
-        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--color-border)">
-          <div class="contact-row"><a href="https://blackberryeatery.co.nz" target="_blank">blackberryeatery.co.nz</a></div>
-          <div class="contact-row"><a href="/cdn-cgi/l/email-protection#02606e636169606770707b67637667707b42656f636b6e2c616d6f"><span class="__cf_email__" data-cfemail="57353b36343c353225252e32362332252e17303a363e3b7934383a">[email&#160;protected]</span></a></div>
+      <!-- REDEFINED -->
+      <article class="listing-card" id="redefined"
+        data-keywords="redefined wellbeing hub gym pilates reformer yoga meditation fitness recovery physiotherapy nutrition massage counselling papamoa takapuna award exercise nz membership classes functional training open gym">
+        <div class="card-header">
+          <div class="card-thumb">🏋️</div>
+          <div class="card-header-text">
+            <div class="card-name">ReDefined Wellbeing Hub</div>
+            <div class="card-tagline">Award-winning gym, pilates studio, and recovery centre in Pāpāmoa</div>
+            <div class="card-address">Pāpāmoa · Also in Takapuna, Auckland · Exercise NZ Award Winner</div>
+          </div>
+          <span class="tier-badge tier-gold">★ Gold Spotlight</span>
         </div>
-      </div>
-      <div class="sidebar-block">
-        <h4>Hours</h4>
-        <div class="hours-row"><span>Mon - Wed</span><span>7:30am - 3:30pm</span></div>
-        <div class="hours-row"><span>Thu - Sun</span><span>7:30am - 8:00pm</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============== THE WAGON =============== -->
-<div class="page listing-page" id="page-wagon">
-  <button class="back-btn" onclick="showPage('home')">&larr; Back to listings</button>
-  <div class="hero-bar"><div class="hero-placeholder" style="background:linear-gradient(135deg,#3d2b1b,#7a5530)">The Wagon - Gourmet Burgers, Bar & Grill</div></div>
-  <div class="listing-grid">
-    <div>
-      <div class="badge badge-silver">&#9733; Silver Listing</div>
-      <h1>The Wagon</h1>
-      <div class="tagline">Gourmet burgers, bar, and grill in Pāpāmoa</div>
-      <div class="meta-row">
-        <span class="mi">Pāpāmoa</span>
-        <span class="mi">07 262 0123</span>
-        <span class="mi">Walk-ins welcome</span>
-      </div>
-
-      <h2 class="sec-title">About This Business</h2>
-      <div class="desc">
-        <p>The Wagon is a burger-focused bar and grill with locations in Pāpāmoa and Whakatane. The Pāpāmoa branch leans into a lively, social atmosphere and is one of those spots that fills up on weekends without much effort. Walk-ins are welcome, but for groups of six or more they recommend booking ahead by phone or email.</p>
-        <p>The menu centres on gourmet burgers, though they run a broader grill menu alongside it. They accept online orders for takeaway through their website. If the restaurant is at capacity when you arrive, they offer a callback system so you do not have to wait around.</p>
-        <p>As a small chain with two locations, The Wagon benefits from some operational consistency. The Pāpāmoa spot has built a strong local following. It is a solid option for casual dining where the focus is on the food and the atmosphere rather than fine dining formality.</p>
-      </div>
-
-      <h2 class="sec-title">What They Offer</h2>
-      <div class="tags">
-        <span class="tag">Gourmet Burgers</span>
-        <span class="tag">Bar & Grill</span>
-        <span class="tag">Takeaway</span>
-        <span class="tag">Online Ordering</span>
-        <span class="tag">Group Bookings</span>
-        <span class="tag">Walk-ins Welcome</span>
-      </div>
-      <div class="seo-bar"><div class="seo-ring"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="23" fill="none" stroke="#e5e2dc" stroke-width="5"/><circle cx="28" cy="28" r="23" fill="none" stroke="var(--color-green)" stroke-width="5" stroke-dasharray="144.51" stroke-dashoffset="28.9" stroke-linecap="round"/></svg><div class="st">80</div></div><div class="seo-label"><strong>SEO Score: 80/100</strong><br>Good for burger and bar searches in Pāpāmoa</div></div>
-    </div>
-    <div class="sidebar">
-      <div class="contact-card">
-        <h3>Eat Here</h3>
-        <div class="sub">Walk-ins or book for 6+</div>
-        <a class="cta cta-pri" href="https://www.ordermeal.co.nz/the-wagon-papamoa/" target="_blank">Order Online</a>
-        <a class="cta cta-sec" href="tel:072620123">Call 07 262 0123</a>
-        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--color-border)">
-          <div class="contact-row"><a href="https://thewagon.co.nz" target="_blank">thewagon.co.nz</a></div>
-          <div class="contact-row"><a href="/cdn-cgi/l/email-protection#86eee3eaeae9c6f2eee3f1e7e1e9e8a8e5e9a8e8fc"><span class="__cf_email__" data-cfemail="2149444d4d4e615549445640464e4f0f424e0f4f5b">[email&#160;protected]</span></a></div>
+        <div class="card-body">
+          <div class="card-description">
+            ReDefined houses five specialised spaces under one roof: a reformer pilates studio, yoga and meditation room, functional strength and conditioning area, open gym, and dedicated recovery lab. On-site health practitioners cover nutrition, physiotherapy, massage, and counselling. They won the Exercise New Zealand Supreme Facility of the Year award in 2023. Membership is structured as a single pass covering all studios and classes. The atmosphere leans community-driven rather than hardcore gym culture — built for long-term habits rather than short-term intensity.
+          </div>
+          <div class="card-services">
+            <div class="services-label">What They Offer</div>
+            <div class="services-list">
+              <span class="service-tag highlight">Reformer Pilates</span>
+              <span class="service-tag highlight">Yoga & Meditation</span>
+              <span class="service-tag">Mat Pilates</span>
+              <span class="service-tag">Functional Training</span>
+              <span class="service-tag">Open Gym</span>
+              <span class="service-tag">Recovery Lab</span>
+              <span class="service-tag">Physiotherapy</span>
+              <span class="service-tag">Nutrition</span>
+              <span class="service-tag">Massage</span>
+              <span class="service-tag">Counselling</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============== PIZZA PUNDITS =============== -->
-<div class="page listing-page" id="page-pizza">
-  <button class="back-btn" onclick="showPage('home')">&larr; Back to listings</button>
-  <div class="hero-bar"><div class="hero-placeholder" style="background:linear-gradient(135deg,#8b2500,#c44200)">The Pizza Pundits - Pāpāmoa Beach Road</div></div>
-  <div class="listing-grid">
-    <div>
-      <div class="badge badge-silver">&#9733; Silver Listing</div>
-      <h1>The Pizza Pundits</h1>
-      <div class="tagline">Creative pizzas with a twist, Pāpāmoa Beach Road</div>
-      <div class="meta-row">
-        <span class="mi">1/898 Pāpāmoa Beach Road</span>
-        <span class="mi">07 542 0058</span>
-        <span class="mi">Open Wed - Sun from 4pm</span>
-      </div>
-
-      <h2 class="sec-title">About This Business</h2>
-      <div class="desc">
-        <p>The Pizza Pundits sits on Pāpāmoa Beach Road and takes a more creative approach to pizza than the standard takeaway. Their point of difference is the menu, which blends traditional pizza bases with toppings that draw from Indian and fusion cooking. Items like butter paneer pizza and apricot-based flavour combinations set them apart from the franchise pizza shops in the area.</p>
-        <p>They cater to dietary needs more thoughtfully than most pizza places. Vegan and gluten-free bases are available, and the menu is designed so those options still carry genuine flavour rather than feeling like afterthoughts. Standard classics are on the menu too for anyone who just wants a reliable margherita or meat lovers.</p>
-        <p>The operation is fairly small and intimate. They are closed Monday and Tuesday, opening from 4pm Wednesday through Sunday. This is primarily an evening spot, making it a good option for a post-beach dinner or takeaway run. Delivery is available through their online ordering system.</p>
-      </div>
-
-      <h2 class="sec-title">What They Offer</h2>
-      <div class="tags">
-        <span class="tag">Classic Pizzas</span>
-        <span class="tag">Fusion / Indian-inspired Pizzas</span>
-        <span class="tag">Vegan Options</span>
-        <span class="tag">Gluten-free Bases</span>
-        <span class="tag">Sides</span>
-        <span class="tag">Dine-in</span>
-        <span class="tag">Takeaway & Delivery</span>
-      </div>
-      <div class="seo-bar"><div class="seo-ring"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="23" fill="none" stroke="#e5e2dc" stroke-width="5"/><circle cx="28" cy="28" r="23" fill="none" stroke="var(--color-green)" stroke-width="5" stroke-dasharray="144.51" stroke-dashoffset="27.46" stroke-linecap="round"/></svg><div class="st">81</div></div><div class="seo-label"><strong>SEO Score: 81/100</strong><br>Good for pizza takeaway and delivery searches in Pāpāmoa</div></div>
-    </div>
-    <div class="sidebar">
-      <div class="contact-card">
-        <h3>Order Pizza</h3>
-        <div class="sub">Dine in, takeaway, or delivery</div>
-        <a class="cta cta-pri" href="https://www.ordermeal.co.nz/the-pizza-pundits/" target="_blank">Order Online</a>
-        <a class="cta cta-sec" href="tel:075420058">Call 07 542 0058</a>
-        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--color-border)">
-          <div class="contact-row"><a href="https://thepizzapundits.co.nz" target="_blank">thepizzapundits.co.nz</a></div>
+        <div class="card-footer">
+          <div class="card-meta">
+            <span class="meta-item">📍 Pāpāmoa</span>
+            <span class="meta-item">🏆 Exercise NZ 2023</span>
+          </div>
+          <div class="seo-score">
+            SEO <div class="score-bar"><div class="score-fill" style="width:90%"></div></div> 90
+          </div>
+          <a class="card-link" href="https://plainblackcreative.github.io/papamoa-previews/listings/papamoa-orthodontist.html">View listing →</a>
         </div>
-      </div>
-      <div class="sidebar-block">
-        <h4>Hours</h4>
-        <div class="hours-row"><span>Mon - Tue</span><span>Closed</span></div>
-        <div class="hours-row"><span>Wed - Thu</span><span>4:00pm - 9:00pm</span></div>
-        <div class="hours-row"><span>Fri - Sat</span><span>4:00pm - 10:00pm</span></div>
-        <div class="hours-row"><span>Sunday</span><span>4:00pm - 9:00pm</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+      </article>
 
-<!-- =============== PRO SUPPLEMENTS =============== -->
-<div class="page listing-page" id="page-prosupps">
-  <button class="back-btn" onclick="showPage('home')">&larr; Back to listings</button>
-  <div class="hero-bar"><div class="hero-placeholder" style="background:linear-gradient(135deg,#1a1a1a,#333)">Pro Supplements - 45 Grey Street, Tauranga</div></div>
-  <div class="listing-grid">
-    <div>
-      <div class="badge badge-silver">&#9733; Silver Listing</div>
-      <h1>Pro Supplements</h1>
-      <div class="tagline">Sports nutrition and supplement retailer, Tauranga</div>
-      <div class="meta-row">
-        <span class="mi">45 Grey Street, Tauranga</span>
-        <span class="mi">In-store only (no Pāpāmoa location)</span>
-      </div>
-
-      <h2 class="sec-title">About This Business</h2>
-      <div class="desc">
-        <p>Pro Supplements operates from Grey Street in Tauranga's CBD and carries a broad range of sports nutrition products. Their shelves cover the main categories: whey protein (isolate, casein, plant-based), pre-workouts, creatine, BCAAs and amino acids, test boosters, vitamins, weight loss supplements, and accessories. Brands stocked include Optimum Nutrition, EHP Labs, Pack Nutrition, Muscletech, and others.</p>
-        <p>The store runs an online shop alongside the physical location, though the site emphasises that featured products are available in-store at Grey Street. They regularly run clearance deals and carry new arrivals, so stock rotates more frequently than at some larger chains. Pricing appears competitive with online-only supplement retailers, particularly on their sale items.</p>
-        <p>It is worth noting this is a Tauranga CBD business rather than a Pāpāmoa-based one. For Pāpāmoa residents, it is a short drive into town. The store is independent rather than franchise-owned, which typically means more flexibility on product advice and recommendations compared to chain supplement shops.</p>
-      </div>
-
-      <h2 class="sec-title">Product Range</h2>
-      <div class="tags">
-        <span class="tag">Whey Protein</span>
-        <span class="tag">Isolate Protein</span>
-        <span class="tag">Plant Protein</span>
-        <span class="tag">Pre-workout</span>
-        <span class="tag">Creatine</span>
-        <span class="tag">BCAAs & Aminos</span>
-        <span class="tag">Weight Loss</span>
-        <span class="tag">Vitamins</span>
-        <span class="tag">Mass Gainers</span>
-        <span class="tag">Bars & Drinks</span>
-        <span class="tag">Accessories</span>
-      </div>
-      <div class="seo-bar"><div class="seo-ring"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="23" fill="none" stroke="#e5e2dc" stroke-width="5"/><circle cx="28" cy="28" r="23" fill="none" stroke="var(--color-green)" stroke-width="5" stroke-dasharray="144.51" stroke-dashoffset="33.44" stroke-linecap="round"/></svg><div class="st">77</div></div><div class="seo-label"><strong>SEO Score: 77/100</strong><br>Covers supplement and protein searches in Tauranga</div></div>
-    </div>
-    <div class="sidebar">
-      <div class="contact-card">
-        <h3>Shop Supplements</h3>
-        <div class="sub">In-store at Grey Street or order online</div>
-        <a class="cta cta-pri" href="https://prosupplement.co.nz" target="_blank">Shop Online</a>
-        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--color-border)">
-          <div class="contact-row"><a href="https://prosupplement.co.nz" target="_blank">prosupplement.co.nz</a></div>
-          <div class="contact-row">45 Grey Street, Tauranga</div>
+      <!-- COASTAL AUTOS -->
+      <article class="listing-card" id="coastal-autos"
+        data-keywords="coastal autos mechanic wof warrant of fitness vehicle servicing tyres wheel alignment brakes auto electrical air conditioning batteries transmission suspension diagnostics fleet rego licensing mta approved papamoa automotive">
+        <div class="card-header">
+          <div class="card-thumb">🔧</div>
+          <div class="card-header-text">
+            <div class="card-name">Coastal Autos</div>
+            <div class="card-tagline">One-stop automotive workshop in Pāpāmoa</div>
+            <div class="card-address">Pāpāmoa · 07 282 7100 · MTA Approved</div>
+          </div>
+          <span class="tier-badge tier-silver">★ Silver</span>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============== HAKANINI SURF =============== -->
-<div class="page listing-page" id="page-hakanini">
-  <button class="back-btn" onclick="showPage('home')">&larr; Back to listings</button>
-  <div class="hero-bar"><div class="hero-placeholder" style="background:linear-gradient(135deg,var(--color-navy),var(--color-ocean-accent))">Hakanini Surf School & Rentals - Pāpāmoa Domain</div></div>
-  <div class="listing-grid">
-    <div>
-      <div class="badge badge-gold">&#9733; Gold Spotlight</div>
-      <h1>Hakanini Surf School & Rentals</h1>
-      <div class="tagline">Pāpāmoa's surf school at the Domain, lessons and board hire for all ages</div>
-      <div class="meta-row">
-        <span class="mi">Pāpāmoa Domain, 559 Pāpāmoa Beach Road</span>
-        <span class="mi">Lessons from $70</span>
-      </div>
-
-      <h2 class="sec-title">About This Business</h2>
-      <div class="desc">
-        <p>Hakanini is Pāpāmoa's dedicated surf school, operating from the Domain at the heart of the beach. Founded by Tom Botting, who brings international experience from running surf rentals and surfing the big waves of Pichilemu in Chile, the school has become a local fixture and built a reputation that extends well beyond Pāpāmoa.</p>
-        <p>They run group lessons for up to eight people, private one-on-one sessions, and school holiday programmes that typically run for a week at an hour per day. Group lessons cover two hours and start from around $70 depending on group size. Board hire is available separately at $35 for a half day or $45 for a full day, which makes it one of the more affordable rental options in the Bay of Plenty.</p>
-        <p>The teaching approach focuses on ocean safety and wave understanding alongside the surfing itself, which parents tend to appreciate. Reviews consistently mention the instructors' ability to build confidence in kids and beginners, with multiple reviewers noting visible improvement even within a single session. The school's location near the Pāpāmoa Beach Holiday Resort makes it particularly convenient for holidaymakers.</p>
-        <p>Hakanini operates on a seasonal schedule that ramps up significantly over summer. During peak periods, group lessons run at 10am and 1pm daily. Availability can be limited during school holidays, so booking early is recommended for holiday programmes.</p>
-      </div>
-
-      <h2 class="sec-title">What They Offer</h2>
-      <div class="tags">
-        <span class="tag">Group Surf Lessons</span>
-        <span class="tag">Private Lessons</span>
-        <span class="tag">Kids' Programmes</span>
-        <span class="tag">School Holiday Camps</span>
-        <span class="tag">Board Hire</span>
-        <span class="tag">Ocean Safety Education</span>
-        <span class="tag">After-school Programmes</span>
-      </div>
-      <div class="seo-bar"><div class="seo-ring"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="23" fill="none" stroke="#e5e2dc" stroke-width="5"/><circle cx="28" cy="28" r="23" fill="none" stroke="var(--color-green)" stroke-width="5" stroke-dasharray="144.51" stroke-dashoffset="10.12" stroke-linecap="round"/></svg><div class="st">93</div></div><div class="seo-label"><strong>SEO Score: 93/100</strong><br>Excellent coverage for surf lessons, board hire, and kids' activities in Pāpāmoa</div></div>
-    </div>
-    <div class="sidebar">
-      <div class="contact-card">
-        <h3>Book a Lesson</h3>
-        <div class="sub">Group lessons, private sessions, or just hire a board</div>
-        <a class="cta cta-pri" href="https://www.hakaninisurf.co.nz" target="_blank">Visit Website</a>
-        <a class="cta cta-sec" href="https://www.facebook.com/Hakaninisurf/" target="_blank">Message on Facebook</a>
-        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--color-border)">
-          <div class="contact-row"><a href="https://www.hakaninisurf.co.nz" target="_blank">hakaninisurf.co.nz</a></div>
-          <div class="contact-row"><a href="https://www.instagram.com/hakaninisurfschool" target="_blank">@hakaninisurfschool</a></div>
-          <div class="contact-row">Pāpāmoa Domain</div>
+        <div class="card-body">
+          <div class="card-description">
+            Coastal Autos handles WOFs, full vehicle servicing, tyres, wheel alignments, brakes, auto electrical, air conditioning, batteries, transmission, suspension, diagnostics, and vehicle licensing — you can get your WOF and handle rego paperwork in the same visit. MTA approved, which provides a baseline of industry standards and access to dispute resolution. They also handle fleet servicing. Reviews consistently mention transparency around what work is actually needed, which matters in an industry where trust can be an issue.
+          </div>
+          <div class="card-services">
+            <div class="services-label">Services</div>
+            <div class="services-list">
+              <span class="service-tag highlight">WOF Inspections</span>
+              <span class="service-tag">Vehicle Servicing</span>
+              <span class="service-tag">Vehicle Licensing</span>
+              <span class="service-tag">Tyres</span>
+              <span class="service-tag">Wheel Alignment</span>
+              <span class="service-tag">Brakes</span>
+              <span class="service-tag">Auto Electrical</span>
+              <span class="service-tag">Air Conditioning</span>
+              <span class="service-tag">Diagnostics</span>
+              <span class="service-tag">Fleet Servicing</span>
+              <span class="service-tag">Suspension</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============== PAP HOUSE =============== -->
-<div class="page listing-page" id="page-paphouse">
-  <button class="back-btn" onclick="showPage('home')">&larr; Back to listings</button>
-  <div class="hero-bar"><div class="hero-placeholder" style="background:linear-gradient(135deg,#2b3a1b,#4a6630)">PAP House - Restaurant & Bar, Pāpāmoa Beach Road</div></div>
-  <div class="listing-grid">
-    <div>
-      <div class="badge badge-gold">&#9733; Gold Spotlight</div>
-      <h1>PAP House</h1>
-      <div class="tagline">Restaurant, bar, and local gathering spot on Pāpāmoa Beach Road</div>
-      <div class="meta-row">
-        <span class="mi">1072 Pāpāmoa Beach Road</span>
-        <span class="mi">07 542 0365</span>
-        <span class="mi">Open 7 days</span>
-        <span class="mi">Dog friendly</span>
-      </div>
-
-      <h2 class="sec-title">About This Business</h2>
-      <div class="desc">
-        <p>PAP House describes itself as "the local's living room," and the description fits. This is a restaurant and bar on Pāpāmoa Beach Road that has become one of those places where regulars show up multiple times a week without it feeling like a special occasion. The atmosphere is social and relaxed, with both indoor and outdoor seating areas.</p>
-        <p>The menu caters broadly, with gluten-free, dairy-free, vegetarian, and vegan options clearly marked. They serve from morning through to late evening, seven days a week, with Saturday and Sunday opening an hour earlier at 9am. The kitchen handles everything from casual drinks and bar snacks through to full meals, making it versatile enough for a coffee catch-up, a family dinner, or a Friday night out.</p>
-        <p>Dogs are welcome, which adds to the casual, neighbourhood feel. Table bookings can be made online, and they also run pickup and delivery through their ordering platform. Gift cards are available for purchase through the website.</p>
-        <p>The venue has built strong word-of-mouth locally. Reviews tend to focus on the consistency of the food and the welcoming atmosphere rather than any single standout dish, which is often the mark of a place that gets the fundamentals right across the board.</p>
-      </div>
-
-      <h2 class="sec-title">What They Offer</h2>
-      <div class="tags">
-        <span class="tag">Restaurant</span>
-        <span class="tag">Bar</span>
-        <span class="tag">Breakfast</span>
-        <span class="tag">Lunch</span>
-        <span class="tag">Dinner</span>
-        <span class="tag">GF / DF / Vegan Options</span>
-        <span class="tag">Dog Friendly</span>
-        <span class="tag">Outdoor Seating</span>
-        <span class="tag">Online Ordering</span>
-        <span class="tag">Gift Cards</span>
-      </div>
-      <div class="seo-bar"><div class="seo-ring"><svg width="50" height="50" viewBox="0 0 56 56"><circle cx="28" cy="28" r="23" fill="none" stroke="#e5e2dc" stroke-width="5"/><circle cx="28" cy="28" r="23" fill="none" stroke="var(--color-green)" stroke-width="5" stroke-dasharray="144.51" stroke-dashoffset="13.01" stroke-linecap="round"/></svg><div class="st">91</div></div><div class="seo-label"><strong>SEO Score: 91/100</strong><br>Excellent for restaurant, bar, and dining searches in Pāpāmoa</div></div>
-    </div>
-    <div class="sidebar">
-      <div class="contact-card">
-        <h3>Visit PAP House</h3>
-        <div class="sub">Book a table or order online</div>
-        <a class="cta cta-pri" href="https://paphouse.co.nz/book-a-table/" target="_blank">Book a Table</a>
-        <a class="cta cta-sec" href="https://www.ordermeal.co.nz/pap-house/" target="_blank">Order Online</a>
-        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--color-border)">
-          <div class="contact-row"><a href="https://paphouse.co.nz" target="_blank">paphouse.co.nz</a></div>
-          <div class="contact-row"><a href="tel:075420365">07 542 0365</a></div>
+        <div class="card-footer">
+          <div class="card-meta">
+            <span class="meta-item">📍 Pāpāmoa</span>
+            <span class="meta-item">📞 07 282 7100</span>
+          </div>
+          <div class="seo-score">
+            SEO <div class="score-bar"><div class="score-fill" style="width:85%"></div></div> 85
+          </div>
+          <a class="card-link" href="https://coastalautos.nz" target="_blank">coastalautos.nz →</a>
         </div>
-      </div>
-      <div class="sidebar-block">
-        <h4>Hours</h4>
-        <div class="hours-row"><span>Mon - Fri</span><span>10:00am - 11:00pm</span></div>
-        <div class="hours-row"><span>Sat - Sun</span><span>9:00am - 11:00pm</span></div>
-      </div>
-    </div>
+      </article>
+
+      <!-- BLACKBERRY EATERY -->
+      <article class="listing-card" id="blackberry-eatery"
+        data-keywords="blackberry eatery cafe coffee allpress breakfast brunch lunch dinner cocktails wine functions events fashion island gravatt road papamoa licensed bar takeaway delivery online ordering gift cards">
+        <div class="card-header">
+          <div class="card-thumb">☕</div>
+          <div class="card-header-text">
+            <div class="card-name">Blackberry Eatery</div>
+            <div class="card-tagline">All-day café and evening dining at Fashion Island, Pāpāmoa</div>
+            <div class="card-address">Shop 1/42 Gravatt Road, Fashion Island · 07 572 1724</div>
+          </div>
+          <span class="tier-badge tier-silver">★ Silver</span>
+        </div>
+        <div class="card-body">
+          <div class="card-description">
+            Blackberry Eatery runs a split-format operation at Fashion Island: café-style breakfast and lunch during the day, then a more substantial dinner service Thursday through Sunday evenings. The coffee programme is built around Allpress beans. The dinner menu is a genuine sit-down dining experience — previous menus have featured lamb shanks, pasta, and dumplings alongside standard evening fare, with handcrafted cocktails and a wine list. Functions are a core part of the business: capacity for up to 120 people, with buffet, cocktail, and working lunch formats.
+          </div>
+          <div class="card-services">
+            <div class="services-label">What They Offer</div>
+            <div class="services-list">
+              <span class="service-tag highlight">Allpress Coffee</span>
+              <span class="service-tag">Breakfast</span>
+              <span class="service-tag">Brunch</span>
+              <span class="service-tag">Lunch</span>
+              <span class="service-tag">Dinner (Thu–Sun)</span>
+              <span class="service-tag">Cocktails & Wine</span>
+              <span class="service-tag">Functions up to 120</span>
+              <span class="service-tag">Outdoor Catering</span>
+              <span class="service-tag">Gift Cards</span>
+              <span class="service-tag">Online Ordering</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-meta">
+            <span class="meta-item">📍 Fashion Island</span>
+            <span class="meta-item">🕐 Mon–Wed 7:30am–3:30pm · Thu–Sun 7:30am–8pm</span>
+          </div>
+          <div class="seo-score">
+            SEO <div class="score-bar"><div class="score-fill" style="width:83%"></div></div> 83
+          </div>
+          <a class="card-link" href="https://blackberryeatery.co.nz" target="_blank">blackberryeatery.co.nz →</a>
+        </div>
+      </article>
+
+      <!-- THE WAGON -->
+      <article class="listing-card" id="the-wagon"
+        data-keywords="the wagon burger bar grill gourmet papamoa whakatane takeaway online ordering walk-ins group bookings casual dining">
+        <div class="card-header">
+          <div class="card-thumb">🍔</div>
+          <div class="card-header-text">
+            <div class="card-name">The Wagon</div>
+            <div class="card-tagline">Gourmet burgers, bar, and grill in Pāpāmoa</div>
+            <div class="card-address">Pāpāmoa · 07 262 0123 · Walk-ins welcome</div>
+          </div>
+          <span class="tier-badge tier-silver">★ Silver</span>
+        </div>
+        <div class="card-body">
+          <div class="card-description">
+            The Wagon is a burger-focused bar and grill with locations in Pāpāmoa and Whakatane. The Pāpāmoa branch leans into a lively, social atmosphere and fills up on weekends. Walk-ins are welcome, though groups of six or more should book ahead. The menu centres on gourmet burgers with a broader grill menu alongside it, with online orders available for takeaway. A callback system means you don't have to wait around if the restaurant is at capacity when you arrive.
+          </div>
+          <div class="card-services">
+            <div class="services-label">What They Offer</div>
+            <div class="services-list">
+              <span class="service-tag highlight">Gourmet Burgers</span>
+              <span class="service-tag">Bar & Grill</span>
+              <span class="service-tag">Takeaway</span>
+              <span class="service-tag">Online Ordering</span>
+              <span class="service-tag">Group Bookings</span>
+              <span class="service-tag">Walk-ins Welcome</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-meta">
+            <span class="meta-item">📍 Pāpāmoa</span>
+            <span class="meta-item">📞 07 262 0123</span>
+          </div>
+          <div class="seo-score">
+            SEO <div class="score-bar"><div class="score-fill" style="width:80%"></div></div> 80
+          </div>
+          <a class="card-link" href="https://plainblackcreative.github.io/papamoa-previews/listings/the-wagon-papamoa.html">View listing →</a>
+        </div>
+      </article>
+
+      <!-- PIZZA PUNDITS -->
+      <article class="listing-card" id="pizza-pundits"
+        data-keywords="pizza pundits takeaway dine-in papamoa beach road indian fusion butter paneer vegan gluten-free gf delivery creative toppings margherita meat lovers">
+        <div class="card-header">
+          <div class="card-thumb">🍕</div>
+          <div class="card-header-text">
+            <div class="card-name">The Pizza Pundits</div>
+            <div class="card-tagline">Creative pizzas with a twist, Pāpāmoa Beach Road</div>
+            <div class="card-address">1/898 Pāpāmoa Beach Road · 07 542 0058 · Open Wed–Sun from 4pm</div>
+          </div>
+          <span class="tier-badge tier-silver">★ Silver</span>
+        </div>
+        <div class="card-body">
+          <div class="card-description">
+            The Pizza Pundits takes a more creative approach to pizza than the standard takeaway, blending traditional bases with toppings that draw from Indian and fusion cooking — items like butter paneer pizza and apricot-based flavour combinations. Vegan and gluten-free bases are available, designed to carry genuine flavour rather than feel like afterthoughts. Standard classics are also on the menu. Closed Monday and Tuesday, opening from 4pm Wednesday through Sunday. Delivery is available through their online ordering system.
+          </div>
+          <div class="card-services">
+            <div class="services-label">What They Offer</div>
+            <div class="services-list">
+              <span class="service-tag">Classic Pizzas</span>
+              <span class="service-tag highlight">Fusion / Indian-inspired</span>
+              <span class="service-tag highlight">Vegan Options</span>
+              <span class="service-tag highlight">Gluten-free Bases</span>
+              <span class="service-tag">Sides</span>
+              <span class="service-tag">Dine-in</span>
+              <span class="service-tag">Takeaway & Delivery</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-meta">
+            <span class="meta-item">📍 Pāpāmoa Beach Road</span>
+            <span class="meta-item">🕐 Wed–Sun from 4pm</span>
+          </div>
+          <div class="seo-score">
+            SEO <div class="score-bar"><div class="score-fill" style="width:81%"></div></div> 81
+          </div>
+          <a class="card-link" href="https://thepizzapundits.co.nz" target="_blank">thepizzapundits.co.nz →</a>
+        </div>
+      </article>
+
+      <!-- PRO SUPPLEMENTS -->
+      <article class="listing-card" id="pro-supplements"
+        data-keywords="pro supplements protein whey isolate casein plant pre-workout creatine bcaa amino vitamins mass gainer weight loss accessories optimum nutrition ehp labs tauranga grey street sports nutrition fitness gym">
+        <div class="card-header">
+          <div class="card-thumb">💪</div>
+          <div class="card-header-text">
+            <div class="card-name">Pro Supplements</div>
+            <div class="card-tagline">Sports nutrition and supplement retailer, Tauranga</div>
+            <div class="card-address">45 Grey Street, Tauranga · In-store + online</div>
+          </div>
+          <span class="tier-badge tier-silver">★ Silver</span>
+        </div>
+        <div class="card-body">
+          <div class="card-description">
+            Pro Supplements operates from Grey Street in Tauranga's CBD and carries a broad range of sports nutrition products: whey protein, pre-workouts, creatine, BCAAs, test boosters, vitamins, weight loss supplements, and accessories. Brands stocked include Optimum Nutrition, EHP Labs, Pack Nutrition, and Muscletech. The store runs an online shop alongside the physical location and regularly runs clearance deals. Worth noting: this is a Tauranga CBD business, not Pāpāmoa-based — a short drive into town for beach residents.
+          </div>
+          <div class="card-services">
+            <div class="services-label">Product Range</div>
+            <div class="services-list">
+              <span class="service-tag highlight">Whey Protein</span>
+              <span class="service-tag">Isolate / Plant Protein</span>
+              <span class="service-tag highlight">Pre-workout</span>
+              <span class="service-tag">Creatine</span>
+              <span class="service-tag">BCAAs & Aminos</span>
+              <span class="service-tag">Weight Loss</span>
+              <span class="service-tag">Vitamins</span>
+              <span class="service-tag">Mass Gainers</span>
+              <span class="service-tag">Accessories</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-meta">
+            <span class="meta-item">📍 45 Grey Street, Tauranga</span>
+            <span class="meta-item">🛒 In-store + online</span>
+          </div>
+          <div class="seo-score">
+            SEO <div class="score-bar"><div class="score-fill" style="width:77%"></div></div> 77
+          </div>
+          <a class="card-link" href="https://prosupplement.co.nz" target="_blank">prosupplement.co.nz →</a>
+        </div>
+      </article>
+
+      <!-- HAKANINI SURF -->
+      <article class="listing-card" id="hakanini"
+        data-keywords="hakanini surf school lessons board hire rental papamoa domain kids children school holiday programmes private group ocean safety beginners tom botting summer seasonal bay of plenty">
+        <div class="card-header">
+          <div class="card-thumb">🏄</div>
+          <div class="card-header-text">
+            <div class="card-name">Hakanini Surf School & Rentals</div>
+            <div class="card-tagline">Pāpāmoa's surf school at the Domain, lessons and board hire for all ages</div>
+            <div class="card-address">Pāpāmoa Domain, 559 Pāpāmoa Beach Road · Lessons from $70</div>
+          </div>
+          <span class="tier-badge tier-gold">★ Gold Spotlight</span>
+        </div>
+        <div class="card-body">
+          <div class="card-description">
+            Hakanini is Pāpāmoa's dedicated surf school, operating from the Domain at the heart of the beach. Founded by Tom Botting, who brings international experience from surfing big waves in Pichilemu, Chile. They run group lessons for up to eight people, private one-on-one sessions, and school holiday programmes. Board hire is available at $35 half-day or $45 full day — one of the more affordable rental options in the Bay of Plenty. Reviews consistently mention the instructors' ability to build confidence in kids and beginners. Booking early is recommended for school holiday programmes.
+          </div>
+          <div class="card-services">
+            <div class="services-label">What They Offer</div>
+            <div class="services-list">
+              <span class="service-tag highlight">Group Surf Lessons</span>
+              <span class="service-tag highlight">Board Hire</span>
+              <span class="service-tag">Private Lessons</span>
+              <span class="service-tag">Kids' Programmes</span>
+              <span class="service-tag">School Holiday Camps</span>
+              <span class="service-tag">Ocean Safety</span>
+              <span class="service-tag">After-school Programmes</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-meta">
+            <span class="meta-item">📍 Pāpāmoa Domain</span>
+            <span class="meta-item">💰 From $70 group · $35 board hire</span>
+          </div>
+          <div class="seo-score">
+            SEO <div class="score-bar"><div class="score-fill" style="width:93%"></div></div> 93
+          </div>
+          <a class="card-link" href="https://hakaninisurf.co.nz" target="_blank">hakaninisurf.co.nz →</a>
+        </div>
+      </article>
+
+      <!-- PAP HOUSE -->
+      <article class="listing-card" id="pap-house"
+        data-keywords="pap house restaurant bar papamoa beach road locals dog friendly outdoor seating breakfast lunch dinner vegan gluten-free dairy-free gf df online ordering gift cards open seven days">
+        <div class="card-header">
+          <div class="card-thumb">🏡</div>
+          <div class="card-header-text">
+            <div class="card-name">PAP House</div>
+            <div class="card-tagline">Restaurant, bar, and local gathering spot on Pāpāmoa Beach Road</div>
+            <div class="card-address">1072 Pāpāmoa Beach Road · 07 542 0365 · Open 7 days · Dog friendly</div>
+          </div>
+          <span class="tier-badge tier-gold">★ Gold Spotlight</span>
+        </div>
+        <div class="card-body">
+          <div class="card-description">
+            PAP House describes itself as "the local's living room," and the description fits. This restaurant and bar on Pāpāmoa Beach Road has become a place where regulars show up multiple times a week without it feeling like a special occasion. The menu caters broadly with gluten-free, dairy-free, vegetarian, and vegan options clearly marked. They serve from morning through to late evening, seven days a week. Dogs are welcome. Table bookings online, pickup and delivery through their ordering platform, and gift cards available.
+          </div>
+          <div class="card-services">
+            <div class="services-label">What They Offer</div>
+            <div class="services-list">
+              <span class="service-tag">Restaurant</span>
+              <span class="service-tag">Bar</span>
+              <span class="service-tag">Breakfast</span>
+              <span class="service-tag">Lunch</span>
+              <span class="service-tag">Dinner</span>
+              <span class="service-tag highlight">GF / DF / Vegan</span>
+              <span class="service-tag highlight">Dog Friendly</span>
+              <span class="service-tag">Outdoor Seating</span>
+              <span class="service-tag">Online Ordering</span>
+              <span class="service-tag">Gift Cards</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-meta">
+            <span class="meta-item">📍 Pāpāmoa Beach Road</span>
+            <span class="meta-item">🕐 Mon–Fri 10am–11pm · Sat–Sun 9am–11pm</span>
+          </div>
+          <div class="seo-score">
+            SEO <div class="score-bar"><div class="score-fill" style="width:91%"></div></div> 91
+          </div>
+          <a class="card-link" href="https://paphouse.co.nz" target="_blank">paphouse.co.nz →</a>
+        </div>
+      </article>
+
+    </main>
   </div>
 </div>
 
-<!-- =============== SURF & TIDES =============== -->
-<div class="page" id="page-surf">
-  <button class="back-btn" onclick="showPage('home')">&larr; Back to listings</button>
-
-  <div class="cat-hero">
-    <h1>Surf & Tides</h1>
-    <p>Pāpāmoa surf conditions, tide times, and local surf businesses</p>
-  </div>
-
-  <!-- TIDE WIDGET -->
-  <div class="tide-widget">
-    <h3>Today's Tides &middot; Pāpāmoa Beach</h3>
-    <div class="tide-row">
-      <div class="tide-item">
-        <div class="tide-icon">&#9650;</div>
-        <div class="tide-time">5:42am</div>
-        <div class="tide-label">High Tide</div>
-        <div class="tide-height">1.8m</div>
-      </div>
-      <div class="tide-item">
-        <div class="tide-icon" style="color:var(--color-ocean-accent)">&#9660;</div>
-        <div class="tide-time">11:58am</div>
-        <div class="tide-label">Low Tide</div>
-        <div class="tide-height">0.3m</div>
-      </div>
-      <div class="tide-item">
-        <div class="tide-icon">&#9650;</div>
-        <div class="tide-time">6:14pm</div>
-        <div class="tide-label">High Tide</div>
-        <div class="tide-height">1.7m</div>
-      </div>
-      <div class="tide-item">
-        <div class="tide-icon" style="color:var(--color-ocean-accent)">&#9660;</div>
-        <div class="tide-time">12:22am</div>
-        <div class="tide-label">Low Tide</div>
-        <div class="tide-height">0.4m</div>
-      </div>
-    </div>
-    <div class="surf-conditions">
-      <div class="surf-cond">
-        <div class="sc-val">0.6 - 0.9m</div>
-        <div class="sc-lbl">Swell Height</div>
-      </div>
-      <div class="surf-cond">
-        <div class="sc-val">NE 12kt</div>
-        <div class="sc-lbl">Wind</div>
-      </div>
-      <div class="surf-cond">
-        <div class="sc-val">19&deg;C</div>
-        <div class="sc-lbl">Water Temp</div>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:12px;font-size:.72rem;color:var(--color-text-light)">Sample data for demo purposes. Live data would be sourced via API integration.</div>
-  </div>
-
-  <!-- SPOTLIGHT AD: HAKANINI -->
-  <div class="spotlight-ad" onclick="showPage('hakanini')">
-    <div>
-      <div class="sp-badge">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
-        Spotlight Listing
-      </div>
-      <h2>Hakanini Surf School & Rentals</h2>
-      <div class="sp-desc">Pāpāmoa's dedicated surf school at the Domain. Group and private lessons for all ages, school holiday programmes, and board hire from $35 half-day. Run by Tom Botting with international surf experience and a team of instructors focused on ocean safety and confidence building.</div>
-      <a class="sp-cta" href="#" onclick="event.stopPropagation();showPage('hakanini')">View Full Listing</a>
-    </div>
-    <div class="sp-img">Hakanini at Pāpāmoa Domain</div>
-  </div>
-
-  <!-- OTHER SURF-RELATED LISTINGS -->
-  <h2 style="font-family:'Playfair Display', serif;font-size:1.15rem;color:var(--color-navy);margin-bottom:14px">Surf & Beach Businesses</h2>
-  <div class="cat-grid">
-    <div class="cat-card" onclick="showPage('hakanini')">
-      <div class="card-img" style="background:linear-gradient(135deg,var(--color-navy),var(--color-ocean-accent))">Hakanini Surf School</div>
-      <div class="card-body">
-        <h3>Hakanini Surf School & Rentals</h3>
-        <div class="card-sub">Pāpāmoa Domain</div>
-        <div class="card-desc">Group and private surf lessons, school holiday programmes, and board hire. Pāpāmoa's only dedicated surf school.</div>
-        <span class="card-badge g">Gold Spotlight</span>
-      </div>
-    </div>
-
-    <div class="cat-card" style="opacity:.55;pointer-events:none">
-      <div class="card-img" style="background:linear-gradient(135deg,#3a5a7c,#5a8aac)">Spotlight Available</div>
-      <div class="card-body">
-        <h3>Surf Shop</h3>
-        <div class="card-sub">Spotlight available in this sub-category</div>
-        <div class="card-desc">No Gold Spotlight listing has been claimed for surf retail in Pāpāmoa yet. Interested? Contact us to claim the top position.</div>
-        <span class="card-badge open">Spotlight available</span>
-      </div>
-    </div>
-
-    <div class="cat-card" style="opacity:.55;pointer-events:none">
-      <div class="card-img" style="background:linear-gradient(135deg,#2a4a5c,#4a7a9c)">Spotlight Available</div>
-      <div class="card-body">
-        <h3>SUP / Kayak Hire</h3>
-        <div class="card-sub">Spotlight available in this sub-category</div>
-        <div class="card-desc">No listing has been claimed for stand-up paddleboard or kayak hire in Pāpāmoa. Get in touch to claim your spot.</div>
-        <span class="card-badge open">Spotlight available</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============== FOOTER =============== -->
-<footer class="site-footer">
-  &copy; 2026 <a href="#">papamoa.info</a> &middot; Papamoa's Local Business Directory &middot; <a href="#">List Your Business</a>
+<footer style="background:var(--color-ocean-deep);color:#8fafc6;text-align:center;padding:1.5rem;font-size:0.8rem;">
+  © 2026 <a href="https://plainblackcreative.github.io/papamoa-previews/" style="color:var(--color-ocean);text-decoration:none;">papamoa.info</a> · Pāpāmoa's Local Business Directory · <a href="https://plainblackcreative.github.io/papamoa-previews/index.html" style="color:var(--color-ocean);text-decoration:none;">List Your Business</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
+<script>
+  const searchInput = document.getElementById('search');
+  const clearBtn    = document.getElementById('clear-btn');
+  const filterMeta  = document.getElementById('filter-meta');
+  const cards       = document.querySelectorAll('.listing-card');
+  const sidebarLinks = document.querySelectorAll('#sidebar-links a');
+  const noResults   = document.getElementById('no-results');
+  const quickFilters = document.querySelectorAll('.qf');
+  const total = cards.length;
+
+  function normalise(str) {
+    return str.toLowerCase()
+      .replace(/ā/g, 'a')
+      .replace(/ō/g, 'o')
+      .replace(/ū/g, 'u')
+      .replace(/ē/g, 'e')
+      .replace(/ī/g, 'i');
+  }
+
+  function runFilter(rawQuery) {
+    const q = normalise(rawQuery.trim());
+    const terms = q.split(/\s+/).filter(Boolean);
+    let visible = 0;
+
+    cards.forEach(card => {
+      const haystack = normalise(
+        card.dataset.keywords + ' ' +
+        card.querySelector('.card-name').textContent + ' ' +
+        card.querySelector('.card-description').textContent + ' ' +
+        card.querySelector('.services-list').textContent + ' ' +
+        (card.querySelector('.tier-badge').textContent)
+      );
+
+      const matches = terms.length === 0 || terms.every(t => haystack.includes(t));
+      card.classList.toggle('hidden', !matches);
+
+      // sync sidebar
+      const link = document.querySelector(`#sidebar-links a[data-id="${card.id}"]`);
+      if (link) link.classList.toggle('hidden-link', !matches);
+
+      if (matches) visible++;
+    });
+
+    noResults.style.display = visible === 0 ? 'block' : 'none';
+    clearBtn.style.display  = q ? 'block' : 'none';
+
+    if (!q) {
+      filterMeta.textContent = `Showing all ${total} listings`;
+    } else if (visible === 0) {
+      filterMeta.textContent = `No results for "${rawQuery.trim()}"`;
+    } else {
+      filterMeta.textContent = `${visible} of ${total} listings match`;
+    }
+  }
+
+  searchInput.addEventListener('input', () => {
+    // deactivate quick filters if user types manually
+    quickFilters.forEach(b => b.classList.remove('active'));
+    runFilter(searchInput.value);
+  });
+
+  clearBtn.addEventListener('click', clearSearch);
+
+  quickFilters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const wasActive = btn.classList.contains('active');
+      quickFilters.forEach(b => b.classList.remove('active'));
+      if (wasActive) {
+        clearSearch();
+      } else {
+        btn.classList.add('active');
+        searchInput.value = btn.dataset.q;
+        runFilter(btn.dataset.q);
+      }
+    });
+  });
+
+  function clearSearch() {
+    searchInput.value = '';
+    quickFilters.forEach(b => b.classList.remove('active'));
+    runFilter('');
+  }
+
+  // initialise
+  runFilter('');
+</script>
+
+</body>
+</html>
