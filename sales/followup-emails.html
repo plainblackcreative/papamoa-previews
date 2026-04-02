@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>papamoa.info — Follow-Up Email Sequence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+  :root {
+    --color-ocean: #1B6B7D;
+    --color-ocean-accent: #3AABDE;
+    --color-ocean-pale: #E8F4F6;
+    --color-ocean-light: #E8F4F6;
+    --color-dune: #C4985A;
+    --color-dune-light: #F5EDD8;
+    --color-text: #2C2C2C;
+    --color-text-soft: #4a4a4a;
+    --color-text-light: #6B6B6B;
+    --color-border: #E0D9CE;
+    --color-sand: #F7F3ED;
+    --color-white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Figtree', sans-serif;
+    background: var(--color-sand);
+    color: var(--color-text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--color-text);
+    padding: 52px 24px 44px;
+    margin-bottom: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(42,157,143,0.14) 0%, transparent 70%);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: 60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .wordmark {
+    font-family: 'Playfair Display', serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--color-ocean-accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4.5vw, 40px);
+    font-weight: 300;
+    color: var(--color-white);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  header h1 em {
+    color: var(--color-dune);
+    font-style: italic;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-ocean);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  /* SEQUENCE INDICATOR */
+  .sequence-strip {
+    display: flex;
+    gap: 0;
+    margin-bottom: 44px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .seq-step {
+    flex: 1;
+    padding: 14px 18px;
+    background: var(--color-white);
+    border-right: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .seq-step:last-child { border-right: none; }
+
+  .seq-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--color-ocean-accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .seq-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .seq-timing {
+    font-size: 11px;
+    color: var(--color-text-light);
+    margin-top: 2px;
+  }
+
+  /* EMAIL CARD */
+  .email-card {
+    background: var(--color-white);
+    border-radius: 14px;
+    border: 1px solid var(--color-border);
+    margin-bottom: 36px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(26,31,46,0.05);
+  }
+
+  .email-header {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .email-header.email-1 { background: linear-gradient(135deg, #1a7a72, #2a9d8f); }
+  .email-header.email-2 { background: linear-gradient(135deg, #7a5c1e, #c9a84c); }
+  .email-header.email-3 { background: linear-gradient(135deg, #2c3347, #3d4455); }
+  .email-header.email-bonus { background: linear-gradient(135deg, #1a3a5c, #2a6aac); }
+
+  .email-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .email-meta { flex: 1; }
+
+  .email-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 6px;
+  }
+
+  .email-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--color-white);
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+
+  .email-when {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* SUBJECT LINE BOX */
+  .subject-box {
+    margin: 24px 28px 0;
+    background: var(--color-sand);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .subject-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    padding: 8px 14px 6px;
+    background: var(--color-border);
+  }
+
+  .subject-text {
+    padding: 10px 14px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .subject-alt {
+    padding: 0 14px 10px;
+    font-size: 12px;
+    color: var(--color-text-light);
+  }
+
+  /* EMAIL BODY */
+  .email-body {
+    padding: 28px 28px 32px;
+  }
+
+  .email-copy {
+    background: var(--color-sand);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 24px 24px;
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--color-text);
+    white-space: pre-wrap;
+    font-family: 'Figtree', sans-serif;
+  }
+
+  .email-copy .placeholder {
+    background: rgba(201,168,76,0.18);
+    color: #7a5c1e;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  /* BENEFITS TABLE */
+  .benefits-block {
+    margin: 20px 0;
+    border: 1px solid var(--color-ocean-light);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .benefits-header {
+    background: var(--color-ocean);
+    padding: 10px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .benefit-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--color-ocean-light);
+    background: var(--color-white);
+  }
+
+  .benefit-row:last-child { border-bottom: none; }
+  .benefit-row:nth-child(even) { background: var(--color-ocean-pale); }
+
+  .benefit-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .benefit-text { flex: 1; }
+
+  .benefit-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ocean);
+    margin-bottom: 2px;
+  }
+
+  .benefit-desc {
+    font-size: 13px;
+    color: var(--color-text-soft);
+    line-height: 1.55;
+  }
+
+  /* ROI TRACKING */
+  .roi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .roi-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 16px;
+    border-top: 3px solid var(--color-ocean-accent);
+  }
+
+  .roi-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--color-ocean-accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .roi-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+
+  .roi-desc {
+    font-size: 12px;
+    color: var(--color-text-light);
+    line-height: 1.55;
+  }
+
+  /* STRATEGY NOTE */
+  .strategy-note {
+    background: var(--color-dune-light);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-left: 3px solid var(--color-dune);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-top: 20px;
+    font-size: 13.5px;
+    color: var(--color-text-soft);
+    line-height: 1.65;
+  }
+
+  .strategy-note strong {
+    color: #7a5c1e;
+    font-weight: 600;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 44px 0;
+  }
+
+  /* SUBJECT LINE PICKER */
+  .subject-picker {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .subject-option {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 18px;
+    position: relative;
+  }
+
+  .subject-option-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--color-border);
+    position: absolute;
+    top: 10px; right: 14px;
+    line-height: 1;
+  }
+
+  .subject-option-type {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ocean);
+    margin-bottom: 8px;
+  }
+
+  .subject-option-line {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 8px;
+    padding-right: 24px;
+  }
+
+  .subject-option-note {
+    font-size: 12px;
+    color: var(--color-text-light);
+    line-height: 1.5;
+  }
+
+  /* TIPS GRID */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .tip-card {
+    background: var(--color-ocean-pale);
+    border: 1px solid rgba(42,157,143,0.15);
+    border-radius: 10px;
+    padding: 18px;
+  }
+
+  .tip-icon { font-size: 20px; margin-bottom: 10px; }
+
+  .tip-card h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ocean);
+    margin-bottom: 6px;
+  }
+
+  .tip-card p {
+    font-size: 13px;
+    color: var(--color-text-soft);
+    line-height: 1.6;
+  }
+
+  /* SIG */
+  .sig-block {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+    font-size: 13px;
+    color: var(--color-text-light);
+    line-height: 1.8;
+  }
+
+  .sig-name {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 14px;
+  }
+
+  @media (max-width: 600px) {
+    .email-body, .email-header { padding: 18px; }
+    .subject-box { margin: 18px 18px 0; }
+    header { padding: 36px 18px 32px; }
+    .email-copy { padding: 18px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <p class="wordmark">papamoa.info</p>
+    <h1>The Follow-Up<br><em>Email Sequence</em></h1>
+    <div class="header-meta">
+      <span class="meta-pill">3 core emails</span>
+      <span class="meta-pill">Subject line options</span>
+      <span class="meta-pill">ROI tracking guide</span>
+      <span class="meta-pill">Jayden Brown — Local Partner</span>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- SEQUENCE OVERVIEW -->
+  <div class="section-label">The Sequence at a Glance</div>
+
+  <div class="sequence-strip">
+    <div class="seq-step">
+      <div class="seq-num">1</div>
+      <div class="seq-label">The Mockup Offer</div>
+      <div class="seq-timing">Day 3 after first contact</div>
+    </div>
+    <div class="seq-step">
+      <div class="seq-num">2</div>
+      <div class="seq-label">The Scarcity Nudge</div>
+      <div class="seq-timing">Day 6 if no reply</div>
+    </div>
+    <div class="seq-step">
+      <div class="seq-num">3</div>
+      <div class="seq-label">The Final Check-in</div>
+      <div class="seq-timing">Day 10 if still no reply</div>
+    </div>
+    <div class="seq-step">
+      <div class="seq-num">+</div>
+      <div class="seq-label">ROI Explainer</div>
+      <div class="seq-timing">Send when they ask "how does it work?"</div>
+    </div>
+  </div>
+
+  <!-- ======== EMAIL 1 ======== -->
+  <div class="section-label">Email 1 — The Mockup Offer</div>
+
+  <div class="email-card">
+    <div class="email-header email-1">
+      <div class="email-meta">
+        <div class="email-tag">Follow-up 1 · Send day 3</div>
+        <div class="email-title">Lead with value, not pressure</div>
+        <div class="email-when">Best for: everyone. The mockup offer is your strongest opener.</div>
+      </div>
+      <div class="email-num">01</div>
+    </div>
+
+    <div class="subject-box">
+      <div class="subject-label">Subject Line</div>
+      <div class="subject-text">Should I finish that mockup for [Business Name]?</div>
+      <div class="subject-alt">Alt: Mock-up of your [Business Name] listing — ready to send</div>
+    </div>
+
+    <div class="email-body">
+      <div class="email-copy">Hi [Name],
+
+I know how busy things get when you're running a business, so I'll keep this short.
+
+I haven't heard back from my last note, but I'd still love to show you exactly how [Business Name] would look on papamoa.info before I open the [Industry] category up to other businesses in the area.
+
+Should I go ahead and put together a free mockup of your listing? It's the easiest way to see the layout and how we structure your information so that AI tools like ChatGPT and Google actually recommend you when locals search for [Industry] in Pāpāmoa. Just hit reply or give me a call and I'll get that over to you. No strings attached.
+
+A couple of things worth knowing while you consider it:
+
+<div class="benefits-block">
+  <div class="benefits-header">What's still on the table for you</div>
+  <div class="benefit-row">
+    <div class="benefit-icon">🏆</div>
+    <div class="benefit-text">
+      <div class="benefit-title">Category Exclusivity</div>
+      <div class="benefit-desc">One Gold Spotlight per sub-category. The top [Industry] spot is still available for [Business Name] — first in wins.</div>
+    </div>
+  </div>
+  <div class="benefit-row">
+    <div class="benefit-icon">⭐</div>
+    <div class="benefit-text">
+      <div class="benefit-title">Free Gold Upgrade ($601 saving)</div>
+      <div class="benefit-desc">Jump in on Silver and I'll move you to the top Spotlight position at no extra cost. Founding members only.</div>
+    </div>
+  </div>
+  <div class="benefit-row">
+    <div class="benefit-icon">🔒</div>
+    <div class="benefit-text">
+      <div class="benefit-title">Lifetime Price Lock</div>
+      <div class="benefit-desc">Your launch rate is locked in for life and will never increase as long as you renew consecutively.</div>
+    </div>
+  </div>
+  <div class="benefit-row">
+    <div class="benefit-icon">✅</div>
+    <div class="benefit-text">
+      <div class="benefit-title">2027 ROI Guarantee</div>
+      <div class="benefit-desc">If we can't track a clear return for you in 2026, your 2027 listing is completely free. Zero risk.</div>
+    </div>
+  </div>
+</div>
+
+Would you like to see that preview? Just reply to this email or give me a call on 027 533 2970.
+
+Cheers,</div>
+
+      <div class="sig-block">
+        <div class="sig-name">Jayden Brown</div>
+        Local Partner, papamoa.info<br>
+        027 533 2970 | jayden@papamoa.info<br>
+        www.papamoa.info
+      </div>
+
+      <div class="strategy-note">
+        <strong>Why this works:</strong> The mockup offer reframes you from "salesperson chasing a deal" to "someone who's already put in work for them." It's much harder to ignore someone who has done something for you. If you can genuinely pull a quick mockup together before sending, even better — mention "I've actually already started one" in the opening line.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== EMAIL 2 ======== -->
+  <div class="section-label">Email 2 — The Scarcity Nudge</div>
+
+  <div class="email-card">
+    <div class="email-header email-2">
+      <div class="email-meta">
+        <div class="email-tag">Follow-up 2 · Send day 6 if no reply</div>
+        <div class="email-title">Create gentle urgency without being pushy</div>
+        <div class="email-when">Best for: high-competition categories — trades, food, real estate, health.</div>
+      </div>
+      <div class="email-num">02</div>
+    </div>
+
+    <div class="subject-box">
+      <div class="subject-label">Subject Line</div>
+      <div class="subject-text">Quick update on the [Industry] spot — papamoa.info</div>
+      <div class="subject-alt">Alt: Still holding that $601 Gold upgrade for you?</div>
+    </div>
+
+    <div class="email-body">
+      <div class="email-copy">Hi [Name],
+
+Just a quick one.
+
+I've had a couple of enquiries from other local [Industry] businesses this week, but since we spoke first, I wanted to make sure [Business Name] had first right of refusal on the top Spotlight position before it gets locked in for the year.
+
+Once that spot is gone, it's gone for 12 months.
+
+I'm also still holding the free Gold upgrade and the 2027 ROI guarantee for you. If the numbers ever don't add up, I'll make it right.
+
+Worth a two-minute chat? I'm happy to run through it quickly on the phone, or just hit reply and I'll send that free mockup straight over.
+
+Cheers,</div>
+
+      <div class="sig-block">
+        <div class="sig-name">Jayden Brown</div>
+        Local Partner, papamoa.info<br>
+        027 533 2970 | jayden@papamoa.info<br>
+        www.papamoa.info
+      </div>
+
+      <div class="strategy-note">
+        <strong>Why this works:</strong> Short emails at this stage outperform long ones. They've already seen the details in email 1. This one just needs to create a small, genuine nudge. The "first right of refusal" framing is respectful and true — you are genuinely only taking one per category.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== EMAIL 3 ======== -->
+  <div class="section-label">Email 3 — The Final Check-in</div>
+
+  <div class="email-card">
+    <div class="email-header email-3">
+      <div class="email-meta">
+        <div class="email-tag">Follow-up 3 · Send day 10 if still no reply</div>
+        <div class="email-title">Close the loop with class, leave the door open</div>
+        <div class="email-when">Best for: everyone. This is your last contact — make it count.</div>
+      </div>
+      <div class="email-num">03</div>
+    </div>
+
+    <div class="subject-box">
+      <div class="subject-label">Subject Line</div>
+      <div class="subject-text">Final check-in for [Business Name]</div>
+      <div class="subject-alt">Alt: Closing the loop — [Business Name] & papamoa.info</div>
+    </div>
+
+    <div class="email-body">
+      <div class="email-copy">Hi [Name],
+
+I haven't heard back from my last couple of notes, so I'm guessing you've been flat out. I'll make this my last check-in before I move the [Industry] category forward with another local business to keep our launch schedule on track.
+
+I genuinely believe this is worth your investment. The network behind papamoa.info has been around since 2005 and the SEO results have always been there — it's exactly why I became a partner.
+
+If the timing just isn't right, that's completely fine. No hard feelings at all.
+
+But if the top [Industry] spot in Pāpāmoa is still on your radar, I can still offer you:
+
+  ⭐  The free Gold upgrade (Spotlight position at Silver price — $601 saving)
+  🔒  Your launch rate locked in for life
+  ✅  The 2027 ROI guarantee — if we can't track a return, next year is on me
+
+Just hit reply or give me a call on 027 533 2970. If I don't hear back, I'll take that as a pass and wish you all the best with the business.
+
+Cheers,</div>
+
+      <div class="sig-block">
+        <div class="sig-name">Jayden Brown</div>
+        Local Partner, papamoa.info<br>
+        027 533 2970 | jayden@papamoa.info<br>
+        www.papamoa.info
+      </div>
+
+      <div class="strategy-note">
+        <strong>Why this works:</strong> "Final check-in" emails consistently get the highest open and reply rates in cold sequences. The psychology is simple — people don't want to miss out, and they also respect someone who isn't going to hound them. Closing the loop politely is more persuasive than a fourth or fifth nudge. Many deals are made on this email.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ======== ROI EXPLAINER ======== -->
+  <div class="section-label">Bonus — The ROI Explainer Email</div>
+
+  <div class="email-card">
+    <div class="email-header email-bonus">
+      <div class="email-meta">
+        <div class="email-tag">Send when they ask "how do you track results?"</div>
+        <div class="email-title">Turn their scepticism into a close</div>
+        <div class="email-when">This email does the heavy lifting for your guarantee. Send it the moment they ask how ROI is measured.</div>
+      </div>
+      <div class="email-num">+</div>
+    </div>
+
+    <div class="subject-box">
+      <div class="subject-label">Subject Line</div>
+      <div class="subject-text">How we track the results for [Business Name]</div>
+    </div>
+
+    <div class="email-body">
+      <div class="email-copy">Hi [Name],
+
+Great question — and because I started as a client of this network myself, I know exactly what it's like to want to see the numbers before committing.
+
+Here are the four ways we track ROI so you always know what you're getting:
+</div>
+
+      <div class="roi-grid">
+        <div class="roi-card">
+          <div class="roi-num">01</div>
+          <div class="roi-title">Referral Traffic</div>
+          <div class="roi-desc">We use tracking links so you can see exactly how many people clicked from your papamoa.info listing to your website. It shows up clearly in Google Analytics.</div>
+        </div>
+        <div class="roi-card">
+          <div class="roi-num">02</div>
+          <div class="roi-title">Warm Enquiries</div>
+          <div class="roi-desc">Locals regularly ask us for personal recommendations. When we point them to your Spotlight listing, those leads arrive already warm. We encourage you to ask new customers: "How did you hear about us?"</div>
+        </div>
+        <div class="roi-card">
+          <div class="roi-num">03</div>
+          <div class="roi-title">Google Ranking</div>
+          <div class="roi-desc">A major part of the ROI is the backlink we provide. We monitor your keyword rankings over the 12-month period to show the growth in real terms.</div>
+        </div>
+        <div class="roi-card">
+          <div class="roi-num">04</div>
+          <div class="roi-title">AI Search Citations</div>
+          <div class="roi-desc">In 2026, visibility in ChatGPT and Google AI is the new word of mouth. We track whether your business is being cited as a local authority for your service.</div>
+        </div>
+      </div>
+
+      <div class="email-copy" style="margin-top: 16px;">
+I'm so confident in this system that I back it with a hard guarantee: if we can't sit down at the end of 2026 and show a clear, measurable return for [Business Name], your 2027 listing is completely on the house.
+
+Does that give you more confidence in how we measure success? Happy to talk through any of it on a quick call.
+
+Cheers,</div>
+
+      <div class="sig-block">
+        <div class="sig-name">Jayden Brown</div>
+        Local Partner, papamoa.info<br>
+        027 533 2970 | jayden@papamoa.info<br>
+        www.papamoa.info
+      </div>
+
+      <div class="strategy-note">
+        <strong>Why this works:</strong> Scepticism about ROI is the most common reason deals stall, not price. This email turns that objection into a trust-building moment. Sending it the moment they ask shows you're prepared, confident, and not defensive. The guarantee lands much harder when it comes after the tracking breakdown rather than before it.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SUBJECT LINE PICKER -->
+  <div class="section-label">Subject Line Options by Situation</div>
+
+  <div class="subject-picker">
+    <div class="subject-option">
+      <div class="subject-option-num">1</div>
+      <div class="subject-option-type">Visual Tease</div>
+      <div class="subject-option-line">Should I finish that mockup for [Business Name]?</div>
+      <div class="subject-option-note">Best for first follow-up. Implies you've already started work for them.</div>
+    </div>
+    <div class="subject-option">
+      <div class="subject-option-num">2</div>
+      <div class="subject-option-type">Competitive Urgency</div>
+      <div class="subject-option-line">Quick update on the [Industry] spot — papamoa.info</div>
+      <div class="subject-option-note">Best for high-competition categories. Creates a subtle ping of urgency.</div>
+    </div>
+    <div class="subject-option">
+      <div class="subject-option-num">3</div>
+      <div class="subject-option-type">Value Anchor</div>
+      <div class="subject-option-line">Still holding that $601 Gold upgrade for you?</div>
+      <div class="subject-option-note">Best when the saving is the most compelling angle for this prospect.</div>
+    </div>
+    <div class="subject-option">
+      <div class="subject-option-num">4</div>
+      <div class="subject-option-type">Peer to Peer</div>
+      <div class="subject-option-line">Quick question re: [Business Name] & papamoa.info</div>
+      <div class="subject-option-note">Best for busy owners. Feels like a personal note, not a sales email.</div>
+    </div>
+    <div class="subject-option">
+      <div class="subject-option-num">5</div>
+      <div class="subject-option-type">Final Close</div>
+      <div class="subject-option-line">Final check-in for [Business Name]</div>
+      <div class="subject-option-note">Best for email 3. Consistently gets the highest open rates in a sequence.</div>
+    </div>
+    <div class="subject-option">
+      <div class="subject-option-num">6</div>
+      <div class="subject-option-type">Ultra Short</div>
+      <div class="subject-option-line">Thoughts on this?</div>
+      <div class="subject-option-note">Best when you want to stay top of mind without feeling like a campaign.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TIPS -->
+  <div class="section-label">Key Principles</div>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">🖼</div>
+      <h4>The mockup is your tipping point</h4>
+      <p>Seeing their own business name on a professional listing is often what tips a "maybe" into a "yes." Build one whenever you can before sending email 1.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">⏱</div>
+      <h4>Timing matters</h4>
+      <p>Day 3, day 6, day 10. Any sooner feels desperate. Any later loses momentum. Stick to the schedule and always send in the morning.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📉</div>
+      <h4>Emails get shorter each time</h4>
+      <p>Email 1 is your most detailed. Email 2 is half the length. Email 3 is shorter still. Shrinking length signals respect for their time.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🔁</div>
+      <h4>Always follow up by phone too</h4>
+      <p>A call on the same day as each email doubles your response rate. The email primes them, the call closes. They work together.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🛡</div>
+      <h4>The guarantee closes deals</h4>
+      <p>Save the ROI guarantee for hesitant prospects, not as an opener. It lands much harder when it comes after you've built some trust.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📋</div>
+      <h4>Track everything in a simple sheet</h4>
+      <p>Date of first contact, email 1, email 2, email 3, response, outcome. You will start to see patterns in which industries respond fastest.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
