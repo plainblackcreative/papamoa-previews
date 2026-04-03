@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NZ Tax in Pāpāmoa | PAYE & GST Calculators, KiwiSaver, Key Dates | Papamoa.info</title>
+  <meta name="description" content="New Zealand tax rates, PAYE and GST calculators, KiwiSaver 2026 changes, personal and business tax key dates. For Pāpāmoa residents and business owners.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #2B3F5C;
+      --blue:    #3AABDE;
+      --lime:    #7DC143;
+      --sand:    #F5EFE0;
+      --dune:    #D4C4A0;
+      --coral:   #E8344A;
+      --white:   #FFFFFF;
+      --ink:     #0D1B2A;
+      --body:    #1E2D3E;
+      --muted:   #607080;
+      --border:  #DDE5EE;
+      --bg:      #F4F7FA;
+      --gold:    #C8962A;
+
+      --t1c: #1A6B9A; --t1bg: #EBF5FB;
+      --t2c: #1A7A42; --t2bg: #EAF7EE;
+      --t3c: #8B4D00; --t3bg: #FFF3E0;
+      --t4c: #7B1C2C; --t4bg: #FDEAEA;
+      --t5c: #4A1575; --t5bg: #F5EEFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--bg);
+      color: var(--body);
+      line-height: 1.6;
+    }
+
+    a { color: var(--blue); }
+    a:hover { color: var(--navy); }
+
+    code, .mono {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.88em;
+    }
+
+    /* =====================
+       HERO
+    ===================== */
+    .hero {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--lime), var(--coral));
+    }
+
+    .hero-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 52px 24px 44px;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .breadcrumb {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 16px;
+      letter-spacing: 0.03em;
+    }
+
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--blue); }
+    .breadcrumb span { margin: 0 6px; }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 em { font-style: italic; color: var(--blue); }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.97rem;
+      max-width: 580px;
+    }
+
+    .hero-fy-badge {
+      background: rgba(58,171,222,0.15);
+      border: 1px solid rgba(58,171,222,0.35);
+      border-radius: 10px;
+      padding: 18px 22px;
+      text-align: center;
+      min-width: 160px;
+      flex-shrink: 0;
+    }
+
+    .hero-fy-badge .fy-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    .hero-fy-badge .fy-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .hero-fy-badge .fy-note {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* =====================
+       STICKY NAV
+    ===================== */
+    .page-nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    }
+
+    .page-nav-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      gap: 0;
+    }
+
+    .page-nav-inner::-webkit-scrollbar { display: none; }
+
+    .pnav-link {
+      padding: 13px 16px;
+      font-size: 0.79rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .pnav-link:hover { color: var(--navy); border-bottom-color: var(--blue); }
+
+    /* =====================
+       LAYOUT
+    ===================== */
+    .page-wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .main-col { min-width: 0; }
+    .side-col { display: flex; flex-direction: column; gap: 20px; }
+
+    /* =====================
+       SECTION
+    ===================== */
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-head h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .section-head .sh-icon { font-size: 1.1rem; }
+
+    .section-intro {
+      font-size: 0.87rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      line-height: 1.7;
+    }
+
+    /* =====================
+       TAX BRACKETS TABLE
+    ===================== */
+    .bracket-table-wrap {
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .bracket-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .bracket-table thead th {
+      background: var(--navy);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 11px 16px;
+      text-align: left;
+    }
+
+    .bracket-table tbody tr { border-bottom: 1px solid var(--border); }
+    .bracket-table tbody tr:last-child { border-bottom: none; }
+    .bracket-table tbody tr:hover { background: var(--bg); }
+
+    .bracket-table tbody td {
+      padding: 12px 16px;
+      font-size: 0.88rem;
+    }
+
+    .bracket-table .col-band { font-weight: 600; color: var(--body); }
+    .bracket-table .col-income { font-family: 'DM Mono', monospace; font-size: 0.84rem; }
+    .bracket-table .col-rate { font-family: 'DM Mono', monospace; font-weight: 500; }
+
+    .rate-bar-cell { width: 160px; }
+
+    .rate-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .rate-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    .t1 .rate-bar-fill { background: var(--t1c); width: 10.5%; }
+    .t2 .rate-bar-fill { background: var(--t2c); width: 17.5%; }
+    .t3 .rate-bar-fill { background: var(--t3c); width: 30%; }
+    .t4 .rate-bar-fill { background: var(--t4c); width: 33%; }
+    .t5 .rate-bar-fill { background: var(--t5c); width: 39%; }
+
+    .band-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+      letter-spacing: 0.03em;
+    }
+
+    .t1 .band-badge { background: var(--t1bg); color: var(--t1c); }
+    .t2 .band-badge { background: var(--t2bg); color: var(--t2c); }
+    .t3 .band-badge { background: var(--t3bg); color: var(--t3c); }
+    .t4 .band-badge { background: var(--t4bg); color: var(--t4c); }
+    .t5 .band-badge { background: var(--t5bg); color: var(--t5c); }
+
+    .acc-note {
+      background: #EBF5FB;
+      border: 1px solid #BDD8EC;
+      border-radius: 7px;
+      padding: 11px 15px;
+      font-size: 0.83rem;
+      color: #1A4A6A;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    /* =====================
+       CALCULATORS
+    ===================== */
+    .calc-tabs {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-bottom: none;
+      border-radius: 10px 10px 0 0;
+      padding: 6px 6px 0;
+    }
+
+    .calc-tab {
+      padding: 10px 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+      border: none;
+      background: transparent;
+      transition: all 0.2s;
+      font-family: 'Figtree', sans-serif;
+    }
+
+    .calc-tab.active {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .calc-tab:hover:not(.active) { background: var(--bg); color: var(--navy); }
+
+    .calc-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 0 0 12px 12px;
+      padding: 24px;
+      display: none;
+    }
+
+    .calc-panel.active { display: block; }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .calc-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .calc-field label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .calc-input-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .calc-input-wrap:focus-within { border-color: var(--blue); }
+
+    .calc-prefix, .calc-suffix {
+      padding: 0 11px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--border);
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .calc-input {
+      border: none;
+      background: transparent;
+      padding: 10px 12px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.96rem;
+      color: var(--ink);
+      width: 100%;
+      outline: none;
+    }
+
+    select.calc-input {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    .calc-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--navy);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: background 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .calc-btn:hover { background: var(--blue); }
+
+    .calc-results {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .calc-results.show { display: block; }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .result-card {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 14px 14px 12px;
+      border: 1px solid var(--border);
+    }
+
+    .result-card .rc-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .result-card .rc-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .result-card .rc-sub {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .result-card.highlight {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+
+    .result-card.highlight .rc-label { color: rgba(255,255,255,0.55); }
+    .result-card.highlight .rc-value { color: #fff; font-size: 1.4rem; }
+    .result-card.highlight .rc-sub { color: rgba(255,255,255,0.5); }
+
+    .bracket-breakdown {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .bb-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      background: #F0F4F8;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bb-head span, .bb-row span {
+      padding: 9px 13px;
+      font-size: 0.75rem;
+    }
+
+    .bb-head span {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .bb-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bb-row:last-child { border-bottom: none; }
+
+    .bb-row span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.83rem;
+      color: var(--body);
+    }
+
+    .bb-row .bb-rate { font-weight: 500; }
+
+    .calc-disclaimer {
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* GST Calc */
+    .gst-toggle {
+      display: flex;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .gst-toggle button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .gst-toggle button.active {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    /* =====================
+       INFO BOXES
+    ===================== */
+    .info-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+
+    .info-box h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 7px;
+    }
+
+    .info-box p, .info-box li {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .info-box ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .info-box li { padding-left: 14px; position: relative; }
+    .info-box li::before { content: '›'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+
+    /* =====================
+       KIWISAVER
+    ===================== */
+    .ks-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .ks-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 16px;
+    }
+
+    .ks-card .ks-icon { font-size: 1.3rem; margin-bottom: 8px; display: block; }
+    .ks-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+    .ks-card p { font-size: 0.81rem; color: var(--muted); line-height: 1.6; }
+
+    .ks-rate-timeline {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .ks-rate-timeline h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+
+    .ks-timeline {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      position: relative;
+    }
+
+    .ks-tl-item {
+      flex: 1;
+      position: relative;
+      padding: 12px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-right: none;
+    }
+
+    .ks-tl-item:last-child { border-right: 1px solid var(--border); border-radius: 0 7px 7px 0; }
+    .ks-tl-item:first-child { border-radius: 7px 0 0 7px; }
+    .ks-tl-item.current { background: #EBF5FB; border-color: var(--blue); }
+    .ks-tl-item.future { opacity: 0.6; }
+
+    .ks-tl-date {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .ks-tl-item.current .ks-tl-date { color: var(--blue); }
+
+    .ks-tl-rate {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .ks-tl-item.current .ks-tl-rate { color: var(--blue); }
+
+    .ks-tl-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .ks-current-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    .ks-contrib-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .ks-contrib-table thead th {
+      background: var(--navy);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    .ks-contrib-table tbody td {
+      padding: 11px 14px;
+      font-size: 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ks-contrib-table tbody tr:last-child td { border-bottom: none; }
+    .ks-contrib-table .num { font-family: 'DM Mono', monospace; }
+    .ks-contrib-table .highlight-row td { background: var(--t1bg); font-weight: 600; }
+
+    .alert-changed {
+      background: #FFF8E8;
+      border: 1px solid #F5C842;
+      border-left: 4px solid #F5C842;
+      border-radius: 0 7px 7px 0;
+      padding: 12px 15px;
+      font-size: 0.83rem;
+      color: #6A4800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+
+    .alert-changed strong { color: #8B5E00; }
+
+    /* =====================
+       KEY DATES
+    ===================== */
+    .dates-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .dates-col-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .date-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .date-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      display: flex;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .date-item .di-date {
+      background: var(--navy);
+      color: #fff;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      min-width: 90px;
+      flex-shrink: 0;
+    }
+
+    .date-item.urgent .di-date { background: var(--coral); }
+    .date-item.medium .di-date { background: var(--gold); }
+    .date-item.ok .di-date { background: var(--lime); }
+
+    .date-item .di-body {
+      padding: 9px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .date-item .di-title {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--body);
+      line-height: 1.3;
+    }
+
+    .date-item .di-note {
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* =====================
+       AD SPOTS
+    ===================== */
+    .ad-spot {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid var(--dune);
+    }
+
+    .ad-spot-inner {
+      padding: 18px;
+      background: var(--white);
+    }
+
+    .ad-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .ad-label::before, .ad-label::after {
+      content: '';
+      display: block;
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Gold KiwiSaver Ad Spot */
+    .ad-ks {
+      background: linear-gradient(135deg, #1A3055 0%, #2B4F7A 100%);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #3A6090;
+    }
+
+    .ad-ks .ad-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 10px;
+    }
+
+    .ad-ks h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 7px;
+      line-height: 1.25;
+    }
+
+    .ad-ks p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .ad-ks .ad-cta {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 9px 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .ad-ks .ad-cta:hover { background: #2890BE; color: #fff; }
+
+    /* Accountant ad */
+    .ad-acct {
+      padding: 18px;
+      background: var(--white);
+    }
+
+    .ad-acct-biz {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg);
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+
+    .ad-acct-biz:hover { border-color: var(--blue); }
+
+    .ad-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .ad-acct-biz h5 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+
+    .ad-acct-biz p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .ad-placeholder {
+      padding: 20px;
+      background: var(--bg);
+      border-radius: 7px;
+      border: 1.5px dashed var(--dune);
+      text-align: center;
+    }
+
+    .ad-placeholder p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .ad-placeholder a {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* =====================
+       USEFUL LINKS
+    ===================== */
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .link-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 12px 14px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .link-item:hover {
+      border-color: var(--blue);
+      box-shadow: 0 2px 8px rgba(58,171,222,0.12);
+    }
+
+    .link-item .li-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    .link-item .li-text .lt-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      display: block;
+    }
+
+    .link-item .li-text .lt-url {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* =====================
+       BUSINESS TAX OVERVIEW
+    ===================== */
+    .biz-tax-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .biz-tax-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .biz-tax-card .btc-rate {
+      font-family: 'DM Mono', monospace;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .biz-tax-card h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--body);
+      margin-bottom: 5px;
+    }
+
+    .biz-tax-card p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .biz-tax-card .new-badge {
+      display: inline-block;
+      background: #E8F9EC;
+      color: #1A7A42;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    /* =====================
+       FOOTER NOTE
+    ===================== */
+    .footer-note {
+      margin-top: 36px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 860px) {
+      .two-col { grid-template-columns: 1fr; }
+      .side-col { order: -1; }
+      .ks-cards { grid-template-columns: 1fr 1fr; }
+      .biz-tax-cards { grid-template-columns: 1fr 1fr; }
+      .dates-grid { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: 1fr 1fr; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-fy-badge { display: none; }
+    }
+
+    @media (max-width: 540px) {
+      .calc-grid { grid-template-columns: 1fr; }
+      .ks-cards { grid-template-columns: 1fr; }
+      .biz-tax-cards { grid-template-columns: 1fr; }
+      .links-grid { grid-template-columns: 1fr; }
+      .ks-timeline { flex-direction: column; }
+      .ks-tl-item { border-right: 1px solid var(--border); border-bottom: none; }
+      .ks-tl-item:last-child { border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="/">Papamoa.info</a>
+        <span>/</span>
+        <a href="/local-info">Local Info</a>
+        <span>/</span>
+        Tax &amp; KiwiSaver
+      </div>
+      <div class="hero-eyebrow">Pāpāmoa &bull; New Zealand</div>
+      <h1>Tax, PAYE &amp; KiwiSaver<br>for <em>Kiwis &amp; local businesses</em></h1>
+      <p class="hero-sub">Current NZ tax rates, interactive PAYE and GST calculators, the 2026 KiwiSaver changes, and every important IRD date for individuals and Pāpāmoa businesses.</p>
+    </div>
+    <div class="hero-fy-badge">
+      <div class="fy-label">Financial year</div>
+      <div class="fy-date">2025<br>/2026</div>
+      <div class="fy-note">1 Apr 2025 – 31 Mar 2026</div>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE NAV -->
+<nav class="page-nav">
+  <div class="page-nav-inner">
+    <a href="#income-tax" class="pnav-link">Income Tax Rates</a>
+    <a href="#calculators" class="pnav-link">PAYE &amp; GST Calculators</a>
+    <a href="#kiwisaver" class="pnav-link">KiwiSaver 2026</a>
+    <a href="#key-dates" class="pnav-link">Key Dates</a>
+    <a href="#business-tax" class="pnav-link">Business Tax</a>
+    <a href="#accountants" class="pnav-link">Local Accountants</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="two-col">
+
+    <!-- MAIN COLUMN -->
+    <main class="main-col">
+
+      <!-- INCOME TAX RATES -->
+      <section class="section" id="income-tax">
+        <div class="section-head">
+          <span class="sh-icon">📊</span>
+          <h2>NZ Income Tax Rates 2025/26</h2>
+        </div>
+        <p class="section-intro">New Zealand uses a <strong>progressive tax system</strong> — you don't pay the highest rate on all your income, only on the portion that falls within each bracket. The thresholds below apply for the full 2025/2026 tax year (1 April 2025 to 31 March 2026).</p>
+
+        <div class="bracket-table-wrap">
+          <table class="bracket-table">
+            <thead>
+              <tr>
+                <th>Bracket</th>
+                <th>Taxable income</th>
+                <th>Rate</th>
+                <th class="rate-bar-cell">Visual</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="t1">
+                <td class="col-band"><span class="band-badge">Band 1</span></td>
+                <td class="col-income">$0 – $14,000</td>
+                <td class="col-rate">10.5%</td>
+                <td><div class="rate-bar"><div class="rate-bar-fill"></div></div></td>
+              </tr>
+              <tr class="t2">
+                <td class="col-band"><span class="band-badge">Band 2</span></td>
+                <td class="col-income">$14,001 – $48,000</td>
+                <td class="col-rate">17.5%</td>
+                <td><div class="rate-bar"><div class="rate-bar-fill"></div></div></td>
+              </tr>
+              <tr class="t3">
+                <td class="col-band"><span class="band-badge">Band 3</span></td>
+                <td class="col-income">$48,001 – $70,000</td>
+                <td class="col-rate">30%</td>
+                <td><div class="rate-bar"><div class="rate-bar-fill"></div></div></td>
+              </tr>
+              <tr class="t4">
+                <td class="col-band"><span class="band-badge">Band 4</span></td>
+                <td class="col-income">$70,001 – $180,000</td>
+                <td class="col-rate">33%</td>
+                <td><div class="rate-bar"><div class="rate-bar-fill"></div></div></td>
+              </tr>
+              <tr class="t5">
+                <td class="col-band"><span class="band-badge">Band 5</span></td>
+                <td class="col-income">Over $180,000</td>
+                <td class="col-rate">39%</td>
+                <td><div class="rate-bar"><div class="rate-bar-fill"></div></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="acc-note">
+          <span>ℹ️</span>
+          <div><strong>ACC earner's levy:</strong> An additional <strong>1.67%</strong> is deducted from your income up to a cap of $152,790, on top of the income tax rates above. This funds New Zealand's accident compensation scheme. Source: IRD / ACC 2025/26.</div>
+        </div>
+
+        <div style="margin-top:14px;" class="info-box">
+          <h4>Tax codes — getting them right</h4>
+          <ul>
+            <li><strong>M</strong> — Main income, standard deductions. Most employees use this.</li>
+            <li><strong>ME</strong> — Main income, eligible for Independent Earner Tax Credit (IETC) if you earn $24k–$48k and don't receive Working for Families. Worth up to $520/year.</li>
+            <li><strong>S / SB / ST</strong> — Secondary income. If you have a second job, use the right secondary code or you may under-pay and face a bill at year end.</li>
+            <li><strong>NSW</strong> — No secondary tax withheld. Only appropriate in specific circumstances.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CALCULATORS -->
+      <section class="section" id="calculators">
+        <div class="section-head">
+          <span class="sh-icon">🧮</span>
+          <h2>PAYE &amp; GST Calculators</h2>
+        </div>
+
+        <div class="calc-tabs">
+          <button class="calc-tab active" onclick="switchCalc('paye')">PAYE Income Tax</button>
+          <button class="calc-tab" onclick="switchCalc('gst')">GST Calculator</button>
+          <button class="calc-tab" onclick="switchCalc('ks')">KiwiSaver Deductions</button>
+        </div>
+
+        <!-- PAYE PANEL -->
+        <div class="calc-panel active" id="panel-paye">
+          <div class="calc-grid">
+            <div class="calc-field">
+              <label>Annual gross income</label>
+              <div class="calc-input-wrap">
+                <span class="calc-prefix">$</span>
+                <input type="number" class="calc-input" id="paye-income" placeholder="75000" min="0" max="1000000">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Pay frequency</label>
+              <div class="calc-input-wrap">
+                <select class="calc-input" id="paye-freq">
+                  <option value="52">Weekly</option>
+                  <option value="26">Fortnightly</option>
+                  <option value="12" selected>Monthly</option>
+                  <option value="1">Annual</option>
+                </select>
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>KiwiSaver rate</label>
+              <div class="calc-input-wrap">
+                <select class="calc-input" id="paye-ks">
+                  <option value="0">No KiwiSaver</option>
+                  <option value="3">3%</option>
+                  <option value="3.5" selected>3.5% (new default)</option>
+                  <option value="4">4%</option>
+                  <option value="6">6%</option>
+                  <option value="8">8%</option>
+                  <option value="10">10%</option>
+                </select>
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Student loan?</label>
+              <div class="calc-input-wrap">
+                <select class="calc-input" id="paye-sl">
+                  <option value="0">No</option>
+                  <option value="12">Yes (12% on income over $22,828)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="calc-btn" onclick="calcPAYE()">Calculate take-home pay</button>
+
+          <div class="calc-results" id="paye-results">
+            <div class="result-grid">
+              <div class="result-card highlight">
+                <div class="rc-label">Take-home pay</div>
+                <div class="rc-value" id="r-takehome">$0</div>
+                <div class="rc-sub" id="r-takehome-period">per month</div>
+              </div>
+              <div class="result-card">
+                <div class="rc-label">Income tax</div>
+                <div class="rc-value" id="r-tax">$0</div>
+                <div class="rc-sub" id="r-tax-period">per month</div>
+              </div>
+              <div class="result-card">
+                <div class="rc-label">Effective tax rate</div>
+                <div class="rc-value" id="r-eff">0%</div>
+                <div class="rc-sub">of gross income</div>
+              </div>
+              <div class="result-card">
+                <div class="rc-label">ACC levy</div>
+                <div class="rc-value" id="r-acc">$0</div>
+                <div class="rc-sub" id="r-acc-period">per month</div>
+              </div>
+              <div class="result-card">
+                <div class="rc-label">KiwiSaver deduction</div>
+                <div class="rc-value" id="r-ks">$0</div>
+                <div class="rc-sub" id="r-ks-period">per month</div>
+              </div>
+              <div class="result-card">
+                <div class="rc-label">Student loan</div>
+                <div class="rc-value" id="r-sl">$0</div>
+                <div class="rc-sub" id="r-sl-period">per month</div>
+              </div>
+            </div>
+
+            <div class="bracket-breakdown">
+              <div class="bb-head">
+                <span>Bracket</span>
+                <span>Taxable amount</span>
+                <span>Tax paid</span>
+              </div>
+              <div id="bb-rows"></div>
+            </div>
+
+            <p class="calc-disclaimer">Estimates only. Does not include Working for Families, IETC, or other credits. For accurate figures consult a tax professional or use myIR.</p>
+          </div>
+        </div>
+
+        <!-- GST PANEL -->
+        <div class="calc-panel" id="panel-gst">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px;">New Zealand GST is <strong>15%</strong>. Use this calculator to add or remove GST from any amount.</p>
+
+          <div class="gst-toggle">
+            <button class="active" id="gst-add-btn" onclick="setGSTMode('add')">Add GST to price (excl. → incl.)</button>
+            <button id="gst-remove-btn" onclick="setGSTMode('remove')">Remove GST from price (incl. → excl.)</button>
+          </div>
+
+          <div class="calc-grid">
+            <div class="calc-field">
+              <label id="gst-input-label">Amount (excl. GST)</label>
+              <div class="calc-input-wrap">
+                <span class="calc-prefix">$</span>
+                <input type="number" class="calc-input" id="gst-amount" placeholder="1000" min="0">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>GST rate</label>
+              <div class="calc-input-wrap">
+                <select class="calc-input" id="gst-rate-select">
+                  <option value="15" selected>15% (standard NZ rate)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button class="calc-btn" onclick="calcGST()">Calculate GST</button>
+
+          <div class="calc-results" id="gst-results">
+            <div class="result-grid">
+              <div class="result-card">
+                <div class="rc-label">Excl. GST</div>
+                <div class="rc-value" id="gst-excl">$0</div>
+              </div>
+              <div class="result-card">
+                <div class="rc-label">GST amount</div>
+                <div class="rc-value" id="gst-gst">$0</div>
+                <div class="rc-sub">15%</div>
+              </div>
+              <div class="result-card highlight">
+                <div class="rc-label">Incl. GST</div>
+                <div class="rc-value" id="gst-incl">$0</div>
+              </div>
+            </div>
+            <p class="calc-disclaimer">NZ GST rate is 15%. All businesses with turnover over $60,000 per year must register for GST with the IRD.</p>
+          </div>
+        </div>
+
+        <!-- KIWISAVER DEDUCTIONS PANEL -->
+        <div class="calc-panel" id="panel-ks">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px;">Calculate your KiwiSaver contributions, employer match and total retirement savings at different contribution rates.</p>
+          <div class="calc-grid">
+            <div class="calc-field">
+              <label>Annual gross salary</label>
+              <div class="calc-input-wrap">
+                <span class="calc-prefix">$</span>
+                <input type="number" class="calc-input" id="ks-salary" placeholder="75000" min="0">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Your contribution rate</label>
+              <div class="calc-input-wrap">
+                <select class="calc-input" id="ks-rate">
+                  <option value="3">3% (temp. reduction available)</option>
+                  <option value="3.5" selected>3.5% (new default from Apr 2026)</option>
+                  <option value="4">4%</option>
+                  <option value="6">6%</option>
+                  <option value="8">8%</option>
+                  <option value="10">10%</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="calc-btn" onclick="calcKS()">Calculate KiwiSaver</button>
+
+          <div class="calc-results" id="ks-results">
+            <div class="result-grid">
+              <div class="result-card">
+                <div class="rc-label">Your contribution / yr</div>
+                <div class="rc-value" id="ks-emp">$0</div>
+              </div>
+              <div class="result-card">
+                <div class="rc-label">Employer match / yr</div>
+                <div class="rc-value" id="ks-er">$0</div>
+                <div class="rc-sub">At matching rate</div>
+              </div>
+              <div class="result-card">
+                <div class="rc-label">Govt. contribution / yr</div>
+                <div class="rc-value" id="ks-govt">$0</div>
+                <div class="rc-sub">Max $260.72 (from Jul 2025)</div>
+              </div>
+              <div class="result-card highlight">
+                <div class="rc-label">Total into KiwiSaver / yr</div>
+                <div class="rc-value" id="ks-total">$0</div>
+              </div>
+              <div class="result-card">
+                <div class="rc-label">Your fortnightly deduction</div>
+                <div class="rc-value" id="ks-fn">$0</div>
+              </div>
+              <div class="result-card">
+                <div class="rc-label">Your weekly deduction</div>
+                <div class="rc-value" id="ks-wk">$0</div>
+              </div>
+            </div>
+            <p class="calc-disclaimer">Government contribution is 25c per $1 you contribute, up to $260.72/year (from 1 July 2025). Employer match shown at same rate as employee. Figures are approximate.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- KIWISAVER -->
+      <section class="section" id="kiwisaver">
+        <div class="section-head">
+          <span class="sh-icon">🥝</span>
+          <h2>KiwiSaver — 2026 Changes</h2>
+        </div>
+
+        <div class="alert-changed">
+          <span>⚡</span>
+          <div><strong>Just changed &mdash; 1 April 2026:</strong> The default KiwiSaver contribution rate for both employees and employers has increased from 3% to 3.5%. A further increase to 4% is scheduled for 1 April 2028.</div>
+        </div>
+
+        <div class="ks-rate-timeline">
+          <h4>Contribution rate roadmap</h4>
+          <div class="ks-timeline">
+            <div class="ks-tl-item">
+              <div class="ks-tl-date">Before Apr 2026</div>
+              <div class="ks-tl-rate">3%</div>
+              <div class="ks-tl-label">Employee &amp; employer default</div>
+            </div>
+            <div class="ks-tl-item current">
+              <div class="ks-current-badge">Now</div>
+              <div class="ks-tl-date">From 1 Apr 2026</div>
+              <div class="ks-tl-rate">3.5%</div>
+              <div class="ks-tl-label">New default rate</div>
+            </div>
+            <div class="ks-tl-item future">
+              <div class="ks-tl-date">From 1 Apr 2028</div>
+              <div class="ks-tl-rate">4%</div>
+              <div class="ks-tl-label">Next scheduled increase</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ks-cards">
+          <div class="ks-card">
+            <span class="ks-icon">👤</span>
+            <h4>Employee options</h4>
+            <p>You can contribute 3%, 3.5%, 4%, 6%, 8% or 10% of your gross pay. If 3.5% is too much right now, you can apply to IRD for a temporary reduction back to 3% for up to 12 months.</p>
+          </div>
+          <div class="ks-card">
+            <span class="ks-icon">🏢</span>
+            <h4>Employer match</h4>
+            <p>Employers must match the minimum rate of 3.5%. If an employee takes a temporary rate reduction to 3%, the employer can also contribute 3%. From Apr 2026, 16 and 17-year-olds are included.</p>
+          </div>
+          <div class="ks-card">
+            <span class="ks-icon">🏛️</span>
+            <h4>Government contribution</h4>
+            <p>From 1 July 2025, the government contributes 25c per $1 you contribute, up to $260.72/year. Previously 50c/$1, max $521.43. Members earning over $180,000 are no longer eligible.</p>
+          </div>
+        </div>
+
+        <table class="ks-contrib-table">
+          <thead>
+            <tr>
+              <th>Rate</th>
+              <th>On $60,000 salary — your contrib.</th>
+              <th>Employer match</th>
+              <th>Total per year</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>3% (temp. reduction)</td>
+              <td class="num">$1,800</td>
+              <td class="num">$1,800</td>
+              <td class="num">$3,600 + govt contrib.</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>3.5% ⭐ New default</td>
+              <td class="num">$2,100</td>
+              <td class="num">$2,100</td>
+              <td class="num">$4,200 + govt contrib.</td>
+            </tr>
+            <tr>
+              <td>4%</td>
+              <td class="num">$2,400</td>
+              <td class="num">$2,400</td>
+              <td class="num">$4,800 + govt contrib.</td>
+            </tr>
+            <tr>
+              <td>6%</td>
+              <td class="num">$3,600</td>
+              <td class="num">$2,100 (min)</td>
+              <td class="num">$5,700 + govt contrib.</td>
+            </tr>
+            <tr>
+              <td>8%</td>
+              <td class="num">$4,800</td>
+              <td class="num">$2,100 (min)</td>
+              <td class="num">$6,900 + govt contrib.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box">
+          <h4>First home withdrawal</h4>
+          <p>If you've been in KiwiSaver for at least 3 years, you may be able to withdraw your balance (minus $1,000) to go towards buying your first home. You must intend to live in the property. Talk to your KiwiSaver provider or a financial adviser about eligibility.</p>
+        </div>
+      </section>
+
+      <!-- KEY DATES -->
+      <section class="section" id="key-dates">
+        <div class="section-head">
+          <span class="sh-icon">📅</span>
+          <h2>Key Tax Dates 2025/26</h2>
+        </div>
+        <p class="section-intro">If a deadline falls on a weekend or public holiday, it moves to the next working day. Dates shown are for a standard 31 March balance date. Using a tax agent usually provides extension of time for filing.</p>
+
+        <div class="dates-grid">
+          <div>
+            <div class="dates-col-title">👤 Individuals</div>
+            <div class="date-list">
+              <div class="date-item ok">
+                <div class="di-date">7 Feb 2026</div>
+                <div class="di-body">
+                  <div class="di-title">Terminal tax due</div>
+                  <div class="di-note">2025 year-end tax, if no tax agent</div>
+                </div>
+              </div>
+              <div class="date-item ok">
+                <div class="di-date">31 Mar 2026</div>
+                <div class="di-body">
+                  <div class="di-title">End of financial year</div>
+                  <div class="di-note">2025/26 tax year closes</div>
+                </div>
+              </div>
+              <div class="date-item ok">
+                <div class="di-date">1 Apr 2026</div>
+                <div class="di-body">
+                  <div class="di-title">KiwiSaver rate rises to 3.5%</div>
+                  <div class="di-note">New default rate applies from first payday</div>
+                </div>
+              </div>
+              <div class="date-item ok">
+                <div class="di-date">7 Jul 2026</div>
+                <div class="di-body">
+                  <div class="di-title">Income tax return due</div>
+                  <div class="di-note">Individuals without tax agent — IR3</div>
+                </div>
+              </div>
+              <div class="date-item ok">
+                <div class="di-date">7 Feb 2027</div>
+                <div class="di-body">
+                  <div class="di-title">Terminal tax due (2026 year)</div>
+                  <div class="di-note">If no tax agent extension</div>
+                </div>
+              </div>
+              <div class="date-item ok">
+                <div class="di-date">31 Mar 2027</div>
+                <div class="di-body">
+                  <div class="di-title">Income tax return due</div>
+                  <div class="di-note">Tax agent extension deadline — 2026 year</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="dates-col-title">🏢 Businesses (31 Mar balance date)</div>
+            <div class="date-list">
+              <div class="date-item ok">
+                <div class="di-date">20th monthly</div>
+                <div class="di-body">
+                  <div class="di-title">PAYE payments due</div>
+                  <div class="di-note">SMEs: 20th of following month</div>
+                </div>
+              </div>
+              <div class="date-item ok">
+                <div class="di-date">28 Aug 2026</div>
+                <div class="di-body">
+                  <div class="di-title">Provisional tax — 1st instalment</div>
+                  <div class="di-note">2027 year, standard option</div>
+                </div>
+              </div>
+              <div class="date-item ok">
+                <div class="di-date">28 Oct 2026</div>
+                <div class="di-body">
+                  <div class="di-title">GST return due (2-monthly Aug/Sep)</div>
+                  <div class="di-note">Also 6-monthly GST (Apr–Sep period)</div>
+                </div>
+              </div>
+              <div class="date-item ok">
+                <div class="di-date">20 Oct 2026</div>
+                <div class="di-body">
+                  <div class="di-title">FBT quarterly return due</div>
+                  <div class="di-note">Q2 Jul–Sep quarter</div>
+                </div>
+              </div>
+              <div class="date-item ok">
+                <div class="di-date">15 Jan 2027</div>
+                <div class="di-body">
+                  <div class="di-title">Provisional tax — 2nd instalment</div>
+                  <div class="di-note">2027 year, standard option</div>
+                </div>
+              </div>
+              <div class="date-item ok">
+                <div class="di-date">7 May 2027</div>
+                <div class="di-body">
+                  <div class="di-title">Provisional tax — 3rd instalment</div>
+                  <div class="di-note">Also: 6-monthly GST (Oct–Mar period)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;" class="info-box">
+          <h4>GST filing frequencies</h4>
+          <ul>
+            <li><strong>6-monthly</strong> — Turnover under $500,000. Due dates: 28 October and 7 May.</li>
+            <li><strong>2-monthly</strong> — Most common. Due 28th of the month after your period ends (except March period: 7 May, and November period: 15 January).</li>
+            <li><strong>Monthly</strong> — Mandatory for turnover over $24 million, or by choice. Due 28th of following month.</li>
+            <li>Not sure? Check your filing frequency in <strong>myIR</strong> or ask your accountant.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- BUSINESS TAX -->
+      <section class="section" id="business-tax">
+        <div class="section-head">
+          <span class="sh-icon">🏢</span>
+          <h2>Business Tax Overview</h2>
+        </div>
+        <p class="section-intro">Key rates and obligations for Pāpāmoa businesses. Always confirm your specific position with a registered tax professional.</p>
+
+        <div class="biz-tax-cards">
+          <div class="biz-tax-card">
+            <div class="btc-rate">28%</div>
+            <h4>Company tax rate</h4>
+            <p>Flat rate on net company profit. Applies to NZ resident companies. Budget 2024 introduced no new company tax increases.</p>
+          </div>
+          <div class="biz-tax-card">
+            <div class="btc-rate">15%</div>
+            <h4>GST rate</h4>
+            <p>Must register if turnover exceeds $60,000/year. File monthly, 2-monthly or 6-monthly returns and remit to IRD.</p>
+          </div>
+          <div class="biz-tax-card">
+            <div class="btc-rate">33%</div>
+            <h4>Trust tax rate</h4>
+            <p>Trustee income is taxed at 33%. Beneficiary income is taxed at the beneficiary's marginal rate.</p>
+          </div>
+          <div class="biz-tax-card">
+            <div class="btc-rate">28%</div>
+            <h4>FBT — top rate</h4>
+            <p>Fringe Benefit Tax applies to non-cash benefits provided to employees. Quarterly payments due 20th of the month.</p>
+          </div>
+          <div class="biz-tax-card">
+            <div class="btc-rate">$5k</div>
+            <h4>Provisional tax threshold</h4>
+            <p>If your residual income tax (RIT) exceeds $5,000, you must pay provisional tax in 2–3 instalments during the year.</p>
+          </div>
+          <div class="biz-tax-card">
+            <div class="btc-rate">20%</div>
+            <h4>Investment Boost</h4>
+            <div class="new-badge">NEW 2025</div>
+            <p>Immediate 20% deduction for eligible new productive business assets from 22 May 2025. Balance depreciated normally.</p>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <h4>Sole traders &amp; self-employed</h4>
+          <ul>
+            <li>Taxed at individual income tax rates (same brackets as PAYE employees).</li>
+            <li>Must file an IR3 individual tax return by 7 July each year (or 31 March if using a tax agent).</li>
+            <li>Must register for GST if annual turnover exceeds $60,000.</li>
+            <li>May need to pay provisional tax if residual income tax is over $5,000.</li>
+            <li>Can claim business expenses to reduce taxable income.</li>
+            <li>KiwiSaver contributions are voluntary but employer match doesn't apply if self-employed.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- USEFUL LINKS -->
+      <section class="section">
+        <div class="section-head">
+          <span class="sh-icon">🔗</span>
+          <h2>Official IRD Resources</h2>
+        </div>
+        <div class="links-grid">
+          <a href="https://www.ird.govt.nz/income-tax/income-tax-for-individuals/tax-codes-and-tax-rates-for-individuals/tax-rates-for-individuals" target="_blank" rel="noopener" class="link-item">
+            <span class="li-icon">📋</span>
+            <div class="li-text">
+              <span class="lt-title">Tax rates for individuals</span>
+              <span class="lt-url">ird.govt.nz</span>
+            </div>
+          </a>
+          <a href="https://www.ird.govt.nz/index/key-dates" target="_blank" rel="noopener" class="link-item">
+            <span class="li-icon">📅</span>
+            <div class="li-text">
+              <span class="lt-title">IRD key dates calendar</span>
+              <span class="lt-url">ird.govt.nz</span>
+            </div>
+          </a>
+          <a href="https://www.ird.govt.nz/kiwisaver-changes" target="_blank" rel="noopener" class="link-item">
+            <span class="li-icon">🥝</span>
+            <div class="li-text">
+              <span class="lt-title">KiwiSaver 2026 changes</span>
+              <span class="lt-url">ird.govt.nz</span>
+            </div>
+          </a>
+          <a href="https://myir.ird.govt.nz/" target="_blank" rel="noopener" class="link-item">
+            <span class="li-icon">🔐</span>
+            <div class="li-text">
+              <span class="lt-title">myIR — manage your tax online</span>
+              <span class="lt-url">myir.ird.govt.nz</span>
+            </div>
+          </a>
+          <a href="https://www.ird.govt.nz/income-tax/provisional-tax" target="_blank" rel="noopener" class="link-item">
+            <span class="li-icon">💼</span>
+            <div class="li-text">
+              <span class="lt-title">Provisional tax guide</span>
+              <span class="lt-url">ird.govt.nz</span>
+            </div>
+          </a>
+          <a href="https://www.sorted.org.nz/tools/kiwisaver-calculator" target="_blank" rel="noopener" class="link-item">
+            <span class="li-icon">📐</span>
+            <div class="li-text">
+              <span class="lt-title">Sorted KiwiSaver calculator</span>
+              <span class="lt-url">sorted.org.nz</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <p class="footer-note">
+        Tax information on this page is for general guidance only and based on IRD published rates for the 2025/26 financial year. Always verify with the IRD or a qualified tax professional for your specific situation. Calculator results are estimates only. &copy; Papamoa.info
+      </p>
+
+    </main>
+
+    <!-- SIDE COLUMN -->
+    <aside class="side-col">
+
+      <!-- KIWISAVER AD SPOT -->
+      <div class="ad-spot">
+        <div class="ad-ks">
+          <div class="ad-eyebrow">Sponsored &bull; KiwiSaver Provider</div>
+          <h4>Is your KiwiSaver working as hard as you do?</h4>
+          <p>With the new 3.5% default rate, now is a great time to review your fund type, fees and investment strategy. Local advice available in Pāpāmoa and Tauranga.</p>
+          <a href="/advertise?ref=kiwisaver" class="ad-cta">Your ad here →</a>
+        </div>
+        <div style="padding:10px 14px 10px;background:var(--white);font-size:0.68rem;color:var(--muted);">
+          KiwiSaver providers: advertise your services to Pāpāmoa residents. <a href="/advertise">Get listed</a>
+        </div>
+      </div>
+
+      <!-- ACCOUNTANTS AD -->
+      <div class="ad-spot" id="accountants">
+        <div class="ad-acct">
+          <div class="ad-label">Local Accountants &amp; Tax Agents</div>
+
+          <a href="/advertise?ref=accounting" class="ad-acct-biz">
+            <div class="ad-logo">📊</div>
+            <div>
+              <h5>Your Accounting Firm</h5>
+              <p>Pāpāmoa-based accountant. Tax returns, GST, payroll and business advisory. Gold listing available.</p>
+            </div>
+          </a>
+
+          <a href="/advertise?ref=accounting" class="ad-acct-biz">
+            <div class="ad-logo">🧾</div>
+            <div>
+              <h5>Your Tax Agent</h5>
+              <p>Chartered accountant or tax agent? Reach local individuals and businesses actively searching for help.</p>
+            </div>
+          </a>
+
+          <div class="ad-placeholder">
+            <p>3 ad spots available for local accounting and financial services businesses.</p>
+            <a href="/advertise?ref=tax-page">List your practice on Papamoa.info →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINANCIAL ADVISERS AD -->
+      <div class="ad-spot">
+        <div class="ad-acct">
+          <div class="ad-label">Financial Advisers &amp; Mortgage Brokers</div>
+
+          <a href="/advertise?ref=financial-advice" class="ad-acct-biz">
+            <div class="ad-logo">💰</div>
+            <div>
+              <h5>Financial Adviser — Pāpāmoa</h5>
+              <p>KiwiSaver, investments, insurance and retirement planning. Your ad on this page reaches people actively researching their finances.</p>
+            </div>
+          </a>
+
+          <div class="ad-placeholder">
+            <p>Mortgage brokers and financial advisers welcome.</p>
+            <a href="/advertise">Enquire about listing →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK FACTS BOX -->
+      <div class="info-box" style="margin-bottom:0;">
+        <h4>Quick tax facts — 2025/26</h4>
+        <ul>
+          <li>Tax year: 1 Apr 2025 – 31 Mar 2026</li>
+          <li>No capital gains tax in NZ</li>
+          <li>No inheritance tax in NZ</li>
+          <li>Company tax rate: 28% (flat)</li>
+          <li>GST: 15% — register if &gt;$60k turnover</li>
+          <li>ACC levy: 1.67% (capped at $152,790)</li>
+          <li>KiwiSaver default: 3.5% from 1 Apr 2026</li>
+          <li>Govt. KiwiSaver contrib.: max $260.72/yr</li>
+          <li>IETC: up to $520 (earn $24k–$48k)</li>
+          <li>Student loan repayment: 12% above $22,828</li>
+        </ul>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+<script>
+  // =====================
+  // TAB SWITCHING
+  // =====================
+  function switchCalc(tab) {
+    document.querySelectorAll('.calc-tab').forEach((t, i) => {
+      t.classList.toggle('active', ['paye','gst','ks'][i] === tab);
+    });
+    ['paye','gst','ks'].forEach(id => {
+      document.getElementById('panel-' + id).classList.toggle('active', id === tab);
+    });
+  }
+
+  // =====================
+  // PAYE CALCULATOR
+  // =====================
+  function calcPAYE() {
+    const income = parseFloat(document.getElementById('paye-income').value) || 0;
+    const freq = parseInt(document.getElementById('paye-freq').value);
+    const ksRate = parseFloat(document.getElementById('paye-ks').value) / 100;
+    const slRate = parseFloat(document.getElementById('paye-sl').value) / 100;
+
+    // Brackets
+    const brackets = [
+      { limit: 14000, rate: 0.105 },
+      { limit: 48000, rate: 0.175 },
+      { limit: 70000, rate: 0.30 },
+      { limit: 180000, rate: 0.33 },
+      { limit: Infinity, rate: 0.39 }
+    ];
+
+    let tax = 0;
+    let prev = 0;
+    let rows = [];
+
+    for (const b of brackets) {
+      if (income <= prev) break;
+      const taxable = Math.min(income, b.limit) - prev;
+      const t = taxable * b.rate;
+      tax += t;
+      if (taxable > 0) {
+        rows.push({ bracket: `${(b.rate * 100).toFixed(1)}%`, taxable, tax: t });
+      }
+      prev = b.limit;
+    }
+
+    // ACC
+    const accCapIncome = Math.min(income, 152790);
+    const acc = accCapIncome * 0.0167;
+
+    // KiwiSaver
+    const ks = income * ksRate;
+
+    // Student loan: 12% on income above $22,828
+    let sl = 0;
+    if (slRate > 0 && income > 22828) {
+      sl = (income - 22828) * slRate;
+    }
+
+    const takehome = income - tax - acc - ks - sl;
+    const effRate = income > 0 ? (tax / income * 100) : 0;
+
+    const fmt = (n) => '$' + Math.round(n / freq).toLocaleString('en-NZ');
+    const fmtA = (n) => '$' + Math.round(n).toLocaleString('en-NZ');
+    const periods = { 52: 'per week', 26: 'per fortnight', 12: 'per month', 1: 'per year' };
+    const period = periods[freq];
+
+    document.getElementById('r-takehome').textContent = fmt(takehome);
+    document.getElementById('r-takehome-period').textContent = period;
+    document.getElementById('r-tax').textContent = fmt(tax);
+    document.getElementById('r-tax-period').textContent = period;
+    document.getElementById('r-eff').textContent = effRate.toFixed(1) + '%';
+    document.getElementById('r-acc').textContent = fmt(acc);
+    document.getElementById('r-acc-period').textContent = period;
+    document.getElementById('r-ks').textContent = ks > 0 ? fmt(ks) : '$0';
+    document.getElementById('r-ks-period').textContent = period;
+    document.getElementById('r-sl').textContent = sl > 0 ? fmt(sl) : '$0';
+    document.getElementById('r-sl-period').textContent = period;
+
+    // Bracket breakdown
+    const ratesLabels = ['10.5%','17.5%','30%','33%','39%'];
+    const maxes = [14000, 48000, 70000, 180000, Infinity];
+    let bbHTML = '';
+    rows.forEach(r => {
+      bbHTML += `<div class="bb-row">
+        <span class="bb-rate">${r.bracket}</span>
+        <span>$${Math.round(r.taxable).toLocaleString('en-NZ')}</span>
+        <span>$${Math.round(r.tax).toLocaleString('en-NZ')}</span>
+      </div>`;
+    });
+    bbHTML += `<div class="bb-row" style="font-weight:600;background:#f5f7fa;">
+      <span>Total</span>
+      <span>$${Math.round(income).toLocaleString('en-NZ')}</span>
+      <span>$${Math.round(tax).toLocaleString('en-NZ')}</span>
+    </div>`;
+    document.getElementById('bb-rows').innerHTML = bbHTML;
+
+    document.getElementById('paye-results').classList.add('show');
+  }
+
+  // =====================
+  // GST CALCULATOR
+  // =====================
+  let gstMode = 'add';
+
+  function setGSTMode(mode) {
+    gstMode = mode;
+    document.getElementById('gst-add-btn').classList.toggle('active', mode === 'add');
+    document.getElementById('gst-remove-btn').classList.toggle('active', mode === 'remove');
+    document.getElementById('gst-input-label').textContent = mode === 'add' ? 'Amount (excl. GST)' : 'Amount (incl. GST)';
+    document.getElementById('gst-results').classList.remove('show');
+  }
+
+  function calcGST() {
+    const amount = parseFloat(document.getElementById('gst-amount').value) || 0;
+    const rate = 0.15;
+    let excl, gst, incl;
+
+    if (gstMode === 'add') {
+      excl = amount;
+      gst = amount * rate;
+      incl = amount + gst;
+    } else {
+      incl = amount;
+      excl = amount / (1 + rate);
+      gst = incl - excl;
+    }
+
+    const fmt = (n) => '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    document.getElementById('gst-excl').textContent = fmt(excl);
+    document.getElementById('gst-gst').textContent = fmt(gst);
+    document.getElementById('gst-incl').textContent = fmt(incl);
+    document.getElementById('gst-results').classList.add('show');
+  }
+
+  // =====================
+  // KIWISAVER CALC
+  // =====================
+  function calcKS() {
+    const salary = parseFloat(document.getElementById('ks-salary').value) || 0;
+    const rate = parseFloat(document.getElementById('ks-rate').value) / 100;
+
+    const empContrib = salary * rate;
+    const erContrib = salary * rate; // employer matches same rate
+    const govtContrib = Math.min(empContrib * 0.25, 260.72);
+    const total = empContrib + erContrib + govtContrib;
+
+    const fmt = (n) => '$' + Math.round(n).toLocaleString('en-NZ');
+    const fmt2 = (n) => '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    document.getElementById('ks-emp').textContent = fmt(empContrib);
+    document.getElementById('ks-er').textContent = fmt(erContrib);
+    document.getElementById('ks-govt').textContent = fmt2(govtContrib);
+    document.getElementById('ks-total').textContent = fmt(Math.round(total));
+    document.getElementById('ks-fn').textContent = fmt2(empContrib / 26);
+    document.getElementById('ks-wk').textContent = fmt2(empContrib / 52);
+
+    document.getElementById('ks-results').classList.add('show');
+  }
+
+  // Enter key triggers calculate
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const active = document.querySelector('.calc-panel.active');
+      if (!active) return;
+      if (active.id === 'panel-paye') calcPAYE();
+      if (active.id === 'panel-gst') calcGST();
+      if (active.id === 'panel-ks') calcKS();
+    }
+  });
+</script>
+</body>
+</html>
