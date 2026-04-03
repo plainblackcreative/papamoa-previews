@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papamoa Neighbourhood Support | Papamoa.info</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0c1a2a;--deep:#142438;--steel:#1e3450;--slate:#2a4060;
+  --sea:#1a6fa0;--sky:#4ab8e8;--aqua:#7dd8f0;
+  --sage:#52b788;--fern:#2d6a4f;--forest:#162b21;
+  --sand:#faf7f2;--cream:#fdfcf7;--warm:#f5f0e8;
+  --ink:#1a1a18;--body:#4a4843;--muted:#8a857e;--line:#e5e2dc;
+  --gold:#c9952d;--gold-bg:#fef9ee;--gold-line:#e8c860;
+  --r:12px;
+  --s-sm:0 1px 3px rgba(0,0,0,.05);--s-md:0 4px 20px rgba(0,0,0,.07);--s-lg:0 12px 40px rgba(0,0,0,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+::selection{background:#dce8f4;color:var(--navy)}
+
+.nav{background:var(--forest);position:sticky;top:0;z-index:500}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-family:'Libre Baskerville',serif;color:#fff;font-size:1.2rem;font-weight:700}
+.logo i{font-style:italic;color:var(--sage);font-weight:400}
+.nav-links{display:flex;gap:8px}
+.nav-links a{color:rgba(255,255,255,.55);font-size:.78rem;font-weight:500;text-decoration:none;padding:6px 14px;border-radius:100px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-links a.on{color:var(--sky);background:rgba(74,184,232,.12)}
+
+.hero{background:linear-gradient(135deg,#1a3a50,#2a6a96);position:relative;overflow:hidden;padding:52px 28px 48px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 90%,rgba(74,184,232,.12) 0%,transparent 50%)}
+.hero-grain{position:absolute;inset:0;opacity:.03;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:.75rem;color:rgba(255,255,255,.3);margin-bottom:14px}
+.breadcrumb a{color:rgba(255,255,255,.45);text-decoration:none}
+.breadcrumb a:hover{color:rgba(255,255,255,.7)}
+.hero-inner h1{font-family:'Libre Baskerville',serif;font-size:clamp(1.8rem,4vw,2.4rem);color:#fff;font-weight:700;line-height:1.15}
+.hero-inner .hero-desc{color:rgba(255,255,255,.45);font-size:.9rem;margin-top:8px;font-weight:300;line-height:1.65}
+
+.article{max-width:900px;margin:0 auto;padding:36px 28px 0}
+
+.contact-float{float:right;width:300px;margin:0 0 24px 32px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--s-md)}
+.contact-float h3{font-family:'Libre Baskerville',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+.cf-row{display:flex;align-items:flex-start;gap:10px;font-size:.82rem;color:var(--body);padding:8px 0;border-bottom:1px solid rgba(0,0,0,.04);line-height:1.5}
+.cf-row:last-child{border:none}
+.cf-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+.cf-row a{color:var(--sea);text-decoration:none}
+.cf-row a:hover{text-decoration:underline}
+.cf-cta{display:block;width:100%;padding:12px;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:transform .15s;margin-top:14px;background:var(--sea);color:#fff}
+.cf-cta:hover{transform:translateY(-1px);box-shadow:var(--s-md)}
+
+.prose{font-size:.92rem;color:var(--body);line-height:1.8}
+.prose p+p{margin-top:16px}
+.prose h2{font-family:'Libre Baskerville',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin:40px 0 12px;line-height:1.25}
+.prose h3{font-family:'Libre Baskerville',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin:32px 0 10px}
+
+.callout{background:var(--sand);border-left:4px solid var(--sea);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;margin:24px 0;clear:both}
+.callout.green{border-left-color:var(--sage);background:rgba(82,183,136,.06)}
+.callout.amber{border-left-color:var(--gold);background:var(--gold-bg)}
+.callout h4{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.callout p{font-size:.84rem;color:var(--body);line-height:1.65}
+
+.steps{margin:20px 0;counter-reset:step}
+.step{display:flex;gap:18px;margin-bottom:18px;align-items:flex-start}
+.step-num{counter-increment:step;width:40px;height:40px;border-radius:50%;background:var(--sea);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;flex-shrink:0}
+.step-num::before{content:counter(step)}
+.step-content h4{font-size:.88rem;font-weight:600;color:var(--navy)}
+.step-content p{font-size:.82rem;color:var(--body);line-height:1.6;margin-top:2px}
+
+.benefits{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;clear:both}
+.benefit{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.benefit .b-icon{font-size:1.4rem;margin-bottom:6px}
+.benefit h4{font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.benefit p{font-size:.78rem;color:var(--body);line-height:1.55}
+
+.faq-list{margin-top:16px;clear:both}
+.faq-item{border-bottom:1px solid var(--line);padding:14px 0}
+.faq-q{font-weight:600;font-size:.88rem;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q::after{content:'+';font-size:1.1rem;color:var(--sea);transition:transform .2s}
+.faq-item.open .faq-q::after{content:'\2212'}
+.faq-a{font-size:.82rem;color:var(--body);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.faq-item.open .faq-a{max-height:300px;padding-top:10px}
+
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:32px 0;clear:both}
+.stat-item{background:var(--navy);border-radius:var(--r);padding:18px;text-align:center}
+.stat-item .s-num{font-family:'Libre Baskerville',serif;font-size:1.5rem;font-weight:700;color:var(--sky)}
+.stat-item .s-lbl{font-size:.68rem;color:rgba(255,255,255,.4);margin-top:3px}
+
+.related{margin:40px 0 0;padding:28px 0;border-top:1px solid var(--line);clear:both}
+.related h3{font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:14px}
+.related-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.rel-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;transition:box-shadow .2s;cursor:pointer}
+.rel-card:hover{box-shadow:var(--s-md)}
+.rel-card h4{font-size:.85rem;font-weight:600;color:var(--sea)}
+.rel-card p{font-size:.72rem;color:var(--muted);margin-top:3px;line-height:1.45}
+
+footer{background:var(--forest);padding:36px 28px;text-align:center;margin-top:48px}
+footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
+footer a{color:var(--sage);text-decoration:none}
+
+@media(max-width:768px){
+  .contact-float{float:none;width:100%;margin:0 0 24px 0}
+  .benefits{grid-template-columns:1fr}
+  .stat-bar{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.article{animation:fadeUp .45s ease both}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">papamoa<i>.info</i></div>
+    <div class="nav-links">
+      <a>Home</a>
+      <a>Essential Services</a>
+      <a>Food & Drink</a>
+      <a class="on">Community</a>
+      <a>Accommodation</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb"><a>Home</a> / <a>Community</a> / <a>Safety & Support</a> / Neighbourhood Support</div>
+    <h1>Papamoa Neighbourhood Support</h1>
+    <div class="hero-desc">How street groups work, how to join, who runs it, and why connected neighbourhoods are safer neighbourhoods. Free to join, volunteer-run, and backed by NZ Police.</div>
+  </div>
+</section>
+
+<div class="article">
+
+  <div class="contact-float">
+    <h3>Get Involved</h3>
+    <div class="cf-row"><span class="cf-icon">&#128100;</span><div><strong>Bruce Banks</strong><br>Papamoa NS Coordinator</div></div>
+    <div class="cf-row"><span class="cf-icon">&#128222;</span><div><a href="tel:0272713772">027 271 3772</a><br>or <a href="tel:075622828">07 562 2828</a></div></div>
+    <div class="cf-row"><span class="cf-icon">&#9993;</span><div><a href="mailto:nspapamoa@wbopns.org.nz">nspapamoa@wbopns.org.nz</a></div></div>
+    <div class="cf-row"><span class="cf-icon">&#127760;</span><div><a href="https://www.wbopns.org.nz" target="_blank">wbopns.org.nz</a><br>Western BOP Neighbourhood Support</div></div>
+    <div class="cf-row"><span class="cf-icon">&#128176;</span><div>Free to join. No cost, no obligation.</div></div>
+    <a class="cf-cta" href="mailto:nspapamoa@wbopns.org.nz?subject=I'd like to join Papamoa Neighbourhood Support">Email to Join</a>
+  </div>
+
+  <div class="prose">
+
+    <p>Papamoa Neighbourhood Support (PNS) is a volunteer-run organisation that connects residents street by street, working alongside NZ Police to prevent crime and build community resilience. It is free to join, covers the entire Papamoa area, and is one of the more active Neighbourhood Support networks in the Western Bay of Plenty.</p>
+
+    <p>The organisation currently has close to 6,000 member households and around 170 street coordinators. It operates under the umbrella of Western Bay of Plenty Neighbourhood Support and works directly with Papamoa's community constable, Senior Constable Adrian Oldham. Coordinator Bruce Banks has been running PNS since he started as a street coordinator for Rainey Crescent in 2014, shortly after moving from Auckland. At that time, Papamoa's population was around 24,000. It is now approaching 40,000, and Banks has been open about the fact that coordinating coverage for that growth with one person is, in his words, "now impossible." The organisation is actively seeking more volunteer help.</p>
+
+    <h2>How Street Groups Work</h2>
+
+    <p>The core unit of Neighbourhood Support is the street group. A street group is simply a cluster of neighbours, typically on one street or a section of a longer street, who agree to share basic contact information and look out for each other. One person volunteers as the street coordinator, acting as the point of contact between the group and the wider PNS network.</p>
+
+    <p>When a group is formed, members receive window and letterbox stickers, and a Neighbourhood Support warning sign goes up on lampposts in the street. These serve a dual purpose: they signal to potential offenders that the street is being watched, and they signal to residents that there is an established network to connect with.</p>
+
+    <p>The practical value shows up in real situations. In one incident described by Community Constable Oldham, a car break-in on a Papamoa street triggered a chain of calls between neighbours. One of those calls reached a resident with security camera footage who did not know anything had happened. That footage provided the vehicle registration of the offending car and showed the offenders moving from house to house. Without the street group connection, that camera footage would have sat unseen.</p>
+
+    <div class="callout green">
+      <h4>It is not about living in each other's pockets</h4>
+      <p>Community Constable Oldham makes this point clearly: Neighbourhood Support is about being connected enough that if something happens, there is a known point of contact in the street and a way to share information quickly. It is not about surveillance or intrusiveness. The level of involvement beyond that is entirely up to each member.</p>
+    </div>
+
+    <h2>What Members Receive</h2>
+
+    <div class="benefits">
+      <div class="benefit">
+        <div class="b-icon">&#128232;</div>
+        <h4>Fortnightly E-Newsletter</h4>
+        <p>Includes the official police report on property crime in Papamoa (burglary, attempted burglary, vehicle break-ins, vehicle thefts), safety advice, and community updates. This is the verified source, unlike social media posts which PNS notes are often exaggerated or second-hand.</p>
+      </div>
+      <div class="benefit">
+        <div class="b-icon">&#128204;</div>
+        <h4>Stickers & Street Signs</h4>
+        <p>Window stickers, letterbox stickers, and lamppost warning signs for your street. These act as a visible deterrent and signal to other residents that the street is covered by an active group.</p>
+      </div>
+      <div class="benefit">
+        <div class="b-icon">&#128218;</div>
+        <h4>Household Information Pack</h4>
+        <p>Filled with information sheets, local emergency numbers, crime prevention advice, and contact details for your street group. Practical, not promotional.</p>
+      </div>
+      <div class="benefit">
+        <div class="b-icon">&#127881;</div>
+        <h4>Social Connection</h4>
+        <p>Many street groups organise Christmas parties, BBQs, and casual catch-ups. This is the part that sounds like a nice bonus but turns out to be the foundation. Knowing your neighbours by name is what makes the crime prevention side actually work.</p>
+      </div>
+    </div>
+
+    <h2>How to Join</h2>
+
+    <p>There are two ways to get involved. You can join as an individual household if your street already has an existing group. Or, if your street does not have a group yet, you can volunteer to become the street coordinator and help form one. The second option is particularly needed in newer Papamoa East subdivisions where development is outpacing community infrastructure.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Contact Bruce Banks</h4>
+          <p>Email nspapamoa@wbopns.org.nz or call 027 271 3772. Let him know your street and whether you want to join an existing group or start a new one.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Driveway Meeting (for new groups)</h4>
+          <p>Bruce and Community Constable Adrian Oldham hold "whistle-stop, 30-minute driveway meetings" with new volunteer street coordinators. All neighbours on the street are invited. It is short, informal, and covers how the system works.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Share Contact Details</h4>
+          <p>Group members share basic contact information with each other. This stays within the group. You then start receiving the e-newsletter and crime alerts.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <h4>Signs and Stickers Go Up</h4>
+          <p>Once the group is established, stickers go on windows and letterboxes, and a Neighbourhood Support sign is posted on a lamppost in the street. Your street is now visibly part of the network.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Where Coverage Gaps Exist</h2>
+
+    <p>PNS coverage is strong across established Papamoa streets but thins out significantly in newer subdivisions, particularly in Papamoa East and areas around Golden Sands and Te Tumu. These are exactly the areas where coverage matters most: new streets in construction zones attract opportunistic theft, and residents who have just moved in do not yet know their neighbours.</p>
+
+    <p>Banks has called specifically for volunteers in these newer areas. If you are among the first residents on a new street, forming a Neighbourhood Support group early sets the tone for the entire street as it fills up. The PNS team provides all the resources and support needed. The main requirement is simply a willingness to be the contact point.</p>
+
+    <div class="callout amber">
+      <h4>Why Not Just Use Facebook?</h4>
+      <p>PNS makes a pointed observation about social media crime posts: many are exaggerated, based on second-hand information, or posted instead of making an actual police report. Unless an offence is reported through proper channels (111 for emergencies, 105 for non-urgent), police cannot investigate, track patterns, or deploy resources. The PNS fortnightly newsletter contains the official property crime data direct from the police sergeant. Social media posts, no matter how many likes they get, do not count as police reports.</p>
+    </div>
+
+    <h2>The Bigger Picture</h2>
+
+    <p>Neighbourhood Support is part of a national organisation that originated from New York City Police in 1977 and reached New Zealand in the 1990s. It was originally called Neighbourhood Watch but rebranded to better reflect the broader community support role. In 2001, Neighbourhood Support NZ signed a Memorandum of Understanding with NZ Police, formalising the partnership.</p>
+
+    <p>In the Western Bay of Plenty, around 14,500 people are members across Tauranga, Mount Maunganui, Papamoa, and Te Puke. Papamoa's nearly 6,000 member households represent a significant share of the total. The organisation also works with Fire and Emergency NZ and Bay of Plenty Civil Defence, which means the same street group structure used for crime prevention also functions as a communication channel during natural disasters and emergencies.</p>
+
+  </div>
+
+  <div class="stat-bar">
+    <div class="stat-item"><div class="s-num">~6,000</div><div class="s-lbl">Member households in Papamoa</div></div>
+    <div class="stat-item"><div class="s-num">170</div><div class="s-lbl">Street coordinators</div></div>
+    <div class="stat-item"><div class="s-num">14,500</div><div class="s-lbl">Members across Western BOP</div></div>
+    <div class="stat-item"><div class="s-num">Free</div><div class="s-lbl">No cost to join or participate</div></div>
+  </div>
+
+  <div class="prose">
+    <h2>Common Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Is my information shared publicly?</div>
+        <div class="faq-a">No. Contact details are shared only within your street group, not publicly or with other groups. The level of personal information you share is your choice. Privacy concerns are common but addressed early in the sign-up process.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How much time does being a street coordinator take?</div>
+        <div class="faq-a">It varies, but most coordinators describe it as a few minutes per week. You receive and occasionally pass on information. There is no obligation to organise social events (though many groups do). The initial driveway meeting with Bruce and the community constable takes about 30 minutes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if my street already has a group?</div>
+        <div class="faq-a">Contact Bruce and he will connect you with your existing street coordinator. You can join as an individual household at any time. There is no waiting list or approval process.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does Neighbourhood Support actually reduce crime?</div>
+        <div class="faq-a">The evidence is strongest around property crime prevention and faster resolution when crime does occur. Streets with visible NS signage and connected residents are harder targets. The "daisy chain" information-sharing effect, where one call triggers a chain that surfaces camera footage or witness observations, has been demonstrated repeatedly in Papamoa. It does not eliminate crime, but it meaningfully reduces opportunity and improves the chance of offenders being identified.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">I rent, not own. Can I still join?</div>
+        <div class="faq-a">Yes. Neighbourhood Support is for all residents regardless of whether they own or rent. Renters are just as much part of the neighbourhood and benefit from (and contribute to) the same community connections.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is this the same as the Papamoa Community Patrol?</div>
+        <div class="faq-a">No, they are separate organisations that work alongside each other. Neighbourhood Support is the information and connection network. The Papamoa Beach Community Patrol is a volunteer group that physically patrols streets in a vehicle during day, dusk, and night shifts. They are covered in detail on the Community Groups & Volunteering page.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="related">
+    <h3>Related Pages</h3>
+    <div class="related-grid">
+      <div class="rel-card">
+        <h4>Police & Crime &rarr;</h4>
+        <p>Papamoa police station, reporting crime, property crime trends, and the community constable</p>
+      </div>
+      <div class="rel-card">
+        <h4>Emergency Preparedness &rarr;</h4>
+        <p>Tsunami evacuation, earthquake, flood, and storm guidance specific to Papamoa</p>
+      </div>
+      <div class="rel-card">
+        <h4>Community Groups &rarr;</h4>
+        <p>Community Patrol, Civil Defence volunteers, and how to get involved</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 <a href="#">papamoa.info</a> &middot; Papamoa's Local Business Directory &middot; <a href="#">List Your Business</a></p>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{q.parentElement.classList.toggle('open')});
+});
+</script>
+</body>
+</html>
