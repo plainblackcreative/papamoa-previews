@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listing Page Template | Papamoa.info</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #2B3F5C;
+      --blue:   #3AABDE;
+      --lime:   #7DC143;
+      --sand:   #F5EFE0;
+      --dune:   #D4C4A0;
+      --coral:  #E8344A;
+      --white:  #FFFFFF;
+      --ink:    #0D1B2A;
+      --body:   #1E2D3E;
+      --muted:  #607080;
+      --border: #DDE5EE;
+      --bg:     #F4F7FA;
+      --gold:   #C8962A;
+      --gold2:  #F0C060;
+      --silver: #8090A8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--bg);
+      color: var(--body);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* =====================================================
+       DEMO CONTROLS — TOP BAR
+    ===================================================== */
+    .demo-bar {
+      background: var(--ink);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid rgba(58,171,222,0.3);
+    }
+
+    .demo-bar-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      white-space: nowrap;
+    }
+
+    .biz-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .biz-pill {
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.18s;
+      white-space: nowrap;
+    }
+
+    .biz-pill:hover { background: rgba(255,255,255,0.13); color: #fff; }
+    .biz-pill.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+    /* =====================================================
+       TIER SWITCHER — STICKY
+    ===================================================== */
+    .tier-switcher {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: stretch;
+      position: sticky;
+      top: 45px;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .tier-tabs {
+      display: flex;
+      flex: 1;
+    }
+
+    .tier-tab {
+      flex: 1;
+      padding: 13px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      font-family: 'Figtree', sans-serif;
+      gap: 2px;
+    }
+
+    .tier-tab .tt-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .tier-tab .tt-price {
+      font-size: 0.65rem;
+      font-weight: 500;
+      opacity: 0.6;
+    }
+
+    /* GOLD tab */
+    .tier-tab.gold { color: var(--gold); }
+    .tier-tab.gold.active { border-bottom-color: var(--gold); background: #FFFBF0; }
+    .tier-tab.gold:hover:not(.active) { background: #FFFDF5; }
+
+    /* SILVER tab */
+    .tier-tab.silver { color: var(--silver); }
+    .tier-tab.silver.active { border-bottom-color: var(--silver); background: #F5F7FA; }
+    .tier-tab.silver:hover:not(.active) { background: #F8F9FB; }
+
+    /* BRONZE tab */
+    .tier-tab.bronze { color: #9A7060; }
+    .tier-tab.bronze.active { border-bottom-color: #9A7060; background: #FBF7F4; }
+    .tier-tab.bronze:hover:not(.active) { background: #FDF9F7; }
+
+    .tier-tab .tt-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-bottom: 2px;
+    }
+
+    .tier-tab.gold .tt-dot { background: var(--gold); }
+    .tier-tab.silver .tt-dot { background: var(--silver); }
+    .tier-tab.bronze .tt-dot { background: #9A7060; }
+
+    /* =====================================================
+       TIER PANELS
+    ===================================================== */
+    .tier-panel { display: none; }
+    .tier-panel.active { display: block; }
+
+    /* =====================================================
+       GOLD LAYOUT
+    ===================================================== */
+
+    /* Hero */
+    .gold-hero {
+      background: var(--navy);
+      min-height: 320px;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gold-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2), var(--gold));
+    }
+
+    .gold-hero-text {
+      padding: 44px 48px 44px 52px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .gold-hero-text::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 0% 100%, rgba(200,150,42,0.12) 0%, transparent 70%);
+    }
+
+    .hero-breadcrumb {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .hero-breadcrumb a { color: rgba(255,255,255,0.45); text-decoration: none; }
+    .hero-breadcrumb span { margin: 0 5px; }
+
+    .hero-badge-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .gold-spotlight-badge {
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: var(--ink);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+
+    .cat-breadcrumb-badge {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.08);
+      padding: 3px 9px;
+      border-radius: 3px;
+    }
+
+    .gold-hero-text h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.12;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 20px;
+      position: relative;
+      max-width: 480px;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      position: relative;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Photo gallery panel */
+    .gold-hero-photos {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      padding: 3px 3px 0 3px;
+    }
+
+    .photo-slot {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-slot:first-child {
+      grid-row: 1 / 3;
+    }
+
+    .photo-slot-inner {
+      width: 100%;
+      height: 100%;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      position: relative;
+    }
+
+    /* Each listing gets its own photo colour scheme */
+    .photo-c1 { background: linear-gradient(135deg, #C04030, #802818); }
+    .photo-c2 { background: linear-gradient(135deg, #D06828, #A04818); }
+    .photo-c3 { background: linear-gradient(135deg, #383830, #282820); }
+    .photo-c4 { background: linear-gradient(135deg, #204880, #183060); }
+    .photo-c5 { background: linear-gradient(135deg, #284838, #183028); }
+    .photo-c6 { background: linear-gradient(135deg, #583028, #382018); }
+    .photo-c7 { background: linear-gradient(135deg, #204060, #142840); }
+    .photo-c8 { background: linear-gradient(135deg, #483868, #302448); }
+
+    .photo-label {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.6);
+      font-size: 0.62rem;
+      padding: 3px 7px;
+      border-radius: 3px;
+    }
+
+    .photo-more {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* Rating badge */
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 5px 12px;
+      border-radius: 5px;
+    }
+
+    .rating-badge .rb-stars { color: #F5C842; font-size: 0.75rem; }
+    .rating-badge .rb-score { color: #fff; font-weight: 700; font-size: 0.88rem; }
+    .rating-badge .rb-count { color: rgba(255,255,255,0.5); font-size: 0.72rem; }
+
+    /* Gold body */
+    .gold-body {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 36px 24px 72px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .gold-main { min-width: 0; }
+    .gold-sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+    /* Action bar */
+    .gold-action-bar {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+
+    .btn-primary-gold {
+      background: linear-gradient(135deg, var(--gold), #B07820);
+      color: var(--white);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 11px 20px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary-gold:hover { filter: brightness(1.1); }
+
+    .btn-secondary-outline {
+      background: transparent;
+      color: var(--body);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 600;
+      font-size: 0.83rem;
+      padding: 11px 18px;
+      border-radius: 7px;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+    .action-divider { flex: 1; }
+
+    .social-icons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .social-icon {
+      width: 34px; height: 34px;
+      border-radius: 7px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .social-icon:hover { background: var(--navy); border-color: var(--navy); }
+
+    /* Content sections */
+    .content-section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .cs-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cs-body {
+      font-size: 0.88rem;
+      color: var(--body);
+      line-height: 1.75;
+    }
+
+    /* Services pills */
+    .services-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .svc-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--body);
+    }
+
+    /* Menu/hours grid */
+    .hours-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 10px;
+      font-size: 0.82rem;
+      background: var(--bg);
+      border-radius: 5px;
+    }
+
+    .hours-row .day { font-weight: 600; color: var(--navy); }
+    .hours-row .time { color: var(--muted); }
+    .hours-row.closed .time { color: var(--coral); }
+    .hours-row.today { background: #EBF8ED; }
+    .hours-row.today .day, .hours-row.today .time { color: #1A7A42; font-weight: 700; }
+
+    /* Map placeholder */
+    .map-placeholder {
+      background: linear-gradient(135deg, #E8F0F8 0%, #D8E4F0 100%);
+      border-radius: 8px;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.83rem;
+      border: 1px solid var(--border);
+    }
+
+    .map-placeholder .map-icon { font-size: 2rem; }
+
+    /* Sidebar cards */
+    .sidebar-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .sidebar-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 10px;
+      font-size: 0.83rem;
+    }
+
+    .contact-item .ci-icon { flex-shrink: 0; font-size: 0.9rem; margin-top: 1px; }
+    .contact-item .ci-text { color: var(--muted); }
+    .contact-item .ci-text a { color: var(--blue); text-decoration: none; }
+    .contact-item .ci-text strong { color: var(--body); display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 1px; }
+
+    /* Gold sidebar special */
+    .gold-spotlight-card {
+      background: linear-gradient(135deg, var(--navy), #1A2A40);
+      border-radius: 10px;
+      padding: 18px;
+      border: 1px solid rgba(200,150,42,0.3);
+    }
+
+    .gold-spotlight-card h4 {
+      color: var(--gold2);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .gold-spotlight-card p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.78rem;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .gold-spotlight-card .btn-upgrade {
+      display: block;
+      background: linear-gradient(135deg, var(--gold), #A07020);
+      color: var(--white);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 9px 14px;
+      border-radius: 5px;
+      text-decoration: none;
+      text-align: center;
+      transition: filter 0.2s;
+    }
+
+    /* =====================================================
+       SILVER LAYOUT
+    ===================================================== */
+    .silver-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 0 0;
+    }
+
+    .silver-header-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .silver-badge-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .silver-badge {
+      background: linear-gradient(135deg, var(--silver), #A0B0C8);
+      color: var(--white);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 3px;
+    }
+
+    .silver-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .silver-header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid var(--silver);
+    }
+
+    .silver-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .silver-body {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 28px 24px 64px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .silver-action-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .btn-primary-silver {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 11px 20px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary-silver:hover { background: var(--blue); }
+
+    /* Silver upgrade prompt */
+    .upgrade-to-gold {
+      background: linear-gradient(135deg, #FFFAF0, #FFF5DC);
+      border: 1px solid rgba(200,150,42,0.3);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .upgrade-to-gold .utg-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+
+    .upgrade-to-gold h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #7A5010;
+      margin-bottom: 5px;
+    }
+
+    .upgrade-to-gold p {
+      font-size: 0.78rem;
+      color: #9A7030;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .upgrade-to-gold .utg-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-bottom: 10px;
+    }
+
+    .upgrade-to-gold .utg-features li {
+      font-size: 0.74rem;
+      color: #8A6020;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .upgrade-to-gold .utg-features li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.6rem;
+      top: 2px;
+    }
+
+    .upgrade-to-gold a {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), #A07020);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+
+    /* =====================================================
+       BRONZE LAYOUT
+    ===================================================== */
+    .bronze-wrap {
+      max-width: 760px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+
+    .bronze-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .bronze-header {
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border);
+      background: #FAFBFC;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .bronze-badge {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 3px;
+      background: #F0EBE4;
+      color: #9A7060;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .bronze-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .bronze-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .bronze-body {
+      padding: 20px 22px;
+    }
+
+    .bronze-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .bronze-contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .bronze-contact-item {
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+    }
+
+    .bronze-upgrade {
+      background: linear-gradient(135deg, var(--navy), #1E3050);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .bronze-upgrade .bu-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 8px;
+    }
+
+    .bronze-upgrade h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .bronze-upgrade p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.55;
+      max-width: 380px;
+      margin: 0 auto 16px;
+    }
+
+    .bronze-upgrade-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-upgrade-silver {
+      background: linear-gradient(135deg, var(--silver), #708090);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 10px 18px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .btn-upgrade-gold {
+      background: linear-gradient(135deg, var(--gold), #A07020);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 10px 18px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .pricing-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      margin-top: 24px;
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .pricing-col {
+      background: var(--white);
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pricing-col.current { background: #F5F7FA; }
+    .pricing-col.highlighted { background: #FFFAF0; }
+
+    .pc-tier {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .pc-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .pc-price span { font-size: 0.75rem; font-weight: 400; color: var(--muted); }
+
+    .pc-feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pc-feature-list li {
+      font-size: 0.73rem;
+      color: var(--muted);
+      padding-left: 13px;
+      position: relative;
+    }
+
+    .pc-feature-list li::before { content: '✓'; position: absolute; left: 0; font-size: 0.65rem; color: var(--lime); }
+    .pc-feature-list li.no::before { content: '✗'; color: #ccc; }
+    .pc-feature-list li.no { color: #bbb; }
+
+    /* =====================================================
+       SHARED COMPONENTS
+    ===================================================== */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 9px 11px;
+      background: var(--bg);
+      border-radius: 6px;
+    }
+
+    .detail-item .di-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .detail-item .di-value {
+      font-size: 0.83rem;
+      color: var(--body);
+      font-weight: 500;
+    }
+
+    .detail-item .di-value a { color: var(--blue); text-decoration: none; }
+
+    /* Review snippet */
+    .review-card {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 14px;
+      border-left: 3px solid var(--gold);
+    }
+
+    .review-stars { color: #F5C842; font-size: 0.8rem; margin-bottom: 5px; }
+    .review-text { font-size: 0.83rem; color: var(--body); line-height: 1.55; font-style: italic; margin-bottom: 6px; }
+    .review-author { font-size: 0.72rem; color: var(--muted); }
+
+    /* Site footer */
+    .site-footer {
+      background: var(--navy);
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 40px;
+    }
+
+    .site-footer a { color: var(--blue); }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .gold-hero { grid-template-columns: 1fr; }
+      .gold-hero-photos { display: none; }
+      .gold-body { grid-template-columns: 1fr; }
+      .gold-sidebar { order: -1; }
+      .silver-body { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 540px) {
+      .gold-hero-text { padding: 32px 20px; }
+      .pricing-compare { grid-template-columns: 1fr; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .hours-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- DEMO CONTROLS -->
+<div class="demo-bar">
+  <span class="demo-bar-label">Listing:</span>
+  <div class="biz-pills">
+    <button class="biz-pill active" onclick="showBiz('pizza')">The Pizza Pundits</button>
+    <button class="biz-pill" onclick="showBiz('orthodontist')">Pāpāmoa Orthodontist</button>
+    <button class="biz-pill" onclick="showBiz('dental')">Tara Road Dental</button>
+    <button class="biz-pill" onclick="showBiz('pacific')">Pacific Park</button>
+    <button class="biz-pill" onclick="showBiz('karaka')">Karaka Pines</button>
+    <button class="biz-pill" onclick="showBiz('wagon')">The Wagon</button>
+    <button class="biz-pill" onclick="showBiz('redefined')">ReDefined</button>
+    <button class="biz-pill" onclick="showBiz('realestate')">Real Estate</button>
+  </div>
+</div>
+
+<!-- TIER SWITCHER -->
+<div class="tier-switcher">
+  <div class="tier-tabs">
+    <button class="tier-tab gold active" onclick="setTier('gold')">
+      <div class="tt-dot"></div>
+      <span class="tt-name">⭐ Gold Spotlight</span>
+      <span class="tt-price">$1,200 + GST / yr</span>
+    </button>
+    <button class="tier-tab silver" onclick="setTier('silver')">
+      <div class="tt-dot"></div>
+      <span class="tt-name">◆ Silver</span>
+      <span class="tt-price">$599 + GST / yr</span>
+    </button>
+    <button class="tier-tab bronze" onclick="setTier('bronze')">
+      <div class="tt-dot"></div>
+      <span class="tt-name">Placeholder</span>
+      <span class="tt-price">Unregistered</span>
+    </button>
+  </div>
+</div>
+
+<!-- ========================================================
+     LISTING CONTENT CONTAINER
+======================================================== -->
+<div id="listing-content"></div>
+
+<footer class="site-footer">
+  <a href="/">Papamoa.info</a> &mdash; Local business directory for Pāpāmoa, Bay of Plenty, New Zealand. All listings written in third-party editorial voice.
+</footer>
+
+<script>
+// ============================================================
+// BUSINESS DATA
+// ============================================================
+const businesses = {
+  pizza: {
+    name: 'The Pizza Pundits',
+    tagline: 'Gourmet pizza in the heart of Pāpāmoa Beach — voted one of the best in the Bay of Plenty.',
+    category: 'Food & Drink',
+    subcat: 'Pizza',
+    address: '1/898 Pāpāmoa Beach Road, Pāpāmoa Beach',
+    phone: '(see order platforms)',
+    website: 'doordash.com / ubereats / ordermeal',
+    instagram: '@thepizzapunditspapamoa',
+    facebook: 'The Pizza Pundits',
+    rating: '4.9',
+    reviewCount: '58 TripAdvisor reviews',
+    emoji: '🍕',
+    colorClass: 'photo-c1',
+    photos: ['🍕', '🔥', '🫒'],
+    hours: [
+      { day: 'Mon', time: 'Closed', closed: true },
+      { day: 'Tue', time: '4:00pm – 9:00pm' },
+      { day: 'Wed', time: '4:00pm – 9:00pm' },
+      { day: 'Thu', time: '4:00pm – 9:00pm' },
+      { day: 'Fri', time: '4:00pm – 9:40pm' },
+      { day: 'Sat', time: '4:00pm – 9:40pm' },
+      { day: 'Sun', time: '4:00pm – 9:00pm', today: true },
+    ],
+    services: ['Gourmet pizza', 'Gluten-free bases (house-made)', 'Vegetarian options', 'Classic & specialty pizzas', 'Sides', 'Drinks', 'Takeaway', 'Dine-in', 'DoorDash delivery', 'Uber Eats delivery', 'Online ordering', 'Community sponsorship'],
+    description: `The Pizza Pundits is a gourmet pizza kitchen operating from a compact shopfront at 1/898 Pāpāmoa Beach Road. Since opening, they've built one of the strongest reputations of any pizza place in the wider Bay of Plenty — currently holding a 4.9-star rating from 58 reviews on TripAdvisor and consistently placing in Pāpāmoa's top ten restaurants.\n\nThe menu covers classic combinations, vegetarian options, traditional pies and more inventive specialty pizzas. The kitchen makes its own gluten-free bases from raw ingredients — a genuine point of difference that customers specifically call out in reviews. The signature Narnia pizza draws returning customers.\n\nThe owners are hands-on and community-minded, running youth sports voucher programmes for local teams. Delivery is available through DoorDash, Uber Eats and Order Meal. Pickup hours typically run 4pm to 9:00–9:40pm, seven days. Pricing sits in the mid-range ($$–$$$).`,
+    highlights: ['4.9★ on TripAdvisor (58 reviews)', 'House-made gluten-free bases', 'Community sports vouchers', 'Available on DoorDash, Uber Eats & Order Meal'],
+    review: { text: 'First pizza place I have been to that makes its own gluten-free bases from raw ingredients. That made the gluten-free pizza super tasty and amazing texture.', author: 'TripAdvisor reviewer, 2024' },
+    review2: { text: 'Fast and wonderful service. Beautiful pizza. Local store supports the community with youth sports team vouchers. All very full!', author: 'TripAdvisor reviewer, 2024' },
+  },
+  orthodontist: {
+    name: 'Pāpāmoa Orthodontist',
+    tagline: 'Specialist orthodontic care for all ages — children, teens and adults — on Tara Road.',
+    category: 'Health & Wellbeing',
+    subcat: 'Orthodontics',
+    address: '1G Tara Road, Pāpāmoa Beach, Tauranga 3187',
+    phone: '07 579 3571',
+    email: 'hello@papamoaorthodontist.co.nz',
+    website: 'papamoaorthodontist.co.nz',
+    instagram: '@papamoa_orthodontist',
+    facebook: 'Pāpāmoa Orthodontist',
+    emoji: '😁',
+    colorClass: 'photo-c4',
+    photos: ['😁', '🦷', '✨'],
+    hours: [
+      { day: 'Mon', time: 'By appointment' },
+      { day: 'Tue', time: 'By appointment' },
+      { day: 'Wed', time: 'By appointment' },
+      { day: 'Thu', time: 'By appointment' },
+      { day: 'Fri', time: 'By appointment' },
+      { day: 'Sat', time: 'Closed', closed: true },
+      { day: 'Sun', time: 'Closed', closed: true, today: true },
+    ],
+    services: ['Metal braces', 'Ceramic braces', 'Clear aligners', 'Early assessment (children)', 'Teenage orthodontics', 'Adult orthodontics', 'Fixed retainers', 'Removable retainers', 'Flexible payment options', 'Free on-site parking'],
+    description: `Pāpāmoa Orthodontist is a dedicated specialist clinic at 1G Tara Road, co-founded by a specialist orthodontist and occupying a purpose-built dental facility alongside Tara Road Dental. The clinic serves patients from Pāpāmoa, Mount Maunganui, Te Puke and across the Tauranga region.\n\nThe practice covers the full range of orthodontic treatment: traditional metal braces, tooth-coloured ceramic options, and clear aligners for patients who prefer a more discreet approach. Early orthodontic assessments are available for children, and the practice sees adults as well as teenagers — a common misconception is that orthodontic treatment is only for young people.\n\nEvery treatment journey begins with a comprehensive consultation and clinical assessment. Fees are transparent and comprehensive, covering placement, adjustments, retainers and follow-up visits — no surprises mid-treatment. Flexible payment options are available. Free parking is on site.`,
+    highlights: ['Specialist orthodontist (not a general dentist)', 'Children, teen & adult treatment', 'Comprehensive fee model — no hidden costs', 'Free parking on site'],
+    review: { text: 'We approach our practice with the care we would give our own family.', author: 'Pāpāmoa Orthodontist practice ethos' },
+  },
+  dental: {
+    name: 'Tara Road Dental',
+    tagline: 'A different way to dental — modern, purpose-built and genuinely patient-first in Pāpāmoa.',
+    category: 'Health & Wellbeing',
+    subcat: 'General Dentist',
+    address: 'Unit 1G Tara Road, Pāpāmoa Beach, Tauranga 3187',
+    phone: '07 579 5291',
+    email: 'hello@tararddental.co.nz',
+    website: 'tararddental.co.nz',
+    facebook: 'Tara Road Dental',
+    emoji: '🦷',
+    colorClass: 'photo-c2',
+    photos: ['🦷', '✨', '😊'],
+    hours: [
+      { day: 'Mon', time: 'By appointment' },
+      { day: 'Tue', time: 'By appointment' },
+      { day: 'Wed', time: 'By appointment' },
+      { day: 'Thu', time: 'By appointment' },
+      { day: 'Fri', time: 'By appointment' },
+      { day: 'Sat', time: 'Closed', closed: true },
+      { day: 'Sun', time: 'Closed', closed: true, today: true },
+    ],
+    services: ['General dentistry', 'Hygiene & scale/clean', 'IV sedation (Midazolam)', 'Wisdom tooth surgery', 'Dental implants', 'Veneers', 'Crowns', 'Bridges', 'Teeth whitening', 'Cosmetic dentistry', 'ACC emergency appointments', 'Online booking'],
+    description: `Tara Road Dental is a modern, purpose-built dental practice at 1G Tara Road, Pāpāmoa, founded by Dr Lloyd Farrar. The practice was built with a clear mission: to change the way patients feel about going to the dentist. Dr Farrar trained at the University of Otago and has worked across hospital and general dental settings in New Zealand and internationally, with specialist experience in IV sedation, wisdom tooth surgery and dental implants.\n\nThe practice is deliberately anxiety-aware. Dr Farrar communicates in plain language, listens to patient concerns, and offers intravenous sedation using Midazolam for patients who need support through more complex or lengthy procedures — many patients report feeling as though they simply had a restful sleep.\n\nDaily ACC appointments are available for dental injuries. The team also participates in the TerraCycle Waste Brigade, collecting used oral care products for recycling. Located a short drive from Te Puke, Mount Maunganui and central Tauranga, with online booking available.`,
+    highlights: ['IV sedation for anxious patients', 'Daily ACC injury appointments', 'Wisdom tooth surgery & dental implants', 'TerraCycle waste recycling partner'],
+    review: { text: 'Tara Road Dental is known for its caring, cutting-edge dental care in a modern, welcoming setting. Patients praise Lloyd and his team for their ability to create a calm, pain-free experience.', author: 'Practice summary — Kiwifruit Capital directory' },
+  },
+  pacific: {
+    name: 'Pacific Park Christian Holiday Camp',
+    tagline: 'Pāpāmoa\'s favourite family holiday park — two minutes from the beach, 80 years young.',
+    category: 'Accommodation',
+    subcat: 'Holiday Parks & Camping',
+    address: '1110 Pāpāmoa Beach Road, Pāpāmoa Beach, Tauranga 3118',
+    phone: '07 542 0018',
+    email: 'office@pacificpark.co.nz',
+    website: 'pacificpark.co.nz',
+    facebook: 'Pacific Park Christian Holiday Camp',
+    rating: '4.0',
+    reviewCount: '321 TripAdvisor reviews — #1 in Pāpāmoa',
+    emoji: '🏕️',
+    colorClass: 'photo-c5',
+    photos: ['🏕️', '🌊', '☀️'],
+    hours: [
+      { day: 'Reception', time: '8:30am – 12:30pm' },
+      { day: '(all week)', time: '1:00pm – 6:30pm', today: true },
+      { day: 'Late arrivals', time: 'By arrangement' },
+      { day: 'Quietness', time: 'After 10:00pm' },
+      { day: 'Check-in', time: 'Not 25 Dec or 1 Jan' },
+    ],
+    services: ['Powered campsites', 'Cabins (unserviced)', 'Air-conditioned 2-bed cabins', 'Fully serviced motel units', 'Group lodges', 'Conference centre', 'Hot tub / spa pool', 'Jumping pillow', "Children's playground", 'Games room', 'Communal kitchens', 'BBQ areas', 'Laundry', 'Free WiFi', 'School groups', 'Church groups', 'Sports teams', 'Alcohol & smoke-free', 'Non-profit', 'Ministry discounts'],
+    description: `Pacific Park Christian Holiday Camp has operated near Pāpāmoa Beach since 1944, founded as Mount Bible Class Camp by two young men responding to what they saw as the moral influence of summer holiday culture on New Zealand youth. Today it runs as a fully equipped, family-friendly holiday park just a two-minute walk from the beach — rated #1 accommodation in Pāpāmoa on TripAdvisor with 321 reviews.\n\nThe park is smoke, vape, drug and alcohol-free. Many reviewers — including those who note they are not Christian — specifically mention this as a positive, praising the calm, family-focused environment. Accommodation ranges from powered campsites to air-conditioned two-bedroom cabins, fully serviced motel units, and self-contained group lodges.\n\nFacilities include a large hot tub, jumping pillow, playground, games room, communal kitchens, BBQ areas and a conference centre for events and retreats. As a non-profit, Pacific Park supports community ministries and charities, and offers ministry discounts to qualifying organisations. Reception is open 8:30am–6:30pm seven days, with late arrivals accommodated on request.`,
+    highlights: ['#1 accommodation in Pāpāmoa on TripAdvisor', '321 reviews, 4-star rated', 'Non-profit — supports community ministries', 'Alcohol, smoke & drug-free environment'],
+    review: { text: 'As non-Christians we were a bit hesitant to book a place with "Christian" in the name, but there were no problems whatsoever. Would stay again.', author: 'TripAdvisor reviewer' },
+    review2: { text: 'The campsite was well maintained, clean and tidy with well-equipped facilities including a large 40-degree hot tub. Staff helpful, quiet at night. Highly recommended.', author: 'TripAdvisor reviewer, Labour Weekend 2025' },
+  },
+  karaka: {
+    name: 'Karaka Pines Pāpāmoa',
+    tagline: 'Retirement your way — beachside independent living with full capital gains, Pāpāmoa\'s newest village.',
+    category: 'Retirement Living',
+    subcat: 'Independent Living',
+    address: 'Te Ara O Wairakei walkway, Pāpāmoa Beach',
+    phone: '027 230 2997',
+    website: 'karakapines.co.nz',
+    facebook: 'Karaka Pines Villages',
+    emoji: '🏡',
+    colorClass: 'photo-c5',
+    photos: ['🏡', '🌿', '🌊'],
+    hours: [
+      { day: 'Sales enquiries', time: 'Contact Trudi' },
+      { day: 'Phone', time: '027 230 2997', today: true },
+      { day: 'Village', time: 'Now open' },
+      { day: 'Homes from', time: '$875,000' },
+    ],
+    services: ['2-bedroom duplexes', '3-bedroom standalone homes', 'Full capital gains model', 'Fixed fees for life option', 'Clubhouse (planned)', 'Gym & wellness centre', 'Shared dining & lounge', 'Library & hobby rooms', 'Direct beach walkway', 'Close to The Sands Town Centre', 'Lock-up-and-leave', '114 units planned'],
+    description: `Karaka Pines Pāpāmoa is the eighth and newest village in the Karaka Pines group, positioned alongside the Te Ara O Wairakei walkway with a direct connection to Pāpāmoa Beach Road. With 114 units planned, the village is sized for a close-knit community rather than a large estate.\n\nHomes come in two-bedroom duplex and three-bedroom standalone configurations, designed with generous open-plan living and private outdoor spaces. A full Clubhouse is planned to include shared dining, a lounge, bar, library, games and hobby rooms, gym and wellness centre.\n\nKaraka Pines' defining commercial difference is its full capital gains model: residents keep the full capital gain when they sell their home, rather than the village operator retaining it. This is distinct from the typical Occupation Right Agreement structures used by most NZ retirement villages. A Fixed Fee option is also available for those who prefer certainty around ongoing costs. The Sands Town Centre — with supermarkets, cafés, medical services and boutique retail — is minutes away. Homes start from $875,000.`,
+    highlights: ['Full capital gains — you keep 100%', '114-unit intimate community', 'Direct walkway to Pāpāmoa Beach', 'Minutes from The Sands Town Centre'],
+    review: { text: 'Capital gain was part of our proactive approach to aging. Here everything is really well thought out. Our home is spacious and easy to look after.', author: 'Karaka Pines resident' },
+  },
+  wagon: {
+    name: 'The Wagon Pāpāmoa',
+    tagline: 'Burgers and casual dining in the heart of the Pāpāmoa Junction precinct.',
+    category: 'Food & Drink',
+    subcat: 'Burgers & Casual Dining',
+    address: 'Unit 1/8 Toorea Street, Pāpāmoa Beach, Tauranga 3118',
+    phone: 'See order platforms',
+    website: 'ordermeal.co.nz/the-wagon-papamoa',
+    emoji: '🍔',
+    colorClass: 'photo-c6',
+    photos: ['🍔', '🔥', '🥤'],
+    hours: [
+      { day: 'Mon–Wed', time: 'Check current hours' },
+      { day: 'Thu', time: '11:00am – 8:00pm' },
+      { day: 'Fri', time: '11:00am – 8:00pm' },
+      { day: 'Sat', time: '11:00am – 8:00pm' },
+      { day: 'Sun', time: 'Check current hours', today: true },
+    ],
+    services: ['Gourmet burgers', 'Casual dining', 'Takeaway', 'Online ordering', 'Delivery available', 'Licensed (on-licence)'],
+    description: `The Wagon operates from Unit 1, 8 Toorea Street in the Pāpāmoa Junction commercial precinct — the newer mixed-use development off Te Okuroa Drive that has attracted a growing cluster of food, retail and trade businesses. The venue holds an on-licence issued by the Tauranga District Licensing Committee.\n\nPickup and delivery are available through Order Meal, with typical hours running 11am–8pm. The Toorea Street location is close to State Highway 2, with good vehicle access and parking, serving both local residents and those travelling through Pāpāmoa East.`,
+    highlights: ['Pāpāmoa Junction location — easy access', 'On-licence', 'Online ordering & delivery', 'Pickup 11am–8pm'],
+    review: { text: 'A welcome new addition to the Pāpāmoa Junction precinct — good burgers in a convenient spot.', author: 'Local feedback' },
+  },
+  redefined: {
+    name: 'ReDefined Wellbeing Hub',
+    tagline: 'New Zealand\'s first fully integrated wellbeing hub — movement, health services and recovery under one roof.',
+    category: 'Health & Wellbeing',
+    subcat: 'Gym & Fitness',
+    address: '58 Ashley Place, Pāpāmoa Beach, Pāpāmoa 3118',
+    phone: '022 454 6945',
+    email: 'us@redefined.nz',
+    website: 'redefined.nz',
+    instagram: '@nzredefined',
+    facebook: 'ReDefined Wellbeing Hub',
+    emoji: '💪',
+    colorClass: 'photo-c7',
+    photos: ['💪', '🧘', '🥶'],
+    hours: [
+      { day: 'Mon–Fri', time: 'Early open — check app', today: false },
+      { day: 'Sat–Sun', time: 'Morning sessions' },
+      { day: 'Reception', time: 'During staffed hours' },
+      { day: 'Book via', time: 'ReDefined App', today: true },
+    ],
+    services: ['Reformer Pilates', 'Yoga & hot yoga', 'Strength training', 'Open gym', 'Recovery Lab', 'Saunas (×2)', 'Cold plunge (12–4°C)', 'Compression therapy', 'Clinical nutrition & naturopathy', 'DNA health testing', 'Integrative medicine GP', 'Remedial manual therapy', 'Physiotherapy', 'Prenatal Pilates', 'Personal training', 'Nutrition coaching'],
+    description: `ReDefined Wellbeing Hub at 58 Ashley Place describes itself as New Zealand's first fully integrated wellbeing centre. Founded by Jimmy August — who trained as a Les Mills personal trainer in Wellington before moving into health club management in London — ReDefined brings movement, specialist health practitioners and recovery technology together under a single roof.\n\nThe facility runs three dedicated studios: Performance (strength and functional training), MindBody (yoga, hot yoga and group fitness) and Movement (Reformer Pilates). A new Recovery Lab features two saunas, compression therapy and cold plunge pools operating between 12 and 4 degrees Celsius. The ethos draws on Blue Zones longevity research, treating recovery as equally important to training itself.\n\nHealth practitioners operating from ReDefined include a registered clinical nutritionist and naturopath (Kylie, who also offers DNA health, diet and sport testing), a lifestyle and integrative medicine GP (available Thursdays), and remedial manual therapists. Physiotherapy is available via Recharge Physio. Prenatal Reformer Pilates is offered for pregnant members with appropriate modifications. Bookings are via the ReDefined app or reception.`,
+    highlights: ['NZ\'s first fully integrated wellbeing hub', 'New Recovery Lab — saunas, cold plunge, compression', 'DNA health, diet & sport testing on site', 'Integrative medicine GP available Thursdays'],
+    review: { text: 'I just had my ass kicked in the best way ever. My first session at ReDefined was just what I needed. There are so many awesome classes to take.', author: 'Google reviewer' },
+    review2: { text: 'One place for yoga. One place for strength. One place for recovery. They built one ecosystem. Your health. Redefined.', author: 'ReDefined practice summary' },
+  },
+  realestate: {
+    name: 'Pāpāmoa Real Estate',
+    tagline: 'Local experts for buying, selling and renting in one of New Zealand\'s fastest-growing coastal suburbs.',
+    category: 'Real Estate',
+    subcat: 'Residential Sales',
+    address: 'Pāpāmoa, Tauranga, Bay of Plenty',
+    phone: 'See individual agents',
+    website: 'papamoa.info/real-estate',
+    emoji: '🏠',
+    colorClass: 'photo-c8',
+    photos: ['🏠', '🌊', '🔑'],
+    hours: [
+      { day: 'Mon–Fri', time: 'Office hours' },
+      { day: 'Sat', time: 'By appointment' },
+      { day: 'Sun', time: 'By appointment', today: true },
+    ],
+    services: ['Residential sales', 'Property appraisals', 'Buyer representation', 'Auction', 'Property management', 'Rental management', 'New builds & sections', 'Investment property'],
+    description: `Pāpāmoa is one of New Zealand's fastest-growing coastal suburbs, with a residential property market that consistently draws buyers from Auckland, Wellington and beyond. The suburb's combination of 16km of white sand beach, strong community infrastructure, proximity to Tauranga Airport and a rapidly expanding local retail and service hub (including the new Sands Town Centre) has kept demand robust through market cycles.\n\nReal estate agencies with an active Pāpāmoa presence include Harcourts (Cnr Domain & Dickson Roads), Ray White Pāpāmoa, EVES Real Estate, and Bayleys. Local agents typically specialise in coastal residential, beach-adjacent premium properties, new-build sections in Pāpāmoa East, and investment property in the rental market.\n\nThe Gold Spotlight listing in this sub-category is currently available. One listing only — placing a single agent or agency at the top of this page in front of buyers and sellers actively researching Pāpāmoa property on a directory with 20+ years of domain authority.`,
+    highlights: ['Gold Spotlight — available now', 'One agent/agency per sub-category', '20+ years domain authority', 'Reaches buyers and sellers researching Pāpāmoa'],
+    review: { text: 'This Gold Spotlight position is available for one Pāpāmoa-focused real estate agent or agency. $1,200 + GST per year, Founding Member rate.', author: 'Papamoa.info — listing available' },
+  },
+};
+
+let currentBiz = 'pizza';
+let currentTier = 'gold';
+
+// ============================================================
+// TIER SWITCHER
+// ============================================================
+function setTier(tier) {
+  currentTier = tier;
+  document.querySelectorAll('.tier-tab').forEach(t => {
+    t.classList.toggle('active', t.classList.contains(tier));
+  });
+  renderListing();
+}
+
+function showBiz(biz) {
+  currentBiz = biz;
+  document.querySelectorAll('.biz-pill').forEach(p => {
+    p.classList.toggle('active', p.getAttribute('onclick').includes(`'${biz}'`));
+  });
+  renderListing();
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function renderListing() {
+  const biz = businesses[currentBiz];
+  const container = document.getElementById('listing-content');
+
+  if (currentTier === 'gold') container.innerHTML = renderGold(biz);
+  else if (currentTier === 'silver') container.innerHTML = renderSilver(biz);
+  else container.innerHTML = renderBronze(biz);
+}
+
+// ============================================================
+// GOLD
+// ============================================================
+function renderGold(biz) {
+  const hoursHTML = (biz.hours || []).map(h =>
+    `<div class="hours-row${h.closed ? ' closed' : ''}${h.today ? ' today' : ''}">
+      <span class="day">${h.day}</span>
+      <span class="time">${h.time}</span>
+    </div>`
+  ).join('');
+
+  const servicesHTML = (biz.services || []).map(s => `<span class="svc-pill">${s}</span>`).join('');
+
+  const highlightsHTML = (biz.highlights || []).map(h =>
+    `<div class="contact-item">
+      <span class="ci-icon">✦</span>
+      <span class="ci-text">${h}</span>
+    </div>`
+  ).join('');
+
+  const reviewHTML = biz.review ? `
+    <div class="review-card" style="margin-bottom:10px;">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"${biz.review.text}"</p>
+      <p class="review-author">— ${biz.review.author}</p>
+    </div>` : '';
+
+  const review2HTML = biz.review2 ? `
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"${biz.review2.text}"</p>
+      <p class="review-author">— ${biz.review2.author}</p>
+    </div>` : '';
+
+  const ratingHTML = biz.rating ? `
+    <div class="rating-badge">
+      <span class="rb-stars">★★★★★</span>
+      <span class="rb-score">${biz.rating}</span>
+      <span class="rb-count">${biz.reviewCount}</span>
+    </div>` : '';
+
+  const descParas = (biz.description || '').split('\n\n').map(p => `<p style="margin-bottom:12px;">${p}</p>`).join('');
+
+  const socialHTML = [
+    biz.instagram ? `<a href="#" class="social-icon" title="Instagram">📷</a>` : '',
+    biz.facebook ? `<a href="#" class="social-icon" title="Facebook">f</a>` : '',
+    biz.website ? `<a href="#" class="social-icon" title="Website">🌐</a>` : '',
+  ].join('');
+
+  return `
+  <div class="tier-panel active">
+
+    <!-- HERO -->
+    <div class="gold-hero">
+      <div class="gold-hero-text">
+        <div class="hero-breadcrumb">
+          <a href="/">Papamoa.info</a>
+          <span>/</span>
+          <a href="#">${biz.category}</a>
+          <span>/</span>
+          ${biz.subcat}
+        </div>
+        <div class="hero-badge-row">
+          <span class="gold-spotlight-badge">⭐ Gold Spotlight</span>
+          <span class="cat-breadcrumb-badge">${biz.subcat}</span>
+        </div>
+        <h1>${biz.name}</h1>
+        <p class="hero-tagline">${biz.tagline}</p>
+        <div class="hero-meta-row">
+          <span class="hero-meta-item">📍 ${biz.address}</span>
+          ${biz.phone && biz.phone !== 'See order platforms' && biz.phone !== 'See individual agents' ? `<span class="hero-meta-item">📞 ${biz.phone}</span>` : ''}
+          ${ratingHTML}
+        </div>
+      </div>
+
+      <div class="gold-hero-photos">
+        <div class="photo-slot">
+          <div class="photo-slot-inner ${biz.colorClass}" style="min-height:200px;font-size:3rem;">
+            ${biz.photos[0]}
+            <span class="photo-label">Photo 1 of 9</span>
+          </div>
+        </div>
+        <div class="photo-slot">
+          <div class="photo-slot-inner ${biz.colorClass}" style="opacity:0.8;font-size:2rem;">
+            ${biz.photos[1] || biz.emoji}
+          </div>
+        </div>
+        <div class="photo-slot" style="position:relative;">
+          <div class="photo-slot-inner ${biz.colorClass}" style="opacity:0.6;font-size:2rem;">
+            ${biz.photos[2] || biz.emoji}
+          </div>
+          <div class="photo-more">+6 photos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="gold-body">
+      <div class="gold-main">
+
+        <!-- ACTION BAR -->
+        <div class="gold-action-bar">
+          ${biz.phone && biz.phone !== 'See order platforms' && biz.phone !== 'See individual agents'
+            ? `<a href="tel:${biz.phone.replace(/\s/g,'')}" class="btn-primary-gold">📞 Call ${biz.phone}</a>`
+            : `<a href="#" class="btn-primary-gold">📋 Get details</a>`}
+          ${biz.website ? `<a href="#" class="btn-secondary-outline">🌐 Visit website</a>` : ''}
+          ${biz.email ? `<a href="mailto:${biz.email}" class="btn-secondary-outline">✉ Email</a>` : ''}
+          <div class="action-divider"></div>
+          <div class="social-icons">${socialHTML}</div>
+        </div>
+
+        <!-- ABOUT -->
+        <div class="content-section">
+          <h3 class="cs-title"><span>📖</span> About ${biz.name}</h3>
+          <div class="cs-body">${descParas}</div>
+        </div>
+
+        <!-- SERVICES -->
+        <div class="content-section">
+          <h3 class="cs-title"><span>✅</span> Services &amp; specialties</h3>
+          <div class="services-wrap">${servicesHTML}</div>
+        </div>
+
+        <!-- HOURS -->
+        ${biz.hours ? `
+        <div class="content-section">
+          <h3 class="cs-title"><span>🕐</span> Opening hours</h3>
+          <div class="hours-grid">${hoursHTML}</div>
+        </div>` : ''}
+
+        <!-- REVIEWS -->
+        ${biz.review ? `
+        <div class="content-section">
+          <h3 class="cs-title"><span>⭐</span> What people say</h3>
+          ${reviewHTML}
+          ${review2HTML}
+        </div>` : ''}
+
+        <!-- MAP -->
+        <div class="content-section">
+          <h3 class="cs-title"><span>📍</span> Find them</h3>
+          <div class="map-placeholder">
+            <span class="map-icon">🗺️</span>
+            <strong>${biz.address}</strong>
+            <span>Interactive map — Google Maps embed</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="gold-sidebar">
+
+        <div class="gold-spotlight-card">
+          <h4>★ Gold Spotlight listing</h4>
+          <p>This business occupies the top position in the ${biz.subcat} sub-category on Papamoa.info — seen by everyone searching for ${biz.subcat.toLowerCase()} in Pāpāmoa.</p>
+          <a href="/advertise" class="btn-upgrade">Learn about Gold →</a>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Contact &amp; location</h4>
+          <div class="contact-list">
+            <div class="contact-item">
+              <span class="ci-icon">📍</span>
+              <span class="ci-text"><strong>Address</strong>${biz.address}</span>
+            </div>
+            ${biz.phone ? `<div class="contact-item"><span class="ci-icon">📞</span><span class="ci-text"><strong>Phone</strong><a href="tel:${biz.phone}">${biz.phone}</a></span></div>` : ''}
+            ${biz.email ? `<div class="contact-item"><span class="ci-icon">✉</span><span class="ci-text"><strong>Email</strong><a href="mailto:${biz.email}">${biz.email}</a></span></div>` : ''}
+            ${biz.website ? `<div class="contact-item"><span class="ci-icon">🌐</span><span class="ci-text"><strong>Website</strong><a href="#">${biz.website}</a></span></div>` : ''}
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Why they stand out</h4>
+          <div class="contact-list">${highlightsHTML}</div>
+        </div>
+
+        ${biz.rating ? `
+        <div class="sidebar-card" style="text-align:center;">
+          <h4>Rating</h4>
+          <div style="font-size:2rem;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif;">${biz.rating}★</div>
+          <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">${biz.reviewCount}</div>
+        </div>` : ''}
+
+      </div>
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// SILVER
+// ============================================================
+function renderSilver(biz) {
+  const descParas = (biz.description || '').split('\n\n').slice(0, 2).map(p => `<p style="margin-bottom:10px;">${p}</p>`).join('');
+  const servicesHTML = (biz.services || []).slice(0, 8).map(s => `<span class="svc-pill">${s}</span>`).join('');
+  const hoursHTML = (biz.hours || []).slice(0, 4).map(h =>
+    `<div class="hours-row${h.closed ? ' closed' : ''}${h.today ? ' today' : ''}">
+      <span class="day">${h.day}</span>
+      <span class="time">${h.time}</span>
+    </div>`
+  ).join('');
+
+  return `
+  <div class="tier-panel active">
+    <div class="silver-header">
+      <div class="silver-header-inner">
+        <div class="hero-breadcrumb" style="color:var(--muted);">
+          <a href="/" style="color:var(--muted);">Papamoa.info</a>
+          <span style="margin:0 5px;">/</span>
+          <a href="#" style="color:var(--muted);">${biz.category}</a>
+          <span style="margin:0 5px;">/</span>
+          ${biz.subcat}
+        </div>
+        <div class="silver-badge-row">
+          <span class="silver-badge">◆ Silver listing</span>
+          <span class="cat-breadcrumb-badge" style="background:var(--bg);color:var(--muted);font-size:0.7rem;padding:3px 8px;border-radius:3px;">${biz.subcat}</span>
+        </div>
+        <h1>${biz.name}</h1>
+        <div class="silver-header-meta">
+          <span class="silver-meta-item">📍 ${biz.address}</span>
+          ${biz.phone && biz.phone !== 'See order platforms' ? `<span class="silver-meta-item">📞 ${biz.phone}</span>` : ''}
+          ${biz.website ? `<span class="silver-meta-item">🌐 ${biz.website}</span>` : ''}
+        </div>
+      </div>
+    </div>
+
+    <div class="silver-body">
+      <div>
+        <div class="silver-action-bar">
+          ${biz.phone && biz.phone !== 'See order platforms' && biz.phone !== 'See individual agents'
+            ? `<a href="tel:${biz.phone}" class="btn-primary-silver">📞 ${biz.phone}</a>`
+            : `<a href="#" class="btn-primary-silver">Get in touch</a>`}
+          ${biz.email ? `<a href="mailto:${biz.email}" class="btn-secondary-outline">✉ Email</a>` : ''}
+          ${biz.website ? `<a href="#" class="btn-secondary-outline">🌐 Website</a>` : ''}
+        </div>
+
+        <div class="content-section">
+          <h3 class="cs-title">About</h3>
+          <div class="cs-body">${descParas}</div>
+        </div>
+
+        <div class="content-section">
+          <h3 class="cs-title">Services</h3>
+          <div class="services-wrap">${servicesHTML}</div>
+          <p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">+ more — visit their website for full details</p>
+        </div>
+
+        ${biz.hours ? `
+        <div class="content-section">
+          <h3 class="cs-title">Hours</h3>
+          <div class="hours-grid">${hoursHTML}</div>
+        </div>` : ''}
+
+        <div class="content-section">
+          <h3 class="cs-title">Find them</h3>
+          <div class="map-placeholder" style="height:140px;">
+            <span style="font-size:1.5rem;">🗺️</span>
+            <span style="font-size:0.83rem;color:var(--muted);">${biz.address}</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="upgrade-to-gold">
+          <div class="utg-eyebrow">Upgrade available</div>
+          <h4>Unlock Gold Spotlight</h4>
+          <p>Gold Spotlight gives ${biz.name} the top position in ${biz.subcat} — with a full photo gallery, hero banner, review showcase and priority placement.</p>
+          <ul class="utg-features">
+            <li>Full-width hero with photo gallery (up to 9 images)</li>
+            <li>Top of sub-category — above all Silver listings</li>
+            <li>Review showcase &amp; star rating display</li>
+            <li>Unlimited AI sub-pages (Founding Member offer)</li>
+            <li>Free Menu Add-On year one</li>
+          </ul>
+          <a href="/advertise#gold">Upgrade to Gold — $1,200 + GST/yr</a>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Contact</h4>
+          <div class="contact-list">
+            <div class="contact-item"><span class="ci-icon">📍</span><span class="ci-text">${biz.address}</span></div>
+            ${biz.phone ? `<div class="contact-item"><span class="ci-icon">📞</span><span class="ci-text"><a href="tel:${biz.phone}">${biz.phone}</a></span></div>` : ''}
+            ${biz.email ? `<div class="contact-item"><span class="ci-icon">✉</span><span class="ci-text"><a href="mailto:${biz.email}">${biz.email}</a></span></div>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// BRONZE / PLACEHOLDER
+// ============================================================
+function renderBronze(biz) {
+  return `
+  <div class="tier-panel active">
+    <div class="bronze-wrap">
+      <div class="bronze-card">
+        <div class="bronze-header">
+          <div>
+            <h1>${biz.name}</h1>
+            <p class="bronze-meta">${biz.category} &rsaquo; ${biz.subcat} &mdash; ${biz.address}</p>
+          </div>
+          <span class="bronze-badge">Placeholder</span>
+        </div>
+        <div class="bronze-body">
+          <p class="bronze-desc">
+            ${biz.name} is listed in the ${biz.subcat} category on Papamoa.info. Basic contact details are shown below. Claim this listing to add your full description, photos, services, hours and contact information.
+          </p>
+          <div class="bronze-contact-row">
+            <span class="bronze-contact-item">📍 ${biz.address}</span>
+            ${biz.phone && biz.phone !== 'See order platforms' && biz.phone !== 'See individual agents' ? `<span class="bronze-contact-item">📞 ${biz.phone}</span>` : ''}
+          </div>
+
+          <div class="bronze-upgrade">
+            <div class="bu-eyebrow">Claim your listing</div>
+            <h3>Is this your business?</h3>
+            <p>Upgrade to Silver or Gold to take control of this listing, add your full description, photos, services and contact details — and start appearing in Pāpāmoa search results with Papamoa.info's 20+ years of domain authority.</p>
+            <div class="bronze-upgrade-btns">
+              <a href="/advertise#silver" class="btn-upgrade-silver">◆ Silver — $599 + GST/yr</a>
+              <a href="/advertise#gold" class="btn-upgrade-gold">⭐ Gold Spotlight — $1,200 + GST/yr</a>
+            </div>
+          </div>
+
+          <!-- TIER COMPARISON -->
+          <div class="pricing-compare" style="margin-top:24px;">
+            <div class="pricing-col current">
+              <span class="pc-tier" style="color:#9A7060;">Placeholder</span>
+              <div class="pc-price">Free <span>unregistered</span></div>
+              <ul class="pc-feature-list">
+                <li>Basic name &amp; address</li>
+                <li class="no">No description</li>
+                <li class="no">No photos</li>
+                <li class="no">No contact links</li>
+                <li class="no">No services listed</li>
+                <li class="no">No search priority</li>
+              </ul>
+            </div>
+            <div class="pricing-col">
+              <span class="pc-tier" style="color:var(--silver);">◆ Silver</span>
+              <div class="pc-price">$599 <span>+ GST/yr</span></div>
+              <ul class="pc-feature-list">
+                <li>Full description</li>
+                <li>Up to 9 images</li>
+                <li>Contact links</li>
+                <li>Services listed</li>
+                <li>Hours displayed</li>
+                <li class="no">No hero banner</li>
+                <li class="no">Sub-category position 2+</li>
+              </ul>
+            </div>
+            <div class="pricing-col highlighted">
+              <span class="pc-tier" style="color:var(--gold);">⭐ Gold Spotlight</span>
+              <div class="pc-price" style="color:var(--gold);">$1,200 <span>+ GST/yr</span></div>
+              <ul class="pc-feature-list">
+                <li>Full-width hero banner</li>
+                <li>Photo gallery (×9+)</li>
+                <li>Top of sub-category</li>
+                <li>Review showcase</li>
+                <li>Unlimited AI sub-pages*</li>
+                <li>Menu Add-On free yr 1*</li>
+                <li>Lifetime price lock*</li>
+              </ul>
+              <span style="font-size:0.65rem;color:var(--muted);">*Founding Member offer</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// Init
+renderListing();
+</script>
+</body>
+</html>
