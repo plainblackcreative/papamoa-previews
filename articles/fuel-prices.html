@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuel Stations & Fuel Prices in Pāpāmoa | Papamoa.info</title>
+  <meta name="description" content="Fuel stations in Pāpāmoa — petrol and diesel prices, station locations, hours and EV charging nearby. Community-updated prices via Gaspy NZ.">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#2B3F5C;--blue:#3AABDE;--lime:#7DC143;--sand:#F5EFE0;--dune:#D4C4A0;--coral:#E8344A;--white:#fff;--body:#1E2D3E;--muted:#607080;--border:#DDE5EE;--bg:#F4F7FA;--gold:#C8962A}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--body);line-height:1.65}
+    a{color:var(--blue)}
+    .site-nav{background:var(--navy);padding:10px 24px;display:flex;align-items:center;gap:16px}
+    .nav-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff;text-decoration:none}
+    .nav-brand em{font-style:normal;color:var(--blue)}
+    .breadcrumb{font-size:0.75rem;color:rgba(255,255,255,0.45)}
+    .breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none}
+    .breadcrumb span{margin:0 5px;opacity:0.4}
+    .hero{background:linear-gradient(135deg,#0D1B2A,#1A2D3A);padding:40px 24px 36px;position:relative;overflow:hidden}
+    .hero::before{content:'⛽';position:absolute;right:50px;top:50%;transform:translateY(-50%);font-size:7rem;opacity:0.07}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--coral))}
+    .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+    .hero-eye{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px}
+    .hero h1 em{font-style:italic;color:var(--gold)}
+    .hero-sub{font-size:0.93rem;color:rgba(255,255,255,0.65);max-width:580px;line-height:1.7}
+    .page-wrap{max-width:900px;margin:0 auto;padding:32px 20px 80px;display:grid;grid-template-columns:1fr 260px;gap:28px;align-items:start}
+    .section{margin-bottom:40px}
+    .section-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px}
+    p{font-size:0.87rem;color:var(--body);line-height:1.75;margin-bottom:12px}
+    /* STATION CARDS */
+    .station-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px}
+    .sc-head{display:flex;gap:0}
+    .sc-logo{width:60px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+    .sc-header{padding:14px 16px;flex:1}
+    .sc-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:3px}
+    .sc-addr{font-size:0.75rem;color:var(--muted)}
+    .sc-body{padding:12px 16px;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .fuel-price{text-align:center;padding:10px;background:var(--bg);border-radius:7px}
+    .fp-type{font-size:0.68rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+    .fp-val{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy)}
+    .fp-val.na{font-size:0.8rem;color:var(--muted);font-family:'Figtree',sans-serif;font-style:italic}
+    .fp-updated{font-size:0.66rem;color:var(--muted);margin-top:2px}
+    /* PRICE NOTE */
+    .price-note{background:#FFF8E8;border:1px solid #F5C842;border-radius:8px;padding:12px 15px;font-size:0.82rem;color:#6A4800;margin-bottom:16px;line-height:1.55}
+    /* GASPY PROMO */
+    .gaspy-box{background:linear-gradient(135deg,#1A3050,#2B4060);border-radius:10px;padding:16px 18px;margin-bottom:16px;display:flex;align-items:center;gap:16px}
+    .gaspy-icon{font-size:2rem;flex-shrink:0}
+    .gaspy-text h4{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:4px}
+    .gaspy-text p{font-size:0.81rem;color:rgba(255,255,255,0.55);line-height:1.5;margin:0}
+    .gaspy-text a{color:var(--blue)}
+    /* SUBMIT FORM */
+    .submit-form{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px}
+    .submit-form h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+    .form-group{display:flex;flex-direction:column;gap:5px}
+    .form-group label{font-size:0.75rem;font-weight:700;color:var(--navy)}
+    .form-group select,.form-group input{padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.84rem;font-family:'Figtree',sans-serif;background:var(--bg);color:var(--body)}
+    .form-group select:focus,.form-group input:focus{outline:none;border-color:var(--blue)}
+    .submit-btn{background:var(--navy);color:#fff;border:none;padding:10px 20px;border-radius:6px;font-family:'Figtree',sans-serif;font-weight:700;font-size:0.84rem;cursor:pointer;width:100%;margin-top:4px}
+    .submit-btn:hover{background:#1A2A40}
+    .form-note{font-size:0.72rem;color:var(--muted);margin-top:8px;line-height:1.5}
+    /* AD */
+    .ad-spot{border-radius:10px;overflow:hidden;border:1px solid var(--dune);margin-bottom:12px}
+    .ad-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:5px 12px;background:#FAFAF7;border-bottom:1px solid var(--border);text-align:center}
+    .ad-inner{padding:14px;background:#fff}
+    .ad-ph{background:var(--bg);border:1.5px dashed var(--dune);border-radius:7px;padding:14px;text-align:center}
+    .ad-ph p{font-size:0.78rem;color:var(--muted);margin-bottom:5px}
+    .ad-ph a{font-size:0.78rem;font-weight:700;color:var(--blue)}
+    .sidebar-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+    .sidebar-card h4{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:10px}
+    .sidebar-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+    .sidebar-list li{font-size:0.82rem;color:var(--muted);padding-left:13px;position:relative;line-height:1.4}
+    .sidebar-list li::before{content:'›';position:absolute;left:0;color:var(--blue);font-weight:700}
+    .site-footer{background:var(--navy);padding:18px 24px;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:40px}
+    .site-footer a{color:var(--blue)}
+    #success-msg{display:none;background:#EAF7EE;border:1px solid var(--lime);border-radius:8px;padding:12px 15px;font-size:0.84rem;color:#1A5A2A;margin-top:10px}
+    @media(max-width:680px){.page-wrap{grid-template-columns:1fr}.sc-body{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="/" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb"><a href="/">Home</a><span>/</span>Fuel Prices</span>
+</nav>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eye">Fuel Stations · Pāpāmoa Beach · Bay of Plenty</div>
+    <h1>Fuel Stations &amp;<br><em>Prices</em> in Pāpāmoa</h1>
+    <p class="hero-sub">Every petrol station in Pāpāmoa — locations, hours and community-reported fuel prices. Help keep prices current by submitting what you paid.</p>
+  </div>
+</header>
+<div class="page-wrap">
+  <main>
+
+    <div class="price-note">
+      <strong>Community-reported prices:</strong> Fuel prices below are reported by Pāpāmoa residents and are not guaranteed to be current. For the most accurate real-time prices, use the <strong>Gaspy app</strong> — the best free fuel price tracker in New Zealand. Prices shown are the most recent community submissions.
+    </div>
+
+    <section class="section">
+      <h2 class="section-title"><span>⛽</span> Pāpāmoa Fuel Stations</h2>
+
+      <div class="station-card">
+        <div class="sc-head">
+          <div class="sc-logo">⛽</div>
+          <div class="sc-header">
+            <div class="sc-name">Mobil Pāpāmoa</div>
+            <div class="sc-addr">Pāpāmoa Beach Road, near Fashion Island</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="fuel-price">
+            <div class="fp-type">91 Unleaded</div>
+            <div class="fp-val na">Check Gaspy</div>
+          </div>
+          <div class="fuel-price">
+            <div class="fp-type">95 Premium</div>
+            <div class="fp-val na">Check Gaspy</div>
+          </div>
+          <div class="fuel-price">
+            <div class="fp-type">Diesel</div>
+            <div class="fp-val na">Check Gaspy</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="station-card">
+        <div class="sc-head">
+          <div class="sc-logo">⛽</div>
+          <div class="sc-header">
+            <div class="sc-name">Z Energy Pāpāmoa</div>
+            <div class="sc-addr">Pāpāmoa Beach Road, Pāpāmoa</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="fuel-price">
+            <div class="fp-type">91 Unleaded</div>
+            <div class="fp-val na">Check Gaspy</div>
+          </div>
+          <div class="fuel-price">
+            <div class="fp-type">95 Premium</div>
+            <div class="fp-val na">Check Gaspy</div>
+          </div>
+          <div class="fuel-price">
+            <div class="fp-type">Diesel</div>
+            <div class="fp-val na">Check Gaspy</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="station-card">
+        <div class="sc-head">
+          <div class="sc-logo">⛽</div>
+          <div class="sc-header">
+            <div class="sc-name">BP / Gull / New World fuel</div>
+            <div class="sc-addr">Various locations — check Gaspy for current stations</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="fuel-price">
+            <div class="fp-type">All grades</div>
+            <div class="fp-val na">Use Gaspy app</div>
+            <div class="fp-updated">For real-time prices</div>
+          </div>
+          <div class="fuel-price">
+            <div class="fp-type">Location</div>
+            <div class="fp-val na">Pāpāmoa &amp; nearby</div>
+          </div>
+          <div class="fuel-price">
+            <div class="fp-type">Live data</div>
+            <div class="fp-val na">gaspy.co.nz</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GASPY PROMO -->
+    <div class="gaspy-box">
+      <span class="gaspy-icon">📱</span>
+      <div class="gaspy-text">
+        <h4>Use Gaspy for real-time fuel prices</h4>
+        <p>Gaspy is the free NZ app for finding the cheapest petrol near you — right now. Crowd-sourced, up-to-the-minute prices across all stations. Download at <a href="https://www.gaspy.co.nz" target="_blank" rel="noopener">gaspy.co.nz</a> or search "Gaspy" in the App Store / Google Play.</p>
+      </div>
+    </div>
+
+    <!-- COMMUNITY SUBMIT FORM -->
+    <section class="section">
+      <h2 class="section-title"><span>📢</span> Submit a Price</h2>
+      <div class="submit-form">
+        <h4>Seen a price at a Pāpāmoa station? Let the community know.</h4>
+        <form id="price-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="station">Station</label>
+              <select id="station" name="station" required>
+                <option value="">Select station...</option>
+                <option>Mobil Pāpāmoa Beach Road</option>
+                <option>Z Energy Pāpāmoa</option>
+                <option>BP Pāpāmoa</option>
+                <option>Gull Pāpāmoa</option>
+                <option>New World Pāpāmoa fuel</option>
+                <option>Other — specify below</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fuel-type">Fuel type</label>
+              <select id="fuel-type" name="fuel_type" required>
+                <option value="">Select type...</option>
+                <option>91 Unleaded</option>
+                <option>95 Premium</option>
+                <option>98 Premium</option>
+                <option>Diesel</option>
+                <option>LPG</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="price">Price per litre (e.g. 2.459)</label>
+              <input type="text" id="price" name="price" placeholder="2.459" required pattern="[0-9]+\.[0-9]{1,3}">
+            </div>
+            <div class="form-group">
+              <label for="your-name">Your name (optional)</label>
+              <input type="text" id="your-name" name="name" placeholder="Optional">
+            </div>
+          </div>
+          <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
+          <input type="hidden" name="subject" value="Fuel price submission — Papamoa.info">
+          <input type="hidden" name="from_name" value="Papamoa.info Fuel Prices">
+          <button type="submit" class="submit-btn">Submit price →</button>
+          <div id="success-msg">✓ Thanks — price submitted! It'll appear after verification.</div>
+          <p class="form-note">Prices are reviewed before publishing. Submissions help keep this page useful for everyone in Pāpāmoa.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- AD SPOTS -->
+    <div class="ad-spot">
+      <div class="ad-label">⭐ Gold Spotlight — Fuel Station</div>
+      <div class="ad-inner"><div class="ad-ph">
+        <p>Fuel station in Pāpāmoa? A Gold Spotlight gets your station seen first by every local searching for petrol prices.</p>
+        <a href="/advertise">Claim Gold Spotlight →</a>
+      </div></div>
+    </div>
+
+    <section class="section">
+      <h2 class="section-title"><span>🔋</span> EV Charging in Pāpāmoa</h2>
+      <p>EV charging infrastructure in Pāpāmoa is expanding as adoption increases across the Bay of Plenty. Current charging points are available at The Sands Town Centre and selected business carparks. For a full map of current EV chargers, check <a href="https://www.plugshare.com" target="_blank" rel="noopener">PlugShare</a> or ChargeNet's website — both show real-time charger availability near Pāpāmoa.</p>
+    </section>
+
+  </main>
+
+  <aside>
+    <div class="sidebar-card">
+      <h4>Live price tools</h4>
+      <ul class="sidebar-list">
+        <li><a href="https://www.gaspy.co.nz" target="_blank" rel="noopener">Gaspy NZ — free fuel app</a></li>
+        <li><a href="https://www.plugshare.com" target="_blank" rel="noopener">PlugShare — EV chargers</a></li>
+        <li><a href="https://www.mbie.govt.nz/building-and-energy/energy-and-natural-resources/energy-statistics-and-modelling/energy-statistics/weekly-fuel-prices/" target="_blank" rel="noopener">MBIE weekly fuel data</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-card">
+      <h4>Nearby</h4>
+      <ul class="sidebar-list">
+        <li><a href="/shopping-centres">Shopping centres</a></li>
+        <li><a href="/tauranga">Tauranga fuel stations</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+<footer class="site-footer">
+  <a href="/">Papamoa.info</a> — Fuel prices are community-reported and may not reflect current pump prices. Always confirm at the pump. Use Gaspy for real-time data.
+</footer>
+<script>
+document.getElementById('price-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.submit-btn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+  const data = new FormData(this);
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {method:'POST',body:data});
+    if (res.ok) {
+      document.getElementById('success-msg').style.display = 'block';
+      this.reset();
+    }
+  } catch(err) {}
+  btn.textContent = 'Submit price →';
+  btn.disabled = false;
+});
+</script>
+</body>
+</html>

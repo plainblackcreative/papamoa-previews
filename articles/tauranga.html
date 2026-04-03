@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tauranga, New Zealand — City Guide, Things to Do & Local Directory | Papamoa.info</title>
+  <meta name="description" content="Tauranga is New Zealand's fifth-largest city and one of the fastest-growing. Explore what to do, where to eat, where to stay, and why Pāpāmoa Beach is the best base for your visit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #2B3F5C; --blue: #3AABDE; --lime: #7DC143; --sand: #F5EFE0;
+      --dune: #D4C4A0; --coral: #E8344A; --white: #fff; --body: #1E2D3E;
+      --muted: #607080; --border: #DDE5EE; --bg: #F4F7FA; --gold: #C8962A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
+    a { color: var(--blue); }
+
+    .site-nav { background: var(--navy); padding: 10px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
+    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--blue); }
+    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(160deg, #0D1B2A 0%, #1A3050 50%, #2B3F5C 100%);
+      padding: 56px 24px 52px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%233AABDE' fill-opacity='0.04'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--lime)); }
+    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+    .hero h1 em { font-style: italic; color: var(--blue); }
+    .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.65); max-width: 600px; line-height: 1.75; margin-bottom: 28px; }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+    .hs { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 18px; }
+    .hs-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; line-height: 1; }
+    .hs-label { font-size: 0.65rem; color: rgba(255,255,255,0.45); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 3px; }
+    .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-primary { background: var(--blue); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.84rem; padding: 11px 20px; border-radius: 6px; text-decoration: none; transition: background 0.2s; }
+    .btn-primary:hover { background: #2A8FBE; color: #fff; }
+    .btn-secondary { background: transparent; color: rgba(255,255,255,0.75); font-family: 'Figtree', sans-serif; font-weight: 600; font-size: 0.84rem; padding: 11px 20px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); text-decoration: none; transition: all 0.2s; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+    /* NETWORK CALLOUT */
+    .network-banner { background: linear-gradient(135deg, var(--blue), #1A7ABE); padding: 16px 24px; }
+    .nb-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .nb-text { font-size: 0.84rem; color: rgba(255,255,255,0.9); }
+    .nb-text strong { color: #fff; }
+    .nb-link { background: rgba(255,255,255,0.2); color: #fff; font-weight: 700; font-size: 0.78rem; padding: 7px 14px; border-radius: 5px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); white-space: nowrap; flex-shrink: 0; }
+    .nb-link:hover { background: rgba(255,255,255,0.3); color: #fff; }
+
+    /* LAYOUT */
+    .page-wrap { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+    .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
+    .main-col { min-width: 0; }
+    .side-col { display: flex; flex-direction: column; gap: 18px; }
+
+    .section { margin-bottom: 48px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px; }
+    p { font-size: 0.88rem; color: var(--body); line-height: 1.8; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* DISTANCE TABLE */
+    .dist-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 16px; }
+    .dist-table th { background: var(--navy); color: rgba(255,255,255,0.7); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+    .dist-table td { padding: 10px 14px; font-size: 0.84rem; border-bottom: 1px solid var(--border); }
+    .dist-table tr:last-child td { border-bottom: none; }
+    .dist-table tr:hover td { background: var(--bg); }
+    .dist-table .dest { font-weight: 600; color: var(--navy); }
+    .dist-table .dist { font-weight: 700; color: var(--blue); }
+    .dist-table .papamoa-row td { background: #EBF5FB; }
+    .dist-table .papamoa-row .dest { color: var(--blue); }
+
+    /* THINGS GRID */
+    .things-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .thing-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    .thing-card h4 { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .thing-card p { font-size: 0.81rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+    /* PAPAMOA PITCH */
+    .pitch-box { background: linear-gradient(135deg, var(--navy), #1A2A40); border-radius: 12px; padding: 24px; margin-bottom: 16px; border: 1px solid rgba(125,193,67,0.3); }
+    .pb-eyebrow { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); margin-bottom: 8px; }
+    .pb-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .pb-points { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+    .pb-points li { font-size: 0.83rem; color: rgba(255,255,255,0.65); padding-left: 16px; position: relative; line-height: 1.5; }
+    .pb-points li::before { content: '✓'; position: absolute; left: 0; color: var(--lime); font-weight: 700; }
+    .pb-link { display: inline-block; background: var(--lime); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.8rem; padding: 9px 16px; border-radius: 5px; text-decoration: none; }
+
+    /* FOUNDING MEMBERS */
+    .fm-box { background: linear-gradient(135deg, #1A2A10, #2B4A20); border-radius: 12px; padding: 20px; border: 1px solid rgba(125,193,67,0.3); margin-bottom: 14px; }
+    .fm-eye { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); margin-bottom: 6px; }
+    .fm-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .fm-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 12px; }
+    .fm-link { display: block; background: var(--lime); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.78rem; padding: 8px 14px; border-radius: 5px; text-decoration: none; text-align: center; }
+
+    /* AD SPOTS */
+    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); margin-bottom: 14px; }
+    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 5px 12px; background: #FAFAF7; border-bottom: 1px solid var(--border); text-align: center; }
+    .ad-inner { padding: 14px; background: var(--white); }
+    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 16px; text-align: center; }
+    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); }
+
+    /* SIDEBAR */
+    .sidebar-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+    .sidebar-card h4 { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .sidebar-list li { font-size: 0.82rem; color: var(--muted); padding-left: 13px; position: relative; line-height: 1.4; }
+    .sidebar-list li::before { content: '›'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+    .sidebar-list li strong { color: var(--body); }
+
+    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
+    .site-footer a { color: var(--blue); }
+
+    @media (max-width: 720px) {
+      .two-col { grid-template-columns: 1fr; }
+      .side-col { order: -1; }
+      .things-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb">
+    <a href="/">Home</a><span>/</span>Tauranga
+  </span>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Bay of Plenty · New Zealand</div>
+    <h1>Tauranga,<br><em>New Zealand</em></h1>
+    <p class="hero-sub">New Zealand's fifth-largest city and one of the fastest-growing. Tauranga sits at the heart of the Bay of Plenty — a harbour city of world-class beaches, restaurants, arts and outdoor adventure. Pāpāmoa is 11 km east and the best base for your visit.</p>
+    <div class="hero-stats">
+      <div class="hs">
+        <div class="hs-num">~163,000</div>
+        <div class="hs-label">City population (2025)</div>
+      </div>
+      <div class="hs">
+        <div class="hs-num">5th</div>
+        <div class="hs-label">Largest NZ city</div>
+      </div>
+      <div class="hs">
+        <div class="hs-num">Bay of Plenty</div>
+        <div class="hs-label">Region</div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="https://www.tauranganz.info" target="_blank" rel="noopener" class="btn-primary">Full Tauranga directory →</a>
+      <a href="#papamoa-advantage" class="btn-secondary">Why stay in Pāpāmoa?</a>
+    </div>
+  </div>
+</header>
+
+<div class="network-banner">
+  <div class="nb-inner">
+    <p class="nb-text">Looking for the complete Tauranga city directory? <strong>TaurangaNZ.info</strong> lists every business, attraction and service across the city.</p>
+    <a href="https://www.tauranganz.info" target="_blank" rel="noopener" class="nb-link">Visit TaurangaNZ.info →</a>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="two-col">
+    <main class="main-col">
+
+      <!-- ABOUT TAURANGA -->
+      <section class="section">
+        <h2 class="section-title"><span>🏙️</span> About Tauranga</h2>
+        <p>Tauranga is a harbour city on the Bay of Plenty coast in the North Island of New Zealand, approximately 204 kilometres south-east of Auckland. It is the urban centre for a region that includes Mount Maunganui, Pāpāmoa, Te Puke and the Western Bay of Plenty. The city has grown rapidly over the past two decades, driven by lifestyle appeal, a warm climate and expanding port and logistics industries.</p>
+        <p>The Tauranga Harbour — Tauranga Moana — is one of the largest and most sheltered natural harbours in New Zealand and was of immense strategic importance to the iwi of the region, particularly Ngāi Te Rangi. The 1864 Battle of Gate Pā, fought near the city centre, was one of the most significant engagements of the New Zealand Wars. The city's Māori heritage is visible in its place names, marae and cultural institutions.</p>
+        <p>Today Tauranga is known for its beaches, café culture, outdoor recreation and growing arts scene. The CBD has undergone substantial regeneration investment and the city continues to attract new residents from across New Zealand and internationally.</p>
+      </section>
+
+      <!-- THINGS TO DO -->
+      <section class="section">
+        <h2 class="section-title"><span>🎯</span> Things to Do in & Around Tauranga</h2>
+
+        <div class="things-grid">
+          <div class="thing-card">
+            <h4>🏔️ Climb Mauao</h4>
+            <p>The iconic Mount Maunganui — Mauao — offers a 3.4km base track with harbour and ocean views, or a harder summit climb to 232m. No dogs. 15 minutes from Pāpāmoa.</p>
+          </div>
+          <div class="thing-card">
+            <h4>🌊 Pāpāmoa Beach</h4>
+            <p>16 kilometres of white sand beach — the longest and least crowded stretch of ocean beach in the Bay of Plenty. Surfing, swimming, fishing and walks. 11km from central Tauranga.</p>
+          </div>
+          <div class="thing-card">
+            <h4>🍷 Tauranga CBD</h4>
+            <p>The regenerated city centre has a strong café, restaurant and bar scene. The Strand, Elizabeth Street and The Crossing are the main precincts. 20 minutes from Pāpāmoa.</p>
+          </div>
+          <div class="thing-card">
+            <h4>🏄 Surfing</h4>
+            <p>Pāpāmoa, Omanu and Mount Maunganui beaches all have surfable breaks. Surf schools and board hire are available at Mount Maunganui. Pāpāmoa Surf Life Saving Club patrols the beach in season.</p>
+          </div>
+          <div class="thing-card">
+            <h4>🌿 McLaren Falls</h4>
+            <p>Beautiful waterfall park 20 minutes south-west of Tauranga in the Wairoa River gorge. Night glow-worm walks available seasonally. Popular for families and walkers.</p>
+          </div>
+          <div class="thing-card">
+            <h4>🛶 Waimarino Adventure</h4>
+            <p>Kayaking, paddleboarding and aqua cycling on the Waimarino estuary near Bethlehem. Family-friendly and suitable for all levels.</p>
+          </div>
+          <div class="thing-card">
+            <h4>⛰️ Pāpāmoa Hills</h4>
+            <p>182-hectare cultural heritage regional park with ancient pā sites, walking tracks and panoramic views from the 224m summit. 20 minutes from the city. No dogs.</p>
+          </div>
+          <div class="thing-card">
+            <h4>🎨 Tauranga Art Gallery</h4>
+            <p>Free entry to the Tauranga Art Gallery on Wharf Street. Changing exhibitions featuring New Zealand and international contemporary art alongside a permanent collection.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- DISTANCES FROM PAPAMOA -->
+      <section class="section">
+        <h2 class="section-title"><span>📍</span> Distances from Pāpāmoa</h2>
+        <p>Pāpāmoa's location east of Tauranga puts it within easy reach of the city's attractions while offering a quieter, beach-oriented base.</p>
+
+        <table class="dist-table">
+          <thead>
+            <tr>
+              <th>Destination</th>
+              <th>Distance from Pāpāmoa</th>
+              <th>Drive time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="papamoa-row">
+              <td class="dest">📍 Pāpāmoa Beach</td>
+              <td class="dist">— (you're here)</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="dest">Mount Maunganui (Mauao)</td>
+              <td class="dist">~10 km</td>
+              <td>~10–15 min</td>
+            </tr>
+            <tr>
+              <td class="dest">Tauranga CBD / city centre</td>
+              <td class="dist">~18 km</td>
+              <td>~20 min</td>
+            </tr>
+            <tr>
+              <td class="dest">Tauranga Hospital</td>
+              <td class="dist">~16 km</td>
+              <td>~18 min</td>
+            </tr>
+            <tr>
+              <td class="dest">Tauranga Airport (TRG)</td>
+              <td class="dist">~14 km</td>
+              <td>~15 min</td>
+            </tr>
+            <tr>
+              <td class="dest">Te Puke</td>
+              <td class="dist">~20 km</td>
+              <td>~20 min</td>
+            </tr>
+            <tr>
+              <td class="dest">Rotorua</td>
+              <td class="dist">~65 km</td>
+              <td>~55 min</td>
+            </tr>
+            <tr>
+              <td class="dest">Hamilton</td>
+              <td class="dist">~115 km</td>
+              <td>~1 hr 20 min</td>
+            </tr>
+            <tr>
+              <td class="dest">Auckland</td>
+              <td class="dist">~220 km</td>
+              <td>~2 hrs 30 min</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- PAPAMOA ADVANTAGE -->
+      <section class="section" id="papamoa-advantage">
+        <h2 class="section-title"><span>🌊</span> Why Stay in Pāpāmoa?</h2>
+
+        <div class="pitch-box">
+          <div class="pb-eyebrow">★ The Pāpāmoa advantage</div>
+          <div class="pb-title">Tauranga's beach suburb — quieter, roomier, ocean-front</div>
+          <ul class="pb-points">
+            <li>16 kilometres of uncrowded white sand beach — right at your door</li>
+            <li>Accommodation from budget to boutique, often cheaper than city centre</li>
+            <li>10 minutes to Mount Maunganui, 20 minutes to Tauranga CBD</li>
+            <li>Strong café and restaurant strip along Pāpāmoa Beach Road</li>
+            <li>Quieter, more relaxed vibe than the busy Mount Maunganui strip</li>
+            <li>Great base for AIMS Games, Mauao walks, Pāpāmoa Hills and day trips</li>
+          </ul>
+          <a href="/" class="pb-link">Browse Pāpāmoa's directory →</a>
+        </div>
+      </section>
+
+      <!-- GOLD FOUNDING MEMBERS -->
+      <section class="section">
+        <h2 class="section-title"><span>⭐</span> Pāpāmoa Gold Members — Visible in Tauranga Too</h2>
+        <p>Gold Founding Members of the Papamoa.info directory also receive a Silver listing on TaurangaNZ.info as part of the Two-for-One Network Boost. Pāpāmoa businesses show up when Tauranga visitors are searching — expanding their reach without extra cost.</p>
+
+        <div class="ad-spot">
+          <div class="ad-label">⭐ Gold Spotlight — Visible on Tauranga Page</div>
+          <div class="ad-inner">
+            <div class="ad-placeholder">
+              <p>Gold Founding Members appear here on the Tauranga gateway page. Reach visitors searching for Tauranga who discover Pāpāmoa.</p>
+              <a href="/advertise">Enquire about Gold Founding Membership →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ad-spot">
+          <div class="ad-label">Accommodation — Tauranga / Pāpāmoa</div>
+          <div class="ad-inner">
+            <div class="ad-placeholder">
+              <p>Accommodation in Pāpāmoa or Tauranga? This page is seen by visitors searching for "Tauranga accommodation."</p>
+              <a href="/advertise">Get listed →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ad-spot">
+          <div class="ad-label">Activities & Experiences</div>
+          <div class="ad-inner">
+            <div class="ad-placeholder">
+              <p>Tours, experiences or activities near Tauranga? Appear in front of visitors planning their trip.</p>
+              <a href="/advertise">Claim this spot →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="side-col">
+
+      <div class="sidebar-card">
+        <h4>Tauranga quick facts</h4>
+        <ul class="sidebar-list">
+          <li><strong>Population:</strong> ~163,000 (2025 est.)</li>
+          <li><strong>Region:</strong> Bay of Plenty</li>
+          <li><strong>Airport:</strong> Tauranga Airport (TRG)</li>
+          <li><strong>Mayor:</strong> Mahé Drysdale (2024)</li>
+          <li><strong>Elevation:</strong> Sea level</li>
+          <li><strong>Climate:</strong> Warm temperate, high sunshine hours</li>
+          <li><strong>Iwi:</strong> Ngāi Te Rangi, Ngāti Pūkenga</li>
+          <li><strong>From Auckland:</strong> ~2.5 hrs by road</li>
+        </ul>
+      </div>
+
+      <div class="fm-box">
+        <div class="fm-eye">🔗 Papamoa.info Network</div>
+        <div class="fm-title">TaurangaNZ.info</div>
+        <p class="fm-desc">The full Tauranga city directory — restaurants, accommodation, services and attractions across the whole city.</p>
+        <a href="https://www.tauranganz.info" target="_blank" rel="noopener" class="fm-link">Visit TaurangaNZ.info →</a>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Explore Pāpāmoa</h4>
+        <ul class="sidebar-list">
+          <li><a href="/">Pāpāmoa directory home</a></li>
+          <li><a href="/accommodation">Accommodation in Pāpāmoa</a></li>
+          <li><a href="/food-drink">Restaurants & cafes</a></li>
+          <li><a href="/walks-tracks">Walks & tracks</a></li>
+          <li><a href="/mount-maunganui">Mount Maunganui guide</a></li>
+          <li><a href="/papamoa-hills">Pāpāmoa Hills Park</a></li>
+          <li><a href="/population-statistics">About Pāpāmoa</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Getting to Tauranga</h4>
+        <ul class="sidebar-list">
+          <li><strong>By air:</strong> Air New Zealand flights from Auckland, Wellington, Christchurch to TRG</li>
+          <li><strong>By road from Auckland:</strong> ~2.5 hrs via SH1 and SH2</li>
+          <li><strong>By bus:</strong> InterCity coaches from Auckland and Rotorua</li>
+          <li><strong>From Rotorua:</strong> ~55 min via SH33</li>
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="/">Papamoa.info</a> — This page is part of the Papamoa.info local directory network. For the full Tauranga business directory, visit <a href="https://www.tauranganz.info" target="_blank" rel="noopener">TaurangaNZ.info</a>.
+</footer>
+
+</body>
+</html>

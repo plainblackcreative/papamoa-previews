@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mount Maunganui (Mauao) — Walks, Beach, Village & Getting There from Pāpāmoa | Papamoa.info</title>
+  <meta name="description" content="Mount Maunganui guide — Mauao base track and summit walk, Mount beach, the village strip, hot pools and everything 10 minutes from Pāpāmoa. No dogs on the Mount.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #2B3F5C; --blue: #3AABDE; --lime: #7DC143; --sand: #F5EFE0;
+      --dune: #D4C4A0; --coral: #E8344A; --white: #fff; --body: #1E2D3E;
+      --muted: #607080; --border: #DDE5EE; --bg: #F4F7FA; --gold: #C8962A;
+      --teal: #2A8080;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
+    a { color: var(--blue); }
+
+    .site-nav { background: var(--navy); padding: 10px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
+    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--blue); }
+    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(155deg, #0A1E30 0%, #1A3045 40%, #0D3040 100%);
+      padding: 52px 24px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -60px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(58,171,222,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--blue), var(--lime));
+    }
+    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 14px; }
+    .hero h1 em { font-style: italic; color: var(--blue); }
+    .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.75; margin-bottom: 28px; }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .chip { font-size: 0.72rem; font-weight: 600; padding: 5px 12px; border-radius: 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.75); }
+    .chip.warn { background: rgba(232,52,74,0.15); border-color: rgba(232,52,74,0.3); color: #FF9090; }
+    .hero-distance { display: inline-flex; align-items: center; gap: 10px; background: rgba(58,171,222,0.15); border: 1px solid rgba(58,171,222,0.3); border-radius: 8px; padding: 10px 16px; }
+    .hd-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); }
+    .hd-val { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: #fff; }
+    .hd-sub { font-size: 0.68rem; color: rgba(255,255,255,0.45); }
+
+    /* LAYOUT */
+    .page-wrap { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+    .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
+    .main-col { min-width: 0; }
+    .side-col { display: flex; flex-direction: column; gap: 18px; }
+
+    .section { margin-bottom: 48px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px; }
+    p { font-size: 0.88rem; color: var(--body); line-height: 1.8; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* TRACK CARDS */
+    .track-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 12px; display: flex; }
+    .tc-icon { width: 60px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .tc-body { padding: 14px 16px; flex: 1; }
+    .tc-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .tc-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 6px; }
+    .tt { font-size: 0.67rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
+    .tt-easy { background: #EAF7EE; color: #1A7A42; }
+    .tt-mod { background: #FFF3E0; color: #8B4500; }
+    .tt-hard { background: #FDEAEA; color: #B71C1C; }
+    .tt-blue { background: #EBF5FB; color: #1A5080; }
+    .tt-nodogs { background: #FDEAEA; color: #B71C1C; }
+    .tc-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+    .tc-meta { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .tcm { font-size: 0.75rem; color: var(--muted); }
+    .tcm strong { color: var(--navy); }
+
+    /* COMPARISON TABLE */
+    .compare-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 16px; }
+    .compare-table th { background: var(--navy); color: rgba(255,255,255,0.7); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+    .compare-table th.papamoa-col { background: #1A5C28; }
+    .compare-table td { padding: 10px 14px; font-size: 0.83rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table .row-label { font-weight: 700; color: var(--navy); font-size: 0.8rem; }
+    .compare-table .papamoa-cell { background: #F0FAF4; }
+    .compare-table tr:hover td { background: var(--bg); }
+    .compare-table tr:hover .papamoa-cell { background: #E4F5EA; }
+    .tick { color: var(--lime); font-weight: 700; }
+    .cross { color: var(--coral); font-weight: 700; }
+
+    /* ATTRACTIONS GRID */
+    .att-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .att-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 15px; }
+    .att-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+    .att-card p { font-size: 0.81rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+    /* DOG ALERT */
+    .dog-alert { background: #FDEAEA; border-left: 4px solid var(--coral); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 0.84rem; color: #7A1020; margin-bottom: 20px; line-height: 1.55; }
+
+    /* PITCH BOX */
+    .pitch-box { background: linear-gradient(135deg, #1A2A10, #2B4820); border-radius: 12px; padding: 22px; border: 1px solid rgba(125,193,67,0.3); margin-bottom: 16px; }
+    .pb-eyebrow { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); margin-bottom: 7px; }
+    .pb-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .pb-points { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+    .pb-points li { font-size: 0.83rem; color: rgba(255,255,255,0.65); padding-left: 16px; position: relative; line-height: 1.5; }
+    .pb-points li::before { content: '✓'; position: absolute; left: 0; color: var(--lime); font-weight: 700; }
+    .pb-link { display: inline-block; background: var(--lime); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.8rem; padding: 9px 16px; border-radius: 5px; text-decoration: none; }
+
+    /* AD SPOTS */
+    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); margin-bottom: 14px; }
+    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 5px 12px; background: #FAFAF7; border-bottom: 1px solid var(--border); text-align: center; }
+    .ad-inner { padding: 14px; background: var(--white); }
+    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 16px; text-align: center; }
+    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); }
+    .ad-gold { background: linear-gradient(135deg, var(--navy), #1A2A40); border-radius: 8px; padding: 16px; }
+    .ag-eye { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+    .ag-name { font-family: 'Playfair Display', serif; font-size: 0.97rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
+    .ag-desc { font-size: 0.79rem; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 10px; }
+    .ag-link { display: block; background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.78rem; padding: 8px 14px; border-radius: 5px; text-decoration: none; text-align: center; }
+
+    /* SIDEBAR */
+    .sidebar-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+    .sidebar-card h4 { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .sidebar-list li { font-size: 0.82rem; color: var(--muted); padding-left: 13px; position: relative; line-height: 1.4; }
+    .sidebar-list li::before { content: '›'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+    .sidebar-list li strong { color: var(--body); }
+
+    .info-block { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+    .ir { display: flex; gap: 10px; padding: 9px 14px; border-bottom: 1px solid var(--border); font-size: 0.83rem; }
+    .ir:last-child { border-bottom: none; }
+    .ir-lbl { font-weight: 700; color: var(--navy); min-width: 110px; flex-shrink: 0; font-size: 0.77rem; }
+    .ir-val { color: var(--muted); line-height: 1.4; }
+
+    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
+    .site-footer a { color: var(--blue); }
+
+    @media (max-width: 720px) {
+      .two-col { grid-template-columns: 1fr; }
+      .side-col { order: -1; }
+      .att-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb">
+    <a href="/">Home</a><span>/</span>Mount Maunganui
+  </span>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Bay of Plenty · 10 minutes from Pāpāmoa</div>
+    <h1>Mount Maunganui<br><em>Mauao</em></h1>
+    <p class="hero-sub">The iconic mountain at the end of the peninsula. Climb it, walk around it, swim below it, eat beside it. Mount Maunganui is one of New Zealand's most visited destinations — and Pāpāmoa puts you 10 minutes away.</p>
+    <div class="hero-chips">
+      <span class="chip">⛰️ 232m summit</span>
+      <span class="chip">🚶 Base track (when open)</span>
+      <span class="chip">🌊 Main beach &amp; Pilot Bay</span>
+      <span class="chip">☕ Mount village strip</span>
+      <span class="chip warn">⚠️ Mauao closed Jan 2026</span>
+      <span class="chip warn">🐕 No dogs on Mauao</span>
+    </div>
+    <div class="hero-distance">
+      <div>
+        <div class="hd-label">From Pāpāmoa Beach</div>
+        <div class="hd-val">~10 km</div>
+        <div class="hd-sub">10–15 minute drive</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <div class="two-col">
+    <main class="main-col">
+
+      <!-- ABOUT MAUAO -->
+      <section class="section">
+        <h2 class="section-title"><span>⛰️</span> About Mauao — Mount Maunganui</h2>
+        <p>Mauao is an extinct volcanic cone rising 232 metres from the tip of a narrow peninsula where the Pacific Ocean meets Tauranga Harbour. Its name means "caught by the morning light" — a reference to the legend of a nameless mountain who, heartbroken and seeking to enter the sea, was caught by the rising sun and turned to stone. The mountain is a taonga (treasure) of immense cultural and spiritual significance to Ngāi Te Rangi, Ngāti Ranginui and Ngāti Pūkenga, who are the mana whenua of the Tauranga Moana region.</p>
+        <p>Today, nearly one million people are believed to walk up or around Mauao every year, making it one of the most-walked landmarks in New Zealand. The suburb of Mount Maunganui — known locally as "the Mount" — clusters around the base of the mountain along a narrow peninsula flanked by surf beach on one side and the sheltered Pilot Bay harbour on the other.</p>
+      </section>
+
+      <!-- MAUAO CLOSURE -->
+      <section class="section">
+        <h2 class="section-title"><span>🚶</span> Walking Tracks on Mauao</h2>
+
+        <div style="background:#FDEAEA;border-left:4px solid var(--coral);border-radius:0 10px 10px 0;padding:16px 18px;margin-bottom:20px;line-height:1.6">
+          <strong style="display:block;font-size:0.9rem;color:#7A1020;margin-bottom:8px">⚠️ Mauao is closed to the public — January 2026 landslide</strong>
+          <p style="font-size:0.84rem;color:#7A1020;margin:0">On 22 January 2026, a catastrophic landslide from Mauao struck the Mount Maunganui Beachside Holiday Park and Mount Hot Pools during record rainfall (274mm in 24 hours). <strong>Six people died.</strong> More than 40 landslides were recorded across the mountain, including 29 on the base track. Mauao remains closed to the public while geotechnical assessment and remediation work continues. The Mount Hot Pools are closed. The campground was destroyed. Tauranga City Council and the Mauao Trust are working on a reopening plan but the timeline is uncertain. Always check <a href="https://www.tauranga.govt.nz" target="_blank" rel="noopener" style="color:#B71C1C">tauranga.govt.nz</a> for current access status before visiting.</p>
+        </div>
+
+        <p style="font-size:0.88rem;color:var(--body);line-height:1.8;margin-bottom:14px">When Mauao reopens, it will be one of New Zealand's most-walked destinations again — nearly one million people visit every year. The information below describes the tracks as they existed before the January 2026 event, for reference when access is restored.</p>
+
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px;opacity:0.7">
+          <div style="background:#F5F0F0;border-bottom:1px solid var(--border);padding:8px 14px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#8B4040">Closed — for reference only when access is restored</div>
+          <div style="padding:14px 16px">
+            <div style="font-weight:700;color:var(--navy);margin-bottom:5px">Mauao Base Track — 3.4 km loop, ~45 min, easy</div>
+            <p style="font-size:0.83rem;color:var(--muted);line-height:1.55;margin:0">The flat base track circled the full mountain from ocean beach to Pilot Bay, passing ancient pōhutukawa trees and offering harbour views. Suited all ages including prams. 29 of the mountain's 40+ landslip areas are on this track — significant remediation required before reopening.</p>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px;opacity:0.7">
+          <div style="background:#F5F0F0;border-bottom:1px solid var(--border);padding:8px 14px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#8B4040">Closed — for reference only when access is restored</div>
+          <div style="padding:14px 16px">
+            <div style="font-weight:700;color:var(--navy);margin-bottom:5px">Waikorire &amp; Oruahine Summit Tracks — to 232m summit, moderate–hard</div>
+            <p style="font-size:0.83rem;color:var(--muted);line-height:1.55;margin:0">Two main summit routes — Waikorire (steeper, eastern side with staircases) and Oruahine (scenic northern side with Pacific views). Both reached the summit viewing platform with panoramic views from Whakaari to the Coromandel. Summit steps on the northern connecting track were completely destroyed in the landslide. The 4WD track also sustained significant damage.</p>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="ir"><span class="ir-lbl">Current status</span><span class="ir-val"><strong>Closed</strong> — all tracks and access points cordoned. Security on site. Do not attempt to enter.</span></div>
+          <div class="ir"><span class="ir-lbl">Mount Hot Pools</span><span class="ir-val"><strong>Closed</strong> — destroyed in the January 2026 landslide. No reopening date confirmed.</span></div>
+          <div class="ir"><span class="ir-lbl">Campground</span><span class="ir-val"><strong>Destroyed</strong> — Mount Maunganui Beachside Holiday Park was the site of the fatal landslide. No reopening.</span></div>
+          <div class="ir"><span class="ir-lbl">Base track</span><span class="ir-val"><strong>Closed</strong> — 29 slip areas on base track. Remediation timeline unknown.</span></div>
+          <div class="ir"><span class="ir-lbl">Monitoring</span><span class="ir-val">A real-time monitoring system with ground-movement alarms is installed at high-risk areas. Only authorised specialists permitted in cordon.</span></div>
+          <div class="ir"><span class="ir-lbl">Current info</span><span class="ir-val"><a href="https://www.tauranga.govt.nz" target="_blank" rel="noopener">tauranga.govt.nz</a> — check before any planned visit</span></div>
+        </div>
+      </section>
+
+      <!-- MOUNT VILLAGE -->
+      <section class="section">
+        <h2 class="section-title"><span>☕</span> The Mount Village</h2>
+        <p>The Mount village strip — centred on Maunganui Road and Marine Parade — is one of the Bay of Plenty's most vibrant café and restaurant precincts. The village itself was not in the January 2026 landslide cordon zone and has remained open for business. Cafes, restaurants, shops and the beach are all accessible — only the immediate area around the base of Mauao is closed.</p>
+
+        <div class="att-grid">
+          <div class="att-card">
+            <h4>☕ Cafes & brunch</h4>
+            <p>The Mount has a disproportionately strong café culture for its size. Multiple award-winning specialty coffee roasters and brunch venues compete for the title of best flat white. Busy on weekends — arrive before 9am or after 11am for shorter waits.</p>
+          </div>
+          <div class="att-card">
+            <h4>🍽️ Restaurants</h4>
+            <p>Marine Parade and the surrounding streets offer everything from casual fish and chips to fine dining. Strong seafood options given proximity to the working fishing harbour. Book ahead for dinner on Friday and Saturday nights in summer.</p>
+          </div>
+          <div class="att-card">
+            <h4>🛍️ Boutique shopping</h4>
+            <p>Independent clothing stores, surf and activewear, jewellery, homewares and gift shops line the Mount's main streets. Notably different from a mall experience — locally owned and curated.</p>
+          </div>
+          <div class="att-card">
+            <h4>🌊 Mount Main Beach</h4>
+            <p>The surf beach along the ocean side of the peninsula remains accessible. A broad, patrolled beach popular for swimming and surfing. Dogs are prohibited year-round on Mount Main Beach and Mauao. Check current access zones at tauranga.govt.nz.</p>
+          </div>
+        </div>
+
+        <div style="background:#FFF8E8;border-left:4px solid #F5C842;border-radius:0 8px 8px 0;padding:12px 15px;font-size:0.84rem;color:#6A4800;line-height:1.55;margin-top:4px">
+          <strong>Mount Hot Pools — closed:</strong> The Mount Hot Pools on Adams Avenue were directly hit in the January 2026 landslide and are closed. No reopening date has been confirmed. The adjacent campground was also destroyed. The village businesses, beach and Pilot Bay are separate from the closed cordon area and are open.
+        </div>
+      </section>
+
+      <!-- PAPAMOA VS MOUNT COMPARISON -->
+      <section class="section">
+        <h2 class="section-title"><span>🔄</span> Pāpāmoa vs Mount Maunganui</h2>
+        <p>Both Pāpāmoa and Mount Maunganui are great places to base yourself in the Bay of Plenty. They offer different experiences — here's an honest comparison for visitors deciding where to stay.</p>
+
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Mount Maunganui</th>
+              <th class="papamoa-col">📍 Pāpāmoa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-label">Beach length</td>
+              <td>Main Beach ~2 km</td>
+              <td class="papamoa-cell"><strong>16 km of beach</strong></td>
+            </tr>
+            <tr>
+              <td class="row-label">Beach crowds (summer)</td>
+              <td>Very busy near village</td>
+              <td class="papamoa-cell"><strong>Quieter, more space</strong></td>
+            </tr>
+            <tr>
+              <td class="row-label">Café & restaurant scene</td>
+              <td><strong>Exceptional — dense strip</strong></td>
+              <td class="papamoa-cell">Good, growing</td>
+            </tr>
+            <tr>
+              <td class="row-label">Mauao walk access</td>
+              <td><span class="tick">✓</span> At the door</td>
+              <td class="papamoa-cell">10 min drive</td>
+            </tr>
+            <tr>
+              <td class="row-label">Accommodation cost</td>
+              <td>Premium (peak demand)</td>
+              <td class="papamoa-cell"><strong>Generally more affordable</strong></td>
+            </tr>
+            <tr>
+              <td class="row-label">Dog-friendly beach</td>
+              <td><span class="cross">✗</span> No dogs on Main Beach or Mauao</td>
+              <td class="papamoa-cell"><span class="tick">✓</span> <strong>Most of beach dog-friendly</strong></td>
+            </tr>
+            <tr>
+              <td class="row-label">Family space</td>
+              <td>Tight peninsula, busy</td>
+              <td class="papamoa-cell"><strong>Spacious, spread out</strong></td>
+            </tr>
+            <tr>
+              <td class="row-label">To Tauranga CBD</td>
+              <td>~8 km</td>
+              <td class="papamoa-cell">~18 km</td>
+            </tr>
+            <tr>
+              <td class="row-label">Hot pools</td>
+              <td><span class="cross">✗</span> Closed — destroyed Jan 2026</td>
+              <td class="papamoa-cell">N/A (10 min to Mount when reopened)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pitch-box">
+          <div class="pb-eyebrow">The Pāpāmoa case</div>
+          <div class="pb-title">Stay in Pāpāmoa — do the Mount as a day trip</div>
+          <ul class="pb-points">
+            <li>16 km of uncrowded beach at your door versus 2 km of busy Mount Main Beach</li>
+            <li>Accommodation typically more affordable, especially in peak season</li>
+            <li>Dog owners get a real beach — dogs are banned at the Mount entirely</li>
+            <li>Families get space to breathe — Gordon Spratt Reserve, quiet streets</li>
+            <li>Mount Maunganui is 10 minutes away for brunch, walks and the hot pools</li>
+            <li>Pāpāmoa Hills and Kaituna River on the doorstep for variety</li>
+          </ul>
+          <a href="/accommodation" class="pb-link">Find accommodation in Pāpāmoa →</a>
+        </div>
+      </section>
+
+      <!-- AD SPOTS -->
+      <section class="section">
+        <h2 class="section-title"><span>⭐</span> Pāpāmoa Businesses — Near the Mount</h2>
+        <p>Gold Founding Members of Papamoa.info gain cross-network visibility — appearing here on the Mount Maunganui gateway page alongside their primary Pāpāmoa listing.</p>
+
+        <div class="ad-spot">
+          <div class="ad-label">⭐ Gold Spotlight — Accommodation near Mount Maunganui</div>
+          <div class="ad-inner">
+            <div class="ad-placeholder">
+              <p>Accommodation in Pāpāmoa seen by visitors searching for "accommodation near Mount Maunganui." Gold Founding Members appear here.</p>
+              <a href="/advertise">Enquire about Gold Founding Membership →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ad-spot">
+          <div class="ad-label">Activities & Tours near Mount Maunganui</div>
+          <div class="ad-inner">
+            <div class="ad-placeholder">
+              <p>Tours, experiences or activities that complement a Mount Maunganui visit? Reach visitors planning their Bay of Plenty trip.</p>
+              <a href="/advertise">Get listed →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ad-spot">
+          <div class="ad-label">Restaurants & Cafes</div>
+          <div class="ad-inner">
+            <div class="ad-placeholder">
+              <p>Restaurant or café in Pāpāmoa? Visitors comparing Mount vs Pāpāmoa for dining land on this page.</p>
+              <a href="/advertise">Claim this spot →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="side-col">
+
+      <div class="sidebar-card">
+        <h4>Mauao at a glance</h4>
+        <ul class="sidebar-list">
+          <li><strong>Height:</strong> 232 metres</li>
+          <li><strong>Type:</strong> Extinct volcanic cone</li>
+          <li><strong>Name means:</strong> Caught by the morning light</li>
+          <li><strong>Status (April 2026):</strong> Closed — January 2026 landslide</li>
+          <li><strong>Deaths:</strong> Six people died 22 January 2026</li>
+          <li><strong>Slips:</strong> 40+ including 29 on base track</li>
+          <li><strong>Hot pools:</strong> Closed — no reopening date</li>
+          <li><strong>Village/beach:</strong> Open</li>
+          <li><strong>Dogs:</strong> Prohibited always</li>
+          <li><strong>From Pāpāmoa:</strong> ~10 km, 10–15 min</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Getting there from Pāpāmoa</h4>
+        <ul class="sidebar-list">
+          <li>Drive west on Pāpāmoa Beach Road</li>
+          <li>Follow signs to Mount Maunganui</li>
+          <li>~10 km, allow 15 min with traffic</li>
+          <li>Bay Hopper Route 30 connects Pāpāmoa and Mount Maunganui</li>
+          <li>Park on Marine Parade or Pilot Bay — arrive early in summer</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Visiting the Mount — April 2026</h4>
+        <ul class="sidebar-list">
+          <li>Mauao tracks and base track remain closed — do not enter the cordon</li>
+          <li>Village cafes, restaurants and boutiques are open</li>
+          <li>Mount Main Beach is accessible — dogs prohibited</li>
+          <li>Hot pools closed — destroyed in January 2026 landslide</li>
+          <li>Check <a href="https://www.tauranga.govt.nz" target="_blank" rel="noopener">tauranga.govt.nz</a> for latest access updates</li>
+          <li>Support Mount businesses — they need visitors</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Explore Pāpāmoa</h4>
+        <ul class="sidebar-list">
+          <li><a href="/">Pāpāmoa directory home</a></li>
+          <li><a href="/accommodation">Accommodation</a></li>
+          <li><a href="/walks-tracks">Walks near Pāpāmoa</a></li>
+          <li><a href="/dogs-papamoa">Dog-friendly beach rules</a></li>
+          <li><a href="/tauranga">Tauranga city guide</a></li>
+          <li><a href="/papamoa-hills">Pāpāmoa Hills Park</a></li>
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="/">Papamoa.info</a> — Mauao closure information sourced from Tauranga City Council, RNZ and NZ Herald (January–February 2026). Six people died in the 22 January 2026 landslide. Always check current access status at <a href="https://www.tauranga.govt.nz" target="_blank" rel="noopener">tauranga.govt.nz</a> before visiting.
+</footer>
+
+</body>
+</html>
