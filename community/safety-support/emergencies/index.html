@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Preparedness | Papamoa.info</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0c1a2a;--deep:#142438;--steel:#1e3450;
+  --sea:#1a6fa0;--sky:#4ab8e8;--aqua:#7dd8f0;
+  --sage:#52b788;--fern:#2d6a4f;--forest:#162b21;
+  --sand:#faf7f2;--cream:#fdfcf7;--warm:#f5f0e8;
+  --ink:#1a1a18;--body:#4a4843;--muted:#8a857e;--line:#e5e2dc;
+  --alert:#c03030;--alert-bg:#fdf0f0;--alert-line:#e0a0a0;
+  --amber:#b07020;--amber-bg:#fef6ee;
+  --r:12px;
+  --s-sm:0 1px 3px rgba(0,0,0,.05);--s-md:0 4px 20px rgba(0,0,0,.07);--s-lg:0 12px 40px rgba(0,0,0,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+::selection{background:#dce8f4;color:var(--navy)}
+
+.nav{background:var(--forest);position:sticky;top:0;z-index:500}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-family:'Libre Baskerville',serif;color:#fff;font-size:1.2rem;font-weight:700}
+.logo i{font-style:italic;color:var(--sage);font-weight:400}
+.nav-links{display:flex;gap:8px}
+.nav-links a{color:rgba(255,255,255,.55);font-size:.78rem;font-weight:500;text-decoration:none;padding:6px 14px;border-radius:100px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-links a.on{color:var(--sky);background:rgba(74,184,232,.12)}
+
+.hero{background:linear-gradient(135deg,#5a1818,#8a2828);position:relative;overflow:hidden;padding:52px 28px 48px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 90%,rgba(192,48,48,.15) 0%,transparent 50%)}
+.hero-grain{position:absolute;inset:0;opacity:.04;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:.75rem;color:rgba(255,255,255,.3);margin-bottom:14px}
+.breadcrumb a{color:rgba(255,255,255,.45);text-decoration:none}
+.hero-inner h1{font-family:'Libre Baskerville',serif;font-size:clamp(1.8rem,4vw,2.4rem);color:#fff;font-weight:700;line-height:1.15}
+.hero-inner .hero-desc{color:rgba(255,255,255,.45);font-size:.9rem;margin-top:8px;font-weight:300;line-height:1.65;max-width:700px}
+
+/* JUMP LINKS */
+.jump-bar{max-width:900px;margin:-18px auto 0;padding:0 28px;position:relative;z-index:2}
+.jump-links{display:flex;gap:8px;flex-wrap:wrap}
+.jump-link{padding:10px 18px;border-radius:var(--r);background:#fff;border:1px solid var(--line);font-size:.8rem;font-weight:600;color:var(--navy);cursor:pointer;text-decoration:none;transition:all .2s;box-shadow:var(--s-sm);display:flex;align-items:center;gap:6px}
+.jump-link:hover{border-color:var(--sea);color:var(--sea);box-shadow:var(--s-md)}
+.jump-link .j-emoji{font-size:1.1rem}
+
+.article{max-width:900px;margin:0 auto;padding:28px 28px 0}
+.prose{font-size:.92rem;color:var(--body);line-height:1.8}
+.prose p+p{margin-top:16px}
+.prose h2{font-family:'Libre Baskerville',serif;font-size:1.4rem;font-weight:700;color:var(--navy);margin:48px 0 12px;line-height:1.25;padding-top:12px;border-top:2px solid var(--line);scroll-margin-top:80px}
+.prose h2:first-of-type{border-top:none;margin-top:24px}
+.prose h3{font-family:'Libre Baskerville',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin:28px 0 8px}
+
+.callout{background:var(--sand);border-left:4px solid var(--sea);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;margin:24px 0}
+.callout.red{border-left-color:var(--alert);background:var(--alert-bg)}
+.callout.amber{border-left-color:var(--amber);background:var(--amber-bg)}
+.callout.green{border-left-color:var(--sage);background:rgba(82,183,136,.06)}
+.callout h4{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.callout p{font-size:.84rem;color:var(--body);line-height:1.65}
+
+/* KEY FACT */
+.keyfact{background:var(--navy);border-radius:var(--r);padding:24px 28px;margin:24px 0;display:flex;align-items:center;gap:20px}
+.kf-num{font-family:'Libre Baskerville',serif;font-size:2.2rem;font-weight:700;color:var(--sky);line-height:1;flex-shrink:0;min-width:80px;text-align:center}
+.kf-text{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.6}
+.kf-text strong{color:#fff}
+
+/* ROUTE CARDS */
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.route-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px 22px}
+.route-card .rc-icon{font-size:1.3rem;margin-bottom:6px}
+.route-card h4{font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.route-card p{font-size:.78rem;color:var(--body);line-height:1.55}
+
+/* CHECKLIST */
+.checklist{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px 26px;margin:24px 0}
+.checklist h4{font-family:'Libre Baskerville',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+.cl-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.cl-item{display:flex;align-items:flex-start;gap:8px;font-size:.82rem;color:var(--body);padding:6px 0;line-height:1.4}
+.cl-check{color:var(--sage);font-weight:700;flex-shrink:0;font-size:.9rem}
+
+/* CONTACTS BAR */
+.contacts-bar{background:var(--navy);border-radius:var(--r);padding:24px 28px;margin:32px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.con{text-align:center}
+.con .con-num{font-family:'Libre Baskerville',serif;font-size:1.6rem;font-weight:700;color:var(--sky)}
+.con h5{font-size:.78rem;font-weight:600;color:rgba(255,255,255,.6);margin-top:2px}
+.con p{font-size:.7rem;color:rgba(255,255,255,.35);margin-top:3px;line-height:1.4}
+
+.related{margin:40px 0 0;padding:28px 0;border-top:1px solid var(--line)}
+.related h3{font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:14px}
+.related-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.rel-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;transition:box-shadow .2s;cursor:pointer}
+.rel-card:hover{box-shadow:var(--s-md)}
+.rel-card h4{font-size:.85rem;font-weight:600;color:var(--sea)}
+.rel-card p{font-size:.72rem;color:var(--muted);margin-top:3px;line-height:1.45}
+
+footer{background:var(--forest);padding:36px 28px;text-align:center;margin-top:48px}
+footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
+footer a{color:var(--sage);text-decoration:none}
+
+@media(max-width:768px){
+  .route-grid,.cl-grid{grid-template-columns:1fr}
+  .contacts-bar{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  .keyfact{flex-direction:column;text-align:center}
+  .jump-links{gap:6px}
+  .jump-link{padding:8px 14px;font-size:.75rem}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.article{animation:fadeUp .45s ease both}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">papamoa<i>.info</i></div>
+    <div class="nav-links">
+      <a>Home</a>
+      <a>Essential Services</a>
+      <a>Food & Drink</a>
+      <a class="on">Community</a>
+      <a>Accommodation</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb"><a>Home</a> / <a>Community</a> / <a>Safety & Support</a> / Emergency Preparedness</div>
+    <h1>Emergency Preparedness for Papamoa</h1>
+    <div class="hero-desc">Tsunami evacuation routes, earthquake response, flood-prone areas, storm preparedness, and how to build a household emergency plan for a coastal Bay of Plenty suburb. Papamoa-specific, not generic.</div>
+  </div>
+</section>
+
+<!-- JUMP LINKS -->
+<div class="jump-bar">
+  <div class="jump-links">
+    <a class="jump-link" href="#tsunami"><span class="j-emoji">&#127754;</span> Tsunami</a>
+    <a class="jump-link" href="#earthquake"><span class="j-emoji">&#127759;</span> Earthquake</a>
+    <a class="jump-link" href="#flooding"><span class="j-emoji">&#127782;&#65039;</span> Flooding</a>
+    <a class="jump-link" href="#storms"><span class="j-emoji">&#127744;</span> Storms & Cyclone</a>
+    <a class="jump-link" href="#fire"><span class="j-emoji">&#128293;</span> Fire</a>
+    <a class="jump-link" href="#kit"><span class="j-emoji">&#127890;</span> Emergency Kit</a>
+  </div>
+</div>
+
+<div class="article">
+  <div class="prose">
+
+    <p>Papamoa sits on a low-lying coastal strip between the Pacific Ocean and State Highway 2. That geography means certain emergencies are more relevant here than in most New Zealand suburbs. Tsunami is the headline risk, but flooding along the Wairakei Stream corridor, coastal storms, and earthquake-triggered liquefaction in Papamoa East are all genuine considerations. January 2026 brought this into sharp focus when Tauranga recorded 274mm of rain in a single day (its wettest on record), with fatal landslides at Welcome Bay and Mount Maunganui.</p>
+
+    <p>This page covers each type of emergency with Papamoa-specific detail: actual evacuation routes, real flood-prone streets, and practical steps rather than generic advice. It is structured as sections you can jump to directly using the links above.</p>
+
+    <!-- =============== TSUNAMI =============== -->
+    <h2 id="tsunami">&#127754; Tsunami</h2>
+
+    <p>Tsunami is the highest-consequence natural hazard facing Papamoa. The Bay of Plenty coastline sits within range of two active subduction zones: the Kermadec Trench to the northeast and the Hikurangi Subduction Zone to the east. A major earthquake on the southern Kermadec Trench could send a tsunami to Papamoa's coastline in approximately 50 minutes. That is not a lot of time, and it is why self-evacuation on foot is the plan, not waiting for official warnings.</p>
+
+    <div class="callout red">
+      <h4>Long or Strong, Get Gone</h4>
+      <p>If you feel an earthquake that is long (more than a minute) or strong (you cannot stand up), and you are anywhere near the coast, move inland or to high ground immediately. Do not wait for a siren, a text, or any official alert. The earthquake itself is your warning. Walk, do not drive. Roads will block within minutes.</p>
+    </div>
+
+    <h3>The Blue Zone</h3>
+
+    <p>In 2023, Emergency Management Bay of Plenty updated tsunami evacuation maps across the region to a single blue evacuation zone, replacing the previous red/orange/yellow system. If you are in the blue zone when a tsunami warning is issued (or when you feel a long or strong earthquake), you need to move inland or to high ground.</p>
+
+    <p>In Papamoa, the blue zone has expanded past State Highway 2 in some areas. For many residents in Papamoa West and central Papamoa, this means crossing SH2 on foot to reach safety. Civil Defence's position on this is blunt: crossing a highway on foot is better than facing a tsunami.</p>
+
+    <div class="keyfact">
+      <div class="kf-num">~50<span style="font-size:.6em;font-weight:400">min</span></div>
+      <div class="kf-text"><strong>Estimated arrival time</strong> of a tsunami from the southern Kermadec Trench. This is the most likely source of a significant tsunami for Papamoa. 50 minutes is enough time to evacuate on foot if you leave immediately. It is not enough time if you drive, get stuck in traffic, then try to find an alternative route.</div>
+    </div>
+
+    <h3>Evacuation Routes and Safe Locations</h3>
+
+    <div class="route-grid">
+      <div class="route-card">
+        <div class="rc-icon">&#128739;</div>
+        <h4>Gordon Spratt Reserve High Ground</h4>
+        <p>Purpose-built tsunami evacuation mound. Capacity for approximately 3,800 people. Earthquake-strengthened to withstand shaking and liquefaction. Accessed via two earthquake-strengthened footbridges. The first purpose-built tsunami high ground in the Southern Hemisphere. Nearest safe high point for central Papamoa residents and Papamoa Primary School students.</p>
+      </div>
+      <div class="route-card">
+        <div class="rc-icon">&#128739;</div>
+        <h4>Parton Road Overbridge</h4>
+        <p>Crosses State Highway 2. One of the primary routes for Papamoa West residents to reach safe ground south of the highway. Walk, not drive.</p>
+      </div>
+      <div class="route-card">
+        <div class="rc-icon">&#128739;</div>
+        <h4>Domain Road Interchange</h4>
+        <p>Another SH2 crossing point. Used by residents in central and eastern Papamoa to get south of the highway.</p>
+      </div>
+      <div class="route-card">
+        <div class="rc-icon">&#128739;</div>
+        <h4>Sandhurst Drive Overbridge</h4>
+        <p>Key crossing for Papamoa East and Wairakei area residents. Connects to safe ground beyond the expressway.</p>
+      </div>
+    </div>
+
+    <p>Additional footbridges have been built at Evansbel Place and off Bermuda Drive in Papamoa West, with deep piling (20-25 metres) to withstand earthquake shaking. In eastern and central Papamoa, some evacuation routes cross farmland to reach safety near the Bruce Road services area. These routes may not be accessible year-round due to farming activities, so having a backup plan is important.</p>
+
+    <div class="callout amber">
+      <h4>No Tsunami Sirens in Tauranga</h4>
+      <p>After years of debate, Tauranga City Council decided against installing a coastal tsunami siren network. The reasoning, supported by international evidence, is that sirens can create a false sense of security and have failed in multiple overseas events. The official position is that a natural earthquake is the primary warning: if you feel it, you should already be moving. Emergency Mobile Alerts will be sent to phones, but do not rely on them as your first trigger to evacuate.</p>
+    </div>
+
+    <!-- =============== EARTHQUAKE =============== -->
+    <h2 id="earthquake">&#127759; Earthquake</h2>
+
+    <p>Papamoa sits in a seismically active region. The Bay of Plenty has experienced multiple earthquakes felt at the coast, and the proximity of the Kermadec and Hikurangi subduction zones means a significant event is a matter of when, not if. The primary concerns for Papamoa specifically are liquefaction and the tsunami risk that follows a marine earthquake.</p>
+
+    <h3>Liquefaction in Papamoa East</h3>
+
+    <p>Much of Papamoa East is built on a layer of sand over a former swamp. In a significant earthquake, this ground is expected to liquefy, meaning the sand loses its structural strength and behaves like liquid. This is not theoretical: the same ground conditions were encountered during construction of the Tauranga Eastern Link highway and the Gordon Spratt Reserve mound (which required significant additional engineering and cost to address).</p>
+
+    <p>For residents, liquefaction can cause foundations to shift, driveways to crack, and underground services (water, wastewater) to break. It does not mean your house will sink, but it does mean damage can be extensive even if the shaking itself is moderate.</p>
+
+    <div class="callout green">
+      <h4>Drop, Cover, Hold. Then Decide.</h4>
+      <p>During shaking: drop to the ground, take cover under sturdy furniture, and hold on. Once the shaking stops, assess: if it was long (more than a minute) or strong (you could not stand), and you are in the tsunami zone, evacuate immediately on foot. If it was a short, moderate shake, stay put and check for damage. Aftershocks will follow. Do not re-enter damaged buildings.</p>
+    </div>
+
+    <!-- =============== FLOODING =============== -->
+    <h2 id="flooding">&#127782;&#65039; Flooding</h2>
+
+    <p>Flooding is the most common natural hazard in the Bay of Plenty, more frequent than tsunami or earthquake. For Papamoa, the Wairakei Stream is the critical piece of stormwater infrastructure. It runs parallel to the coast through much of the suburb and drains into the Palm Beach stormwater lakes before flowing out to sea at Harrison's Cut.</p>
+
+    <h3>The Wairakei Stream Corridor</h3>
+
+    <p>The corridor was designed to become an elongated lake during heavy rain, ponding water in the stream reserve rather than on residential properties. TCC stormwater engineers have stated the system is designed to handle a 1-in-50-year storm while keeping water at least half a metre from housing. It handled a 1-in-10-year event successfully in an early test.</p>
+
+    <p>However, there are ongoing concerns. The Papamoa Residents and Ratepayers Association has raised issues about delayed culvert upgrades at road crossings (particularly at Gravatt Road), which are required under the resource consent for the Wairakei Stream. As more residential areas feed into the catchment, the risk of serious flooding in a major event increases if these culverts are not completed. Cyclone Gabrielle debris in 2023 also caused drainage issues at the Palm Beach Pond outlet that persisted for months.</p>
+
+    <h3>Known Flood-prone Areas</h3>
+
+    <p>In January 2025, heavy rain caused flooding on Dickson Road between Alexander Place and Douglas Place, and on Longview Drive. Water reached fence lines before firefighters cleared blocked drains. The Wairakei Stream level was high and the Grant Place weir was fully opened to manage flow. These are the streets that tend to flood first when the system is under pressure.</p>
+
+    <div class="callout">
+      <h4>January 2026: Tauranga's Wettest Day on Record</h4>
+      <p>On 21-22 January 2026, 274mm of rain fell in Tauranga, the city's wettest day on record. Two people were killed by a landslide at a house on Welcome Bay Road in rural Papamoa. Six more died at a campground landslide in Mount Maunganui. While the worst impacts were from landslides rather than flooding, the event demonstrated the severity of weather that Papamoa can experience. Properties near the Papamoa Hills and Welcome Bay are at higher landslide risk than the flat beachfront, but the volume of water overwhelmed drainage systems across the district.</p>
+    </div>
+
+    <!-- =============== STORMS =============== -->
+    <h2 id="storms">&#127744; Storms & Cyclone</h2>
+
+    <p>Papamoa's coastal exposure means it takes the full force of weather systems arriving from the northeast and east. Strong onshore winds bring salt spray, wave surges, and coastal erosion. The Bay of Plenty was affected by Cyclone Gabrielle in February 2023, and the January 2026 storm system derived from Tropical Disturbance 05F brought record rainfall.</p>
+
+    <p>During severe weather: stay indoors, secure outdoor furniture and trampolines, clear gutters and drains before the weather arrives, avoid coastal areas where wave surges can reach above normal high tide lines, and keep devices charged in case of power outages. Beachfront properties should have a plan for coastal inundation during storm surge combined with high tide.</p>
+
+    <p>Power outages are common during significant storms. Uninterruptible Power Supply devices, a gas camping stove, torches, and a battery-powered radio are practical preparations. If you have a garage with an electric door, know how to operate the manual release so you are not trapped inside.</p>
+
+    <!-- =============== FIRE =============== -->
+    <h2 id="fire">&#128293; Fire</h2>
+
+    <p>Papamoa is primarily a residential suburb rather than a rural fire risk area, but summer conditions (dry easterly winds, low humidity, sandy soil that dries out fast) can create fire risk in vegetation and scrub areas. The dunes and reserve areas along the beachfront can carry fire if conditions align.</p>
+
+    <p>Standard residential fire safety applies: working smoke alarms on every level and in every bedroom, an escape plan that the whole household knows, and keeping a clear path to exits. Fire and Emergency NZ runs a free home fire safety visit programme where a crew will come to your home, check your smoke alarms, and help you develop an escape plan. Call 0800 NZ FIRE (0800 693 473) to book.</p>
+
+    <!-- =============== KIT =============== -->
+    <h2 id="kit">&#127890; Emergency Kit</h2>
+
+    <p>Every household in Papamoa should have a grab bag ready to go. In a tsunami evacuation you will have minutes, not hours, to leave. In a storm or flood you may be without power or water for days. The kit should live somewhere accessible (by the front door or in the garage) and be checked every six months.</p>
+
+    <div class="checklist">
+      <h4>Emergency Kit Checklist</h4>
+      <div class="cl-grid">
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Water: 3 litres per person per day, for at least 3 days</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Non-perishable food for 3 days (canned, dried, energy bars)</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Can opener (manual, not electric)</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Torch and spare batteries</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Battery-powered or hand-crank radio</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> First aid kit</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Prescription medications (2-week supply)</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Copies of important documents in a waterproof bag</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Phone charger (portable battery bank)</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Cash (EFTPOS will not work without power)</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Warm clothing and rain gear</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Sturdy shoes (for walking over debris)</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Toilet paper, wet wipes, hand sanitiser</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Baby supplies if applicable (nappies, formula, wipes)</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Pet food and water if applicable</div>
+        <div class="cl-item"><span class="cl-check">&#10003;</span> Whistle (to signal for help)</div>
+      </div>
+    </div>
+
+    <p>For Papamoa specifically, sturdy walking shoes are essential. In a tsunami evacuation you may be walking across farmland, over rough ground, or across highway berms. Jandals will not cut it. Keep shoes by the bed and in the grab bag.</p>
+
+  </div>
+
+  <!-- CONTACTS -->
+  <div class="contacts-bar">
+    <div class="con">
+      <div class="con-num">111</div>
+      <h5>Emergency</h5>
+      <p>Police, Fire, Ambulance. Life-threatening situations and crimes in progress.</p>
+    </div>
+    <div class="con">
+      <div class="con-num" style="font-size:1.2rem">0800 884 881</div>
+      <h5>Civil Defence BOP</h5>
+      <p>Emergency Management Bay of Plenty. bopcivildefence.govt.nz</p>
+    </div>
+    <div class="con">
+      <div class="con-num" style="font-size:1.2rem">0800 693 473</div>
+      <h5>Fire & Emergency NZ</h5>
+      <p>Non-emergency fire safety queries. Free home fire safety visits.</p>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p style="font-size:.78rem;color:var(--muted);line-height:1.55;margin-top:8px">Tsunami evacuation maps are available at tauranga.govt.nz/tsunami and bopcivildefence.govt.nz. Download the maps for your area and keep a printed copy with your emergency kit. Check the NZ Getready website (getready.govt.nz) for comprehensive emergency preparedness guidance. This page provides Papamoa-specific context but is not a substitute for official Civil Defence advice.</p>
+  </div>
+
+  <div class="related">
+    <h3>Related Pages</h3>
+    <div class="related-grid">
+      <div class="rel-card">
+        <h4>Neighbourhood Support &rarr;</h4>
+        <p>Street groups also function as the communication channel during emergencies</p>
+      </div>
+      <div class="rel-card">
+        <h4>Police & Crime &rarr;</h4>
+        <p>Papamoa police station, reporting, and the community patrol</p>
+      </div>
+      <div class="rel-card">
+        <h4>Community Groups &rarr;</h4>
+        <p>Civil Defence volunteers, community patrol, and how to get involved</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 <a href="#">papamoa.info</a> &middot; Papamoa's Local Business Directory &middot; <a href="#">List Your Business</a></p>
+</footer>
+
+</body>
+</html>
