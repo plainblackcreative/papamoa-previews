@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listing Pages | Papamoa.info</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--navy:#2B3F5C;--blue:#3AABDE;--lime:#7DC143;--sand:#F5EFE0;--dune:#D4C4A0;--coral:#E8344A;--white:#FFFFFF;--ink:#0D1B2A;--body:#1E2D3E;--muted:#607080;--border:#DDE5EE;--bg:#F4F7FA;--gold:#C8962A;--gold2:#F0C060;--silver:#8090A8}
+    html{scroll-behavior:smooth}
+    body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--body);line-height:1.65;min-height:100vh}
+
+    /* DEMO BAR */
+    .demo-bar{background:var(--ink);padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:1000;border-bottom:2px solid rgba(58,171,222,0.3)}
+    .demo-bar-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);white-space:nowrap}
+    .biz-pills{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+    .biz-pill{padding:5px 12px;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.55);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:4px;cursor:pointer;transition:all .18s;white-space:nowrap;font-family:'Figtree',sans-serif}
+    .biz-pill:hover{background:rgba(255,255,255,.13);color:#fff}
+    .biz-pill.active{background:var(--blue);border-color:var(--blue);color:#fff}
+
+    /* TIER SWITCHER */
+    .tier-switcher{background:var(--white);border-bottom:1px solid var(--border);display:flex;position:sticky;top:45px;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .tier-tabs{display:flex;flex:1}
+    .tier-tab{flex:1;padding:13px 16px;display:flex;flex-direction:column;align-items:center;cursor:pointer;border:none;background:transparent;border-bottom:3px solid transparent;transition:all .2s;font-family:'Figtree',sans-serif;gap:2px}
+    .tier-tab .tt-name{font-size:.78rem;font-weight:700;letter-spacing:.04em}
+    .tier-tab .tt-price{font-size:.65rem;font-weight:500;opacity:.6}
+    .tier-tab .tt-dot{width:8px;height:8px;border-radius:50%;margin-bottom:2px}
+    .tier-tab.gold{color:var(--gold)}.tier-tab.gold.active{border-bottom-color:var(--gold);background:#FFFBF0}.tier-tab.gold:hover:not(.active){background:#FFFDF5}.tier-tab.gold .tt-dot{background:var(--gold)}
+    .tier-tab.silver{color:var(--silver)}.tier-tab.silver.active{border-bottom-color:var(--silver);background:#F5F7FA}.tier-tab.silver:hover:not(.active){background:#F8F9FB}.tier-tab.silver .tt-dot{background:var(--silver)}
+    .tier-tab.bronze{color:#9A7060}.tier-tab.bronze.active{border-bottom-color:#9A7060;background:#FBF7F4}.tier-tab.bronze:hover:not(.active){background:#FDF9F7}.tier-tab.bronze .tt-dot{background:#9A7060}
+
+    /* GOLD HERO */
+    .gold-hero{background:var(--navy);min-height:300px;display:grid;grid-template-columns:1fr 400px;position:relative;overflow:hidden}
+    .gold-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold))}
+    .gold-hero-text{padding:44px 48px 44px 52px;position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end}
+    .gold-hero-text::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 100%,rgba(200,150,42,.12) 0%,transparent 70%)}
+    .hero-breadcrumb{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:18px;position:relative}
+    .hero-breadcrumb a{color:rgba(255,255,255,.45);text-decoration:none}.hero-breadcrumb span{margin:0 5px}
+    .hero-badge-row{display:flex;gap:8px;align-items:center;margin-bottom:12px;position:relative;flex-wrap:wrap}
+    .gold-spotlight-badge{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--ink);font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px}
+    .menu-addon-badge{background:var(--lime);color:#fff;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px}
+    .cat-crumb{font-size:.7rem;color:rgba(255,255,255,.5);background:rgba(255,255,255,.08);padding:3px 9px;border-radius:3px}
+    .gold-hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:#fff;line-height:1.12;margin-bottom:10px;position:relative}
+    .hero-tagline{font-size:1rem;color:rgba(255,255,255,.65);margin-bottom:20px;position:relative;max-width:480px}
+    .hero-meta-row{display:flex;flex-wrap:wrap;gap:14px;position:relative}
+    .hero-meta-item{display:flex;align-items:center;gap:5px;font-size:.78rem;color:rgba(255,255,255,.6)}
+    .rating-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:5px}
+    .rating-badge .rb-stars{color:#F5C842;font-size:.75rem}.rating-badge .rb-score{color:#fff;font-weight:700;font-size:.88rem}.rating-badge .rb-count{color:rgba(255,255,255,.5);font-size:.72rem}
+
+    /* PHOTO GRID */
+    .gold-hero-photos{display:grid;grid-template-rows:1fr 1fr;grid-template-columns:1fr 1fr;gap:3px;padding:3px 3px 0}
+    .photo-slot{position:relative;overflow:hidden}.photo-slot:first-child{grid-row:1/3}
+    .psi{width:100%;height:100%;min-height:120px;display:flex;align-items:center;justify-content:center;font-size:2rem;position:relative}
+    .pc1{background:linear-gradient(135deg,#C04030,#802818)}.pc2{background:linear-gradient(135deg,#D06828,#A04818)}.pc3{background:linear-gradient(135deg,#383830,#282820)}.pc4{background:linear-gradient(135deg,#204880,#183060)}.pc5{background:linear-gradient(135deg,#284838,#183028)}.pc6{background:linear-gradient(135deg,#583028,#382018)}.pc7{background:linear-gradient(135deg,#204060,#142840)}.pc8{background:linear-gradient(135deg,#483868,#302448)}
+    .photo-label{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.5);color:rgba(255,255,255,.6);font-size:.62rem;padding:3px 7px;border-radius:3px}
+    .photo-more{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:700}
+
+    /* GOLD BODY */
+    .gold-body{max-width:1060px;margin:0 auto;padding:36px 24px 72px;display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start}
+    .gold-main{min-width:0}.gold-sidebar{display:flex;flex-direction:column;gap:16px}
+
+    /* BUTTONS */
+    .btn-gold{background:linear-gradient(135deg,var(--gold),#B07820);color:#fff;font-family:'Figtree',sans-serif;font-weight:700;font-size:.85rem;padding:11px 20px;border-radius:7px;border:none;cursor:pointer;text-decoration:none;transition:all .2s;letter-spacing:.02em}
+    .btn-gold:hover{filter:brightness(1.1)}
+    .btn-menu{background:linear-gradient(135deg,var(--lime),#5A9020);color:#fff;font-family:'Figtree',sans-serif;font-weight:700;font-size:.85rem;padding:11px 20px;border-radius:7px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:filter .2s}
+    .btn-menu:hover{filter:brightness(1.1)}
+    .btn-outline{background:transparent;color:var(--body);font-family:'Figtree',sans-serif;font-weight:600;font-size:.83rem;padding:11px 18px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;text-decoration:none;transition:all .2s}
+    .btn-outline:hover{border-color:var(--blue);color:var(--blue)}
+    .btn-navy{background:var(--navy);color:#fff;font-family:'Figtree',sans-serif;font-weight:700;font-size:.85rem;padding:11px 20px;border-radius:7px;border:none;cursor:pointer;text-decoration:none;transition:background .2s}
+    .btn-navy:hover{background:var(--blue)}
+
+    /* ACTION BAR */
+    .action-bar{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;align-items:center}
+    .action-divider{flex:1}
+    .social-icons{display:flex;gap:8px}
+    .si{width:34px;height:34px;border-radius:7px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;text-decoration:none;transition:all .2s}
+    .si:hover{background:var(--navy);border-color:var(--navy)}
+    .updated-tag{font-size:.72rem;color:var(--muted);font-style:italic;margin-left:auto}
+
+    /* CONTENT SECTIONS */
+    .cs{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px}
+    .cs-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+    .cs-body{font-size:.88rem;color:var(--body);line-height:1.75}
+    .svcs{display:flex;flex-wrap:wrap;gap:7px}
+    .svc{font-size:.75rem;font-weight:600;padding:5px 12px;border-radius:20px;background:var(--bg);border:1px solid var(--border);color:var(--body)}
+    .hours-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
+    .hr{display:flex;justify-content:space-between;padding:8px 10px;font-size:.82rem;background:var(--bg);border-radius:5px}
+    .hr .day{font-weight:600;color:var(--navy)}.hr .time{color:var(--muted)}
+    .hr.closed .time{color:var(--coral)}.hr.today{background:#EBF8ED}.hr.today .day,.hr.today .time{color:#1A7A42;font-weight:700}
+    .map-ph{background:linear-gradient(135deg,#E8F0F8,#D8E4F0);border-radius:8px;height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);font-size:.83rem;border:1px solid var(--border)}
+    .rv{background:var(--bg);border-radius:8px;padding:14px;border-left:3px solid var(--gold);margin-bottom:10px}
+    .rv-stars{color:#F5C842;font-size:.8rem;margin-bottom:5px}.rv-text{font-size:.83rem;color:var(--body);line-height:1.55;font-style:italic;margin-bottom:6px}.rv-author{font-size:.72rem;color:var(--muted)}
+
+    /* SIDEBAR */
+    .sc{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px}
+    .sc h4{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+    .cl{display:flex;flex-direction:column;gap:9px}
+    .ci{display:flex;gap:10px;font-size:.83rem}
+    .ci .ci-i{flex-shrink:0;font-size:.9rem;margin-top:1px}.ci .ci-t{color:var(--muted)}.ci .ci-t a{color:var(--blue);text-decoration:none}
+    .ci .ci-t strong{color:var(--body);display:block;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:1px}
+    .gold-sc{background:linear-gradient(135deg,var(--navy),#1A2A40);border-radius:10px;padding:18px;border:1px solid rgba(200,150,42,.3)}
+    .gold-sc h4{color:var(--gold2);font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+    .gold-sc p{color:rgba(255,255,255,.55);font-size:.78rem;line-height:1.55;margin-bottom:12px}
+    .gold-sc a{display:block;background:linear-gradient(135deg,var(--gold),#A07020);color:#fff;font-family:'Figtree',sans-serif;font-weight:700;font-size:.78rem;padding:9px 14px;border-radius:5px;text-decoration:none;text-align:center}
+
+    /* MENU TEASER (gold) */
+    .mts{background:linear-gradient(135deg,#F0FAF0,#E4F5E4);border:1px solid #A8D8A8;border-radius:10px;padding:18px 20px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .2s}
+    .mts:hover{border-color:var(--lime);box-shadow:0 2px 12px rgba(125,193,67,.15)}
+    .mts-icon{font-size:1.8rem;flex-shrink:0}
+    .mts-txt{flex:1}.mts-txt h4{font-size:.92rem;font-weight:700;color:#2A6020;margin-bottom:3px}.mts-txt p{font-size:.78rem;color:#4A8040;line-height:1.45}
+    .mts-arrow{font-size:1.1rem;color:var(--lime);flex-shrink:0}
+    .mts-upd{font-size:.68rem;color:#4A8040;background:rgba(125,193,67,.15);padding:2px 8px;border-radius:10px;white-space:nowrap}
+
+    /* MENU TEASER (silver — blurred preview) */
+    .mpw{margin-top:14px;display:flex;flex-direction:column;gap:6px;position:relative}
+    .mpr{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--white);border:1px solid var(--border);border-radius:7px;font-size:.83rem}
+    .mpr .mpn{font-weight:600;color:var(--navy)}.mpr .mpp{color:var(--muted);font-weight:600}
+    .mpr.blur{filter:blur(3px);pointer-events:none;user-select:none}
+    .mpf{position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to bottom,transparent,var(--white));border-radius:0 0 7px 7px}
+    .smu{background:linear-gradient(135deg,#FFFAF0,#FFF5DC);border:1px solid rgba(200,150,42,.3);border-radius:10px;padding:16px 18px;margin-top:14px}
+    .smu-eye{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+    .smu-h{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:#7A5010;margin-bottom:5px}
+    .smu-p{font-size:.78rem;color:#9A7030;line-height:1.5;margin-bottom:10px}
+    .smu-btn{display:inline-block;background:linear-gradient(135deg,var(--gold),#A07020);color:#fff;font-family:'Figtree',sans-serif;font-size:.75rem;font-weight:700;padding:7px 14px;border-radius:4px;text-decoration:none}
+
+    /* SILVER */
+    .silver-header{background:var(--white);border-bottom:1px solid var(--border);padding:28px 0 0}
+    .silver-inner{max-width:1000px;margin:0 auto;padding:0 24px}
+    .silver-badge{background:linear-gradient(135deg,var(--silver),#A0B0C8);color:#fff;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:3px}
+    .silver-header h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--navy);margin-bottom:8px}
+    .silver-meta{display:flex;flex-wrap:wrap;gap:16px;padding-bottom:20px;border-bottom:3px solid var(--silver)}
+    .silver-mi{display:flex;align-items:center;gap:5px;font-size:.8rem;color:var(--muted)}
+    .silver-body{max-width:1000px;margin:0 auto;padding:28px 24px 64px;display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:start}
+    .silver-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+    .utg{background:linear-gradient(135deg,#FFFAF0,#FFF5DC);border:1px solid rgba(200,150,42,.3);border-radius:10px;padding:16px;margin-bottom:16px}
+    .utg-eye{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+    .utg h4{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:#7A5010;margin-bottom:5px}
+    .utg p{font-size:.78rem;color:#9A7030;line-height:1.5;margin-bottom:10px}
+    .utg ul{list-style:none;display:flex;flex-direction:column;gap:3px;margin-bottom:10px}
+    .utg li{font-size:.74rem;color:#8A6020;padding-left:14px;position:relative}
+    .utg li::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:.6rem;top:2px}
+    .utg a{display:inline-block;background:linear-gradient(135deg,var(--gold),#A07020);color:#fff;font-family:'Figtree',sans-serif;font-size:.75rem;font-weight:700;padding:7px 14px;border-radius:4px;text-decoration:none}
+
+    /* BRONZE */
+    .bronze-wrap{max-width:760px;margin:40px auto;padding:0 24px}
+    .bronze-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+    .bronze-hdr{padding:20px 22px;border-bottom:1px solid var(--border);background:#FAFBFC;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .bronze-badge{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:3px;background:#F0EBE4;color:#9A7060;white-space:nowrap;flex-shrink:0}
+    .bronze-hdr h1{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+    .bronze-meta{font-size:.78rem;color:var(--muted)}
+    .bronze-body{padding:20px 22px}
+    .bronze-desc{font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:16px}
+    .bronze-contacts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+    .bci{font-size:.78rem;color:var(--muted);background:var(--bg);padding:5px 10px;border-radius:5px;border:1px solid var(--border)}
+    .bup{background:linear-gradient(135deg,var(--navy),#1E3050);border-radius:10px;padding:20px;text-align:center}
+    .bup-eye{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px}
+    .bup h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px}
+    .bup p{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.55;max-width:380px;margin:0 auto 16px}
+    .bup-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .btn-upsil{background:linear-gradient(135deg,var(--silver),#708090);color:#fff;font-family:'Figtree',sans-serif;font-weight:700;font-size:.8rem;padding:10px 18px;border-radius:5px;text-decoration:none}
+    .btn-upgold{background:linear-gradient(135deg,var(--gold),#A07020);color:#fff;font-family:'Figtree',sans-serif;font-weight:700;font-size:.8rem;padding:10px 18px;border-radius:5px;text-decoration:none}
+    .pc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;margin-top:24px;background:var(--border);border-radius:10px;overflow:hidden}
+    .pc{background:var(--white);padding:16px 14px;display:flex;flex-direction:column;gap:8px}
+    .pc.cur{background:#F5F7FA}.pc.hi{background:#FFFAF0}
+    .pc-tier{font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+    .pc-price{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);line-height:1}
+    .pc-price span{font-size:.75rem;font-weight:400;color:var(--muted)}
+    .pc-fl{list-style:none;display:flex;flex-direction:column;gap:4px}
+    .pc-fl li{font-size:.73rem;color:var(--muted);padding-left:13px;position:relative}
+    .pc-fl li::before{content:'✓';position:absolute;left:0;font-size:.65rem;color:var(--lime)}
+    .pc-fl li.no::before{content:'✗';color:#ccc}.pc-fl li.no{color:#bbb}
+
+    /* LIGHTBOX */
+    .lb-ov{position:fixed;inset:0;background:rgba(10,20,35,.75);backdrop-filter:blur(4px);z-index:9000;display:none;align-items:flex-end;justify-content:center}
+    .lb-ov.open{display:flex;animation:ovIn .25s ease both}
+    @keyframes ovIn{from{opacity:0}to{opacity:1}}
+    .lb-sheet{background:var(--white);width:100%;max-width:760px;max-height:92vh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;overflow:hidden;animation:shUp .3s cubic-bezier(.22,1,.36,1) both;box-shadow:0 -8px 60px rgba(0,0,0,.3)}
+    @keyframes shUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
+    .lb-hdr{padding:18px 22px 0;flex-shrink:0}
+    .lb-drag{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 14px}
+    .lb-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .lb-tblk h2{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:3px}
+    .lb-sub{font-size:.75rem;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .lb-upd{font-size:.68rem;color:var(--muted);background:var(--bg);padding:2px 8px;border-radius:10px;border:1px solid var(--border)}
+    .lb-close{width:34px;height:34px;background:var(--bg);border:1px solid var(--border);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:background .2s;font-family:'Figtree',sans-serif}
+    .lb-close:hover{background:var(--border)}
+    .lb-tabs{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 22px;border-bottom:1px solid var(--border);flex-shrink:0}
+    .lb-tabs::-webkit-scrollbar{display:none}
+    .lb-tab{padding:10px 16px;font-size:.8rem;font-weight:600;color:var(--muted);white-space:nowrap;cursor:pointer;border-bottom:2.5px solid transparent;transition:all .18s;font-family:'Figtree',sans-serif;background:none;border-top:none;border-left:none;border-right:none}
+    .lb-tab:hover{color:var(--navy)}.lb-tab.active{color:var(--navy);border-bottom-color:var(--lime);font-weight:700}
+    .lb-filters{padding:10px 22px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;flex-shrink:0;border-bottom:1px solid var(--border);background:#FAFBFC}
+    .lb-filters::-webkit-scrollbar{display:none}
+    .fp{padding:5px 12px;font-size:.72rem;font-weight:600;border-radius:20px;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .18s;font-family:'Figtree',sans-serif}
+    .fp:hover{border-color:var(--lime);color:#3A7010}.fp.active{background:var(--lime);border-color:var(--lime);color:#fff}
+    .lb-scroll{overflow-y:auto;flex:1;padding:16px 22px 32px}
+    .mi-list{display:flex;flex-direction:column;gap:3px}
+    .mi{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:12px 14px;background:var(--white);border:1px solid var(--border);border-radius:9px;transition:all .15s}
+    .mi:hover{border-color:var(--blue);background:#FAFEFF}
+    .mi-l{flex:1;min-width:0}.mi-nr{display:flex;align-items:center;gap:7px;margin-bottom:3px;flex-wrap:wrap}
+    .mi-n{font-size:.9rem;font-weight:700;color:var(--navy)}
+    .mb{font-size:.6rem;font-weight:700;padding:2px 6px;border-radius:10px;letter-spacing:.04em}
+    .mb.gf{background:#FFF3E0;color:#8B4500}.mb.v{background:#E8F5E9;color:#2E7D32}.mb.vg{background:#E8F5E9;color:#1A5C20;border:1px solid #A5D6A7}.mb.df{background:#EDE7F6;color:#512DA8}.mb.sp{background:#FFEBEE;color:#C62828}.mb.new{background:#E3F2FD;color:#1565C0}.mb.pop{background:#FFF8E1;color:#F57F17}
+    .mi-d{font-size:.78rem;color:var(--muted);line-height:1.5}
+    .mi-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+    .mi-p{font-size:.92rem;font-weight:700;color:var(--navy);white-space:nowrap}
+    .no-res{text-align:center;padding:40px 20px;color:var(--muted);font-size:.88rem}
+    .no-res .nri{font-size:2rem;margin-bottom:8px}
+    .lb-foot{padding:12px 22px;background:var(--bg);border-top:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .lb-fn{font-size:.72rem;color:var(--muted);font-style:italic}
+    .lb-ob{background:var(--navy);color:#fff;font-family:'Figtree',sans-serif;font-weight:700;font-size:.82rem;padding:9px 18px;border-radius:6px;border:none;cursor:pointer;text-decoration:none;transition:background .2s}
+    .lb-ob:hover{background:var(--blue)}
+
+    /* FOOTER */
+    .site-footer{background:var(--navy);padding:20px 24px;text-align:center;font-size:.75rem;color:rgba(255,255,255,.4);margin-top:40px}
+    .site-footer a{color:var(--blue)}
+
+    @media(max-width:860px){.gold-hero{grid-template-columns:1fr}.gold-hero-photos{display:none}.gold-body{grid-template-columns:1fr}.gold-sidebar{order:-1}.silver-body{grid-template-columns:1fr}}
+    @media(max-width:540px){.gold-hero-text{padding:32px 20px}.pc-grid{grid-template-columns:1fr}.hours-grid{grid-template-columns:1fr}.lb-sheet{max-height:95vh}}
+  </style>
+</head>
+<body>
+
+<!-- DEMO BAR -->
+<div class="demo-bar">
+  <span class="demo-bar-label">Listing:</span>
+  <div class="biz-pills">
+    <button class="biz-pill active" onclick="showBiz('pizza')">🍕 Pizza Pundits</button>
+    <button class="biz-pill" onclick="showBiz('orthodontist')">😁 Orthodontist</button>
+    <button class="biz-pill" onclick="showBiz('dental')">🦷 Tara Rd Dental</button>
+    <button class="biz-pill" onclick="showBiz('pacific')">🏕️ Pacific Park</button>
+    <button class="biz-pill" onclick="showBiz('karaka')">🏡 Karaka Pines</button>
+    <button class="biz-pill" onclick="showBiz('wagon')">🍔 The Wagon</button>
+    <button class="biz-pill" onclick="showBiz('redefined')">💪 ReDefined</button>
+    <button class="biz-pill" onclick="showBiz('realestate')">🏠 Real Estate</button>
+  </div>
+</div>
+
+<!-- TIER SWITCHER -->
+<div class="tier-switcher">
+  <div class="tier-tabs">
+    <button class="tier-tab gold active" onclick="setTier('gold')">
+      <div class="tt-dot"></div><span class="tt-name">⭐ Gold Spotlight</span><span class="tt-price">$1,200 + GST / yr</span>
+    </button>
+    <button class="tier-tab silver" onclick="setTier('silver')">
+      <div class="tt-dot"></div><span class="tt-name">◆ Silver</span><span class="tt-price">$599 + GST / yr</span>
+    </button>
+    <button class="tier-tab bronze" onclick="setTier('bronze')">
+      <div class="tt-dot"></div><span class="tt-name">Placeholder</span><span class="tt-price">Unregistered</span>
+    </button>
+  </div>
+</div>
+
+<div id="lc"></div>
+
+<!-- LIGHTBOX -->
+<div class="lb-ov" id="lbov" onclick="closeLBov(event)">
+  <div class="lb-sheet">
+    <div class="lb-hdr">
+      <div class="lb-drag"></div>
+      <div class="lb-top">
+        <div class="lb-tblk">
+          <h2 id="lb-title">Menu</h2>
+          <div class="lb-sub"><span id="lb-sub"></span><span class="lb-upd" id="lb-upd"></span></div>
+        </div>
+        <button class="lb-close" onclick="closeLB()">✕</button>
+      </div>
+    </div>
+    <div class="lb-tabs" id="lb-tabs"></div>
+    <div class="lb-filters" id="lb-filters"></div>
+    <div class="lb-scroll" id="lb-scroll"></div>
+    <div class="lb-foot">
+      <span class="lb-fn" id="lb-fn"></span>
+      <a href="#" class="lb-ob" id="lb-ob" target="_blank" rel="noopener">Order →</a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer"><a href="/">Papamoa.info</a> — Pāpāmoa business directory, Bay of Plenty, New Zealand.</footer>
+
+<script>
+const B={
+  pizza:{name:'The Pizza Pundits',tagline:'Gourmet handcrafted pizza, seven nights a week at Pāpāmoa Beach.',cat:'Food & Drink',sub:'Pizza',addr:'1/898 Pāpāmoa Beach Road, Pāpāmoa Beach',phone:null,email:null,web:'doordash / ubereats / ordermeal',ig:'@thepizzapunditspapamoa',fb:true,rating:'4.9',rc:'58 TripAdvisor reviews',emoji:'🍕',cc:'pc1',photos:['🍕','🔥','🫒'],
+  desc:`The Pizza Pundits is a gourmet pizza kitchen at 1/898 Pāpāmoa Beach Road, open seven nights a week from 4:30pm. They hold a 4.9-star rating from 58 TripAdvisor reviews and consistently place in Pāpāmoa's top ten restaurants.\n\nThe kitchen makes its own gluten-free bases from raw ingredients — a genuine point of difference. The signature Narnia pizza draws returning customers. Delivery via DoorDash, Uber Eats and Delivereasy.\n\nThe owners run youth sports voucher programmes for local teams.`,
+  hours:[{d:'Sun',t:'4:30pm – 9:20pm',today:true},{d:'Mon',t:'4:30pm – 9:20pm'},{d:'Tue',t:'4:30pm – 9:20pm'},{d:'Wed',t:'4:30pm – 9:20pm'},{d:'Thu',t:'4:30pm – 9:20pm'},{d:'Fri',t:'4:30pm – 10:20pm'},{d:'Sat',t:'4:30pm – 10:20pm'}],
+  svcs:['Gourmet pizza','Gluten-free bases (house-made)','Vegetarian options','Classic & specialty pizzas','Sides & drinks','Takeaway & dine-in','DoorDash','Uber Eats','Delivereasy','Online ordering','Community sports vouchers'],
+  hl:['4.9★ TripAdvisor (58 reviews)','House-made gluten-free bases','Youth sports community sponsorship','DoorDash, Uber Eats & Delivereasy'],
+  rv:{t:'First pizza place I have been to that makes its own gluten-free bases from raw ingredients. That made the pizza super tasty and amazing texture.',a:'TripAdvisor reviewer, 2024'},
+  rv2:{t:'Fast and wonderful service. Beautiful pizza. Local store supports the community with youth sports team vouchers.',a:'TripAdvisor reviewer, 2024'},
+  hasMenu:true,mlabel:'View Menu',mupd:'Updated April 2026',olab:'Order on DoorDash →',ohref:'https://www.doordash.com/store/the-pizza-pundits-papamoa-32868089/',mfoot:'Menu pricing set by The Pizza Pundits. Confirm prices when ordering.',
+  mf:['All','GF available','Vegetarian','Popular'],
+  mt:[{id:'classic',l:'🍕 Classic'},{id:'specialty',l:'✨ Specialty'},{id:'veggie',l:'🌿 Vegetarian'},{id:'deals',l:'💰 Deals'},{id:'sides',l:'🍟 Sides & Drinks'}],
+  md:{classic:[{n:'Cheese',d:'Pizza sauce, mozzarella',p:'$18',b:['v','gf'],pop:true},{n:'Hawaiian',d:'Pizza sauce, champagne ham, pineapple, mozzarella',p:'$22',b:['gf']},{n:'Pepperoni',d:'Pizza sauce, Italian pepperoni, mozzarella',p:'$22',b:['gf'],pop:true},{n:'Beef',d:'Pizza sauce, onion, beef, mozzarella, BBQ swirl',p:'$23',b:['gf']},{n:'Bacon & Onion',d:'Pizza sauce, onion, smoky bacon, mozzarella, BBQ swirl',p:'$23',b:['gf']},{n:'Ham & Cheese',d:'Pizza sauce, ham, mozzarella',p:'$20',b:['gf']}],specialty:[{n:'The Narnia',d:"Signature pizza — ask in store for today's version",p:'Market',b:['pop'],pop:true},{n:'Blue Cheese & Bacon',d:'Smoky bacon, spinach, caramelised onions, blue cheese, mozzarella',p:'$26',b:['gf']},{n:'Salami Duo',d:'Chorizo salami, Italian pepperoni, mozzarella',p:'$25',b:['gf'],pop:true},{n:'Meat Feast',d:'Pepperoni, sausage, smoky bacon, caramelised onions, smoked BBQ sauce, mozzarella',p:'$28',b:['gf']},{n:'Pulled Pork',d:'BBQ pulled pork, bacon, pineapple, jalapeños, mozzarella, BBQ sauce, coriander',p:'$27',b:['gf','sp']},{n:'Margherita',d:'Pizza sauce, fresh basil, creamy mozzarella',p:'$20',b:['v','gf']}],veggie:[{n:'Margherita',d:'Pizza sauce, fresh basil, mozzarella, cherry tomatoes',p:'$20',b:['v','gf']},{n:'Cheese',d:'Pizza sauce and mozzarella',p:'$18',b:['v','gf']},{n:'Vegan option',d:'Dairy-free cheese on request — check with staff',p:'Ask',b:['vg','df']}],deals:[{n:'Two-for-One',d:'Any two pizzas, any side and any drink',p:'Combo',b:['pop']},{n:'Family Deal',d:'Any one pizza, any side and any drink',p:'Combo',b:[]}],sides:[{n:'Garlic Bread',d:'Freshly made garlic bread',p:'$7',b:['v']},{n:'Wedges',d:'Golden potato wedges with sour cream',p:'$8',b:['v','gf']},{n:'Soft Drinks',d:'Coke, Sprite, Fanta',p:'$4',b:['v','gf','vg']},{n:'Water',d:'Still or sparkling',p:'$3',b:['v','gf','vg']}]},
+  prev:[{n:'The Narnia',p:'Market'},{n:'Pepperoni',p:'$22'},{n:'Meat Feast',p:'$28'}]},
+
+  orthodontist:{name:'Pāpāmoa Orthodontist',tagline:'Specialist orthodontic care for children, teens and adults at Tara Road.',cat:'Health & Wellbeing',sub:'Orthodontics',addr:'1G Tara Road, Pāpāmoa Beach, Tauranga 3187',phone:'07 579 3571',email:'hello@papamoaorthodontist.co.nz',web:'papamoaorthodontist.co.nz',ig:'@papamoa_orthodontist',fb:true,emoji:'😁',cc:'pc4',photos:['😁','🦷','✨'],
+  desc:`Pāpāmoa Orthodontist is a specialist clinic at 1G Tara Road, co-founded by a specialist orthodontist alongside Tara Road Dental in the same purpose-built facility. The clinic serves patients from Pāpāmoa, Mount Maunganui, Te Puke and Tauranga.\n\nTreatment options include traditional metal braces, tooth-coloured ceramic braces and clear aligners. Early assessments are available for children from around age 7. Adults are equally welcome — orthodontic treatment is not just for young people.\n\nFees are transparent and comprehensive, covering placement, all adjustments, retainers and follow-up. Flexible payment options available. Free on-site parking.`,
+  hours:[{d:'Mon–Thu',t:'By appointment'},{d:'Fri',t:'By appointment'},{d:'Sat–Sun',t:'Closed',closed:true}],
+  svcs:['Metal braces','Ceramic braces','Clear aligners','Early assessment (children)','Teen orthodontics','Adult orthodontics','Fixed retainers','Removable retainers','Flexible payment','Free parking'],
+  hl:['Specialist orthodontist (not a general dentist)','Children, teen & adult treatment','Comprehensive fee — no hidden costs','Free parking on site'],
+  rv:{t:'We approach our practice with the care we would give our own family.',a:'Pāpāmoa Orthodontist practice ethos'},
+  hasMenu:true,mlabel:'View Treatments & Fees',mupd:'Updated March 2026',olab:'Book a consultation →',ohref:'https://www.papamoaorthodontist.co.nz',mfoot:'Fees are approximate and depend on case complexity. Full quote provided at consultation.',
+  mf:['All','Children','Adults','Popular'],
+  mt:[{id:'fixed',l:'🔩 Fixed Braces'},{id:'aligners',l:'✨ Clear Aligners'},{id:'retainers',l:'🦷 Retainers'},{id:'assessment',l:'📋 Assessment'}],
+  md:{fixed:[{n:'Metal Braces — Standard',d:'Stainless steel braces. Can be personalised with coloured o-rings.',p:'From $5,500',b:['pop'],pop:true},{n:'Metal Braces — Complex',d:'For more involved alignment or bite correction. Comprehensive fee includes all adjustments.',p:'From $6,500',b:[]},{n:'Ceramic Braces',d:'Tooth-coloured brackets. Popular with older teens and adults.',p:'From $6,000',b:['pop']}],aligners:[{n:'Clear Aligner Treatment',d:'Custom series of clear removable aligners. Virtually invisible.',p:'From $6,000',b:['pop'],pop:true},{n:'Short-term Aligners',d:'For mild corrections or minor relapse.',p:'From $3,500',b:[]}],retainers:[{n:'Fixed (Bonded) Retainer',d:'Wire bonded to back of front teeth. Included in comprehensive fee.',p:'Included',b:[]},{n:'Removable Retainer',d:'Custom clear retainer worn at night. Included in comprehensive fee.',p:'Included',b:[]},{n:'Replacement Retainer',d:'If your retainer is lost or worn out post-treatment.',p:'From $250',b:[]}],assessment:[{n:'Initial Consultation',d:'Clinical assessment, photos, X-rays and a full treatment plan.',p:'From $150',b:['pop'],pop:true},{n:'Early Assessment (Children)',d:'Jaw and bite assessment for children aged 7–10.',p:'From $100',b:[]},{n:'Flexible Payment Plans',d:'Interest-free options available for all comprehensive treatments.',p:'Interest-free',b:['new']}]},
+  prev:[{n:'Metal Braces — Standard',p:'From $5,500'},{n:'Clear Aligner Treatment',p:'From $6,000'},{n:'Initial Consultation',p:'From $150'}]},
+
+  dental:{name:'Tara Road Dental',tagline:'A different way to dental — modern, purpose-built and patient-first in Pāpāmoa.',cat:'Health & Wellbeing',sub:'General Dentist',addr:'Unit 1G Tara Road, Pāpāmoa Beach, Tauranga 3187',phone:'07 579 5291',email:'hello@tararddental.co.nz',web:'tararddental.co.nz',fb:true,emoji:'🦷',cc:'pc2',photos:['🦷','✨','😊'],
+  desc:`Tara Road Dental is a modern, purpose-built dental practice at 1G Tara Road, founded by Dr Lloyd Farrar. The practice was built to change how patients feel about going to the dentist. Dr Farrar trained at the University of Otago with experience in hospital and general dental settings in New Zealand and internationally.\n\nSpecialist experience includes IV sedation (Midazolam for anxious patients), wisdom tooth surgery and dental implants. Daily ACC appointments are available for dental injuries.\n\nThe practice participates in the TerraCycle Waste Brigade, diverting used oral care products from landfill. Online booking available.`,
+  hours:[{d:'Mon–Fri',t:'By appointment'},{d:'Sat–Sun',t:'Closed',closed:true}],
+  svcs:['General dentistry','Scale & clean','IV sedation (Midazolam)','Wisdom tooth surgery','Dental implants','Veneers & crowns','Bridges','Teeth whitening','Cosmetic dentistry','ACC emergency appointments','Online booking'],
+  hl:['IV sedation for anxious patients','Daily ACC injury appointments','Implants & wisdom tooth surgery','TerraCycle Waste Brigade partner'],
+  rv:{t:'Known for caring, cutting-edge dental care in a modern, welcoming setting. Lloyd and his team create a calm, pain-free experience.',a:'Kiwifruit Capital directory summary'},
+  hasMenu:true,mlabel:'View Services & Fees',mupd:'Updated March 2026',olab:'Book online →',ohref:'https://tararddental.co.nz',mfoot:'Fees are estimates only. ACC covers dental injuries. Call 07 579 5291.',
+  mf:['All','Preventive','Cosmetic','Surgical','Emergency'],
+  mt:[{id:'preventive',l:'✅ Preventive'},{id:'restorative',l:'🔧 Restorative'},{id:'cosmetic',l:'✨ Cosmetic'},{id:'surgical',l:'🏥 Surgical'},{id:'specialist',l:'💉 Specialist'}],
+  md:{preventive:[{n:'Check-up & Exam',d:'Comprehensive exam, X-rays as required, oral health assessment.',p:'From $90',b:['pop'],pop:true},{n:'Scale & Clean',d:'Professional hygiene clean, plaque removal, gum health check.',p:'From $120',b:['pop']},{n:'Dental X-Rays',d:'Bitewing or OPG X-rays.',p:'From $45',b:[]},{n:'Fissure Sealants',d:'Protective coating on back teeth. Especially beneficial for children.',p:'From $50/tooth',b:[]}],restorative:[{n:'Tooth-Coloured Filling',d:'Composite resin matched to your natural tooth colour.',p:'From $150',b:[]},{n:'Dental Crown',d:'Custom porcelain or ceramic crown.',p:'From $1,800',b:[]},{n:'Dental Bridge',d:'Fixed replacement for a missing tooth.',p:'From $3,000',b:[]},{n:'Dentures',d:'Full or partial. Implant-retained options available.',p:'POA',b:[]}],cosmetic:[{n:'Teeth Whitening',d:'Take-home professional whitening with custom trays.',p:'From $450',b:['pop'],pop:true},{n:'Dental Veneers',d:'Porcelain veneers to correct chips, discolouration or gaps.',p:'From $1,500/tooth',b:[]},{n:'Composite Bonding',d:'Tooth-coloured resin for shape or colour improvement.',p:'From $300/tooth',b:[]},{n:'Smile Assessment',d:'Consultation to discuss cosmetic goals.',p:'Free with check-up',b:['new']}],surgical:[{n:'Wisdom Tooth Removal',d:'Assessment and extraction. IV sedation available.',p:'From $280/tooth',b:[]},{n:'Dental Implant',d:'Titanium implant to replace a missing tooth root.',p:'From $4,500',b:['pop'],pop:true},{n:'Simple Extraction',d:'Removal under local anaesthetic.',p:'From $180',b:[]},{n:'ACC Dental Injury',d:'Same-day appointments for dental injuries. ACC covered.',p:'ACC covered',b:['pop']}],specialist:[{n:'IV Sedation',d:'Intravenous Midazolam. Many patients feel as if they simply had a restful sleep.',p:'From $350',b:['pop']},{n:'Oral Surgery Consultation',d:'Dr Farrar has specialist surgical experience. For complex cases.',p:'From $120',b:[]},{n:'Orthodontic Referral',d:'To Pāpāmoa Orthodontist in the same facility.',p:'Free referral',b:['new']}]},
+  prev:[{n:'Check-up & Exam',p:'From $90'},{n:'Teeth Whitening',p:'From $450'},{n:'Dental Implant',p:'From $4,500'}]},
+
+  pacific:{name:'Pacific Park Christian Holiday Camp',tagline:"Pāpāmoa's #1 family holiday park — two minutes from the beach since 1944.",cat:'Accommodation',sub:'Holiday Parks & Camping',addr:'1110 Pāpāmoa Beach Road, Pāpāmoa Beach',phone:'07 542 0018',email:'office@pacificpark.co.nz',web:'pacificpark.co.nz',fb:true,rating:'4.0',rc:'321 TripAdvisor reviews — #1 in Pāpāmoa',emoji:'🏕️',cc:'pc5',photos:['🏕️','🌊','☀️'],
+  desc:`Pacific Park Christian Holiday Camp has operated near Pāpāmoa Beach since 1944. Today it is ranked #1 accommodation in Pāpāmoa on TripAdvisor with 321 reviews and a 4-star rating. The park is smoke, vape, drug and alcohol-free — a genuine draw for families. Non-Christian guests are equally welcome.\n\nAccommodation ranges from powered campsites to air-conditioned two-bedroom cabins, serviced motel units and self-contained group lodges. Facilities include a hot tub, jumping pillow, playground, games room, communal kitchens and a conference centre.\n\nAs a non-profit, Pacific Park supports community ministries and offers ministry discounts. Office hours: 8:30am–6:30pm seven days.`,
+  hours:[{d:'Office',t:'8:30am – 12:30pm'},{d:'(7 days)',t:'1:00pm – 6:30pm',today:true},{d:'Late arrivals',t:'By arrangement'},{d:'Quiet hours',t:'After 10:00pm'}],
+  svcs:['Powered campsites','Unserviced cabins','Air-con 2-bed cabins','Serviced motel units','Group lodges','Conference centre','Hot tub / spa pool','Jumping pillow','Playground','Games room','Communal kitchens','BBQ areas','Laundry','Free WiFi','School & church groups','Non-profit'],
+  hl:['#1 TripAdvisor accommodation in Pāpāmoa','321 reviews, 4-star rated','Non-profit — supports community ministries','Alcohol, smoke & drug-free'],
+  rv:{t:"As non-Christians we were a bit hesitant to book with 'Christian' in the name, but there were no problems whatsoever. Would stay again.",a:'TripAdvisor reviewer'},
+  rv2:{t:'Well maintained, clean and tidy with a large 40-degree hot tub. Staff helpful, quiet at night. Highly recommended.',a:'TripAdvisor reviewer, Labour Weekend 2025'},
+  hasMenu:false},
+
+  karaka:{name:'Karaka Pines Pāpāmoa',tagline:"Beachside independent retirement living with full capital gains — Pāpāmoa's newest village.",cat:'Retirement Living',sub:'Independent Living',addr:'Te Ara O Wairakei walkway, Pāpāmoa Beach',phone:'027 230 2997',web:'karakapines.co.nz',fb:true,emoji:'🏡',cc:'pc5',photos:['🏡','🌿','🌊'],
+  desc:`Karaka Pines Pāpāmoa is the eighth Karaka Pines village, positioned alongside the Te Ara O Wairakei walkway with a direct connection to Pāpāmoa Beach Road. The village is planned for 114 units in a mix of two-bedroom duplexes and three-bedroom standalone homes.\n\nKaraka Pines' defining difference is its full capital gains model: residents keep the complete capital gain when they sell — a structure the company says is unique at scale in New Zealand retirement living. A Clubhouse is planned with shared dining, lounge, bar, library, gym and wellness centre.\n\nThe Sands Town Centre is minutes away. Homes from $875,000. Contact Trudi: 027 230 2997.`,
+  hours:[{d:'Sales',t:'Contact Trudi'},{d:'Phone',t:'027 230 2997',today:true},{d:'Village',t:'Now open'},{d:'From',t:'$875,000'}],
+  svcs:['2-bedroom duplexes','3-bedroom standalone homes','Full capital gains model','Fixed fees for life option','Clubhouse (planned)','Gym & wellness centre','Direct beach walkway','Near The Sands Town Centre','Lock-up-and-leave','114 units planned'],
+  hl:['Full capital gains — you keep 100%','114-unit intimate community','Direct walkway to Pāpāmoa Beach','Minutes from The Sands Town Centre'],
+  rv:{t:'Capital gain was part of our proactive approach to aging. Our home is spacious and easy to look after. The capital gain gives us confidence.',a:'Karaka Pines resident'},
+  hasMenu:false},
+
+  wagon:{name:'The Wagon Pāpāmoa',tagline:'Burgers and casual dining in the heart of the Pāpāmoa Junction precinct.',cat:'Food & Drink',sub:'Burgers & Casual Dining',addr:'Unit 1/8 Toorea Street, Pāpāmoa Beach',phone:null,web:'ordermeal.co.nz/the-wagon-papamoa',emoji:'🍔',cc:'pc6',photos:['🍔','🔥','🥤'],
+  desc:`The Wagon operates from Unit 1, 8 Toorea Street in the Pāpāmoa Junction precinct — the newer mixed-use development off Te Okuroa Drive close to State Highway 2. The venue holds an on-licence from the Tauranga District Licensing Committee.\n\nPickup and delivery are available through Order Meal, with typical hours running 11am–8pm. The Toorea Street location has good road access and ample parking, serving the growing residential and commercial area of Pāpāmoa East.`,
+  hours:[{d:'Thu–Sat',t:'11:00am – 8:00pm'},{d:'Sun–Wed',t:'Check current hours',today:true}],
+  svcs:['Gourmet burgers','Casual dining','Takeaway','Online ordering','Delivery available','Licensed (on-licence)'],
+  hl:['Pāpāmoa Junction — easy SH2 access','On-licence','Online ordering & delivery','Pickup 11am–8pm'],
+  rv:{t:'A welcome new addition to Pāpāmoa Junction — burgers in a convenient spot.',a:'Local feedback'},
+  hasMenu:true,mlabel:'View Menu',mupd:'Updated March 2026',olab:'Order on Order Meal →',ohref:'https://www.ordermeal.co.nz/the-wagon-papamoa/',mfoot:'Confirm current menu and hours directly with The Wagon before travelling.',
+  mf:['All','Popular','GF available'],
+  mt:[{id:'burgers',l:'🍔 Burgers'},{id:'sides',l:'🍟 Sides'},{id:'drinks',l:'🥤 Drinks'}],
+  md:{burgers:[{n:'Classic Beef Burger',d:'Beef patty, lettuce, tomato, cheese, house sauce, brioche bun',p:'$16',b:['pop'],pop:true},{n:'Double Trouble',d:'Double beef patty, double cheese, pickles, mustard, onion',p:'$21',b:[]},{n:'BBQ Bacon Burger',d:'Beef patty, crispy bacon, cheddar, BBQ sauce, onion rings, brioche bun',p:'$19',b:['pop'],pop:true},{n:'Crispy Chicken Burger',d:'Southern fried chicken, slaw, pickles, house sauce',p:'$18',b:[]},{n:'Veggie Stack',d:'House veggie patty, lettuce, tomato, cheese, aioli, brioche bun',p:'$17',b:['v','gf']},{n:'The Wagon Special',d:'Ask in store — rotates regularly',p:'Ask',b:['new']}],sides:[{n:'Hand-cut Fries',d:'Thick-cut fries with house seasoning',p:'$8',b:['v','gf']},{n:'Loaded Fries',d:'Fries, cheese sauce, jalapeños, sour cream',p:'$12',b:['v']},{n:'Onion Rings',d:'Beer-battered onion rings',p:'$9',b:['v']},{n:'Side Salad',d:'Seasonal greens, cherry tomatoes, vinaigrette',p:'$7',b:['v','gf','vg','df']}],drinks:[{n:'Soft Drinks',d:'Coke, L&P, Sprite, Fanta',p:'$4',b:['v','gf','vg']},{n:'Milkshake',d:'Chocolate, vanilla, strawberry, caramel',p:'$8',b:['v']},{n:'Beer & Wine',d:'Licensed venue — ask staff',p:'Varies',b:[]},{n:'Water',d:'Still or sparkling',p:'$3',b:['v','gf','vg']}]},
+  prev:[{n:'Classic Beef Burger',p:'$16'},{n:'BBQ Bacon Burger',p:'$19'},{n:'Loaded Fries',p:'$12'}]},
+
+  redefined:{name:'ReDefined Wellbeing Hub',tagline:"NZ's first fully integrated wellbeing hub — movement, health services and recovery under one roof.",cat:'Health & Wellbeing',sub:'Gym & Fitness',addr:'58 Ashley Place, Pāpāmoa Beach, Pāpāmoa 3118',phone:'022 454 6945',email:'us@redefined.nz',web:'redefined.nz',ig:'@nzredefined',fb:true,emoji:'💪',cc:'pc7',photos:['💪','🧘','🥶'],
+  desc:`ReDefined Wellbeing Hub at 58 Ashley Place is New Zealand's first fully integrated wellbeing centre. Founded by Jimmy August, it brings three dedicated studios (Performance, MindBody and Movement), an open gym, a Recovery Lab, and specialist health practitioners under one roof.\n\nThe Recovery Lab features two saunas, compression therapy and cold plunge pools at 12–4°C. Health practitioners include a registered clinical nutritionist and naturopath (DNA testing available), a lifestyle and integrative medicine GP (Thursdays), and remedial manual therapists.\n\nPrenatal Reformer Pilates is offered with appropriate modifications. Bookings via the ReDefined app or reception.`,
+  hours:[{d:'Mon–Fri',t:'Early open — check app'},{d:'Sat–Sun',t:'Morning sessions'},{d:'Book via',t:'ReDefined App',today:true}],
+  svcs:['Reformer Pilates','Yoga & hot yoga','Strength training','Open gym','Recovery Lab','Saunas (×2)','Cold plunge (12–4°C)','Compression therapy','Clinical nutrition & naturopathy','DNA health/diet/sport testing','Integrative medicine GP','Remedial manual therapy','Physiotherapy','Prenatal Pilates','Personal training'],
+  hl:["NZ's first fully integrated wellbeing hub",'New Recovery Lab — saunas, cold plunge, compression','DNA health, diet & sport testing on site','Integrative medicine GP — Thursdays'],
+  rv:{t:'I just had my ass kicked in the best way ever. My first session at ReDefined was just what I needed. There are so many awesome classes to take.',a:'Google reviewer'},
+  rv2:{t:'One place for yoga. One place for strength. One place for recovery. One ecosystem. Your health. Redefined.',a:'ReDefined practice summary'},
+  hasMenu:true,mlabel:'View Classes & Services',mupd:'Updated April 2026',olab:'Book via ReDefined App →',ohref:'https://www.redefined.nz',mfoot:'Class timetable changes seasonally. Book via the ReDefined app or call 022 454 6945.',
+  mf:['All','Pilates','Yoga','Strength','Recovery','Health Services'],
+  mt:[{id:'classes',l:'🏃 Studio Classes'},{id:'recovery',l:'🧊 Recovery Lab'},{id:'health',l:'🩺 Health Services'},{id:'gym',l:'💪 Open Gym'}],
+  md:{classes:[{n:'Reformer Pilates',d:'Equipment-based Pilates on the reformer. All levels including prenatal.',p:'$28/class',b:['pop'],pop:true},{n:'Hot Yoga',d:'Yoga in a heated studio. Mats provided.',p:'$22/class',b:['pop']},{n:'Yoga Flow',d:'Dynamic vinyasa-style yoga.',p:'$20/class',b:[]},{n:'Strength & Conditioning',d:'Functional strength training in the Performance Studio.',p:'$22/class',b:[]},{n:'HIIT',d:'High intensity interval training. 45-minute class.',p:'$22/class',b:[]},{n:'Movement Fundamentals',d:'Mobility, coordination and body control.',p:'$20/class',b:[]}],recovery:[{n:'Sauna Session',d:'Two saunas. Time slots bookable.',p:'$18/session',b:['pop'],pop:true},{n:'Cold Plunge',d:'Cold immersion at 12–4°C. Reduces inflammation and improves mental clarity.',p:'$18/session',b:['pop']},{n:'Sauna + Cold Plunge Combo',d:'Contrast therapy protocol. Guided for first-timers.',p:'$28/session',b:['pop']},{n:'Compression Therapy',d:'Pneumatic compression for legs and arms.',p:'$15/session',b:[]}],health:[{n:'Nutrition & Naturopathy Consult',d:'Initial 60-min consultation with Kylie (Registered Clinical Nutritionist & Naturopath).',p:'$120',b:[]},{n:'DNA Testing — DNACore®',d:'DNA Health, Diet and Sport reports. Genetic insights into nutrition and performance.',p:'$395',b:[]},{n:'Integrative Medicine GP',d:"Dr Cheryl — Thursdays in-person & online. Lifestyle medicine for complex conditions.",p:'POA',b:[]},{n:'Remedial Manual Therapy',d:'Deep tissue and remedial massage. 60 or 90 minutes.',p:'$100–$140',b:[]},{n:'Physiotherapy',d:'Via Recharge Physio. Injury assessment, rehab and performance.',p:'POA',b:[]}],gym:[{n:'Casual Gym Visit',d:'Single-visit open gym access.',p:'$20',b:[]},{n:'Weekly Pass',d:'Unlimited open gym access for 7 days.',p:'$55',b:['pop']},{n:'Monthly Membership',d:'Unlimited open gym + class bookings at member rate.',p:'From $79/mo',b:['pop'],pop:true},{n:'Personal Training',d:'1:1 or small group PT with a qualified coach.',p:'From $85/hr',b:[]}]},
+  prev:[{n:'Reformer Pilates',p:'$28/class'},{n:'Sauna + Cold Plunge',p:'$28/session'},{n:'DNA Testing',p:'$395'}]},
+
+  realestate:{name:'Pāpāmoa Real Estate',tagline:"Local experts for buying, selling and renting in one of NZ's fastest-growing coastal suburbs.",cat:'Real Estate',sub:'Residential Sales',addr:'Pāpāmoa, Tauranga, Bay of Plenty',phone:null,web:'papamoa.info/real-estate',emoji:'🏠',cc:'pc8',photos:['🏠','🌊','🔑'],
+  desc:`Pāpāmoa is one of New Zealand's fastest-growing coastal suburbs, with a residential property market that draws buyers from Auckland and Wellington. Agencies with an active Pāpāmoa presence include Harcourts (Cnr Domain & Dickson Roads), Ray White Pāpāmoa, EVES Real Estate and Bayleys.\n\nLocal agents specialise in coastal residential, beachfront premium properties, new-build sections in Pāpāmoa East and investment rental property.\n\nThe Gold Spotlight in Real Estate > Residential Sales is currently available — one position, placing a single agent or agency at the top of this page.`,
+  hours:[{d:'Mon–Fri',t:'Office hours'},{d:'Sat–Sun',t:'By appointment',today:true}],
+  svcs:['Residential sales','Property appraisals','Buyer representation','Auction','Property management','Rental management','New builds & sections','Investment property'],
+  hl:['Gold Spotlight — available now','One agent/agency per sub-category','20+ years domain authority','Reaches active Pāpāmoa buyers and sellers'],
+  rv:{t:'Gold Spotlight in Real Estate > Residential Sales. $1,200 + GST/yr. One position only.',a:'Papamoa.info — listing available'},
+  hasMenu:false}
+};
+
+// ── STATE ──
+let cb='pizza',ct='gold',lbTab='',lbF=new Set(['All']);
+
+// ── SWITCHES ──
+function setTier(t){ct=t;document.querySelectorAll('.tier-tab').forEach(el=>el.classList.toggle('active',el.classList.contains(t)));render()}
+function showBiz(b){cb=b;document.querySelectorAll('.biz-pill').forEach(el=>el.classList.toggle('active',el.getAttribute('onclick').includes(`'${b}'`)));render();window.scrollTo({top:45,behavior:'smooth'})}
+
+function render(){
+  const el=document.getElementById('lc');
+  const biz=B[cb];
+  if(ct==='gold')el.innerHTML=rGold(biz);
+  else if(ct==='silver')el.innerHTML=rSilver(biz);
+  else el.innerHTML=rBronze(biz);
+}
+
+// ── HELPERS ──
+const BD={gf:{l:'GF',c:'gf'},v:{l:'🌿 Veg',c:'v'},vg:{l:'🌱 Vegan',c:'vg'},df:{l:'DF',c:'df'},sp:{l:'🌶️',c:'sp'},new:{l:'New',c:'new'},pop:{l:'⭐',c:'pop'}};
+function bH(bs=[]){return bs.map(b=>BD[b]?`<span class="mb ${BD[b].c}">${BD[b].l}</span>`:'').join('')}
+function hH(hrs=[]){return hrs.map(h=>`<div class="hr${h.closed?' closed':''}${h.today?' today':''}"><span class="day">${h.d}</span><span class="time">${h.t}</span></div>`).join('')}
+function sH(s=[]){return s.map(x=>`<span class="svc">${x}</span>`).join('')}
+function dH(d=''){return d.split('\n\n').map(p=>`<p style="margin-bottom:12px">${p}</p>`).join('')}
+function mTG(biz){
+  if(!biz.hasMenu)return'';
+  return`<div class="cs"><h3 class="cs-title"><span>📋</span>${biz.mlabel||'Menu'}</h3>
+  <div class="mts" onclick="openLB()">
+    <div class="mts-icon">📋</div>
+    <div class="mts-txt"><h4>Browse ${(biz.mlabel||'the full menu').toLowerCase()}</h4><p>Category tabs, dietary filters and pricing — tap to open</p></div>
+    <span class="mts-upd">${biz.mupd}</span><span class="mts-arrow">›</span>
+  </div></div>`
+}
+function mTS(biz){
+  if(!biz.hasMenu)return'';
+  const rows=(biz.prev||[]).slice(0,3).map((it,i)=>`<div class="mpr${i>0?' blur':''}"><span class="mpn">${it.n}</span><span class="mpp">${it.p}</span></div>`).join('');
+  return`<div class="cs"><h3 class="cs-title"><span>📋</span>${biz.mlabel||'Menu'}</h3>
+  <div class="mpw">${rows}<div class="mpf"></div></div>
+  <div class="smu"><div class="smu-eye">Add-on available</div><div class="smu-h">Unlock the full interactive ${(biz.mlabel||'menu').toLowerCase()}</div><p class="smu-p">Category tabs, dietary filters, pricing and a "Last Updated" date — embedded on your listing. Updated via a private form, no CMS login needed.</p><a href="/advertise#menu-addon" class="smu-btn">Add Menu for $199 + GST/yr →</a></div></div>`
+}
+
+// ── GOLD ──
+function rGold(biz){
+  const rit=biz.rating?`<div class="rating-badge"><span class="rb-stars">★★★★★</span><span class="rb-score">${biz.rating}</span><span class="rb-count">${biz.rc}</span></div>`:'';
+  const cts=[
+    biz.phone?`<a href="tel:${biz.phone}" class="btn-gold">📞 ${biz.phone}</a>`:'',
+    biz.email?`<a href="mailto:${biz.email}" class="btn-outline">✉ Email</a>`:'',
+    biz.web?`<a href="#" class="btn-outline">🌐 Website</a>`:'',
+  ].filter(Boolean);
+  if(!biz.phone&&!biz.email)cts.unshift(`<a href="#" class="btn-gold">📋 Get in touch</a>`);
+  const mbtn=biz.hasMenu?`<button class="btn-menu" onclick="openLB()">📋 ${biz.mlabel}</button>`:'';
+  const soc=[biz.ig?`<a href="#" class="si" title="Instagram">📷</a>`:'',biz.fb?`<a href="#" class="si" title="Facebook">f</a>`:'',biz.web?`<a href="#" class="si" title="Website">🌐</a>`:''].filter(Boolean).join('');
+  const hlHTML=(biz.hl||[]).map(h=>`<div class="ci"><span class="ci-i">✦</span><span class="ci-t">${h}</span></div>`).join('');
+  return`<div>
+  <div class="gold-hero">
+    <div class="gold-hero-text">
+      <div class="hero-breadcrumb"><a href="/">Papamoa.info</a><span>/</span><a href="#">${biz.cat}</a><span>/</span>${biz.sub}</div>
+      <div class="hero-badge-row"><span class="gold-spotlight-badge">⭐ Gold Spotlight</span><span class="cat-crumb">${biz.sub}</span>${biz.hasMenu?`<span class="menu-addon-badge">📋 ${biz.mlabel}</span>`:''}</div>
+      <h1>${biz.name}</h1><p class="hero-tagline">${biz.tagline}</p>
+      <div class="hero-meta-row"><span class="hero-meta-item">📍 ${biz.addr}</span>${biz.phone?`<span class="hero-meta-item">📞 ${biz.phone}</span>`:''}${rit}</div>
+    </div>
+    <div class="gold-hero-photos">
+      <div class="photo-slot"><div class="psi ${biz.cc}" style="min-height:200px;font-size:3rem">${biz.photos[0]}<span class="photo-label">Photo 1 of 9</span></div></div>
+      <div class="photo-slot"><div class="psi ${biz.cc}" style="opacity:.8;font-size:2rem">${biz.photos[1]||biz.emoji}</div></div>
+      <div class="photo-slot" style="position:relative"><div class="psi ${biz.cc}" style="opacity:.6;font-size:2rem">${biz.photos[2]||biz.emoji}</div><div class="photo-more">+6 photos</div></div>
+    </div>
+  </div>
+  <div class="gold-body">
+    <div class="gold-main">
+      <div class="action-bar">
+        ${cts.join('')}${mbtn}${biz.hasMenu?`<span class="updated-tag">🕐 ${biz.mupd}</span>`:''}
+        <div class="action-divider"></div><div class="social-icons">${soc}</div>
+      </div>
+      <div class="cs"><h3 class="cs-title"><span>📖</span> About ${biz.name}</h3><div class="cs-body">${dH(biz.desc)}</div></div>
+      ${mTG(biz)}
+      <div class="cs"><h3 class="cs-title"><span>✅</span> Services &amp; specialties</h3><div class="svcs">${sH(biz.svcs)}</div></div>
+      ${biz.hours?`<div class="cs"><h3 class="cs-title"><span>🕐</span> Opening hours</h3><div class="hours-grid">${hH(biz.hours)}</div></div>`:''}
+      ${biz.rv?`<div class="cs"><h3 class="cs-title"><span>⭐</span> What people say</h3>
+        <div class="rv"><div class="rv-stars">★★★★★</div><p class="rv-text">"${biz.rv.t}"</p><p class="rv-author">— ${biz.rv.a}</p></div>
+        ${biz.rv2?`<div class="rv"><div class="rv-stars">★★★★★</div><p class="rv-text">"${biz.rv2.t}"</p><p class="rv-author">— ${biz.rv2.a}</p></div>`:''}
+      </div>`:''}
+      <div class="cs"><h3 class="cs-title"><span>📍</span> Find them</h3><div class="map-ph"><span style="font-size:2rem">🗺️</span><strong>${biz.addr}</strong><span>Interactive map — Google Maps embed</span></div></div>
+    </div>
+    <div class="gold-sidebar">
+      <div class="gold-sc"><h4>★ Gold Spotlight listing</h4><p>Top position in ${biz.sub} on Papamoa.info — seen by everyone searching ${biz.sub.toLowerCase()} in Pāpāmoa.</p><a href="/advertise">About Gold listings →</a></div>
+      <div class="sc"><h4>Contact &amp; location</h4><div class="cl">
+        <div class="ci"><span class="ci-i">📍</span><span class="ci-t"><strong>Address</strong>${biz.addr}</span></div>
+        ${biz.phone?`<div class="ci"><span class="ci-i">📞</span><span class="ci-t"><strong>Phone</strong><a href="tel:${biz.phone}">${biz.phone}</a></span></div>`:''}
+        ${biz.email?`<div class="ci"><span class="ci-i">✉</span><span class="ci-t"><strong>Email</strong><a href="mailto:${biz.email}">${biz.email}</a></span></div>`:''}
+        ${biz.web?`<div class="ci"><span class="ci-i">🌐</span><span class="ci-t"><strong>Website</strong><a href="#">${biz.web}</a></span></div>`:''}
+      </div></div>
+      <div class="sc"><h4>Why they stand out</h4><div class="cl">${hlHTML}</div></div>
+      ${biz.rating?`<div class="sc" style="text-align:center"><h4>Rating</h4><div style="font-size:2rem;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif">${biz.rating}★</div><div style="font-size:.78rem;color:var(--muted);margin-top:4px">${biz.rc}</div></div>`:''}
+    </div>
+  </div></div>`
+}
+
+// ── SILVER ──
+function rSilver(biz){
+  const cta=biz.phone?`<a href="tel:${biz.phone}" class="btn-navy">📞 ${biz.phone}</a>`:`<a href="#" class="btn-navy">Get in touch</a>`;
+  return`<div>
+  <div class="silver-header"><div class="silver-inner">
+    <div class="hero-breadcrumb" style="color:var(--muted)"><a href="/" style="color:var(--muted)">Papamoa.info</a><span style="margin:0 5px">/</span><a href="#" style="color:var(--muted)">${biz.cat}</a><span style="margin:0 5px">/</span>${biz.sub}</div>
+    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap"><span class="silver-badge">◆ Silver listing</span><span class="cat-crumb" style="background:var(--bg);color:var(--muted);font-size:.7rem;padding:3px 8px;border-radius:3px">${biz.sub}</span></div>
+    <h1>${biz.name}</h1>
+    <div class="silver-meta"><span class="silver-mi">📍 ${biz.addr}</span>${biz.phone?`<span class="silver-mi">📞 ${biz.phone}</span>`:''}${biz.web?`<span class="silver-mi">🌐 ${biz.web}</span>`:''}</div>
+  </div></div>
+  <div class="silver-body">
+    <div>
+      <div class="silver-actions">${cta}${biz.email?`<a href="mailto:${biz.email}" class="btn-outline">✉ Email</a>`:''}${biz.web?`<a href="#" class="btn-outline">🌐 Website</a>`:''}</div>
+      <div class="cs"><h3 class="cs-title">About</h3><div class="cs-body">${dH(biz.desc).split('</p>').slice(0,2).join('</p>')}</p></div></div>
+      ${mTS(biz)}
+      <div class="cs"><h3 class="cs-title">Services</h3><div class="svcs">${sH(biz.svcs.slice(0,9))}</div>${biz.svcs.length>9?`<p style="font-size:.75rem;color:var(--muted);margin-top:10px">+ more — see website</p>`:''}</div>
+      ${biz.hours?`<div class="cs"><h3 class="cs-title">Hours</h3><div class="hours-grid">${hH(biz.hours.slice(0,4))}</div></div>`:''}
+      <div class="cs"><h3 class="cs-title">Find them</h3><div class="map-ph" style="height:140px"><span style="font-size:1.5rem">🗺️</span><span style="font-size:.83rem;color:var(--muted)">${biz.addr}</span></div></div>
+    </div>
+    <div>
+      <div class="utg"><div class="utg-eye">Upgrade available</div><h4>Unlock Gold Spotlight</h4><p>Gold places ${biz.name} at the top of ${biz.sub} with a hero banner, photo gallery and review showcase.</p>
+      <ul>${[`Full-width hero + photo gallery (×9+)`,`Top of sub-category position`,`Review showcase & star rating`,biz.hasMenu?`Interactive menu with filters`:'',`Unlimited AI sub-pages (Founding Member)`].filter(Boolean).map(f=>`<li>${f}</li>`).join('')}</ul>
+      <a href="/advertise#gold">Upgrade to Gold — $1,200 + GST/yr</a></div>
+      <div class="sc"><h4>Contact</h4><div class="cl">
+        <div class="ci"><span class="ci-i">📍</span><span class="ci-t">${biz.addr}</span></div>
+        ${biz.phone?`<div class="ci"><span class="ci-i">📞</span><span class="ci-t"><a href="tel:${biz.phone}">${biz.phone}</a></span></div>`:''}
+        ${biz.email?`<div class="ci"><span class="ci-i">✉</span><span class="ci-t"><a href="mailto:${biz.email}">${biz.email}</a></span></div>`:''}
+      </div></div>
+    </div>
+  </div></div>`
+}
+
+// ── BRONZE ──
+function rBronze(biz){
+  return`<div class="bronze-wrap"><div class="bronze-card">
+  <div class="bronze-hdr"><div><h1>${biz.name}</h1><p class="bronze-meta">${biz.cat} › ${biz.sub} — ${biz.addr}</p></div><span class="bronze-badge">Placeholder</span></div>
+  <div class="bronze-body">
+    <p class="bronze-desc">${biz.name} is listed in the ${biz.sub} category on Papamoa.info. Claim this listing to add your description, photos, services and contact information.</p>
+    <div class="bronze-contacts"><span class="bci">📍 ${biz.addr}</span>${biz.phone?`<span class="bci">📞 ${biz.phone}</span>`:''}</div>
+    <div class="bup"><div class="bup-eye">Claim this listing</div><h3>Is this your business?</h3><p>Upgrade to Silver or Gold to control this listing and start appearing in Pāpāmoa search results with 20+ years of domain authority.</p>
+    <div class="bup-btns"><a href="/advertise#silver" class="btn-upsil">◆ Silver — $599 + GST/yr</a><a href="/advertise#gold" class="btn-upgold">⭐ Gold — $1,200 + GST/yr</a></div></div>
+    <div class="pc-grid">
+      <div class="pc cur"><span class="pc-tier" style="color:#9A7060">Placeholder</span><div class="pc-price">Free <span>unregistered</span></div><ul class="pc-fl"><li>Name &amp; address</li><li class="no">No description</li><li class="no">No photos</li><li class="no">No menu</li><li class="no">No priority</li></ul></div>
+      <div class="pc"><span class="pc-tier" style="color:var(--silver)">◆ Silver</span><div class="pc-price">$599 <span>+ GST/yr</span></div><ul class="pc-fl"><li>Full description</li><li>Up to 9 images</li><li>Contact links</li><li>Services listed</li><li>Hours displayed</li><li class="no">No hero banner</li>${biz.hasMenu?'<li class="no">Menu teaser only</li>':''}</ul></div>
+      <div class="pc hi"><span class="pc-tier" style="color:var(--gold)">⭐ Gold Spotlight</span><div class="pc-price" style="color:var(--gold)">$1,200 <span>+ GST/yr</span></div><ul class="pc-fl"><li>Full-width hero</li><li>Photo gallery (×9+)</li><li>Top of sub-category</li><li>Review showcase</li>${biz.hasMenu?'<li>Full interactive menu</li>':''}<li>Unlimited AI sub-pages*</li><li>Menu free yr 1*</li></ul><span style="font-size:.65rem;color:var(--muted)">*Founding Member</span></div>
+    </div>
+  </div></div></div>`
+}
+
+// ── LIGHTBOX ──
+function openLB(){
+  const biz=B[cb];if(!biz.hasMenu)return;
+  lbTab=biz.mt[0].id;lbF=new Set(['All']);
+  document.getElementById('lb-title').textContent=`${biz.name} — ${biz.mlabel}`;
+  document.getElementById('lb-sub').textContent=biz.addr;
+  document.getElementById('lb-upd').textContent=biz.mupd;
+  document.getElementById('lb-fn').textContent=biz.mfoot;
+  const ob=document.getElementById('lb-ob');ob.textContent=biz.olab;ob.href=biz.ohref;
+  rLBTabs();rLBFilters();rLBItems();
+  document.getElementById('lbov').classList.add('open');document.body.style.overflow='hidden';
+}
+function closeLB(){document.getElementById('lbov').classList.remove('open');document.body.style.overflow=''}
+function closeLBov(e){if(e.target===document.getElementById('lbov'))closeLB()}
+function rLBTabs(){const biz=B[cb];document.getElementById('lb-tabs').innerHTML=biz.mt.map(t=>`<button class="lb-tab${t.id===lbTab?' active':''}" onclick="setLBTab('${t.id}')">${t.l}</button>`).join('')}
+function setLBTab(id){lbTab=id;lbF=new Set(['All']);rLBTabs();rLBFilters();rLBItems()}
+function rLBFilters(){const biz=B[cb];document.getElementById('lb-filters').innerHTML=biz.mf.map(f=>`<button class="fp${lbF.has(f)?' active':''}" onclick="toggleF('${f}')">${f}</button>`).join('')}
+const FB={'GF available':'gf','Vegetarian':'v','Vegan':'vg','Dairy-free':'df','Popular':'pop'};
+function toggleF(f){if(f==='All'){lbF=new Set(['All'])}else{lbF.delete('All');lbF.has(f)?lbF.delete(f):lbF.add(f);if(lbF.size===0)lbF.add('All')}rLBFilters();rLBItems()}
+function rLBItems(){
+  const biz=B[cb];const items=(biz.md||{})[lbTab]||[];
+  const filtered=items.filter(it=>{
+    if(lbF.has('All'))return true;
+    for(const f of lbF){const bk=FB[f];if(!bk)return true;if(it.b.includes(bk))return true}
+    return false;
+  });
+  if(!filtered.length){document.getElementById('lb-scroll').innerHTML=`<div class="no-res"><div class="nri">🔍</div><p>No items match that filter.</p><button onclick="lbF=new Set(['All']);rLBFilters();rLBItems()" style="margin-top:10px;padding:7px 16px;background:var(--navy);color:#fff;border:none;border-radius:5px;cursor:pointer;font-family:'Figtree',sans-serif;font-size:.8rem">Show all</button></div>`;return}
+  document.getElementById('lb-scroll').innerHTML=`<div class="mi-list">${filtered.map(it=>`<div class="mi"><div class="mi-l"><div class="mi-nr"><span class="mi-n">${it.n}</span>${bH(it.b)}</div><p class="mi-d">${it.d}</p></div><div class="mi-r"><span class="mi-p">${it.p}</span></div></div>`).join('')}</div>`
+}
+
+render();
+</script>
+</body>
+</html>
