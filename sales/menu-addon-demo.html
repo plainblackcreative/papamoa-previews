@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu / Service List Add-On | Papamoa.info</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #2B3F5C; --blue: #3AABDE; --lime: #7DC143;
+      --sand: #F5EFE0; --dune: #D4C4A0; --coral: #E8344A;
+      --white: #FFFFFF; --ink: #0D1B2A; --body: #1E2D3E;
+      --muted: #607080; --border: #DDE5EE; --bg: #F4F7FA;
+      --gold: #C8962A; --gold2: #F0C060;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--bg);
+      color: var(--body);
+      line-height: 1.6;
+    }
+
+    /* ── DEMO SWITCHER ── */
+    .demo-bar {
+      background: var(--ink);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+      border-bottom: 2px solid rgba(58,171,222,0.3);
+    }
+
+    .demo-bar-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      white-space: nowrap;
+    }
+
+    .biz-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .biz-pill {
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.18s;
+      white-space: nowrap;
+      font-family: 'Figtree', sans-serif;
+      border: none;
+    }
+
+    .biz-pill:hover { background: rgba(255,255,255,0.13); color: #fff; }
+    .biz-pill.active { background: var(--blue); color: #fff; }
+
+    /* ── LISTING PREVIEW CARD ── */
+    .preview-wrap {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .listing-card {
+      background: var(--white);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+
+    .lc-hero {
+      padding: 28px 28px 20px;
+      border-bottom: 3px solid var(--gold);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .lc-hero-left { flex: 1; }
+
+    .lc-badge-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .gold-badge {
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: var(--ink);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 3px;
+    }
+
+    .menu-badge {
+      background: var(--lime);
+      color: #fff;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 3px;
+    }
+
+    .lc-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .lc-meta { font-size: 0.8rem; color: var(--muted); }
+
+    .lc-emoji {
+      font-size: 3rem;
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    .lc-actions {
+      padding: 16px 28px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      background: #FAFBFC;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .btn-menu {
+      background: linear-gradient(135deg, var(--lime), #5A9020);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 11px 22px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: filter 0.2s;
+    }
+
+    .btn-menu:hover { filter: brightness(1.1); }
+
+    .btn-order {
+      background: var(--navy);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 11px 20px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-order:hover { background: var(--blue); }
+
+    .last-updated {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-left: auto;
+      font-style: italic;
+    }
+
+    .lc-body {
+      padding: 20px 28px 28px;
+    }
+
+    .lc-description { font-size: 0.88rem; color: var(--body); line-height: 1.7; }
+
+    /* ── UPSELL CARD (no menu yet) ── */
+    .upsell-card {
+      background: linear-gradient(135deg, #FFFAF0, #FFF5DC);
+      border: 1px solid rgba(200,150,42,0.25);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .upsell-icon { font-size: 1.8rem; flex-shrink: 0; }
+
+    .upsell-content h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #7A5010;
+      margin-bottom: 5px;
+    }
+
+    .upsell-content p {
+      font-size: 0.82rem;
+      color: #9A7030;
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    .upsell-content .upsell-price {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* ══════════════════════════════════════════
+       LIGHTBOX OVERLAY
+    ══════════════════════════════════════════ */
+    .lb-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 20, 35, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 9000;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .lb-overlay.open {
+      display: flex;
+      animation: overlayIn 0.25s ease both;
+    }
+
+    @keyframes overlayIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .lb-sheet {
+      background: var(--white);
+      width: 100%;
+      max-width: 760px;
+      max-height: 92vh;
+      border-radius: 20px 20px 0 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: sheetUp 0.3s cubic-bezier(0.22,1,0.36,1) both;
+      box-shadow: 0 -8px 60px rgba(0,0,0,0.3);
+    }
+
+    @keyframes sheetUp {
+      from { transform: translateY(60px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Sheet header */
+    .lb-header {
+      padding: 18px 22px 0;
+      flex-shrink: 0;
+    }
+
+    .lb-drag-handle {
+      width: 40px;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 0 auto 14px;
+    }
+
+    .lb-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .lb-title-block h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .lb-title-block .lb-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lb-updated {
+      font-size: 0.68rem;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .lb-close {
+      width: 34px;
+      height: 34px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: background 0.2s;
+      font-family: 'Figtree', sans-serif;
+    }
+
+    .lb-close:hover { background: var(--border); }
+
+    /* Category tabs */
+    .lb-tabs {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 22px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .lb-tabs::-webkit-scrollbar { display: none; }
+
+    .lb-tab {
+      padding: 10px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+      cursor: pointer;
+      border-bottom: 2.5px solid transparent;
+      transition: all 0.18s;
+      font-family: 'Figtree', sans-serif;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+
+    .lb-tab:hover { color: var(--navy); }
+    .lb-tab.active { color: var(--navy); border-bottom-color: var(--lime); font-weight: 700; }
+
+    /* Filters */
+    .lb-filters {
+      padding: 10px 22px;
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+      background: #FAFBFC;
+    }
+
+    .lb-filters::-webkit-scrollbar { display: none; }
+
+    .filter-pill {
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.18s;
+      font-family: 'Figtree', sans-serif;
+    }
+
+    .filter-pill:hover { border-color: var(--lime); color: #3A7010; }
+    .filter-pill.active { background: var(--lime); border-color: var(--lime); color: #fff; }
+
+    /* Menu items scroll area */
+    .lb-scroll {
+      overflow-y: auto;
+      flex: 1;
+      padding: 16px 22px 32px;
+    }
+
+    .menu-section { margin-bottom: 28px; }
+
+    .menu-section-title {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-items { display: flex; flex-direction: column; gap: 3px; }
+
+    .menu-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      transition: all 0.15s;
+    }
+
+    .menu-item:hover { border-color: var(--blue); background: #FAFEFF; }
+    .menu-item.hidden { display: none; }
+
+    .mi-left { flex: 1; min-width: 0; }
+
+    .mi-name-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 3px;
+      flex-wrap: wrap;
+    }
+
+    .mi-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .mi-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .mi-badge.gf  { background: #FFF3E0; color: #8B4500; }
+    .mi-badge.v   { background: #E8F5E9; color: #2E7D32; }
+    .mi-badge.vg  { background: #E8F5E9; color: #1A5C20; border: 1px solid #A5D6A7; }
+    .mi-badge.df  { background: #EDE7F6; color: #512DA8; }
+    .mi-badge.sp  { background: #FFEBEE; color: #C62828; }
+    .mi-badge.new { background: #E3F2FD; color: #1565C0; }
+    .mi-badge.pop { background: #FFF8E1; color: #F57F17; }
+
+    .mi-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .mi-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .mi-price {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    .mi-action {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--blue);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .mi-action:hover { color: var(--navy); }
+
+    /* No results */
+    .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .no-results .nr-icon { font-size: 2rem; margin-bottom: 8px; }
+
+    /* Sheet footer */
+    .lb-footer {
+      padding: 12px 22px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lb-footer-note {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .lb-order-btn {
+      background: var(--navy);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 9px 18px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .lb-order-btn:hover { background: var(--blue); }
+
+    /* ── ADDON UPSELL LIGHTBOX ── */
+    .addon-upsell-lb {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,20,35,0.7);
+      backdrop-filter: blur(4px);
+      z-index: 9500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .addon-upsell-lb.open { display: flex; animation: overlayIn 0.2s ease both; }
+
+    .addon-upsell-box {
+      background: var(--white);
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      overflow: hidden;
+      animation: sheetUp 0.25s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .aub-header {
+      background: linear-gradient(135deg, var(--navy), #1A2A40);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .aub-header .aub-icon { font-size: 2.5rem; margin-bottom: 8px; }
+
+    .aub-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .aub-header p { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+
+    .aub-body { padding: 22px 24px; }
+
+    .aub-feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .aub-feature-list li {
+      display: flex;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--body);
+      align-items: flex-start;
+    }
+
+    .aub-feature-list li .fi-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .aub-feature-list li strong { color: var(--navy); }
+
+    .aub-price {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .aub-price .ap-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .aub-price .ap-amount { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--navy); }
+    .aub-price .ap-note { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+    .aub-btns { display: flex; gap: 10px; }
+
+    .aub-btn-primary {
+      flex: 1;
+      background: linear-gradient(135deg, var(--lime), #4A8010);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 12px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .aub-btn-close {
+      background: var(--bg);
+      color: var(--muted);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      padding: 12px 18px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--navy);
+      padding: 18px 24px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .lb-sheet { max-height: 95vh; }
+      .lc-hero { flex-direction: column; }
+      .lc-emoji { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- DEMO BAR -->
+<div class="demo-bar">
+  <span class="demo-bar-label">Business:</span>
+  <div class="biz-pills">
+    <button class="biz-pill active" onclick="loadBiz('pizza')">🍕 The Pizza Pundits</button>
+    <button class="biz-pill" onclick="loadBiz('wagon')">🍔 The Wagon</button>
+    <button class="biz-pill" onclick="loadBiz('redefined')">💪 ReDefined</button>
+    <button class="biz-pill" onclick="loadBiz('dental')">🦷 Tara Road Dental</button>
+    <button class="biz-pill" onclick="loadBiz('orthodontist')">😁 Pāpāmoa Orthodontist</button>
+  </div>
+</div>
+
+<!-- LISTING PREVIEW -->
+<div class="preview-wrap">
+  <div class="listing-card" id="listing-card">
+    <!-- Injected by JS -->
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     MENU LIGHTBOX
+════════════════════════════ -->
+<div class="lb-overlay" id="lb-overlay" onclick="closeLightbox(event)">
+  <div class="lb-sheet" id="lb-sheet">
+    <div class="lb-header">
+      <div class="lb-drag-handle"></div>
+      <div class="lb-top-row">
+        <div class="lb-title-block">
+          <h2 id="lb-title">Menu</h2>
+          <div class="lb-sub">
+            <span id="lb-subtitle"></span>
+            <span class="lb-updated" id="lb-updated"></span>
+          </div>
+        </div>
+        <button class="lb-close" onclick="closeLightboxBtn()">✕</button>
+      </div>
+    </div>
+
+    <div class="lb-tabs" id="lb-tabs"></div>
+    <div class="lb-filters" id="lb-filters"></div>
+    <div class="lb-scroll" id="lb-scroll"></div>
+
+    <div class="lb-footer">
+      <span class="lb-footer-note" id="lb-footer-note"></span>
+      <a href="#" class="lb-order-btn" id="lb-order-btn">Order online →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ADDON UPSELL MODAL -->
+<div class="addon-upsell-lb" id="addon-upsell" onclick="closeUpsell(event)">
+  <div class="addon-upsell-box">
+    <div class="aub-header">
+      <div class="aub-icon">📋</div>
+      <h2>Add a Menu or Service List</h2>
+      <p>Let visitors browse your full menu, services or price list right here on Papamoa.info — without leaving the page.</p>
+    </div>
+    <div class="aub-body">
+      <ul class="aub-feature-list">
+        <li><span class="fi-icon">📂</span><div><strong>Category tabs</strong> — organise by pizza type, treatment type, service area or any grouping that suits your business.</div></li>
+        <li><span class="fi-icon">🥗</span><div><strong>Dietary &amp; preference filters</strong> — GF, vegan, vegetarian, dairy-free and more (food businesses), or filter by treatment type, age group or price range (services).</div></li>
+        <li><span class="fi-icon">🔄</span><div><strong>Client-updated via private form</strong> — you submit changes through a private form, which pushes updates to GitHub automatically. No CMS login needed.</div></li>
+        <li><span class="fi-icon">📅</span><div><strong>"Last Updated" date</strong> — displayed on the menu so visitors know it's current.</div></li>
+        <li><span class="fi-icon">📱</span><div><strong>Mobile-first lightbox</strong> — slides up as a bottom sheet on phones, centred modal on desktop.</div></li>
+      </ul>
+      <div class="aub-price">
+        <div class="ap-label">Menu / Service List Add-On</div>
+        <div class="ap-amount">$199 <span style="font-size:0.9rem;font-weight:400;color:var(--muted);">+ GST/yr</span></div>
+        <div class="ap-note">Available to Silver &amp; Gold listings. Year one free for Gold Founding Members.</div>
+      </div>
+      <div class="aub-btns">
+        <a href="/advertise#menu-addon" class="aub-btn-primary">Add to my listing →</a>
+        <button class="aub-btn-close" onclick="closeUpsell()">Maybe later</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <a href="/" style="color:var(--blue);">Papamoa.info</a> — Menu / Service List Add-On demo. $199 + GST/year. Available to Silver and Gold listings.
+</footer>
+
+<script>
+// ════════════════════════════════════════════════════
+// BUSINESS DATA
+// ════════════════════════════════════════════════════
+
+const businesses = {
+
+  pizza: {
+    name: 'The Pizza Pundits',
+    subtitle: 'Menu',
+    address: '1/898 Pāpāmoa Beach Road',
+    emoji: '🍕',
+    hasMenu: true,
+    updated: 'Updated April 2026',
+    orderLabel: 'Order on DoorDash →',
+    orderHref: 'https://www.doordash.com/store/the-pizza-pundits-papamoa-32868089/',
+    footerNote: 'Menu pricing set directly by The Pizza Pundits. Confirm current prices when ordering.',
+    description: 'A quirky pizzeria at Pāpāmoa Beach Road, creating large handcrafted gourmet pizzas seven nights a week. House-made gluten-free bases available — ask when ordering.',
+    filters: ['All', 'GF available', 'Vegetarian', 'Popular'],
+    tabs: [
+      { id: 'classic', label: '🍕 Classic Pizzas' },
+      { id: 'specialty', label: '✨ Specialty' },
+      { id: 'veggie', label: '🥗 Vegetarian' },
+      { id: 'deals', label: '💰 Deals' },
+      { id: 'sides', label: '🍟 Sides & Drinks' },
+    ],
+    menu: {
+      classic: [
+        { name: 'Cheese', desc: 'Pizza sauce, mozzarella — the pure thing', price: '$18', badges: ['v', 'gf'], popular: true },
+        { name: 'Hawaiian', desc: 'Pizza sauce, champagne ham, pineapple, mozzarella', price: '$22', badges: ['gf'] },
+        { name: 'Pepperoni', desc: 'Pizza sauce, Italian pepperoni, mozzarella', price: '$22', badges: ['gf'], popular: true },
+        { name: 'Beef', desc: 'Pizza sauce, onion, beef, mozzarella, BBQ swirl', price: '$23', badges: ['gf'] },
+        { name: 'Bacon & Onion', desc: 'Pizza sauce, onion, smoky bacon, mozzarella, BBQ swirl', price: '$23', badges: ['gf'] },
+        { name: 'Ham & Cheese', desc: 'Pizza sauce, ham, mozzarella', price: '$20', badges: ['gf'] },
+      ],
+      specialty: [
+        { name: 'The Narnia', desc: 'Signature pizza — ask in store for today\'s version', price: 'Market', badges: ['pop'], popular: true },
+        { name: 'Blue Cheese & Bacon', desc: 'Smoky bacon, spinach, caramelised onions, blue cheese, mozzarella', price: '$26', badges: ['gf'] },
+        { name: 'Salami Duo', desc: 'Chorizo salami, Italian pepperoni, mozzarella', price: '$25', badges: ['gf'], popular: true },
+        { name: 'Meat Feast', desc: 'Pepperoni, sausage, smoky bacon, caramelised onions, smoked BBQ sauce, mozzarella', price: '$28', badges: ['gf'] },
+        { name: 'Pulled Pork', desc: 'BBQ pulled pork, bacon, pineapple, caramelised onions, jalapeños, mozzarella, BBQ sauce, coriander', price: '$27', badges: ['gf', 'sp'] },
+        { name: 'Margherita', desc: 'Pizza sauce, fresh basil, creamy mozzarella — classic done right', price: '$20', badges: ['v', 'gf'] },
+      ],
+      veggie: [
+        { name: 'Garden Margherita', desc: 'Pizza sauce, fresh basil, mozzarella, cherry tomatoes', price: '$20', badges: ['v', 'gf'] },
+        { name: 'Cheese', desc: 'Pizza sauce and mozzarella — simple and satisfying', price: '$18', badges: ['v', 'gf'] },
+        { name: 'Ask for vegan option', desc: 'Dairy-free cheese available on request — check with staff', price: 'Ask', badges: ['vg', 'df'] },
+      ],
+      deals: [
+        { name: 'Two-for-One Deal', desc: 'Pick any two pizzas from the full menu, plus any side and any drink', price: 'Combo deal', badges: ['pop'] },
+        { name: 'Family Deal', desc: 'Any one pizza from the full menu, plus any side and any drink', price: 'Combo deal', badges: [] },
+      ],
+      sides: [
+        { name: 'Garlic Bread', desc: 'Freshly made garlic bread', price: '$7', badges: ['v'] },
+        { name: 'Wedges', desc: 'Golden potato wedges with sour cream', price: '$8', badges: ['v', 'gf'] },
+        { name: 'Soft Drinks', desc: 'Coke, Sprite, Fanta — check in store for current range', price: '$4', badges: ['v', 'gf', 'vg'] },
+        { name: 'Water', desc: 'Still or sparkling', price: '$3', badges: ['v', 'gf', 'vg'] },
+      ],
+    },
+  },
+
+  wagon: {
+    name: 'The Wagon Pāpāmoa',
+    subtitle: 'Menu',
+    address: 'Unit 1/8 Toorea Street, Pāpāmoa Junction',
+    emoji: '🍔',
+    hasMenu: true,
+    updated: 'Updated March 2026',
+    orderLabel: 'Order on Order Meal →',
+    orderHref: 'https://www.ordermeal.co.nz/the-wagon-papamoa/',
+    footerNote: 'Confirm current menu and hours directly with The Wagon before travelling.',
+    description: 'Burgers and casual dining in the Pāpāmoa Junction precinct off Te Okuroa Drive. Licensed. Pickup 11am–8pm.',
+    filters: ['All', 'Popular', 'GF available', 'Sides'],
+    tabs: [
+      { id: 'burgers', label: '🍔 Burgers' },
+      { id: 'sides', label: '🍟 Sides' },
+      { id: 'drinks', label: '🥤 Drinks' },
+    ],
+    menu: {
+      burgers: [
+        { name: 'Classic Beef Burger', desc: 'Beef patty, lettuce, tomato, cheese, house sauce, brioche bun', price: '$16', badges: ['pop'], popular: true },
+        { name: 'Double Trouble', desc: 'Double beef patty, double cheese, pickles, mustard, onion', price: '$21', badges: [] },
+        { name: 'BBQ Bacon Burger', desc: 'Beef patty, crispy bacon, cheddar, BBQ sauce, onion rings, brioche bun', price: '$19', badges: ['pop'], popular: true },
+        { name: 'Crispy Chicken Burger', desc: 'Southern fried chicken, slaw, pickles, house sauce, milk bun', price: '$18', badges: [] },
+        { name: 'Veggie Stack', desc: 'House veggie patty, lettuce, tomato, cheese, aioli, brioche bun', price: '$17', badges: ['v', 'gf'] },
+        { name: 'The Wagon Special', desc: 'Ask in store — rotates regularly', price: 'Ask', badges: ['new'] },
+      ],
+      sides: [
+        { name: 'Hand-cut Fries', desc: 'Thick-cut fries with house seasoning', price: '$8', badges: ['v', 'gf'] },
+        { name: 'Loaded Fries', desc: 'Fries, cheese sauce, jalapeños, sour cream', price: '$12', badges: ['v'] },
+        { name: 'Onion Rings', desc: 'Beer-battered onion rings with dipping sauce', price: '$9', badges: ['v'] },
+        { name: 'Side Salad', desc: 'Seasonal greens, cherry tomatoes, vinaigrette', price: '$7', badges: ['v', 'gf', 'vg', 'df'] },
+      ],
+      drinks: [
+        { name: 'Soft Drinks', desc: 'Coke, L&P, Sprite, Fanta', price: '$4', badges: ['v', 'gf', 'vg'] },
+        { name: 'Milkshake', desc: 'Chocolate, vanilla, strawberry, caramel', price: '$8', badges: ['v'] },
+        { name: 'Water', desc: 'Still or sparkling', price: '$3', badges: ['v', 'gf', 'vg'] },
+        { name: 'Beer & Wine', desc: 'Licensed venue — ask staff for current selection', price: 'Varies', badges: [] },
+      ],
+    },
+  },
+
+  redefined: {
+    name: 'ReDefined Wellbeing Hub',
+    subtitle: 'Classes & Services',
+    address: '58 Ashley Place, Pāpāmoa Beach',
+    emoji: '💪',
+    hasMenu: true,
+    updated: 'Updated April 2026',
+    orderLabel: 'Book via ReDefined App →',
+    orderHref: 'https://www.redefined.nz',
+    footerNote: 'Class timetable changes seasonally. Book via the ReDefined app or call reception.',
+    description: "NZ's first fully integrated wellbeing hub. Studios: Performance, MindBody, Movement. Recovery Lab, health practitioners and open gym all under one roof.",
+    filters: ['All', 'Pilates', 'Yoga', 'Strength', 'Recovery', 'Health Services'],
+    tabs: [
+      { id: 'classes', label: '🏃 Studio Classes' },
+      { id: 'recovery', label: '🧊 Recovery Lab' },
+      { id: 'health', label: '🩺 Health Services' },
+      { id: 'gym', label: '💪 Open Gym' },
+    ],
+    menu: {
+      classes: [
+        { name: 'Reformer Pilates', desc: 'Equipment-based Pilates on the reformer machine. All levels, including prenatal options. Book via app.', price: '$28/class', badges: ['pop'], popular: true },
+        { name: 'Hot Yoga', desc: 'Yoga in a heated studio. Build strength, flexibility and mental focus. Mats provided.', price: '$22/class', badges: ['pop'] },
+        { name: 'Yoga Flow', desc: 'Dynamic vinyasa-style yoga. Suitable for beginners through to experienced practitioners.', price: '$20/class', badges: [] },
+        { name: 'Strength & Conditioning', desc: 'Performance Studio. Functional strength training with qualified coaches. Progressive programming.', price: '$22/class', badges: [] },
+        { name: 'HIIT', desc: 'High intensity interval training. 45-minute class in the Performance Studio.', price: '$22/class', badges: [] },
+        { name: 'Movement Fundamentals', desc: 'Ground-up movement coaching focused on mobility, coordination and body control.', price: '$20/class', badges: [] },
+      ],
+      recovery: [
+        { name: 'Sauna Session', desc: 'Two saunas available. Heat exposure integrated into your recovery strategy. Time slots bookable.', price: '$18/session', badges: ['pop'], popular: true },
+        { name: 'Cold Plunge', desc: 'Cold immersion at 12–4°C. Evidence-based recovery for inflammation, soreness and mental clarity.', price: '$18/session', badges: ['pop'] },
+        { name: 'Sauna + Cold Plunge Combo', desc: 'Contrast therapy protocol: heat, cold, repeat. Guided by staff for first-timers.', price: '$28/session', badges: ['pop'] },
+        { name: 'Compression Therapy', desc: 'Pneumatic compression for legs and arms. Ideal post-training or for circulation support.', price: '$15/session', badges: [] },
+      ],
+      health: [
+        { name: 'Nutrition & Naturopathy Consult', desc: 'Initial 60-minute consultation with Kylie (Registered Clinical Nutritionist & Naturopath). Health history, goals, lifestyle review.', price: '$120', badges: [] },
+        { name: 'DNA Testing — DNACore®', desc: 'Combines DNA Health, Diet and Sport reports. Genetic insights into nutrition, performance and disease risk.', price: '$395', badges: [] },
+        { name: 'Integrative Medicine GP', desc: 'Dr Cheryl — available Thursdays in-person and online. Lifestyle and integrative medicine approach to complex or chronic conditions.', price: 'POA', badges: [] },
+        { name: 'Remedial Manual Therapy', desc: 'Deep tissue and remedial massage targeting specific muscular and structural issues. 60 or 90-minute sessions.', price: '$100–$140', badges: [] },
+        { name: 'Physiotherapy', desc: 'Via Recharge Physio. Assessment and treatment for injury, rehabilitation and performance.', price: 'POA', badges: [] },
+      ],
+      gym: [
+        { name: 'Casual Gym Visit', desc: 'Single-visit open gym access. Full equipment, no membership required.', price: '$20', badges: [] },
+        { name: 'Weekly Gym Pass', desc: 'Unlimited open gym access for 7 days. Includes use of all equipment.', price: '$55', badges: ['pop'] },
+        { name: 'Monthly Membership', desc: 'Unlimited open gym + class bookings at member rate. Various tiers available.', price: 'From $79/mo', badges: ['pop'], popular: true },
+        { name: 'Personal Training', desc: '1:1 or small group PT with a qualified coach. Programming tailored to your goals.', price: 'From $85/hr', badges: [] },
+      ],
+    },
+  },
+
+  dental: {
+    name: 'Tara Road Dental',
+    subtitle: 'Services & Treatments',
+    address: 'Unit 1G Tara Road, Pāpāmoa',
+    emoji: '🦷',
+    hasMenu: true,
+    updated: 'Updated March 2026',
+    orderLabel: 'Book online →',
+    orderHref: 'https://tararddental.co.nz',
+    footerNote: 'All fees are estimates only. ACC applies to dental injuries. Call 07 579 5291 to discuss your needs.',
+    description: 'Modern, purpose-built dental practice in Pāpāmoa. General dentistry, cosmetic treatments, implants and IV sedation for anxious patients. Led by Dr Lloyd Farrar.',
+    filters: ['All', 'Preventive', 'Cosmetic', 'Surgical', 'Emergency'],
+    tabs: [
+      { id: 'preventive', label: '✅ Preventive' },
+      { id: 'restorative', label: '🔧 Restorative' },
+      { id: 'cosmetic', label: '✨ Cosmetic' },
+      { id: 'surgical', label: '🏥 Surgical' },
+      { id: 'specialist', label: '💉 Specialist' },
+    ],
+    menu: {
+      preventive: [
+        { name: 'Check-up & Exam', desc: 'Comprehensive dental examination, X-rays as required, oral health assessment.', price: 'From $90', badges: ['pop'], popular: true },
+        { name: 'Scale & Clean (Hygiene)', desc: 'Professional clean with dental hygienist. Plaque removal, gum health check, home care advice. Recommended every 6 months.', price: 'From $120', badges: ['pop'] },
+        { name: 'Dental X-Rays', desc: 'Bitewing or OPG X-rays to detect decay, bone levels and hidden issues.', price: 'From $45', badges: [] },
+        { name: 'Fissure Sealants', desc: 'Protective coating applied to back teeth to prevent decay — especially beneficial for children.', price: 'From $50/tooth', badges: [] },
+      ],
+      restorative: [
+        { name: 'Tooth-Coloured Filling', desc: 'Composite resin fillings matched to your natural tooth colour.', price: 'From $150', badges: [] },
+        { name: 'Dental Crown', desc: 'Custom-made porcelain or ceramic crown to protect a damaged or heavily filled tooth.', price: 'From $1,800', badges: [] },
+        { name: 'Dental Bridge', desc: 'Fixed replacement for a missing tooth or teeth, anchored to adjacent teeth.', price: 'From $3,000', badges: [] },
+        { name: 'Dentures', desc: 'Full or partial removable dentures. Various options including implant-retained dentures.', price: 'POA', badges: [] },
+      ],
+      cosmetic: [
+        { name: 'Teeth Whitening', desc: 'Take-home professional whitening kit with custom trays. Safe, effective and long-lasting results.', price: 'From $450', badges: ['pop'], popular: true },
+        { name: 'Dental Veneers', desc: 'Porcelain veneers to correct chips, discolouration, gaps or uneven teeth. Natural-looking results.', price: 'From $1,500/tooth', badges: [] },
+        { name: 'Composite Bonding', desc: 'Tooth-coloured resin applied to improve shape, colour or minor chips. Conservative and reversible.', price: 'From $300/tooth', badges: [] },
+        { name: 'Smile Assessment', desc: 'Consultation to discuss cosmetic goals and recommend the most suitable treatment pathway.', price: 'Free with check-up', badges: ['new'] },
+      ],
+      surgical: [
+        { name: 'Wisdom Tooth Removal', desc: 'Assessment and extraction of impacted or problematic wisdom teeth. IV sedation available.', price: 'From $280/tooth', badges: [] },
+        { name: 'Dental Implant', desc: 'Titanium implant to replace a missing tooth root, with crown on top. Natural look and feel.', price: 'From $4,500', badges: ['pop'], popular: true },
+        { name: 'Simple Extraction', desc: 'Removal of a damaged or problematic tooth under local anaesthetic.', price: 'From $180', badges: [] },
+        { name: 'ACC Dental Injury', desc: 'Same-day appointments available for dental injuries. ACC covers treatment for accidental injuries.', price: 'ACC covered', badges: ['pop'] },
+      ],
+      specialist: [
+        { name: 'IV Sedation', desc: 'Intravenous sedation using Midazolam for anxious patients or longer procedures. You\'ll feel deeply relaxed — many patients feel as if they simply had a restful sleep.', price: 'From $350', badges: ['pop'] },
+        { name: 'Oral Surgery Consultation', desc: 'Dr Lloyd Farrar has specialist experience in surgical techniques. Consultation to assess complex cases.', price: 'From $120', badges: [] },
+        { name: 'Orthodontic Referral', desc: 'Referral to Pāpāmoa Orthodontist (same facility) for braces, aligners and retainers.', price: 'Free referral', badges: ['new'] },
+      ],
+    },
+  },
+
+  orthodontist: {
+    name: 'Pāpāmoa Orthodontist',
+    subtitle: 'Treatments & Fees',
+    address: '1G Tara Road, Pāpāmoa Beach',
+    emoji: '😁',
+    hasMenu: true,
+    updated: 'Updated March 2026',
+    orderLabel: 'Book a consultation →',
+    orderHref: 'https://www.papamoaorthodontist.co.nz',
+    footerNote: 'All fees are approximate and depend on treatment complexity. A comprehensive consultation fee includes your assessment and treatment plan.',
+    description: 'Specialist orthodontic clinic at 1G Tara Road. Braces, clear aligners and retainers for children, teens and adults. Flexible payment options. Free parking.',
+    filters: ['All', 'Children', 'Teens', 'Adults'],
+    tabs: [
+      { id: 'fixed', label: '🔩 Fixed Braces' },
+      { id: 'aligners', label: '✨ Clear Aligners' },
+      { id: 'retainers', label: '🦷 Retainers' },
+      { id: 'assessment', label: '📋 Assessment' },
+    ],
+    menu: {
+      fixed: [
+        { name: 'Metal Braces — Standard', desc: 'Traditional stainless steel braces bonded to each tooth. Reliable and effective. Can be personalised with coloured o-rings. Most common choice for children and teens.', price: 'From $5,500', badges: ['pop'], popular: true },
+        { name: 'Metal Braces — Complex', desc: 'For more complex alignment or bite correction cases. Comprehensive fee includes all adjustments, retainers and follow-up visits.', price: 'From $6,500', badges: [] },
+        { name: 'Ceramic Braces', desc: 'Tooth-coloured brackets designed to blend with your natural smile. Discreet but effective. Popular with older teens and adults.', price: 'From $6,000', badges: ['pop'] },
+      ],
+      aligners: [
+        { name: 'Clear Aligner Treatment', desc: 'A series of custom clear aligners worn sequentially to gradually move teeth. Removable for eating, drinking and brushing. Virtually invisible.', price: 'From $6,000', badges: ['pop'], popular: true },
+        { name: 'Short-term Aligner Treatment', desc: 'For mild corrections, spacing or minor relapse cases. Fewer aligners, shorter treatment time.', price: 'From $3,500', badges: [] },
+      ],
+      retainers: [
+        { name: 'Fixed (Bonded) Retainer', desc: 'A thin wire bonded to the back of the front teeth to hold them in position after treatment. Included in comprehensive treatment fee.', price: 'Included', badges: [] },
+        { name: 'Removable Retainer', desc: 'Custom clear retainer worn at night to maintain results. Included in comprehensive treatment fee. Replacement retainers available.', price: 'Included', badges: [] },
+        { name: 'Replacement Retainer', desc: 'If your retainer is lost or worn out after treatment is complete.', price: 'From $250', badges: [] },
+      ],
+      assessment: [
+        { name: 'Initial Consultation', desc: 'Comprehensive clinical assessment including photographs, X-rays (if required) and a detailed treatment plan. Includes full discussion of options and fees.', price: 'From $150', badges: ['pop'], popular: true },
+        { name: 'Early Assessment (Children)', desc: 'Assessment of jaw development and bite for younger children (typically 7–10 years). Identifies issues early when treatment is most effective.', price: 'From $100', badges: [] },
+        { name: 'Payment Plan', desc: 'Flexible payment options available for all comprehensive treatments. Discuss with the team at your consultation.', price: 'Interest-free options', badges: ['new'] },
+      ],
+    },
+  },
+};
+
+// ════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════
+let currentBiz = 'pizza';
+let activeTab = '';
+let activeFilters = new Set(['All']);
+
+// ════════════════════════════════════════════════════
+// RENDER LISTING CARD
+// ════════════════════════════════════════════════════
+function loadBiz(bizId) {
+  currentBiz = bizId;
+  const biz = businesses[bizId];
+  activeTab = biz.tabs[0].id;
+  activeFilters = new Set(['All']);
+
+  document.querySelectorAll('.biz-pill').forEach(p => {
+    p.classList.toggle('active', p.getAttribute('onclick').includes(`'${bizId}'`));
+  });
+
+  const card = document.getElementById('listing-card');
+
+  card.innerHTML = `
+    <div class="lc-hero">
+      <div class="lc-hero-left">
+        <div class="lc-badge-row">
+          <span class="gold-badge">⭐ Gold Spotlight</span>
+          <span class="menu-badge">📋 Menu Add-On</span>
+        </div>
+        <div class="lc-name">${biz.name}</div>
+        <div class="lc-meta">📍 ${biz.address}</div>
+      </div>
+      <div class="lc-emoji">${biz.emoji}</div>
+    </div>
+
+    <div class="lc-actions">
+      <button class="btn-menu" onclick="openLightbox()">
+        📋 View ${biz.subtitle}
+      </button>
+      <a href="${biz.orderHref}" class="btn-order" target="_blank" rel="noopener">${biz.orderLabel}</a>
+      <span class="last-updated">🕐 ${biz.updated}</span>
+    </div>
+
+    <div class="lc-body">
+      <p class="lc-description">${biz.description}</p>
+      <div class="upsell-card" style="display:none;" id="menu-upsell-cta">
+        <!-- hidden if menu present -->
+      </div>
+    </div>
+  `;
+}
+
+// ════════════════════════════════════════════════════
+// OPEN / CLOSE LIGHTBOX
+// ════════════════════════════════════════════════════
+function openLightbox() {
+  const biz = businesses[currentBiz];
+  activeTab = biz.tabs[0].id;
+  activeFilters = new Set(['All']);
+
+  document.getElementById('lb-title').textContent = `${biz.name} — ${biz.subtitle}`;
+  document.getElementById('lb-subtitle').textContent = biz.address;
+  document.getElementById('lb-updated').textContent = biz.updated;
+  document.getElementById('lb-footer-note').textContent = biz.footerNote;
+  document.getElementById('lb-order-btn').textContent = biz.orderLabel;
+  document.getElementById('lb-order-btn').href = biz.orderHref;
+
+  renderTabs();
+  renderFilters();
+  renderItems();
+
+  document.getElementById('lb-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(event) {
+  if (event.target === document.getElementById('lb-overlay')) {
+    closeLightboxBtn();
+  }
+}
+
+function closeLightboxBtn() {
+  document.getElementById('lb-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ════════════════════════════════════════════════════
+// TABS
+// ════════════════════════════════════════════════════
+function renderTabs() {
+  const biz = businesses[currentBiz];
+  const container = document.getElementById('lb-tabs');
+  container.innerHTML = biz.tabs.map(t => `
+    <button class="lb-tab ${t.id === activeTab ? 'active' : ''}" onclick="setTab('${t.id}')">
+      ${t.label}
+    </button>
+  `).join('');
+}
+
+function setTab(tabId) {
+  activeTab = tabId;
+  activeFilters = new Set(['All']);
+  renderTabs();
+  renderFilters();
+  renderItems();
+}
+
+// ════════════════════════════════════════════════════
+// FILTERS
+// ════════════════════════════════════════════════════
+function renderFilters() {
+  const biz = businesses[currentBiz];
+  const container = document.getElementById('lb-filters');
+  container.innerHTML = biz.filters.map(f => `
+    <button class="filter-pill ${activeFilters.has(f) ? 'active' : ''}" onclick="toggleFilter('${f}')">
+      ${f}
+    </button>
+  `).join('');
+}
+
+function toggleFilter(filter) {
+  if (filter === 'All') {
+    activeFilters = new Set(['All']);
+  } else {
+    activeFilters.delete('All');
+    if (activeFilters.has(filter)) {
+      activeFilters.delete(filter);
+      if (activeFilters.size === 0) activeFilters.add('All');
+    } else {
+      activeFilters.add(filter);
+    }
+  }
+  renderFilters();
+  renderItems();
+}
+
+// ════════════════════════════════════════════════════
+// ITEMS
+// ════════════════════════════════════════════════════
+const badgeMap = {
+  gf:  { label: 'GF', cls: 'gf', filter: 'GF available' },
+  v:   { label: '🌿 Veg', cls: 'v', filter: 'Vegetarian' },
+  vg:  { label: '🌱 Vegan', cls: 'vg', filter: 'Vegan' },
+  df:  { label: 'DF', cls: 'df', filter: 'Dairy-free' },
+  sp:  { label: '🌶️', cls: 'sp', filter: '' },
+  new: { label: 'New', cls: 'new', filter: '' },
+  pop: { label: '⭐ Popular', cls: 'pop', filter: 'Popular' },
+};
+
+const filterBadgeMap = {
+  'GF available': 'gf',
+  'Vegetarian': 'v',
+  'Vegan': 'vg',
+  'Dairy-free': 'df',
+  'Popular': 'pop',
+  'Pilates': null,
+  'Yoga': null,
+  'Strength': null,
+  'Recovery': null,
+  'Health Services': null,
+  'Preventive': null,
+  'Cosmetic': null,
+  'Surgical': null,
+  'Emergency': null,
+  'Children': null,
+  'Teens': null,
+  'Adults': null,
+  'Sides': null,
+};
+
+function itemMatchesFilters(item) {
+  if (activeFilters.has('All')) return true;
+  for (const f of activeFilters) {
+    const badgeKey = filterBadgeMap[f];
+    if (badgeKey === null) return true; // tab-level filter — show all
+    if (badgeKey && item.badges.includes(badgeKey)) return true;
+  }
+  return false;
+}
+
+function renderItems() {
+  const biz = businesses[currentBiz];
+  const items = biz.menu[activeTab] || [];
+  const scroll = document.getElementById('lb-scroll');
+
+  const filtered = items.filter(itemMatchesFilters);
+
+  if (filtered.length === 0) {
+    scroll.innerHTML = `
+      <div class="no-results">
+        <div class="nr-icon">🔍</div>
+        <p>No items match that filter in this category.</p>
+        <button onclick="activeFilters=new Set(['All']);renderFilters();renderItems();"
+          style="margin-top:10px;padding:7px 16px;background:var(--navy);color:#fff;border:none;border-radius:5px;cursor:pointer;font-family:'Figtree',sans-serif;font-size:0.8rem;">
+          Show all
+        </button>
+      </div>`;
+    return;
+  }
+
+  const badgeHTML = (badges) => badges.map(b => {
+    const bm = badgeMap[b];
+    return bm ? `<span class="mi-badge ${bm.cls}">${bm.label}</span>` : '';
+  }).join('');
+
+  scroll.innerHTML = `
+    <div class="menu-section">
+      <div class="menu-items">
+        ${filtered.map(item => `
+          <div class="menu-item">
+            <div class="mi-left">
+              <div class="mi-name-row">
+                <span class="mi-name">${item.name}</span>
+                ${badgeHTML(item.badges)}
+              </div>
+              <p class="mi-desc">${item.desc}</p>
+            </div>
+            <div class="mi-right">
+              <span class="mi-price">${item.price}</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// ════════════════════════════════════════════════════
+// UPSELL MODAL
+// ════════════════════════════════════════════════════
+function openUpsell() {
+  document.getElementById('addon-upsell').classList.add('open');
+}
+
+function closeUpsell(event) {
+  if (!event || event.target === document.getElementById('addon-upsell')) {
+    document.getElementById('addon-upsell').classList.remove('open');
+  }
+}
+
+// Init
+loadBiz('pizza');
+</script>
+</body>
+</html>
