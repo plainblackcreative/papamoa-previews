@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-NZ">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 
 .nav{background:var(--forest);position:sticky;top:0;z-index:500}
 .nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.logo{font-family:'Libre Baskerville',serif;color:#fff;font-size:1.2rem;font-weight:700}
+.logo{font-family:'Libre Baskerville',serif;color:#fff;font-size:1.2rem;font-weight:700;text-decoration:none}
 .logo i{font-style:italic;color:var(--sage);font-weight:400}
 .nav-links{display:flex;gap:8px}
 .nav-links a{color:rgba(255,255,255,.55);font-size:.78rem;font-weight:500;text-decoration:none;padding:6px 14px;border-radius:100px;transition:all .2s}
@@ -39,6 +39,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
 .breadcrumb{font-size:.75rem;color:rgba(255,255,255,.3);margin-bottom:14px}
 .breadcrumb a{color:rgba(255,255,255,.45);text-decoration:none}
+.breadcrumb a:hover{color:rgba(255,255,255,.75)}
 .hero-inner h1{font-family:'Libre Baskerville',serif;font-size:clamp(2rem,4.5vw,2.8rem);color:#fff;font-weight:700;line-height:1.15}
 .hero-inner h1 span{color:var(--sky)}
 .hero-inner .hero-desc{color:rgba(255,255,255,.4);font-size:.92rem;margin-top:10px;max-width:680px;font-weight:300;line-height:1.7}
@@ -64,7 +65,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .sec-title{font-family:'Libre Baskerville',serif;font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:18px}
 
 .hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.hub-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:box-shadow .25s,transform .25s;cursor:pointer;display:flex;flex-direction:column}
+.hub-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:box-shadow .25s,transform .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
 .hub-card:hover{box-shadow:var(--s-lg);transform:translateY(-3px)}
 .hub-top{height:140px;position:relative;display:flex;align-items:center;justify-content:center}
 .hub-top .hub-icon{font-size:3rem;position:relative;z-index:1;filter:drop-shadow(0 2px 8px rgba(0,0,0,.15))}
@@ -75,7 +76,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .hub-body .hub-topics{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
 .hub-topic{font-size:.68rem;padding:3px 10px;border-radius:100px;background:var(--sand);border:1px solid var(--line);color:var(--muted);font-weight:500}
 .hub-link{display:inline-flex;align-items:center;gap:5px;margin-top:14px;font-size:.82rem;font-weight:600;color:var(--sea);text-decoration:none;transition:color .2s}
-.hub-link:hover{color:var(--navy)}
+.hub-card:hover .hub-link{color:var(--navy)}
 
 /* QUICK CONTACTS */
 .contacts{max-width:1200px;margin:0 auto;padding:40px 28px 0}
@@ -98,6 +99,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 footer{background:var(--forest);padding:36px 28px;text-align:center}
 footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
 footer a{color:var(--sage);text-decoration:none}
+footer a:hover{color:#fff}
 
 @media(max-width:900px){
   .hub-grid{grid-template-columns:1fr}
@@ -108,6 +110,7 @@ footer a{color:var(--sage);text-decoration:none}
 }
 @media(max-width:600px){
   .contact-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .hub-card{animation:fadeUp .5s ease both}
@@ -120,13 +123,13 @@ footer a{color:var(--sage);text-decoration:none}
 
 <nav class="nav">
   <div class="nav-inner">
-    <div class="logo">papamoa<i>.info</i></div>
+    <a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html" class="logo">papamoa<i>.info</i></a>
     <div class="nav-links">
-      <a>Home</a>
-      <a>Essential Services</a>
-      <a>Food & Drink</a>
-      <a class="on">Community</a>
-      <a>Accommodation</a>
+      <a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Home</a>
+      <a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Essential Services</a>
+      <a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Food &amp; Drink</a>
+      <a class="on" href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/">Community</a>
+      <a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Accommodation</a>
     </div>
   </div>
 </nav>
@@ -135,9 +138,13 @@ footer a{color:var(--sage);text-decoration:none}
 <section class="hero">
   <div class="hero-grain"></div>
   <div class="hero-inner">
-    <div class="breadcrumb"><a>Home</a> / <a>Community</a> / Safety & Support</div>
-    <h1>Community Safety <span>& Support</span></h1>
-    <div class="hero-desc">Neighbourhood support networks, policing, crime reporting, emergency preparedness, and community volunteering in Papamoa. Everything residents need to stay informed, connected, and prepared.</div>
+    <div class="breadcrumb">
+      <a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Home</a> /
+      <a href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/">Community</a> /
+      Safety &amp; Support
+    </div>
+    <h1>Community Safety <span>&amp; Support</span></h1>
+    <div class="hero-desc">Neighbourhood support networks, policing, crime reporting, emergency preparedness, and community volunteering in Pāpāmoa. Everything residents need to stay informed, connected, and prepared.</div>
   </div>
 </section>
 
@@ -147,7 +154,7 @@ footer a{color:var(--sage);text-decoration:none}
     <div class="e-icon">&#9888;&#65039;</div>
     <div class="e-content">
       <h3>In an Emergency, Call 111</h3>
-      <p>For crimes in progress, medical emergencies, fires, or natural disasters. For non-emergency police matters, call 105 or report online at 105.police.govt.nz. If you feel a long or strong earthquake near the coast, do not wait for official warnings. Move inland immediately.</p>
+      <p>For crimes in progress, medical emergencies, fires, or natural disasters. For non-emergency police matters, call 105 or report online at <a href="https://www.105.police.govt.nz" target="_blank" style="color:var(--alert)">105.police.govt.nz</a>. If you feel a long or strong earthquake near the coast, do not wait for official warnings. Move inland immediately.</p>
     </div>
     <div class="e-numbers">
       <div class="e-num"><div class="num">111</div><div class="num-label">Emergency</div></div>
@@ -159,8 +166,8 @@ footer a{color:var(--sage);text-decoration:none}
 <!-- INTRO -->
 <section class="intro">
   <div class="intro-text">
-    <p>Papamoa is generally a safe and well-connected community, but like any fast-growing area it has its own set of realities to be aware of. Property crime (particularly vehicle break-ins at beach carparks and opportunistic theft in newer subdivisions) is the most common issue. The beachfront location means tsunami preparedness is a genuine consideration, not a hypothetical one. And the rapid growth of Papamoa East means some newer streets do not yet have the same level of community infrastructure as established areas.</p>
-    <p>This section of Papamoa.info brings together the practical information residents need: how the Neighbourhood Support network operates, where to report crime, what to do in each type of emergency, and how to get involved in community safety volunteering. Each topic has its own dedicated page with detailed, Papamoa-specific information rather than generic advice.</p>
+    <p>Pāpāmoa is generally a safe and well-connected community, but like any fast-growing area it has its own set of realities to be aware of. Property crime (particularly vehicle break-ins at beach carparks and opportunistic theft in newer subdivisions) is the most common issue. The beachfront location means tsunami preparedness is a genuine consideration, not a hypothetical one. And the rapid growth of Pāpāmoa East means some newer streets do not yet have the same level of community infrastructure as established areas.</p>
+    <p>This section of Papamoa.info brings together the practical information residents need: how the Neighbourhood Support network operates, where to report crime, what to do in each type of emergency, and how to get involved in community safety volunteering. Each topic has its own dedicated page with detailed, Pāpāmoa-specific information rather than generic advice.</p>
   </div>
 </section>
 
@@ -170,14 +177,14 @@ footer a{color:var(--sage);text-decoration:none}
   <div class="hub-grid">
 
     <!-- NEIGHBOURHOOD SUPPORT -->
-    <div class="hub-card">
+    <a class="hub-card" href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/neighbourhood-support/">
       <div class="hub-top" style="background:linear-gradient(135deg,#1a3a50,#2a6a96)">
         <div class="hub-icon">&#127968;</div>
       </div>
       <div class="hub-body">
-        <h3>Papamoa Neighbourhood Support</h3>
-        <div class="hub-path">/community/safety-support/neighbourhood-support</div>
-        <p>How to join, how street groups work, who coordinates it, and why it matters. Papamoa Neighbourhood Support has over 5,000 members and works directly with local police to report and prevent property crime. Coverage is strong in established streets but gaps remain in newer Papamoa East subdivisions.</p>
+        <h3>Pāpāmoa Neighbourhood Support</h3>
+        <div class="hub-path">/community/safety-support/neighbourhood-support/</div>
+        <p>How to join, how street groups work, who coordinates it, and why it matters. Pāpāmoa Neighbourhood Support has over 5,000 members and works directly with local police to report and prevent property crime. Coverage is strong in established streets but gaps remain in newer Pāpāmoa East subdivisions.</p>
         <div class="hub-topics">
           <span class="hub-topic">Street Groups</span>
           <span class="hub-topic">How to Join</span>
@@ -186,62 +193,62 @@ footer a{color:var(--sage);text-decoration:none}
           <span class="hub-topic">Window Stickers</span>
           <span class="hub-topic">Driveway Meetings</span>
         </div>
-        <a class="hub-link" href="#">Read full page &rarr;</a>
+        <span class="hub-link">Read full page &rarr;</span>
       </div>
-    </div>
+    </a>
 
     <!-- POLICE & CRIME -->
-    <div class="hub-card">
+    <a class="hub-card" href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/police-crime/">
       <div class="hub-top" style="background:linear-gradient(135deg,#2a2a3a,#4a4a6a)">
         <div class="hub-icon">&#128694;</div>
       </div>
       <div class="hub-body">
-        <h3>Police & Crime</h3>
-        <div class="hub-path">/community/safety-support/police-crime</div>
-        <p>Local policing in Papamoa, how to report crime (111 vs 105 vs online), what the community patrol does, and an honest look at the types of crime that actually occur here. Papamoa has a staffed police station and a dedicated community constable, but 24/7 coverage is shared with the wider Tauranga district.</p>
+        <h3>Police &amp; Crime</h3>
+        <div class="hub-path">/community/safety-support/police-crime/</div>
+        <p>Local policing in Pāpāmoa, how to report crime (111 vs 105 vs online), what the community patrol does, and an honest look at the types of crime that actually occur here. Pāpāmoa has a staffed police station and a dedicated community constable, but 24/7 coverage is shared with the wider Tauranga district.</p>
         <div class="hub-topics">
-          <span class="hub-topic">Papamoa Police Station</span>
+          <span class="hub-topic">Pāpāmoa Police Station</span>
           <span class="hub-topic">Community Constable</span>
           <span class="hub-topic">Community Patrol</span>
           <span class="hub-topic">Reporting Crime</span>
           <span class="hub-topic">Property Crime Trends</span>
           <span class="hub-topic">Beach Carpark Safety</span>
         </div>
-        <a class="hub-link" href="#">Read full page &rarr;</a>
+        <span class="hub-link">Read full page &rarr;</span>
       </div>
-    </div>
+    </a>
 
     <!-- EMERGENCY PREPAREDNESS -->
-    <div class="hub-card">
+    <a class="hub-card" href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/emergencies/">
       <div class="hub-top" style="background:linear-gradient(135deg,#5a2020,#8a3030)">
         <div class="hub-icon">&#127754;</div>
       </div>
       <div class="hub-body">
         <h3>Emergency Preparedness</h3>
-        <div class="hub-path">/community/safety-support/emergencies</div>
-        <p>Papamoa-specific guidance for tsunami, earthquake, flood, storm, and fire emergencies. Includes evacuation zones and routes (including the Gordon Spratt Reserve high ground), what "long or strong, get gone" means in practice, flood-prone areas in Papamoa East, and how to build a household emergency plan for a coastal suburb.</p>
+        <div class="hub-path">/community/safety-support/emergencies/</div>
+        <p>Pāpāmoa-specific guidance for tsunami, earthquake, flood, storm, and fire emergencies. Includes evacuation zones and routes (including the Gordon Spratt Reserve high ground), what "long or strong, get gone" means in practice, flood-prone areas in Pāpāmoa East, and how to build a household emergency plan for a coastal suburb.</p>
         <div class="hub-topics">
           <span class="hub-topic">Tsunami Evacuation</span>
           <span class="hub-topic">Blue Zone Maps</span>
           <span class="hub-topic">Earthquake</span>
           <span class="hub-topic">Flooding</span>
-          <span class="hub-topic">Storm & Cyclone</span>
+          <span class="hub-topic">Storm &amp; Cyclone</span>
           <span class="hub-topic">Emergency Kit</span>
           <span class="hub-topic">Gordon Spratt Reserve</span>
         </div>
-        <a class="hub-link" href="#">Read full page &rarr;</a>
+        <span class="hub-link">Read full page &rarr;</span>
       </div>
-    </div>
+    </a>
 
     <!-- COMMUNITY GROUPS -->
-    <div class="hub-card">
+    <a class="hub-card" href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/community-groups/">
       <div class="hub-top" style="background:linear-gradient(135deg,#1a3a2a,#2d6a4f)">
         <div class="hub-icon">&#129309;</div>
       </div>
       <div class="hub-body">
-        <h3>Community Groups & Volunteering</h3>
-        <div class="hub-path">/community/safety-support/community-groups</div>
-        <p>How to get involved in making Papamoa safer and more connected. The Papamoa Beach Community Patrol runs day, dusk, and night shifts covering over 2,200km per month. Neighbourhood Support needs street coordinators, particularly in new subdivisions. Civil Defence volunteers, service clubs, and community centre programmes also covered.</p>
+        <h3>Community Groups &amp; Volunteering</h3>
+        <div class="hub-path">/community/safety-support/community-groups/</div>
+        <p>How to get involved in making Pāpāmoa safer and more connected. The Pāpāmoa Beach Community Patrol runs day, dusk, and night shifts covering over 2,200km per month. Neighbourhood Support needs street coordinators, particularly in new subdivisions. Civil Defence volunteers, service clubs, and community centre programmes also covered.</p>
         <div class="hub-topics">
           <span class="hub-topic">Community Patrol</span>
           <span class="hub-topic">Street Coordinators</span>
@@ -249,9 +256,9 @@ footer a{color:var(--sage);text-decoration:none}
           <span class="hub-topic">Service Clubs</span>
           <span class="hub-topic">Community Centre</span>
         </div>
-        <a class="hub-link" href="#">Read full page &rarr;</a>
+        <span class="hub-link">Read full page &rarr;</span>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>
@@ -276,23 +283,23 @@ footer a{color:var(--sage);text-decoration:none}
       <div class="con-icon">&#127968;</div>
       <h4>Neighbourhood Support</h4>
       <div class="con-num" style="font-size:1rem">027 271 3772</div>
-      <div class="con-desc">Bruce Banks, Papamoa Coordinator. Or email nspapamoa@wbopns.org.nz</div>
+      <div class="con-desc">Bruce Banks, Pāpāmoa Coordinator. Or email <a href="mailto:nspapamoa@wbopns.org.nz" style="color:var(--sea)">nspapamoa@wbopns.org.nz</a></div>
     </div>
     <div class="con-card">
       <div class="con-icon">&#127754;</div>
       <h4>Civil Defence</h4>
       <div class="con-num" style="font-size:1rem">0800 884 881</div>
-      <div class="con-desc">Emergency Management Bay of Plenty. bopcivildefence.govt.nz</div>
+      <div class="con-desc">Emergency Management Bay of Plenty. <a href="https://www.bopcivildefence.govt.nz" target="_blank" style="color:var(--sea)">bopcivildefence.govt.nz</a></div>
     </div>
   </div>
 </section>
 
-<!-- PAPAMOA STATS -->
+<!-- STATS -->
 <section class="stats">
   <div class="stats-grid">
     <div class="stat">
       <div class="stat-num">5,000+</div>
-      <div class="stat-label">Neighbourhood Support members in Papamoa</div>
+      <div class="stat-label">Neighbourhood Support members in Pāpāmoa</div>
     </div>
     <div class="stat">
       <div class="stat-num">260+</div>
@@ -310,7 +317,7 @@ footer a{color:var(--sage);text-decoration:none}
 </section>
 
 <footer>
-  <p>&copy; 2026 <a href="#">papamoa.info</a> &middot; Papamoa's Local Business Directory &middot; <a href="#">List Your Business</a></p>
+  <p>&copy; 2026 <a href="https://plainblackcreative.github.io/papamoa-previews/">papamoa.info</a> &middot; Pāpāmoa's Local Business Directory &middot; <a href="https://plainblackcreative.github.io/papamoa-previews/index.html">List Your Business</a></p>
 </footer>
 
 </body>
