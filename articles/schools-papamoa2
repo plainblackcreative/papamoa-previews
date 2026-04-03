@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schools in Pāpāmoa — Primary, Intermediate & Secondary | Papamoa.info</title>
+  <meta name="description" content="Complete guide to every school in Pāpāmoa Beach — primary, secondary and special character. Zones, rolls, contacts and enrolment info for Pāpāmoa families.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0;
+      --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E;
+      --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
+    a { color: var(--blue); }
+
+    /* NAV */
+    .site-nav { background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
+    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--blue); }
+    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
+
+    /* HERO */
+    .page-hero { background: var(--navy); padding: 44px 24px 40px; position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), #1A7ABE); }
+    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 12px; }
+    .page-hero h1 em { font-style: italic; color: var(--blue); }
+    .page-hero p.hero-sub { font-size: 0.97rem; color: rgba(255,255,255,0.65); max-width: 600px; line-height: 1.7; }
+    .hero-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+    .hstat { text-align: center; }
+    .hstat-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: #fff; line-height: 1; }
+    .hstat-label { font-size: 0.68rem; font-weight: 600; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+    /* LAYOUT */
+    .page-wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 80px; }
+    .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+    .main-col { min-width: 0; }
+    .side-col { display: flex; flex-direction: column; gap: 18px; }
+
+    /* SECTIONS */
+    .section { margin-bottom: 44px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px; }
+    .section-intro { font-size: 0.88rem; color: var(--muted); margin-bottom: 18px; line-height: 1.7; }
+
+    /* ALERT */
+    .alert { border-radius: 8px; padding: 13px 16px; font-size: 0.85rem; line-height: 1.55; margin-bottom: 18px; display: flex; gap: 10px; }
+    .alert-info { background: #EBF5FB; border-left: 4px solid var(--blue); color: #1A4060; }
+    .alert-green { background: #EAF7EE; border-left: 4px solid var(--lime); color: #1A5020; }
+
+    /* SCHOOL CARDS */
+    .school-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+    .sc-header { padding: 18px 20px 14px; display: flex; gap: 14px; align-items: flex-start; border-bottom: 1px solid var(--border); }
+    .sc-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .sc-icon-primary { background: linear-gradient(135deg, #EBF5FB, #D0EAF7); }
+    .sc-icon-secondary { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); }
+    .sc-icon-special { background: linear-gradient(135deg, #EAF7EE, #D0F0D8); }
+    .sc-icon-catholic { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); }
+    .sc-meta { flex: 1; min-width: 0; }
+    .sc-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .sc-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 6px; }
+    .sc-tag { font-size: 0.62rem; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
+    .tag-primary { background: rgba(58,171,222,0.1); color: var(--blue); border: 1px solid rgba(58,171,222,0.2); }
+    .tag-secondary { background: rgba(200,150,42,0.1); color: var(--gold); border: 1px solid rgba(200,150,42,0.2); }
+    .tag-state { background: rgba(96,112,128,0.1); color: var(--muted); border: 1px solid var(--border); }
+    .tag-integrated { background: rgba(125,193,67,0.1); color: #3A8020; border: 1px solid rgba(125,193,67,0.2); }
+    .tag-immersion { background: rgba(43,63,92,0.12); color: var(--navy); border: 1px solid rgba(43,63,92,0.2); }
+    .tag-coed { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+    .tag-zoned { background: rgba(232,52,74,0.08); color: var(--coral); border: 1px solid rgba(232,52,74,0.15); }
+    .sc-address { font-size: 0.78rem; color: var(--muted); }
+
+    .sc-body { padding: 16px 20px; }
+    .sc-desc { font-size: 0.86rem; color: var(--body); line-height: 1.7; margin-bottom: 14px; }
+
+    .sc-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+    .sc-info-item { background: var(--bg); border-radius: 6px; padding: 8px 10px; }
+    .sci-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+    .sci-val { font-size: 0.84rem; font-weight: 600; color: var(--navy); }
+
+    .sc-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sc-link { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-decoration: none; background: rgba(58,171,222,0.08); border: 1px solid rgba(58,171,222,0.2); padding: 5px 12px; border-radius: 5px; transition: all 0.15s; }
+    .sc-link:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+    /* EQUITY INDEX NOTE */
+    .equity-note { font-size: 0.76rem; color: var(--muted); font-style: italic; margin-top: 8px; line-height: 1.5; }
+
+    /* DATA TABLE */
+    .data-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .data-table th { background: var(--navy); color: rgba(255,255,255,0.7); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+    .data-table td { padding: 10px 14px; font-size: 0.84rem; border-bottom: 1px solid var(--border); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--bg); }
+
+    /* AD SPOTS */
+    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
+    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+    .ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .ad-inner { padding: 16px; background: var(--white); }
+    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
+    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-decoration: none; }
+
+    /* FACT BOX */
+    .fact-box { background: var(--navy); border-radius: 10px; padding: 20px; }
+    .fact-box h4 { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .fact-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .fact-list li { font-size: 0.82rem; color: rgba(255,255,255,0.7); display: flex; gap: 8px; }
+    .fact-list li::before { content: '›'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+    .fact-list li strong { color: #fff; }
+
+    /* ENROLMENT STEPS */
+    .steps { display: flex; flex-direction: column; gap: 10px; }
+    .step { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 13px 16px; display: flex; gap: 12px; align-items: flex-start; }
+    .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-body { flex: 1; }
+    .step-title { font-weight: 700; font-size: 0.88rem; color: var(--navy); margin-bottom: 2px; }
+    .step-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    /* CARD */
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+
+    /* FOOTER */
+    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
+    .site-footer a { color: var(--blue); }
+
+    @media (max-width: 720px) {
+      .two-col { grid-template-columns: 1fr; }
+      .side-col { order: -1; }
+      .sc-info-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .sc-info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb">
+    <a href="/">Home</a><span>/</span>Schools in Pāpāmoa
+  </span>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">&#127979; Local Information</div>
+    <h1>Schools in <em>Pāpāmoa</em></h1>
+    <p class="hero-sub">Every school serving the Pāpāmoa Beach community — from new entrants through to Year 13. Zones, rolls, contacts and enrolment information for Pāpāmoa families.</p>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-num">8</div>
+        <div class="hstat-label">Schools</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">~6,500</div>
+        <div class="hstat-label">Students</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">7</div>
+        <div class="hstat-label">Primary &amp; Composite</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">1</div>
+        <div class="hstat-label">Secondary</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="two-col">
+    <div class="main-col">
+
+      <div class="alert alert-info">
+        <span>&#128204;</span>
+        <div>Pāpāmoa is one of New Zealand's fastest-growing suburbs and its school network has expanded rapidly to keep pace. Three new schools have opened since 2011. Always verify zone boundaries and enrolment availability directly with the school before making property or enrolment decisions — zones are updated regularly by the Ministry of Education.</div>
+      </div>
+
+      <!-- PRIMARY SCHOOLS -->
+      <div class="section">
+        <div class="section-title">&#127979; Primary Schools (Years 1–6)</div>
+        <p class="section-intro">Pāpāmoa has six primary schools catering for children in Years 1 to 6 (ages 5–11). All are co-educational. Most are zoned, meaning enrolment priority is given to families within the school's zone boundary.</p>
+
+        <!-- PAPAMOA PRIMARY -->
+        <div class="school-card">
+          <div class="sc-header">
+            <div class="sc-icon sc-icon-primary">&#127979;</div>
+            <div class="sc-meta">
+              <div class="sc-name">Pāpāmoa Primary School</div>
+              <div class="sc-tags">
+                <span class="sc-tag tag-primary">Primary Yrs 1–6</span>
+                <span class="sc-tag tag-state">State</span>
+                <span class="sc-tag tag-coed">Co-Ed</span>
+                <span class="sc-tag tag-zoned">Zoned</span>
+              </div>
+              <div class="sc-address">&#128205; 5 Gravatt Road, Pāpāmoa West</div>
+            </div>
+          </div>
+          <div class="sc-body">
+            <p class="sc-desc">Pāpāmoa Primary is one of the suburb's longest-established schools, situated in Pāpāmoa West on Gravatt Road. It accommodates a bilingual education stream — Te Manawanui — which has grown to four classes since its establishment in 2021. The school serves a significant roll with strong community links across the western end of Pāpāmoa.</p>
+            <div class="sc-info-grid">
+              <div class="sc-info-item">
+                <div class="sci-label">Roll (Oct 2025)</div>
+                <div class="sci-val">~526</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Decile</div>
+                <div class="sci-val">6</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Year levels</div>
+                <div class="sci-val">Years 1–6</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Phone</div>
+                <div class="sci-val">07 542 0261</div>
+              </div>
+            </div>
+            <div class="sc-links">
+              <a href="https://www.papamoaprimary.school.nz" class="sc-link" target="_blank" rel="noopener">Website &#8599;</a>
+              <a href="https://www.educationcounts.govt.nz/find-school/school/profile?school=1885" class="sc-link" target="_blank" rel="noopener">School zone &#8599;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- GOLDEN SANDS -->
+        <div class="school-card">
+          <div class="sc-header">
+            <div class="sc-icon sc-icon-primary">&#127958;</div>
+            <div class="sc-meta">
+              <div class="sc-name">Golden Sands School</div>
+              <div class="sc-tags">
+                <span class="sc-tag tag-primary">Primary Yrs 1–6</span>
+                <span class="sc-tag tag-state">State</span>
+                <span class="sc-tag tag-coed">Co-Ed</span>
+                <span class="sc-tag tag-zoned">Zoned</span>
+              </div>
+              <div class="sc-address">&#128205; Golden Sands Drive, Pāpāmoa East</div>
+            </div>
+          </div>
+          <div class="sc-body">
+            <p class="sc-desc">Golden Sands School opened in 2011 as a purpose-built contemporary learning environment with flexible spaces and collaborative teaching. Learning Communities within the school are named after notable New Zealanders — Cooper, Batten, Sheppard, Mahy and Rutherford — alongside Te Rito, a bilingual community. The school has been progressively extended to accommodate significant roll growth since opening.</p>
+            <div class="sc-info-grid">
+              <div class="sc-info-item">
+                <div class="sci-label">Established</div>
+                <div class="sci-val">2011</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Roll (Oct 2025)</div>
+                <div class="sci-val">~560</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Year levels</div>
+                <div class="sci-val">Years 1–6</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Phone</div>
+                <div class="sci-val">07 542 1699</div>
+              </div>
+            </div>
+            <div class="sc-links">
+              <a href="https://goldensands.school.nz" class="sc-link" target="_blank" rel="noopener">Website &#8599;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TE AKAU KI PAPAMOA -->
+        <div class="school-card">
+          <div class="sc-header">
+            <div class="sc-icon sc-icon-primary">&#127809;</div>
+            <div class="sc-meta">
+              <div class="sc-name">Te Ākau ki Pāpāmoa School</div>
+              <div class="sc-tags">
+                <span class="sc-tag tag-primary">Primary Yrs 1–6</span>
+                <span class="sc-tag tag-state">State</span>
+                <span class="sc-tag tag-coed">Co-Ed</span>
+                <span class="sc-tag tag-zoned">Zoned</span>
+              </div>
+              <div class="sc-address">&#128205; Pāpāmoa Beach Road, Pāpāmoa</div>
+            </div>
+          </div>
+          <div class="sc-body">
+            <p class="sc-desc">Te Ākau ki Pāpāmoa School opened in 2000 and originally catered for Years 1 to 8. When Pāpāmoa College opened it transitioned to a Year 1 to 6 school. Approximately 32% of learners identify as Māori and the school maintains three reo rua akomanga providing bilingual education. A new principal was appointed in 2024. The school's vision centres on students being strong in their identities, languages and cultures.</p>
+            <div class="sc-info-grid">
+              <div class="sc-info-item">
+                <div class="sci-label">Roll</div>
+                <div class="sci-val">~600</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Year levels</div>
+                <div class="sci-val">Years 1–6</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Bilingual</div>
+                <div class="sci-val">3 reo rua classes</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Phone</div>
+                <div class="sci-val">07 542 0460</div>
+              </div>
+            </div>
+            <div class="sc-links">
+              <a href="https://www.teakaukipapamoa.school.nz" class="sc-link" target="_blank" rel="noopener">Website &#8599;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAHATAI COAST -->
+        <div class="school-card">
+          <div class="sc-header">
+            <div class="sc-icon sc-icon-primary">&#127940;</div>
+            <div class="sc-meta">
+              <div class="sc-name">Tahatai Coast School</div>
+              <div class="sc-tags">
+                <span class="sc-tag tag-primary">Primary Yrs 1–6</span>
+                <span class="sc-tag tag-state">State</span>
+                <span class="sc-tag tag-coed">Co-Ed</span>
+                <span class="sc-tag tag-zoned">Zoned</span>
+              </div>
+              <div class="sc-address">&#128205; Pāpāmoa Beach Road, Pāpāmoa</div>
+            </div>
+          </div>
+          <div class="sc-body">
+            <p class="sc-desc">Tahatai Coast School is one of the area's larger primary schools, established in 1996 and serving families in a broad zone across the central Pāpāmoa corridor. With a roll of approximately 748, it is one of the highest-roll primary schools in the network. The school has built strong programmes in sport, the arts and literacy alongside its core curriculum.</p>
+            <div class="sc-info-grid">
+              <div class="sc-info-item">
+                <div class="sci-label">Established</div>
+                <div class="sci-val">1996</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Roll</div>
+                <div class="sci-val">~748</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Year levels</div>
+                <div class="sci-val">Years 1–6</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Phone</div>
+                <div class="sci-val">07 542 0730</div>
+              </div>
+            </div>
+            <div class="sc-links">
+              <a href="https://www.tahatai.school.nz" class="sc-link" target="_blank" rel="noopener">Website &#8599;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TE MANAWA -->
+        <div class="school-card">
+          <div class="sc-header">
+            <div class="sc-icon sc-icon-primary">&#127775;</div>
+            <div class="sc-meta">
+              <div class="sc-name">Te Manawa ō Pāpāmoa School</div>
+              <div class="sc-tags">
+                <span class="sc-tag tag-primary">Primary Yrs 1–6</span>
+                <span class="sc-tag tag-state">State</span>
+                <span class="sc-tag tag-coed">Co-Ed</span>
+                <span class="sc-tag tag-zoned">Zoned</span>
+              </div>
+              <div class="sc-address">&#128205; 72 Te Okuroa Drive, Pāpāmoa East</div>
+            </div>
+          </div>
+          <div class="sc-body">
+            <p class="sc-desc">Te Manawa ō Pāpāmoa is the newest state primary in Pāpāmoa, opening in 2022 to serve the rapidly growing Pāpāmoa East and Te Tumu development areas. The school is purpose-built at 72 Te Okuroa Drive and its zone was specifically designed to relieve pressure on neighbouring schools. Learners are referred to as kaimanawa and the school has a strong focus on community connections. Uniform is compulsory.</p>
+            <div class="sc-info-grid">
+              <div class="sc-info-item">
+                <div class="sci-label">Opened</div>
+                <div class="sci-val">2022</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Year levels</div>
+                <div class="sci-val">Years 1–6</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Phone</div>
+                <div class="sci-val">07 899 4076</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Email</div>
+                <div class="sci-val"><a href="mailto:office@tmop.school.nz">office@tmop.school.nz</a></div>
+              </div>
+            </div>
+            <div class="sc-links">
+              <a href="https://www.tmop.school.nz" class="sc-link" target="_blank" rel="noopener">Website &#8599;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUZANNE AUBERT -->
+        <div class="school-card">
+          <div class="sc-header">
+            <div class="sc-icon sc-icon-catholic">&#9997;&#65039;</div>
+            <div class="sc-meta">
+              <div class="sc-name">Suzanne Aubert Catholic School</div>
+              <div class="sc-tags">
+                <span class="sc-tag tag-primary">Primary Yrs 1–6</span>
+                <span class="sc-tag tag-integrated">State Integrated</span>
+                <span class="sc-tag tag-coed">Co-Ed</span>
+              </div>
+              <div class="sc-address">&#128205; Cnr Golden Sands Drive &amp; The Boulevard, Pāpāmoa East</div>
+            </div>
+          </div>
+          <div class="sc-body">
+            <p class="sc-desc">Suzanne Aubert Catholic School opened in February 2021 as Pāpāmoa's first Catholic school, catering for the growing Catholic community in the suburb. It is a state-integrated school, meaning it is government funded but Catholic owned. The school is named after Mary Aubert (1835–1926), founder of the Sisters of Compassion — the only homegrown religious order in Aotearoa. Preference enrolment applies to Catholic families; however out-of-parish enrolments may be accepted where space permits.</p>
+            <div class="sc-info-grid">
+              <div class="sc-info-item">
+                <div class="sci-label">Opened</div>
+                <div class="sci-val">2021</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Roll (Jul 2025)</div>
+                <div class="sci-val">~199</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Character</div>
+                <div class="sci-val">Catholic</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Year levels</div>
+                <div class="sci-val">Years 1–6</div>
+              </div>
+            </div>
+            <div class="sc-links">
+              <a href="https://www.suzanneaubert.school.nz" class="sc-link" target="_blank" rel="noopener">Website &#8599;</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SPECIAL CHARACTER -->
+      <div class="section">
+        <div class="section-title">&#127809; Special Character School</div>
+
+        <!-- TE KURA KOKIRI -->
+        <div class="school-card">
+          <div class="sc-header">
+            <div class="sc-icon sc-icon-special">&#127809;</div>
+            <div class="sc-meta">
+              <div class="sc-name">Te Kura Kōkiri — Te Kura Kaupapa Māori o Te Kura Kōkiri</div>
+              <div class="sc-tags">
+                <span class="sc-tag tag-primary">Full Primary</span>
+                <span class="sc-tag tag-state">State</span>
+                <span class="sc-tag tag-immersion">Māori Immersion</span>
+                <span class="sc-tag tag-coed">Co-Ed</span>
+              </div>
+              <div class="sc-address">&#128205; Pāpāmoa</div>
+            </div>
+          </div>
+          <div class="sc-body">
+            <p class="sc-desc">Te Kura Kōkiri is a kura kaupapa Māori — a full primary school where students learn exclusively through te reo Māori. It operates under the principles of kura kaupapa Māori, centring tikanga Māori and te ao Māori in all aspects of teaching and school life. With a roll of approximately 275, it serves whānau seeking full Māori immersion education for their tamariki. Entry is open to all children whose whānau commit to supporting the kura kaupapa principles.</p>
+            <div class="sc-info-grid">
+              <div class="sc-info-item">
+                <div class="sci-label">Roll</div>
+                <div class="sci-val">~275</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Language</div>
+                <div class="sci-val">Te reo Māori</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Type</div>
+                <div class="sci-val">Kura Kaupapa</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECONDARY -->
+      <div class="section">
+        <div class="section-title">&#127941; Secondary School (Years 7–13)</div>
+
+        <!-- PAPAMOA COLLEGE -->
+        <div class="school-card">
+          <div class="sc-header">
+            <div class="sc-icon sc-icon-secondary">&#127941;</div>
+            <div class="sc-meta">
+              <div class="sc-name">Pāpāmoa College</div>
+              <div class="sc-tags">
+                <span class="sc-tag tag-secondary">Secondary Yrs 7–13</span>
+                <span class="sc-tag tag-state">State</span>
+                <span class="sc-tag tag-coed">Co-Ed</span>
+                <span class="sc-tag tag-zoned">Zoned</span>
+              </div>
+              <div class="sc-address">&#128205; 1 Gravatt Road, Pāpāmoa West</div>
+            </div>
+          </div>
+          <div class="sc-body">
+            <p class="sc-desc">Pāpāmoa College is the suburb's sole secondary school, opened in 2009 by gazette under then-Education Minister Anne Tolley. It caters for Years 7 to 13, taking junior students directly from Pāpāmoa's primary schools and carrying them through to NCEA Level 3 and University Entrance. With 1,775 students as of October 2025, it is a large and well-resourced school with a broad curriculum including Te Pākura — a bilingual Māori learning pathway — and Learning Through Sport classes. The school is BYOD and uses a compulsory uniform purchased from its shop at 60 Parton Road.</p>
+            <div class="sc-info-grid">
+              <div class="sc-info-item">
+                <div class="sci-label">Roll (Oct 2025)</div>
+                <div class="sci-val">1,775</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Equity Index</div>
+                <div class="sci-val">458 (mid-range)</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Year levels</div>
+                <div class="sci-val">Years 7–13</div>
+              </div>
+              <div class="sc-info-item">
+                <div class="sci-label">Phone</div>
+                <div class="sci-val">07 542 0676</div>
+              </div>
+            </div>
+            <p class="equity-note">Note: New Zealand schools transitioned from the decile system to the Equity Index (EQI) from 2024. An EQI of 458 places Pāpāmoa College among schools with average socioeconomic barriers to achievement, broadly equivalent to decile 5–6 under the former system.</p>
+            <div class="sc-links">
+              <a href="https://www.papamoacollege.school.nz" class="sc-link" target="_blank" rel="noopener">Website &#8599;</a>
+              <a href="https://www.papamoacollege.school.nz/enrol-with-us/" class="sc-link" target="_blank" rel="noopener">Enrolment &#8599;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK COMPARISON TABLE -->
+      <div class="section">
+        <div class="section-title">&#128202; All Schools at a Glance</div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>School</th>
+                <th>Type</th>
+                <th>Years</th>
+                <th>Roll</th>
+                <th>Zoned</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Pāpāmoa Primary</td><td>State</td><td>1–6</td><td>~526</td><td>Yes</td></tr>
+              <tr><td>Golden Sands</td><td>State</td><td>1–6</td><td>~560</td><td>Yes</td></tr>
+              <tr><td>Te Ākau ki Pāpāmoa</td><td>State</td><td>1–6</td><td>~600</td><td>Yes</td></tr>
+              <tr><td>Tahatai Coast</td><td>State</td><td>1–6</td><td>~748</td><td>Yes</td></tr>
+              <tr><td>Te Manawa ō Pāpāmoa</td><td>State</td><td>1–6</td><td>Growing</td><td>Yes</td></tr>
+              <tr><td>Suzanne Aubert Catholic</td><td>State Integrated</td><td>1–6</td><td>~199</td><td>Catholic preference</td></tr>
+              <tr><td>Te Kura Kōkiri</td><td>State (Kaupapa Māori)</td><td>Full Primary</td><td>~275</td><td>Open</td></tr>
+              <tr><td>Pāpāmoa College</td><td>State</td><td>7–13</td><td>1,775</td><td>Yes</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ENROLMENT SECTION -->
+      <div class="section">
+        <div class="section-title">&#128203; Enrolling in a Pāpāmoa School</div>
+        <p class="section-intro">Most Pāpāmoa schools are zoned, meaning in-zone families have priority. Out-of-zone enrolments may be available if the school has capacity — contact the school directly to check. Zone boundaries change, so always verify with the school before buying or renting.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Check the school zone</div>
+              <div class="step-desc">Use the Ministry of Education's <a href="https://www.education.govt.nz/school/find-a-school/" target="_blank" rel="noopener">Find a School</a> tool to check whether your address falls within the zone of your preferred school.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Contact the school</div>
+              <div class="step-desc">Call or email the school office to ask about enrolment availability and to request an enrolment pack. Most schools have a specific process and a meet-and-greet step before formal enrolment.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Provide proof of address</div>
+              <div class="step-desc">Most zoned schools require a tenancy agreement, rates notice or sale/purchase agreement as evidence of in-zone residence. Have this ready before the meeting.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Plan for uniform and stationery</div>
+              <div class="step-desc">All Pāpāmoa schools require a uniform. Several schools sell uniforms through their school office or a designated uniform shop. Stationery lists are typically published on each school's website before the start of the year.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="side-col">
+
+      <!-- AD: TUTOR -->
+      <div class="ad-spot">
+        <div class="ad-label">Sponsored</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>&#127891; Pāpāmoa tutors &amp; learning support</p>
+            <a href="/index.html">Claim this spot &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK FACTS -->
+      <div class="fact-box">
+        <h4>&#128204; Quick Facts</h4>
+        <ul class="fact-list">
+          <li><strong>8 schools</strong> serve Pāpāmoa Beach</li>
+          <li><strong>3 new schools</strong> opened since 2011 (Golden Sands, Suzanne Aubert, Te Manawa ō Pāpāmoa)</li>
+          <li><strong>Pāpāmoa College</strong> takes Year 7 — no separate intermediate school</li>
+          <li><strong>Te Kura Kōkiri</strong> offers full Māori immersion</li>
+          <li>All state schools are <strong>free to attend</strong> for NZ residents</li>
+          <li>Zone boundaries are <strong>reviewed regularly</strong> — verify before buying/renting</li>
+        </ul>
+      </div>
+
+      <!-- AD: UNIFORM -->
+      <div class="ad-spot">
+        <div class="ad-label">Sponsored</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>&#128084; School uniform suppliers</p>
+            <a href="/index.html">Claim this spot &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- USEFUL LINKS -->
+      <div class="card">
+        <div class="card-title">&#128279; Useful Links</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <a href="https://www.education.govt.nz/school/find-a-school/" target="_blank" rel="noopener" style="font-size:0.82rem;font-weight:600">Find a School — Ministry of Education &#8599;</a>
+          <a href="https://www.educationcounts.govt.nz" target="_blank" rel="noopener" style="font-size:0.82rem;font-weight:600">Education Counts — rolls &amp; data &#8599;</a>
+          <a href="https://www.ero.govt.nz" target="_blank" rel="noopener" style="font-size:0.82rem;font-weight:600">ERO — school review reports &#8599;</a>
+          <a href="https://www.tauranga.govt.nz" target="_blank" rel="noopener" style="font-size:0.82rem;font-weight:600">Tauranga City Council &#8599;</a>
+        </div>
+      </div>
+
+      <!-- AD: STATIONERY -->
+      <div class="ad-spot">
+        <div class="ad-label">Sponsored</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>&#128218; Stationery &amp; school supplies</p>
+            <a href="/index.html">Claim this spot &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RELATED LINKS -->
+      <div class="card">
+        <div class="card-title">&#128240; Related pages</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <a href="/articles/population-statistics.html" style="font-size:0.82rem;font-weight:600">Population &amp; Statistics</a>
+          <a href="/articles/kids-birthday-parties.html" style="font-size:0.82rem;font-weight:600">Kids Birthday Parties</a>
+          <a href="/articles/parks-playgrounds.html" style="font-size:0.82rem;font-weight:600">Parks &amp; Playgrounds</a>
+          <a href="/articles/school-terms-holidays.html" style="font-size:0.82rem;font-weight:600">School Terms &amp; Holidays 2026</a>
+          <a href="/articles/library.html" style="font-size:0.82rem;font-weight:600">Pāpāmoa Library</a>
+          <a href="/articles/community.html" style="font-size:0.82rem;font-weight:600">Community Resources</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="/">Papamoa.info</a> &mdash; The local directory for Pāpāmoa, Bay of Plenty, New Zealand. School data sourced from Ministry of Education Education Counts, ERO and individual school websites. Roll figures are approximate and subje
