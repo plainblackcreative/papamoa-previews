@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Groups & Volunteering | Papamoa.info</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0c1a2a;--deep:#142438;--steel:#1e3450;
+  --sea:#1a6fa0;--sky:#4ab8e8;--aqua:#7dd8f0;
+  --sage:#52b788;--fern:#2d6a4f;--forest:#162b21;
+  --sand:#faf7f2;--cream:#fdfcf7;--warm:#f5f0e8;
+  --ink:#1a1a18;--body:#4a4843;--muted:#8a857e;--line:#e5e2dc;
+  --gold:#c9952d;--gold-bg:#fef9ee;--gold-line:#e8c860;
+  --r:12px;
+  --s-sm:0 1px 3px rgba(0,0,0,.05);--s-md:0 4px 20px rgba(0,0,0,.07);--s-lg:0 12px 40px rgba(0,0,0,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+::selection{background:var(--sand);color:var(--forest)}
+
+.nav{background:var(--forest);position:sticky;top:0;z-index:500}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-family:'Libre Baskerville',serif;color:#fff;font-size:1.2rem;font-weight:700}
+.logo i{font-style:italic;color:var(--sage);font-weight:400}
+.nav-links{display:flex;gap:8px}
+.nav-links a{color:rgba(255,255,255,.55);font-size:.78rem;font-weight:500;text-decoration:none;padding:6px 14px;border-radius:100px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-links a.on{color:var(--sage);background:rgba(82,183,136,.12)}
+
+.hero{background:linear-gradient(135deg,#1a3a2a,#2d6a4f);position:relative;overflow:hidden;padding:52px 28px 48px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 90%,rgba(82,183,136,.12) 0%,transparent 50%)}
+.hero-grain{position:absolute;inset:0;opacity:.03;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:.75rem;color:rgba(255,255,255,.3);margin-bottom:14px}
+.breadcrumb a{color:rgba(255,255,255,.45);text-decoration:none}
+.hero-inner h1{font-family:'Libre Baskerville',serif;font-size:clamp(1.8rem,4vw,2.4rem);color:#fff;font-weight:700;line-height:1.15}
+.hero-inner .hero-desc{color:rgba(255,255,255,.45);font-size:.9rem;margin-top:8px;font-weight:300;line-height:1.65}
+
+.article{max-width:900px;margin:0 auto;padding:36px 28px 0}
+
+.prose{font-size:.92rem;color:var(--body);line-height:1.8}
+.prose p+p{margin-top:16px}
+.prose h2{font-family:'Libre Baskerville',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin:44px 0 12px;line-height:1.25;scroll-margin-top:80px}
+.prose h3{font-family:'Libre Baskerville',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin:28px 0 8px}
+
+.callout{background:var(--sand);border-left:4px solid var(--sea);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;margin:24px 0}
+.callout.green{border-left-color:var(--sage);background:rgba(82,183,136,.06)}
+.callout.amber{border-left-color:var(--gold);background:var(--gold-bg)}
+.callout h4{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.callout p{font-size:.84rem;color:var(--body);line-height:1.65}
+
+/* ORG CARDS */
+.org-grid{display:grid;grid-template-columns:1fr;gap:16px;margin:24px 0}
+.org-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:box-shadow .2s}
+.org-card:hover{box-shadow:var(--s-md)}
+.org-inner{display:grid;grid-template-columns:auto 1fr;gap:0}
+.org-side{width:8px;flex-shrink:0}
+.org-body{padding:22px 26px}
+.org-body h3{font-family:'Libre Baskerville',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:2px}
+.org-body .org-type{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:8px}
+.org-body p{font-size:.84rem;color:var(--body);line-height:1.65}
+.org-body .org-stats{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap}
+.org-stat{display:flex;flex-direction:column}
+.org-stat .os-num{font-family:'Libre Baskerville',serif;font-size:1.1rem;font-weight:700;color:var(--sea)}
+.org-stat .os-lbl{font-size:.65rem;color:var(--muted)}
+.org-body .org-contact{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:.8rem;color:var(--body);line-height:1.5}
+.org-body .org-contact a{color:var(--sea);text-decoration:none}
+.org-body .org-contact a:hover{text-decoration:underline}
+
+/* NEEDS GRID */
+.needs-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.need-card{background:#fff;border:2px dashed var(--line);border-radius:var(--r);padding:20px 22px;text-align:center;transition:border-color .2s}
+.need-card:hover{border-color:var(--sage)}
+.need-card .n-icon{font-size:1.8rem;margin-bottom:8px}
+.need-card h4{font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.need-card p{font-size:.78rem;color:var(--body);line-height:1.55}
+.need-card .n-cta{display:inline-block;margin-top:10px;padding:7px 16px;border:1.5px solid var(--fern);border-radius:8px;color:var(--fern);font-size:.78rem;font-weight:600;text-decoration:none;transition:all .2s}
+.need-card .n-cta:hover{background:var(--fern);color:#fff}
+
+/* CENTRE CARD */
+.centre-card{background:var(--forest);border-radius:var(--r);padding:28px 32px;margin:28px 0;position:relative;overflow:hidden}
+.centre-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 80%,rgba(82,183,136,.08) 0%,transparent 50%)}
+.centre-card h3{font-family:'Libre Baskerville',serif;font-size:1.1rem;color:#fff;font-weight:700;margin-bottom:10px;position:relative}
+.centre-card p{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.7;position:relative}
+.centre-details{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:16px;position:relative}
+.cd{text-align:center}
+.cd .cd-icon{font-size:1.3rem;margin-bottom:4px}
+.cd h5{font-size:.78rem;color:rgba(255,255,255,.6);font-weight:600}
+.cd p{font-size:.7rem;color:rgba(255,255,255,.35);margin-top:2px;line-height:1.4}
+
+.related{margin:40px 0 0;padding:28px 0;border-top:1px solid var(--line)}
+.related h3{font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:14px}
+.related-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.rel-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;transition:box-shadow .2s;cursor:pointer}
+.rel-card:hover{box-shadow:var(--s-md)}
+.rel-card h4{font-size:.85rem;font-weight:600;color:var(--sea)}
+.rel-card p{font-size:.72rem;color:var(--muted);margin-top:3px;line-height:1.45}
+
+footer{background:var(--forest);padding:36px 28px;text-align:center;margin-top:48px}
+footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
+footer a{color:var(--sage);text-decoration:none}
+
+@media(max-width:768px){
+  .needs-grid{grid-template-columns:1fr}
+  .centre-details{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.article{animation:fadeUp .45s ease both}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">papamoa<i>.info</i></div>
+    <div class="nav-links">
+      <a>Home</a>
+      <a>Essential Services</a>
+      <a>Food & Drink</a>
+      <a class="on">Community</a>
+      <a>Accommodation</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb"><a>Home</a> / <a>Community</a> / <a>Safety & Support</a> / Community Groups</div>
+    <h1>Community Groups & Volunteering</h1>
+    <div class="hero-desc">The volunteer organisations that keep Papamoa safe, connected, and functioning. Where to find them, what they actually do, and how to get involved.</div>
+  </div>
+</section>
+
+<div class="article">
+  <div class="prose">
+
+    <p>Papamoa's community infrastructure runs on volunteers. The community patrol that drives the streets at night, the Neighbourhood Support coordinators who connect neighbours after a break-in, the Lions and Rotary members who fund local projects, and the Civil Defence volunteers who step up during storms and evacuations are all unpaid residents doing the work because they believe it matters. This page brings them together in one place.</p>
+
+    <h2>Papamoa Beach Community Patrol</h2>
+
+    <div class="org-grid">
+      <div class="org-card">
+        <div class="org-inner">
+          <div class="org-side" style="background:var(--sea)"></div>
+          <div class="org-body">
+            <h3>Papamoa Beach Community Patrol</h3>
+            <div class="org-type">Safety &middot; Volunteer &middot; Est. 2000</div>
+            <p>A volunteer patrol that has been driving the streets of Papamoa since 2000, operating in a marked vehicle with day, dusk, night, and late-night shifts. They are the visible presence on the ground when police are deployed elsewhere, and they work directly alongside NZ Police and Neighbourhood Support. The patrol vehicle carries a mobile AED (defibrillator), making it a first-response asset as well as a deterrent.</p>
+            <p style="margin-top:10px">The patrol runs an electric vehicle that charges at the Papamoa Police Station (TECT-funded charger). When the original EV sponsorship from Ebbett Tauranga ended, the patrol launched a Givealittle campaign to purchase the vehicle. They receive no government funding and rely entirely on community donations, fundraising, and sponsorship. They are looking toward acquiring a second vehicle as Papamoa continues to grow.</p>
+            <div class="org-stats">
+              <div class="org-stat"><div class="os-num">23+</div><div class="os-lbl">Years operating</div></div>
+              <div class="org-stat"><div class="os-num">25,000+</div><div class="os-lbl">Km per year</div></div>
+              <div class="org-stat"><div class="os-num">485</div><div class="os-lbl">Patrols per year</div></div>
+              <div class="org-stat"><div class="os-num">3,248</div><div class="os-lbl">Volunteer hours per year</div></div>
+            </div>
+            <div class="org-contact">Contact through the Papamoa Police Station or search "Papamoa Beach Community Patrol" on Facebook for current details. Volunteers are always welcome.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Papamoa Neighbourhood Support</h2>
+
+    <div class="org-grid">
+      <div class="org-card">
+        <div class="org-inner">
+          <div class="org-side" style="background:var(--sky)"></div>
+          <div class="org-body">
+            <h3>Papamoa Neighbourhood Support</h3>
+            <div class="org-type">Crime Prevention & Community &middot; Free to join</div>
+            <p>The street group network that connects nearly 6,000 member households through 170 volunteer street coordinators. PNS works directly with Papamoa's community constable, sends fortnightly e-newsletters with official property crime data, and provides the stickers, signs, and information packs that signal to offenders and neighbours alike that a street is being watched.</p>
+            <p style="margin-top:10px">Coordinator Bruce Banks has been running PNS since 2014 and has been transparent that one person covering a suburb approaching 40,000 people is no longer sustainable. The organisation urgently needs more volunteer street coordinators, particularly in newer Papamoa East subdivisions where coverage gaps exist. The role is light-touch: a few minutes a week and a 30-minute driveway meeting to get started.</p>
+            <div class="org-stats">
+              <div class="org-stat"><div class="os-num">~6,000</div><div class="os-lbl">Member households</div></div>
+              <div class="org-stat"><div class="os-num">170</div><div class="os-lbl">Street coordinators</div></div>
+              <div class="org-stat"><div class="os-num">Free</div><div class="os-lbl">No cost to join</div></div>
+            </div>
+            <div class="org-contact">
+              <strong>Bruce Banks</strong> &middot; <a href="tel:0272713772">027 271 3772</a> &middot; <a href="mailto:nspapamoa@wbopns.org.nz">nspapamoa@wbopns.org.nz</a><br>
+              Full details on the <a href="#">Neighbourhood Support page</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Service Clubs</h2>
+
+    <div class="org-grid">
+      <div class="org-card">
+        <div class="org-inner">
+          <div class="org-side" style="background:var(--gold)"></div>
+          <div class="org-body">
+            <h3>Papamoa Lions Club</h3>
+            <div class="org-type">Service Club &middot; Chartered 1979</div>
+            <p>One of the longest-running community organisations in Papamoa, chartered in 1979 when the suburb was a fraction of its current size. Papamoa Lions has contributed thousands of volunteer hours over more than four decades, focusing on fundraising and direct service for young people, elderly residents, and local needs. They previously ran the Papamoa market at Palm Beach Plaza before the centre's redevelopment in 2014.</p>
+            <div class="org-contact"><a href="https://e-clubhouse.org/sites/papamoa/" target="_blank">e-clubhouse.org/sites/papamoa</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="org-card">
+        <div class="org-inner">
+          <div class="org-side" style="background:var(--fern)"></div>
+          <div class="org-body">
+            <h3>Papamoa Rotary Club</h3>
+            <div class="org-type">Service Club &middot; Chartered 2008</div>
+            <p>A newer club with an informal, beach-side culture that reflects Papamoa's character. They meet weekly and pride themselves on an active approach to local projects rather than a purely social calendar. The club has a close relationship with the Papamoa Surf Life Saving Club, having funded a longboat and an ATV for surf rescue. To date they have donated more than $120,000 to community projects in the Papamoa area, with funding distributed to local organisations at regular community events.</p>
+            <div class="org-contact"><a href="https://papamoarotaryclub.co.nz" target="_blank">papamoarotaryclub.co.nz</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Emergency & Safety Volunteering</h2>
+
+    <div class="org-grid">
+      <div class="org-card">
+        <div class="org-inner">
+          <div class="org-side" style="background:#c03030"></div>
+          <div class="org-body">
+            <h3>Papamoa Surf Life Saving Club</h3>
+            <div class="org-type">Surf Rescue &middot; Volunteer</div>
+            <p>The frontline of beach safety at Papamoa. Surf lifeguards patrol the beach during summer, respond to rescues, and run junior surf programmes (Nippers) for kids. The club relies heavily on volunteer lifeguards, water safety instructors, and committee members. Supported by Papamoa Rotary, who have funded rescue equipment. Volunteering ranges from active lifeguarding (requires training and patrols) to non-beach roles like fundraising, event coordination, and coaching.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="org-card">
+        <div class="org-inner">
+          <div class="org-side" style="background:#e08020"></div>
+          <div class="org-body">
+            <h3>Civil Defence Volunteering</h3>
+            <div class="org-type">Emergency Management Bay of Plenty</div>
+            <p>Emergency Management Bay of Plenty coordinates Civil Defence response across the region. Volunteers are needed for welfare centre operations, community communication during events, and supporting official response teams. In Papamoa, the Neighbourhood Support street group network also functions as a Civil Defence communication channel, meaning street coordinators serve a dual role during emergencies. Separate Civil Defence volunteer registration is available through the EMBOP website.</p>
+            <div class="org-contact"><a href="https://www.bopcivildefence.govt.nz" target="_blank">bopcivildefence.govt.nz</a> &middot; 0800 884 881</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Where Volunteers Are Needed Most</h2>
+
+    <p>Not all volunteer needs are equal. Some organisations are well-staffed and function smoothly. Others are stretched thin and at risk of losing capacity if more people do not step up. Here is where the gaps are right now.</p>
+
+    <div class="needs-grid">
+      <div class="need-card">
+        <div class="n-icon">&#128680;</div>
+        <h4>NS Street Coordinators</h4>
+        <p>Papamoa East, Golden Sands, and Te Tumu have the biggest gaps. New streets with no coordinator mean no crime alerts, no street group, and no connection to the wider network. The role takes a few minutes a week.</p>
+        <a class="n-cta" href="mailto:nspapamoa@wbopns.org.nz?subject=Street coordinator volunteer enquiry">Volunteer</a>
+      </div>
+      <div class="need-card">
+        <div class="n-icon">&#128663;</div>
+        <h4>Community Patrol Members</h4>
+        <p>More volunteers means more shifts covered and more eyes on the street. Particularly needed for evening and late-night patrols. No special training required beyond a willingness to show up regularly.</p>
+        <a class="n-cta" href="#">Contact via Police Station</a>
+      </div>
+      <div class="need-card">
+        <div class="n-icon">&#127754;</div>
+        <h4>Surf Lifeguards</h4>
+        <p>Summer patrols rely on volunteer lifeguards. Training is provided through Surf Life Saving NZ. Junior surf programmes also need coaches and water safety volunteers. A commitment to regular patrol days is expected.</p>
+        <a class="n-cta" href="#">Contact SLSC</a>
+      </div>
+      <div class="need-card">
+        <div class="n-icon">&#128176;</div>
+        <h4>Patrol Funding & Sponsorship</h4>
+        <p>The community patrol receives no government funding. They need ongoing financial support for vehicle maintenance and are working toward a second patrol vehicle. Local business sponsorship and individual donations keep them on the road.</p>
+        <a class="n-cta" href="https://givealittle.co.nz/cause/urgent-papamoa-community-patrol-needs-our-help" target="_blank">Donate via Givealittle</a>
+      </div>
+    </div>
+
+    <h2>Papamoa Community Centre</h2>
+
+  </div>
+
+  <div class="centre-card">
+    <h3>Papamoa Community Centre & Library</h3>
+    <p>The community centre is co-located with Papamoa Library adjacent to Papamoa Plaza on Gravatt Road. It opened in 2006 and offers seven purpose-built meeting rooms of varying sizes, from one-on-one counselling spaces to large workshop rooms. It serves as the physical hub for many of the community groups listed on this page, as well as hosting playgroups, art and drama sessions, wellness classes, and business meetings. AV equipment and kitchen facilities are available.</p>
+    <div class="centre-details">
+      <div class="cd">
+        <div class="cd-icon">&#128205;</div>
+        <h5>Location</h5>
+        <p>Gravatt Road, Papamoa<br>Adjacent to Papamoa Library & Plaza</p>
+      </div>
+      <div class="cd">
+        <div class="cd-icon">&#127970;</div>
+        <h5>Facilities</h5>
+        <p>7 meeting rooms, kitchenette, kitchen, AV equipment</p>
+      </div>
+      <div class="cd">
+        <div class="cd-icon">&#128197;</div>
+        <h5>Bookings</h5>
+        <p>Available for community groups and businesses. Contact CBOP for availability.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="prose">
+
+    <div class="callout green">
+      <h4>The Pattern That Makes It Work</h4>
+      <p>These organisations are distinct but interconnected. Neighbourhood Support provides the information network. The community patrol provides the physical presence. Surf Life Saving covers the beach. Lions and Rotary provide funding and project capacity. Civil Defence provides the emergency coordination framework. And the community centre gives them all a place to meet. No single one of them covers everything, but together they form a layered system where each part strengthens the others. The more people who participate, the stronger each layer becomes.</p>
+    </div>
+
+  </div>
+
+  <div class="related">
+    <h3>Related Pages</h3>
+    <div class="related-grid">
+      <div class="rel-card">
+        <h4>Neighbourhood Support &rarr;</h4>
+        <p>Full detail on how street groups work, how to join, and coverage gaps</p>
+      </div>
+      <div class="rel-card">
+        <h4>Police & Crime &rarr;</h4>
+        <p>Papamoa police station, reporting crime, and property crime trends</p>
+      </div>
+      <div class="rel-card">
+        <h4>Emergency Preparedness &rarr;</h4>
+        <p>Tsunami, earthquake, flood, and storm guidance specific to Papamoa</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 <a href="#">papamoa.info</a> &middot; Papamoa's Local Business Directory &middot; <a href="#">List Your Business</a></p>
+</footer>
+
+</body>
+</html>
