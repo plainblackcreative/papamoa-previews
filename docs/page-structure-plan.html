@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO/GEO Page Structure Plan | Papamoa.info</title>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #2B3F5C; --blue: #3AABDE; --lime: #7DC143; --sand: #F5EFE0;
+      --coral: #E8344A; --white: #fff; --ink: #0D1B2A; --body: #1E2D3E;
+      --muted: #607080; --border: #DDE5EE; --bg: #F4F7FA; --gold: #C8962A;
+    }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.6; padding: 32px 20px 80px; }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--navy); margin-bottom: 8px; }
+    .intro { font-size: 0.9rem; color: var(--muted); margin-bottom: 36px; max-width: 680px; line-height: 1.7; }
+    .intro strong { color: var(--body); }
+    .updated { font-size: 0.72rem; background: #e8f5e9; color: #2a7a3a; border: 1px solid #b2dfdb; border-radius: 4px; padding: 2px 8px; display: inline-block; margin-bottom: 20px; font-weight: 700; }
+
+    /* GEO callout */
+    .geo-box { background: var(--navy); border-radius: 12px; padding: 22px 24px; margin-bottom: 40px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .geo-item h4 { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 5px; }
+    .geo-item p { font-size: 0.8rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+    .geo-item .geo-rec { font-size: 0.72rem; margin-top:6px; color: var(--lime); font-weight: 700; }
+
+    /* Section headers */
+    h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px; }
+
+    /* Cards */
+    .page-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; }
+
+    .page-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .page-card.changed { border-color: #7DC143; }
+    .page-card.new { border-color: var(--blue); }
+
+    .pc-head { display: grid; grid-template-columns: 48px 1fr auto; align-items: stretch; gap: 0; }
+    .pc-icon { background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .pc-title-block { padding: 14px 16px; }
+    .pc-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .pc-url { font-size: 0.72rem; color: var(--blue); font-family: monospace; }
+    .pc-badge { padding: 14px 16px; display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+
+    .badge { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; white-space: nowrap; }
+    .badge-single   { background: #E8F5E9; color: #2A7A3A; }
+    .badge-multi    { background: #E3F2FD; color: #1565A0; }
+    .badge-hub      { background: #F3E5F5; color: #6A0DAD; }
+    .badge-live     { background: #FFF3E0; color: #E65100; }
+    .badge-protected { background: #FCE4EC; color: #B71C1C; }
+    .badge-network  { background: #E0F7FA; color: #00695C; }
+    .badge-new      { background: #E3F2FD; color: #0D47A1; }
+    .badge-updated  { background: #F1F8E9; color: #33691E; }
+
+    .pc-body { padding: 14px 16px 16px; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pc-col h5 { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+    .pc-col ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .pc-col li { font-size: 0.8rem; color: var(--body); padding-left: 13px; position: relative; line-height: 1.4; }
+    .pc-col li::before { content: '›'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+    .pc-col li.ad::before   { color: var(--gold); content: '★'; }
+    .pc-col li.geo::before  { color: var(--lime); content: '◆'; }
+    .pc-col li.warn::before { color: var(--coral); content: '!'; }
+    .pc-col li.done::before { color: var(--lime); content: '✓'; }
+
+    .pc-note { grid-column: 1 / -1; font-size: 0.78rem; color: var(--muted); background: var(--bg); border-radius: 6px; padding: 9px 12px; font-style: italic; line-height: 1.5; }
+    .pc-note strong { color: var(--body); font-style: normal; }
+
+    /* Subpages list */
+    .subpages { padding: 10px 16px 14px; border-top: 1px solid var(--border); background: #FAFBFC; }
+    .subpages-label { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .subpage-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sp { font-size: 0.72rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; background: var(--white); border: 1px solid var(--border); color: var(--body); }
+    .sp.key { border-color: var(--blue); color: var(--blue); background: #EBF5FB; }
+    .sp.ad  { border-color: var(--gold); color: var(--gold); background: #FFFBF0; }
+    .sp.geo { border-color: var(--lime); color: #3A7010; background: #F0FAF0; }
+    .sp.done { border-color: var(--lime); color: #2A7A3A; background: #E8F5E9; }
+
+    /* Summary table */
+    .summary-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin-top: 40px; }
+    .summary-table th { background: var(--navy); color: rgba(255,255,255,0.7); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+    .summary-table td { padding: 10px 14px; font-size: 0.82rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .summary-table tr:last-child td { border-bottom: none; }
+    .summary-table tr:hover td { background: var(--bg); }
+    .summary-table tr.built td { background: #f0faf0; }
+    .priority { font-size: 0.65rem; font-weight: 800; padding: 2px 7px; border-radius: 3px; }
+    .p1   { background: #FFEBEE; color: #B71C1C; }
+    .p2   { background: #FFF3E0; color: #E65100; }
+    .p3   { background: #E8F5E9; color: #2A7A3A; }
+    .done-badge { background: #E8F5E9; color: #2A7A3A; font-size: 0.65rem; font-weight: 800; padding: 2px 7px; border-radius: 3px; }
+
+    @media(max-width:640px) {
+      .geo-box { grid-template-columns: 1fr; }
+      .pc-body { grid-template-columns: 1fr; }
+      .pc-head { grid-template-columns: 40px 1fr; }
+      .pc-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>SEO & GEO Page Structure</h1>
+  <div class="updated">Updated April 2026</div>
+  <p class="intro">Structural recommendations for Papamoa.info's content expansion. Each page is designed to rank in Google traditional search <strong>and</strong> appear as a cited source in AI answer engines (ChatGPT, Perplexity, Claude, Gemini — collectively called <strong>GEO: Generative Engine Optimisation</strong>). Ad spots are noted where they create genuine commercial value. Pages marked ✓ are already built and live in the repo.</p>
+
+  <!-- GEO TERMINOLOGY BOX -->
+  <div class="geo-box">
+    <div class="geo-item">
+      <h4>SEO (Traditional)</h4>
+      <p>Google blue-link rankings. Requires keyword targeting, internal linking, structured data, fast load times.</p>
+      <div class="geo-rec">Already doing this ✓</div>
+    </div>
+    <div class="geo-item">
+      <h4>AIO / AEO</h4>
+      <p>Google's AI Overviews (formerly SGE). Answer-style content, FAQ schema, clear factual statements, cited sources.</p>
+      <div class="geo-rec">Google-specific subset of GEO</div>
+    </div>
+    <div class="geo-item">
+      <h4>GEO — Use This Term</h4>
+      <p>Generative Engine Optimisation. Covers ALL AI answer engines: ChatGPT, Perplexity, Claude, Gemini, Google AIO. Structured facts, local specificity, editorial voice.</p>
+      <div class="geo-rec">✦ Recommended term going forward</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       GROUP 1: OUTDOOR & RECREATION
+  ═══════════════════════════════ -->
+  <h2>🌿 Outdoor & Recreation</h2>
+  <div class="page-grid">
+
+    <!-- WALKS & TRACKS -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🚶</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Walks & Tracks in Pāpāmoa</div>
+          <div class="pc-url">/walks-tracks</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-hub">Hub page + sub-pages</span></div>
+      </div>
+      <div class="subpages">
+        <div class="subpages-label">Structure</div>
+        <div class="subpage-pills">
+          <span class="sp key">Hub: /walks-tracks</span>
+          <span class="sp">Te Ara O Wairakei</span>
+          <span class="sp">Pāpāmoa Hills walks</span>
+          <span class="sp">Beach walk</span>
+          <span class="sp">Kaituna River loop</span>
+          <span class="sp geo">GEO: "best walks near Pāpāmoa"</span>
+          <span class="sp ad">Ad: guided tours / outdoor gear</span>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Overview hub with map embed</li>
+            <li>Difficulty ratings, distance, time</li>
+            <li>Dog-friendly / accessible flags</li>
+            <li>Seasonal conditions notes</li>
+            <li>Car parking info per walk</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"What walks are near Pāpāmoa Beach?"</li>
+            <li class="geo">"Dog-friendly walks Pāpāmoa"</li>
+            <li class="ad">Spotlight: guided walking tours</li>
+            <li class="ad">Spotlight: bike hire / e-bike hire</li>
+            <li>Link out to TCC track pages</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Structure:</strong> Hub page lists all walks with summary cards, each card links to its own sub-page. Hub answers the overview questions AI engines love ("What walks are in Pāpāmoa?"). Sub-pages go deep on each specific track for long-tail search.</div>
+      </div>
+    </div>
+
+    <!-- PARKS, PLAYGROUNDS, SKATE, PICNICS -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🛝</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Parks, Playgrounds, Skate Parks & Picnic Spots</div>
+          <div class="pc-url">/parks-playgrounds</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Single page, tabbed</span></div>
+      </div>
+      <div class="subpages">
+        <div class="subpages-label">Tabs on one page</div>
+        <div class="subpage-pills">
+          <span class="sp key">All parks overview</span>
+          <span class="sp">Playgrounds</span>
+          <span class="sp">Skate parks</span>
+          <span class="sp">Picnic spots</span>
+          <span class="sp">Gordon Spratt Reserve ↗</span>
+          <span class="sp geo">GEO: "playgrounds in Pāpāmoa"</span>
+          <span class="sp ad">Ad: kids party hire / face painting</span>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Each park: address, facilities, parking</li>
+            <li>Equipment age-range notes</li>
+            <li>Shade / shelter availability</li>
+            <li>BBQ / toilet facilities noted</li>
+            <li>Map embed for each location</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Best playgrounds in Pāpāmoa"</li>
+            <li class="geo">"Where to have a picnic Pāpāmoa"</li>
+            <li class="ad">Spotlight: kids party hire / hire equipment</li>
+            <li class="ad">Spotlight: food delivery to parks</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Structure:</strong> Single page with anchor-linked tabs or jump sections. All on one URL keeps authority consolidated. Gordon Spratt gets its own dedicated page (see below) and is linked from here as the flagship park.</div>
+      </div>
+    </div>
+
+    <!-- GORDON SPRATT -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🏞️</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Gordon Spratt Reserve</div>
+          <div class="pc-url">/gordon-spratt-reserve</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Dedicated single page</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Full facilities breakdown</li>
+            <li>Sports fields, tennis, walking paths</li>
+            <li>Events hosted there</li>
+            <li>Parking, toilets, BBQs</li>
+            <li>Dog rules on the reserve</li>
+            <li>Nearby businesses (café, dairy)</li>
+            <li>Tsunami mound / civil defence role</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Gordon Spratt Reserve Pāpāmoa facilities"</li>
+            <li class="geo">"Sports fields near Pāpāmoa"</li>
+            <li class="ad">Spotlight: sports clubs using the reserve</li>
+            <li class="ad">Spotlight: personal trainers / fitness</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Why dedicated:</strong> Gordon Spratt is searched by name constantly — it's the main civic gathering point for Pāpāmoa East. Its own page captures "Gordon Spratt" as a named query and ranks for it independently of the parks hub. Also note its role as the 3,800-capacity tsunami evacuation mound — cross-link with the emergencies page.</div>
+      </div>
+    </div>
+
+    <!-- PAPAMOA HILLS -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">⛰️</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Pāpāmoa Hills Cultural Heritage Regional Park</div>
+          <div class="pc-url">/papamoa-hills</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Dedicated single page</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Park overview, access, parking</li>
+            <li>All named tracks with stats</li>
+            <li>Māori cultural significance</li>
+            <li>Views from the summit</li>
+            <li>Native flora notes</li>
+            <li>Dog rules (on-lead only)</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Pāpāmoa Hills walk how long"</li>
+            <li class="geo">"Pāpāmoa Hills dog friendly"</li>
+            <li class="geo">"Views from Pāpāmoa Hills"</li>
+            <li class="ad">Spotlight: guided walks / tours</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Cross-link with:</strong> Māori History page, Walks & Tracks hub. The park has significant cultural content that bridges recreation and history — both pages should cite each other.</div>
+      </div>
+    </div>
+
+    <!-- SURF & TIDES — BUILT -->
+    <div class="page-card changed">
+      <div class="pc-head">
+        <div class="pc-icon">🏄</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Surf & Tides Pāpāmoa</div>
+          <div class="pc-url">/categories/surf-tides</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-updated">✓ Built</span><span class="badge badge-live">Static demo data</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li class="done">Conditions strip (swell, wind, water temp)</li>
+            <li class="done">Tide chart (canvas-drawn, current time marker)</li>
+            <li class="done">7-day swell forecast</li>
+            <li class="done">Hakanini Gold Spotlight</li>
+            <li class="done">Surf Shop + SUP hire placeholder slots</li>
+            <li class="done">Beach guide + AEO FAQ</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>Next steps</h5>
+          <ul>
+            <li>Live swell: Open-Meteo Marine API (free, no key)</li>
+            <li>Live tides: NIWA API via Cloudflare Worker (needs key)</li>
+            <li class="geo">"Surf conditions Pāpāmoa today"</li>
+            <li class="geo">"Tide times Pāpāmoa Beach"</li>
+            <li class="ad">Spotlight: Surf Shop (open)</li>
+            <li class="ad">Spotlight: SUP / Kayak hire (open)</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Live API plan:</strong> Open-Meteo Marine API handles swell data (free, CORS-friendly, no key needed). NIWA Tide API handles tides — requires free API key from developer.niwa.co.nz, routed through existing Cloudflare Worker. Both deferred to Phase 2.</div>
+      </div>
+    </div>
+
+  </div><!-- /outdoor -->
+
+  <!-- ═══════════════════════════════
+       GROUP 2: COMMUNITY & LOCAL LIFE
+  ═══════════════════════════════ -->
+  <h2>🏘️ Community & Local Life</h2>
+  <div class="page-grid">
+
+    <!-- LIBRARY -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">📚</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Pāpāmoa Library</div>
+          <div class="pc-url">/library</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Single page</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Hours, address, parking</li>
+            <li>Services (printing, wifi, etc)</li>
+            <li>Children's programmes</li>
+            <li>Community room hire</li>
+            <li>Current events / exhibitions</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Pāpāmoa library hours"</li>
+            <li class="geo">"Kids programmes Pāpāmoa library"</li>
+            <li class="ad">Spotlight: tutoring / learning services</li>
+          </ul>
+        </div>
+        <div class="pc-note">Useful GEO target because people ask AI assistants "What time does Pāpāmoa library open?" — having the factual answer on a local authority page captures those queries.</div>
+      </div>
+    </div>
+
+    <!-- DOGS -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🐕</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Dogs in Pāpāmoa — Rules, Walking, Beach Access</div>
+          <div class="pc-url">/dogs-papamoa</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Single page, sectioned</span></div>
+      </div>
+      <div class="subpages">
+        <div class="subpages-label">Sections (anchor-linked)</div>
+        <div class="subpage-pills">
+          <span class="sp key">/dogs-papamoa</span>
+          <span class="sp">#beach-rules</span>
+          <span class="sp">#walking-areas</span>
+          <span class="sp">#off-leash-zones</span>
+          <span class="sp">#attacks-reporting</span>
+          <span class="sp geo">GEO: "can I take my dog to Pāpāmoa beach?"</span>
+          <span class="sp ad">Ad: dog grooming / vet / dog daycare</span>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>TCC beach rules by season/zone</li>
+            <li>Off-lead areas map & list</li>
+            <li>Dog attack reporting process</li>
+            <li>Poo bag locations</li>
+            <li>Local dog-friendly businesses</li>
+            <li>Dog registration info</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Are dogs allowed on Pāpāmoa beach?"</li>
+            <li class="geo">"Dog off-lead areas Pāpāmoa"</li>
+            <li class="geo">"Dog attack what to do NZ"</li>
+            <li class="ad">Spotlight: dog grooming</li>
+            <li class="ad">Spotlight: vet / dog daycare</li>
+            <li class="ad">Spotlight: dog-friendly accommodation</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>High GEO value:</strong> "Can I take my dog to Pāpāmoa Beach?" is exactly the type of specific local question that AI engines answer with a cited local source. This page can own that answer.</div>
+      </div>
+    </div>
+
+    <!-- KIDS BIRTHDAY PARTIES -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🎂</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Kids Birthday Parties in Pāpāmoa</div>
+          <div class="pc-url">/kids-birthday-parties</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Single page — high ad density</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Venues that host kids parties</li>
+            <li>Beach party tips & rules</li>
+            <li>Park options (Gordon Spratt etc)</li>
+            <li>Local entertainers directory</li>
+            <li>Catering options</li>
+            <li>Party hire (tables, marquees)</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Kids party venues Pāpāmoa"</li>
+            <li class="geo">"Birthday party ideas near Tauranga"</li>
+            <li class="ad">Spotlight: party venue</li>
+            <li class="ad">Spotlight: entertainers (face paint, magic)</li>
+            <li class="ad">Spotlight: party hire / catering</li>
+            <li class="ad">Spotlight: cake makers</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Commercial priority:</strong> High-intent search — parents actively looking to spend money. Four natural ad spots, all genuinely useful to the searcher. One of the best ad revenue pages on the site.</div>
+      </div>
+    </div>
+
+    <!-- SENIORS -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">👴</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Seniors & Retirement Living in Pāpāmoa</div>
+          <div class="pc-url">/seniors-retirement</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-hub">Hub page</span></div>
+      </div>
+      <div class="subpages">
+        <div class="subpages-label">Sub-sections / links</div>
+        <div class="subpage-pills">
+          <span class="sp key">Hub overview</span>
+          <span class="sp">Retirement villages (Karaka Pines etc)</span>
+          <span class="sp">Home support services</span>
+          <span class="sp">Social groups</span>
+          <span class="sp">Transport & accessibility</span>
+          <span class="sp ad">Ad: retirement villages</span>
+          <span class="sp ad">Ad: home care services</span>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Retirement village directory</li>
+            <li>Aged care facilities nearby</li>
+            <li>Senior social groups</li>
+            <li>Community transport options</li>
+            <li>Accessible recreation</li>
+            <li>NZ Super / entitlements links</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Retirement villages Pāpāmoa"</li>
+            <li class="geo">"Best places to retire Bay of Plenty"</li>
+            <li class="ad">Gold Spotlight: Karaka Pines (existing)</li>
+            <li class="ad">Spotlight: home care / support services</li>
+            <li class="ad">Spotlight: medical transport</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMUNITY RESOURCES -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🤝</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Community Resources & Support</div>
+          <div class="pc-url">/community</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Single page, categorised</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Emergency contacts</li>
+            <li>Local Facebook groups list</li>
+            <li>Neighbourhood Support</li>
+            <li>Food banks / social services</li>
+            <li>Mental health resources</li>
+            <li>Youth services</li>
+            <li>Volunteer opportunities</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Community groups Pāpāmoa"</li>
+            <li class="geo">"Food bank near Pāpāmoa"</li>
+            <li>No paid ads — editorial integrity page</li>
+            <li class="warn">Keep ad-free — trust/authority page</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>No ads on this page.</strong> Community resources pages are high-trust editorial content. AI engines weight them heavily as authoritative local sources. Ads would undermine the page's credibility and its GEO value.</div>
+      </div>
+    </div>
+
+    <!-- SUMMER INSECTS — BUILT -->
+    <div class="page-card changed">
+      <div class="pc-head">
+        <div class="pc-icon">🦟</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Summer Insects in Pāpāmoa</div>
+          <div class="pc-url">/articles/summer-insects-papamoa</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-updated">✓ Built</span><span class="badge badge-single">Article + spotlight</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li class="done">Why coastal Pāpāmoa gets it worse</li>
+            <li class="done">6 insect cards with annoyance ratings</li>
+            <li class="done">Activity calendar by month</li>
+            <li class="done">Prevention checklist</li>
+            <li class="done">Summer entertaining tips</li>
+            <li class="done">Natural deterrents</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"How to keep flies out Pāpāmoa summer"</li>
+            <li class="geo">"Mosquitoes Bay of Plenty"</li>
+            <li class="ad">Speedy Screens Gold Spotlight (live)</li>
+          </ul>
+        </div>
+        <div class="pc-note">Speedy Screens Gold Spotlight placed in sidebar — content naturally leads to the solution. Template for future article + spotlight ad combos.</div>
+      </div>
+    </div>
+
+  </div><!-- /community -->
+
+  <!-- ═══════════════════════════════
+       GROUP 3: HISTORY & IDENTITY
+  ═══════════════════════════════ -->
+  <h2>🏛️ History, Identity & People</h2>
+  <div class="page-grid">
+
+    <!-- MAORI HISTORY -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🌿</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Māori History of Pāpāmoa</div>
+          <div class="pc-url">/maori-history</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Single page — GEO anchor</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Ngā Pōtiki / Ngāi Te Rangi history</li>
+            <li>Tamapahore Marae</li>
+            <li>Pā sites and significance</li>
+            <li>Place name meanings</li>
+            <li>Connection to Pāpāmoa Hills</li>
+            <li>Living culture today</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"What does Pāpāmoa mean in Māori?"</li>
+            <li class="geo">"Māori history Pāpāmoa Beach"</li>
+            <li class="geo">"Ngā Pōtiki Pāpāmoa"</li>
+            <li class="warn">No commercial ads — kawa/cultural respect</li>
+            <li>Link to Tamapahore Marae</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>GEO priority page.</strong> "What does Pāpāmoa mean?" is a high-frequency AI question. Having an accurate, respectful, well-sourced answer on papamoa.info positions the site as the authoritative local reference. No ads on this page.</div>
+      </div>
+    </div>
+
+    <!-- WELL KNOWN PEOPLE -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">⭐</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Notable People from Pāpāmoa</div>
+          <div class="pc-url">/notable-people</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Single page</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Athletes, artists, business figures</li>
+            <li>Each person: brief bio, connection to Pāpāmoa</li>
+            <li>Editorial voice — factual only</li>
+            <li>Living residents noted as such</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Famous people from Pāpāmoa"</li>
+            <li class="geo">"Who lives in Pāpāmoa NZ?"</li>
+            <li>No direct ads — editorial page</li>
+            <li>Internal links to relevant businesses</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>GEO magnet.</strong> AI engines love "who lives in / is from [place]" queries. Keep it factual, cited and editorial — no promotional content about living residents.</div>
+      </div>
+    </div>
+
+    <!-- POPULATION & STATISTICS -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">📊</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Pāpāmoa Population & Statistics</div>
+          <div class="pc-url">/population-statistics</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Single page — GEO anchor</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Current population estimate</li>
+            <li>Growth rate & projections</li>
+            <li>Age breakdown</li>
+            <li>Housing stats</li>
+            <li>Census data (2023 + updates)</li>
+            <li>Comparison to Tauranga city</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Pāpāmoa population 2025"</li>
+            <li class="geo">"How big is Pāpāmoa?"</li>
+            <li class="geo">"Pāpāmoa growth rate"</li>
+            <li class="ad">Contextual: Karaka Pines, new developments</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Highest GEO value on the site.</strong> "Pāpāmoa population" is asked constantly by AI engines and cited widely. Stats pages with named sources (Stats NZ census) become the reference that AI engines quote. Update annually.</div>
+      </div>
+    </div>
+
+    <!-- TCC / COUNCIL / REPS -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🏛️</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Council, Mayor, Local MPs & Representatives</div>
+          <div class="pc-url">/local-government</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Single page</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>TCC ward councillors for Pāpāmoa</li>
+            <li>Current Mayor of Tauranga</li>
+            <li>Bay of Plenty MP / electorate</li>
+            <li>BOPRC regional councillors</li>
+            <li>How to contact / report issues</li>
+            <li>TCC service links</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Who is Pāpāmoa's councillor?"</li>
+            <li class="geo">"Tauranga Mayor 2025"</li>
+            <li class="geo">"How to report a pothole Pāpāmoa"</li>
+            <li>No paid ads — civic information page</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Needs regular updates</strong> — elected positions change. Consider a note: "Last verified [date]." High GEO value because people ask AI assistants civic questions constantly. No ads.</div>
+      </div>
+    </div>
+
+  </div><!-- /history -->
+
+  <!-- ═══════════════════════════════
+       GROUP 4: SHOPPING & DINING
+  ═══════════════════════════════ -->
+  <h2>🛍️ Shopping, Dining & Local Precincts</h2>
+  <div class="page-grid">
+
+    <!-- FASHION ISLAND & PALM BEACH PLAZA -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🏬</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Fashion Island & Palm Beach Plaza</div>
+          <div class="pc-url">/shopping-centres</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Single page, two sections</span></div>
+      </div>
+      <div class="subpages">
+        <div class="subpages-label">Page structure</div>
+        <div class="subpage-pills">
+          <span class="sp key">/shopping-centres</span>
+          <span class="sp">#fashion-island — stores, hours, map</span>
+          <span class="sp">#palm-beach-plaza — stores, hours, map</span>
+          <span class="sp">#the-sands — new development</span>
+          <span class="sp ad">Ad: individual store Gold Spotlights</span>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Each centre: tenants listed</li>
+            <li>Opening hours, parking info</li>
+            <li>ATMs, facilities</li>
+            <li>New store announcements</li>
+            <li>Easter / public holiday hours (link)</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"What shops are at Fashion Island Pāpāmoa?"</li>
+            <li class="geo">"Palm Beach Plaza opening hours"</li>
+            <li class="ad">Gold Spotlight: anchor tenants</li>
+            <li class="ad">Spotlight: individual retailers</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>High commercial value.</strong> Shopping centre pages with tenant lists rank for "[store name] Pāpāmoa" queries. Each tenant is a potential Silver/Gold listing. The page itself becomes a hub for retail ad spots.</div>
+      </div>
+    </div>
+
+    <!-- DINNER AT THE DOMAIN -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🌙</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Dinner at The Domain</div>
+          <div class="pc-url">/dinner-at-the-domain</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Dedicated event/venue page</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>What is Dinner at the Domain?</li>
+            <li>Dates, tickets, how to attend</li>
+            <li>Food / vendor options</li>
+            <li>Location and parking</li>
+            <li>History of the event</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"Dinner at the Domain Pāpāmoa 2026"</li>
+            <li class="geo">"Pāpāmoa Domain events"</li>
+            <li class="ad">Spotlight: event caterers / food trucks</li>
+            <li class="ad">Spotlight: event sponsors</li>
+          </ul>
+        </div>
+        <div class="pc-note">Dedicated page captures event-specific searches. Update annually with current year's dates. Include a persistent "Next event: [date]" element for featured snippet capture.</div>
+      </div>
+    </div>
+
+    <!-- THE YARD -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🏪</div>
+        <div class="pc-title-block">
+          <div class="pc-title">The Yard Pāpāmoa</div>
+          <div class="pc-url">/the-yard</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Dedicated precinct page</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>What is The Yard?</li>
+            <li>Tenants / businesses listed</li>
+            <li>Opening hours</li>
+            <li>Location, parking, access</li>
+            <li>Events held there</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"The Yard Pāpāmoa what's there"</li>
+            <li class="ad">Gold Spotlight: tenant businesses</li>
+            <li class="ad">Spotlight: events at The Yard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FUEL STATIONS & PRICES -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">⛽</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Fuel Stations & Prices in Pāpāmoa</div>
+          <div class="pc-url">/fuel-prices</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-live">Live data + AI update</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>All Pāpāmoa fuel stations listed</li>
+            <li>Live / recent price display</li>
+            <li>Address, hours, facilities</li>
+            <li>EV charging stations nearby</li>
+            <li>Price trend context (NZ average)</li>
+            <li>"Submit a price" community form</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>Technical & Ad notes</h5>
+          <ul>
+            <li class="geo">"Cheapest petrol Pāpāmoa"</li>
+            <li class="geo">"Fuel prices Pāpāmoa today"</li>
+            <li class="ad">Contextual: fuel station Gold Spotlights</li>
+            <li class="warn">Investigate: Gaspy NZ API, MBIE fuel data</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Live data approach:</strong> Community price submissions via Web3Forms → GitHub Actions updates JSON file → page reads JSON, displays "Last reported: [time]." No paid API required. "Submit a price" button encourages community participation and keeps data fresh. Gaspy NZ API worth investigating as a cleaner alternative.</div>
+      </div>
+    </div>
+
+  </div><!-- /shopping -->
+
+  <!-- ═══════════════════════════════
+       GROUP 5: EVENTS & SPORT
+  ═══════════════════════════════ -->
+  <h2>🎪 Events, Sport & News</h2>
+  <div class="page-grid">
+
+    <!-- NEWS & EVENTS — UPDATED -->
+    <div class="page-card changed">
+      <div class="pc-head">
+        <div class="pc-icon">📅</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Pāpāmoa News & Events</div>
+          <div class="pc-url">/news-events</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-updated">Updated</span><span class="badge badge-hub">Hub + submission form</span></div>
+      </div>
+      <div class="subpages">
+        <div class="subpages-label">Page sections</div>
+        <div class="subpage-pills">
+          <span class="sp key">Upcoming events calendar</span>
+          <span class="sp key">Recent news feed</span>
+          <span class="sp">Community submission form</span>
+          <span class="sp">Recurring events (markets etc)</span>
+          <span class="sp">Council announcements</span>
+          <span class="sp geo">GEO: "What's on in Pāpāmoa?"</span>
+          <span class="sp ad">Ad: event sponsors / venues</span>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Public page content</h5>
+          <ul>
+            <li>Calendar layout — upcoming events</li>
+            <li>Recent news feed (curated)</li>
+            <li>Submission form for community</li>
+            <li>Submissions pending admin approval</li>
+            <li>Council & development news</li>
+            <li>Link to NZ Herald / SunLive Pāpāmoa tags</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>Submission & technical flow</h5>
+          <ul>
+            <li>Web3Forms → submission queue</li>
+            <li>Jay approves before anything publishes</li>
+            <li>No password protection needed</li>
+            <li class="ad">Contextual ad spots between items</li>
+            <li class="geo">"What's on in Pāpāmoa this weekend?"</li>
+            <li class="geo">"Pāpāmoa events 2026"</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Merged from two entries (News + Admin Upload).</strong> Single public page with calendar + news feed. Community members submit via a Web3Forms form — submissions go to Jay's email for review before publishing. No password protection needed; quality gate is Jay's approval step. AI feeder: Jay submits a URL → Claude API summarises in editorial voice via the existing Cloudflare Worker → Jay approves → publishes.</div>
+      </div>
+    </div>
+
+    <!-- AIMS GAMES -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🏅</div>
+        <div class="pc-title-block">
+          <div class="pc-title">AIMS Games — Tauranga / Pāpāmoa Guide</div>
+          <div class="pc-url">/aims-games</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-single">Dedicated page — annual refresh</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>What is AIMS Games?</li>
+            <li>When / dates for current year</li>
+            <li>Venues used in Pāpāmoa</li>
+            <li>Accommodation guide for families</li>
+            <li>Restaurants near venues</li>
+            <li>Transport tips</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>GEO / Ad opportunities</h5>
+          <ul>
+            <li class="geo">"AIMS Games 2026 Tauranga"</li>
+            <li class="geo">"Accommodation AIMS Games families"</li>
+            <li class="ad">Spotlight: accommodation (Pacific Park etc)</li>
+            <li class="ad">Spotlight: restaurants near venues</li>
+            <li class="ad">Spotlight: sports shops / equipment hire</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Seasonal spike traffic.</strong> AIMS Games is one of the world's largest youth multi-sport events and brings thousands of families to the region annually. This page captures that transient but high-volume traffic and converts it to accommodation/restaurant ad views. Update annually with current year's dates and venues.</div>
+      </div>
+    </div>
+
+  </div><!-- /events -->
+
+  <!-- ═══════════════════════════════
+       GROUP 6: NETWORK & CROSS-PROMOTION
+  ═══════════════════════════════ -->
+  <h2>🔗 Network & Cross-Promotion</h2>
+  <div class="page-grid">
+
+    <!-- TAURANGA -->
+    <div class="page-card">
+      <div class="pc-head">
+        <div class="pc-icon">🏙️</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Tauranga — Gateway Page</div>
+          <div class="pc-url">/tauranga</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-network">Network traffic funnel</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Brief overview of Tauranga</li>
+            <li>"How far from Pāpāmoa?" distance table</li>
+            <li>What to do / see nearby</li>
+            <li>Link prominently to tauranganz.info</li>
+            <li>"Looking for Pāpāmoa specifically? ↓"</li>
+            <li>Gold Founding Members shown here too</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>Network strategy</h5>
+          <ul>
+            <li class="geo">"Things to do near Tauranga"</li>
+            <li class="geo">"Pāpāmoa vs Tauranga"</li>
+            <li>Capture overflow from tauranganz.info</li>
+            <li class="ad">Gold Founding Members visible on both sites</li>
+            <li class="ad">Shared listing revenue across network</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Network play:</strong> Visitors searching "Tauranga restaurants" land on /tauranga, see Pāpāmoa options, get directed to tauranganz.info for the full picture. Gold Founding Members benefit from visibility on both domains — this justifies the Two-for-One Network Boost in your sales pitch.</div>
+      </div>
+    </div>
+
+    <!-- MOUNT MAUNGANUI — NEW -->
+    <div class="page-card new">
+      <div class="pc-head">
+        <div class="pc-icon">🌊</div>
+        <div class="pc-title-block">
+          <div class="pc-title">Mount Maunganui — Gateway Page</div>
+          <div class="pc-url">/mount-maunganui</div>
+        </div>
+        <div class="pc-badge"><span class="badge badge-new">New</span><span class="badge badge-network">Network traffic funnel</span></div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-col">
+          <h5>Page content</h5>
+          <ul>
+            <li>Overview of Mount Maunganui</li>
+            <li>The Mount — walk, beach, village</li>
+            <li>"How far from Pāpāmoa?" (10 min drive)</li>
+            <li>What Pāpāmoa offers that Mount doesn't</li>
+            <li>Link to tauranganz.info when Mount page exists</li>
+            <li>Gold Founding Members cross-displayed</li>
+          </ul>
+        </div>
+        <div class="pc-col">
+          <h5>Network strategy</h5>
+          <ul>
+            <li class="geo">"Things to do Mount Maunganui"</li>
+            <li class="geo">"Pāpāmoa vs Mount Maunganui"</li>
+            <li class="geo">"Accommodation near Mount Maunganui"</li>
+            <li>Build SEO now — Mount page on TaurangaNZ TBD</li>
+            <li class="ad">Gold Founding Member cross-network visibility</li>
+          </ul>
+        </div>
+        <div class="pc-note"><strong>Note:</strong> TaurangaNZ.info doesn't have a Mount Maunganui page yet. Build this page on Papamoa.info now to capture Mount search traffic and funnel it toward Pāpāmoa businesses. When TaurangaNZ eventually builds its Mount page, update cross-links. In the meantime this page stands alone and earns SEO value independently.</div>
+      </div>
+    </div>
+
+  </div><!-- /network -->
+
+  <!-- SUMMARY TABLE -->
+  <h2>📋 Summary — Priority & Build Order</h2>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Page</th>
+        <th>URL</th>
+        <th>Structure</th>
+        <th>Ad spots</th>
+        <th>GEO priority</th>
+        <th>Build order</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="built"><td>Surf & Tides</td><td>/categories/surf-tides</td><td>Category page</td><td>2</td><td>⭐⭐⭐ High</td><td><span class="done-badge">✓ Built</span></td></tr>
+      <tr class="built"><td>Summer Insects</td><td>/articles/summer-insects-papamoa</td><td>Article + spotlight</td><td>1</td><td>⭐⭐ Medium</td><td><span class="done-badge">✓ Built</span></td></tr>
+      <tr><td>Population & Statistics</td><td>/population-statistics</td><td>Single page</td><td>0</td><td>⭐⭐⭐ Highest</td><td><span class="priority p1">1st</span></td></tr>
+      <tr><td>Dogs — rules, beach, walking</td><td>/dogs-papamoa</td><td>Single, sectioned</td><td>3</td><td>⭐⭐⭐ High</td><td><span class="priority p1">1st</span></td></tr>
+      <tr><td>Māori History</td><td>/maori-history</td><td>Single page</td><td>0</td><td>⭐⭐⭐ High</td><td><span class="priority p1">1st</span></td></tr>
+      <tr><td>Pāpāmoa Hills</td><td>/papamoa-hills</td><td>Single page</td><td>1</td><td>⭐⭐⭐ High</td><td><span class="priority p1">1st</span></td></tr>
+      <tr><td>Fuel Prices</td><td>/fuel-prices</td><td>Single + live data</td><td>2</td><td>⭐⭐⭐ High</td><td><span class="priority p1">1st</span></td></tr>
+      <tr><td>News & Events</td><td>/news-events</td><td>Hub + calendar + form</td><td>3</td><td>⭐⭐ Medium</td><td><span class="priority p2">2nd</span></td></tr>
+      <tr><td>Kids Birthday Parties</td><td>/kids-birthday-parties</td><td>Single page</td><td>4</td><td>⭐⭐ Medium</td><td><span class="priority p2">2nd</span></td></tr>
+      <tr><td>Walks & Tracks</td><td>/walks-tracks + sub-pages</td><td>Hub + sub-pages</td><td>2</td><td>⭐⭐ Medium</td><td><span class="priority p2">2nd</span></td></tr>
+      <tr><td>Fashion Island & Palm Beach Plaza</td><td>/shopping-centres</td><td>Single, two sections</td><td>6+</td><td>⭐⭐ Medium</td><td><span class="priority p2">2nd</span></td></tr>
+      <tr><td>AIMS Games</td><td>/aims-games</td><td>Single page</td><td>3</td><td>⭐⭐ Medium</td><td><span class="priority p2">2nd</span></td></tr>
+      <tr><td>Parks & Playgrounds</td><td>/parks-playgrounds</td><td>Single, tabbed</td><td>2</td><td>⭐⭐ Medium</td><td><span class="priority p2">2nd</span></td></tr>
+      <tr><td>Gordon Spratt Reserve</td><td>/gordon-spratt-reserve</td><td>Single page</td><td>2</td><td>⭐⭐ Medium</td><td><span class="priority p2">2nd</span></td></tr>
+      <tr><td>Seniors & Retirement</td><td>/seniors-retirement</td><td>Hub page</td><td>3</td><td>⭐⭐ Medium</td><td><span class="priority p2">2nd</span></td></tr>
+      <tr><td>Mount Maunganui gateway</td><td>/mount-maunganui</td><td>Single page</td><td>3</td><td>⭐⭐ Medium</td><td><span class="priority p2">2nd</span></td></tr>
+      <tr><td>Library</td><td>/library</td><td>Single page</td><td>1</td><td>⭐ Standard</td><td><span class="priority p3">3rd</span></td></tr>
+      <tr><td>Notable People</td><td>/notable-people</td><td>Single page</td><td>0</td><td>⭐ Standard</td><td><span class="priority p3">3rd</span></td></tr>
+      <tr><td>Community Resources</td><td>/community</td><td>Single page</td><td>0</td><td>⭐ Standard</td><td><span class="priority p3">3rd</span></td></tr>
+      <tr><td>Dinner at The Domain</td><td>/dinner-at-the-domain</td><td>Single page</td><td>2</td><td>⭐ Standard</td><td><span class="priority p3">3rd</span></td></tr>
+      <tr><td>The Yard</td><td>/the-yard</td><td>Single page</td><td>2</td><td>⭐ Standard</td><td><span class="priority p3">3rd</span></td></tr>
+      <tr><td>Tauranga gateway page</td><td>/tauranga</td><td>Single page</td><td>3</td><td>⭐⭐ Medium</td><td><span class="priority p3">3rd</span></td></tr>
+      <tr><td>Māori History</td><td>/maori-history</td><td>Single page</td><td>0</td><td>⭐⭐⭐ High</td><td><span class="priority p1">1st</span></td></tr>
+      <tr><td>Local Government / TCC</td><td>/local-government</td><td>Single page</td><td>0</td><td>⭐⭐ Medium</td><td><span class="priority p3">3rd</span></td></tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
+</html>
