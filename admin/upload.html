@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — News & Events Upload | Papamoa.info</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #2B3F5C; --blue: #3AABDE; --lime: #7DC143; --sand: #F5EFE0;
+      --dune: #D4C4A0; --coral: #E8344A; --white: #fff; --body: #1E2D3E;
+      --muted: #607080; --border: #DDE5EE; --bg: #F4F7FA; --gold: #C8962A;
+      --dark-bg: #0D1B2A; --dark-surface: #1A2A3A; --dark-border: #2A3A4A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--dark-bg); color: #C8D8E8; line-height: 1.65; min-height: 100vh; }
+
+    /* ── LOCK SCREEN ── */
+    #lock-screen {
+      position: fixed; inset: 0;
+      background: var(--dark-bg);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+    }
+    .lock-box {
+      background: var(--dark-surface);
+      border: 1px solid var(--dark-border);
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    .lock-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .lock-logo em { font-style: normal; color: var(--blue); }
+    .lock-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .lock-icon { font-size: 2rem; margin-bottom: 12px; }
+    .lock-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .lock-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
+    .lock-input {
+      width: 100%;
+      padding: 11px 14px;
+      background: var(--dark-bg);
+      border: 1px solid var(--dark-border);
+      border-radius: 7px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 1rem;
+      color: #fff;
+      text-align: center;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+    .lock-input:focus { outline: none; border-color: var(--blue); }
+    .lock-btn {
+      width: 100%;
+      padding: 11px;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .lock-btn:hover { background: #2A8FBE; }
+    .lock-error {
+      display: none;
+      font-size: 0.78rem;
+      color: var(--coral);
+      margin-top: 8px;
+    }
+
+    /* ── APP SHELL ── */
+    #app { display: none; }
+
+    .app-header {
+      background: var(--dark-surface);
+      border-bottom: 1px solid var(--dark-border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .app-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .app-logo em { font-style: normal; color: var(--blue); }
+    .app-tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); }
+    .logout-btn {
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--dark-border);
+      border-radius: 5px;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-family: 'Figtree', sans-serif;
+      transition: all 0.2s;
+    }
+    .logout-btn:hover { color: #fff; border-color: var(--muted); }
+
+    /* ── TABS ── */
+    .admin-tabs {
+      background: var(--dark-surface);
+      border-bottom: 1px solid var(--dark-border);
+      display: flex;
+      padding: 0 24px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .admin-tabs::-webkit-scrollbar { display: none; }
+    .atab {
+      padding: 12px 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+      cursor: pointer;
+      border: none;
+      border-bottom: 2px solid transparent;
+      background: transparent;
+      font-family: 'Figtree', sans-serif;
+      transition: all 0.2s;
+    }
+    .atab:hover { color: #fff; }
+    .atab.active { color: #fff; border-bottom-color: var(--lime); }
+
+    /* ── PANELS ── */
+    .admin-wrap { max-width: 820px; margin: 0 auto; padding: 28px 20px 80px; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .panel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .panel-sub { font-size: 0.84rem; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+
+    /* ── FORM ELEMENTS ── */
+    .field-group { margin-bottom: 16px; }
+    .field-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .field-label .req { color: var(--coral); }
+    .field-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--dark-surface);
+      border: 1px solid var(--dark-border);
+      border-radius: 7px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.88rem;
+      color: #fff;
+      transition: border-color 0.2s;
+    }
+    .field-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(58,171,222,0.1); }
+    .field-input::placeholder { color: #3A4A5A; }
+    .field-textarea { min-height: 100px; resize: vertical; }
+    .field-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23607080' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 30px;
+      cursor: pointer;
+    }
+    .field-select option { background: var(--dark-surface); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 10px 20px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: #2A8FBE; }
+    .btn-primary:disabled { background: #2A3A4A; color: var(--muted); cursor: not-allowed; }
+    .btn-success { background: var(--lime); color: #fff; }
+    .btn-success:hover { background: #5A9020; }
+    .btn-success:disabled { background: #2A3A4A; color: var(--muted); cursor: not-allowed; }
+    .btn-danger { background: transparent; color: var(--coral); border: 1px solid rgba(232,52,74,0.4); }
+    .btn-danger:hover { background: rgba(232,52,74,0.1); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--dark-border); }
+    .btn-ghost:hover { color: #fff; border-color: var(--muted); }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+    /* ── AI SUMMARY BOX ── */
+    .ai-box {
+      background: linear-gradient(135deg, #0D2A1A, #1A3A28);
+      border: 1px solid rgba(125,193,67,0.25);
+      border-radius: 10px;
+      padding: 18px;
+      margin: 16px 0;
+      display: none;
+    }
+    .ai-box.visible { display: block; }
+    .ai-box-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .ai-badge {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lime);
+      background: rgba(125,193,67,0.15);
+      border: 1px solid rgba(125,193,67,0.3);
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .ai-title { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+    .ai-content {
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .ai-content.loading {
+      color: var(--muted);
+      font-style: italic;
+    }
+    .ai-field-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(125,193,67,0.7);
+      margin-bottom: 5px;
+    }
+    .ai-edit {
+      width: 100%;
+      padding: 9px 12px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(125,193,67,0.2);
+      border-radius: 6px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.85);
+      resize: vertical;
+      min-height: 80px;
+      margin-bottom: 10px;
+    }
+    .ai-edit:focus { outline: none; border-color: var(--lime); }
+
+    /* ── STATUS ALERTS ── */
+    .alert {
+      border-radius: 8px;
+      padding: 12px 15px;
+      font-size: 0.84rem;
+      line-height: 1.55;
+      margin-bottom: 14px;
+      display: none;
+    }
+    .alert.visible { display: block; }
+    .alert-info { background: #0D2A3A; border-left: 3px solid var(--blue); color: #7AC8E8; }
+    .alert-success { background: #0D2A1A; border-left: 3px solid var(--lime); color: #80C878; }
+    .alert-error { background: #2A0D0D; border-left: 3px solid var(--coral); color: #E88080; }
+    .alert-warn { background: #2A200D; border-left: 3px solid var(--gold); color: #C8A840; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--dark-border);
+      margin: 24px 0;
+    }
+
+    /* ── HISTORY TABLE ── */
+    .history-table { width: 100%; border-collapse: collapse; }
+    .history-table th {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--dark-border);
+    }
+    .history-table td {
+      padding: 10px 12px;
+      font-size: 0.82rem;
+      color: #C8D8E8;
+      border-bottom: 1px solid var(--dark-border);
+      vertical-align: top;
+    }
+    .history-table tr:last-child td { border-bottom: none; }
+    .ht-empty { text-align: center; color: var(--muted); font-style: italic; padding: 28px !important; }
+    .status-pill {
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+    .sp-pending { background: rgba(200,150,42,0.2); color: var(--gold); }
+    .sp-sent { background: rgba(125,193,67,0.2); color: var(--lime); }
+
+    /* ── SPINNER ── */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(58,171,222,0.3);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    /* ── HELP PANEL ── */
+    .help-section { margin-bottom: 24px; }
+    .help-section h3 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .help-section p, .help-section li {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .help-section ul { list-style: none; display: flex; flex-direction: column; gap: 5px; padding-left: 2px; }
+    .help-section li::before { content: '›'; color: var(--blue); font-weight: 700; margin-right: 6px; }
+    .code-block {
+      background: var(--dark-bg);
+      border: 1px solid var(--dark-border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: #80C8E8;
+      margin: 8px 0;
+      word-break: break-all;
+    }
+
+    @media (max-width: 580px) {
+      .field-row { grid-template-columns: 1fr; }
+      .lock-box { margin: 16px; padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     LOCK SCREEN
+═══════════════════════════════════ -->
+<div id="lock-screen">
+  <div class="lock-box">
+    <div class="lock-logo">Papamoa<em>.info</em></div>
+    <div class="lock-tag">Admin area</div>
+    <div class="lock-icon">🔐</div>
+    <div class="lock-title">Enter password</div>
+    <div class="lock-sub">This page is restricted to Papamoa.info admins only.</div>
+    <input
+      type="password"
+      class="lock-input"
+      id="lock-input"
+      placeholder="••••••••"
+      autocomplete="current-password"
+      onkeydown="if(event.key==='Enter') checkPassword()"
+    >
+    <button class="lock-btn" onclick="checkPassword()">Unlock →</button>
+    <div class="lock-error" id="lock-error">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     APP
+═══════════════════════════════════ -->
+<div id="app">
+
+  <header class="app-header">
+    <div>
+      <div class="app-logo">Papamoa<em>.info</em></div>
+      <div class="app-tag">News &amp; Events Admin</div>
+    </div>
+    <button class="logout-btn" onclick="logout()">🔓 Lock</button>
+  </header>
+
+  <nav class="admin-tabs">
+    <button class="atab active" onclick="switchPanel('news', this)">📰 Add news item</button>
+    <button class="atab" onclick="switchPanel('event', this)">📅 Add event</button>
+    <button class="atab" onclick="switchPanel('history', this)">📋 History</button>
+    <button class="atab" onclick="switchPanel('help', this)">❓ Help</button>
+  </nav>
+
+  <div class="admin-wrap">
+
+    <!-- ──────────────────────────────
+         PANEL: ADD NEWS ITEM
+    ────────────────────────────────── -->
+    <div class="panel active" id="panel-news">
+
+      <div class="panel-title">Add a news item</div>
+      <p class="panel-sub">Paste a URL from SunLive, NZ Herald, TCC or another source. Claude will read the article and write a 2–3 sentence summary in the Papamoa.info editorial voice. Review and edit before submitting.</p>
+
+      <div class="alert alert-warn visible" id="news-proxy-note">
+        <strong>Using Claude API via:</strong> <code style="font-size:0.78rem;color:inherit">papamoa-claude-proxy.jkbrownnz.workers.dev</code>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Article URL <span class="req">*</span></label>
+        <input
+          type="url"
+          class="field-input"
+          id="news-url"
+          placeholder="https://www.sunlive.co.nz/news/..."
+        >
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Headline (optional — leave blank to auto-generate)</label>
+        <input
+          type="text"
+          class="field-input"
+          id="news-headline"
+          placeholder="Leave blank — Claude will suggest one"
+        >
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Category <span class="req">*</span></label>
+        <select class="field-input field-select" id="news-category">
+          <option value="">Select category</option>
+          <option>Council & Local Government</option>
+          <option>Environment & Parks</option>
+          <option>Development & Planning</option>
+          <option>Community</option>
+          <option>Events</option>
+          <option>Business</option>
+          <option>Safety & Emergency</option>
+          <option>Transport & Infrastructure</option>
+          <option>Sport</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" id="summarise-btn" onclick="summariseArticle()">
+        <span class="spinner" id="sum-spinner" style="display:none"></span>
+        ✦ Summarise with Claude
+      </button>
+
+      <!-- AI OUTPUT BOX -->
+      <div class="ai-box" id="ai-box">
+        <div class="ai-box-header">
+          <span class="ai-badge">✦ Claude summary</span>
+          <span class="ai-title">Review and edit before submitting</span>
+        </div>
+
+        <div class="ai-field-label">Headline</div>
+        <input type="text" class="ai-edit" id="ai-headline" style="min-height:auto;height:38px;margin-bottom:12px">
+
+        <div class="ai-field-label">Summary (shown on site)</div>
+        <textarea class="ai-edit" id="ai-summary" rows="4"></textarea>
+
+        <div class="ai-field-label">Source / attribution</div>
+        <input type="text" class="ai-edit" id="ai-source" style="min-height:auto;height:38px;margin-bottom:12px" placeholder="e.g. SunLive, TCC, NZ Herald Bay of Plenty Times">
+
+        <div class="btn-row">
+          <button class="btn btn-success" onclick="submitNews()">
+            <span class="spinner" id="submit-news-spinner" style="display:none"></span>
+            ✓ Submit for publishing
+          </button>
+          <button class="btn btn-ghost" onclick="resetNews()">✕ Start over</button>
+          <button class="btn btn-ghost" onclick="summariseArticle()" style="font-size:0.78rem">↻ Re-summarise</button>
+        </div>
+      </div>
+
+      <div class="alert alert-success" id="news-success">
+        <strong>Submitted.</strong> The news item has been sent to <code style="font-size:0.78rem">jkbrownnz@gmail.com</code> via Web3Forms. Copy it into the news-events page or wait for the automated workflow to pick it up.
+      </div>
+      <div class="alert alert-error" id="news-error"></div>
+
+    </div>
+
+    <!-- ──────────────────────────────
+         PANEL: ADD EVENT
+    ────────────────────────────────── -->
+    <div class="panel" id="panel-event">
+
+      <div class="panel-title">Add an event</div>
+      <p class="panel-sub">Fill in the event details. Submitting sends a formatted notification to <code style="font-size:0.78rem;color:var(--blue)">jkbrownnz@gmail.com</code> via Web3Forms for review before it appears on the public events page.</p>
+
+      <div class="field-group">
+        <label class="field-label">Event name <span class="req">*</span></label>
+        <input type="text" class="field-input" id="ev-name" placeholder="e.g. Pāpāmoa Community Market">
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">Event date <span class="req">*</span></label>
+          <input type="date" class="field-input" id="ev-date">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Time</label>
+          <input type="text" class="field-input" id="ev-time" placeholder="e.g. 10am – 2pm">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">Category <span class="req">*</span></label>
+          <select class="field-input field-select" id="ev-category">
+            <option value="">Select category</option>
+            <option>Community</option>
+            <option>Sport &amp; Recreation</option>
+            <option>Arts &amp; Culture</option>
+            <option>Food &amp; Drink</option>
+            <option>Market</option>
+            <option>Music</option>
+            <option>Family &amp; Kids</option>
+            <option>Charity &amp; Fundraiser</option>
+            <option>Business</option>
+            <option>Annual / Recurring</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Location <span class="req">*</span></label>
+          <input type="text" class="field-input" id="ev-location" placeholder="e.g. Gordon Spratt Reserve">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Description <span class="req">*</span></label>
+        <textarea class="field-input field-textarea" id="ev-description" placeholder="What is it, who's it for, cost, what to bring, contact details..."></textarea>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">Website / Facebook link</label>
+          <input type="url" class="field-input" id="ev-url" placeholder="https://...">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Recurring?</label>
+          <select class="field-input field-select" id="ev-recurring">
+            <option value="no">No — one-off</option>
+            <option value="weekly">Weekly</option>
+            <option value="fortnightly">Fortnightly</option>
+            <option value="monthly">Monthly</option>
+            <option value="annual">Annual</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-success" onclick="submitEvent()">
+          <span class="spinner" id="submit-event-spinner" style="display:none"></span>
+          ✓ Submit event
+        </button>
+        <button class="btn btn-ghost" onclick="resetEvent()">✕ Clear form</button>
+      </div>
+
+      <div class="alert alert-success" id="event-success">
+        <strong>Event submitted.</strong> Sent to <code style="font-size:0.78rem">jkbrownnz@gmail.com</code> for review. Once approved, add it manually to the news-events.html page, or wait for the automated workflow.
+      </div>
+      <div class="alert alert-error" id="event-error"></div>
+
+    </div>
+
+    <!-- ──────────────────────────────
+         PANEL: HISTORY
+    ────────────────────────────────── -->
+    <div class="panel" id="panel-history">
+
+      <div class="panel-title">Submission history</div>
+      <p class="panel-sub">Items submitted this session. History is session-only — it clears when you close the tab. Check jkbrownnz@gmail.com for the full record.</p>
+
+      <table class="history-table" id="history-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Type</th>
+            <th>Title / Name</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="history-body">
+          <tr><td class="ht-empty" colspan="4">No submissions this session yet.</td></tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- ──────────────────────────────
+         PANEL: HELP
+    ────────────────────────────────── -->
+    <div class="panel" id="panel-help">
+
+      <div class="panel-title">Help & workflow</div>
+      <p class="panel-sub" style="margin-bottom:28px">How this admin page works and what happens after you submit.</p>
+
+      <div class="help-section">
+        <h3>📰 News workflow</h3>
+        <ul>
+          <li>Paste a URL from any public news source</li>
+          <li>Click <strong>Summarise with Claude</strong> — the article is fetched and passed to Claude via the Cloudflare proxy</li>
+          <li>Claude writes a 2–3 sentence summary in the Papamoa.info editorial voice (third-person, factual)</li>
+          <li>Edit the headline and summary as needed</li>
+          <li>Click <strong>Submit for publishing</strong> — sends to jkbrownnz@gmail.com via Web3Forms</li>
+          <li>Manually copy the summary into news-events.html, or wait for the GitHub Actions workflow (Phase 2)</li>
+        </ul>
+      </div>
+
+      <hr class="divider">
+
+      <div class="help-section">
+        <h3>📅 Event workflow</h3>
+        <ul>
+          <li>Fill in the event details and click <strong>Submit event</strong></li>
+          <li>Sends to jkbrownnz@gmail.com via Web3Forms</li>
+          <li>Review in email, then manually add to the news-events.html upcoming events section</li>
+          <li>Phase 2: GitHub Actions will automate this — submissions will write directly to a JSON file and the page rebuilds</li>
+        </ul>
+      </div>
+
+      <hr class="divider">
+
+      <div class="help-section">
+        <h3>🔧 Technical setup</h3>
+        <ul>
+          <li><strong>Claude proxy URL:</strong></li>
+        </ul>
+        <div class="code-block">https://papamoa-claude-proxy.jkbrownnz.workers.dev</div>
+        <ul>
+          <li><strong>Web3Forms key:</strong> <code style="font-size:0.78rem;color:#80C8E8">37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78</code></li>
+          <li><strong>Submissions go to:</strong> jkbrownnz@gmail.com</li>
+          <li>The Claude proxy handles the API key — no key lives in this file</li>
+          <li>Password is stored in localStorage — clear browser data to reset</li>
+          <li>This page has <code>noindex, nofollow</code> — it won't appear in Google</li>
+        </ul>
+      </div>
+
+      <hr class="divider">
+
+      <div class="help-section">
+        <h3>🔐 Password management</h3>
+        <ul>
+          <li>Change the password in the JS below (<code style="font-size:0.78rem;color:#80C8E8">ADMIN_PASSWORD</code> constant)</li>
+          <li>Current password is set in the source — update it before deploying to GitHub</li>
+          <li>For higher security, move password check to the Cloudflare Worker (Phase 2)</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div><!-- /admin-wrap -->
+</div><!-- /app -->
+
+<script>
+// ════════════════════════════════════════
+// CONFIG — update password before deploy
+// ════════════════════════════════════════
+const ADMIN_PASSWORD   = 'papamoa2026admin';
+const CLAUDE_PROXY_URL = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
+const WEB3FORMS_KEY    = '37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78';
+const ADMIN_EMAIL      = 'jkbrownnz@gmail.com';
+const SESSION_KEY      = 'papamoa_admin_auth';
+
+// ════════════════════════════════════════
+// AUTH
+// ════════════════════════════════════════
+function checkPassword() {
+  const val = document.getElementById('lock-input').value;
+  if (val === ADMIN_PASSWORD) {
+    sessionStorage.setItem(SESSION_KEY, '1');
+    document.getElementById('lock-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('lock-error').style.display = 'none';
+  } else {
+    const err = document.getElementById('lock-error');
+    err.style.display = 'block';
+    document.getElementById('lock-input').value = '';
+    document.getElementById('lock-input').focus();
+    setTimeout(() => { err.style.display = 'none'; }, 3000);
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem(SESSION_KEY);
+  document.getElementById('lock-screen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('lock-input').value = '';
+}
+
+// Auto-unlock if session active
+if (sessionStorage.getItem(SESSION_KEY) === '1') {
+  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+}
+
+// ════════════════════════════════════════
+// TAB SWITCHING
+// ════════════════════════════════════════
+function switchPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.atab').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+// ════════════════════════════════════════
+// HISTORY
+// ════════════════════════════════════════
+const sessionHistory = [];
+
+function addHistory(type, title) {
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-NZ', { hour:'2-digit', minute:'2-digit' });
+  sessionHistory.unshift({ time, type, title, status: 'sent' });
+  renderHistory();
+}
+
+function renderHistory() {
+  const tbody = document.getElementById('history-body');
+  if (sessionHistory.length === 0) {
+    tbody.innerHTML = '<tr><td class="ht-empty" colspan="4">No submissions this session yet.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = sessionHistory.map(h => `
+    <tr>
+      <td>${h.time}</td>
+      <td>${h.type === 'news' ? '📰 News' : '📅 Event'}</td>
+      <td>${escapeHtml(h.title)}</td>
+      <td><span class="status-pill sp-sent">Sent</span></td>
+    </tr>
+  `).join('');
+}
+
+function escapeHtml(str) {
+  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ════════════════════════════════════════
+// NEWS — SUMMARISE
+// ════════════════════════════════════════
+async function summariseArticle() {
+  const url      = document.getElementById('news-url').value.trim();
+  const hint     = document.getElementById('news-headline').value.trim();
+  const category = document.getElementById('news-category').value;
+
+  if (!url) { showAlert('news-error', 'Please enter a URL first.'); return; }
+  if (!category) { showAlert('news-error', 'Please select a category.'); return; }
+
+  const btn = document.getElementById('summarise-btn');
+  const spinner = document.getElementById('sum-spinner');
+  btn.disabled = true;
+  spinner.style.display = 'inline-block';
+  hideAlert('news-error');
+
+  const aiBox = document.getElementById('ai-box');
+  aiBox.classList.add('visible');
+  document.getElementById('ai-summary').value = '';
+  document.getElementById('ai-headline').value = 'Generating...';
+  document.getElementById('ai-source').value = '';
+
+  const prompt = `You are the editorial assistant for Papamoa.info, a local business directory for Pāpāmoa Beach, Bay of Plenty, New Zealand.
+
+A news article has been submitted for inclusion in the site's news feed. The article URL is:
+${url}
+${hint ? `Suggested headline: ${hint}` : ''}
+Category: ${category}
+
+Your task:
+1. Write a concise headline (under 12 words) for this article in the Papamoa.info editorial voice
+2. Write a 2–3 sentence summary of the article relevant to Pāpāmoa residents
+3. Identify the source publication name
+
+Rules:
+- Use third-person editorial voice ("Tauranga City Council has announced..." not "We...")
+- Never reproduce more than 10 words verbatim from the source
+- Be factual and specific — no generalities
+- If the article is not directly relevant to Pāpāmoa, note that briefly
+- Do NOT make up facts not in the article
+
+Respond ONLY with valid JSON in this exact format (no markdown, no backticks):
+{"headline":"...", "summary":"...", "source":"..."}`;
+
+  try {
+    const response = await fetch(CLAUDE_PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 400,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) throw new Error(`Proxy error: ${response.status}`);
+
+    const data = await response.json();
+    const text = data.content?.[0]?.text || '';
+
+    let parsed;
+    try {
+      parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
+    } catch {
+      // Fallback: try extracting JSON from text
+      const match = text.match(/\{[\s\S]*\}/);
+      if (match) parsed = JSON.parse(match[0]);
+      else throw new Error('Could not parse Claude response as JSON');
+    }
+
+    document.getElementById('ai-headline').value = parsed.headline || '';
+    document.getElementById('ai-summary').value  = parsed.summary  || '';
+    document.getElementById('ai-source').value   = parsed.source   || '';
+
+  } catch (err) {
+    showAlert('news-error', `Summarisation failed: ${err.message}. Check the proxy is running and the URL is publicly accessible.`);
+    aiBox.classList.remove('visible');
+  } finally {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+  }
+}
+
+// ════════════════════════════════════════
+// NEWS — SUBMIT
+// ════════════════════════════════════════
+async function submitNews() {
+  const headline = document.getElementById('ai-headline').value.trim();
+  const summary  = document.getElementById('ai-summary').value.trim();
+  const source   = document.getElementById('ai-source').value.trim();
+  const url      = document.getElementById('news-url').value.trim();
+  const category = document.getElementById('news-category').value;
+
+  if (!headline || !summary) { showAlert('news-error', 'Headline and summary are required before submitting.'); return; }
+
+  const btn = document.getElementById('summarise-btn');
+  const spinner = document.getElementById('submit-news-spinner');
+  btn.disabled = true;
+  spinner.style.display = 'inline-block';
+
+  const body = new FormData();
+  body.append('access_key', WEB3FORMS_KEY);
+  body.append('subject', `[Papamoa.info Admin] New news item — ${headline}`);
+  body.append('from_name', 'Papamoa.info Admin');
+  body.append('type', 'News item');
+  body.append('headline', headline);
+  body.append('summary', summary);
+  body.append('source', source);
+  body.append('url', url);
+  body.append('category', category);
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body });
+    if (res.ok) {
+      addHistory('news', headline);
+      showAlert('news-success', null, true);
+      document.getElementById('ai-box').classList.remove('visible');
+    } else {
+      throw new Error('Web3Forms returned an error');
+    }
+  } catch (err) {
+    showAlert('news-error', `Submission failed: ${err.message}`);
+  } finally {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+  }
+}
+
+function resetNews() {
+  document.getElementById('news-url').value = '';
+  document.getElementById('news-headline').value = '';
+  document.getElementById('news-category').value = '';
+  document.getElementById('ai-box').classList.remove('visible');
+  hideAlert('news-success');
+  hideAlert('news-error');
+}
+
+// ════════════════════════════════════════
+// EVENT — SUBMIT
+// ════════════════════════════════════════
+async function submitEvent() {
+  const name      = document.getElementById('ev-name').value.trim();
+  const date      = document.getElementById('ev-date').value;
+  const time      = document.getElementById('ev-time').value.trim();
+  const category  = document.getElementById('ev-category').value;
+  const location  = document.getElementById('ev-location').value.trim();
+  const desc      = document.getElementById('ev-description').value.trim();
+  const evUrl     = document.getElementById('ev-url').value.trim();
+  const recurring = document.getElementById('ev-recurring').value;
+
+  if (!name || !date || !category || !location || !desc) {
+    showAlert('event-error', 'Please fill in all required fields (name, date, category, location, description).');
+    return;
+  }
+
+  const btn = document.querySelector('#panel-event .btn-success');
+  const spinner = document.getElementById('submit-event-spinner');
+  btn.disabled = true;
+  spinner.style.display = 'inline-block';
+  hideAlert('event-error');
+
+  const body = new FormData();
+  body.append('access_key', WEB3FORMS_KEY);
+  body.append('subject', `[Papamoa.info Admin] New event — ${name}`);
+  body.append('from_name', 'Papamoa.info Admin');
+  body.append('type', 'Event');
+  body.append('event_name', name);
+  body.append('event_date', date);
+  body.append('event_time', time || 'Not specified');
+  body.append('category', category);
+  body.append('location', location);
+  body.append('description', desc);
+  body.append('event_url', evUrl || 'Not provided');
+  body.append('recurring', recurring);
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body });
+    if (res.ok) {
+      addHistory('event', name);
+      showAlert('event-success', null, true);
+    } else {
+      throw new Error('Web3Forms returned an error');
+    }
+  } catch (err) {
+    showAlert('event-error', `Submission failed: ${err.message}`);
+  } finally {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+  }
+}
+
+function resetEvent() {
+  ['ev-name','ev-date','ev-time','ev-location','ev-description','ev-url'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('ev-category').value = '';
+  document.getElementById('ev-recurring').value = 'no';
+  hideAlert('event-success');
+  hideAlert('event-error');
+}
+
+// ════════════════════════════════════════
+// ALERT HELPERS
+// ════════════════════════════════════════
+function showAlert(id, message, isSuccess) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (message) el.innerHTML = message;
+  el.classList.add('visible');
+  if (!isSuccess) setTimeout(() => hideAlert(id), 8000);
+}
+
+function hideAlert(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.remove('visible');
+}
+</script>
+
+</body>
+</html>
