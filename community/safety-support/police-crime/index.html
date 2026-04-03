@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Police & Crime in Papamoa | Papamoa.info</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0c1a2a;--deep:#142438;--steel:#1e3450;--slate:#2a4060;
+  --sea:#1a6fa0;--sky:#4ab8e8;--aqua:#7dd8f0;
+  --sage:#52b788;--fern:#2d6a4f;--forest:#162b21;
+  --sand:#faf7f2;--cream:#fdfcf7;--warm:#f5f0e8;
+  --ink:#1a1a18;--body:#4a4843;--muted:#8a857e;--line:#e5e2dc;
+  --alert:#d04040;--alert-bg:#fdf0f0;--alert-line:#e8a0a0;
+  --gold:#c9952d;--gold-bg:#fef9ee;
+  --r:12px;
+  --s-sm:0 1px 3px rgba(0,0,0,.05);--s-md:0 4px 20px rgba(0,0,0,.07);--s-lg:0 12px 40px rgba(0,0,0,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+::selection{background:#dce8f4;color:var(--navy)}
+
+.nav{background:var(--forest);position:sticky;top:0;z-index:500}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-family:'Libre Baskerville',serif;color:#fff;font-size:1.2rem;font-weight:700}
+.logo i{font-style:italic;color:var(--sage);font-weight:400}
+.nav-links{display:flex;gap:8px}
+.nav-links a{color:rgba(255,255,255,.55);font-size:.78rem;font-weight:500;text-decoration:none;padding:6px 14px;border-radius:100px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-links a.on{color:var(--sky);background:rgba(74,184,232,.12)}
+
+.hero{background:linear-gradient(135deg,#1a1a2e,#2a2a4a);position:relative;overflow:hidden;padding:52px 28px 48px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 90%,rgba(74,184,232,.08) 0%,transparent 50%)}
+.hero-grain{position:absolute;inset:0;opacity:.03;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:.75rem;color:rgba(255,255,255,.3);margin-bottom:14px}
+.breadcrumb a{color:rgba(255,255,255,.45);text-decoration:none}
+.hero-inner h1{font-family:'Libre Baskerville',serif;font-size:clamp(1.8rem,4vw,2.4rem);color:#fff;font-weight:700;line-height:1.15}
+.hero-inner .hero-desc{color:rgba(255,255,255,.45);font-size:.9rem;margin-top:8px;font-weight:300;line-height:1.65}
+
+.article{max-width:900px;margin:0 auto;padding:36px 28px 0}
+
+/* REPORTING CARDS */
+.report-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:0 0 32px}
+.rpt{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;text-align:center;transition:box-shadow .2s}
+.rpt:hover{box-shadow:var(--s-md)}
+.rpt.emergency{border-color:var(--alert-line);background:var(--alert-bg)}
+.rpt .rpt-num{font-family:'Libre Baskerville',serif;font-size:2.2rem;font-weight:700;line-height:1}
+.rpt.emergency .rpt-num{color:var(--alert)}
+.rpt .rpt-num.blue{color:var(--sea)}
+.rpt .rpt-num.green{color:var(--fern)}
+.rpt h4{font-size:.85rem;font-weight:600;color:var(--navy);margin-top:6px}
+.rpt p{font-size:.75rem;color:var(--body);line-height:1.5;margin-top:6px}
+.rpt a{font-size:.78rem;color:var(--sea);text-decoration:none;font-weight:600;display:inline-block;margin-top:8px}
+.rpt a:hover{text-decoration:underline}
+
+/* SIDEBAR FLOAT */
+.station-float{float:right;width:300px;margin:0 0 24px 32px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--s-md)}
+.station-float h3{font-family:'Libre Baskerville',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+.sf-row{display:flex;align-items:flex-start;gap:10px;font-size:.82rem;color:var(--body);padding:8px 0;border-bottom:1px solid rgba(0,0,0,.04);line-height:1.5}
+.sf-row:last-child{border:none}
+.sf-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+.sf-row a{color:var(--sea);text-decoration:none}
+
+.prose{font-size:.92rem;color:var(--body);line-height:1.8}
+.prose p+p{margin-top:16px}
+.prose h2{font-family:'Libre Baskerville',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin:40px 0 12px;line-height:1.25;clear:both}
+.prose h3{font-family:'Libre Baskerville',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin:28px 0 8px}
+
+.callout{background:var(--sand);border-left:4px solid var(--sea);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;margin:24px 0;clear:both}
+.callout.amber{border-left-color:var(--gold);background:var(--gold-bg)}
+.callout.red{border-left-color:var(--alert);background:var(--alert-bg)}
+.callout.green{border-left-color:var(--sage);background:rgba(82,183,136,.06)}
+.callout h4{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.callout p{font-size:.84rem;color:var(--body);line-height:1.65}
+
+/* CRIME TYPE CARDS */
+.crime-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;clear:both}
+.crime-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+.crime-card .cc-icon{font-size:1.5rem;margin-bottom:8px}
+.crime-card h4{font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.crime-card p{font-size:.78rem;color:var(--body);line-height:1.55}
+
+/* PATROL SECTION */
+.patrol-card{background:var(--navy);border-radius:var(--r);padding:28px 32px;margin:28px 0;position:relative;overflow:hidden;clear:both}
+.patrol-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 80%,rgba(74,184,232,.08) 0%,transparent 50%)}
+.patrol-card h3{font-family:'Libre Baskerville',serif;font-size:1.15rem;color:#fff;font-weight:700;margin-bottom:12px;position:relative}
+.patrol-card p{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.7;position:relative}
+.patrol-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px;position:relative}
+.ps{text-align:center}
+.ps .ps-num{font-family:'Libre Baskerville',serif;font-size:1.4rem;font-weight:700;color:var(--sky)}
+.ps .ps-lbl{font-size:.65rem;color:rgba(255,255,255,.35);margin-top:2px}
+
+/* FAQ */
+.faq-list{margin-top:16px;clear:both}
+.faq-item{border-bottom:1px solid var(--line);padding:14px 0}
+.faq-q{font-weight:600;font-size:.88rem;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q::after{content:'+';font-size:1.1rem;color:var(--sea);transition:transform .2s}
+.faq-item.open .faq-q::after{content:'\2212'}
+.faq-a{font-size:.82rem;color:var(--body);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.faq-item.open .faq-a{max-height:300px;padding-top:10px}
+
+.related{margin:40px 0 0;padding:28px 0;border-top:1px solid var(--line);clear:both}
+.related h3{font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:14px}
+.related-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.rel-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;transition:box-shadow .2s;cursor:pointer}
+.rel-card:hover{box-shadow:var(--s-md)}
+.rel-card h4{font-size:.85rem;font-weight:600;color:var(--sea)}
+.rel-card p{font-size:.72rem;color:var(--muted);margin-top:3px;line-height:1.45}
+
+footer{background:var(--forest);padding:36px 28px;text-align:center;margin-top:48px}
+footer p{font-size:.72rem;color:rgba(255,255,255,.3)}
+footer a{color:var(--sage);text-decoration:none}
+
+@media(max-width:768px){
+  .report-grid{grid-template-columns:1fr}
+  .station-float{float:none;width:100%;margin:0 0 24px 0}
+  .crime-grid{grid-template-columns:1fr}
+  .patrol-stats{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.article{animation:fadeUp .45s ease both}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">papamoa<i>.info</i></div>
+    <div class="nav-links">
+      <a>Home</a>
+      <a>Essential Services</a>
+      <a>Food & Drink</a>
+      <a class="on">Community</a>
+      <a>Accommodation</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb"><a>Home</a> / <a>Community</a> / <a>Safety & Support</a> / Police & Crime</div>
+    <h1>Police & Crime in Papamoa</h1>
+    <div class="hero-desc">How policing works locally, how to report crime properly, what types of crime actually occur here, and the volunteer community patrol that covers 25,000+ kilometres a year.</div>
+  </div>
+</section>
+
+<div class="article">
+
+  <!-- REPORTING CARDS -->
+  <div class="report-grid">
+    <div class="rpt emergency">
+      <div class="rpt-num">111</div>
+      <h4>Emergency</h4>
+      <p>Crime in progress, life at risk, fire, medical emergency. Always call 111 when something is happening right now.</p>
+    </div>
+    <div class="rpt">
+      <div class="rpt-num blue">105</div>
+      <h4>Non-Emergency Police</h4>
+      <p>Report a crime that has already happened. Theft, property damage, vehicle break-in. Not in progress, not urgent.</p>
+      <a href="https://www.police.govt.nz/use-105" target="_blank">Or report online &rarr;</a>
+    </div>
+    <div class="rpt">
+      <div class="rpt-num green">Online</div>
+      <h4>105.police.govt.nz</h4>
+      <p>Report non-emergency crime online at any time. Upload photos, provide detail, get a reference number. Often faster than calling.</p>
+      <a href="https://105.police.govt.nz" target="_blank">Report online &rarr;</a>
+    </div>
+  </div>
+
+  <!-- STATION FLOAT -->
+  <div class="station-float">
+    <h3>Papamoa Police Station</h3>
+    <div class="sf-row"><span class="sf-icon">&#128205;</span><div>Papamoa Beach Road<br>Papamoa</div></div>
+    <div class="sf-row"><span class="sf-icon">&#128338;</span><div><strong>Weekdays 8am - 4pm</strong><br>Counter service only during these hours</div></div>
+    <div class="sf-row"><span class="sf-icon">&#128110;</span><div><strong>24/7 officer coverage</strong><br>An officer is always on duty in Papamoa, even when the counter is closed</div></div>
+    <div class="sf-row"><span class="sf-icon">&#128100;</span><div><strong>Sergeant Jason Perry</strong><br>Officer in charge. 35+ years policing experience.</div></div>
+    <div class="sf-row"><span class="sf-icon">&#127968;</span><div><strong>Senior Constable Adrian Oldham</strong><br>Community Constable. Works with Neighbourhood Support and community patrol.</div></div>
+    <div class="sf-row"><span class="sf-icon">&#128222;</span><div>After hours: <strong>111</strong> or <strong>105</strong><br>Do not call the station directly after hours</div></div>
+  </div>
+
+  <div class="prose">
+
+    <p>Papamoa has its own staffed police station on Papamoa Beach Road, open to the public weekdays from 8am to 4pm. Outside those hours, an officer is always on duty in the Papamoa area. After-hours coverage is managed as part of the wider Tauranga Western Bay of Plenty policing district, with a shared arrangement with the Te Puke station that ensures overnight presence.</p>
+
+    <p>The station is led by Sergeant Jason Perry, who has over 35 years in the police force and has made community connection a priority since taking charge. The station also has a dedicated community constable, Senior Constable Adrian Oldham, who works directly with Papamoa Neighbourhood Support and the community patrol. This is the person most residents will interact with if they are involved in crime prevention activities rather than responding to an incident.</p>
+
+    <p>A security fence was installed at the front of the station in recent years. Perry has acknowledged it can look like a barrier, but the message is clear: the station is open and the team wants residents to come in.</p>
+
+    <h2>How to Report Crime</h2>
+
+    <p>The single most important thing to understand about reporting crime in Papamoa is the difference between 111 and 105. Getting this right directly affects the police response you receive.</p>
+
+    <p><strong>111</strong> is for emergencies. A crime happening right now, someone in danger, a fire, a medical emergency. The call centre will prioritise your call and dispatch resources. If you see someone breaking into a car or a house, call 111. Do not wait. Do not post on Facebook first.</p>
+
+    <p><strong>105</strong> is for everything else. Your car was broken into overnight. Your letterbox was damaged. You discovered something was stolen from your property. These are real crimes that need reporting, but they are not happening right now and nobody is in immediate danger. You can call 105 or report online at 105.police.govt.nz. The online option lets you upload photos, provide detailed information, and get a reference number. Many people find it faster and more thorough than calling.</p>
+
+    <div class="callout red">
+      <h4>A Facebook post is not a police report</h4>
+      <p>This is worth repeating because it comes up constantly. Posting about a crime on a local Facebook group does not create a police report. Police cannot investigate, track patterns, deploy resources, or charge anyone based on a social media post. If you have been a victim of any crime, no matter how minor it seems, report it through 111 (emergency) or 105 (non-emergency). Crime data that informs policing decisions in Papamoa comes from official reports, not Facebook threads.</p>
+    </div>
+
+    <h2>What Crime Actually Looks Like in Papamoa</h2>
+
+    <p>Papamoa is a safe place to live by New Zealand standards. The Neighbourhood Support coordinator, Bruce Banks, reviews property crime statistics weekly and has noted no dramatic trends beyond what would be expected in a growing suburb. That said, growth itself creates opportunity for certain types of crime. Here is what actually happens.</p>
+
+    <div class="crime-grid">
+      <div class="crime-card">
+        <div class="cc-icon">&#128663;</div>
+        <h4>Vehicle Break-ins</h4>
+        <p>The most common crime in Papamoa. Beach carparks are a particular target, especially during summer. Leaving valuables visible in a parked car at the beach is an invitation. Surfboard racks and open ute trays also attract attention. The advice is simple: take everything with you or leave your car completely empty and visibly so.</p>
+      </div>
+      <div class="crime-card">
+        <div class="cc-icon">&#128230;</div>
+        <h4>Package & Opportunistic Theft</h4>
+        <p>Parcels left on doorsteps, tools in open garages, and items on construction sites. Newer subdivisions in Papamoa East are particularly affected because construction zones provide cover and there are fewer established neighbours watching the street. Delivered packages should go to a secure location or be collected promptly.</p>
+      </div>
+      <div class="crime-card">
+        <div class="cc-icon">&#127968;</div>
+        <h4>Burglary</h4>
+        <p>Burglary statistics in Papamoa have remained relatively low compared to other Tauranga suburbs. The general upward trend in reported crime aligns with population growth rather than indicating a deteriorating situation. Neighbourhood Support street groups with visible signage act as a meaningful deterrent. Locked doors and windows remain the most effective prevention.</p>
+      </div>
+      <div class="crime-card">
+        <div class="cc-icon">&#128681;</div>
+        <h4>Youth Disorder & Tagging</h4>
+        <p>With significant urban development in Papamoa East, youth-related issues like tagging and minor disorder have been flagged by police as an area of focus. Sergeant Perry has stated directly that early intervention on these issues is a priority to prevent them from escalating. Report tagging and disorder through 105.</p>
+      </div>
+    </div>
+
+    <div class="callout amber">
+      <h4>Perception vs Reality</h4>
+      <p>Social media amplifies crime perception significantly. Bruce Banks, the Neighbourhood Support coordinator, has observed that Facebook posts about crime in Papamoa are frequently exaggerated, based on second-hand information, or missing critical context. The fortnightly Neighbourhood Support e-newsletter contains the official property crime report from the police sergeant. If you want an accurate picture of crime in your area, this is the source to follow, not social media feeds. Join Neighbourhood Support to receive it.</p>
+    </div>
+
+    <h2>Papamoa Beach Community Patrol</h2>
+
+  </div>
+
+  <div class="patrol-card">
+    <h3>Papamoa Beach Community Patrol</h3>
+    <p>Operating since 2000, the Papamoa Beach Community Patrol is a volunteer organisation that physically patrols the streets of Papamoa in a marked vehicle. They run day, dusk, night, and late-night shifts, covering the full 24-hour cycle. The patrol works closely with police and carries a mobile AED (defibrillator) onboard.</p>
+    <p style="margin-top:12px">The patrol runs an electric vehicle (originally sponsored by Ebbett Tauranga) that charges at the Papamoa Police Station using a TECT-funded charger. They receive no government funding and rely entirely on community donations, fundraising, and sponsorship. A Givealittle campaign was launched to help them purchase the EV when the original sponsorship ended.</p>
+    <div class="patrol-stats">
+      <div class="ps"><div class="ps-num">23+</div><div class="ps-lbl">Years operating</div></div>
+      <div class="ps"><div class="ps-num">25,000+</div><div class="ps-lbl">Km patrolled per year</div></div>
+      <div class="ps"><div class="ps-num">485</div><div class="ps-lbl">Patrols per year</div></div>
+      <div class="ps"><div class="ps-num">3,248</div><div class="ps-lbl">Volunteer hours per year</div></div>
+    </div>
+  </div>
+
+  <div class="prose">
+
+    <h2>Policing Structure</h2>
+
+    <p>Papamoa falls within the Western Bay of Plenty policing area, which is part of the Bay of Plenty Police District. The local station handles day-to-day community policing, but resources are managed at a district level and can be deployed across the wider Tauranga area based on demand. This means that on any given night, the officer on duty in Papamoa may be responding to a call in another part of the district, and vice versa.</p>
+
+    <p>There have been periodic calls from residents for a stronger or 24/7-staffed police presence in Papamoa. Police have responded that Papamoa's crime statistics are low relative to other areas, and that having officers based centrally in Tauranga allows flexible deployment to wherever they are needed most. An officer is always on duty in the Papamoa area, but a permanently staffed 24/7 counter is not currently part of the operating model.</p>
+
+    <div class="callout green">
+      <h4>The Crime Map</h4>
+      <p>NZ Police publish crime data by area at policedata.nz. You can look up reported crime for specific Papamoa suburbs including Doncaster, Gravatt, Pacific View, Palm Beach, Palm Springs, and Papamoa East. The data shows a general upward trend that is broadly in line with population growth across the Tauranga district and nationally. This is the same data source that journalists and researchers use when writing about crime in the area.</p>
+    </div>
+
+    <h2>Common Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Can I walk into the Papamoa Police Station?</div>
+        <div class="faq-a">Yes, during counter hours (weekdays 8am to 4pm). The security fence at the front is a standard safety requirement, not a barrier. The team encourages residents to come in. Outside counter hours, call 111 for emergencies or 105 for non-urgent matters.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there always a police officer in Papamoa at night?</div>
+        <div class="faq-a">Yes, there is always an officer on duty in the Papamoa area, 24/7. However, they may be responding to calls anywhere in the wider district at any given time. Night coverage improved through a shared arrangement with the Te Puke station. For overnight emergencies, call 111.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Should I report minor crime?</div>
+        <div class="faq-a">Absolutely. Even seemingly minor offences may be part of a pattern that police are tracking. A letterbox theft, a tagged fence, a car door handle checked overnight. Report everything through 105 (call or online). It takes a few minutes and creates a record that helps police allocate resources and build cases.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I join the Community Patrol?</div>
+        <div class="faq-a">The Papamoa Beach Community Patrol is always looking for volunteers. They run multiple shifts across the week and welcome people who can commit to regular hours. Contact them through the Papamoa Police Station or search for Papamoa Beach Community Patrol on Facebook for current contact details.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is Papamoa safe?</div>
+        <div class="faq-a">By New Zealand standards, yes. Property crime exists (as it does everywhere), with vehicle break-ins being the most common issue. Violent crime is uncommon. The general trend in crime statistics aligns with population growth rather than indicating a worsening situation. Basic precautions, such as locking cars, not leaving valuables visible, and joining Neighbourhood Support, significantly reduce risk.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Where can I check crime stats for my street?</div>
+        <div class="faq-a">Visit policedata.nz for official NZ Police crime statistics broken down by area. For Papamoa-specific crime reporting, join Neighbourhood Support to receive the fortnightly e-newsletter which includes the official property crime report from the local police sergeant.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="related">
+    <h3>Related Pages</h3>
+    <div class="related-grid">
+      <div class="rel-card">
+        <h4>Neighbourhood Support &rarr;</h4>
+        <p>How street groups work, how to join, and the volunteer coordinator network</p>
+      </div>
+      <div class="rel-card">
+        <h4>Emergency Preparedness &rarr;</h4>
+        <p>Tsunami, earthquake, flood, and storm guidance specific to Papamoa</p>
+      </div>
+      <div class="rel-card">
+        <h4>Community Groups &rarr;</h4>
+        <p>Community Patrol details, Civil Defence volunteers, and other ways to get involved</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 <a href="#">papamoa.info</a> &middot; Papamoa's Local Business Directory &middot; <a href="#">List Your Business</a></p>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{q.parentElement.classList.toggle('open')});
+});
+</script>
+</body>
+</html>
