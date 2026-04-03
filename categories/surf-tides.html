@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surf & Tides Pāpāmoa — Conditions, Tide Times & Local Surf Businesses</title>
+  <meta name="description" content="Today's tide times, surf conditions, swell forecast and local surf businesses for Pāpāmoa Beach, Bay of Plenty. Updated daily.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ocean:        #3AABDE;
+      --ocean-deep:   #2B3F5C;
+      --ocean-mid:    #1a6e9e;
+      --ocean-light:  #e8f6fd;
+      --sand:         #f5f0e8;
+      --sand-dark:    #e8dfc8;
+      --dune:         #c4a96a;
+      --dune-light:   #f0e6cc;
+      --text:         #1a1a1a;
+      --text-soft:    #555;
+      --text-light:   #888;
+      --white:        #ffffff;
+      --border:       #e2ddd4;
+      --green:        #7DC143;
+      --green-light:  #edf7e1;
+      --red:          #E8344A;
+      --amber:        #f59e0b;
+      --foam:         rgba(255,255,255,0.06);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--ocean-deep);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 300;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(27,42,60,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--ocean); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      padding-top: 56px;
+    }
+
+    /* animated ocean background */
+    .ocean-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 120% 80% at 20% 60%, #0d4a6e 0%, transparent 60%),
+        radial-gradient(ellipse 80% 60% at 80% 30%, #1a6e9e 0%, transparent 50%),
+        linear-gradient(180deg, #0a1628 0%, #1a3a5c 40%, #2B3F5C 100%);
+    }
+
+    /* SVG wave layers */
+    .waves {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 220px;
+      overflow: hidden;
+    }
+    .wave {
+      position: absolute;
+      bottom: 0;
+      width: 200%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 220'%3E%3Cpath fill='%23ffffff' fill-opacity='0.04' d='M0,160L48,149.3C96,139,192,117,288,122.7C384,128,480,160,576,160C672,160,768,128,864,117.3C960,107,1056,117,1152,128C1248,139,1344,149,1392,154.7L1440,160L1440,220L1392,220C1344,220,1248,220,1152,220C1056,220,960,220,864,220C768,220,672,220,576,220C480,220,384,220,288,220C192,220,96,220,48,220L0,220Z'/%3E%3C/svg%3E") repeat-x bottom;
+      background-size: 1440px 220px;
+      animation: waveScroll 12s linear infinite;
+    }
+    .wave:nth-child(2) {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 220'%3E%3Cpath fill='%233AABDE' fill-opacity='0.06' d='M0,96L48,112C96,128,192,160,288,154.7C384,149,480,107,576,96C672,85,768,107,864,122.7C960,139,1056,149,1152,138.7C1248,128,1344,96,1392,80L1440,64L1440,220L1392,220C1344,220,1248,220,1152,220C1056,220,960,220,864,220C768,220,672,220,576,220C480,220,384,220,288,220C192,220,96,220,48,220L0,220Z'/%3E%3C/svg%3E") repeat-x bottom;
+      background-size: 1440px 220px;
+      animation: waveScroll 18s linear infinite reverse;
+      opacity: 0.7;
+    }
+    .wave:nth-child(3) {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 220'%3E%3Cpath fill='%232B3F5C' fill-opacity='1' d='M0,180L60,165C120,149,240,117,360,112C480,107,600,128,720,138.7C840,149,960,149,1080,138.7C1200,128,1320,107,1380,96L1440,85L1440,220L1380,220C1320,220,1200,220,1080,220C960,220,840,220,720,220C600,220,480,220,360,220C240,220,120,220,60,220L0,220Z'/%3E%3C/svg%3E") repeat-x bottom;
+      background-size: 1440px 220px;
+    }
+    @keyframes waveScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* floating particles */
+    .particles { position: absolute; inset: 0; pointer-events: none; }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(58,171,222,0.15);
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) scale(1); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding: 0 2rem 3rem;
+      max-width: 900px;
+      animation: fadeUp 0.8s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(58,171,222,0.15);
+      border: 1px solid rgba(58,171,222,0.3);
+      border-radius: 20px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ocean);
+      margin-bottom: 1.2rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--ocean);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.6); }
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--ocean);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      max-width: 480px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* ── CONDITIONS STRIP ── */
+    .conditions-strip {
+      display: flex;
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      max-width: 680px;
+    }
+    .cond-item {
+      flex: 1;
+      padding: 1rem;
+      text-align: center;
+      background: rgba(255,255,255,0.03);
+      transition: background 0.2s;
+      cursor: default;
+    }
+    .cond-item:hover { background: rgba(255,255,255,0.07); }
+    .cond-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 0.4rem;
+    }
+    .cond-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+    .cond-unit {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 0.2rem;
+    }
+    .cond-good  { color: var(--green); }
+    .cond-ok    { color: var(--amber); }
+    .cond-poor  { color: var(--red); }
+
+    .hero-disclaimer {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.25);
+      margin-top: 0.75rem;
+    }
+
+    /* scroll cue */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+    .scroll-cue svg { animation: bounce 2s ease infinite; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    /* ── MAIN CONTENT ── */
+    .page-body {
+      background: var(--sand);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-label h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--ocean-deep);
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── TIDE TABLE ── */
+    .tide-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .tide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tide-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      transition: box-shadow 0.2s;
+    }
+    .tide-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+
+    .tide-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .tide-high .tide-icon { background: var(--ocean-light); }
+    .tide-low  .tide-icon { background: var(--dune-light); }
+
+    .tide-info {}
+    .tide-type {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.2rem;
+    }
+    .tide-time {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--ocean-deep);
+      line-height: 1;
+    }
+    .tide-height {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      margin-top: 0.2rem;
+    }
+
+    /* tide chart */
+    .tide-chart-wrap {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .tide-chart-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+    canvas#tideChart { width: 100%; height: 120px; display: block; }
+
+    /* ── SWELL FORECAST ── */
+    .swell-section { margin-bottom: 3.5rem; }
+
+    .forecast-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.6rem;
+    }
+    .forecast-day {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 0.5rem;
+      text-align: center;
+      transition: box-shadow 0.15s, border-color 0.15s;
+      cursor: default;
+    }
+    .forecast-day:hover {
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      border-color: var(--ocean);
+    }
+    .forecast-day.today {
+      border-color: var(--ocean);
+      background: var(--ocean-light);
+    }
+    .fd-day {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+    .forecast-day.today .fd-day { color: var(--ocean-deep); }
+    .fd-icon { font-size: 1.4rem; margin-bottom: 0.4rem; display: block; }
+    .fd-swell {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ocean-deep);
+      line-height: 1;
+    }
+    .fd-period {
+      font-size: 0.68rem;
+      color: var(--text-light);
+      margin-top: 0.2rem;
+    }
+    .fd-wind {
+      font-size: 0.68rem;
+      color: var(--text-soft);
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .fd-rating {
+      display: flex;
+      justify-content: center;
+      gap: 2px;
+      margin-top: 0.4rem;
+    }
+    .fd-rating span {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+    .fd-rating span.on { background: var(--green); }
+    .fd-rating span.half { background: var(--amber); }
+
+    /* ── BEACH GUIDE ── */
+    .beach-section { margin-bottom: 3.5rem; }
+
+    .beach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .beach-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .beach-card-icon { font-size: 1.6rem; margin-bottom: 0.75rem; display: block; }
+    .beach-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--ocean-deep);
+      margin-bottom: 0.5rem;
+    }
+    .beach-card p {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text-soft);
+    }
+    .beach-card ul {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+    .beach-card ul li {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      padding: 0.2rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+    .beach-card ul li::before { content: '→'; color: var(--ocean); flex-shrink: 0; }
+
+    /* ── SPOTLIGHT LISTING ── */
+    .spotlight-section { margin-bottom: 3.5rem; }
+
+    .spotlight-card {
+      background: var(--ocean-deep);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      position: relative;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(58,171,222,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .spotlight-body { padding: 2.5rem; position: relative; z-index: 1; }
+    .spotlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,215,0,0.15);
+      border: 1px solid rgba(255,215,0,0.3);
+      border-radius: 20px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffd700;
+      margin-bottom: 1rem;
+    }
+    .spotlight-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+    .spotlight-tagline {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 1.25rem;
+    }
+    .spotlight-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1.5rem;
+    }
+    .spotlight-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .ss-tag {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      font-size: 0.72rem;
+      padding: 0.2rem 0.55rem;
+      color: rgba(255,255,255,0.65);
+    }
+    .spotlight-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--ocean);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #2d9ac7; transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.14); }
+
+    .spotlight-visual {
+      background: rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      gap: 1.25rem;
+      border-left: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      z-index: 1;
+    }
+    .stat-pill {
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      width: 100%;
+    }
+    .stat-pill-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--white);
+      line-height: 1;
+    }
+    .stat-pill-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── PLACEHOLDER LISTINGS ── */
+    .listings-section { margin-bottom: 3.5rem; }
+
+    .listings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .placeholder-card {
+      background: var(--white);
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .ph-header { display: flex; align-items: center; gap: 0.75rem; }
+    .ph-icon {
+      width: 44px; height: 44px;
+      border-radius: 8px;
+      background: var(--sand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .ph-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+    .ph-badge {
+      display: inline-block;
+      background: var(--ocean-light);
+      color: var(--ocean-deep);
+      border: 1px solid #b3dff2;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.6rem;
+      margin-left: auto;
+    }
+    .ph-desc {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      line-height: 1.55;
+    }
+    .ph-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--ocean);
+      text-decoration: none;
+      margin-top: auto;
+      transition: gap 0.15s;
+    }
+    .ph-cta:hover { gap: 0.6rem; }
+
+    /* ── AEO CONTENT ── */
+    .faq-section { margin-bottom: 3.5rem; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .faq-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .faq-q {
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--ocean-deep);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      user-select: none;
+    }
+    .faq-q svg { flex-shrink: 0; transition: transform 0.25s; color: var(--text-light); }
+    .faq-card.open .faq-q svg { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text-soft);
+      padding: 0 1.25rem;
+    }
+    .faq-card.open .faq-a {
+      max-height: 300px;
+      padding: 0 1.25rem 1.25rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ocean-deep);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.78rem;
+    }
+    footer a { color: var(--ocean); text-decoration: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .spotlight-card { grid-template-columns: 1fr; }
+      .spotlight-visual { flex-direction: row; border-left: none; border-top: 1px solid rgba(255,255,255,0.06); }
+      .stat-pill { width: auto; flex: 1; }
+      .beach-grid { grid-template-columns: 1fr 1fr; }
+      .forecast-row { grid-template-columns: repeat(4, 1fr); }
+      .forecast-row .forecast-day:nth-child(n+5) { display: none; }
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero-content { padding: 0 1rem 2.5rem; }
+      .conditions-strip { flex-wrap: wrap; }
+      .cond-item { flex: 0 0 50%; }
+      .tide-grid { grid-template-columns: 1fr; }
+      .beach-grid { grid-template-columns: 1fr; }
+      .listings-grid { grid-template-columns: 1fr; }
+      .forecast-row { grid-template-columns: repeat(3, 1fr); }
+      .forecast-row .forecast-day:nth-child(n+4) { display: none; }
+      .container { padding: 2rem 1rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a class="nav-brand" href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Papamoa<span>.info</span></a>
+  <ul class="nav-links">
+    <li><a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">Home</a></li>
+    <li><a href="#" class="active">Surf & Tides</a></li>
+    <li><a href="https://plainblackcreative.github.io/papamoa-previews/all-listings.html">All Listings</a></li>
+    <li><a href="https://plainblackcreative.github.io/papamoa-previews/index.html">List Your Business</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="ocean-bg"></div>
+
+  <!-- particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- waves -->
+  <div class="waves">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Live Conditions · Pāpāmoa Beach</div>
+    <h1 class="hero-title">Surf &amp; <em>Tides</em></h1>
+    <p class="hero-sub">Today's conditions, tide times, 7-day swell forecast, and everything you need to know before you hit the water at Pāpāmoa.</p>
+
+    <div class="conditions-strip">
+      <div class="cond-item">
+        <div class="cond-label">Swell</div>
+        <div class="cond-value cond-good">0.8m</div>
+        <div class="cond-unit">1.2m @ 11s NE</div>
+      </div>
+      <div class="cond-item">
+        <div class="cond-label">Wind</div>
+        <div class="cond-value cond-good">NE 12kt</div>
+        <div class="cond-unit">offshore · light</div>
+      </div>
+      <div class="cond-item">
+        <div class="cond-label">Surf Rating</div>
+        <div class="cond-value cond-good">Fair–Good</div>
+        <div class="cond-unit">knee to waist high</div>
+      </div>
+      <div class="cond-item">
+        <div class="cond-label">Water Temp</div>
+        <div class="cond-value">19°C</div>
+        <div class="cond-unit">no wetsuit needed</div>
+      </div>
+      <div class="cond-item">
+        <div class="cond-label">Next High</div>
+        <div class="cond-value" id="next-high">–</div>
+        <div class="cond-unit" id="next-high-ht">–</div>
+      </div>
+      <div class="cond-item">
+        <div class="cond-label">Next Low</div>
+        <div class="cond-value" id="next-low">–</div>
+        <div class="cond-unit" id="next-low-ht">–</div>
+      </div>
+    </div>
+    <div class="hero-disclaimer">⚠ Sample data for demo purposes. Live data would be sourced via NIWA / MetOcean API integration.</div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+  <div class="container">
+
+    <!-- TIDE TABLE -->
+    <section class="tide-section" id="tides">
+      <div class="section-label"><h2>Today's Tides</h2></div>
+
+      <div class="tide-grid">
+        <div class="tide-card tide-high">
+          <div class="tide-icon">▲</div>
+          <div class="tide-info">
+            <div class="tide-type">High Tide</div>
+            <div class="tide-time">5:42 am</div>
+            <div class="tide-height">1.8m · already passed</div>
+          </div>
+        </div>
+        <div class="tide-card tide-low">
+          <div class="tide-icon">▼</div>
+          <div class="tide-info">
+            <div class="tide-type">Low Tide</div>
+            <div class="tide-time">11:58 am</div>
+            <div class="tide-height">0.3m · already passed</div>
+          </div>
+        </div>
+        <div class="tide-card tide-high">
+          <div class="tide-icon">▲</div>
+          <div class="tide-info">
+            <div class="tide-type">High Tide</div>
+            <div class="tide-time">6:14 pm</div>
+            <div class="tide-height">1.7m · <strong style="color:var(--ocean-deep)">coming up</strong></div>
+          </div>
+        </div>
+        <div class="tide-card tide-low">
+          <div class="tide-icon">▼</div>
+          <div class="tide-info">
+            <div class="tide-type">Low Tide</div>
+            <div class="tide-time">12:22 am</div>
+            <div class="tide-height">0.4m · overnight</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tide-chart-wrap">
+        <div class="tide-chart-title">Tide curve — Pāpāmoa Beach · today</div>
+        <canvas id="tideChart"></canvas>
+        <div style="margin-top:0.75rem;font-size:0.72rem;color:var(--text-light);display:flex;gap:1.5rem;">
+          <span>🕐 Current time marked with dashed line</span>
+          <span>Data: LINZ / NIWA (demo values)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SWELL FORECAST -->
+    <section class="swell-section" id="forecast">
+      <div class="section-label"><h2>7-Day Swell Forecast</h2></div>
+      <div class="forecast-row">
+        <div class="forecast-day today">
+          <div class="fd-day">Today</div>
+          <span class="fd-icon">🌊</span>
+          <div class="fd-swell">0.8m</div>
+          <div class="fd-period">11s NE</div>
+          <div class="fd-wind">NE 12kt</div>
+          <div class="fd-rating"><span class="on"></span><span class="on"></span><span class="half"></span><span></span><span></span></div>
+        </div>
+        <div class="forecast-day">
+          <div class="fd-day">Fri</div>
+          <span class="fd-icon">🌊</span>
+          <div class="fd-swell">1.0m</div>
+          <div class="fd-period">12s NE</div>
+          <div class="fd-wind">NE 8kt</div>
+          <div class="fd-rating"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div>
+        </div>
+        <div class="forecast-day">
+          <div class="fd-day">Sat</div>
+          <span class="fd-icon">🌊</span>
+          <div class="fd-swell">1.2m</div>
+          <div class="fd-period">13s NE</div>
+          <div class="fd-wind">N 10kt</div>
+          <div class="fd-rating"><span class="on"></span><span class="on"></span><span class="on"></span><span class="half"></span><span></span></div>
+        </div>
+        <div class="forecast-day">
+          <div class="fd-day">Sun</div>
+          <span class="fd-icon">🏄</span>
+          <div class="fd-swell">1.5m</div>
+          <div class="fd-period">14s NE</div>
+          <div class="fd-wind">N 6kt</div>
+          <div class="fd-rating"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div>
+        </div>
+        <div class="forecast-day">
+          <div class="fd-day">Mon</div>
+          <span class="fd-icon">🌤️</span>
+          <div class="fd-swell">0.9m</div>
+          <div class="fd-period">10s E</div>
+          <div class="fd-wind">E 14kt</div>
+          <div class="fd-rating"><span class="on"></span><span class="on"></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="forecast-day">
+          <div class="fd-day">Tue</div>
+          <span class="fd-icon">💨</span>
+          <div class="fd-swell">0.6m</div>
+          <div class="fd-period">9s SE</div>
+          <div class="fd-wind">SE 18kt</div>
+          <div class="fd-rating"><span class="half"></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="forecast-day">
+          <div class="fd-day">Wed</div>
+          <span class="fd-icon">🌊</span>
+          <div class="fd-swell">1.1m</div>
+          <div class="fd-period">12s NE</div>
+          <div class="fd-wind">NE 10kt</div>
+          <div class="fd-rating"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div>
+        </div>
+      </div>
+      <p style="margin-top:0.75rem;font-size:0.72rem;color:var(--text-light);">⚠ Sample forecast data. Live integration via MetOcean Solutions or Surf Life Saving NZ API planned.</p>
+    </section>
+
+    <!-- HAKANINI SPOTLIGHT -->
+    <section class="spotlight-section" id="surf-school">
+      <div class="section-label"><h2>Gold Spotlight</h2></div>
+      <div class="spotlight-card">
+        <div class="spotlight-body">
+          <div class="spotlight-badge">⭐ Gold Spotlight · Surf Schools & Lessons</div>
+          <div class="spotlight-name">Hakanini Surf School & Rentals</div>
+          <div class="spotlight-tagline">Pāpāmoa's dedicated surf school — at the Domain since day one</div>
+          <p class="spotlight-desc">
+            Hakanini operates from the Pāpāmoa Domain at the heart of the beach, founded by Tom Botting who brings international experience from Pichilemu, Chile. They run group lessons for up to eight people, private one-on-one sessions, and school holiday programmes that fill fast. Board hire is $35 half-day or $45 full day — one of the most affordable rental options in the Bay of Plenty. Reviews consistently highlight confidence-building in kids and beginners, with visible improvement in a single session.
+          </p>
+          <div class="spotlight-services">
+            <span class="ss-tag">Group Surf Lessons</span>
+            <span class="ss-tag">Private Lessons</span>
+            <span class="ss-tag">Kids' Programmes</span>
+            <span class="ss-tag">School Holiday Camps</span>
+            <span class="ss-tag">Board Hire from $35</span>
+            <span class="ss-tag">Ocean Safety Education</span>
+            <span class="ss-tag">After-school Programmes</span>
+          </div>
+          <div class="spotlight-actions">
+            <a href="https://www.hakaninisurf.co.nz" target="_blank" class="btn-primary">Visit Website →</a>
+            <a href="https://www.facebook.com/Hakaninisurf/" target="_blank" class="btn-ghost">Message on Facebook</a>
+          </div>
+        </div>
+        <div class="spotlight-visual">
+          <div class="stat-pill">
+            <div class="stat-pill-value">$35</div>
+            <div class="stat-pill-label">Board hire · half day</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-value">$70</div>
+            <div class="stat-pill-label">Group lesson from</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-value">All ages</div>
+            <div class="stat-pill-label">Kids to adults</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-value">Pāpāmoa Domain</div>
+            <div class="stat-pill-label">559 Pāpāmoa Beach Rd</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLACEHOLDER LISTINGS -->
+    <section class="listings-section" id="businesses">
+      <div class="section-label"><h2>Surf & Beach Businesses</h2></div>
+      <div class="listings-grid">
+        <div class="placeholder-card">
+          <div class="ph-header">
+            <div class="ph-icon">🏄</div>
+            <div>
+              <div class="ph-name" style="color:var(--ocean-deep);font-family:'Playfair Display',serif;">Hakanini Surf School & Rentals</div>
+              <div style="font-size:0.72rem;color:var(--text-light);">Pāpāmoa Domain</div>
+            </div>
+            <span class="ph-badge" style="background:#fff3cc;border-color:#e6c84a;color:#9a6f00;">Gold</span>
+          </div>
+          <p class="ph-desc" style="color:var(--text-soft);">Group and private surf lessons, school holiday programmes, and board hire. Pāpāmoa's only dedicated surf school.</p>
+          <a class="ph-cta" href="https://www.hakaninisurf.co.nz" target="_blank">hakaninisurf.co.nz →</a>
+        </div>
+
+        <div class="placeholder-card">
+          <div class="ph-header">
+            <div class="ph-icon">🛒</div>
+            <div>
+              <div class="ph-name">Surf Shop</div>
+              <div style="font-size:0.72rem;color:var(--text-light);">Spotlight available</div>
+            </div>
+            <span class="ph-badge">Spotlight Open</span>
+          </div>
+          <p class="ph-desc">No Gold Spotlight listing has been claimed for surf retail in Pāpāmoa yet. Boards, wetsuits, accessories — this sub-category is wide open.</p>
+          <a class="ph-cta" href="https://plainblackcreative.github.io/papamoa-previews/index.html">Claim this spot →</a>
+        </div>
+
+        <div class="placeholder-card">
+          <div class="ph-header">
+            <div class="ph-icon">🏄‍♀️</div>
+            <div>
+              <div class="ph-name">SUP / Kayak Hire</div>
+              <div style="font-size:0.72rem;color:var(--text-light);">Spotlight available</div>
+            </div>
+            <span class="ph-badge">Spotlight Open</span>
+          </div>
+          <p class="ph-desc">No listing has been claimed for stand-up paddleboard or kayak hire in Pāpāmoa. A high-demand summer activity with no directory presence yet.</p>
+          <a class="ph-cta" href="https://plainblackcreative.github.io/papamoa-previews/index.html">Claim this spot →</a>
+        </div>
+
+        <div class="placeholder-card">
+          <div class="ph-header">
+            <div class="ph-icon">🐟</div>
+            <div>
+              <div class="ph-name">Fishing Charters</div>
+              <div style="font-size:0.72rem;color:var(--text-light);">Spotlight available</div>
+            </div>
+            <span class="ph-badge">Spotlight Open</span>
+          </div>
+          <p class="ph-desc">Pāpāmoa and the wider Bay of Plenty are prime fishing territory. No fishing charter or guide has claimed a directory listing here yet.</p>
+          <a class="ph-cta" href="https://plainblackcreative.github.io/papamoa-previews/index.html">Claim this spot →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEACH GUIDE -->
+    <section class="beach-section" id="guide">
+      <div class="section-label"><h2>Pāpāmoa Beach Guide</h2></div>
+      <div class="beach-grid">
+        <div class="beach-card">
+          <span class="beach-card-icon">🌊</span>
+          <h3>Best Surf Spots</h3>
+          <p>Pāpāmoa Beach is a long, open beach break that works best on a NE–E swell with light offshore winds. The Domain area and the western end near Papamoa Hills are the most consistent peaks.</p>
+          <ul>
+            <li>Domain area — best for learners and intermediates</li>
+            <li>Eastern stretch — longer walls, less crowd</li>
+            <li>Avoid SE winds — chops up the swell quickly</li>
+          </ul>
+        </div>
+        <div class="beach-card">
+          <span class="beach-card-icon">⏰</span>
+          <h3>Best Times to Surf</h3>
+          <p>The two to three hours either side of high tide generally produces the best conditions at Pāpāmoa. Dead low can get shallow and dumpy in places.</p>
+          <ul>
+            <li>Early mornings — typically glassier conditions</li>
+            <li>NE swell + light N wind = ideal combo</li>
+            <li>Summer: water 19–22°C, no suit needed</li>
+            <li>Winter: 15–17°C, 2–3mm spring suit recommended</li>
+          </ul>
+        </div>
+        <div class="beach-card">
+          <span class="beach-card-icon">🚨</span>
+          <h3>Beach Safety</h3>
+          <p>Pāpāmoa Beach is patrolled by Surf Life Saving New Zealand during summer months. Always swim and surf between the flags when patrolled.</p>
+          <ul>
+            <li>Swim between the flags — always</li>
+            <li>Rip currents present — if caught, float and signal</li>
+            <li>Patrol season: Oct–Apr, weekends and holidays</li>
+            <li>Emergency: 111 · Surf patrol: watch for red and yellow flags</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- AEO FAQ -->
+    <section class="faq-section" id="faq">
+      <div class="section-label"><h2>Common Questions</h2></div>
+      <div class="faq-grid">
+
+        <div class="faq-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            What is the surf like at Pāpāmoa Beach?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">Pāpāmoa is a long sandy beach break in the Bay of Plenty, New Zealand. It works best on a NE to E swell with light offshore winds. Wave heights are typically 0.5–1.5m, occasionally larger during solid NE swells. It is well-suited to beginners and intermediates, and Hakanini Surf School operates from the Domain for lessons and board hire.</div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Where can I get surf lessons in Pāpāmoa?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">Hakanini Surf School & Rentals is Pāpāmoa's dedicated surf school, based at the Pāpāmoa Domain (559 Pāpāmoa Beach Road). They run group lessons from around $70, private one-on-one sessions, school holiday programmes, and board hire from $35 half-day. Founded by Tom Botting, they cater to all ages from kids to adults.</div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Can I hire a surfboard at Pāpāmoa Beach?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">Yes. Hakanini Surf School & Rentals at the Pāpāmoa Domain offers board hire from $35 for a half day and $45 for a full day. This is one of the most affordable hire options in the Bay of Plenty. No lesson required — walk-up hire is available subject to availability.</div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            What are the tide times for Pāpāmoa today?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">Pāpāmoa Beach tide times are based on the Port of Tauranga tidal station. Times shift approximately 50 minutes later each day. For live, accurate tide data, LINZ (Land Information New Zealand) publishes official tide tables, and apps like Tides Near Me and MetService include Tauranga/Pāpāmoa tides.</div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Is Pāpāmoa Beach safe for swimming?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">Pāpāmoa Beach is patrolled by Surf Life Saving NZ during the summer season (October to April), on weekends, public holidays, and school holidays. Always swim between the red and yellow patrol flags. The beach has rip currents — if caught in one, stay calm, float, and signal for help. Do not try to swim against it.</div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            What wetsuit do I need at Pāpāmoa?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="faq-a">In summer (December–March) water temperatures at Pāpāmoa reach 19–22°C — most surfers are fine without a wetsuit or with a thin 1–2mm top. In winter (June–August) temperatures drop to around 15–17°C, and a 2–3mm spring suit or 3/2mm full wetsuit is recommended for extended sessions.</div>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /container -->
+</div><!-- /page-body -->
+
+<footer>
+  © 2026 <a href="https://plainblackcreative.github.io/papamoa-previews/">papamoa.info</a> · Pāpāmoa's Local Business Directory ·
+  <a href="https://plainblackcreative.github.io/papamoa-previews/index.html">List Your Business</a> ·
+  <a href="https://plainblackcreative.github.io/papamoa-previews/sitemap.html">Site Index</a>
+</footer>
+
+<script>
+  // ── Particles ──
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 80 + 20;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      animation-duration:${Math.random()*20+15}s;
+      animation-delay:-${Math.random()*20}s;
+    `;
+    container.appendChild(p);
+  }
+
+  // ── Next tide labels ──
+  const now = new Date();
+  const tides = [
+    { time: new Date(), label: '6:14 pm', height: '1.7m', type: 'high' },
+    { time: new Date(), label: '12:22 am', height: '0.4m', type: 'low' },
+  ];
+  document.getElementById('next-high').textContent = '6:14 pm';
+  document.getElementById('next-high-ht').textContent = '1.7m rising';
+  document.getElementById('next-low').textContent  = '12:22 am';
+  document.getElementById('next-low-ht').textContent  = '0.4m overnight';
+
+  // ── Tide chart (canvas) ──
+  const canvas = document.getElementById('tideChart');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+  canvas.height = 120 * window.devicePixelRatio;
+  canvas.style.height = '120px';
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+  const W = canvas.offsetWidth;
+  const H = 120;
+
+  // Tide points: [hour, height_metres]
+  const tideData = [
+    [0,0.9],[1,0.5],[2,0.3],[3,0.4],[4,0.9],[5,1.4],[5.7,1.8],
+    [7,1.6],[8,1.2],[9,0.8],[10,0.5],[11.97,0.3],[13,0.5],
+    [14,0.9],[15,1.2],[16,1.5],[18.23,1.7],[19,1.5],[20,1.1],
+    [21,0.7],[22,0.5],[23,0.4],[24,0.4]
+  ];
+
+  function tideX(h) { return (h / 24) * W; }
+  function tideY(m) { return H - 10 - ((m / 2.0) * (H - 20)); }
+
+  // gradient fill
+  const grad = ctx.createLinearGradient(0, 0, 0, H);
+  grad.addColorStop(0, 'rgba(58,171,222,0.35)');
+  grad.addColorStop(1, 'rgba(58,171,222,0.02)');
+
+  ctx.beginPath();
+  ctx.moveTo(0, H);
+  tideData.forEach(([h, m], i) => {
+    if (i === 0) ctx.lineTo(tideX(h), tideY(m));
+    else {
+      const prev = tideData[i - 1];
+      const cpx = (tideX(prev[0]) + tideX(h)) / 2;
+      ctx.bezierCurveTo(cpx, tideY(prev[1]), cpx, tideY(m), tideX(h), tideY(m));
+    }
+  });
+  ctx.lineTo(W, H);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // line
+  ctx.beginPath();
+  tideData.forEach(([h, m], i) => {
+    if (i === 0) ctx.moveTo(tideX(h), tideY(m));
+    else {
+      const prev = tideData[i - 1];
+      const cpx = (tideX(prev[0]) + tideX(h)) / 2;
+      ctx.bezierCurveTo(cpx, tideY(prev[1]), cpx, tideY(m), tideX(h), tideY(m));
+    }
+  });
+  ctx.strokeStyle = '#3AABDE';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // hour labels
+  ctx.fillStyle = '#999';
+  ctx.font = '10px Figtree, sans-serif';
+  ctx.textAlign = 'center';
+  [0,3,6,9,12,15,18,21,24].forEach(h => {
+    const label = h === 0 ? '12am' : h === 12 ? '12pm' : h === 24 ? '' : h > 12 ? `${h-12}pm` : `${h}am`;
+    ctx.fillText(label, tideX(h), H - 1);
+  });
+
+  // current time line
+  const nowH = now.getHours() + now.getMinutes() / 60;
+  ctx.beginPath();
+  ctx.setLineDash([4, 4]);
+  ctx.strokeStyle = 'rgba(232,52,74,0.6)';
+  ctx.lineWidth = 1.5;
+  ctx.moveTo(tideX(nowH), 0);
+  ctx.lineTo(tideX(nowH), H - 15);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ── FAQ toggle ──
+  function toggleFaq(el) {
+    const card = el.closest('.faq-card');
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
