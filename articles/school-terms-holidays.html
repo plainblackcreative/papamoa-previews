@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Terms & Holidays 2026 | Pāpāmoa Schools | Papamoa.info</title>
+  <meta name="description" content="School term dates and holidays for Pāpāmoa schools in 2026. Pāpāmoa College, Golden Sands School, Te Ākau ki Pāpāmoa and Pāpāmoa Primary. Including teacher-only days and local events.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #2B3F5C;
+      --blue: #3AABDE;
+      --lime: #7DC143;
+      --sand: #F5EFE0;
+      --dune: #D4C4A0;
+      --coral: #E8344A;
+      --black: #0A0A0A;
+      --white: #FFFFFF;
+      --text: #1A2A3A;
+      --muted: #6B7A8D;
+
+      /* School colours */
+      --c-primary: #2B3F5C;
+      --c-gs: #2A7A3A;       /* Golden Sands - green */
+      --c-ta: #8B4513;       /* Te Akau - earthy */
+      --c-pp: #1565A0;       /* Papamoa Primary - blue */
+      --c-pc: #6A0DAD;       /* Papamoa College - purple */
+
+      /* Term bands */
+      --t1: #3AABDE;
+      --t2: #7DC143;
+      --t3: #F5A623;
+      --t4: #E8344A;
+      --hols: #EAE0CC;
+    }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--sand);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(125,193,67,0.15) 0%, transparent 70%);
+    }
+
+    .hero-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 56px 24px 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .breadcrumb {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+    }
+
+    .breadcrumb a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--blue); }
+    .breadcrumb span { margin: 0 6px; }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--lime);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 3px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      max-width: 600px;
+    }
+
+    /* SCHOOL TABS */
+    .schools-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 28px;
+    }
+
+    .school-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .school-badge:hover { background: rgba(255,255,255,0.18); }
+    .school-badge .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* MAIN */
+    .main-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+
+    /* QUICK SUMMARY BAND */
+    .term-overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .term-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 16px 16px 14px;
+      border-top: 4px solid;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .term-card.t1 { border-color: var(--t1); }
+    .term-card.t2 { border-color: var(--t2); }
+    .term-card.t3 { border-color: var(--t3); }
+    .term-card.t4 { border-color: var(--t4); }
+
+    .term-card .term-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .t1 .term-label { color: var(--t1); }
+    .t2 .term-label { color: var(--t2); }
+    .t3 .term-label { color: var(--t3); }
+    .t4 .term-label { color: var(--t4); }
+
+    .term-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .term-card .dates {
+      font-size: 0.82rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .term-card .weeks {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .term-card .ph-list {
+      margin-top: 8px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      border-top: 1px solid var(--sand);
+      padding-top: 7px;
+    }
+
+    .term-card .ph-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+      margin-bottom: 2px;
+    }
+
+    .term-card .ph-item::before {
+      content: '🗓';
+      font-size: 0.65rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* HOL BAND */
+    .hols-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .hol-card {
+      background: var(--hols);
+      border-radius: 10px;
+      padding: 14px 16px;
+      border: 1px solid var(--dune);
+    }
+
+    .hol-card .hol-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .hol-card .hol-dates {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .hol-card .hol-nights {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* SECTION */
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-intro {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--dune);
+    }
+
+    /* SCHOOL CARDS */
+    .school-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .school-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .school-card-header {
+      padding: 16px 18px 14px;
+      border-bottom: 1px solid var(--sand);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .school-card-header .school-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .school-card-header .school-type {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .school-card-header .school-color-bar {
+      width: 5px;
+      height: 44px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .school-card-body {
+      padding: 14px 18px;
+    }
+
+    .school-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #F5F5F5;
+      font-size: 0.85rem;
+    }
+
+    .school-row:last-child { border-bottom: none; }
+
+    .school-row .sr-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      width: 80px;
+      flex-shrink: 0;
+      padding-top: 1px;
+    }
+
+    .school-row .sr-value {
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      margin-right: 3px;
+      margin-bottom: 2px;
+    }
+
+    .tag.confirmed { background: #E6F4EA; color: #2A7A3A; }
+    .tag.unconfirmed { background: #F5F5F5; color: #888; }
+    .tag.ph { background: #FFF0F0; color: #C0252E; }
+    .tag.tod { background: #EEF4FF; color: #1A55A0; }
+    .tag.exam { background: #FFF8ED; color: #A05A00; }
+
+    /* EVENTS TABLE */
+    .events-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+      font-size: 0.84rem;
+    }
+
+    .events-table thead th {
+      text-align: left;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 8px 10px;
+      background: #F8F6F2;
+      border-bottom: 2px solid var(--dune);
+    }
+
+    .events-table tbody tr {
+      border-bottom: 1px solid #F0EDE6;
+    }
+
+    .events-table tbody tr:hover { background: #FAFAF8; }
+
+    .events-table tbody td {
+      padding: 10px 10px;
+      vertical-align: top;
+    }
+
+    .events-table .col-date {
+      font-weight: 600;
+      color: var(--navy);
+      white-space: nowrap;
+      width: 130px;
+    }
+
+    .events-table .col-event {
+      color: var(--text);
+    }
+
+    .events-table .col-schools {
+      width: 200px;
+    }
+
+    .events-table .col-type {
+      width: 100px;
+    }
+
+    .school-chip {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin: 1px;
+    }
+
+    .chip-all { background: #E8F4FD; color: #1565A0; }
+    .chip-gs { background: #E6F4EA; color: #2A7A3A; }
+    .chip-ta { background: #FFF3E0; color: #8B4513; }
+    .chip-pp { background: #E3F2FD; color: #1565A0; }
+    .chip-pc { background: #F3E5F5; color: #6A0DAD; }
+
+    /* PLACEHOLDER NOTICE */
+    .placeholder-notice {
+      background: #EEF4FF;
+      border: 1px dashed #90B8E0;
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      color: #1A3A5C;
+    }
+
+    .placeholder-notice .notice-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    .placeholder-notice a { color: var(--blue); font-weight: 600; }
+
+    /* CTA */
+    .update-cta {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 26px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .update-cta strong { color: #fff; font-size: 1.05rem; display: block; margin-bottom: 5px; }
+    .update-cta p { color: rgba(255,255,255,0.75); font-size: 0.87rem; max-width: 460px; }
+
+    .btn-cta {
+      background: var(--lime);
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 12px 22px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .btn-cta:hover { background: #5A9A30; }
+
+    .footer-note {
+      margin-top: 32px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--dune);
+    }
+
+    @media (max-width: 680px) {
+      .term-overview { grid-template-columns: repeat(2, 1fr); }
+      .hols-row { grid-template-columns: repeat(2, 1fr); }
+      .school-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .term-overview { grid-template-columns: 1fr 1fr; }
+      .hols-row { grid-template-columns: 1fr 1fr; }
+      .events-table .col-schools { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="/">Papamoa.info</a>
+      <span>/</span>
+      <a href="/local-info">Local Info</a>
+      <span>/</span>
+      School Terms &amp; Holidays
+    </div>
+    <div class="hero-tag">2026</div>
+    <h1>School Terms &amp; Holidays<br>in <em>Pāpāmoa</em></h1>
+    <p class="hero-sub">Term dates, school holidays, teacher-only days and local events across all four Pāpāmoa schools. Ministry of Education confirmed dates alongside school-specific information.</p>
+
+    <div class="schools-nav">
+      <a href="#all-schools" class="school-badge">
+        <span class="dot" style="background:#3AABDE"></span> All schools overview
+      </a>
+      <a href="#golden-sands" class="school-badge">
+        <span class="dot" style="background:#2A7A3A"></span> Golden Sands School
+      </a>
+      <a href="#te-akau" class="school-badge">
+        <span class="dot" style="background:#8B4513"></span> Te Ākau ki Pāpāmoa
+      </a>
+      <a href="#papamoa-primary" class="school-badge">
+        <span class="dot" style="background:#1565A0"></span> Pāpāmoa Primary
+      </a>
+      <a href="#college" class="school-badge">
+        <span class="dot" style="background:#6A0DAD"></span> Pāpāmoa College
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="main-wrap">
+
+  <!-- TERM OVERVIEW CARDS -->
+  <section class="section" id="all-schools">
+    <h2 class="section-title">📅 2026 Term Dates</h2>
+    <p class="section-intro">Ministry of Education confirmed national term dates. Individual schools may vary by up to a week at the start of Term 1 and end of Term 4. Always confirm with your school directly.</p>
+
+    <div class="term-overview">
+      <div class="term-card t1">
+        <div class="term-label">Term 1</div>
+        <h3>Summer to Autumn</h3>
+        <div class="dates">Late Jan &ndash; 2 April</div>
+        <div class="weeks">~9&ndash;11 weeks depending on start date</div>
+        <div class="ph-list">
+          <div class="ph-item">Waitangi Day &mdash; Fri 6 Feb</div>
+        </div>
+      </div>
+
+      <div class="term-card t2">
+        <div class="term-label">Term 2</div>
+        <h3>Autumn to Winter</h3>
+        <div class="dates">20 April &ndash; 3 July</div>
+        <div class="weeks">11 weeks (fixed)</div>
+        <div class="ph-list">
+          <div class="ph-item">Anzac Day &mdash; Sat 25 Apr (obs. Mon 27)</div>
+          <div class="ph-item">King's Birthday &mdash; Mon 1 June</div>
+        </div>
+      </div>
+
+      <div class="term-card t3">
+        <div class="term-label">Term 3</div>
+        <h3>Winter to Spring</h3>
+        <div class="dates">20 July &ndash; 25 Sept</div>
+        <div class="weeks">10 weeks (fixed)</div>
+        <div class="ph-list">
+          <div class="ph-item">No public holidays in term</div>
+        </div>
+      </div>
+
+      <div class="term-card t4">
+        <div class="term-label">Term 4</div>
+        <h3>Spring to Summer</h3>
+        <div class="dates">12 Oct &ndash; by 18 Dec</div>
+        <div class="weeks">~10 weeks</div>
+        <div class="ph-list">
+          <div class="ph-item">Labour Day &mdash; Mon 26 Oct</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOLIDAYS -->
+    <h3 style="font-family:'Playfair Display',serif;color:var(--navy);font-size:1.1rem;margin-bottom:12px;margin-top:8px;">School Holiday Periods</h3>
+    <div class="hols-row">
+      <div class="hol-card">
+        <div class="hol-label">Summer Holidays</div>
+        <div class="hol-dates">~20 Dec 2025 &ndash; Late Jan 2026</div>
+        <div class="hol-nights">5&ndash;6 weeks</div>
+      </div>
+      <div class="hol-card">
+        <div class="hol-label">Easter / Autumn Break</div>
+        <div class="hol-dates">3 &ndash; 19 April 2026</div>
+        <div class="hol-nights">Good Fri, Easter Mon &amp; Tue included</div>
+      </div>
+      <div class="hol-card">
+        <div class="hol-label">Winter Holidays</div>
+        <div class="hol-dates">4 &ndash; 19 July 2026</div>
+        <div class="hol-nights">Matariki &mdash; Fri 10 July</div>
+      </div>
+      <div class="hol-card">
+        <div class="hol-label">Spring Holidays</div>
+        <div class="hol-dates">26 Sept &ndash; 11 October 2026</div>
+        <div class="hol-nights">2 weeks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHOOL-BY-SCHOOL -->
+  <section class="section">
+    <h2 class="section-title">🏫 School-by-School Details</h2>
+    <p class="section-intro">Confirmed and pending dates for each Pāpāmoa school. Teacher-only days, athletics days, and other events will be added as schools release them. If you're a school staff member or parent rep, <a href="#update" style="color:var(--blue);font-weight:600;">submit dates below</a>.</p>
+
+    <div class="placeholder-notice">
+      <span class="notice-icon">ℹ️</span>
+      <div>Some dates below are sourced from school websites and newsletters. Dates marked <span class="tag unconfirmed">Unconfirmed</span> have not been verified directly with the school. <a href="#update">Submit a correction</a> if you have better information.</div>
+    </div>
+
+    <div class="school-grid">
+
+      <!-- GOLDEN SANDS -->
+      <div class="school-card" id="golden-sands">
+        <div class="school-card-header">
+          <div>
+            <div class="school-name">Golden Sands School</div>
+            <div class="school-type">Years 1&ndash;6 &mdash; 26 Golden Sands Drive, Pāpāmoa Beach</div>
+          </div>
+          <div class="school-color-bar" style="background:var(--c-gs)"></div>
+        </div>
+        <div class="school-card-body">
+          <div class="school-row">
+            <span class="sr-label">Term 1 start</span>
+            <span class="sr-value"><span class="tag confirmed">Confirmed</span> School to confirm exact start date</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Term 1 end</span>
+            <span class="sr-value">Thursday 2 April 2026</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Teacher-only days</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span> Ministry allows 2 per year</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Athletics Day</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span> Typically Term 2 or 3</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Fun / Colour Run</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span> End of year event</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Beach Ed</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span> Pāpāmoa Surf Club programme</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Website</span>
+            <span class="sr-value"><a href="https://goldensands.school.nz" target="_blank" rel="noopener" style="color:var(--blue)">goldensands.school.nz</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TE AKAU -->
+      <div class="school-card" id="te-akau">
+        <div class="school-card-header">
+          <div>
+            <div class="school-name">Te Ākau ki Pāpāmoa School</div>
+            <div class="school-type">Years 1&ndash;8 &mdash; Pāpāmoa East</div>
+          </div>
+          <div class="school-color-bar" style="background:var(--c-ta)"></div>
+        </div>
+        <div class="school-card-body">
+          <div class="school-row">
+            <span class="sr-label">Term 1 start</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be confirmed</span></span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Term 1 end</span>
+            <span class="sr-value">Thursday 2 April 2026</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Teacher-only days</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span></span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Kapa Haka</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span></span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Athletics Day</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span></span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Website</span>
+            <span class="sr-value"><a href="https://www.teakaukipapamoa.school.nz" target="_blank" rel="noopener" style="color:var(--blue)">teakaukipapamoa.school.nz</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAPAMOA PRIMARY -->
+      <div class="school-card" id="papamoa-primary">
+        <div class="school-card-header">
+          <div>
+            <div class="school-name">Pāpāmoa Primary School</div>
+            <div class="school-type">Years 1&ndash;6 &mdash; 312 Dickson Road, Pāpāmoa</div>
+          </div>
+          <div class="school-color-bar" style="background:var(--c-pp)"></div>
+        </div>
+        <div class="school-card-body">
+          <div class="school-row">
+            <span class="sr-label">Term 1 start</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be confirmed</span></span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Term 1 end</span>
+            <span class="sr-value">Thursday 2 April 2026</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Teacher-only days</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span></span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Athletics / Cross Country</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span></span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Beach Brilliance</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span> Cluster event</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Website</span>
+            <span class="sr-value"><a href="https://www.papamoa.school.nz" target="_blank" rel="noopener" style="color:var(--blue)">papamoa.school.nz</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAPAMOA COLLEGE -->
+      <div class="school-card" id="college">
+        <div class="school-card-header">
+          <div>
+            <div class="school-name">Pāpāmoa College</div>
+            <div class="school-type">Years 7&ndash;13 &mdash; Doncaster Drive, Pāpāmoa East</div>
+          </div>
+          <div class="school-color-bar" style="background:var(--c-pc)"></div>
+        </div>
+        <div class="school-card-body">
+          <div class="school-row">
+            <span class="sr-label">Term 1 start</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be confirmed</span></span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Term 1 end</span>
+            <span class="sr-value">Thursday 2 April 2026</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Teacher-only days</span>
+            <span class="sr-value"><span class="tag unconfirmed">To be advised</span></span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Athletics Day (Yr 7/8)</span>
+            <span class="sr-value"><span class="tag confirmed">Confirmed</span> Term 4, 2026 (date TBC)</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">BoP Athletics (Yr 9-13)</span>
+            <span class="sr-value"><span class="tag confirmed">Confirmed</span> 12 March 2026 (already passed)</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">NCEA Exams</span>
+            <span class="sr-value"><span class="tag exam">Exam leave</span> Typically Nov&ndash;Dec, Term 4</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">School hours</span>
+            <span class="sr-value">8:35am &ndash; 3:00pm</span>
+          </div>
+          <div class="school-row">
+            <span class="sr-label">Website</span>
+            <span class="sr-value"><a href="https://www.papamoacollege.school.nz" target="_blank" rel="noopener" style="color:var(--blue)">papamoacollege.school.nz</a></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NOTABLE DATES TABLE -->
+  <section class="section">
+    <h2 class="section-title">📋 Notable Dates &amp; Events</h2>
+    <p class="section-intro">Key dates across all Pāpāmoa schools. Includes public holidays in term time, teacher-only days (as confirmed), and local events. Page updated as schools publish.</p>
+
+    <div style="overflow-x:auto;">
+    <table class="events-table">
+      <thead>
+        <tr>
+          <th class="col-date">Date</th>
+          <th class="col-event">Event / Notes</th>
+          <th class="col-schools">Schools</th>
+          <th class="col-type">Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-date">Fri 6 Feb 2026</td>
+          <td class="col-event">Waitangi Day &mdash; no school</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag ph">Public Holiday</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Thu 2 Apr 2026</td>
+          <td class="col-event">Term 1 ends (all schools)</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag confirmed">Term end</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Fri 3 Apr 2026</td>
+          <td class="col-event">Good Friday &mdash; school holidays begin</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag ph">Public Holiday</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Mon 6 Apr 2026</td>
+          <td class="col-event">Easter Monday</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag ph">Public Holiday</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Tue 7 Apr 2026</td>
+          <td class="col-event">Easter Tuesday &mdash; school holiday</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag ph">School Holiday</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Sun 19 Apr 2026</td>
+          <td class="col-event">Easter school holidays end</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag confirmed">Holidays end</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Mon 20 Apr 2026</td>
+          <td class="col-event">Term 2 begins</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag confirmed">Term start</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Mon 27 Apr 2026</td>
+          <td class="col-event">Anzac Day (observed) &mdash; no school</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag ph">Public Holiday</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Mon 1 Jun 2026</td>
+          <td class="col-event">King's Birthday &mdash; no school</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag ph">Public Holiday</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Fri 3 Jul 2026</td>
+          <td class="col-event">Term 2 ends</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag confirmed">Term end</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Fri 10 Jul 2026</td>
+          <td class="col-event">Matariki &mdash; public holiday</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag ph">Public Holiday</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Mon 20 Jul 2026</td>
+          <td class="col-event">Term 3 begins</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag confirmed">Term start</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Fri 25 Sep 2026</td>
+          <td class="col-event">Term 3 ends</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag confirmed">Term end</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Mon 12 Oct 2026</td>
+          <td class="col-event">Term 4 begins</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag confirmed">Term start</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Mon 26 Oct 2026</td>
+          <td class="col-event">Labour Day &mdash; no school</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag ph">Public Holiday</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Term 4, 2026</td>
+          <td class="col-event">Athletics Day Yrs 7/8 (date TBC)</td>
+          <td class="col-schools"><span class="school-chip chip-pc">Pāpāmoa College</span></td>
+          <td><span class="tag unconfirmed">Date TBC</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">Nov&ndash;Dec 2026</td>
+          <td class="col-event">NCEA Examinations</td>
+          <td class="col-schools"><span class="school-chip chip-pc">Pāpāmoa College</span></td>
+          <td><span class="tag exam">Exam leave</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">TBC 2026</td>
+          <td class="col-event">Teacher-only day (up to 2 per school per year)</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag tod">Teacher-only</span></td>
+        </tr>
+        <tr>
+          <td class="col-date">By 18 Dec 2026</td>
+          <td class="col-event">Term 4 ends (latest possible date)</td>
+          <td class="col-schools"><span class="school-chip chip-all">All schools</span></td>
+          <td><span class="tag confirmed">Term end</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- UPDATE CTA -->
+  <div class="update-cta" id="update">
+    <div>
+      <strong>Schools: add your dates here</strong>
+      <p>Teacher-only days, sports days, gala days, swim sports, strikes, exam leave or any other whole-school closure. Send through via the form and we'll get it on the page within 48 hours. Free for all Pāpāmoa schools.</p>
+    </div>
+    <a href="/contact?ref=school-dates" class="btn-cta">Submit School Dates</a>
+  </div>
+
+  <p class="footer-note">
+    National term dates sourced from the Ministry of Education. School-specific dates sourced from school websites and communications. Always verify directly with your school for confirmed dates. &copy; Papamoa.info
+  </p>
+
+</main>
+
+</body>
+</html>
