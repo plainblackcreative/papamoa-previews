@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pāpāmoa Community Resources — Support, Groups & Emergency Contacts | Papamoa.info</title>
+  <meta name="description" content="Community resources for Pāpāmoa residents — emergency contacts, food banks, mental health support, Facebook community groups, youth services and volunteer opportunities.">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#2B3F5C;--blue:#3AABDE;--lime:#7DC143;--sand:#F5EFE0;--dune:#D4C4A0;--coral:#E8344A;--white:#fff;--body:#1E2D3E;--muted:#607080;--border:#DDE5EE;--bg:#F4F7FA;--gold:#C8962A}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--body);line-height:1.65}
+    a{color:var(--blue)}
+    .site-nav{background:var(--navy);padding:10px 24px;display:flex;align-items:center;gap:16px}
+    .nav-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff;text-decoration:none}
+    .nav-brand em{font-style:normal;color:var(--blue)}
+    .breadcrumb{font-size:0.75rem;color:rgba(255,255,255,0.45)}
+    .breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none}
+    .breadcrumb span{margin:0 5px;opacity:0.4}
+    .hero{background:var(--navy);padding:40px 24px 36px;position:relative}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lime),var(--blue))}
+    .hero-inner{max-width:900px;margin:0 auto}
+    .hero-eye{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime);margin-bottom:10px}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px}
+    .hero h1 em{font-style:italic;color:var(--lime)}
+    .hero-sub{font-size:0.93rem;color:rgba(255,255,255,0.65);max-width:580px;line-height:1.7}
+    .page-nav{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+    .pn-inner{max-width:900px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none}
+    .pn-inner::-webkit-scrollbar{display:none}
+    .pnl{padding:11px 14px;font-size:0.8rem;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.2s}
+    .pnl:hover{color:var(--navy);border-bottom-color:var(--blue)}
+    .page-wrap{max-width:900px;margin:0 auto;padding:36px 20px 80px}
+    .section{margin-bottom:44px}
+    .section-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px}
+    .section-intro{font-size:0.87rem;color:var(--muted);margin-bottom:16px;line-height:1.7}
+    /* EMERGENCY GRID */
+    .emergency-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
+    .em-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px;border-left:3px solid var(--coral)}
+    .em-card.blue{border-left-color:var(--blue)}
+    .em-card.lime{border-left-color:var(--lime)}
+    .em-card.gold{border-left-color:var(--gold)}
+    .em-name{font-weight:700;color:var(--navy);font-size:0.9rem;margin-bottom:4px}
+    .em-number{font-size:1rem;font-weight:800;color:var(--coral);margin-bottom:3px}
+    .em-card.blue .em-number{color:var(--blue)}
+    .em-card.lime .em-number{color:#2A7A3A}
+    .em-card.gold .em-number{color:var(--gold)}
+    .em-note{font-size:0.76rem;color:var(--muted);line-height:1.4}
+    /* RESOURCE CARDS */
+    .resource-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+    .resource-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px}
+    .resource-icon{font-size:1.2rem;flex-shrink:0;margin-top:2px}
+    .resource-body h4{font-weight:700;color:var(--navy);font-size:0.88rem;margin-bottom:3px}
+    .resource-body p{font-size:0.81rem;color:var(--muted);line-height:1.5}
+    .resource-body a{font-size:0.8rem}
+    /* FB GROUP PILLS */
+    .fb-groups{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+    .fb-group{background:var(--white);border:1px solid var(--border);border-radius:7px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .fbg-name{font-size:0.84rem;font-weight:600;color:var(--navy)}
+    .fbg-type{font-size:0.7rem;color:var(--muted)}
+    .fbg-link{font-size:0.75rem;font-weight:700;color:var(--blue);white-space:nowrap}
+    .site-footer{background:var(--navy);padding:18px 24px;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:40px}
+    .site-footer a{color:var(--blue)}
+    @media(max-width:600px){.emergency-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="/" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb"><a href="/">Home</a><span>/</span>Community</span>
+</nav>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eye">Community Support · Pāpāmoa Beach · Bay of Plenty</div>
+    <h1>Pāpāmoa <em>Community</em><br>Resources</h1>
+    <p class="hero-sub">Emergency contacts, food support, mental health resources, community Facebook groups, youth services and ways to connect with and give back to the Pāpāmoa community.</p>
+  </div>
+</header>
+<nav class="page-nav">
+  <div class="pn-inner">
+    <a href="#emergency" class="pnl">🆘 Emergency</a>
+    <a href="#food-support" class="pnl">🛒 Food support</a>
+    <a href="#mental-health" class="pnl">💚 Mental health</a>
+    <a href="#groups" class="pnl">👥 Facebook groups</a>
+    <a href="#youth" class="pnl">🧒 Youth</a>
+    <a href="#volunteer" class="pnl">🤝 Volunteer</a>
+  </div>
+</nav>
+<div class="page-wrap">
+
+  <section class="section" id="emergency">
+    <h2 class="section-title"><span>🆘</span> Emergency Contacts</h2>
+    <div class="emergency-grid">
+      <div class="em-card">
+        <div class="em-name">Police / Fire / Ambulance</div>
+        <div class="em-number"><a href="tel:111" style="color:inherit;text-decoration:none">111</a></div>
+        <div class="em-note">Life-threatening emergencies only. Don't dial 111 for non-urgent matters.</div>
+      </div>
+      <div class="em-card blue">
+        <div class="em-name">Police (non-emergency)</div>
+        <div class="em-number"><a href="tel:105" style="color:inherit;text-decoration:none">105</a></div>
+        <div class="em-note">Reporting crime that is not in progress, noise, property damage, dog attacks.</div>
+      </div>
+      <div class="em-card lime">
+        <div class="em-name">TCC Animal Services</div>
+        <div class="em-number"><a href="tel:0800834703" style="color:inherit;text-decoration:none">0800 834 703</a></div>
+        <div class="em-note">Dog attacks, stray animals, dangerous animals. After-hours line available.</div>
+      </div>
+      <div class="em-card gold">
+        <div class="em-name">Tauranga Hospital</div>
+        <div class="em-number"><a href="tel:075798000" style="color:inherit;text-decoration:none">07 579 8000</a></div>
+        <div class="em-note">Cameron Road, Tauranga. ED open 24/7.</div>
+      </div>
+      <div class="em-card blue">
+        <div class="em-name">St John (non-emergency)</div>
+        <div class="em-number"><a href="tel:0800785646" style="color:inherit;text-decoration:none">0800 785 646</a></div>
+        <div class="em-note">Health advice line and non-urgent transport.</div>
+      </div>
+      <div class="em-card">
+        <div class="em-name">Tauranga City Council</div>
+        <div class="em-number"><a href="tel:075772700" style="color:inherit;text-decoration:none">07 577 2700</a></div>
+        <div class="em-note">Roads, flooding, noise, rubbish. General council services.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="food-support">
+    <h2 class="section-title"><span>🛒</span> Food Support</h2>
+    <p class="section-intro">No one in Pāpāmoa should go without food. Several community organisations provide food assistance in the Tauranga / Pāpāmoa area.</p>
+    <div class="resource-list">
+      <div class="resource-card">
+        <span class="resource-icon">🥫</span>
+        <div class="resource-body">
+          <h4>Tauranga City Foodbank</h4>
+          <p>Operating from multiple sites, Tauranga's foodbank provides food parcels to individuals and families in need across the city including Pāpāmoa. No referral required for first-time visitors. Contact: <a href="tel:075786081">07 578 6081</a></p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">⛪</span>
+        <div class="resource-body">
+          <h4>Local churches & community pantries</h4>
+          <p>Several Pāpāmoa churches and community organisations run informal food banks, community pantries and food-share programmes. Check the Pāpāmoa Community Facebook group for current local initiatives.</p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">🤲</span>
+        <div class="resource-body">
+          <h4>Work and Income NZ (WINZ)</h4>
+          <p>Emergency food grants may be available to eligible individuals through WINZ. Call <a href="tel:08005520002">0800 552 002</a> or visit the Tauranga WINZ office. You do not need to be on a benefit to request a one-off emergency food grant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="mental-health">
+    <h2 class="section-title"><span>💚</span> Mental Health & Wellbeing</h2>
+    <div class="resource-list">
+      <div class="resource-card">
+        <span class="resource-icon">📞</span>
+        <div class="resource-body">
+          <h4>Lifeline — 0800 543 354</h4>
+          <p>24-hour crisis support line. Free. Available any time for anyone struggling with mental health, thoughts of suicide or just needing to talk.</p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">💬</span>
+        <div class="resource-body">
+          <h4>1737 — Need to Talk?</h4>
+          <p>Free call or text 1737 any time to talk with a trained counsellor. Available 24 hours, 7 days.</p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">🧒</span>
+        <div class="resource-body">
+          <h4>Youthline — 0800 376 633</h4>
+          <p>Free helpline for young people (up to 25) needing support. Also text 234. Available 24/7.</p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">🏥</span>
+        <div class="resource-body">
+          <h4>Bay of Plenty District Health Board mental health services</h4>
+          <p>Community mental health services available through referral from your GP. In a mental health crisis, you can also present directly to Tauranga Hospital Emergency Department.</p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">🌸</span>
+        <div class="resource-body">
+          <h4>Anxiety New Zealand — 0800 269 4389</h4>
+          <p>Support, information and resources for people living with anxiety and anxiety-related disorders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="groups">
+    <h2 class="section-title"><span>👥</span> Pāpāmoa Community Facebook Groups</h2>
+    <p class="section-intro">Facebook groups are the primary way Pāpāmoa residents connect, share local information, ask for recommendations and organise community activity. These are the main active groups.</p>
+    <div class="fb-groups">
+      <div class="fb-group">
+        <div><div class="fbg-name">Pāpāmoa Community Page</div><div class="fbg-type">General community news and discussion</div></div>
+        <a href="https://www.facebook.com/groups/papamoacommunity" target="_blank" rel="noopener" class="fbg-link">Facebook →</a>
+      </div>
+      <div class="fb-group">
+        <div><div class="fbg-name">Pāpāmoa Buy, Sell and Swap</div><div class="fbg-type">Local trading group</div></div>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener" class="fbg-link">Facebook →</a>
+      </div>
+      <div class="fb-group">
+        <div><div class="fbg-name">Pāpāmoa Lost & Found Pets</div><div class="fbg-type">Missing and found animals</div></div>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener" class="fbg-link">Facebook →</a>
+      </div>
+      <div class="fb-group">
+        <div><div class="fbg-name">Pāpāmoa Mums</div><div class="fbg-type">Support group for local mothers</div></div>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener" class="fbg-link">Facebook →</a>
+      </div>
+      <div class="fb-group">
+        <div><div class="fbg-name">Pāpāmoa Neighbourhood Support</div><div class="fbg-type">Neighbourhood watch and safety</div></div>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener" class="fbg-link">Facebook →</a>
+      </div>
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted)">Facebook group links updated periodically. Group names and URLs can change — search Facebook for "Pāpāmoa" to find current active groups.</p>
+  </section>
+
+  <section class="section" id="youth">
+    <h2 class="section-title"><span>🧒</span> Youth Services</h2>
+    <div class="resource-list">
+      <div class="resource-card">
+        <span class="resource-icon">📚</span>
+        <div class="resource-body">
+          <h4>Pāpāmoa Library — youth programmes</h4>
+          <p>The Pāpāmoa Library runs school holiday programmes and youth-oriented activities throughout the year. Free to attend with library membership. <a href="/library">Library page →</a></p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">⚽</span>
+        <div class="resource-body">
+          <h4>Pāpāmoa sports clubs</h4>
+          <p>Gordon Spratt Reserve hosts a range of youth sports clubs including football, rugby league, touch and cricket. Contact TCC for current club contact details, or ask at the reserve.</p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">🌊</span>
+        <div class="resource-body">
+          <h4>Pāpāmoa Surf Life Saving Club — Nippers</h4>
+          <p>The Pāpāmoa SLSC runs a Nippers programme for children aged 5–13 during summer. Ocean safety, beach sports and lifesaving skills. One of the most popular children's programmes in the suburb.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="volunteer">
+    <h2 class="section-title"><span>🤝</span> Volunteer Opportunities</h2>
+    <div class="resource-list">
+      <div class="resource-card">
+        <span class="resource-icon">🌊</span>
+        <div class="resource-body">
+          <h4>Pāpāmoa Surf Life Saving Club</h4>
+          <p>Volunteer patrol members provide beach safety every weekend and public holiday through summer. No prior experience required — training provided. Contact the club directly through their Facebook page.</p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">🏘️</span>
+        <div class="resource-body">
+          <h4>Neighbourhood Support</h4>
+          <p>Neighbourhood Support Tauranga connects neighbours and builds community resilience. Becoming a street coordinator takes minimal time and has real community benefit. Visit <a href="https://www.neighbourhoodsupport.co.nz" target="_blank" rel="noopener">neighbourhoodsupport.co.nz</a></p>
+        </div>
+      </div>
+      <div class="resource-card">
+        <span class="resource-icon">🌿</span>
+        <div class="resource-body">
+          <h4>Bay of Plenty Regional Council conservation volunteers</h4>
+          <p>BOPRC runs volunteer programmes for native planting and conservation work at Pāpāmoa Hills and other regional parks. Check <a href="https://www.boprc.govt.nz" target="_blank" rel="noopener">boprc.govt.nz</a> for current opportunities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<footer class="site-footer">
+  <a href="/">Papamoa.info</a> — Community resources page. No advertising on this page. Contact details verified April 2026 — report changes to <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a>.
+</footer>
+</body>
+</html>
