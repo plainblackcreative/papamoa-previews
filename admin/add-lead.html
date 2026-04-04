@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Add Lead">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Add Lead | Papamoa.info</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0F1117;
+      --bg-card: #1A1D27;
+      --bg-input: #22262F;
+      --border: #2E3340;
+      --text: #E8E9ED;
+      --text-dim: #8B8FA3;
+      --text-muted: #5C6070;
+      --ocean: #3BB5C9;
+      --ocean-dim: rgba(59,181,201,0.15);
+      --dune: #D4A04A;
+      --green: #34D399;
+      --green-dim: rgba(52,211,153,0.15);
+      --red: #F87171;
+      --font: 'DM Sans', -apple-system, sans-serif;
+      --radius: 10px;
+    }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ocean);
+    }
+    .header-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--ocean-dim);
+      color: var(--ocean);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* Form */
+    .form-wrap {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+    .field-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .field-label .req { color: var(--red); }
+    .field-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .field-input:focus {
+      outline: none;
+      border-color: var(--ocean);
+      box-shadow: 0 0 0 3px var(--ocean-dim);
+    }
+    .field-input::placeholder { color: var(--text-muted); }
+
+    select.field-input {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235C6070' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    textarea.field-input {
+      min-height: 80px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Quick-add category pills */
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .pill {
+      padding: 8px 16px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pill:active,
+    .pill.selected {
+      background: var(--ocean-dim);
+      border-color: var(--ocean);
+      color: var(--ocean);
+    }
+
+    /* Footer / submit */
+    .form-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+      background: var(--bg-card);
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--ocean);
+      color: var(--bg);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .submit-btn:active { transform: scale(0.98); }
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Success state */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      z-index: 100;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+    }
+    .success-overlay.active { display: flex; }
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: var(--green-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .success-overlay h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .success-overlay p {
+      font-size: 15px;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+    }
+    .success-overlay .add-another {
+      padding: 14px 32px;
+      background: var(--ocean);
+      color: var(--bg);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    @media (min-width: 500px) {
+      body { align-items: center; justify-content: center; }
+      .form-container { width: 420px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <div class="header">
+      <span class="header-title">+ Add Lead</span>
+      <span class="header-badge">Jayden Only</span>
+    </div>
+
+    <form class="form-wrap" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
+      <input type="hidden" name="subject" value="New Lead Added - Papamoa.info CRM">
+      <input type="hidden" name="from_name" value="Papamoa.info Lead Intake">
+      <input type="hidden" name="redirect" value="">
+
+      <!-- Status always starts as New Lead -->
+      <input type="hidden" name="Status" value="New Lead">
+
+      <div class="field">
+        <label class="field-label">Business Name <span class="req">*</span></label>
+        <input type="text" name="Business Name" class="field-input" placeholder="e.g. Bayline Plumbing" required autocomplete="off">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">Contact Name</label>
+          <input type="text" name="Contact Name" class="field-input" placeholder="e.g. Mike" autocomplete="off">
+        </div>
+        <div class="field">
+          <label class="field-label">Phone</label>
+          <input type="tel" name="Phone" class="field-input" placeholder="027..." autocomplete="off">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Email</label>
+        <input type="email" name="Email" class="field-input" placeholder="Optional" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label class="field-label">Category <span class="req">*</span></label>
+        <input type="hidden" name="Category" id="categoryInput" value="" required>
+        <div class="pill-group" id="categoryPills">
+          <button type="button" class="pill" data-val="Accommodation">Accommodation</button>
+          <button type="button" class="pill" data-val="Activities">Activities</button>
+          <button type="button" class="pill" data-val="Food & Drink">Food & Drink</button>
+          <button type="button" class="pill" data-val="Shops">Shops</button>
+          <button type="button" class="pill" data-val="Services">Services</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Sub-Category</label>
+        <input type="text" name="Sub-Category" class="field-input" placeholder="e.g. Plumber, Cafes, Motels" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label class="field-label">Lead Source <span class="req">*</span></label>
+        <select name="Lead Source" class="field-input" required>
+          <option value="" disabled selected>How did you find them?</option>
+          <option value="Cold Call">Cold Call</option>
+          <option value="Networking">Networking</option>
+          <option value="Spotted (Van/Sign)">Spotted (Van/Sign)</option>
+          <option value="Facebook">Facebook</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Google Search">Google Search</option>
+          <option value="Outscraper">Outscraper</option>
+          <option value="Referral">Referral</option>
+          <option value="Placeholder Data">Placeholder Data</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">Tier Interest</label>
+          <select name="Tier Interest" class="field-input">
+            <option value="Unknown" selected>Unknown</option>
+            <option value="Gold">Gold</option>
+            <option value="Silver">Silver</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Website</label>
+          <input type="url" name="Website" class="field-input" placeholder="Optional" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Notes</label>
+        <textarea name="Notes" class="field-input" placeholder="Saw their van in Papamoa East. Good reviews. No directory listings yet."></textarea>
+      </div>
+    </form>
+
+    <div class="form-footer">
+      <button type="submit" form="leadForm" class="submit-btn" id="submitBtn">Add Lead to Pipeline</button>
+    </div>
+  </div>
+
+  <!-- Success -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-icon">&#10003;</div>
+    <h2>Lead Added</h2>
+    <p id="successName">Business name will appear here</p>
+    <button class="add-another" onclick="resetForm()">+ Add Another Lead</button>
+  </div>
+
+  <script>
+    // Category pill selection
+    document.querySelectorAll('#categoryPills .pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('#categoryPills .pill').forEach(function(p) { p.classList.remove('selected'); });
+        this.classList.add('selected');
+        document.getElementById('categoryInput').value = this.getAttribute('data-val');
+      });
+    });
+
+    // Form submission
+    document.getElementById('leadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Adding...';
+
+      var formData = new FormData(this);
+      var bizName = formData.get('Business Name');
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      }).then(function(response) {
+        return response.json();
+      }).then(function(data) {
+        if (data.success) {
+          document.getElementById('successName').textContent = bizName + ' added to pipeline';
+          document.getElementById('successOverlay').classList.add('active');
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Add Lead to Pipeline';
+          alert('Something went wrong. Try again.');
+        }
+      }).catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Add Lead to Pipeline';
+        alert('Network error. Check your connection.');
+      });
+    });
+
+    function resetForm() {
+      document.getElementById('leadForm').reset();
+      document.querySelectorAll('#categoryPills .pill').forEach(function(p) { p.classList.remove('selected'); });
+      document.getElementById('categoryInput').value = '';
+      document.getElementById('submitBtn').disabled = false;
+      document.getElementById('submitBtn').textContent = 'Add Lead to Pipeline';
+      document.getElementById('successOverlay').classList.remove('active');
+    }
+  </script>
+
+</body>
+</html>
