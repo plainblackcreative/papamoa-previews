@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real Estate Agent Outreach — Admin | Papamoa.info</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ocean: #1B6B7D;
+  --ocean-deep: #0F4352;
+  --ocean-light: #E4F2F5;
+  --sand: #F7F3ED;
+  --sand-dark: #EDE7DB;
+  --dune: #C4985A;
+  --dune-light: #F5EDD8;
+  --navy: #0D2B3E;
+  --white: #FFFFFF;
+  --text: #1A2832;
+  --muted: #5A6E78;
+  --border: #D8E4E8;
+  --gold: #B8840A;
+  --gold-bg: #FBF3E2;
+  --green: #1E6B3C;
+  --green-bg: #E6F4EC;
+  --red: #8B2020;
+  --red-bg: #FAEAEA;
+  --warn: #7A5500;
+  --warn-bg: #FFF8E6;
+  --font-body: 'Figtree', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--sand);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ADMIN BANNER */
+.admin-banner {
+  background: var(--navy);
+  color: var(--white);
+  padding: 11px 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.ab-badge {
+  background: #C0540A;
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+.ab-text { flex: 1; opacity: 0.7; }
+.ab-links { display: flex; gap: 16px; margin-left: auto; }
+.ab-links a { color: rgba(255,255,255,0.5); font-size: 12px; text-decoration: none; }
+.ab-links a:hover { color: var(--white); }
+
+/* LAYOUT */
+.page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+.page-header { margin-bottom: 40px; border-bottom: 2px solid var(--border); padding-bottom: 28px; }
+.page-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 8px;
+}
+.page-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.page-meta { font-size: 13px; color: var(--muted); }
+
+/* SECTIONS */
+.section { margin-bottom: 52px; }
+.section-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ALERTS */
+.alert {
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  font-size: 13.5px;
+  display: flex;
+  gap: 10px;
+}
+.alert-icon { flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+.alert.info { background: var(--ocean-light); border: 1px solid #B0D4DC; color: var(--ocean-deep); }
+.alert.warn { background: var(--warn-bg); border: 1px solid #E8C96A; color: var(--warn); }
+.alert.ok { background: var(--green-bg); border: 1px solid #9ED0B4; color: var(--green); }
+
+/* EMAIL BLOCK */
+.email-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.eb-head {
+  background: var(--sand-dark);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.eb-label { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); }
+.eb-when { font-size: 12px; color: var(--muted); }
+.eb-subject {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.eb-subject strong { color: var(--navy); }
+.eb-subject span { color: var(--muted); }
+.eb-body {
+  padding: 20px;
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.75;
+  white-space: pre-wrap;
+  font-family: var(--font-body);
+  border-bottom: 1px solid var(--border);
+}
+.eb-notes {
+  padding: 12px 20px;
+  background: #FAFBFC;
+  font-size: 12px;
+  color: var(--muted);
+}
+.eb-notes strong { color: var(--text); }
+.copy-btn {
+  background: var(--ocean);
+  color: var(--white);
+  border: none;
+  padding: 7px 14px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: var(--font-body);
+}
+.copy-btn:hover { background: var(--ocean-deep); }
+.copy-btn.copied { background: var(--green); }
+
+/* FOLLOW-UP TIMELINE */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border);
+}
+.tl-item { position: relative; padding-bottom: 28px; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  background: var(--ocean);
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 2px var(--ocean);
+}
+.tl-dot.warm { background: var(--dune); box-shadow: 0 0 0 2px var(--dune); }
+.tl-dot.last { background: var(--red); box-shadow: 0 0 0 2px var(--red); }
+.tl-head { font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+.tl-day { display: inline-block; background: var(--sand-dark); font-size: 11px; font-weight: 700; color: var(--muted); padding: 2px 8px; border-radius: 3px; margin-right: 8px; }
+.tl-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* STRATEGY NOTES */
+.note-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+.note-card h4 { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 8px; }
+.note-card p { color: var(--muted); }
+.note-card ul { padding-left: 18px; color: var(--muted); display: flex; flex-direction: column; gap: 5px; }
+.note-card li { font-size: 13.5px; }
+
+/* PRICING TABLE */
+.pricing-ref {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 13.5px;
+}
+.pricing-ref table { width: 100%; border-collapse: collapse; }
+.pricing-ref th {
+  background: var(--navy);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 11px 16px;
+  text-align: left;
+}
+.pricing-ref td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text);
+}
+.pricing-ref tr:last-child td { border-bottom: none; }
+.pricing-ref tr:nth-child(even) td { background: #FAFBFC; }
+.price-strong { font-weight: 700; color: var(--navy); }
+
+/* FOOTER */
+.doc-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="admin-banner">
+  <span class="ab-badge">Internal</span>
+  <span class="ab-text">Real Estate Agent Outreach — Admin Reference. Not for sharing.</span>
+  <div class="ab-links">
+    <a href="/partners/real-estate-agent.html">Partner Page</a>
+    <a href="/categories/real-estate.html">Category Page</a>
+    <a href="/admin/index.html">Admin Home</a>
+  </div>
+</div>
+
+<div class="page">
+  <div class="page-header">
+    <div class="page-eyebrow">Admin / Outreach</div>
+    <h1 class="page-title">Real Estate Agent Outreach</h1>
+    <p class="page-meta">Cold email scripts, follow-up sequence, strategy notes, and pricing reference for the featured agent partnership campaign.</p>
+  </div>
+
+  <!-- STRATEGY OVERVIEW -->
+  <div class="section">
+    <div class="section-label">Context</div>
+    <h2 class="section-title">Campaign Overview</h2>
+
+    <div class="alert info">
+      <span class="alert-icon">ℹ</span>
+      <div>This is a <strong>premium partnership position</strong>, not a standard business listing. The real estate featured agent slot is priced and positioned differently from Gold/Silver directory listings. Treat it as a bespoke arrangement, not a product with a public price.</div>
+    </div>
+
+    <div class="note-card">
+      <h4>What You Are Selling</h4>
+      <ul>
+        <li>Exclusive featured position on the real estate category page (one agent, no competitors)</li>
+        <li>Monthly property market blog article targeting Papamoa search terms, published under their name</li>
+        <li>Social media sharing of each article across Papamoa.info channels</li>
+        <li>AI search presence: name woven into locally authoritative content that ChatGPT, Siri, and Google AI draw from</li>
+        <li>Direct leads: no platform between agent and client</li>
+        <li>Compounding value: every article makes the presence stronger</li>
+      </ul>
+    </div>
+
+    <div class="note-card">
+      <h4>Who to Target</h4>
+      <ul>
+        <li>Agents with Papamoa-specific focus, not Tauranga-wide generalists</li>
+        <li>Active profiles on RateMyAgent, homes.co.nz, or realestate.co.nz with recent Papamoa sales</li>
+        <li>Independent agents or small boutique agencies tend to be more receptive than large franchise branch managers</li>
+        <li>Look for agents who post their own market content on social, they already understand the value of content</li>
+        <li>Avoid agents at agencies that might see this as competing with their own brand</li>
+      </ul>
+    </div>
+
+    <div class="note-card">
+      <h4>Pricing Approach</h4>
+      <p>Do not publish pricing on the partner page. This allows for a conversation and avoids sticker shock before value is established. The ask will likely be in the range of $150 to $250/month depending on what the market accepts. Frame it as: "One lead pays for this many times over."</p>
+    </div>
+  </div>
+
+  <!-- COLD EMAILS -->
+  <div class="section">
+    <div class="section-label">Outreach</div>
+    <h2 class="section-title">Cold Email Scripts</h2>
+
+    <div class="alert warn">
+      <span class="alert-icon">&#9888;</span>
+      <div><strong>Before sending:</strong> Replace [First Name] and personalise the opening line with one specific detail (a recent sale, a neighbourhood they specialise in, a post they made). Generic cold emails get deleted. One genuine detail changes the read rate significantly.</div>
+    </div>
+
+    <!-- EMAIL 1 -->
+    <div class="email-block" id="email1">
+      <div class="eb-head">
+        <span class="eb-label">Email 1 — Warm Approach</span>
+        <span class="eb-when">Use for: agents you've had any contact with, or where you have a specific personal detail</span>
+        <button class="copy-btn" onclick="copyEmail('email1-body', this)">Copy</button>
+      </div>
+      <div class="eb-subject">
+        <strong>Subject:</strong> <span>A local opportunity for Papamoa real estate — thought of you</span>
+      </div>
+      <div class="eb-body" id="email1-body">Hi [First Name],
+
+I hope things are going well. My name is Jayden and I run Papamoa.info, a community-focused website dedicated to being the most trusted local resource for the Papamoa area.
+
+I'm putting together our featured real estate partnership and wanted to reach out to you directly.
+
+The idea is straightforward: one agent, exclusively, featured across the site, recommended to our audience, and supported by a monthly Papamoa property market article written around your expertise and shared on our social channels.
+
+I've attached a document that explains the full picture, including how the site drives exposure beyond basic traffic figures, and an example of what the monthly content looks like. You can also see it live here: papamoa.info/categories/real-estate.html
+
+The way people search for local services is changing fast. Google is one part of it, but increasingly people are asking ChatGPT, Siri, and Google's AI directly. Being woven into an authoritative local site like ours is how you show up in those answers, not just on a list.
+
+I only work with one agent in real estate, so this conversation is exclusive to you for now.
+
+Worth a quick chat? I'm flexible on timing and happy to answer any questions.
+
+Kind regards,
+Jayden
+Papamoa.info
+jayden@papamoa.info</div>
+      <div class="eb-notes"><strong>Notes:</strong> Attach the partner page as a PDF export if sending by email. Link to /partners/real-estate-agent.html and /categories/real-estate.html. Mention a specific detail about their work in the opening paragraph to personalise.</div>
+    </div>
+
+    <!-- EMAIL 2 -->
+    <div class="email-block" id="email2">
+      <div class="eb-head">
+        <span class="eb-label">Email 2 — Direct/Cold Approach</span>
+        <span class="eb-when">Use for: fully cold outreach where you have no prior contact</span>
+        <button class="copy-btn" onclick="copyEmail('email2-body', this)">Copy</button>
+      </div>
+      <div class="eb-subject">
+        <strong>Subject:</strong> <span>One spot. One Papamoa agent. Is it you?</span>
+      </div>
+      <div class="eb-body" id="email2-body">Hi [First Name],
+
+I run Papamoa.info, a local website focused on becoming the go-to digital resource for the Papamoa community.
+
+I'm reaching out because I have one featured position available for a real estate agent, and I wanted to put it in front of you before I approach anyone else.
+
+There are two things worth seeing:
+
+1. Why a Papamoa.info listing works — covering how local authority sites drive exposure beyond what standard traffic reports show, including Google rankings, AI search results (ChatGPT, Siri, Gemini), and direct referrals that never touch a contact form.
+
+2. An example of the monthly Papamoa Real Estate Market Blog — a keyword-rich, shareable article I produce each month, published on the site and shared across our social channels.
+
+Both are visible here: papamoa.info/partners/real-estate-agent.html
+
+The short version: people regularly ask us who we recommend for real estate in Papamoa. Right now, I don't have an answer. I'd like that answer to be you.
+
+One lead from a trusted local recommendation and the investment pays for itself.
+
+Would you be open to a quick chat this week? Happy to walk you through it over the phone or grab a coffee.
+
+Thanks,
+Jayden
+Papamoa.info
+jayden@papamoa.info</div>
+      <div class="eb-notes"><strong>Notes:</strong> Subject line has higher open rate for cold lists. Link to /partners/real-estate-agent.html which has all content in one place. Consider LinkedIn connection before emailing if targeting specific agents.</div>
+    </div>
+  </div>
+
+  <!-- FOLLOW-UP SEQUENCE -->
+  <div class="section">
+    <div class="section-label">Automation</div>
+    <h2 class="section-title">Follow-Up Sequence</h2>
+
+    <div class="alert info">
+      <span class="alert-icon">ℹ</span>
+      <div>This is a manual sequence until Brevo automation is set up for the agent campaign. Track outreach in the CRM. Most responses come on Day 3 or Day 6 follow-ups, not the initial email.</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-head"><span class="tl-day">Day 0</span>Initial outreach</div>
+        <div class="tl-desc">Send Email 1 or Email 2 depending on context. Note send date in CRM. Attach partner page PDF if email client.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot warm"></div>
+        <div class="tl-head"><span class="tl-day">Day 3</span>First follow-up — light bump</div>
+        <div class="tl-desc">Short one-liner: "Hi [Name], just wanted to make sure my earlier email didn't get lost. Happy to answer any questions or jump on a quick call this week." No new content, no pressure. Just visibility.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot warm"></div>
+        <div class="tl-head"><span class="tl-day">Day 6</span>Second follow-up — add value</div>
+        <div class="tl-desc">Link to the live category page or the latest market report. "The category page is live if you'd like to see it in context: [link]. This is where you'd be featured." Show, don't tell.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot last"></div>
+        <div class="tl-head"><span class="tl-day">Day 10</span>Final touch — scarcity close</div>
+        <div class="tl-desc">"I'm going to reach out to a couple of other agents in the area this week so wanted to give you first right of refusal. No hard feelings either way — just didn't want you to miss out if the timing is right." Then move on. No more contact unless they reply.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OBJECTION HANDLING -->
+  <div class="section">
+    <div class="section-label">Sales</div>
+    <h2 class="section-title">Objection Handling</h2>
+
+    <div class="note-card">
+      <h4>"How do I know it will drive leads?"</h4>
+      <p>You don't, and I won't claim to. What I can say is: this site is being built for long-term local authority, not quick traffic. The value compounds. Your name in front of someone actively searching "real estate agent Papamoa" on Google or asking that question on ChatGPT, that is targeted. One genuine lead covers the cost many times over. The question is whether you want to be the agent who owns this ground before someone else does.</p>
+    </div>
+
+    <div class="note-card">
+      <h4>"My agency already has a website and social media."</h4>
+      <p>Great. This isn't a replacement for any of that. It's a second authoritative signal that reinforces your name and links back to your own site. Think of it as a trusted local neighbour recommending you, at scale. It also helps your own website rank better through the backlink from an established local domain.</p>
+    </div>
+
+    <div class="note-card">
+      <h4>"What's the price?"</h4>
+      <p>Don't quote a number cold. Respond with: "I'd rather have a quick conversation and make sure it makes sense for your situation first. If it doesn't, I'd rather tell you that than take your money." This builds trust and allows a needs-based price conversation.</p>
+    </div>
+
+    <div class="note-card">
+      <h4>"Can I think about it?"</h4>
+      <p>Yes, of course. Give them a clear next step: "Totally fine. I'll follow up in a few days. One thing worth knowing is that I can only work with one agent in real estate, so once this is filled, it's closed. But no rush on my end." Then follow the sequence above.</p>
+    </div>
+  </div>
+
+  <!-- PRICING REFERENCE -->
+  <div class="section">
+    <div class="section-label">Reference</div>
+    <h2 class="section-title">Pricing Reference</h2>
+
+    <div class="alert warn">
+      <span class="alert-icon">&#9888;</span>
+      <div>The real estate featured position is priced separately from the standard Gold/Silver directory tiers. Do not quote directory pricing for this product. See below for how to frame the conversation.</div>
+    </div>
+
+    <div class="pricing-ref">
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Standard Directory Listings</th>
+            <th>Featured Agent Position</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Structure</td>
+            <td>Gold $1,199+GST/yr, Silver $599+GST/yr</td>
+            <td class="price-strong">Bespoke monthly arrangement. Likely $150 to $250/month. Finalise in conversation.</td>
+          </tr>
+          <tr>
+            <td>Includes</td>
+            <td>Listing page, SEO description, images, review badges</td>
+            <td class="price-strong">Featured position + monthly market article + social sharing + AI optimisation</td>
+          </tr>
+          <tr>
+            <td>Scarcity</td>
+            <td>One Gold per subcategory</td>
+            <td class="price-strong">One agent for all of Papamoa real estate. Absolute exclusivity.</td>
+          </tr>
+          <tr>
+            <td>Value frame</td>
+            <td>Ranking and lead capture for local searches</td>
+            <td class="price-strong">Total local authority. One referral pays for the year. Compounding content engine.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ASSETS -->
+  <div class="section">
+    <div class="section-label">Assets</div>
+    <h2 class="section-title">Pages to Send Prospects</h2>
+
+    <div class="note-card">
+      <h4>Primary Link (send this one)</h4>
+      <p><strong>papamoa.info/partners/real-estate-agent.html</strong> — The dedicated partner pitch page. Everything in one place: value proposition, what's included, the monthly article concept, and CTA. This replaces PDF attachments for initial outreach.</p>
+    </div>
+
+    <div class="note-card">
+      <h4>Proof of Concept (send as follow-up)</h4>
+      <p><strong>papamoa.info/categories/real-estate.html</strong> — The live category page with the March 2026 market report built in. Shows them exactly where they'd appear, with the Spotlight Available card in the sidebar. Best sent on the Day 6 follow-up.</p>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    Papamoa.info Internal Admin &bull; Real Estate Agent Outreach &bull; Plain Black Creative &bull; April 2026
+  </div>
+</div>
+
+<script>
+function copyEmail(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
