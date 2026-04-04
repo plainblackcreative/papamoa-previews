@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Cave Pāpāmoa — VR, Sim Racing & Escape Rooms | Papamoa.info</title>
+  <meta name="description" content="The Cave Pāpāmoa offers virtual reality experiences, VR escape rooms, sim racing and PC gaming at 16 Ashley Place, Pāpāmoa. Birthday parties and corporate events catered for.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0;
+      --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E;
+      --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
+    a { color: var(--blue); }
+
+    .site-nav { background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
+    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--blue); }
+    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
+
+    .page-hero { background: var(--navy); padding: 44px 24px 40px; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; top: -80px; right: -60px; width: 320px; height: 320px; background: radial-gradient(circle, rgba(58,171,222,0.12) 0%, transparent 65%); pointer-events: none; }
+    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), #8A2BE2); }
+    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; padding: 4px 10px; border-radius: 3px; margin-bottom: 12px; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 10px; }
+    .page-hero h1 em { font-style: italic; color: var(--blue); }
+    .hero-sub { font-size: 0.92rem; color: rgba(255,255,255,0.6); max-width: 540px; line-height: 1.65; margin-bottom: 18px; }
+    .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hchip { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); padding: 4px 10px; border-radius: 4px; }
+
+    .page-wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 80px; }
+    .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+    .main-col { min-width: 0; }
+    .side-col { display: flex; flex-direction: column; gap: 18px; }
+
+    .section { margin-bottom: 36px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+
+    .listing-desc { font-size: 0.9rem; color: var(--body); line-height: 1.75; margin-bottom: 16px; }
+
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .service-card { background: var(--white); border: 1px solid var(--border); border-radius: 9px; padding: 14px 16px; }
+    .service-icon { font-size: 1.4rem; margin-bottom: 6px; }
+    .service-name { font-weight: 700; font-size: 0.88rem; color: var(--navy); margin-bottom: 3px; }
+    .service-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    .info-rows { display: flex; flex-direction: column; gap: 0; background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .info-row { display: flex; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+    .info-row:last-child { border-bottom: none; }
+    .ir-label { font-weight: 700; color: var(--navy); min-width: 100px; font-size: 0.78rem; flex-shrink: 0; }
+    .ir-val { color: var(--muted); }
+    .ir-val a { color: var(--blue); text-decoration: none; }
+
+    .seo-bar { background: var(--navy); border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
+    .seo-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #fff; line-height: 1; flex-shrink: 0; }
+    .seo-bar-wrap { flex: 1; }
+    .seo-track { height: 6px; background: rgba(255,255,255,0.15); border-radius: 3px; overflow: hidden; margin-bottom: 5px; }
+    .seo-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--lime), #5A9020); }
+    .seo-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+
+    .cta-block { background: linear-gradient(135deg, var(--navy), #1A2A40); border-radius: 10px; padding: 20px; }
+    .cta-title { font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+    .cta-btns { display: flex; flex-direction: column; gap: 8px; }
+    .cta-btn { display: block; text-align: center; font-weight: 700; font-size: 0.85rem; padding: 11px 16px; border-radius: 7px; text-decoration: none; transition: opacity 0.15s; }
+    .cta-primary { background: linear-gradient(135deg, var(--blue), #1A8ABE); color: #fff; }
+    .cta-primary:hover { opacity: 0.85; }
+    .cta-ghost { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); }
+    .cta-ghost:hover { background: rgba(255,255,255,0.14); }
+
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+
+    .social-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .social-link { font-size: 0.78rem; font-weight: 700; color: var(--blue); background: rgba(58,171,222,0.08); border: 1px solid rgba(58,171,222,0.2); padding: 5px 12px; border-radius: 5px; text-decoration: none; transition: all 0.15s; }
+    .social-link:hover { background: var(--blue); color: #fff; }
+
+    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
+    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+    .ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .ad-inner { padding: 16px; background: var(--white); }
+    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
+    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-decoration: none; }
+
+    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
+    .site-footer a { color: var(--blue); }
+
+    @media (max-width: 720px) {
+      .two-col { grid-template-columns: 1fr; }
+      .side-col { order: -1; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb">
+    <a href="/">Home</a><span>/</span><a href="/categories/entertainment.html">Activities &amp; Entertainment</a><span>/</span>The Cave Pāpāmoa
+  </span>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-badge">&#11088; Silver Listing</div>
+    <div class="hero-eyebrow">&#127918; Virtual Reality &amp; Sim Racing &middot; Pāpāmoa</div>
+    <h1>The Cave <em>Pāpāmoa</em></h1>
+    <p class="hero-sub">VR experiences, escape rooms, sim racing and PC gaming at 16 Ashley Place. Birthday parties and corporate events a speciality. One of three New Zealand locations.</p>
+    <div class="hero-chips">
+      <span class="hchip">&#128205; 16 Ashley Place, Pāpāmoa</span>
+      <span class="hchip">&#128222; 0800 228 369</span>
+      <span class="hchip">&#9733; 50+ TripAdvisor reviews</span>
+      <span class="hchip">Ages 8+</span>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="two-col">
+    <div class="main-col">
+
+      <div class="section">
+        <div class="section-title">About The Cave Pāpāmoa</div>
+        <p class="listing-desc">The Cave is a high-tech entertainment studio at 16 Ashley Place in Pāpāmoa, offering hosted virtual reality sessions, VR escape rooms, sim racing simulators and PC gaming. It is one of three Cave locations in New Zealand — alongside Taupō and Palmerston North — and positions itself as a premium indoor activity for families, groups, date nights and corporate teams.</p>
+        <p class="listing-desc">The VR sessions are hosted rather than self-directed, meaning a staff member guides participants through experiences suited to their age and comfort level. The library runs to hundreds of titles across genres including sport, RPG, sci-fi, arcade and shooters. The sim racing setup uses custom-built rigs and covers rally, circuit, formula one and go-kart formats. Head-to-head racing between participants is possible and popular for groups.</p>
+        <p class="listing-desc">Birthday parties are a core part of the operation. The Cave handles the setup, entertainment and group photo, and provides coffee for accompanying parents. Minimum age is 8 years, minimum group size 4 for birthday packages. The venue can cater for corporate groups up to 40 people with a range of entertainment and catering options. Advance booking is strongly recommended — the venue books out regularly, particularly on weekends and during school holidays.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Experiences</div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">&#129505;</div>
+            <div class="service-name">Virtual Reality</div>
+            <div class="service-desc">Hosted VR sessions with hundreds of titles. Solo or group. Sport, RPG, sci-fi, arcade, shooters. Hosted by trained staff.</div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">&#128275;</div>
+            <div class="service-name">VR Escape Rooms</div>
+            <div class="service-desc">Immersive virtual escape room experiences — transported into a world where you can see, hear and interact with another reality.</div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">&#127950;</div>
+            <div class="service-name">Sim Racing</div>
+            <div class="service-desc">Custom-built racing simulators. Rally, circuit, F1, go-kart and demolition derby. Head-to-head racing available. All skill levels welcome.</div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">&#128187;</div>
+            <div class="service-name">PC Gaming</div>
+            <div class="service-desc">High-spec PC gaming stations. Solo or multiplayer. Suitable for experienced gamers and casual players alike.</div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">&#127881;</div>
+            <div class="service-name">Birthday Parties</div>
+            <div class="service-desc">Full party packages for ages 8+. Minimum 4 players. Hosted entertainment, group photo, birthday gift. Parents' lounge with coffee.</div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">&#128188;</div>
+            <div class="service-name">Corporate Events</div>
+            <div class="service-desc">Team building and corporate events for groups up to 40. Range of activities and catering options. Book directly via the website.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Business Details</div>
+        <div class="info-rows">
+          <div class="info-row"><span class="ir-label">Address</span><span class="ir-val">7/16 Ashley Place, Pāpāmoa 3118</span></div>
+          <div class="info-row"><span class="ir-label">Phone</span><span class="ir-val"><a href="tel:0800228369">0800 228 369</a></span></div>
+          <div class="info-row"><span class="ir-label">Email</span><span class="ir-val"><a href="mailto:info@thecave.nz">info@thecave.nz</a></span></div>
+          <div class="info-row"><span class="ir-label">Website</span><span class="ir-val"><a href="https://www.thecave.nz/papamoa" target="_blank" rel="noopener">thecave.nz/papamoa</a></span></div>
+          <div class="info-row"><span class="ir-label">Min age</span><span class="ir-val">8 years</span></div>
+          <div class="info-row"><span class="ir-label">Group size</span><span class="ir-val">Up to 40 (corporate events)</span></div>
+          <div class="info-row"><span class="ir-label">Locations</span><span class="ir-val">Pāpāmoa, Taupō, Palmerston North</span></div>
+        </div>
+      </div>
+
+      <div class="seo-bar">
+        <div class="seo-num">84</div>
+        <div class="seo-bar-wrap">
+          <div class="seo-track"><div class="seo-fill" style="width:84%"></div></div>
+          <div class="seo-label">SEO Score &mdash; Strong for VR, sim racing and kids&rsquo; activities in Pāpāmoa</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="side-col">
+
+      <div class="cta-block">
+        <div class="cta-title">Book Now</div>
+        <div class="cta-btns">
+          <a href="https://fareharbor.com/embeds/book/thecave/?flow=1044057&full-items=yes" class="cta-btn cta-primary" target="_blank" rel="noopener">&#127918; Book online</a>
+          <a href="tel:0800228369" class="cta-btn cta-ghost">&#128222; 0800 228 369</a>
+          <a href="https://www.thecave.nz/papamoa" class="cta-btn cta-ghost" target="_blank" rel="noopener">&#127760; thecave.nz</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">&#128279; Find them online</div>
+        <div class="social-links">
+          <a href="https://www.facebook.com/thecavenz/" class="social-link" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.instagram.com/thecavenz/" class="social-link" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.youtube.com/@TheCaveNZ" class="social-link" target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">&#128204; Good to know</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="font-size:0.82rem;color:var(--body);display:flex;gap:8px"><span style="color:var(--lime);font-weight:700;flex-shrink:0">›</span>Minimum age 8 years for most experiences</div>
+          <div style="font-size:0.82rem;color:var(--body);display:flex;gap:8px"><span style="color:var(--lime);font-weight:700;flex-shrink:0">›</span>Advance booking recommended — venue books out on weekends</div>
+          <div style="font-size:0.82rem;color:var(--body);display:flex;gap:8px"><span style="color:var(--lime);font-weight:700;flex-shrink:0">›</span>Gift vouchers available online</div>
+          <div style="font-size:0.82rem;color:var(--body);display:flex;gap:8px"><span style="color:var(--lime);font-weight:700;flex-shrink:0">›</span>Birthday parties: 2 hours, min 4 players</div>
+          <div style="font-size:0.82rem;color:var(--body);display:flex;gap:8px"><span style="color:var(--lime);font-weight:700;flex-shrink:0">›</span>Corporate groups up to 40 catered for</div>
+          <div style="font-size:0.82rem;color:var(--body);display:flex;gap:8px"><span style="color:var(--lime);font-weight:700;flex-shrink:0">›</span>50+ TripAdvisor reviews</div>
+        </div>
+      </div>
+
+      <div class="ad-spot">
+        <div class="ad-label">Sponsored</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>&#127918; Entertainment &amp; Activities in Pāpāmoa</p>
+            <a href="/index.html">Claim this spot &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">&#128279; Related pages</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <a href="/articles/kids-birthday-parties.html" style="font-size:0.82rem;font-weight:600">Kids Birthday Parties</a>
+          <a href="/articles/gordon-spratt-reserve.html" style="font-size:0.82rem;font-weight:600">Gordon Spratt Reserve</a>
+          <a href="/articles/parks-playgrounds.html" style="font-size:0.82rem;font-weight:600">Parks &amp; Playgrounds</a>
+          <a href="/articles/aims-games.html" style="font-size:0.82rem;font-weight:600">AIMS Games 2026</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="/">Papamoa.info</a> &mdash; The local directory for Pāpāmoa, Bay of Plenty, New Zealand. Listing details sourced from thecave.nz and publicly available information. Always confirm bookings and pricing directly with the business.
+</footer>
+
+</body>
+</html>
