@@ -78,6 +78,22 @@
     .page-card.not-built { opacity: 0.5; pointer-events: none; background: var(--bg); }
     .page-card.not-built .pc-path { color: var(--muted); }
 
+    /* STAR */
+    .star-btn {
+      position: absolute; top: 10px; right: 10px;
+      background: none; border: none; cursor: pointer;
+      font-size: 1rem; line-height: 1; padding: 2px 4px;
+      color: var(--dune); opacity: 0.25;
+      transition: opacity 0.15s, transform 0.15s;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+    .star-btn:hover { opacity: 0.7; transform: scale(1.2); }
+    .star-btn.starred { opacity: 1; color: var(--gold); }
+    .page-card { position: relative; }
+    .ftab.starred-tab { border-color: var(--gold); color: var(--gold); }
+    .ftab.starred-tab.active { background: var(--gold); color: #fff; border-color: var(--gold); }
+
     /* EMPTY STATE */
     .empty-state { text-align: center; padding: 48px 20px; color: var(--muted); }
     .empty-state p { font-size: 0.88rem; margin-bottom: 6px; }
@@ -121,6 +137,7 @@
     <input type="text" class="filter-input" id="search-input" placeholder="Search pages..." oninput="filterPages()">
     <div class="filter-tabs">
       <button class="ftab active" onclick="filterTab('all', this)">All</button>
+      <button class="ftab starred-tab" onclick="filterTab('starred', this)">⭐ Starred</button>
       <button class="ftab" onclick="filterTab('root', this)">Root</button>
       <button class="ftab" onclick="filterTab('listings', this)">Listings</button>
       <button class="ftab" onclick="filterTab('categories', this)">Categories</button>
@@ -139,6 +156,7 @@
     <div class="stat-chip"><strong id="count-total">0</strong> pages total</div>
     <div class="stat-chip"><strong id="count-live">0</strong> live</div>
     <div class="stat-chip"><strong id="count-new">0</strong> new this session</div>
+    <div class="stat-chip"><strong id="count-starred">0</strong> starred</div>
   </div>
 
   <!-- ROOT -->
@@ -947,8 +965,49 @@
 </footer>
 
 <script>
+  const STAR_KEY = 'papamoa_starred';
   let activeTab = 'all';
 
+  // ── STAR PERSISTENCE ──
+  function getStarred() {
+    try { return JSON.parse(localStorage.getItem(STAR_KEY) || '[]'); } catch(e) { return []; }
+  }
+  function saveStarred(arr) {
+    localStorage.setItem(STAR_KEY, JSON.stringify(arr));
+  }
+
+  function toggleStar(e, path) {
+    e.preventDefault();
+    e.stopPropagation();
+    const starred = getStarred();
+    const idx = starred.indexOf(path);
+    if (idx === -1) { starred.push(path); } else { starred.splice(idx, 1); }
+    saveStarred(starred);
+    const btn = e.currentTarget;
+    btn.classList.toggle('starred', idx === -1);
+    btn.title = idx === -1 ? 'Unstar' : 'Star';
+    updateStarCount();
+    if (activeTab === 'starred') applyFilters();
+  }
+
+  function initStars() {
+    const starred = getStarred();
+    document.querySelectorAll('.page-card').forEach(card => {
+      const path = card.querySelector('.pc-path')?.textContent.trim() || '';
+      const btn = document.createElement('button');
+      btn.className = 'star-btn' + (starred.includes(path) ? ' starred' : '');
+      btn.title = starred.includes(path) ? 'Unstar' : 'Star';
+      btn.innerHTML = '★';
+      btn.addEventListener('click', e => toggleStar(e, path));
+      card.appendChild(btn);
+    });
+  }
+
+  function updateStarCount() {
+    document.getElementById('count-starred').textContent = getStarred().length;
+  }
+
+  // ── FILTERS ──
   function filterTab(tab, btn) {
     activeTab = tab;
     document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
@@ -956,12 +1015,11 @@
     applyFilters();
   }
 
-  function filterPages() {
-    applyFilters();
-  }
+  function filterPages() { applyFilters(); }
 
   function applyFilters() {
     const q = document.getElementById('search-input').value.toLowerCase();
+    const starred = getStarred();
     const cards = document.querySelectorAll('.page-card');
     let visible = 0;
 
@@ -969,10 +1027,12 @@
       const section = card.dataset.section || '';
       const keywords = (card.dataset.keywords || '').toLowerCase();
       const title = card.querySelector('.pc-title')?.textContent.toLowerCase() || '';
-      const path = card.querySelector('.pc-path')?.textContent.toLowerCase() || '';
+      const path = card.querySelector('.pc-path')?.textContent.trim() || '';
       const desc = card.querySelector('.pc-desc')?.textContent.toLowerCase() || '';
 
-      const matchTab = activeTab === 'all' || section === activeTab;
+      const matchTab = activeTab === 'all'
+        || (activeTab === 'starred' && starred.includes(path))
+        || section === activeTab;
       const matchSearch = !q || title.includes(q) || path.includes(q) || desc.includes(q) || keywords.includes(q);
 
       if (matchTab && matchSearch) {
@@ -987,7 +1047,7 @@
     document.getElementById('count-total').textContent = cards.length;
   }
 
-  // Count stats on load
+  // ── INIT ──
   window.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.page-card');
     const live = document.querySelectorAll('.page-card:not(.not-built)');
@@ -995,6 +1055,8 @@
     document.getElementById('count-total').textContent = cards.length;
     document.getElementById('count-live').textContent = live.length;
     document.getElementById('count-new').textContent = newItems.length;
+    initStars();
+    updateStarCount();
   });
 </script>
 
