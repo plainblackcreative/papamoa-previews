@@ -73,6 +73,7 @@
     .tag-review { background: rgba(232,52,74,0.1); color: var(--coral); border: 1px solid rgba(232,52,74,0.2); }
     .tag-new { background: rgba(125,193,67,0.15); color: #2A7010; border: 1px solid rgba(125,193,67,0.3); }
     .tag-ppp { background: rgba(43,63,92,0.1); color: var(--navy); border: 1px solid rgba(43,63,92,0.2); }
+    .tag-partner { background: rgba(200,150,42,0.12); color: var(--gold); border: 1px solid rgba(200,150,42,0.3); }
 
     /* NOT BUILT */
     .page-card.not-built { opacity: 0.5; pointer-events: none; background: var(--bg); }
@@ -114,7 +115,7 @@
 <body>
 
 <nav class="site-nav">
-  <a href="/" class="nav-brand">Papamoa<em>.info</em></a>
+  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
 </nav>
 
 <div class="page-hero">
@@ -137,7 +138,7 @@
     <input type="text" class="filter-input" id="search-input" placeholder="Search pages..." oninput="filterPages()">
     <div class="filter-tabs">
       <button class="ftab active" onclick="filterTab('all', this)">All</button>
-      <button class="ftab starred-tab" onclick="filterTab('starred', this)">⭐ Starred</button>
+      <button class="ftab starred-tab" onclick="filterTab('starred', this)">&#11088; Starred</button>
       <button class="ftab" onclick="filterTab('root', this)">Root</button>
       <button class="ftab" onclick="filterTab('listings', this)">Listings</button>
       <button class="ftab" onclick="filterTab('categories', this)">Categories</button>
@@ -147,6 +148,7 @@
       <button class="ftab" onclick="filterTab('onboarding', this)">Onboarding</button>
       <button class="ftab" onclick="filterTab('admin', this)">Admin</button>
       <button class="ftab" onclick="filterTab('community', this)">Community</button>
+      <button class="ftab" onclick="filterTab('partners', this)">Partners</button>
       <button class="ftab" onclick="filterTab('docs', this)">Docs</button>
     </div>
   </div>
@@ -240,7 +242,7 @@
         <div class="pc-title">Xanadu Book Exchange</div>
         <div class="pc-path">/listings/xanadu-book-exchange-papamoa.html</div>
         <div class="pc-desc">Second-hand bookstore &mdash; Silver listing, Shopping</div>
-        <div class="pc-tags"><span class="pc-tag tag-silver">Silver</span></div>
+        <div class="pc-tags"><span class="pc-tag tag-silver" style="background:rgba(58,171,222,0.1);color:var(--blue);border:1px solid rgba(58,171,222,0.2)">Silver</span></div>
       </div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/kayco-nails-papamoa.html" target="_blank" data-section="listings" data-keywords="kayco nails beauty press-on">
@@ -249,7 +251,7 @@
         <div class="pc-title">Kayco Nails P&#257;p&#257;moa</div>
         <div class="pc-path">/listings/kayco-nails-papamoa.html</div>
         <div class="pc-desc">Custom press-on nail kits &mdash; Silver listing, Beauty</div>
-        <div class="pc-tags"><span class="pc-tag tag-silver">Silver</span></div>
+        <div class="pc-tags"><span class="pc-tag tag-silver" style="background:rgba(58,171,222,0.1);color:var(--blue);border:1px solid rgba(58,171,222,0.2)">Silver</span></div>
       </div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/the-wagon-papamoa.html" target="_blank" data-section="listings" data-keywords="wagon food drink gold menu">
@@ -300,8 +302,17 @@
   </div>
 
   <!-- CATEGORIES -->
-  <div class="section-head" data-section="categories"><h2>&#128451; Categories</h2><span class="sh-count">8</span></div>
+  <div class="section-head" data-section="categories"><h2>&#128451; Categories</h2><span class="sh-count">9</span></div>
   <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/real-estate.html" target="_blank" data-section="categories" data-keywords="real estate property market agent buying selling">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body">
+        <div class="pc-title">Real Estate</div>
+        <div class="pc-path">/categories/real-estate.html</div>
+        <div class="pc-desc">Property market hub &mdash; monthly market reports, neighbourhood data, featured agent Spotlight</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/lawn-mowing.html" target="_blank" data-section="categories" data-keywords="lawn mowing gardening">
       <span class="pc-icon">&#127807;</span>
       <div class="pc-body">
@@ -323,7 +334,7 @@
       <div class="pc-body">
         <div class="pc-title">Surf &amp; Tides</div>
         <div class="pc-path">/categories/surf-tides.html</div>
-        <div class="pc-desc">Conditions, tide times, 7-day forecast, Hakanini spotlight</div>
+        <div class="pc-desc">Conditions, tide times, 7-day forecast, Hakanini Gold Spotlight</div>
       </div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/gardening.html" target="_blank" data-section="categories" data-keywords="gardening garden">
@@ -792,7 +803,7 @@
   </div>
 
   <!-- ADMIN -->
-  <div class="section-head" data-section="admin"><h2>&#9881;&#65039; Admin</h2><span class="sh-count">5</span></div>
+  <div class="section-head" data-section="admin"><h2>&#9881;&#65039; Admin</h2><span class="sh-count">6</span></div>
   <div class="page-grid">
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/admin/add-lead.html" target="_blank" data-section="admin" data-keywords="add lead CRM new prospect">
       <span class="pc-icon">&#10133;</span>
@@ -836,6 +847,15 @@
         <div class="pc-title">News &amp; Events Upload</div>
         <div class="pc-path">/admin/upload.html</div>
         <div class="pc-desc">Password-protected admin tool &mdash; AI news summariser + event submission</div>
+        <div class="pc-tags"><span class="pc-tag tag-internal">Internal</span><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/admin/real-estate-outreach.html" target="_blank" data-section="admin" data-keywords="real estate agent outreach email scripts follow-up sales">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body">
+        <div class="pc-title">Real Estate Agent Outreach</div>
+        <div class="pc-path">/admin/real-estate-outreach.html</div>
+        <div class="pc-desc">Cold email scripts, follow-up sequence (Day 0/3/6/10), objection handling and pricing guidance for featured agent campaign</div>
         <div class="pc-tags"><span class="pc-tag tag-internal">Internal</span><span class="pc-tag tag-new">New</span></div>
       </div>
     </a>
@@ -891,6 +911,20 @@
         <div class="pc-title">Community Groups</div>
         <div class="pc-path">/community/safety-support/community-groups/</div>
         <div class="pc-desc">Local clubs, groups and community organisations</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- PARTNERS — NEW SECTION -->
+  <div class="section-head" data-section="partners"><h2>&#129309; Partners</h2><span class="sh-count">1</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/partners/real-estate-agent.html" target="_blank" data-section="partners" data-keywords="real estate agent partner featured exclusive pitch listing monthly report">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body">
+        <div class="pc-title">Featured Real Estate Agent</div>
+        <div class="pc-path">/partners/real-estate-agent.html</div>
+        <div class="pc-desc">Agent partnership pitch page &mdash; exclusive featured position, monthly market articles, AI search presence. Send to prospects instead of PDF attachments.</div>
+        <div class="pc-tags"><span class="pc-tag tag-partner">Partner</span><span class="pc-tag tag-new">New</span></div>
       </div>
     </a>
   </div>
@@ -1009,7 +1043,7 @@
       const btn = document.createElement('button');
       btn.className = 'star-btn' + (starred.includes(path) ? ' starred' : '');
       btn.title = starred.includes(path) ? 'Unstar' : 'Star';
-      btn.innerHTML = '★';
+      btn.innerHTML = '&#9733;';
       btn.addEventListener('click', e => toggleStar(e, path));
       card.appendChild(btn);
     });
