@@ -3,842 +3,350 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Papamoa.info — Get Found by Papamoa Customers</title>
+<title>Advertise on Papamoa.info — Pāpāmoa's Local Business Directory</title>
+<meta name="description" content="Get your Pāpāmoa business found by locals. Silver listings from $599+GST/yr. Gold Spotlight from $1,200+GST/yr. We write everything. Live in 24 hours.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --color-ocean-deep: #134B58;
-  --color-ocean: #1B6B7D;
-  --color-ocean-accent: #3AABDE;
-  --color-ocean-light: #E8F4F6;
-  --green: #7DC143;
-  --color-green-light: #E8F5E9;
-  --color-dune: #C4985A;
-  --color-dune-light: #F5EDD8;
-  --red: #E8344A;
-  --sand: #f7f4ee;
-  --color-sand-dark: #EDE7DB;
-  --color-text: #2C2C2C;
-  --color-text-soft: #4a4a4a;
-  --color-text-light: #6B6B6B;
-  --white: #fff;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
-  --radius: 12px;
+  --ocean: #1B6B7D;
+  --ocean-deep: #0F4352;
+  --ocean-light: #E4F2F5;
+  --sand: #F7F3ED;
+  --sand-dark: #EDE7DB;
+  --dune: #C4985A;
+  --dune-light: #F5EDD8;
+  --navy: #0D2B3E;
+  --white: #FFFFFF;
+  --text: #1A2832;
+  --muted: #5A6E78;
+  --border: #D8E4E8;
+  --silver: #5A7A8A;
+  --silver-bg: #EDF3F6;
+  --gold: #B8840A;
+  --gold-bg: #FBF3E2;
+  --green: #1E6B3C;
+  --green-bg: #E6F4EC;
+  --font-body: 'Figtree', sans-serif;
+  --font-display: 'Playfair Display', serif;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: 'Figtree', sans-serif;
-  background: var(--color-sand);
-  color: var(--color-text);
-  overflow-x: hidden;
-}
+body { font-family: var(--font-body); background: var(--sand); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
 /* NAV */
-.nav {
-  background: var(--color-ocean-deep);
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-logo {
-  font-family: 'Figtree', sans-serif;
-  font-weight: 600;
-  font-size: 15px;
-  color: white;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-}
-.nav-logo em { color: var(--color-green); font-style: normal; }
-.nav-logo span { color: var(--color-ocean-accent); }
-.nav-cta {
-  background: var(--color-ocean-accent);
-  color: white;
-  padding: 8px 18px;
-  border-radius: 100px;
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.nav-cta:hover { background: #2d95c4; }
+.nav { background: var(--navy); padding: 0 32px; height: 58px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.nav-logo { font-family: var(--font-body); font-weight: 700; font-size: 15px; color: var(--white); text-decoration: none; }
+.nav-logo span { color: var(--dune); }
+.nav-links { display: flex; align-items: center; gap: 20px; }
+.nav-links a { color: rgba(255,255,255,0.6); font-size: 13px; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta { background: var(--dune); color: var(--white) !important; padding: 8px 18px; border-radius: 5px; font-weight: 700 !important; }
+@media (max-width: 600px) { .nav-links { gap: 10px; } .nav-links a:not(.nav-cta) { display: none; } }
 
-/* HERO */
-.hero {
-  background: var(--color-ocean-deep);
-  padding: 80px 24px 100px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(58,171,222,0.1) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(125,193,67,0.07) 0%, transparent 50%);
-  pointer-events: none;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -2px; left: 0; right: 0;
-  height: 80px;
-  background: var(--color-sand);
-  clip-path: ellipse(65% 100% at 50% 100%);
-}
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 720px;
-  margin: 0 auto;
-}
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 100px;
-  padding: 6px 16px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.7);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 28px;
-}
-.pulse {
-  width: 7px; height: 7px;
-  background: var(--color-green);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+/* PAGE HEADER */
+.page-header { background: var(--white); border-bottom: 1px solid var(--border); padding: 16px 32px; }
+.breadcrumb { font-size: 12px; color: var(--muted); }
+.breadcrumb a { color: var(--ocean); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
 
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(28px, 5vw, 52px);
-  color: white;
-  font-weight: 700;
-  line-height: 1.15;
-  margin-bottom: 20px;
-}
-.hero h1 em { color: var(--color-ocean-accent); font-style: italic; }
-.hero-sub {
-  color: rgba(255,255,255,0.65);
-  font-size: 17px;
-  font-weight: 300;
-  line-height: 1.7;
-  margin-bottom: 40px;
-  max-width: 560px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-bottom: 48px;
-}
-.hero-stat {
-  text-align: center;
-}
-.hero-stat-num {
-  font-size: 28px;
-  font-weight: 700;
-  color: white;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.hero-stat-num span { color: var(--color-ocean-accent); }
-.hero-stat-label {
-  font-size: 12px;
-  color: rgba(255,255,255,0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-.hero-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--color-ocean-accent);
-  color: white;
-  padding: 16px 32px;
-  border-radius: 100px;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s;
-  box-shadow: 0 8px 32px rgba(58,171,222,0.3);
-}
-.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(58,171,222,0.4); }
-.hero-cta-sub {
-  display: block;
-  margin-top: 12px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.4);
-}
+/* INTRO SECTION */
+.intro { padding: 56px 32px 48px; max-width: 960px; margin: 0 auto; }
+.intro-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+@media (max-width: 720px) { .intro-grid { grid-template-columns: 1fr; gap: 32px; } }
+.intro-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocean); margin-bottom: 12px; }
+.intro h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 18px; }
+.intro h1 em { font-style: italic; color: var(--ocean); }
+.intro-lead { font-size: 1rem; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+.intro-bullets { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.intro-bullet { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; }
+.ib-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ocean); flex-shrink: 0; }
+.intro-cta { display: inline-block; background: var(--dune); color: var(--white); font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 6px; text-decoration: none; transition: all 0.2s; }
+.intro-cta:hover { background: #B8840A; transform: translateY(-1px); }
 
-/* CONTAINER */
-.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+/* STAT CARD */
+.stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 32px; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.stat-item { text-align: center; }
+.stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+.stat-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.stat-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+.stat-note { font-size: 12.5px; color: var(--muted); line-height: 1.6; text-align: center; }
 
-/* SECTION */
-.section { padding: 72px 0; }
-.section-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-ocean-accent);
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-.section h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(22px, 3.5vw, 34px);
-  color: var(--color-ocean-deep);
-  margin-bottom: 16px;
-  line-height: 1.25;
-}
-.section .lead {
-  font-size: 16px;
-  color: var(--color-text-soft);
-  line-height: 1.7;
-  max-width: 600px;
-  margin-bottom: 48px;
-}
+/* DIVIDER */
+.section-divider { height: 1px; background: var(--border); max-width: 960px; margin: 0 auto; }
 
-/* WHY SECTION */
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-.why-card {
-  background: white;
-  border-radius: var(--radius);
-  padding: 28px;
-  box-shadow: var(--shadow-sm);
-  border-left: 3px solid transparent;
-  transition: all 0.2s;
-}
-.why-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-.why-card.blue { border-left-color: var(--color-ocean-accent); }
-.why-card.green { border-left-color: var(--color-green); }
-.why-card.gold { border-left-color: var(--color-dune); }
-.why-icon {
-  font-size: 28px;
-  margin-bottom: 14px;
-  display: block;
-}
-.why-card h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--color-ocean-deep);
-  margin-bottom: 8px;
-}
-.why-card p {
-  font-size: 13px;
-  color: var(--color-text-soft);
-  line-height: 1.6;
-}
+/* PRICING SECTION */
+.pricing { padding: 56px 32px; max-width: 960px; margin: 0 auto; }
+.pricing-header { margin-bottom: 36px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocean); margin-bottom: 8px; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.section-sub { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
-/* NETWORK STRIP */
-.network-strip {
-  background: var(--color-ocean-deep);
-  padding: 28px 32px;
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin: 48px 0;
-  flex-wrap: wrap;
-}
-.network-strip-text { flex: 1; min-width: 200px; }
-.network-strip-text strong {
-  display: block;
-  color: white;
-  font-size: 15px;
-  margin-bottom: 4px;
-}
-.network-strip-text span {
-  color: rgba(255,255,255,0.55);
-  font-size: 13px;
-}
-.network-badge {
-  background: rgba(58,171,222,0.15);
-  border: 1px solid rgba(58,171,222,0.3);
-  color: var(--color-ocean-accent);
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-}
+.pricing-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 20px; }
+@media (max-width: 600px) { .pricing-grid { grid-template-columns: 1fr; } }
 
-/* TIERS */
-.tiers-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 16px;
-}
-@media (max-width: 600px) { .tiers-grid { grid-template-columns: 1fr; } }
+.price-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.price-card.gold-card { border-color: rgba(184,132,10,0.35); box-shadow: 0 6px 28px rgba(184,132,10,0.1); }
+.price-head { padding: 24px 26px 20px; border-bottom: 1px solid var(--border); }
+.price-head.silver-head { background: var(--silver-bg); }
+.price-head.gold-head { background: var(--gold-bg); border-bottom-color: rgba(184,132,10,0.2); }
+.price-badge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 3px; margin-bottom: 10px; }
+.silver-badge { background: #D8E8EE; color: var(--silver); }
+.gold-badge { background: #FAECC8; color: var(--gold); }
+.price-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+.silver-name { color: var(--silver); }
+.gold-name { color: var(--gold); }
+.price-amount { font-size: 1.7rem; font-weight: 800; line-height: 1.1; margin-bottom: 8px; }
+.silver-amount { color: var(--silver); }
+.gold-amount { color: var(--gold); }
+.price-amount span { font-size: 0.85rem; font-weight: 400; opacity: 0.6; }
+.price-tagline { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.price-body { padding: 20px 26px; }
+.feat-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.feat-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; line-height: 1.45; }
+.fi { font-style: normal; flex-shrink: 0; font-weight: 700; font-size: 13px; margin-top: 1px; }
+.fi-yes { color: var(--green); }
+.fi-no { color: #C0C8CC; }
+.fi-note { color: var(--dune); }
+.price-footer { padding: 16px 26px 22px; }
+.price-cta { display: block; text-align: center; padding: 12px; border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none; transition: all 0.2s; }
+.silver-cta { background: var(--silver-bg); color: var(--silver); border: 1px solid #BDD0D8; }
+.silver-cta:hover { background: var(--silver); color: var(--white); }
+.gold-cta { background: var(--gold); color: var(--white); }
+.gold-cta:hover { background: #9A6E08; }
+.scarcity { font-size: 11.5px; color: var(--gold); font-weight: 600; text-align: center; margin-top: 8px; }
 
-.tier-card {
-  background: white;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  border: 2px solid transparent;
-  transition: all 0.2s;
-}
-.tier-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-.tier-card.gold-card { border-color: var(--color-dune); }
-.tier-card.silver-card { border-color: var(--color-sand-dark); }
+/* ADDON STRIP */
+.addon-strip { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-top: 16px; display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.as-icon { font-size: 26px; flex-shrink: 0; }
+.as-body { flex: 1; min-width: 180px; }
+.as-body h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.as-body p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.as-price { flex-shrink: 0; }
+.as-price strong { display: block; font-size: 14px; font-weight: 800; color: var(--ocean); }
+.as-price span { font-size: 11px; color: var(--muted); }
 
-.tier-card-top {
-  padding: 24px 24px 20px;
-  border-bottom: 1px solid var(--color-sand-dark);
-}
-.tier-label {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 8px;
-}
-.gold-card .tier-label { color: var(--color-dune); }
-.silver-card .tier-label { color: var(--color-ocean-deep); }
-.tier-price {
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--color-text);
-  line-height: 1;
-  margin-bottom: 6px;
-}
-.tier-price span { font-size: 14px; font-weight: 400; color: var(--color-text-light); }
-.tier-desc { font-size: 13px; color: var(--color-text-soft); line-height: 1.5; }
-.tier-badge {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 100px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.gold-card .tier-badge { background: var(--color-dune); color: white; }
+/* GUARANTEES */
+.guarantees { padding: 0 32px 56px; max-width: 960px; margin: 0 auto; }
+.guarantee-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.g-pill { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; display: flex; align-items: flex-start; gap: 10px; flex: 1; min-width: 200px; }
+.g-icon { font-size: 18px; flex-shrink: 0; }
+.g-text strong { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.g-text span { font-size: 12px; color: var(--muted); line-height: 1.45; }
 
-.tier-card-features { padding: 20px 24px; }
-.tier-feature {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--color-text-soft);
-  padding: 5px 0;
-  border-bottom: 1px solid var(--color-sand);
-  line-height: 1.4;
-}
-.tier-feature:last-child { border-bottom: none; }
-.feat-dot {
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9px;
-  font-weight: 700;
-  flex-shrink: 0;
-  margin-top: 1px;
-  color: white;
-}
-.feat-dot.yes { background: var(--color-green); }
-.feat-dot.no { background: var(--color-sand-dark); color: var(--color-text-light); }
-.scarcity-note {
-  font-size: 12px;
-  color: var(--color-dune);
-  font-weight: 600;
-  padding: 8px 12px;
-  background: var(--color-dune-light);
-  border-radius: 6px;
-  margin: 12px 24px 20px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* HOW IT WORKS */
-.steps { display: flex; flex-direction: column; gap: 0; }
-.step {
-  display: flex;
-  gap: 24px;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--color-sand-dark);
-  align-items: flex-start;
-}
-.step:last-child { border-bottom: none; }
-.step-num {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: var(--color-ocean-deep);
-  color: white;
-  font-size: 15px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.step-content h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--color-ocean-deep);
-  margin-bottom: 6px;
-}
-.step-content p {
-  font-size: 14px;
-  color: var(--color-text-soft);
-  line-height: 1.6;
-}
-.step-time {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--color-ocean-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-top: 6px;
-}
-
-/* VISIBILITY FORM */
-.form-section {
-  background: var(--color-ocean-deep);
-  border-radius: var(--radius);
-  padding: 48px 40px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  margin: 48px 0;
-}
-.form-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 30% 50%, rgba(58,171,222,0.08) 0%, transparent 60%);
-  pointer-events: none;
-}
-.form-inner { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; }
-.form-section h2 {
-  font-family: 'Playfair Display', serif;
-  color: white;
-  font-size: clamp(20px, 3vw, 28px);
-  margin-bottom: 10px;
-}
-.form-section p {
-  color: rgba(255,255,255,0.6);
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 32px;
-}
-.visibility-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-@media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
-.vis-input {
-  width: 100%;
-  padding: 13px 16px;
-  border-radius: 8px;
-  border: 1.5px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
-  color: white;
-  font-family: 'Figtree', sans-serif;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.vis-input:focus { border-color: var(--color-ocean-accent); }
-.vis-input::placeholder { color: rgba(255,255,255,0.35); }
-.vis-select {
-  width: 100%;
-  padding: 13px 16px;
-  border-radius: 8px;
-  border: 1.5px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
-  color: white;
-  font-family: 'Figtree', sans-serif;
-  font-size: 14px;
-  outline: none;
-  cursor: pointer;
-  appearance: none;
-}
-.vis-select option { background: var(--color-ocean-deep); color: white; }
-.btn-submit {
-  width: 100%;
-  background: var(--color-ocean-accent);
-  color: white;
-  border: none;
-  padding: 15px;
-  border-radius: 8px;
-  font-family: 'Figtree', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 4px;
-}
-.btn-submit:hover { background: #2d95c4; transform: translateY(-1px); }
-.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-.form-promise {
-  margin-top: 12px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.4);
-}
-.form-success {
-  display: none;
-  text-align: center;
-  padding: 20px 0;
-}
-.form-success .tick { font-size: 48px; margin-bottom: 16px; }
-.form-success h3 { color: white; font-size: 20px; margin-bottom: 8px; }
-.form-success p { color: rgba(255,255,255,0.6); font-size: 14px; }
-
-/* JAYDEN */
-.jayden-section {
-  background: white;
-  border-radius: var(--radius);
-  padding: 32px;
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 48px;
-  flex-wrap: wrap;
-}
-.jayden-avatar {
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  background: var(--color-ocean-deep);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  color: var(--color-ocean-accent);
-  font-weight: 700;
-  flex-shrink: 0;
-}
-.jayden-text { flex: 1; min-width: 180px; }
-.jayden-text strong { display: block; font-size: 16px; color: var(--color-ocean-deep); margin-bottom: 4px; }
-.jayden-text p { font-size: 13px; color: var(--color-text-soft); line-height: 1.5; }
-.jayden-contact {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex-shrink: 0;
-}
-.jayden-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  text-align: center;
-  transition: all 0.2s;
-}
-.jayden-btn.primary { background: var(--color-ocean-deep); color: white; }
-.jayden-btn.primary:hover { background: var(--color-ocean); }
-.jayden-btn.secondary { background: var(--color-sand); color: var(--color-ocean-deep); border: 1px solid var(--color-sand-dark); }
-.jayden-btn.secondary:hover { background: var(--color-sand-dark); }
+/* CTA SECTION */
+.cta-section { background: linear-gradient(140deg, var(--ocean-deep), var(--ocean)); padding: 56px 32px; text-align: center; }
+.cta-inner { max-width: 540px; margin: 0 auto; }
+.cta-inner h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--white); margin-bottom: 14px; }
+.cta-inner p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 28px; }
+.cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { display: inline-block; background: var(--dune); color: var(--white); font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 6px; text-decoration: none; transition: all 0.2s; }
+.btn-primary:hover { background: #B8840A; }
+.btn-ghost { display: inline-block; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: var(--white); font-weight: 600; font-size: 15px; padding: 14px 28px; border-radius: 6px; text-decoration: none; transition: all 0.2s; }
+.btn-ghost:hover { background: rgba(255,255,255,0.2); }
 
 /* FOOTER */
-.footer {
-  background: var(--color-ocean-deep);
-  padding: 32px 24px;
-  text-align: center;
-  color: rgba(255,255,255,0.4);
-  font-size: 12px;
-  line-height: 2;
-}
-.footer a { color: var(--color-ocean-accent); text-decoration: none; }
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.fade-up { animation: fadeUp 0.5s ease both; }
-
-@media (max-width: 600px) {
-  .hero { padding: 60px 20px 80px; }
-  .section { padding: 48px 0; }
-  .form-section { padding: 36px 24px; }
-  .jayden-section { flex-direction: column; text-align: center; }
-  .jayden-contact { flex-direction: row; justify-content: center; }
-  .network-strip { flex-direction: column; text-align: center; }
-}
+.footer { background: var(--navy); padding: 32px; text-align: center; }
+.footer-logo { font-weight: 700; font-size: 15px; color: var(--white); margin-bottom: 8px; }
+.footer-logo span { color: var(--dune); }
+.footer-tagline { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; }
+.footer-links a:hover { color: var(--white); }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="#" class="nav-logo"><em>www</em>.papamoa.<span>info</span></a>
-  <a href="#get-found" class="nav-cta">Check your visibility →</a>
+  <a href="/index.html" class="nav-logo">papamoa<span>.info</span></a>
+  <div class="nav-links">
+    <a href="/index.html">Directory</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#get-started" class="nav-cta">Get listed</a>
+  </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <span class="pulse"></span>
-      Pāpāmoa's local business directory
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb"><a href="/index.html">Papamoa.info</a> › Advertise</div>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-grid">
+    <div>
+      <div class="intro-eyebrow">List your business</div>
+      <h1>Reach <em>Pāpāmoa customers</em> when they're searching for you</h1>
+      <p class="intro-lead">Papamoa.info is the only directory built exclusively for Pāpāmoa. When locals search for a plumber, a café, or a physio in the area, this is where they look — and your listing is what they find.</p>
+      <div class="intro-bullets">
+        <div class="intro-bullet"><span class="ib-dot"></span>We write your listing from your website and socials</div>
+        <div class="intro-bullet"><span class="ib-dot"></span>Live within 24 hours of your approval</div>
+        <div class="intro-bullet"><span class="ib-dot"></span>SEO-optimised from day one, built for AI search</div>
+        <div class="intro-bullet"><span class="ib-dot"></span>20+ years of Google trust behind every listing</div>
+      </div>
+      <a href="#get-started" class="intro-cta">Get started — it's quick →</a>
     </div>
-    <h1>Get found by customers<br>searching for <em>you</em> in Pāpāmoa</h1>
-    <p class="hero-sub">
-      Papamoa.info puts your business in front of local customers at the exact moment they're searching.
-      SEO-optimised listings, AI-ready content, and 20 years of domain authority working for you.
-    </p>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">37<span>,800</span></div>
-        <div class="hero-stat-label">Pāpāmoa residents</div>
+    <div class="stat-card">
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-num">37,800</div>
+          <div class="stat-label">Pāpāmoa residents</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Years online</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">#1</div>
+          <div class="stat-label">Pāpāmoa-only directory</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">24hr</div>
+          <div class="stat-label">Live from approval</div>
+        </div>
       </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">20<span>yrs</span></div>
-        <div class="hero-stat-label">Domain authority</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">88<span>%</span></div>
-        <div class="hero-stat-label">Searches show AI Overviews</div>
-      </div>
+      <div class="stat-divider"></div>
+      <p class="stat-note">Pāpāmoa is the fastest-growing suburb in Tauranga. Residents actively search for local services — and national directories bury Pāpāmoa businesses among thousands of results.</p>
     </div>
-    <a href="#get-found" class="hero-cta">Check your visibility free →</a>
-    <span class="hero-cta-sub">Takes 60 seconds · No obligation · Personal preview within 24 hours</span>
   </div>
 </div>
 
-<div class="container">
+<div class="section-divider"></div>
 
-  <!-- WHY NOW -->
-  <div class="section">
-    <div class="section-label">Why it matters now</div>
-    <h2>Search has changed. Most Pāpāmoa businesses haven't.</h2>
-    <p class="lead">Google now answers questions directly. ChatGPT recommends local businesses. If your business isn't structured for AI search, you're invisible to a growing share of customers — no matter how good your website is.</p>
-
-    <div class="why-grid">
-      <div class="why-card blue">
-        <span class="why-icon">📍</span>
-        <h3>Local search dominance</h3>
-        <p>Papamoa.info ranks for hundreds of local search terms. A listing puts your business on pages that already have Google's attention — you're borrowing 20 years of domain authority.</p>
-      </div>
-      <div class="why-card green">
-        <span class="why-icon">🤖</span>
-        <h3>AI-ready visibility</h3>
-        <p>Our listings use structured FAQ schema and AEO markup — the exact signals ChatGPT, Perplexity, and Google AI Overviews use to decide which businesses to recommend.</p>
-      </div>
-      <div class="why-card gold">
-        <span class="why-icon">🔗</span>
-        <h3>Backlink to your website</h3>
-        <p>Every listing links directly to your website, passing authority from a trusted NZ directory domain. Better rankings for your own site, not just ours.</p>
-      </div>
-    </div>
-
-    <div class="network-strip">
-      <div class="network-strip-text">
-        <strong>Part of the TaurangaNZ.info network — trusted since 2005</strong>
-        <span>Gold listings include a free Silver listing on TaurangaNZ.info — covering the whole Bay of Plenty region.</span>
-      </div>
-      <div class="network-badge">20-year domain authority</div>
-    </div>
+<!-- PRICING -->
+<div class="pricing" id="pricing">
+  <div class="pricing-header">
+    <div class="section-label">Listing options</div>
+    <h2 class="section-title">Choose your listing tier</h2>
+    <p class="section-sub">Silver gets you fully listed and found. Gold puts you at the top — with Spotlight placement, AI-optimised content, and access to premium ad spots across the site. One Gold Spotlight per sub-category.</p>
   </div>
 
-  <!-- TIERS -->
-  <div class="section" style="padding-top:0">
-    <div class="section-label">Listing tiers</div>
-    <h2>Two tiers. One clear winner for most businesses.</h2>
-    <p class="lead">Silver gets you found. Gold gets you to the top — and keeps you there. One Gold Spotlight per sub-category means first in wins.</p>
+  <div class="pricing-grid">
 
-    <div class="tiers-grid">
-      <div class="tier-card gold-card">
-        <div class="tier-card-top">
-          <div class="tier-label">Gold</div>
-          <div class="tier-price">$1,200 <span>+GST/yr</span></div>
-          <div class="tier-desc">Spotlight position + full AI search optimisation</div>
-          <span class="tier-badge">Founding Member offer</span>
-        </div>
-        <div class="tier-card-features">
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>Spotlight — top of your sub-category</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>Unlimited AI sub-pages free ($150 value each)</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>TaurangaNZ.info Silver listing free</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>Unlimited images</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>AI-optimised FAQ &amp; AEO schema</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>Lifetime price lock</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>Facebook welcome post</div>
-        </div>
-        <div class="scarcity-note">⚑ One Gold per sub-category — first in wins</div>
+    <!-- SILVER -->
+    <div class="price-card">
+      <div class="price-head silver-head">
+        <div class="price-badge silver-badge">◆ Silver</div>
+        <div class="price-name silver-name">Silver Listing</div>
+        <div class="price-amount silver-amount">$599 <span>+GST / yr</span></div>
+        <div class="price-tagline">Full claimed listing. SEO description, images, schema, social links, review badges — everything a customer needs to choose you.</div>
       </div>
-      <div class="tier-card silver-card">
-        <div class="tier-card-top">
-          <div class="tier-label">Silver</div>
-          <div class="tier-price">$599 <span>+GST/yr</span></div>
-          <div class="tier-desc">Complete local SEO listing</div>
-        </div>
-        <div class="tier-card-features">
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>SEO-optimised description</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>Up to 9 images</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>All contact &amp; social links</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>Schema markup</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>Lifetime price lock</div>
-          <div class="tier-feature"><div class="feat-dot yes">✓</div>Facebook welcome post</div>
-          <div class="tier-feature"><div class="feat-dot no">✕</div>Spotlight position</div>
-          <div class="tier-feature"><div class="feat-dot no">✕</div>AI sub-pages &amp; FAQ</div>
-        </div>
+      <div class="price-body">
+        <ul class="feat-list">
+          <li><i class="fi fi-yes">✓</i> SEO-optimised description (written by us)</li>
+          <li><i class="fi fi-yes">✓</i> Up to 9 images</li>
+          <li><i class="fi fi-yes">✓</i> Schema markup</li>
+          <li><i class="fi fi-yes">✓</i> All contact &amp; social links</li>
+          <li><i class="fi fi-yes">✓</i> Google &amp; TripAdvisor review badges</li>
+          <li><i class="fi fi-yes">✓</i> Facebook welcome post</li>
+          <li><i class="fi fi-yes">✓</i> Lifetime price lock</li>
+          <li><i class="fi fi-yes">✓</i> 2027 ROI guarantee</li>
+          <li><i class="fi fi-note">+</i> Menu / Service List Add-On: $199+GST/yr</li>
+          <li><i class="fi fi-no">✕</i> Spotlight position</li>
+          <li><i class="fi fi-no">✕</i> Premium ad spots</li>
+        </ul>
+      </div>
+      <div class="price-footer">
+        <a href="#get-started" class="price-cta silver-cta">Get Silver →</a>
       </div>
     </div>
-    <p style="font-size:12px;color:var(--color-text-light);text-align:center;margin-top:12px">Annual subscription · We write everything · You review and approve · Listing live within 24 hours</p>
+
+    <!-- GOLD -->
+    <div class="price-card gold-card">
+      <div class="price-head gold-head">
+        <div class="price-badge gold-badge">⭐ Gold Spotlight</div>
+        <div class="price-name gold-name">Gold Listing</div>
+        <div class="price-amount gold-amount">$1,200 <span>+GST / yr</span></div>
+        <div class="price-tagline">Top of your sub-category, always. AI-optimised FAQ, unlimited images, Menu Add-On included, and access to premium ad spots across articles and category pages.</div>
+      </div>
+      <div class="price-body">
+        <ul class="feat-list">
+          <li><i class="fi fi-yes">✓</i> Everything in Silver</li>
+          <li><i class="fi fi-yes">✓</i> Unlimited images</li>
+          <li><i class="fi fi-yes">✓</i> Spotlight — top of your sub-category</li>
+          <li><i class="fi fi-yes">✓</i> AI-optimised FAQ &amp; AEO schema</li>
+          <li><i class="fi fi-yes">✓</i> Menu / Service List Add-On included free</li>
+          <li><i class="fi fi-yes">✓</i> Access to premium article &amp; page ad spots</li>
+          <li><i class="fi fi-yes">✓</i> Lifetime price lock</li>
+          <li><i class="fi fi-yes">✓</i> 2027 ROI guarantee</li>
+          <li><i class="fi fi-note">+</i> Extra subcategory Spotlights: $99+GST/yr each</li>
+        </ul>
+      </div>
+      <div class="price-footer">
+        <a href="#get-started" class="price-cta gold-cta">Get Gold →</a>
+        <div class="scarcity">⚑ One Gold Spotlight per sub-category — first in wins</div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- HOW IT WORKS -->
-  <div class="section" style="padding-top:0">
-    <div class="section-label">How it works</div>
-    <h2>From enquiry to live listing in 24 hours.</h2>
-    <p class="lead">We handle the writing, the SEO, and the setup. You just review and sign off.</p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <h3>Check your visibility</h3>
-          <p>Fill in the form below. We analyse your current search presence and build a personalised preview showing exactly how your listing will look.</p>
-          <div class="step-time">Today</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <h3>Review your preview</h3>
-          <p>We send you a personal preview page with your SEO score, a search term checker, and mockups of your listing at each tier. No obligation to proceed.</p>
-          <div class="step-time">Within 24 hours</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <h3>We write, you approve</h3>
-          <p>If you're keen, we write your complete listing — description, tags, FAQ, sub-pages. You review and sign off before anything goes live.</p>
-          <div class="step-time">Draft within 48 hours</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-content">
-          <h3>Go live + Facebook welcome</h3>
-          <p>Your listing publishes on Papamoa.info. We post a welcome to the Papamoa community Facebook groups — your first boost of local visibility.</p>
-          <div class="step-time">Live within 24 hours of approval</div>
-        </div>
-      </div>
+  <!-- ADD-ON STRIP -->
+  <div class="addon-strip">
+    <div class="as-icon">📋</div>
+    <div class="as-body">
+      <h4>Menu / Service List Add-On</h4>
+      <p>An interactive, filterable menu or service list on your listing page. Works for restaurants, spas, mechanics, dentists, gyms — any business with a price list. Update it any time via a private link, no login or tech knowledge needed.</p>
+    </div>
+    <div class="as-price">
+      <strong>$199+GST/yr</strong>
+      <span>Free with Gold</span>
     </div>
   </div>
 
 </div>
 
-<!-- VISIBILITY FORM -->
-<div class="container">
-  <div class="form-section" id="get-found">
-    <div class="form-inner">
-      <h2>Check your Pāpāmoa visibility — free</h2>
-      <p>Enter your details below. We'll analyse your current search presence and send you a personalised preview within 24 hours. No obligation, no sales pressure.</p>
-
-      <form class="visibility-form" id="visibility-form" onsubmit="submitVisibility(event)">
-        <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
-        <input type="hidden" name="form_name" value="main-lander">
-        <input type="hidden" name="subject" value="New visibility request — Papamoa.info">
-        <input type="hidden" name="redirect" value="false">
-        <input type="hidden" name="botcheck" style="display:none">
-
-        <div class="form-row">
-          <input type="text" name="first_name" placeholder="Your first name" required class="vis-input">
-          <input type="text" name="business_name" placeholder="Business name" required class="vis-input">
-        </div>
-        <input type="text" name="website" placeholder="Website (e.g. yourbusiness.co.nz)" class="vis-input">
-        <select name="category" required class="vis-select">
-          <option value="" disabled selected>Business category</option>
-          <option>Accommodation</option>
-          <option>Activities & Attractions</option>
-          <option>Food & Drink</option>
-          <option>Shops & Retail</option>
-          <option>Trades & Services</option>
-          <option>Health & Wellbeing</option>
-          <option>Professional Services</option>
-          <option>Other</option>
-        </select>
-        <input type="email" name="email" placeholder="Email address" required class="vis-input">
-        <input type="tel" name="phone" placeholder="Phone number (optional)" class="vis-input">
-        <button type="submit" class="btn-submit" id="submit-btn">Send me my free visibility report →</button>
-        <p class="form-promise">Your preview will arrive within 24 hours · No spam · Unsubscribe any time</p>
-      </form>
-
-      <div class="form-success" id="form-success">
-        <div class="tick">✓</div>
-        <h3>Got it — your preview is on its way.</h3>
-        <p>Jayden will have your personalised visibility report ready within 24 hours.<br>In the meantime, call <a href="tel:0275332970" style="color:var(--color-ocean-accent)">027 533 2970</a> if you have questions.</p>
+<!-- GUARANTEES -->
+<div class="guarantees">
+  <div class="guarantee-row">
+    <div class="g-pill">
+      <span class="g-icon">🔒</span>
+      <div class="g-text">
+        <strong>Lifetime Price Lock</strong>
+        <span>Your launch price never increases as long as you renew consecutively.</span>
+      </div>
+    </div>
+    <div class="g-pill">
+      <span class="g-icon">📈</span>
+      <div class="g-text">
+        <strong>2027 ROI Guarantee</strong>
+        <span>No clear return in 2026? Your 2027 listing is free. Simple as that.</span>
+      </div>
+    </div>
+    <div class="g-pill">
+      <span class="g-icon">✍️</span>
+      <div class="g-text">
+        <strong>Done for You</strong>
+        <span>We write and set up everything. You review, approve, and go live.</span>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container">
-  <!-- JAYDEN -->
-  <div class="jayden-section">
-    <div class="jayden-avatar">J</div>
-    <div class="jayden-text">
-      <strong>Jayden Brown — Local Partner, Papamoa.info</strong>
-      <p>I'm a Pāpāmoa local and I run the listings for this directory. I build every preview personally and I'm always happy to chat through whether a listing makes sense for your business — no pressure.</p>
-    </div>
-    <div class="jayden-contact">
-      <a href="tel:0275332970" class="jayden-btn primary">027 533 2970</a>
-      <a href="/cdn-cgi/l/email-protection#771d160e13121937071607161a1816591e191118" class="jayden-btn secondary"><span class="__cf_email__" data-cfemail="385259415c5d5678485948595557591651565e57">[email&#160;protected]</span></a>
+<!-- GET STARTED CTA -->
+<div class="cta-section" id="get-started">
+  <div class="cta-inner">
+    <h2>Ready to get listed?</h2>
+    <p>Get in touch and we'll send you a free personalised listing preview within 24 hours. No obligation — see exactly how your business will appear before you commit.</p>
+    <div class="cta-buttons">
+      <a href="mailto:jayden@papamoa.info?subject=Listing enquiry" class="btn-primary">Email Jayden →</a>
+      <a href="tel:+64275332970" class="btn-ghost">027 533 2970</a>
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <a href="https://papamoa.info">papamoa.info</a> · Part of the TaurangaNZ.info network — trusted since 2005<br>
-  © 2026 Papamoa.info · <a href="/cdn-cgi/l/email-protection#bcd6ddc5d8d9d2fcccddccddd1d3dd92d5d2dad3"><span class="__cf_email__" data-cfemail="e58f849c81808ba595849584888a84cb8c8b838a">[email&#160;protected]</span></a> · 027 533 2970
+  <div class="footer-logo">papamoa<span>.info</span></div>
+  <div class="footer-tagline">Pāpāmoa's local business directory · Part of the TaurangaNZ.info network · Trusted since 2005</div>
+  <div class="footer-links">
+    <a href="/index.html">Directory</a>
+    <a href="/sitemap.html">Sitemap</a>
+    <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a>
+  </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-async function submitVisibility(e) {
-  e.preventDefault();
-  const btn = document.getElementById('submit-btn');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-
-  const form = document.getElementById('visibility-form');
-  const data = new FormData(form);
-
-  try {
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: data
+</body>
+</html>
