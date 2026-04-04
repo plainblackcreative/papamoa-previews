@@ -1128,21 +1128,42 @@
 
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    let currentStep = 0;
-    const totalSteps = 7;
+  <script>
+  let currentStep = 0;
+  const totalSteps = 7;
 
-    function goToStep(n) {
-      currentStep = n;
-      updateUI();
-    }
-    function nextStep() {
-      if (currentStep < totalSteps - 1) { currentStep++; updateUI(); }
-    }
-    function prevStep() {
-      if (currentStep > 0) { currentStep--; updateUI(); }
-    }
+  function goToStep(n) {
+    currentStep = n;
+    updateUI();
+  }
+  function nextStep() {
+    if (currentStep < totalSteps - 1) { currentStep++; updateUI(); }
+  }
+  function prevStep() {
+    if (currentStep > 0) { currentStep--; updateUI(); }
+  }
 
-    function updateUI() {
-      // Panels
-      document.querySelectorAll('.step-panel').forEach((p,
+  function updateUI() {
+    // Panels
+    document.querySelectorAll('.step-panel').forEach((p, i) => {
+      p.classList.toggle('active', i === currentStep);
+    });
+
+    // Progress steps
+    document.querySelectorAll('.progress-step').forEach((s, i) => {
+      s.classList.remove('active', 'done');
+      if (i === currentStep) s.classList.add('active');
+      if (i < currentStep) s.classList.add('done');
+    });
+
+    // Progress lines
+    document.querySelectorAll('.progress-line').forEach((l, i) => {
+      l.classList.remove('active', 'done');
+      if (i < currentStep) l.classList.add('done');
+      if (i === currentStep) l.classList.add('active');
+    });
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
