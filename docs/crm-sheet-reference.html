@@ -1,283 +1,610 @@
 <!DOCTYPE html>
 <html lang="en-NZ">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Papamoa.info — Master CRM Sheet Reference</title>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css">
-<style>
-  :root {
-    --navy: #2B3F5C; --blue: #3AABDE; --green: #7DC143;
-    --gold: #C4892A; --red: #E8344A; --sand: #F7F4EE;
-    --color-sand-dark: #EDE7DB; --ink: #1A1A1A; --ink-soft: #4A4A4A;
-    --color-text-light: #6B6B6B; --white: #fff;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Figtree',sans-serif; background:var(--color-sand); color:var(--color-text); font-size:14px; }
-  .header { background:var(--color-ocean-deep); padding:24px 32px; display:flex; align-items:center; justify-content:space-between; }
-  .header h1 { font-size:18px; font-weight:600; color:white; }
-  .header span { font-size:12px; color:rgba(255,255,255,0.5); }
-  .tabs { display:flex; gap:4px; padding:20px 32px 0; border-bottom:2px solid var(--color-sand-dark); background:white; }
-  .tab { padding:10px 20px; font-size:13px; font-weight:500; cursor:pointer; border-radius:8px 8px 0 0; border:1px solid var(--color-sand-dark); border-bottom:none; color:var(--color-text-soft); background:var(--color-sand); transition:all 0.15s; }
-  .tab.active { background:white; color:var(--color-ocean-deep); border-color:var(--color-sand-dark); font-weight:600; }
-  .content { padding:24px 32px; display:none; }
-  .content.active { display:block; }
-  .desc { font-size:13px; color:var(--color-text-soft); margin-bottom:20px; line-height:1.6; padding:12px 16px; background:var(--color-ocean-accent); background:rgba(58,171,222,0.1); border-left:3px solid var(--color-ocean-accent); border-radius:0 6px 6px 0; }
-  table { width:100%; border-collapse:collapse; background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 12px rgba(43,63,92,0.08); margin-bottom:24px; }
-  thead tr { background:var(--color-ocean-deep); }
-  thead th { padding:11px 14px; text-align:left; font-size:11px; font-weight:600; color:white; letter-spacing:0.04em; text-transform:uppercase; }
-  tbody tr:nth-child(even) { background:var(--color-sand); }
-  tbody tr:hover { background:rgba(58,171,222,0.06); }
-  td { padding:10px 14px; font-size:12.5px; color:var(--color-text-soft); border-bottom:1px solid var(--color-sand-dark); vertical-align:top; }
-  td:first-child { font-weight:600; color:var(--color-ocean-deep); width:40px; }
-  td:nth-child(2) { font-weight:500; color:var(--color-text); width:180px; }
-  .type-badge { display:inline-block; font-size:10px; font-weight:600; padding:2px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:0.04em; }
-  .type-text { background:#e8f4fb; color:#1a6e96; }
-  .type-dropdown { background:#eef7e3; color:#3a7d1a; }
-  .type-date { background:#fdf6e8; color:var(--color-dune); }
-  .type-checkbox { background:#fef2f3; color:var(--color-red); }
-  .type-formula { background:#f3f0fb; color:#5a3d9e; }
-  .type-currency { background:var(--color-sand); color:var(--color-text-soft); }
-  .type-number { background:var(--color-sand); color:var(--color-text-soft); }
-  .dropdown-values { font-size:11px; color:var(--color-text-light); margin-top:4px; }
-  .dropdown-values span { display:inline-block; background:var(--color-sand); border:1px solid var(--color-sand-dark); border-radius:4px; padding:1px 6px; margin:2px 2px 0 0; }
-  .section-title { font-size:14px; font-weight:600; color:var(--color-ocean-deep); margin:24px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--color-sand-dark); }
-  .tip { background:#eef7e3; border:1px solid #c0dd97; border-radius:8px; padding:12px 16px; margin-bottom:16px; font-size:12px; color:#3a7d1a; line-height:1.6; }
-  .tip strong { display:block; margin-bottom:4px; font-size:13px; }
-  .formula-block { background:var(--color-ocean-deep); color:#7DC143; font-family:monospace; font-size:12px; padding:10px 14px; border-radius:6px; margin:8px 0; }
-  .format-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; }
-  .format-card { padding:14px; border-radius:8px; border:1px solid var(--color-sand-dark); }
-  .format-card.red { background:#fef2f3; border-color:#f7c1c1; }
-  .format-card.amber { background:#fdf6e8; border-color:#FAC775; }
-  .format-card.green { background:#eef7e3; border-color:#c0dd97; }
-  .format-card .fc-label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px; }
-  .format-card.red .fc-label { color:var(--color-red); }
-  .format-card.amber .fc-label { color:var(--color-dune); }
-  .format-card.green .fc-label { color:var(--color-green); }
-  .format-card .fc-formula { font-family:monospace; font-size:11px; color:var(--color-text-soft); }
-  .status-flow { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 20px; }
-  .status-pill { padding:5px 12px; border-radius:100px; font-size:11px; font-weight:600; border:1px solid; }
-  .s1 { background:#e8f4fb; border-color:#3AABDE; color:#1a6e96; }
-  .s2 { background:#eef7e3; border-color:#7DC143; color:#3a7d1a; }
-  .s3 { background:#fdf6e8; border-color:#C4892A; color:#8a5e1a; }
-  .s4 { background:#fef2f3; border-color:#E8344A; color:var(--color-red); }
-  .arrow { color:var(--color-text-light); font-size:14px; padding-top:4px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papamoa.info — Master CRM Sheet Reference</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F7F3ED;
+      --bg-card: #FFFFFF;
+      --bg-header: #134B58;
+      --border: #E0D9CE;
+      --ocean: #1B6B7D;
+      --ocean-deep: #134B58;
+      --ocean-light: #E8F4F6;
+      --dune: #C4985A;
+      --dune-light: #F5EDD8;
+      --text: #2C2C2C;
+      --text-light: #6B6B6B;
+      --green: #16A34A;
+      --green-light: #DCFCE7;
+      --amber: #D97706;
+      --amber-light: #FEF3C7;
+      --red: #DC2626;
+      --red-light: #FEE2E2;
+      --font-body: 'DM Sans', sans-serif;
+      --font-display: 'Fraunces', serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius: 8px;
+      --radius-lg: 14px;
+      --shadow: 0 1px 4px rgba(0,0,0,0.06);
+      --max-width: 1100px;
+    }
+    body { font-family: var(--font-body); color: var(--text); background: var(--bg); font-size: 15px; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+
+    /* Header */
+    .page-header { background: var(--bg-header); color: white; padding: 40px 24px 20px; }
+    .header-inner { max-width: var(--max-width); margin: 0 auto; }
+    .header-inner h1 { font-family: var(--font-display); font-size: 30px; font-weight: 700; margin-bottom: 6px; }
+    .header-sub { font-size: 14px; opacity: 0.7; }
+    .header-updated { font-size: 12px; opacity: 0.5; margin-top: 4px; }
+
+    /* Tab nav */
+    .tab-bar {
+      background: var(--bg-header);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .tab-bar-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+    }
+    .tab-btn {
+      padding: 14px 24px;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: rgba(255,255,255,0.5);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: rgba(255,255,255,0.8); }
+    .tab-btn.active {
+      color: white;
+      border-bottom-color: var(--dune);
+    }
+
+    /* Content */
+    .content { max-width: var(--max-width); margin: 0 auto; padding: 32px 24px 80px; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Section blocks */
+    .section { margin-bottom: 32px; }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ocean-deep);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      max-width: 700px;
+    }
+
+    /* Status flow */
+    .flow-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    .flow-step {
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .flow-step.main { background: var(--ocean-light); color: var(--ocean); }
+    .flow-step.end { background: var(--green-light); color: var(--green); }
+    .flow-step.lost { background: var(--red-light); color: var(--red); }
+    .flow-step.pause { background: var(--amber-light); color: var(--amber); }
+    .flow-arrow { color: var(--text-light); font-size: 14px; }
+
+    /* Table */
+    .ref-table {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    .ref-table thead th {
+      background: var(--ocean-deep);
+      color: white;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .ref-table tbody td {
+      padding: 10px 14px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .ref-table tbody tr:last-child td { border-bottom: none; }
+    .ref-table tbody tr:nth-child(even) { background: #FAFAF7; }
+    .ref-table .col-id { font-family: var(--font-mono); font-weight: 600; color: var(--ocean); width: 40px; }
+    .ref-table .col-field { font-weight: 600; color: var(--ocean-deep); min-width: 160px; }
+    .ref-table .col-type {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-light);
+      width: 90px;
+    }
+    .ref-table .col-notes { color: var(--text-light); line-height: 1.5; }
+
+    .dropdown-values {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .dv {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--ocean-light);
+      color: var(--ocean);
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .dv.warn { background: var(--amber-light); color: var(--amber); }
+    .dv.bad { background: var(--red-light); color: var(--red); }
+
+    /* Formula blocks */
+    .formula-block {
+      background: #0D1117;
+      color: #E6EDF3;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      margin: 8px 0;
+      overflow-x: auto;
+    }
+    .formula-block .comment { color: #6A737D; }
+
+    /* Info cards */
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+    .info-card h4 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ocean-deep);
+      margin-bottom: 8px;
+    }
+    .info-card p, .info-card li {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    .info-card ol, .info-card ul {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+    .info-card li { margin-bottom: 6px; }
+
+    /* Conditional formatting demo */
+    .cond-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .cond-item {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      font-size: 13px;
+    }
+    .cond-item.red-bg { background: var(--red-light); border: 1px solid #FCA5A5; }
+    .cond-item.amber-bg { background: var(--amber-light); border: 1px solid #FCD34D; }
+    .cond-item.green-bg { background: var(--green-light); border: 1px solid #86EFAC; }
+    .cond-item strong { display: block; margin-bottom: 4px; font-size: 14px; }
+    .cond-item code { font-family: var(--font-mono); font-size: 12px; background: rgba(0,0,0,0.06); padding: 1px 6px; border-radius: 3px; }
+
+    /* Sequence timeline */
+    .sequence {
+      margin: 16px 0;
+    }
+    .seq-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .seq-item:last-child { border-bottom: none; }
+    .seq-day {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--ocean);
+      width: 70px;
+      flex-shrink: 0;
+    }
+    .seq-text { color: var(--text-light); }
+
+    /* New badge */
+    .new-badge {
+      display: inline-flex;
+      padding: 2px 6px;
+      background: var(--green-light);
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 3px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 700px) {
+      .tab-bar-inner { overflow-x: auto; }
+      .ref-table { font-size: 12px; }
+      .ref-table thead th, .ref-table tbody td { padding: 8px 10px; }
+      .cond-row { flex-direction: column; }
+      .flow-bar { gap: 4px; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Papamoa.info — Master CRM Sheet</h1>
-  <span>PlainBlack · Setup Reference · March 2026</span>
-</div>
-
-<div class="tabs">
-  <div class="tab active" onclick="showTab('leads')">Tab 1 — LEADS</div>
-  <div class="tab" onclick="showTab('listings')">Tab 2 — LISTINGS</div>
-  <div class="tab" onclick="showTab('renewals')">Tab 3 — RENEWALS</div>
-  <div class="tab" onclick="showTab('setup')">Setup Instructions</div>
-</div>
-
-<!-- LEADS TAB -->
-<div class="content active" id="tab-leads">
-  <div class="desc">Every prospect goes here the moment they are identified. One row per business. Add manually during Phase 1. Make.com adds rows automatically in Phase 2. Never delete rows — change Status to Lost or Not Now instead.</div>
-
-  <div class="section-title">Status Flow</div>
-  <div class="status-flow">
-    <span class="status-pill s1">New Lead</span><span class="arrow">→</span>
-    <span class="status-pill s1">Contacted</span><span class="arrow">→</span>
-    <span class="status-pill s1">PPP Sent</span><span class="arrow">→</span>
-    <span class="status-pill s2">Engaged</span><span class="arrow">→</span>
-    <span class="status-pill s2">Form Submitted</span><span class="arrow">→</span>
-    <span class="status-pill s2">Onboarding</span><span class="arrow">→</span>
-    <span class="status-pill s2">Approved</span><span class="arrow">→</span>
-    <span class="status-pill s3">Invoiced</span><span class="arrow">→</span>
-    <span class="status-pill s3">Paid</span><span class="arrow">→</span>
-    <span class="status-pill s2">Published</span>
-    <span style="width:100%;"></span>
-    <span class="status-pill s4">Lost</span>
-    <span class="status-pill s4">Not Now</span>
-    <span class="status-pill s4">Wrong Fit</span>
-  </div>
-
-  <table>
-    <thead>
-      <tr><th>Col</th><th>Field Name</th><th>Type</th><th>Notes & Dropdown Values</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>A</td><td>ID</td><td><span class="type-badge type-text">Text</span></td><td>Manual: PPI-001, PPI-002... Sequential, never reuse</td></tr>
-      <tr><td>B</td><td>Business Name</td><td><span class="type-badge type-text">Text</span></td><td>Official trading name</td></tr>
-      <tr><td>C</td><td>Slug</td><td><span class="type-badge type-text">Text</span></td><td>URL-safe: driftwood-cafe, papamoa-surf-school (lowercase, hyphens only)</td></tr>
-      <tr><td>D</td><td>Contact Name</td><td><span class="type-badge type-text">Text</span></td><td>Person Jayden spoke to</td></tr>
-      <tr><td>E</td><td>Email</td><td><span class="type-badge type-text">Text</span></td><td>Primary outreach email</td></tr>
-      <tr><td>F</td><td>Phone</td><td><span class="type-badge type-text">Text</span></td><td>Primary outreach phone</td></tr>
-      <tr><td>G</td><td>Website</td><td><span class="type-badge type-text">Text</span></td><td>Full URL incl. https://</td></tr>
-      <tr><td>H</td><td>Category</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Accommodation</span><span>Activities</span><span>Food & Drink</span><span>Shops</span><span>Services</span></div></td></tr>
-      <tr><td>I</td><td>Sub-Category</td><td><span class="type-badge type-text">Text</span></td><td>e.g. Cafes, Plumbers, Motels — free text until full subcat list is confirmed</td></tr>
-      <tr><td>J</td><td>Tier Interest</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Silver</span><span>Gold</span><span>Unknown</span></div></td></tr>
-      <tr><td>K</td><td>Lead Source</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Cold Call</span><span>Facebook DM</span><span>Instagram DM</span><span>LinkedIn DM</span><span>Cold Email</span><span>Referral</span><span>Inbound</span></div></td></tr>
-      <tr><td>L</td><td>Status</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>New Lead</span><span>Contacted</span><span>PPP Sent</span><span>Engaged</span><span>Form Submitted</span><span>Onboarding</span><span>Approved</span><span>Invoiced</span><span>Paid</span><span>Published</span><span>Lost</span><span>Not Now</span><span>Wrong Fit</span></div></td></tr>
-      <tr><td>M</td><td>Preview URL</td><td><span class="type-badge type-text">Text</span></td><td>https://preview.papamoa.info/{slug} — add when PPP is built</td></tr>
-      <tr><td>N</td><td>PPP Built</td><td><span class="type-badge type-checkbox">Checkbox</span></td><td>Tick when PPP is live and verified on GitHub</td></tr>
-      <tr><td>O</td><td>Date First Contact</td><td><span class="type-badge type-date">Date</span></td><td>DD/MM/YYYY — when Jayden first called or messaged</td></tr>
-      <tr><td>P</td><td>Date Email 1 Sent</td><td><span class="type-badge type-date">Date</span></td><td>Day 3 follow-up send date</td></tr>
-      <tr><td>Q</td><td>Date Email 2 Sent</td><td><span class="type-badge type-date">Date</span></td><td>Day 6 follow-up send date</td></tr>
-      <tr><td>R</td><td>Date Email 3 Sent</td><td><span class="type-badge type-date">Date</span></td><td>Day 10 final check-in send date</td></tr>
-      <tr><td>S</td><td>Date PPP Sent</td><td><span class="type-badge type-date">Date</span></td><td>When preview link was shared with prospect</td></tr>
-      <tr><td>T</td><td>Call Back Date</td><td><span class="type-badge type-date">Date</span></td><td>The specific day committed to during the call</td></tr>
-      <tr><td>U</td><td>Response</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>No Reply</span><span>Interested</span><span>Requested More Info</span><span>Not Now</span><span>Not Interested</span><span>Wrong Fit</span></div></td></tr>
-      <tr><td>V</td><td>Notes</td><td><span class="type-badge type-text">Text</span></td><td>Free text — call notes, objections, personal details, anything useful</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- LISTINGS TAB -->
-<div class="content" id="tab-listings">
-  <div class="desc">Only businesses that have paid and gone live on papamoa.info. Rows move here from the LEADS tab when Status = Published. This is the active client database. Renewal tracking lives here.</div>
-
-  <table>
-    <thead>
-      <tr><th>Col</th><th>Field Name</th><th>Type</th><th>Notes & Values</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>A</td><td>ID</td><td><span class="type-badge type-text">Text</span></td><td>Matches LEADS tab ID — PPI-001 etc.</td></tr>
-      <tr><td>B</td><td>Business Name</td><td><span class="type-badge type-text">Text</span></td><td></td></tr>
-      <tr><td>C</td><td>Slug</td><td><span class="type-badge type-text">Text</span></td><td></td></tr>
-      <tr><td>D</td><td>Tier</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Silver</span><span>Gold</span><span>Bronze</span></div></td></tr>
-      <tr><td>E</td><td>Category</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Accommodation</span><span>Activities</span><span>Food & Drink</span><span>Shops</span><span>Services</span></div></td></tr>
-      <tr><td>F</td><td>Primary Sub-Category</td><td><span class="type-badge type-text">Text</span></td><td>Main category the Spotlight applies to (Gold only)</td></tr>
-      <tr><td>G</td><td>Additional Sub-Categories</td><td><span class="type-badge type-text">Text</span></td><td>Comma separated — Gold only, $99+GST each</td></tr>
-      <tr><td>H</td><td>Sub-Pages Count</td><td><span class="type-badge type-number">Number</span></td><td>Total published sub-pages. Gold Founding Members = unlimited free</td></tr>
-      <tr><td>I</td><td>Founding Member</td><td><span class="type-badge type-checkbox">Checkbox</span></td><td>Tick if signed up during founding member period — locks in all perks</td></tr>
-      <tr><td>J</td><td>Live URL</td><td><span class="type-badge type-text">Text</span></td><td>https://papamoa.info/business/{slug}</td></tr>
-      <tr><td>K</td><td>TaurangaNZ URL</td><td><span class="type-badge type-text">Text</span></td><td>Gold only — their TaurangaNZ.info listing URL</td></tr>
-      <tr><td>L</td><td>Admin Email</td><td><span class="type-badge type-text">Text</span></td><td>Invoice and admin contact</td></tr>
-      <tr><td>M</td><td>Customer Email</td><td><span class="type-badge type-text">Text</span></td><td>Public-facing contact email on listing</td></tr>
-      <tr><td>N</td><td>Admin Phone</td><td><span class="type-badge type-text">Text</span></td><td></td></tr>
-      <tr><td>O</td><td>Customer Phone</td><td><span class="type-badge type-text">Text</span></td><td></td></tr>
-      <tr><td>P</td><td>Payment Date</td><td><span class="type-badge type-date">Date</span></td><td>Date Stripe payment confirmed</td></tr>
-      <tr><td>Q</td><td>Invoice Number</td><td><span class="type-badge type-text">Text</span></td><td>Stripe invoice number for records</td></tr>
-      <tr><td>R</td><td>Annual Value (excl GST)</td><td><span class="type-badge type-currency">Currency</span></td><td>NZD — Silver: $599, Gold: $1,200 + any add-ons</td></tr>
-      <tr><td>S</td><td>Renewal Date</td><td><span class="type-badge type-formula">Formula</span></td><td><div class="formula-block">=P2+365</div>Auto-calculates from payment date</td></tr>
-      <tr><td>T</td><td>Renewal Status</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Active</span><span>Renewal Due</span><span>30-Day Notice Sent</span><span>7-Day Notice Sent</span><span>Renewed</span><span>Lapsed</span></div></td></tr>
-      <tr><td>U</td><td>Facebook Post Date</td><td><span class="type-badge type-date">Date</span></td><td>When welcome post was published to Pāpāmoa groups</td></tr>
-      <tr><td>V</td><td>GA Connected</td><td><span class="type-badge type-checkbox">Checkbox</span></td><td>Tick once Google Analytics is tracking this listing's page</td></tr>
-      <tr><td>W</td><td>Notes</td><td><span class="type-badge type-text">Text</span></td><td>Anything useful — special requests, communication history</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- RENEWALS TAB -->
-<div class="content" id="tab-renewals">
-  <div class="desc">Shows all listings with upcoming renewals. At launch, populate manually from LISTINGS tab. In Phase 2, Make.com checks this daily and sends renewal reminder emails automatically via Brevo.</div>
-
-  <div class="section-title">Conditional Formatting — Days Until Renewal</div>
-  <div class="format-grid">
-    <div class="format-card red">
-      <div class="fc-label">Urgent — Red</div>
-      <div class="fc-formula">Rule: =D2&lt;7</div>
-      <div style="font-size:12px; color:var(--color-text-soft); margin-top:6px;">Renewal in less than 7 days — call immediately</div>
-    </div>
-    <div class="format-card amber">
-      <div class="fc-label">Due Soon — Amber</div>
-      <div class="fc-formula">Rule: =AND(D2&gt;=7,D2&lt;=30)</div>
-      <div style="font-size:12px; color:var(--color-text-soft); margin-top:6px;">Renewal in 7–30 days — send reminder email</div>
-    </div>
-    <div class="format-card green">
-      <div class="fc-label">On Track — Green</div>
-      <div class="fc-formula">Rule: =D2&gt;30</div>
-      <div style="font-size:12px; color:var(--color-text-soft); margin-top:6px;">More than 30 days — no action needed</div>
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-inner">
+      <h1>Papamoa.info — Master CRM Sheet</h1>
+      <div class="header-sub">PlainBlack Creative — Google Sheets Setup Reference</div>
+      <div class="header-updated">Last updated: April 2026 — includes Menu Add-On, Listing Health, and Placeholder tracking</div>
     </div>
   </div>
 
-  <table>
-    <thead>
-      <tr><th>Col</th><th>Field Name</th><th>Type</th><th>Notes</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>A</td><td>Business Name</td><td><span class="type-badge type-text">Text</span></td><td>Pull from LISTINGS tab or enter manually</td></tr>
-      <tr><td>B</td><td>Tier</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Silver</span><span>Gold</span><span>Bronze</span></div></td></tr>
-      <tr><td>C</td><td>Renewal Date</td><td><span class="type-badge type-date">Date</span></td><td>Copy from LISTINGS tab column S</td></tr>
-      <tr><td>D</td><td>Days Until Renewal</td><td><span class="type-badge type-formula">Formula</span></td><td><div class="formula-block">=C2-TODAY()</div>Auto-calculates. Apply conditional formatting to this column.</td></tr>
-      <tr><td>E</td><td>Status</td><td><span class="type-badge type-dropdown">Dropdown</span></td><td><div class="dropdown-values"><span>Active</span><span>30-Day Notice Sent</span><span>7-Day Notice Sent</span><span>Renewed</span><span>Lapsed</span></div></td></tr>
-      <tr><td>F</td><td>Renewal Value</td><td><span class="type-badge type-currency">Currency</span></td><td>NZD excl. GST — same as original for Founding Members (price locked)</td></tr>
-      <tr><td>G</td><td>Admin Email</td><td><span class="type-badge type-text">Text</span></td><td>For sending renewal invoice</td></tr>
-      <tr><td>H</td><td>Notes</td><td><span class="type-badge type-text">Text</span></td><td>Renewal conversation notes</td></tr>
-    </tbody>
-  </table>
-
-  <div class="tip">
-    <strong>Renewal email sequence (Phase 2 — Make.com automated)</strong>
-    Day -30: "Your listing renews in 30 days — here's what it delivered this year."
-    Day -7: "Final reminder — your Papamoa.info listing renews in 7 days."
-    Day 0: Invoice sent automatically via Stripe.
-    Day +7: If unpaid — "Your listing has lapsed. Reply to reinstate."
-  </div>
-</div>
-
-<!-- SETUP TAB -->
-<div class="content" id="tab-setup">
-  <div class="desc">Step-by-step instructions to create this Google Sheet from scratch. Complete in order.</div>
-
-  <div class="section-title">Step 1 — Create the Sheet</div>
-  <ol style="padding-left:20px; font-size:13px; color:var(--color-text-soft); line-height:2;">
-    <li>Go to <strong>sheets.google.com</strong></li>
-    <li>Click <strong>Blank spreadsheet</strong></li>
-    <li>Click "Untitled spreadsheet" at the top → rename to <strong>Papamoa.info — Master CRM</strong></li>
-    <li>Rename Sheet1 to <strong>LEADS</strong></li>
-    <li>Click + at the bottom to add sheets → rename to <strong>LISTINGS</strong> and <strong>RENEWALS</strong></li>
-  </ol>
-
-  <div class="section-title" style="margin-top:24px;">Step 2 — Add Column Headers</div>
-  <div class="tip">
-    <strong>Quick tip:</strong> Row 1 of each tab = headers. Type each column name exactly as shown in the tabs above.
-    Bold row 1: select it → Format → Bold. Freeze row 1: View → Freeze → 1 row.
-    Make the header row background colour navy (#2B3F5C) with white text for each tab.
+  <!-- Tabs -->
+  <div class="tab-bar">
+    <div class="tab-bar-inner">
+      <button class="tab-btn active" data-tab="leads">Tab 1 — LEADS</button>
+      <button class="tab-btn" data-tab="listings">Tab 2 — LISTINGS</button>
+      <button class="tab-btn" data-tab="renewals">Tab 3 — RENEWALS</button>
+      <button class="tab-btn" data-tab="health">Tab 4 — HEALTH</button>
+      <button class="tab-btn" data-tab="setup">Setup Instructions</button>
+    </div>
   </div>
 
-  <div class="section-title">Step 3 — Add Data Validation (Dropdowns)</div>
-  <ol style="padding-left:20px; font-size:13px; color:var(--color-text-soft); line-height:2;">
-    <li>Click the column letter to select the whole column</li>
-    <li>Data → <strong>Data Validation</strong> → <strong>Add a Rule</strong></li>
-    <li>Criteria: <strong>Dropdown</strong></li>
-    <li>Enter values from the table above, one per line</li>
-    <li>On invalid data: <strong>Show a warning</strong></li>
-    <li>Click <strong>Done</strong></li>
-    <li>Repeat for each dropdown column</li>
-  </ol>
+  <div class="content">
 
-  <div class="section-title">Step 4 — Add Formulas</div>
-  <div class="tip">
-    <strong>LISTINGS tab — Renewal Date (column S):</strong>
-    Click cell S2, type <code>=P2+365</code>, press Enter.
-    Then click S2, copy it (Ctrl+C), select S2:S1000, paste (Ctrl+V).
-    This calculates renewal date for every row automatically.
+    <!-- ============================== TAB 1: LEADS ============================== -->
+    <div class="tab-panel active" id="tab-leads">
+      <div class="section">
+        <h2 class="section-title">LEADS Tab</h2>
+        <p class="section-desc">Every prospect goes here the moment they are identified. One row per business. Add manually during Phase 1. Make.com adds rows automatically in Phase 2. Never delete rows — change Status to Lost or Not Now instead.</p>
+      </div>
+
+      <div class="section">
+        <h3 style="font-size:16px;font-weight:600;color:var(--ocean-deep);margin-bottom:12px;">Status Flow</h3>
+        <div class="flow-bar">
+          <span class="flow-step main">New Lead</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step main">Contacted</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step main">PPP Sent</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step main">Engaged</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step main">Form Submitted</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step main">Onboarding</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step main">Approved</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step main">Invoiced</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step main">Paid</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step end">Published</span>
+        </div>
+        <div class="flow-bar">
+          <span class="flow-step lost">Lost</span>
+          <span class="flow-step pause">Not Now</span>
+          <span class="flow-step lost">Wrong Fit</span>
+        </div>
+      </div>
+
+      <table class="ref-table">
+        <thead><tr><th>Col</th><th>Field Name</th><th>Type</th><th>Notes & Dropdown Values</th></tr></thead>
+        <tbody>
+          <tr><td class="col-id">A</td><td class="col-field">ID</td><td class="col-type">Text</td><td class="col-notes">Manual: PPI-001, PPI-002... Sequential, never reuse</td></tr>
+          <tr><td class="col-id">B</td><td class="col-field">Business Name</td><td class="col-type">Text</td><td class="col-notes">Official trading name</td></tr>
+          <tr><td class="col-id">C</td><td class="col-field">Slug</td><td class="col-type">Text</td><td class="col-notes">URL-safe: <code>driftwood-cafe</code>, <code>papamoa-surf-school</code> (lowercase, hyphens only)</td></tr>
+          <tr><td class="col-id">D</td><td class="col-field">Contact Name</td><td class="col-type">Text</td><td class="col-notes">Person Jayden spoke to</td></tr>
+          <tr><td class="col-id">E</td><td class="col-field">Email</td><td class="col-type">Text</td><td class="col-notes">Primary outreach email</td></tr>
+          <tr><td class="col-id">F</td><td class="col-field">Phone</td><td class="col-type">Text</td><td class="col-notes">Primary outreach phone</td></tr>
+          <tr><td class="col-id">G</td><td class="col-field">Website</td><td class="col-type">Text</td><td class="col-notes">Full URL incl. https://</td></tr>
+          <tr><td class="col-id">H</td><td class="col-field">Category</td><td class="col-type">Dropdown</td><td class="col-notes">Top-level category<div class="dropdown-values"><span class="dv">Accommodation</span><span class="dv">Activities</span><span class="dv">Food & Drink</span><span class="dv">Shops</span><span class="dv">Services</span></div></td></tr>
+          <tr><td class="col-id">I</td><td class="col-field">Sub-Category</td><td class="col-type">Text</td><td class="col-notes">e.g. Cafes, Plumber, Motels. Must match slug in category tree JSON</td></tr>
+          <tr><td class="col-id">J</td><td class="col-field">Tier Interest</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">Silver</span><span class="dv">Gold</span><span class="dv">Unknown</span></div></td></tr>
+          <tr><td class="col-id">K</td><td class="col-field">Lead Source</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">Placeholder Data</span><span class="dv">Cold Call</span><span class="dv">Facebook DM</span><span class="dv">Instagram DM</span><span class="dv">LinkedIn DM</span><span class="dv">Cold Email</span><span class="dv">Referral</span><span class="dv">Inbound</span><span class="dv">Outscraper</span></div></td></tr>
+          <tr><td class="col-id">L</td><td class="col-field">Status</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">New Lead</span><span class="dv">Contacted</span><span class="dv">PPP Sent</span><span class="dv">Engaged</span><span class="dv">Form Submitted</span><span class="dv">Onboarding</span><span class="dv">Approved</span><span class="dv">Invoiced</span><span class="dv">Paid</span><span class="dv">Published</span><span class="dv warn">Not Now</span><span class="dv bad">Lost</span><span class="dv bad">Wrong Fit</span></div></td></tr>
+          <tr><td class="col-id">M</td><td class="col-field">Placeholder Views <span class="new-badge">New</span></td><td class="col-type">Number</td><td class="col-notes">Monthly page views on the placeholder listing for this subcategory. Key sales data point.</td></tr>
+          <tr><td class="col-id">N</td><td class="col-field">Placeholder Enquiries <span class="new-badge">New</span></td><td class="col-type">Number</td><td class="col-notes">Monthly enquiries captured by the placeholder page. Use in outreach email.</td></tr>
+          <tr><td class="col-id">O</td><td class="col-field">Preview URL</td><td class="col-type">Text</td><td class="col-notes">GitHub Pages staging URL for their draft listing</td></tr>
+          <tr><td class="col-id">P</td><td class="col-field">PPP Built</td><td class="col-type">Checkbox</td><td class="col-notes">Tick when PPP is live and verified on GitHub</td></tr>
+          <tr><td class="col-id">Q</td><td class="col-field">Date First Contact</td><td class="col-type">Date</td><td class="col-notes">DD/MM/YYYY</td></tr>
+          <tr><td class="col-id">R</td><td class="col-field">Date Email 1 Sent</td><td class="col-type">Date</td><td class="col-notes">Day 3 follow-up send date</td></tr>
+          <tr><td class="col-id">S</td><td class="col-field">Date Email 2 Sent</td><td class="col-type">Date</td><td class="col-notes">Day 6 follow-up send date</td></tr>
+          <tr><td class="col-id">T</td><td class="col-field">Date Email 3 Sent</td><td class="col-type">Date</td><td class="col-notes">Day 10 final check-in send date</td></tr>
+          <tr><td class="col-id">U</td><td class="col-field">Date PPP Sent</td><td class="col-type">Date</td><td class="col-notes">When preview link was shared with prospect</td></tr>
+          <tr><td class="col-id">V</td><td class="col-field">Call Back Date</td><td class="col-type">Date</td><td class="col-notes">The specific day committed to during the call</td></tr>
+          <tr><td class="col-id">W</td><td class="col-field">Response</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">No Reply</span><span class="dv">Interested</span><span class="dv">Requested More Info</span><span class="dv warn">Not Now</span><span class="dv bad">Not Interested</span><span class="dv bad">Wrong Fit</span></div></td></tr>
+          <tr><td class="col-id">X</td><td class="col-field">Notes</td><td class="col-type">Text</td><td class="col-notes">Free text: call notes, objections, personal details, anything useful</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ============================== TAB 2: LISTINGS ============================== -->
+    <div class="tab-panel" id="tab-listings">
+      <div class="section">
+        <h2 class="section-title">LISTINGS Tab</h2>
+        <p class="section-desc">Only businesses that have paid and gone live on papamoa.info. Rows move here from the LEADS tab when Status = Published. This is the active client database. Includes placeholder listings for tracking purposes.</p>
+      </div>
+
+      <table class="ref-table">
+        <thead><tr><th>Col</th><th>Field Name</th><th>Type</th><th>Notes & Values</th></tr></thead>
+        <tbody>
+          <tr><td class="col-id">A</td><td class="col-field">ID</td><td class="col-type">Text</td><td class="col-notes">Matches LEADS tab ID: PPI-001 etc. Placeholders use PH-001, PH-002.</td></tr>
+          <tr><td class="col-id">B</td><td class="col-field">Business Name</td><td class="col-type">Text</td><td class="col-notes">Trading name (or placeholder name e.g. "Plumber Papamoa")</td></tr>
+          <tr><td class="col-id">C</td><td class="col-field">Slug</td><td class="col-type">Text</td><td class="col-notes">URL path segment</td></tr>
+          <tr><td class="col-id">D</td><td class="col-field">Tier</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">Gold</span><span class="dv">Silver</span><span class="dv">Placeholder</span></div></td></tr>
+          <tr><td class="col-id">E</td><td class="col-field">Category</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">Accommodation</span><span class="dv">Activities</span><span class="dv">Food & Drink</span><span class="dv">Shops</span><span class="dv">Services</span></div></td></tr>
+          <tr><td class="col-id">F</td><td class="col-field">Primary Sub-Category</td><td class="col-type">Text</td><td class="col-notes">Main category the Spotlight applies to (Gold only)</td></tr>
+          <tr><td class="col-id">G</td><td class="col-field">Additional Sub-Categories</td><td class="col-type">Text</td><td class="col-notes">Comma separated. Gold only, $99+GST each</td></tr>
+          <tr><td class="col-id">H</td><td class="col-field">Sub-Pages Count</td><td class="col-type">Number</td><td class="col-notes">Total published sub-pages. Gold Founding Members = unlimited free ($150 value each)</td></tr>
+          <tr><td class="col-id">I</td><td class="col-field">Founding Member</td><td class="col-type">Checkbox</td><td class="col-notes">Tick if signed up during founding member period. Locks in all perks including price lock.</td></tr>
+          <tr><td class="col-id">J</td><td class="col-field">Menu Add-On <span class="new-badge">New</span></td><td class="col-type">Checkbox</td><td class="col-notes">Tick if business has the Interactive Menu add-on ($199+GST/yr). Gold Founding Members get year 1 free.</td></tr>
+          <tr><td class="col-id">K</td><td class="col-field">Menu Last Updated <span class="new-badge">New</span></td><td class="col-type">Date</td><td class="col-notes">Date the client last updated their interactive menu via the private form.</td></tr>
+          <tr><td class="col-id">L</td><td class="col-field">Live URL</td><td class="col-type">Text</td><td class="col-notes">https://papamoa.info/business/{slug}</td></tr>
+          <tr><td class="col-id">M</td><td class="col-field">TaurangaNZ URL</td><td class="col-type">Text</td><td class="col-notes">Gold Founding Members only. Their TaurangaNZ.info Silver listing URL (two-for-one bonus).</td></tr>
+          <tr><td class="col-id">N</td><td class="col-field">Admin Email</td><td class="col-type">Text</td><td class="col-notes">Invoice and admin contact</td></tr>
+          <tr><td class="col-id">O</td><td class="col-field">Customer Email</td><td class="col-type">Text</td><td class="col-notes">Public-facing contact email on listing</td></tr>
+          <tr><td class="col-id">P</td><td class="col-field">Admin Phone</td><td class="col-type">Text</td><td class="col-notes">Internal contact</td></tr>
+          <tr><td class="col-id">Q</td><td class="col-field">Customer Phone</td><td class="col-type">Text</td><td class="col-notes">Displayed on listing</td></tr>
+          <tr><td class="col-id">R</td><td class="col-field">Payment Date</td><td class="col-type">Date</td><td class="col-notes">Date Stripe payment confirmed</td></tr>
+          <tr><td class="col-id">S</td><td class="col-field">Invoice Number</td><td class="col-type">Text</td><td class="col-notes">Stripe invoice number for records</td></tr>
+          <tr><td class="col-id">T</td><td class="col-field">Annual Value (excl GST)</td><td class="col-type">Currency</td><td class="col-notes">NZD. Silver: $599, Gold: $1,200 + add-ons ($99 per extra subcat, $199 menu, $150 per sub-page)</td></tr>
+          <tr><td class="col-id">U</td><td class="col-field">Renewal Date</td><td class="col-type">Formula</td><td class="col-notes"><code>=R2+365</code> Auto-calculates from payment date</td></tr>
+          <tr><td class="col-id">V</td><td class="col-field">Renewal Status</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">Active</span><span class="dv warn">Renewal Due</span><span class="dv warn">30-Day Notice Sent</span><span class="dv warn">7-Day Notice Sent</span><span class="dv">Renewed</span><span class="dv bad">Lapsed</span></div></td></tr>
+          <tr><td class="col-id">W</td><td class="col-field">Facebook Post Date</td><td class="col-type">Date</td><td class="col-notes">When welcome post was published to Papamoa groups</td></tr>
+          <tr><td class="col-id">X</td><td class="col-field">GA Connected</td><td class="col-type">Checkbox</td><td class="col-notes">Tick once Google Analytics is tracking this listing's page</td></tr>
+          <tr><td class="col-id">Y</td><td class="col-field">Notes</td><td class="col-type">Text</td><td class="col-notes">Special requests, communication history</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ============================== TAB 3: RENEWALS ============================== -->
+    <div class="tab-panel" id="tab-renewals">
+      <div class="section">
+        <h2 class="section-title">RENEWALS Tab</h2>
+        <p class="section-desc">Shows all listings with upcoming renewals. At launch, populate manually from LISTINGS tab. In Phase 2, Make.com checks this daily and sends renewal reminder emails automatically via Brevo.</p>
+      </div>
+
+      <div class="section">
+        <h3 style="font-size:16px;font-weight:600;color:var(--ocean-deep);margin-bottom:12px;">Conditional Formatting — Days Until Renewal</h3>
+        <div class="cond-row">
+          <div class="cond-item red-bg">
+            <strong style="color:var(--red);">Urgent — Red</strong>
+            <code>=D2&lt;7</code><br>
+            Renewal in less than 7 days. Call immediately.
+          </div>
+          <div class="cond-item amber-bg">
+            <strong style="color:var(--amber);">Due Soon — Amber</strong>
+            <code>=AND(D2&gt;=7,D2&lt;=30)</code><br>
+            Renewal in 7-30 days. Send reminder email.
+          </div>
+          <div class="cond-item green-bg">
+            <strong style="color:var(--green);">On Track — Green</strong>
+            <code>=D2&gt;30</code><br>
+            More than 30 days. No action needed.
+          </div>
+        </div>
+      </div>
+
+      <table class="ref-table">
+        <thead><tr><th>Col</th><th>Field Name</th><th>Type</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="col-id">A</td><td class="col-field">Business Name</td><td class="col-type">Text</td><td class="col-notes">Pull from LISTINGS tab or enter manually</td></tr>
+          <tr><td class="col-id">B</td><td class="col-field">Tier</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">Gold</span><span class="dv">Silver</span></div></td></tr>
+          <tr><td class="col-id">C</td><td class="col-field">Renewal Date</td><td class="col-type">Date</td><td class="col-notes">Copy from LISTINGS tab column U</td></tr>
+          <tr><td class="col-id">D</td><td class="col-field">Days Until Renewal</td><td class="col-type">Formula</td><td class="col-notes"><code>=C2-TODAY()</code> Auto-calculates. Apply conditional formatting to this column.</td></tr>
+          <tr><td class="col-id">E</td><td class="col-field">Status</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">Active</span><span class="dv warn">30-Day Notice Sent</span><span class="dv warn">7-Day Notice Sent</span><span class="dv">Renewed</span><span class="dv bad">Lapsed</span></div></td></tr>
+          <tr><td class="col-id">F</td><td class="col-field">Renewal Value</td><td class="col-type">Currency</td><td class="col-notes">NZD excl. GST. Same as original for Founding Members (price locked).</td></tr>
+          <tr><td class="col-id">G</td><td class="col-field">Menu Add-On <span class="new-badge">New</span></td><td class="col-type">Checkbox</td><td class="col-notes">If ticked, include $199+GST menu renewal in the invoice total.</td></tr>
+          <tr><td class="col-id">H</td><td class="col-field">Admin Email</td><td class="col-type">Text</td><td class="col-notes">For sending renewal invoice</td></tr>
+          <tr><td class="col-id">I</td><td class="col-field">Notes</td><td class="col-type">Text</td><td class="col-notes">Renewal conversation notes</td></tr>
+        </tbody>
+      </table>
+
+      <div class="info-card">
+        <h4>Renewal Email Sequence (Phase 2 — Make.com automated via Brevo)</h4>
+        <div class="sequence">
+          <div class="seq-item"><span class="seq-day">Day -30</span><span class="seq-text">"Your listing renews in 30 days. Here's what it delivered this year." (Include views, enquiries, SEO score)</span></div>
+          <div class="seq-item"><span class="seq-day">Day -7</span><span class="seq-text">"Final reminder. Your Papamoa.info listing renews in 7 days."</span></div>
+          <div class="seq-item"><span class="seq-day">Day 0</span><span class="seq-text">Invoice sent automatically via Stripe.</span></div>
+          <div class="seq-item"><span class="seq-day">Day +7</span><span class="seq-text">"Your listing has lapsed. Reply to reinstate." Verified badge removed.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================== TAB 4: HEALTH ============================== -->
+    <div class="tab-panel" id="tab-health">
+      <div class="section">
+        <h2 class="section-title">HEALTH Tab <span class="new-badge">New</span></h2>
+        <p class="section-desc">Tracks listing verification status and automated health checks. Every paid listing gets a verification email every 6 months. Clients confirm or update their details via a private pre-filled form. Automated checks run weekly via GitHub Actions.</p>
+      </div>
+
+      <table class="ref-table">
+        <thead><tr><th>Col</th><th>Field Name</th><th>Type</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="col-id">A</td><td class="col-field">Business Name</td><td class="col-type">Text</td><td class="col-notes">Pull from LISTINGS tab</td></tr>
+          <tr><td class="col-id">B</td><td class="col-field">Tier</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">Gold</span><span class="dv">Silver</span><span class="dv">Placeholder</span></div></td></tr>
+          <tr><td class="col-id">C</td><td class="col-field">Last Verified</td><td class="col-type">Date</td><td class="col-notes">Date the client last confirmed their listing details via the verification form.</td></tr>
+          <tr><td class="col-id">D</td><td class="col-field">Next Verification Due</td><td class="col-type">Formula</td><td class="col-notes"><code>=C2+182</code> (6 months). Gold listings can be set to quarterly: <code>=C2+91</code></td></tr>
+          <tr><td class="col-id">E</td><td class="col-field">Days Until Due</td><td class="col-type">Formula</td><td class="col-notes"><code>=D2-TODAY()</code> Apply conditional formatting (same as Renewals tab).</td></tr>
+          <tr><td class="col-id">F</td><td class="col-field">Verification Status</td><td class="col-type">Dropdown</td><td class="col-notes"><div class="dropdown-values"><span class="dv">Verified</span><span class="dv warn">Due</span><span class="dv warn">Reminder 1 Sent</span><span class="dv warn">Reminder 2 Sent</span><span class="dv bad">Overdue</span><span class="dv bad">Badge Removed</span></div></td></tr>
+          <tr><td class="col-id">G</td><td class="col-field">Website Check</td><td class="col-type">Dropdown</td><td class="col-notes">Automated weekly. <div class="dropdown-values"><span class="dv">OK</span><span class="dv bad">404</span><span class="dv bad">DNS Fail</span><span class="dv warn">SSL Expiring</span><span class="dv">N/A</span></div></td></tr>
+          <tr><td class="col-id">H</td><td class="col-field">Email Check</td><td class="col-type">Dropdown</td><td class="col-notes">MX record + SMTP check. <div class="dropdown-values"><span class="dv">OK</span><span class="dv bad">Bounced</span><span class="dv warn">No MX</span><span class="dv">N/A</span></div></td></tr>
+          <tr><td class="col-id">I</td><td class="col-field">Phone Check</td><td class="col-type">Dropdown</td><td class="col-notes">NZ phone format validation. <div class="dropdown-values"><span class="dv">OK</span><span class="dv bad">Invalid</span><span class="dv">N/A</span></div></td></tr>
+          <tr><td class="col-id">J</td><td class="col-field">Hours Match GBP</td><td class="col-type">Dropdown</td><td class="col-notes">Compare listing hours vs Google Business Profile. <div class="dropdown-values"><span class="dv">Match</span><span class="dv warn">Mismatch</span><span class="dv">No GBP</span></div></td></tr>
+          <tr><td class="col-id">K</td><td class="col-field">Social Links Check</td><td class="col-type">Dropdown</td><td class="col-notes">Facebook/Instagram URLs resolve. <div class="dropdown-values"><span class="dv">OK</span><span class="dv bad">Dead Link</span><span class="dv">No Socials</span></div></td></tr>
+          <tr><td class="col-id">L</td><td class="col-field">Last Auto-Check</td><td class="col-type">Date</td><td class="col-notes">Date of most recent automated health check run (GitHub Actions, weekly Monday 6am).</td></tr>
+          <tr><td class="col-id">M</td><td class="col-field">Pending Updates</td><td class="col-type">Checkbox</td><td class="col-notes">Tick if the client has submitted changes that Jayden hasn't applied yet.</td></tr>
+          <tr><td class="col-id">N</td><td class="col-field">Notes</td><td class="col-type">Text</td><td class="col-notes">Flagged issues, client feedback from verification form.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="info-card">
+        <h4>Verification Email Sequence</h4>
+        <div class="sequence">
+          <div class="seq-item"><span class="seq-day">Day 0</span><span class="seq-text">"Time to confirm your listing details." Pre-filled form link sent to admin email.</span></div>
+          <div class="seq-item"><span class="seq-day">Day +7</span><span class="seq-text">"Just checking this didn't land in spam. Your listing details need confirming."</span></div>
+          <div class="seq-item"><span class="seq-day">Day +14</span><span class="seq-text">"Second reminder. 2 minutes to confirm, keeps your Verified badge active."</span></div>
+          <div class="seq-item"><span class="seq-day">Day +21</span><span class="seq-text">"Final notice. If we don't hear back, the Verified badge will be removed in 7 days."</span></div>
+          <div class="seq-item"><span class="seq-day">Day +30</span><span class="seq-text">Verified badge automatically removed from public listing. Status &rarr; Badge Removed.</span></div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h4>Automated Health Checks (GitHub Actions, weekly)</h4>
+        <ul>
+          <li><strong>Website reachability:</strong> HTTP HEAD to each listing URL. Flags 404, 500, DNS failure, SSL expiry within 30 days.</li>
+          <li><strong>Email deliverability:</strong> MX record lookup + SMTP check on listing email domains.</li>
+          <li><strong>Phone format:</strong> Validates NZ landline (0X XXX XXXX) and mobile (02X XXX XXXX) patterns.</li>
+          <li><strong>Google Business Profile hours:</strong> Compares listing hours vs GBP (where available). Flags mismatches.</li>
+          <li><strong>Social profile links:</strong> Checks Facebook and Instagram URLs resolve to active pages.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============================== TAB 5: SETUP ============================== -->
+    <div class="tab-panel" id="tab-setup">
+      <div class="section">
+        <h2 class="section-title">Setup Instructions</h2>
+        <p class="section-desc">Step-by-step instructions to create this Google Sheet from scratch. Complete in order.</p>
+      </div>
+
+      <div class="info-card">
+        <h4>Step 1 — Create the Sheet</h4>
+        <ol>
+          <li>Go to <strong>sheets.google.com</strong></li>
+          <li>Click <strong>Blank spreadsheet</strong></li>
+          <li>Rename to <strong>Papamoa.info — Master CRM</strong></li>
+          <li>Rename Sheet1 to <strong>LEADS</strong></li>
+          <li>Click + at the bottom to add sheets: <strong>LISTINGS</strong>, <strong>RENEWALS</strong>, <strong>HEALTH</strong></li>
+        </ol>
+      </div>
+
+      <div class="info-card">
+        <h4>Step 2 — Add Column Headers</h4>
+        <p>Row 1 of each tab = headers. Type each column name exactly as shown in the tabs above. Bold row 1: select it &rarr; Format &rarr; Bold. Freeze row 1: View &rarr; Freeze &rarr; 1 row. Make the header row background colour navy (#134B58) with white text for each tab.</p>
+      </div>
+
+      <div class="info-card">
+        <h4>Step 3 — Add Data Validation (Dropdowns)</h4>
+        <ol>
+          <li>Click the column letter to select the whole column</li>
+          <li>Data &rarr; <strong>Data Validation</strong> &rarr; <strong>Add a Rule</strong></li>
+          <li>Criteria: <strong>Dropdown</strong></li>
+          <li>Enter values from the table above, one per line</li>
+          <li>On invalid data: <strong>Show a warning</strong></li>
+          <li>Click <strong>Done</strong></li>
+          <li>Repeat for each dropdown column across all tabs</li>
+        </ol>
+      </div>
+
+      <div class="info-card">
+        <h4>Step 4 — Add Formulas</h4>
+        <p><strong>LISTINGS tab — Renewal Date (column U):</strong></p>
+        <div class="formula-block">=R2+365 <span class="comment">// Auto-calculates renewal date from payment date</span></div>
+        <p>Click cell U2, type the formula, press Enter. Copy down to U1000.</p>
+
+        <p style="margin-top:16px;"><strong>RENEWALS tab — Days Until Renewal (column D):</strong></p>
+        <div class="formula-block">=C2-TODAY() <span class="comment">// Shows days remaining, apply conditional formatting</span></div>
+        <p>Copy down to D1000. Then select D2:D1000 &rarr; Format &rarr; Conditional Formatting &rarr; add the three colour rules shown in the Renewals tab.</p>
+
+        <p style="margin-top:16px;"><strong>HEALTH tab — Next Verification Due (column D):</strong></p>
+        <div class="formula-block">=C2+182 <span class="comment">// 6 months from last verified date</span></div>
+
+        <p style="margin-top:16px;"><strong>HEALTH tab — Days Until Due (column E):</strong></p>
+        <div class="formula-block">=D2-TODAY() <span class="comment">// Same conditional formatting as Renewals</span></div>
+      </div>
+
+      <div class="info-card">
+        <h4>Step 5 — Connect to Make.com (Phase 2)</h4>
+        <ol>
+          <li>In Make.com: Create scenario &rarr; Add Google Sheets module</li>
+          <li>Connection &rarr; Add &rarr; Sign in with jkbrownnz@gmail.com Google account</li>
+          <li>Allow Make.com access to Google Sheets</li>
+          <li>Select spreadsheet: <strong>Papamoa.info — Master CRM</strong></li>
+          <li>Select sheet: <strong>LEADS</strong></li>
+          <li>Make.com can now read, write, and update rows automatically</li>
+        </ol>
+      </div>
+
+      <div class="info-card">
+        <h4>Step 6 — Share with Make.com Service Account (if needed)</h4>
+        <p>If Make.com requires a service account email for access, share the sheet with that email address: File &rarr; Share &rarr; Share with people &rarr; enter the service account email &rarr; set to Editor.</p>
+      </div>
+    </div>
+
   </div>
-  <div class="tip" style="margin-top:8px;">
-    <strong>RENEWALS tab — Days Until Renewal (column D):</strong>
-    Click cell D2, type <code>=C2-TODAY()</code>, press Enter.
-    Copy down to D1000.
-    Then select D2:D1000 → Format → Conditional Formatting → add the three rules shown in the Renewals tab.
-  </div>
 
-  <div class="section-title">Step 5 — Connect to Make.com (Phase 2)</div>
-  <ol style="padding-left:20px; font-size:13px; color:var(--color-text-soft); line-height:2;">
-    <li>In Make.com: Create scenario → Add Google Sheets module</li>
-    <li>Connection → Add → Sign in with <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb818a928f8e85ab9b8a9b8a86848ac582858d84">[email&#160;protected]</a> Google account</li>
-    <li>Allow Make.com access to Google Sheets</li>
-    <li>Select spreadsheet: <strong>Papamoa.info — Master CRM</strong></li>
-    <li>Select sheet: <strong>LEADS</strong></li>
-    <li>Make.com can now read, write, and update rows automatically</li>
-  </ol>
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var tabId = this.getAttribute('data-tab');
 
-  <div class="section-title">Step 6 — Share with Make.com Service Account (if needed)</div>
-  <p style="font-size:13px; color:var(--color-text-soft); line-height:1.8;">
-    If Make.com requires a service account email for access, share the sheet with that email address:
-    File → Share → Share with people → enter the service account email → set to Editor.
-  </p>
-</div>
+        // Deactivate all tabs and panels
+        document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function showTab(id) {
-  document.querySelectorAll('.content').forEach(c => c.classList.r
+        // Activate clicked tab and corresponding panel
+        this.classList.add('active');
+        document.getElementById('tab-' + tabId).classList.add('active');
+
+        // Scroll to top of content
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
