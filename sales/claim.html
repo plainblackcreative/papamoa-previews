@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claim This Spotlight | Papamoa.info</title>
+  <meta name="description" content="Claim the Spotlight position in your category on Papamoa.info. One exclusive position per subcategory. Real local traffic, real customer enquiries.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sand: #F7F3ED;
+      --sand-dark: #EDE7DB;
+      --ocean: #1B6B7D;
+      --ocean-deep: #134B58;
+      --ocean-light: #E8F4F6;
+      --dune: #C4985A;
+      --dune-light: #F5EDD8;
+      --text: #2C2C2C;
+      --text-light: #6B6B6B;
+      --white: #FFFFFF;
+      --border: #E0D9CE;
+      --green: #16A34A;
+      --green-light: #DCFCE7;
+      --amber: #D97706;
+      --font-body: 'DM Sans', sans-serif;
+      --font-display: 'Fraunces', serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius: 8px;
+      --radius-lg: 16px;
+      --shadow: 0 4px 16px rgba(0,0,0,0.08);
+      --max-width: 760px;
+    }
+    body { font-family: var(--font-body); color: var(--text); background: var(--sand); font-size: 16px; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+
+    /* Header */
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--ocean); text-decoration: none; }
+    .logo span { color: var(--dune); }
+
+    .content { max-width: var(--max-width); margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* Spotlight hero */
+    .spotlight-hero {
+      background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean) 100%);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .spotlight-hero::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(196,152,90,0.2) 0%, transparent 70%);
+    }
+    .spotlight-hero-inner { position: relative; z-index: 1; }
+    .spotlight-badge-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--dune);
+      color: var(--white);
+      padding: 6px 18px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+    .spotlight-hero h1 {
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .spotlight-hero .category-name {
+      font-size: 20px;
+      opacity: 0.85;
+      margin-bottom: 24px;
+    }
+
+    /* Stats */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--ocean-deep);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-value.highlight { color: var(--dune); }
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-light);
+    }
+    .stat-sub {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    /* What you get */
+    .benefits-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow);
+    }
+    .benefits-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ocean-deep);
+      margin-bottom: 16px;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 14px;
+      padding: 6px 0;
+    }
+    .benefit-check { color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    /* Scarcity callout */
+    .scarcity-bar {
+      background: var(--dune-light);
+      border: 2px solid var(--dune);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .scarcity-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--dune);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .scarcity-text { font-size: 15px; }
+    .scarcity-text strong { color: var(--ocean-deep); }
+
+    /* Form */
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .form-header {
+      background: var(--ocean-deep);
+      color: var(--white);
+      padding: 24px 32px;
+    }
+    .form-header h2 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .form-header p { font-size: 14px; opacity: 0.75; }
+    .form-body { padding: 32px; }
+    .f-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .f-full { margin-bottom: 16px; }
+    .f-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 5px;
+    }
+    .f-label .req { color: #DC2626; }
+    .f-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .f-input:focus {
+      outline: none;
+      border-color: var(--ocean);
+      box-shadow: 0 0 0 3px var(--ocean-light);
+    }
+    select.f-input { cursor: pointer; }
+    textarea.f-input { min-height: 80px; resize: vertical; }
+
+    /* Pre-filled category display */
+    .category-display {
+      padding: 14px 18px;
+      background: var(--ocean-light);
+      border: 1px solid #B2DFDB;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .category-display-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ocean-deep);
+    }
+    .category-display-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 3px 10px;
+      background: var(--dune);
+      color: var(--white);
+      border-radius: 100px;
+    }
+
+    .f-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--dune);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+    .f-submit:hover { background: #B38845; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(196,152,90,0.3); }
+
+    .f-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+    .f-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .footer {
+      background: var(--ocean-deep);
+      color: rgba(255,255,255,0.5);
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .stats-bar { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .f-row { grid-template-columns: 1fr; }
+      .spotlight-hero h1 { font-size: 26px; }
+      .spotlight-hero { padding: 28px 20px; }
+      .scarcity-bar { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="/" class="logo">papamoa<span>.info</span></a>
+  </header>
+
+  <div class="content">
+
+    <!-- Hero -->
+    <div class="spotlight-hero">
+      <div class="spotlight-hero-inner">
+        <div class="spotlight-badge-hero">&#11088; Spotlight Position</div>
+        <h1>Claim the #1 Spot</h1>
+        <p class="category-name" id="heroCategory">Plumber in Papamoa</p>
+      </div>
+    </div>
+
+    <!-- Stats (populated dynamically in production, hardcoded for demo) -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-value">312</div>
+        <div class="stat-label">Monthly Views</div>
+        <div class="stat-sub">People searching this category</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value highlight">18</div>
+        <div class="stat-label">Monthly Enquiries</div>
+        <div class="stat-sub">Real customer leads</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--green);">Open</div>
+        <div class="stat-label">Spotlight Status</div>
+        <div class="stat-sub">Available right now</div>
+      </div>
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefits-card">
+      <h3 class="benefits-title">What You Get as the Spotlight</h3>
+      <div class="benefits-grid">
+        <div class="benefit-item"><span class="benefit-check">&#10003;</span> Top position, above all other listings</div>
+        <div class="benefit-item"><span class="benefit-check">&#10003;</span> Only ONE Spotlight per subcategory</div>
+        <div class="benefit-item"><span class="benefit-check">&#10003;</span> Full professional profile (we write it)</div>
+        <div class="benefit-item"><span class="benefit-check">&#10003;</span> Unlimited gallery images</div>
+        <div class="benefit-item"><span class="benefit-check">&#10003;</span> Google Reviews badge</div>
+        <div class="benefit-item"><span class="benefit-check">&#10003;</span> Direct enquiry form</div>
+        <div class="benefit-item"><span class="benefit-check">&#10003;</span> Google schema markup (SEO boost)</div>
+        <div class="benefit-item"><span class="benefit-check">&#10003;</span> Social media links displayed</div>
+        <div class="benefit-item"><span class="benefit-check">&#10003;</span> Verified badge on listing</div>
+        <div class="benefit-item"><span class="benefit-check">&#10003;</span> All existing enquiries routed to you</div>
+      </div>
+    </div>
+
+    <!-- Scarcity -->
+    <div class="scarcity-bar">
+      <div class="scarcity-icon">1</div>
+      <div class="scarcity-text">
+        <strong>Only one Spotlight per subcategory.</strong> Once this position is claimed, it's taken. The next business to ask will be offered a Silver listing below yours.
+      </div>
+    </div>
+
+    <!-- Claim Form -->
+    <div class="form-card">
+      <div class="form-header">
+        <h2>Claim This Spotlight</h2>
+        <p>Fill in your details and we'll have your listing live within 48 hours.</p>
+      </div>
+      <div class="form-body">
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
+          <input type="hidden" name="subject" value="SPOTLIGHT CLAIM - Plumber Papamoa">
+          <input type="hidden" name="from_name" value="Papamoa.info - Spotlight Claim">
+          <input type="hidden" name="Lead Source" value="Inbound (Claim)">
+          <input type="hidden" name="Status" value="New Lead">
+          <input type="hidden" name="Tier Interest" value="Gold">
+
+          <!-- Show which category they're claiming -->
+          <div class="category-display">
+            <span class="category-display-text" id="claimCategory">Services / Plumber</span>
+            <span class="category-display-badge">Spotlight</span>
+          </div>
+          <input type="hidden" name="Category" value="Services" id="hiddenCategory">
+          <input type="hidden" name="Sub-Category" value="Plumber" id="hiddenSubCategory">
+
+          <div class="f-row">
+            <div>
+              <label class="f-label">Business Name <span class="req">*</span></label>
+              <input type="text" name="Business Name" class="f-input" placeholder="Your trading name" required>
+            </div>
+            <div>
+              <label class="f-label">Your Name <span class="req">*</span></label>
+              <input type="text" name="Contact Name" class="f-input" placeholder="Contact person" required>
+            </div>
+          </div>
+
+          <div class="f-row">
+            <div>
+              <label class="f-label">Phone <span class="req">*</span></label>
+              <input type="tel" name="Phone" class="f-input" placeholder="027..." required>
+            </div>
+            <div>
+              <label class="f-label">Email <span class="req">*</span></label>
+              <input type="email" name="Email" class="f-input" placeholder="you@business.co.nz" required>
+            </div>
+          </div>
+
+          <div class="f-full">
+            <label class="f-label">Website</label>
+            <input type="url" name="Website" class="f-input" placeholder="https://yourbusiness.co.nz">
+          </div>
+
+          <div class="f-full">
+            <label class="f-label">Anything else we should know?</label>
+            <textarea name="Notes" class="f-input" placeholder="Service area, specialities, how long you've been operating..."></textarea>
+          </div>
+
+          <button type="submit" class="f-submit">&#11088; Claim This Spotlight</button>
+
+          <div class="f-trust">
+            <span class="f-trust-item">&#128274; No obligation</span>
+            <span class="f-trust-item">&#128337; Response within 24hrs</span>
+            <span class="f-trust-item">&#128221; We write the listing</span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">&copy; 2026 Papamoa.info. Papamoa, Bay of Plenty, New Zealand.</footer>
+
+  <script>
+    // In production, these values come from URL params: /claim?cat=services&sub=plumber
+    // For demo, we parse them if present
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var cat = params.get('cat');
+      var sub = params.get('sub');
+
+      if (cat && sub) {
+        var catTitle = cat.charAt(0).toUpperCase() + cat.slice(1);
+        var subTitle = sub.replace(/-/g, ' ');
+        subTitle = subTitle.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+
+        document.getElementById('heroCategory').textContent = subTitle + ' in Papamoa';
+        document.getElementById('claimCategory').textContent = catTitle + ' / ' + subTitle;
+        document.getElementById('hiddenCategory').value = catTitle;
+        document.getElementById('hiddenSubCategory').value = subTitle;
+
+        // Update email subject
+        var form = document.querySelector('form');
+        var subjectField = form.querySelector('[name="subject"]');
+        if (subjectField) {
+          subjectField.value = 'SPOTLIGHT CLAIM - ' + subTitle + ' Papamoa';
+        }
+      }
+    })();
+  </script>
+
+</body>
+</html>
