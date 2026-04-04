@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papamoa.info — Facebook Post Library</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0;
+      --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E;
+      --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A;
+      --fb:#1877F2;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
+
+    .site-nav { background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 12px; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
+    .nav-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); }
+
+    .page-hero { background: var(--navy); padding: 40px 24px 36px; position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--fb), #4267B2); }
+    .hero-inner { max-width: 1000px; margin: 0 auto; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6A9FEA; margin-bottom: 10px; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; color: #fff; margin-bottom: 8px; line-height: 1.15; }
+    .page-hero h1 em { font-style: italic; color: var(--blue); }
+    .page-hero p { font-size: 0.88rem; color: rgba(255,255,255,0.5); max-width: 560px; margin-bottom: 16px; }
+    .hero-tips { display: flex; gap: 12px; flex-wrap: wrap; }
+    .tip-chip { font-size: 0.72rem; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); padding: 4px 10px; border-radius: 4px; }
+
+    .page-wrap { max-width: 1000px; margin: 0 auto; padding: 28px 20px 80px; }
+
+    /* FILTER */
+    .filter-row { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .ftab { padding: 6px 14px; font-size: 0.75rem; font-weight: 700; border-radius: 5px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; font-family: 'Figtree', sans-serif; transition: all 0.15s; white-space: nowrap; }
+    .ftab:hover { border-color: var(--blue); color: var(--blue); }
+    .ftab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    /* GRID */
+    .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+
+    /* POST CARD */
+    .post-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.15s; }
+    .post-card:hover { border-color: var(--blue); box-shadow: 0 4px 16px rgba(58,171,222,0.1); transform: translateY(-2px); }
+    .post-card.hidden { display: none; }
+
+    .post-header { padding: 12px 14px 8px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+    .post-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--blue)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .post-avatar span { font-family: 'Playfair Display', serif; font-size: 0.8rem; font-weight: 700; color: #fff; }
+    .post-handle { font-size: 0.78rem; font-weight: 700; color: var(--navy); }
+    .post-handle small { font-weight: 400; color: var(--muted); font-size: 0.7rem; display: block; }
+    .post-type-badge { margin-left: auto; font-size: 0.6rem; font-weight: 700; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.06em; flex-shrink: 0; }
+    .badge-community { background: rgba(125,193,67,0.12); color: #3A8020; border: 1px solid rgba(125,193,67,0.25); }
+    .badge-info { background: rgba(58,171,222,0.1); color: var(--blue); border: 1px solid rgba(58,171,222,0.2); }
+    .badge-listing { background: rgba(200,150,42,0.1); color: var(--gold); border: 1px solid rgba(200,150,42,0.2); }
+    .badge-tease { background: rgba(232,52,74,0.1); color: var(--coral); border: 1px solid rgba(232,52,74,0.2); }
+    .badge-seasonal { background: rgba(43,63,92,0.1); color: var(--navy); border: 1px solid rgba(43,63,92,0.2); }
+    .badge-poll { background: rgba(96,112,128,0.1); color: var(--muted); border: 1px solid var(--border); }
+
+    .post-body { padding: 14px; flex: 1; }
+    .post-text { font-size: 0.88rem; color: var(--body); line-height: 1.65; white-space: pre-wrap; }
+    .post-text .hashtag { color: var(--fb); }
+    .post-text .emoji { font-style: normal; }
+
+    .post-footer { padding: 10px 14px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .post-number { font-size: 0.65rem; font-weight: 700; color: var(--muted); }
+    .post-timing { font-size: 0.68rem; color: var(--muted); }
+    .copy-btn { font-size: 0.72rem; font-weight: 700; color: var(--blue); background: rgba(58,171,222,0.08); border: 1px solid rgba(58,171,222,0.2); border-radius: 5px; padding: 4px 10px; cursor: pointer; font-family: 'Figtree', sans-serif; transition: all 0.15s; white-space: nowrap; }
+    .copy-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .copy-btn.copied { background: var(--lime); color: #fff; border-color: var(--lime); }
+
+    /* IMAGE SUGGESTION */
+    .img-suggestion { margin: 8px 14px 0; padding: 8px 10px; background: var(--bg); border-radius: 6px; font-size: 0.72rem; color: var(--muted); display: flex; gap: 6px; align-items: flex-start; }
+    .img-suggestion::before { content: '📸'; flex-shrink: 0; }
+
+    .site-footer { background: var(--navy); padding: 16px 24px; text-align: center; font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/sitemap.html" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="nav-tag">Facebook Post Library</span>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">@papamoa.info &mdash; Daily posts</div>
+    <h1>Facebook <em>Post Library</em></h1>
+    <p>30 ready-to-post Facebook posts for @papamoa.info. Copy, schedule, and post daily to grow followers and attract listings.</p>
+    <div class="hero-tips">
+      <span class="tip-chip">&#128161; Post daily — consistency beats perfection</span>
+      <span class="tip-chip">&#127919; Goal: 500 followers before first paid outreach</span>
+      <span class="tip-chip">&#128200; Share in local FB groups for organic reach</span>
+      <span class="tip-chip">&#128241; Best times: 7am, 12pm, 6pm NZST</span>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="filter-row">
+    <button class="ftab active" onclick="filterPosts('all', this)">All (30)</button>
+    <button class="ftab" onclick="filterPosts('community', this)">Community</button>
+    <button class="ftab" onclick="filterPosts('info', this)">Local Info</button>
+    <button class="ftab" onclick="filterPosts('listing', this)">Listing Promos</button>
+    <button class="ftab" onclick="filterPosts('tease', this)">Directory Tease</button>
+    <button class="ftab" onclick="filterPosts('seasonal', this)">Seasonal</button>
+    <button class="ftab" onclick="filterPosts('poll', this)">Polls & Questions</button>
+  </div>
+
+  <div class="posts-grid" id="posts-grid">
+
+    <!-- POST 1 -->
+    <div class="post-card" data-type="tease">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-tease">Tease</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Pāpāmoa is getting its own local directory. 🌊
+
+Every local business. Every service. Every tradie, café, and community group — all in one place built specifically for Pāpāmoa Beach.
+
+We're almost ready. Follow along to be first to know when we go live.
+
+<span class="hashtag">#Papamoa #PapamoaBeach #TaurangaNZ #SupportLocal #BayOfPlenty</span></div>
+      </div>
+      <div class="img-suggestion">Beach at golden hour with Pāpāmoa text overlay, or a collage of local business storefronts.</div>
+      <div class="post-footer">
+        <span class="post-number">Post #1 — Pin this</span>
+        <span class="post-timing">Day 1</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 2 -->
+    <div class="post-card" data-type="info">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-info">Local Info</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Pāpāmoa Hills track update ⚠️
+
+Following the January landslips, most tracks remain closed. The Summerhills Track has now reopened — but the main ridge track, Hairpin Track and loop tracks are all still closed pending remediation.
+
+Before you head up, check the current status at papamoa.info/articles/papamoa-hills
+
+Stay safe out there.
+
+<span class="hashtag">#PapamoaHills #PapamoaBeach #Papamoa #Tauranga #TrackUpdate</span></div>
+      </div>
+      <div class="img-suggestion">Photo of Pāpāmoa Hills from below, or the Summerhills track entrance.</div>
+      <div class="post-footer">
+        <span class="post-number">Post #2</span>
+        <span class="post-timing">Day 2</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 3 -->
+    <div class="post-card" data-type="poll">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-poll">Poll</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Quick question for Pāpāmoa locals 👇
+
+When you need to find a local tradie or business, where do you look first?
+
+🔵 Google
+🟡 Facebook groups
+🟢 Word of mouth
+🔴 Nextdoor
+
+Drop your answer in the comments — we're building something to make this easier.
+
+<span class="hashtag">#Papamoa #PapamoaBeach #LocalBusiness #SupportLocal</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #3</span>
+        <span class="post-timing">Day 3</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 4 -->
+    <div class="post-card" data-type="info">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-info">Local Info</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Did you know Pāpāmoa Beach is one of the fastest-growing communities in New Zealand? 📈
+
+The June 2025 estimate puts the population at 37,910 — up from 25,000 just ten years ago.
+
+More people means more local businesses, more services, and more reasons to keep your spending local.
+
+Full stats including age breakdown, ethnicity and income data: papamoa.info/articles/population-statistics
+
+<span class="hashtag">#Papamoa #PapamoaBeach #BayOfPlenty #Tauranga #NewZealand</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #4</span>
+        <span class="post-timing">Day 4</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 5 -->
+    <div class="post-card" data-type="community">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-community">Community</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Gordon Spratt Reserve — Pāpāmoa's best park 🌿
+
+Big reminder that Gordon Spratt Reserve has one of the few purpose-built tsunami evacuation mounds in New Zealand, with capacity for 3,800 people.
+
+It's also home to some of the best sports fields, a skate bowl, playgrounds, and plenty of picnic space for the whole family.
+
+What's your favourite thing about Gordon Spratt? 👇
+
+<span class="hashtag">#Papamoa #GordonSpratt #PapamoaBeach #FamilyFriendly #TaurangaNZ</span></div>
+      </div>
+      <div class="img-suggestion">Aerial or wide shot of Gordon Spratt Reserve, or the tsunami mound.</div>
+      <div class="post-footer">
+        <span class="post-number">Post #5</span>
+        <span class="post-timing">Day 5</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 6 -->
+    <div class="post-card" data-type="listing">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-listing">Listing</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Is your Pāpāmoa business showing up where locals are looking? 🔍
+
+Papamoa.info is building the most complete local directory for Pāpāmoa Beach — and every local business gets a free listing.
+
+No catch. Free forever. We write the description for you in an editorial voice that Google and AI search actually trust.
+
+Paid upgrades available when you're ready — but the free listing is yours to keep.
+
+DM us or visit papamoa.info to find your listing.
+
+<span class="hashtag">#Papamoa #PapamoaLocal #LocalBusiness #SmallBusiness #BayOfPlenty #SupportLocal</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #6</span>
+        <span class="post-timing">Day 6</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 7 -->
+    <div class="post-card" data-type="info">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-info">Local Info</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Mount Maunganui update for Pāpāmoa locals 🏔️
+
+Mauao (the Mount) remains fully closed following the January 2026 landslide that claimed six lives. All tracks — including the base track and summit track — are cordoned off with no reopening date confirmed.
+
+The Mount Hot Pools are destroyed. The campground is gone.
+
+The village strip, beach and restaurants are all open and operating normally.
+
+Our full updated guide: papamoa.info/articles/mount-maunganui
+
+<span class="hashtag">#MountMaunganui #Mauao #TaurangaNZ #Papamoa #BayOfPlenty</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #7</span>
+        <span class="post-timing">Day 7</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 8 -->
+    <div class="post-card" data-type="seasonal">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-seasonal">Seasonal</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">AIMS Games is coming to Tauranga 🏆
+
+5–11 September 2026. 12,000+ intermediate school students. New Zealand's largest school sport event — and it all happens right in our backyard.
+
+If you're hosting visiting families or need to book accommodation, now is the time.
+
+Everything you need to know: papamoa.info/articles/aims-games
+
+<span class="hashtag">#AIMSGames #AIMSGames2026 #Tauranga #Papamoa #BayOfPlenty #Sport</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #8</span>
+        <span class="post-timing">Day 8</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 9 -->
+    <div class="post-card" data-type="poll">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-poll">Poll</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Pāpāmoa locals — what's missing? 🤔
+
+We're building a directory of every business and service in the area. Help us prioritise — what do you wish was easier to find locally?
+
+💇 Hair & beauty
+🔧 Tradies (plumber, electrician etc.)
+🍕 Food delivery
+🐕 Pet services
+🌿 Garden & lawn care
+
+Comment below with what's hardest to find in Pāpāmoa!
+
+<span class="hashtag">#Papamoa #PapamoaBeach #LocalBusiness #BayOfPlenty</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #9</span>
+        <span class="post-timing">Day 9</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 10 -->
+    <div class="post-card" data-type="info">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-info">Local Info</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Dog owners — know the rules before you hit the beach 🐕
+
+The TCC Dog Bylaw 2018 (updated 2023) sets clear rules for Pāpāmoa Beach:
+
+🟢 Dogs allowed on leash: full beach, year round
+🟢 Dogs off leash: western end of Pāpāmoa Beach (before 9am and after 7pm, Sept–Apr)
+🔴 Dogs prohibited: main swimming and patrolled areas
+
+Full rules, off-leash zones, and registration info: papamoa.info/articles/dogs-papamoa
+
+<span class="hashtag">#Papamoa #PapamoaBeach #DogBeach #DogsOfNZ #TaurangaNZ #PetFriendly</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #10</span>
+        <span class="post-timing">Day 10</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 11 -->
+    <div class="post-card" data-type="tease">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-tease">Tease</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Here's something most local business directories get wrong. 👇
+
+They let businesses write their own descriptions. Which means you get marketing fluff, not useful information.
+
+Papamoa.info writes every listing in a neutral, third-party editorial voice — the same way a journalist would describe a business. Honest. Specific. Genuinely useful.
+
+That's why Google and AI search engines trust us more than most business directories.
+
+More soon.
+
+<span class="hashtag">#Papamoa #SEO #LocalBusiness #PapamoaBeach #SmallBusinessNZ</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #11</span>
+        <span class="post-timing">Day 11</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 12 -->
+    <div class="post-card" data-type="community">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-community">Community</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">School term dates for Pāpāmoa families 📅
+
+Term 2 2026 starts 27 April and runs until 3 July.
+
+We've got all four terms, every school holiday, and public holiday dates for 2026 in one easy page — bookmark it now so you're never caught off-guard.
+
+papamoa.info/articles/school-terms-holidays
+
+<span class="hashtag">#Papamoa #PapamoaSchools #SchoolHolidays #BayOfPlenty #NZSchools</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #12</span>
+        <span class="post-timing">Day 12</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 13 -->
+    <div class="post-card" data-type="listing">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-listing">Listing</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Thinking about listing your Pāpāmoa business? Here's what Silver gets you. 👇
+
+✅ Claimed and verified listing (no more placeholder)
+✅ Your description, photos, hours and contact details
+✅ Social media icons
+✅ Google Reviews rating badge
+✅ Lifetime price lock — $599+GST once, never again
+✅ 2027 ROI Guarantee
+
+If you don't get a measurable return from your listing by end of 2027, we'll refund you. Simple as that.
+
+DM us to claim your listing.
+
+<span class="hashtag">#Papamoa #LocalBusiness #SmallBusinessNZ #SupportLocal #PapamoaBeach</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #13</span>
+        <span class="post-timing">Day 13</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 14 -->
+    <div class="post-card" data-type="info">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-info">Local Info</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Shopping in Pāpāmoa 🛍️
+
+Three main shopping centres serve the Pāpāmoa area:
+
+🛒 Fashion Island — anchor tenants New World, Mitre 10, Paper Plus
+🛒 Palm Beach Plaza — anchor Countdown, ASB, NZ Post
+🛒 The Sands — newer development, growing tenancy
+
+Each centre has different anchor tenants, parking, and hours. Full guide including opening hours: papamoa.info/articles/shopping-centres
+
+<span class="hashtag">#Papamoa #PapamoaShopping #FashionIsland #PalmBeachPlaza #BayOfPlenty</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #14</span>
+        <span class="post-timing">Day 14</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 15 -->
+    <div class="post-card" data-type="poll">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-poll">Poll</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">How long have you lived in Pāpāmoa? 🌊
+
+Drop your answer in the comments:
+
+🟦 Less than 2 years — still finding my feet
+🟩 2–5 years — starting to know all the spots
+🟨 5–10 years — I know where everything is
+🟥 10+ years — basically a local legend
+
+We love hearing how our community has grown! Tag a neighbour 👇
+
+<span class="hashtag">#Papamoa #PapamoaBeach #PapamoaCommunity #BayOfPlenty #BeachLife</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #15</span>
+        <span class="post-timing">Day 15</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 16 -->
+    <div class="post-card" data-type="community">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-community">Community</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Pāpāmoa Library — more than just books 📚
+
+The Pāpāmoa Library at Gordon Spratt Reserve is free to join, has fast public WiFi, regular story time sessions for kids, and an active events programme.
+
+It's one of the most underrated community resources in the area.
+
+Hours, services and upcoming events: papamoa.info/articles/library
+
+<span class="hashtag">#Papamoa #PapamoaLibrary #BayOfPlenty #Community #FamilyFriendly</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #16</span>
+        <span class="post-timing">Day 16</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 17 -->
+    <div class="post-card" data-type="tease">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-tease">Tease</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">AI is changing how people find local businesses. 🤖
+
+When someone asks ChatGPT or Google AI "where's a good plumber in Pāpāmoa?" — it pulls from directory sites like ours.
+
+Businesses that aren't listed on a trusted local directory are invisible in AI search. Full stop.
+
+We're solving that for Pāpāmoa. Free listing for every local business. No excuses not to be found.
+
+More info coming soon — follow @papamoa.info to stay in the loop.
+
+<span class="hashtag">#Papamoa #AI #LocalSEO #LocalBusiness #PapamoaBeach #SmallBusinessNZ</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #17</span>
+        <span class="post-timing">Day 17</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 18 -->
+    <div class="post-card" data-type="info">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-info">Local Info</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Seniors & retirement living in Pāpāmoa 👴👵
+
+Pāpāmoa has become one of the most popular retirement destinations in the Bay of Plenty — for good reason.
+
+Karaka Pines Village is one of the area's premium retirement communities. We've also put together a guide to home care services, NZ Super entitlements and what to expect from the transition.
+
+papamoa.info/articles/seniors-retirement
+
+Share this with someone who might find it useful 💛
+
+<span class="hashtag">#Papamoa #Retirement #SeniorLiving #BayOfPlenty #NZSuper #AgedCare</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #18</span>
+        <span class="post-timing">Day 18</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 19 -->
+    <div class="post-card" data-type="listing">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-listing">Listing</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Attention Pāpāmoa business owners 📣
+
+We already have a placeholder listing for your business on Papamoa.info.
+
+That means right now, people searching for your service in Pāpāmoa might find your placeholder — and have no way to contact you.
+
+Claim it for free and make sure the right information is there. Or upgrade to a Silver listing ($599+GST, lifetime) to get your full details, photos and Google Reviews badge.
+
+DM us or search for your business at papamoa.info
+
+<span class="hashtag">#Papamoa #LocalBusiness #SmallBusinessNZ #PapamoaBeach #SupportLocal</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #19</span>
+        <span class="post-timing">Day 19</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 20 -->
+    <div class="post-card" data-type="community">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-community">Community</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">The Māori history of Pāpāmoa 🌿
+
+Before the subdivisions and beach houses, this land was home to Ngā Pōtiki and Ngāi Te Rangi — two of the principal iwi of Tauranga Moana.
+
+The name Pāpāmoa comes from the flat pumice plain (papa = flat land, moa = pumice/extinct bird). Tamapahore Marae remains a living cultural institution at the heart of the community.
+
+We've published a respectful overview of the history: papamoa.info/articles/maori-history
+
+<span class="hashtag">#Papamoa #MaoriHistory #NgaPotiki #NgaiTeRangi #TaurangaMoana #Aotearoa</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #20</span>
+        <span class="post-timing">Day 20</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 21 -->
+    <div class="post-card" data-type="seasonal">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-seasonal">Seasonal</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Autumn in Pāpāmoa 🍂
+
+April is one of the best months to be here — the crowds thin out, the water stays warm from summer, and the surf is often at its best.
+
+If you're planning a family birthday party this autumn, we've put together a local guide to venues, entertainers and party hire: papamoa.info/articles/kids-birthday-parties
+
+Tag a Pāpāmoa parent who might need this! 🎉
+
+<span class="hashtag">#Papamoa #PapamoaBeach #KidsBirthdayParty #BayOfPlenty #FamilyFriendly</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #21</span>
+        <span class="post-timing">Day 21</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 22 -->
+    <div class="post-card" data-type="info">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-info">Local Info</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Your local government contacts 🏛️
+
+Mayor of Tauranga City: Mahé Drysdale (elected October 2024)
+Bay of Plenty MP: Tom Rutherford (National)
+TCC main line: 07 577 7000
+TCC after hours: 07 578 8522
+
+We've published a full breakdown of who represents Pāpāmoa at council and central government level, including how to report issues: papamoa.info/articles/local-government
+
+<span class="hashtag">#Papamoa #TaurangaCC #LocalGovernment #BayOfPlenty #TaurangaNZ</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #22</span>
+        <span class="post-timing">Day 22</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 23 -->
+    <div class="post-card" data-type="poll">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-poll">Poll</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Pāpāmoa locals — best local business you'd recommend? 🌟
+
+We're curating the best of Pāpāmoa for the directory. Tell us your go-to local:
+
+Drop the name of a Pāpāmoa business you love in the comments — we'll make sure they're in the directory with a great listing.
+
+Café, tradie, salon, retailer — anything goes. Let's celebrate the good ones 👇
+
+<span class="hashtag">#Papamoa #SupportLocal #PapamoaBeach #LocalBusiness #BayOfPlenty</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #23</span>
+        <span class="post-timing">Day 23</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 24 -->
+    <div class="post-card" data-type="tease">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-tease">Tease</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">What does a Gold listing on Papamoa.info get you? 👇
+
+🥇 Top of your sub-category — one per category, yours exclusively
+🥇 Unlimited photos
+🥇 AI-powered sub-pages about your business
+🥇 Interactive menu / service list with pricing
+🥇 Google Reviews and TripAdvisor rating badges
+🥇 Lifetime price lock + 2027 ROI Guarantee
+
+All built and managed by us. Zero tech skills required.
+
+Interested? DM us — Gold spots are limited to one per sub-category.
+
+<span class="hashtag">#Papamoa #LocalBusiness #PapamoaBeach #SmallBusinessNZ #SupportLocal</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #24</span>
+        <span class="post-timing">Day 24</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 25 -->
+    <div class="post-card" data-type="community">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-community">Community</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Church and community groups in Pāpāmoa 🙏
+
+Pāpāmoa has a strong and active faith community. We're building a guide to all local churches, denominations and service times so you can find your community easily.
+
+If you're involved with a local church, community group or organisation and want to be listed — DM us. Free listing, always.
+
+<span class="hashtag">#Papamoa #PapamoaChurch #PapamoaCommunity #BayOfPlenty #Faith</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #25</span>
+        <span class="post-timing">Day 25</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 26 -->
+    <div class="post-card" data-type="info">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-info">Local Info</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">NZ Tax & KiwiSaver — easy calculator 💰
+
+Not the most exciting topic, but one of the most useful. Our PAYE and GST calculators help you quickly work out:
+
+✅ Take-home pay after tax
+✅ GST on any amount (add or subtract)
+✅ KiwiSaver contribution amounts
+✅ Key IRD dates for 2026
+
+Bookmark it: papamoa.info/articles/tax-kiwisaver
+
+<span class="hashtag">#Papamoa #KiwiSaver #NZTax #PAYE #GST #MoneyNZ #PersonalFinance</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #26</span>
+        <span class="post-timing">Day 26</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 27 -->
+    <div class="post-card" data-type="listing">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-listing">Listing</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">A question for Pāpāmoa tradies 🔧
+
+How many of your customers found you through Google this year?
+
+If the answer is "not many" — your listing on Papamoa.info might be the simplest fix.
+
+We write the description. We handle the SEO. We make sure you show up when locals search for what you do.
+
+Free placeholder listing already exists for most local tradies. Silver upgrade ($599+GST lifetime) gets your full details, photos, and reviews badge.
+
+DM us to get started.
+
+<span class="hashtag">#Papamoa #Tradies #PlumberNZ #ElectricianNZ #LocalBusiness #SmallBusinessNZ</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #27</span>
+        <span class="post-timing">Day 27</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 28 -->
+    <div class="post-card" data-type="community">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-community">Community</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Pāpāmoa is on track to be Tauranga's largest suburb. 🏘️
+
+With 37,910 residents and growing — Pāpāmoa has more people than most NZ provincial cities.
+
+Yet until now, there's been no dedicated local directory. No single place to find everything Pāpāmoa. No local voice for the community online.
+
+That's what Papamoa.info is here to change.
+
+Follow us to be part of it from day one. 🌊
+
+<span class="hashtag">#Papamoa #PapamoaBeach #BayOfPlenty #TaurangaNZ #NewZealand #GrowthSuburb</span></div>
+      </div>
+      <div class="img-suggestion">Aerial photo of Pāpāmoa Beach showing the scale of the suburb.</div>
+      <div class="post-footer">
+        <span class="post-number">Post #28</span>
+        <span class="post-timing">Day 28</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 29 -->
+    <div class="post-card" data-type="seasonal">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-seasonal">Seasonal</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">Planning a Pāpāmoa wedding? 💍
+
+The beach, the weather, the venues — Pāpāmoa is one of the best wedding destinations in the Bay of Plenty.
+
+We've put together a full guide to local wedding venues, photographers, caterers and suppliers — all based in or near Pāpāmoa.
+
+papamoa.info/articles/weddings
+
+Tag someone who's planning their big day! 🌸
+
+<span class="hashtag">#Papamoa #PapamoaWedding #WeddingNZ #BayOfPlenty #BeachWedding #TaurangaWedding</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #29</span>
+        <span class="post-timing">Day 29</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- POST 30 -->
+    <div class="post-card" data-type="tease">
+      <div class="post-header">
+        <div class="post-avatar"><span>Pi</span></div>
+        <div class="post-handle">Papamoa.info<small>Local directory for Pāpāmoa</small></div>
+        <span class="post-type-badge badge-tease">Tease</span>
+      </div>
+      <div class="post-body">
+        <div class="post-text">30 days in. 🌊
+
+We've been sharing local guides, community info, and building out the Pāpāmoa.info directory behind the scenes.
+
+Here's what's live right now:
+📍 Full article guides on dogs, tracks, parks, history, government, schools and more
+📍 Placeholder listings for most Pāpāmoa businesses
+📍 Local news and events page
+📍 Shopping, dining and accommodation guides
+
+All free. All locally focused. All written specifically for Pāpāmoa.
+
+Visit papamoa.info — and if you own a local business, your listing is waiting for you.
+
+<span class="hashtag">#Papamoa #PapamoaBeach #LocalDirectory #SupportLocal #BayOfPlenty #TaurangaNZ</span></div>
+      </div>
+      <div class="post-footer">
+        <span class="post-number">Post #30 — Month 1 wrap-up</span>
+        <span class="post-timing">Day 30</span>
+        <button class="copy-btn" onclick="copyPost(this)">Copy</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  Papamoa.info internal use only &nbsp;&middot;&nbsp; PlainBlack Creative &nbsp;&middot;&nbsp; 30 posts / month 1
+</footer>
+
+<script>
+  function filterPosts(type, btn) {
+    document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.post-card').forEach(card => {
+      if (type === 'all' || card.dataset.type === type) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  function copyPost(btn) {
+    const card = btn.closest('.post-card');
+    const text = card.querySelector('.post-text').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
