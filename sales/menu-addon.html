@@ -1,751 +1,730 @@
 <!DOCTYPE html>
 <html lang="en-NZ">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Menu for Your Listing | Papamoa.info</title>
-  <meta name="description" content="Add an interactive, always-up-to-date menu to your Papamoa.info listing. Customers browse your menu, see prices, filter by dietary needs, and order directly.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu & Service List Add-On | Papamoa.info</title>
+<meta name="description" content="Add an interactive, always-current menu to your Papamoa.info listing. Customers browse, filter by dietary needs, and order directly. $199+GST/yr for Silver. Included free with Gold.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ocean: #1B6B7D; --ocean-deep: #0F4352; --ocean-light: #E4F2F5;
+  --sand: #F7F3ED; --sand-dark: #EDE7DB; --dune: #C4985A; --dune-light: #F5EDD8;
+  --navy: #0D2B3E; --white: #FFFFFF; --text: #1A2832; --muted: #5A6E78;
+  --border: #D8E4E8; --silver: #5A7A8A; --silver-bg: #EDF3F6;
+  --gold: #B8840A; --gold-bg: #FBF3E2;
+  --green: #1E6B3C; --green-bg: #E6F4EC;
+  --red: #8B2020; --red-bg: #FAEAEA;
+  --font-body: 'Figtree', sans-serif; --font-display: 'Playfair Display', serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--sand); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+.nav { background: var(--navy); padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.nav-logo { font-weight: 700; font-size: 15px; color: var(--white); text-decoration: none; }
+.nav-logo span { color: var(--dune); }
+.nav-back { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+.nav-back:hover { color: var(--white); }
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --color-sand: #F7F3ED;
-      --color-sand-dark: #EDE7DB;
-      --color-ocean: #1B6B7D;
-      --color-ocean-deep: #134B58;
-      --color-ocean-light: #E8F4F6;
-      --color-dune: #C4985A;
-      --color-dune-light: #F5EDD8;
-      --color-text: #2C2C2C;
-      --color-text-light: #6B6B6B;
-      --color-white: #FFFFFF;
-      --color-border: #E0D9CE;
-      --color-green: #2E7D32;
-      --color-green-light: #E8F5E9;
-      --font-body: 'Figtree', sans-serif;
-      --font-display: 'Playfair Display', serif;
-      --radius: 8px;
-      --radius-lg: 16px;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-      --max-width: 900px;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-sand); line-height: 1.65; font-size: 16px; -webkit-font-smoothing: antialiased; }
+.hero { background: linear-gradient(140deg, var(--ocean-deep), var(--ocean)); padding: 64px 32px 68px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 110%, rgba(196,152,90,0.15) 0%, transparent 50%); }
+.hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.hero-eyebrow { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 14px; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 16px; }
+.hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 28px; }
+.hero-price-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.hero-price { display: inline-flex; align-items: baseline; gap: 4px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px 22px; }
+.hp-amount { font-size: 2rem; font-weight: 800; color: var(--white); line-height: 1; }
+.hp-suffix { font-size: 13px; color: rgba(255,255,255,0.6); }
+.hero-price-note { font-size: 12px; color: rgba(255,255,255,0.5); }
 
-    /* ---- HEADER ---- */
-    .page-header {
-      background: linear-gradient(135deg, var(--color-ocean-deep) 0%, var(--color-ocean) 100%);
-      padding: 64px 24px;
-      text-align: center;
-      color: var(--color-white);
-      position: relative;
-      overflow: hidden;
-    }
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%; right: -50%; bottom: -50%;
-      background: radial-gradient(circle at 30% 40%, rgba(196,152,90,0.15) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05) 0%, transparent 40%);
-    }
-    .header-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
-    .header-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.12);
-      padding: 6px 16px;
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      margin-bottom: 20px;
-    }
-    .page-header h1 {
-      font-family: var(--font-display);
-      font-size: 44px;
-      font-weight: 700;
-      line-height: 1.15;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
-    }
-    .page-header p {
-      font-size: 18px;
-      opacity: 0.85;
-      max-width: 560px;
-      margin: 0 auto 28px;
-      line-height: 1.6;
-    }
-    .header-price {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 8px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 12px 28px;
-      border-radius: var(--radius-lg);
-    }
-    .header-price .amount {
-      font-family: var(--font-display);
-      font-size: 36px;
-      font-weight: 700;
-    }
-    .header-price .period {
-      font-size: 15px;
-      opacity: 0.7;
-    }
+.page { max-width: 860px; margin: 0 auto; padding: 56px 24px 80px; }
 
-    /* ---- MAIN CONTENT ---- */
-    .content { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+.section { margin-bottom: 56px; }
+.section-label { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.section-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--navy); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.section-sub { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 24px; }
 
-    /* Problem/Solution */
-    .problem-section {
-      padding: 56px 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-    }
-    .problem-card {
-      padding: 32px;
-      border-radius: var(--radius-lg);
-    }
-    .problem-card.bad {
-      background: #FFF5F5;
-      border: 1px solid #FECACA;
-    }
-    .problem-card.good {
-      background: var(--color-green-light);
-      border: 1px solid #A5D6A7;
-    }
-    .problem-card h3 {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .problem-card.bad h3 { color: #B91C1C; }
-    .problem-card.good h3 { color: var(--color-green); }
-    .problem-list {
-      list-style: none;
-    }
-    .problem-list li {
-      padding: 8px 0;
-      font-size: 15px;
-      line-height: 1.5;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-    .problem-list li::before { flex-shrink: 0; font-size: 16px; }
-    .problem-card.bad .problem-list li::before { content: '\2717'; color: #B91C1C; }
-    .problem-card.good .problem-list li::before { content: '\2713'; color: var(--color-green); }
+/* OLD WAY vs NEW WAY */
+.compare-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .compare-split { grid-template-columns: 1fr; } }
+.compare-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.cc-head { padding: 14px 20px; font-size: 13px; font-weight: 800; letter-spacing: 0.03em; display: flex; align-items: center; gap: 8px; }
+.cc-head-bad { background: var(--red-bg); color: var(--red); border-bottom: 1px solid #E8AAAA; }
+.cc-head-good { background: var(--green-bg); color: var(--green); border-bottom: 1px solid #9ED0B4; }
+.cc-body { padding: 16px 20px; }
+.cc-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.cc-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.5; }
+.cc-icon { flex-shrink: 0; font-size: 13px; margin-top: 2px; font-weight: 700; }
+.cc-bad { color: var(--red); }
+.cc-good { color: var(--green); }
 
-    /* Features */
-    .features-section {
-      padding: 56px 0;
-      border-top: 1px solid var(--color-border);
-    }
-    .features-title {
-      font-family: var(--font-display);
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--color-ocean-deep);
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .feature-card {
-      background: var(--color-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      text-align: center;
-      transition: all 0.2s;
-    }
-    .feature-card:hover {
-      border-color: var(--color-ocean);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-    .feature-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--color-ocean-light);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      margin: 0 auto 16px;
-    }
-    .feature-card h4 {
-      font-family: var(--font-display);
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--color-ocean-deep);
-      margin-bottom: 8px;
-    }
-    .feature-card p {
-      font-size: 14px;
-      color: var(--color-text-light);
-      line-height: 1.55;
-    }
+/* FEATURES GRID */
+.features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 700px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+.feature-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px 18px; }
+.fc-icon { font-size: 24px; margin-bottom: 10px; }
+.fc-title { font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.fc-desc { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
 
-    /* How It Works */
-    .how-section {
-      padding: 56px 0;
-      border-top: 1px solid var(--color-border);
-    }
-    .how-title {
-      font-family: var(--font-display);
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--color-ocean-deep);
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .how-subtitle {
-      text-align: center;
-      font-size: 16px;
-      color: var(--color-text-light);
-      margin-bottom: 40px;
-    }
-    .how-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      position: relative;
-    }
-    .how-steps::before {
-      content: '';
-      position: absolute;
-      top: 36px;
-      left: 16.66%;
-      right: 16.66%;
-      height: 2px;
-      background: var(--color-border);
-      z-index: 0;
-    }
-    .how-step {
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .step-number {
-      width: 72px;
-      height: 72px;
-      background: var(--color-ocean);
-      color: var(--color-white);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 700;
-      margin: 0 auto 16px;
-      border: 4px solid var(--color-sand);
-    }
-    .how-step h4 {
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--color-ocean-deep);
-      margin-bottom: 8px;
-    }
-    .how-step p {
-      font-size: 14px;
-      color: var(--color-text-light);
-      line-height: 1.55;
-      max-width: 240px;
-      margin: 0 auto;
-    }
+/* HOW IT WORKS */
+.how-steps { display: flex; flex-direction: column; gap: 14px; }
+.how-step { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 16px; }
+.hs-num { width: 32px; height: 32px; background: var(--ocean); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: var(--white); flex-shrink: 0; margin-top: 1px; }
+.hs-body strong { display: block; font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+.hs-body span { font-size: 13px; color: var(--muted); line-height: 1.55; }
 
-    /* Use Cases */
-    .usecases-section {
-      padding: 56px 0;
-      border-top: 1px solid var(--color-border);
-    }
-    .usecases-title {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--color-ocean-deep);
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .usecases-subtitle {
-      text-align: center;
-      font-size: 16px;
-      color: var(--color-text-light);
-      margin-bottom: 32px;
-    }
-    .usecase-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-    .usecase-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 18px 22px;
-      background: var(--color-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      font-size: 15px;
-      font-weight: 500;
-    }
-    .usecase-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--color-ocean-light);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-    .usecase-label {
-      font-size: 12px;
-      color: var(--color-text-light);
-      font-weight: 400;
-      display: block;
-      margin-top: 2px;
-    }
+/* USE CASES */
+.use-cases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media (max-width: 680px) { .use-cases { grid-template-columns: 1fr 1fr; } }
+.use-case { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 16px 14px; text-align: center; }
+.uc-icon { font-size: 24px; margin-bottom: 8px; }
+.uc-label { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+.uc-desc { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
 
-    /* Pricing */
-    .pricing-section {
-      padding: 56px 0;
-      border-top: 1px solid var(--color-border);
-    }
-    .pricing-card {
-      max-width: 560px;
-      margin: 0 auto;
-      background: var(--color-white);
-      border: 2px solid var(--color-dune);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-md), 0 0 0 4px var(--color-dune-light);
-    }
-    .pricing-header {
-      background: linear-gradient(135deg, var(--color-ocean-deep), var(--color-ocean));
-      padding: 32px;
-      text-align: center;
-      color: var(--color-white);
-    }
-    .pricing-header h3 {
-      font-family: var(--font-display);
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .pricing-header p { font-size: 14px; opacity: 0.8; }
-    .pricing-amount {
-      margin-top: 16px;
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: 6px;
-    }
-    .pricing-amount .price {
-      font-family: var(--font-display);
-      font-size: 48px;
-      font-weight: 700;
-    }
-    .pricing-amount .gst {
-      font-size: 14px;
-      opacity: 0.7;
-    }
-    .pricing-amount .freq {
-      font-size: 16px;
-      opacity: 0.8;
-    }
-    .pricing-body {
-      padding: 32px;
-    }
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 28px;
-    }
-    .pricing-features li {
-      padding: 10px 0;
-      border-bottom: 1px solid var(--color-border);
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .pricing-features li:last-child { border-bottom: none; }
-    .pricing-features li::before {
-      content: '\2713';
-      color: var(--color-green);
-      font-weight: 700;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-    .pricing-note {
-      font-size: 13px;
-      color: var(--color-text-light);
-      text-align: center;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-    .pricing-cta {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      background: var(--color-dune);
-      color: var(--color-white);
-      border: none;
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 600;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .pricing-cta:hover { background: #B38845; transform: translateY(-1px); }
-    .pricing-or {
-      text-align: center;
-      margin-top: 12px;
-      font-size: 14px;
-      color: var(--color-text-light);
-    }
-    .pricing-or a {
-      color: var(--color-ocean);
-      font-weight: 600;
-      text-decoration: none;
-    }
+/* PRICING BOX */
+.pricing-box { background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.pb-head { background: linear-gradient(135deg, var(--ocean-deep), var(--ocean)); padding: 28px 32px; text-align: center; }
+.pb-head h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--white); margin-bottom: 6px; }
+.pb-head p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 18px; }
+.pb-price-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.pb-price-chip { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 10px 22px; text-align: center; min-width: 140px; }
+.ppc-amount { font-size: 1.4rem; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 3px; }
+.ppc-label { font-size: 11px; color: rgba(255,255,255,0.6); }
+.pb-body { padding: 26px 32px; }
+.pb-feat-list { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 22px; }
+.pb-feat-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; line-height: 1.45; }
+.pfi { font-style: normal; flex-shrink: 0; font-weight: 700; font-size: 13px; margin-top: 1px; color: var(--green); }
+.pb-note { font-size: 13px; color: var(--muted); line-height: 1.65; padding: 16px 0; border-top: 1px solid var(--border); margin-bottom: 22px; }
+.pb-cta { display: block; text-align: center; background: var(--dune); color: var(--white); font-weight: 700; font-size: 15px; padding: 14px 24px; border-radius: 7px; text-decoration: none; transition: background 0.2s; margin-bottom: 10px; }
+.pb-cta:hover { background: #B8840A; }
+.pb-cta-sub { text-align: center; font-size: 13px; color: var(--muted); }
+.pb-cta-sub a { color: var(--ocean); text-decoration: none; font-weight: 600; }
 
-    /* FAQ */
-    .faq-section {
-      padding: 56px 0;
-      border-top: 1px solid var(--color-border);
-    }
-    .faq-title {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--color-ocean-deep);
-      text-align: center;
-      margin-bottom: 32px;
-    }
-    .faq-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .faq-item {
-      background: var(--color-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-    }
-    .faq-item h4 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--color-ocean-deep);
-      margin-bottom: 8px;
-    }
-    .faq-item p {
-      font-size: 14px;
-      color: var(--color-text-light);
-      line-height: 1.55;
-    }
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 10px; }
+.faq-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.faq-q { padding: 14px 18px; font-size: 14px; font-weight: 700; color: var(--navy); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; user-select: none; }
+.faq-q::after { content: '+'; font-size: 18px; font-weight: 400; color: var(--muted); flex-shrink: 0; transition: transform 0.2s; }
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a { padding: 0 18px; font-size: 13.5px; color: var(--muted); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+.faq-item.open .faq-a { max-height: 300px; padding: 0 18px 16px; }
 
-    /* CTA Footer */
-    .cta-footer {
-      padding: 56px 0;
-      text-align: center;
-      border-top: 1px solid var(--color-border);
-    }
-    .cta-footer h2 {
-      font-family: var(--font-display);
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--color-ocean-deep);
-      margin-bottom: 12px;
-    }
-    .cta-footer p {
-      font-size: 16px;
-      color: var(--color-text-light);
-      margin-bottom: 28px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .cta-footer-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 36px;
-      background: var(--color-ocean);
-      color: var(--color-white);
-      border: none;
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .cta-footer-btn:hover { background: var(--color-ocean-deep); transform: translateY(-1px); }
+/* FINAL CTA */
+.final-cta { background: linear-gradient(140deg, var(--ocean-deep), var(--ocean)); border-radius: 14px; padding: 40px 32px; text-align: center; }
+.final-cta h2 { font-family: var(--font-display); font-size: 1.5rem; color: var(--white); margin-bottom: 10px; }
+.final-cta p { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 24px; line-height: 1.65; max-width: 480px; margin-left: auto; margin-right: auto; }
+.fc-btn { display: inline-block; background: var(--dune); color: var(--white); font-weight: 700; font-size: 15px; padding: 14px 32px; border-radius: 7px; text-decoration: none; transition: background 0.2s; }
+.fc-btn:hover { background: #B8840A; }
 
-    @media (max-width: 700px) {
-      .problem-section { grid-template-columns: 1fr; gap: 20px; }
-      .features-grid { grid-template-columns: 1fr; }
-      .how-steps { grid-template-columns: 1fr; gap: 24px; }
-      .how-steps::before { display: none; }
-      .usecase-grid { grid-template-columns: 1fr; }
-      .faq-grid { grid-template-columns: 1fr; }
-      .page-header h1 { font-size: 32px; }
-      .header-price .amount { font-size: 28px; }
-    }
-  </style>
+/* DEMO SELECTORS */
+.demo-selectors { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.demo-btn { font-family: var(--font-body); font-size: 13px; font-weight: 600; padding: 9px 16px; border-radius: 100px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+.demo-btn:hover { border-color: var(--ocean); color: var(--ocean); }
+.demo-btn.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+.demo-preview { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.dp-listing-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.dp-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.dp-cat { font-size: 11.5px; color: var(--muted); }
+.dp-tier { font-size: 11px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; background: var(--gold-bg); color: var(--gold); padding: 4px 10px; border-radius: 4px; }
+.dp-menu-bar { padding: 14px 20px; display: flex; align-items: center; gap: 10px; background: var(--ocean-light); }
+.dp-menu-bar span { font-size: 18px; }
+#dp-bar-label { font-size: 13.5px; font-weight: 600; color: var(--ocean-deep); flex: 1; }
+.dp-open-btn { font-family: var(--font-body); background: var(--ocean); color: var(--white); font-size: 13px; font-weight: 700; padding: 9px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background 0.15s; }
+.dp-open-btn:hover { background: var(--ocean-deep); }
+
+/* LIGHTBOX */
+.lb-overlay { display: none; position: fixed; inset: 0; background: rgba(13,43,62,0.65); z-index: 500; align-items: flex-end; justify-content: center; padding: 0; }
+@media (min-width: 600px) { .lb-overlay { align-items: center; padding: 20px; } }
+.lb-overlay.open { display: flex; }
+.lb-modal { background: var(--white); width: 100%; max-width: 560px; border-radius: 16px 16px 0 0; max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; animation: slideUp 0.25s ease; }
+@media (min-width: 600px) { .lb-modal { border-radius: 16px; max-height: 80vh; } }
+@keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.lb-header { padding: 16px 20px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; flex-shrink: 0; }
+.lb-biz-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.lb-updated { font-size: 11px; color: var(--muted); }
+.lb-close { background: none; border: none; font-size: 18px; color: var(--muted); cursor: pointer; padding: 2px 6px; border-radius: 4px; transition: color 0.15s; }
+.lb-close:hover { color: var(--text); }
+
+.lb-tabs { display: flex; gap: 4px; padding: 10px 16px; border-bottom: 1px solid var(--border); overflow-x: auto; flex-shrink: 0; scrollbar-width: none; }
+.lb-tabs::-webkit-scrollbar { display: none; }
+.lb-tab { font-family: var(--font-body); font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 100px; border: none; background: var(--sand); color: var(--muted); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+.lb-tab.active { background: var(--navy); color: var(--white); }
+
+.lb-filters { display: flex; align-items: center; gap: 6px; padding: 10px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; overflow-x: auto; }
+.lb-filter-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; white-space: nowrap; }
+.lb-filter { font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+.lb-filter.active { background: var(--ocean); border-color: var(--ocean); color: var(--white); }
+
+.lb-items { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
+
+.lb-item { display: flex; gap: 12px; padding: 12px; background: var(--sand); border-radius: 8px; border: 1px solid var(--border); transition: opacity 0.15s; }
+.lb-item.hidden { display: none; }
+.lb-item-photo { width: 72px; height: 72px; border-radius: 7px; object-fit: cover; flex-shrink: 0; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.lb-item-body { flex: 1; min-width: 0; }
+.lb-item-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 3px; }
+.lb-item-name { font-size: 13.5px; font-weight: 700; color: var(--navy); line-height: 1.3; }
+.lb-item-price { font-size: 13.5px; font-weight: 800; color: var(--ocean-deep); white-space: nowrap; flex-shrink: 0; }
+.lb-item-desc { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 6px; }
+.lb-item-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.lb-tag { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px; }
+.lb-tag-VG { background: #E8F5E9; color: #2E7D32; }
+.lb-tag-V { background: #F1F8E9; color: #558B2F; }
+.lb-tag-GF { background: #FFF8E1; color: #F57F17; }
+.lb-tag-DF { background: #E3F2FD; color: #1565C0; }
+
+.lb-cat-header { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 4px 0 2px; }
+
+.lb-footer { padding: 12px 16px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+.lb-footer-note { font-size: 11.5px; color: var(--muted); }
+.lb-order-btn { background: var(--dune); color: var(--white); font-family: var(--font-body); font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 5px; text-decoration: none; white-space: nowrap; transition: background 0.15s; }
+.lb-order-btn:hover { background: #B8840A; }
+
+.footer-text { font-size: 12px; color: rgba(255,255,255,0.4); }
+.footer-text a { color: rgba(255,255,255,0.5); text-decoration: none; }
+.footer-text a:hover { color: var(--white); }
+</style>
 </head>
 <body>
 
-  <!-- Hero -->
-  <div class="page-header">
-    <div class="header-content">
-      <div class="header-badge">&#128209; Add-On Feature for Papamoa.info Listings</div>
-      <h1>Put Your Menu in Front of Hungry Customers</h1>
-      <p>An interactive, always-current menu right on your listing page. Customers browse dishes, filter by dietary needs, and order directly. You update it yourself in under two minutes.</p>
-      <div class="header-price">
-        <span class="amount">$199</span>
-        <span class="period">+GST / year</span>
+<nav class="nav">
+  <a href="/index.html" class="nav-logo">papamoa<span>.info</span></a>
+  <a href="/sales/landing.html" class="nav-back">← Back to pricing</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">📑 Add-On Feature for Papamoa.info Listings</span>
+    <h1>Put Your Menu in Front of Hungry Customers</h1>
+    <p class="hero-sub">An interactive, always-current menu right on your listing page. Customers browse dishes, filter by dietary needs, and order directly. You update it yourself in under two minutes.</p>
+    <div class="hero-price-wrap">
+      <div class="hero-price">
+        <span class="hp-amount">$199</span>
+        <span class="hp-suffix">+GST / year</span>
       </div>
+      <span class="hero-price-note">Silver listings &nbsp;·&nbsp; Included free with Gold</span>
     </div>
   </div>
+</div>
 
-  <div class="content">
+<div class="page">
 
-    <!-- Problem / Solution -->
-    <div class="problem-section">
-      <div class="problem-card bad">
-        <h3>&#128683; The Old Way</h3>
-        <ul class="problem-list">
-          <li>PDF menus that nobody downloads on mobile</li>
-          <li>Linking to a third-party site where you lose the customer</li>
-          <li>Outdated prices sitting on your website for months</li>
-          <li>No dietary filtering, so customers call to ask</li>
-          <li>Menu changes mean paying your web developer</li>
-          <li>No dish photos means customers scroll past without stopping</li>
-          <li>Zero visibility for Google searches like "gluten free Pāpāmoa"</li>
-        </ul>
-      </div>
-      <div class="problem-card good">
-        <h3>&#9989; The Menu Add-On</h3>
-        <ul class="problem-list">
-          <li>Beautiful interactive menu loads instantly on any device</li>
-          <li>Stays right on your Papamoa.info listing, no redirect</li>
-          <li>Update prices, items, and specials yourself in 2 minutes</li>
-          <li>Built-in dietary filters (VG, V, GF, DF) cut down phone calls</li>
-          <li>No developer needed, simple private form to manage changes</li>
-          <li>Per-item dish photos grab attention and drive orders, AI placeholders included from day one</li>
-          <li>Menu schema markup helps Google show your dishes in search</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Features -->
-    <div class="features-section">
-      <h2 class="features-title">What Your Customers See</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">&#128209;</div>
-          <h4>Full Interactive Menu</h4>
-          <p>Categories, descriptions, and prices displayed in a clean lightbox. Customers browse without leaving your listing.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#127807;</div>
-          <h4>Dietary Filters</h4>
-          <p>One-tap filtering for Vegetarian, Vegan, Gluten Free, and Dairy Free. Customers find what they can eat instantly.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128247;</div>
-          <h4>Dish Photos</h4>
-          <p>Every menu item can show a photo. Customers spend longer browsing menus with images and order more confidently, especially with exotic or unfamiliar dishes. AI-generated images are included from launch based on your dish descriptions. Swap in real photos any time through your update form.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128241;</div>
-          <h4>Mobile-First Design</h4>
-          <p>Looks and works perfectly on phones. No pinching, zooming, or downloading PDFs. Just tap and browse.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128666;</div>
-          <h4>Order Online Button</h4>
-          <p>Direct link to your online ordering platform (Uber Eats, OrderMeal, your own site) right inside the menu.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128197;</div>
-          <h4>"Last Updated" Date</h4>
-          <p>Shows customers exactly when the menu was last refreshed. No more guessing if prices are current.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128270;</div>
-          <h4>Google Menu Schema</h4>
-          <p>Your dishes and prices appear in Google search results. Helps you show up for searches like "burgers Pāpāmoa."</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- How It Works -->
-    <div class="how-section">
-      <h2 class="how-title">How You Update Your Menu</h2>
-      <p class="how-subtitle">No tech skills needed. No waiting for someone else to do it.</p>
-      <div class="how-steps">
-        <div class="how-step">
-          <div class="step-number">1</div>
-          <h4>Open Your Form</h4>
-          <p>You get a private link to your menu editor. Bookmark it on your phone. No login or password needed.</p>
-        </div>
-        <div class="how-step">
-          <div class="step-number">2</div>
-          <h4>Make Your Changes</h4>
-          <p>Add items, change prices, update descriptions, toggle dietary tags, remove seasonal dishes. Simple fields, no code.</p>
-        </div>
-        <div class="how-step">
-          <div class="step-number">3</div>
-          <h4>Live in Minutes</h4>
-          <p>Submit the form and your menu updates automatically. The "Last Updated" date refreshes so customers know it's current.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Use Cases (beyond Food & Drink) -->
-    <div class="usecases-section">
-      <h2 class="usecases-title">Not Just for Restaurants</h2>
-      <p class="usecases-subtitle">The interactive menu works for any business with a service list and pricing</p>
-      <div class="usecase-grid">
-        <div class="usecase-item">
-          <div class="usecase-icon">&#127828;</div>
-          <div>Restaurants & Cafes<span class="usecase-label">Full food and drinks menu</span></div>
-        </div>
-        <div class="usecase-item">
-          <div class="usecase-icon">&#127867;</div>
-          <div>Bars & Pubs<span class="usecase-label">Tap list, cocktails, wine list</span></div>
-        </div>
-        <div class="usecase-item">
-          <div class="usecase-icon">&#128135;</div>
-          <div>Hairdressers & Barbers<span class="usecase-label">Service menu with pricing</span></div>
-        </div>
-        <div class="usecase-item">
-          <div class="usecase-icon">&#128134;</div>
-          <div>Beauty & Day Spas<span class="usecase-label">Treatment list and packages</span></div>
-        </div>
-        <div class="usecase-item">
-          <div class="usecase-icon">&#129463;</div>
-          <div>Dental & Health<span class="usecase-label">Treatment options and indicative pricing</span></div>
-        </div>
-        <div class="usecase-item">
-          <div class="usecase-icon">&#128663;</div>
-          <div>Automotive Services<span class="usecase-label">Service schedule and pricing</span></div>
-        </div>
-        <div class="usecase-item">
-          <div class="usecase-icon">&#127947;</div>
-          <div>Gyms & Studios<span class="usecase-label">Class timetable and membership pricing</span></div>
-        </div>
-        <div class="usecase-item">
-          <div class="usecase-icon">&#128230;</div>
-          <div>Takeaway & Delivery<span class="usecase-label">Full menu with online order link</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pricing -->
-    <div class="pricing-section">
-      <div class="pricing-card">
-        <div class="pricing-header">
-          <h3>Interactive Menu Add-On</h3>
-          <p>Available for Gold and Silver listings</p>
-          <div class="pricing-amount">
-            <span class="price">$199</span>
-            <span class="gst">+GST</span>
-            <span class="freq">/ year</span>
-          </div>
-        </div>
-        <div class="pricing-body">
-          <ul class="pricing-features">
-            <li>Interactive lightbox menu on your listing page</li>
-            <li>Unlimited menu items and categories</li>
-            <li>Per-item dish photos (AI placeholders included, swap for real photos anytime)</li>
-            <li>Dietary icons and one-tap filtering (VG, V, GF, DF)</li>
-            <li>Private update form, change your menu anytime</li>
-            <li>Mobile-optimised design</li>
-            <li>"Last Updated" date for customer confidence</li>
-            <li>Google Menu schema markup (SEO boost)</li>
-            <li>Direct link to your online ordering platform</li>
-            <li>Initial menu setup included (we build it from your current menu)</li>
-            <li>Unlimited updates throughout the year</li>
+  <!-- OLD WAY vs NEW WAY -->
+  <div class="section">
+    <div class="section-label">The problem it solves</div>
+    <h2 class="section-title">Why a static menu isn't working for you</h2>
+    <div class="compare-split">
+      <div class="compare-card">
+        <div class="cc-head cc-head-bad">🚫 The Old Way</div>
+        <div class="cc-body">
+          <ul class="cc-list">
+            <li><span class="cc-icon cc-bad">✕</span> PDF menus that nobody downloads on mobile</li>
+            <li><span class="cc-icon cc-bad">✕</span> Linking to a third-party site where you lose the customer</li>
+            <li><span class="cc-icon cc-bad">✕</span> Outdated prices sitting on your website for months</li>
+            <li><span class="cc-icon cc-bad">✕</span> No dietary filtering, so customers call to ask</li>
+            <li><span class="cc-icon cc-bad">✕</span> Menu changes mean paying your web developer</li>
+            <li><span class="cc-icon cc-bad">✕</span> No dish photos means customers scroll past without stopping</li>
+            <li><span class="cc-icon cc-bad">✕</span> Zero visibility for Google searches like "gluten free Pāpāmoa"</li>
           </ul>
-          <div class="pricing-note">
-            Available as an add-on to any Gold ($1,200+GST) or Silver ($599+GST) listing.<br>
-            Gold Founding Members get the first year included free.
-          </div>
-          <a href="/contact-papamoainfo" class="pricing-cta">Add Menu to My Listing</a>
-          <div class="pricing-or">or call <a href="tel:0275332970">027 533 2970</a> to discuss</div>
+        </div>
+      </div>
+      <div class="compare-card">
+        <div class="cc-head cc-head-good">✅ The Menu Add-On</div>
+        <div class="cc-body">
+          <ul class="cc-list">
+            <li><span class="cc-icon cc-good">✓</span> Beautiful interactive menu loads instantly on any device</li>
+            <li><span class="cc-icon cc-good">✓</span> Stays right on your Papamoa.info listing — no redirect</li>
+            <li><span class="cc-icon cc-good">✓</span> Update prices, items, and specials yourself in 2 minutes</li>
+            <li><span class="cc-icon cc-good">✓</span> Built-in dietary filters (VG, V, GF, DF) cut down phone calls</li>
+            <li><span class="cc-icon cc-good">✓</span> No developer needed — simple private form to manage changes</li>
+            <li><span class="cc-icon cc-good">✓</span> Per-item dish photos grab attention — AI placeholders included from day one</li>
+            <li><span class="cc-icon cc-good">✓</span> Menu schema markup helps Google show your dishes in search</li>
+          </ul>
         </div>
       </div>
     </div>
-
-    <!-- FAQ -->
-    <div class="faq-section">
-      <h2 class="faq-title">Common Questions</h2>
-      <div class="faq-grid">
-        <div class="faq-item">
-          <h4>How quickly can my menu be live?</h4>
-          <p>Send us your current menu (PDF, photo, or link) and we'll have it built and live within 48 hours. You can then make changes yourself anytime.</p>
-        </div>
-        <div class="faq-item">
-          <h4>What if I change my menu seasonally?</h4>
-          <p>Update it as often as you like. The private form takes about two minutes. There's no limit on changes and no extra cost.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Can I add daily specials?</h4>
-          <p>Yes. You can add, edit, or remove items at any time. Many businesses update specials weekly or even daily.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Do I need to be a Gold listing?</h4>
-          <p>The menu add-on is available for both Gold and Silver tier listings. It's an optional extra on top of your listing fee.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Does it replace my own website menu?</h4>
-          <p>No. It complements it. Your listing still links to your website. The interactive menu gives customers an instant preview without navigating away.</p>
-        </div>
-        <div class="faq-item">
-          <h4>What about images of dishes?</h4>
-          <p>Each menu item can have its own photo. Send us your dish photos and we'll add them alongside descriptions and prices. Don't have photos ready? We generate attractive AI placeholder images based on your menu descriptions, so customers still get a visual sense of each dish. Swap in real photos anytime through the update form.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Final CTA -->
-    <div class="cta-footer">
-      <h2>Ready to Put Your Menu in Front of More Customers?</h2>
-      <p>Get set up in 48 hours. Send us your current menu and we'll handle the rest.</p>
-      <a href="/contact-papamoainfo" class="cta-footer-btn">&#128209; Get Started</a>
-    </div>
-
   </div>
+
+  <!-- WHAT CUSTOMERS SEE -->
+  <div class="section">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">What your customers see</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="fc-icon">📑</div>
+        <div class="fc-title">Full Interactive Menu</div>
+        <div class="fc-desc">Categories, descriptions, and prices in a clean lightbox. Customers browse without leaving your listing.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🌿</div>
+        <div class="fc-title">Dietary Filters</div>
+        <div class="fc-desc">One-tap filtering for Vegetarian, Vegan, Gluten Free, and Dairy Free. Customers find what they can eat instantly.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">📷</div>
+        <div class="fc-title">Dish Photos</div>
+        <div class="fc-desc">Every item can show a photo. AI-generated images included from launch — swap in real photos any time through your update form.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">📱</div>
+        <div class="fc-title">Mobile-First Design</div>
+        <div class="fc-desc">Works perfectly on phones. No pinching, zooming, or downloading PDFs. Just tap and browse.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🚚</div>
+        <div class="fc-title">Order Online Button</div>
+        <div class="fc-desc">Direct link to your ordering platform — Uber Eats, OrderMeal, your own site — right inside the menu.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">📅</div>
+        <div class="fc-title">"Last Updated" Date</div>
+        <div class="fc-desc">Shows customers exactly when the menu was last refreshed. No more guessing if prices are current.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🔎</div>
+        <div class="fc-title">Google Menu Schema</div>
+        <div class="fc-desc">Your dishes and prices appear in Google results. Helps you show up for searches like "burgers Pāpāmoa."</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🔗</div>
+        <div class="fc-title">No-Login Updates</div>
+        <div class="fc-desc">Private link, fill in your changes, submit. No CMS, no developer, no waiting.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO UPDATE -->
+  <div class="section">
+    <div class="section-label">Updates</div>
+    <h2 class="section-title">How you update your menu</h2>
+    <p class="section-sub">No tech skills needed. No waiting for someone else to do it.</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="hs-num">1</div>
+        <div class="hs-body">
+          <strong>Open your form</strong>
+          <span>You get a private link to your menu editor. Bookmark it on your phone. No login or password needed.</span>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="hs-num">2</div>
+        <div class="hs-body">
+          <strong>Make your changes</strong>
+          <span>Add items, change prices, update descriptions, toggle dietary tags, remove seasonal dishes. Simple fields, no code.</span>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="hs-num">3</div>
+        <div class="hs-body">
+          <strong>Live in minutes</strong>
+          <span>Submit the form and your menu updates automatically. The "Last Updated" date refreshes so customers know it's current.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE DEMO -->
+  <div class="section">
+    <div class="section-label">Try it now</div>
+    <h2 class="section-title">See it live — pick a business type</h2>
+    <p class="section-sub">These are real examples of how the lightbox looks across different business types. Click any business below, then hit "Open Menu" to see the full experience.</p>
+
+    <div class="demo-selectors">
+      <button class="demo-btn active" data-biz="wagon" onclick="selectBiz('wagon', this)">🍔 The Wagon</button>
+      <button class="demo-btn" data-biz="pizza" onclick="selectBiz('pizza', this)">🍕 Pizza Pundits</button>
+      <button class="demo-btn" data-biz="gym" onclick="selectBiz('gym', this)">💪 ReDefined</button>
+      <button class="demo-btn" data-biz="dental" onclick="selectBiz('dental', this)">🦷 Tara Road Dental</button>
+      <button class="demo-btn" data-biz="ortho" onclick="selectBiz('ortho', this)">😁 Pāpāmoa Orthodontist</button>
+    </div>
+
+    <div class="demo-preview">
+      <div class="dp-listing">
+        <div class="dp-listing-header">
+          <div class="dp-info">
+            <div class="dp-name" id="dp-name">The Wagon Pāpāmoa</div>
+            <div class="dp-cat" id="dp-cat">Food &amp; Drink › Burgers &amp; Bar</div>
+          </div>
+          <div class="dp-tier">⭐ Gold</div>
+        </div>
+        <div class="dp-menu-bar" id="dp-bar">
+          <span id="dp-bar-icon">📋</span>
+          <span id="dp-bar-label">View Menu &amp; Prices</span>
+          <button class="dp-open-btn" onclick="openLightbox()">Open Menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lb-overlay" id="lb-overlay" onclick="closeLightboxOutside(event)">
+    <div class="lb-modal" id="lb-modal">
+      <div class="lb-header">
+        <div class="lb-header-left">
+          <div class="lb-biz-name" id="lb-biz-name">The Wagon Pāpāmoa</div>
+          <div class="lb-updated" id="lb-updated">Updated April 2026</div>
+        </div>
+        <button class="lb-close" onclick="closeLightbox()">✕</button>
+      </div>
+
+      <div class="lb-tabs" id="lb-tabs"></div>
+
+      <div class="lb-filters" id="lb-filters">
+        <span class="lb-filter-label">Filter:</span>
+        <button class="lb-filter active" data-filter="all" onclick="setFilter('all', this)">All</button>
+        <button class="lb-filter" data-filter="VG" onclick="setFilter('VG', this)">🌿 VG</button>
+        <button class="lb-filter" data-filter="V" onclick="setFilter('V', this)">🌱 V</button>
+        <button class="lb-filter" data-filter="GF" onclick="setFilter('GF', this)">GF</button>
+        <button class="lb-filter" data-filter="DF" onclick="setFilter('DF', this)">DF</button>
+      </div>
+
+      <div class="lb-items" id="lb-items"></div>
+
+      <div class="lb-footer">
+        <span class="lb-footer-note" id="lb-footer-note">Prices include GST. Menu subject to change.</span>
+        <a class="lb-order-btn" id="lb-order-btn" href="#" target="_blank">Order Online →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- USE CASES -->
+  <div class="section">
+    <div class="section-label">Not just for restaurants</div>
+    <h2 class="section-title">Any business with a service list and pricing</h2>
+    <div class="use-cases">
+      <div class="use-case">
+        <div class="uc-icon">🍔</div>
+        <div class="uc-label">Restaurants &amp; Cafés</div>
+        <div class="uc-desc">Full food and drinks menu</div>
+      </div>
+      <div class="use-case">
+        <div class="uc-icon">🍻</div>
+        <div class="uc-label">Bars &amp; Pubs</div>
+        <div class="uc-desc">Tap list, cocktails, wine list</div>
+      </div>
+      <div class="use-case">
+        <div class="uc-icon">💇</div>
+        <div class="uc-label">Hairdressers &amp; Barbers</div>
+        <div class="uc-desc">Service menu with pricing</div>
+      </div>
+      <div class="use-case">
+        <div class="uc-icon">💆</div>
+        <div class="uc-label">Beauty &amp; Day Spas</div>
+        <div class="uc-desc">Treatment list and packages</div>
+      </div>
+      <div class="use-case">
+        <div class="uc-icon">🦷</div>
+        <div class="uc-label">Dental &amp; Health</div>
+        <div class="uc-desc">Treatment options and indicative pricing</div>
+      </div>
+      <div class="use-case">
+        <div class="uc-icon">🚗</div>
+        <div class="uc-label">Automotive Services</div>
+        <div class="uc-desc">Service schedule and pricing</div>
+      </div>
+      <div class="use-case">
+        <div class="uc-icon">🏋</div>
+        <div class="uc-label">Gyms &amp; Studios</div>
+        <div class="uc-desc">Class timetable and membership pricing</div>
+      </div>
+      <div class="use-case">
+        <div class="uc-icon">📦</div>
+        <div class="uc-label">Takeaway &amp; Delivery</div>
+        <div class="uc-desc">Full menu with online order link</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="section">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Interactive Menu Add-On</h2>
+    <div class="pricing-box">
+      <div class="pb-head">
+        <h3>Menu / Service List Add-On</h3>
+        <p>Available for Gold and Silver listings</p>
+        <div class="pb-price-row">
+          <div class="pb-price-chip">
+            <div class="ppc-amount">$199 <span style="font-size:0.75rem;font-weight:400;opacity:0.7;">+GST/yr</span></div>
+            <div class="ppc-label">◆ Silver listings</div>
+          </div>
+          <div class="pb-price-chip">
+            <div class="ppc-amount">Free</div>
+            <div class="ppc-label">⭐ Included with Gold</div>
+          </div>
+        </div>
+      </div>
+      <div class="pb-body">
+        <ul class="pb-feat-list">
+          <li><i class="pfi">✓</i> Interactive lightbox menu on your listing page</li>
+          <li><i class="pfi">✓</i> Unlimited menu items and categories</li>
+          <li><i class="pfi">✓</i> Per-item dish photos (AI placeholders included — swap for real photos anytime)</li>
+          <li><i class="pfi">✓</i> Dietary icons and one-tap filtering (VG, V, GF, DF)</li>
+          <li><i class="pfi">✓</i> Private update form — change your menu anytime</li>
+          <li><i class="pfi">✓</i> Mobile-optimised design</li>
+          <li><i class="pfi">✓</i> "Last Updated" date for customer confidence</li>
+          <li><i class="pfi">✓</i> Google Menu schema markup (SEO boost)</li>
+          <li><i class="pfi">✓</i> Direct link to your online ordering platform</li>
+          <li><i class="pfi">✓</i> Initial menu setup included — we build it from your current menu</li>
+          <li><i class="pfi">✓</i> Unlimited updates throughout the year</li>
+        </ul>
+        <p class="pb-note">Available as an add-on to any Silver ($599+GST/yr) or Gold ($1,200+GST/yr) listing. Gold listings include the Menu Add-On free. Gold Founding Members get year one included free.</p>
+        <a href="mailto:jayden@papamoa.info?subject=Menu Add-On enquiry" class="pb-cta">📑 Add Menu to My Listing →</a>
+        <p class="pb-cta-sub">or call <a href="tel:+64275332970">027 533 2970</a> to discuss</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section">
+    <div class="section-label">Common questions</div>
+    <h2 class="section-title">Frequently asked questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">How quickly can my menu be live?</div>
+        <div class="faq-a">Send us your current menu (PDF, photo, or link) and we'll have it built and live within 48 hours. You can then make changes yourself anytime.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I change my menu seasonally?</div>
+        <div class="faq-a">Update it as often as you like. The private form takes about two minutes. There's no limit on changes and no extra cost.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I add daily specials?</div>
+        <div class="faq-a">Yes. You can add, edit, or remove items at any time. Many businesses update specials weekly or even daily.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I need to be a Gold listing?</div>
+        <div class="faq-a">The Menu Add-On is available for both Gold and Silver listings. It's included free with Gold and an optional extra for Silver at $199+GST/yr.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does it replace my own website menu?</div>
+        <div class="faq-a">No — it complements it. Your listing still links to your website. The interactive menu gives customers an instant preview without navigating away from Papamoa.info.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What about photos of dishes?</div>
+        <div class="faq-a">Each menu item can have its own photo. Send us your dish photos and we'll add them alongside descriptions and prices. Don't have photos ready? We generate attractive AI placeholder images based on your menu descriptions so customers still get a visual sense of each dish. Swap in real photos anytime through the update form.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="final-cta">
+    <h2>Ready to put your menu in front of more customers?</h2>
+    <p>Get set up in 48 hours. Send us your current menu and we'll handle the rest.</p>
+    <a href="mailto:jayden@papamoa.info?subject=Menu Add-On enquiry" class="fc-btn">📑 Get Started →</a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-text">
+    Papamoa.info Menu &amp; Service List Add-On &bull;
+    <a href="/sales/landing.html">View all listing options</a> &bull;
+    <a href="/index.html">Back to directory</a>
+  </div>
+</footer>
+
+<script>
+// ── BUSINESS DATA ──────────────────────────────────────────
+const businesses = {
+  wagon: {
+    name: 'The Wagon Pāpāmoa', cat: 'Food & Drink › Burgers & Bar',
+    barLabel: 'View Menu & Prices', barIcon: '📋',
+    lbUpdated: 'Updated April 2026', orderHref: 'https://www.ordermeal.co.nz/the-wagon-papamoa/',
+    footerNote: 'Prices include GST. Menu subject to seasonal availability.',
+    categories: ['Signature Burgers','Sides & Starters','Shared Plates','Drinks'],
+    items: [
+      { cat:'Signature Burgers', name:'The Wagon Wheel', desc:'Double beef patty, American cheese, pickles, lettuce, tomato, Wagon sauce on a brioche bun', price:'$22.50', tags:['GF'], photo:'🍔' },
+      { cat:'Signature Burgers', name:'Smoky BBQ', desc:'Beef patty, streaky bacon, smoked cheddar, BBQ glaze, crispy onion rings, slaw', price:'$23.50', tags:[], photo:'🍖' },
+      { cat:'Signature Burgers', name:'The Garden Wagon', desc:'Grilled halloumi, roasted mushroom, avocado, rocket, beetroot relish, herb aioli', price:'$21.50', tags:['VG','GF'], photo:'🥗' },
+      { cat:'Signature Burgers', name:'The Plant Patty', desc:'House-made plant patty, vegan cheese, pickled red onion, tomato, lettuce, vegan aioli', price:'$22.00', tags:['V','GF','DF'], photo:'🌱' },
+      { cat:'Sides & Starters', name:'Hand-Cut Fries', desc:'Crispy hand-cut fries with Wagon seasoning salt', price:'$9.50', tags:['VG','GF','DF'], photo:'🍟' },
+      { cat:'Sides & Starters', name:'Loaded Fries', desc:'Fries topped with melted cheese, bacon bits, sour cream, spring onion', price:'$15.50', tags:['VG','GF'], photo:'🧀' },
+      { cat:'Sides & Starters', name:'Wings (6pc)', desc:'Choose: Buffalo / Smoky BBQ / Korean Sticky. Served with ranch or blue cheese dip', price:'$16.50', tags:['GF','DF'], photo:'🍗' },
+      { cat:'Shared Plates', name:'The Wagon Platter', desc:'Onion rings, wings, loaded fries, sliders ×3, dipping sauces. Feeds 2–3', price:'$45.00', tags:[], photo:'🎉' },
+      { cat:'Drinks', name:'Craft Beer', desc:'Rotating tap selection — ask staff for current taps', price:'$10–13', tags:['VG','DF'], photo:'🍺' },
+      { cat:'Drinks', name:'Signature Cocktails', desc:'Wagon Margarita / Espresso Martini / Passionfruit Mojito / Blue Lagoon', price:'$16–18', tags:['VG'], photo:'🍸' },
+    ]
+  },
+  pizza: {
+    name: 'The Pizza Pundits', cat: 'Food & Drink › Pizzeria',
+    barLabel: 'View Menu & Prices', barIcon: '🍕',
+    lbUpdated: 'Updated April 2026', orderHref: '#',
+    footerNote: 'Large pizzas only. Gluten-free bases available on request.',
+    categories: ['Classic Pizzas','Gourmet Pizzas','Sides','Drinks'],
+    items: [
+      { cat:'Classic Pizzas', name:'Margherita', desc:'San Marzano tomato, fior di latte, fresh basil, extra virgin olive oil', price:'$26.00', tags:['VG'], photo:'🍕' },
+      { cat:'Classic Pizzas', name:'Pepperoni', desc:'Tomato base, mozzarella, sliced pepperoni, dried oregano', price:'$28.00', tags:[], photo:'🍕' },
+      { cat:'Gourmet Pizzas', name:'The Coastal', desc:'Prawn, roasted capsicum, feta, rocket, lemon aioli, chilli flakes', price:'$32.00', tags:['GF'], photo:'🦐' },
+      { cat:'Gourmet Pizzas', name:'Truffle Mushroom', desc:'White base, mixed mushrooms, truffle oil, parmesan, fresh thyme', price:'$31.00', tags:['VG'], photo:'🍄' },
+      { cat:'Gourmet Pizzas', name:'Vegan Garden', desc:'Tomato base, roasted vegetables, vegan mozzarella, kalamata olives, fresh basil', price:'$30.00', tags:['V','DF'], photo:'🌿' },
+      { cat:'Sides', name:'Garlic Pizza Bread', desc:'House-made dough, garlic butter, fresh parsley', price:'$12.00', tags:['VG'], photo:'🧄' },
+      { cat:'Sides', name:'Caesar Salad', desc:'Cos lettuce, bacon, croutons, parmesan, house Caesar dressing', price:'$14.00', tags:[], photo:'🥗' },
+      { cat:'Drinks', name:'Soft Drinks', desc:'Coke / Sprite / Fanta / L&P / Ginger Beer', price:'$5.00', tags:['VG','GF','DF'], photo:'🥤' },
+    ]
+  },
+  gym: {
+    name: 'ReDefined Wellbeing Hub', cat: 'Health & Fitness › Gym',
+    barLabel: 'View Memberships & Classes', barIcon: '💪',
+    lbUpdated: 'Updated April 2026', orderHref: '#',
+    footerNote: 'All prices include GST. Casual passes require pre-booking.',
+    categories: ['Memberships','Class Passes','Personal Training','Extras'],
+    items: [
+      { cat:'Memberships', name:'Monthly Unlimited', desc:'Full gym access, all group classes, 2 guest passes per month, no lock-in contract', price:'$79/mth', tags:[], photo:'🏋' },
+      { cat:'Memberships', name:'6-Month Commitment', desc:'Full gym access, all classes, priority booking, 10% off personal training', price:'$69/mth', tags:[], photo:'📅' },
+      { cat:'Memberships', name:'Student / Senior', desc:'Valid ID required. Full access, all classes, no lock-in', price:'$59/mth', tags:[], photo:'🎓' },
+      { cat:'Class Passes', name:'10-Class Pack', desc:'Use for any group class. Expires 3 months from purchase', price:'$165', tags:[], photo:'🎟' },
+      { cat:'Class Passes', name:'Casual Drop-In', desc:'Single class access. Booking required 24 hours in advance', price:'$22', tags:[], photo:'1️⃣' },
+      { cat:'Personal Training', name:'Single PT Session', desc:'60-minute 1-on-1 with a qualified trainer. Program included', price:'$90', tags:[], photo:'🧑‍💼' },
+      { cat:'Personal Training', name:'PT Pack of 5', desc:'5 × 60-minute sessions. Use within 2 months', price:'$399', tags:[], photo:'💰' },
+      { cat:'Extras', name:'Locker Rental', desc:'Monthly locker access with combination lock provided', price:'$15/mth', tags:[], photo:'🔒' },
+    ]
+  },
+  dental: {
+    name: 'Tara Road Dental', cat: 'Health › Dental',
+    barLabel: 'View Services & Pricing', barIcon: '🦷',
+    lbUpdated: 'Updated April 2026', orderHref: '#',
+    footerNote: 'Indicative pricing only. Final cost confirmed at consultation. ACC and Southern Cross accepted.',
+    categories: ['Routine Care','Cosmetic','Restorative','Children'],
+    items: [
+      { cat:'Routine Care', name:'New Patient Examination', desc:'Comprehensive oral health assessment, X-rays if required, treatment plan', price:'From $120', tags:[], photo:'🔍' },
+      { cat:'Routine Care', name:'Scale & Polish', desc:'Professional clean and polish. Combined with exam on first visit', price:'From $95', tags:[], photo:'✨' },
+      { cat:'Routine Care', name:'X-Rays (2 films)', desc:'Standard bitewing X-rays for cavity detection between teeth', price:'From $60', tags:[], photo:'📷' },
+      { cat:'Cosmetic', name:'Teeth Whitening (take-home)', desc:'Custom trays and professional whitening gel. Results in 2 weeks', price:'From $450', tags:[], photo:'😁' },
+      { cat:'Cosmetic', name:'Composite Bonding', desc:'Tooth-coloured resin to repair chips, gaps, or discolouration. Per tooth', price:'From $250', tags:[], photo:'🦷' },
+      { cat:'Restorative', name:'White Filling', desc:'Tooth-coloured composite filling. Price varies by size and location', price:'From $180', tags:[], photo:'🪥' },
+      { cat:'Restorative', name:'Dental Crown', desc:'Full porcelain crown. Includes two appointments and lab fees', price:'From $1,800', tags:[], photo:'👑' },
+      { cat:'Children', name:"Child's Examination", desc:'Under 14. WellChild/Tamariki Ora check-up. ACC-funded eligible patients', price:'From $60', tags:[], photo:'👶' },
+    ]
+  },
+  ortho: {
+    name: 'Pāpāmoa Orthodontist', cat: 'Health › Orthodontics',
+    barLabel: 'View Treatments & Fees', barIcon: '😁',
+    lbUpdated: 'Updated April 2026', orderHref: '#',
+    footerNote: 'All fees are indicative. A full assessment is required for a personalised quote. Payment plans available.',
+    categories: ['Braces','Aligners','Retainers','Children'],
+    items: [
+      { cat:'Braces', name:'Metal Braces', desc:'Traditional metal brackets and wires. Most effective for complex cases. 18–24 month treatment', price:'From $5,800', tags:[], photo:'🦷' },
+      { cat:'Braces', name:'Ceramic Braces', desc:'Tooth-coloured brackets — less visible than metal. Same effectiveness, higher cost', price:'From $6,800', tags:[], photo:'😬' },
+      { cat:'Aligners', name:'Clear Aligners (full)', desc:'Removable clear trays. Suitable for mild–moderate cases. Includes retainers', price:'From $6,500', tags:[], photo:'😁' },
+      { cat:'Aligners', name:'Clear Aligners (minor)', desc:'Short-course aligner treatment for minor corrections. 3–6 months', price:'From $2,800', tags:[], photo:'✨' },
+      { cat:'Retainers', name:'Vivera Retainer (set of 3)', desc:'Clear retainers to maintain results post-treatment. 3-pack', price:'$680', tags:[], photo:'🫙' },
+      { cat:'Retainers', name:'Fixed Wire Retainer', desc:'Bonded to back of teeth. Long-term retention for lower/upper arch', price:'$380', tags:[], photo:'🔧' },
+      { cat:'Children', name:'Early Interceptive Treatment', desc:'For children 7–11. Guides jaw growth and reduces future treatment needs', price:'From $2,200', tags:[], photo:'👧' },
+    ]
+  }
+};
+
+let currentBiz = 'wagon';
+let currentCat = null;
+let currentFilter = 'all';
+
+function selectBiz(bizKey, btn) {
+  document.querySelectorAll('.demo-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentBiz = bizKey;
+  const biz = businesses[bizKey];
+  document.getElementById('dp-name').textContent = biz.name;
+  document.getElementById('dp-cat').innerHTML = biz.cat.replace('›', '&rsaquo;');
+  document.getElementById('dp-bar-icon').textContent = biz.barIcon;
+  document.getElementById('dp-bar-label').textContent = biz.barLabel;
+}
+
+function openLightbox() {
+  const biz = businesses[currentBiz];
+  currentCat = biz.categories[0];
+  currentFilter = 'all';
+  document.getElementById('lb-biz-name').textContent = biz.name;
+  document.getElementById('lb-updated').textContent = biz.lbUpdated;
+  document.getElementById('lb-order-btn').href = biz.orderHref;
+  document.getElementById('lb-footer-note').textContent = biz.footerNote;
+  renderTabs();
+  renderFilters();
+  renderItems();
+  document.getElementById('lb-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lb-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxOutside(e) {
+  if (e.target === document.getElementById('lb-overlay')) closeLightbox();
+}
+
+function renderTabs() {
+  const biz = businesses[currentBiz];
+  const container = document.getElementById('lb-tabs');
+  container.innerHTML = biz.categories.map(cat =>
+    `<button class="lb-tab${cat === currentCat ? ' active' : ''}" onclick="setTab('${cat.replace(/'/g,"\\'")}', this)">${cat}</button>`
+  ).join('');
+}
+
+function setTab(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.lb-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = 'all';
+  document.querySelectorAll('.lb-filter').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lb-filter[data-filter="all"]').classList.add('active');
+  renderItems();
+}
+
+function renderFilters() {
+  document.querySelectorAll('.lb-filter').forEach(b => {
+    b.classList.toggle('active', b.dataset.filter === 'all');
+  });
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.lb-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderItems();
+}
+
+function renderItems() {
+  const biz = businesses[currentBiz];
+  const items = biz.items.filter(i => i.cat === currentCat);
+  const container = document.getElementById('lb-items');
+
+  if (items.length === 0) {
+    container.innerHTML = '<p style="text-align:center;color:var(--muted);font-size:13px;padding:24px 0;">No items in this category.</p>';
+    return;
+  }
+
+  const filtered = currentFilter === 'all' ? items : items.filter(i => i.tags.includes(currentFilter));
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<p style="text-align:center;color:var(--muted);font-size:13px;padding:24px 0;">No ${currentFilter} items in this category.</p>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map(item => `
+    <div class="lb-item">
+      <div class="lb-item-photo">${item.photo}</div>
+      <div class="lb-item-body">
+        <div class="lb-item-top">
+          <div class="lb-item-name">${item.name}</div>
+          <div class="lb-item-price">${item.price}</div>
+        </div>
+        <div class="lb-item-desc">${item.desc}</div>
+        ${item.tags.length ? `<div class="lb-item-tags">${item.tags.map(t => `<span class="lb-tag lb-tag-${t}">${t}</span>`).join('')}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+</script>
 
 </body>
 </html>
