@@ -712,4 +712,16 @@ document.getElementById('visibility-form').addEventListener('submit', async func
     const data = await res.json();
     if (data.success) {
       this.style.display = 'none';
-      document.get
+      document.getElementById('success-msg').style.display = 'block';
+    } else {
+      btn.textContent = 'Try again';
+      btn.disabled = false;
+    }
+  } catch(err) {
+    btn.textContent = 'Try again';
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
