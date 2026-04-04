@@ -3,646 +3,636 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Papamoa.info — Task Plan</title>
+<title>Papamoa.info — Pre-Demo Task Plan</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy:#0D2B3E; --ocean:#1B6B7D; --blue:#3AABDE; --lime:#7DC143;
-  --sand:#F5EFE0; --dune:#C4985A; --coral:#E8344A; --white:#fff;
-  --body:#1E2D3E; --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA;
-  --gold:#C8962A; --green:#1E6B3C; --green-bg:#E6F4EC;
-  --done-bg:#F0FAF3; --done-border:#86CFAA;
-}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ocean: #1B6B7D; --ocean-deep: #0F4352; --ocean-light: #E4F2F5;
+  --sand: #F7F3ED; --sand-dark: #EDE7DB; --dune: #C4985A; --dune-light: #F5EDD8;
+  --navy: #0D2B3E; --white: #FFFFFF; --text: #1A2832; --muted: #5A6E78;
+  --border: #D8E4E8; --silver: #5A7A8A; --silver-bg: #EDF3F6;
+  --gold: #B8840A; --gold-bg: #FBF3E2;
+  --green: #1E6B3C; --green-bg: #E6F4EC;
+  --red: #8B2020; --red-bg: #FAEAEA;
+  --amber: #8A5A00; --amber-bg: #FFF8E6;
+  --purple: #5B3FA0; --purple-bg: #F0EBF8;
+  --font-body: 'Figtree', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
 html { scroll-behavior: smooth; }
-body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-body); background: var(--sand); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; font-size: 14px; }
 
-.nav { background: var(--navy); padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-.nav-brand { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: #fff; text-decoration: none; }
-.nav-brand em { font-style: normal; color: var(--blue); }
-.nav-meta { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
+.nav { background: var(--navy); padding: 0 28px; height: 54px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.nav-logo { font-weight: 700; font-size: 15px; color: var(--white); text-decoration: none; }
+.nav-logo em { font-style: italic; color: var(--dune); }
+.nav-tag { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 500; }
 
-.hero { background: linear-gradient(135deg, var(--navy) 0%, #1A3A4A 100%); padding: 44px 24px 40px; position: relative; overflow: hidden; }
-.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--lime), var(--blue), var(--dune)); }
-.hero-inner { max-width: 960px; margin: 0 auto; }
-.hero-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lime); margin-bottom: 10px; }
-.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 10px; }
-.hero h1 em { font-style: italic; color: var(--blue); }
-.hero-sub { font-size: 0.9rem; color: rgba(255,255,255,0.55); margin-bottom: 24px; max-width: 560px; }
-.hero-stats { display: flex; gap: 14px; flex-wrap: wrap; }
-.hstat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 16px; text-align: center; }
-.hstat-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1; }
-.hstat-num.green { color: var(--lime); }
-.hstat-num.amber { color: var(--dune); }
-.hstat-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 3px; }
+.page-header { background: linear-gradient(135deg, var(--navy), var(--ocean-deep)); padding: 48px 32px 44px; }
+.page-header-inner { max-width: 900px; margin: 0 auto; }
+.header-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+.header-title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 14px; }
+.header-title em { font-style: italic; color: #90D4E0; }
+.header-sub { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 540px; line-height: 1.7; margin-bottom: 24px; }
+.header-meta { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 16px; }
+.header-stat { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 10px 18px; text-align: center; }
+.hs-num { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--white); line-height: 1; }
+.hs-label { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.05em; margin-top: 3px; }
+.header-pill { font-size: 12px; color: rgba(255,255,255,0.5); }
 
-.page-wrap { max-width: 960px; margin: 0 auto; padding: 32px 20px 80px; }
+.page-body { max-width: 900px; margin: 0 auto; padding: 36px 28px 80px; }
 
-.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; align-items: center; }
-.filter-input { flex: 1; min-width: 200px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Figtree', sans-serif; font-size: 0.85rem; background: var(--white); color: var(--body); }
-.filter-input:focus { outline: none; border-color: var(--blue); }
-.ftab { padding: 6px 14px; font-size: 0.72rem; font-weight: 700; border-radius: 5px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; font-family: 'Figtree', sans-serif; transition: all 0.15s; white-space: nowrap; }
-.ftab:hover { border-color: var(--blue); color: var(--blue); }
-.ftab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
-.ftab.done-tab.active { background: var(--green); border-color: var(--green); }
+/* PRICING MODEL */
+.pricing-model { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 40px; }
+.pm-head { background: var(--navy); padding: 14px 20px; }
+.pm-head h3 { font-size: 13px; font-weight: 700; color: var(--white); }
+.pm-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 700px) { .pm-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 420px) { .pm-grid { grid-template-columns: 1fr; } }
+.pm-tier { padding: 16px 18px; border-right: 1px solid var(--border); }
+.pm-tier:last-child { border-right: none; }
+.pm-tier-name { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+.pm-tier-price { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; line-height: 1.2; margin-bottom: 6px; }
+.pm-tier-price span { font-family: var(--font-body); font-size: 11px; font-weight: 400; opacity: 0.6; }
+.pm-tier-note { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+.pm-tier-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
+.pm-bronze { border-top: 3px solid #9A7060; }
+.pm-bronze .pm-tier-name { color: #9A7060; }
+.pm-bronze .pm-tier-price { color: #9A7060; }
+.pm-bronze .pm-tier-tag { background: #F5EDE8; color: #9A7060; }
+.pm-silver { border-top: 3px solid var(--silver); }
+.pm-silver .pm-tier-name { color: var(--silver); }
+.pm-silver .pm-tier-price { color: var(--silver); }
+.pm-silver .pm-tier-tag { background: var(--silver-bg); color: var(--silver); }
+.pm-gold { border-top: 3px solid var(--gold); }
+.pm-gold .pm-tier-name { color: var(--gold); }
+.pm-gold .pm-tier-price { color: var(--gold); }
+.pm-gold .pm-tier-tag { background: var(--gold-bg); color: var(--gold); }
+.pm-addons { border-top: 3px solid var(--ocean); }
+.pm-addons .pm-tier-name { color: var(--ocean); }
+.pm-addons .pm-tier-price { color: var(--ocean); }
+.pm-addons .pm-tier-tag { background: var(--ocean-light); color: var(--ocean); }
 
-.pricing-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 36px; }
-.price-tile { background: var(--white); border: 1px solid var(--border); border-radius: 9px; padding: 14px 16px; }
-.price-tile.gold { border-color: rgba(200,150,42,0.4); background: linear-gradient(135deg, #FBF7EE, #FFF8E8); }
-.pt-tier { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
-.pt-tier.silver { color: var(--ocean); }
-.pt-tier.gold { color: var(--gold); }
-.pt-tier.addon { color: var(--blue); }
-.pt-price { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-.pt-price span { font-size: 0.7rem; font-weight: 400; color: var(--muted); font-family: 'Figtree', sans-serif; }
-.pt-note { font-size: 0.75rem; color: var(--muted); line-height: 1.45; }
+/* SECTIONS */
+.task-section { margin-bottom: 44px; }
+.ts-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.ts-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+.ts-meta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.ts-count { font-size: 12px; color: var(--muted); font-weight: 600; }
+.ts-priority { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; }
+.priority-critical { background: var(--red-bg); color: var(--red); }
+.priority-high { background: var(--amber-bg); color: var(--amber); }
+.priority-medium { background: var(--ocean-light); color: var(--ocean); }
+.priority-last { background: var(--green-bg); color: var(--green); }
 
-.section { margin-bottom: 40px; }
-.section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
-.section-head h2 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); }
-.sh-badge { font-size: 0.62rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
-.sh-critical { background: rgba(232,52,74,0.1); color: var(--coral); border: 1px solid rgba(232,52,74,0.2); }
-.sh-high { background: rgba(200,150,42,0.1); color: var(--gold); border: 1px solid rgba(200,150,42,0.2); }
-.sh-medium { background: rgba(58,171,222,0.1); color: var(--blue); border: 1px solid rgba(58,171,222,0.2); }
-.sh-done { background: var(--green-bg); color: var(--green); border: 1px solid var(--done-border); }
-.sh-count { font-size: 0.62rem; font-weight: 700; background: var(--bg); border: 1px solid var(--border); color: var(--muted); padding: 2px 8px; border-radius: 10px; margin-left: auto; }
+/* TASKS */
+.task-list { display: flex; flex-direction: column; gap: 10px; }
+.task-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
+.task-item.new { border-left: 3px solid var(--dune); }
+.task-check { width: 18px; height: 18px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; margin-top: 2px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; }
+.task-check:hover { border-color: var(--ocean); }
+.task-check.done { background: var(--green); border-color: var(--green); }
+.task-check.done::after { content: '\2713'; color: var(--white); font-size: 11px; font-weight: 800; }
+.task-body { flex: 1; min-width: 0; }
+.task-title { font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 4px; line-height: 1.35; }
+.task-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+.task-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+.task-tag { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px; letter-spacing: 0.04em; }
+.tag-tech { background: #EBF4F8; color: #2A6B88; }
+.tag-funnel { background: var(--purple-bg); color: var(--purple); }
+.tag-listing { background: var(--ocean-light); color: var(--ocean); }
+.tag-automation { background: var(--gold-bg); color: var(--gold); }
+.tag-seo { background: var(--green-bg); color: var(--green); }
+.tag-content { background: var(--sand-dark); color: var(--muted); }
+.tag-qa { background: var(--red-bg); color: var(--red); }
+.tag-new { background: var(--dune-light); color: #8A5A00; }
 
-.task-list { display: flex; flex-direction: column; gap: 8px; }
-.task { background: var(--white); border: 1px solid var(--border); border-radius: 9px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
-.task.done { background: var(--done-bg); border-color: var(--done-border); opacity: 0.75; }
-.task.hidden { display: none; }
-.task-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; font-size: 0.7rem; font-weight: 700; }
-.task.done .task-check { background: var(--green); border-color: var(--green); color: #fff; }
-.task-body { flex: 1; }
-.task-title { font-weight: 700; font-size: 0.87rem; color: var(--navy); margin-bottom: 3px; }
-.task.done .task-title { text-decoration: line-through; color: var(--muted); }
-.task-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
-.task-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 7px; }
-.ttag { font-size: 0.6rem; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
-.ttag-funnel { background: rgba(232,52,74,0.08); color: var(--coral); border: 1px solid rgba(232,52,74,0.18); }
-.ttag-tech { background: rgba(58,171,222,0.08); color: var(--blue); border: 1px solid rgba(58,171,222,0.18); }
-.ttag-content { background: rgba(125,193,67,0.1); color: var(--green); border: 1px solid rgba(125,193,67,0.2); }
-.ttag-auto { background: rgba(200,150,42,0.1); color: var(--gold); border: 1px solid rgba(200,150,42,0.2); }
-.ttag-qa { background: rgba(96,112,128,0.1); color: var(--muted); border: 1px solid var(--border); }
-.ttag-final { background: rgba(43,63,92,0.1); color: var(--navy); border: 1px solid rgba(43,63,92,0.2); }
+.new-badge { display: inline-flex; align-items: center; background: var(--dune-light); color: #8A5A00; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 3px; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 8px; vertical-align: middle; }
 
-.empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 0.85rem; display: none; }
+/* QA GRID */
+.qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) { .qa-grid { grid-template-columns: 1fr; } }
+.qa-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 16px; display: flex; gap: 12px; }
+.qa-icon { font-size: 20px; flex-shrink: 0; }
+.qa-body h4 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.qa-body p { font-size: 12px; color: var(--muted); line-height: 1.55; }
 
-.site-footer { background: var(--navy); padding: 16px 24px; text-align: center; font-size: 0.72rem; color: rgba(255,255,255,0.3); margin-top: 40px; }
-.site-footer a { color: var(--blue); text-decoration: none; }
-
-@media (max-width: 600px) { .hero-stats { gap: 10px; } }
+.page-footer { text-align: center; font-size: 12px; color: var(--muted); padding-top: 24px; border-top: 1px solid var(--border); }
 </style>
 </head>
 <body>
 
 <nav class="nav">
-  <a href="/" class="nav-brand">Papamoa<em>.info</em></a>
-  <span class="nav-meta">Internal &mdash; PlainBlack Creative &middot; Updated April 2026</span>
+  <a href="/sitemap.html" class="nav-logo">Papamoa<em>.info</em></a>
+  <span class="nav-tag">Pre-Demo Task Plan · Internal — PlainBlack Creative</span>
 </nav>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Internal &mdash; PlainBlack Creative</div>
-    <h1>Pre-Launch <em>Task Plan</em></h1>
-    <p class="hero-sub">One question drives every task: does it help prove the automated funnel converts cold leads into paying listings?</p>
-    <div class="hero-stats">
-      <div class="hstat"><div class="hstat-num green" id="stat-done">0</div><div class="hstat-label">Done</div></div>
-      <div class="hstat"><div class="hstat-num amber" id="stat-pending">0</div><div class="hstat-label">Pending</div></div>
-      <div class="hstat"><div class="hstat-num" id="stat-total">0</div><div class="hstat-label">Total tasks</div></div>
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="header-tag">Internal — PlainBlack Creative</div>
+    <h1 class="header-title">Pre-Demo <em>Task Plan</em></h1>
+    <p class="header-sub">What needs to happen before this site can convert its first paying listing client. Focused entirely on proving the hands-off sales funnel works.</p>
+    <div class="header-meta">
+      <div class="header-stat">
+        <div class="hs-num">100</div>
+        <div class="hs-label">Sales per month — from month one</div>
+      </div>
+      <span class="header-pill">🎯 Critical path: funnel proof</span>
+      <span class="header-pill">📅 Updated: April 2026</span>
     </div>
   </div>
 </div>
 
-<div class="page-wrap">
+<div class="page-body">
 
-  <!-- PRICING REFERENCE -->
-  <div class="section">
-    <div class="section-head">
-      <h2>&#128176; Confirmed Pricing &mdash; Master Reference</h2>
-      <a href="/pricing-master.html" target="_blank" style="font-size:0.72rem;color:var(--blue);text-decoration:none;margin-left:auto">View full doc &#8599;</a>
-    </div>
-    <div class="pricing-strip">
-      <div class="price-tile">
-        <div class="pt-tier silver">&#9670; Silver</div>
-        <div class="pt-price">$599 <span>+GST / yr</span></div>
-        <div class="pt-note">Full listing. SEO description, images, schema, social links, review badges. Lifetime price lock. 2027 ROI guarantee. TaurangaNZ.info Silver free.</div>
-      </div>
-      <div class="price-tile gold">
-        <div class="pt-tier gold">&#11088; Gold Spotlight</div>
-        <div class="pt-price">$1,200 <span>+GST / yr</span></div>
-        <div class="pt-note">Top of sub-category. AI FAQ + AEO schema. Unlimited images. Menu Add-On included free. One per sub-category &mdash; first in wins.</div>
-      </div>
-      <div class="price-tile">
-        <div class="pt-tier addon">&#128203; Menu Add-On</div>
-        <div class="pt-price">$199 <span>+GST / yr</span></div>
-        <div class="pt-note">Interactive filterable menu/service list. Free with Gold. Add-on for Silver. Works for any business with a price list.</div>
-      </div>
-      <div class="price-tile">
-        <div class="pt-tier addon">&#128205; Extra Spotlight</div>
-        <div class="pt-price">$99 <span>+GST / yr</span></div>
-        <div class="pt-note">Gold only. Additional sub-category Spotlights beyond the primary one.</div>
-      </div>
-    </div>
-  </div>
+  <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:28px;">The only way this works at scale is if the funnel runs without Jay manually selling. Every task on this plan is evaluated against one question: does it help prove the automated funnel converts cold leads into paying listings?</p>
 
-  <!-- FILTER -->
-  <div class="filter-bar">
-    <input type="text" class="filter-input" id="search-input" placeholder="Search tasks..." oninput="applyFilters()">
-    <button class="ftab active" onclick="filterTab('all',this)">All</button>
-    <button class="ftab" onclick="filterTab('pending',this)">Pending</button>
-    <button class="ftab done-tab" onclick="filterTab('done',this)">&#10003; Done</button>
-    <button class="ftab" onclick="filterTab('funnel',this)">Funnel</button>
-    <button class="ftab" onclick="filterTab('tech',this)">Tech</button>
-    <button class="ftab" onclick="filterTab('content',this)">Content</button>
-    <button class="ftab" onclick="filterTab('auto',this)">Automation</button>
-    <button class="ftab" onclick="filterTab('qa',this)">QA</button>
-    <button class="ftab" onclick="filterTab('final',this)">Final</button>
+  <!-- PRICING MODEL -->
+  <div class="pricing-model">
+    <div class="pm-head"><h3>💰 Confirmed Pricing Model — Locked April 2026</h3></div>
+    <div class="pm-grid">
+      <div class="pm-tier pm-bronze">
+        <div class="pm-tier-name">Bronze</div>
+        <div class="pm-tier-price">Free <span>/ placeholder</span></div>
+        <div class="pm-tier-note">Auto-generated. Captures real enquiries. No social icons, no badges. Internal only — never sold.</div>
+        <span class="pm-tier-tag">Core lead generation engine</span>
+      </div>
+      <div class="pm-tier pm-silver">
+        <div class="pm-tier-name">Silver</div>
+        <div class="pm-tier-price">$599 <span>+GST / yr</span></div>
+        <div class="pm-tier-note">Full claimed listing. SEO description, up to 9 images, social links, review badges. Lifetime price lock. 2027 ROI Guarantee.</div>
+        <span class="pm-tier-tag">Primary conversion target</span>
+      </div>
+      <div class="pm-tier pm-gold">
+        <div class="pm-tier-name">Gold Spotlight</div>
+        <div class="pm-tier-price">$1,199 <span>+GST / yr</span></div>
+        <div class="pm-tier-note">Top of sub-category. Unlimited images. AI FAQ/AEO schema. Menu Add-On free. Premium ad access. One per sub-category.</div>
+        <span class="pm-tier-tag">Annual recurring upsell</span>
+      </div>
+      <div class="pm-tier pm-addons">
+        <div class="pm-tier-name">Add-Ons</div>
+        <div class="pm-tier-price">From $99 <span>+GST / yr</span></div>
+        <div class="pm-tier-note">Menu/Service List: $199+GST/yr (free with Gold). Extra subcategory Spotlights: $99+GST/yr each. Premium ad spots: TBD.</div>
+        <span class="pm-tier-tag">Upsell automation target</span>
+      </div>
+    </div>
   </div>
 
   <!-- 1. FUNNEL PROOF -->
-  <div class="section">
-    <div class="section-head">
-      <h2>&#128176; 1. Funnel Proof &mdash; Critical Path</h2>
-      <span class="sh-badge sh-critical">Critical</span>
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">📷 1. Funnel Proof — Must Work Before Demo</div>
+      <div class="ts-meta"><span class="ts-count">0 / 9</span><span class="ts-priority priority-critical">Critical</span></div>
     </div>
     <div class="task-list">
-      <div class="task done" data-tags="tech funnel">
-        <div class="task-check">&#10003;</div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Build /sales/claim.html &mdash; default site visitor landing page</div>
-          <div class="task-desc">Warm, simple page for visitors clicking any "Claim this listing" CTA. Full pitch, Web3Forms connected. form_name: claim-lander.</div>
-          <div class="task-tags"><span class="ttag ttag-funnel">Funnel</span><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Verify Cloudflare Worker proxy is live and returning correct responses</div>
+          <div class="task-desc">Test papamoa-claude-proxy.jkbrownnz.workers.dev with a POST request. Confirm it returns JSON, not an error. Check Cloudflare dashboard for error rate.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
-      <div class="task done" data-tags="tech funnel">
-        <div class="task-check">&#10003;</div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Build /sales/landing.html &mdash; funnel page with PPP form</div>
-          <div class="task-desc">The most important page on the site. URL params ?biz= and ?cat= personalise the hero and scarcity banner. Form captures enough to build a PPP. Web3Forms form_name: funnel-lander.</div>
-          <div class="task-tags"><span class="ttag ttag-funnel">Funnel</span><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Test Web3Forms end-to-end — form submit to email receipt</div>
+          <div class="task-desc">Submit a test enquiry from a placeholder listing. Confirm the email lands at jkbrownnz@gmail.com within 60 seconds with all fields populated.</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
-      <div class="task" data-tags="tech funnel">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Verify Cloudflare Worker proxy is live</div>
-          <div class="task-desc">Test papamoa-claude-proxy.jkbrownnz.workers.dev with a POST request. Confirm it returns JSON. Check Cloudflare dashboard for error rate.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span><span class="ttag ttag-funnel">Funnel</span></div>
+          <div class="task-title">Build a Silver "claim your listing" landing page</div>
+          <div class="task-desc">The placeholder listing CTA currently points nowhere useful. Build /claim.html — simple page explaining Silver ($599+GST/yr), Web3Forms enquiry, clear next step. Primary conversion page.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-listing">Listing</span></div>
         </div>
       </div>
-      <div class="task" data-tags="tech funnel">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Test Web3Forms end-to-end</div>
-          <div class="task-desc">Submit a test from /sales/landing.html. Confirm email lands at jkbrownnz@gmail.com with all fields including ?biz= and ?cat= hidden fields.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span><span class="ttag ttag-funnel">Funnel</span></div>
+          <div class="task-title">Update all placeholder listings to link to /sales/landing.html</div>
+          <div class="task-desc">Every "claim this listing" button must go to the sales landing page, not a dead link. lawn-mowing-papamoa.html is the template — replicate across all placeholders.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-listing">Listing</span></div>
         </div>
       </div>
-      <div class="task" data-tags="auto funnel">
-        <div class="task-check"></div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Activate Stripe &mdash; Silver and Gold payment links</div>
-          <div class="task-desc">$599+GST and $1,200+GST NZD payment links. Add "pay now" option to /sales/landing.html. Automated receipt email is the minimum viable onboarding trigger.</div>
-          <div class="task-tags"><span class="ttag ttag-auto">Automation</span><span class="ttag ttag-funnel">Funnel</span></div>
+          <div class="task-title">Fix href="#" links in 4 listing/category pages <span class="new-badge">New</span></div>
+          <div class="task-desc">"Claim this Spotlight" / "List Your Business" links pointing to href="#" in: listings/speedy-screens-papamoa.html, listings/greencut-papamoa.html, categories/fishing.html, categories/gardening.html. All should point to /sales/landing.html.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
-      <div class="task" data-tags="auto funnel">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Brevo Day 3 / Day 6 / Day 10 sequence &mdash; activate and test</div>
-          <div class="task-desc">DNS access pending client. Set up in Brevo using Gmail send domain for now. Test trigger from a Web3Forms submission. Must fire automatically with no manual steps.</div>
-          <div class="task-tags"><span class="ttag ttag-auto">Automation</span><span class="ttag ttag-funnel">Funnel</span></div>
+          <div class="task-title">Stripe payment link for Silver ($599+GST/yr) — ready but not promoted</div>
+          <div class="task-desc">Activate Stripe. Create a $599+GST NZD payment link. Add to /sales/landing.html as optional "pay now" alongside the enquiry form. Automated receipt email is the minimum viable onboarding trigger.</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
-      <div class="task" data-tags="auto funnel">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Outscraper lead scrape &mdash; first 200 P&#257;p&#257;moa businesses</div>
-          <div class="task-desc">Pull business name, website, phone, email, category from Google Maps. Clean the CSV. This is the cold outreach list. Without it there are no leads to funnel.</div>
-          <div class="task-tags"><span class="ttag ttag-auto">Automation</span><span class="ttag ttag-funnel">Funnel</span></div>
+          <div class="task-title">Brevo Day 3 / Day 6 / Day 10 sequence — activate and test</div>
+          <div class="task-desc">Domain auth pending client DNS access. Set up sequence in Brevo using Gmail send domain in the meantime. Test trigger from Web3Forms submission. Must fire automatically — no manual steps.</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
-      <div class="task" data-tags="auto funnel">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Send first cold email batch &mdash; 20 businesses, track opens</div>
-          <div class="task-desc">Import first 20 leads into Brevo. Send cold email template linking to /sales/landing.html?biz=&cat=. Monitor open rate and click-through. Proof the funnel works from cold traffic.</div>
-          <div class="task-tags"><span class="ttag ttag-auto">Automation</span><span class="ttag ttag-funnel">Funnel</span></div>
+          <div class="task-title">Outscraper lead scrape — Pāpāmoa businesses, first 200 records</div>
+          <div class="task-desc">Pull business name, website, phone, email, category from Google Maps for Pāpāmoa. Clean the CSV. This is the cold outreach list. Without this there are no leads to funnel.</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Send first cold email batch — 20 businesses, track opens</div>
+          <div class="task-desc">Import first 20 leads into Brevo. Send the cold email template. Monitor open rate and click-through to placeholder listings. This is proof the funnel triggers from cold traffic.</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 2. LISTINGS -->
-  <div class="section">
-    <div class="section-head">
-      <h2>&#128205; 2. Listings</h2>
-      <span class="sh-badge sh-high">High priority</span>
+  <!-- 2. DEMO LISTINGS -->
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">📍 2. Demo-Ready Listings</div>
+      <div class="ts-meta"><span class="ts-count">0 / 5</span><span class="ts-priority priority-high">High</span></div>
     </div>
     <div class="task-list">
-      <div class="task done" data-tags="content">
-        <div class="task-check">&#10003;</div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">The Cave P&#257;p&#257;moa &mdash; Gold Spotlight listing</div>
-          <div class="task-desc">VR &amp; sim racing at 7/16 Ashley Place. FareHarbor booking. PlainBlack Creative client &mdash; top candidate for first real paid Gold.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span></div>
+          <div class="task-title">Standardise master listing template — pick one, lock it</div>
+          <div class="task-desc">Review listing-template.html, combined-listings.html, and the-wagon-papamoa.html. Pick the best one as the master. All new listings built from this template only.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
-      <div class="task done" data-tags="content">
-        <div class="task-check">&#10003;</div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Xanadu Book Exchange &mdash; Silver listing</div>
-          <div class="task-desc">Only second-hand bookstore left in the Bay. ~10M books, no book over $5. Natural Gold Spotlight candidate given high organic search volume for the name.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span></div>
+          <div class="task-title">5 placeholder listings covering key sub-categories</div>
+          <div class="task-desc">Build placeholder listings for: Plumber Pāpāmoa, Electrician Pāpāmoa, Hair Salon Pāpāmoa, Pizza Delivery Pāpāmoa, Real Estate Agent Pāpāmoa. High-search sub-categories that demonstrate the model.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-seo">SEO</span></div>
         </div>
       </div>
-      <div class="task done" data-tags="content">
-        <div class="task-check">&#10003;</div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Kayco Nails &mdash; Silver listing</div>
-          <div class="task-desc">Custom press-on nail kits, home-based, ships NZ-wide. Order via Instagram @kayco.nails.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span></div>
+          <div class="task-title">Churches &amp; Religious Organisations page</div>
+          <div class="task-desc">Build /articles/churches-papamoa.html listing local churches, denominations, service times. Placeholder listings for each. High community SEO value, zero competition.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-seo">SEO</span><span class="task-tag tag-content">Content</span></div>
         </div>
       </div>
-      <div class="task" data-tags="tech content">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Standardise master listing template &mdash; pick one, lock it</div>
-          <div class="task-desc">Review listing-template.html, combined-listings.html, listings.html and current live listings. Pick one as the master. All new listings from that template only.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span><span class="ttag ttag-content">Content</span></div>
+          <div class="task-title">One real Gold demo listing — approached business, real content</div>
+          <div class="task-desc">Approach one real Pāpāmoa business for a free Gold demo listing (no charge, in exchange for a testimonial). Real photos, real content, real Google Reviews badge. Centrepiece of the demo.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
-      <div class="task" data-tags="content">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">5 new placeholder listings &mdash; high-search sub-categories</div>
-          <div class="task-desc">Plumber, Electrician, Hair Salon, Pizza Delivery, Real Estate Agent &mdash; all in P&#257;p&#257;moa. Rank, capture enquiries, generate traffic data for sales conversations.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span></div>
-        </div>
-      </div>
-      <div class="task" data-tags="content funnel">
-        <div class="task-check"></div>
-        <div class="task-body">
-          <div class="task-title">One real Gold demo listing</div>
-          <div class="task-desc">Approach one real P&#257;p&#257;moa business for a free Gold demo in exchange for a testimonial. Real photos, real content, real Google Reviews badge. The Cave is the top candidate.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span><span class="ttag ttag-funnel">Funnel</span></div>
-        </div>
-      </div>
-      <div class="task" data-tags="content funnel">
-        <div class="task-check"></div>
-        <div class="task-body">
-          <div class="task-title">PPPs for 3 real prospect businesses</div>
-          <div class="task-desc">Use driftwood-cafe.html as template. Build 3 personalised previews in /previews/. Note: replace fictional name in template before any real outreach (a real Driftwood Cafe exists in Auckland).</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span><span class="ttag ttag-funnel">Funnel</span></div>
-        </div>
-      </div>
-      <div class="task" data-tags="content">
-        <div class="task-check"></div>
-        <div class="task-body">
-          <div class="task-title">Menu Add-On upgrade &mdash; per-item photos</div>
-          <div class="task-desc">Add photo field to menu JSON data structure and photo slot to lightbox item template. AI-generated placeholder at minimum, real photo when provided by client.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">PPP (pre-payment preview) for 3 real prospect businesses</div>
+          <div class="task-desc">Use the driftwood-cafe.html PPP template. Build 3 real personalised previews for top cold-outreach prospects. Each gets a unique URL in /previews/. Send as part of the cold email sequence.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 3. PAGES BUILT -->
-  <div class="section">
-    <div class="section-head">
-      <h2>&#10003; 3. Build Phase Completed</h2>
-      <span class="sh-badge sh-done">Done</span>
+  <!-- 3. MISSING PAGES -->
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">📄 3. Missing Pages &amp; Content</div>
+      <div class="ts-meta"><span class="ts-count">0 / 5</span><span class="ts-priority priority-high">High</span></div>
     </div>
     <div class="task-list">
-      <div class="task done" data-tags="content">
-        <div class="task-check">&#10003;</div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">32 article pages built and live in repo</div>
-          <div class="task-desc">Swimming, utilities, water rates, rubbish/recycling, clothing recycling, op shops, schools, AIMS Games, parks, walks, dogs, M&#257;ori history, Mount Maunganui, library, local government, seniors, population, shopping centres, Tauranga, notable people, fuel prices, news/events, dinner at the domain, The Yard, kids parties, Gordon Spratt, P&#257;p&#257;moa Hills, summer insects, Easter trading, school terms, tax/KiwiSaver, weddings.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span></div>
+          <div class="task-title">all-listings.html — update with new placeholder listings</div>
+          <div class="task-desc">The all-listings showcase is the directory's "proof of scale" page. Add all new placeholder listings. Should show 20+ listings to look credible in a demo.</div>
+          <div class="task-tags"><span class="task-tag tag-content">Content</span><span class="task-tag tag-listing">Listing</span></div>
         </div>
       </div>
-      <div class="task done" data-tags="content">
-        <div class="task-check">&#10003;</div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">8 category pages built and live</div>
-          <div class="task-desc">Accommodation, Entertainment, Shopping, Services, Surf &amp; Tides, Fishing, Lawn Mowing, Gardening.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span></div>
+          <div class="task-title">homepage.html — add article/SEO page links to nav or category cards</div>
+          <div class="task-desc">The directory homepage doesn't yet link to new article pages. Add featured content cards or a "Local Info" section so the homepage feels like a full directory.</div>
+          <div class="task-tags"><span class="task-tag tag-content">Content</span><span class="task-tag tag-seo">SEO</span></div>
         </div>
       </div>
-      <div class="task done" data-tags="tech">
-        <div class="task-check">&#10003;</div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">index.html = site dashboard (was sitemap.html)</div>
-          <div class="task-desc">Root URL is now the internal site index. Filterable, searchable, star function with localStorage persistence. All repo pages listed with correct counts.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Schools in Pāpāmoa page — /articles/schools-papamoa.html</div>
+          <div class="task-desc">High-search, zero-competition page. List all Pāpāmoa schools with zone maps, decile, contact. Placeholder ad spots for tutors, uniform shops, stationery.</div>
+          <div class="task-tags"><span class="task-tag tag-seo">SEO</span><span class="task-tag tag-content">Content</span></div>
         </div>
       </div>
-      <div class="task done" data-tags="tech">
-        <div class="task-check">&#10003;</div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">pricing-master.html &mdash; single source of truth</div>
-          <div class="task-desc">Master pricing override doc. Dead offers listed. High-priority files needing updates listed. Linked from index and task plan footer.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Accommodation category page — /categories/accommodation.html</div>
+          <div class="task-desc">Currently marked "not built" in the sitemap. AIMS Games traffic alone makes this high priority. Pacific Park Gold Spotlight is ready to drop in.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-seo">SEO</span></div>
         </div>
       </div>
-      <div class="task done" data-tags="tech">
-        <div class="task-check">&#10003;</div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">CRM built on Google Sheets + Apps Script</div>
-          <div class="task-desc">LEADS, LISTINGS, RENEWALS, HEALTH tabs. Dropdowns, formulas, conditional formatting. CRM dashboard connected for reading. Write-back endpoint still pending.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span></div>
-        </div>
-      </div>
-      <div class="task done" data-tags="content">
-        <div class="task-check">&#10003;</div>
-        <div class="task-body">
-          <div class="task-title">Community &amp; Safety section &mdash; 6 pages</div>
-          <div class="task-desc">community.html, safety-support hub, emergencies, neighbourhood support, police/crime, community groups.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span></div>
-        </div>
-      </div>
-      <div class="task done" data-tags="tech funnel">
-        <div class="task-check">&#10003;</div>
-        <div class="task-body">
-          <div class="task-title">Sales pages consolidated &mdash; /sales/landing.html and /sales/claim.html</div>
-          <div class="task-desc">Funnel page with PPP form + URL param personalisation. Default site visitor claim page. post-call-landing.html retained for warm post-call leads.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span><span class="ttag ttag-funnel">Funnel</span></div>
+          <div class="task-title">Sitemap — replace with updated version (already built)</div>
+          <div class="task-desc">New sitemap.html with all articles, updated counts, and Articles tab is ready in outputs. Upload to GitHub root to replace current version.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 4. TECH & AUTOMATION -->
-  <div class="section">
-    <div class="section-head">
-      <h2>&#9881;&#65039; 4. Tech &amp; Automation</h2>
-      <span class="sh-badge sh-medium">Medium</span>
+  <!-- 4. PRICING & FILE UPDATES (new section) -->
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">💰 4. Pricing &amp; File Updates <span class="new-badge">New</span></div>
+      <div class="ts-meta"><span class="ts-count">0 / 6</span><span class="ts-priority priority-high">High</span></div>
     </div>
     <div class="task-list">
-      <div class="task" data-tags="tech auto">
-        <div class="task-check"></div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Apps Script write-back endpoint &mdash; CRM save + add-lead form</div>
-          <div class="task-desc">One script, two features. Publish as Web App from the Google Sheet. CRM dashboard Save button posts to it. Add Lead form also posts to it. Writes rows to LEADS tab automatically.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span><span class="ttag ttag-auto">Automation</span></div>
+          <div class="task-title">Upload rebuilt sales pages to GitHub</div>
+          <div class="task-desc">All rebuilt with correct pricing ($599 Silver, $1,199 Gold, dead offers removed): sales/main-lander.html, sales/landing.html, sales/post-call-landing.html, previews/driftwood-cafe.html, sales/menu-addon.html, sales/why-list.html, sales/followup-emails.html, sales/sales-scripts.html.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
-      <div class="task" data-tags="tech auto">
-        <div class="task-check"></div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Make.com &mdash; automation glue setup</div>
-          <div class="task-desc">Wire Web3Forms submissions to Brevo sequence trigger to CRM row creation. This is the backbone that makes the funnel hands-off.</div>
-          <div class="task-tags"><span class="ttag ttag-auto">Automation</span><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Upload rebuilt listing pages to GitHub</div>
+          <div class="task-desc">Check tier upsell blocks in: listings/the-wagon-papamoa.html, listings/speedy-screens-papamoa.html, listings/lawn-mowing-papamoa.html, listings/greencut-papamoa.html. Correct pricing, remove dead offers, fix href="#" links.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
-      <div class="task" data-tags="tech auto">
-        <div class="task-check"></div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">GitHub Actions &mdash; auto-regenerate index.html on push</div>
-          <div class="task-desc">Scan repo for .html files on every push to main. Rebuild the page cards in index.html from a template. No manual sitemap updates needed as pages are added.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span><span class="ttag ttag-auto">Automation</span></div>
+          <div class="task-title">Fix admin/sales-funnel.html — truncated JS + copy tweak</div>
+          <div class="task-desc">Replace truncated updateUI() function (buttons/navigation broken). Also update "What Happens Next" Month 3: change "Gold Founding Member two-for-one bonus" to "included free with any paid listing".</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
-      <div class="task" data-tags="tech auto">
-        <div class="task-check"></div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Star persistence upgrade &mdash; index.html dashboard</div>
-          <div class="task-desc">Currently localStorage (one browser, one device). Upgrade to GitHub Gist via GitHub API or Cloudflare KV via existing Worker proxy to persist stars across devices and browser wipes.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span><span class="ttag ttag-auto">Automation</span></div>
+          <div class="task-title">Fix docs/crm-sheet-reference.html — 3 small changes</div>
+          <div class="task-desc">Remove Bronze from Tier dropdown in LISTINGS tab (col D) and RENEWALS tab (col B). Remove Sub-Pages Count column H from LISTINGS tab — sub-pages removed from product entirely.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
-      <div class="task" data-tags="tech">
-        <div class="task-check"></div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Google Analytics &amp; Search Console &mdash; connect to demo site</div>
-          <div class="task-desc">Add GA tag to all pages. Real traffic data from the demo period is gold for sales conversations. Request client Search Console access after demo reveal.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Upload updated pricing-master.html to repo and replace in Project Files</div>
+          <div class="task-desc">Gold price updated from $1,200 to $1,199. Upload new version to docs/pricing-master.html in repo. Also replace the copy in Claude Project Files so all future sessions use the correct price automatically.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
-      <div class="task" data-tags="tech auto">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Fuel Prices page &mdash; live data source</div>
-          <div class="task-desc">Gaspy NZ API or Web3Forms + GitHub Actions crowd-source. Decide approach. High SEO and repeat-visit value. Even a weekly manual update beats a static placeholder.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span><span class="ttag ttag-auto">Automation</span></div>
-        </div>
-      </div>
-      <div class="task" data-tags="tech">
-        <div class="task-check"></div>
-        <div class="task-body">
-          <div class="task-title">DNS session with client &mdash; all records in one hit</div>
-          <div class="task-desc">preview.papamoa.info CNAME, Brevo SPF/DKIM/DMARC, MX if needed. Prepare a one-page DNS checklist. Schedule post-demo reveal. Begin jayden@papamoa.info email warmup after DNS access.</div>
-          <div class="task-tags"><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">VS Code Find in Files — old /post-call-landing.html path references</div>
+          <div class="task-desc">Cmd+Shift+F in VS Code, search for "/post-call-landing.html" — should now be "/sales/post-call-landing.html". Fix any matches found.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 5. QA -->
-  <div class="section">
-    <div class="section-head">
-      <h2>&#128269; 5. QA &amp; Link Audit</h2>
-      <span class="sh-badge sh-high">Before demo</span>
+  <!-- 5. LINK AUDIT -->
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">🔗 5. Link &amp; Path Audit</div>
+      <div class="ts-meta"><span class="ts-count">0 / 3</span><span class="ts-priority priority-high">High</span></div>
     </div>
     <div class="task-list">
-      <div class="task" data-tags="qa tech">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Batch fix all /index.html CTA links &rarr; /sales/claim.html</div>
-          <div class="task-desc">Many "Claim this listing / List your business" CTAs still point to /index.html (old sales page). Now that index.html is the dashboard, all sales-intent links should go to /sales/claim.html. Do in one pass at end of build via github.dev find &amp; replace.</div>
-          <div class="task-tags"><span class="ttag ttag-qa">QA</span><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Fix /articles/ cross-links in all new article pages</div>
+          <div class="task-desc">Pages uploaded before the path fix contain cross-links pointing to /slug instead of /articles/slug. Fixed versions are in outputs — upload to replace current repo files. Use batch upload in GitHub.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
-      <div class="task" data-tags="qa tech">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">VS Code Find in Files &mdash; old /post-call-landing.html path</div>
-          <div class="task-desc">Search for "/post-call-landing.html". Should now be "/sales/post-call-landing.html". Fix any matches found.</div>
-          <div class="task-tags"><span class="ttag ttag-qa">QA</span><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Check all "Claim this spot" ad placeholder links are live</div>
+          <div class="task-desc">Every /advertise link in ad placeholder blocks needs to go somewhere real — /sales/landing.html. Currently most are dead links.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
-      <div class="task" data-tags="qa">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Quick fix &mdash; 4 specific href="#" claim links</div>
-          <div class="task-desc">listings/speedy-screens-papamoa.html, listings/greencut-papamoa.html, categories/fishing.html, categories/gardening.html &mdash; all "Claim this Spotlight" links still point to #. Update to /sales/claim.html.</div>
-          <div class="task-tags"><span class="ttag ttag-qa">QA</span></div>
-        </div>
-      </div>
-      <div class="task" data-tags="qa">
-        <div class="task-check"></div>
-        <div class="task-body">
-          <div class="task-title">Change admin/upload.html password before demo</div>
-          <div class="task-desc">Currently 'papamoa2026admin' in the JS. Change before sharing any demo URLs with Carwyn or prospects.</div>
-          <div class="task-tags"><span class="ttag ttag-qa">QA</span></div>
-        </div>
-      </div>
-      <div class="task" data-tags="qa tech">
-        <div class="task-check"></div>
-        <div class="task-body">
-          <div class="task-title">CRM dashboard &mdash; rebuild API calls via Cloudflare Worker proxy</div>
-          <div class="task-desc">Old hardcoded key was exposed in admin/crm-dashboard.html (revoked). Rebuild routes all Google API calls through Worker proxy. Key lives in Worker env vars only, never in HTML.</div>
-          <div class="task-tags"><span class="ttag ttag-qa">QA</span><span class="ttag ttag-tech">Tech</span></div>
-        </div>
-      </div>
-      <div class="task" data-tags="qa">
-        <div class="task-check"></div>
-        <div class="task-body">
-          <div class="task-title">Pricing audit &mdash; update legacy pricing in repo files</div>
-          <div class="task-desc">High priority files: sales/main-lander.html, previews/driftwood-cafe.html, listings with tier upsell blocks. Full list in pricing-master.html. Update before Carwyn demo.</div>
-          <div class="task-tags"><span class="ttag ttag-qa">QA</span></div>
-        </div>
-      </div>
-      <div class="task" data-tags="qa">
-        <div class="task-check"></div>
-        <div class="task-body">
-          <div class="task-title">Mobile rendering check &mdash; 375px on every key page</div>
-          <div class="task-desc">iPhone SE width. Two-col layouts collapse. No horizontal overflow. Nav wraps cleanly. Priority: sales/landing.html, homepage.html, listing pages, category pages.</div>
-          <div class="task-tags"><span class="ttag ttag-qa">QA</span></div>
-        </div>
-      </div>
-      <div class="task" data-tags="qa">
-        <div class="task-check"></div>
-        <div class="task-body">
-          <div class="task-title">Accuracy check &mdash; 4 key facts across all pages</div>
-          <div class="task-desc">Mauao = fully closed (Jan 2026 landslide, hot pools destroyed). P&#257;p&#257;moa Hills = Summerhills Track open, all others closed. Mayor = Mah&#233; Drysdale. AIMS Games = 5&ndash;11 Sep 2026.</div>
-          <div class="task-tags"><span class="ttag ttag-qa">QA</span></div>
-        </div>
-      </div>
-      <div class="task" data-tags="qa">
-        <div class="task-check"></div>
-        <div class="task-body">
-          <div class="task-title">CRM duplicate highlight &mdash; LEADS tab conditional formatting</div>
-          <div class="task-desc">Add duplicate detection on Business Name and Email columns in the Google Sheet LEADS tab. Conditional formatting to highlight rows where either field matches another row.</div>
-          <div class="task-tags"><span class="ttag ttag-qa">QA</span><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Audit all pages for remaining Bronze-as-product references</div>
+          <div class="task-desc">Bronze is internal placeholder only — never sold. Find and remove any pages offering Bronze as a paid product or showing Bronze pricing to visitors. Check listing upsell blocks especially.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 6. FACEBOOK -->
-  <div class="section">
-    <div class="section-head">
-      <h2>&#128722; 6. Facebook &amp; Social</h2>
-      <span class="sh-badge sh-medium">Medium</span>
+  <!-- 6. TECH & AUTOMATION -->
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">⚙️ 6. Tech &amp; Automation</div>
+      <div class="ts-meta"><span class="ts-count">0 / 7</span><span class="ts-priority priority-medium">Medium</span></div>
     </div>
     <div class="task-list">
-      <div class="task" data-tags="content funnel">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Post daily to @papamoa.info Facebook</div>
-          <div class="task-desc">30 posts ready in sales/facebook-posts.html. Post daily. Goal: 500 followers before first paid outreach batch. Consistency beats quality at this stage.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span><span class="ttag ttag-funnel">Funnel</span></div>
+          <div class="task-title">GitHub Actions — auto-regenerate sitemap.html on every push</div>
+          <div class="task-desc">Scan repo for .html files on push to main. Rebuild sitemap.html from template. No manual updates needed as pages are added. Required before scale.</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
-      <div class="task" data-tags="content funnel">
-        <div class="task-check"></div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Join and post in P&#257;p&#257;moa community Facebook groups</div>
-          <div class="task-desc">Papamoa Beach Community, Papamoa Mums &amp; Dads, Papamoa Noticeboard etc. Share useful articles (Easter hours, school terms, P&#257;p&#257;moa Hills track status). Don't spam &mdash; be genuinely helpful first.</div>
-          <div class="task-tags"><span class="ttag ttag-content">Content</span><span class="ttag ttag-funnel">Funnel</span></div>
+          <div class="task-title">CRM dashboard — route Google API calls through Cloudflare Worker <span class="new-badge">New</span></div>
+          <div class="task-desc">Hardcoded API key was exposed in admin/crm-dashboard.html (revoked). When rebuilding CRM connection, route all Google Sheets API calls through the existing Cloudflare Worker. Key lives in Worker environment variables, never in HTML.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Rotate Claude API key after build is complete <span class="new-badge">New</span></div>
+          <div class="task-desc">Go to console.anthropic.com, rotate the key, then update the new key in Cloudflare Worker environment variables. Protects against unauthorised usage charges.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Fuel prices page — data source investigation</div>
+          <div class="task-desc">Gaspy NZ API or crowd-source via Web3Forms + GitHub Actions. Decide approach. High SEO and repeat-visit value. Even a weekly manual update beats a static placeholder.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-seo">SEO</span></div>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Google Analytics &amp; Search Console — connect to demo site</div>
+          <div class="task-desc">Even on github.io the GA tag is worth adding now. Real traffic data from the demo period is gold for sales conversations. Request client access to Search Console after the demo reveal.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-seo">SEO</span></div>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Admin upload page — change password before demo</div>
+          <div class="task-desc">admin/upload.html currently has ADMIN_PASSWORD = 'papamoa2026admin' in the JS. Change this before sharing any demo URLs. Edit directly in GitHub.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span></div>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">DNS session with client — all records in one hit</div>
+          <div class="task-desc">preview.papamoa.info CNAME, Brevo SPF/DKIM/DMARC, MX if needed. Prepare a one-page DNS checklist so the session takes under 10 minutes. Schedule for post-demo reveal.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-automation">Automation</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 7. FINAL STEPS -->
-  <div class="section">
-    <div class="section-head">
-      <h2>&#128274; 7. Final Steps &mdash; Do Last</h2>
-      <span class="sh-badge sh-critical">Do last</span>
+  <!-- 7. FACEBOOK -->
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">📹 7. Facebook &amp; Social Growth</div>
+      <div class="ts-meta"><span class="ts-count">0 / 3</span><span class="ts-priority priority-medium">Medium</span></div>
     </div>
     <div class="task-list">
-      <div class="task" data-tags="final tech">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Rotate Claude API key &mdash; console.anthropic.com</div>
-          <div class="task-desc">Generate new key, update in Cloudflare Worker environment variables, then invalidate the old key. Protects against unauthorised usage charges. Do after build is complete.</div>
-          <div class="task-tags"><span class="ttag ttag-final">Final</span><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Post daily to @papamoa.info Facebook — use pre-built post library</div>
+          <div class="task-desc">30 Facebook posts are ready (see facebook-posts.html). Start posting daily. Goal is 500 followers before the first paid outreach batch goes out.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-content">Content</span></div>
         </div>
       </div>
-      <div class="task" data-tags="final tech">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Migrate to Astro &mdash; listings as markdown, category tree as JSON</div>
-          <div class="task-desc">Target architecture. Deferred until post-launch. All hardcoded /index.html CTA links resolved via template variables as part of migration.</div>
-          <div class="task-tags"><span class="ttag ttag-final">Final</span><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Facebook post — announce the directory is coming</div>
+          <div class="task-desc">"Pāpāmoa is getting its own local directory." Simple teaser. Link to index.html. Pin to top of page. This is post #1.</div>
+          <div class="task-tags"><span class="task-tag tag-content">Content</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
-      <div class="task" data-tags="final tech">
-        <div class="task-check"></div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Upgrade image hosting to Cloudflare R2</div>
-          <div class="task-desc">When repo approaches 1GB. Per-listing image folders move to R2. No code change beyond updating image src paths.</div>
-          <div class="task-tags"><span class="ttag ttag-final">Final</span><span class="ttag ttag-tech">Tech</span></div>
+          <div class="task-title">Join &amp; post in Pāpāmoa community Facebook groups</div>
+          <div class="task-desc">Papamoa Beach Community, Papamoa Mums &amp; Dads, Papamoa Noticeboard etc. Share useful articles. Don't spam — be genuinely helpful. Drive traffic before you have organic followers.</div>
+          <div class="task-tags"><span class="task-tag tag-content">Content</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="empty-state" id="empty-state">No tasks match that filter.</div>
+  <!-- 8. FINAL STEPS (new) -->
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">🎨 8. Final Steps — Design, Pricing &amp; Verification Pass <span class="new-badge">New</span></div>
+      <div class="ts-meta"><span class="ts-count">0 / 4</span><span class="ts-priority priority-last">Run last</span></div>
+    </div>
+    <div class="task-list">
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Upgrade all pages — consistent CSS, design system, graphics</div>
+          <div class="task-desc">Final pass to bring every page up to the confirmed design system: Figtree body, Playfair Display headings, ocean/sand/dune palette. No legacy CSS, no old colour variables, no broken layouts. Do this after all content and feature work is complete.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Audit all pages for correct pricing and tier references</div>
+          <div class="task-desc">Silver $599+GST/yr, Gold $1,199+GST/yr, Menu Add-On $199+GST/yr, extra Spotlights $99+GST/yr. No $1,200 Gold references. No Bronze as paid product. No sub-pages references anywhere.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Check all internal links work across every page</div>
+          <div class="task-desc">Nav links, CTA buttons, cross-links between articles and listings, footer links. No dead "#" links. No /slug paths that should be /articles/slug or /listings/slug. No old /post-call-landing.html references.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Verify all Web3Forms automations fire correctly on GitHub Pages</div>
+          <div class="task-desc">Submit a test from every active form type on the live GitHub Pages domain (not in preview). Confirm email receipt at jkbrownnz@gmail.com for each. Forms: placeholder listing enquiry, sales/landing.html, main-lander.html visibility form, client verification form.</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QA CHECKLIST -->
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">✅ 9. Pre-Launch QA Checklist</div>
+      <div class="ts-meta"><span class="ts-priority priority-last">Run last</span></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:18px;">Run this sweep across every page in the repo before the client demo. Aim for a single focused QA session — not piecemeal fixes.</p>
+    <div class="qa-grid">
+      <div class="qa-item"><div class="qa-icon">🎨</div><div class="qa-body"><h4>CSS &amp; Design System</h4><p>Figtree + Playfair Display loading. All colour variables correct (--navy, --ocean, --sand, --dune, --gold). No broken layouts at 375px, 768px, 1280px.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">🔗</div><div class="qa-body"><h4>Internal Links</h4><p>No /slug links — all should be /articles/slug, /listings/slug etc. No dead "advertise", "claim", or "Home" links. Nav brand link goes to /.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">🖼️</div><div class="qa-body"><h4>Images &amp; Media</h4><p>No broken image tags. Hero images load. Logos render at correct size. No placeholder image paths from templates that weren't replaced.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">🖊</div><div class="qa-body"><h4>Editorial Voice</h4><p>Spot-check 10 pages. No "we/us/our" in listing copy. No "contact us" — all should be "call them / visit them". Macron on Pāpāmoa. No em dashes.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">📊</div><div class="qa-body"><h4>Forms &amp; APIs</h4><p>Web3Forms: submit a test from each active form type on GitHub Pages. Check email receipt. Cloudflare Worker: live test via PPP search checker.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">📱</div><div class="qa-body"><h4>Mobile Rendering</h4><p>Every page tested on iPhone SE (375px). Two-col layouts collapse to single col. Tables scroll horizontally. No horizontal overflow. Nav wraps cleanly.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">🔍</div><div class="qa-body"><h4>SEO Basics</h4><p>Every page has a unique title tag. Meta description present. No duplicate H1s. noindex only on admin/sales pages. Sitemap reflects current repo state.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">🔴</div><div class="qa-body"><h4>Accuracy &amp; Dates</h4><p>Mauao closure status correct (fully closed, April 2026). Pāpāmoa Hills track status correct. Mayor name correct (Mahé Drysdale). AIMS Games dates (5–11 Sep 2026).</p></div></div>
+      <div class="qa-item"><div class="qa-icon">💰</div><div class="qa-body"><h4>Pricing Accuracy</h4><p>Silver $599+GST/yr. Gold $1,199+GST/yr. Menu Add-On $199+GST/yr. Extra Spotlights $99+GST/yr. No $1,200 references. No sub-pages. No Bronze as paid product.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">⚡</div><div class="qa-body"><h4>Security</h4><p>Claude API key rotated in Cloudflare Worker. Admin password changed in admin/upload.html. No API keys hardcoded in any HTML file. CRM dashboard API routed through Worker proxy.</p></div></div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    Papamoa.info internal use only &nbsp;·&nbsp; PlainBlack Creative &nbsp;·&nbsp; Updated April 2026
+  </div>
 
 </div>
 
-<footer class="site-footer">
-  Papamoa.info internal use only &nbsp;&middot;&nbsp;
-  <a href="/">Site Index</a> &nbsp;&middot;&nbsp;
-  <a href="/pricing-master.html">Pricing Master</a> &nbsp;&middot;&nbsp;
-  PlainBlack Creative &nbsp;&middot;&nbsp; Updated April 2026
-</footer>
-
 <script>
-  let activeTab = 'all';
-
-  function filterTab(tab, btn) {
-    activeTab = tab;
-    document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    applyFilters();
-  }
-
-  function applyFilters() {
-    const q = document.getElementById('search-input').value.toLowerCase();
-    const tasks = document.querySelectorAll('.task');
-    let visible = 0;
-
-    tasks.forEach(task => {
-      const tags = task.dataset.tags || '';
-      const title = task.querySelector('.task-title')?.textContent.toLowerCase() || '';
-      const desc = task.querySelector('.task-desc')?.textContent.toLowerCase() || '';
-      const isDone = task.classList.contains('done');
-
-      const matchTab =
-        activeTab === 'all' ? true :
-        activeTab === 'done' ? isDone :
-        activeTab === 'pending' ? !isDone :
-        tags.includes(activeTab);
-
-      const matchSearch = !q || title.includes(q) || desc.includes(q) || tags.includes(q);
-
-      if (matchTab && matchSearch) {
-        task.classList.remove('hidden');
-        visible++;
-      } else {
-        task.classList.add('hidden');
-      }
-    });
-
-    document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    const all = document.querySelectorAll('.task');
-    const done = document.querySelectorAll('.task.done');
-    document.getElementById('stat-total').textContent = all.length;
-    document.getElementById('stat-done').textContent = done.length;
-    document.getElementById('stat-pending').textContent = all.length - done.length;
-  });
+function toggle(el) {
+  el.classList.toggle('done');
+  var key = 'task-' + Array.from(document.querySelectorAll('.task-check')).indexOf(el);
+  localStorage.setItem(key, el.classList.contains('done') ? '1' : '');
+}
+document.querySelectorAll('.task-check').forEach(function(el, i) {
+  if (localStorage.getItem('task-' + i) === '1') el.classList.add('done');
+});
 </script>
-
 </body>
 </html>
