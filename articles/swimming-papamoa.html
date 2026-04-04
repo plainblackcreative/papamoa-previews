@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swimming in Pāpāmoa — Beach, Pools, Water Holes &amp; Pool Laws | Papamoa.info</title>
+  <meta name="description" content="Where to swim in Pāpāmoa — beach guide, freshwater swimming holes nearby, public pools, and complete guide to residential pool &amp; spa laws for Tauranga homeowners.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0;
+      --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E;
+      --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A;
+      --ocean:#1A7ABE; --teal:#2A9A8A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
+    a { color: var(--blue); }
+
+    .site-nav { background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
+    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
+
+    .page-hero { background: linear-gradient(135deg, #0D2A40 0%, #1A3A55 50%, #0D3A2A 100%); padding: 44px 24px 40px; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; top: -60px; right: -80px; width: 360px; height: 360px; background: radial-gradient(circle, rgba(58,171,222,0.12) 0%, transparent 65%); pointer-events: none; }
+    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--teal), var(--lime)); }
+    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 10px; }
+    .page-hero h1 em { font-style: italic; color: var(--blue); }
+    .hero-sub { font-size: 0.92rem; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; margin-bottom: 18px; }
+    .hero-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hero-tab { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); padding: 5px 12px; border-radius: 4px; cursor: pointer; text-decoration: none; transition: all 0.15s; }
+    .hero-tab:hover { color: #fff; background: rgba(255,255,255,0.12); }
+
+    .page-wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 80px; }
+    .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+    .main-col { min-width: 0; }
+    .side-col { display: flex; flex-direction: column; gap: 18px; }
+
+    .section { margin-bottom: 40px; scroll-margin-top: 16px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .body-text { font-size: 0.9rem; color: var(--body); line-height: 1.75; margin-bottom: 14px; }
+
+    /* SWIM SPOT CARDS */
+    .swim-card { background: var(--white); border: 1px solid var(--border); border-radius: 11px; overflow: hidden; margin-bottom: 14px; }
+    .swim-card.featured { border-color: rgba(58,171,222,0.4); }
+    .sc-header { display: flex; gap: 14px; padding: 16px; border-bottom: 1px solid var(--border); align-items: flex-start; }
+    .sc-emoji { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+    .sc-meta { flex: 1; }
+    .sc-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .sc-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 4px; }
+    .sc-tag { font-size: 0.6rem; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
+    .tag-beach { background: rgba(58,171,222,0.1); color: var(--blue); border: 1px solid rgba(58,171,222,0.2); }
+    .tag-fresh { background: rgba(42,154,138,0.1); color: var(--teal); border: 1px solid rgba(42,154,138,0.2); }
+    .tag-pool { background: rgba(43,63,92,0.1); color: var(--navy); border: 1px solid rgba(43,63,92,0.2); }
+    .tag-patrolled { background: rgba(125,193,67,0.1); color: #3A8020; border: 1px solid rgba(125,193,67,0.2); }
+    .tag-drive { background: rgba(200,150,42,0.1); color: var(--gold); border: 1px solid rgba(200,150,42,0.2); }
+    .tag-warning { background: rgba(232,52,74,0.08); color: var(--coral); border: 1px solid rgba(232,52,74,0.18); }
+    .sc-dist { font-size: 0.73rem; color: var(--muted); }
+    .sc-body { padding: 14px 16px; font-size: 0.86rem; color: var(--body); line-height: 1.7; }
+
+    /* POOL LAW RULES */
+    .rule-block { background: var(--white); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+    .rule-header { display: flex; gap: 12px; align-items: center; padding: 13px 16px; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, #F8FBFF, #EFF5FC); }
+    .rule-num { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .rule-title { font-weight: 700; font-size: 0.92rem; color: var(--navy); }
+    .rule-body { padding: 12px 16px; font-size: 0.84rem; color: var(--body); line-height: 1.7; }
+    .rule-body a { color: var(--blue); }
+
+    /* SEASONAL CALENDAR */
+    .season-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .season-card { border-radius: 9px; padding: 14px; }
+    .season-summer { background: linear-gradient(135deg, #FFF8E8, #FFF0C8); border: 1px solid rgba(200,150,42,0.25); }
+    .season-autumn { background: linear-gradient(135deg, #FEF0E8, #FDDCC8); border: 1px solid rgba(232,100,42,0.2); }
+    .season-winter { background: linear-gradient(135deg, #EBF5FB, #D8EEF8); border: 1px solid rgba(58,171,222,0.2); }
+    .season-spring { background: linear-gradient(135deg, #EAF7EE, #D5F0DC); border: 1px solid rgba(125,193,67,0.25); }
+    .season-name { font-weight: 800; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+    .season-summer .season-name { color: #8A5A00; }
+    .season-autumn .season-name { color: #7A3800; }
+    .season-winter .season-name { color: #1A4060; }
+    .season-spring .season-name { color: #2A6030; }
+    .season-months { font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
+    .season-items { display: flex; flex-direction: column; gap: 5px; }
+    .season-item { font-size: 0.79rem; color: var(--body); display: flex; gap: 7px; line-height: 1.45; }
+    .season-item::before { content: '›'; font-weight: 700; flex-shrink: 0; }
+    .season-summer .season-item::before { color: var(--gold); }
+    .season-autumn .season-item::before { color: #D07030; }
+    .season-winter .season-item::before { color: var(--blue); }
+    .season-spring .season-item::before { color: var(--lime); }
+
+    /* TIPS */
+    .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .tip-card { background: var(--white); border: 1px solid var(--border); border-radius: 9px; padding: 14px; }
+    .tip-icon { font-size: 1.2rem; margin-bottom: 6px; }
+    .tip-title { font-weight: 700; font-size: 0.86rem; color: var(--navy); margin-bottom: 5px; }
+    .tip-text { font-size: 0.79rem; color: var(--muted); line-height: 1.55; }
+
+    /* INFO ROWS */
+    .info-rows { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+    .info-row { display: flex; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+    .info-row:last-child { border-bottom: none; }
+    .ir-label { font-weight: 700; color: var(--navy); min-width: 120px; font-size: 0.78rem; flex-shrink: 0; }
+    .ir-val { color: var(--muted); line-height: 1.5; }
+    .ir-val a { color: var(--blue); text-decoration: none; }
+
+    /* ALERTS */
+    .alert-note { border-radius: 8px; padding: 12px 16px; font-size: 0.83rem; line-height: 1.6; margin-bottom: 16px; display: flex; gap: 10px; }
+    .alert-blue { background: #EBF5FB; border-left: 4px solid var(--blue); color: #1A4060; }
+    .alert-yellow { background: #FFF8E8; border-left: 4px solid var(--gold); color: #5A3800; }
+    .alert-red { background: #FEF0EE; border-left: 4px solid var(--coral); color: #7A1A10; }
+    .alert-green { background: #EAF7EE; border-left: 4px solid var(--lime); color: #1A5020; }
+
+    /* SIDEBAR */
+    .fact-box { background: var(--navy); border-radius: 10px; padding: 20px; }
+    .fact-box h4 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .fact-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .fact-list li { font-size: 0.82rem; color: rgba(255,255,255,0.7); display: flex; gap: 8px; line-height: 1.5; }
+    .fact-list li::before { content: '›'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+    .fact-list li strong { color: #fff; }
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .link-list { display: flex; flex-direction: column; gap: 8px; }
+    .link-list a { font-size: 0.82rem; font-weight: 600; text-decoration: none; color: var(--blue); }
+    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
+    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+    .ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .ad-inner { padding: 16px; background: var(--white); }
+    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
+    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-decoration: none; }
+
+    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
+    .site-footer a { color: var(--blue); }
+
+    @media (max-width: 720px) {
+      .two-col { grid-template-columns: 1fr; }
+      .side-col { order: -1; }
+      .season-grid, .tips-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb"><a href="/homepage.html">Home</a><span>/</span>Swimming &mdash; P&#257;p&#257;moa</span>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">&#127940; Local Information &middot; P&#257;p&#257;moa</div>
+    <h1>Swimming in <em>P&#257;p&#257;moa</em></h1>
+    <p class="hero-sub">The beach, freshwater swimming holes nearby, public pools and hot pools &mdash; plus a complete guide to residential pool and spa laws for Tauranga homeowners.</p>
+    <div class="hero-tabs">
+      <a href="#beach" class="hero-tab">Beach swimming</a>
+      <a href="#freshwater" class="hero-tab">Swimming holes</a>
+      <a href="#pools" class="hero-tab">Pools &amp; hot pools</a>
+      <a href="#pool-laws" class="hero-tab">Pool laws</a>
+      <a href="#pool-tips" class="hero-tab">Pool care tips</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="two-col">
+    <div class="main-col">
+
+      <!-- ══ BEACH SWIMMING ══ -->
+      <div class="section" id="beach">
+        <div class="section-title">&#127944; Beach Swimming &mdash; P&#257;p&#257;moa</div>
+
+        <div class="swim-card featured">
+          <div class="sc-header">
+            <span class="sc-emoji">&#127944;</span>
+            <div class="sc-meta">
+              <div class="sc-name">P&#257;p&#257;moa Beach</div>
+              <div class="sc-tags"><span class="sc-tag tag-beach">Surf beach</span><span class="sc-tag tag-patrolled">Patrolled in summer</span></div>
+              <div class="sc-dist">&#128205; P&#257;p&#257;moa Beach Road &middot; 14km of ocean beach</div>
+            </div>
+          </div>
+          <div class="sc-body">P&#257;p&#257;moa Beach is a long stretch of ocean-facing sandy beach running from the Kaituna River mouth in the east to Omanu in the west. The beach faces north-east, receives regular surf and is a popular family swimming destination all year. It is best swum in settled weather with lighter winds &mdash; exposed to the north-east in onshore conditions. Surf Life Saving patrols operate at the Domain area during the summer season (October to April). Always swim between the flags when patrols are operating.<br><br>The beach is generally safest in the central zone near the Domain. Be aware of rip currents which can develop in gutters along the beach &mdash; rips run perpendicular to the beach and away from shore. If caught in a rip, float and signal for help rather than swimming against it. Water quality is monitored by Bay of Plenty Regional Council from November to May.</div>
+        </div>
+
+        <div class="swim-card">
+          <div class="sc-header">
+            <span class="sc-emoji">&#127958;</span>
+            <div class="sc-meta">
+              <div class="sc-name">Kaituna River Mouth</div>
+              <div class="sc-tags"><span class="sc-tag tag-beach">Estuary</span><span class="sc-tag tag-warning">Check water quality</span></div>
+              <div class="sc-dist">&#128205; Eastern end of P&#257;p&#257;moa Beach &middot; P&#257;p&#257;moa East</div>
+            </div>
+          </div>
+          <div class="sc-body">The Kaituna River drains a large agricultural catchment and its mouth fluctuates significantly in water quality, particularly after heavy rain. It is a popular fishing and whitebait spot but swimming is not recommended here. The BOP Regional Council monitors this site &mdash; always check current water quality status at <a href="https://www.lawa.org.nz" target="_blank" rel="noopener">lawa.org.nz</a> before entering the water near river mouths or after significant rainfall anywhere.</div>
+        </div>
+
+        <div class="alert-note alert-yellow">
+          <span>&#9928;</span>
+          <div><strong>After heavy rain:</strong> Avoid swimming at P&#257;p&#257;moa Beach for 48&ndash;72 hours after significant rainfall, particularly near the Kaituna River mouth and any stormwater outlets. Rain washes bacteria, sediment and contaminants into the ocean. The BOP Regional Council issues advisories at <a href="https://www.boprc.govt.nz/living-in-the-bay/safe-swimming-areas/" target="_blank" rel="noopener">boprc.govt.nz</a>.</div>
+        </div>
+
+        <div class="info-rows">
+          <div class="info-row"><span class="ir-label">Patrolled season</span><span class="ir-val">October to April (Surf Life Saving NZ) &middot; Always swim between the flags</span></div>
+          <div class="info-row"><span class="ir-label">Water quality</span><span class="ir-val">Monitored Nov&ndash;May by BOP Regional Council &middot; <a href="https://www.lawa.org.nz" target="_blank" rel="noopener">Check lawa.org.nz</a></span></div>
+          <div class="info-row"><span class="ir-label">Rip awareness</span><span class="ir-val">Rips present along gutters &mdash; if caught, float and signal &middot; <a href="https://www.watersafety.org.nz" target="_blank" rel="noopener">watersafety.org.nz</a></span></div>
+          <div class="info-row"><span class="ir-label">After rain</span><span class="ir-val">Avoid swimming 48&ndash;72 hours after heavy rain near river mouths &amp; drains</span></div>
+          <div class="info-row"><span class="ir-label">Facilities</span><span class="ir-val">Toilets, showers, BBQs at the Domain &middot; Parking along beach access points</span></div>
+        </div>
+      </div>
+
+      <!-- ══ FRESHWATER ══ -->
+      <div class="section" id="freshwater">
+        <div class="section-title">&#127807; Freshwater Swimming Holes Near P&#257;p&#257;moa</div>
+        <p class="body-text">P&#257;p&#257;moa has no freshwater swimming spots within the suburb itself &mdash; the beach is the local swim spot. But the wider Bay of Plenty has some excellent freshwater options within a 30&ndash;60 minute drive.</p>
+
+        <div class="swim-card featured">
+          <div class="sc-header">
+            <span class="sc-emoji">&#127739;</span>
+            <div class="sc-meta">
+              <div class="sc-name">McLaren Falls &amp; Pori Pori Swimming Hole</div>
+              <div class="sc-tags"><span class="sc-tag tag-fresh">Freshwater</span><span class="sc-tag tag-drive">20 min drive</span></div>
+              <div class="sc-dist">&#128205; McLaren Falls Road, Lower Kaimai &middot; ~20 min from P&#257;p&#257;moa</div>
+            </div>
+          </div>
+          <div class="sc-body">McLaren Falls Park is the closest popular freshwater swimming destination to P&#257;p&#257;moa. The pools beneath and above the bridge are a local favourite in summer. The park has picnic tables, BBQs, toilets, a caf&eacute; (Falls Caf&eacute;), and one of NZ&rsquo;s best botanical tree collections. The Pori Pori swimming hole is in the lower Kaimai ranges a short drive away &mdash; a magical spot for family picnics.<br><br><strong>Important:</strong> Manawa Energy releases water from the McLaren Falls Dam over summer for hydro-electric generation. It is not safe to swim before or during a water release as river levels rise rapidly. Check the Manawa Energy website for scheduled release dates before visiting.</div>
+        </div>
+
+        <div class="swim-card">
+          <div class="sc-header">
+            <span class="sc-emoji">&#129707;</span>
+            <div class="sc-meta">
+              <div class="sc-name">Aongatete Swimming Holes</div>
+              <div class="sc-tags"><span class="sc-tag tag-fresh">Freshwater</span><span class="sc-tag tag-drive">45 min drive</span></div>
+              <div class="sc-dist">&#128205; Wright Road off SH2, near Katikati &middot; ~45 min from P&#257;p&#257;moa</div>
+            </div>
+          </div>
+          <div class="sc-body">A 30-minute easy bush walk along the Aongatete Link Track leads to natural swimming holes in the Aongatete River, with a small waterfall and native bush surroundings. An easy and popular family outing. The track starts from the car park at the end of Wright Road. Rated Easy on AllTrails, 2 miles return, ~1 hour. Best in summer when water levels are lower after dry spells.</div>
+        </div>
+
+        <div class="swim-card">
+          <div class="sc-header">
+            <span class="sc-emoji">&#127947;</span>
+            <div class="sc-meta">
+              <div class="sc-name">Waimarino Adventure Park (Wairoa River)</div>
+              <div class="sc-tags"><span class="sc-tag tag-fresh">Freshwater</span><span class="sc-tag tag-drive">25 min drive</span></div>
+              <div class="sc-dist">&#128205; Wairoa River, Bethlehem &middot; ~25 min from P&#257;p&#257;moa</div>
+            </div>
+          </div>
+          <div class="sc-body">Waimarino Adventure Park on the Wairoa River offers supervised water activities including kayaking, paddle boarding, waterslides and swimming in a safe, managed environment. A good option for families wanting freshwater fun with facilities and supervision. Entry fees apply.</div>
+        </div>
+
+        <div class="swim-card">
+          <div class="sc-header">
+            <span class="sc-emoji">&#128698;</span>
+            <div class="sc-meta">
+              <div class="sc-name">Kaiate Falls (Te Rerekawau)</div>
+              <div class="sc-tags"><span class="sc-tag tag-fresh">Freshwater</span><span class="sc-tag tag-warning">Health warning</span><span class="sc-tag tag-drive">25 min drive</span></div>
+              <div class="sc-dist">&#128205; Near Welcome Bay, Tauranga &middot; ~25 min from P&#257;p&#257;moa</div>
+            </div>
+          </div>
+          <div class="sc-body">Kaiate Falls is a scenic waterfall reserve near Tauranga with beautiful cascading falls into pools below. However, Toi Te Ora Public Health has a <strong>permanent health warning</strong> for this site due to regularly recorded unsafe levels of bacteria. Swimming is not recommended and has not been safe for some time. Worth visiting for the scenery, but do not swim. Check <a href="https://www.lawa.org.nz" target="_blank" rel="noopener">lawa.org.nz</a> for any updated status.</div>
+        </div>
+
+        <div class="alert-note alert-blue">
+          <span>&#128204;</span>
+          <div>Water quality at freshwater swimming spots can change quickly after rain, or due to upstream agricultural activity. Always check <a href="https://www.lawa.org.nz" target="_blank" rel="noopener">lawa.org.nz</a> (Land Air Water Aotearoa) before visiting any freshwater spot &mdash; it shows current water quality status for monitored sites across the Bay of Plenty.</div>
+        </div>
+      </div>
+
+      <!-- ══ PUBLIC POOLS ══ -->
+      <div class="section" id="pools">
+        <div class="section-title">&#127946; Public Pools &amp; Hot Pools</div>
+
+        <div class="swim-card featured">
+          <div class="sc-header">
+            <span class="sc-emoji">&#127946;</span>
+            <div class="sc-meta">
+              <div class="sc-name">Baywave Aquatic Centre</div>
+              <div class="sc-tags"><span class="sc-tag tag-pool">Indoor pool</span><span class="sc-tag tag-drive">20 min drive</span></div>
+              <div class="sc-dist">&#128205; Girven Road, Mount Maunganui &middot; ~20 min from P&#257;p&#257;moa</div>
+            </div>
+          </div>
+          <div class="sc-body">Baywave is the closest full-facility public aquatic centre to P&#257;p&#257;moa. Run by Tauranga City Council, it offers a 50m outdoor pool, a covered 25m pool, learner pools, a hydroslide, spa pools, a gym and sauna. Lap swimming, learn to swim lessons and aqua fitness classes available. Check current hours, pricing and session availability at <a href="https://www.tauranga.govt.nz" target="_blank" rel="noopener">tauranga.govt.nz</a>.</div>
+        </div>
+
+        <div class="swim-card">
+          <div class="sc-header">
+            <span class="sc-emoji">&#9832;</span>
+            <div class="sc-meta">
+              <div class="sc-name">Mount Maunganui Hot Pools</div>
+              <div class="sc-tags"><span class="sc-tag tag-pool">Hot pools</span><span class="sc-tag tag-drive">15 min drive</span></div>
+              <div class="sc-dist">&#128205; Adams Avenue, Mount Maunganui &middot; ~15 min from P&#257;p&#257;moa</div>
+            </div>
+          </div>
+          <div class="sc-body"><strong>Note:</strong> The Mount Maunganui Hot Pools were destroyed in the January 2026 landslide from Mauao and remain closed indefinitely as of April 2026. The Mauao Village and beach are open but the hot pools site has been demolished. Check the Mount Hot Pools website for any updates on redevelopment plans.</div>
+        </div>
+
+        <div class="swim-card">
+          <div class="sc-header">
+            <span class="sc-emoji">&#127960;</span>
+            <div class="sc-meta">
+              <div class="sc-name">Pacific Park Holiday Camp Pools</div>
+              <div class="sc-tags"><span class="sc-tag tag-pool">Private pools</span></div>
+              <div class="sc-dist">&#128205; 1110 P&#257;p&#257;moa Beach Road, P&#257;p&#257;moa</div>
+            </div>
+          </div>
+          <div class="sc-body">Pacific Park has an outdoor hot tub and pool facilities available to guests. Not open to the general public, but available if you&rsquo;re staying at the park.</div>
+        </div>
+      </div>
+
+      <!-- ══ POOL LAWS ══ -->
+      <div class="section" id="pool-laws">
+        <div class="section-title">&#128274; Residential Pool &amp; Spa Laws</div>
+        <p class="body-text">If you have or are planning a pool or spa at your P&#257;p&#257;moa home, you need to understand your legal obligations. Pool safety law in New Zealand is governed by the Building Act 2004 as amended by the Building (Pools) Amendment Act 2016, which replaced the old Fencing of Swimming Pools Act on 1 January 2017. The relevant Building Code clause is <strong>F9 &mdash; Restricting access to residential pools</strong>.</p>
+
+        <div class="rule-block">
+          <div class="rule-header"><div class="rule-num">1</div><div class="rule-title">Who the law applies to</div></div>
+          <div class="rule-body">The law applies to <strong>any residential pool capable of being filled to a depth of 400mm or more</strong> &mdash; including swimming pools, spa pools, above-ground pools, and inflatable pools. It also applies to hot tubs. Garden ponds are generally excluded. The duty applies to the pool owner, property owner, and any person with the pool on their property (including tenants and landlords).</div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-header"><div class="rule-num">2</div><div class="rule-title">Barrier requirement</div></div>
+          <div class="rule-body">Every residential pool must have a <strong>physical barrier that restricts unsupervised access by children under 5 years of age</strong>. This is the core requirement. The barrier must fully enclose the immediate pool area. A boundary fence alone is not sufficient &mdash; there must be a pool-specific barrier, though a compliant boundary fence can form part of it under certain conditions.<br><br>
+          Key barrier specifications under F9/AS1:<br><br>
+          &bull; Minimum height: <strong>1200mm</strong> for barriers not on a boundary<br>
+          &bull; Boundary barriers: minimum <strong>1800mm</strong> high (measured on pool side)<br>
+          &bull; No openings wider than <strong>100mm</strong> (prevents children squeezing through)<br>
+          &bull; No external features within <strong>760mm</strong> of the top that could assist climbing (plants, furniture, BBQs, heat pumps)<br>
+          &bull; Gates must be <strong>self-closing and self-latching</strong> from any open position<br>
+          &bull; Gate latches must be on the pool side, unreachable from outside, or at least 1500mm from the ground<br>
+          &bull; No gate can be propped or held open<br>
+          &bull; Doors in buildings forming part of the barrier must be self-closing, self-latching, with a locking device at least 1500mm above floor level</div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-header"><div class="rule-num">3</div><div class="rule-title">Spa pools &amp; hot tubs &mdash; the cover option</div></div>
+          <div class="rule-body">Small heated pools (spa pools and hot tubs) with a water surface area of <strong>5m&sup2; or less</strong> have an alternative compliance option under F9/AS2. If the spa pool walls are at least <strong>760mm high</strong> above the adjacent ground, the walls are non-climbable, and there are no climbing aids within 760mm &mdash; then a <strong>lockable safety cover</strong> may be used instead of a surrounding fence. The cover must be lockable with straps and padlocks and must comply with specific load and cover requirements. Pools using a compliant safety cover are <strong>exempt from the 3-yearly inspection requirement</strong>. If the spa pool exceeds 5m&sup2;, a full fence barrier is required.</div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-header"><div class="rule-num">4</div><div class="rule-title">Building consent requirements</div></div>
+          <div class="rule-body">A <strong>building consent is required</strong> for the installation of a swimming pool and its fencing/barrier. This applies even if the pool itself doesn&rsquo;t require a consent. Exception: small heated pools (spa pools 5m&sup2; or less with walls 760mm+ high) are exempt from needing a building consent for their safety cover. Contact Tauranga City Council&rsquo;s building team before installing any pool or pool barrier to confirm what consents are required for your specific situation.</div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-header"><div class="rule-num">5</div><div class="rule-title">3-yearly inspections in Tauranga</div></div>
+          <div class="rule-body">The Building Act requires all residential swimming pools (and non-exempt spa pools) to be <strong>inspected at least once every three years</strong> by either Tauranga City Council or an Independently Qualified Pool Inspector (IQPI). In Tauranga, the initial inspection is included as a targeted rate in your property rates. If the barrier fails, a re-inspection fee applies. As at 2025, <strong>the re-inspection fee in Tauranga is $174.90</strong> and the fine for a non-compliant pool barrier is <strong>$500</strong>.<br><br>
+          You can use a private IQPI instead of the council. MBIE maintains a national register of IQPIs at <a href="https://www.mbie.govt.nz" target="_blank" rel="noopener">mbie.govt.nz</a>. If you use an IQPI, notify Tauranga City Council so their records can be updated. You will receive a letter from TCC when your inspection is due.</div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-header"><div class="rule-num">6</div><div class="rule-title">Common inspection failures</div></div>
+          <div class="rule-body">The most common reasons pool barriers fail inspection in Tauranga:<br><br>
+          &bull; Gates that don&rsquo;t fully self-close and self-latch from all opening angles<br>
+          &bull; New landscaping or plants that have grown into climbing aids near the fence<br>
+          &bull; BBQs, outdoor furniture or heat pump units placed too close to the fence<br>
+          &bull; Latches that can be reached through or over the gate from outside<br>
+          &bull; House doors accessing the pool area without self-closing hardware or alarms<br>
+          &bull; Pool equipment (ladders, steps) left accessible near the fence line<br>
+          &bull; Gaps in fencing that have widened over time beyond 100mm</div>
+        </div>
+
+        <div class="alert-note alert-red">
+          <span>&#128680;</span>
+          <div><strong>Responsibility is shared.</strong> Pool owners, property owners, landlords and tenants all carry legal responsibility under the Building Act 2004. If you rent a property with a pool, both you and your landlord have duties. Failure to comply can result in a Notice to Fix and fines. Always ensure the barrier is maintained &mdash; not just at inspection time.</div>
+        </div>
+
+        <div class="info-rows">
+          <div class="info-row"><span class="ir-label">Legislation</span><span class="ir-val">Building Act 2004 &mdash; Clause F9 &middot; Building (Pools) Amendment Act 2016</span></div>
+          <div class="info-row"><span class="ir-label">Depth threshold</span><span class="ir-val">Any pool capable of 400mm depth or more must have a barrier</span></div>
+          <div class="info-row"><span class="ir-label">Inspection cycle</span><span class="ir-val">Every 3 years by TCC or private IQPI</span></div>
+          <div class="info-row"><span class="ir-label">TCC re-inspection fee</span><span class="ir-val">$174.90 (as at 2025)</span></div>
+          <div class="info-row"><span class="ir-label">Non-compliance fine</span><span class="ir-val">$500</span></div>
+          <div class="info-row"><span class="ir-label">TCC pool info</span><span class="ir-val"><a href="https://www.tauranga.govt.nz/building-and-development/building-and-renovations/inspections-and-approvals/swimming-pool-safety-barriers" target="_blank" rel="noopener">tauranga.govt.nz &mdash; pool safety barriers &#8599;</a></span></div>
+          <div class="info-row"><span class="ir-label">MBIE guidance</span><span class="ir-val"><a href="https://www.building.govt.nz/building-code-compliance/f-safety-of-users/pool-safety" target="_blank" rel="noopener">building.govt.nz &mdash; pool safety &#8599;</a></span></div>
+        </div>
+      </div>
+
+      <!-- ══ POOL CARE TIPS ══ -->
+      <div class="section" id="pool-tips">
+        <div class="section-title">&#129694; Residential Pool Care &mdash; Bay of Plenty Tips</div>
+        <p class="body-text">P&#257;p&#257;moa&rsquo;s coastal climate is pool-friendly but does present some specific challenges year-round &mdash; from pine pollen in spring to high UV in summer and algae risk in autumn. Here is what local pool owners should know by season.</p>
+
+        <div class="season-grid">
+          <div class="season-card season-summer">
+            <div class="season-name">&#9728;&#65039; Summer</div>
+            <div class="season-months">December &mdash; February</div>
+            <div class="season-items">
+              <div class="season-item">Peak UV &mdash; chlorine burns off faster; test and dose more frequently (every 2&ndash;3 days)</div>
+              <div class="season-item">High bather load &mdash; increase sanitiser after heavy pool use</div>
+              <div class="season-item">Salt pools: check cell output &mdash; heat raises chlorine demand</div>
+              <div class="season-item">Shocking the pool weekly prevents chloramines from building up in hot weather</div>
+              <div class="season-item">Stabiliser (cyanuric acid) protects chlorine from UV &mdash; keep at 30&ndash;50 ppm</div>
+              <div class="season-item">Algae risk highest &mdash; maintain free chlorine above 2ppm</div>
+            </div>
+          </div>
+          <div class="season-card season-autumn">
+            <div class="season-name">&#127810; Autumn</div>
+            <div class="season-months">March &mdash; May</div>
+            <div class="season-items">
+              <div class="season-item">Leaf fall and organic matter raise the demand for sanitiser &mdash; empty skimmer baskets more often</div>
+              <div class="season-item">Rain events dilute pool chemistry &mdash; test and correct after heavy rain</div>
+              <div class="season-item">Algae can still develop in warm Bay of Plenty autumns; don&rsquo;t relax the chemical regime too early</div>
+              <div class="season-item">Good time for a end-of-summer pool service and filter clean</div>
+              <div class="season-item">Water temp drops &mdash; consider a heat pump to extend the season</div>
+            </div>
+          </div>
+          <div class="season-card season-winter">
+            <div class="season-name">&#10052; Winter</div>
+            <div class="season-months">June &mdash; August</div>
+            <div class="season-items">
+              <div class="season-item">Cooler water slows algae growth &mdash; reduce chemical doses but don&rsquo;t stop treating</div>
+              <div class="season-item">Run your pump at least 4&ndash;6 hours per day to maintain circulation</div>
+              <div class="season-item">Check water balance monthly even if not swimming</div>
+              <div class="season-item">BOP winters are mild &mdash; P&#257;p&#257;moa pools rarely get cold enough to require full winterisation</div>
+              <div class="season-item">Good time for equipment maintenance, filter media replacement, and fence/barrier checks</div>
+            </div>
+          </div>
+          <div class="season-card season-spring">
+            <div class="season-name">&#127803; Spring</div>
+            <div class="season-months">September &mdash; November</div>
+            <div class="season-items">
+              <div class="season-item"><strong>Pine pollen season:</strong> P&#257;p&#257;moa gets significant yellow pine pollen from mid-September. It floats on the surface and blocks skimmer baskets. Skim and clean filters more frequently during pollen season</div>
+              <div class="season-item">Pollen can lower pH &mdash; test and adjust pH after pollen events</div>
+              <div class="season-item">Algae risk rises as water warms in October &mdash; shock the pool before the swimming season starts</div>
+              <div class="season-item">Check your pool fence/barrier before the swim season &mdash; spot issues before the inspection</div>
+              <div class="season-item">Service heat pump or solar heating before summer demand rises</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title" style="font-size:1rem; margin-top:8px">General Pool Care Tips</div>
+        <div class="tips-grid">
+          <div class="tip-card">
+            <div class="tip-icon">&#9879;&#65039;</div>
+            <div class="tip-title">Test twice a week in summer</div>
+            <div class="tip-text">Test free chlorine, pH and alkalinity at least twice weekly in summer. Aim for free chlorine 2&ndash;3 ppm, pH 7.2&ndash;7.6, total alkalinity 80&ndash;120 ppm.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">&#127774;</div>
+            <div class="tip-title">Run the pump long enough</div>
+            <div class="tip-text">In P&#257;p&#257;moa&rsquo;s hot summers, run your pump at least 8 hours per day. Every hour of pump runtime turns the water over and distributes chemicals. Short pump cycles are the #1 cause of water quality problems.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">&#127803;</div>
+            <div class="tip-title">Pollen season (Sept&ndash;Oct)</div>
+            <div class="tip-text">Pine pollen blankets P&#257;p&#257;moa each spring. It won&rsquo;t harm the water but clogs filters fast. Skim daily during pollen season, backwash weekly and check pH &mdash; pollen can push it down.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">&#127783;&#65039;</div>
+            <div class="tip-title">After heavy rain</div>
+            <div class="tip-text">Heavy BOP rain events dilute pool water and can introduce organic matter and bacteria. Test immediately after rain and shock the pool. Check that pool equipment wasn&rsquo;t flooded or damaged.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">&#129302;</div>
+            <div class="tip-title">Algae prevention</div>
+            <div class="tip-text">Green algae blooms in P&#257;p&#257;moa pools in warm periods. Prevention is far easier than cure. Maintain free chlorine above 2 ppm, brush walls weekly, run the pump adequately and add an algaecide monthly as a preventative.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">&#127774;</div>
+            <div class="tip-title">Saltwater pools</div>
+            <div class="tip-text">Salt chlorinators are popular in P&#257;p&#257;moa&rsquo;s beachside climate. In summer heat the cell works harder &mdash; check cell output and salt levels monthly. Rinse the cell with acid annually to remove calcium buildup from hard tap water.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">&#128274;</div>
+            <div class="tip-title">Fence maintenance year-round</div>
+            <div class="tip-text">Check gates self-close and latch properly every month. Prune plants within 760mm of the top of the fence &mdash; they can grow into climbing aids between inspections. Check hinges and posts haven&rsquo;t shifted over winter.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">&#128107;</div>
+            <div class="tip-title">Coastal pool care</div>
+            <div class="tip-text">P&#257;p&#257;moa&rsquo;s salt air is mild but watch for corrosion on equipment and fittings. Rinse pool equipment down periodically and inspect light fittings, pump lids and fence posts for corrosion annually.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══ SIDEBAR ══ -->
+    <div class="side-col">
+
+      <div class="fact-box">
+        <h4>&#128204; Swimming quick ref</h4>
+        <ul class="fact-list">
+          <li><strong>P&#257;p&#257;moa Beach</strong> &mdash; patrolled Oct&ndash;Apr</li>
+          <li>Always swim <strong>between the flags</strong></li>
+          <li>Avoid swimming <strong>48&ndash;72h after rain</strong></li>
+          <li><strong>McLaren Falls</strong> &mdash; best freshwater, 20 min</li>
+          <li><strong>Kaiate Falls</strong> &mdash; permanent health warning, do not swim</li>
+          <li><strong>Baywave</strong> &mdash; public pool, Mt Maunganui</li>
+          <li><strong>Mt Hot Pools</strong> &mdash; closed (Jan 2026 landslide)</li>
+          <li>Check water quality: <strong>lawa.org.nz</strong></li>
+        </ul>
+      </div>
+
+      <div class="ad-spot">
+        <div class="ad-label">Sponsored</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>&#127946; Pool sales &amp; installation &mdash; P&#257;p&#257;moa</p>
+            <a href="/index.html">Claim this spot &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-spot">
+        <div class="ad-label">Sponsored</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>&#9879;&#65039; Pool servicing &amp; chemicals</p>
+            <a href="/index.html">Claim this spot &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="fact-box" style="background:linear-gradient(135deg,#1A2A1A,#2A3A20)">
+        <h4 style="color:var(--lime)">&#128274; Pool law snapshot</h4>
+        <ul class="fact-list">
+          <li><strong>400mm+</strong> deep &rarr; barrier required</li>
+          <li>Barrier height: min <strong>1200mm</strong></li>
+          <li>Gates: <strong>self-closing &amp; self-latching</strong></li>
+          <li>Inspect every <strong>3 years</strong></li>
+          <li>Spa &le;5m&sup2;: lockable cover OK</li>
+          <li>Non-compliance fine: <strong>$500</strong></li>
+          <li>Re-inspection fee TCC: <strong>$174.90</strong></li>
+        </ul>
+      </div>
+
+      <div class="ad-spot">
+        <div class="ad-label">Sponsored</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>&#128274; Pool fencing &amp; safety barriers</p>
+            <a href="/index.html">Claim this spot &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">&#128279; Useful links</div>
+        <div class="link-list">
+          <a href="https://www.lawa.org.nz" target="_blank" rel="noopener">LAWA &mdash; check water quality &#8599;</a>
+          <a href="https://www.boprc.govt.nz/living-in-the-bay/safe-swimming-areas/" target="_blank" rel="noopener">BOP safe swimming areas &#8599;</a>
+          <a href="https://www.watersafety.org.nz" target="_blank" rel="noopener">Water Safety NZ &#8599;</a>
+          <a href="https://www.tauranga.govt.nz/building-and-development/building-and-renovations/inspections-and-approvals/swimming-pool-safety-barriers" target="_blank" rel="noopener">TCC pool safety barriers &#8599;</a>
+          <a href="https://www.building.govt.nz/building-code-compliance/f-safety-of-users/pool-safety" target="_blank" rel="noopener">MBIE pool safety &mdash; Clause F9 &#8599;</a>
+          <a href="https://www.manawa.co.nz" target="_blank" rel="noopener">Manawa dam releases (McLaren Falls) &#8599;</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">&#128279; Related pages</div>
+        <div class="link-list">
+          <a href="/articles/surf-tides.html">Surf &amp; Tides &mdash; P&#257;p&#257;moa</a>
+          <a href="/articles/gordon-spratt-reserve.html">Gordon Spratt Reserve</a>
+          <a href="/articles/parks-playgrounds.html">Parks &amp; Playgrounds</a>
+          <a href="/articles/walks-tracks.html">Walks &amp; Tracks</a>
+          <a href="/articles/kids-birthday-parties.html">Kids Birthday Parties</a>
+          <a href="/articles/water-rates-papamoa.html">Water &amp; Rates</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="/homepage.html">Papamoa.info</a> &mdash; The local directory for P&#257;p&#257;moa, Bay of Plenty, New Zealand. Pool law information is a general guide only &mdash; always verify current requirements with Tauranga City Council and MBIE. Water quality information sourced from BOP Regional Council and LAWA. Always check current conditions before swimming.
+</footer>
+
+</body>
+</html>
