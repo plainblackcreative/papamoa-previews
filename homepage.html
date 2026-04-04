@@ -57,7 +57,6 @@
     .search-suggestions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
     .search-suggestion { font-size: 0.74rem; font-weight: 600; color: var(--muted); background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 3px 11px; cursor: pointer; transition: all 0.15s; font-family: 'Figtree', sans-serif; }
     .search-suggestion:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
-    /* Search results dropdown */
     .search-results { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--white); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); z-index: 50; max-height: 340px; overflow-y: auto; display: none; }
     .search-results.visible { display: block; }
     .sr-group-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 10px 14px 4px; }
@@ -154,7 +153,6 @@
     .chip { font-size: 0.75rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; white-space: nowrap; font-family: 'Figtree', sans-serif; transition: all 0.15s; }
     .chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
 
-    /* SPOTLIGHT AD IN SECTION */
     .section-spotlight { background: linear-gradient(135deg, var(--navy), #1A2A40); border-radius: 10px; padding: 20px; margin-bottom: 22px; }
     .ss-eye { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
     .ss-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
@@ -162,7 +160,6 @@
     .ss-desc { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 12px; }
     .ss-link { display: inline-block; background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; font-size: 0.78rem; font-weight: 700; padding: 8px 16px; border-radius: 5px; text-decoration: none; }
 
-    /* LISTING CARDS */
     .list-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
     .list-head h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); }
     .list-count { font-size: 0.75rem; color: var(--muted); }
@@ -182,7 +179,6 @@
     .l-tag { font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 3px; background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
     .l-card.dim { opacity: 0.55; pointer-events: none; background: var(--bg); }
 
-    /* EMPTY SPOT */
     .empty-spot { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 10px; padding: 18px 20px; text-align: center; margin-bottom: 12px; }
     .empty-spot h3 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
     .empty-spot p { font-size: 0.79rem; color: var(--muted); margin-bottom: 10px; }
@@ -223,7 +219,7 @@
 
 <!-- ── NAV ── -->
 <nav class="site-nav">
-  <a href="/" class="nav-brand">Papamoa<em>.info</em></a>
+  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
   <div class="nav-links">
     <a href="/homepage.html" class="nav-link active">Home</a>
     <a href="/categories/essential-services.html" class="nav-link">Essential Services</a>
@@ -232,6 +228,7 @@
     <a href="/categories/entertainment.html" class="nav-link">Food &amp; Drink</a>
     <a href="/categories/entertainment.html" class="nav-link">Entertainment</a>
     <a href="/categories/shopping.html" class="nav-link">Shopping</a>
+    <a href="/categories/real-estate.html" class="nav-link">Real Estate</a>
   </div>
   <a href="/sales/claim.html" class="nav-cta">List Your Business</a>
 </nav>
@@ -239,8 +236,8 @@
 <!-- ── HERO ── -->
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">Pāpāmoa, Bay of Plenty</div>
-    <h1>Discover Pāpāmoa,<br><em>from the locals who know it</em></h1>
+    <div class="hero-eyebrow">P&#257;p&#257;moa, Bay of Plenty</div>
+    <h1>Discover P&#257;p&#257;moa,<br><em>from the locals who know it</em></h1>
     <p>Every listing written by the directory, not the business. Honest, specific, and built for search.</p>
   </div>
 </div>
@@ -265,10 +262,11 @@
   <div class="search-bar-inner" style="padding-top:0">
     <div class="search-suggestions">
       <span class="search-suggestion" onclick="fillSearch('plumber')">Plumber</span>
-      <span class="search-suggestion" onclick="fillSearch('café')">Café</span>
+      <span class="search-suggestion" onclick="fillSearch('caf&#233;')">Caf&#233;</span>
       <span class="search-suggestion" onclick="fillSearch('accommodation')">Accommodation</span>
       <span class="search-suggestion" onclick="fillSearch('surf')">Surf school</span>
       <span class="search-suggestion" onclick="fillSearch('mechanic')">Mechanic</span>
+      <span class="search-suggestion" onclick="fillSearch('real estate')">Real estate agent</span>
       <span class="search-suggestion" onclick="fillSearch('school')">Schools</span>
       <span class="search-suggestion" onclick="fillSearch('dog')">Dogs</span>
       <span class="search-suggestion" onclick="fillSearch('electrician')">Electrician</span>
@@ -283,7 +281,7 @@
     <div class="section-heading">
       <h2>Browse Categories</h2>
     </div>
-    <p class="section-sub">7 top-level categories, hundreds of sub-categories</p>
+    <p class="section-sub">8 top-level categories, hundreds of sub-categories</p>
     <div class="cat-grid">
       <a href="/categories/essential-services.html" class="cat-card">
         <span class="cat-icon">&#128736;</span>
@@ -341,6 +339,14 @@
         </div>
         <span class="cat-arrow">&#8594;</span>
       </a>
+      <a href="/categories/real-estate.html" class="cat-card">
+        <span class="cat-icon">&#127968;</span>
+        <div class="cat-info">
+          <h3>Real Estate</h3>
+          <p>Buying, selling, market reports, local agent</p>
+        </div>
+        <span class="cat-arrow">&#8594;</span>
+      </a>
     </div>
   </div>
 </div>
@@ -351,7 +357,7 @@
     <div class="section-heading">
       <h2>Spotlight Listings</h2>
     </div>
-    <p class="section-sub" style="margin-bottom:20px">Pāpāmoa&rsquo;s top-rated businesses — editorially selected, one Gold Spotlight per sub-category</p>
+    <p class="section-sub" style="margin-bottom:20px">P&#257;p&#257;moa&rsquo;s top-rated businesses &mdash; editorially selected, one Gold Spotlight per sub-category</p>
     <div class="spotlight-grid">
       <a href="/categories/essential-services.html" class="spot-card">
         <div class="spot-img spot-img-green">&#127947;</div>
@@ -367,8 +373,8 @@
         <span class="spot-badge">&#11088; Gold Spotlight</span>
         <div class="spot-body">
           <div class="spot-name">Hakanini Surf School &amp; Rentals</div>
-          <div class="spot-sub">Pāpāmoa Domain</div>
-          <p class="spot-desc">Pāpāmoa&rsquo;s dedicated surf school. Group and private lessons for all ages, holiday programmes, and board hire from $35.</p>
+          <div class="spot-sub">P&#257;p&#257;moa Domain</div>
+          <p class="spot-desc">P&#257;p&#257;moa&rsquo;s dedicated surf school. Group and private lessons for all ages, holiday programmes, and board hire from $35.</p>
         </div>
       </a>
       <a href="/categories/entertainment.html" class="spot-card">
@@ -376,7 +382,7 @@
         <span class="spot-badge">&#11088; Gold Spotlight</span>
         <div class="spot-body">
           <div class="spot-name">PAP House</div>
-          <div class="spot-sub">Restaurant &amp; Bar, Pāpāmoa Beach Road</div>
+          <div class="spot-sub">Restaurant &amp; Bar, P&#257;p&#257;moa Beach Road</div>
           <p class="spot-desc">The local&rsquo;s living room. Dog-friendly restaurant and bar open seven days with indoor and outdoor seating.</p>
         </div>
       </a>
@@ -385,7 +391,7 @@
         <span class="spot-badge">&#11088; Gold Spotlight</span>
         <div class="spot-body">
           <div class="spot-name">Coastal Autos</div>
-          <div class="spot-sub">Mechanic &amp; WOF, Pāpāmoa</div>
+          <div class="spot-sub">Mechanic &amp; WOF, P&#257;p&#257;moa</div>
           <p class="spot-desc">MTA-approved workshop handling WOFs, servicing, tyres, brakes, auto electrical, and vehicle licensing under one roof.</p>
         </div>
       </a>
@@ -397,7 +403,7 @@
 <div class="stats-band">
   <div class="stats-inner">
     <div class="stat-item">
-      <div class="stat-num">6</div>
+      <div class="stat-num">8</div>
       <div class="stat-label">Top-level Categories</div>
     </div>
     <div class="stat-item">
@@ -415,9 +421,7 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     LOCAL INFO SECTION — NEW
-═══════════════════════════════════════════ -->
+<!-- ── LOCAL INFO SECTION ── -->
 <div class="local-info">
   <div class="local-info-inner">
 
@@ -425,7 +429,34 @@
       <h2>Local Info &amp; Guides</h2>
       <a href="/articles/news-events.html">News &amp; events &rarr;</a>
     </div>
-    <p class="local-info-sub">Everything you need to know about living in and visiting Pāpāmoa — written by the directory, not a tourist board.</p>
+    <p class="local-info-sub">Everything you need to know about living in and visiting P&#257;p&#257;moa &mdash; written by the directory, not a tourist board.</p>
+
+    <!-- PROPERTY & REAL ESTATE — NEW ROW -->
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px">Property &amp; Real Estate</div>
+    <div class="info-grid" style="margin-bottom:20px">
+      <a href="/categories/real-estate.html" class="info-card">
+        <span class="ic-icon">&#127968;</span>
+        <div class="ic-body">
+          <div class="ic-title">Property Market</div>
+          <div class="ic-desc">Monthly market reports, neighbourhood data, median prices and buying &amp; selling guides.</div>
+          <span class="ic-tag ic-tag-updated">March 2026 report live</span>
+        </div>
+      </a>
+      <a href="/categories/real-estate.html#market" class="info-card">
+        <span class="ic-icon">&#128202;</span>
+        <div class="ic-body">
+          <div class="ic-title">March 2026 Market Snapshot</div>
+          <div class="ic-desc">$895k median. 38 homes listed. 29 days avg DOM. Neighbourhood breakdown across Golden Sands, The Lakes, Papamoa Beach and more.</div>
+        </div>
+      </a>
+      <a href="/categories/real-estate.html" class="info-card">
+        <span class="ic-icon">&#128222;</span>
+        <div class="ic-body">
+          <div class="ic-title">Find a Local Agent</div>
+          <div class="ic-desc">One agent exclusively recommended by Papamoa.info. Direct contact, no platform sitting between you and expert local advice.</div>
+        </div>
+      </a>
+    </div>
 
     <!-- ROW 1: Community & People -->
     <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px">Community &amp; People</div>
@@ -440,15 +471,15 @@
       <a href="/articles/maori-history.html" class="info-card">
         <span class="ic-icon">&#127963;</span>
         <div class="ic-body">
-          <div class="ic-title">Māori History</div>
-          <div class="ic-desc">Ngā Pōtiki, Ngāi Te Rangi, Tamapahore Marae and the origins of the name Pāpāmoa.</div>
+          <div class="ic-title">M&#257;ori History</div>
+          <div class="ic-desc">Ng&#257; P&#333;tiki, Ng&#257;i Te Rangi, Tamapahore Marae and the origins of the name P&#257;p&#257;moa.</div>
         </div>
       </a>
       <a href="/articles/local-government.html" class="info-card">
         <span class="ic-icon">&#127963;</span>
         <div class="ic-body">
           <div class="ic-title">Local Government</div>
-          <div class="ic-desc">Mayor Mahé Drysdale, TCC contacts, MP Tom Rutherford. Who represents Pāpāmoa.</div>
+          <div class="ic-desc">Mayor Mah&#233; Drysdale, TCC contacts, MP Tom Rutherford. Who represents P&#257;p&#257;moa.</div>
           <span class="ic-tag ic-tag-updated">Updated Apr 2026</span>
         </div>
       </a>
@@ -456,7 +487,7 @@
         <span class="ic-icon">&#11088;</span>
         <div class="ic-body">
           <div class="ic-title">Notable People</div>
-          <div class="ic-desc">Athletes, artists and public figures with connections to Pāpāmoa.</div>
+          <div class="ic-desc">Athletes, artists and public figures with connections to P&#257;p&#257;moa.</div>
         </div>
       </a>
       <a href="/community/community.html" class="info-card">
@@ -481,8 +512,8 @@
       <a href="/articles/papamoa-hills.html" class="info-card">
         <span class="ic-icon">&#127956;</span>
         <div class="ic-body">
-          <div class="ic-title">Pāpāmoa Hills</div>
-          <div class="ic-desc">Track status, closures and maps. Summerhills Track open — others closed after Jan 2026 landslips.</div>
+          <div class="ic-title">P&#257;p&#257;moa Hills</div>
+          <div class="ic-desc">Track status, closures and maps. Summerhills Track open &mdash; others closed after Jan 2026 landslips.</div>
           <span class="ic-tag ic-tag-updated">Updated Apr 2026</span>
         </div>
       </a>
@@ -490,27 +521,27 @@
         <span class="ic-icon">&#128694;</span>
         <div class="ic-body">
           <div class="ic-title">Walks &amp; Tracks</div>
-          <div class="ic-desc">All walking and cycling tracks in Pāpāmoa — difficulty, dogs, access and directions.</div>
+          <div class="ic-desc">All walking and cycling tracks in P&#257;p&#257;moa &mdash; difficulty, dogs, access and directions.</div>
         </div>
       </a>
       <a href="/articles/parks-playgrounds.html" class="info-card">
         <span class="ic-icon">&#127794;</span>
         <div class="ic-body">
           <div class="ic-title">Parks &amp; Playgrounds</div>
-          <div class="ic-desc">Gordon Spratt Reserve, skate spots, picnic areas and sports fields across Pāpāmoa.</div>
+          <div class="ic-desc">Gordon Spratt Reserve, skate spots, picnic areas and sports fields across P&#257;p&#257;moa.</div>
         </div>
       </a>
       <a href="/articles/gordon-spratt-reserve.html" class="info-card">
         <span class="ic-icon">&#127795;</span>
         <div class="ic-body">
           <div class="ic-title">Gordon Spratt Reserve</div>
-          <div class="ic-desc">Pāpāmoa&rsquo;s main park. Tsunami mound (3,800 capacity), full facilities and event space.</div>
+          <div class="ic-desc">P&#257;p&#257;moa&rsquo;s main park. Tsunami mound (3,800 capacity), full facilities and event space.</div>
         </div>
       </a>
       <a href="/articles/dogs-papamoa.html" class="info-card">
         <span class="ic-icon">&#128054;</span>
         <div class="ic-body">
-          <div class="ic-title">Dogs in Pāpāmoa</div>
+          <div class="ic-title">Dogs in P&#257;p&#257;moa</div>
           <div class="ic-desc">TCC Dog Bylaw, off-leash zones, beach rules, registration and reporting.</div>
         </div>
       </a>
@@ -530,8 +561,8 @@
       <a href="/articles/schools-papamoa.html" class="info-card">
         <span class="ic-icon">&#127979;</span>
         <div class="ic-body">
-          <div class="ic-title">Schools in Pāpāmoa</div>
-          <div class="ic-desc">All 8 schools — primary, secondary, Catholic and Māori immersion. Zones, rolls, contacts.</div>
+          <div class="ic-title">Schools in P&#257;p&#257;moa</div>
+          <div class="ic-desc">All 8 schools &mdash; primary, secondary, Catholic and M&#257;ori immersion. Zones, rolls, contacts.</div>
         </div>
       </a>
       <a href="/articles/school-terms-holidays.html" class="info-card">
@@ -545,13 +576,13 @@
         <span class="ic-icon">&#127881;</span>
         <div class="ic-body">
           <div class="ic-title">Kids Birthday Parties</div>
-          <div class="ic-desc">Venues, entertainers, catering and party hire across Pāpāmoa.</div>
+          <div class="ic-desc">Venues, entertainers, catering and party hire across P&#257;p&#257;moa.</div>
         </div>
       </a>
       <a href="/articles/library.html" class="info-card">
         <span class="ic-icon">&#128218;</span>
         <div class="ic-body">
-          <div class="ic-title">Pāpāmoa Library</div>
+          <div class="ic-title">P&#257;p&#257;moa Library</div>
           <div class="ic-desc">Hours, services, free WiFi, story time and events. At Gordon Spratt Reserve.</div>
         </div>
       </a>
@@ -571,7 +602,7 @@
         <span class="ic-icon">&#127942;</span>
         <div class="ic-body">
           <div class="ic-title">AIMS Games 2026</div>
-          <div class="ic-desc">5–11 Sep 2026. 12,000+ students. Accommodation guide, venues, parking.</div>
+          <div class="ic-desc">5&ndash;11 Sep 2026. 12,000+ students. Accommodation guide, venues, parking.</div>
           <span class="ic-tag ic-tag-seasonal">Book accommodation now</span>
         </div>
       </a>
@@ -587,14 +618,14 @@
         <span class="ic-icon">&#128717;</span>
         <div class="ic-body">
           <div class="ic-title">Shopping Centres</div>
-          <div class="ic-desc">Fashion Island, Palm Beach Plaza and The Sands — tenants, hours and parking.</div>
+          <div class="ic-desc">Fashion Island, Palm Beach Plaza and The Sands &mdash; tenants, hours and parking.</div>
         </div>
       </a>
       <a href="/articles/the-yard.html" class="info-card">
         <span class="ic-icon">&#127978;</span>
         <div class="ic-body">
           <div class="ic-title">The Yard</div>
-          <div class="ic-desc">Pāpāmoa&rsquo;s boutique retail and dining precinct.</div>
+          <div class="ic-desc">P&#257;p&#257;moa&rsquo;s boutique retail and dining precinct.</div>
         </div>
       </a>
       <a href="/articles/op-shops-papamoa.html" class="info-card">
@@ -607,7 +638,7 @@
       <a href="/articles/weddings.html" class="info-card">
         <span class="ic-icon">&#128141;</span>
         <div class="ic-body">
-          <div class="ic-title">Weddings in Pāpāmoa</div>
+          <div class="ic-title">Weddings in P&#257;p&#257;moa</div>
           <div class="ic-desc">Venues, photographers, catering and local wedding suppliers.</div>
         </div>
       </a>
@@ -622,7 +653,7 @@
         <span class="ic-icon">&#9981;</span>
         <div class="ic-body">
           <div class="ic-title">Fuel Prices</div>
-          <div class="ic-desc">Local petrol and diesel prices across Pāpāmoa stations.</div>
+          <div class="ic-desc">Local petrol and diesel prices across P&#257;p&#257;moa stations.</div>
           <span class="ic-tag ic-tag-live">Updated regularly</span>
         </div>
       </a>
@@ -641,15 +672,15 @@
       <a href="/articles/swimming-papamoa.html" class="info-card">
         <span class="ic-icon">&#127946;</span>
         <div class="ic-body">
-          <div class="ic-title">Swimming in Pāpāmoa</div>
+          <div class="ic-title">Swimming in P&#257;p&#257;moa</div>
           <div class="ic-desc">Beach guide, freshwater holes, public pools and residential pool &amp; spa laws.</div>
         </div>
       </a>
       <a href="/articles/utilities-papamoa.html" class="info-card">
         <span class="ic-icon">&#9889;</span>
         <div class="ic-body">
-          <div class="ic-title">Utilities — Power, Gas &amp; Broadband</div>
-          <div class="ic-desc">Power retailers, LPG, fibre broadband and mobile coverage in Pāpāmoa.</div>
+          <div class="ic-title">Utilities &mdash; Power, Gas &amp; Broadband</div>
+          <div class="ic-desc">Power retailers, LPG, fibre broadband and mobile coverage in P&#257;p&#257;moa.</div>
         </div>
       </a>
       <a href="/articles/water-rates-papamoa.html" class="info-card">
@@ -675,7 +706,7 @@
       </a>
     </div>
 
-    <!-- FEATURED: TOOLS & CALCULATORS -->
+    <!-- TOOLS & CALCULATORS -->
     <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px">Tools &amp; Calculators</div>
     <div class="feature-row">
       <a href="/articles/tax-kiwisaver.html" class="feature-card">
@@ -690,7 +721,7 @@
         <span class="fc-icon">&#128003;</span>
         <div>
           <div class="fc-title">Easter Trading Hours 2026</div>
-          <p class="fc-desc">Which Pāpāmoa shops and services are open over Easter? Full list with dates and hours.</p>
+          <p class="fc-desc">Which P&#257;p&#257;moa shops and services are open over Easter? Full list with dates and hours.</p>
           <span class="fc-link">View trading hours &rarr;</span>
         </div>
       </a>
@@ -706,7 +737,7 @@
     <div class="cat-hero-bar cat-hero-essential">
       <div class="breadcrumb-bar"><a href="/homepage.html">Home</a> / Essential Services</div>
       <h2>Essential Services</h2>
-      <p>Mechanics, tradespeople, health professionals, finance, education, and the services that keep Pāpāmoa running</p>
+      <p>Mechanics, tradespeople, health professionals, finance, education, and the services that keep P&#257;p&#257;moa running</p>
     </div>
 
     <div class="subcat-chips">
@@ -725,8 +756,8 @@
     <div class="section-spotlight">
       <div class="ss-eye">&#11088; Gold Spotlight &middot; Automotive</div>
       <div class="ss-name">Coastal Autos</div>
-      <div class="ss-sub">&#128663; Mechanic &amp; WOF &middot; Pāpāmoa</div>
-      <p class="ss-desc">An MTA-approved workshop in Pāpāmoa offering WOFs, full vehicle servicing, tyres, wheel alignments, brakes, auto electrical, air conditioning, diagnostics, and vehicle licensing. They handle fleet servicing and accept online bookings. Reviewers consistently mention the transparent communication around what work is actually needed.</p>
+      <div class="ss-sub">&#128663; Mechanic &amp; WOF &middot; P&#257;p&#257;moa</div>
+      <p class="ss-desc">An MTA-approved workshop in P&#257;p&#257;moa offering WOFs, full vehicle servicing, tyres, wheel alignments, brakes, auto electrical, air conditioning, diagnostics, and vehicle licensing. They handle fleet servicing and accept online bookings. Reviewers consistently mention the transparent communication around what work is actually needed.</p>
       <a href="/categories/essential-services.html" class="ss-link">View full listing &rarr;</a>
     </div>
 
@@ -737,15 +768,15 @@
     <div class="list-grid">
       <div class="l-card">
         <div class="l-img" style="background:linear-gradient(135deg,#1A3020,#2A5030)"><span class="l-badge badge-gold">&#11088; Gold</span>&#128663;</div>
-        <div class="l-body"><h3>Coastal Autos</h3><div class="l-sub">Automotive &middot; Pāpāmoa</div><p class="l-desc">One-stop workshop for WOFs, servicing, tyres, brakes, auto electrical, and vehicle licensing. MTA approved with online booking and fleet servicing capability.</p><div class="l-tags"><span class="l-tag">WOF</span><span class="l-tag">Servicing</span><span class="l-tag">Tyres</span><span class="l-tag">Auto Electrical</span></div></div>
+        <div class="l-body"><h3>Coastal Autos</h3><div class="l-sub">Automotive &middot; P&#257;p&#257;moa</div><p class="l-desc">One-stop workshop for WOFs, servicing, tyres, brakes, auto electrical, and vehicle licensing. MTA approved with online booking and fleet servicing capability.</p><div class="l-tags"><span class="l-tag">WOF</span><span class="l-tag">Servicing</span><span class="l-tag">Tyres</span><span class="l-tag">Auto Electrical</span></div></div>
       </div>
       <div class="l-card">
         <div class="l-img" style="background:linear-gradient(135deg,#0D2A40,#1A4060)"><span class="l-badge badge-gold">&#11088; Gold</span>&#127947;</div>
-        <div class="l-body"><h3>ReDefined Wellbeing Hub</h3><div class="l-sub">Health &amp; Fitness &middot; Pāpāmoa</div><p class="l-desc">Award-winning facility combining reformer pilates, yoga, functional training, open gym, and a recovery lab with on-site physiotherapy, nutrition, massage, and counselling.</p><div class="l-tags"><span class="l-tag">Pilates</span><span class="l-tag">Yoga</span><span class="l-tag">Gym</span><span class="l-tag">Physio</span></div></div>
+        <div class="l-body"><h3>ReDefined Wellbeing Hub</h3><div class="l-sub">Health &amp; Fitness &middot; P&#257;p&#257;moa</div><p class="l-desc">Award-winning facility combining reformer pilates, yoga, functional training, open gym, and a recovery lab with on-site physiotherapy, nutrition, massage, and counselling.</p><div class="l-tags"><span class="l-tag">Pilates</span><span class="l-tag">Yoga</span><span class="l-tag">Gym</span><span class="l-tag">Physio</span></div></div>
       </div>
       <div class="l-card">
         <div class="l-img" style="background:linear-gradient(135deg,#2A1A2A,#402040)"><span class="l-badge badge-silver">Silver</span>&#9986;&#65039;</div>
-        <div class="l-body"><h3>Barber Toms</h3><div class="l-sub">Personal Care &middot; 80 Parton Rd, Pāpāmoa</div><p class="l-desc">Neighbourhood barbershop offering men&rsquo;s and kids&rsquo; cuts, beard trims, razor fades, and a full &ldquo;The Works&rdquo; package. Walk-ins or book through Fresha. Second location in Mt Maunganui.</p><div class="l-tags"><span class="l-tag">Barber</span><span class="l-tag">Men&rsquo;s Cuts</span><span class="l-tag">Beard Trims</span></div></div>
+        <div class="l-body"><h3>Barber Toms</h3><div class="l-sub">Personal Care &middot; 80 Parton Rd, P&#257;p&#257;moa</div><p class="l-desc">Neighbourhood barbershop offering men&rsquo;s and kids&rsquo; cuts, beard trims, razor fades, and a full &ldquo;The Works&rdquo; package. Walk-ins or book through Fresha. Second location in Mt Maunganui.</p><div class="l-tags"><span class="l-tag">Barber</span><span class="l-tag">Men&rsquo;s Cuts</span><span class="l-tag">Beard Trims</span></div></div>
       </div>
       <div class="l-card">
         <div class="l-img" style="background:linear-gradient(135deg,#1A2A1A,#2A402A)"><span class="l-badge badge-silver">Silver</span>&#128137;</div>
@@ -753,15 +784,15 @@
       </div>
       <div class="l-card dim">
         <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#129463;</div>
-        <div class="l-body"><h3>Dentist</h3><div class="l-sub">Health &amp; Medical</div><p class="l-desc">No Gold Spotlight listing has been claimed for dentists in Pāpāmoa. This is the top position in the sub-category.</p></div>
+        <div class="l-body"><h3>Dentist</h3><div class="l-sub">Health &amp; Medical</div><p class="l-desc">No Gold Spotlight listing has been claimed for dentists in P&#257;p&#257;moa. This is the top position in the sub-category.</p></div>
       </div>
       <div class="l-card dim">
         <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#9889;</div>
-        <div class="l-body"><h3>Electrician</h3><div class="l-sub">Trades &amp; Building</div><p class="l-desc">No Gold Spotlight listing has been claimed for electricians in Pāpāmoa. Claim the top spot for this high-demand sub-category.</p></div>
+        <div class="l-body"><h3>Electrician</h3><div class="l-sub">Trades &amp; Building</div><p class="l-desc">No Gold Spotlight listing has been claimed for electricians in P&#257;p&#257;moa. Claim the top spot for this high-demand sub-category.</p></div>
       </div>
       <div class="l-card dim">
         <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#128295;</div>
-        <div class="l-body"><h3>Plumber</h3><div class="l-sub">Trades &amp; Building</div><p class="l-desc">No Gold Spotlight listing has been claimed for plumbers in Pāpāmoa. One Gold Spotlight per sub-category.</p></div>
+        <div class="l-body"><h3>Plumber</h3><div class="l-sub">Trades &amp; Building</div><p class="l-desc">No Gold Spotlight listing has been claimed for plumbers in P&#257;p&#257;moa. One Gold Spotlight per sub-category.</p></div>
       </div>
     </div>
   </div>
@@ -773,7 +804,7 @@
     <div class="cat-hero-bar cat-hero-accom">
       <div class="breadcrumb-bar"><a href="/homepage.html">Home</a> / Accommodation</div>
       <h2>Accommodation</h2>
-      <p>Motels, holiday parks, Airbnb managers, luxury stays, and everywhere to rest your head in Pāpāmoa</p>
+      <p>Motels, holiday parks, Airbnb managers, luxury stays, and everywhere to rest your head in P&#257;p&#257;moa</p>
     </div>
 
     <div class="subcat-chips">
@@ -790,7 +821,7 @@
     <div class="empty-spot">
       <h3>&#11088; Gold Spotlight available &mdash; Accommodation</h3>
       <p>Pacific Park is listed on our dedicated accommodation page. The homepage Spotlight position is still available for the primary accommodation category.</p>
-      <a href="/claim.html" class="es-cta">Claim this Spotlight &rarr;</a>
+      <a href="/sales/claim.html" class="es-cta">Claim this Spotlight &rarr;</a>
     </div>
 
     <div class="list-head">
@@ -800,23 +831,23 @@
     <div class="list-grid">
       <div class="l-card">
         <div class="l-img" style="background:linear-gradient(135deg,#0D2A40,#1A4060)"><span class="l-badge badge-silver">Silver</span>&#127940;</div>
-        <div class="l-body"><h3>Pāpāmoa Beach Resort</h3><div class="l-sub">Holiday Park &middot; 535 Pāpāmoa Beach Road</div><p class="l-desc">A well-established holiday park directly on Pāpāmoa Beach Road with powered and non-powered sites, cabins, and motel-style units. Popular with families over summer.</p><div class="l-tags"><span class="l-tag">Holiday Park</span><span class="l-tag">Cabins</span><span class="l-tag">Camping</span><span class="l-tag">Beachfront</span></div></div>
+        <div class="l-body"><h3>P&#257;p&#257;moa Beach Resort</h3><div class="l-sub">Holiday Park &middot; 535 P&#257;p&#257;moa Beach Road</div><p class="l-desc">A well-established holiday park directly on P&#257;p&#257;moa Beach Road with powered and non-powered sites, cabins, and motel-style units. Popular with families over summer.</p><div class="l-tags"><span class="l-tag">Holiday Park</span><span class="l-tag">Cabins</span><span class="l-tag">Camping</span><span class="l-tag">Beachfront</span></div></div>
       </div>
       <div class="l-card">
         <div class="l-img" style="background:linear-gradient(135deg,#1A1A3A,#2A2A5A)"><span class="l-badge badge-silver">Silver</span>&#127968;</div>
-        <div class="l-body"><h3>Pacific Palms Motel</h3><div class="l-sub">Motel &middot; Pāpāmoa Beach</div><p class="l-desc">A mid-range motel with self-contained units a short walk from the beach. Units range from studio to two-bedroom, all with kitchenettes. Suitable for couples, small families, and contractors.</p><div class="l-tags"><span class="l-tag">Motel</span><span class="l-tag">Self-contained</span><span class="l-tag">Parking</span></div></div>
+        <div class="l-body"><h3>Pacific Palms Motel</h3><div class="l-sub">Motel &middot; P&#257;p&#257;moa Beach</div><p class="l-desc">A mid-range motel with self-contained units a short walk from the beach. Units range from studio to two-bedroom, all with kitchenettes. Suitable for couples, small families, and contractors.</p><div class="l-tags"><span class="l-tag">Motel</span><span class="l-tag">Self-contained</span><span class="l-tag">Parking</span></div></div>
       </div>
       <div class="l-card">
         <div class="l-img" style="background:linear-gradient(135deg,#1A2A1A,#2A4A2A)"><span class="l-badge badge-silver">Silver</span>&#127968;</div>
-        <div class="l-body"><h3>Golden Sands Holiday Homes</h3><div class="l-sub">Airbnb &amp; Short-stay &middot; Golden Sands, Pāpāmoa</div><p class="l-desc">Property management company operating a portfolio of short-stay rental homes in the Golden Sands subdivision. Three- to four-bedroom family homes on Airbnb and Bookabach.</p><div class="l-tags"><span class="l-tag">Holiday Homes</span><span class="l-tag">Airbnb</span><span class="l-tag">Families</span></div></div>
+        <div class="l-body"><h3>Golden Sands Holiday Homes</h3><div class="l-sub">Airbnb &amp; Short-stay &middot; Golden Sands, P&#257;p&#257;moa</div><p class="l-desc">Property management company operating a portfolio of short-stay rental homes in the Golden Sands subdivision. Three- to four-bedroom family homes on Airbnb and Bookabach.</p><div class="l-tags"><span class="l-tag">Holiday Homes</span><span class="l-tag">Airbnb</span><span class="l-tag">Families</span></div></div>
       </div>
       <div class="l-card dim">
         <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#127981;</div>
-        <div class="l-body"><h3>Luxury / Boutique Stay</h3><div class="l-sub">Luxury / Boutique</div><p class="l-desc">No Gold Spotlight listing has been claimed for luxury or boutique accommodation in Pāpāmoa. One Spotlight available per sub-category.</p></div>
+        <div class="l-body"><h3>Luxury / Boutique Stay</h3><div class="l-sub">Luxury / Boutique</div><p class="l-desc">No Gold Spotlight listing has been claimed for luxury or boutique accommodation in P&#257;p&#257;moa. One Spotlight available per sub-category.</p></div>
       </div>
       <div class="l-card dim">
         <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#127960;</div>
-        <div class="l-body"><h3>Backpackers / Hostel</h3><div class="l-sub">Backpackers</div><p class="l-desc">No listing has been claimed for backpacker or hostel accommodation in Pāpāmoa. If one exists or is opening, this spot is available.</p></div>
+        <div class="l-body"><h3>Backpackers / Hostel</h3><div class="l-sub">Backpackers</div><p class="l-desc">No listing has been claimed for backpacker or hostel accommodation in P&#257;p&#257;moa. If one exists or is opening, this spot is available.</p></div>
       </div>
       <div class="l-card dim">
         <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#127959;</div>
@@ -832,7 +863,7 @@
     <div class="footer-top">
       <div>
         <div class="footer-brand">Papamoa<em>.info</em></div>
-        <p class="footer-tagline">Pāpāmoa&rsquo;s independent local business directory. Every listing written editorially, not by the business. Built for Google, AI engines, and the people who live here.</p>
+        <p class="footer-tagline">P&#257;p&#257;moa&rsquo;s independent local business directory. Every listing written editorially, not by the business. Built for Google, AI engines, and the people who live here.</p>
       </div>
       <div class="footer-col">
         <h4>Categories</h4>
@@ -843,22 +874,24 @@
           <li><a href="/categories/accommodation.html">Accommodation</a></li>
           <li><a href="/categories/surf-tides.html">Activities &amp; Outdoors</a></li>
           <li><a href="/categories/services.html">Home &amp; Property</a></li>
+          <li><a href="/categories/real-estate.html">Real Estate</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Local Info</h4>
         <ul class="footer-links">
+          <li><a href="/categories/real-estate.html">Property Market</a></li>
           <li><a href="/articles/population-statistics.html">Population &amp; Stats</a></li>
           <li><a href="/articles/schools-papamoa.html">Schools</a></li>
           <li><a href="/articles/school-terms-holidays.html">School Terms 2026</a></li>
-          <li><a href="/articles/papamoa-hills.html">Pāpāmoa Hills</a></li>
+          <li><a href="/articles/papamoa-hills.html">P&#257;p&#257;moa Hills</a></li>
           <li><a href="/articles/swimming-papamoa.html">Swimming</a></li>
-          <li><a href="/articles/dogs-papamoa.html">Dogs in Pāpāmoa</a></li>
+          <li><a href="/articles/dogs-papamoa.html">Dogs in P&#257;p&#257;moa</a></li>
           <li><a href="/articles/local-government.html">Local Government</a></li>
           <li><a href="/articles/news-events.html">News &amp; Events</a></li>
           <li><a href="/articles/aims-games.html">AIMS Games 2026</a></li>
           <li><a href="/articles/mount-maunganui.html">Mount Maunganui</a></li>
-          <li><a href="/articles/maori-history.html">Māori History</a></li>
+          <li><a href="/articles/maori-history.html">M&#257;ori History</a></li>
           <li><a href="/articles/fuel-prices.html">Fuel Prices</a></li>
           <li><a href="/articles/rubbish-recycling-papamoa.html">Rubbish &amp; Recycling</a></li>
           <li><a href="/articles/utilities-papamoa.html">Utilities</a></li>
@@ -877,76 +910,79 @@
           <li><a href="/sales/claim.html">Gold Spotlight</a></li>
           <li><a href="/sales/menu-addon.html">Menu Add-On</a></li>
           <li><a href="/sales/claim.html">Get Listed</a></li>
+          <li><a href="/partners/real-estate-agent.html">Featured Agent Position</a></li>
         </ul>
         <h4 style="margin-top:16px">Network</h4>
         <ul class="footer-links">
           <li><a href="https://tauranganz.info" target="_blank" rel="noopener">TaurangaNZ.info</a></li>
-          <li><a href="/index.html">Site Index</a></li>
+          <li><a href="/sitemap.html">Site Index</a></li>
           <li><a href="#">About Papamoa.info</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">&copy; 2026 papamoa.info &middot; Pāpāmoa&rsquo;s Local Business Directory</div>
+    <div class="footer-bottom">&copy; 2026 papamoa.info &middot; P&#257;p&#257;moa&rsquo;s Local Business Directory</div>
   </div>
 </footer>
 
 <script>
-// ── SEARCH DATA ──
-// Covers listings, articles, categories and tools
 const SEARCH_INDEX = [
   // Categories
-  { type:'cat', icon:'🔧', title:'Essential Services', sub:'Mechanics, trades, health, plumbers, electricians', url:'/categories/essential-services.html', keywords:'essential services mechanic trades health plumber electrician' },
-  { type:'cat', icon:'🏨', title:'Accommodation', sub:'Holiday parks, motels, Airbnb, luxury stays', url:'/categories/accommodation.html', keywords:'accommodation motel holiday park airbnb stay hotel' },
-  { type:'cat', icon:'🏄', title:'Surf & Tides', sub:'Conditions, surf school, tide times, fishing', url:'/categories/surf-tides.html', keywords:'surf tides beach fishing conditions forecast' },
-  { type:'cat', icon:'🍔', title:'Food & Drink', sub:'Cafes, restaurants, takeaway, bars, breweries', url:'/categories/entertainment.html', keywords:'food drink cafe restaurant takeaway bar pub' },
-  { type:'cat', icon:'🛍️', title:'Shopping & Retail', sub:'Fashion, homewares, gifts, specialty stores', url:'/categories/shopping.html', keywords:'shopping retail fashion gifts homewares' },
-  { type:'cat', icon:'🏠', title:'Home & Property', sub:'Builders, landscaping, real estate, cleaning', url:'/categories/services.html', keywords:'home property builders landscaping real estate cleaning' },
-  { type:'cat', icon:'💼', title:'Professional Services', sub:'Accountants, lawyers, financial advisers', url:'/categories/services.html', keywords:'professional services accountant lawyer financial adviser' },
+  { type:'cat', icon:'&#128736;', title:'Essential Services', sub:'Mechanics, trades, health, plumbers, electricians', url:'/categories/essential-services.html', keywords:'essential services mechanic trades health plumber electrician' },
+  { type:'cat', icon:'&#127968;', title:'Accommodation', sub:'Holiday parks, motels, Airbnb, luxury stays', url:'/categories/accommodation.html', keywords:'accommodation motel holiday park airbnb stay hotel' },
+  { type:'cat', icon:'&#127940;', title:'Surf & Tides', sub:'Conditions, surf school, tide times, fishing', url:'/categories/surf-tides.html', keywords:'surf tides beach fishing conditions forecast' },
+  { type:'cat', icon:'&#127829;', title:'Food & Drink', sub:'Cafes, restaurants, takeaway, bars, breweries', url:'/categories/entertainment.html', keywords:'food drink cafe restaurant takeaway bar pub' },
+  { type:'cat', icon:'&#128717;', title:'Shopping & Retail', sub:'Fashion, homewares, gifts, specialty stores', url:'/categories/shopping.html', keywords:'shopping retail fashion gifts homewares' },
+  { type:'cat', icon:'&#127968;', title:'Home & Property', sub:'Builders, landscaping, real estate, cleaning', url:'/categories/services.html', keywords:'home property builders landscaping real estate cleaning' },
+  { type:'cat', icon:'&#128188;', title:'Professional Services', sub:'Accountants, lawyers, financial advisers', url:'/categories/services.html', keywords:'professional services accountant lawyer financial adviser' },
+  { type:'cat', icon:'&#127968;', title:'Real Estate', sub:'Buying, selling, market reports, local agent', url:'/categories/real-estate.html', keywords:'real estate property market agent buying selling house home papamoa' },
   // Listings
-  { type:'listing', icon:'⭐', title:'Pacific Park Holiday Camp', sub:'Holiday Park · Gold Spotlight', url:'/categories/accommodation.html', keywords:'pacific park holiday camp accommodation camping motel cabin' },
-  { type:'listing', icon:'⭐', title:'Coastal Autos', sub:'Mechanic & WOF · Gold Spotlight', url:'/listings/coastal-autos-papamoa.html', keywords:'coastal autos mechanic wof warrant tyres servicing' },
-  { type:'listing', icon:'⭐', title:'ReDefined Wellbeing Hub', sub:'Gym, Pilates, Yoga · Gold Spotlight', url:'/listings/redefined-wellbeing-papamoa.html', keywords:'redefined wellbeing gym pilates yoga fitness health' },
-  { type:'listing', icon:'⭐', title:'Hakanini Surf School', sub:'Surf Lessons & Board Hire', url:'/categories/surf-tides.html', keywords:'hakanini surf school lessons board hire surfing' },
-  { type:'listing', icon:'⭐', title:'PAP House', sub:'Restaurant & Bar', url:'/categories/entertainment.html', keywords:'pap house restaurant bar food drink dining' },
-  { type:'listing', icon:'🎮', title:'The Cave Pāpāmoa', sub:'VR & Sim Racing · Gold Spotlight', url:'/listings/the-cave-papamoa.html', keywords:'the cave vr virtual reality sim racing entertainment birthday' },
-  { type:'listing', icon:'📚', title:'Xanadu Book Exchange', sub:'Second-hand Books · Silver', url:'/listings/xanadu-book-exchange-papamoa.html', keywords:'xanadu books second hand bookstore cheap no book over five dollars' },
-  { type:'listing', icon:'💅', title:'Kayco Nails', sub:'Custom Press-On Nails · Silver', url:'/listings/kayco-nails-papamoa.html', keywords:'kayco nails press on custom nail kits beauty' },
-  { type:'listing', icon:'🏌️', title:'Lawn Mowing Pāpāmoa', sub:'Garden & Lawn · Placeholder', url:'/listings/lawn-mowing-papamoa.html', keywords:'lawn mowing garden grass cut trim' },
-  { type:'listing', icon:'🦷', title:'Pāpāmoa Orthodontist', sub:'Dental · Professional Services', url:'/listings/papamoa-orthodontist.html', keywords:'orthodontist dental teeth braces' },
-  { type:'listing', icon:'🔧', title:'Speedy Screens', sub:'Trades · Window & Door Screens', url:'/listings/speedy-screens-papamoa.html', keywords:'speedy screens windows doors flyscreens trades' },
+  { type:'listing', icon:'&#11088;', title:'Pacific Park Holiday Camp', sub:'Holiday Park · Gold Spotlight', url:'/categories/accommodation.html', keywords:'pacific park holiday camp accommodation camping motel cabin' },
+  { type:'listing', icon:'&#11088;', title:'Coastal Autos', sub:'Mechanic & WOF · Gold Spotlight', url:'/listings/coastal-autos-papamoa.html', keywords:'coastal autos mechanic wof warrant tyres servicing' },
+  { type:'listing', icon:'&#11088;', title:'ReDefined Wellbeing Hub', sub:'Gym, Pilates, Yoga · Gold Spotlight', url:'/listings/redefined-wellbeing-papamoa.html', keywords:'redefined wellbeing gym pilates yoga fitness health' },
+  { type:'listing', icon:'&#11088;', title:'Hakanini Surf School', sub:'Surf Lessons & Board Hire', url:'/categories/surf-tides.html', keywords:'hakanini surf school lessons board hire surfing' },
+  { type:'listing', icon:'&#11088;', title:'PAP House', sub:'Restaurant & Bar', url:'/categories/entertainment.html', keywords:'pap house restaurant bar food drink dining' },
+  { type:'listing', icon:'&#127918;', title:'The Cave Pāpāmoa', sub:'VR & Sim Racing · Gold Spotlight', url:'/listings/the-cave-papamoa.html', keywords:'the cave vr virtual reality sim racing entertainment birthday' },
+  { type:'listing', icon:'&#128218;', title:'Xanadu Book Exchange', sub:'Second-hand Books · Silver', url:'/listings/xanadu-book-exchange-papamoa.html', keywords:'xanadu books second hand bookstore cheap no book over five dollars' },
+  { type:'listing', icon:'&#128133;', title:'Kayco Nails', sub:'Custom Press-On Nails · Silver', url:'/listings/kayco-nails-papamoa.html', keywords:'kayco nails press on custom nail kits beauty' },
+  { type:'listing', icon:'&#127807;', title:'Lawn Mowing Pāpāmoa', sub:'Garden & Lawn · Placeholder', url:'/listings/lawn-mowing-papamoa.html', keywords:'lawn mowing garden grass cut trim' },
+  { type:'listing', icon:'&#129463;', title:'Pāpāmoa Orthodontist', sub:'Dental · Professional Services', url:'/listings/papamoa-orthodontist.html', keywords:'orthodontist dental teeth braces' },
+  { type:'listing', icon:'&#128295;', title:'Speedy Screens', sub:'Trades · Window & Door Screens', url:'/listings/speedy-screens-papamoa.html', keywords:'speedy screens windows doors flyscreens trades' },
+  // Real Estate
+  { type:'info', icon:'&#127968;', title:'Papamoa Property Market', sub:'March 2026 report — $895k median, 38 listings', url:'/categories/real-estate.html', keywords:'property market real estate papamoa march 2026 prices median homes listings buying selling' },
+  { type:'info', icon:'&#128222;', title:'Featured Real Estate Agent', sub:'One agent exclusively recommended by Papamoa.info', url:'/categories/real-estate.html', keywords:'real estate agent papamoa recommended best who local' },
   // Articles
-  { type:'info', icon:'📊', title:'Population & Statistics', sub:'37,910 residents · Census data & demographics', url:'/articles/population-statistics.html', keywords:'population statistics census demographics growth residents' },
-  { type:'info', icon:'⛰️', title:'Pāpāmoa Hills', sub:'Track status · Closures & maps', url:'/articles/papamoa-hills.html', keywords:'papamoa hills tracks walks closed open landslip' },
-  { type:'info', icon:'🐕', title:'Dogs in Pāpāmoa', sub:'Beach rules, off-leash zones, TCC bylaw', url:'/articles/dogs-papamoa.html', keywords:'dogs dog beach rules bylaw off leash zone' },
-  { type:'info', icon:'🏛️', title:'Māori History', sub:'Ngā Pōtiki, Ngāi Te Rangi, Tamapahore Marae', url:'/articles/maori-history.html', keywords:'maori history nga potiki ngai te rangi tamapahore marae' },
-  { type:'info', icon:'🚶', title:'Walks & Tracks', sub:'All walking and cycling tracks in Pāpāmoa', url:'/articles/walks-tracks.html', keywords:'walks tracks walking cycling trails outdoor' },
-  { type:'info', icon:'🌳', title:'Parks & Playgrounds', sub:'Gordon Spratt Reserve, skate spots, sports fields', url:'/articles/parks-playgrounds.html', keywords:'parks playgrounds gordon spratt skate sports family' },
-  { type:'info', icon:'🌳', title:'Gordon Spratt Reserve', sub:'Main park · Tsunami mound & facilities', url:'/articles/gordon-spratt-reserve.html', keywords:'gordon spratt reserve park tsunami mound playground' },
-  { type:'info', icon:'🏆', title:'AIMS Games 2026', sub:'5–11 Sep 2026 · Accommodation & guide', url:'/articles/aims-games.html', keywords:'aims games 2026 sport tauranga accommodation families' },
-  { type:'info', icon:'🎉', title:'Kids Birthday Parties', sub:'Venues, entertainers & party hire', url:'/articles/kids-birthday-parties.html', keywords:'kids birthday parties venues entertainers hire children' },
-  { type:'info', icon:'🛍️', title:'Shopping Centres', sub:'Fashion Island, Palm Beach Plaza, The Sands', url:'/articles/shopping-centres.html', keywords:'shopping centres fashion island palm beach plaza sands stores' },
-  { type:'info', icon:'👴', title:'Seniors & Retirement', sub:'Villages, home care, NZ Super', url:'/articles/seniors-retirement.html', keywords:'seniors retirement village home care nz super aged' },
-  { type:'info', icon:'🏛️', title:'Local Government', sub:'Mayor, TCC contacts, MP', url:'/articles/local-government.html', keywords:'local government tcc mayor mahe drysdale council mp' },
-  { type:'info', icon:'📚', title:'Pāpāmoa Library', sub:'Hours, WiFi, story time & events', url:'/articles/library.html', keywords:'library books wifi hours story time events' },
-  { type:'info', icon:'⭐', title:'Notable People', sub:'Athletes, artists & public figures', url:'/articles/notable-people.html', keywords:'notable people famous athletes artists public figures' },
-  { type:'info', icon:'⛽', title:'Fuel Prices', sub:'Local petrol & diesel prices', url:'/articles/fuel-prices.html', keywords:'fuel prices petrol diesel stations' },
-  { type:'info', icon:'🏙️', title:'Tauranga', sub:'15 min from Pāpāmoa · City guide', url:'/articles/tauranga.html', keywords:'tauranga city nearby distance guide' },
-  { type:'info', icon:'⛰️', title:'Mount Maunganui', sub:'Mauao closed after Jan 2026 landslide', url:'/articles/mount-maunganui.html', keywords:'mount maunganui mauao hot pools tracks closure' },
-  { type:'info', icon:'📰', title:'News & Events', sub:'Upcoming events & local news', url:'/articles/news-events.html', keywords:'news events upcoming community local' },
-  { type:'info', icon:'🏊', title:'Swimming in Pāpāmoa', sub:'Beach guide, freshwater holes, pool laws', url:'/articles/swimming-papamoa.html', keywords:'swimming swim beach freshwater pools spa pool fence law' },
-  { type:'info', icon:'⚡', title:'Utilities — Power, Gas & Broadband', sub:'Power retailers, LPG, fibre, mobile', url:'/articles/utilities-papamoa.html', keywords:'utilities power electricity gas broadband fibre internet mobile' },
-  { type:'info', icon:'💧', title:'Water & Rates', sub:'TCC metered water, quarterly billing', url:'/articles/water-rates-papamoa.html', keywords:'water rates tcc metered billing wastewater waiari' },
-  { type:'info', icon:'♻️', title:'Rubbish & Recycling', sub:'4-bin kerbside guide, transfer station', url:'/articles/rubbish-recycling-papamoa.html', keywords:'rubbish recycling bins kerbside transfer station waste' },
-  { type:'info', icon:'👕', title:'Clothing Recycling', sub:'Bins, Waipuna free collection, textile recycling', url:'/articles/clothing-recycling-papamoa.html', keywords:'clothing recycling textile bins waipuna donate' },
-  { type:'info', icon:'🛍️', title:'Op Shops & Second-hand', sub:'Waipuna Hospice, Vinnies, Xanadu Books', url:'/articles/op-shops-papamoa.html', keywords:'op shop second hand thrift waipuna vinnies xanadu books' },
-  { type:'info', icon:'💍', title:'Weddings in Pāpāmoa', sub:'Venues, photographers & suppliers', url:'/articles/weddings.html', keywords:'weddings venues photographers catering hire' },
-  { type:'info', icon:'🍽️', title:'Dinner at the Domain', sub:'Annual outdoor dining event · Dates & tickets', url:'/articles/dinner-at-the-domain.html', keywords:'dinner domain outdoor dining event tickets domain' },
-  { type:'info', icon:'🏫', title:'Schools in Pāpāmoa', sub:'All 8 schools · Zones, rolls, contacts', url:'/articles/schools-papamoa.html', keywords:'schools primary secondary papamoa college zones enrolment' },
+  { type:'info', icon:'&#128202;', title:'Population & Statistics', sub:'37,910 residents · Census data & demographics', url:'/articles/population-statistics.html', keywords:'population statistics census demographics growth residents' },
+  { type:'info', icon:'&#9968;', title:'Pāpāmoa Hills', sub:'Track status · Closures & maps', url:'/articles/papamoa-hills.html', keywords:'papamoa hills tracks walks closed open landslip' },
+  { type:'info', icon:'&#128054;', title:'Dogs in Pāpāmoa', sub:'Beach rules, off-leash zones, TCC bylaw', url:'/articles/dogs-papamoa.html', keywords:'dogs dog beach rules bylaw off leash zone' },
+  { type:'info', icon:'&#127963;', title:'Māori History', sub:'Ngā Pōtiki, Ngāi Te Rangi, Tamapahore Marae', url:'/articles/maori-history.html', keywords:'maori history nga potiki ngai te rangi tamapahore marae' },
+  { type:'info', icon:'&#128694;', title:'Walks & Tracks', sub:'All walking and cycling tracks in Pāpāmoa', url:'/articles/walks-tracks.html', keywords:'walks tracks walking cycling trails outdoor' },
+  { type:'info', icon:'&#127794;', title:'Parks & Playgrounds', sub:'Gordon Spratt Reserve, skate spots, sports fields', url:'/articles/parks-playgrounds.html', keywords:'parks playgrounds gordon spratt skate sports family' },
+  { type:'info', icon:'&#127795;', title:'Gordon Spratt Reserve', sub:'Main park · Tsunami mound & facilities', url:'/articles/gordon-spratt-reserve.html', keywords:'gordon spratt reserve park tsunami mound playground' },
+  { type:'info', icon:'&#127942;', title:'AIMS Games 2026', sub:'5–11 Sep 2026 · Accommodation & guide', url:'/articles/aims-games.html', keywords:'aims games 2026 sport tauranga accommodation families' },
+  { type:'info', icon:'&#127881;', title:'Kids Birthday Parties', sub:'Venues, entertainers & party hire', url:'/articles/kids-birthday-parties.html', keywords:'kids birthday parties venues entertainers hire children' },
+  { type:'info', icon:'&#128717;', title:'Shopping Centres', sub:'Fashion Island, Palm Beach Plaza, The Sands', url:'/articles/shopping-centres.html', keywords:'shopping centres fashion island palm beach plaza sands stores' },
+  { type:'info', icon:'&#129399;', title:'Seniors & Retirement', sub:'Villages, home care, NZ Super', url:'/articles/seniors-retirement.html', keywords:'seniors retirement village home care nz super aged' },
+  { type:'info', icon:'&#127963;', title:'Local Government', sub:'Mayor, TCC contacts, MP', url:'/articles/local-government.html', keywords:'local government tcc mayor mahe drysdale council mp' },
+  { type:'info', icon:'&#128218;', title:'Pāpāmoa Library', sub:'Hours, WiFi, story time & events', url:'/articles/library.html', keywords:'library books wifi hours story time events' },
+  { type:'info', icon:'&#11088;', title:'Notable People', sub:'Athletes, artists & public figures', url:'/articles/notable-people.html', keywords:'notable people famous athletes artists public figures' },
+  { type:'info', icon:'&#9981;', title:'Fuel Prices', sub:'Local petrol & diesel prices', url:'/articles/fuel-prices.html', keywords:'fuel prices petrol diesel stations' },
+  { type:'info', icon:'&#127961;', title:'Tauranga', sub:'15 min from Pāpāmoa · City guide', url:'/articles/tauranga.html', keywords:'tauranga city nearby distance guide' },
+  { type:'info', icon:'&#9968;', title:'Mount Maunganui', sub:'Mauao closed after Jan 2026 landslide', url:'/articles/mount-maunganui.html', keywords:'mount maunganui mauao hot pools tracks closure' },
+  { type:'info', icon:'&#128240;', title:'News & Events', sub:'Upcoming events & local news', url:'/articles/news-events.html', keywords:'news events upcoming community local' },
+  { type:'info', icon:'&#127946;', title:'Swimming in Pāpāmoa', sub:'Beach guide, freshwater holes, pool laws', url:'/articles/swimming-papamoa.html', keywords:'swimming swim beach freshwater pools spa pool fence law' },
+  { type:'info', icon:'&#9889;', title:'Utilities — Power, Gas & Broadband', sub:'Power retailers, LPG, fibre, mobile', url:'/articles/utilities-papamoa.html', keywords:'utilities power electricity gas broadband fibre internet mobile' },
+  { type:'info', icon:'&#128167;', title:'Water & Rates', sub:'TCC metered water, quarterly billing', url:'/articles/water-rates-papamoa.html', keywords:'water rates tcc metered billing wastewater waiari' },
+  { type:'info', icon:'&#9851;', title:'Rubbish & Recycling', sub:'4-bin kerbside guide, transfer station', url:'/articles/rubbish-recycling-papamoa.html', keywords:'rubbish recycling bins kerbside transfer station waste' },
+  { type:'info', icon:'&#128248;', title:'Clothing Recycling', sub:'Bins, Waipuna free collection, textile recycling', url:'/articles/clothing-recycling-papamoa.html', keywords:'clothing recycling textile bins waipuna donate' },
+  { type:'info', icon:'&#128717;', title:'Op Shops & Second-hand', sub:'Waipuna Hospice, Vinnies, Xanadu Books', url:'/articles/op-shops-papamoa.html', keywords:'op shop second hand thrift waipuna vinnies xanadu books' },
+  { type:'info', icon:'&#128141;', title:'Weddings in Pāpāmoa', sub:'Venues, photographers & suppliers', url:'/articles/weddings.html', keywords:'weddings venues photographers catering hire' },
+  { type:'info', icon:'&#127869;', title:'Dinner at the Domain', sub:'Annual outdoor dining event · Dates & tickets', url:'/articles/dinner-at-the-domain.html', keywords:'dinner domain outdoor dining event tickets domain' },
+  { type:'info', icon:'&#127979;', title:'Schools in Pāpāmoa', sub:'All 8 schools · Zones, rolls, contacts', url:'/articles/schools-papamoa.html', keywords:'schools primary secondary papamoa college zones enrolment' },
   // Tools
-  { type:'tool', icon:'💰', title:'PAYE & GST Calculator', sub:'Tax calculator · KiwiSaver', url:'/articles/tax-kiwisaver.html', keywords:'tax paye gst calculator kiwisaver income' },
-  { type:'tool', icon:'🐣', title:'Easter Trading Hours 2026', sub:'Pāpāmoa shop & service hours', url:'/articles/easter-trading-hours.html', keywords:'easter trading hours open closed shops' },
-  { type:'tool', icon:'🏫', title:'School Terms 2026', sub:'All term dates & holidays', url:'/articles/school-terms-holidays.html', keywords:'school terms holidays 2026 dates calendar' },
+  { type:'tool', icon:'&#128176;', title:'PAYE & GST Calculator', sub:'Tax calculator · KiwiSaver', url:'/articles/tax-kiwisaver.html', keywords:'tax paye gst calculator kiwisaver income' },
+  { type:'tool', icon:'&#128003;', title:'Easter Trading Hours 2026', sub:'Pāpāmoa shop & service hours', url:'/articles/easter-trading-hours.html', keywords:'easter trading hours open closed shops' },
+  { type:'tool', icon:'&#127979;', title:'School Terms 2026', sub:'All term dates & holidays', url:'/articles/school-terms-holidays.html', keywords:'school terms holidays 2026 dates calendar' },
 ];
 
 const TYPE_LABELS = { cat: 'Categories', listing: 'Businesses', info: 'Local Info', tool: 'Tools' };
@@ -968,7 +1004,6 @@ function handleSearch(val) {
     return;
   }
 
-  // Group by type
   const grouped = {};
   results.forEach(r => {
     if (!grouped[r.type]) grouped[r.type] = [];
@@ -1001,7 +1036,6 @@ function handleSearchKey(e) {
 function submitSearch() {
   const q = document.getElementById('site-search').value.trim();
   if (!q) return;
-  // For now scroll to first result or show inline — full search page is Phase 2
   handleSearch(q);
 }
 
@@ -1016,7 +1050,6 @@ function escHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-// Close dropdown on outside click
 document.addEventListener('click', e => {
   if (!e.target.closest('.search-input-wrap')) {
     document.getElementById('search-results').classList.remove('visible');
