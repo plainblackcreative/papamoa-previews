@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Featured Real Estate Agent Position — Papamoa.info</title>
+<meta name="description" content="One real estate agent. Exclusively recommended by Papamoa.info. Monthly market reports, AI search presence, and direct leads from people already searching for an agent in Papamoa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ocean: #1B6B7D;
+  --ocean-deep: #0F4352;
+  --ocean-light: #E4F2F5;
+  --sand: #F7F3ED;
+  --sand-dark: #EDE7DB;
+  --dune: #C4985A;
+  --dune-light: #F5EDD8;
+  --navy: #0D2B3E;
+  --white: #FFFFFF;
+  --text: #1A2832;
+  --muted: #5A6E78;
+  --border: #D8E4E8;
+  --gold: #B8840A;
+  --gold-bg: #FBF3E2;
+  --green: #1E6B3C;
+  --green-bg: #E6F4EC;
+  --font-body: 'Figtree', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--sand);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+.site-nav {
+  background: var(--navy);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+.nav-brand {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--white);
+  text-decoration: none;
+}
+.nav-brand span { color: var(--dune); }
+.nav-cta {
+  background: var(--dune);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--gold); }
+
+/* HERO */
+.hero {
+  background: linear-gradient(150deg, var(--navy) 0%, #0a3244 55%, #0f5060 100%);
+  padding: 72px 24px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  right: -80px;
+  top: -80px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,152,90,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 820px; margin: 0 auto; position: relative; }
+.hero-scarcity {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(196,152,90,0.15);
+  border: 1px solid rgba(196,152,90,0.35);
+  padding: 7px 14px;
+  border-radius: 30px;
+  margin-bottom: 24px;
+}
+.hs-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--dune);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+.hs-text { font-size: 12px; font-weight: 700; color: var(--dune); letter-spacing: 0.05em; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--dune);
+}
+.hero-sub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.7);
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--dune);
+  color: var(--white);
+  padding: 14px 28px;
+  border-radius: 7px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--gold); transform: translateY(-1px); }
+.btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  padding: 14px 28px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: background 0.2s;
+  display: inline-block;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.18); }
+
+/* PAGE */
+.page { max-width: 820px; margin: 0 auto; padding: 56px 24px 80px; }
+.section { margin-bottom: 60px; }
+.section-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* VALUE PROPS */
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+@media (max-width: 580px) { .value-grid { grid-template-columns: 1fr; } }
+.value-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 22px 20px;
+  transition: box-shadow 0.2s;
+}
+.value-card:hover { box-shadow: 0 4px 16px rgba(15,67,82,0.1); }
+.vc-icon { font-size: 24px; margin-bottom: 12px; }
+.vc-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.vc-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+/* INCLUDES LIST */
+.includes-list {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.il-head {
+  background: var(--navy);
+  padding: 16px 22px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.il-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.il-item:last-child { border-bottom: none; }
+.il-check {
+  width: 20px;
+  height: 20px;
+  background: var(--green-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 11px;
+  color: var(--green);
+  font-weight: 800;
+}
+.il-text {}
+.il-text strong { display: block; color: var(--navy); font-size: 14px; margin-bottom: 3px; }
+.il-text span { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+/* PROOF BLOCK */
+.proof-block {
+  background: linear-gradient(135deg, var(--gold-bg), #FDF7E8);
+  border: 1px solid rgba(196,152,90,0.3);
+  border-radius: 12px;
+  padding: 28px 32px;
+  position: relative;
+}
+.proof-block::before {
+  content: '\201C';
+  font-family: var(--font-display);
+  font-size: 6rem;
+  color: rgba(196,152,90,0.15);
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  line-height: 1;
+}
+.proof-quote {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.5;
+  margin-bottom: 14px;
+  position: relative;
+}
+.proof-context { font-size: 13px; color: var(--muted); }
+
+/* AI SECTION */
+.ai-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.ai-pill {
+  background: var(--navy);
+  color: rgba(255,255,255,0.8);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+}
+
+/* HOW IT WORKS */
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 36px;
+  height: 36px;
+  background: var(--ocean);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-content {}
+.step-content strong { display: block; font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+.step-content p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* EXAMPLE REPORT PREVIEW */
+.report-preview {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.rp-head {
+  background: linear-gradient(135deg, var(--navy), var(--ocean-deep));
+  padding: 18px 22px;
+}
+.rp-head h4 { font-family: var(--font-display); font-size: 1rem; color: var(--white); font-weight: 700; }
+.rp-head p { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.rp-body { padding: 18px 22px; }
+.rp-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+@media (max-width: 500px) { .rp-metrics { grid-template-columns: repeat(2,1fr); } }
+.rpm {
+  background: var(--sand);
+  border-radius: 7px;
+  padding: 10px 12px;
+  text-align: center;
+}
+.rpm-val { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 3px; }
+.rpm-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.rp-body p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+.rp-link {
+  display: block;
+  padding: 13px 22px;
+  border-top: 1px solid var(--border);
+  background: var(--sand);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ocean);
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s;
+}
+.rp-link:hover { background: var(--ocean-light); }
+
+/* CTA SECTION */
+.cta-section {
+  background: var(--navy);
+  border-radius: 14px;
+  padding: 40px 36px;
+  text-align: center;
+}
+.cta-section h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.cta-section p { font-size: 14px; color: rgba(255,255,255,0.65); max-width: 500px; margin: 0 auto 28px; line-height: 1.7; }
+.cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-email {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 16px;
+}
+.cta-email a { color: rgba(255,255,255,0.6); }
+
+/* FOOTER */
+.site-footer {
+  background: var(--navy);
+  margin-top: 0;
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+}
+.site-footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/index.html" class="nav-brand">Papamoa<span>.info</span></a>
+  <a href="mailto:jayden@papamoa.info" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-scarcity">
+      <span class="hs-dot"></span>
+      <span class="hs-text">One position available &bull; Real Estate</span>
+    </div>
+    <h1>You're Selling Papamoa.<br><em>Are You Showing Up</em><br>Where Papamoa Looks?</h1>
+    <p class="hero-sub">One local agent. Exclusively recommended. Monthly market reports that rank in Google and surface in AI search results. Direct leads, no platform sitting between you and your client.</p>
+    <div class="hero-actions">
+      <a href="mailto:jayden@papamoa.info" class="btn-primary">Express Interest</a>
+      <a href="/categories/real-estate.html" class="btn-secondary">See the Category Page</a>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- THE OPPORTUNITY -->
+  <div class="section">
+    <div class="section-eyebrow">The Opportunity</div>
+    <h2 class="section-title">Why a Listing Here Works Differently</h2>
+
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="vc-icon">🎯</div>
+        <div class="vc-title">Exclusive Position</div>
+        <div class="vc-desc">One agent, one neighbourhood, full commitment. You are not competing with a page full of agents who all paid the same fee for the same slot.</div>
+      </div>
+      <div class="value-card">
+        <div class="vc-icon">🤖</div>
+        <div class="vc-title">AI Search Presence</div>
+        <div class="vc-desc">When someone asks ChatGPT, Siri, or Google's AI overview "who is the best real estate agent in Papamoa" — your name should come back. We are building the site those tools draw from.</div>
+      </div>
+      <div class="value-card">
+        <div class="vc-icon">📰</div>
+        <div class="vc-title">Monthly Market Report</div>
+        <div class="vc-desc">A keyword-rich Papamoa property article written around your expertise every month. Published, shared to our social channels, and building authority over time.</div>
+      </div>
+      <div class="value-card">
+        <div class="vc-icon">📞</div>
+        <div class="vc-title">Direct Leads, No Gates</div>
+        <div class="vc-desc">Papamoa.info is a portal, not a gated platform. A motivated buyer or seller finds you here and calls you directly. No contact form sitting between you and your client.</div>
+      </div>
+    </div>
+
+    <div class="proof-block">
+      <div class="proof-quote">People ask us who we recommend for real estate in Papamoa. Right now, we don't have an answer. We'd like that answer to be you.</div>
+      <div class="proof-context">One genuine local recommendation leads. One lead is all it takes to make this worthwhile.</div>
+    </div>
+  </div>
+
+  <!-- WHAT'S INCLUDED -->
+  <div class="section">
+    <div class="section-eyebrow">What You Get</div>
+    <h2 class="section-title">The Featured Real Estate Position</h2>
+
+    <div class="includes-list">
+      <div class="il-head">Everything Included</div>
+      <div class="il-item">
+        <div class="il-check">&#10003;</div>
+        <div class="il-text">
+          <strong>Priority Featured listing in the Real Estate section</strong>
+          <span>Your name, agency, contact details, and profile at the top of the Papamoa.info real estate category page. The page ranks for local property searches.</span>
+        </div>
+      </div>
+      <div class="il-item">
+        <div class="il-check">&#10003;</div>
+        <div class="il-text">
+          <strong>Monthly Papamoa Property Market Report</strong>
+          <span>A full market article targeting the search terms buyers and sellers in Papamoa are actually using. Written around your expertise. Published on the site each month.</span>
+        </div>
+      </div>
+      <div class="il-item">
+        <div class="il-check">&#10003;</div>
+        <div class="il-text">
+          <strong>Social media sharing on every article</strong>
+          <span>Each monthly report is shared across Papamoa.info's social channels with your name and contact prominent. Reaches an engaged local audience.</span>
+        </div>
+      </div>
+      <div class="il-item">
+        <div class="il-check">&#10003;</div>
+        <div class="il-text">
+          <strong>AI search optimisation</strong>
+          <span>Your name and expertise woven into structured, authoritative local content that AI tools draw from when someone asks who handles real estate in Papamoa.</span>
+        </div>
+      </div>
+      <div class="il-item">
+        <div class="il-check">&#10003;</div>
+        <div class="il-text">
+          <strong>Direct contact, no platform barriers</strong>
+          <span>Phone, website, and email linked directly. No contact form delay. Buyers and sellers who find you here call you, not us.</span>
+        </div>
+      </div>
+      <div class="il-item">
+        <div class="il-check">&#10003;</div>
+        <div class="il-text">
+          <strong>The recommended local agent for our audience</strong>
+          <span>When locals ask us who to call about buying or selling in Papamoa, you are the name we give. That is a referral, not an impression.</span>
+        </div>
+      </div>
+      <div class="il-item">
+        <div class="il-check">&#10003;</div>
+        <div class="il-text">
+          <strong>Compounding content value</strong>
+          <span>Every article we publish adds to a growing body of locally authoritative content. A presence that gets stronger every month it exists, not static like a banner ad.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE HIDDEN HIT -->
+  <div class="section">
+    <div class="section-eyebrow">Beyond the Click</div>
+    <h2 class="section-title">What Traffic Reports Don't Show You</h2>
+
+    <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px;">A buyer searching "real estate agent Papamoa" may see your name and phone number right there in the search results or on our directory page — and never click anywhere. They already have what they need. They pick up the phone, save your number, or head to your own website directly. That conversion is real. It just doesn't show up in a form submission report.</p>
+
+    <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px;">Beyond direct traffic, being listed on a trusted local domain like Papamoa.info sends a quality signal to Google. It functions as a backlink from an established, locally authoritative site, reinforcing your own website's credibility in the eyes of the algorithm. Your Papamoa.info listing is doing quiet SEO work for your personal site, day and night.</p>
+
+    <div class="ai-bar">
+      <span class="ai-pill">ChatGPT</span>
+      <span class="ai-pill">Siri</span>
+      <span class="ai-pill">Google AI Overviews</span>
+      <span class="ai-pill">Gemini</span>
+      <span class="ai-pill">Answer Engine Optimisation</span>
+    </div>
+
+    <p style="font-size:14px;color:var(--muted);line-height:1.75;">Traditional SEO gets your website onto a list. Authority-based presence gets your name into the answer. Those are two very different things, and right now, most local agents are only chasing the first one. Papamoa.info is being built to be the source AI tools draw from when someone asks about Papamoa. If your name is woven into our content, your brand gets carried into those AI-generated answers, even when no search page is ever seen.</p>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section">
+    <div class="section-eyebrow">Process</div>
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Quick conversation</strong>
+          <p>A short call or coffee to understand your market focus, the areas you cover, and what you'd want to be known for. No sales pressure. Just a straightforward chat about whether this makes sense for you.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Your profile goes live</strong>
+          <p>A professionally written featured listing with your details, expertise, and contact information published at the top of the Papamoa.info real estate category page. Live within 48 hours of confirmation.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>First monthly market report</strong>
+          <p>We write and publish the first property market article under your name. Targeted at real search terms, structured for AI tools, shared to our social channels. This is your content engine from day one.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Ongoing monthly articles</strong>
+          <p>Each month, a fresh Papamoa property market update. Your brand builds alongside the site's authority. Every article adds to the foundation. This compounds. A banner ad doesn't.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAMPLE REPORT -->
+  <div class="section">
+    <div class="section-eyebrow">See It in Action</div>
+    <h2 class="section-title">Example: March 2026 Market Report</h2>
+    <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px;">This is the kind of content published monthly under the featured agent's name. Keyword-optimised, neighbourhood-specific, and written to rank for the searches buyers and sellers in Papamoa are actually doing.</p>
+
+    <div class="report-preview">
+      <div class="rp-head">
+        <h4>Papamoa Property Market — March 2026</h4>
+        <p>Published in partnership with Papamoa.info's featured local agent</p>
+      </div>
+      <div class="rp-body">
+        <div class="rp-metrics">
+          <div class="rpm"><div class="rpm-val">$895k</div><div class="rpm-label">Median Price</div></div>
+          <div class="rpm"><div class="rpm-val">38</div><div class="rpm-label">Listed</div></div>
+          <div class="rpm"><div class="rpm-val">29 days</div><div class="rpm-label">Avg DOM</div></div>
+          <div class="rpm"><div class="rpm-val">94%</div><div class="rpm-label">Sale/CV</div></div>
+        </div>
+        <p>March has brought more breathing room to the Papamoa market. Listing numbers are up, giving buyers more to choose from, while properties that are well-presented and priced realistically are still moving at a solid pace. Neighbourhood data, buyer and seller tips, and a forward look at April included...</p>
+      </div>
+      <a href="/categories/real-estate.html" class="rp-link">Read the full March report on the category page &rarr;</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section">
+    <div class="cta-section">
+      <h2>One Spot. One Agent. Ready When You Are.</h2>
+      <p>This position is available to one Papamoa real estate agent. If you'd like to discuss what a featured listing on Papamoa.info could mean for your business, reach out and we'll have a straightforward conversation about it.</p>
+      <div class="cta-actions">
+        <a href="mailto:jayden@papamoa.info" class="btn-primary">Email Jayden</a>
+        <a href="/categories/real-estate.html" class="btn-secondary">See the Category Page</a>
+      </div>
+      <div class="cta-email">Or email directly: <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a></div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Papamoa.info &bull; <a href="/index.html">Home</a> &bull; <a href="/all-listings.html">Directory</a> &bull; <a href="/sales/landing.html">List Your Business</a></p>
+  <p style="margin-top:8px">Proudly serving the Pāpāmoa community &bull; Bay of Plenty, New Zealand</p>
+</footer>
+
+</body>
+</html>
