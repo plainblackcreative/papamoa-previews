@@ -3,1141 +3,856 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papamoa.info — Site Index</title>
+  <title>Papamoa.info / Site Index</title>
+  <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --color-ocean: #3AABDE;
-      --color-ocean-deep: #2B3F5C;
-      --color-ocean-light: #e8f6fc;
-      --color-sand: #f5f0e8;
-      --color-sand-dark: #e8e0d0;
-      --color-dune: #c4a882;
-      --color-text: #1a1a1a;
-      --color-text-soft: #555;
-      --color-text-light: #888;
-      --color-white: #ffffff;
-      --color-border: #e2ddd5;
-      --color-green: #7DC143;
-      --color-green-light: #f0f8e8;
-      --color-red: #E8344A;
-      --color-amber: #f59e0b;
-      --radius: 8px;
-      --font-body: 'Figtree', sans-serif;
-      --font-display: 'Playfair Display', serif;
+      --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0;
+      --dune:#D4C4A0; --coral:#E8344A; --white:#FFFFFF; --ink:#0D1B2A;
+      --body:#1E2D3E; --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A;
     }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
 
-    body {
-      font-family: var(--font-body);
-      background: var(--color-sand);
-      color: var(--color-text);
-      min-height: 100vh;
-    }
+    /* NAV */
+    .site-nav { background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
 
-    /* HEADER */
-    .site-header {
-      background: var(--color-ocean-deep);
-      padding: 28px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .site-header h1 {
-      font-family: var(--font-display);
-      color: var(--color-white);
-      font-size: 1.5rem;
-      line-height: 1.2;
-    }
-    .site-header h1 span { color: var(--color-ocean); }
-    .site-header p {
-      color: rgba(255,255,255,0.45);
-      font-size: 0.8rem;
-      margin-top: 3px;
-    }
-    .repo-badge {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.7);
-      font-size: 0.75rem;
-      padding: 6px 14px;
-      border-radius: 20px;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
-    .repo-badge:hover { background: rgba(255,255,255,0.18); color: #fff; }
+    /* HERO */
+    .page-hero { background: var(--navy); padding: 36px 24px 32px; position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--lime), #5A9020); }
+    .hero-inner { max-width: 1060px; margin: 0 auto; position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); margin-bottom: 8px; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 6px; }
+    .page-hero h1 em { font-style: normal; color: var(--blue); }
+    .page-hero p { font-size: 0.84rem; color: rgba(255,255,255,0.5); }
+    .hero-meta { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+    .hero-meta a { color: var(--blue); text-decoration: none; }
 
-    /* CONTROLS */
-    .controls {
-      background: var(--color-white);
-      border-bottom: 1px solid var(--color-border);
-      padding: 12px 32px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-    }
-    .search-wrap {
-      position: relative;
-      flex: 1;
-      min-width: 180px;
-      max-width: 320px;
-    }
-    .search-wrap svg {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--color-text-light);
-      pointer-events: none;
-    }
-    #search {
-      width: 100%;
-      padding: 8px 12px 8px 34px;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: 0.875rem;
-      color: var(--color-text);
-      background: var(--color-sand);
-      outline: none;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    #search:focus { border-color: var(--color-ocean); background: #fff; }
+    /* WRAP */
+    .page-wrap { max-width: 1060px; margin: 0 auto; padding: 28px 20px 80px; }
 
-    .filter-pills { display: flex; gap: 6px; flex-wrap: wrap; }
-    .pill {
-      padding: 5px 14px;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      cursor: pointer;
-      border: 1.5px solid var(--color-border);
-      background: transparent;
-      color: var(--color-text-soft);
-      transition: all 0.15s;
-      font-family: var(--font-body);
-    }
-    .pill:hover { border-color: var(--color-ocean); color: var(--color-ocean-deep); }
-    .pill.active { background: var(--color-ocean-deep); border-color: var(--color-ocean-deep); color: #fff; }
+    /* FILTER BAR */
+    .filter-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+    .filter-input { flex: 1; min-width: 200px; padding: 9px 14px; border: 1px solid var(--border); border-radius: 7px; font-family: 'Figtree', sans-serif; font-size: 0.88rem; color: var(--body); background: var(--white); }
+    .filter-input:focus { outline: none; border-color: var(--blue); }
+    .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .ftab { padding: 6px 14px; font-size: 0.75rem; font-weight: 700; border-radius: 5px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; font-family: 'Figtree', sans-serif; transition: all 0.15s; white-space: nowrap; }
+    .ftab:hover { border-color: var(--blue); color: var(--blue); }
+    .ftab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
 
-    .page-count {
-      margin-left: auto;
-      font-size: 0.78rem;
-      color: var(--color-text-light);
-      white-space: nowrap;
-    }
+    /* SECTION HEADERS */
+    .section-head { display: flex; align-items: center; gap: 10px; margin: 32px 0 14px; }
+    .section-head h2 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); }
+    .section-head .sh-count { font-size: 0.7rem; font-weight: 700; background: var(--bg); border: 1px solid var(--border); color: var(--muted); padding: 2px 8px; border-radius: 10px; }
+    .section-head::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-    /* MAIN */
-    .main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 36px 24px 64px;
-    }
+    /* PAGE GRID */
+    .page-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
 
-    /* SECTION */
-    .section { margin-bottom: 44px; }
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--color-border);
-    }
-    .section-icon {
-      width: 30px; height: 30px;
-      border-radius: 7px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.95rem;
-      flex-shrink: 0;
-    }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      color: var(--color-ocean-deep);
-    }
-    .section-count {
-      margin-left: auto;
-      font-size: 0.73rem;
-      color: var(--color-text-light);
-      background: var(--color-sand-dark);
-      padding: 2px 8px;
-      border-radius: 10px;
-    }
+    /* PAGE CARD */
+    .page-card { background: var(--white); border: 1px solid var(--border); border-radius: 9px; padding: 14px 16px; text-decoration: none; color: inherit; display: flex; gap: 12px; align-items: flex-start; transition: all 0.15s; }
+    .page-card:hover { border-color: var(--blue); box-shadow: 0 2px 8px rgba(58,171,222,0.12); transform: translateY(-1px); }
+    .page-card.hidden { display: none; }
+    .pc-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+    .pc-body { flex: 1; min-width: 0; }
+    .pc-title { font-weight: 700; font-size: 0.88rem; color: var(--navy); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pc-path { font-size: 0.72rem; color: var(--blue); font-family: monospace; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pc-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.45; }
+    .pc-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+    .pc-tag { font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 3px; }
+    .tag-gold { background: rgba(200,150,42,0.12); color: var(--gold); border: 1px solid rgba(200,150,42,0.25); }
+    .tag-demo { background: rgba(58,171,222,0.1); color: var(--blue); border: 1px solid rgba(58,171,222,0.2); }
+    .tag-placeholder { background: rgba(125,193,67,0.1); color: #3A8020; border: 1px solid rgba(125,193,67,0.2); }
+    .tag-internal { background: rgba(96,112,128,0.1); color: var(--muted); border: 1px solid var(--border); }
+    .tag-review { background: rgba(232,52,74,0.1); color: var(--coral); border: 1px solid rgba(232,52,74,0.2); }
+    .tag-new { background: rgba(125,193,67,0.15); color: #2A7010; border: 1px solid rgba(125,193,67,0.3); }
+    .tag-ppp { background: rgba(43,63,92,0.1); color: var(--navy); border: 1px solid rgba(43,63,92,0.2); }
 
-    /* CARDS */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
-      gap: 10px;
-    }
-    .card {
-      background: var(--color-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 14px 16px;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--color-ocean);
-      opacity: 0;
-      transition: opacity 0.15s;
-    }
-    a.card:hover {
-      box-shadow: 0 4px 18px rgba(43,63,92,0.1);
-      border-color: var(--color-ocean);
-      transform: translateY(-1px);
-    }
-    a.card:hover::before { opacity: 1; }
+    /* NOT BUILT */
+    .page-card.not-built { opacity: 0.5; pointer-events: none; background: var(--bg); }
+    .page-card.not-built .pc-path { color: var(--muted); }
 
-    .card-icon { font-size: 1.1rem; line-height: 1; margin-top: 1px; flex-shrink: 0; }
-    .card-body { flex: 1; min-width: 0; }
-    .card-name {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--color-text);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .card-path {
-      font-size: 0.7rem;
-      color: var(--color-text-light);
-      margin-top: 2px;
-      font-family: 'Courier New', monospace;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .card-desc {
-      font-size: 0.78rem;
-      color: var(--color-text-soft);
-      margin-top: 5px;
-      line-height: 1.45;
-    }
-    .card-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 7px; }
-    .tag {
-      font-size: 0.63rem;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .tag-gold     { background: #fef3c7; color: #92400e; }
-    .tag-silver   { background: #f1f5f9; color: #475569; }
-    .tag-placeholder { background: var(--color-green-light); color: #3a6b10; }
-    .tag-demo     { background: var(--color-ocean-light); color: #1a6b9a; }
-    .tag-ppp      { background: #fdf2f8; color: #9d174d; }
-    .tag-admin    { background: #fff7ed; color: #9a3412; }
-    .tag-wip      { background: #fef9c3; color: #854d0e; }
+    /* EMPTY STATE */
+    .empty-state { text-align: center; padding: 48px 20px; color: var(--muted); }
+    .empty-state p { font-size: 0.88rem; margin-bottom: 6px; }
+    .empty-state small { font-size: 0.78rem; opacity: 0.7; }
 
-    /* Disabled card (not-yet-built) */
-    .card.disabled {
-      opacity: 0.45;
-      cursor: default;
-      pointer-events: none;
-    }
+    /* STATS ROW */
+    .stats-row { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+    .stat-chip { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+    .stat-chip strong { color: var(--navy); font-size: 1rem; font-family: 'Playfair Display', serif; }
 
-    /* No results */
-    .no-results { display: none; text-align: center; padding: 64px 20px; }
-    .no-results.visible { display: block; }
-    .no-results h3 { font-size: 1rem; margin-bottom: 6px; color: var(--color-text-soft); }
-    .no-results p { font-size: 0.85rem; color: var(--color-text-light); }
+    /* FOOTER */
+    .site-footer { background: var(--navy); padding: 16px 24px; text-align: center; font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-top: 40px; }
+    .site-footer a { color: var(--blue); }
 
-    .section.hidden { display: none; }
-    .card.hidden { display: none; }
-
-    footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 0.78rem;
-      color: var(--color-text-light);
-      border-top: 1px solid var(--color-border);
-    }
-
-    @media (max-width: 600px) {
-      .site-header { padding: 20px 16px; }
-      .controls { padding: 10px 16px; }
-      .main { padding: 24px 14px 48px; }
-    }
+    @media (max-width: 600px) { .page-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div>
-    <h1>Papamoa.info <span>/ Site Index</span></h1>
-    <p>plainblackcreative/papamoa-previews · GitHub Pages</p>
-  </div>
-  <a href="https://github.com/plainblackcreative/papamoa-previews" class="repo-badge" target="_blank">↗ GitHub Repo</a>
-</header>
+<nav class="site-nav">
+  <a href="/" class="nav-brand">Papamoa<em>.info</em></a>
+</nav>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input id="search" type="text" placeholder="Search pages…" autocomplete="off">
+<div class="page-hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Internal</div>
+      <h1>Papamoa<em>.info</em> / Site Index</h1>
+      <p>plainblackcreative/papamoa-previews &middot; GitHub Pages</p>
+    </div>
+    <div class="hero-meta">
+      <a href="https://github.com/plainblackcreative/papamoa-previews" target="_blank" rel="noopener">&#8599; GitHub Repo</a>
+    </div>
   </div>
-  <div class="filter-pills">
-    <button class="pill active" data-filter="all">All</button>
-    <button class="pill" data-filter="root">Root</button>
-    <button class="pill" data-filter="listings">Listings</button>
-    <button class="pill" data-filter="categories">Categories</button>
-    <button class="pill" data-filter="sales">Sales</button>
-    <button class="pill" data-filter="previews">Previews</button>
-    <button class="pill" data-filter="onboarding">Onboarding</button>
-    <button class="pill" data-filter="admin">Admin</button>
-    <button class="pill" data-filter="docs">Docs</button>
-  </div>
-  <span class="page-count" id="page-count"></span>
 </div>
 
-<main class="main">
+<div class="page-wrap">
 
-  <!-- ROOT -->
-  <section class="section" data-section="root">
-    <div class="section-header">
-      <div class="section-icon" style="background:#e8f6fc">🏠</div>
-      <span class="section-title">Root</span>
-      <span class="section-count"></span>
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <input type="text" class="filter-input" id="search-input" placeholder="Search pages..." oninput="filterPages()">
+    <div class="filter-tabs">
+      <button class="ftab active" onclick="filterTab('all', this)">All</button>
+      <button class="ftab" onclick="filterTab('root', this)">Root</button>
+      <button class="ftab" onclick="filterTab('listings', this)">Listings</button>
+      <button class="ftab" onclick="filterTab('categories', this)">Categories</button>
+      <button class="ftab" onclick="filterTab('articles', this)">Articles</button>
+      <button class="ftab" onclick="filterTab('sales', this)">Sales</button>
+      <button class="ftab" onclick="filterTab('previews', this)">Previews</button>
+      <button class="ftab" onclick="filterTab('onboarding', this)">Onboarding</button>
+      <button class="ftab" onclick="filterTab('admin', this)">Admin</button>
+      <button class="ftab" onclick="filterTab('community', this)">Community</button>
+      <button class="ftab" onclick="filterTab('docs', this)">Docs</button>
     </div>
-    <div class="cards">
-      <a href="https://plainblackcreative.github.io/papamoa-previews/index.html" target="_blank" class="card" data-name="Sales Landing" data-section="root sales">
-        <span class="card-icon">🎯</span>
-        <div class="card-body">
-          <div class="card-name">Sales Landing</div>
-          <div class="card-path">/index.html</div>
-          <div class="card-desc">Main entry — cold email CTA destination with Web3Forms visibility form</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html" target="_blank" class="card" data-name="Directory Homepage" data-section="root">
-        <span class="card-icon">🗂️</span>
-        <div class="card-body">
-          <div class="card-name">Directory Homepage</div>
-          <div class="card-path">/homepage.html</div>
-          <div class="card-desc">Category browse — Food & Drink, Surf & Tides, and more</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/all-listings.html" target="_blank" class="card" data-name="All Listings Showcase" data-section="root">
-        <span class="card-icon">📋</span>
-        <div class="card-body">
-          <div class="card-name">All Listings Showcase</div>
-          <div class="card-path">/all-listings.html</div>
-          <div class="card-desc">Demo of all live listings — directory overview for prospects</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sitemap.html" target="_blank" class="card" data-name="Site Index" data-section="root">
-        <span class="card-icon">🗺️</span>
-        <div class="card-body">
-          <div class="card-name">Site Index</div>
-          <div class="card-path">/sitemap.html</div>
-          <div class="card-desc">You are here</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- LISTINGS -->
-  <section class="section" data-section="listings">
-    <div class="section-header">
-      <div class="section-icon" style="background:#f0f8e8">📍</div>
-      <span class="section-title">Listings</span>
-      <span class="section-count"></span>
-    </div>
-    <div class="cards">
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/listings.html" target="_blank" class="card" data-name="Listings Index" data-section="listings">
-        <span class="card-icon">📋</span>
-        <div class="card-body">
-          <div class="card-name">Listings Index</div>
-          <div class="card-path">/listings/listings.html</div>
-          <div class="card-desc">Pāpāmoa business listings index page</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/combined-listings.html" target="_blank" class="card" data-name="Combined Listings" data-section="listings">
-        <span class="card-icon">📑</span>
-        <div class="card-body">
-          <div class="card-name">Combined Listings</div>
-          <div class="card-path">/listings/combined-listings.html</div>
-          <div class="card-desc">All listing pages combined — template comparison candidate</div>
-          <div class="card-tags"><span class="tag tag-wip">Review needed</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/listing-template.html" target="_blank" class="card" data-name="Listing Template" data-section="listings">
-        <span class="card-icon">🗒️</span>
-        <div class="card-body">
-          <div class="card-name">Listing Template</div>
-          <div class="card-path">/listings/listing-template.html</div>
-          <div class="card-desc">Master listing template — to be standardised</div>
-          <div class="card-tags"><span class="tag tag-wip">Review needed</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/the-wagon-papamoa.html" target="_blank" class="card" data-name="The Wagon Pāpāmoa" data-section="listings">
-        <span class="card-icon">🍔</span>
-        <div class="card-body">
-          <div class="card-name">The Wagon Pāpāmoa</div>
-          <div class="card-path">/listings/the-wagon-papamoa.html</div>
-          <div class="card-desc">Gold listing demo with Menu Add-On — Food & Drink</div>
-          <div class="card-tags"><span class="tag tag-gold">Gold</span><span class="tag tag-demo">Demo</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/papamoa-orthodontist.html" target="_blank" class="card" data-name="Pāpāmoa Orthodontist" data-section="listings">
-        <span class="card-icon">🦷</span>
-        <div class="card-body">
-          <div class="card-name">Pāpāmoa Orthodontist</div>
-          <div class="card-path">/listings/papamoa-orthodontist.html</div>
-          <div class="card-desc">Professional services listing demo</div>
-          <div class="card-tags"><span class="tag tag-demo">Demo</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/lawn-mowing-papamoa.html" target="_blank" class="card" data-name="Lawn Mowing Pāpāmoa" data-section="listings">
-        <span class="card-icon">🌿</span>
-        <div class="card-body">
-          <div class="card-name">Lawn Mowing Pāpāmoa</div>
-          <div class="card-path">/listings/lawn-mowing-papamoa.html</div>
-          <div class="card-desc">Placeholder — captures enquiries while sub-category is empty</div>
-          <div class="card-tags"><span class="tag tag-placeholder">Placeholder</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/greencut-papamoa.html" target="_blank" class="card" data-name="Greencut Pāpāmoa" data-section="listings">
-        <span class="card-icon">✂️</span>
-        <div class="card-body">
-          <div class="card-name">Greencut Pāpāmoa</div>
-          <div class="card-path">/listings/greencut-papamoa.html</div>
-          <div class="card-desc">Lawn & garden listing demo</div>
-          <div class="card-tags"><span class="tag tag-demo">Demo</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/speedy-screens-papamoa.html" target="_blank" class="card" data-name="Speedy Screens Pāpāmoa" data-section="listings">
-        <span class="card-icon">🔧</span>
-        <div class="card-body">
-          <div class="card-name">Speedy Screens Pāpāmoa</div>
-          <div class="card-path">/listings/speedy-screens-papamoa.html</div>
-          <div class="card-desc">Trades listing demo</div>
-          <div class="card-tags"><span class="tag tag-demo">Demo</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/xanadu-book-exchange-papamoa.html" target="_blank" class="card" data-name="Xanadu Book Exchange Papamoa books" data-section="listings">
-        <span class="card-icon">📚</span>
-        <div class="card-body">
-          <div class="card-name">Xanadu Book Exchange</div>
-          <div class="card-path">/listings/xanadu-book-exchange-papamoa.html</div>
-          <div class="card-desc">Second-hand book exchange in Pāpāmoa</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/kayco-nails-papamoa.html" target="_blank" class="card" data-name="Kayco Nails Papamoa nail salon beauty" data-section="listings">
-        <span class="card-icon">💅</span>
-        <div class="card-body">
-          <div class="card-name">Kayco Nails</div>
-          <div class="card-path">/listings/kayco-nails-papamoa.html</div>
-          <div class="card-desc">Nail salon listing in Pāpāmoa</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/listings/the-cave-papamoa.html" target="_blank" class="card" data-name="The Cave Papamoa" data-section="listings">
-        <span class="card-icon">🏠</span>
-        <div class="card-body">
-          <div class="card-name">The Cave Pāpāmoa</div>
-          <div class="card-path">/listings/the-cave-papamoa.html</div>
-          <div class="card-desc">Local business listing in Pāpāmoa</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- CATEGORIES -->
-  <section class="section" data-section="categories">
-    <div class="section-header">
-      <div class="section-icon" style="background:#fdf2f8">🗃️</div>
-      <span class="section-title">Categories</span>
-      <span class="section-count"></span>
-    </div>
-    <div class="cards">
-      <a href="https://plainblackcreative.github.io/papamoa-previews/categories/lawn-mowing.html" target="_blank" class="card" data-name="Lawn Mowing" data-section="categories">
-        <span class="card-icon">🌱</span>
-        <div class="card-body">
-          <div class="card-name">Lawn Mowing</div>
-          <div class="card-path">/categories/lawn-mowing.html</div>
-          <div class="card-desc">Sub-category listing page</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/categories/fishing.html" target="_blank" class="card" data-name="Fishing & Surf" data-section="categories">
-        <span class="card-icon">🎣</span>
-        <div class="card-body">
-          <div class="card-name">Fishing & Surf</div>
-          <div class="card-path">/categories/fishing.html</div>
-          <div class="card-desc">Surf & Tides sub-category page</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/categories/surf-tides.html" target="_blank" class="card" data-name="Surf & Tides" data-section="categories">
-        <span class="card-icon">🏄</span>
-        <div class="card-body">
-          <div class="card-name">Surf & Tides</div>
-          <div class="card-path">/categories/surf-tides.html</div>
-          <div class="card-desc">Conditions, tide times, 7-day forecast, Hakanini spotlight</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/categories/gardening.html" target="_blank" class="card" data-name="Gardening" data-section="categories">
-        <span class="card-icon">🪴</span>
-        <div class="card-body">
-          <div class="card-name">Gardening</div>
-          <div class="card-path">/categories/gardening.html</div>
-          <div class="card-desc">Gardening sub-category page</div>
-        </div>
-      </a>
-      <div class="card disabled" data-name="Entertainment" data-section="categories">
-        <span class="card-icon">🎭</span>
-        <div class="card-body">
-          <div class="card-name">Entertainment</div>
-          <div class="card-path">/categories/entertainment.html</div>
-          <div class="card-tags"><span class="tag tag-wip">Not built</span></div>
-        </div>
-      </div>
-      <div class="card disabled" data-name="Shopping" data-section="categories">
-        <span class="card-icon">🛍️</span>
-        <div class="card-body">
-          <div class="card-name">Shopping</div>
-          <div class="card-path">/categories/shopping.html</div>
-          <div class="card-tags"><span class="tag tag-wip">Not built</span></div>
-        </div>
-      </div>
-      <div class="card disabled" data-name="Services" data-section="categories">
-        <span class="card-icon">🛠️</span>
-        <div class="card-body">
-          <div class="card-name">Services</div>
-          <div class="card-path">/categories/services.html</div>
-          <div class="card-tags"><span class="tag tag-wip">Not built</span></div>
-        </div>
-      </div>
-      <div class="card disabled" data-name="Accommodation" data-section="categories">
-        <span class="card-icon">🏨</span>
-        <div class="card-body">
-          <div class="card-name">Accommodation</div>
-          <div class="card-path">/categories/accommodation.html</div>
-          <div class="card-tags"><span class="tag tag-wip">Not built</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SALES -->
-  <section class="section" data-section="sales">
-    <div class="section-header">
-      <div class="section-icon" style="background:#fff7ed">💼</div>
-      <span class="section-title">Sales</span>
-      <span class="section-count"></span>
-    </div>
-    <div class="cards">
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sales/landing.html" target="_blank" class="card" data-name="Sales Landing copy" data-section="sales">
-        <span class="card-icon">🎯</span>
-        <div class="card-body">
-          <div class="card-name">Sales Landing (copy)</div>
-          <div class="card-path">/sales/landing.html</div>
-          <div class="card-desc">Mirror of index.html — brand green logo fix still needed</div>
-          <div class="card-tags"><span class="tag tag-wip">Logo fix needed</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sales/main-lander.html" target="_blank" class="card" data-name="Main Lander" data-section="sales">
-        <span class="card-icon">📣</span>
-        <div class="card-body">
-          <div class="card-name">Main Lander</div>
-          <div class="card-path">/sales/main-lander.html</div>
-          <div class="card-desc">Main sales lander with Web3Forms CTA</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sales/menu-addon.html" target="_blank" class="card" data-name="Menu Add-On Sales Page" data-section="sales">
-        <span class="card-icon">🍽️</span>
-        <div class="card-body">
-          <div class="card-name">Menu Add-On Sales Page</div>
-          <div class="card-path">/sales/menu-addon.html</div>
-          <div class="card-desc">Dedicated pitch page for the $199/yr Menu Add-On</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sales/menu-addon-demo.html" target="_blank" class="card" data-name="Menu Add-On Demo" data-section="sales">
-        <span class="card-icon">🍽️</span>
-        <div class="card-body">
-          <div class="card-name">Menu Add-On Demo</div>
-          <div class="card-path">/sales/menu-addon-demo.html</div>
-          <div class="card-desc">Interactive demo of the Menu / Service List Add-On</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sales/why-list.html" target="_blank" class="card" data-name="Why List Editorial" data-section="sales">
-        <span class="card-icon">📰</span>
-        <div class="card-body">
-          <div class="card-name">Why List — Editorial</div>
-          <div class="card-path">/sales/why-list.html</div>
-          <div class="card-desc">AEO/SEO pitch article for prospects</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sales/facebook-posts.html" target="_blank" class="card" data-name="Facebook post library templates" data-section="sales">
-        <span class="card-icon">📘</span>
-        <div class="card-body">
-          <div class="card-name">Facebook Post Library</div>
-          <div class="card-path">/sales/facebook-posts.html</div>
-          <div class="card-desc">Post templates for new listings — community hero, lifestyle, AI-first angles</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sales/post-call-landing.html" target="_blank" class="card" data-name="Post-Call Landing" data-section="sales">
-        <span class="card-icon">📞</span>
-        <div class="card-body">
-          <div class="card-name">Post-Call Landing</div>
-          <div class="card-path">/sales/post-call-landing.html</div>
-          <div class="card-desc">Sent after a sales call — recap + next steps CTA</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sales/followup-emails.html" target="_blank" class="card" data-name="Follow-Up Email Sequence" data-section="sales">
-        <span class="card-icon">📧</span>
-        <div class="card-body">
-          <div class="card-name">Follow-Up Email Sequence</div>
-          <div class="card-path">/sales/followup-emails.html</div>
-          <div class="card-desc">Day 3 / Day 6 / Day 10 Brevo sequence templates</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sales/email-template.html" target="_blank" class="card" data-name="Cold Email Template" data-section="sales">
-        <span class="card-icon">✉️</span>
-        <div class="card-body">
-          <div class="card-name">Cold Email Template</div>
-          <div class="card-path">/sales/email-template.html</div>
-          <div class="card-desc">Brevo-ready HTML cold email template</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/sales/sales-scripts.html" target="_blank" class="card" data-name="Sales Call Scripts" data-section="sales">
-        <span class="card-icon">🗣️</span>
-        <div class="card-body">
-          <div class="card-name">Sales Call Scripts</div>
-          <div class="card-path">/sales/sales-scripts.html</div>
-          <div class="card-desc">Phone frameworks and objection handling</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- PREVIEWS -->
-  <section class="section" data-section="previews">
-    <div class="section-header">
-      <div class="section-icon" style="background:#fdf2f8">👁️</div>
-      <span class="section-title">Client Previews (PPPs)</span>
-      <span class="section-count"></span>
-    </div>
-    <div class="cards">
-      <a href="https://plainblackcreative.github.io/papamoa-previews/previews/driftwood-cafe.html" target="_blank" class="card" data-name="Driftwood Café" data-section="previews">
-        <span class="card-icon">☕</span>
-        <div class="card-body">
-          <div class="card-name">Driftwood Café</div>
-          <div class="card-path">/previews/driftwood-cafe.html</div>
-          <div class="card-desc">PPP template — pre-payment Gold client preview with demo data</div>
-          <div class="card-tags"><span class="tag tag-ppp">PPP</span><span class="tag tag-gold">Gold</span></div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ONBOARDING -->
-  <section class="section" data-section="onboarding">
-    <div class="section-header">
-      <div class="section-icon" style="background:#f0f8e8">✅</div>
-      <span class="section-title">Onboarding</span>
-      <span class="section-count"></span>
-    </div>
-    <div class="cards">
-      <a href="https://plainblackcreative.github.io/papamoa-previews/onboarding/confirm-listing.html" target="_blank" class="card" data-name="Confirm Listing" data-section="onboarding">
-        <span class="card-icon">✍️</span>
-        <div class="card-body">
-          <div class="card-name">Confirm Listing</div>
-          <div class="card-path">/onboarding/confirm-listing.html</div>
-          <div class="card-desc">Client approval — step 2 of Draft → Approval → Go Live</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ADMIN -->
-  <section class="section" data-section="admin">
-    <div class="section-header">
-      <div class="section-icon" style="background:#fff7ed">⚙️</div>
-      <span class="section-title">Admin</span>
-      <span class="section-count"></span>
-    </div>
-    <div class="cards">
-      <a href="https://plainblackcreative.github.io/papamoa-previews/admin/upload.html" target="_blank" class="card" data-name="News events upload admin" data-section="admin">
-        <span class="card-icon">📤</span>
-        <div class="card-body">
-          <div class="card-name">News & Events Upload</div>
-          <div class="card-path">/admin/upload.html</div>
-          <div class="card-desc">Admin upload page for news and events — submissions queue for Jay's approval</div>
-          <div class="card-tags"><span class="tag tag-admin">Internal</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/admin/listing-health.html" target="_blank" class="card" data-name="Listing Health Dashboard" data-section="admin">
-        <span class="card-icon">📊</span>
-        <div class="card-body">
-          <div class="card-name">Listing Health Dashboard</div>
-          <div class="card-path">/admin/listing-health.html</div>
-          <div class="card-desc">Quality scoring across all active listings</div>
-          <div class="card-tags"><span class="tag tag-admin">Internal</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/admin/sales-funnel.html" target="_blank" class="card" data-name="Sales Funnel Dashboard" data-section="admin">
-        <span class="card-icon">🔀</span>
-        <div class="card-body">
-          <div class="card-name">Sales Funnel Dashboard</div>
-          <div class="card-path">/admin/sales-funnel.html</div>
-          <div class="card-desc">Interactive sales process — lead to close stages</div>
-          <div class="card-tags"><span class="tag tag-admin">Internal</span></div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- COMMUNITY -->
-  <section class="section" data-section="community">
-    <div class="section-header">
-      <div class="section-icon" style="background:#f0e6fd">🤝</div>
-      <span class="section-title">Community</span>
-      <span class="section-count"></span>
-    </div>
-    <div class="cards">
-      <a href="https://plainblackcreative.github.io/papamoa-previews/community/community.html" target="_blank" class="card" data-name="Community resources support groups Papamoa" data-section="community">
-        <span class="card-icon">🤝</span>
-        <div class="card-body">
-          <div class="card-name">Community Resources & Support</div>
-          <div class="card-path">/community/community.html</div>
-          <div class="card-desc">Facebook groups, food banks, mental health, volunteer opportunities</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/" target="_blank" class="card" data-name="Safety Support hub community" data-section="community">
-        <span class="card-icon">🛡️</span>
-        <div class="card-body">
-          <div class="card-name">Safety & Support Hub</div>
-          <div class="card-path">/community/safety-support/</div>
-          <div class="card-desc">Community safety and support landing page</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/neighbourhood-support/" target="_blank" class="card" data-name="Neighbourhood support community" data-section="community">
-        <span class="card-icon">🏘️</span>
-        <div class="card-body">
-          <div class="card-name">Neighbourhood Support</div>
-          <div class="card-path">/community/safety-support/neighbourhood-support/</div>
-          <div class="card-desc">Local neighbourhood support resources</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/police-crime/" target="_blank" class="card" data-name="Police crime safety community" data-section="community">
-        <span class="card-icon">👮</span>
-        <div class="card-body">
-          <div class="card-name">Police & Crime</div>
-          <div class="card-path">/community/safety-support/police-crime/</div>
-          <div class="card-desc">Local police, crime prevention and reporting</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/emergencies/" target="_blank" class="card" data-name="Emergencies safety community" data-section="community">
-        <span class="card-icon">🚨</span>
-        <div class="card-body">
-          <div class="card-name">Emergencies</div>
-          <div class="card-path">/community/safety-support/emergencies/</div>
-          <div class="card-desc">Emergency contacts, civil defence, and local preparedness</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/community-groups/" target="_blank" class="card" data-name="Community groups clubs Papamoa" data-section="community">
-        <span class="card-icon">👥</span>
-        <div class="card-body">
-          <div class="card-name">Community Groups</div>
-          <div class="card-path">/community/safety-support/community-groups/</div>
-          <div class="card-desc">Local clubs, groups, and community organisations</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- DOCS -->
-  <section class="section" data-section="docs">
-    <div class="section-header">
-      <div class="section-icon" style="background:#e8f6fc">📚</div>
-      <span class="section-title">Docs</span>
-      <span class="section-count"></span>
-    </div>
-    <div class="cards">
-      <a href="https://plainblackcreative.github.io/papamoa-previews/docs/task-plan.html" target="_blank" class="card" data-name="Pre-demo task plan checklist" data-section="docs">
-        <span class="card-icon">✅</span>
-        <div class="card-body">
-          <div class="card-name">Pre-Demo Task Plan</div>
-          <div class="card-path">/docs/task-plan.html</div>
-          <div class="card-desc">Pre-launch checklist and task tracker for demo preparation</div>
-          <div class="card-tags"><span class="tag tag-admin">Internal</span></div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/docs/page-structure-plan.html" target="_blank" class="card" data-name="Page structure plan SEO GEO" data-section="docs">
-        <span class="card-icon">🗺️</span>
-        <div class="card-body">
-          <div class="card-name">Page Structure Plan</div>
-          <div class="card-path">/docs/page-structure-plan.html</div>
-          <div class="card-desc">SEO & GEO page structure plan — build order, ad spots, content strategy</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/docs/current-state-report.html" target="_blank" class="card" data-name="Current State Report" data-section="docs">
-        <span class="card-icon">📄</span>
-        <div class="card-body">
-          <div class="card-name">Current State Report</div>
-          <div class="card-path">/docs/current-state-report.html</div>
-          <div class="card-desc">Internal project status report</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/docs/crm-sheet-reference.html" target="_blank" class="card" data-name="CRM Sheet Reference" data-section="docs">
-        <span class="card-icon">🗒️</span>
-        <div class="card-body">
-          <div class="card-name">CRM Sheet Reference</div>
-          <div class="card-path">/docs/crm-sheet-reference.html</div>
-          <div class="card-desc">Google Sheets CRM column definitions and usage guide</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ARTICLES -->
-  <section class="section" data-section="articles">
-    <div class="section-header">
-      <div class="section-icon" style="background:#edf7e1">📰</div>
-      <span class="section-title">Articles</span>
-      <span class="section-count"></span>
-    </div>
-    <div class="cards">
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/summer-insects-papamoa.html" target="_blank" class="card" data-name="Summer insects flies mosquitoes Papamoa" data-section="articles">
-        <span class="card-icon">🦟</span>
-        <div class="card-body">
-          <div class="card-name">Summer Insects in Pāpāmoa</div>
-          <div class="card-path">/articles/summer-insects-papamoa.html</div>
-          <div class="card-desc">Flies, mozzies, wasps — what they are and how to keep them out. Speedy Screens spotlight.</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/easter-trading-hours.html" target="_blank" class="card" data-name="Easter trading hours shops Papamoa 2026" data-section="articles">
-        <span class="card-icon">🐣</span>
-        <div class="card-body">
-          <div class="card-name">Easter Trading Hours 2026</div>
-          <div class="card-path">/articles/easter-trading-hours.html</div>
-          <div class="card-desc">Pāpāmoa shops and services Easter opening hours</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/school-terms-holidays.html" target="_blank" class="card" data-name="School terms holidays 2026 Papamoa" data-section="articles">
-        <span class="card-icon">🏫</span>
-        <div class="card-body">
-          <div class="card-name">School Terms and Holidays 2026</div>
-          <div class="card-path">/articles/school-terms-holidays.html</div>
-          <div class="card-desc">Pāpāmoa school term dates and holiday periods</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/tax-kiwisaver.html" target="_blank" class="card" data-name="NZ tax PAYE GST KiwiSaver calculators Papamoa" data-section="articles">
-        <span class="card-icon">💰</span>
-        <div class="card-body">
-          <div class="card-name">NZ Tax and KiwiSaver Guide</div>
-          <div class="card-path">/articles/tax-kiwisaver.html</div>
-          <div class="card-desc">PAYE and GST calculators, KiwiSaver info, key dates</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/weddings.html" target="_blank" class="card" data-name="Weddings venues photographers suppliers Papamoa" data-section="articles">
-        <span class="card-icon">💍</span>
-        <div class="card-body">
-          <div class="card-name">Weddings in Pāpāmoa</div>
-          <div class="card-path">/articles/weddings.html</div>
-          <div class="card-desc">Venues, photographers and local wedding suppliers</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/aims-games.html" target="_blank" class="card" data-name="AIMS Games Tauranga Papamoa sport families" data-section="articles">
-        <span class="card-icon">🏅</span>
-        <div class="card-body">
-          <div class="card-name">AIMS Games</div>
-          <div class="card-path">/articles/aims-games.html</div>
-          <div class="card-desc">Tauranga/Pāpāmoa guide for families attending AIMS Games</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/dinner-at-the-domain.html" target="_blank" class="card" data-name="Dinner at the Domain Papamoa event" data-section="articles">
-        <span class="card-icon">🌙</span>
-        <div class="card-body">
-          <div class="card-name">Dinner at The Domain</div>
-          <div class="card-path">/articles/dinner-at-the-domain.html</div>
-          <div class="card-desc">Annual outdoor dining event at Pāpāmoa Domain — dates, tickets, info</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/dogs-papamoa.html" target="_blank" class="card" data-name="Dogs Papamoa beach rules walking off-lead" data-section="articles">
-        <span class="card-icon">🐕</span>
-        <div class="card-body">
-          <div class="card-name">Dogs in Pāpāmoa</div>
-          <div class="card-path">/articles/dogs-papamoa.html</div>
-          <div class="card-desc">Beach rules, off-lead zones, walking areas, attack reporting</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/fuel-prices.html" target="_blank" class="card" data-name="Fuel prices petrol stations Papamoa" data-section="articles">
-        <span class="card-icon">⛽</span>
-        <div class="card-body">
-          <div class="card-name">Fuel Stations & Prices</div>
-          <div class="card-path">/articles/fuel-prices.html</div>
-          <div class="card-desc">Pāpāmoa fuel stations, current prices, EV charging</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/gordon-spratt-reserve.html" target="_blank" class="card" data-name="Gordon Spratt Reserve Papamoa park facilities" data-section="articles">
-        <span class="card-icon">🏞️</span>
-        <div class="card-body">
-          <div class="card-name">Gordon Spratt Reserve</div>
-          <div class="card-path">/articles/gordon-spratt-reserve.html</div>
-          <div class="card-desc">Facilities, sports fields, events, parking and dog rules</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/kids-birthday-parties.html" target="_blank" class="card" data-name="Kids birthday parties venues Papamoa" data-section="articles">
-        <span class="card-icon">🎂</span>
-        <div class="card-body">
-          <div class="card-name">Kids Birthday Parties</div>
-          <div class="card-path">/articles/kids-birthday-parties.html</div>
-          <div class="card-desc">Venues, entertainers, catering and party hire in Pāpāmoa</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/library.html" target="_blank" class="card" data-name="Papamoa library hours services programmes" data-section="articles">
-        <span class="card-icon">📚</span>
-        <div class="card-body">
-          <div class="card-name">Pāpāmoa Library</div>
-          <div class="card-path">/articles/library.html</div>
-          <div class="card-desc">Hours, services, children's programmes, community room hire</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/local-government.html" target="_blank" class="card" data-name="TCC council mayor MP representatives Papamoa" data-section="articles">
-        <span class="card-icon">🏛️</span>
-        <div class="card-body">
-          <div class="card-name">Local Government & Representatives</div>
-          <div class="card-path">/articles/local-government.html</div>
-          <div class="card-desc">TCC councillors, Mayor, Bay of Plenty MP, BOPRC contacts</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/maori-history.html" target="_blank" class="card" data-name="Maori history Papamoa nga potiki place names" data-section="articles">
-        <span class="card-icon">🌿</span>
-        <div class="card-body">
-          <div class="card-name">Māori History of Pāpāmoa</div>
-          <div class="card-path">/articles/maori-history.html</div>
-          <div class="card-desc">Ngā Pōtiki, Tamapahore Marae, place names and living culture</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/mount-maunganui.html" target="_blank" class="card" data-name="Mount Maunganui things to do gateway page" data-section="articles">
-        <span class="card-icon">🌊</span>
-        <div class="card-body">
-          <div class="card-name">Mount Maunganui</div>
-          <div class="card-path">/articles/mount-maunganui.html</div>
-          <div class="card-desc">Gateway page — things to do, distance from Pāpāmoa, network funnel</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/news-events.html" target="_blank" class="card" data-name="News events calendar Papamoa community" data-section="articles">
-        <span class="card-icon">📅</span>
-        <div class="card-body">
-          <div class="card-name">News & Events</div>
-          <div class="card-path">/articles/news-events.html</div>
-          <div class="card-desc">Upcoming events calendar, local news feed, community submissions</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/notable-people.html" target="_blank" class="card" data-name="Notable people famous from Papamoa" data-section="articles">
-        <span class="card-icon">⭐</span>
-        <div class="card-body">
-          <div class="card-name">Notable People from Pāpāmoa</div>
-          <div class="card-path">/articles/notable-people.html</div>
-          <div class="card-desc">Athletes, artists and figures with a connection to Pāpāmoa</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/papamoa-hills.html" target="_blank" class="card" data-name="Papamoa Hills walks tracks cultural heritage park" data-section="articles">
-        <span class="card-icon">⛰️</span>
-        <div class="card-body">
-          <div class="card-name">Pāpāmoa Hills</div>
-          <div class="card-path">/articles/papamoa-hills.html</div>
-          <div class="card-desc">Cultural Heritage Regional Park — tracks, access, Māori significance</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/parks-playgrounds.html" target="_blank" class="card" data-name="Parks playgrounds skate parks picnic Papamoa" data-section="articles">
-        <span class="card-icon">🛝</span>
-        <div class="card-body">
-          <div class="card-name">Parks, Playgrounds & Skate Parks</div>
-          <div class="card-path">/articles/parks-playgrounds.html</div>
-          <div class="card-desc">All parks, playgrounds, skate parks and picnic spots in Pāpāmoa</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/population-statistics.html" target="_blank" class="card" data-name="Papamoa population statistics census growth" data-section="articles">
-        <span class="card-icon">📊</span>
-        <div class="card-body">
-          <div class="card-name">Population & Statistics</div>
-          <div class="card-path">/articles/population-statistics.html</div>
-          <div class="card-desc">Population, growth rate, age breakdown, housing stats, census data</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/seniors-retirement.html" target="_blank" class="card" data-name="Seniors retirement villages Papamoa aged care" data-section="articles">
-        <span class="card-icon">👴</span>
-        <div class="card-body">
-          <div class="card-name">Seniors & Retirement</div>
-          <div class="card-path">/articles/seniors-retirement.html</div>
-          <div class="card-desc">Retirement villages, aged care, social groups, transport options</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/shopping-centres.html" target="_blank" class="card" data-name="Fashion Island Palm Beach Plaza shopping centres Papamoa" data-section="articles">
-        <span class="card-icon">🏬</span>
-        <div class="card-body">
-          <div class="card-name">Fashion Island & Palm Beach Plaza</div>
-          <div class="card-path">/articles/shopping-centres.html</div>
-          <div class="card-desc">Tenant directories, hours, parking and facilities</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/tauranga.html" target="_blank" class="card" data-name="Tauranga gateway things to do near Papamoa" data-section="articles">
-        <span class="card-icon">🏙️</span>
-        <div class="card-body">
-          <div class="card-name">Tauranga</div>
-          <div class="card-path">/articles/tauranga.html</div>
-          <div class="card-desc">Gateway page — things to do, distance from Pāpāmoa, network funnel</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/the-yard.html" target="_blank" class="card" data-name="The Yard Papamoa precinct businesses" data-section="articles">
-        <span class="card-icon">🏪</span>
-        <div class="card-body">
-          <div class="card-name">The Yard Pāpāmoa</div>
-          <div class="card-path">/articles/the-yard.html</div>
-          <div class="card-desc">Precinct guide — tenants, hours, location, events</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/walks-tracks.html" target="_blank" class="card" data-name="Walks tracks Papamoa hiking dog friendly" data-section="articles">
-        <span class="card-icon">🚶</span>
-        <div class="card-body">
-          <div class="card-name">Walks & Tracks</div>
-          <div class="card-path">/articles/walks-tracks.html</div>
-          <div class="card-desc">All walks near Pāpāmoa — difficulty, distance, dog-friendly flags</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/utilities-papamoa.html" target="_blank" class="card" data-name="Utilities Papamoa power water internet providers" data-section="articles">
-        <span class="card-icon">💡</span>
-        <div class="card-body">
-          <div class="card-name">Utilities in Pāpāmoa</div>
-          <div class="card-path">/articles/utilities-papamoa.html</div>
-          <div class="card-desc">Power, water, internet and gas providers for Pāpāmoa residents</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/water-rates-papamoa.html" target="_blank" class="card" data-name="Water rates Papamoa TCC billing" data-section="articles">
-        <span class="card-icon">💧</span>
-        <div class="card-body">
-          <div class="card-name">Water Rates Pāpāmoa</div>
-          <div class="card-path">/articles/water-rates-papamoa.html</div>
-          <div class="card-desc">TCC water rates, billing, metering and usage info for Pāpāmoa</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/rubbish-recycling-papamoa.html" target="_blank" class="card" data-name="Rubbish recycling bins collection Papamoa TCC" data-section="articles">
-        <span class="card-icon">♻️</span>
-        <div class="card-body">
-          <div class="card-name">Rubbish & Recycling</div>
-          <div class="card-path">/articles/rubbish-recycling-papamoa.html</div>
-          <div class="card-desc">Collection days, bin colours, recycling rules and drop-off points</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/clothing-recycling-papamoa.html" target="_blank" class="card" data-name="Clothing recycling textile donation Papamoa" data-section="articles">
-        <span class="card-icon">👕</span>
-        <div class="card-body">
-          <div class="card-name">Clothing Recycling</div>
-          <div class="card-path">/articles/clothing-recycling-papamoa.html</div>
-          <div class="card-desc">Where to donate or recycle clothing and textiles in Pāpāmoa</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/op-shops-papamoa.html" target="_blank" class="card" data-name="Op shops second hand stores Papamoa" data-section="articles">
-        <span class="card-icon">🛍️</span>
-        <div class="card-body">
-          <div class="card-name">Op Shops in Pāpāmoa</div>
-          <div class="card-path">/articles/op-shops-papamoa.html</div>
-          <div class="card-desc">Second-hand and charity shops near Pāpāmoa — hours, locations, what they accept</div>
-        </div>
-      </a>
-      <a href="https://plainblackcreative.github.io/papamoa-previews/articles/swimming-papamoa.html" target="_blank" class="card" data-name="Swimming pools Papamoa beach safety lessons" data-section="articles">
-        <span class="card-icon">🏊</span>
-        <div class="card-body">
-          <div class="card-name">Swimming in Pāpāmoa</div>
-          <div class="card-path">/articles/swimming-papamoa.html</div>
-          <div class="card-desc">Beach swimming, pools, lessons, surf lifesaving and safety</div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-
-
-  <div class="no-results" id="no-results">
-    <h3>No pages match that search.</h3>
-    <p>Try a different keyword or clear the filter.</p>
   </div>
 
-</main>
+  <!-- STATS -->
+  <div class="stats-row" id="stats-row">
+    <div class="stat-chip"><strong id="count-total">0</strong> pages total</div>
+    <div class="stat-chip"><strong id="count-live">0</strong> live</div>
+    <div class="stat-chip"><strong id="count-new">0</strong> new this session</div>
+  </div>
 
-<footer>
-  Papamoa.info internal use only &nbsp;·&nbsp; plainblackcreative/papamoa-previews
+  <!-- ROOT -->
+  <div class="section-head" data-section="root"><h2>&#127968; Root</h2><span class="sh-count">4</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/index.html" target="_blank" data-section="root" data-keywords="sales landing home index">
+      <span class="pc-icon">&#127919;</span>
+      <div class="pc-body">
+        <div class="pc-title">Sales Landing</div>
+        <div class="pc-path">/index.html</div>
+        <div class="pc-desc">Main entry &mdash; cold email CTA destination with Web3Forms visibility form</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/homepage.html" target="_blank" data-section="root" data-keywords="directory homepage categories browse">
+      <span class="pc-icon">&#128451;</span>
+      <div class="pc-body">
+        <div class="pc-title">Directory Homepage</div>
+        <div class="pc-path">/homepage.html</div>
+        <div class="pc-desc">Category browse &mdash; Food &amp; Drink, Surf &amp; Tides, and more</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/all-listings.html" target="_blank" data-section="root" data-keywords="all listings showcase demo">
+      <span class="pc-icon">&#128203;</span>
+      <div class="pc-body">
+        <div class="pc-title">All Listings Showcase</div>
+        <div class="pc-path">/all-listings.html</div>
+        <div class="pc-desc">Demo of all live listings &mdash; directory overview for prospects</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/sitemap.html" target="_blank" data-section="root" data-keywords="sitemap index">
+      <span class="pc-icon">&#128506;</span>
+      <div class="pc-body">
+        <div class="pc-title">Site Index</div>
+        <div class="pc-path">/sitemap.html</div>
+        <div class="pc-desc">You are here</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- LISTINGS -->
+  <div class="section-head" data-section="listings"><h2>&#128205; Listings</h2><span class="sh-count">7</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/listings.html" target="_blank" data-section="listings" data-keywords="listings index">
+      <span class="pc-icon">&#128211;</span>
+      <div class="pc-body">
+        <div class="pc-title">Listings Index</div>
+        <div class="pc-path">/listings/listings.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa business listings index page</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/combined-listings.html" target="_blank" data-section="listings" data-keywords="combined listings template">
+      <span class="pc-icon">&#128209;</span>
+      <div class="pc-body">
+        <div class="pc-title">Combined Listings</div>
+        <div class="pc-path">/listings/combined-listings.html</div>
+        <div class="pc-desc">All listing pages combined &mdash; template comparison candidate</div>
+        <div class="pc-tags"><span class="pc-tag tag-review">Review needed</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/listing-template.html" target="_blank" data-section="listings" data-keywords="listing template master">
+      <span class="pc-icon">&#128221;</span>
+      <div class="pc-body">
+        <div class="pc-title">Listing Template</div>
+        <div class="pc-path">/listings/listing-template.html</div>
+        <div class="pc-desc">Master listing template &mdash; to be standardised</div>
+        <div class="pc-tags"><span class="pc-tag tag-review">Review needed</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/the-wagon-papamoa.html" target="_blank" data-section="listings" data-keywords="wagon food drink gold menu">
+      <span class="pc-icon">&#127828;</span>
+      <div class="pc-body">
+        <div class="pc-title">The Wagon P&#257;p&#257;moa</div>
+        <div class="pc-path">/listings/the-wagon-papamoa.html</div>
+        <div class="pc-desc">Gold listing demo with Menu Add-On &mdash; Food &amp; Drink</div>
+        <div class="pc-tags"><span class="pc-tag tag-gold">Gold</span><span class="pc-tag tag-demo">Demo</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/papamoa-orthodontist.html" target="_blank" data-section="listings" data-keywords="orthodontist professional services">
+      <span class="pc-icon">&#129463;</span>
+      <div class="pc-body">
+        <div class="pc-title">P&#257;p&#257;moa Orthodontist</div>
+        <div class="pc-path">/listings/papamoa-orthodontist.html</div>
+        <div class="pc-desc">Professional services listing demo</div>
+        <div class="pc-tags"><span class="pc-tag tag-demo">Demo</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/lawn-mowing-papamoa.html" target="_blank" data-section="listings" data-keywords="lawn mowing placeholder gardening">
+      <span class="pc-icon">&#127807;</span>
+      <div class="pc-body">
+        <div class="pc-title">Lawn Mowing P&#257;p&#257;moa</div>
+        <div class="pc-path">/listings/lawn-mowing-papamoa.html</div>
+        <div class="pc-desc">Placeholder &mdash; captures enquiries while sub-category is empty</div>
+        <div class="pc-tags"><span class="pc-tag tag-placeholder">Placeholder</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/greencut-papamoa.html" target="_blank" data-section="listings" data-keywords="greencut lawn garden">
+      <span class="pc-icon">&#9986;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Greencut P&#257;p&#257;moa</div>
+        <div class="pc-path">/listings/greencut-papamoa.html</div>
+        <div class="pc-desc">Lawn &amp; garden listing demo</div>
+        <div class="pc-tags"><span class="pc-tag tag-demo">Demo</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/speedy-screens-papamoa.html" target="_blank" data-section="listings" data-keywords="speedy screens trades">
+      <span class="pc-icon">&#128295;</span>
+      <div class="pc-body">
+        <div class="pc-title">Speedy Screens P&#257;p&#257;moa</div>
+        <div class="pc-path">/listings/speedy-screens-papamoa.html</div>
+        <div class="pc-desc">Trades listing demo</div>
+        <div class="pc-tags"><span class="pc-tag tag-demo">Demo</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="section-head" data-section="categories"><h2>&#128451; Categories</h2><span class="sh-count">7</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/lawn-mowing.html" target="_blank" data-section="categories" data-keywords="lawn mowing gardening">
+      <span class="pc-icon">&#127807;</span>
+      <div class="pc-body">
+        <div class="pc-title">Lawn Mowing</div>
+        <div class="pc-path">/categories/lawn-mowing.html</div>
+        <div class="pc-desc">Sub-category listing page</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/fishing.html" target="_blank" data-section="categories" data-keywords="fishing surf tides">
+      <span class="pc-icon">&#127907;</span>
+      <div class="pc-body">
+        <div class="pc-title">Fishing &amp; Surf</div>
+        <div class="pc-path">/categories/fishing.html</div>
+        <div class="pc-desc">Surf &amp; Tides sub-category page</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/surf-tides.html" target="_blank" data-section="categories" data-keywords="surf tides conditions forecast">
+      <span class="pc-icon">&#127940;</span>
+      <div class="pc-body">
+        <div class="pc-title">Surf &amp; Tides</div>
+        <div class="pc-path">/categories/surf-tides.html</div>
+        <div class="pc-desc">Conditions, tide times, 7-day forecast, Hakanini spotlight</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/gardening.html" target="_blank" data-section="categories" data-keywords="gardening garden">
+      <span class="pc-icon">&#127796;</span>
+      <div class="pc-body">
+        <div class="pc-title">Gardening</div>
+        <div class="pc-path">/categories/gardening.html</div>
+        <div class="pc-desc">Gardening sub-category page</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/entertainment.html" target="_blank" data-section="categories" data-keywords="entertainment activities dining restaurants bars VR">
+      <span class="pc-icon">&#127917;</span>
+      <div class="pc-body">
+        <div class="pc-title">Entertainment</div>
+        <div class="pc-path">/categories/entertainment.html</div>
+        <div class="pc-desc">Things to do, dining and activities &mdash; The Cave VR, Hakanini Surf School, restaurants and bars</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shopping.html" target="_blank" data-section="categories" data-keywords="shopping retail Papamoa Plaza Fashion Island books second-hand">
+      <span class="pc-icon">&#128717;</span>
+      <div class="pc-body">
+        <div class="pc-title">Shopping</div>
+        <div class="pc-path">/categories/shopping.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa Plaza, Fashion Island, Xanadu Book Exchange, op shops and specialty retail</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services.html" target="_blank" data-section="categories" data-keywords="services automotive health fitness trades professional">
+      <span class="pc-icon">&#128736;</span>
+      <div class="pc-body">
+        <div class="pc-title">Services</div>
+        <div class="pc-path">/categories/services.html</div>
+        <div class="pc-desc">Mechanics, health &amp; fitness, personal care, trades and professional services in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation.html" target="_blank" data-section="categories" data-keywords="accommodation holiday park motel beachfront aims games">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body">
+        <div class="pc-title">Accommodation</div>
+        <div class="pc-path">/categories/accommodation.html</div>
+        <div class="pc-desc">Holiday parks, motels, B&Bs and short-stay rentals &mdash; Pacific Park Gold Spotlight, AIMS Games guide</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ARTICLES — NEW THIS SESSION -->
+  <div class="section-head" data-section="articles"><h2>&#128240; Articles</h2><span class="sh-count">26</span></div>
+  <div class="page-grid">
+
+    <!-- Pre-existing articles -->
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/summer-insects-papamoa.html" target="_blank" data-section="articles" data-keywords="summer insects flies wasps speedy screens">
+      <span class="pc-icon">&#129429;</span>
+      <div class="pc-body">
+        <div class="pc-title">Summer Insects in P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/summer-insects-papamoa.html</div>
+        <div class="pc-desc">Flies, mozzies, wasps &mdash; what they are and how to keep them out. Speedy Screens spotlight.</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/easter-trading-hours.html" target="_blank" data-section="articles" data-keywords="easter trading hours shops">
+      <span class="pc-icon">&#128003;</span>
+      <div class="pc-body">
+        <div class="pc-title">Easter Trading Hours 2026</div>
+        <div class="pc-path">/articles/easter-trading-hours.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa shops and services Easter opening hours</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/school-terms-holidays.html" target="_blank" data-section="articles" data-keywords="school terms holidays 2026">
+      <span class="pc-icon">&#127979;</span>
+      <div class="pc-body">
+        <div class="pc-title">School Terms and Holidays 2026</div>
+        <div class="pc-path">/articles/school-terms-holidays.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa school term dates and holiday periods</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/tax-kiwisaver.html" target="_blank" data-section="articles" data-keywords="tax kiwisaver paye gst calculator">
+      <span class="pc-icon">&#128176;</span>
+      <div class="pc-body">
+        <div class="pc-title">NZ Tax and KiwiSaver Guide</div>
+        <div class="pc-path">/articles/tax-kiwisaver.html</div>
+        <div class="pc-desc">PAYE and GST calculators, KiwiSaver info, key dates</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/weddings.html" target="_blank" data-section="articles" data-keywords="weddings venues photographers">
+      <span class="pc-icon">&#128141;</span>
+      <div class="pc-body">
+        <div class="pc-title">Weddings in P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/weddings.html</div>
+        <div class="pc-desc">Venues, photographers and local wedding suppliers</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/schools-papamoa.html" target="_blank" data-section="articles" data-keywords="schools primary secondary papamoa college zones enrolment">
+      <span class="pc-icon">&#127979;</span>
+      <div class="pc-body">
+        <div class="pc-title">Schools in P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/schools-papamoa.html</div>
+        <div class="pc-desc">All 8 schools &mdash; primary, secondary, Catholic and M&#257;ori immersion. Zones, rolls and contacts</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+
+    <!-- New articles this session -->
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/population-statistics.html" target="_blank" data-section="articles" data-keywords="population statistics census demographics">
+      <span class="pc-icon">&#128202;</span>
+      <div class="pc-body">
+        <div class="pc-title">Population &amp; Statistics</div>
+        <div class="pc-path">/articles/population-statistics.html</div>
+        <div class="pc-desc">Census data, growth timeline, ethnicity and income stats for P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/papamoa-hills.html" target="_blank" data-section="articles" data-keywords="papamoa hills tracks walks regional park">
+      <span class="pc-icon">&#127956;</span>
+      <div class="pc-body">
+        <div class="pc-title">P&#257;p&#257;moa Hills Regional Park</div>
+        <div class="pc-path">/articles/papamoa-hills.html</div>
+        <div class="pc-desc">Track status, closures, maps and facilities &mdash; updated April 2026</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/dogs-papamoa.html" target="_blank" data-section="articles" data-keywords="dogs bylaw beach rules TCC">
+      <span class="pc-icon">&#128054;</span>
+      <div class="pc-body">
+        <div class="pc-title">Dogs in P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/dogs-papamoa.html</div>
+        <div class="pc-desc">TCC Dog Bylaw 2018, beach zones, registration and attack reporting</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/maori-history.html" target="_blank" data-section="articles" data-keywords="maori history nga potiki ngai te rangi tamapahore">
+      <span class="pc-icon">&#127963;</span>
+      <div class="pc-body">
+        <div class="pc-title">M&#257;ori History of P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/maori-history.html</div>
+        <div class="pc-desc">Ng&#257; P&#333;tiki, Ng&#257;i Te Rangi, Tamapahore Marae and place names</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/walks-tracks.html" target="_blank" data-section="articles" data-keywords="walks tracks outdoor recreation">
+      <span class="pc-icon">&#128694;</span>
+      <div class="pc-body">
+        <div class="pc-title">Walks &amp; Tracks</div>
+        <div class="pc-path">/articles/walks-tracks.html</div>
+        <div class="pc-desc">Hub page for all P&#257;p&#257;moa walking and cycling tracks</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/parks-playgrounds.html" target="_blank" data-section="articles" data-keywords="parks playgrounds skate picnic sports">
+      <span class="pc-icon">&#127794;</span>
+      <div class="pc-body">
+        <div class="pc-title">Parks &amp; Playgrounds</div>
+        <div class="pc-path">/articles/parks-playgrounds.html</div>
+        <div class="pc-desc">All P&#257;p&#257;moa parks, playgrounds, skate spots and sports fields</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/gordon-spratt-reserve.html" target="_blank" data-section="articles" data-keywords="gordon spratt reserve park tsunami mound">
+      <span class="pc-icon">&#127795;</span>
+      <div class="pc-body">
+        <div class="pc-title">Gordon Spratt Reserve</div>
+        <div class="pc-path">/articles/gordon-spratt-reserve.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa&rsquo;s main reserve &mdash; tsunami mound, facilities and events</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/aims-games.html" target="_blank" data-section="articles" data-keywords="aims games sport 2026 tauranga">
+      <span class="pc-icon">&#127942;</span>
+      <div class="pc-body">
+        <div class="pc-title">AIMS Games 2026</div>
+        <div class="pc-path">/articles/aims-games.html</div>
+        <div class="pc-desc">5&ndash;11 September 2026 &mdash; NZ&rsquo;s largest intermediate school sport event</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/kids-birthday-parties.html" target="_blank" data-section="articles" data-keywords="kids birthday parties venues activities">
+      <span class="pc-icon">&#127881;</span>
+      <div class="pc-body">
+        <div class="pc-title">Kids Birthday Parties</div>
+        <div class="pc-path">/articles/kids-birthday-parties.html</div>
+        <div class="pc-desc">Venues, entertainers, catering and party hire in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/shopping-centres.html" target="_blank" data-section="articles" data-keywords="shopping centres fashion island palm beach plaza sands">
+      <span class="pc-icon">&#128717;</span>
+      <div class="pc-body">
+        <div class="pc-title">Shopping Centres</div>
+        <div class="pc-path">/articles/shopping-centres.html</div>
+        <div class="pc-desc">Fashion Island, Palm Beach Plaza and The Sands &mdash; tenants and hours</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/seniors-retirement.html" target="_blank" data-section="articles" data-keywords="seniors retirement karaka pines aged care">
+      <span class="pc-icon">&#129399;</span>
+      <div class="pc-body">
+        <div class="pc-title">Seniors &amp; Retirement</div>
+        <div class="pc-path">/articles/seniors-retirement.html</div>
+        <div class="pc-desc">Retirement villages, home care, NZ Super and entitlements</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/local-government.html" target="_blank" data-section="articles" data-keywords="local government TCC mayor councillors MP">
+      <span class="pc-icon">&#127963;</span>
+      <div class="pc-body">
+        <div class="pc-title">Local Government</div>
+        <div class="pc-path">/articles/local-government.html</div>
+        <div class="pc-desc">TCC, Mayor Mah&#233; Drysdale, Tom Rutherford MP and council contacts</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/library.html" target="_blank" data-section="articles" data-keywords="library hours wifi story time books">
+      <span class="pc-icon">&#128218;</span>
+      <div class="pc-body">
+        <div class="pc-title">P&#257;p&#257;moa Library</div>
+        <div class="pc-path">/articles/library.html</div>
+        <div class="pc-desc">Hours, services, WiFi, events and story time sessions</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/notable-people.html" target="_blank" data-section="articles" data-keywords="notable people famous from papamoa">
+      <span class="pc-icon">&#11088;</span>
+      <div class="pc-body">
+        <div class="pc-title">Notable People from P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/notable-people.html</div>
+        <div class="pc-desc">Athletes, artists and public figures connected to P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/fuel-prices.html" target="_blank" data-section="articles" data-keywords="fuel prices petrol diesel stations">
+      <span class="pc-icon">&#9981;</span>
+      <div class="pc-body">
+        <div class="pc-title">Fuel Prices P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/fuel-prices.html</div>
+        <div class="pc-desc">Local petrol and diesel prices &mdash; live data placeholder</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/tauranga.html" target="_blank" data-section="articles" data-keywords="tauranga city nearby distance guide">
+      <span class="pc-icon">&#127961;</span>
+      <div class="pc-body">
+        <div class="pc-title">Tauranga &mdash; P&#257;p&#257;moa&rsquo;s Nearest City</div>
+        <div class="pc-path">/articles/tauranga.html</div>
+        <div class="pc-desc">Distance, travel times and TaurangaNZ.info network</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/mount-maunganui.html" target="_blank" data-section="articles" data-keywords="mount maunganui mauao hot pools tracks closure 2026">
+      <span class="pc-icon">&#127956;</span>
+      <div class="pc-body">
+        <div class="pc-title">Mount Maunganui</div>
+        <div class="pc-path">/articles/mount-maunganui.html</div>
+        <div class="pc-desc">Mauao fully closed after January 2026 landslide &mdash; village and beach remain open</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/news-events.html" target="_blank" data-section="articles" data-keywords="news events upcoming local papamoa">
+      <span class="pc-icon">&#128240;</span>
+      <div class="pc-body">
+        <div class="pc-title">News &amp; Events</div>
+        <div class="pc-path">/articles/news-events.html</div>
+        <div class="pc-desc">Upcoming events, regular markets, local news and event submission form</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/dinner-at-the-domain.html" target="_blank" data-section="articles" data-keywords="dinner domain event food">
+      <span class="pc-icon">&#127869;</span>
+      <div class="pc-body">
+        <div class="pc-title">Dinner at the Domain</div>
+        <div class="pc-path">/articles/dinner-at-the-domain.html</div>
+        <div class="pc-desc">Annual outdoor dining event at the Domain</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/the-yard.html" target="_blank" data-section="articles" data-keywords="the yard shopping precinct">
+      <span class="pc-icon">&#127978;</span>
+      <div class="pc-body">
+        <div class="pc-title">The Yard</div>
+        <div class="pc-path">/articles/the-yard.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa&rsquo;s boutique retail and dining precinct</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- SALES -->
+  <div class="section-head" data-section="sales"><h2>&#128148; Sales</h2><span class="sh-count">9</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/sales/landing.html" target="_blank" data-section="sales" data-keywords="sales landing">
+      <span class="pc-icon">&#127919;</span>
+      <div class="pc-body">
+        <div class="pc-title">Sales Landing (copy)</div>
+        <div class="pc-path">/sales/landing.html</div>
+        <div class="pc-desc">Mirror of index.html &mdash; brand green logo fix still needed</div>
+        <div class="pc-tags"><span class="pc-tag tag-review">Logo fix needed</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/sales/main-lander.html" target="_blank" data-section="sales" data-keywords="main lander sales">
+      <span class="pc-icon">&#128226;</span>
+      <div class="pc-body">
+        <div class="pc-title">Main Lander</div>
+        <div class="pc-path">/sales/main-lander.html</div>
+        <div class="pc-desc">Main sales lander with Web3Forms CTA</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/sales/menu-addon.html" target="_blank" data-section="sales" data-keywords="menu addon sales pitch 199">
+      <span class="pc-icon">&#127869;</span>
+      <div class="pc-body">
+        <div class="pc-title">Menu Add-On Sales Page</div>
+        <div class="pc-path">/sales/menu-addon.html</div>
+        <div class="pc-desc">Dedicated pitch page for the $199/yr Menu Add-On</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/sales/menu-addon-demo.html" target="_blank" data-section="sales" data-keywords="menu addon demo interactive">
+      <span class="pc-icon">&#127869;</span>
+      <div class="pc-body">
+        <div class="pc-title">Menu Add-On Demo</div>
+        <div class="pc-path">/sales/menu-addon-demo.html</div>
+        <div class="pc-desc">Interactive demo of the Menu / Service List Add-On</div>
+        <div class="pc-tags"><span class="pc-tag tag-demo">Demo</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/sales/why-list.html" target="_blank" data-section="sales" data-keywords="why list editorial seo aeo">
+      <span class="pc-icon">&#128240;</span>
+      <div class="pc-body">
+        <div class="pc-title">Why List &mdash; Editorial</div>
+        <div class="pc-path">/sales/why-list.html</div>
+        <div class="pc-desc">AEO/SEO pitch article for prospects</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/sales/post-call-landing.html" target="_blank" data-section="sales" data-keywords="post call landing recap next steps">
+      <span class="pc-icon">&#128222;</span>
+      <div class="pc-body">
+        <div class="pc-title">Post-Call Landing</div>
+        <div class="pc-path">/sales/post-call-landing.html</div>
+        <div class="pc-desc">Sent after a sales call &mdash; recap + next steps CTA</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/sales/followup-emails.html" target="_blank" data-section="sales" data-keywords="followup email sequence brevo day 3 6 10">
+      <span class="pc-icon">&#128140;</span>
+      <div class="pc-body">
+        <div class="pc-title">Follow-Up Email Sequence</div>
+        <div class="pc-path">/sales/followup-emails.html</div>
+        <div class="pc-desc">Day 3 / Day 6 / Day 10 Brevo sequence templates</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/sales/email-template.html" target="_blank" data-section="sales" data-keywords="cold email template brevo">
+      <span class="pc-icon">&#9993;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Cold Email Template</div>
+        <div class="pc-path">/sales/email-template.html</div>
+        <div class="pc-desc">Brevo-ready HTML cold email template</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/sales/sales-scripts.html" target="_blank" data-section="sales" data-keywords="sales scripts phone objection handling">
+      <span class="pc-icon">&#128483;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Sales Call Scripts</div>
+        <div class="pc-path">/sales/sales-scripts.html</div>
+        <div class="pc-desc">Phone frameworks and objection handling</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- PREVIEWS -->
+  <div class="section-head" data-section="previews"><h2>&#128065;&#65039; Client Previews (PPPs)</h2><span class="sh-count">1</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/previews/driftwood-cafe.html" target="_blank" data-section="previews" data-keywords="driftwood cafe ppp preview gold">
+      <span class="pc-icon">&#9749;</span>
+      <div class="pc-body">
+        <div class="pc-title">Driftwood Caf&#233;</div>
+        <div class="pc-path">/previews/driftwood-cafe.html</div>
+        <div class="pc-desc">PPP template &mdash; pre-payment Gold client preview with demo data</div>
+        <div class="pc-tags"><span class="pc-tag tag-ppp">PPP</span><span class="pc-tag tag-gold">Gold</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ONBOARDING -->
+  <div class="section-head" data-section="onboarding"><h2>&#9989; Onboarding</h2><span class="sh-count">1</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/onboarding/confirm-listing.html" target="_blank" data-section="onboarding" data-keywords="confirm listing onboarding approval">
+      <span class="pc-icon">&#9997;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Confirm Listing</div>
+        <div class="pc-path">/onboarding/confirm-listing.html</div>
+        <div class="pc-desc">Client approval &mdash; step 2 of Draft &rarr; Approval &rarr; Go Live</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ADMIN -->
+  <div class="section-head" data-section="admin"><h2>&#9881;&#65039; Admin</h2><span class="sh-count">3</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/admin/listing-health.html" target="_blank" data-section="admin" data-keywords="listing health dashboard quality scoring">
+      <span class="pc-icon">&#128202;</span>
+      <div class="pc-body">
+        <div class="pc-title">Listing Health Dashboard</div>
+        <div class="pc-path">/admin/listing-health.html</div>
+        <div class="pc-desc">Quality scoring across all active listings</div>
+        <div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/admin/sales-funnel.html" target="_blank" data-section="admin" data-keywords="sales funnel dashboard stages lead close">
+      <span class="pc-icon">&#128256;</span>
+      <div class="pc-body">
+        <div class="pc-title">Sales Funnel Dashboard</div>
+        <div class="pc-path">/admin/sales-funnel.html</div>
+        <div class="pc-desc">Interactive sales process &mdash; lead to close stages</div>
+        <div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/admin/upload.html" target="_blank" data-section="admin" data-keywords="admin upload news events claude ai">
+      <span class="pc-icon">&#128229;</span>
+      <div class="pc-body">
+        <div class="pc-title">News &amp; Events Upload</div>
+        <div class="pc-path">/admin/upload.html</div>
+        <div class="pc-desc">Password-protected admin tool &mdash; AI news summariser + event submission</div>
+        <div class="pc-tags"><span class="pc-tag tag-internal">Internal</span><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- COMMUNITY -->
+  <div class="section-head" data-section="community"><h2>&#129309; Community</h2><span class="sh-count">6</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/community.html" target="_blank" data-section="community" data-keywords="community resources contacts emergency groups">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body">
+        <div class="pc-title">Community Resources</div>
+        <div class="pc-path">/community/community.html</div>
+        <div class="pc-desc">Emergency contacts, Facebook groups, food banks and mental health</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/" target="_blank" data-section="community" data-keywords="safety support hub community">
+      <span class="pc-icon">&#128737;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Safety &amp; Support Hub</div>
+        <div class="pc-path">/community/safety-support/</div>
+        <div class="pc-desc">Community safety and support landing page</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/neighbourhood-support/" target="_blank" data-section="community" data-keywords="neighbourhood support local">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body">
+        <div class="pc-title">Neighbourhood Support</div>
+        <div class="pc-path">/community/safety-support/neighbourhood-support/</div>
+        <div class="pc-desc">Local neighbourhood support resources</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/police-crime/" target="_blank" data-section="community" data-keywords="police crime reporting prevention">
+      <span class="pc-icon">&#128110;</span>
+      <div class="pc-body">
+        <div class="pc-title">Police &amp; Crime</div>
+        <div class="pc-path">/community/safety-support/police-crime/</div>
+        <div class="pc-desc">Local police, crime prevention and reporting</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/emergencies/" target="_blank" data-section="community" data-keywords="emergencies civil defence contacts">
+      <span class="pc-icon">&#128680;</span>
+      <div class="pc-body">
+        <div class="pc-title">Emergencies</div>
+        <div class="pc-path">/community/safety-support/emergencies/</div>
+        <div class="pc-desc">Emergency contacts, civil defence and local preparedness</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/safety-support/community-groups/" target="_blank" data-section="community" data-keywords="community groups clubs organisations">
+      <span class="pc-icon">&#128101;</span>
+      <div class="pc-body">
+        <div class="pc-title">Community Groups</div>
+        <div class="pc-path">/community/safety-support/community-groups/</div>
+        <div class="pc-desc">Local clubs, groups and community organisations</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- DOCS -->
+  <div class="section-head" data-section="docs"><h2>&#128218; Docs</h2><span class="sh-count">2</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/docs/current-state-report.html" target="_blank" data-section="docs" data-keywords="current state report internal project">
+      <span class="pc-icon">&#128196;</span>
+      <div class="pc-body">
+        <div class="pc-title">Current State Report</div>
+        <div class="pc-path">/docs/current-state-report.html</div>
+        <div class="pc-desc">Internal project status report</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/docs/crm-sheet-reference.html" target="_blank" data-section="docs" data-keywords="crm google sheets reference columns">
+      <span class="pc-icon">&#128221;</span>
+      <div class="pc-body">
+        <div class="pc-title">CRM Sheet Reference</div>
+        <div class="pc-path">/docs/crm-sheet-reference.html</div>
+        <div class="pc-desc">Google Sheets CRM column definitions and usage guide</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ARCHIVE -->
+  <div class="section-head"><h2>&#128452; Archive</h2><span class="sh-count">1</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/archive/papamoa-info-site-old.html" target="_blank" data-keywords="archive old site pre migration">
+      <span class="pc-icon">&#128336;</span>
+      <div class="pc-body">
+        <div class="pc-title">Old Site (pre-migration)</div>
+        <div class="pc-path">/archive/papamoa-info-site-old.html</div>
+        <div class="pc-desc">Original HTML before design system migration &mdash; for reference only</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" id="empty-state" style="display:none">
+    <p>No pages match that search.</p>
+    <small>Try a different keyword or clear the filter.</small>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  Papamoa.info internal use only &nbsp;&middot;&nbsp; plainblackcreative/papamoa-previews
 </footer>
 
 <script>
-  const searchInput = document.getElementById('search');
-  const pills = document.querySelectorAll('.pill');
-  const allSections = document.querySelectorAll('.section');
-  const allCards = document.querySelectorAll('.card');
-  const noResults = document.getElementById('no-results');
-  const pageCount = document.getElementById('page-count');
-  let activeFilter = 'all';
+  let activeTab = 'all';
 
-  // Set initial section counts
-  allSections.forEach(section => {
-    const total = section.querySelectorAll('a.card').length;
-    section.querySelector('.section-count').textContent = total + ' page' + (total !== 1 ? 's' : '');
-  });
-
-  function update() {
-    const q = searchInput.value.toLowerCase().trim();
-
-    allCards.forEach(card => {
-      const name = (card.dataset.name || '').toLowerCase();
-      const path = (card.querySelector('.card-path')?.textContent || '').toLowerCase();
-      const desc = (card.querySelector('.card-desc')?.textContent || '').toLowerCase();
-      const cardSection = (card.dataset.section || '');
-
-      const matchesQuery = !q || name.includes(q) || path.includes(q) || desc.includes(q);
-      const matchesFilter = activeFilter === 'all' || cardSection.includes(activeFilter);
-
-      card.classList.toggle('hidden', !(matchesQuery && matchesFilter));
-    });
-
-    // Hide empty sections
-    allSections.forEach(section => {
-      const anyVisible = [...section.querySelectorAll('.card')].some(c => !c.classList.contains('hidden'));
-      section.classList.toggle('hidden', !anyVisible);
-    });
-
-    // Count only <a> cards (not disabled divs)
-    const visible = [...allCards].filter(c => c.tagName === 'A' && !c.classList.contains('hidden')).length;
-    pageCount.textContent = visible + ' page' + (visible !== 1 ? 's' : '');
-    noResults.classList.toggle('visible', visible === 0);
+  function filterTab(tab, btn) {
+    activeTab = tab;
+    document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
   }
 
-  pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      activeFilter = pill.dataset.filter;
-      update();
-    });
-  });
+  function filterPages() {
+    applyFilters();
+  }
 
-  searchInput.addEventListener('input', update);
-  update();
+  function applyFilters() {
+    const q = document.getElementById('search-input').value.toLowerCase();
+    const cards = document.querySelectorAll('.page-card');
+    let visible = 0;
+
+    cards.forEach(card => {
+      const section = card.dataset.section || '';
+      const keywords = (card.dataset.keywords || '').toLowerCase();
+      const title = card.querySelector('.pc-title')?.textContent.toLowerCase() || '';
+      const path = card.querySelector('.pc-path')?.textContent.toLowerCase() || '';
+      const desc = card.querySelector('.pc-desc')?.textContent.toLowerCase() || '';
+
+      const matchTab = activeTab === 'all' || section === activeTab;
+      const matchSearch = !q || title.includes(q) || path.includes(q) || desc.includes(q) || keywords.includes(q);
+
+      if (matchTab && matchSearch) {
+        card.classList.remove('hidden');
+        visible++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
+    document.getElementById('count-total').textContent = cards.length;
+  }
+
+  // Count stats on load
+  window.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.page-card');
+    const live = document.querySelectorAll('.page-card:not(.not-built)');
+    const newItems = document.querySelectorAll('.pc-tag.tag-new');
+    document.getElementById('count-total').textContent = cards.length;
+    document.getElementById('count-live').textContent = live.length;
+    document.getElementById('count-new').textContent = newItems.length;
+  });
 </script>
 
 </body>
