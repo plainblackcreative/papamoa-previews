@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power, Gas, Broadband & Phone in Pāpāmoa | Papamoa.info</title>
+  <meta name="description" content="Guide to utilities in Pāpāmoa — electricity retailers, LPG gas, fibre broadband providers, mobile coverage and how to compare and switch.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    /* === SHARED === */
+    :root { --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0; --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E; --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
+    a { color: var(--blue); }
+    .site-nav { background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
+    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
+    .page-hero { background: linear-gradient(135deg, #1A2A3A, #2B3F5C); padding: 44px 24px 40px; position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), #1A7ABE); }
+    .hero-inner { max-width: 960px; margin: 0 auto; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 10px; }
+    .page-hero h1 em { font-style: italic; color: var(--blue); }
+    .hero-sub { font-size: 0.92rem; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .page-wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 80px; }
+    .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+    .main-col { min-width: 0; }
+    .side-col { display: flex; flex-direction: column; gap: 18px; }
+    .section { margin-bottom: 36px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    .body-text { font-size: 0.9rem; color: var(--body); line-height: 1.75; margin-bottom: 14px; }
+    .info-rows { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+    .info-row { display: flex; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+    .info-row:last-child { border-bottom: none; }
+    .ir-label { font-weight: 700; color: var(--navy); min-width: 120px; font-size: 0.78rem; flex-shrink: 0; }
+    .ir-val { color: var(--muted); line-height: 1.5; }
+    .ir-val a { color: var(--blue); text-decoration: none; }
+    .provider-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .provider-card { background: var(--white); border: 1px solid var(--border); border-radius: 9px; padding: 14px; }
+    .pc-name { font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 4px; }
+    .pc-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+    .pc-link { font-size: 0.75rem; font-weight: 700; color: var(--blue); text-decoration: none; }
+    .alert-note { border-radius: 8px; padding: 12px 16px; font-size: 0.83rem; line-height: 1.6; margin-bottom: 16px; display: flex; gap: 10px; }
+    .alert-blue { background: #EBF5FB; border-left: 4px solid var(--blue); color: #1A4060; }
+    .alert-yellow { background: #FFF8E8; border-left: 4px solid var(--gold); color: #5A3800; }
+    .alert-green { background: #EAF7EE; border-left: 4px solid var(--lime); color: #1A5020; }
+    .fact-box { background: var(--navy); border-radius: 10px; padding: 20px; }
+    .fact-box h4 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .fact-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .fact-list li { font-size: 0.82rem; color: rgba(255,255,255,0.7); display: flex; gap: 8px; line-height: 1.5; }
+    .fact-list li::before { content: '›'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+    .fact-list li strong { color: #fff; }
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .link-list { display: flex; flex-direction: column; gap: 8px; }
+    .link-list a { font-size: 0.82rem; font-weight: 600; text-decoration: none; }
+    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
+    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+    .ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .ad-inner { padding: 16px; background: var(--white); }
+    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
+    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-decoration: none; }
+    .op-shop-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+    .osc-header { padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; border-bottom: 1px solid var(--border); }
+    .osc-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .osc-meta { flex: 1; }
+    .osc-name { font-family: 'Playfair Display', serif; font-size: 0.97rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .osc-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 4px; }
+    .osc-tag { font-size: 0.6rem; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: rgba(58,171,222,0.08); color: var(--blue); border: 1px solid rgba(58,171,222,0.15); }
+    .osc-tag-hospice { background: rgba(232,52,74,0.08); color: var(--coral); border-color: rgba(232,52,74,0.15); }
+    .osc-tag-church { background: rgba(125,193,67,0.1); color: #3A8020; border-color: rgba(125,193,67,0.2); }
+    .osc-tag-thrift { background: rgba(200,150,42,0.1); color: var(--gold); border-color: rgba(200,150,42,0.2); }
+    .osc-addr { font-size: 0.75rem; color: var(--muted); }
+    .osc-body { padding: 12px 16px; font-size: 0.84rem; color: var(--body); line-height: 1.65; }
+    .osc-hours { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
+    .site-footer a { color: var(--blue); }
+    @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } .side-col { order: -1; } .provider-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb"><a href="/homepage.html">Home</a><span>/</span>Utilities &mdash; Power, Gas &amp; Broadband</span>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">&#9889; Local Information &middot; P&#257;p&#257;moa</div>
+    <h1>Utilities &mdash; Power, Gas <em>&amp; Broadband</em></h1>
+    <p class="hero-sub">Electricity retailers, LPG gas, fibre broadband and mobile coverage for P&#257;p&#257;moa residents. How to compare providers and where to report faults.</p>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="two-col">
+    <div class="main-col">
+      <div class="alert-note alert-blue">
+        <span>&#128204;</span>
+        <div>P&#257;p&#257;moa is fully connected to the Chorus fibre broadband network, Powerco electricity lines, and Tauranga City Council reticulated water. All standard New Zealand utility retailers operate here. This page summarises what you need to know as a P&#257;p&#257;moa resident.</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">&#9889; Electricity</div>
+        <p class="body-text">P&#257;p&#257;moa is on the Powerco electricity lines network &mdash; Powerco owns and maintains the poles and wires that deliver power to your property. For faults or outages, contact Powerco directly on <a href="tel:0800769363">0800 769 363</a> or check their outage map at <a href="https://www.powerco.co.nz" target="_blank" rel="noopener">powerco.co.nz</a>.</p>
+        <p class="body-text">For your electricity bill, you choose a separate electricity retailer. These retailers buy power wholesale and on-sell it to you &mdash; the retailer you choose does not affect how reliably your power is delivered (that's always Powerco). Major retailers operating in P&#257;p&#257;moa include:</p>
+        <div class="provider-grid">
+          <div class="provider-card"><div class="pc-name">Mercury</div><div class="pc-desc">Large NZ-owned retailer, bundles power with broadband and mobile. Offers renewable energy and rewards.</div><a href="https://www.mercury.co.nz" class="pc-link" target="_blank" rel="noopener">mercury.co.nz</a></div>
+          <div class="provider-card"><div class="pc-name">Contact Energy</div><div class="pc-desc">One of NZ's largest, with a range of fixed and variable rate plans and green energy options.</div><a href="https://www.contact.co.nz" class="pc-link" target="_blank" rel="noopener">contact.co.nz</a></div>
+          <div class="provider-card"><div class="pc-name">Genesis</div><div class="pc-desc">Government-owned retailer with a range of fixed and variable plans, and gas options for dual-fuel households.</div><a href="https://www.genesisenergy.co.nz" class="pc-link" target="_blank" rel="noopener">genesisenergy.co.nz</a></div>
+          <div class="provider-card"><div class="pc-name">Meridian</div><div class="pc-desc">100% renewable electricity from NZ hydro, wind and solar. Popular with households wanting green credentials.</div><a href="https://www.meridianenergy.co.nz" class="pc-link" target="_blank" rel="noopener">meridianenergy.co.nz</a></div>
+          <div class="provider-card"><div class="pc-name">Electric Kiwi</div><div class="pc-desc">Independent retailer with a "Hour of Power" daily free hour. Popular for off-peak usage.</div><a href="https://www.electrickiwi.co.nz" class="pc-link" target="_blank" rel="noopener">electrickiwi.co.nz</a></div>
+          <div class="provider-card"><div class="pc-name">Flick Electric</div><div class="pc-desc">Wholesale spot pricing model. Can save money for households that shift usage to off-peak periods.</div><a href="https://www.flickelectric.co.nz" class="pc-link" target="_blank" rel="noopener">flickelectric.co.nz</a></div>
+        </div>
+        <div class="alert-note alert-yellow"><span>&#128161;</span><div>Use <a href="https://www.powerswitch.org.nz" target="_blank" rel="noopener">Powerswitch.org.nz</a> (Consumer NZ&rsquo;s free comparison tool) to see which retailer offers the best rate for your P&#257;p&#257;moa address. Average savings are around $400 per year for those who switch.</div></div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">&#128293; Gas (LPG)</div>
+        <p class="body-text">P&#257;p&#257;moa does not have reticulated natural gas &mdash; there is no gas main running to properties. Households using gas for heating or cooking use bottled LPG delivered by cylinder. Main LPG suppliers in the Bay of Plenty include:</p>
+        <div class="info-rows">
+          <div class="info-row"><span class="ir-label">Nova Energy</span><span class="ir-val">Residential LPG cylinder delivery. <a href="https://www.novaenergy.co.nz" target="_blank" rel="noopener">novaenergy.co.nz</a></span></div>
+          <div class="info-row"><span class="ir-label">Rockgas</span><span class="ir-val">Nationwide LPG supplier. <a href="https://www.rockgas.co.nz" target="_blank" rel="noopener">rockgas.co.nz</a> &middot; 0800 476 254</span></div>
+          <div class="info-row"><span class="ir-label">Gas Works</span><span class="ir-val">LPG bottles, BBQ gas and cylinder swaps at many hardware and supermarket locations.</span></div>
+        </div>
+        <p class="body-text">LPG is typically supplied in 9 kg or 45 kg cylinders. For outdoor BBQ gas, cylinder swaps are available at most service stations and hardware stores in P&#257;p&#257;moa including Mitre 10 and Bunnings in Tauranga.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">&#127760; Broadband &amp; Internet</div>
+        <p class="body-text">P&#257;p&#257;moa is fully covered by the Chorus fibre broadband network. Most properties can connect to UFB fibre, which offers much faster and more reliable speeds than old copper ADSL connections. In June 2025, Chorus upgraded its standard plan speeds &mdash; the entry-level plan now runs at 100/20 Mbps and the popular mid-tier plan at 500/100 Mbps, at no extra cost.</p>
+        <p class="body-text">Chorus does not sell directly to consumers &mdash; you choose a broadband retailer who provides service over the Chorus network. Most major NZ retailers are available in P&#257;p&#257;moa:</p>
+        <div class="provider-grid">
+          <div class="provider-card"><div class="pc-name">Spark</div><div class="pc-desc">NZ's largest telco. Fibre, mobile and landline bundles. Good for households wanting everything in one bill.</div><a href="https://www.spark.co.nz" class="pc-link" target="_blank" rel="noopener">spark.co.nz</a></div>
+          <div class="provider-card"><div class="pc-name">One NZ (Vodafone)</div><div class="pc-desc">Formerly Vodafone. Fibre and 5G fixed wireless options. Mobile bundling available.</div><a href="https://www.one.nz" class="pc-link" target="_blank" rel="noopener">one.nz</a></div>
+          <div class="provider-card"><div class="pc-name">2degrees</div><div class="pc-desc">Competitive pricing on fibre and mobile. Popular with families wanting straightforward bundled plans.</div><a href="https://www.2degrees.nz" class="pc-link" target="_blank" rel="noopener">2degrees.nz</a></div>
+          <div class="provider-card"><div class="pc-name">Mercury (broadband)</div><div class="pc-desc">Discount broadband when bundled with electricity. Half-price broadband offer for new power customers (terms apply).</div><a href="https://www.mercury.co.nz" class="pc-link" target="_blank" rel="noopener">mercury.co.nz</a></div>
+          <div class="provider-card"><div class="pc-name">Orcon / Slingshot</div><div class="pc-desc">Independent ISPs under the same group. Competitive pricing and no-lock-in plans.</div><a href="https://www.orcon.net.nz" class="pc-link" target="_blank" rel="noopener">orcon.net.nz</a></div>
+          <div class="provider-card"><div class="pc-name">Starlink</div><div class="pc-desc">Satellite internet from SpaceX. An option for rural or remote properties beyond the fibre footprint.</div><a href="https://www.starlink.com" class="pc-link" target="_blank" rel="noopener">starlink.com</a></div>
+        </div>
+        <div class="alert-note alert-blue"><span>&#128204;</span><div>Use <a href="https://www.broadbandcompare.co.nz" target="_blank" rel="noopener">Broadband Compare</a> or enter your address at <a href="https://www.chorus.co.nz" target="_blank" rel="noopener">chorus.co.nz</a> to confirm fibre availability at your property and see available plans side by side.</div></div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">&#128222; Mobile &amp; Phone</div>
+        <p class="body-text">P&#257;p&#257;moa has strong 4G and 5G mobile coverage from all three New Zealand networks. Spark, One NZ and 2degrees all provide good outdoor coverage across the suburb. Indoor coverage is generally reliable across the residential area. For the Pāpāmoa Hills area and surrounding rural zones, coverage quality varies by carrier &mdash; worth checking each provider's coverage map for your specific address.</p>
+        <p class="body-text">Landline services remain available via fibre-based VoIP through most broadband providers. Traditional copper-based landlines are being progressively retired by Chorus as fibre uptake increases.</p>
+      </div>
+    </div>
+    <div class="side-col">
+      <div class="fact-box">
+        <h4>&#128204; Quick reference</h4>
+        <ul class="fact-list">
+          <li><strong>Power faults</strong> &mdash; Powerco: 0800 769 363</li>
+          <li><strong>Lines network</strong> &mdash; Powerco (not your retailer)</li>
+          <li><strong>No reticulated gas</strong> &mdash; LPG cylinders only</li>
+          <li><strong>Fibre</strong> &mdash; Chorus network, fully available in P&#257;p&#257;moa</li>
+          <li><strong>3 mobile networks</strong> &mdash; Spark, One NZ, 2degrees</li>
+          <li><strong>Compare power</strong> &mdash; powerswitch.org.nz</li>
+          <li><strong>Compare broadband</strong> &mdash; broadbandcompare.co.nz</li>
+        </ul>
+      </div>
+      <div class="ad-spot">
+        <div class="ad-label">Sponsored</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>&#9889; Solar &amp; battery installers in P&#257;p&#257;moa</p>
+            <a href="/index.html">Claim this spot &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#128279; Useful links</div>
+        <div class="link-list">
+          <a href="https://www.powerswitch.org.nz" target="_blank" rel="noopener">Powerswitch &mdash; compare power plans &#8599;</a>
+          <a href="https://www.broadbandcompare.co.nz" target="_blank" rel="noopener">Broadband Compare &#8599;</a>
+          <a href="https://www.powerco.co.nz" target="_blank" rel="noopener">Powerco &mdash; outage map &#8599;</a>
+          <a href="https://www.chorus.co.nz" target="_blank" rel="noopener">Check fibre availability &#8599;</a>
+          <a href="https://www.tauranga.govt.nz/property-and-rates/water-rates" target="_blank" rel="noopener">TCC water rates &#8599;</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#128279; Related pages</div>
+        <div class="link-list">
+          <a href="/articles/water-rates-papamoa.html" style="font-size:0.82rem;font-weight:600">Water &amp; Rates</a>
+          <a href="/articles/rubbish-recycling-papamoa.html" style="font-size:0.82rem;font-weight:600">Rubbish &amp; Recycling</a>
+          <a href="/articles/local-government.html" style="font-size:0.82rem;font-weight:600">Local Government</a>
+          <a href="/articles/population-statistics.html" style="font-size:0.82rem;font-weight:600">Population &amp; Statistics</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="/homepage.html">Papamoa.info</a> &mdash; The local directory for P&#257;p&#257;moa, Bay of Plenty, New Zealand. Always verify details directly with providers.
+</footer>
+
+</body>
+</html>
