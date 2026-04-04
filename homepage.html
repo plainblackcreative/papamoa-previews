@@ -1,98 +1,1060 @@
 <!DOCTYPE html>
 <html lang="en-NZ">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Papamoa — Local Business Directory</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Figtree',sans-serif;background:#F7F3ED;color:#1A2832}
-.hero{background:linear-gradient(135deg,#0D2B3E,#1B6B7D);padding:56px 24px 48px;text-align:center;color:#fff}
-.hero h1{font-family:'Playfair Display',serif;font-size:2.4rem;margin-bottom:10px}
-.hero p{font-size:16px;opacity:.8;max-width:480px;margin:0 auto}
-.page{max-width:960px;margin:0 auto;padding:48px 24px 80px}
-.section-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5A6E78;margin-bottom:8px}
-.section-title{font-family:'Playfair Display',serif;font-size:1.5rem;color:#0D2B3E;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid #D8E4E8}
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:40px}
-.cat-card{background:#fff;border:1px solid #D8E4E8;border-radius:10px;padding:16px 18px;text-decoration:none;display:flex;flex-direction:column;gap:4px;transition:border-color .2s}
-.cat-card:hover{border-color:#1B6B7D;background:#E4F2F5}
-.cat-name{font-size:14px;font-weight:600;color:#1A2832;text-transform:capitalize}
-.cat-count{font-size:12px;color:#5A6E78}
-ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px}
-li a{display:block;font-size:12.5px;font-family:monospace;color:#1B6B7D;background:#fff;border:1px solid #D8E4E8;border-radius:6px;padding:6px 10px;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-li a:hover{background:#E4F2F5}
-.cta{background:#fff;border:1px solid #D8E4E8;border-top:3px solid #C4985A;border-radius:10px;padding:24px 28px;margin-bottom:40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.cta p{font-size:15px;color:#1A2832;max-width:480px}
-.cta a{background:#C4985A;color:#fff;font-weight:600;font-size:14px;padding:10px 22px;border-radius:8px;text-decoration:none}
-.cta a:hover{background:#B8840A}
-footer{text-align:center;font-size:12px;color:#5A6E78;padding:24px;border-top:1px solid #D8E4E8}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pāpāmoa Local Directory — Businesses, Services & Local Info | Papamoa.info</title>
+  <meta name="description" content="Pāpāmoa's independent local directory. Every business listing written editorially. Local guides, community info, events and everything you need to know about Pāpāmoa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0;
+      --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E;
+      --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
+    a { color: var(--blue); text-decoration: none; }
+
+    /* ── NAV ── */
+    .site-nav { background: var(--navy); padding: 0 20px; display: flex; align-items: center; gap: 0; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; padding: 14px 0; margin-right: 24px; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
+    .nav-links { display: flex; align-items: center; gap: 0; flex: 1; overflow-x: auto; scrollbar-width: none; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-link { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.6); padding: 14px 12px; white-space: nowrap; text-decoration: none; transition: color 0.15s; border-bottom: 2px solid transparent; }
+    .nav-link:hover { color: #fff; border-bottom-color: rgba(255,255,255,0.3); }
+    .nav-link.active { color: #fff; border-bottom-color: var(--blue); }
+    .nav-cta { margin-left: auto; font-size: 0.75rem; font-weight: 700; background: var(--lime); color: #fff; padding: 7px 16px; border-radius: 5px; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.15s; }
+    .nav-cta:hover { background: #5A9020; }
+
+    /* ── HERO ── */
+    .hero { background: var(--navy); padding: 56px 24px 52px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(58,171,222,0.1) 0%, transparent 65%); pointer-events: none; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--lime), var(--blue)); }
+    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lime); margin-bottom: 12px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 14px; }
+    .hero h1 em { font-style: italic; color: var(--blue); }
+    .hero p { font-size: 1rem; color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.7; }
+
+    /* ── WRAP ── */
+    .section-wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── SEARCH BAR ── */
+    .search-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 18px 20px; }
+    .search-bar-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 10px; align-items: center; }
+    .search-input-wrap { flex: 1; position: relative; }
+    .search-input-wrap::before { content: ''; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7' stroke='%23607080' stroke-width='2'/%3E%3Cpath stroke='%23607080' stroke-width='2' stroke-linecap='round' d='m16 16 4 4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: contain; pointer-events: none; }
+    .search-input { width: 100%; padding: 11px 14px 11px 40px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Figtree', sans-serif; font-size: 0.95rem; color: var(--body); background: var(--bg); transition: all 0.15s; }
+    .search-input:focus { outline: none; border-color: var(--blue); background: var(--white); box-shadow: 0 0 0 3px rgba(58,171,222,0.1); }
+    .search-input::placeholder { color: var(--muted); }
+    .search-btn { padding: 11px 22px; background: var(--blue); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.88rem; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; transition: background 0.15s; flex-shrink: 0; }
+    .search-btn:hover { background: #2A8FBE; }
+    .search-suggestions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+    .search-suggestion { font-size: 0.74rem; font-weight: 600; color: var(--muted); background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 3px 11px; cursor: pointer; transition: all 0.15s; font-family: 'Figtree', sans-serif; }
+    .search-suggestion:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .search-results { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--white); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); z-index: 50; max-height: 340px; overflow-y: auto; display: none; }
+    .search-results.visible { display: block; }
+    .sr-group-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 10px 14px 4px; }
+    .sr-item { display: flex; gap: 10px; align-items: center; padding: 9px 14px; text-decoration: none; color: var(--body); transition: background 0.1s; }
+    .sr-item:hover { background: var(--bg); }
+    .sr-item-icon { font-size: 1rem; flex-shrink: 0; width: 24px; text-align: center; }
+    .sr-item-title { font-weight: 600; font-size: 0.86rem; color: var(--navy); }
+    .sr-item-sub { font-size: 0.74rem; color: var(--muted); }
+    .sr-empty { padding: 18px 14px; text-align: center; font-size: 0.84rem; color: var(--muted); }
+    .sr-divider { border: none; border-top: 1px solid var(--border); margin: 4px 0; }
+
+    /* ── CATEGORY BROWSE ── */
+    .cat-browse { padding: 44px 0 40px; }
+    .section-heading { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
+    .section-heading h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); }
+    .section-heading a { font-size: 0.8rem; font-weight: 700; color: var(--blue); }
+    .section-sub { font-size: 0.84rem; color: var(--muted); margin-bottom: 20px; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+    .cat-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; display: flex; align-items: flex-start; gap: 12px; text-decoration: none; color: inherit; transition: all 0.15s; }
+    .cat-card:hover { border-color: var(--blue); box-shadow: 0 3px 12px rgba(58,171,222,0.1); transform: translateY(-2px); }
+    .cat-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .cat-info h3 { font-weight: 700; font-size: 0.92rem; color: var(--navy); margin-bottom: 4px; }
+    .cat-info p { font-size: 0.76rem; color: var(--muted); line-height: 1.45; }
+    .cat-arrow { margin-left: auto; color: var(--blue); font-size: 0.9rem; align-self: center; flex-shrink: 0; opacity: 0.6; }
+
+    /* ── LOCAL INFO SECTION ── */
+    .local-info { background: var(--navy); padding: 44px 0 48px; }
+    .local-info-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+    .local-info-heading { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
+    .local-info-heading h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: #fff; }
+    .local-info-heading a { font-size: 0.8rem; font-weight: 700; color: var(--blue); }
+    .local-info-sub { font-size: 0.84rem; color: rgba(255,255,255,0.45); margin-bottom: 24px; }
+
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .info-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 9px; padding: 14px 16px; text-decoration: none; color: inherit; display: flex; gap: 11px; align-items: flex-start; transition: all 0.15s; }
+    .info-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(58,171,222,0.35); }
+    .ic-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+    .ic-body { flex: 1; min-width: 0; }
+    .ic-title { font-weight: 700; font-size: 0.86rem; color: #fff; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ic-desc { font-size: 0.75rem; color: rgba(255,255,255,0.45); line-height: 1.45; }
+    .ic-tag { display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-top: 5px; }
+    .ic-tag-updated { background: rgba(125,193,67,0.2); color: var(--lime); border: 1px solid rgba(125,193,67,0.25); }
+    .ic-tag-seasonal { background: rgba(200,150,42,0.2); color: #D4A840; border: 1px solid rgba(200,150,42,0.25); }
+    .ic-tag-live { background: rgba(58,171,222,0.2); color: var(--blue); border: 1px solid rgba(58,171,222,0.25); }
+
+    /* ── FEATURED ARTICLES ROW ── */
+    .feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .feature-card { background: linear-gradient(135deg, rgba(58,171,222,0.08), rgba(58,171,222,0.03)); border: 1px solid rgba(58,171,222,0.2); border-radius: 9px; padding: 16px 18px; text-decoration: none; display: flex; gap: 12px; align-items: flex-start; transition: all 0.15s; }
+    .feature-card:hover { background: rgba(58,171,222,0.12); border-color: rgba(58,171,222,0.4); }
+    .fc-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .fc-title { font-weight: 700; font-size: 0.9rem; color: #fff; margin-bottom: 4px; }
+    .fc-desc { font-size: 0.76rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .fc-link { font-size: 0.72rem; font-weight: 700; color: var(--blue); margin-top: 6px; display: block; }
+
+    /* ── SPOTLIGHT LISTINGS ── */
+    .spotlight-section { padding: 44px 0 40px; }
+    .spotlight-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .spot-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: all 0.15s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+    .spot-card:hover { border-color: var(--gold); box-shadow: 0 4px 16px rgba(200,150,42,0.1); transform: translateY(-2px); }
+    .spot-img { height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+    .spot-img-green { background: linear-gradient(135deg, #1A3020, #2A5030); }
+    .spot-img-blue { background: linear-gradient(135deg, #0D2A40, #1A4060); }
+    .spot-img-coral { background: linear-gradient(135deg, #2A1A1A, #4A2020); }
+    .spot-img-teal { background: linear-gradient(135deg, #0D2A2A, #1A4040); }
+    .spot-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; padding: 2px 8px; border-radius: 2px; margin: 10px 12px 0; width: fit-content; }
+    .spot-body { padding: 8px 12px 14px; flex: 1; }
+    .spot-name { font-weight: 700; font-size: 0.92rem; color: var(--navy); margin-bottom: 3px; }
+    .spot-sub { font-size: 0.72rem; color: var(--muted); margin-bottom: 6px; }
+    .spot-desc { font-size: 0.78rem; color: var(--body); line-height: 1.5; }
+
+    /* ── STATS ── */
+    .stats-band { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stats-inner { max-width: 960px; margin: 0 auto; padding: 24px 20px; display: flex; gap: 0; }
+    .stat-item { flex: 1; text-align: center; padding: 0 16px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--navy); line-height: 1; }
+    .stat-label { font-size: 0.72rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+
+    /* ── CATEGORY SECTIONS ── */
+    .cat-section { background: var(--white); border-top: 1px solid var(--border); padding: 44px 0 48px; }
+    .cat-section:nth-child(even) { background: var(--bg); }
+    .cat-hero-bar { border-radius: 10px; padding: 22px 24px 20px; margin-bottom: 24px; position: relative; overflow: hidden; }
+    .cat-hero-bar::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
+    .cat-hero-essential { background: linear-gradient(135deg, #1A2A3A, #2B3F5C); }
+    .cat-hero-essential::after { background: var(--lime); }
+    .cat-hero-accom { background: linear-gradient(135deg, #1A2038, #2B3060); }
+    .cat-hero-accom::after { background: var(--blue); }
+    .breadcrumb-bar { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+    .breadcrumb-bar a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .cat-hero-bar h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .cat-hero-bar p { font-size: 0.86rem; color: rgba(255,255,255,0.55); max-width: 540px; }
+
+    .subcat-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+    .chip { font-size: 0.75rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; white-space: nowrap; font-family: 'Figtree', sans-serif; transition: all 0.15s; }
+    .chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    .section-spotlight { background: linear-gradient(135deg, var(--navy), #1A2A40); border-radius: 10px; padding: 20px; margin-bottom: 22px; }
+    .ss-eye { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
+    .ss-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .ss-sub { font-size: 0.72rem; color: var(--gold); margin-bottom: 8px; font-weight: 600; }
+    .ss-desc { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 12px; }
+    .ss-link { display: inline-block; background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; font-size: 0.78rem; font-weight: 700; padding: 8px 16px; border-radius: 5px; text-decoration: none; }
+
+    .list-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+    .list-head h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); }
+    .list-count { font-size: 0.75rem; color: var(--muted); }
+    .list-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .l-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: all 0.15s; }
+    .l-card:hover { border-color: var(--blue); transform: translateY(-1px); box-shadow: 0 3px 10px rgba(58,171,222,0.08); }
+    .l-img { height: 70px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; position: relative; }
+    .l-badge { position: absolute; top: 8px; left: 8px; font-size: 0.58rem; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
+    .badge-gold { background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; }
+    .badge-silver { background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+    .badge-spot { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2); font-style: italic; }
+    .l-body { padding: 12px 14px; }
+    .l-body h3 { font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 3px; }
+    .l-sub { font-size: 0.72rem; color: var(--muted); margin-bottom: 6px; }
+    .l-desc { font-size: 0.79rem; color: var(--body); line-height: 1.5; margin-bottom: 8px; }
+    .l-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+    .l-tag { font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 3px; background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+    .l-card.dim { opacity: 0.55; pointer-events: none; background: var(--bg); }
+
+    .empty-spot { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 10px; padding: 18px 20px; text-align: center; margin-bottom: 12px; }
+    .empty-spot h3 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+    .empty-spot p { font-size: 0.79rem; color: var(--muted); margin-bottom: 10px; }
+    .es-cta { display: inline-block; font-size: 0.78rem; font-weight: 700; color: var(--blue); background: rgba(58,171,222,0.08); border: 1px solid rgba(58,171,222,0.2); padding: 5px 14px; border-radius: 5px; text-decoration: none; }
+
+    /* ── FOOTER ── */
+    .site-footer { background: var(--navy); padding: 40px 20px 24px; }
+    .footer-inner { max-width: 960px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .footer-brand em { font-style: normal; color: var(--blue); }
+    .footer-tagline { font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.65; }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 12px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .footer-links li a { font-size: 0.8rem; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links li a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 18px; font-size: 0.72rem; color: rgba(255,255,255,0.25); }
+
+    @media (max-width: 720px) {
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .info-grid { grid-template-columns: 1fr 1fr; }
+      .feature-row { grid-template-columns: 1fr; }
+      .spotlight-grid { grid-template-columns: 1fr 1fr; }
+      .list-grid { grid-template-columns: 1fr; }
+      .stats-inner { flex-wrap: wrap; }
+      .stat-item { flex: 1 1 50%; border-right: none; border-bottom: 1px solid var(--border); padding: 12px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+    }
+    @media (max-width: 480px) {
+      .cat-grid { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .spotlight-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
+
+<!-- ── NAV ── -->
+<nav class="site-nav">
+  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
+  <div class="nav-links">
+    <a href="/homepage.html" class="nav-link active">Home</a>
+    <a href="/categories/essential-services.html" class="nav-link">Essential Services</a>
+    <a href="/categories/accommodation.html" class="nav-link">Accommodation</a>
+    <a href="/categories/surf-tides.html" class="nav-link">Surf &amp; Tides</a>
+    <a href="/categories/entertainment.html" class="nav-link">Food &amp; Drink</a>
+    <a href="/categories/entertainment.html" class="nav-link">Entertainment</a>
+    <a href="/categories/shopping.html" class="nav-link">Shopping</a>
+    <a href="/categories/real-estate.html" class="nav-link">Real Estate</a>
+  </div>
+  <a href="/sales/claim.html" class="nav-cta">List Your Business</a>
+</nav>
+
+<!-- ── HERO ── -->
 <div class="hero">
-  <h1>Papamoa Local Directory</h1>
-  <p>The best local businesses, services &amp; community info in Papamoa, Bay of Plenty.</p>
-</div>
-<div class="page">
-  <div class="cta">
-    <p>Is your business in Papamoa? Get found by locals searching online.</p>
-    <a href="https://plainblackcreative.github.io/papamoa-previews/sales/landing.html">List your business</a>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">P&#257;p&#257;moa, Bay of Plenty</div>
+    <h1>Discover P&#257;p&#257;moa,<br><em>from the locals who know it</em></h1>
+    <p>Every listing written by the directory, not the business. Honest, specific, and built for search.</p>
   </div>
-  <div class="section-label">Browse by section</div>
-  <h2 class="section-title">Categories</h2>
-  <div class="cat-grid">
-    <a class="cat-card" href="https://plainblackcreative.github.io/papamoa-previews/admin/add-lead.html">
-      <span class="cat-name">admin</span>
-      <span class="cat-count">6 pages</span>
-    </a>
-    <a class="cat-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/aims-games.html">
-      <span class="cat-name">articles</span>
-      <span class="cat-count">32 pages</span>
-    </a>
-    <a class="cat-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation.html">
-      <span class="cat-name">categories</span>
-      <span class="cat-count">9 pages</span>
-    </a>
-    <a class="cat-card" href="https://plainblackcreative.github.io/papamoa-previews/community/community.html">
-      <span class="cat-name">community</span>
-      <span class="cat-count">6 pages</span>
-    </a>
-    <a class="cat-card" href="https://plainblackcreative.github.io/papamoa-previews/docs/crm-sheet-reference.html">
-      <span class="cat-name">docs</span>
-      <span class="cat-count">5 pages</span>
-    </a>
-    <a class="cat-card" href="https://plainblackcreative.github.io/papamoa-previews/listings/combined-listings.html">
-      <span class="cat-name">listings</span>
-      <span class="cat-count">11 pages</span>
-    </a>
-    <a class="cat-card" href="https://plainblackcreative.github.io/papamoa-previews/onboarding/confirm-listing.html">
-      <span class="cat-name">onboarding</span>
-      <span class="cat-count">1 page</span>
-    </a>
-    <a class="cat-card" href="https://plainblackcreative.github.io/papamoa-previews/partners/real-estate-agent.html">
-      <span class="cat-name">partners</span>
-      <span class="cat-count">1 page</span>
-    </a>
-    <a class="cat-card" href="https://plainblackcreative.github.io/papamoa-previews/previews/driftwood-cafe.html">
-      <span class="cat-name">previews</span>
-      <span class="cat-count">1 page</span>
-    </a>
-    <a class="cat-card" href="https://plainblackcreative.github.io/papamoa-previews/sales/claim.html">
-      <span class="cat-name">sales</span>
-      <span class="cat-count">12 pages</span>
-    </a>
-  </div>
-  <div class="section-label">Root pages</div>
-  <h2 class="section-title">All pages</h2>
-  <ul>
-  <li><a href="https://plainblackcreative.github.io/papamoa-previews/all-listings.html">all-listings.html</a></li>
-  <li><a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html">homepage.html</a></li>
-  <li><a href="https://plainblackcreative.github.io/papamoa-previews/index.html">index.html</a></li>
-  <li><a href="https://plainblackcreative.github.io/papamoa-previews/pricing-master.html">pricing-master.html</a></li>
-  </ul>
 </div>
-<footer>Papamoa.info &bull; Built by Plain Black Creative</footer>
+
+<!-- ── SEARCH BAR ── -->
+<div class="search-bar">
+  <div class="search-bar-inner">
+    <div class="search-input-wrap">
+      <input
+        type="text"
+        class="search-input"
+        id="site-search"
+        placeholder="Search businesses, services, local info&hellip;"
+        autocomplete="off"
+        oninput="handleSearch(this.value)"
+        onkeydown="handleSearchKey(event)"
+      >
+      <div class="search-results" id="search-results"></div>
+    </div>
+    <button class="search-btn" onclick="submitSearch()">Search</button>
+  </div>
+  <div class="search-bar-inner" style="padding-top:0">
+    <div class="search-suggestions">
+      <span class="search-suggestion" onclick="fillSearch('plumber')">Plumber</span>
+      <span class="search-suggestion" onclick="fillSearch('caf&#233;')">Caf&#233;</span>
+      <span class="search-suggestion" onclick="fillSearch('accommodation')">Accommodation</span>
+      <span class="search-suggestion" onclick="fillSearch('surf')">Surf school</span>
+      <span class="search-suggestion" onclick="fillSearch('mechanic')">Mechanic</span>
+      <span class="search-suggestion" onclick="fillSearch('real estate')">Real estate agent</span>
+      <span class="search-suggestion" onclick="fillSearch('school')">Schools</span>
+      <span class="search-suggestion" onclick="fillSearch('dog')">Dogs</span>
+      <span class="search-suggestion" onclick="fillSearch('electrician')">Electrician</span>
+      <span class="search-suggestion" onclick="fillSearch('walks')">Walks &amp; tracks</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── CATEGORY BROWSE ── -->
+<div class="cat-browse">
+  <div class="section-wrap">
+    <div class="section-heading">
+      <h2>Browse Categories</h2>
+    </div>
+    <p class="section-sub">8 top-level categories, hundreds of sub-categories</p>
+    <div class="cat-grid">
+      <a href="/categories/essential-services.html" class="cat-card">
+        <span class="cat-icon">&#128736;</span>
+        <div class="cat-info">
+          <h3>Essential Services</h3>
+          <p>Mechanics, trades, health, plumbers, electricians</p>
+        </div>
+        <span class="cat-arrow">&#8594;</span>
+      </a>
+      <a href="/categories/entertainment.html" class="cat-card">
+        <span class="cat-icon">&#127829;</span>
+        <div class="cat-info">
+          <h3>Food &amp; Drink</h3>
+          <p>Cafes, restaurants, takeaway, bars, breweries</p>
+        </div>
+        <span class="cat-arrow">&#8594;</span>
+      </a>
+      <a href="/categories/shopping.html" class="cat-card">
+        <span class="cat-icon">&#128717;</span>
+        <div class="cat-info">
+          <h3>Shopping &amp; Retail</h3>
+          <p>Fashion, homewares, gifts, specialty stores</p>
+        </div>
+        <span class="cat-arrow">&#8594;</span>
+      </a>
+      <a href="/categories/accommodation.html" class="cat-card">
+        <span class="cat-icon">&#127968;</span>
+        <div class="cat-info">
+          <h3>Accommodation</h3>
+          <p>Motels, holiday parks, Airbnb, luxury stays</p>
+        </div>
+        <span class="cat-arrow">&#8594;</span>
+      </a>
+      <a href="/categories/surf-tides.html" class="cat-card">
+        <span class="cat-icon">&#127940;</span>
+        <div class="cat-info">
+          <h3>Activities &amp; Outdoors</h3>
+          <p>Surf, fitness, tours, beaches, playgrounds</p>
+        </div>
+        <span class="cat-arrow">&#8594;</span>
+      </a>
+      <a href="/categories/services.html" class="cat-card">
+        <span class="cat-icon">&#127968;</span>
+        <div class="cat-info">
+          <h3>Home &amp; Property</h3>
+          <p>Builders, landscaping, real estate, cleaning</p>
+        </div>
+        <span class="cat-arrow">&#8594;</span>
+      </a>
+      <a href="/categories/services.html" class="cat-card">
+        <span class="cat-icon">&#128188;</span>
+        <div class="cat-info">
+          <h3>Professional Services</h3>
+          <p>Accountants, lawyers, financial advisers, consultants</p>
+        </div>
+        <span class="cat-arrow">&#8594;</span>
+      </a>
+      <a href="/categories/real-estate.html" class="cat-card">
+        <span class="cat-icon">&#127968;</span>
+        <div class="cat-info">
+          <h3>Real Estate</h3>
+          <p>Buying, selling, market reports, local agent</p>
+        </div>
+        <span class="cat-arrow">&#8594;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── SPOTLIGHT LISTINGS ── -->
+<div class="spotlight-section" style="background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section-wrap">
+    <div class="section-heading">
+      <h2>Spotlight Listings</h2>
+    </div>
+    <p class="section-sub" style="margin-bottom:20px">P&#257;p&#257;moa&rsquo;s top-rated businesses &mdash; editorially selected, one Gold Spotlight per sub-category</p>
+    <div class="spotlight-grid">
+      <a href="/categories/essential-services.html" class="spot-card">
+        <div class="spot-img spot-img-green">&#127947;</div>
+        <span class="spot-badge">&#11088; Gold Spotlight</span>
+        <div class="spot-body">
+          <div class="spot-name">ReDefined Wellbeing Hub</div>
+          <div class="spot-sub">Gym, Pilates, Yoga, Recovery</div>
+          <p class="spot-desc">Award-winning facility with five specialised studios, on-site health practitioners, and a single membership covering everything.</p>
+        </div>
+      </a>
+      <a href="/categories/surf-tides.html" class="spot-card">
+        <div class="spot-img spot-img-blue">&#127940;</div>
+        <span class="spot-badge">&#11088; Gold Spotlight</span>
+        <div class="spot-body">
+          <div class="spot-name">Hakanini Surf School &amp; Rentals</div>
+          <div class="spot-sub">P&#257;p&#257;moa Domain</div>
+          <p class="spot-desc">P&#257;p&#257;moa&rsquo;s dedicated surf school. Group and private lessons for all ages, holiday programmes, and board hire from $35.</p>
+        </div>
+      </a>
+      <a href="/categories/entertainment.html" class="spot-card">
+        <div class="spot-img spot-img-coral">&#127860;</div>
+        <span class="spot-badge">&#11088; Gold Spotlight</span>
+        <div class="spot-body">
+          <div class="spot-name">PAP House</div>
+          <div class="spot-sub">Restaurant &amp; Bar, P&#257;p&#257;moa Beach Road</div>
+          <p class="spot-desc">The local&rsquo;s living room. Dog-friendly restaurant and bar open seven days with indoor and outdoor seating.</p>
+        </div>
+      </a>
+      <a href="/categories/essential-services.html" class="spot-card">
+        <div class="spot-img spot-img-teal">&#128663;</div>
+        <span class="spot-badge">&#11088; Gold Spotlight</span>
+        <div class="spot-body">
+          <div class="spot-name">Coastal Autos</div>
+          <div class="spot-sub">Mechanic &amp; WOF, P&#257;p&#257;moa</div>
+          <p class="spot-desc">MTA-approved workshop handling WOFs, servicing, tyres, brakes, auto electrical, and vehicle licensing under one roof.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── STATS BAND ── -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">8</div>
+      <div class="stat-label">Top-level Categories</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">Sub-categories</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Editorially Written</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">SEO</div>
+      <div class="stat-label">Built for Search &amp; AI</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── LOCAL INFO SECTION ── -->
+<div class="local-info">
+  <div class="local-info-inner">
+
+    <div class="local-info-heading">
+      <h2>Local Info &amp; Guides</h2>
+      <a href="/articles/news-events.html">News &amp; events &rarr;</a>
+    </div>
+    <p class="local-info-sub">Everything you need to know about living in and visiting P&#257;p&#257;moa &mdash; written by the directory, not a tourist board.</p>
+
+    <!-- PROPERTY & REAL ESTATE — NEW ROW -->
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px">Property &amp; Real Estate</div>
+    <div class="info-grid" style="margin-bottom:20px">
+      <a href="/categories/real-estate.html" class="info-card">
+        <span class="ic-icon">&#127968;</span>
+        <div class="ic-body">
+          <div class="ic-title">Property Market</div>
+          <div class="ic-desc">Monthly market reports, neighbourhood data, median prices and buying &amp; selling guides.</div>
+          <span class="ic-tag ic-tag-updated">March 2026 report live</span>
+        </div>
+      </a>
+      <a href="/categories/real-estate.html#market" class="info-card">
+        <span class="ic-icon">&#128202;</span>
+        <div class="ic-body">
+          <div class="ic-title">March 2026 Market Snapshot</div>
+          <div class="ic-desc">$895k median. 38 homes listed. 29 days avg DOM. Neighbourhood breakdown across Golden Sands, The Lakes, Papamoa Beach and more.</div>
+        </div>
+      </a>
+      <a href="/categories/real-estate.html" class="info-card">
+        <span class="ic-icon">&#128222;</span>
+        <div class="ic-body">
+          <div class="ic-title">Find a Local Agent</div>
+          <div class="ic-desc">One agent exclusively recommended by Papamoa.info. Direct contact, no platform sitting between you and expert local advice.</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- ROW 1: Community & People -->
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px">Community &amp; People</div>
+    <div class="info-grid" style="margin-bottom:20px">
+      <a href="/articles/population-statistics.html" class="info-card">
+        <span class="ic-icon">&#128202;</span>
+        <div class="ic-body">
+          <div class="ic-title">Population &amp; Stats</div>
+          <div class="ic-desc">37,910 residents. NZ&rsquo;s fastest-growing suburb. Census data, growth timeline, demographics.</div>
+        </div>
+      </a>
+      <a href="/articles/maori-history.html" class="info-card">
+        <span class="ic-icon">&#127963;</span>
+        <div class="ic-body">
+          <div class="ic-title">M&#257;ori History</div>
+          <div class="ic-desc">Ng&#257; P&#333;tiki, Ng&#257;i Te Rangi, Tamapahore Marae and the origins of the name P&#257;p&#257;moa.</div>
+        </div>
+      </a>
+      <a href="/articles/local-government.html" class="info-card">
+        <span class="ic-icon">&#127963;</span>
+        <div class="ic-body">
+          <div class="ic-title">Local Government</div>
+          <div class="ic-desc">Mayor Mah&#233; Drysdale, TCC contacts, MP Tom Rutherford. Who represents P&#257;p&#257;moa.</div>
+          <span class="ic-tag ic-tag-updated">Updated Apr 2026</span>
+        </div>
+      </a>
+      <a href="/articles/notable-people.html" class="info-card">
+        <span class="ic-icon">&#11088;</span>
+        <div class="ic-body">
+          <div class="ic-title">Notable People</div>
+          <div class="ic-desc">Athletes, artists and public figures with connections to P&#257;p&#257;moa.</div>
+        </div>
+      </a>
+      <a href="/community/community.html" class="info-card">
+        <span class="ic-icon">&#9997;&#65039;</span>
+        <div class="ic-body">
+          <div class="ic-title">Churches &amp; Community Groups</div>
+          <div class="ic-desc">Local churches, faith communities and community organisations.</div>
+        </div>
+      </a>
+      <a href="/community/community.html" class="info-card">
+        <span class="ic-icon">&#129309;</span>
+        <div class="ic-body">
+          <div class="ic-title">Community Resources</div>
+          <div class="ic-desc">Emergency contacts, food banks, Facebook groups, mental health support.</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- ROW 2: Outdoors & Parks -->
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px">Outdoors &amp; Recreation</div>
+    <div class="info-grid" style="margin-bottom:20px">
+      <a href="/articles/papamoa-hills.html" class="info-card">
+        <span class="ic-icon">&#127956;</span>
+        <div class="ic-body">
+          <div class="ic-title">P&#257;p&#257;moa Hills</div>
+          <div class="ic-desc">Track status, closures and maps. Summerhills Track open &mdash; others closed after Jan 2026 landslips.</div>
+          <span class="ic-tag ic-tag-updated">Updated Apr 2026</span>
+        </div>
+      </a>
+      <a href="/articles/walks-tracks.html" class="info-card">
+        <span class="ic-icon">&#128694;</span>
+        <div class="ic-body">
+          <div class="ic-title">Walks &amp; Tracks</div>
+          <div class="ic-desc">All walking and cycling tracks in P&#257;p&#257;moa &mdash; difficulty, dogs, access and directions.</div>
+        </div>
+      </a>
+      <a href="/articles/parks-playgrounds.html" class="info-card">
+        <span class="ic-icon">&#127794;</span>
+        <div class="ic-body">
+          <div class="ic-title">Parks &amp; Playgrounds</div>
+          <div class="ic-desc">Gordon Spratt Reserve, skate spots, picnic areas and sports fields across P&#257;p&#257;moa.</div>
+        </div>
+      </a>
+      <a href="/articles/gordon-spratt-reserve.html" class="info-card">
+        <span class="ic-icon">&#127795;</span>
+        <div class="ic-body">
+          <div class="ic-title">Gordon Spratt Reserve</div>
+          <div class="ic-desc">P&#257;p&#257;moa&rsquo;s main park. Tsunami mound (3,800 capacity), full facilities and event space.</div>
+        </div>
+      </a>
+      <a href="/articles/dogs-papamoa.html" class="info-card">
+        <span class="ic-icon">&#128054;</span>
+        <div class="ic-body">
+          <div class="ic-title">Dogs in P&#257;p&#257;moa</div>
+          <div class="ic-desc">TCC Dog Bylaw, off-leash zones, beach rules, registration and reporting.</div>
+        </div>
+      </a>
+      <a href="/articles/mount-maunganui.html" class="info-card">
+        <span class="ic-icon">&#127956;</span>
+        <div class="ic-body">
+          <div class="ic-title">Mount Maunganui</div>
+          <div class="ic-desc">Mauao fully closed after Jan 2026 landslide. Village and beach remain open.</div>
+          <span class="ic-tag ic-tag-updated">Closure update</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- ROW 3: Families & Schools -->
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px">Families &amp; Schools</div>
+    <div class="info-grid" style="margin-bottom:20px">
+      <a href="/articles/schools-papamoa.html" class="info-card">
+        <span class="ic-icon">&#127979;</span>
+        <div class="ic-body">
+          <div class="ic-title">Schools in P&#257;p&#257;moa</div>
+          <div class="ic-desc">All 8 schools &mdash; primary, secondary, Catholic and M&#257;ori immersion. Zones, rolls, contacts.</div>
+        </div>
+      </a>
+      <a href="/articles/school-terms-holidays.html" class="info-card">
+        <span class="ic-icon">&#128197;</span>
+        <div class="ic-body">
+          <div class="ic-title">School Terms 2026</div>
+          <div class="ic-desc">All four terms, holidays and public holidays for 2026. Bookmark for the year.</div>
+        </div>
+      </a>
+      <a href="/articles/kids-birthday-parties.html" class="info-card">
+        <span class="ic-icon">&#127881;</span>
+        <div class="ic-body">
+          <div class="ic-title">Kids Birthday Parties</div>
+          <div class="ic-desc">Venues, entertainers, catering and party hire across P&#257;p&#257;moa.</div>
+        </div>
+      </a>
+      <a href="/articles/library.html" class="info-card">
+        <span class="ic-icon">&#128218;</span>
+        <div class="ic-body">
+          <div class="ic-title">P&#257;p&#257;moa Library</div>
+          <div class="ic-desc">Hours, services, free WiFi, story time and events. At Gordon Spratt Reserve.</div>
+        </div>
+      </a>
+      <a href="/articles/seniors-retirement.html" class="info-card">
+        <span class="ic-icon">&#129399;</span>
+        <div class="ic-body">
+          <div class="ic-title">Seniors &amp; Retirement</div>
+          <div class="ic-desc">Retirement villages, home care, NZ Super and local aged care services.</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- ROW 4: Events, Shopping & Getting Around -->
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px">Events, Shopping &amp; Getting Around</div>
+    <div class="info-grid" style="margin-bottom:24px">
+      <a href="/articles/aims-games.html" class="info-card">
+        <span class="ic-icon">&#127942;</span>
+        <div class="ic-body">
+          <div class="ic-title">AIMS Games 2026</div>
+          <div class="ic-desc">5&ndash;11 Sep 2026. 12,000+ students. Accommodation guide, venues, parking.</div>
+          <span class="ic-tag ic-tag-seasonal">Book accommodation now</span>
+        </div>
+      </a>
+      <a href="/articles/news-events.html" class="info-card">
+        <span class="ic-icon">&#128240;</span>
+        <div class="ic-body">
+          <div class="ic-title">News &amp; Events</div>
+          <div class="ic-desc">Upcoming events, regular markets, local news and community submissions.</div>
+          <span class="ic-tag ic-tag-live">Updated regularly</span>
+        </div>
+      </a>
+      <a href="/articles/shopping-centres.html" class="info-card">
+        <span class="ic-icon">&#128717;</span>
+        <div class="ic-body">
+          <div class="ic-title">Shopping Centres</div>
+          <div class="ic-desc">Fashion Island, Palm Beach Plaza and The Sands &mdash; tenants, hours and parking.</div>
+        </div>
+      </a>
+      <a href="/articles/the-yard.html" class="info-card">
+        <span class="ic-icon">&#127978;</span>
+        <div class="ic-body">
+          <div class="ic-title">The Yard</div>
+          <div class="ic-desc">P&#257;p&#257;moa&rsquo;s boutique retail and dining precinct.</div>
+        </div>
+      </a>
+      <a href="/articles/op-shops-papamoa.html" class="info-card">
+        <span class="ic-icon">&#128717;</span>
+        <div class="ic-body">
+          <div class="ic-title">Op Shops &amp; Second-hand</div>
+          <div class="ic-desc">Waipuna Hospice, Vinnies, Recycle Boutique and Xanadu Book Exchange.</div>
+        </div>
+      </a>
+      <a href="/articles/weddings.html" class="info-card">
+        <span class="ic-icon">&#128141;</span>
+        <div class="ic-body">
+          <div class="ic-title">Weddings in P&#257;p&#257;moa</div>
+          <div class="ic-desc">Venues, photographers, catering and local wedding suppliers.</div>
+        </div>
+      </a>
+      <a href="/articles/dinner-at-the-domain.html" class="info-card">
+        <span class="ic-icon">&#127869;</span>
+        <div class="ic-body">
+          <div class="ic-title">Dinner at the Domain</div>
+          <div class="ic-desc">Annual outdoor dining event at the Domain. Dates, tickets and guide.</div>
+        </div>
+      </a>
+      <a href="/articles/fuel-prices.html" class="info-card">
+        <span class="ic-icon">&#9981;</span>
+        <div class="ic-body">
+          <div class="ic-title">Fuel Prices</div>
+          <div class="ic-desc">Local petrol and diesel prices across P&#257;p&#257;moa stations.</div>
+          <span class="ic-tag ic-tag-live">Updated regularly</span>
+        </div>
+      </a>
+      <a href="/articles/tauranga.html" class="info-card">
+        <span class="ic-icon">&#127961;</span>
+        <div class="ic-body">
+          <div class="ic-title">Tauranga</div>
+          <div class="ic-desc">15 min from the CBD. Distance guide, transport and the TaurangaNZ.info network.</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- ROW 5: Home & Living -->
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px">Home &amp; Living</div>
+    <div class="info-grid" style="margin-bottom:24px">
+      <a href="/articles/swimming-papamoa.html" class="info-card">
+        <span class="ic-icon">&#127946;</span>
+        <div class="ic-body">
+          <div class="ic-title">Swimming in P&#257;p&#257;moa</div>
+          <div class="ic-desc">Beach guide, freshwater holes, public pools and residential pool &amp; spa laws.</div>
+        </div>
+      </a>
+      <a href="/articles/utilities-papamoa.html" class="info-card">
+        <span class="ic-icon">&#9889;</span>
+        <div class="ic-body">
+          <div class="ic-title">Utilities &mdash; Power, Gas &amp; Broadband</div>
+          <div class="ic-desc">Power retailers, LPG, fibre broadband and mobile coverage in P&#257;p&#257;moa.</div>
+        </div>
+      </a>
+      <a href="/articles/water-rates-papamoa.html" class="info-card">
+        <span class="ic-icon">&#128167;</span>
+        <div class="ic-body">
+          <div class="ic-title">Water &amp; Rates</div>
+          <div class="ic-desc">TCC metered water, Waiari plant, quarterly billing and wastewater.</div>
+        </div>
+      </a>
+      <a href="/articles/rubbish-recycling-papamoa.html" class="info-card">
+        <span class="ic-icon">&#9851;&#65039;</span>
+        <div class="ic-body">
+          <div class="ic-title">Rubbish &amp; Recycling</div>
+          <div class="ic-desc">4-bin kerbside guide, Te Maunga Transfer Station hours and accepted materials.</div>
+        </div>
+      </a>
+      <a href="/articles/clothing-recycling-papamoa.html" class="info-card">
+        <span class="ic-icon">&#128248;</span>
+        <div class="ic-body">
+          <div class="ic-title">Clothing Recycling</div>
+          <div class="ic-desc">Clothing bins, Waipuna Hospice free home collection and textile recycling.</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- TOOLS & CALCULATORS -->
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px">Tools &amp; Calculators</div>
+    <div class="feature-row">
+      <a href="/articles/tax-kiwisaver.html" class="feature-card">
+        <span class="fc-icon">&#128176;</span>
+        <div>
+          <div class="fc-title">PAYE &amp; GST Calculator</div>
+          <p class="fc-desc">Work out take-home pay, GST on any amount, and KiwiSaver contributions. Key IRD dates for 2026.</p>
+          <span class="fc-link">Open calculator &rarr;</span>
+        </div>
+      </a>
+      <a href="/articles/easter-trading-hours.html" class="feature-card">
+        <span class="fc-icon">&#128003;</span>
+        <div>
+          <div class="fc-title">Easter Trading Hours 2026</div>
+          <p class="fc-desc">Which P&#257;p&#257;moa shops and services are open over Easter? Full list with dates and hours.</p>
+          <span class="fc-link">View trading hours &rarr;</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+<!-- ── END LOCAL INFO ── -->
+
+<!-- ── ESSENTIAL SERVICES SECTION ── -->
+<div class="cat-section">
+  <div class="section-wrap">
+    <div class="cat-hero-bar cat-hero-essential">
+      <div class="breadcrumb-bar"><a href="/homepage.html">Home</a> / Essential Services</div>
+      <h2>Essential Services</h2>
+      <p>Mechanics, tradespeople, health professionals, finance, education, and the services that keep P&#257;p&#257;moa running</p>
+    </div>
+
+    <div class="subcat-chips">
+      <span class="chip active">All</span>
+      <span class="chip">Automotive</span>
+      <span class="chip">Health &amp; Medical</span>
+      <span class="chip">Trades &amp; Building</span>
+      <span class="chip">Finance &amp; Legal</span>
+      <span class="chip">Education &amp; Childcare</span>
+      <span class="chip">Cleaning</span>
+      <span class="chip">Pest Control</span>
+      <span class="chip">IT &amp; Tech</span>
+      <span class="chip">Veterinary</span>
+    </div>
+
+    <div class="section-spotlight">
+      <div class="ss-eye">&#11088; Gold Spotlight &middot; Automotive</div>
+      <div class="ss-name">Coastal Autos</div>
+      <div class="ss-sub">&#128663; Mechanic &amp; WOF &middot; P&#257;p&#257;moa</div>
+      <p class="ss-desc">An MTA-approved workshop in P&#257;p&#257;moa offering WOFs, full vehicle servicing, tyres, wheel alignments, brakes, auto electrical, air conditioning, diagnostics, and vehicle licensing. They handle fleet servicing and accept online bookings. Reviewers consistently mention the transparent communication around what work is actually needed.</p>
+      <a href="/categories/essential-services.html" class="ss-link">View full listing &rarr;</a>
+    </div>
+
+    <div class="list-head">
+      <h3>All Essential Services</h3>
+      <span class="list-count">Showing 7 listings</span>
+    </div>
+    <div class="list-grid">
+      <div class="l-card">
+        <div class="l-img" style="background:linear-gradient(135deg,#1A3020,#2A5030)"><span class="l-badge badge-gold">&#11088; Gold</span>&#128663;</div>
+        <div class="l-body"><h3>Coastal Autos</h3><div class="l-sub">Automotive &middot; P&#257;p&#257;moa</div><p class="l-desc">One-stop workshop for WOFs, servicing, tyres, brakes, auto electrical, and vehicle licensing. MTA approved with online booking and fleet servicing capability.</p><div class="l-tags"><span class="l-tag">WOF</span><span class="l-tag">Servicing</span><span class="l-tag">Tyres</span><span class="l-tag">Auto Electrical</span></div></div>
+      </div>
+      <div class="l-card">
+        <div class="l-img" style="background:linear-gradient(135deg,#0D2A40,#1A4060)"><span class="l-badge badge-gold">&#11088; Gold</span>&#127947;</div>
+        <div class="l-body"><h3>ReDefined Wellbeing Hub</h3><div class="l-sub">Health &amp; Fitness &middot; P&#257;p&#257;moa</div><p class="l-desc">Award-winning facility combining reformer pilates, yoga, functional training, open gym, and a recovery lab with on-site physiotherapy, nutrition, massage, and counselling.</p><div class="l-tags"><span class="l-tag">Pilates</span><span class="l-tag">Yoga</span><span class="l-tag">Gym</span><span class="l-tag">Physio</span></div></div>
+      </div>
+      <div class="l-card">
+        <div class="l-img" style="background:linear-gradient(135deg,#2A1A2A,#402040)"><span class="l-badge badge-silver">Silver</span>&#9986;&#65039;</div>
+        <div class="l-body"><h3>Barber Toms</h3><div class="l-sub">Personal Care &middot; 80 Parton Rd, P&#257;p&#257;moa</div><p class="l-desc">Neighbourhood barbershop offering men&rsquo;s and kids&rsquo; cuts, beard trims, razor fades, and a full &ldquo;The Works&rdquo; package. Walk-ins or book through Fresha. Second location in Mt Maunganui.</p><div class="l-tags"><span class="l-tag">Barber</span><span class="l-tag">Men&rsquo;s Cuts</span><span class="l-tag">Beard Trims</span></div></div>
+      </div>
+      <div class="l-card">
+        <div class="l-img" style="background:linear-gradient(135deg,#1A2A1A,#2A402A)"><span class="l-badge badge-silver">Silver</span>&#128137;</div>
+        <div class="l-body"><h3>Pro Supplements</h3><div class="l-sub">Health &amp; Nutrition &middot; Tauranga</div><p class="l-desc">Independent supplement retailer stocking protein, pre-workouts, creatine, BCAAs, vitamins, and accessories from leading brands. Online store and Tauranga CBD location.</p><div class="l-tags"><span class="l-tag">Protein</span><span class="l-tag">Supplements</span><span class="l-tag">Sports Nutrition</span></div></div>
+      </div>
+      <div class="l-card dim">
+        <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#129463;</div>
+        <div class="l-body"><h3>Dentist</h3><div class="l-sub">Health &amp; Medical</div><p class="l-desc">No Gold Spotlight listing has been claimed for dentists in P&#257;p&#257;moa. This is the top position in the sub-category.</p></div>
+      </div>
+      <div class="l-card dim">
+        <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#9889;</div>
+        <div class="l-body"><h3>Electrician</h3><div class="l-sub">Trades &amp; Building</div><p class="l-desc">No Gold Spotlight listing has been claimed for electricians in P&#257;p&#257;moa. Claim the top spot for this high-demand sub-category.</p></div>
+      </div>
+      <div class="l-card dim">
+        <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#128295;</div>
+        <div class="l-body"><h3>Plumber</h3><div class="l-sub">Trades &amp; Building</div><p class="l-desc">No Gold Spotlight listing has been claimed for plumbers in P&#257;p&#257;moa. One Gold Spotlight per sub-category.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ACCOMMODATION SECTION ── -->
+<div class="cat-section">
+  <div class="section-wrap">
+    <div class="cat-hero-bar cat-hero-accom">
+      <div class="breadcrumb-bar"><a href="/homepage.html">Home</a> / Accommodation</div>
+      <h2>Accommodation</h2>
+      <p>Motels, holiday parks, Airbnb managers, luxury stays, and everywhere to rest your head in P&#257;p&#257;moa</p>
+    </div>
+
+    <div class="subcat-chips">
+      <span class="chip active">All</span>
+      <span class="chip">Holiday Parks</span>
+      <span class="chip">Motels</span>
+      <span class="chip">Hotels</span>
+      <span class="chip">Airbnb &amp; Short-stay</span>
+      <span class="chip">Luxury / Boutique</span>
+      <span class="chip">Backpackers</span>
+      <span class="chip">Property Management</span>
+    </div>
+
+    <div class="empty-spot">
+      <h3>&#11088; Gold Spotlight available &mdash; Accommodation</h3>
+      <p>Pacific Park is listed on our dedicated accommodation page. The homepage Spotlight position is still available for the primary accommodation category.</p>
+      <a href="/sales/claim.html" class="es-cta">Claim this Spotlight &rarr;</a>
+    </div>
+
+    <div class="list-head">
+      <h3>All Accommodation</h3>
+      <span class="list-count">Showing 6 listings &middot; <a href="/categories/accommodation.html">View full accommodation page &rarr;</a></span>
+    </div>
+    <div class="list-grid">
+      <div class="l-card">
+        <div class="l-img" style="background:linear-gradient(135deg,#0D2A40,#1A4060)"><span class="l-badge badge-silver">Silver</span>&#127940;</div>
+        <div class="l-body"><h3>P&#257;p&#257;moa Beach Resort</h3><div class="l-sub">Holiday Park &middot; 535 P&#257;p&#257;moa Beach Road</div><p class="l-desc">A well-established holiday park directly on P&#257;p&#257;moa Beach Road with powered and non-powered sites, cabins, and motel-style units. Popular with families over summer.</p><div class="l-tags"><span class="l-tag">Holiday Park</span><span class="l-tag">Cabins</span><span class="l-tag">Camping</span><span class="l-tag">Beachfront</span></div></div>
+      </div>
+      <div class="l-card">
+        <div class="l-img" style="background:linear-gradient(135deg,#1A1A3A,#2A2A5A)"><span class="l-badge badge-silver">Silver</span>&#127968;</div>
+        <div class="l-body"><h3>Pacific Palms Motel</h3><div class="l-sub">Motel &middot; P&#257;p&#257;moa Beach</div><p class="l-desc">A mid-range motel with self-contained units a short walk from the beach. Units range from studio to two-bedroom, all with kitchenettes. Suitable for couples, small families, and contractors.</p><div class="l-tags"><span class="l-tag">Motel</span><span class="l-tag">Self-contained</span><span class="l-tag">Parking</span></div></div>
+      </div>
+      <div class="l-card">
+        <div class="l-img" style="background:linear-gradient(135deg,#1A2A1A,#2A4A2A)"><span class="l-badge badge-silver">Silver</span>&#127968;</div>
+        <div class="l-body"><h3>Golden Sands Holiday Homes</h3><div class="l-sub">Airbnb &amp; Short-stay &middot; Golden Sands, P&#257;p&#257;moa</div><p class="l-desc">Property management company operating a portfolio of short-stay rental homes in the Golden Sands subdivision. Three- to four-bedroom family homes on Airbnb and Bookabach.</p><div class="l-tags"><span class="l-tag">Holiday Homes</span><span class="l-tag">Airbnb</span><span class="l-tag">Families</span></div></div>
+      </div>
+      <div class="l-card dim">
+        <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#127981;</div>
+        <div class="l-body"><h3>Luxury / Boutique Stay</h3><div class="l-sub">Luxury / Boutique</div><p class="l-desc">No Gold Spotlight listing has been claimed for luxury or boutique accommodation in P&#257;p&#257;moa. One Spotlight available per sub-category.</p></div>
+      </div>
+      <div class="l-card dim">
+        <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#127960;</div>
+        <div class="l-body"><h3>Backpackers / Hostel</h3><div class="l-sub">Backpackers</div><p class="l-desc">No listing has been claimed for backpacker or hostel accommodation in P&#257;p&#257;moa. If one exists or is opening, this spot is available.</p></div>
+      </div>
+      <div class="l-card dim">
+        <div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Spotlight available</span>&#127959;</div>
+        <div class="l-body"><h3>Holiday Park</h3><div class="l-sub">Holiday Parks</div><p class="l-desc">No Gold Spotlight has been claimed for holiday parks on the homepage. <a href="/categories/accommodation.html">View full accommodation page</a> for Pacific Park Gold Spotlight.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Papamoa<em>.info</em></div>
+        <p class="footer-tagline">P&#257;p&#257;moa&rsquo;s independent local business directory. Every listing written editorially, not by the business. Built for Google, AI engines, and the people who live here.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul class="footer-links">
+          <li><a href="/categories/services.html">Essential Services</a></li>
+          <li><a href="/categories/entertainment.html">Food &amp; Drink</a></li>
+          <li><a href="/categories/shopping.html">Shopping &amp; Retail</a></li>
+          <li><a href="/categories/accommodation.html">Accommodation</a></li>
+          <li><a href="/categories/surf-tides.html">Activities &amp; Outdoors</a></li>
+          <li><a href="/categories/services.html">Home &amp; Property</a></li>
+          <li><a href="/categories/real-estate.html">Real Estate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Local Info</h4>
+        <ul class="footer-links">
+          <li><a href="/categories/real-estate.html">Property Market</a></li>
+          <li><a href="/articles/population-statistics.html">Population &amp; Stats</a></li>
+          <li><a href="/articles/schools-papamoa.html">Schools</a></li>
+          <li><a href="/articles/school-terms-holidays.html">School Terms 2026</a></li>
+          <li><a href="/articles/papamoa-hills.html">P&#257;p&#257;moa Hills</a></li>
+          <li><a href="/articles/swimming-papamoa.html">Swimming</a></li>
+          <li><a href="/articles/dogs-papamoa.html">Dogs in P&#257;p&#257;moa</a></li>
+          <li><a href="/articles/local-government.html">Local Government</a></li>
+          <li><a href="/articles/news-events.html">News &amp; Events</a></li>
+          <li><a href="/articles/aims-games.html">AIMS Games 2026</a></li>
+          <li><a href="/articles/mount-maunganui.html">Mount Maunganui</a></li>
+          <li><a href="/articles/maori-history.html">M&#257;ori History</a></li>
+          <li><a href="/articles/fuel-prices.html">Fuel Prices</a></li>
+          <li><a href="/articles/rubbish-recycling-papamoa.html">Rubbish &amp; Recycling</a></li>
+          <li><a href="/articles/utilities-papamoa.html">Utilities</a></li>
+          <li><a href="/articles/water-rates-papamoa.html">Water &amp; Rates</a></li>
+          <li><a href="/articles/op-shops-papamoa.html">Op Shops</a></li>
+          <li><a href="/articles/weddings.html">Weddings</a></li>
+          <li><a href="/articles/tax-kiwisaver.html">Tax &amp; KiwiSaver</a></li>
+          <li><a href="/articles/shopping-centres.html">Shopping Centres</a></li>
+          <li><a href="/articles/tauranga.html">Tauranga</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Businesses</h4>
+        <ul class="footer-links">
+          <li><a href="/sales/claim.html">Silver Listing</a></li>
+          <li><a href="/sales/claim.html">Gold Spotlight</a></li>
+          <li><a href="/sales/menu-addon.html">Menu Add-On</a></li>
+          <li><a href="/sales/claim.html">Get Listed</a></li>
+          <li><a href="/partners/real-estate-agent.html">Featured Agent Position</a></li>
+        </ul>
+        <h4 style="margin-top:16px">Network</h4>
+        <ul class="footer-links">
+          <li><a href="https://tauranganz.info" target="_blank" rel="noopener">TaurangaNZ.info</a></li>
+          <li><a href="/sitemap.html">Site Index</a></li>
+          <li><a href="#">About Papamoa.info</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 papamoa.info &middot; P&#257;p&#257;moa&rsquo;s Local Business Directory</div>
+  </div>
+</footer>
+
+<script>
+const SEARCH_INDEX = [
+  // Categories
+  { type:'cat', icon:'&#128736;', title:'Essential Services', sub:'Mechanics, trades, health, plumbers, electricians', url:'/categories/essential-services.html', keywords:'essential services mechanic trades health plumber electrician' },
+  { type:'cat', icon:'&#127968;', title:'Accommodation', sub:'Holiday parks, motels, Airbnb, luxury stays', url:'/categories/accommodation.html', keywords:'accommodation motel holiday park airbnb stay hotel' },
+  { type:'cat', icon:'&#127940;', title:'Surf & Tides', sub:'Conditions, surf school, tide times, fishing', url:'/categories/surf-tides.html', keywords:'surf tides beach fishing conditions forecast' },
+  { type:'cat', icon:'&#127829;', title:'Food & Drink', sub:'Cafes, restaurants, takeaway, bars, breweries', url:'/categories/entertainment.html', keywords:'food drink cafe restaurant takeaway bar pub' },
+  { type:'cat', icon:'&#128717;', title:'Shopping & Retail', sub:'Fashion, homewares, gifts, specialty stores', url:'/categories/shopping.html', keywords:'shopping retail fashion gifts homewares' },
+  { type:'cat', icon:'&#127968;', title:'Home & Property', sub:'Builders, landscaping, real estate, cleaning', url:'/categories/services.html', keywords:'home property builders landscaping real estate cleaning' },
+  { type:'cat', icon:'&#128188;', title:'Professional Services', sub:'Accountants, lawyers, financial advisers', url:'/categories/services.html', keywords:'professional services accountant lawyer financial adviser' },
+  { type:'cat', icon:'&#127968;', title:'Real Estate', sub:'Buying, selling, market reports, local agent', url:'/categories/real-estate.html', keywords:'real estate property market agent buying selling house home papamoa' },
+  // Listings
+  { type:'listing', icon:'&#11088;', title:'Pacific Park Holiday Camp', sub:'Holiday Park · Gold Spotlight', url:'/categories/accommodation.html', keywords:'pacific park holiday camp accommodation camping motel cabin' },
+  { type:'listing', icon:'&#11088;', title:'Coastal Autos', sub:'Mechanic & WOF · Gold Spotlight', url:'/listings/coastal-autos-papamoa.html', keywords:'coastal autos mechanic wof warrant tyres servicing' },
+  { type:'listing', icon:'&#11088;', title:'ReDefined Wellbeing Hub', sub:'Gym, Pilates, Yoga · Gold Spotlight', url:'/listings/redefined-wellbeing-papamoa.html', keywords:'redefined wellbeing gym pilates yoga fitness health' },
+  { type:'listing', icon:'&#11088;', title:'Hakanini Surf School', sub:'Surf Lessons & Board Hire', url:'/categories/surf-tides.html', keywords:'hakanini surf school lessons board hire surfing' },
+  { type:'listing', icon:'&#11088;', title:'PAP House', sub:'Restaurant & Bar', url:'/categories/entertainment.html', keywords:'pap house restaurant bar food drink dining' },
+  { type:'listing', icon:'&#127918;', title:'The Cave Pāpāmoa', sub:'VR & Sim Racing · Gold Spotlight', url:'/listings/the-cave-papamoa.html', keywords:'the cave vr virtual reality sim racing entertainment birthday' },
+  { type:'listing', icon:'&#128218;', title:'Xanadu Book Exchange', sub:'Second-hand Books · Silver', url:'/listings/xanadu-book-exchange-papamoa.html', keywords:'xanadu books second hand bookstore cheap no book over five dollars' },
+  { type:'listing', icon:'&#128133;', title:'Kayco Nails', sub:'Custom Press-On Nails · Silver', url:'/listings/kayco-nails-papamoa.html', keywords:'kayco nails press on custom nail kits beauty' },
+  { type:'listing', icon:'&#127807;', title:'Lawn Mowing Pāpāmoa', sub:'Garden & Lawn · Placeholder', url:'/listings/lawn-mowing-papamoa.html', keywords:'lawn mowing garden grass cut trim' },
+  { type:'listing', icon:'&#129463;', title:'Pāpāmoa Orthodontist', sub:'Dental · Professional Services', url:'/listings/papamoa-orthodontist.html', keywords:'orthodontist dental teeth braces' },
+  { type:'listing', icon:'&#128295;', title:'Speedy Screens', sub:'Trades · Window & Door Screens', url:'/listings/speedy-screens-papamoa.html', keywords:'speedy screens windows doors flyscreens trades' },
+  // Real Estate
+  { type:'info', icon:'&#127968;', title:'Papamoa Property Market', sub:'March 2026 report — $895k median, 38 listings', url:'/categories/real-estate.html', keywords:'property market real estate papamoa march 2026 prices median homes listings buying selling' },
+  { type:'info', icon:'&#128222;', title:'Featured Real Estate Agent', sub:'One agent exclusively recommended by Papamoa.info', url:'/categories/real-estate.html', keywords:'real estate agent papamoa recommended best who local' },
+  // Articles
+  { type:'info', icon:'&#128202;', title:'Population & Statistics', sub:'37,910 residents · Census data & demographics', url:'/articles/population-statistics.html', keywords:'population statistics census demographics growth residents' },
+  { type:'info', icon:'&#9968;', title:'Pāpāmoa Hills', sub:'Track status · Closures & maps', url:'/articles/papamoa-hills.html', keywords:'papamoa hills tracks walks closed open landslip' },
+  { type:'info', icon:'&#128054;', title:'Dogs in Pāpāmoa', sub:'Beach rules, off-leash zones, TCC bylaw', url:'/articles/dogs-papamoa.html', keywords:'dogs dog beach rules bylaw off leash zone' },
+  { type:'info', icon:'&#127963;', title:'Māori History', sub:'Ngā Pōtiki, Ngāi Te Rangi, Tamapahore Marae', url:'/articles/maori-history.html', keywords:'maori history nga potiki ngai te rangi tamapahore marae' },
+  { type:'info', icon:'&#128694;', title:'Walks & Tracks', sub:'All walking and cycling tracks in Pāpāmoa', url:'/articles/walks-tracks.html', keywords:'walks tracks walking cycling trails outdoor' },
+  { type:'info', icon:'&#127794;', title:'Parks & Playgrounds', sub:'Gordon Spratt Reserve, skate spots, sports fields', url:'/articles/parks-playgrounds.html', keywords:'parks playgrounds gordon spratt skate sports family' },
+  { type:'info', icon:'&#127795;', title:'Gordon Spratt Reserve', sub:'Main park · Tsunami mound & facilities', url:'/articles/gordon-spratt-reserve.html', keywords:'gordon spratt reserve park tsunami mound playground' },
+  { type:'info', icon:'&#127942;', title:'AIMS Games 2026', sub:'5–11 Sep 2026 · Accommodation & guide', url:'/articles/aims-games.html', keywords:'aims games 2026 sport tauranga accommodation families' },
+  { type:'info', icon:'&#127881;', title:'Kids Birthday Parties', sub:'Venues, entertainers & party hire', url:'/articles/kids-birthday-parties.html', keywords:'kids birthday parties venues entertainers hire children' },
+  { type:'info', icon:'&#128717;', title:'Shopping Centres', sub:'Fashion Island, Palm Beach Plaza, The Sands', url:'/articles/shopping-centres.html', keywords:'shopping centres fashion island palm beach plaza sands stores' },
+  { type:'info', icon:'&#129399;', title:'Seniors & Retirement', sub:'Villages, home care, NZ Super', url:'/articles/seniors-retirement.html', keywords:'seniors retirement village home care nz super aged' },
+  { type:'info', icon:'&#127963;', title:'Local Government', sub:'Mayor, TCC contacts, MP', url:'/articles/local-government.html', keywords:'local government tcc mayor mahe drysdale council mp' },
+  { type:'info', icon:'&#128218;', title:'Pāpāmoa Library', sub:'Hours, WiFi, story time & events', url:'/articles/library.html', keywords:'library books wifi hours story time events' },
+  { type:'info', icon:'&#11088;', title:'Notable People', sub:'Athletes, artists & public figures', url:'/articles/notable-people.html', keywords:'notable people famous athletes artists public figures' },
+  { type:'info', icon:'&#9981;', title:'Fuel Prices', sub:'Local petrol & diesel prices', url:'/articles/fuel-prices.html', keywords:'fuel prices petrol diesel stations' },
+  { type:'info', icon:'&#127961;', title:'Tauranga', sub:'15 min from Pāpāmoa · City guide', url:'/articles/tauranga.html', keywords:'tauranga city nearby distance guide' },
+  { type:'info', icon:'&#9968;', title:'Mount Maunganui', sub:'Mauao closed after Jan 2026 landslide', url:'/articles/mount-maunganui.html', keywords:'mount maunganui mauao hot pools tracks closure' },
+  { type:'info', icon:'&#128240;', title:'News & Events', sub:'Upcoming events & local news', url:'/articles/news-events.html', keywords:'news events upcoming community local' },
+  { type:'info', icon:'&#127946;', title:'Swimming in Pāpāmoa', sub:'Beach guide, freshwater holes, pool laws', url:'/articles/swimming-papamoa.html', keywords:'swimming swim beach freshwater pools spa pool fence law' },
+  { type:'info', icon:'&#9889;', title:'Utilities — Power, Gas & Broadband', sub:'Power retailers, LPG, fibre, mobile', url:'/articles/utilities-papamoa.html', keywords:'utilities power electricity gas broadband fibre internet mobile' },
+  { type:'info', icon:'&#128167;', title:'Water & Rates', sub:'TCC metered water, quarterly billing', url:'/articles/water-rates-papamoa.html', keywords:'water rates tcc metered billing wastewater waiari' },
+  { type:'info', icon:'&#9851;', title:'Rubbish & Recycling', sub:'4-bin kerbside guide, transfer station', url:'/articles/rubbish-recycling-papamoa.html', keywords:'rubbish recycling bins kerbside transfer station waste' },
+  { type:'info', icon:'&#128248;', title:'Clothing Recycling', sub:'Bins, Waipuna free collection, textile recycling', url:'/articles/clothing-recycling-papamoa.html', keywords:'clothing recycling textile bins waipuna donate' },
+  { type:'info', icon:'&#128717;', title:'Op Shops & Second-hand', sub:'Waipuna Hospice, Vinnies, Xanadu Books', url:'/articles/op-shops-papamoa.html', keywords:'op shop second hand thrift waipuna vinnies xanadu books' },
+  { type:'info', icon:'&#128141;', title:'Weddings in Pāpāmoa', sub:'Venues, photographers & suppliers', url:'/articles/weddings.html', keywords:'weddings venues photographers catering hire' },
+  { type:'info', icon:'&#127869;', title:'Dinner at the Domain', sub:'Annual outdoor dining event · Dates & tickets', url:'/articles/dinner-at-the-domain.html', keywords:'dinner domain outdoor dining event tickets domain' },
+  { type:'info', icon:'&#127979;', title:'Schools in Pāpāmoa', sub:'All 8 schools · Zones, rolls, contacts', url:'/articles/schools-papamoa.html', keywords:'schools primary secondary papamoa college zones enrolment' },
+  // Tools
+  { type:'tool', icon:'&#128176;', title:'PAYE & GST Calculator', sub:'Tax calculator · KiwiSaver', url:'/articles/tax-kiwisaver.html', keywords:'tax paye gst calculator kiwisaver income' },
+  { type:'tool', icon:'&#128003;', title:'Easter Trading Hours 2026', sub:'Pāpāmoa shop & service hours', url:'/articles/easter-trading-hours.html', keywords:'easter trading hours open closed shops' },
+  { type:'tool', icon:'&#127979;', title:'School Terms 2026', sub:'All term dates & holidays', url:'/articles/school-terms-holidays.html', keywords:'school terms holidays 2026 dates calendar' },
+];
+
+const TYPE_LABELS = { cat: 'Categories', listing: 'Businesses', info: 'Local Info', tool: 'Tools' };
+
+function handleSearch(val) {
+  const q = val.trim().toLowerCase();
+  const box = document.getElementById('search-results');
+  if (!q || q.length < 2) { box.classList.remove('visible'); return; }
+
+  const results = SEARCH_INDEX.filter(item =>
+    item.keywords.includes(q) ||
+    item.title.toLowerCase().includes(q) ||
+    item.sub.toLowerCase().includes(q)
+  ).slice(0, 8);
+
+  if (!results.length) {
+    box.innerHTML = `<div class="sr-empty">No results for "<strong>${escHtml(val)}</strong>" — try a different search term</div>`;
+    box.classList.add('visible');
+    return;
+  }
+
+  const grouped = {};
+  results.forEach(r => {
+    if (!grouped[r.type]) grouped[r.type] = [];
+    grouped[r.type].push(r);
+  });
+
+  let html = '';
+  Object.entries(grouped).forEach(([type, items]) => {
+    html += `<div class="sr-group-label">${TYPE_LABELS[type] || type}</div>`;
+    items.forEach(item => {
+      html += `<a href="${item.url}" class="sr-item">
+        <span class="sr-item-icon">${item.icon}</span>
+        <div>
+          <div class="sr-item-title">${escHtml(item.title)}</div>
+          <div class="sr-item-sub">${escHtml(item.sub)}</div>
+        </div>
+      </a>`;
+    });
+  });
+
+  box.innerHTML = html;
+  box.classList.add('visible');
+}
+
+function handleSearchKey(e) {
+  if (e.key === 'Enter') submitSearch();
+  if (e.key === 'Escape') document.getElementById('search-results').classList.remove('visible');
+}
+
+function submitSearch() {
+  const q = document.getElementById('site-search').value.trim();
+  if (!q) return;
+  handleSearch(q);
+}
+
+function fillSearch(term) {
+  const input = document.getElementById('site-search');
+  input.value = term;
+  input.focus();
+  handleSearch(term);
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.search-input-wrap')) {
+    document.getElementById('search-results').classList.remove('visible');
+  }
+});
+</script>
 </body>
 </html>
