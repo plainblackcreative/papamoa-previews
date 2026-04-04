@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papamoa.info — Growth Strategy & Funnel Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ocean: #1B6B7D;
+  --ocean-deep: #0F4352;
+  --ocean-light: #E4F2F5;
+  --sand: #F7F3ED;
+  --sand-dark: #EDE7DB;
+  --dune: #C4985A;
+  --dune-light: #F5EDD8;
+  --navy: #0D2B3E;
+  --white: #FFFFFF;
+  --text: #1A2832;
+  --muted: #5A6E78;
+  --border: #D8E4E8;
+  --silver: #5A7A8A;
+  --silver-bg: #EDF3F6;
+  --gold: #B8840A;
+  --gold-bg: #FBF3E2;
+  --green: #1E6B3C;
+  --green-bg: #E6F4EC;
+  --red: #8B2020;
+  --red-bg: #FAEAEA;
+  --warn: #7A5500;
+  --warn-bg: #FFF8E6;
+  --font-body: 'Figtree', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--sand);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.override-banner {
+  background: var(--navy);
+  color: var(--white);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.override-banner .ob-badge {
+  background: var(--ocean);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.override-banner .ob-text { flex: 1; opacity: 0.85; }
+.override-date { margin-left: auto; opacity: 0.5; font-weight: 400; white-space: nowrap; }
+
+.page { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+
+.doc-header {
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 32px;
+  margin-bottom: 48px;
+}
+.doc-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 10px;
+}
+.doc-title {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.doc-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--muted);
+}
+.doc-meta span { display: flex; align-items: center; gap: 6px; }
+.doc-meta strong { color: var(--text); }
+
+.section { margin-bottom: 56px; }
+.section-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.section-body { font-size: 14.5px; line-height: 1.75; color: var(--text); }
+.section-body p { margin-bottom: 16px; }
+.section-body p:last-child { margin-bottom: 0; }
+
+.alert {
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  font-size: 13.5px;
+  display: flex;
+  gap: 12px;
+}
+.alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.alert.info { background: var(--ocean-light); border: 1px solid #B0D4DC; color: var(--ocean-deep); }
+.alert.warn { background: var(--warn-bg); border: 1px solid #E8C96A; color: var(--warn); }
+.alert.ok { background: var(--green-bg); border: 1px solid #9ED0B4; color: var(--green); }
+.alert strong { font-weight: 700; }
+
+/* TWO TRACK LAYOUT */
+.two-tracks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+@media (max-width: 680px) { .two-tracks { grid-template-columns: 1fr; } }
+
+.track-card {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  overflow: hidden;
+}
+.track-head {
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.track-head.ocean { background: var(--ocean-light); border-bottom-color: #B0D4DC; }
+.track-head.dune  { background: var(--dune-light);  border-bottom-color: #E0C898; }
+.track-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.track-eyebrow.ocean { color: var(--ocean); }
+.track-eyebrow.dune  { color: var(--dune); }
+.track-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.track-body { padding: 18px 22px; }
+.track-body p { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.track-body p:last-child { margin-bottom: 0; }
+
+/* FUNNEL FLOW */
+.funnel-flow { display: flex; flex-direction: column; gap: 0; margin-bottom: 24px; }
+.funnel-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.funnel-step {
+  flex: 1;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 14px 18px;
+  position: relative;
+}
+.funnel-flow .funnel-row:first-child .funnel-step { border-radius: 10px 10px 0 0; }
+.funnel-flow .funnel-row:last-child .funnel-step  { border-radius: 0 0 10px 10px; }
+.funnel-flow .funnel-row + .funnel-row .funnel-step { border-top: none; }
+
+.funnel-step-num {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+.funnel-step-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.funnel-step-body { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+.funnel-step.highlight-ocean { border-left: 3px solid var(--ocean); }
+.funnel-step.highlight-dune  { border-left: 3px solid var(--dune); }
+.funnel-step.highlight-green { border-left: 3px solid var(--green); }
+
+/* LEAK POINTS */
+.leak-box {
+  margin: -1px 0 0 48px;
+  background: var(--dune-light);
+  border: 1px solid #E0C898;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 11px 16px 13px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13px;
+  color: var(--warn);
+  margin-bottom: 4px;
+}
+.leak-arrow {
+  font-size: 14px;
+  flex-shrink: 0;
+  opacity: 0.6;
+  margin-top: 1px;
+}
+.leak-box strong { font-weight: 700; display: block; margin-bottom: 2px; color: var(--navy); }
+.leak-box p { color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+
+/* ORGANIC PATHS */
+.org-paths { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.org-path {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+.org-path-entry {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ocean);
+  white-space: nowrap;
+}
+.org-path-desc { font-size: 13.5px; line-height: 1.55; }
+.org-path-desc strong { color: var(--navy); font-weight: 700; }
+.org-path-desc span { color: var(--muted); }
+.org-path-cta {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--ocean);
+  padding: 6px 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* PLACEHOLDER ENGINE */
+.placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+@media (max-width: 600px) { .placeholder-grid { grid-template-columns: 1fr; } }
+
+.ph-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.ph-card-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ocean);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.ph-card h4 { font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+.ph-card p  { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+/* PRIORITIES TABLE */
+.priorities { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--white); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 16px; }
+.priorities th { background: var(--navy); color: var(--white); font-weight: 700; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 11px 16px; text-align: left; }
+.priorities td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+.priorities tr:last-child td { border-bottom: none; }
+.priorities tr:nth-child(even) td { background: #FAFBFC; }
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.tag-now    { background: var(--red-bg);    color: var(--red);   }
+.tag-soon   { background: var(--warn-bg);   color: var(--warn);  }
+.tag-later  { background: var(--silver-bg); color: var(--silver);}
+
+.divider { height: 1px; background: var(--border); margin: 48px 0; }
+
+.doc-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+
+<div class="override-banner">
+  <span class="ob-badge">Strategy Doc</span>
+  <span class="ob-text">Growth engine + funnel architecture — internal reference for Papamoa.info build.</span>
+  <span class="override-date">April 2026</span>
+</div>
+
+<div class="page">
+
+  <div class="doc-header">
+    <div class="doc-eyebrow">Papamoa.info — Internal Reference</div>
+    <h1 class="doc-title">Growth Strategy &amp; Funnel Architecture</h1>
+    <div class="doc-meta">
+      <span><strong>Status:</strong> Working draft</span>
+      <span><strong>Last updated:</strong> April 2026</span>
+      <span><strong>Owner:</strong> Jayden Brown / Plain Black Creative</span>
+    </div>
+  </div>
+
+  <!-- CORE THESIS -->
+  <div class="section">
+    <div class="section-label">The big picture</div>
+    <h2 class="section-title">The Site Is the Funnel</h2>
+    <div class="section-body">
+      <p>The outbound sales funnel — finding leads, sending email sequences, booking calls — is valuable and stays in place. But it should not be the <em>only</em> pipeline. The site itself is a parallel acquisition engine that works without any outreach effort once the content is live.</p>
+      <p>Every article, info page, and placeholder listing that ranks in Google is a silent sales pitch to the local business that should own that spot. The organic visitor who reads "Lawn Mowing Pāpāmoa" and thinks "that's my category" is a warm lead who found you — you didn't have to find them. These two tracks run in parallel and reinforce each other.</p>
+    </div>
+
+    <div class="two-tracks">
+      <div class="track-card">
+        <div class="track-head ocean">
+          <div class="track-eyebrow ocean">Track A</div>
+          <div class="track-name">Outbound Funnel</div>
+        </div>
+        <div class="track-body">
+          <p>Find businesses via Outscraper. Add to Brevo sequences. Run Day 3 / Day 6 / Day 10 follow-ups. Book a call. Show the PPP demo. Close Gold or Silver.</p>
+          <p>This track stays exactly as designed. No changes to the flow, offer structure, or sequence timing.</p>
+        </div>
+      </div>
+      <div class="track-card">
+        <div class="track-head dune">
+          <div class="track-eyebrow dune">Track B</div>
+          <div class="track-name">Organic Inbound</div>
+        </div>
+        <div class="track-body">
+          <p>Google sends visitors to articles, info pages, and category listings. Some visitors are business owners in the exact category they're reading. The page catches their attention and gives them a clear path to claim their spot.</p>
+          <p>No outreach required. The content does the work.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert info">
+      <span class="alert-icon">ℹ</span>
+      <div>These tracks are complementary, not competing. A business contacted via Track A will often have already seen the site organically. A business who discovers the site via Track B may still enter the outbound sequence if they don't convert immediately. The funnel catches everyone.</div>
+    </div>
+  </div>
+
+  <!-- OUTBOUND FUNNEL WITH LEAK POINTS -->
+  <div class="section">
+    <div class="section-label">Track A — unchanged</div>
+    <h2 class="section-title">Outbound Funnel + Organic Leak Points</h2>
+
+    <div class="section-body" style="margin-bottom:20px;">
+      <p>The funnel sequence is untouched. The only addition is "leak points" — passive CTAs at each stage that catch organic visitors who are already on the site and primed to act, without interrupting the outbound flow.</p>
+    </div>
+
+    <div class="funnel-flow">
+
+      <div class="funnel-row">
+        <div class="funnel-step highlight-ocean">
+          <div class="funnel-step-num">Step 1</div>
+          <div class="funnel-step-title">Lead sourcing</div>
+          <div class="funnel-step-body">Outscraper pulls local business data by category. Lead enters Brevo list. No site interaction required.</div>
+        </div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-step highlight-ocean">
+          <div class="funnel-step-num">Step 2</div>
+          <div class="funnel-step-title">Day 0 — intro email</div>
+          <div class="funnel-step-body">Personalised email with article link and ad spot visible in body. Traffic number included ("this article had X reads in the last 30 days").</div>
+        </div>
+      </div>
+
+      <div class="leak-box">
+        <span class="leak-arrow">↳</span>
+        <div>
+          <strong>Organic leak point: article ad spot</strong>
+          <p>Any visitor who lands on that same article organically sees the same ad placement. If it's their category, a "Claim this Spotlight" link is right there. They don't need to be in the email sequence — the page catches them directly.</p>
+        </div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-step highlight-ocean">
+          <div class="funnel-step-num">Step 3</div>
+          <div class="funnel-step-title">Day 3 — follow-up</div>
+          <div class="funnel-step-body">Reminder email. Links to the listing placeholder and the category page.</div>
+        </div>
+      </div>
+
+      <div class="leak-box">
+        <span class="leak-arrow">↳</span>
+        <div>
+          <strong>Organic leak point: placeholder listing</strong>
+          <p>The placeholder listing for their category ranks independently. A business searching for themselves or their category finds a placeholder with their suburb in the title, a "Spotlight available" badge, and a clear path to upgrade. No email needed.</p>
+        </div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-step highlight-ocean">
+          <div class="funnel-step-num">Step 4</div>
+          <div class="funnel-step-title">Day 6 — value email</div>
+          <div class="funnel-step-body">Deeper value pitch. Show what a Gold listing looks like. Link to PPP if built.</div>
+        </div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-step highlight-ocean">
+          <div class="funnel-step-num">Step 5</div>
+          <div class="funnel-step-title">Day 10 — last-ditch</div>
+          <div class="funnel-step-body">Final email. May trigger last-ditch offer (Silver price, Gold product) for selected hesitating leads.</div>
+        </div>
+      </div>
+
+      <div class="leak-box">
+        <span class="leak-arrow">↳</span>
+        <div>
+          <strong>Organic leak point: category page "Spotlight available" card</strong>
+          <p>Every category page shows an empty Spotlight slot when no Gold listing exists. Any business browsing their own category sees the vacancy. The card shows the spot, the price, and a link to the sales landing page. No sequence required.</p>
+        </div>
+      </div>
+
+      <div class="funnel-row">
+        <div class="funnel-step highlight-green">
+          <div class="funnel-step-num">Close</div>
+          <div class="funnel-step-title">Call / PPP demo / payment</div>
+          <div class="funnel-step-body">Gold ($1,199+GST/yr) or Silver ($599+GST/yr). TaurangaNZ.info Silver included as standard funnel bonus. Stripe payment. Onboarding sequence begins.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="alert ok">
+      <span class="alert-icon">✓</span>
+      <div>Leak points are passive. They require no automation, no separate sequence, and no changes to the outbound flow. They are just well-placed CTAs on pages that already exist and already rank.</div>
+    </div>
+  </div>
+
+  <!-- ORGANIC ENTRY PATHS -->
+  <div class="section">
+    <div class="section-label">Track B — inbound</div>
+    <h2 class="section-title">Organic Entry Paths</h2>
+
+    <div class="section-body" style="margin-bottom:20px;">
+      <p>A business owner can arrive on the site via multiple organic paths and convert without ever entering the outbound sequence. Each path needs a clear, low-friction next step.</p>
+    </div>
+
+    <div class="org-paths">
+
+      <div class="org-path">
+        <div class="org-path-entry">Article page</div>
+        <div class="org-path-desc">
+          <strong>Business owner reads a relevant article</strong><br>
+          <span>e.g. "Best Lawn Mowing Services in Pāpāmoa" — they see an ad spot mid-article and a sidebar Spotlight. The spot is clearly available. They click through to the listing landing page.</span>
+        </div>
+        <div class="org-path-cta">Claim spot</div>
+      </div>
+
+      <div class="org-path">
+        <div class="org-path-entry">Category page</div>
+        <div class="org-path-desc">
+          <strong>Business owner finds their category</strong><br>
+          <span>They look themselves up or browse competitors. They see a "Gold Spotlight — available" card at the top of the category. One click to the sales landing page.</span>
+        </div>
+        <div class="org-path-cta">Claim spot</div>
+      </div>
+
+      <div class="org-path">
+        <div class="org-path-entry">Placeholder listing</div>
+        <div class="org-path-desc">
+          <strong>Business owner finds their own placeholder</strong><br>
+          <span>A generic listing for their subcategory ranks in Google. They recognise it as their category. The listing has a "This could be your business" CTA with traffic data shown ("X enquiries via this listing in the last 30 days").</span>
+        </div>
+        <div class="org-path-cta">Upgrade listing</div>
+      </div>
+
+      <div class="org-path">
+        <div class="org-path-entry">Web3Forms lead</div>
+        <div class="org-path-desc">
+          <strong>Enquiry submitted via a placeholder listing</strong><br>
+          <span>A visitor contacts a business via the placeholder form — that business gets notified, sees the enquiry came from Papamoa.info, and reaches out. Jayden follows up with traffic data and the upgrade offer.</span>
+        </div>
+        <div class="org-path-cta">Follow up</div>
+      </div>
+
+      <div class="org-path">
+        <div class="org-path-entry">Direct search</div>
+        <div class="org-path-desc">
+          <strong>Business owner Googles their own business name</strong><br>
+          <span>The placeholder or category page ranks for "[Business Name] Pāpāmoa." They find a listing that already looks like theirs. The "Claim this listing" CTA is prominent.</span>
+        </div>
+        <div class="org-path-cta">Claim listing</div>
+      </div>
+
+    </div>
+
+    <div class="alert warn">
+      <span class="alert-icon">⚠</span>
+      <div><strong>All organic CTAs point to /sales/landing.html.</strong> Every "Claim this Spotlight", "Upgrade listing", and "List your business" link across articles, category pages, and placeholder listings must use a consistent destination. Check that all current placeholder files use this path, not href="#".</div>
+    </div>
+  </div>
+
+  <!-- PLACEHOLDER ENGINE -->
+  <div class="section">
+    <div class="section-label">The foundation</div>
+    <h2 class="section-title">Placeholder Engine</h2>
+
+    <div class="section-body" style="margin-bottom:20px;">
+      <p>Placeholders are not filler. They are the primary organic acquisition asset. Every empty subcategory gets a placeholder that does all of the following simultaneously:</p>
+    </div>
+
+    <div class="placeholder-grid">
+      <div class="ph-card">
+        <div class="ph-card-num">1</div>
+        <h4>Ranks in Google</h4>
+        <p>Written in directory voice with full SEO structure, local keywords, schema markup. Every subcategory has a page — no empty slots.</p>
+      </div>
+      <div class="ph-card">
+        <div class="ph-card-num">2</div>
+        <h4>Captures visitor enquiries</h4>
+        <p>Web3Forms contact form routes to jkbrownnz@gmail.com. Every enquiry is evidence of traffic value that can be shown to a prospect.</p>
+      </div>
+      <div class="ph-card">
+        <div class="ph-card-num">3</div>
+        <h4>Generates traffic data</h4>
+        <p>Google Analytics tracks page views per listing. "690 reads in 23 days" is a concrete sales number. No placeholder = no data.</p>
+      </div>
+      <div class="ph-card">
+        <div class="ph-card-num">4</div>
+        <h4>Shows the vacant Spotlight</h4>
+        <p>The "Gold Spotlight — available" badge is visible on every placeholder. Any business who finds it sees the opportunity immediately.</p>
+      </div>
+      <div class="ph-card">
+        <div class="ph-card-num">5</div>
+        <h4>Outreach ammunition</h4>
+        <p>Traffic and enquiry data from placeholders is the primary sales tool for the outbound sequence. The placeholder runs before outreach begins.</p>
+      </div>
+      <div class="ph-card">
+        <div class="ph-card-num">6</div>
+        <h4>Inbound self-qualification</h4>
+        <p>A business owner who finds their own placeholder is already pre-sold on the concept. They found you. The conversion barrier is the lowest it will ever be.</p>
+      </div>
+    </div>
+
+    <div class="alert info">
+      <span class="alert-icon">ℹ</span>
+      <div><strong>Build order matters.</strong> Placeholders need to be live before outreach starts — ideally 2-4 weeks before — so there is real traffic data to reference in the intro email. "This placeholder has had X views" is the most compelling line in the sequence. An empty slot produces nothing.</div>
+    </div>
+  </div>
+
+  <!-- BUILD PRIORITIES -->
+  <div class="section">
+    <div class="section-label">What to build first</div>
+    <h2 class="section-title">Build Priorities</h2>
+
+    <table class="priorities">
+      <thead>
+        <tr>
+          <th>Priority</th>
+          <th>What</th>
+          <th>Why</th>
+          <th>When</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag tag-now">Now</span></td>
+          <td>Placeholder listing in every subcategory</td>
+          <td>No placeholder = no traffic data = no organic leak points = weaker outbound pitch</td>
+          <td>Before outreach begins</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-now">Now</span></td>
+          <td>Fix all href="#" CTAs to point to /sales/landing.html</td>
+          <td>Every organic visitor who clicks "Claim" and hits a dead link is a lost conversion</td>
+          <td>Immediately</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-now">Now</span></td>
+          <td>Article pages with inline ad spots (Spotlight available)</td>
+          <td>Article pages are the highest-traffic organic entry point — they need visible, claimable ad spots</td>
+          <td>Before outreach begins</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-soon">Soon</span></td>
+          <td>Category pages with "Spotlight available" card</td>
+          <td>Business owners browsing their own category need to see the vacant slot and a clear CTA</td>
+          <td>Week 1-2</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-soon">Soon</span></td>
+          <td>Google Analytics on all pages</td>
+          <td>Traffic data from placeholders is the core sales proof point — must be collecting before outreach</td>
+          <td>With placeholder build</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-soon">Soon</span></td>
+          <td>PPP (Potential Paying Page) template per business</td>
+          <td>The close for both tracks — organic visitors and outbound calls both need to see a polished listing demo</td>
+          <td>Week 2-3</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-later">Later</span></td>
+          <td>Outbound email sequence (Brevo / Make.com)</td>
+          <td>Sequence needs traffic data from placeholders to be compelling — don't run it on empty</td>
+          <td>After 2-4 weeks of placeholder data</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-later">Later</span></td>
+          <td>Premium ad spot pricing + dashboard</td>
+          <td>Requires traffic data and Gold listings live before pricing is meaningful</td>
+          <td>Deferred — later phase</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ONE-LINER SUMMARY -->
+  <div class="section">
+    <div class="section-label">Summary</div>
+    <h2 class="section-title">One-Paragraph Version</h2>
+    <div class="section-body">
+      <p>Build the site first: articles, info pages, and a placeholder listing in every subcategory. Get them live and indexed. Start collecting traffic numbers. Then run the outbound sequence using those numbers as proof. Meanwhile, every page that ranks is also a passive sales pitch to any business owner who finds it organically — via article ad spots, category Spotlight vacancies, and placeholder "claim this listing" CTAs. The outbound funnel stays exactly as designed. The organic layer doesn't replace it, it runs underneath it and feeds the same destination. Both tracks close to the same sales page, the same PPP demo, the same Gold or Silver product.</p>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    Papamoa.info — Growth Strategy &amp; Funnel Architecture &bull; Plain Black Creative &bull; April 2026
+  </div>
+
+</div>
+</body>
+</html>
