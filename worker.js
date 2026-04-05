@@ -1,16 +1,54 @@
-// papamoa-claude-proxy v1
+// papamoa-claude-proxy v2
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+
+    // ── CORS preflight ────────────────────────────────
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST',
+          'Access-Control-Allow-Methods': 'GET, POST',
           'Access-Control-Allow-Headers': 'Content-Type',
         }
       });
     }
 
+    // ── Google Sheets proxy ───────────────────────────
+    if (url.pathname === '/sheets') {
+      if (request.method !== 'GET') {
+        return new Response('Method not allowed', { status: 405 });
+      }
+
+      const sheetId = url.searchParams.get('sheetId');
+      const range   = url.searchParams.get('range');
+
+      if (!sheetId || !range) {
+        return new Response('Missing sheetId or range param', { status: 400 });
+      }
+
+      if (!env.GOOGLE_SHEETS_KEY) {
+        return new Response(JSON.stringify({ error: 'GOOGLE_SHEETS_KEY not configured in Worker secrets' }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      const sheetsUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}?key=${env.GOOGLE_SHEETS_KEY}`;
+
+      const resp = await fetch(sheetsUrl);
+      const data = await resp.json();
+
+      return new Response(JSON.stringify(data), {
+        status: resp.status,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }
+      });
+    }
+
+    // ── Claude proxy (existing, unchanged) ───────────
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
     }
@@ -73,14 +111,14 @@ Return this exact JSON:
       })
     });
 
-if (!claudeResponse.ok) {
-  const errorText = await claudeResponse.text();
-  return new Response(JSON.stringify({
-    positive: false,
-    headline: 'Search check temporarily unavailable',
-    body: errorText,
-    search_term_used: searchTerm
-  }), {
+    if (!claudeResponse.ok) {
+      const errorText = await claudeResponse.text();
+      return new Response(JSON.stringify({
+        positive: false,
+        headline: 'Search check temporarily unavailable',
+        body: errorText,
+        search_term_used: searchTerm
+      }), {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
