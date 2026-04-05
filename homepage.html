@@ -47,7 +47,7 @@
     /* SEARCH BAR */
     .search-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 18px 20px; }
     .search-bar-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 10px; align-items: center; }
-    .search-input-wrap { flex: 1; position: relative; }
+    .search-input-wrap { flex: 1; position: relative; z-index: 51; }
     .search-input-wrap::before { content: ''; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7' stroke='%23607080' stroke-width='2'/%3E%3Cpath stroke='%23607080' stroke-width='2' stroke-linecap='round' d='m16 16 4 4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: contain; pointer-events: none; }
     .search-input { width: 100%; padding: 11px 14px 11px 40px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Figtree', sans-serif; font-size: 0.95rem; color: var(--body); background: var(--bg); transition: all 0.15s; }
     .search-input:focus { outline: none; border-color: var(--blue); background: var(--white); box-shadow: 0 0 0 3px rgba(58,171,222,0.1); }
@@ -69,7 +69,8 @@
     .sr-divider { border: none; border-top: 1px solid var(--border); margin: 4px 0; }
 
     /* CATEGORY BROWSE */
-    .cat-browse { padding: 44px 0 40px; }
+    .cat-browse { padding: 44px 0 40px; background: var(--bg); }
+    .cat-browse-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; }
     .section-heading { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
     .section-heading h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); }
     .section-heading a { font-size: 0.8rem; font-weight: 700; color: var(--blue); }
@@ -269,7 +270,7 @@
 </div>
 
 <div class="cat-browse">
-  <div class="section-wrap">
+  <div class="cat-browse-inner">
     <div class="section-heading"><h2>Browse Categories</h2></div>
     <p class="section-sub">29 categories &mdash; restaurants, trades, health, cafes, gyms and more</p>
     <div class="cat-grid" id="cat-grid">
@@ -423,15 +424,17 @@
         <div class="cat-info"><h3>Fishing &amp; Surf</h3><p>Bait, tackle, charters and surf hire</p></div>
         <span class="cat-arrow">&#8594;</span>
       </a>
-    </div>
+    </div><!-- /cat-grid -->
     <div class="cat-expand-wrap" id="cat-expand-wrap">
       <button class="cat-expand-btn" id="cat-expand-btn" onclick="expandCats()">
         Show more categories <span class="btn-count" id="cat-remaining">21 remaining</span> &#8595;
       </button>
     </div>
+  </div><!-- /cat-browse-inner -->
+</div><!-- /cat-browse -->
 
 <div class="spotlight-section" style="background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-  <div class="section-wrap">
+  <div style="max-width:960px;margin:0 auto;padding:44px 20px 40px;">
     <div class="section-heading"><h2>Spotlight Listings</h2></div>
     <p class="section-sub" style="margin-bottom:20px">P&#257;p&#257;moa&rsquo;s top-rated businesses &mdash; editorially selected, one Gold Spotlight per sub-category</p>
     <div class="spotlight-grid">
