@@ -752,52 +752,125 @@
 <script>
 // Search index
 const SEARCH_INDEX = [
-  { type:'cat', icon:'&#128736;', title:'Essential Services', sub:'Mechanics, trades, health, plumbers, electricians', url:'/categories/services.html', keywords:'mechanic plumber electrician painter trades health medical dentist physio vet cleaning pest it tech legal accountant finance childcare' },
-  { type:'cat', icon:'&#127829;', title:'Food &amp; Drink', sub:'Cafes, restaurants, takeaway, bars, sushi', url:'/categories/restaurants-papamoa.html', keywords:'food drink restaurant cafe coffee bar pub takeaway sushi indian turkish fish chips bakery' },
-  { type:'cat', icon:'&#127940;', title:'Activities &amp; Outdoors', sub:'Surf, fitness, tours, beaches, playgrounds', url:'/categories/surf-tides.html', keywords:'surf tides beach activities outdoors walks tracks playground park fitness gym yoga pilates' },
-  { type:'cat', icon:'&#128717;', title:'Shopping &amp; Retail', sub:'Fashion, homewares, gifts, specialty', url:'/categories/shopping.html', keywords:'shopping retail fashion homewares gifts specialty stores vape supplement' },
-  { type:'cat', icon:'&#127968;', title:'Accommodation', sub:'Motels, holiday parks, Airbnb, luxury', url:'/categories/accommodation.html', keywords:'accommodation motel holiday park airbnb short stay luxury boutique backpackers hostel' },
-  { type:'cat', icon:'&#127968;', title:'Real Estate', sub:'Buying, selling, market reports', url:'/categories/real-estate.html', keywords:'real estate property market buy sell agent house rent median price' },
-  { type:'listing', icon:'&#128663;', title:'Coastal Autos', sub:'Mechanic &amp; WOF &middot; P&#257;p&#257;moa', url:'/categories/services.html', keywords:'mechanic wof warrant fitness service tyre brake auto electrical coastal autos' },
-  { type:'listing', icon:'&#127947;', title:'ReDefined Wellbeing Hub', sub:'Gym, Pilates, Yoga &middot; P&#257;p&#257;moa', url:'/categories/services.html', keywords:'gym pilates yoga reformer fitness wellness physio redefined wellbeing hub' },
-  { type:'listing', icon:'&#127860;', title:'PAP House', sub:'Restaurant &amp; Bar &middot; P&#257;p&#257;moa Beach Road', url:'/categories/entertainment.html', keywords:'pap house restaurant bar food drink beach road papamoa' },
-  { type:'listing', icon:'&#127940;', title:'Hakanini Surf School', sub:'Surf lessons &amp; hire &middot; P&#257;p&#257;moa Domain', url:'/categories/surf-tides.html', keywords:'surf school lessons hire board hakanini papamoa domain' },
-  { type:'info', icon:'&#127956;', title:'P&#257;p&#257;moa Hills', sub:'Track status, closures and maps', url:'/articles/papamoa-hills.html', keywords:'papamoa hills track walks closed open landslip summit summerhills' },
-  { type:'info', icon:'&#128202;', title:'Population &amp; Stats', sub:'37,910 residents, fastest-growing suburb', url:'/articles/population-statistics.html', keywords:'population stats demographics census growth fastest suburb' },
-  { type:'info', icon:'&#127963;', title:'Local Government', sub:'Mayor, TCC contacts, MP', url:'/articles/local-government.html', keywords:'local government mayor mahe drysdale tcc tauranga city council mp tom rutherford' },
-  { type:'info', icon:'&#127979;', title:'Schools in P&#257;p&#257;moa', sub:'All 8 schools, zones, rolls, contacts', url:'/articles/schools-papamoa.html', keywords:'schools primary secondary papamoa college zones enrolment rolls contacts' },
-  { type:'info', icon:'&#128197;', title:'School Terms 2026', sub:'All term dates and holidays', url:'/articles/school-terms-holidays.html', keywords:'school terms holidays 2026 dates calendar term' },
-  { type:'info', icon:'&#128054;', title:'Dogs in P&#257;p&#257;moa', sub:'Off-leash zones, beach rules, registration', url:'/articles/dogs-papamoa.html', keywords:'dogs off leash beach rules bylaw registration tcc papamoa' },
-  { type:'info', icon:'&#127946;', title:'Swimming in P&#257;p&#257;moa', sub:'Beach guide, freshwater, pool laws', url:'/articles/swimming-papamoa.html', keywords:'swimming swim beach freshwater pools spa pool fence law' },
-  { type:'info', icon:'&#9889;', title:'Utilities — Power, Gas &amp; Broadband', sub:'Power retailers, LPG, fibre, mobile', url:'/articles/utilities-papamoa.html', keywords:'utilities power electricity gas broadband fibre internet mobile' },
-  { type:'info', icon:'&#128167;', title:'Water &amp; Rates', sub:'TCC metered water, quarterly billing', url:'/articles/water-rates-papamoa.html', keywords:'water rates tcc metered billing wastewater waiari' },
-  { type:'info', icon:'&#9851;', title:'Rubbish &amp; Recycling', sub:'4-bin kerbside guide, transfer station', url:'/articles/rubbish-recycling-papamoa.html', keywords:'rubbish recycling bins kerbside transfer station waste' },
-  { type:'info', icon:'&#128141;', title:'Weddings in P&#257;p&#257;moa', sub:'Venues, photographers &amp; suppliers', url:'/articles/weddings.html', keywords:'weddings venues photographers catering hire' },
-  { type:'info', icon:'&#127869;', title:'Dinner at the Domain', sub:'Annual outdoor dining event', url:'/articles/dinner-at-the-domain.html', keywords:'dinner domain outdoor dining event tickets' },
-  { type:'info', icon:'&#127942;', title:'AIMS Games 2026', sub:'5–11 Sep · 12,000+ students', url:'/articles/aims-games.html', keywords:'aims games 2026 sports tauranga students accommodation' },
-  { type:'info', icon:'&#127979;', title:'Schools in P&#257;p&#257;moa', sub:'All 8 schools &middot; Zones, rolls, contacts', url:'/articles/schools-papamoa.html', keywords:'schools primary secondary papamoa college zones enrolment' },
-  { type:'tool', icon:'&#128176;', title:'PAYE &amp; GST Calculator', sub:'Tax calculator &middot; KiwiSaver', url:'/articles/tax-kiwisaver.html', keywords:'tax paye gst calculator kiwisaver income' },
-  { type:'tool', icon:'&#128003;', title:'Easter Trading Hours 2026', sub:'P&#257;p&#257;moa shop &amp; service hours', url:'/articles/easter-trading-hours.html', keywords:'easter trading hours open closed shops' },
-  { type:'tool', icon:'&#127979;', title:'School Terms 2026', sub:'All term dates &amp; holidays', url:'/articles/school-terms-holidays.html', keywords:'school terms holidays 2026 dates calendar' },
-  // Real listings in repo
-  { type:'listing', icon:'&#128133;', title:'Kayco Nails', sub:'Nail salon &middot; Pāpāmoa', url:'/listings/kayco-nails-papamoa.html', keywords:'kayco nails nail salon kay manicure pedicure gel acrylic beauty papamoa nails beauty' },
-  { type:'listing', icon:'&#128295;', title:'Speedy Screens', sub:'Window &amp; door screens &middot; Pāpāmoa', url:'/listings/speedy-screens-papamoa.html', keywords:'speedy screens window door fly screen security screen repair installation papamoa' },
-  { type:'listing', icon:'&#127981;', title:'The Cave Pāpāmoa', sub:'Gym &middot; Pāpāmoa', url:'/listings/the-cave-papamoa.html', keywords:'the cave gym fitness training crossfit papamoa' },
-  { type:'listing', icon:'&#127869;', title:'The Wagon', sub:'Food truck &middot; Pāpāmoa', url:'/listings/the-wagon-papamoa.html', keywords:'the wagon food truck burger papamoa' },
-  { type:'listing', icon:'&#128218;', title:'Xanadu Book Exchange', sub:'Secondhand books &middot; Pāpāmoa', url:'/listings/xanadu-book-exchange-papamoa.html', keywords:'xanadu book exchange secondhand books second hand papamoa' },
-  { type:'listing', icon:'&#127808;', title:'Greencut', sub:'Lawn mowing &amp; garden &middot; Pāpāmoa', url:'/listings/greencut-papamoa.html', keywords:'greencut lawn mowing garden maintenance papamoa' },
-  { type:'listing', icon:'&#129463;', title:'Pāpāmoa Orthodontist', sub:'Orthodontics &middot; Pāpāmoa', url:'/listings/papamoa-orthodontist.html', keywords:'orthodontist braces teeth dental orthodontic papamoa' },
-];
+  // ── CATEGORIES ──
+  { type:'cat', icon:'🔧', title:'Essential Services', sub:'Mechanics, trades, health, plumbers, electricians', url:'/categories/services.html', keywords:'mechanic plumber electrician painter fencing aircon trades health medical dentist physio physio vet cleaning pest it tech legal accountant finance childcare essential services' },
+  { type:'cat', icon:'🍽', title:'Food & Drink', sub:'Cafes, restaurants, takeaway, bars, sushi, Indian', url:'/categories/restaurants-papamoa.html', keywords:'food drink restaurant cafe coffee bar pub takeaway sushi indian turkish fish chips bakery burger pizza dining eat' },
+  { type:'cat', icon:'🏄', title:'Activities & Outdoors', sub:'Surf, fitness, tours, beaches, playgrounds', url:'/categories/surf-tides.html', keywords:'surf tides beach activities outdoors walks tracks playground park fitness gym yoga pilates surfing kayak paddle tours' },
+  { type:'cat', icon:'🛍', title:'Shopping & Retail', sub:'Fashion, homewares, gifts, specialty stores', url:'/categories/shopping.html', keywords:'shopping retail fashion homewares gifts specialty stores boutique clothing accessories shoes vape supplement' },
+  { type:'cat', icon:'🏠', title:'Accommodation', sub:'Motels, holiday parks, Airbnb, luxury', url:'/categories/accommodation.html', keywords:'accommodation motel hotel holiday park airbnb short stay luxury boutique backpackers hostel camping stay sleep' },
+  { type:'cat', icon:'🏡', title:'Real Estate', sub:'Buying, selling, market reports', url:'/categories/real-estate.html', keywords:'real estate property market buy sell agent house rent median price valuation investment land homes' },
+  { type:'cat', icon:'☕', title:'Cafes', sub:'Specialty coffee, brunch and flat whites', url:'/categories/cafe-papamoa.html', keywords:'cafe coffee flat white brunch breakfast morning tea espresso cafes' },
+  { type:'cat', icon:'🍺', title:'Bars & Pubs', sub:'Craft beer, live music and local pubs', url:'/categories/bar-papamoa.html', keywords:'bar pub craft beer live music local pub drinks cocktail happy hour nightlife' },
+  { type:'cat', icon:'🐟', title:'Fish & Chips', sub:'Fresh-battered chippies in Pāpāmoa', url:'/categories/fish-and-chips-papamoa.html', keywords:'fish chips chippie takeaway battered deep fried fish and chips takeaways' },
+  { type:'cat', icon:'🍣', title:'Sushi', sub:'Sushi trains and Japanese restaurants', url:'/categories/sushi-papamoa.html', keywords:'sushi train japanese restaurant sashimi rolls bento noodles ramen japanese' },
+  { type:'cat', icon:'🍛', title:'Indian Restaurants', sub:'Curry, tandoor and Indian cuisine', url:'/categories/indian-restaurant-papamoa.html', keywords:'indian restaurant curry tandoor naan butter chicken tikka masala indian food' },
+  { type:'cat', icon:'🥙', title:'Turkish Food', sub:'Kebabs, döner and Mediterranean dining', url:'/categories/turkish-restaurant-papamoa.html', keywords:'turkish kebab doner kebab mediterranean food falafel pita turkish restaurant' },
+  { type:'cat', icon:'🥐', title:'Bakeries', sub:'Fresh-baked bread, pies and pastries', url:'/categories/bakery-papamoa.html', keywords:'bakery bread pies pastries rolls buns bakeries fresh baked' },
+  { type:'cat', icon:'🛒', title:'Supermarkets & Grocery', sub:'Supermarkets and grocery stores', url:'/categories/supermarket-papamoa.html', keywords:'supermarket grocery countdown pak n save new world supermarkets food store' },
+  { type:'cat', icon:'🚗', title:'Mechanics & Auto', sub:'WOF inspections, servicing and tyres', url:'/categories/mechanic-papamoa.html', keywords:'mechanic wof warrant of fitness service tyre brake auto car repair automotive' },
+  { type:'cat', icon:'⚡', title:'Electricians', sub:'Registered electricians and EV charger install', url:'/categories/electrician-papamoa.html', keywords:'electrician electrical wiring switchboard ev charger heat pump install registered sparky' },
+  { type:'cat', icon:'🔧', title:'Plumbers', sub:'Licensed plumbers and gasfitters', url:'/categories/plumber-papamoa.html', keywords:'plumber plumbing gasfitter gas pipe drain blocked drain bathroom renovation hot water cylinder' },
+  { type:'cat', icon:'🎨', title:'Painters & Decorators', sub:'Interior and exterior house painting', url:'/categories/painter-papamoa.html', keywords:'painter painting decorator interior exterior house painting walls colour' },
+  { type:'cat', icon:'🌿', title:'Fencing', sub:'Timber, steel and pool fencing', url:'/categories/fencing-papamoa.html', keywords:'fencing fence timber steel pool fence gate boundary privacy fence installer' },
+  { type:'cat', icon:'❄', title:'Air Conditioning', sub:'Authorised heat pump installers', url:'/categories/aircon-papamoa.html', keywords:'air conditioning aircon heat pump mitsubishi fujitsu daikin installer hvac heating cooling airconditioning' },
+  { type:'cat', icon:'🦴', title:'Physiotherapy', sub:'ACC registered physio and sports rehab', url:'/categories/physio-papamoa.html', keywords:'physiotherapy physio physiotherapist acc sports rehab rehabilitation injury back neck shoulder knee pain' },
+  { type:'cat', icon:'🏥', title:'Medical Centres', sub:'GP practices and enrolled patient services', url:'/categories/medical-centre-papamoa.html', keywords:'medical centre gp doctor enrolled patient health care clinic general practice' },
+  { type:'cat', icon:'🏋', title:'Gyms & Fitness', sub:'24hr gyms, group classes and personal training', url:'/categories/gym-papamoa.html', keywords:'gym fitness 24 hour group classes personal training crossfit pilates yoga weights exercise' },
+  { type:'cat', icon:'👶', title:'Childcare & ECE', sub:'Licensed early learning centres', url:'/categories/childcare-papamoa.html', keywords:'childcare childcare early childhood education ece kindy kindergarten creche daycare licensed' },
+  { type:'cat', icon:'💊', title:'Supplement Stores', sub:'Sports nutrition, vitamins and wellness', url:'/categories/supplement-store-papamoa.html', keywords:'supplement store sports nutrition vitamins protein creatine wellness health store' },
+  { type:'cat', icon:'💨', title:'Vape Shops', sub:'E-cigarettes, devices and e-liquids', url:'/categories/vape-shop-papamoa.html', keywords:'vape shop e-cigarette vaping device e-liquid pods nicotine vape store' },
+  { type:'cat', icon:'🎣', title:'Fishing & Surf', sub:'Bait, tackle, charters and surf hire', url:'/categories/fishing.html', keywords:'fishing bait tackle charter boat hire surf surfboard fishing gear rod reel' },
+  { type:'cat', icon:'🌿', title:'Gardening & Lawn', sub:'Lawn mowing, garden maintenance', url:'/categories/gardening.html', keywords:'gardening lawn mowing garden maintenance landscaping hedge trimming weeding gardener' },
+  { type:'cat', icon:'🏕', title:'Entertainment', sub:'Bars, dining, activities and events', url:'/categories/entertainment.html', keywords:'entertainment bar dining activities events live music fun night out things to do' },
 
-const TYPE_LABELS = { cat:'Categories', listing:'Businesses', info:'Local Info', tool:'Tools' };
+  // ── LISTINGS ──
+  { type:'listing', icon:'🚗', title:'Coastal Autos', sub:'Mechanic & WOF · Pāpāmoa', url:'/categories/services.html', keywords:'coastal autos mechanic wof warrant fitness service tyre brake auto electrical' },
+  { type:'listing', icon:'🏋', title:'ReDefined Wellbeing Hub', sub:'Gym, Pilates, Yoga · Pāpāmoa', url:'/categories/services.html', keywords:'redefined wellbeing hub gym pilates yoga reformer fitness physio nutrition massage counselling' },
+  { type:'listing', icon:'🍽', title:'PAP House', sub:'Restaurant & Bar · Pāpāmoa Beach Road', url:'/categories/entertainment.html', keywords:'pap house restaurant bar food drink beach road papamoa dog friendly' },
+  { type:'listing', icon:'🏄', title:'Hakanini Surf School', sub:'Surf lessons & hire · Pāpāmoa Domain', url:'/categories/surf-tides.html', keywords:'hakanini surf school surfing lessons hire board papamoa domain holiday programme' },
+  { type:'listing', icon:'💅', title:'Kayco Nails', sub:'Nail salon · Pāpāmoa', url:'/listings/kayco-nails-papamoa.html', keywords:'kayco nails nail salon kay manicure pedicure gel acrylic nail art beauty nails beauty salon' },
+  { type:'listing', icon:'🔧', title:'Speedy Screens', sub:'Window & door screens · Pāpāmoa', url:'/listings/speedy-screens-papamoa.html', keywords:'speedy screens window door fly screen security screen repair installation screen door' },
+  { type:'listing', icon:'🏋', title:'The Cave Pāpāmoa', sub:'Gym · Pāpāmoa', url:'/listings/the-cave-papamoa.html', keywords:'the cave gym fitness training crossfit strength conditioning papamoa' },
+  { type:'listing', icon:'🍔', title:'The Wagon', sub:'Food truck · Pāpāmoa', url:'/listings/the-wagon-papamoa.html', keywords:'the wagon food truck burger fries street food papamoa' },
+  { type:'listing', icon:'📚', title:'Xanadu Book Exchange', sub:'Secondhand books · Pāpāmoa', url:'/listings/xanadu-book-exchange-papamoa.html', keywords:'xanadu book exchange secondhand books second hand used books paperback novels' },
+  { type:'listing', icon:'🌿', title:'Greencut', sub:'Lawn mowing & garden · Pāpāmoa', url:'/listings/greencut-papamoa.html', keywords:'greencut lawn mowing garden maintenance landscaping papamoa' },
+  { type:'listing', icon:'😁', title:'Pāpāmoa Orthodontist', sub:'Orthodontics · Pāpāmoa', url:'/listings/papamoa-orthodontist.html', keywords:'orthodontist braces teeth dental orthodontic invisalign papamoa' },
+  { type:'listing', icon:'✂', title:'Lawn Mowing Pāpāmoa', sub:'Lawn & garden care · Pāpāmoa', url:'/listings/lawn-mowing-papamoa.html', keywords:'lawn mowing garden care papamoa grass cut maintenance' },
 
+  // ── LOCAL INFO / ARTICLES ──
+  { type:'info', icon:'⛰', title:'Pāpāmoa Hills', sub:'Track status, closures, maps', url:'/articles/papamoa-hills.html', keywords:'papamoa hills track walk hike summit closed open landslip terrain regional park summerhills' },
+  { type:'info', icon:'🚶', title:'Walks & Tracks', sub:'All walking and cycling tracks', url:'/articles/walks-tracks.html', keywords:'walk walks track tracks walking cycling hike hiking nature path trail papamoa terrain' },
+  { type:'info', icon:'🌳', title:'Parks & Playgrounds', sub:'Gordon Spratt Reserve, skate spots, picnic areas', url:'/articles/parks-playgrounds.html', keywords:'park parks playground playgrounds picnic gordon spratt reserve skate skateboard sports fields' },
+  { type:'info', icon:'🌳', title:'Gordon Spratt Reserve', sub:'Main park, tsunami mound, events', url:'/articles/gordon-spratt-reserve.html', keywords:'gordon spratt reserve park tsunami mound capacity picnic events facilities papamoa' },
+  { type:'info', icon:'🐕', title:'Dogs in Pāpāmoa', sub:'Off-leash zones, beach rules, registration', url:'/articles/dogs-papamoa.html', keywords:'dogs dog off leash beach rules bylaw registration tcc papamoa dog park' },
+  { type:'info', icon:'🏊', title:'Swimming in Pāpāmoa', sub:'Beach guide, freshwater, pool laws', url:'/articles/swimming-papamoa.html', keywords:'swimming swim beach freshwater pool pools spa pool fence law papamoa surf beach' },
+  { type:'info', icon:'📊', title:'Population & Stats', sub:'37,910 residents, fastest-growing suburb', url:'/articles/population-statistics.html', keywords:'population stats statistics census growth fastest suburb demographics residents 2024' },
+  { type:'info', icon:'🏛', title:'Local Government', sub:'Mayor, TCC contacts, MP', url:'/articles/local-government.html', keywords:'local government mayor mahe drysdale tcc tauranga city council mp tom rutherford councillor' },
+  { type:'info', icon:'⭐', title:'Notable People', sub:'Athletes, artists, public figures', url:'/articles/notable-people.html', keywords:'notable people athletes artists celebrities famous connections papamoa' },
+  { type:'info', icon:'🏛', title:'Māori History', sub:'Ngā Pōtiki, Ngāi Te Rangi, Tamapahore Marae', url:'/articles/maori-history.html', keywords:'maori history nga potiki ngai te rangi tamapahore marae tangata whenua history papamoa iwi hapu' },
+  { type:'info', icon:'⛰', title:'Mount Maunganui', sub:'Mauao closed after Jan 2026 landslide', url:'/articles/mount-maunganui.html', keywords:'mount maunganui mauao closed closure landslide the mount main beach village walk' },
+  { type:'info', icon:'🏫', title:'Schools in Pāpāmoa', sub:'All 8 schools, zones, rolls, contacts', url:'/articles/schools-papamoa.html', keywords:'schools primary secondary papamoa college zones enrolment rolls contacts catholic maori immersion' },
+  { type:'info', icon:'📅', title:'School Terms 2026', sub:'All term dates and holidays', url:'/articles/school-terms-holidays.html', keywords:'school terms holidays 2026 dates calendar term break holidays term dates' },
+  { type:'info', icon:'🎂', title:'Kids Birthday Parties', sub:'Venues, entertainers, catering', url:'/articles/kids-birthday-parties.html', keywords:'kids birthday party parties venue entertainer catering hire children celebration party papamoa' },
+  { type:'info', icon:'📚', title:'Pāpāmoa Library', sub:'Hours, services, free WiFi, story time', url:'/articles/library.html', keywords:'library papamoa hours services wifi story time books events gordon spratt' },
+  { type:'info', icon:'👴', title:'Seniors & Retirement', sub:'Retirement villages, home care, NZ Super', url:'/articles/seniors-retirement.html', keywords:'seniors retirement village home care nz super superannuation aged care elderly papamoa' },
+  { type:'info', icon:'🏠', title:'Real Estate Market', sub:'March 2026 market report, median prices', url:'/categories/real-estate.html', keywords:'real estate market report median price houses papamoa march 2026 property values' },
+  { type:'info', icon:'🛍', title:'Shopping Centres', sub:'Fashion Island, Palm Beach Plaza, The Sands', url:'/articles/shopping-centres.html', keywords:'shopping centre fashion island palm beach plaza the sands shops retail tenants hours parking' },
+  { type:'info', icon:'🏬', title:'The Yard', sub:'Boutique retail and dining precinct', url:'/articles/the-yard.html', keywords:'the yard papamoa boutique retail dining precinct shops cafe restaurant precinct' },
+  { type:'info', icon:'🛒', title:'Op Shops & Second-hand', sub:'Waipuna, Vinnies, Recycle Boutique', url:'/articles/op-shops-papamoa.html', keywords:'op shop second hand thrift waipuna vinnies recycle boutique xanadu books donate charity shop' },
+  { type:'info', icon:'💍', title:'Weddings in Pāpāmoa', sub:'Venues, photographers, suppliers', url:'/articles/weddings.html', keywords:'weddings wedding venue photographer catering hire celebrant flowers papamoa beach' },
+  { type:'info', icon:'🍽', title:'Dinner at the Domain', sub:'Annual outdoor dining event', url:'/articles/dinner-at-the-domain.html', keywords:'dinner at the domain outdoor dining event tickets papamoa domain annual' },
+  { type:'info', icon:'⛽', title:'Fuel Prices', sub:'Local petrol and diesel prices', url:'/articles/fuel-prices.html', keywords:'fuel price petrol diesel bp z energy mobil gull papamoa prices station' },
+  { type:'info', icon:'🏙', title:'Tauranga', sub:'15 min from CBD, transport guide', url:'/articles/tauranga.html', keywords:'tauranga cbd city centre distance transport bus drive commute papamoa' },
+  { type:'info', icon:'⚡', title:'Utilities — Power, Gas & Broadband', sub:'Power retailers, LPG, fibre, mobile', url:'/articles/utilities-papamoa.html', keywords:'utilities power electricity gas broadband fibre internet mobile lpu lpg contact energy meridian genesis' },
+  { type:'info', icon:'💧', title:'Water & Rates', sub:'TCC metered water, quarterly billing', url:'/articles/water-rates-papamoa.html', keywords:'water rates tcc metered billing wastewater waiari plant quarterly council rates' },
+  { type:'info', icon:'♻', title:'Rubbish & Recycling', sub:'4-bin kerbside guide, transfer station', url:'/articles/rubbish-recycling-papamoa.html', keywords:'rubbish recycling bins kerbside 4 bin transfer station waste te maunga green waste' },
+  { type:'info', icon:'👕', title:'Clothing Recycling', sub:'Bins, Waipuna collection, textile recycling', url:'/articles/clothing-recycling-papamoa.html', keywords:'clothing recycling textile bins waipuna hospice free collection donate clothes' },
+  { type:'info', icon:'🐛', title:'Summer Insects', sub:'Wasps, mosquitoes, stinging caterpillars', url:'/articles/summer-insects-papamoa.html', keywords:'summer insects wasps mosquitoes caterpillars stinging pests bugs papamoa' },
+  { type:'info', icon:'🏆', title:'AIMS Games 2026', sub:'5–11 Sep · 12,000+ students', url:'/articles/aims-games.html', keywords:'aims games 2026 sports tauranga students accommodation tickets venues parking september' },
+  { type:'info', icon:'📰', title:'News & Events', sub:'Upcoming events, markets, local news', url:'/articles/news-events.html', keywords:'news events markets local papamoa upcoming community calendar things to do' },
+
+  // ── COMMUNITY ──
+  { type:'community', icon:'👥', title:'Community Groups', sub:'Churches, clubs and organisations', url:'/community/community-groups.html', keywords:'community groups church clubs organisations faith sport volunteer papamoa' },
+  { type:'community', icon:'🆘', title:'Emergency Contacts', sub:'Police, fire, ambulance, civil defence', url:'/community/emergencies.html', keywords:'emergency contacts police fire ambulance civil defence disaster flood earthquake 111' },
+  { type:'community', icon:'🤝', title:'Neighbourhood Support', sub:'Local support network and resources', url:'/community/neighbourhood-support.html', keywords:'neighbourhood support network community help welfare assistance papamoa' },
+  { type:'community', icon:'🚔', title:'Police & Crime', sub:'Pāpāmoa Police, reporting, non-emergency', url:'/community/police-crime.html', keywords:'police crime report non emergency papamoa tauranga station neighbourhood support' },
+  { type:'community', icon:'🤝', title:'Community Resources', sub:'Food banks, Facebook groups, mental health', url:'/community/community-resources.html', keywords:'community resources food bank foodbank facebook groups mental health support help papamoa' },
+
+  // ── TOOLS ──
+  { type:'tool', icon:'💰', title:'PAYE & GST Calculator', sub:'Tax calculator · KiwiSaver', url:'/articles/tax-kiwisaver.html', keywords:'tax paye gst calculator kiwisaver income take home pay ird tax return' },
+  { type:'tool', icon:'🐰', title:'Easter Trading Hours 2026', sub:'Pāpāmoa shop & service hours over Easter', url:'/articles/easter-trading-hours.html', keywords:'easter trading hours open closed shops services easter friday saturday sunday monday 2026' },
+]; = { cat:'Categories', listing:'Businesses', info:'Local Info', tool:'Tools' };
+
+function normaliseQuery(str) {
+  return str.toLowerCase()
+    .replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 function handleSearch(val) {
-  const q = val.trim().toLowerCase();
+  const raw = val.trim();
+  const q = normaliseQuery(raw);
   const box = document.getElementById('search-results');
   if (!q || q.length < 2) { box.classList.remove('visible'); return; }
-  const results = SEARCH_INDEX.filter(item =>
-    item.keywords.includes(q) || item.title.toLowerCase().includes(q) || item.sub.toLowerCase().includes(q)
-  ).slice(0, 8);
+  // Score each item: exact phrase > starts with > any word matches
+  const qWords = q.split(' ').filter(w => w.length > 1);
+  const scored = SEARCH_INDEX.map(item => {
+    const kw = normaliseQuery(item.keywords);
+    const ti = normaliseQuery(item.title);
+    const su = normaliseQuery(item.sub);
+    const haystack = ti + ' ' + su + ' ' + kw;
+    let score = 0;
+    if (haystack.includes(q)) score += 10;
+    qWords.forEach(w => {
+      if (ti.startsWith(w)) score += 5;
+      if (ti.includes(w)) score += 3;
+      if (su.includes(w)) score += 2;
+      if (kw.includes(w)) score += 1;
+    });
+    return { item, score };
+  }).filter(x => x.score > 0).sort((a,b) => b.score - a.score);
+  const results = scored.slice(0, 10).map(x => x.item);
   if (!results.length) {
     box.innerHTML = `<div class="sr-empty">No results for "<strong>${escHtml(val)}</strong>" — try a different search term</div>`;
     box.classList.add('visible'); return;
@@ -808,7 +881,10 @@ function handleSearch(val) {
   Object.entries(grouped).forEach(([type, items]) => {
     html += `<div class="sr-group-label">${TYPE_LABELS[type] || type}</div>`;
     items.forEach(item => {
-      html += `<a href="${item.url}" class="sr-item"><span class="sr-item-icon">${item.icon}</span><div><div class="sr-item-title">${item.title}</div><div class="sr-item-sub">${escHtml(item.sub)}</div></div></a>`;
+      const badgeMap = { cat:'Category', listing:'Business', info:'Local Info', tool:'Tool', community:'Community' };
+      const badgeColour = { cat:'#3AABDE', listing:'#C8962A', info:'#1E6B3C', tool:'#607080', community:'#5A7A8A' };
+      const badge = badgeMap[item.type] ? `<span style="font-size:0.6rem;font-weight:700;padding:1px 6px;border-radius:3px;background:${badgeColour[item.type]}22;color:${badgeColour[item.type]};border:1px solid ${badgeColour[item.type]}44;margin-left:6px;vertical-align:middle;">${badgeMap[item.type]}</span>` : '';
+      html += `<a href="${item.url}" class="sr-item"><span class="sr-item-icon">${item.icon}</span><div><div class="sr-item-title">${decodeHtml(item.title)}${badge}</div><div class="sr-item-sub">${decodeHtml(item.sub)}</div></div></a>`;
     });
   });
   box.innerHTML = html;
@@ -833,6 +909,11 @@ function fillSearch(term) {
 }
 function escHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function decodeHtml(str) {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = str;
+  return txt.value;
 }
 function expandCats() {
   const hidden = document.querySelectorAll('.cat-card.cat-hidden');
