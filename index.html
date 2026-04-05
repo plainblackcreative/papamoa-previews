@@ -47,10 +47,18 @@
     .ftab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
 
     /* SECTION HEADERS */
-    .section-head { display: flex; align-items: center; gap: 10px; margin: 32px 0 14px; }
+    .section-head { display: flex; align-items: center; gap: 10px; margin: 32px 0 14px; cursor: pointer; user-select: none; }
     .section-head h2 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); }
     .section-head .sh-count { font-size: 0.7rem; font-weight: 700; background: var(--bg); border: 1px solid var(--border); color: var(--muted); padding: 2px 8px; border-radius: 10px; }
     .section-head::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-head:hover h2 { color: var(--blue); }
+    .sh-toggle { font-size: 0.7rem; color: var(--muted); background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px; font-weight: 700; white-space: nowrap; transition: all 0.15s; flex-shrink: 0; }
+    .section-head:hover .sh-toggle { border-color: var(--blue); color: var(--blue); }
+    .section-wrap.collapsed .page-grid { display: none; }
+    .page-card.over-limit { display: none; }
+    .page-card.over-limit.show-all { display: flex; }
+    .show-more-btn { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 16px; background: var(--white); border: 1.5px dashed var(--border); border-radius: 9px; font-family: 'Figtree', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+    .show-more-btn:hover { border-color: var(--blue); color: var(--blue); background: rgba(58,171,222,0.04); }
 
     /* PAGE GRID */
     .page-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
@@ -162,7 +170,8 @@
   </div>
 
   <!-- ROOT -->
-  <div class="section-head" data-section="root"><h2>&#127968; Root</h2><span class="sh-count">2</span></div>
+  <div class="section-wrap" data-sec="root">
+  <div class="section-head" data-section="root"><h2>&#127968; Root</h2><span class="sh-count">2</span><span class="sh-toggle">&#9660; collapse</span></div>
   <div class="page-grid">
     <a class="page-card" href="https://plainblackcreative.github.io/homepage.html" target="_blank" data-section="root" data-keywords="directory homepage categories browse">
       <span class="pc-icon">&#128451;</span>
@@ -181,802 +190,11 @@
       </div>
     </a>
   </div>
-
-  <!-- LISTINGS -->
-  <div class="section-head" data-section="listings"><h2>&#128205; Listings</h2><span class="sh-count">11</span></div>
-  <div class="page-grid">
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/all-listings.html" target="_blank" data-section="listings" data-keywords="all listings showcase demo directory overview">
-      <span class="pc-icon">&#128203;</span>
-      <div class="pc-body">
-        <div class="pc-title">All Listings Showcase</div>
-        <div class="pc-path">/listings/all-listings.html</div>
-        <div class="pc-desc">Demo of all live listings &mdash; directory overview for prospects</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/listings.html" target="_blank" data-section="listings" data-keywords="listings index">
-      <span class="pc-icon">&#128211;</span>
-      <div class="pc-body">
-        <div class="pc-title">Listings Index</div>
-        <div class="pc-path">/listings/listings.html</div>
-        <div class="pc-desc">P&#257;p&#257;moa business listings index page</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/combined-listings.html" target="_blank" data-section="listings" data-keywords="combined listings template">
-      <span class="pc-icon">&#128209;</span>
-      <div class="pc-body">
-        <div class="pc-title">Combined Listings</div>
-        <div class="pc-path">/listings/combined-listings.html</div>
-        <div class="pc-desc">All listing pages combined &mdash; template comparison candidate</div>
-        <div class="pc-tags"><span class="pc-tag tag-review">Review needed</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/listing-template.html" target="_blank" data-section="listings" data-keywords="listing template master">
-      <span class="pc-icon">&#128221;</span>
-      <div class="pc-body">
-        <div class="pc-title">Listing Template</div>
-        <div class="pc-path">/listings/listing-template.html</div>
-        <div class="pc-desc">Master listing template &mdash; to be standardised</div>
-        <div class="pc-tags"><span class="pc-tag tag-review">Review needed</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/the-cave-papamoa.html" target="_blank" data-section="listings" data-keywords="the cave VR sim racing entertainment">
-      <span class="pc-icon">&#127918;</span>
-      <div class="pc-body">
-        <div class="pc-title">The Cave P&#257;p&#257;moa</div>
-        <div class="pc-path">/listings/the-cave-papamoa.html</div>
-        <div class="pc-desc">VR &amp; sim racing &mdash; Gold Spotlight, Entertainment</div>
-        <div class="pc-tags"><span class="pc-tag tag-gold">Gold</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/xanadu-book-exchange-papamoa.html" target="_blank" data-section="listings" data-keywords="xanadu books second-hand bookstore">
-      <span class="pc-icon">&#128218;</span>
-      <div class="pc-body">
-        <div class="pc-title">Xanadu Book Exchange</div>
-        <div class="pc-path">/listings/xanadu-book-exchange-papamoa.html</div>
-        <div class="pc-desc">Second-hand bookstore &mdash; Silver listing, Shopping</div>
-        <div class="pc-tags"><span class="pc-tag tag-silver" style="background:rgba(58,171,222,0.1);color:var(--blue);border:1px solid rgba(58,171,222,0.2)">Silver</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/kayco-nails-papamoa.html" target="_blank" data-section="listings" data-keywords="kayco nails beauty press-on">
-      <span class="pc-icon">&#128133;</span>
-      <div class="pc-body">
-        <div class="pc-title">Kayco Nails P&#257;p&#257;moa</div>
-        <div class="pc-path">/listings/kayco-nails-papamoa.html</div>
-        <div class="pc-desc">Custom press-on nail kits &mdash; Silver listing, Beauty</div>
-        <div class="pc-tags"><span class="pc-tag tag-silver" style="background:rgba(58,171,222,0.1);color:var(--blue);border:1px solid rgba(58,171,222,0.2)">Silver</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/the-wagon-papamoa.html" target="_blank" data-section="listings" data-keywords="wagon food drink gold menu">
-      <span class="pc-icon">&#127828;</span>
-      <div class="pc-body">
-        <div class="pc-title">The Wagon P&#257;p&#257;moa</div>
-        <div class="pc-path">/listings/the-wagon-papamoa.html</div>
-        <div class="pc-desc">Gold listing demo with Menu Add-On &mdash; Food &amp; Drink</div>
-        <div class="pc-tags"><span class="pc-tag tag-gold">Gold</span><span class="pc-tag tag-demo">Demo</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/papamoa-orthodontist.html" target="_blank" data-section="listings" data-keywords="orthodontist professional services">
-      <span class="pc-icon">&#129463;</span>
-      <div class="pc-body">
-        <div class="pc-title">P&#257;p&#257;moa Orthodontist</div>
-        <div class="pc-path">/listings/papamoa-orthodontist.html</div>
-        <div class="pc-desc">Professional services listing demo</div>
-        <div class="pc-tags"><span class="pc-tag tag-demo">Demo</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/lawn-mowing-papamoa.html" target="_blank" data-section="listings" data-keywords="lawn mowing placeholder gardening">
-      <span class="pc-icon">&#127807;</span>
-      <div class="pc-body">
-        <div class="pc-title">Lawn Mowing P&#257;p&#257;moa</div>
-        <div class="pc-path">/listings/lawn-mowing-papamoa.html</div>
-        <div class="pc-desc">Placeholder &mdash; captures enquiries while sub-category is empty</div>
-        <div class="pc-tags"><span class="pc-tag tag-placeholder">Placeholder</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/greencut-papamoa.html" target="_blank" data-section="listings" data-keywords="greencut lawn garden">
-      <span class="pc-icon">&#9986;&#65039;</span>
-      <div class="pc-body">
-        <div class="pc-title">Greencut P&#257;p&#257;moa</div>
-        <div class="pc-path">/listings/greencut-papamoa.html</div>
-        <div class="pc-desc">Lawn &amp; garden listing demo</div>
-        <div class="pc-tags"><span class="pc-tag tag-demo">Demo</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/listings/speedy-screens-papamoa.html" target="_blank" data-section="listings" data-keywords="speedy screens trades">
-      <span class="pc-icon">&#128295;</span>
-      <div class="pc-body">
-        <div class="pc-title">Speedy Screens P&#257;p&#257;moa</div>
-        <div class="pc-path">/listings/speedy-screens-papamoa.html</div>
-        <div class="pc-desc">Trades listing demo</div>
-        <div class="pc-tags"><span class="pc-tag tag-demo">Demo</span></div>
-      </div>
-    </a>
-  </div>
-
-  <!-- CATEGORIES -->
-  <div class="section-head" data-section="categories"><h2>&#128451; Categories</h2><span class="sh-count">30</span></div>
-  <div class="page-grid">
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/real-estate.html" target="_blank" data-section="categories" data-keywords="real estate property market agent buying selling">
-      <span class="pc-icon">&#127968;</span>
-      <div class="pc-body">
-        <div class="pc-title">Real Estate</div>
-        <div class="pc-path">/categories/real-estate.html</div>
-        <div class="pc-desc">Property market hub &mdash; monthly market reports, neighbourhood data, featured agent Spotlight</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/lawn-mowing.html" target="_blank" data-section="categories" data-keywords="lawn mowing gardening">
-      <span class="pc-icon">&#127807;</span>
-      <div class="pc-body">
-        <div class="pc-title">Lawn Mowing</div>
-        <div class="pc-path">/categories/lawn-mowing.html</div>
-        <div class="pc-desc">Sub-category listing page</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/fishing.html" target="_blank" data-section="categories" data-keywords="fishing surf tides">
-      <span class="pc-icon">&#127907;</span>
-      <div class="pc-body">
-        <div class="pc-title">Fishing &amp; Surf</div>
-        <div class="pc-path">/categories/fishing.html</div>
-        <div class="pc-desc">Surf &amp; Tides sub-category page</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/surf-tides.html" target="_blank" data-section="categories" data-keywords="surf tides conditions forecast">
-      <span class="pc-icon">&#127940;</span>
-      <div class="pc-body">
-        <div class="pc-title">Surf &amp; Tides</div>
-        <div class="pc-path">/categories/surf-tides.html</div>
-        <div class="pc-desc">Conditions, tide times, 7-day forecast, Hakanini Gold Spotlight</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/gardening.html" target="_blank" data-section="categories" data-keywords="gardening garden">
-      <span class="pc-icon">&#127796;</span>
-      <div class="pc-body">
-        <div class="pc-title">Gardening</div>
-        <div class="pc-path">/categories/gardening.html</div>
-        <div class="pc-desc">Gardening sub-category page</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/entertainment.html" target="_blank" data-section="categories" data-keywords="entertainment activities dining restaurants bars VR">
-      <span class="pc-icon">&#127917;</span>
-      <div class="pc-body">
-        <div class="pc-title">Entertainment</div>
-        <div class="pc-path">/categories/entertainment.html</div>
-        <div class="pc-desc">Things to do, dining and activities &mdash; The Cave VR, Hakanini Surf School, restaurants and bars</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/shopping.html" target="_blank" data-section="categories" data-keywords="shopping retail Papamoa Plaza Fashion Island books second-hand">
-      <span class="pc-icon">&#128717;</span>
-      <div class="pc-body">
-        <div class="pc-title">Shopping</div>
-        <div class="pc-path">/categories/shopping.html</div>
-        <div class="pc-desc">P&#257;p&#257;moa Plaza, Fashion Island, Xanadu Book Exchange, op shops and specialty retail</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/services.html" target="_blank" data-section="categories" data-keywords="services automotive health fitness trades professional">
-      <span class="pc-icon">&#128736;</span>
-      <div class="pc-body">
-        <div class="pc-title">Services</div>
-        <div class="pc-path">/categories/services.html</div>
-        <div class="pc-desc">Mechanics, health &amp; fitness, personal care, trades and professional services in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/accommodation.html" target="_blank" data-section="categories" data-keywords="accommodation holiday park motel beachfront aims games">
-      <span class="pc-icon">&#127968;</span>
-      <div class="pc-body">
-        <div class="pc-title">Accommodation</div>
-        <div class="pc-path">/categories/accommodation.html</div>
-        <div class="pc-desc">Holiday parks, motels, B&Bs and short-stay rentals &mdash; Pacific Park Gold Spotlight, AIMS Games guide</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/restaurants-papamoa.html" target="_blank" data-section="categories" data-keywords="restaurants dining food dine-in takeaway">
-      <span class="pc-icon">🍽️</span>
-      <div class="pc-body">
-        <div class="pc-title">Restaurants</div>
-        <div class="pc-path">/categories/restaurants-papamoa.html</div>
-        <div class="pc-desc">Restaurant listings for P&#257;p&#257;moa &mdash; Gold Spotlight, Silver, Bronze placeholders</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/cafe-papamoa.html" target="_blank" data-section="categories" data-keywords="cafe coffee brunch flat white espresso">
-      <span class="pc-icon">☕</span>
-      <div class="pc-body">
-        <div class="pc-title">Cafes</div>
-        <div class="pc-path">/categories/cafe-papamoa.html</div>
-        <div class="pc-desc">Specialty coffee and brunch cafes in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/bar-papamoa.html" target="_blank" data-section="categories" data-keywords="bar pub drinks craft beer live music">
-      <span class="pc-icon">🍺</span>
-      <div class="pc-body">
-        <div class="pc-title">Bars &amp; Pubs</div>
-        <div class="pc-path">/categories/bar-papamoa.html</div>
-        <div class="pc-desc">Local bars and pubs in P&#257;p&#257;moa &mdash; craft beer, live music</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/fish-and-chips-papamoa.html" target="_blank" data-section="categories" data-keywords="fish chips chippie seafood takeaway">
-      <span class="pc-icon">🐟</span>
-      <div class="pc-body">
-        <div class="pc-title">Fish &amp; Chips</div>
-        <div class="pc-path">/categories/fish-and-chips-papamoa.html</div>
-        <div class="pc-desc">Fish and chip shops in P&#257;p&#257;moa &mdash; fresh-battered daily</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/indian-restaurant-papamoa.html" target="_blank" data-section="categories" data-keywords="indian restaurant curry tandoor biryani">
-      <span class="pc-icon">🍛</span>
-      <div class="pc-body">
-        <div class="pc-title">Indian Restaurants</div>
-        <div class="pc-path">/categories/indian-restaurant-papamoa.html</div>
-        <div class="pc-desc">Indian cuisine and curry restaurants in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/turkish-restaurant-papamoa.html" target="_blank" data-section="categories" data-keywords="turkish food kebab mediterranean doner">
-      <span class="pc-icon">🥙</span>
-      <div class="pc-body">
-        <div class="pc-title">Turkish Food</div>
-        <div class="pc-path">/categories/turkish-restaurant-papamoa.html</div>
-        <div class="pc-desc">Turkish restaurants and kebab shops in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/sushi-papamoa.html" target="_blank" data-section="categories" data-keywords="sushi japanese sushi train nigiri rolls">
-      <span class="pc-icon">🍣</span>
-      <div class="pc-body">
-        <div class="pc-title">Sushi</div>
-        <div class="pc-path">/categories/sushi-papamoa.html</div>
-        <div class="pc-desc">Sushi trains and Japanese restaurants in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/bakery-papamoa.html" target="_blank" data-section="categories" data-keywords="bakery bread pastry pies cakes sourdough">
-      <span class="pc-icon">🍞</span>
-      <div class="pc-body">
-        <div class="pc-title">Bakeries</div>
-        <div class="pc-path">/categories/bakery-papamoa.html</div>
-        <div class="pc-desc">Fresh-baked bread, pies, and pastries in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/supermarket-papamoa.html" target="_blank" data-section="categories" data-keywords="supermarket grocery food store four square">
-      <span class="pc-icon">🛒</span>
-      <div class="pc-body">
-        <div class="pc-title">Supermarkets &amp; Grocery</div>
-        <div class="pc-path">/categories/supermarket-papamoa.html</div>
-        <div class="pc-desc">Supermarkets and grocery stores in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/supplement-store-papamoa.html" target="_blank" data-section="categories" data-keywords="supplements protein vitamins health nutrition sports">
-      <span class="pc-icon">💊</span>
-      <div class="pc-body">
-        <div class="pc-title">Supplement &amp; Health Stores</div>
-        <div class="pc-path">/categories/supplement-store-papamoa.html</div>
-        <div class="pc-desc">Sports nutrition and vitamin stores in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/physio-papamoa.html" target="_blank" data-section="categories" data-keywords="physiotherapy physio sports rehab ACC">
-      <span class="pc-icon">🦴</span>
-      <div class="pc-body">
-        <div class="pc-title">Physiotherapy</div>
-        <div class="pc-path">/categories/physio-papamoa.html</div>
-        <div class="pc-desc">Physio clinics in P&#257;p&#257;moa &mdash; ACC registered, sports rehab</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/medical-centre-papamoa.html" target="_blank" data-section="categories" data-keywords="medical centre GP doctor enrolled patients urgent care">
-      <span class="pc-icon">🏥</span>
-      <div class="pc-body">
-        <div class="pc-title">Medical Centres</div>
-        <div class="pc-path">/categories/medical-centre-papamoa.html</div>
-        <div class="pc-desc">GP practices and medical centres in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/childcare-papamoa.html" target="_blank" data-section="categories" data-keywords="childcare ECE early learning kindy 20 hours">
-      <span class="pc-icon">🧒</span>
-      <div class="pc-body">
-        <div class="pc-title">Childcare &amp; Early Learning</div>
-        <div class="pc-path">/categories/childcare-papamoa.html</div>
-        <div class="pc-desc">Licensed ECE and childcare centres in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/gym-papamoa.html" target="_blank" data-section="categories" data-keywords="gym fitness classes personal training 24 hour">
-      <span class="pc-icon">🏋️</span>
-      <div class="pc-body">
-        <div class="pc-title">Gyms &amp; Fitness</div>
-        <div class="pc-path">/categories/gym-papamoa.html</div>
-        <div class="pc-desc">Gyms and fitness studios in P&#257;p&#257;moa &mdash; 24hr access and group classes</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/electrician-papamoa.html" target="_blank" data-section="categories" data-keywords="electrician electrical EV charger solar wiring">
-      <span class="pc-icon">⚡</span>
-      <div class="pc-body">
-        <div class="pc-title">Electricians</div>
-        <div class="pc-path">/categories/electrician-papamoa.html</div>
-        <div class="pc-desc">Registered electricians in P&#257;p&#257;moa &mdash; domestic, commercial, EV chargers</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/plumber-papamoa.html" target="_blank" data-section="categories" data-keywords="plumber plumbing gasfitter hot water drainage">
-      <span class="pc-icon">🔧</span>
-      <div class="pc-body">
-        <div class="pc-title">Plumbers</div>
-        <div class="pc-path">/categories/plumber-papamoa.html</div>
-        <div class="pc-desc">Licensed plumbers and gasfitters in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/mechanic-papamoa.html" target="_blank" data-section="categories" data-keywords="mechanic WOF warrant of fitness servicing tyres auto">
-      <span class="pc-icon">🚗</span>
-      <div class="pc-body">
-        <div class="pc-title">Mechanics &amp; Auto Repair</div>
-        <div class="pc-path">/categories/mechanic-papamoa.html</div>
-        <div class="pc-desc">WOF inspections and auto servicing in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/painter-papamoa.html" target="_blank" data-section="categories" data-keywords="painter decorator interior exterior residential">
-      <span class="pc-icon">🎨</span>
-      <div class="pc-body">
-        <div class="pc-title">Painters &amp; Decorators</div>
-        <div class="pc-path">/categories/painter-papamoa.html</div>
-        <div class="pc-desc">Interior and exterior painters in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/fencing-papamoa.html" target="_blank" data-section="categories" data-keywords="fencing pool fence timber steel residential">
-      <span class="pc-icon">🪵</span>
-      <div class="pc-body">
-        <div class="pc-title">Fencing</div>
-        <div class="pc-path">/categories/fencing-papamoa.html</div>
-        <div class="pc-desc">Fencing contractors in P&#257;p&#257;moa &mdash; timber, steel, pool fencing</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/aircon-papamoa.html" target="_blank" data-section="categories" data-keywords="air conditioning heat pump HVAC Mitsubishi Daikin">
-      <span class="pc-icon">❄️</span>
-      <div class="pc-body">
-        <div class="pc-title">Air Conditioning &amp; Heat Pumps</div>
-        <div class="pc-path">/categories/aircon-papamoa.html</div>
-        <div class="pc-desc">Authorised heat pump installers in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/categories/vape-shop-papamoa.html" target="_blank" data-section="categories" data-keywords="vape vaping e-cigarette nicotine">
-      <span class="pc-icon">💨</span>
-      <div class="pc-body">
-        <div class="pc-title">Vape Shops</div>
-        <div class="pc-path">/categories/vape-shop-papamoa.html</div>
-        <div class="pc-desc">Vape retailers and e-cigarette shops in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-  </div>
-
-  <!-- ARTICLES -->
-  <div class="section-head" data-section="articles"><h2>&#128240; Articles</h2><span class="sh-count">32</span></div>
-  <div class="page-grid">
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/swimming-papamoa.html" target="_blank" data-section="articles" data-keywords="swimming beach water holes pool laws">
-      <span class="pc-icon">&#127946;</span>
-      <div class="pc-body">
-        <div class="pc-title">Swimming in P&#257;p&#257;moa</div>
-        <div class="pc-path">/articles/swimming-papamoa.html</div>
-        <div class="pc-desc">Beach guide, freshwater holes, public pools and residential pool &amp; spa laws</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/utilities-papamoa.html" target="_blank" data-section="articles" data-keywords="utilities power broadband fibre LPG electricity">
-      <span class="pc-icon">&#9889;</span>
-      <div class="pc-body">
-        <div class="pc-title">Utilities &mdash; Power, Gas &amp; Broadband</div>
-        <div class="pc-path">/articles/utilities-papamoa.html</div>
-        <div class="pc-desc">Power retailers, LPG, fibre broadband and mobile coverage in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/water-rates-papamoa.html" target="_blank" data-section="articles" data-keywords="water rates TCC Waiari billing">
-      <span class="pc-icon">&#128167;</span>
-      <div class="pc-body">
-        <div class="pc-title">Water &amp; Rates</div>
-        <div class="pc-path">/articles/water-rates-papamoa.html</div>
-        <div class="pc-desc">TCC metered water, Waiari plant, quarterly billing and wastewater</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/rubbish-recycling-papamoa.html" target="_blank" data-section="articles" data-keywords="rubbish recycling bins kerbside transfer station">
-      <span class="pc-icon">&#9851;&#65039;</span>
-      <div class="pc-body">
-        <div class="pc-title">Rubbish &amp; Recycling</div>
-        <div class="pc-path">/articles/rubbish-recycling-papamoa.html</div>
-        <div class="pc-desc">4-bin kerbside guide, Te Maunga Transfer Station hours and accepted materials</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/clothing-recycling-papamoa.html" target="_blank" data-section="articles" data-keywords="clothing recycling donations bins Waipuna ImpacTex">
-      <span class="pc-icon">&#128248;</span>
-      <div class="pc-body">
-        <div class="pc-title">Clothing Recycling &amp; Donations</div>
-        <div class="pc-path">/articles/clothing-recycling-papamoa.html</div>
-        <div class="pc-desc">Clothing bins, Waipuna Hospice collection and textile recycling options</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/op-shops-papamoa.html" target="_blank" data-section="articles" data-keywords="op shops second-hand Waipuna Vinnies charity">
-      <span class="pc-icon">&#128717;</span>
-      <div class="pc-body">
-        <div class="pc-title">Op Shops &amp; Second-hand</div>
-        <div class="pc-path">/articles/op-shops-papamoa.html</div>
-        <div class="pc-desc">Waipuna Hospice, Vinnies, Recycle Boutique and second-hand options near P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/summer-insects-papamoa.html" target="_blank" data-section="articles" data-keywords="summer insects flies wasps speedy screens">
-      <span class="pc-icon">&#129429;</span>
-      <div class="pc-body">
-        <div class="pc-title">Summer Insects in P&#257;p&#257;moa</div>
-        <div class="pc-path">/articles/summer-insects-papamoa.html</div>
-        <div class="pc-desc">Flies, mozzies, wasps &mdash; what they are and how to keep them out. Speedy Screens spotlight.</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/easter-trading-hours.html" target="_blank" data-section="articles" data-keywords="easter trading hours shops">
-      <span class="pc-icon">&#128003;</span>
-      <div class="pc-body">
-        <div class="pc-title">Easter Trading Hours 2026</div>
-        <div class="pc-path">/articles/easter-trading-hours.html</div>
-        <div class="pc-desc">P&#257;p&#257;moa shops and services Easter opening hours</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/school-terms-holidays.html" target="_blank" data-section="articles" data-keywords="school terms holidays 2026">
-      <span class="pc-icon">&#127979;</span>
-      <div class="pc-body">
-        <div class="pc-title">School Terms and Holidays 2026</div>
-        <div class="pc-path">/articles/school-terms-holidays.html</div>
-        <div class="pc-desc">P&#257;p&#257;moa school term dates and holiday periods</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/tax-kiwisaver.html" target="_blank" data-section="articles" data-keywords="tax kiwisaver paye gst calculator">
-      <span class="pc-icon">&#128176;</span>
-      <div class="pc-body">
-        <div class="pc-title">NZ Tax and KiwiSaver Guide</div>
-        <div class="pc-path">/articles/tax-kiwisaver.html</div>
-        <div class="pc-desc">PAYE and GST calculators, KiwiSaver info, key dates</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/weddings.html" target="_blank" data-section="articles" data-keywords="weddings venues photographers">
-      <span class="pc-icon">&#128141;</span>
-      <div class="pc-body">
-        <div class="pc-title">Weddings in P&#257;p&#257;moa</div>
-        <div class="pc-path">/articles/weddings.html</div>
-        <div class="pc-desc">Venues, photographers and local wedding suppliers</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/schools-papamoa.html" target="_blank" data-section="articles" data-keywords="schools primary secondary papamoa college zones enrolment">
-      <span class="pc-icon">&#127979;</span>
-      <div class="pc-body">
-        <div class="pc-title">Schools in P&#257;p&#257;moa</div>
-        <div class="pc-path">/articles/schools-papamoa.html</div>
-        <div class="pc-desc">All 8 schools &mdash; primary, secondary, Catholic and M&#257;ori immersion. Zones, rolls and contacts</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/population-statistics.html" target="_blank" data-section="articles" data-keywords="population statistics census demographics">
-      <span class="pc-icon">&#128202;</span>
-      <div class="pc-body">
-        <div class="pc-title">Population &amp; Statistics</div>
-        <div class="pc-path">/articles/population-statistics.html</div>
-        <div class="pc-desc">Census data, growth timeline, ethnicity and income stats for P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/papamoa-hills.html" target="_blank" data-section="articles" data-keywords="papamoa hills tracks walks regional park">
-      <span class="pc-icon">&#127956;</span>
-      <div class="pc-body">
-        <div class="pc-title">P&#257;p&#257;moa Hills Regional Park</div>
-        <div class="pc-path">/articles/papamoa-hills.html</div>
-        <div class="pc-desc">Track status, closures, maps and facilities &mdash; updated April 2026</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/dogs-papamoa.html" target="_blank" data-section="articles" data-keywords="dogs bylaw beach rules TCC">
-      <span class="pc-icon">&#128054;</span>
-      <div class="pc-body">
-        <div class="pc-title">Dogs in P&#257;p&#257;moa</div>
-        <div class="pc-path">/articles/dogs-papamoa.html</div>
-        <div class="pc-desc">TCC Dog Bylaw 2018, beach zones, registration and attack reporting</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/maori-history.html" target="_blank" data-section="articles" data-keywords="maori history nga potiki ngai te rangi tamapahore">
-      <span class="pc-icon">&#127963;</span>
-      <div class="pc-body">
-        <div class="pc-title">M&#257;ori History of P&#257;p&#257;moa</div>
-        <div class="pc-path">/articles/maori-history.html</div>
-        <div class="pc-desc">Ng&#257; P&#333;tiki, Ng&#257;i Te Rangi, Tamapahore Marae and place names</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/walks-tracks.html" target="_blank" data-section="articles" data-keywords="walks tracks outdoor recreation">
-      <span class="pc-icon">&#128694;</span>
-      <div class="pc-body">
-        <div class="pc-title">Walks &amp; Tracks</div>
-        <div class="pc-path">/articles/walks-tracks.html</div>
-        <div class="pc-desc">Hub page for all P&#257;p&#257;moa walking and cycling tracks</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/parks-playgrounds.html" target="_blank" data-section="articles" data-keywords="parks playgrounds skate picnic sports">
-      <span class="pc-icon">&#127794;</span>
-      <div class="pc-body">
-        <div class="pc-title">Parks &amp; Playgrounds</div>
-        <div class="pc-path">/articles/parks-playgrounds.html</div>
-        <div class="pc-desc">All P&#257;p&#257;moa parks, playgrounds, skate spots and sports fields</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/gordon-spratt-reserve.html" target="_blank" data-section="articles" data-keywords="gordon spratt reserve park tsunami mound">
-      <span class="pc-icon">&#127795;</span>
-      <div class="pc-body">
-        <div class="pc-title">Gordon Spratt Reserve</div>
-        <div class="pc-path">/articles/gordon-spratt-reserve.html</div>
-        <div class="pc-desc">P&#257;p&#257;moa&rsquo;s main reserve &mdash; tsunami mound, facilities and events</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/aims-games.html" target="_blank" data-section="articles" data-keywords="aims games sport 2026 tauranga">
-      <span class="pc-icon">&#127942;</span>
-      <div class="pc-body">
-        <div class="pc-title">AIMS Games 2026</div>
-        <div class="pc-path">/articles/aims-games.html</div>
-        <div class="pc-desc">5&ndash;11 September 2026 &mdash; NZ&rsquo;s largest intermediate school sport event</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/kids-birthday-parties.html" target="_blank" data-section="articles" data-keywords="kids birthday parties venues activities">
-      <span class="pc-icon">&#127881;</span>
-      <div class="pc-body">
-        <div class="pc-title">Kids Birthday Parties</div>
-        <div class="pc-path">/articles/kids-birthday-parties.html</div>
-        <div class="pc-desc">Venues, entertainers, catering and party hire in P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/shopping-centres.html" target="_blank" data-section="articles" data-keywords="shopping centres fashion island palm beach plaza sands">
-      <span class="pc-icon">&#128717;</span>
-      <div class="pc-body">
-        <div class="pc-title">Shopping Centres</div>
-        <div class="pc-path">/articles/shopping-centres.html</div>
-        <div class="pc-desc">Fashion Island, Palm Beach Plaza and The Sands &mdash; tenants and hours</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/seniors-retirement.html" target="_blank" data-section="articles" data-keywords="seniors retirement karaka pines aged care">
-      <span class="pc-icon">&#129399;</span>
-      <div class="pc-body">
-        <div class="pc-title">Seniors &amp; Retirement</div>
-        <div class="pc-path">/articles/seniors-retirement.html</div>
-        <div class="pc-desc">Retirement villages, home care, NZ Super and entitlements</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/local-government.html" target="_blank" data-section="articles" data-keywords="local government TCC mayor councillors MP">
-      <span class="pc-icon">&#127963;</span>
-      <div class="pc-body">
-        <div class="pc-title">Local Government</div>
-        <div class="pc-path">/articles/local-government.html</div>
-        <div class="pc-desc">TCC, Mayor Mah&#233; Drysdale, Tom Rutherford MP and council contacts</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/library.html" target="_blank" data-section="articles" data-keywords="library hours wifi story time books">
-      <span class="pc-icon">&#128218;</span>
-      <div class="pc-body">
-        <div class="pc-title">P&#257;p&#257;moa Library</div>
-        <div class="pc-path">/articles/library.html</div>
-        <div class="pc-desc">Hours, services, WiFi, events and story time sessions</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/notable-people.html" target="_blank" data-section="articles" data-keywords="notable people famous from papamoa">
-      <span class="pc-icon">&#11088;</span>
-      <div class="pc-body">
-        <div class="pc-title">Notable People from P&#257;p&#257;moa</div>
-        <div class="pc-path">/articles/notable-people.html</div>
-        <div class="pc-desc">Athletes, artists and public figures connected to P&#257;p&#257;moa</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/fuel-prices.html" target="_blank" data-section="articles" data-keywords="fuel prices petrol diesel stations">
-      <span class="pc-icon">&#9981;</span>
-      <div class="pc-body">
-        <div class="pc-title">Fuel Prices P&#257;p&#257;moa</div>
-        <div class="pc-path">/articles/fuel-prices.html</div>
-        <div class="pc-desc">Local petrol and diesel prices &mdash; live data placeholder</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/tauranga.html" target="_blank" data-section="articles" data-keywords="tauranga city nearby distance guide">
-      <span class="pc-icon">&#127961;</span>
-      <div class="pc-body">
-        <div class="pc-title">Tauranga &mdash; P&#257;p&#257;moa&rsquo;s Nearest City</div>
-        <div class="pc-path">/articles/tauranga.html</div>
-        <div class="pc-desc">Distance, travel times and TaurangaNZ.info network</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/mount-maunganui.html" target="_blank" data-section="articles" data-keywords="mount maunganui mauao hot pools tracks closure 2026">
-      <span class="pc-icon">&#127956;</span>
-      <div class="pc-body">
-        <div class="pc-title">Mount Maunganui</div>
-        <div class="pc-path">/articles/mount-maunganui.html</div>
-        <div class="pc-desc">Mauao fully closed after January 2026 landslide &mdash; village and beach remain open</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/news-events.html" target="_blank" data-section="articles" data-keywords="news events upcoming local papamoa">
-      <span class="pc-icon">&#128240;</span>
-      <div class="pc-body">
-        <div class="pc-title">News &amp; Events</div>
-        <div class="pc-path">/articles/news-events.html</div>
-        <div class="pc-desc">Upcoming events, regular markets, local news and event submission form</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/dinner-at-the-domain.html" target="_blank" data-section="articles" data-keywords="dinner domain event food">
-      <span class="pc-icon">&#127869;</span>
-      <div class="pc-body">
-        <div class="pc-title">Dinner at the Domain</div>
-        <div class="pc-path">/articles/dinner-at-the-domain.html</div>
-        <div class="pc-desc">Annual outdoor dining event at the Domain</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/articles/the-yard.html" target="_blank" data-section="articles" data-keywords="the yard shopping precinct">
-      <span class="pc-icon">&#127978;</span>
-      <div class="pc-body">
-        <div class="pc-title">The Yard</div>
-        <div class="pc-path">/articles/the-yard.html</div>
-        <div class="pc-desc">P&#257;p&#257;moa&rsquo;s boutique retail and dining precinct</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-  </div>
-
-  <!-- SALES -->
-  <div class="section-head" data-section="sales"><h2>&#128148; Sales</h2><span class="sh-count">11</span></div>
-  <div class="page-grid">
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/claim.html" target="_blank" data-section="sales" data-keywords="claim listing site visitor CTA">
-      <span class="pc-icon">&#128205;</span>
-      <div class="pc-body">
-        <div class="pc-title">Claim / List Your Business</div>
-        <div class="pc-path">/sales/claim.html</div>
-        <div class="pc-desc">Default landing page for site visitors clicking any listing CTA</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/facebook-posts.html" target="_blank" data-section="sales" data-keywords="facebook posts social media templates">
-      <span class="pc-icon">&#128722;</span>
-      <div class="pc-body">
-        <div class="pc-title">Facebook Post Templates</div>
-        <div class="pc-path">/sales/facebook-posts.html</div>
-        <div class="pc-desc">Social media post templates for new listings and promotions</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/landing.html" target="_blank" data-section="sales" data-keywords="sales landing funnel PPP form preview">
-      <span class="pc-icon">&#127919;</span>
-      <div class="pc-body">
-        <div class="pc-title">Sales Funnel Landing</div>
-        <div class="pc-path">/sales/landing.html</div>
-        <div class="pc-desc">Primary funnel page. URL params ?biz= and ?cat= personalise hero and scarcity banner. Form triggers PPP build.</div>
-        <div class="pc-tags"><span class="pc-tag tag-new">Active funnel</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/landing-v2.html" target="_blank" data-section="sales" data-keywords="sales landing v2 best hero index">
-      <span class="pc-icon">&#11088;</span>
-      <div class="pc-body">
-        <div class="pc-title">Sales Landing V2</div>
-        <div class="pc-path">/sales/landing-v2.html</div>
-        <div class="pc-desc">Best hero design &mdash; candidate to replace index.html or other landers. Kept as permanent reference.</div>
-        <div class="pc-tags"><span class="pc-tag tag-gold">Best style</span></div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/main-lander.html" target="_blank" data-section="sales" data-keywords="main lander sales">
-      <span class="pc-icon">&#128226;</span>
-      <div class="pc-body">
-        <div class="pc-title">Main Lander</div>
-        <div class="pc-path">/sales/main-lander.html</div>
-        <div class="pc-desc">Main sales lander with Web3Forms CTA</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/menu-addon.html" target="_blank" data-section="sales" data-keywords="menu addon sales pitch 199">
-      <span class="pc-icon">&#127869;</span>
-      <div class="pc-body">
-        <div class="pc-title">Menu Add-On Sales Page</div>
-        <div class="pc-path">/sales/menu-addon.html</div>
-        <div class="pc-desc">Dedicated pitch page for the $199/yr Menu Add-On</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/why-list.html" target="_blank" data-section="sales" data-keywords="why list editorial seo aeo">
-      <span class="pc-icon">&#128240;</span>
-      <div class="pc-body">
-        <div class="pc-title">Why List &mdash; Editorial</div>
-        <div class="pc-path">/sales/why-list.html</div>
-        <div class="pc-desc">AEO/SEO pitch article for prospects</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/post-call-landing.html" target="_blank" data-section="sales" data-keywords="post call landing recap next steps">
-      <span class="pc-icon">&#128222;</span>
-      <div class="pc-body">
-        <div class="pc-title">Post-Call Landing</div>
-        <div class="pc-path">/sales/post-call-landing.html</div>
-        <div class="pc-desc">Sent after a sales call &mdash; recap + next steps CTA</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/followup-emails.html" target="_blank" data-section="sales" data-keywords="followup email sequence brevo day 3 6 10">
-      <span class="pc-icon">&#128140;</span>
-      <div class="pc-body">
-        <div class="pc-title">Follow-Up Email Sequence</div>
-        <div class="pc-path">/sales/followup-emails.html</div>
-        <div class="pc-desc">Day 3 / Day 6 / Day 10 Brevo sequence templates</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/email-template.html" target="_blank" data-section="sales" data-keywords="cold email template brevo">
-      <span class="pc-icon">&#9993;&#65039;</span>
-      <div class="pc-body">
-        <div class="pc-title">Cold Email Template</div>
-        <div class="pc-path">/sales/email-template.html</div>
-        <div class="pc-desc">Brevo-ready HTML cold email template</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/sales/sales-scripts.html" target="_blank" data-section="sales" data-keywords="sales scripts phone objection handling">
-      <span class="pc-icon">&#128483;&#65039;</span>
-      <div class="pc-body">
-        <div class="pc-title">Sales Call Scripts</div>
-        <div class="pc-path">/sales/sales-scripts.html</div>
-        <div class="pc-desc">Phone frameworks and objection handling</div>
-      </div>
-    </a>
-  </div>
-
-  <!-- PREVIEWS -->
-  <div class="section-head" data-section="previews"><h2>&#128065;&#65039; Client Previews (PPPs)</h2><span class="sh-count">1</span></div>
-  <div class="page-grid">
-    <a class="page-card" href="https://plainblackcreative.github.io/previews/driftwood-cafe.html" target="_blank" data-section="previews" data-keywords="driftwood cafe ppp preview gold">
-      <span class="pc-icon">&#9749;</span>
-      <div class="pc-body">
-        <div class="pc-title">Driftwood Caf&#233;</div>
-        <div class="pc-path">/previews/driftwood-cafe.html</div>
-        <div class="pc-desc">PPP template &mdash; pre-payment Gold client preview with demo data</div>
-        <div class="pc-tags"><span class="pc-tag tag-ppp">PPP</span><span class="pc-tag tag-gold">Gold</span></div>
-      </div>
-    </a>
-  </div>
-
-  <!-- ONBOARDING -->
-  <div class="section-head" data-section="onboarding"><h2>&#9989; Onboarding</h2><span class="sh-count">1</span></div>
-  <div class="page-grid">
-    <a class="page-card" href="https://plainblackcreative.github.io/onboarding/confirm-listing.html" target="_blank" data-section="onboarding" data-keywords="confirm listing onboarding approval">
-      <span class="pc-icon">&#9997;&#65039;</span>
-      <div class="pc-body">
-        <div class="pc-title">Confirm Listing</div>
-        <div class="pc-path">/onboarding/confirm-listing.html</div>
-        <div class="pc-desc">Client approval &mdash; step 2 of Draft &rarr; Approval &rarr; Go Live</div>
-      </div>
-    </a>
   </div>
 
   <!-- ADMIN -->
-  <div class="section-head" data-section="admin"><h2>&#9881;&#65039; Admin</h2><span class="sh-count">6</span></div>
+  <div class="section-wrap" data-sec="admin">
+  <div class="section-head" data-section="admin"><h2>&#9881;&#65039; Admin</h2><span class="sh-count">6</span><span class="sh-toggle">&#9660; collapse</span></div>
   <div class="page-grid">
     <a class="page-card" href="https://plainblackcreative.github.io/admin/add-lead.html" target="_blank" data-section="admin" data-keywords="add lead CRM new prospect">
       <span class="pc-icon">&#10133;</span>
@@ -1028,81 +246,16 @@
       <div class="pc-body">
         <div class="pc-title">Real Estate Agent Outreach</div>
         <div class="pc-path">/admin/real-estate-outreach.html</div>
-        <div class="pc-desc">Cold email scripts, follow-up sequence (Day 0/3/6/10), objection handling and pricing guidance for featured agent campaign</div>
+        <div class="pc-desc">Cold email scripts, follow-up sequence and objection handling for featured agent campaign</div>
         <div class="pc-tags"><span class="pc-tag tag-internal">Internal</span><span class="pc-tag tag-new">New</span></div>
       </div>
     </a>
   </div>
-
-  <!-- COMMUNITY -->
-  <div class="section-head" data-section="community"><h2>&#129309; Community</h2><span class="sh-count">6</span></div>
-  <div class="page-grid">
-    <a class="page-card" href="https://plainblackcreative.github.io/community/community-resources.html" target="_blank" data-section="community" data-keywords="community resources contacts emergency groups support">
-      <span class="pc-icon">&#129309;</span>
-      <div class="pc-body">
-        <div class="pc-title">Community Resources</div>
-        <div class="pc-path">/community/community-resources.html</div>
-        <div class="pc-desc">Emergency contacts, Facebook groups, food banks and mental health</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/community/comunity.html" target="_blank" data-section="community" data-keywords="community safety support hub">
-      <span class="pc-icon">&#128737;&#65039;</span>
-      <div class="pc-body">
-        <div class="pc-title">Community Safety &amp; Support</div>
-        <div class="pc-path">/community/comunity.html</div>
-        <div class="pc-desc">Community safety and support landing page</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/community/neighbourhood-support.html" target="_blank" data-section="community" data-keywords="neighbourhood support local">
-      <span class="pc-icon">&#127968;</span>
-      <div class="pc-body">
-        <div class="pc-title">Neighbourhood Support</div>
-        <div class="pc-path">/community/neighbourhood-support.html</div>
-        <div class="pc-desc">Local neighbourhood support resources</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/community/police-crime.html" target="_blank" data-section="community" data-keywords="police crime reporting prevention">
-      <span class="pc-icon">&#128110;</span>
-      <div class="pc-body">
-        <div class="pc-title">Police &amp; Crime</div>
-        <div class="pc-path">/community/police-crime.html</div>
-        <div class="pc-desc">Local police, crime prevention and reporting</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/community/emergencies.html" target="_blank" data-section="community" data-keywords="emergencies civil defence contacts">
-      <span class="pc-icon">&#128680;</span>
-      <div class="pc-body">
-        <div class="pc-title">Emergencies</div>
-        <div class="pc-path">/community/emergencies.html</div>
-        <div class="pc-desc">Emergency contacts, civil defence and local preparedness</div>
-      </div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/community/community-groups.html" target="_blank" data-section="community" data-keywords="community groups clubs organisations">
-      <span class="pc-icon">&#128101;</span>
-      <div class="pc-body">
-        <div class="pc-title">Community Groups</div>
-        <div class="pc-path">/community/community-groups.html</div>
-        <div class="pc-desc">Local clubs, groups and community organisations</div>
-      </div>
-    </a>
-  </div>
-
-  <!-- PARTNERS — NEW SECTION -->
-  <div class="section-head" data-section="partners"><h2>&#129309; Partners</h2><span class="sh-count">1</span></div>
-  <div class="page-grid">
-    <a class="page-card" href="https://plainblackcreative.github.io/partners/real-estate-agent.html" target="_blank" data-section="partners" data-keywords="real estate agent partner featured exclusive pitch listing monthly report">
-      <span class="pc-icon">&#127968;</span>
-      <div class="pc-body">
-        <div class="pc-title">Featured Real Estate Agent</div>
-        <div class="pc-path">/partners/real-estate-agent.html</div>
-        <div class="pc-desc">Agent partnership pitch page &mdash; exclusive featured position, monthly market articles, AI search presence. Send to prospects instead of PDF attachments.</div>
-        <div class="pc-tags"><span class="pc-tag tag-partner">Partner</span><span class="pc-tag tag-new">New</span></div>
-      </div>
-    </a>
   </div>
 
   <!-- DOCS -->
-  <div class="section-head" data-section="docs"><h2>&#128218; Docs</h2><span class="sh-count">6</span></div>
+  <div class="section-wrap" data-sec="docs">
+  <div class="section-head" data-section="docs"><h2>&#128218; Docs</h2><span class="sh-count">6</span><span class="sh-toggle">&#9660; collapse</span></div>
   <div class="page-grid">
     <a class="page-card" href="https://plainblackcreative.github.io/docs/pricing-master.html" target="_blank" data-section="docs" data-keywords="pricing master tiers gold silver bronze add-ons">
       <span class="pc-icon">&#128176;</span>
@@ -1157,7 +310,874 @@
       </div>
     </a>
   </div>
+  </div>
 
+  <!-- SALES -->
+  <div class="section-wrap" data-sec="sales">
+  <div class="section-head" data-section="sales"><h2>&#128148; Sales</h2><span class="sh-count">11</span><span class="sh-toggle">&#9660; collapse</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/sales/claim.html" target="_blank" data-section="sales" data-keywords="claim listing site visitor CTA">
+      <span class="pc-icon">&#128205;</span>
+      <div class="pc-body">
+        <div class="pc-title">Claim / List Your Business</div>
+        <div class="pc-path">/sales/claim.html</div>
+        <div class="pc-desc">Default landing page for site visitors clicking any listing CTA</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/sales/main-lander.html" target="_blank" data-section="sales" data-keywords="main lander sales">
+      <span class="pc-icon">&#128226;</span>
+      <div class="pc-body">
+        <div class="pc-title">Main Lander</div>
+        <div class="pc-path">/sales/main-lander.html</div>
+        <div class="pc-desc">Main sales lander with Web3Forms CTA</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/sales/landing.html" target="_blank" data-section="sales" data-keywords="sales landing funnel PPP form preview">
+      <span class="pc-icon">&#127919;</span>
+      <div class="pc-body">
+        <div class="pc-title">Sales Funnel Landing</div>
+        <div class="pc-path">/sales/landing.html</div>
+        <div class="pc-desc">Primary funnel page. URL params ?biz= and ?cat= personalise hero and scarcity banner.</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">Active funnel</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/sales/landing-v2.html" target="_blank" data-section="sales" data-keywords="sales landing v2 best hero index">
+      <span class="pc-icon">&#11088;</span>
+      <div class="pc-body">
+        <div class="pc-title">Sales Landing V2</div>
+        <div class="pc-path">/sales/landing-v2.html</div>
+        <div class="pc-desc">Best hero design &mdash; kept as permanent reference.</div>
+        <div class="pc-tags"><span class="pc-tag tag-gold">Best style</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/sales/post-call-landing.html" target="_blank" data-section="sales" data-keywords="post call landing recap next steps">
+      <span class="pc-icon">&#128222;</span>
+      <div class="pc-body">
+        <div class="pc-title">Post-Call Landing</div>
+        <div class="pc-path">/sales/post-call-landing.html</div>
+        <div class="pc-desc">Sent after a sales call &mdash; recap + next steps CTA</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/sales/followup-emails.html" target="_blank" data-section="sales" data-keywords="followup email sequence brevo day 3 6 10">
+      <span class="pc-icon">&#128140;</span>
+      <div class="pc-body">
+        <div class="pc-title">Follow-Up Email Sequence</div>
+        <div class="pc-path">/sales/followup-emails.html</div>
+        <div class="pc-desc">Day 3 / Day 6 / Day 10 Brevo sequence templates</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/sales/email-template.html" target="_blank" data-section="sales" data-keywords="cold email template brevo">
+      <span class="pc-icon">&#9993;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Cold Email Template</div>
+        <div class="pc-path">/sales/email-template.html</div>
+        <div class="pc-desc">Brevo-ready HTML cold email template</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/sales/sales-scripts.html" target="_blank" data-section="sales" data-keywords="sales scripts phone objection handling">
+      <span class="pc-icon">&#128483;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Sales Call Scripts</div>
+        <div class="pc-path">/sales/sales-scripts.html</div>
+        <div class="pc-desc">Phone frameworks and objection handling</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/sales/menu-addon.html" target="_blank" data-section="sales" data-keywords="menu addon sales pitch 199">
+      <span class="pc-icon">&#127869;</span>
+      <div class="pc-body">
+        <div class="pc-title">Menu Add-On Sales Page</div>
+        <div class="pc-path">/sales/menu-addon.html</div>
+        <div class="pc-desc">Dedicated pitch page for the $199/yr Menu Add-On</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/sales/why-list.html" target="_blank" data-section="sales" data-keywords="why list editorial seo aeo">
+      <span class="pc-icon">&#128240;</span>
+      <div class="pc-body">
+        <div class="pc-title">Why List &mdash; Editorial</div>
+        <div class="pc-path">/sales/why-list.html</div>
+        <div class="pc-desc">AEO/SEO pitch article for prospects</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/sales/facebook-posts.html" target="_blank" data-section="sales" data-keywords="facebook posts social media templates">
+      <span class="pc-icon">&#128722;</span>
+      <div class="pc-body">
+        <div class="pc-title">Facebook Post Templates</div>
+        <div class="pc-path">/sales/facebook-posts.html</div>
+        <div class="pc-desc">Social media post templates for new listings and promotions</div>
+      </div>
+    </a>
+  </div>
+  </div>
+
+  <!-- ONBOARDING -->
+  <div class="section-wrap" data-sec="onboarding">
+  <div class="section-head" data-section="onboarding"><h2>&#9989; Onboarding</h2><span class="sh-count">1</span><span class="sh-toggle">&#9660; collapse</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/onboarding/confirm-listing.html" target="_blank" data-section="onboarding" data-keywords="confirm listing onboarding approval">
+      <span class="pc-icon">&#9997;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Confirm Listing</div>
+        <div class="pc-path">/onboarding/confirm-listing.html</div>
+        <div class="pc-desc">Client approval &mdash; step 2 of Draft &rarr; Approval &rarr; Go Live</div>
+      </div>
+    </a>
+  </div>
+  </div>
+
+  <!-- PARTNERS -->
+  <div class="section-wrap" data-sec="partners">
+  <div class="section-head" data-section="partners"><h2>&#129309; Partners</h2><span class="sh-count">1</span><span class="sh-toggle">&#9660; collapse</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/partners/real-estate-agent.html" target="_blank" data-section="partners" data-keywords="real estate agent partner featured exclusive pitch listing monthly report">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body">
+        <div class="pc-title">Featured Real Estate Agent</div>
+        <div class="pc-path">/partners/real-estate-agent.html</div>
+        <div class="pc-desc">Agent partnership pitch page &mdash; exclusive featured position, monthly market articles, AI search presence.</div>
+        <div class="pc-tags"><span class="pc-tag tag-partner">Partner</span><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+  </div>
+  </div>
+
+  <!-- PREVIEWS -->
+  <div class="section-wrap" data-sec="previews">
+  <div class="section-head" data-section="previews"><h2>&#128065;&#65039; Client Previews (PPPs)</h2><span class="sh-count">1</span><span class="sh-toggle">&#9660; collapse</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/previews/driftwood-cafe.html" target="_blank" data-section="previews" data-keywords="driftwood cafe ppp preview gold">
+      <span class="pc-icon">&#9749;</span>
+      <div class="pc-body">
+        <div class="pc-title">Driftwood Caf&#233;</div>
+        <div class="pc-path">/previews/driftwood-cafe.html</div>
+        <div class="pc-desc">PPP template &mdash; pre-payment Gold client preview with demo data</div>
+        <div class="pc-tags"><span class="pc-tag tag-ppp">PPP</span><span class="pc-tag tag-gold">Gold</span></div>
+      </div>
+    </a>
+  </div>
+  </div>
+
+  <!-- LISTINGS -->
+  <div class="section-wrap" data-sec="listings">
+  <div class="section-head" data-section="listings"><h2>&#128205; Listings</h2><span class="sh-count">11</span><span class="sh-toggle">&#9660; collapse</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/listings/all-listings.html" target="_blank" data-section="listings" data-keywords="all listings showcase demo directory overview">
+      <span class="pc-icon">&#128203;</span>
+      <div class="pc-body">
+        <div class="pc-title">All Listings Showcase</div>
+        <div class="pc-path">/listings/all-listings.html</div>
+        <div class="pc-desc">Demo of all live listings &mdash; directory overview for prospects</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/listings/the-cave-papamoa.html" target="_blank" data-section="listings" data-keywords="the cave VR sim racing entertainment">
+      <span class="pc-icon">&#127918;</span>
+      <div class="pc-body">
+        <div class="pc-title">The Cave P&#257;p&#257;moa</div>
+        <div class="pc-path">/listings/the-cave-papamoa.html</div>
+        <div class="pc-desc">VR &amp; sim racing &mdash; Gold Spotlight, Entertainment</div>
+        <div class="pc-tags"><span class="pc-tag tag-gold">Gold</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/listings/the-wagon-papamoa.html" target="_blank" data-section="listings" data-keywords="wagon food drink gold menu">
+      <span class="pc-icon">&#127828;</span>
+      <div class="pc-body">
+        <div class="pc-title">The Wagon P&#257;p&#257;moa</div>
+        <div class="pc-path">/listings/the-wagon-papamoa.html</div>
+        <div class="pc-desc">Gold listing demo with Menu Add-On &mdash; Food &amp; Drink</div>
+        <div class="pc-tags"><span class="pc-tag tag-gold">Gold</span><span class="pc-tag tag-demo">Demo</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/listings/xanadu-book-exchange-papamoa.html" target="_blank" data-section="listings" data-keywords="xanadu books second-hand bookstore">
+      <span class="pc-icon">&#128218;</span>
+      <div class="pc-body">
+        <div class="pc-title">Xanadu Book Exchange</div>
+        <div class="pc-path">/listings/xanadu-book-exchange-papamoa.html</div>
+        <div class="pc-desc">Second-hand bookstore &mdash; Silver listing, Shopping</div>
+        <div class="pc-tags"><span class="pc-tag tag-silver" style="background:rgba(58,171,222,0.1);color:var(--blue);border:1px solid rgba(58,171,222,0.2)">Silver</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/listings/kayco-nails-papamoa.html" target="_blank" data-section="listings" data-keywords="kayco nails beauty press-on">
+      <span class="pc-icon">&#128133;</span>
+      <div class="pc-body">
+        <div class="pc-title">Kayco Nails P&#257;p&#257;moa</div>
+        <div class="pc-path">/listings/kayco-nails-papamoa.html</div>
+        <div class="pc-desc">Custom press-on nail kits &mdash; Silver listing, Beauty</div>
+        <div class="pc-tags"><span class="pc-tag tag-silver" style="background:rgba(58,171,222,0.1);color:var(--blue);border:1px solid rgba(58,171,222,0.2)">Silver</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/listings/papamoa-orthodontist.html" target="_blank" data-section="listings" data-keywords="orthodontist professional services">
+      <span class="pc-icon">&#129463;</span>
+      <div class="pc-body">
+        <div class="pc-title">P&#257;p&#257;moa Orthodontist</div>
+        <div class="pc-path">/listings/papamoa-orthodontist.html</div>
+        <div class="pc-desc">Professional services listing demo</div>
+        <div class="pc-tags"><span class="pc-tag tag-demo">Demo</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/listings/lawn-mowing-papamoa.html" target="_blank" data-section="listings" data-keywords="lawn mowing placeholder gardening">
+      <span class="pc-icon">&#127807;</span>
+      <div class="pc-body">
+        <div class="pc-title">Lawn Mowing P&#257;p&#257;moa</div>
+        <div class="pc-path">/listings/lawn-mowing-papamoa.html</div>
+        <div class="pc-desc">Placeholder &mdash; captures enquiries while sub-category is empty</div>
+        <div class="pc-tags"><span class="pc-tag tag-placeholder">Placeholder</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/listings/greencut-papamoa.html" target="_blank" data-section="listings" data-keywords="greencut lawn garden">
+      <span class="pc-icon">&#9986;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Greencut P&#257;p&#257;moa</div>
+        <div class="pc-path">/listings/greencut-papamoa.html</div>
+        <div class="pc-desc">Lawn &amp; garden listing demo</div>
+        <div class="pc-tags"><span class="pc-tag tag-demo">Demo</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/listings/speedy-screens-papamoa.html" target="_blank" data-section="listings" data-keywords="speedy screens trades">
+      <span class="pc-icon">&#128295;</span>
+      <div class="pc-body">
+        <div class="pc-title">Speedy Screens P&#257;p&#257;moa</div>
+        <div class="pc-path">/listings/speedy-screens-papamoa.html</div>
+        <div class="pc-desc">Trades listing demo</div>
+        <div class="pc-tags"><span class="pc-tag tag-demo">Demo</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/listings/listings.html" target="_blank" data-section="listings" data-keywords="listings index">
+      <span class="pc-icon">&#128211;</span>
+      <div class="pc-body">
+        <div class="pc-title">Listings Index</div>
+        <div class="pc-path">/listings/listings.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa business listings index page</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/listings/combined-listings.html" target="_blank" data-section="listings" data-keywords="combined listings template">
+      <span class="pc-icon">&#128209;</span>
+      <div class="pc-body">
+        <div class="pc-title">Combined Listings</div>
+        <div class="pc-path">/listings/combined-listings.html</div>
+        <div class="pc-desc">All listing pages combined &mdash; template comparison candidate</div>
+        <div class="pc-tags"><span class="pc-tag tag-review">Review needed</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/listings/listing-template.html" target="_blank" data-section="listings" data-keywords="listing template master">
+      <span class="pc-icon">&#128221;</span>
+      <div class="pc-body">
+        <div class="pc-title">Listing Template</div>
+        <div class="pc-path">/listings/listing-template.html</div>
+        <div class="pc-desc">Master listing template &mdash; to be standardised</div>
+        <div class="pc-tags"><span class="pc-tag tag-review">Review needed</span></div>
+      </div>
+    </a>
+  </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="section-wrap" data-sec="categories">
+  <div class="section-head" data-section="categories"><h2>&#128451; Categories</h2><span class="sh-count">30</span><span class="sh-toggle">&#9660; collapse</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/categories/accommodation.html" target="_blank" data-section="categories" data-keywords="accommodation holiday park motel beachfront aims games">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body">
+        <div class="pc-title">Accommodation</div>
+        <div class="pc-path">/categories/accommodation.html</div>
+        <div class="pc-desc">Holiday parks, motels, B&Bs and short-stay rentals &mdash; Pacific Park Gold Spotlight, AIMS Games guide</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/categories/aircon-papamoa.html" target="_blank" data-section="categories" data-keywords="air conditioning heat pump HVAC Mitsubishi Daikin">
+      <span class="pc-icon">❄️</span>
+      <div class="pc-body">
+        <div class="pc-title">Air Conditioning &amp; Heat Pumps</div>
+        <div class="pc-path">/categories/aircon-papamoa.html</div>
+        <div class="pc-desc">Authorised heat pump installers in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/categories/bakery-papamoa.html" target="_blank" data-section="categories" data-keywords="bakery bread pastry pies cakes sourdough">
+      <span class="pc-icon">🍞</span>
+      <div class="pc-body">
+        <div class="pc-title">Bakeries</div>
+        <div class="pc-path">/categories/bakery-papamoa.html</div>
+        <div class="pc-desc">Fresh-baked bread, pies, and pastries in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/categories/bar-papamoa.html" target="_blank" data-section="categories" data-keywords="bar pub drinks craft beer live music">
+      <span class="pc-icon">🍺</span>
+      <div class="pc-body">
+        <div class="pc-title">Bars &amp; Pubs</div>
+        <div class="pc-path">/categories/bar-papamoa.html</div>
+        <div class="pc-desc">Local bars and pubs in P&#257;p&#257;moa &mdash; craft beer, live music</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/categories/cafe-papamoa.html" target="_blank" data-section="categories" data-keywords="cafe coffee brunch flat white espresso">
+      <span class="pc-icon">☕</span>
+      <div class="pc-body">
+        <div class="pc-title">Cafes</div>
+        <div class="pc-path">/categories/cafe-papamoa.html</div>
+        <div class="pc-desc">Specialty coffee and brunch cafes in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/categories/childcare-papamoa.html" target="_blank" data-section="categories" data-keywords="childcare ECE early learning kindy 20 hours">
+      <span class="pc-icon">🧒</span>
+      <div class="pc-body">
+        <div class="pc-title">Childcare &amp; Early Learning</div>
+        <div class="pc-path">/categories/childcare-papamoa.html</div>
+        <div class="pc-desc">Licensed ECE and childcare centres in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/electrician-papamoa.html" target="_blank" data-section="categories" data-keywords="electrician electrical EV charger solar wiring">
+      <span class="pc-icon">⚡</span>
+      <div class="pc-body">
+        <div class="pc-title">Electricians</div>
+        <div class="pc-path">/categories/electrician-papamoa.html</div>
+        <div class="pc-desc">Registered electricians in P&#257;p&#257;moa &mdash; domestic, commercial, EV chargers</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/entertainment.html" target="_blank" data-section="categories" data-keywords="entertainment activities dining restaurants bars VR">
+      <span class="pc-icon">&#127917;</span>
+      <div class="pc-body">
+        <div class="pc-title">Entertainment</div>
+        <div class="pc-path">/categories/entertainment.html</div>
+        <div class="pc-desc">Things to do, dining and activities &mdash; The Cave VR, Hakanini Surf School, restaurants and bars</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/fencing-papamoa.html" target="_blank" data-section="categories" data-keywords="fencing pool fence timber steel residential">
+      <span class="pc-icon">🪵</span>
+      <div class="pc-body">
+        <div class="pc-title">Fencing</div>
+        <div class="pc-path">/categories/fencing-papamoa.html</div>
+        <div class="pc-desc">Fencing contractors in P&#257;p&#257;moa &mdash; timber, steel, pool fencing</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/fish-and-chips-papamoa.html" target="_blank" data-section="categories" data-keywords="fish chips chippie seafood takeaway">
+      <span class="pc-icon">🐟</span>
+      <div class="pc-body">
+        <div class="pc-title">Fish &amp; Chips</div>
+        <div class="pc-path">/categories/fish-and-chips-papamoa.html</div>
+        <div class="pc-desc">Fish and chip shops in P&#257;p&#257;moa &mdash; fresh-battered daily</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/fishing.html" target="_blank" data-section="categories" data-keywords="fishing surf tides">
+      <span class="pc-icon">&#127907;</span>
+      <div class="pc-body">
+        <div class="pc-title">Fishing &amp; Surf</div>
+        <div class="pc-path">/categories/fishing.html</div>
+        <div class="pc-desc">Surf &amp; Tides sub-category page</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/gardening.html" target="_blank" data-section="categories" data-keywords="gardening garden">
+      <span class="pc-icon">&#127796;</span>
+      <div class="pc-body">
+        <div class="pc-title">Gardening</div>
+        <div class="pc-path">/categories/gardening.html</div>
+        <div class="pc-desc">Gardening sub-category page</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/gym-papamoa.html" target="_blank" data-section="categories" data-keywords="gym fitness classes personal training 24 hour">
+      <span class="pc-icon">🏋️</span>
+      <div class="pc-body">
+        <div class="pc-title">Gyms &amp; Fitness</div>
+        <div class="pc-path">/categories/gym-papamoa.html</div>
+        <div class="pc-desc">Gyms and fitness studios in P&#257;p&#257;moa &mdash; 24hr access and group classes</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/indian-restaurant-papamoa.html" target="_blank" data-section="categories" data-keywords="indian restaurant curry tandoor biryani">
+      <span class="pc-icon">🍛</span>
+      <div class="pc-body">
+        <div class="pc-title">Indian Restaurants</div>
+        <div class="pc-path">/categories/indian-restaurant-papamoa.html</div>
+        <div class="pc-desc">Indian cuisine and curry restaurants in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/lawn-mowing.html" target="_blank" data-section="categories" data-keywords="lawn mowing gardening">
+      <span class="pc-icon">&#127807;</span>
+      <div class="pc-body">
+        <div class="pc-title">Lawn Mowing</div>
+        <div class="pc-path">/categories/lawn-mowing.html</div>
+        <div class="pc-desc">Sub-category listing page</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/mechanic-papamoa.html" target="_blank" data-section="categories" data-keywords="mechanic WOF warrant of fitness servicing tyres auto">
+      <span class="pc-icon">🚗</span>
+      <div class="pc-body">
+        <div class="pc-title">Mechanics &amp; Auto Repair</div>
+        <div class="pc-path">/categories/mechanic-papamoa.html</div>
+        <div class="pc-desc">WOF inspections and auto servicing in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/medical-centre-papamoa.html" target="_blank" data-section="categories" data-keywords="medical centre GP doctor enrolled patients urgent care">
+      <span class="pc-icon">🏥</span>
+      <div class="pc-body">
+        <div class="pc-title">Medical Centres</div>
+        <div class="pc-path">/categories/medical-centre-papamoa.html</div>
+        <div class="pc-desc">GP practices and medical centres in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/painter-papamoa.html" target="_blank" data-section="categories" data-keywords="painter decorator interior exterior residential">
+      <span class="pc-icon">🎨</span>
+      <div class="pc-body">
+        <div class="pc-title">Painters &amp; Decorators</div>
+        <div class="pc-path">/categories/painter-papamoa.html</div>
+        <div class="pc-desc">Interior and exterior painters in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/physio-papamoa.html" target="_blank" data-section="categories" data-keywords="physiotherapy physio sports rehab ACC">
+      <span class="pc-icon">🦴</span>
+      <div class="pc-body">
+        <div class="pc-title">Physiotherapy</div>
+        <div class="pc-path">/categories/physio-papamoa.html</div>
+        <div class="pc-desc">Physio clinics in P&#257;p&#257;moa &mdash; ACC registered, sports rehab</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/plumber-papamoa.html" target="_blank" data-section="categories" data-keywords="plumber plumbing gasfitter hot water drainage">
+      <span class="pc-icon">🔧</span>
+      <div class="pc-body">
+        <div class="pc-title">Plumbers</div>
+        <div class="pc-path">/categories/plumber-papamoa.html</div>
+        <div class="pc-desc">Licensed plumbers and gasfitters in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/real-estate.html" target="_blank" data-section="categories" data-keywords="real estate property market agent buying selling">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body">
+        <div class="pc-title">Real Estate</div>
+        <div class="pc-path">/categories/real-estate.html</div>
+        <div class="pc-desc">Property market hub &mdash; monthly market reports, neighbourhood data, featured agent Spotlight</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/restaurants-papamoa.html" target="_blank" data-section="categories" data-keywords="restaurants dining food dine-in takeaway">
+      <span class="pc-icon">🍽️</span>
+      <div class="pc-body">
+        <div class="pc-title">Restaurants</div>
+        <div class="pc-path">/categories/restaurants-papamoa.html</div>
+        <div class="pc-desc">Restaurant listings for P&#257;p&#257;moa &mdash; Gold Spotlight, Silver, Bronze placeholders</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/services.html" target="_blank" data-section="categories" data-keywords="services automotive health fitness trades professional">
+      <span class="pc-icon">&#128736;</span>
+      <div class="pc-body">
+        <div class="pc-title">Services</div>
+        <div class="pc-path">/categories/services.html</div>
+        <div class="pc-desc">Mechanics, health &amp; fitness, personal care, trades and professional services in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/shopping.html" target="_blank" data-section="categories" data-keywords="shopping retail Papamoa Plaza Fashion Island books second-hand">
+      <span class="pc-icon">&#128717;</span>
+      <div class="pc-body">
+        <div class="pc-title">Shopping</div>
+        <div class="pc-path">/categories/shopping.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa Plaza, Fashion Island, Xanadu Book Exchange, op shops and specialty retail</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/supermarket-papamoa.html" target="_blank" data-section="categories" data-keywords="supermarket grocery food store four square">
+      <span class="pc-icon">🛒</span>
+      <div class="pc-body">
+        <div class="pc-title">Supermarkets &amp; Grocery</div>
+        <div class="pc-path">/categories/supermarket-papamoa.html</div>
+        <div class="pc-desc">Supermarkets and grocery stores in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/supplement-store-papamoa.html" target="_blank" data-section="categories" data-keywords="supplements protein vitamins health nutrition sports">
+      <span class="pc-icon">💊</span>
+      <div class="pc-body">
+        <div class="pc-title">Supplement &amp; Health Stores</div>
+        <div class="pc-path">/categories/supplement-store-papamoa.html</div>
+        <div class="pc-desc">Sports nutrition and vitamin stores in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/surf-tides.html" target="_blank" data-section="categories" data-keywords="surf tides conditions forecast">
+      <span class="pc-icon">&#127940;</span>
+      <div class="pc-body">
+        <div class="pc-title">Surf &amp; Tides</div>
+        <div class="pc-path">/categories/surf-tides.html</div>
+        <div class="pc-desc">Conditions, tide times, 7-day forecast, Hakanini Gold Spotlight</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/sushi-papamoa.html" target="_blank" data-section="categories" data-keywords="sushi japanese sushi train nigiri rolls">
+      <span class="pc-icon">🍣</span>
+      <div class="pc-body">
+        <div class="pc-title">Sushi</div>
+        <div class="pc-path">/categories/sushi-papamoa.html</div>
+        <div class="pc-desc">Sushi trains and Japanese restaurants in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/turkish-restaurant-papamoa.html" target="_blank" data-section="categories" data-keywords="turkish food kebab mediterranean doner">
+      <span class="pc-icon">🥙</span>
+      <div class="pc-body">
+        <div class="pc-title">Turkish Food</div>
+        <div class="pc-path">/categories/turkish-restaurant-papamoa.html</div>
+        <div class="pc-desc">Turkish restaurants and kebab shops in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+      <a class="page-card over-limit" href="https://plainblackcreative.github.io/categories/vape-shop-papamoa.html" target="_blank" data-section="categories" data-keywords="vape vaping e-cigarette nicotine">
+      <span class="pc-icon">&#128168;</span>
+      <div class="pc-body">
+        <div class="pc-title">Vape Shops</div>
+        <div class="pc-path">/categories/vape-shop-papamoa.html</div>
+        <div class="pc-desc">Vape retailers and e-cigarette shops in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+  </div><!-- /categories page-grid -->
+  </div><!-- /categories section-wrap -->
+
+  <!-- ARTICLES -->
+  <div class="section-wrap" data-sec="articles">
+  <div class="section-head" data-section="articles"><h2>&#128240; Articles</h2><span class="sh-count">31</span><span class="sh-toggle">&#9660; collapse</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/articles/aims-games.html" target="_blank" data-section="articles" data-keywords="aims games sport 2026 tauranga">
+      <span class="pc-icon">&#127942;</span>
+      <div class="pc-body">
+        <div class="pc-title">AIMS Games 2026</div>
+        <div class="pc-path">/articles/aims-games.html</div>
+        <div class="pc-desc">5&ndash;11 September 2026 &mdash; NZ&rsquo;s largest intermediate school sport event</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/articles/clothing-recycling-papamoa.html" target="_blank" data-section="articles" data-keywords="clothing recycling donations bins Waipuna ImpacTex">
+      <span class="pc-icon">&#128248;</span>
+      <div class="pc-body">
+        <div class="pc-title">Clothing Recycling &amp; Donations</div>
+        <div class="pc-path">/articles/clothing-recycling-papamoa.html</div>
+        <div class="pc-desc">Clothing bins, Waipuna Hospice collection and textile recycling options</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/articles/dinner-at-the-domain.html" target="_blank" data-section="articles" data-keywords="dinner domain event food">
+      <span class="pc-icon">&#127869;</span>
+      <div class="pc-body">
+        <div class="pc-title">Dinner at the Domain</div>
+        <div class="pc-path">/articles/dinner-at-the-domain.html</div>
+        <div class="pc-desc">Annual outdoor dining event at the Domain</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/articles/dogs-papamoa.html" target="_blank" data-section="articles" data-keywords="dogs bylaw beach rules TCC">
+      <span class="pc-icon">&#128054;</span>
+      <div class="pc-body">
+        <div class="pc-title">Dogs in P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/dogs-papamoa.html</div>
+        <div class="pc-desc">TCC Dog Bylaw 2018, beach zones, registration and attack reporting</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/articles/easter-trading-hours.html" target="_blank" data-section="articles" data-keywords="easter trading hours shops">
+      <span class="pc-icon">&#128003;</span>
+      <div class="pc-body">
+        <div class="pc-title">Easter Trading Hours 2026</div>
+        <div class="pc-path">/articles/easter-trading-hours.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa shops and services Easter opening hours</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/articles/fuel-prices.html" target="_blank" data-section="articles" data-keywords="fuel prices petrol diesel stations">
+      <span class="pc-icon">&#9981;</span>
+      <div class="pc-body">
+        <div class="pc-title">Fuel Prices P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/fuel-prices.html</div>
+        <div class="pc-desc">Local petrol and diesel prices &mdash; live data placeholder</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/gordon-spratt-reserve.html" target="_blank" data-section="articles" data-keywords="gordon spratt reserve park tsunami mound">
+      <span class="pc-icon">&#127795;</span>
+      <div class="pc-body">
+        <div class="pc-title">Gordon Spratt Reserve</div>
+        <div class="pc-path">/articles/gordon-spratt-reserve.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa&rsquo;s main reserve &mdash; tsunami mound, facilities and events</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/kids-birthday-parties.html" target="_blank" data-section="articles" data-keywords="kids birthday parties venues activities">
+      <span class="pc-icon">&#127881;</span>
+      <div class="pc-body">
+        <div class="pc-title">Kids Birthday Parties</div>
+        <div class="pc-path">/articles/kids-birthday-parties.html</div>
+        <div class="pc-desc">Venues, entertainers, catering and party hire in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/local-government.html" target="_blank" data-section="articles" data-keywords="local government TCC mayor councillors MP">
+      <span class="pc-icon">&#127963;</span>
+      <div class="pc-body">
+        <div class="pc-title">Local Government</div>
+        <div class="pc-path">/articles/local-government.html</div>
+        <div class="pc-desc">TCC, Mayor Mah&#233; Drysdale, Tom Rutherford MP and council contacts</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/maori-history.html" target="_blank" data-section="articles" data-keywords="maori history nga potiki ngai te rangi tamapahore">
+      <span class="pc-icon">&#127963;</span>
+      <div class="pc-body">
+        <div class="pc-title">M&#257;ori History of P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/maori-history.html</div>
+        <div class="pc-desc">Ng&#257; P&#333;tiki, Ng&#257;i Te Rangi, Tamapahore Marae and place names</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/mount-maunganui.html" target="_blank" data-section="articles" data-keywords="mount maunganui mauao hot pools tracks closure 2026">
+      <span class="pc-icon">&#127956;</span>
+      <div class="pc-body">
+        <div class="pc-title">Mount Maunganui</div>
+        <div class="pc-path">/articles/mount-maunganui.html</div>
+        <div class="pc-desc">Mauao fully closed after January 2026 landslide &mdash; village and beach remain open</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/news-events.html" target="_blank" data-section="articles" data-keywords="news events upcoming local papamoa">
+      <span class="pc-icon">&#128240;</span>
+      <div class="pc-body">
+        <div class="pc-title">News &amp; Events</div>
+        <div class="pc-path">/articles/news-events.html</div>
+        <div class="pc-desc">Upcoming events, regular markets, local news and event submission form</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/notable-people.html" target="_blank" data-section="articles" data-keywords="notable people famous from papamoa">
+      <span class="pc-icon">&#11088;</span>
+      <div class="pc-body">
+        <div class="pc-title">Notable People from P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/notable-people.html</div>
+        <div class="pc-desc">Athletes, artists and public figures connected to P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/tax-kiwisaver.html" target="_blank" data-section="articles" data-keywords="tax kiwisaver paye gst calculator">
+      <span class="pc-icon">&#128176;</span>
+      <div class="pc-body">
+        <div class="pc-title">NZ Tax and KiwiSaver Guide</div>
+        <div class="pc-path">/articles/tax-kiwisaver.html</div>
+        <div class="pc-desc">PAYE and GST calculators, KiwiSaver info, key dates</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/op-shops-papamoa.html" target="_blank" data-section="articles" data-keywords="op shops second-hand Waipuna Vinnies charity">
+      <span class="pc-icon">&#128717;</span>
+      <div class="pc-body">
+        <div class="pc-title">Op Shops &amp; Second-hand</div>
+        <div class="pc-path">/articles/op-shops-papamoa.html</div>
+        <div class="pc-desc">Waipuna Hospice, Vinnies, Recycle Boutique and second-hand options near P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/parks-playgrounds.html" target="_blank" data-section="articles" data-keywords="parks playgrounds skate picnic sports">
+      <span class="pc-icon">&#127794;</span>
+      <div class="pc-body">
+        <div class="pc-title">Parks &amp; Playgrounds</div>
+        <div class="pc-path">/articles/parks-playgrounds.html</div>
+        <div class="pc-desc">All P&#257;p&#257;moa parks, playgrounds, skate spots and sports fields</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/population-statistics.html" target="_blank" data-section="articles" data-keywords="population statistics census demographics">
+      <span class="pc-icon">&#128202;</span>
+      <div class="pc-body">
+        <div class="pc-title">Population &amp; Statistics</div>
+        <div class="pc-path">/articles/population-statistics.html</div>
+        <div class="pc-desc">Census data, growth timeline, ethnicity and income stats for P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/papamoa-hills.html" target="_blank" data-section="articles" data-keywords="papamoa hills tracks walks regional park">
+      <span class="pc-icon">&#127956;</span>
+      <div class="pc-body">
+        <div class="pc-title">P&#257;p&#257;moa Hills Regional Park</div>
+        <div class="pc-path">/articles/papamoa-hills.html</div>
+        <div class="pc-desc">Track status, closures, maps and facilities &mdash; updated April 2026</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/library.html" target="_blank" data-section="articles" data-keywords="library hours wifi story time books">
+      <span class="pc-icon">&#128218;</span>
+      <div class="pc-body">
+        <div class="pc-title">P&#257;p&#257;moa Library</div>
+        <div class="pc-path">/articles/library.html</div>
+        <div class="pc-desc">Hours, services, WiFi, events and story time sessions</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/rubbish-recycling-papamoa.html" target="_blank" data-section="articles" data-keywords="rubbish recycling bins kerbside transfer station">
+      <span class="pc-icon">&#9851;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Rubbish &amp; Recycling</div>
+        <div class="pc-path">/articles/rubbish-recycling-papamoa.html</div>
+        <div class="pc-desc">4-bin kerbside guide, Te Maunga Transfer Station hours and accepted materials</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/school-terms-holidays.html" target="_blank" data-section="articles" data-keywords="school terms holidays 2026">
+      <span class="pc-icon">&#127979;</span>
+      <div class="pc-body">
+        <div class="pc-title">School Terms and Holidays 2026</div>
+        <div class="pc-path">/articles/school-terms-holidays.html</div>
+        <div class="pc-desc">P&#257;p&#257;moa school term dates and holiday periods</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/schools-papamoa.html" target="_blank" data-section="articles" data-keywords="schools primary secondary papamoa college zones enrolment">
+      <span class="pc-icon">&#127979;</span>
+      <div class="pc-body">
+        <div class="pc-title">Schools in P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/schools-papamoa.html</div>
+        <div class="pc-desc">All 8 schools &mdash; primary, secondary, Catholic and M&#257;ori immersion. Zones, rolls and contacts</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/seniors-retirement.html" target="_blank" data-section="articles" data-keywords="seniors retirement karaka pines aged care">
+      <span class="pc-icon">&#129399;</span>
+      <div class="pc-body">
+        <div class="pc-title">Seniors &amp; Retirement</div>
+        <div class="pc-path">/articles/seniors-retirement.html</div>
+        <div class="pc-desc">Retirement villages, home care, NZ Super and entitlements</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/shopping-centres.html" target="_blank" data-section="articles" data-keywords="shopping centres fashion island palm beach plaza sands">
+      <span class="pc-icon">&#128717;</span>
+      <div class="pc-body">
+        <div class="pc-title">Shopping Centres</div>
+        <div class="pc-path">/articles/shopping-centres.html</div>
+        <div class="pc-desc">Fashion Island, Palm Beach Plaza and The Sands &mdash; tenants and hours</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/summer-insects-papamoa.html" target="_blank" data-section="articles" data-keywords="summer insects flies wasps speedy screens">
+      <span class="pc-icon">&#129429;</span>
+      <div class="pc-body">
+        <div class="pc-title">Summer Insects in P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/summer-insects-papamoa.html</div>
+        <div class="pc-desc">Flies, mozzies, wasps &mdash; what they are and how to keep them out. Speedy Screens spotlight.</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/swimming-papamoa.html" target="_blank" data-section="articles" data-keywords="swimming beach water holes pool laws">
+      <span class="pc-icon">&#127946;</span>
+      <div class="pc-body">
+        <div class="pc-title">Swimming in P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/swimming-papamoa.html</div>
+        <div class="pc-desc">Beach guide, freshwater holes, public pools and residential pool &amp; spa laws</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/tauranga.html" target="_blank" data-section="articles" data-keywords="tauranga city nearby distance guide">
+      <span class="pc-icon">&#127961;</span>
+      <div class="pc-body">
+        <div class="pc-title">Tauranga &mdash; P&#257;p&#257;moa&rsquo;s Nearest City</div>
+        <div class="pc-path">/articles/tauranga.html</div>
+        <div class="pc-desc">Distance, travel times and TaurangaNZ.info network</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/utilities-papamoa.html" target="_blank" data-section="articles" data-keywords="utilities power broadband fibre LPG electricity">
+      <span class="pc-icon">&#9889;</span>
+      <div class="pc-body">
+        <div class="pc-title">Utilities &mdash; Power, Gas &amp; Broadband</div>
+        <div class="pc-path">/articles/utilities-papamoa.html</div>
+        <div class="pc-desc">Power retailers, LPG, fibre broadband and mobile coverage in P&#257;p&#257;moa</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/walks-tracks.html" target="_blank" data-section="articles" data-keywords="walks tracks outdoor recreation">
+      <span class="pc-icon">&#128694;</span>
+      <div class="pc-body">
+        <div class="pc-title">Walks &amp; Tracks</div>
+        <div class="pc-path">/articles/walks-tracks.html</div>
+        <div class="pc-desc">Hub page for all P&#257;p&#257;moa walking and cycling tracks</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/water-rates-papamoa.html" target="_blank" data-section="articles" data-keywords="water rates TCC Waiari billing">
+      <span class="pc-icon">&#128167;</span>
+      <div class="pc-body">
+        <div class="pc-title">Water &amp; Rates</div>
+        <div class="pc-path">/articles/water-rates-papamoa.html</div>
+        <div class="pc-desc">TCC metered water, Waiari plant, quarterly billing and wastewater</div>
+        <div class="pc-tags"><span class="pc-tag tag-new">New</span></div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/articles/weddings.html" target="_blank" data-section="articles" data-keywords="weddings venues photographers">
+      <span class="pc-icon">&#128141;</span>
+      <div class="pc-body">
+        <div class="pc-title">Weddings in P&#257;p&#257;moa</div>
+        <div class="pc-path">/articles/weddings.html</div>
+        <div class="pc-desc">Venues, photographers and local wedding suppliers</div>
+      </div>
+    </a>
+  </div><!-- /articles page-grid -->
+  </div><!-- /articles section-wrap -->
+
+  <!-- COMMUNITY -->
+  <div class="section-wrap" data-sec="community">
+  <div class="section-head" data-section="community"><h2>&#129309; Community</h2><span class="sh-count">6</span><span class="sh-toggle">&#9660; collapse</span></div>
+  <div class="page-grid">
+    <a class="page-card" href="https://plainblackcreative.github.io/community/community-resources.html" target="_blank" data-section="community" data-keywords="community resources contacts emergency groups support">
+      <span class="pc-icon">&#129309;</span>
+      <div class="pc-body">
+        <div class="pc-title">Community Resources</div>
+        <div class="pc-path">/community/community-resources.html</div>
+        <div class="pc-desc">Emergency contacts, Facebook groups, food banks and mental health</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/community/comunity.html" target="_blank" data-section="community" data-keywords="community safety support hub">
+      <span class="pc-icon">&#128737;&#65039;</span>
+      <div class="pc-body">
+        <div class="pc-title">Community Safety &amp; Support</div>
+        <div class="pc-path">/community/comunity.html</div>
+        <div class="pc-desc">Community safety and support landing page</div>
+      </div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/community/neighbourhood-support.html" target="_blank" data-section="community" data-keywords="neighbourhood support local">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body">
+        <div class="pc-title">Neighbourhood Support</div>
+        <div class="pc-path">/community/neighbourhood-support.html</div>
+        <div class="pc-desc">Local neighbourhood support resources</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/community/police-crime.html" target="_blank" data-section="community" data-keywords="police crime reporting prevention">
+      <span class="pc-icon">&#128110;</span>
+      <div class="pc-body">
+        <div class="pc-title">Police &amp; Crime</div>
+        <div class="pc-path">/community/police-crime.html</div>
+        <div class="pc-desc">Local police, crime prevention and reporting</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/community/emergencies.html" target="_blank" data-section="community" data-keywords="emergencies civil defence contacts">
+      <span class="pc-icon">&#128680;</span>
+      <div class="pc-body">
+        <div class="pc-title">Emergencies</div>
+        <div class="pc-path">/community/emergencies.html</div>
+        <div class="pc-desc">Emergency contacts, civil defence and local preparedness</div>
+      </div>
+    </a>
+    <a class="page-card over-limit" href="https://plainblackcreative.github.io/community/community-groups.html" target="_blank" data-section="community" data-keywords="community groups clubs organisations">
+      <span class="pc-icon">&#128101;</span>
+      <div class="pc-body">
+        <div class="pc-title">Community Groups</div>
+        <div class="pc-path">/community/community-groups.html</div>
+        <div class="pc-desc">Local clubs, groups and community organisations</div>
+      </div>
+    </a>
+  </div>
+  </div>
   <!-- EMPTY STATE -->
   <div class="empty-state" id="empty-state" style="display:none">
     <p>No pages match that search.</p>
@@ -1225,6 +1245,7 @@
     const q = document.getElementById('search-input').value.toLowerCase();
     const starred = getStarred();
     const cards = document.querySelectorAll('.page-card');
+    const isSearching = q.length > 0 || activeTab !== 'all';
     let visible = 0;
 
     cards.forEach(card => {
@@ -1241,14 +1262,108 @@
 
       if (matchTab && matchSearch) {
         card.classList.remove('hidden');
+        // When filtering/searching, show all cards regardless of over-limit
+        if (isSearching) card.classList.add('show-all');
         visible++;
       } else {
         card.classList.add('hidden');
       }
     });
 
+    // Show/hide show-more buttons based on whether we're searching
+    document.querySelectorAll('.show-more-btn').forEach(btn => {
+      btn.style.display = isSearching ? 'none' : '';
+    });
+
+    // When search is cleared, restore over-limit state
+    if (!isSearching) {
+      document.querySelectorAll('.page-card.over-limit').forEach(c => c.classList.remove('show-all'));
+    }
+
     document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
     document.getElementById('count-total').textContent = cards.length;
+  }
+
+  // ── SECTION COLLAPSE/EXPAND ──────────────────────────
+  const COLLAPSE_KEY = 'papamoa_collapsed';
+  const ROWS = 2; // max visible rows before "show more"
+  const COLS = 3; // approximate tiles per row (grid auto-fills ~3 at 280px min)
+
+  function getCollapsed() {
+    try { return JSON.parse(localStorage.getItem(COLLAPSE_KEY) || '[]'); } catch(e) { return []; }
+  }
+  function saveCollapsed(arr) {
+    localStorage.setItem(COLLAPSE_KEY, JSON.stringify(arr));
+  }
+
+  function initSections() {
+    const collapsed = getCollapsed();
+    document.querySelectorAll('.section-wrap').forEach(wrap => {
+      const sec = wrap.dataset.sec;
+      const head = wrap.querySelector('.section-head');
+      const toggle = wrap.querySelector('.sh-toggle');
+      const grid = wrap.querySelector('.page-grid');
+
+      // Apply saved collapsed state
+      if (collapsed.includes(sec)) {
+        wrap.classList.add('collapsed');
+        if (toggle) toggle.innerHTML = '&#9658; expand';
+      }
+
+      // Click header to toggle collapse
+      head.addEventListener('click', () => {
+        const isNowCollapsed = wrap.classList.toggle('collapsed');
+        const arr = getCollapsed();
+        if (isNowCollapsed) {
+          if (!arr.includes(sec)) arr.push(sec);
+          if (toggle) toggle.innerHTML = '&#9658; expand';
+        } else {
+          const idx = arr.indexOf(sec);
+          if (idx > -1) arr.splice(idx, 1);
+          if (toggle) toggle.innerHTML = '&#9660; collapse';
+        }
+        saveCollapsed(arr);
+      });
+
+      // Add "show more" button if cards exceed 2 rows
+      applyOverLimit(wrap);
+    });
+  }
+
+  function applyOverLimit(wrap) {
+    const grid = wrap.querySelector('.page-grid');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.page-card'));
+    const limit = ROWS * COLS;
+
+    // Remove any existing show-more btn
+    const existing = grid.querySelector('.show-more-btn');
+    if (existing) existing.remove();
+
+    const overCards = cards.filter(c => c.classList.contains('over-limit'));
+    if (overCards.length === 0) return;
+
+    // Count visible over-limit cards
+    const allShown = overCards.every(c => c.classList.contains('show-all'));
+
+    const btn = document.createElement('button');
+    btn.className = 'show-more-btn';
+    btn.innerHTML = allShown
+      ? '&#9650; Show fewer'
+      : '&#9660; Show ' + overCards.length + ' more';
+
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      if (allShown) {
+        overCards.forEach(c => c.classList.remove('show-all'));
+        btn.innerHTML = '&#9660; Show ' + overCards.length + ' more';
+      } else {
+        overCards.forEach(c => c.classList.add('show-all'));
+        btn.innerHTML = '&#9650; Show fewer';
+      }
+    });
+
+    grid.appendChild(btn);
   }
 
   window.addEventListener('DOMContentLoaded', () => {
@@ -1260,6 +1375,7 @@
     document.getElementById('count-new').textContent = newItems.length;
     initStars();
     updateStarCount();
+    initSections();
   });
 </script>
 
