@@ -38,9 +38,9 @@
     .hero-desc { font-size:0.97rem; color:rgba(255,255,255,0.62); max-width:560px; line-height:1.75; }
 
     /* SEARCH */
-    .search-bar { background:var(--white); border-bottom:1px solid var(--border); padding:18px 20px; overflow:hidden; }
+    .search-bar { background:var(--white); border-bottom:1px solid var(--border); padding:18px 20px; }
     .search-bar-inner { max-width:960px; margin:0 auto; display:flex; gap:10px; align-items:center; }
-    .search-input-wrap { flex:1; position:relative; z-index:51; }
+    .search-input-wrap { flex:1; position:relative; z-index:51; overflow:visible; }
     .search-input-wrap::before { content:''; position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7' stroke='%23607080' stroke-width='2'/%3E%3Cpath stroke='%23607080' stroke-width='2' stroke-linecap='round' d='m16 16 4 4'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-size:contain; pointer-events:none; }
     .search-input { width:100%; padding:11px 14px 11px 40px; border:1.5px solid var(--border); border-radius:8px; font-family:'Figtree',sans-serif; font-size:0.95rem; color:var(--body); background:var(--bg); transition:all 0.15s; }
     .search-input:focus { outline:none; border-color:var(--blue); background:var(--white); box-shadow:0 0 0 3px rgba(58,171,222,0.1); }
@@ -341,8 +341,8 @@
     <div class="info-section-label">Property &amp; Real Estate</div>
     <div class="info-grid" style="margin-bottom:20px">
       <a href="/categories/real-estate.html" class="info-card"><span class="ic-icon">&#127968;</span><div class="ic-body"><div class="ic-title">Property Market</div><div class="ic-desc">Monthly market reports, neighbourhood data, median prices.</div><span class="ic-tag ic-tag-updated">March 2026 report live</span></div></a>
-      <a href="/categories/real-estate.html" class="info-card"><span class="ic-icon">&#127968;</span><div class="ic-body"><div class="ic-title">Rentals in Pāpāmoa</div><div class="ic-desc">Rental listings, average rents and property management in Pāpāmoa.</div></div></a>
-      <a href="/categories/real-estate.html" class="info-card"><span class="ic-icon">&#127959;</span><div class="ic-body"><div class="ic-title">New Developments</div><div class="ic-desc">Upcoming subdivisions, new builds and development projects in Pāpāmoa.</div></div></a>
+      <a href="/articles/rentals-papamoa.html" class="info-card"><span class="ic-icon">&#127968;</span><div class="ic-body"><div class="ic-title">Rentals in Pāpāmoa</div><div class="ic-desc">Rental listings, average rents and property management in Pāpāmoa.</div></div></a>
+      <a href="/articles/new-developments-papamoa.html" class="info-card"><span class="ic-icon">&#127959;</span><div class="ic-body"><div class="ic-title">New Developments</div><div class="ic-desc">Upcoming subdivisions, new builds and development projects in Pāpāmoa.</div></div></a>
     </div>
 
     <div class="info-section-label">Community &amp; People</div>
@@ -508,10 +508,10 @@
     </div>
     <div class="subcat-chips">
       <span class="chip active">All</span>
-      <a href="/categories/accommodation.html" class="chip">Holiday Parks</a>
-      <a href="/categories/accommodation.html" class="chip">Motels</a>
-      <a href="/categories/accommodation.html" class="chip">Airbnb &amp; Short-stay</a>
-      <a href="/categories/accommodation.html" class="chip">Luxury Stays</a>
+      <a href="/categories/holiday-parks-papamoa.html" class="chip">Holiday Parks</a>
+      <a href="/categories/motels-papamoa.html" class="chip">Motels</a>
+      <a href="/categories/short-stay-papamoa.html" class="chip">Airbnb &amp; Short-stay</a>
+      <a href="/categories/luxury-stays-papamoa.html" class="chip">Luxury Stays</a>
       <a href="/categories/accommodation.html" class="chip">Backpackers</a>
     </div>
 
@@ -554,7 +554,7 @@
     </div>
     <div class="subcat-chips">
       <span class="chip active">All</span>
-      <a href="/articles/fishing-surf-tides.html" class="chip">Surf &amp; Outdoors</a>
+      <a href="/categories/surf-tides.html" class="chip">Surf &amp; Outdoors</a>
       <a href="/categories/gym-papamoa.html" class="chip">Gyms &amp; Fitness</a>
       <a href="/categories/indoor-activities.html" class="chip">Indoor Activities</a>
       <a href="/articles/walks-tracks.html" class="chip">Walks &amp; Tracks</a>
@@ -789,8 +789,8 @@ const SEARCH_INDEX = [
   { type:'listing', icon:'✂', title:'Lawn Mowing Pāpāmoa', sub:'Lawn & garden · Pāpāmoa', url:'/listings/lawn-mowing-papamoa.html', keywords:'lawn mowing garden care papamoa grass cut maintenance' },
   { type:'listing', icon:'✂', title:'Barber Toms', sub:'Barber · Pāpāmoa', url:'/listings/barber-toms-papamoa.html', keywords:'barber toms haircut mens cuts beard trim fade walk in papamoa' },
   { type:'info', icon:'🎣', title:'Fishing, Surf & Tides', sub:'Fishing spots, surf breaks, tides & outdoor activities', url:'/articles/fishing-surf-tides.html', keywords:'fishing surf tides bait tackle charter boat hire surf break rod reel kayak outdoor activities papamoa beach' },
-  { type:'info', icon:'🏠', title:'Rentals in Pāpāmoa', sub:'Rental listings and property management', url:'/categories/real-estate.html', keywords:'rentals rental property papamoa rent house apartment property management' },
-  { type:'info', icon:'🏗', title:'New Developments', sub:'Subdivisions and new builds in Pāpāmoa', url:'/categories/real-estate.html', keywords:'new development subdivision new build papamoa houses development project' },
+  { type:'info', icon:'🏠', title:'Rentals in Pāpāmoa', sub:'Rental listings and property management', url:'/articles/rentals-papamoa.html', keywords:'rentals rental property papamoa rent house apartment property management' },
+  { type:'info', icon:'🏗', title:'New Developments', sub:'Subdivisions and new builds in Pāpāmoa', url:'/articles/new-developments-papamoa.html', keywords:'new development subdivision new build papamoa houses development project' },
     { type:'info', icon:'⛰', title:'Papamoa Hills', sub:'Track status, closures, maps', url:'/articles/papamoa-hills.html', keywords:'papamoa hills track walk hike summit closed open landslip terrain regional park summerhills' },
   { type:'info', icon:'🚶', title:'Walks & Tracks', sub:'All walking and cycling tracks', url:'/articles/walks-tracks.html', keywords:'walk walks track tracks walking cycling hike hiking nature path trail papamoa terrain' },
   { type:'info', icon:'🌳', title:'Parks & Playgrounds', sub:'Gordon Spratt Reserve, skate spots, picnic areas', url:'/articles/parks-playgrounds.html', keywords:'park parks playground playgrounds picnic gordon spratt reserve skate skateboard sports fields' },
