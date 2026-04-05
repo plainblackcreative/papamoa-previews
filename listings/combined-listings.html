@@ -405,7 +405,7 @@ function mTS(biz){
   const rows=(biz.prev||[]).slice(0,3).map((it,i)=>`<div class="mpr${i>0?' blur':''}"><span class="mpn">${it.n}</span><span class="mpp">${it.p}</span></div>`).join('');
   return`<div class="cs"><h3 class="cs-title"><span>📋</span>${biz.mlabel||'Menu'}</h3>
   <div class="mpw">${rows}<div class="mpf"></div></div>
-  <div class="smu"><div class="smu-eye">Add-on available</div><div class="smu-h">Unlock the full interactive ${(biz.mlabel||'menu').toLowerCase()}</div><p class="smu-p">Category tabs, dietary filters, pricing and a "Last Updated" date — embedded on your listing. Updated via a private form, no CMS login needed.</p><a href="/advertise#menu-addon" class="smu-btn">Add Menu for $199 + GST/yr →</a></div></div>`
+  <div class="smu"><div class="smu-eye">Add-on available</div><div class="smu-h">Unlock the full interactive ${(biz.mlabel||'menu').toLowerCase()}</div><p class="smu-p">Category tabs, dietary filters, pricing and a "Last Updated" date — embedded on your listing. Updated via a private form, no CMS login needed.</p><a href="/sales/landing.html#menu-addon" class="smu-btn">Add Menu for $199 + GST/yr →</a></div></div>`
 }
 
 // ── GOLD ──
@@ -451,7 +451,7 @@ function rGold(biz){
       <div class="cs"><h3 class="cs-title"><span>📍</span> Find them</h3><div class="map-ph"><span style="font-size:2rem">🗺️</span><strong>${biz.addr}</strong><span>Interactive map — Google Maps embed</span></div></div>
     </div>
     <div class="gold-sidebar">
-      <div class="gold-sc"><h4>★ Gold Spotlight listing</h4><p>Top position in ${biz.sub} on Papamoa.info — seen by everyone searching ${biz.sub.toLowerCase()} in Pāpāmoa.</p><a href="/advertise">About Gold listings →</a></div>
+      <div class="gold-sc"><h4>★ Gold Spotlight listing</h4><p>Top position in ${biz.sub} on Papamoa.info — seen by everyone searching ${biz.sub.toLowerCase()} in Pāpāmoa.</p><a href="/sales/landing.html">About Gold listings →</a></div>
       <div class="sc"><h4>Contact &amp; location</h4><div class="cl">
         <div class="ci"><span class="ci-i">📍</span><span class="ci-t"><strong>Address</strong>${biz.addr}</span></div>
         ${biz.phone?`<div class="ci"><span class="ci-i">📞</span><span class="ci-t"><strong>Phone</strong><a href="tel:${biz.phone}">${biz.phone}</a></span></div>`:''}
@@ -486,7 +486,7 @@ function rSilver(biz){
     <div>
       <div class="utg"><div class="utg-eye">Upgrade available</div><h4>Unlock Gold Spotlight</h4><p>Gold places ${biz.name} at the top of ${biz.sub} with a hero banner, photo gallery and review showcase.</p>
       <ul>${[`Full-width hero + photo gallery (×9+)`,`Top of sub-category position`,`Review showcase & star rating`,biz.hasMenu?`Interactive menu with filters`:'',`Unlimited AI sub-pages (Founding Member)`].filter(Boolean).map(f=>`<li>${f}</li>`).join('')}</ul>
-      <a href="/advertise#gold">Upgrade to Gold — $1,200 + GST/yr</a></div>
+      <a href="/sales/landing.html#gold">Upgrade to Gold — $1,200 + GST/yr</a></div>
       <div class="sc"><h4>Contact</h4><div class="cl">
         <div class="ci"><span class="ci-i">📍</span><span class="ci-t">${biz.addr}</span></div>
         ${biz.phone?`<div class="ci"><span class="ci-i">📞</span><span class="ci-t"><a href="tel:${biz.phone}">${biz.phone}</a></span></div>`:''}
@@ -504,7 +504,7 @@ function rBronze(biz){
     <p class="bronze-desc">${biz.name} is listed in the ${biz.sub} category on Papamoa.info. Claim this listing to add your description, photos, services and contact information.</p>
     <div class="bronze-contacts"><span class="bci">📍 ${biz.addr}</span>${biz.phone?`<span class="bci">📞 ${biz.phone}</span>`:''}</div>
     <div class="bup"><div class="bup-eye">Claim this listing</div><h3>Is this your business?</h3><p>Upgrade to Silver or Gold to control this listing and start appearing in Pāpāmoa search results with 20+ years of domain authority.</p>
-    <div class="bup-btns"><a href="/advertise#silver" class="btn-upsil">◆ Silver — $599 + GST/yr</a><a href="/advertise#gold" class="btn-upgold">⭐ Gold — $1,200 + GST/yr</a></div></div>
+    <div class="bup-btns"><a href="/sales/landing.html#silver" class="btn-upsil">◆ Silver — $599 + GST/yr</a><a href="/sales/landing.html#gold" class="btn-upgold">⭐ Gold — $1,200 + GST/yr</a></div></div>
     <div class="pc-grid">
       <div class="pc cur"><span class="pc-tier" style="color:#9A7060">Placeholder</span><div class="pc-price">Free <span>unregistered</span></div><ul class="pc-fl"><li>Name &amp; address</li><li class="no">No description</li><li class="no">No photos</li><li class="no">No menu</li><li class="no">No priority</li></ul></div>
       <div class="pc"><span class="pc-tier" style="color:var(--silver)">◆ Silver</span><div class="pc-price">$599 <span>+ GST/yr</span></div><ul class="pc-fl"><li>Full description</li><li>Up to 9 images</li><li>Contact links</li><li>Services listed</li><li>Hours displayed</li><li class="no">No hero banner</li>${biz.hasMenu?'<li class="no">Menu teaser only</li>':''}</ul></div>
