@@ -200,7 +200,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Test Web3Forms end-to-end — form submit to email receipt</div>
-          <div class="task-desc">Submit a test enquiry from a placeholder listing. Confirm the email lands at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="610b0a03130e160f0f1b21060c00080d4f020e0c">[email&#160;protected]</a> within 60 seconds with all fields populated.</div>
+          <div class="task-desc">Submit a test enquiry from a placeholder listing. Confirm the email lands at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e983828b9b869e878793a98e84888085c78a8684">[email&#160;protected]</a> within 60 seconds with all fields populated.</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
@@ -374,7 +374,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Upload rebuilt sales pages to GitHub</div>
-          <div class="task-desc">All rebuilt with correct pricing ($599 Silver, $1,199 Gold, dead offers removed): sales/main-lander.html, sales/landing.html, previews/driftwood-cafe.html, sales/menu-addon.html, sales/why-list.html, sales/followup-emails.html, sales/sales-scripts.html.</div>
+          <div class="task-desc">All rebuilt with correct pricing ($599 Silver, $1,199 Gold, dead offers removed): sales/main-lander.html, sales/landing.html, sales/post-call-landing.html, previews/driftwood-cafe.html, sales/menu-addon.html, sales/why-list.html, sales/followup-emails.html, sales/sales-scripts.html.</div>
           <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
@@ -410,6 +410,14 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">VS Code Find in Files — old /post-call-landing.html path references</div>
+          <div class="task-desc">Cmd+Shift+F in VS Code, search for "/post-call-landing.html" — should now be "/sales/post-call-landing.html". Fix any matches found.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-tech">Tech</span></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -436,16 +444,22 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
-      <div class="task-item">
+      <div class="task-item new">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Audit all pages for remaining Bronze-as-product references</div>
-          <div class="task-desc">Bronze is internal placeholder only — never sold. Find and remove any pages offering Bronze as a paid product or showing Bronze pricing to visitors. Check listing upsell blocks especially.</div>
-          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span></div>
+          <div class="task-title">Reframe Gold scarcity + remove "Jayden" references across all pages <span class="new-badge">New</span></div>
+          <div class="task-desc">Two related copy changes needed across all sales and listing pages: (1) Replace "one Gold per sub-category" as the primary scarcity hook with premium ad spot scarcity instead — Gold unlocks access to genuinely finite ad positions on high-traffic article/info pages. Keep the sub-category fact as a feature note, not a fear trigger. (2) Remove all first-person "Jayden" references — replace with "we/us" throughout. Affects: sales/list-with-us.html, sales/landing.html, sales/claim.html, sales/main-lander.html, sales/landing-v2.html, sales/why-list.html, sales/followup-emails.html, sales/sales-scripts.html, previews/driftwood-cafe.html, listings/speedy-screens-papamoa.html, listings/greencut-papamoa.html, listings/lawn-mowing-papamoa.html, admin/sales-funnel.html. Use VS Code Find in Files (Cmd+Shift+H) to catch any remaining "Jayden" instances.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
-    </div>
-  </div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Build /onboarding/add-menu.html — Menu Add-On request form <span class="new-badge">New</span></div>
+          <div class="task-desc">Lightweight page for existing Silver listings wanting to add the Menu Add-On. Flow: (1) Short form — business name, listing URL, menu source (link / PDF upload / photos). (2) We scan and build a menu draft. (3) Send preview link for approval. (4) Payment triggered at approval step via Stripe. (5) Goes live on approval + payment. Start as a simple Web3Forms submission — automate the Claude scan/build step in Phase 2. CTA on /sales/menu-addon.html?ref=silver points here.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
 
   <!-- 6. TECH & AUTOMATION -->
   <div class="task-section">
@@ -574,7 +588,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Check all internal links work across every page</div>
-          <div class="task-desc">Nav links, CTA buttons, cross-links between articles and listings, footer links. No dead "#" links. No /slug paths that should be /articles/slug or /listings/slug.</div>
+          <div class="task-desc">Nav links, CTA buttons, cross-links between articles and listings, footer links. No dead "#" links. No /slug paths that should be /articles/slug or /listings/slug. No old /post-call-landing.html references.</div>
           <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
@@ -582,7 +596,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Verify all Web3Forms automations fire correctly on GitHub Pages</div>
-          <div class="task-desc">Submit a test from every active form type on the live GitHub Pages domain (not in preview). Confirm email receipt at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e08a8b82928f978e8e9aa0878d81898cce838f8d">[email&#160;protected]</a> for each. Forms: placeholder listing enquiry, sales/landing.html, main-lander.html visibility form, client verification form.</div>
+          <div class="task-desc">Submit a test from every active form type on the live GitHub Pages domain (not in preview). Confirm email receipt at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e64656c7c61796060744e69636f6762206d6163">[email&#160;protected]</a> for each. Forms: placeholder listing enquiry, sales/landing.html, main-lander.html visibility form, client verification form.</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
