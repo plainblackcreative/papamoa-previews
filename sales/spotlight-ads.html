@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotlight Ad Spots — Papamoa.info</title>
+  <meta name="description" content="Premium ad positions on Papamoa.info — homepage sections, category pages and high-traffic article pages. Monthly placements. Gold listing required.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#0D2B3E; --ocean:#1B6B7D; --ocean-deep:#0F4352;
+      --accent:#3AABDE; --dune:#C4985A; --dune-light:#F5EDD8;
+      --gold:#B8840A; --gold-bg:#FBF3E2;
+      --sand:#F7F3ED; --white:#fff; --text:#1A2832; --muted:#5A6E78;
+      --border:#D8E4E8; --green:#1E6B3C; --green-bg:#E6F4EC;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Figtree', sans-serif; background: var(--sand); color: var(--text); line-height: 1.65; }
+
+    .nav { background: var(--navy); height: 56px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 15px; color: #fff; text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-back { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; }
+    .nav-back:hover { color: #fff; }
+
+    .hero { background: var(--navy); padding: 64px 24px 72px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(58,171,222,0.1) 0%, transparent 60%); pointer-events: none; }
+    .hero::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 60px; background: var(--sand); clip-path: ellipse(65% 100% at 50% 100%); }
+    .hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dune); margin-bottom: 16px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+    .hero p { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.75; max-width: 500px; margin: 0 auto; }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 56px 0; }
+
+    /* Coming soon box */
+    .coming-soon {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--dune);
+      border-radius: 12px;
+      padding: 40px 36px;
+      text-align: center;
+      margin: 48px auto;
+      max-width: 600px;
+    }
+    .cs-icon { font-size: 48px; margin-bottom: 16px; }
+    .coming-soon h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--navy); margin-bottom: 12px; }
+    .coming-soon p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 24px; max-width: 440px; margin-left: auto; margin-right: auto; }
+
+    /* Placement types preview */
+    .placements-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+    @media (max-width: 580px) { .placements-grid { grid-template-columns: 1fr; } }
+    .placement-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+    .pc-label { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .pc-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .pc-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+    .pc-price { font-size: 13px; font-weight: 700; color: var(--gold); }
+    .pc-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; background: var(--gold-bg); color: var(--gold); border: 1px solid rgba(184,132,10,0.2); margin-top: 6px; }
+
+    /* Requirement note */
+    .req-note { background: var(--dune-light); border: 1px solid rgba(196,152,90,0.3); border-radius: 8px; padding: 16px 20px; font-size: 13.5px; color: #7A5800; line-height: 1.6; margin-bottom: 24px; }
+    .req-note strong { color: #5A3800; }
+
+    /* CTA */
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; background: var(--ocean); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 14px; padding: 12px 24px; border-radius: 7px; text-decoration: none; transition: background 0.2s; }
+    .btn-primary:hover { background: var(--ocean-deep); }
+    .btn-secondary { display: inline-block; background: var(--white); color: var(--ocean); font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 14px; padding: 12px 24px; border-radius: 7px; text-decoration: none; border: 1.5px solid var(--border); transition: all 0.2s; }
+    .btn-secondary:hover { border-color: var(--ocean); }
+
+    .footer { background: var(--navy); padding: 24px; text-align: center; font-size: 12px; color: rgba(255,255,255,0.35); }
+    .footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/homepage.html" class="nav-logo">Papamoa<span>.info</span></a>
+  <a href="/homepage.html" class="nav-back">&larr; Directory</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Premium Placements</div>
+    <h1>Spotlight Ad Spots</h1>
+    <p>Premium monthly ad positions across Papamoa.info &mdash; homepage sections, main category pages, and high-traffic article pages. Available to Gold listing holders only.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="coming-soon">
+    <div class="cs-icon">&#128202;</div>
+    <h2>Pricing coming soon</h2>
+    <p>We&rsquo;re building the analytics dashboard to price these positions accurately based on real traffic data. Placements will be priced by page and position &mdash; homepage spots will carry a premium over category and article spots.</p>
+    <div class="req-note">
+      <strong>Gold listing required.</strong> Spotlight ad spots are available exclusively to active Gold listing holders. A Gold listing ($1,199+GST/yr) is the prerequisite for any ad spot purchase.
+    </div>
+    <div class="cta-row">
+      <a href="/sales/list-with-us.html" class="btn-primary">Get a Gold listing first &rarr;</a>
+      <a href="/contact.html" class="btn-secondary" onclick="pnfOpenContact('General enquiry')">Register interest</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ocean);margin-bottom:8px;">Available placements</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--navy);margin-bottom:12px;">Where your spotlight can appear</h2>
+      <p style="font-size:14px;color:var(--muted);max-width:520px;margin:0 auto;">Each placement is a single exclusive position. One business per spot, per page. Pricing set once analytics confirm traffic volumes.</p>
+    </div>
+
+    <div class="placements-grid">
+      <div class="placement-card">
+        <div class="pc-label">Tier 1 &mdash; Highest value</div>
+        <div class="pc-name">Homepage Section Spotlight</div>
+        <div class="pc-desc">Featured position at the top of a homepage category section (Food & Drink, Essential Services, Accommodation, Entertainment). Seen by every homepage visitor scrolling past that section.</div>
+        <div class="pc-price">Pricing TBD &mdash; analytics pending</div>
+        <div class="pc-badge">Monthly</div>
+      </div>
+      <div class="placement-card">
+        <div class="pc-label">Tier 2</div>
+        <div class="pc-name">Category Page Spotlight</div>
+        <div class="pc-desc">Featured position at the top of a main category page (e.g. /categories/restaurants-papamoa.html). Targeted to visitors actively browsing that category.</div>
+        <div class="pc-price">Pricing TBD &mdash; analytics pending</div>
+        <div class="pc-badge">Monthly</div>
+      </div>
+      <div class="placement-card">
+        <div class="pc-label">Tier 3</div>
+        <div class="pc-name">Article Page Ad Spot</div>
+        <div class="pc-desc">Positioned ad on a high-traffic info or article page (e.g. Papamoa Hills, Schools, AIMS Games, Dogs in Papamoa). Relevant to the article audience.</div>
+        <div class="pc-price">Pricing TBD &mdash; analytics pending</div>
+        <div class="pc-badge">Monthly</div>
+      </div>
+      <div class="placement-card">
+        <div class="pc-label">Tier 4</div>
+        <div class="pc-name">News &amp; Events Spotlight</div>
+        <div class="pc-desc">Featured position on the News & Events page. Seasonal and event-driven traffic spikes (AIMS Games, Easter, summer) make this valuable at key times of year.</div>
+        <div class="pc-price">Pricing TBD &mdash; analytics pending</div>
+        <div class="pc-badge">Monthly</div>
+      </div>
+    </div>
+
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:24px 28px;margin-top:8px;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:8px;">Not available on sub-category pages</h3>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.65;">Sub-category pages (e.g. /categories/plumber-papamoa.html) are reserved for Gold listing Spotlights &mdash; the exclusive top position that comes with a Gold annual listing. Spotlight Ad Spots are a separate monthly product available on homepage sections and main category pages only.</p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <a href="/homepage.html">papamoa.info</a> &middot; P&#257;p&#257;moa&rsquo;s local business directory &middot; <a href="/sales/list-with-us.html">List your business</a>
+</footer>
+
+<script>
+function pnfOpenContact(type) {
+  // Contact lightbox not available on this stub page -- open email fallback
+  window.location.href = 'mailto:jayden@papamoa.info?subject=Spotlight Ad Spot enquiry';
+}
+</script>
+
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
+</body>
+</html>
