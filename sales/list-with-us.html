@@ -411,18 +411,426 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   .vis-box { padding: 24px 20px; }
 }
 </style>
+<style id="papamoa-nav-footer-css">
+/* ── NAV/FOOTER TOKENS ── */
+:root {
+  --pnf-navy:    #0D2B3E;
+  --pnf-ocean:   #1B6B7D;
+  --pnf-accent:  #3AABDE;
+  --pnf-dune:    #C4985A;
+  --pnf-white:   #FFFFFF;
+  --pnf-border:  rgba(255,255,255,0.1);
+  --pnf-muted:   rgba(255,255,255,0.45);
+  --pnf-font:    'Figtree', sans-serif;
+  --pnf-display: 'Playfair Display', serif;
+}
+
+/* ── NAV BASE ── */
+.pnf-nav {
+  background: var(--pnf-navy);
+  height: 56px;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  gap: 16px;
+}
+.pnf-logo {
+  font-family: var(--pnf-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--pnf-white);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  flex-shrink: 0;
+}
+.pnf-logo span { color: var(--pnf-accent); }
+
+/* Public nav links */
+.pnf-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.pnf-links::-webkit-scrollbar { display: none; }
+.pnf-link {
+  font-family: var(--pnf-font);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pnf-muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  white-space: nowrap;
+  transition: color 0.15s, background 0.15s;
+  border-bottom: 2px solid transparent;
+}
+.pnf-link:hover { color: var(--pnf-white); }
+.pnf-link.active { color: var(--pnf-white); border-bottom-color: var(--pnf-accent); }
+
+/* CTA button */
+.pnf-cta {
+  font-family: var(--pnf-font);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--pnf-accent);
+  color: var(--pnf-white);
+  padding: 8px 18px;
+  border-radius: 100px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.pnf-cta:hover { background: #2d95c4; }
+
+/* Facebook link in nav */
+.pnf-fb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.08);
+  color: var(--pnf-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.pnf-fb:hover { background: #1877F2; color: var(--pnf-white); }
+
+/* Sales nav back link */
+.pnf-back {
+  font-size: 13px;
+  color: var(--pnf-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.pnf-back:hover { color: var(--pnf-white); }
+
+@media (max-width: 640px) {
+  .pnf-nav { padding: 0 16px; }
+  .pnf-links { display: none; }
+  .pnf-fb { display: none; }
+}
+
+/* ── FOOTER BASE ── */
+.pnf-footer {
+  background: var(--pnf-navy);
+  padding: 48px 28px 24px;
+}
+.pnf-footer-inner { max-width: 960px; margin: 0 auto; }
+
+/* Public footer grid */
+.pnf-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 36px;
+}
+@media (max-width: 760px) {
+  .pnf-footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+@media (max-width: 480px) {
+  .pnf-footer-grid { grid-template-columns: 1fr; }
+}
+.pnf-footer-brand {
+  font-family: var(--pnf-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--pnf-white);
+  margin-bottom: 8px;
+}
+.pnf-footer-brand span { color: var(--pnf-accent); }
+.pnf-footer-tagline {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.7;
+  margin-bottom: 18px;
+  max-width: 280px;
+}
+.pnf-footer-social {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.pnf-social-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 7px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.pnf-social-btn:hover { background: #1877F2; border-color: #1877F2; color: var(--pnf-white); }
+.pnf-social-btn .fb-icon { font-size: 14px; font-weight: 800; }
+.pnf-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pnf-accent);
+  text-decoration: none;
+  transition: color 0.15s;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--pnf-font);
+  line-height: 1.5;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.pnf-contact-link:hover { color: var(--pnf-white); }
+
+.pnf-footer-col h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 12px;
+}
+.pnf-footer-col h4 + h4 { margin-top: 20px; }
+.pnf-footer-links { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.pnf-footer-links a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.15s;
+  line-height: 1.4;
+}
+.pnf-footer-links a:hover { color: var(--pnf-white); }
+.pnf-footer-links button {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--pnf-font);
+  transition: color 0.15s;
+  text-align: left;
+}
+.pnf-footer-links button:hover { color: var(--pnf-white); }
+
+/* Footer bottom bar */
+.pnf-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+}
+.pnf-footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; }
+.pnf-footer-bottom a:hover { color: var(--pnf-white); }
+
+/* Sales footer (slimmer) */
+.pnf-footer-slim {
+  background: var(--pnf-navy);
+  padding: 28px;
+  text-align: center;
+}
+.pnf-footer-slim .pnf-footer-brand {
+  margin-bottom: 6px;
+  display: inline-block;
+}
+.pnf-footer-slim .pnf-footer-tagline {
+  max-width: 100%;
+  text-align: center;
+  margin: 0 auto 16px;
+}
+.pnf-footer-slim-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.pnf-footer-slim-links a,
+.pnf-footer-slim-links button {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--pnf-font);
+  transition: color 0.15s;
+}
+.pnf-footer-slim-links a:hover,
+.pnf-footer-slim-links button:hover { color: var(--pnf-white); }
+.pnf-footer-slim-bottom {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.2);
+}
+
+/* Admin footer (minimal) */
+.pnf-footer-admin {
+  background: var(--pnf-navy);
+  padding: 16px 28px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ── CONTACT LIGHTBOX ── */
+.pnf-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13,43,62,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.pnf-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.pnf-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 520px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+  transform: translateY(16px);
+  transition: transform 0.25s;
+}
+.pnf-overlay.open .pnf-modal { transform: translateY(0); }
+.pnf-modal-head {
+  background: var(--pnf-navy);
+  padding: 22px 28px 18px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.pnf-modal-head h2 {
+  font-family: var(--pnf-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 3px;
+}
+.pnf-modal-head p {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
+.pnf-modal-close {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: rgba(255,255,255,0.6);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1;
+}
+.pnf-modal-close:hover { background: rgba(255,255,255,0.2); color: #fff; }
+.pnf-modal-body { padding: 24px 28px 28px; }
+.pnf-cf { display: flex; flex-direction: column; gap: 14px; }
+.pnf-cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 420px) { .pnf-cf-row { grid-template-columns: 1fr; } }
+.pnf-cf label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #5A6E78;
+  margin-bottom: 5px;
+  display: block;
+}
+.pnf-cf input,
+.pnf-cf select,
+.pnf-cf textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #D8E4E8;
+  border-radius: 7px;
+  font-family: var(--pnf-font);
+  font-size: 14px;
+  color: #1A2832;
+  background: #F7F3ED;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.pnf-cf input:focus,
+.pnf-cf select:focus,
+.pnf-cf textarea:focus { border-color: #1B6B7D; background: #fff; }
+.pnf-cf textarea { resize: vertical; min-height: 80px; line-height: 1.55; }
+.pnf-cf-submit {
+  width: 100%;
+  background: #1B6B7D;
+  color: #fff;
+  border: none;
+  padding: 13px;
+  border-radius: 8px;
+  font-family: var(--pnf-font);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 2px;
+}
+.pnf-cf-submit:hover { background: #0F4352; }
+.pnf-cf-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.pnf-cf-fine { font-size: 11.5px; color: #5A6E78; text-align: center; margin-top: 6px; }
+.pnf-cf-success {
+  display: none;
+  text-align: center;
+  padding: 16px 0 8px;
+}
+.pnf-cf-success .pnf-tick { font-size: 40px; margin-bottom: 10px; }
+.pnf-cf-success h3 { font-size: 18px; font-weight: 700; color: #1E6B3C; margin-bottom: 6px; }
+.pnf-cf-success p { font-size: 13.5px; color: #5A6E78; line-height: 1.6; }
+</style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav">
-  <a href="/homepage.html" class="nav-logo">papamoa<span>.info</span></a>
-  <div class="nav-links">
-    <a href="/homepage.html">Directory</a>
-    <a href="#tiers">Pricing</a>
-    <a href="#how-it-works">How it works</a>
-    <a href="#get-found" class="nav-cta">List your business</a>
-  </div>
+<nav class="pnf-nav" id="pnf-nav-sales">
+  <a href="/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
+  <a href="/homepage.html" class="pnf-back">&larr; Directory</a>
+  <a href="#get-found" class="pnf-cta">Get started &rarr;</a>
 </nav>
 
 <!-- HERO -->
@@ -983,15 +1391,17 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 </div>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-logo">papamoa<span>.info</span></div>
-  <div class="footer-tagline">P&#257;p&#257;moa&rsquo;s local business directory &middot; Part of the TaurangaNZ.info network &middot; Trusted since 2005</div>
-  <div class="footer-links">
-    <a href="/homepage.html">Directory</a>
-    <a href="#tiers">Pricing</a>
-    <a href="#how-it-works">How it works</a>
-    <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a>
-    <a href="tel:+64275332970">027 533 2970</a>
+<footer class="pnf-footer pnf-footer-slim" id="pnf-footer-sales">
+  <div class="pnf-footer-inner" style="text-align:center;">
+    <div class="pnf-footer-brand">Papamoa<span>.info</span></div>
+    <p class="pnf-footer-tagline">P&#257;p&#257;moa&rsquo;s local business directory &middot; Part of the TaurangaNZ.info network &middot; Trusted since 2005</p>
+    <div class="pnf-footer-slim-links">
+      <a href="/homepage.html">Directory</a>
+      <a href="/sales/list-with-us.html">Pricing</a>
+      <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener">Facebook</a>
+      <button onclick="pnfOpenContact()">Contact</button>
+    </div>
+    <div class="pnf-footer-slim-bottom">&copy; 2026 Papamoa.info</div>
   </div>
 </footer>
 
@@ -1045,6 +1455,115 @@ async function submitForm(e) {
       }
     });
   })();
+</script>
+<div class="pnf-overlay" id="pnf-contact-overlay" onclick="pnfOverlayClick(event)">
+  <div class="pnf-modal" role="dialog" aria-label="Contact Papamoa.info">
+    <div class="pnf-modal-head">
+      <div>
+        <h2>Get in touch</h2>
+        <p>We&rsquo;ll get back to you within one business day.</p>
+      </div>
+      <button class="pnf-modal-close" onclick="pnfCloseContact()" aria-label="Close">&times;</button>
+    </div>
+    <div class="pnf-modal-body">
+      <form class="pnf-cf" id="pnf-contact-form" onsubmit="pnfSubmitContact(event)">
+        <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
+        <input type="hidden" name="form_name" value="contact-lightbox">
+        <input type="hidden" name="redirect" value="false">
+        <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="pnf-cf-row">
+          <div>
+            <label>Your name *</label>
+            <input type="text" name="name" placeholder="Sarah" required>
+          </div>
+          <div>
+            <label>Email *</label>
+            <input type="email" name="email" placeholder="you@email.com" required>
+          </div>
+        </div>
+
+        <div>
+          <label>Enquiry type *</label>
+          <select name="enquiry_type" required id="pnf-enquiry-type">
+            <option value="" disabled selected>Select a topic</option>
+            <option value="General enquiry">General enquiry</option>
+            <option value="Listing enquiry">Listing enquiry &mdash; I want to get listed</option>
+            <option value="Listing support">Listing support &mdash; update or change my listing</option>
+            <option value="Media enquiry">Media enquiry</option>
+            <option value="News &amp; community notice">News &amp; community notice</option>
+            <option value="Report an error">Report an error on the site</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Message *</label>
+          <textarea name="message" placeholder="How can we help?" required></textarea>
+        </div>
+
+        <button type="submit" class="pnf-cf-submit" id="pnf-cf-btn">Send message &rarr;</button>
+        <p class="pnf-cf-fine">No spam &middot; We reply within one business day</p>
+      </form>
+
+      <div class="pnf-cf-success" id="pnf-cf-success">
+        <div class="pnf-tick">&#10003;</div>
+        <h3>Message received</h3>
+        <p>We&rsquo;ll be in touch within one business day.<br>For urgent listing support call <a href="tel:+64275332970" style="color:#1B6B7D">027 533 2970</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// ── Contact lightbox ──
+function pnfOpenContact(type) {
+  if (type) {
+    var sel = document.getElementById('pnf-enquiry-type');
+    if (sel) {
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value === type) { sel.selectedIndex = i; break; }
+      }
+    }
+  }
+  document.getElementById('pnf-contact-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function pnfCloseContact() {
+  document.getElementById('pnf-contact-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function pnfOverlayClick(e) {
+  if (e.target === document.getElementById('pnf-contact-overlay')) pnfCloseContact();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') pnfCloseContact();
+});
+
+async function pnfSubmitContact(e) {
+  e.preventDefault();
+  var btn = document.getElementById('pnf-cf-btn');
+  btn.textContent = 'Sending\u2026';
+  btn.disabled = true;
+  try {
+    var res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: new FormData(document.getElementById('pnf-contact-form'))
+    });
+    var json = await res.json();
+    if (json.success) {
+      document.getElementById('pnf-contact-form').style.display = 'none';
+      document.getElementById('pnf-cf-success').style.display = 'block';
+    } else {
+      btn.textContent = 'Try again';
+      btn.disabled = false;
+    }
+  } catch(err) {
+    btn.textContent = 'Try again';
+    btn.disabled = false;
+  }
+}
+
+// Auto-open on /contact.html
+if (window.location.pathname.indexOf('contact') !== -1) pnfOpenContact();
 </script>
 </body>
 </html>
