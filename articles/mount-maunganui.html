@@ -444,5 +444,20 @@
   <a href="/">Papamoa.info</a> — Mauao closure information sourced from Tauranga City Council, RNZ and NZ Herald (January–February 2026). Six people died in the 22 January 2026 landslide. Always check current access status at <a href="https://www.tauranga.govt.nz" target="_blank" rel="noopener">tauranga.govt.nz</a> before visiting.
 </footer>
 
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
 </body>
 </html>

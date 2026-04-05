@@ -402,5 +402,20 @@
   <a href="/">Papamoa.info</a> — This page is part of the Papamoa.info local directory network. For the full Tauranga business directory, visit <a href="https://www.tauranganz.info" target="_blank" rel="noopener">TaurangaNZ.info</a>.
 </footer>
 
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
 </body>
 </html>

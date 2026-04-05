@@ -279,5 +279,20 @@
 <footer class="site-footer">
   <a href="/">Papamoa.info</a> — Community resources page. No advertising on this page. Contact details verified April 2026 — report changes to <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a>.
 </footer>
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
 </body>
 </html>

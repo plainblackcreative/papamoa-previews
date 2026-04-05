@@ -574,5 +574,20 @@
   <a href="/homepage.html">Papamoa.info</a> &mdash; The local directory for P&#257;p&#257;moa, Bay of Plenty, New Zealand. Pool law information is a general guide only &mdash; always verify current requirements with Tauranga City Council and MBIE. Water quality information sourced from BOP Regional Council and LAWA. Always check current conditions before swimming.
 </footer>
 
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
 </body>
 </html>

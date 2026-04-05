@@ -431,5 +431,20 @@
   <a href="/">Papamoa.info</a> — The local directory for Pāpāmoa, Bay of Plenty, New Zealand. Population data sourced from Stats NZ.
 </footer>
 
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
 </body>
 </html>

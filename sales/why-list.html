@@ -360,5 +360,20 @@ body { font-family: var(--font-body); background: var(--white); color: var(--tex
   <p class="af-text">Written by Jayden Brown · Local Partner, Papamoa.info · Pāpāmoa, New Zealand</p>
 </div>
 
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
 </body>
 </html>

@@ -320,5 +320,20 @@ footer a:hover{color:#fff}
   <p>&copy; 2026 <a href="https://plainblackcreative.github.io/papamoa-previews/">papamoa.info</a> &middot; Pāpāmoa's Local Business Directory &middot; <a href="https://plainblackcreative.github.io/papamoa-previews/index.html">List Your Business</a></p>
 </footer>
 
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
 </body>
 </html>

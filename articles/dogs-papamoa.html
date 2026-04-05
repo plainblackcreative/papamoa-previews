@@ -362,5 +362,20 @@
   <a href="/">Papamoa.info</a> — Dog rules sourced from TCC Dog Management Bylaw 2018 and March 2026 consultation documents. Always verify current rules at <a href="https://www.tauranga.govt.nz" target="_blank" rel="noopener">tauranga.govt.nz</a>.
 </footer>
 
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
 </body>
 </html>
