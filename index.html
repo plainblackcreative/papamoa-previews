@@ -1296,14 +1296,18 @@
 <script>
   (function() {
     var base = '/papamoa-previews';
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
+    var absBase = 'https://plainblackcreative.github.io';
+
+    // Rewrite all hrefs on page load
+    document.querySelectorAll('a[href]').forEach(function(a) {
       var href = a.getAttribute('href');
-      if (!href) return;
+      // Absolute URL missing /papamoa-previews/ prefix
+      if (href.startsWith(absBase + '/') && !href.startsWith(absBase + base)) {
+        a.setAttribute('href', absBase + base + href.slice(absBase.length));
+      }
+      // Root-relative missing /papamoa-previews/ prefix
       if (href.startsWith('/') && !href.startsWith(base)) {
-        e.preventDefault();
-        window.location.href = base + href;
+        a.setAttribute('href', base + href);
       }
     });
   })();
