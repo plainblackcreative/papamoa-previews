@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events & News in Pāpāmoa — What's On, Community Notices & Local Updates | Papamoa.info</title>
+  <meta name="description" content="What's on in Pāpāmoa — upcoming events, community notices, recurring markets and local news. Submit your event free. Updated regularly by the Papamoa.info team.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #2B3F5C; --blue: #3AABDE; --lime: #7DC143; --sand: #F5EFE0;
+      --dune: #D4C4A0; --coral: #E8344A; --white: #fff; --body: #1E2D3E;
+      --muted: #607080; --border: #DDE5EE; --bg: #F4F7FA; --gold: #C8962A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
+    a { color: var(--blue); }
+
+    .site-nav { background: var(--navy); padding: 10px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
+    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--blue); }
+    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
+
+    /* HERO */
+    .hero {
+      background: var(--navy);
+      padding: 44px 24px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(125,193,67,0.08) 0%, transparent 70%);
+    }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--lime), var(--blue)); }
+    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .hero-text {}
+    .hero-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime); margin-bottom: 10px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.12; margin-bottom: 10px; }
+    .hero h1 em { font-style: italic; color: var(--lime); }
+    .hero-sub { font-size: 0.95rem; color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.7; }
+    .hero-submit-btn { background: var(--lime); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.84rem; padding: 12px 22px; border-radius: 6px; text-decoration: none; white-space: nowrap; flex-shrink: 0; align-self: flex-start; margin-top: 8px; display: inline-block; }
+    .hero-submit-btn:hover { background: #5A9020; color: #fff; }
+
+    /* TABS */
+    .tab-nav { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .tab-nav-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; display: flex; overflow-x: auto; scrollbar-width: none; }
+    .tab-nav-inner::-webkit-scrollbar { display: none; }
+    .tab-btn { padding: 13px 18px; font-size: 0.82rem; font-weight: 600; color: var(--muted); white-space: nowrap; cursor: pointer; border: none; border-bottom: 3px solid transparent; background: transparent; font-family: 'Figtree', sans-serif; transition: all 0.2s; }
+    .tab-btn:hover { color: var(--navy); }
+    .tab-btn.active { color: var(--navy); border-bottom-color: var(--lime); font-weight: 700; }
+
+    /* LAYOUT */
+    .page-wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 80px; }
+    .two-col { display: grid; grid-template-columns: 1fr 296px; gap: 28px; align-items: start; }
+    .main-col { min-width: 0; }
+    .side-col { display: flex; flex-direction: column; gap: 18px; }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .section-title-left { display: flex; align-items: center; gap: 8px; }
+    .see-all { font-size: 0.76rem; font-weight: 600; color: var(--blue); text-decoration: none; font-family: 'Figtree', sans-serif; }
+
+    /* EVENT CARDS */
+    .event-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 12px; display: flex; transition: box-shadow 0.2s, border-color 0.2s; }
+    .event-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); border-color: var(--blue); }
+    .event-date-col { width: 72px; flex-shrink: 0; background: var(--navy); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px 8px; text-align: center; }
+    .event-day { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: #fff; line-height: 1; }
+    .event-month { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-top: 2px; }
+    .event-dow { font-size: 0.6rem; color: rgba(255,255,255,0.4); margin-top: 3px; }
+    .event-body { padding: 14px 16px; flex: 1; }
+    .event-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 6px; }
+    .et { font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
+    .et-community { background: #E8F5E9; color: #1A6A30; }
+    .et-sport { background: #EBF5FB; color: #1A4A80; }
+    .et-arts { background: #F3E5F5; color: #6A0DAD; }
+    .et-food { background: #FFF3E0; color: #8B4500; }
+    .et-market { background: #FFF9E8; color: #7A5A00; }
+    .et-family { background: #FCE4EC; color: #880E4F; }
+    .et-recurring { background: #E0F2F1; color: #00695C; }
+    .et-free { background: #E8F5E9; color: #1A6A30; }
+    .event-title { font-family: 'Playfair Display', serif; font-size: 0.97rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .event-meta { font-size: 0.78rem; color: var(--muted); margin-bottom: 5px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .event-meta span { display: flex; align-items: center; gap: 3px; }
+    .event-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+    .event-card.featured { border-color: var(--gold); }
+    .event-card.featured .event-date-col { background: linear-gradient(135deg, #5A3A00, #8B6010); }
+
+    /* RECURRING EVENTS */
+    .recurring-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .rec-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 14px; border-left: 3px solid var(--lime); }
+    .rec-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .rec-freq { font-size: 0.72rem; font-weight: 700; color: var(--lime); margin-bottom: 5px; }
+    .rec-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    /* SUBMIT FORM */
+    .submit-section { background: linear-gradient(135deg, #F0FAF4, #E4F5E8); border: 1px solid #A8D8B8; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+    .submit-section h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .submit-section p { font-size: 0.84rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+    .form-group label .req { color: var(--coral); }
+    .form-input { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Figtree', sans-serif; font-size: 0.84rem; color: var(--body); background: var(--white); transition: border-color 0.2s; }
+    .form-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(58,171,222,0.12); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23607080' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; cursor: pointer; }
+    .form-textarea { min-height: 90px; resize: vertical; }
+    .form-submit { background: var(--lime); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.84rem; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; transition: background 0.2s; }
+    .form-submit:hover { background: #5A9020; }
+    .form-note { font-size: 0.73rem; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+    .form-success { display: none; background: #EAF7EE; border: 1px solid #A8D8B0; border-radius: 8px; padding: 14px 16px; font-size: 0.84rem; color: #1A5A28; line-height: 1.55; }
+
+    /* NEWS ITEMS */
+    .news-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 10px; display: flex; gap: 14px; }
+    .ni-date { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; padding-top: 2px; min-width: 60px; }
+    .ni-body {}
+    .ni-title { font-weight: 700; color: var(--navy); font-size: 0.88rem; margin-bottom: 3px; }
+    .ni-desc { font-size: 0.81rem; color: var(--muted); line-height: 1.55; }
+    .ni-source { font-size: 0.72rem; color: var(--blue); margin-top: 5px; }
+
+    /* EMPTY STATE */
+    .empty-state { background: var(--white); border: 1.5px dashed var(--border); border-radius: 10px; padding: 32px 24px; text-align: center; margin-bottom: 16px; }
+    .empty-state p { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
+    .empty-state p strong { color: var(--navy); }
+
+    /* AD SPOTS */
+    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); margin-bottom: 14px; }
+    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 5px 12px; background: #FAFAF7; border-bottom: 1px solid var(--border); text-align: center; }
+    .ad-inner { padding: 14px; background: var(--white); }
+    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 16px; text-align: center; }
+    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); }
+
+    /* SIDEBAR */
+    .sidebar-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+    .sidebar-card h4 { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .sidebar-list li { font-size: 0.82rem; color: var(--muted); padding-left: 13px; position: relative; line-height: 1.4; }
+    .sidebar-list li::before { content: '›'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+    .sidebar-list li strong { color: var(--body); }
+
+    /* MINI CALENDAR */
+    .mini-cal { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
+    .mc-head { background: var(--navy); padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; }
+    .mc-month { font-family: 'Playfair Display', serif; font-size: 0.88rem; font-weight: 700; color: #fff; }
+    .mc-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
+    .mc-dow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 6px 4px; text-align: center; }
+    .mc-day { font-size: 0.78rem; color: var(--body); padding: 5px 4px; text-align: center; cursor: default; border-radius: 4px; margin: 1px; }
+    .mc-day.other { color: var(--border); }
+    .mc-day.today { background: var(--navy); color: #fff; font-weight: 700; border-radius: 50%; }
+    .mc-day.has-event { font-weight: 700; color: var(--navy); background: #EBF8ED; border-radius: 50%; }
+    .mc-day.has-event.today { background: var(--lime); color: #fff; }
+
+    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
+    .site-footer a { color: var(--blue); }
+
+    @media (max-width: 720px) {
+      .two-col { grid-template-columns: 1fr; }
+      .side-col { order: -1; }
+      .form-row { grid-template-columns: 1fr; }
+      .recurring-grid { grid-template-columns: 1fr; }
+      .hero-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb">
+    <a href="/">Home</a><span>/</span>Events & News
+  </span>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Pāpāmoa Beach · Bay of Plenty</div>
+      <h1>Events &amp; <em>News</em><br>in Pāpāmoa</h1>
+      <p class="hero-sub">What's on, what's happening and what you need to know. Community events, markets, sports, arts and local news — all in one place.</p>
+    </div>
+    <a href="#submit-event" class="hero-submit-btn">+ Submit your event</a>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchTab('upcoming', this)">📅 Upcoming events</button>
+    <button class="tab-btn" onclick="switchTab('recurring', this)">🔄 Regular events</button>
+    <button class="tab-btn" onclick="switchTab('news', this)">📰 Local news</button>
+    <button class="tab-btn" onclick="switchTab('submit', this)">✏️ Submit an event</button>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="two-col">
+    <main class="main-col">
+
+      <!-- UPCOMING EVENTS TAB -->
+      <div class="tab-panel active" id="tab-upcoming">
+
+        <div class="section-title">
+          <span class="section-title-left"><span>📅</span> Upcoming events</span>
+          <a href="#submit-event" class="see-all" onclick="switchTab('submit', document.querySelectorAll('.tab-btn')[3])">+ Submit yours</a>
+        </div>
+
+        <!-- FEATURED: AIMS GAMES -->
+        <div class="event-card featured">
+          <div class="event-date-col">
+            <div class="event-day">5</div>
+            <div class="event-month">Sep</div>
+            <div class="event-dow">Sat</div>
+          </div>
+          <div class="event-body">
+            <div class="event-tags">
+              <span class="et et-sport">Sport</span>
+              <span class="et et-family">Family</span>
+              <span class="et et-recurring">Annual</span>
+            </div>
+            <div class="event-title">Zespri AIMS Games 2026</div>
+            <div class="event-meta">
+              <span>📍 Tauranga &amp; surrounds</span>
+              <span>🗓️ 5–11 September 2026</span>
+              <span>👥 14,000+ athletes</span>
+            </div>
+            <p class="event-desc">The largest junior multi-sport event in Australasia returns to Tauranga. 430+ schools, 27 sports, seven days. Pāpāmoa accommodation is ideal for visiting families — 10 minutes from most venues.</p>
+          </div>
+        </div>
+
+        <!-- DINNER AT THE DOMAIN -->
+        <div class="event-card">
+          <div class="event-date-col">
+            <div class="event-day" style="font-size:1rem;line-height:1.2">TBC</div>
+            <div class="event-month">2026</div>
+          </div>
+          <div class="event-body">
+            <div class="event-tags">
+              <span class="et et-food">Food &amp; drink</span>
+              <span class="et et-community">Community</span>
+              <span class="et et-recurring">Annual</span>
+            </div>
+            <div class="event-title">Dinner at the Domain</div>
+            <div class="event-meta">
+              <span>📍 Pāpāmoa Domain</span>
+              <span>⏰ Evening — date TBC</span>
+            </div>
+            <p class="event-desc">Pāpāmoa's signature outdoor dining event, held at the Domain with food vendors, local produce and a relaxed beachside atmosphere. Watch the Dinner at the Domain Facebook page for 2026 dates.</p>
+          </div>
+        </div>
+
+        <!-- PLACEHOLDER FOR MORE EVENTS -->
+        <div class="empty-state">
+          <p><strong>More events coming.</strong> This page is updated regularly as events are submitted and confirmed. Know about an upcoming event in Pāpāmoa? Submit it below and the Papamoa.info team will review it for listing.</p>
+          <a href="#submit-event" onclick="switchTab('submit', document.querySelectorAll('.tab-btn')[3])" style="display:inline-block;margin-top:12px;background:var(--lime);color:#fff;font-weight:700;font-size:0.82rem;padding:8px 16px;border-radius:5px;text-decoration:none">+ Submit your event</a>
+        </div>
+
+        <!-- AD SPOT 1 -->
+        <div class="ad-spot">
+          <div class="ad-label">⭐ Event Sponsor Spotlight</div>
+          <div class="ad-inner">
+            <div class="ad-placeholder">
+              <p>Event, venue or service that benefits from appearing alongside Pāpāmoa events? Sponsor the events page.</p>
+              <a href="/index.html">Enquire about sponsorship →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RECURRING EVENTS TAB -->
+      <div class="tab-panel" id="tab-recurring">
+
+        <div class="section-title">
+          <span class="section-title-left"><span>🔄</span> Regular &amp; recurring events</span>
+        </div>
+
+        <p style="font-size:0.87rem;color:var(--muted);line-height:1.7;margin-bottom:18px">These events run regularly through the year. Always confirm current schedules directly with the organiser before attending.</p>
+
+        <div class="recurring-grid">
+          <div class="rec-card">
+            <h4>🌊 Surf Life Saving Patrols</h4>
+            <div class="rec-freq">October – April · Weekends &amp; public holidays</div>
+            <p class="rec-desc">Pāpāmoa Surf Life Saving Club patrols the beach between the flags on weekends and public holidays through summer. Swim between the flags.</p>
+          </div>
+          <div class="rec-card">
+            <h4>🏉 Touch Rugby</h4>
+            <div class="rec-freq">Summer season · Weekly</div>
+            <p class="rec-desc">Social and competitive touch rugby at Gordon Spratt Reserve and other venues through the Tauranga Touch Association summer season.</p>
+          </div>
+          <div class="rec-card">
+            <h4>🌅 Parkrun</h4>
+            <div class="rec-freq">Every Saturday · 8:00am</div>
+            <p class="rec-desc">Free, timed 5km run/walk at various Tauranga locations. Check parkrun.co.nz for the current Pāpāmoa area event location and registration details.</p>
+          </div>
+          <div class="rec-card">
+            <h4>📚 Library Story Time</h4>
+            <div class="rec-freq">Weekly — check library for current schedule</div>
+            <p class="rec-desc">Pāpāmoa Library runs regular children's story time sessions. Check the library schedule or Tauranga City Libraries website for current days and times.</p>
+          </div>
+          <div class="rec-card">
+            <h4>🧘 Beach Yoga</h4>
+            <div class="rec-freq">Regular — varies by provider</div>
+            <p class="rec-desc">Several yoga instructors run regular beach yoga sessions on Pāpāmoa Beach through summer. Check local Facebook groups and noticeboards for current schedules.</p>
+          </div>
+          <div class="rec-card">
+            <h4>🎣 Fishing Competitions</h4>
+            <div class="rec-freq">Throughout summer</div>
+            <p class="rec-desc">Pāpāmoa is a popular surf casting and kontiki fishing location. Competitive fishing events run throughout the summer at the eastern end of the beach. Check local fishing clubs for schedules.</p>
+          </div>
+        </div>
+
+        <!-- AD SPOT 2 -->
+        <div class="ad-spot">
+          <div class="ad-label">Run a regular event or class in Pāpāmoa?</div>
+          <div class="ad-inner">
+            <div class="ad-placeholder">
+              <p>Yoga, fitness, kids classes, community groups — get your regular event listed in Pāpāmoa's events calendar.</p>
+              <a href="/index.html">Get listed free →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- NEWS TAB -->
+      <div class="tab-panel" id="tab-news">
+
+        <div class="section-title">
+          <span class="section-title-left"><span>📰</span> Local news &amp; notices</span>
+        </div>
+
+        <p style="font-size:0.87rem;color:var(--muted);line-height:1.7;margin-bottom:18px">Community notices, council announcements and local updates relevant to Pāpāmoa residents. Curated by the Papamoa.info team from public sources.</p>
+
+        <!-- NEWS ITEM: PAPAMOA HILLS -->
+        <div class="news-item">
+          <div class="ni-date">Apr 2026</div>
+          <div class="ni-body">
+            <div class="ni-title">Pāpāmoa Hills Regional Park partially reopens</div>
+            <p class="ni-desc">The Summerhills Track (from Reid Road carpark) reopened on 3 April 2026 following extensive damage from January landslips. The Karangaumu Summit Track, Te Rae o Pāpāmoa Track and all other tracks remain closed. Signage is in place. Check BOPRC before visiting.</p>
+            <div class="ni-source"><a href="/articles/papamoa-hills.html">Full details on the Pāpāmoa Hills page →</a></div>
+          </div>
+        </div>
+
+        <!-- NEWS ITEM: DOG BYLAW -->
+        <div class="news-item">
+          <div class="ni-date">Mar 2026</div>
+          <div class="ni-body">
+            <div class="ni-title">TCC consulting on new dog bylaw changes</div>
+            <p class="ni-desc">Tauranga City Council opened public consultation in March 2026 on proposed changes to the Dog Management Bylaw. Proposed changes include on-lead requirements on the Pāpāmoa Shared Path, bans in cemeteries and skate parks, and licensing for walking more than four dogs at once.</p>
+            <div class="ni-source"><a href="/articles/dogs-papamoa.html#bylaw-changes">Full details on the Dogs in Pāpāmoa page →</a></div>
+          </div>
+        </div>
+
+        <!-- NEWS ITEM: MAUAO -->
+        <div class="news-item">
+          <div class="ni-date">Jan 2026</div>
+          <div class="ni-body">
+            <div class="ni-title">Mauao (Mount Maunganui) remains closed after fatal landslide</div>
+            <p class="ni-desc">Six people died on 22 January 2026 when a catastrophic landslide from Mauao struck the adjacent campground and hot pools during record rainfall. All Mauao tracks remain closed. The Mount Hot Pools are closed with no reopening date confirmed. The village strip, beach and businesses remain open.</p>
+            <div class="ni-source"><a href="/articles/mount-maunganui.html">Full details on the Mount Maunganui page →</a></div>
+          </div>
+        </div>
+
+        <!-- NEWS ITEM: AIMS GAMES -->
+        <div class="news-item">
+          <div class="ni-date">Mar 2026</div>
+          <div class="ni-body">
+            <div class="ni-title">AIMS Games 2026 registrations open</div>
+            <p class="ni-desc">Registrations for the Zespri AIMS Games 2026 opened on 20 March 2026. The event runs 5–11 September in Tauranga. Beyonder is the official accommodation partner. Book early — accommodation across Tauranga and Pāpāmoa fills fast during Games week.</p>
+            <div class="ni-source"><a href="/articles/aims-games.html">Full details on the AIMS Games page →</a></div>
+          </div>
+        </div>
+
+        <div class="empty-state" style="margin-top:8px">
+          <p>Know about something that should be on this page? <strong>Community notices, council decisions, new businesses, local updates</strong> — email <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a> and the team will review it for the news feed.</p>
+        </div>
+
+        <!-- AD SPOT 3 -->
+        <div class="ad-spot">
+          <div class="ad-label">Local business news &amp; announcements</div>
+          <div class="ad-inner">
+            <div class="ad-placeholder">
+              <p>New opening, special event or business announcement? Reach the Pāpāmoa community.</p>
+              <a href="/index.html">Get listed →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SUBMIT EVENT TAB -->
+      <div class="tab-panel" id="tab-submit">
+
+        <div class="section-title">
+          <span class="section-title-left"><span>✏️</span> Submit your event</span>
+        </div>
+
+        <div class="submit-section" id="submit-event">
+          <h3>Add your event to the Pāpāmoa calendar</h3>
+          <p>Community events, sports fixtures, markets, concerts, fundraisers, charity events — if it's happening in or around Pāpāmoa and it's open to the public, submit it here. The Papamoa.info team reviews all submissions. Listings are free.</p>
+
+          <form id="event-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
+            <input type="hidden" name="subject" value="New Event Submission — Papamoa.info">
+            <input type="hidden" name="from_name" value="Papamoa.info Events">
+            <input type="hidden" name="redirect" value="">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Event name <span class="req">*</span></label>
+                <input type="text" name="event_name" class="form-input" placeholder="e.g. Pāpāmoa Community Market" required>
+              </div>
+              <div class="form-group">
+                <label>Event category <span class="req">*</span></label>
+                <select name="category" class="form-input form-select" required>
+                  <option value="">Select a category</option>
+                  <option>Community</option>
+                  <option>Sport &amp; Recreation</option>
+                  <option>Arts &amp; Culture</option>
+                  <option>Food &amp; Drink</option>
+                  <option>Market</option>
+                  <option>Music</option>
+                  <option>Family &amp; Kids</option>
+                  <option>Charity &amp; Fundraiser</option>
+                  <option>Business</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Event date <span class="req">*</span></label>
+                <input type="date" name="event_date" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label>Time</label>
+                <input type="text" name="event_time" class="form-input" placeholder="e.g. 10am – 2pm">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Location / venue <span class="req">*</span></label>
+              <input type="text" name="location" class="form-input" placeholder="e.g. Gordon Spratt Reserve, Pāpāmoa" required>
+            </div>
+
+            <div class="form-group">
+              <label>Description <span class="req">*</span></label>
+              <textarea name="description" class="form-input form-textarea" placeholder="Tell us about the event — what it is, who it's for, cost, what to bring." required></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your name <span class="req">*</span></label>
+                <input type="text" name="contact_name" class="form-input" placeholder="Your full name" required>
+              </div>
+              <div class="form-group">
+                <label>Your email <span class="req">*</span></label>
+                <input type="email" name="contact_email" class="form-input" placeholder="you@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Website or Facebook link</label>
+              <input type="url" name="event_url" class="form-input" placeholder="https://...">
+            </div>
+
+            <div class="form-group">
+              <label>Is this a recurring event?</label>
+              <select name="recurring" class="form-input form-select">
+                <option value="no">No — one-off event</option>
+                <option value="weekly">Yes — weekly</option>
+                <option value="fortnightly">Yes — fortnightly</option>
+                <option value="monthly">Yes — monthly</option>
+                <option value="other">Yes — other frequency</option>
+              </select>
+            </div>
+
+            <button type="submit" class="form-submit">Submit event →</button>
+            <p class="form-note">Submissions are reviewed by the Papamoa.info team within 48 hours. We may edit for length or clarity before publishing. Commercial event promotions may be asked to use a paid listing — we'll be in touch if so.</p>
+          </form>
+
+          <div class="form-success" id="form-success">
+            <strong>Thanks — event received!</strong> The Papamoa.info team will review your submission and be in touch within 48 hours. If your event is approved it will appear on the events calendar.
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <aside class="side-col">
+
+      <!-- MINI CALENDAR - April 2026 -->
+      <div class="mini-cal">
+        <div class="mc-head">
+          <span class="mc-month">April 2026</span>
+        </div>
+        <div class="mc-grid" style="padding:8px">
+          <div class="mc-dow">M</div><div class="mc-dow">T</div><div class="mc-dow">W</div><div class="mc-dow">T</div><div class="mc-dow">F</div><div class="mc-dow">S</div><div class="mc-dow">S</div>
+          <!-- Week 1 -->
+          <div class="mc-day other"></div><div class="mc-day other"></div><div class="mc-day other">1</div><div class="mc-day other">2</div><div class="mc-day today">3</div><div class="mc-day">4</div><div class="mc-day">5</div>
+          <!-- Week 2 -->
+          <div class="mc-day">6</div><div class="mc-day">7</div><div class="mc-day">8</div><div class="mc-day">9</div><div class="mc-day">10</div><div class="mc-day">11</div><div class="mc-day">12</div>
+          <!-- Week 3 -->
+          <div class="mc-day has-event">13</div><div class="mc-day">14</div><div class="mc-day">15</div><div class="mc-day">16</div><div class="mc-day">17</div><div class="mc-day">18</div><div class="mc-day has-event">19</div>
+          <!-- Week 4 -->
+          <div class="mc-day">20</div><div class="mc-day">21</div><div class="mc-day">22</div><div class="mc-day">23</div><div class="mc-day has-event">25</div><div class="mc-day">26</div><div class="mc-day">27</div>
+          <!-- Week 5 -->
+          <div class="mc-day">28</div><div class="mc-day">29</div><div class="mc-day">30</div>
+        </div>
+        <div style="padding:8px 12px 10px;font-size:0.72rem;color:var(--muted)">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#EBF8ED;border:1px solid var(--lime);margin-right:4px;vertical-align:middle"></span>Event scheduled
+        </div>
+      </div>
+
+      <!-- KEY DATES -->
+      <div class="sidebar-card">
+        <h4>Key dates — 2026</h4>
+        <ul class="sidebar-list">
+          <li><strong>5–11 Sep:</strong> AIMS Games Tauranga</li>
+          <li><strong>Dinner at the Domain:</strong> TBC</li>
+          <li><strong>Pāpāmoa Hills:</strong> Partial reopen Apr 2026</li>
+          <li>Check back regularly for updates</li>
+        </ul>
+      </div>
+
+      <!-- SUBMIT SHORTCUT -->
+      <div style="background:linear-gradient(135deg,#1A2A10,#2B4820);border-radius:10px;padding:18px;margin-bottom:14px;border:1px solid rgba(125,193,67,0.3)">
+        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime);margin-bottom:5px">Got an event?</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:6px">Submit it free</div>
+        <p style="font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:10px">Community events, markets, sport — if it's in Pāpāmoa, it belongs here.</p>
+        <a href="#submit-event" onclick="switchTab('submit',document.querySelectorAll('.tab-btn')[3])" style="display:block;background:var(--lime);color:#fff;font-family:'Figtree',sans-serif;font-weight:700;font-size:0.78rem;padding:8px 14px;border-radius:5px;text-decoration:none;text-align:center">Submit your event →</a>
+      </div>
+
+      <!-- USEFUL LINKS -->
+      <div class="sidebar-card">
+        <h4>Useful links</h4>
+        <ul class="sidebar-list">
+          <li><a href="https://www.tauranga.govt.nz/events" target="_blank" rel="noopener">TCC events</a></li>
+          <li><a href="https://www.nzaimsgames.co.nz" target="_blank" rel="noopener">AIMS Games official site</a></li>
+          <li><a href="https://www.sunlive.co.nz" target="_blank" rel="noopener">SunLive — Bay news</a></li>
+          <li><a href="https://www.bayofplentytimes.co.nz" target="_blank" rel="noopener">Bay of Plenty Times</a></li>
+          <li><a href="/articles/easter-trading-hours.html">Easter trading hours</a></li>
+          <li><a href="/articles/school-terms-holidays.html">School terms 2026</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Related pages</h4>
+        <ul class="sidebar-list">
+          <li><a href="/articles/aims-games.html">AIMS Games 2026 guide</a></li>
+          <li><a href="/articles/dinner-at-the-domain.html">Dinner at the Domain</a></li>
+          <li><a href="/articles/gordon-spratt-reserve.html">Gordon Spratt Reserve</a></li>
+          <li><a href="/community">Community Resources</a></li>
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="/">Papamoa.info</a> — Events submitted here are reviewed before publication. For urgent notices contact <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a>.
+</footer><script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (id === 'submit') {
+    setTimeout(() => document.getElementById('submit-event').scrollIntoView({behavior:'smooth', block:'start'}), 100);
+  }
+}
+
+// Form submission
+document.getElementById('event-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.form-submit');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: new FormData(th

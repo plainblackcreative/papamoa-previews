@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Yard Pāpāmoa — What's There, Stores, Hours & Location | Papamoa.info</title>
+  <meta name="description" content="The Yard in Pāpāmoa — a curated retail and dining precinct. Find out what businesses are there, opening hours, parking and upcoming events at The Yard.">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#2B3F5C;--blue:#3AABDE;--lime:#7DC143;--sand:#F5EFE0;--dune:#D4C4A0;--coral:#E8344A;--white:#fff;--body:#1E2D3E;--muted:#607080;--border:#DDE5EE;--bg:#F4F7FA;--gold:#C8962A}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--body);line-height:1.65}
+    a{color:var(--blue)}
+    .site-nav{background:var(--navy);padding:10px 24px;display:flex;align-items:center;gap:16px}
+    .nav-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff;text-decoration:none}
+    .nav-brand em{font-style:normal;color:var(--blue)}
+    .breadcrumb{font-size:0.75rem;color:rgba(255,255,255,0.45)}
+    .breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none}
+    .breadcrumb span{margin:0 5px;opacity:0.4}
+    .hero{background:linear-gradient(135deg,#1A1A1A,#2A2A2A);padding:44px 24px 40px;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--coral))}
+    .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+    .hero-eye{font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.9rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:12px}
+    .hero h1 em{font-style:italic;color:var(--gold)}
+    .hero-sub{font-size:0.97rem;color:rgba(255,255,255,0.6);max-width:580px;line-height:1.7}
+    .page-wrap{max-width:900px;margin:0 auto;padding:36px 20px 80px;display:grid;grid-template-columns:1fr 260px;gap:28px;align-items:start}
+    .section{margin-bottom:40px}
+    .section-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px}
+    p{font-size:0.88rem;color:var(--body);line-height:1.75;margin-bottom:12px}
+    p:last-child{margin-bottom:0}
+    /* TENANT GRID */
+    .tenant-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
+    .tenant-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px}
+    .tc-name{font-weight:700;color:var(--navy);font-size:0.9rem;margin-bottom:3px}
+    .tc-type{font-size:0.72rem;color:var(--muted);margin-bottom:6px}
+    .tc-desc{font-size:0.81rem;color:var(--muted);line-height:1.5}
+    /* INFO */
+    .info-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+    .ir{display:flex;gap:10px;padding:9px 14px;border-bottom:1px solid var(--border);font-size:0.83rem}
+    .ir:last-child{border-bottom:none}
+    .ir-lbl{font-weight:700;color:var(--navy);min-width:100px;flex-shrink:0;font-size:0.77rem}
+    .ir-val{color:var(--muted)}
+    /* AD */
+    .ad-spot{border-radius:10px;overflow:hidden;border:1px solid var(--dune);margin-bottom:12px}
+    .ad-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:5px 12px;background:#FAFAF7;border-bottom:1px solid var(--border);text-align:center}
+    .ad-inner{padding:14px;background:#fff}
+    .ad-ph{background:var(--bg);border:1.5px dashed var(--dune);border-radius:7px;padding:16px;text-align:center}
+    .ad-ph p{font-size:0.78rem;color:var(--muted);margin-bottom:5px}
+    .ad-ph a{font-size:0.78rem;font-weight:700;color:var(--blue)}
+    .sidebar-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+    .sidebar-card h4{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:10px}
+    .sidebar-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+    .sidebar-list li{font-size:0.82rem;color:var(--muted);padding-left:13px;position:relative;line-height:1.4}
+    .sidebar-list li::before{content:'›';position:absolute;left:0;color:var(--blue);font-weight:700}
+    .site-footer{background:var(--navy);padding:18px 24px;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:40px}
+    .site-footer a{color:var(--blue)}
+    @media(max-width:680px){.page-wrap{grid-template-columns:1fr}.tenant-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/articles/shopping-centres.html">Shopping</a><span>/</span>The Yard</span>
+</nav>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eye">Dining & Retail Precinct · Pāpāmoa</div>
+    <h1>The <em>Yard</em></h1>
+    <p class="hero-sub">A curated precinct of independent food, retail and lifestyle businesses in Pāpāmoa — one of the suburb's most distinctive gathering places.</p>
+  </div>
+</header>
+<div class="page-wrap">
+  <main>
+    <section class="section">
+      <h2 class="section-title"><span>🏪</span> About The Yard</h2>
+      <p>The Yard is a precinct-style retail and dining destination in Pāpāmoa that has developed a loyal following for its curated mix of independent businesses. Unlike the big-box shopping centres, The Yard draws people in with character — smaller, owner-operated businesses in a setting that encourages browsing and lingering.</p>
+      <p>The precinct is home to a mix of café, food, artisan retail and services. It attracts both locals who visit regularly and visitors who discover it while staying at Pāpāmoa Beach.</p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title"><span>🏬</span> Businesses at The Yard</h2>
+      <div class="tenant-grid">
+        <div class="tenant-card">
+          <div class="tc-name">Coffee & Café</div>
+          <div class="tc-type">Food & beverage</div>
+          <p class="tc-desc">The Yard's café offering draws a strong morning coffee crowd. Good brunch options available. Indoor and outdoor seating.</p>
+        </div>
+        <div class="tenant-card">
+          <div class="tc-name">Artisan & gift retail</div>
+          <div class="tc-type">Retail</div>
+          <p class="tc-desc">Locally made gifts, homewares and lifestyle products. Popular for finding something original that you won't find in a chain store.</p>
+        </div>
+        <div class="tenant-card">
+          <div class="tc-name">Food & specialty</div>
+          <div class="tc-type">Food & beverage</div>
+          <p class="tc-desc">Specialty food offerings including fresh produce and gourmet products alongside the café.</p>
+        </div>
+        <div class="tenant-card">
+          <div class="tc-name">Services</div>
+          <div class="tc-type">Professional services</div>
+          <p class="tc-desc">A selection of professional service businesses operating from The Yard precinct.</p>
+        </div>
+      </div>
+
+      <div class="ad-spot">
+        <div class="ad-label">⭐ Gold Spotlight — The Yard Business</div>
+        <div class="ad-inner"><div class="ad-ph">
+          <p>Business at The Yard? Be the first listing locals see when they search for what you offer in Pāpāmoa.</p>
+          <a href="/index.html">Claim Gold Spotlight — $1,199 + GST/yr →</a>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title"><span>ℹ️</span> Getting There</h2>
+      <div class="info-card">
+        <div class="ir"><span class="ir-lbl">Location</span><span class="ir-val">Pāpāmoa Beach Road, Pāpāmoa (confirm current address via Google Maps)</span></div>
+        <div class="ir"><span class="ir-lbl">Parking</span><span class="ir-val">On-site parking available. Street parking nearby.</span></div>
+        <div class="ir"><span class="ir-lbl">Hours</span><span class="ir-val">Varies by business. Most open 7 days. Café typically from 7am.</span></div>
+        <div class="ir"><span class="ir-lbl">Events</span><span class="ir-val">The Yard hosts occasional markets and community events — see <a href="/articles/news-events.html">events page</a></span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title"><span>📣</span> Events at The Yard</h2>
+      <p>The Yard has hosted a range of community events including Saturday markets, pop-up vendors and seasonal events. Check the <a href="/articles/news-events.html">Pāpāmoa events page</a> or The Yard's social media for current event listings.</p>
+      <div class="ad-spot">
+        <div class="ad-label">Events & Sponsorship</div>
+        <div class="ad-inner"><div class="ad-ph">
+          <p>Event organiser or sponsor looking to reach The Yard's audience? Advertise here.</p>
+          <a href="/index.html">Get listed →</a>
+        </div></div>
+      </div>
+    </section>
+  </main>
+
+  <aside>
+    <div class="sidebar-card">
+      <h4>Quick info</h4>
+      <ul class="sidebar-list">
+        <li><strong>Type:</strong> Curated precinct</li>
+        <li><strong>Vibe:</strong> Independent, character-driven</li>
+        <li><strong>Best for:</strong> Coffee, gifts, browsing</li>
+        <li><strong>Parking:</strong> On-site, free</li>
+        <li><strong>Open:</strong> 7 days (hours vary)</li>
+      </ul>
+    </div>
+    <div class="sidebar-card">
+      <h4>Related pages</h4>
+      <ul class="sidebar-list">
+        <li><a href="/articles/shopping-centres.html">Shopping Centres</a></li>
+        <li><a href="/articles/news-events.html">Events in Pāpāmoa</a></li>
+        <li><a href="/articles/dinner-at-the-domain.html">Dinner at the Domain</a></li>
+        <li><a href="/categories/restaurants-papamoa.html">Food & Drink</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+<footer class="site-footer">
+  <a href="/">Papamoa.info</a> — Tenant information updated periodically. Confirm current businesses directly before visiting.
+</footer>
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
+</body>
+</html>

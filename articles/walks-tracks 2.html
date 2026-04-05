@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walks & Tracks in Pāpāmoa | Best Walking Tracks Near Pāpāmoa Beach | Papamoa.info</title>
+  <meta name="description" content="The best walks and tracks in and around Pāpāmoa Beach — Te Ara o Wairakei, Pāpāmoa Hills, beach walks, Kaituna loop and more. Distances, times, dog rules and parking info.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#2B3F5C;--blue:#3AABDE;--lime:#7DC143;--sand:#F5EFE0;--dune:#D4C4A0;--coral:#E8344A;--white:#fff;--body:#1E2D3E;--muted:#607080;--border:#DDE5EE;--bg:#F4F7FA;--gold:#C8962A}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--body);line-height:1.65}
+    a{color:var(--blue)}
+    .site-nav{background:var(--navy);padding:10px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .nav-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff;text-decoration:none}
+    .nav-brand em{font-style:normal;color:var(--blue)}
+    .breadcrumb{font-size:0.75rem;color:rgba(255,255,255,0.45)}
+    .breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none}
+    .breadcrumb span{margin:0 5px;opacity:0.4}
+    .hero{background:linear-gradient(150deg,#1A3028,#2B4A38);padding:44px 24px 40px;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lime),var(--blue))}
+    .hero-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+    .hero-eye{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime);margin-bottom:10px}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:12px}
+    .hero h1 em{font-style:italic;color:var(--lime)}
+    .hero-sub{font-size:0.97rem;color:rgba(255,255,255,0.65);max-width:600px;line-height:1.7;margin-bottom:20px}
+    .hero-filters{display:flex;flex-wrap:wrap;gap:8px}
+    .hf{font-size:0.72rem;font-weight:700;padding:5px 12px;border-radius:20px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);cursor:pointer;transition:all 0.2s;font-family:'Figtree',sans-serif}
+    .hf.active,.hf:hover{background:var(--lime);border-color:var(--lime);color:#fff}
+    .page-wrap{max-width:960px;margin:0 auto;padding:36px 20px 80px}
+    .two-col{display:grid;grid-template-columns:1fr 280px;gap:28px;align-items:start}
+    .main-col{min-width:0}
+    .side-col{display:flex;flex-direction:column;gap:16px}
+    .section-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px}
+    /* WALK CARDS */
+    .walk-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;transition:box-shadow 0.2s}
+    .walk-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.08);border-color:var(--blue)}
+    .walk-head{display:grid;grid-template-columns:64px 1fr;align-items:stretch}
+    .walk-icon{background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+    .walk-header{padding:14px 16px;flex:1}
+    .walk-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+    .walk-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+    .wt{font-size:0.67rem;font-weight:700;padding:2px 8px;border-radius:3px}
+    .wt-easy{background:#EAF7EE;color:#1A7A42}
+    .wt-mod{background:#FFF3E0;color:#8B4500}
+    .wt-hard{background:#FDEAEA;color:#B71C1C}
+    .wt-blue{background:#EBF5FB;color:#1A5080}
+    .wt-purple{background:#F3E5F5;color:#6A0DAD}
+    .wt-dogs{background:#E8F4FD;color:#1A5080}
+    .wt-nodogs{background:#FDEAEA;color:#B71C1C}
+    .wt-access{background:#E8F5E9;color:#2A6A3A}
+    .wt-closed{background:#FDEAEA;color:#B71C1C}
+    .walk-desc{padding:0 16px 16px;font-size:0.84rem;color:var(--muted);line-height:1.6}
+    .walk-footer{padding:10px 16px;background:#FAFBFC;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .walk-meta-items{display:flex;flex-wrap:wrap;gap:12px}
+    .wmi{font-size:0.76rem;color:var(--muted);display:flex;align-items:center;gap:4px}
+    .wmi strong{color:var(--navy)}
+    .walk-link{font-size:0.78rem;font-weight:700;color:var(--blue);text-decoration:none}
+    .walk-link:hover{text-decoration:underline}
+    /* SIDEBAR */
+    .sidebar-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px}
+    .sidebar-card h4{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:10px}
+    .sidebar-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+    .sidebar-list li{font-size:0.82rem;color:var(--muted);padding-left:13px;position:relative;line-height:1.4}
+    .sidebar-list li::before{content:'›';position:absolute;left:0;color:var(--blue);font-weight:700}
+    .ad-spot{border-radius:10px;overflow:hidden;border:1px solid var(--dune)}
+    .ad-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:5px 12px;background:#FAFAF7;border-bottom:1px solid var(--border);text-align:center}
+    .ad-inner{padding:14px}
+    .ad-placeholder{background:var(--bg);border:1.5px dashed var(--dune);border-radius:7px;padding:16px;text-align:center}
+    .ad-placeholder p{font-size:0.78rem;color:var(--muted);margin-bottom:6px}
+    .ad-placeholder a{font-size:0.78rem;font-weight:700;color:var(--blue)}
+    .alert-warn{background:#FFF8E8;border-left:4px solid #F5C842;border-radius:0 7px 7px 0;padding:12px 15px;font-size:0.84rem;color:#6A4800;margin-bottom:20px;line-height:1.55}
+    .tip-box{background:linear-gradient(135deg,#EBF8F5,#DDF0E8);border:1px solid #A8D8C0;border-radius:10px;padding:16px 18px;margin-bottom:20px}
+    .tip-box h4{font-size:0.8rem;font-weight:700;color:#1A5C3C;margin-bottom:8px}
+    .tip-box ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+    .tip-box li{font-size:0.82rem;color:#2A6A48;padding-left:14px;position:relative}
+    .tip-box li::before{content:'✓';position:absolute;left:0;color:var(--lime)}
+    .site-footer{background:var(--navy);padding:20px 24px;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:40px}
+    .site-footer a{color:var(--blue)}
+    @media(max-width:720px){.two-col{grid-template-columns:1fr}.side-col{order:-1}}
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb"><a href="/">Home</a><span>/</span>Walks & Tracks</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eye">Outdoor Recreation · Pāpāmoa Beach · Bay of Plenty</div>
+    <h1>Walks &amp; Tracks<br>near <em>Pāpāmoa</em></h1>
+    <p class="hero-sub">From a flat beach stroll to the summit of the Pāpāmoa Hills, there's a walk for every ability. Here's every track worth knowing about — with distances, times, dog rules and parking.</p>
+    <div class="hero-filters">
+      <button class="hf active">All walks</button>
+      <button class="hf">Dog-friendly</button>
+      <button class="hf">Easy</button>
+      <button class="hf">Summit views</button>
+      <button class="hf">Accessible</button>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <div class="two-col">
+    <main class="main-col">
+
+      <div class="alert-warn">
+        <strong>Pāpāmoa Hills track update (April 2026):</strong> The park partially reopened 3 April 2026 after January landslips. Only the Summerhills Track is currently open. See individual track cards below.
+      </div>
+
+      <h2 class="section-title"><span>🚶</span> All Walks near Pāpāmoa</h2>
+
+      <!-- TE ARA O WAIRAKEI -->
+      <div class="walk-card">
+        <div class="walk-head">
+          <div class="walk-icon">🌊</div>
+          <div class="walk-header">
+            <div class="walk-name">Te Ara o Wairakei Coastal Walkway</div>
+            <div class="walk-tags">
+              <span class="wt wt-easy">Easy</span>
+              <span class="wt wt-dogs">🐕 Dog-friendly (on-lead sections)</span>
+              <span class="wt wt-access">Mostly accessible</span>
+              <span class="wt wt-blue">Paved path</span>
+            </div>
+          </div>
+        </div>
+        <div class="walk-desc">
+          Te Ara o Wairakei is Pāpāmoa's signature coastal walkway, running parallel to the beach through the heart of the suburb. The shared path links residential areas, the beach, Karaka Pines retirement village and connects toward The Sands Town Centre. It's flat, well-paved and popular with walkers, runners and cyclists at all hours. Beach access points are frequent — duck off the path for a beach walk at any point. Dogs are welcome on-lead in most sections; check current TCC rules for the Pāpāmoa Shared Path under proposed bylaw changes (March 2026 consultation).
+        </div>
+        <div class="walk-footer">
+          <div class="walk-meta-items">
+            <span class="wmi">📍 <strong>Access:</strong> Multiple entry points along Pāpāmoa Beach Road</span>
+            <span class="wmi">🚗 <strong>Parking:</strong> Domain Road carpark, Taylor Reserve, Parton Road</span>
+            <span class="wmi">⏱ <strong>Time:</strong> Any distance — 20 min to 2+ hrs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAPAMOA BEACH WALK -->
+      <div class="walk-card">
+        <div class="walk-head">
+          <div class="walk-icon">🏖️</div>
+          <div class="walk-header">
+            <div class="walk-name">Pāpāmoa Beach Walk</div>
+            <div class="walk-tags">
+              <span class="wt wt-easy">Easy</span>
+              <span class="wt wt-dogs">🐕 Dog-friendly (most sections)</span>
+              <span class="wt wt-blue">16 km beach</span>
+            </div>
+          </div>
+        </div>
+        <div class="walk-desc">
+          Pāpāmoa's 16-kilometre white sand beach is one of the longest accessible beaches in the Bay of Plenty. Walk west toward Mount Maunganui for cafe access and the iconic Mauao backdrop, or head east toward the quieter stretches near the Kaituna River for solitude and fishing. The full beach from Mount boundary to Kaituna River is doable in around 3.5–4 hours one way with good conditions. Dogs are welcome on most of the beach and must be under effective control; prohibited near the Pāpāmoa Surf Club and in front of the Domain. See the Dogs in Pāpāmoa page for full rules.
+        </div>
+        <div class="walk-footer">
+          <div class="walk-meta-items">
+            <span class="wmi">📏 <strong>Max distance:</strong> 16 km one way</span>
+            <span class="wmi">⏱ <strong>Full beach:</strong> 3.5–4 hrs one way</span>
+            <span class="wmi">🅿 <strong>Parking:</strong> Domain Road, Taylor Reserve, Karewa Parade</span>
+          </div>
+          <a href="/articles/dogs-papamoa.html#beach-rules" class="walk-link">Dog rules →</a>
+        </div>
+      </div>
+
+      <!-- PAPAMOA HILLS SUMMIT -->
+      <div class="walk-card">
+        <div class="walk-head">
+          <div class="walk-icon">⛰️</div>
+          <div class="walk-header">
+            <div class="walk-name">Pāpāmoa Hills — Karangaumu Summit Track</div>
+            <div class="walk-tags">
+              <span class="wt wt-mod">Moderate</span>
+              <span class="wt wt-nodogs">🚫 No dogs</span>
+              <span class="wt wt-closed">⚠️ Closed April 2026</span>
+            </div>
+          </div>
+        </div>
+        <div class="walk-desc">
+          The classic track to the 224-metre summit of the Pāpāmoa Hills, passing through pine forest, native bush and open grassland. The summit trig station offers sweeping views from the Coromandel Peninsula to East Cape on a clear day. The track rises steeply from the Poplar Lane carpark. Currently closed following January 2026 landslips — only the Summerhills Track is currently open as an alternative route to the summit.
+        </div>
+        <div class="walk-footer">
+          <div class="walk-meta-items">
+            <span class="wmi">📏 <strong>Distance:</strong> ~2.5 km return</span>
+            <span class="wmi">⏱ <strong>Time:</strong> 45–60 min</span>
+            <span class="wmi">📍 <strong>Start:</strong> Poplar Lane, off SH2 between Pāpāmoa and Te Puke</span>
+          </div>
+          <a href="/articles/papamoa-hills.html" class="walk-link">Full park info →</a>
+        </div>
+      </div>
+
+      <!-- SUMMERHILLS TRACK -->
+      <div class="walk-card">
+        <div class="walk-head">
+          <div class="walk-icon">🌿</div>
+          <div class="walk-header">
+            <div class="walk-name">Pāpāmoa Hills — Summerhills Track</div>
+            <div class="walk-tags">
+              <span class="wt wt-mod">Moderate</span>
+              <span class="wt wt-nodogs">🚫 No dogs</span>
+              <span class="wt wt-easy" style="background:#EAF7EE;color:#1A7A42">✓ Open April 2026</span>
+            </div>
+          </div>
+        </div>
+        <div class="walk-desc">
+          Currently the primary open access to the Pāpāmoa Hills summit, starting from the Summerhill Recreation Farm carpark on Reid Road rather than the usual Poplar Lane entrance. Reaches the trig station at the 224-metre summit with panoramic Bay of Plenty views. Good walking shoes and water essential — no water supply in the park.
+        </div>
+        <div class="walk-footer">
+          <div class="walk-meta-items">
+            <span class="wmi">📏 <strong>Distance:</strong> ~3 km return</span>
+            <span class="wmi">⏱ <strong>Time:</strong> 60–90 min</span>
+            <span class="wmi">📍 <strong>Start:</strong> Summerhill Recreation Farm carpark, Reid Road</span>
+          </div>
+          <a href="/articles/papamoa-hills.html" class="walk-link">Full park info →</a>
+        </div>
+      </div>
+
+      <!-- KAITUNA RIVER -->
+      <div class="walk-card">
+        <div class="walk-head">
+          <div class="walk-icon">🌊</div>
+          <div class="walk-header">
+            <div class="walk-name">Kaituna River Track</div>
+            <div class="walk-tags">
+              <span class="wt wt-easy">Easy–Moderate</span>
+              <span class="wt wt-dogs">🐕 Dog-friendly</span>
+              <span class="wt wt-blue">River & wetland</span>
+            </div>
+          </div>
+        </div>
+        <div class="walk-desc">
+          The Kaituna River forms the eastern boundary of Pāpāmoa and flows into the ocean at Te Tumu. The lower Kaituna offers birdwatching, wetland scenery and a quieter alternative to the beach walk. The river is also popular for white-water kayaking upstream at Okere Falls — outside Pāpāmoa but a common day trip. Access from Kaituna Road or Te Tumu Road near the river mouth.
+        </div>
+        <div class="walk-footer">
+          <div class="walk-meta-items">
+            <span class="wmi">📍 <strong>Access:</strong> Kaituna Road / Te Tumu Road</span>
+            <span class="wmi">⏱ <strong>Time:</strong> 30 min–1.5 hrs depending on route</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOUNT MAUNGANUI -->
+      <div class="walk-card">
+        <div class="walk-head">
+          <div class="walk-icon">🏔️</div>
+          <div class="walk-header">
+            <div class="walk-name">Mauao (Mount Maunganui) Base Track & Summit</div>
+            <div class="walk-tags">
+              <span class="wt wt-easy">Base: Easy</span>
+              <span class="wt wt-mod">Summit: Moderate–Hard</span>
+              <span class="wt wt-nodogs">🚫 No dogs on Mauao</span>
+            </div>
+          </div>
+        </div>
+        <div class="walk-desc">
+          A short drive west along the beach from Pāpāmoa, Mauao (232 metres) is one of New Zealand's most iconic walks. The base track (3.4 km loop, 45 min, easy) circles the mountain at sea level with spectacular harbour and ocean views. The summit track adds significant elevation and takes 1.5–2 hours return. Dogs are prohibited on Mauao at all times. Best accessed from Pilot Bay or Leisure Island car parks, Mount Maunganui.
+        </div>
+        <div class="walk-footer">
+          <div class="walk-meta-items">
+            <span class="wmi">📏 <strong>Base track:</strong> 3.4 km loop</span>
+            <span class="wmi">⏱ <strong>Base time:</strong> 45 min</span>
+            <span class="wmi">📍 <strong>Location:</strong> Mount Maunganui (~15 min drive from Pāpāmoa)</span>
+          </div>
+          <a href="/articles/mount-maunganui.html" class="walk-link">About Mount Maunganui →</a>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <h4>Tips for walking in Pāpāmoa</h4>
+        <ul>
+          <li>Bring sunscreen and water — NZ sun is intense year-round</li>
+          <li>The beach and coastal path are best early morning or evening in summer to avoid heat</li>
+          <li>No drinking water available at Pāpāmoa Hills — carry at least 500ml per person</li>
+          <li>Check Pāpāmoa Hills track status before visiting: boprc.govt.nz</li>
+          <li>Dogs are prohibited at Pāpāmoa Hills entirely — leave them home for that trip</li>
+          <li>Tick resistance recommended for bush and long-grass sections</li>
+        </ul>
+      </div>
+
+    </main>
+
+    <aside class="side-col">
+
+      <div class="sidebar-card">
+        <h4>Quick comparison</h4>
+        <ul class="sidebar-list">
+          <li>Coastal walkway — <strong>Easy, dogs ok</strong></li>
+          <li>Beach walk — <strong>Easy, dogs ok (most)</strong></li>
+          <li>Pāpāmoa Hills summit — <strong>Moderate, no dogs</strong></li>
+          <li>Kaituna River — <strong>Easy, dogs ok</strong></li>
+          <li>Mauao base track — <strong>Easy, no dogs</strong></li>
+          <li>Mauao summit — <strong>Hard, no dogs</strong></li>
+        </ul>
+      </div>
+
+      <div class="ad-spot">
+        <div class="ad-label">Guided Tours & Outdoor Hire</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>Guided walks, e-bike hire or outdoor experiences near Pāpāmoa? Reach every local walker.</p>
+            <a href="/index.html">Get a Gold Spotlight →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-spot">
+        <div class="ad-label">Bike Hire & Active Transport</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>Bike hire, e-bike or surf hire near the Pāpāmoa walkway? Advertise here.</p>
+            <a href="/index.html">Get listed →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>Related pages</h4>
+        <ul class="sidebar-list">
+          <li><a href="/articles/papamoa-hills.html">Pāpāmoa Hills Park</a></li>
+          <li><a href="/articles/gordon-spratt-reserve.html">Gordon Spratt Reserve</a></li>
+          <li><a href="/articles/dogs-papamoa.html">Dog rules & walking areas</a></li>
+          <li><a href="/articles/parks-playgrounds.html">Parks & Playgrounds</a></li>
+          <li><a href="/articles/mount-maunganui.html">Mount Maunganui</a></li>
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="/">Papamoa.info</a> — Pāpāmoa's local directory. Track conditions change — always check with BOPRC before visiting Pāpāmoa Hills.
+</footer>
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weddings in Pāpāmoa | Venues, Photographers & Local Suppliers | Papamoa.info</title>
+  <meta name="description" content="Plan your Pāpāmoa beach wedding. Venues, photographers, celebrants, florists and local wedding suppliers on New Zealand's most beautiful stretch of coast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ivory: #FAF7F2;
+      --cream: #F2EDE3;
+      --linen: #E8DFD0;
+      --sand: #D4C4A8;
+      --blush: #D9A89C;
+      --rose: #C07868;
+      --terracotta: #A85840;
+      --ink: #1C2635;
+      --navy: #2B3F5C;
+      --sage: #7A9080;
+      --gold: #B8965A;
+      --white: #FFFFFF;
+      --muted: #7A7060;
+      --body: #3A3028;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--ivory);
+      color: var(--body);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* =====================
+       DECORATIVE ELEMENTS
+    ===================== */
+    .deco-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 auto 24px;
+      width: fit-content;
+    }
+
+    .deco-line::before,
+    .deco-line::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: var(--sand);
+    }
+
+    .deco-diamond {
+      width: 6px; height: 6px;
+      background: var(--blush);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .deco-leaf {
+      color: var(--sage);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* =====================
+       HERO
+    ===================== */
+    .hero {
+      background: var(--ink);
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative botanical pattern - pure CSS */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 75% 40%, rgba(217,168,156,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 20% 70%, rgba(122,144,128,0.10) 0%, transparent 60%);
+    }
+
+    .hero-text-col {
+      padding: 80px 56px 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-image-col {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative image placeholder that looks intentional */
+    .hero-image-col::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(217,168,156,0.25) 0%, rgba(28,38,53,0.4) 50%),
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.015) 40px,
+          rgba(255,255,255,0.015) 80px
+        );
+    }
+
+    /* Linen texture overlay */
+    .hero-image-col::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .hero-image-label {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      z-index: 3;
+      background: rgba(28,38,53,0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.6);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      padding: 8px 14px;
+      border-radius: 4px;
+    }
+
+    /* Big decorative botanical lines */
+    .hero-botanical {
+      position: absolute;
+      right: 28px;
+      top: 60px;
+      width: 42%;
+      height: calc(100% - 120px);
+      z-index: 1;
+      opacity: 0.12;
+    }
+
+    .breadcrumb {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 36px;
+      letter-spacing: 0.04em;
+    }
+
+    .breadcrumb a { color: rgba(255,255,255,0.45); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--blush); }
+    .breadcrumb span { margin: 0 6px; }
+
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--blush);
+      letter-spacing: 0.12em;
+      margin-bottom: 18px;
+      opacity: 0.9;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.6rem, 4.5vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--blush);
+      display: block;
+    }
+
+    .hero-body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 380px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-stat .stat-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .hero-stat .stat-label {
+      font-size: 0.73rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 60px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .scroll-line {
+      width: 36px;
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* =====================
+       NAV PILLS
+    ===================== */
+    .category-nav {
+      background: var(--cream);
+      border-bottom: 1px solid var(--linen);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .category-nav-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .category-nav-inner::-webkit-scrollbar { display: none; }
+
+    .nav-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 14px 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-pill:hover { color: var(--terracotta); border-bottom-color: var(--blush); }
+    .nav-pill .pill-icon { font-size: 0.9rem; }
+
+    /* =====================
+       MAIN WRAPPER
+    ===================== */
+    .main {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+
+    /* =====================
+       SECTION HEADER
+    ===================== */
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--rose);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .section-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 14px auto 0;
+      line-height: 1.75;
+    }
+
+    /* =====================
+       WHY PAPAMOA
+    ===================== */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 16px;
+      border: 1px solid var(--linen);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .why-card {
+      background: var(--white);
+      padding: 32px 28px;
+      position: relative;
+    }
+
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blush), var(--rose));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .why-card:hover::before { opacity: 1; }
+
+    .why-icon {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .why-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .why-card p {
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* =====================
+       VENUE CARDS
+    ===================== */
+    .section {
+      margin-bottom: 72px;
+    }
+
+    .venues-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .venue-card {
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid var(--linen);
+      display: grid;
+      grid-template-columns: 240px 1fr auto;
+      overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .venue-card:hover {
+      box-shadow: 0 8px 32px rgba(28,38,53,0.10);
+      transform: translateY(-1px);
+    }
+
+    .venue-image-slot {
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .venue-image-slot .venue-type-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--sand);
+      text-align: center;
+      padding: 20px;
+      line-height: 1.4;
+      opacity: 0.8;
+    }
+
+    /* Each venue gets a unique warm background */
+    .venue-card:nth-child(1) .venue-image-slot { background: linear-gradient(135deg, #E8DFD0 0%, #D4C4A8 100%); }
+    .venue-card:nth-child(2) .venue-image-slot { background: linear-gradient(135deg, #DDE8D8 0%, #C4D4BE 100%); }
+    .venue-card:nth-child(3) .venue-image-slot { background: linear-gradient(135deg, #E8D8D0 0%, #D4BAAE 100%); }
+    .venue-card:nth-child(4) .venue-image-slot { background: linear-gradient(135deg, #D8DCE8 0%, #B8C4D8 100%); }
+
+    .venue-body {
+      padding: 24px 28px;
+    }
+
+    .venue-tag-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .vtag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    .vtag-beach { background: #E0F0F8; color: #1A6080; }
+    .vtag-indoor { background: #EEF4E8; color: #2A6030; }
+    .vtag-outdoor { background: #FEF9E8; color: #806020; }
+    .vtag-capacity { background: #F5F0E8; color: #604020; }
+    .vtag-intimate { background: #FAEAEE; color: #803040; }
+    .vtag-papamoa { background: rgba(192,120,104,0.15); color: var(--terracotta); }
+
+    .venue-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .venue-location {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .venue-desc {
+      font-size: 0.88rem;
+      color: var(--body);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .venue-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .venue-detail {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .venue-detail .di { font-size: 0.85rem; }
+
+    .venue-cta {
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 10px;
+      border-left: 1px solid var(--linen);
+    }
+
+    .btn-view {
+      background: var(--ink);
+      color: var(--white);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 10px 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-view:hover { background: var(--terracotta); }
+
+    .btn-enquire {
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 5px;
+      border: 1px solid var(--linen);
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-enquire:hover { border-color: var(--blush); color: var(--rose); }
+
+    .listing-badge {
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* =====================
+       SUPPLIER GRID
+    ===================== */
+    .supplier-category {
+      margin-bottom: 52px;
+    }
+
+    .supplier-cat-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--linen);
+    }
+
+    .supplier-cat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .supplier-cat-count {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .supplier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .supplier-card {
+      background: var(--white);
+      border: 1px solid var(--linen);
+      border-radius: 10px;
+      padding: 20px 20px 18px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+    }
+
+    .supplier-card:hover {
+      box-shadow: 0 4px 20px rgba(28,38,53,0.08);
+      border-color: var(--blush);
+    }
+
+    .supplier-card.unconfirmed {
+      background: #FAFAF8;
+      border-style: dashed;
+    }
+
+    .supplier-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .supplier-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .supplier-loc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .supplier-desc {
+      font-size: 0.82rem;
+      color: var(--body);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .supplier-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .stag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: var(--cream);
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .gold-ring {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #D4A84A, #F0C870, #C08030);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.55rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .supplier-card.placeholder {
+      background: var(--cream);
+      border-style: dashed;
+      border-color: var(--sand);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 120px;
+    }
+
+    .placeholder-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--sand);
+      margin-bottom: 8px;
+    }
+
+    .btn-list-here {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--rose);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid var(--blush);
+      padding-bottom: 1px;
+    }
+
+    /* =====================
+       TIPS STRIP
+    ===================== */
+    .tips-strip {
+      background: var(--ink);
+      border-radius: 14px;
+      padding: 48px 52px;
+      margin-bottom: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tips-strip::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217,168,156,0.12) 0%, transparent 70%);
+    }
+
+    .tips-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .tips-header p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--blush);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .tips-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tip-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .tip-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: rgba(217,168,156,0.25);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 36px;
+    }
+
+    .tip-content h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 5px;
+    }
+
+    .tip-content p {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+
+    /* =====================
+       BEACH CEREMONY
+    ===================== */
+    .beach-info {
+      background: linear-gradient(135deg, #EAE0D4, #F2ECE4);
+      border-radius: 14px;
+      padding: 44px 48px;
+      margin-bottom: 72px;
+      border: 1px solid var(--linen);
+    }
+
+    .beach-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .beach-info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .beach-info h2 em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    .beach-info p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .beach-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .beach-checklist li {
+      font-size: 0.86rem;
+      color: var(--body);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .beach-checklist li::before {
+      content: '✦';
+      color: var(--blush);
+      font-size: 0.65rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    /* =====================
+       LISTING CTA
+    ===================== */
+    .list-cta {
+      background: var(--white);
+      border: 1px solid var(--linen);
+      border-radius: 14px;
+      padding: 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 72px;
+    }
+
+    .list-cta::before {
+      content: '❧';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.4rem;
+      color: var(--linen);
+    }
+
+    .list-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 12px;
+      margin-top: 20px;
+    }
+
+    .list-cta p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--terracotta);
+      color: var(--white);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 14px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: #905038; }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 14px 28px;
+      border-radius: 6px;
+      border: 1.5px solid var(--linen);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--blush); color: var(--rose); }
+
+    .pricing-note {
+      margin-top: 20px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* =====================
+       FOOTER NOTE
+    ===================== */
+    .footer-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--sand);
+      padding-top: 24px;
+      border-top: 1px solid var(--linen);
+    }
+
+    /* =====================
+       ANIMATIONS
+    ===================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-text-col > * {
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero-text-col .breadcrumb   { animation-delay: 0.1s; }
+    .hero-text-col .hero-eyebrow { animation-delay: 0.2s; }
+    .hero-text-col h1            { animation-delay: 0.3s; }
+    .hero-text-col .hero-body    { animation-delay: 0.4s; }
+    .hero-text-col .hero-stats   { animation-delay: 0.5s; }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text-col { padding: 60px 28px 48px; }
+      .hero-image-col { display: none; }
+      .hero-scroll { left: 28px; }
+      .why-grid { grid-template-columns: 1fr; gap: 1px; }
+      .venue-card { grid-template-columns: 160px 1fr; }
+      .venue-cta { display: none; }
+      .supplier-grid { grid-template-columns: 1fr 1fr; }
+      .tips-grid { grid-template-columns: 1fr; gap: 20px; }
+      .tips-strip { padding: 36px 28px; }
+      .beach-info-grid { grid-template-columns: 1fr; gap: 24px; }
+      .beach-info { padding: 32px 28px; }
+      .list-cta { padding: 36px 28px; }
+    }
+
+    @media (max-width: 600px) {
+      .venue-card { grid-template-columns: 1fr; }
+      .venue-image-slot { min-height: 100px; }
+      .supplier-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="hero-text-col">
+    <div class="breadcrumb">
+      <a href="/">Papamoa.info</a>
+      <span>/</span>
+      <a href="/articles/local-government.html">Local Info</a>
+      <span>/</span>
+      Weddings
+    </div>
+    <p class="hero-eyebrow">Say I do in Pāpāmoa</p>
+    <h1>New Zealand's most beautiful stretch of coast<em>is your wedding backdrop.</em></h1>
+    <p class="hero-body">Sixteen kilometres of white sand, golden light year-round, and a community of exceptional local suppliers. This is where couples come to celebrate.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-n">16km</span>
+        <span class="stat-label">of white sand beach</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-n">4+</span>
+        <span class="stat-label">venues in Pāpāmoa</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-n">BOP</span>
+        <span class="stat-label">Sunshine capital, NZ</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image-col">
+    <!-- SVG botanical decorative element -->
+    <svg class="hero-botanical" viewBox="0 0 300 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M150 580 Q150 400 200 300 Q250 200 180 100" stroke="rgba(217,168,156,1)" stroke-width="1.5" fill="none"/>
+      <path d="M150 580 Q150 420 100 320 Q50 220 120 120" stroke="rgba(122,144,128,1)" stroke-width="1.2" fill="none"/>
+      <!-- leaves -->
+      <ellipse cx="200" cy="290" rx="30" ry="12" transform="rotate(-30 200 290)" stroke="rgba(217,168,156,0.8)" stroke-width="1" fill="rgba(217,168,156,0.1)"/>
+      <ellipse cx="180" cy="220" rx="25" ry="10" transform="rotate(20 180 220)" stroke="rgba(217,168,156,0.7)" stroke-width="1" fill="rgba(217,168,156,0.08)"/>
+      <ellipse cx="100" cy="310" rx="28" ry="11" transform="rotate(40 100 310)" stroke="rgba(122,144,128,0.8)" stroke-width="1" fill="rgba(122,144,128,0.1)"/>
+      <ellipse cx="115" cy="230" rx="22" ry="9" transform="rotate(-20 115 230)" stroke="rgba(122,144,128,0.7)" stroke-width="1" fill="rgba(122,144,128,0.08)"/>
+      <circle cx="195" cy="118" r="5" stroke="rgba(217,168,156,0.9)" stroke-width="1" fill="rgba(217,168,156,0.2)"/>
+      <circle cx="122" cy="128" r="4" stroke="rgba(122,144,128,0.9)" stroke-width="1" fill="rgba(122,144,128,0.2)"/>
+    </svg>
+    <div class="hero-image-label">Photo opportunities from ceremony to golden hour</div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    Explore suppliers
+  </div>
+</header>
+
+<!-- ==================== NAV ==================== -->
+<nav class="category-nav">
+  <div class="category-nav-inner">
+    <a href="#venues" class="nav-pill"><span class="pill-icon">🏛️</span> Venues</a>
+    <a href="#photographers" class="nav-pill"><span class="pill-icon">📷</span> Photography</a>
+    <a href="#celebrants" class="nav-pill"><span class="pill-icon">💍</span> Celebrants</a>
+    <a href="#catering" class="nav-pill"><span class="pill-icon">🍽️</span> Catering</a>
+    <a href="#flowers" class="nav-pill"><span class="pill-icon">💐</span> Flowers &amp; Styling</a>
+    <a href="#beauty" class="nav-pill"><span class="pill-icon">✨</span> Hair &amp; Beauty</a>
+    <a href="#music" class="nav-pill"><span class="pill-icon">🎵</span> Music &amp; Entertainment</a>
+    <a href="#beach-ceremony" class="nav-pill"><span class="pill-icon">🌊</span> Beach Ceremonies</a>
+  </div>
+</nav>
+
+<!-- ==================== MAIN ==================== -->
+<main class="main">
+
+  <!-- WHY PAPAMOA -->
+  <section class="section">
+    <div class="section-header">
+      <p class="section-eyebrow">Why couples choose us</p>
+      <h2 class="section-title">Pāpāmoa is made for weddings</h2>
+      <p class="section-body">From the light to the landscape, everything about this place conspires to make your day extraordinary.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon">🌅</span>
+        <h3>The light is exceptional</h3>
+        <p>Pāpāmoa's east-facing beach catches soft morning light and transforms at golden hour. Photographers consistently rate it among the Bay of Plenty's best backdrops, with views out to Motiti Island on clear days.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🏖️</span>
+        <h3>16km of white sand</h3>
+        <p>The longest uninterrupted stretch of beach in the Bay of Plenty means you'll never be crowded. From Pāpāmoa East to the surf club, there's always a quiet spot to make your own.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">☀️</span>
+        <h3>New Zealand's sunniest region</h3>
+        <p>The Bay of Plenty earns its name. Tauranga-Pāpāmoa consistently records among the highest sunshine hours in New Zealand, giving outdoor ceremonies the best possible odds year-round.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🏡</span>
+        <h3>Accommodation sorted</h3>
+        <p>Pāpāmoa has a huge range of holiday accommodation from beachfront apartments to large family homes. Guests travelling from Auckland or Wellington arrive at Tauranga Airport just minutes away.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🍷</span>
+        <h3>World-class food and drink</h3>
+        <p>The Bay of Plenty produces some of New Zealand's finest fruit, seafood and artisan produce. Local caterers know how to make the most of it, and the local hospitality scene has grown dramatically in recent years.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">📍</span>
+        <h3>Everything close by</h3>
+        <p>Florists, photographers, beauty salons, celebrants and stylists all serve the Pāpāmoa area. Many are based here. You're not outsourcing from far away &mdash; you're working with people who know this place.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUES -->
+  <section class="section" id="venues">
+    <div class="section-header">
+      <p class="section-eyebrow">Where to celebrate</p>
+      <h2 class="section-title">Venues in &amp; around Pāpāmoa</h2>
+    </div>
+
+    <div class="venues-list">
+
+      <div class="venue-card">
+        <div class="venue-image-slot">
+          <span class="venue-type-label">Beachfront<br>Venue</span>
+        </div>
+        <div class="venue-body">
+          <div class="venue-tag-row">
+            <span class="vtag vtag-papamoa">Pāpāmoa</span>
+            <span class="vtag vtag-beach">Beachfront</span>
+            <span class="vtag vtag-capacity">Up to 200 guests</span>
+          </div>
+          <div class="venue-name">Pāpāmoa Beach Surf Lifesaving Club</div>
+          <div class="venue-location">📍 Pāpāmoa Beach Road, Pāpāmoa Beach</div>
+          <p class="venue-desc">An iconic venue sitting directly on the Pāpāmoa beachfront, with breathtaking views across the water to Motiti Island. The club combines a relaxed coastal atmosphere with modern facilities, and the beach makes for unforgettable ceremony and photo backdrops. Couples can bring their chosen caterer.</p>
+          <div class="venue-details">
+            <span class="venue-detail"><span class="di">🎂</span> BYO caterer welcome</span>
+            <span class="venue-detail"><span class="di">🌊</span> Direct beach access</span>
+            <span class="venue-detail"><span class="di">🌅</span> Sunset views</span>
+          </div>
+        </div>
+        <div class="venue-cta">
+          <span class="listing-badge">⭐ Gold listing</span>
+          <a href="#" class="btn-view">View listing</a>
+          <a href="#" class="btn-enquire">Enquire</a>
+        </div>
+      </div>
+
+      <div class="venue-card">
+        <div class="venue-image-slot">
+          <span class="venue-type-label">Oceanfront<br>Restaurant</span>
+        </div>
+        <div class="venue-body">
+          <div class="venue-tag-row">
+            <span class="vtag vtag-papamoa">Pāpāmoa</span>
+            <span class="vtag vtag-beach">Beachfront</span>
+            <span class="vtag vtag-intimate">Up to 70 guests</span>
+          </div>
+          <div class="venue-name">Bluebiyou</div>
+          <div class="venue-location">📍 Pāpāmoa Beach Road, Pāpāmoa Beach</div>
+          <p class="venue-desc">The only restaurant directly on the beachfront in the entire Bay of Plenty. Bluebiyou offers intimate receptions with panoramic ocean views, in-house catering focused on locally sourced seafood, and exclusive use of the function room and restaurant from 10:30am. A dedicated wedding coordinator is included. Winter rate available May&ndash;September.</p>
+          <div class="venue-details">
+            <span class="venue-detail"><span class="di">🦞</span> Seafood-focused menus</span>
+            <span class="venue-detail"><span class="di">🥂</span> Dedicated coordinator</span>
+            <span class="venue-detail"><span class="di">🌙</span> Until midnight</span>
+          </div>
+        </div>
+        <div class="venue-cta">
+          <a href="#" class="btn-view">View listing</a>
+          <a href="#" class="btn-enquire">Enquire</a>
+        </div>
+      </div>
+
+      <div class="venue-card">
+        <div class="venue-image-slot">
+          <span class="venue-type-label">Beach<br>Resort</span>
+        </div>
+        <div class="venue-body">
+          <div class="venue-tag-row">
+            <span class="vtag vtag-papamoa">Pāpāmoa</span>
+            <span class="vtag vtag-outdoor">Garden &amp; beach</span>
+            <span class="vtag vtag-capacity">Up to 200 guests</span>
+          </div>
+          <div class="venue-name">Pāpāmoa Beach Resort</div>
+          <div class="venue-location">📍 Pāpāmoa Beach Road, Pāpāmoa</div>
+          <p class="venue-desc">A fully serviced beachfront resort offering a range of indoor and outdoor event spaces including a garden area and large function room with ocean views. On-site accommodation means your guests can stay the night. A relaxed, casual setting that works beautifully for larger celebrations.</p>
+          <div class="venue-details">
+            <span class="venue-detail"><span class="di">🛏️</span> On-site accommodation</span>
+            <span class="venue-detail"><span class="di">🌿</span> Garden ceremony space</span>
+            <span class="venue-detail"><span class="di">🚗</span> Ample parking</span>
+          </div>
+        </div>
+        <div class="venue-cta">
+          <a href="#" class="btn-view">View listing</a>
+          <a href="#" class="btn-enquire">Enquire</a>
+        </div>
+      </div>
+
+      <div class="venue-card">
+        <div class="venue-image-slot">
+          <span class="venue-type-label">Modern<br>Event Space</span>
+        </div>
+        <div class="venue-body">
+          <div class="venue-tag-row">
+            <span class="vtag vtag-papamoa">Pāpāmoa</span>
+            <span class="vtag vtag-indoor">Indoor + outdoor</span>
+            <span class="vtag vtag-capacity">Up to 250 guests</span>
+          </div>
+          <div class="venue-name">Summer House Pāpāmoa</div>
+          <div class="venue-location">📍 Pāpāmoa East</div>
+          <p class="venue-desc">A sleek, contemporary event venue in Pāpāmoa with multiple event spaces including a garden area, large function room and deck. The modern design lends itself to stylish, elegant celebrations. Capacity for up to 250 guests and strong parking.</p>
+          <div class="venue-details">
+            <span class="venue-detail"><span class="di">🏛️</span> Contemporary design</span>
+            <span class="venue-detail"><span class="di">🌳</span> Garden ceremony</span>
+            <span class="venue-detail"><span class="di">🎉</span> Large capacity</span>
+          </div>
+        </div>
+        <div class="venue-cta">
+          <a href="#" class="btn-view">View listing</a>
+          <a href="#" class="btn-enquire">Enquire</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PHOTOGRAPHERS -->
+  <section class="section" id="photographers">
+    <div class="supplier-category">
+      <div class="supplier-cat-header">
+        <h3 class="supplier-cat-title">📷 Photographers &amp; Videographers</h3>
+        <span class="supplier-cat-count">Based in or serving Pāpāmoa</span>
+      </div>
+      <div class="supplier-grid">
+
+        <div class="supplier-card">
+          <div class="supplier-top">
+            <div>
+              <div class="supplier-name">Justin Aitken Photography</div>
+              <div class="supplier-loc">📍 Based in Pāpāmoa Beach</div>
+            </div>
+            <div class="gold-ring">★</div>
+          </div>
+          <p class="supplier-desc">Award-winning documentary-style wedding photographer based right here in Pāpāmoa Beach. Five-time Wedding Photographer of the Year at NZ's National Photography Awards. Natural, candid images with a romantic edge. Travels nationally.</p>
+          <div class="supplier-tags">
+            <span class="stag">Documentary style</span>
+            <span class="stag">Beach specialist</span>
+            <span class="stag">Videography</span>
+            <span class="stag">Award-winning</span>
+          </div>
+        </div>
+
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">Your studio here</p>
+          <a href="/index.html" class="btn-list-here">List your business →</a>
+        </div>
+
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">Your studio here</p>
+          <a href="/index.html" class="btn-list-here">List your business →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CELEBRANTS -->
+    <div class="supplier-category" id="celebrants">
+      <div class="supplier-cat-header">
+        <h3 class="supplier-cat-title">💍 Celebrants &amp; MCs</h3>
+        <span class="supplier-cat-count">Serving Pāpāmoa and Bay of Plenty</span>
+      </div>
+      <div class="supplier-grid">
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">Celebrants wanted</p>
+          <a href="/index.html" class="btn-list-here">List your services →</a>
+        </div>
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">Celebrants wanted</p>
+          <a href="/index.html" class="btn-list-here">List your services →</a>
+        </div>
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">Celebrants wanted</p>
+          <a href="/index.html" class="btn-list-here">List your services →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATERING -->
+    <div class="supplier-category" id="catering">
+      <div class="supplier-cat-header">
+        <h3 class="supplier-cat-title">🍽️ Catering &amp; Cakes</h3>
+        <span class="supplier-cat-count">Local caterers, food trucks &amp; cake makers</span>
+      </div>
+      <div class="supplier-grid">
+        <div class="supplier-card">
+          <div class="supplier-top">
+            <div>
+              <div class="supplier-name">Food101 Catering</div>
+              <div class="supplier-loc">📍 Bay of Plenty</div>
+            </div>
+          </div>
+          <p class="supplier-desc">Used by couples at Pāpāmoa Beach Surf Lifesaving Club and other BOP venues. Full-service event catering with flexible menus.</p>
+          <div class="supplier-tags">
+            <span class="stag">Full service</span>
+            <span class="stag">BYO venue ready</span>
+          </div>
+        </div>
+        <div class="supplier-card">
+          <div class="supplier-top">
+            <div>
+              <div class="supplier-name">Mumma Kim's Cakes</div>
+              <div class="supplier-loc">📍 Bay of Plenty</div>
+            </div>
+          </div>
+          <p class="supplier-desc">Custom wedding cakes made locally. Known for elegant designs and excellent flavour. Popular with Pāpāmoa couples.</p>
+          <div class="supplier-tags">
+            <span class="stag">Custom cakes</span>
+            <span class="stag">Wedding specialist</span>
+          </div>
+        </div>
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">Caterers wanted</p>
+          <a href="/index.html" class="btn-list-here">List your business →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOWERS -->
+    <div class="supplier-category" id="flowers">
+      <div class="supplier-cat-header">
+        <h3 class="supplier-cat-title">💐 Florists &amp; Stylists</h3>
+        <span class="supplier-cat-count">Floral design, venue styling &amp; hire</span>
+      </div>
+      <div class="supplier-grid">
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">Florists wanted</p>
+          <a href="/index.html" class="btn-list-here">List your business →</a>
+        </div>
+        <div class="supplier-card">
+          <div class="supplier-top">
+            <div>
+              <div class="supplier-name">Celebration Lane Pāpāmoa</div>
+              <div class="supplier-loc">📍 Pāpāmoa</div>
+            </div>
+          </div>
+          <p class="supplier-desc">Furniture and décor hire for weddings and events. Popular with Pāpāmoa Beach couples for ceremony and reception styling.</p>
+          <div class="supplier-tags">
+            <span class="stag">Furniture hire</span>
+            <span class="stag">Décor</span>
+            <span class="stag">Pāpāmoa-based</span>
+          </div>
+        </div>
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">Stylists wanted</p>
+          <a href="/index.html" class="btn-list-here">List your business →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- HAIR & BEAUTY -->
+    <div class="supplier-category" id="beauty">
+      <div class="supplier-cat-header">
+        <h3 class="supplier-cat-title">✨ Hair &amp; Makeup</h3>
+        <span class="supplier-cat-count">Bridal beauty in Pāpāmoa &amp; Tauranga</span>
+      </div>
+      <div class="supplier-grid">
+        <div class="supplier-card">
+          <div class="supplier-top">
+            <div>
+              <div class="supplier-name">Kitzo / White Salon</div>
+              <div class="supplier-loc">📍 Bay of Plenty</div>
+            </div>
+          </div>
+          <p class="supplier-desc">Bridal hair specialists with strong reviews from Pāpāmoa wedding couples. On-location services available for wedding day prep.</p>
+          <div class="supplier-tags">
+            <span class="stag">Bridal hair</span>
+            <span class="stag">On-location</span>
+          </div>
+        </div>
+        <div class="supplier-card">
+          <div class="supplier-top">
+            <div>
+              <div class="supplier-name">Sophie Garth Makeup</div>
+              <div class="supplier-loc">📍 Bay of Plenty</div>
+            </div>
+          </div>
+          <p class="supplier-desc">Bridal makeup artist with a natural, luminous style. Works at venues across the Bay of Plenty including Pāpāmoa Beach locations.</p>
+          <div class="supplier-tags">
+            <span class="stag">Bridal makeup</span>
+            <span class="stag">Natural style</span>
+          </div>
+        </div>
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">Your salon here</p>
+          <a href="/index.html" class="btn-list-here">List your business →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MUSIC -->
+    <div class="supplier-category" id="music">
+      <div class="supplier-cat-header">
+        <h3 class="supplier-cat-title">🎵 Music &amp; Entertainment</h3>
+        <span class="supplier-cat-count">Bands, DJs and live entertainment</span>
+      </div>
+      <div class="supplier-grid">
+        <div class="supplier-card">
+          <div class="supplier-top">
+            <div>
+              <div class="supplier-name">Black &amp; Gold Band</div>
+              <div class="supplier-loc">📍 Bay of Plenty</div>
+            </div>
+          </div>
+          <p class="supplier-desc">Live wedding band popular with Pāpāmoa and Tauranga couples. Covers a wide range of styles to keep guests of all ages on the floor.</p>
+          <div class="supplier-tags">
+            <span class="stag">Live band</span>
+            <span class="stag">Covers</span>
+            <span class="stag">BOP-based</span>
+          </div>
+        </div>
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">DJs &amp; bands wanted</p>
+          <a href="/index.html" class="btn-list-here">List your business →</a>
+        </div>
+        <div class="supplier-card placeholder">
+          <p class="placeholder-text">DJs &amp; bands wanted</p>
+          <a href="/index.html" class="btn-list-here">List your business →</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- BEACH CEREMONY INFO -->
+  <section id="beach-ceremony">
+    <div class="beach-info">
+      <div class="beach-info-grid">
+        <div>
+          <h2>Planning a <em>beach ceremony</em> in Pāpāmoa?</h2>
+          <p>Pāpāmoa Beach is one of New Zealand's most naturally beautiful ceremony settings. The long, uncrowded stretch means genuine privacy even in summer, and the views out over the bay are stunning at any time of day.</p>
+          <p>A few things to know before you start planning.</p>
+        </div>
+        <div>
+          <ul class="beach-checklist">
+            <li><strong>Permits:</strong> Check with Tauranga City Council for any permit requirements for ceremonies or structures on the beach or in reserves.</li>
+            <li><strong>Timing:</strong> Early morning or late afternoon light is exceptional on this east-facing beach. Golden hour starts roughly 90 minutes before sunset.</li>
+            <li><strong>Wind:</strong> Pāpāmoa can be breezy, especially in spring. Discuss wind with your stylist and florist early to plan accordingly.</li>
+            <li><strong>Tides:</strong> Check the tide chart for your ceremony date. A high tide can reduce the beach width substantially.</li>
+            <li><strong>Access:</strong> The beach is public. Most couples arrange a nearby venue for the reception so guests don't have to travel far post-ceremony.</li>
+            <li><strong>Backup plan:</strong> Any good Pāpāmoa venue has a wet-weather option. Confirm this when you book.</li>
+            <li><strong>Shoes optional:</strong> Seriously consider going barefoot. Photographers love it, and so do guests.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS STRIP -->
+  <div class="tips-strip">
+    <div class="tips-header">
+      <p>Local wisdom</p>
+      <h2>Tips from Pāpāmoa wedding suppliers</h2>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-item">
+        <span class="tip-num">01</span>
+        <div class="tip-content">
+          <h4>Book 12&ndash;18 months out in summer</h4>
+          <p>Popular venues and photographers fill fast for November through March. If your heart is set on a particular date or supplier, move early.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">02</span>
+        <div class="tip-content">
+          <h4>Consider a winter weekend</h4>
+          <p>May to September in the Bay of Plenty can be stunning and clear. Venues offer better rates and availability is excellent. Some venues discount specifically for off-peak.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">03</span>
+        <div class="tip-content">
+          <h4>Use local suppliers where you can</h4>
+          <p>Local photographers, florists and caterers know the venues, the light, and the logistics. That familiarity pays off on the day in ways that are hard to quantify.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">04</span>
+        <div class="tip-content">
+          <h4>Plan around the golden hour</h4>
+          <p>Pāpāmoa's east coast orientation means the best light for photos is early morning and late afternoon. Time your ceremony to finish with 2&ndash;3 hours of natural light left.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">05</span>
+        <div class="tip-content">
+          <h4>Guest accommodation is easy here</h4>
+          <p>Pāpāmoa has an enormous range of holiday houses and apartments. Booking an Airbnb or Bookabach for the bridal party is popular &mdash; and your photographer will love the natural light in beachside homes.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <span class="tip-num">06</span>
+        <div class="tip-content">
+          <h4>Motiti Island views on a clear day</h4>
+          <p>On a good day the view from Pāpāmoa Beach stretches to Motiti Island and beyond. Worth building your ceremony timing around if the weather cooperates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LISTING CTA -->
+  <div class="list-cta">
+    <h2>A Pāpāmoa wedding supplier?</h2>
+    <p>Get your business in front of couples planning their day on this coast. Listings on Papamoa.info carry the trust of a 20-year-old local domain &mdash; we rank in Google and appear in AI search results for Bay of Plenty wedding searches.</p>
+    <div class="cta-btns">
+      <a href="/index.html" class="btn-primary">Get listed today</a>
+      <a href="/index.html" class="btn-secondary">View listing options</a>
+    </div>
+    <p class="pricing-note">Silver listings from $599 + GST &bull; Gold Spotlight from $1,199 + GST &bull; One Gold per sub-category</p>
+  </div>
+
+  <p class="footer-note">
+    Papamoa.info is an independently operated local directory for Pāpāmoa, Bay of Plenty, New Zealand. Listing details are provided by businesses and verified where possible. &copy; Papamoa.info
+  </p>
+
+</main>
+
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
+</body>
+</html>

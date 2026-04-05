@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Police & Crime in Papamoa | Papamoa.info</title>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
 <style>
 :root{
   --navy:#0c1a2a;--deep:#142438;--steel:#1e3450;--slate:#2a4060;
@@ -123,20 +125,38 @@ footer a{color:var(--sage);text-decoration:none}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .article{animation:fadeUp .45s ease both}
 </style>
+<style>
+:root { --pnf-navy:#0D2B3E; --pnf-accent:#3AABDE; --pnf-font:'Figtree',sans-serif; --pnf-display:'Playfair Display',serif; }
+.pnf-nav { background:var(--pnf-navy); height:56px; padding:0 28px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:200; box-shadow:0 2px 12px rgba(0,0,0,0.25); gap:16px; }
+.pnf-logo { font-family:var(--pnf-display); font-weight:700; font-size:15px; color:#fff; text-decoration:none; flex-shrink:0; }
+.pnf-logo span { color:var(--pnf-accent); }
+.pnf-links { display:flex; align-items:center; gap:2px; flex:1; overflow-x:auto; scrollbar-width:none; }
+.pnf-links::-webkit-scrollbar { display:none; }
+.pnf-link { font-family:var(--pnf-font); font-size:13px; font-weight:500; color:rgba(255,255,255,0.45); text-decoration:none; padding:6px 12px; white-space:nowrap; transition:color 0.15s; border-bottom:2px solid transparent; }
+.pnf-link:hover { color:#fff; }
+.pnf-link.active { color:#fff; border-bottom-color:var(--pnf-accent); }
+.pnf-cta { font-family:var(--pnf-font); font-size:13px; font-weight:700; background:var(--pnf-accent); color:#fff; padding:8px 18px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0; }
+.pnf-cta:hover { background:#2d95c4; }
+.pnf-fb { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:6px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.45); text-decoration:none; font-size:13px; font-weight:700; flex-shrink:0; transition:background 0.15s,color 0.15s; }
+.pnf-fb:hover { background:#1877F2; color:#fff; }
+@media (max-width:640px) { .pnf-links { display:none; } .pnf-fb { display:none; } .pnf-nav { padding:0 16px; } }
+</style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="logo">papamoa<i>.info</i></div>
-    <div class="nav-links">
-      <a>Home</a>
-      <a>Essential Services</a>
-      <a>Food & Drink</a>
-      <a class="on">Community</a>
-      <a>Accommodation</a>
-    </div>
+<nav class="pnf-nav">
+  <a href="/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
+  <div class="pnf-links">
+    <a href="/homepage.html" class="pnf-link">Home</a>
+    <a href="/community/community.html" class="pnf-link active">Community</a>
+    <a href="/categories/accommodation.html" class="pnf-link">Accommodation</a>
+    <a href="/categories/restaurants-papamoa.html" class="pnf-link">Food &amp; Drink</a>
+    <a href="/categories/entertainment.html" class="pnf-link">Entertainment</a>
+    <a href="/categories/services.html" class="pnf-link">Services</a>
+    <a href="/homepage.html#local-info" class="pnf-link">Essential Info</a>
   </div>
+  <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-fb" title="Papamoa.info on Facebook">f</a>
+  <a href="/sales/list-with-us.html" class="pnf-cta">List Your Business</a>
 </nav>
 
 <section class="hero">

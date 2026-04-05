@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clothing Bins & Textile Recycling in Pāpāmoa | Papamoa.info</title>
+  <meta name="description" content="Where to donate, recycle or rehome clothing and textiles in Pāpāmoa. Waipuna Hospice shop, clothing bins, Salvation Army and textile recyclers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    /* === SHARED === */
+    :root { --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0; --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E; --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
+    a { color: var(--blue); }
+    .site-nav { background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand em { font-style: normal; color: var(--blue); }
+    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
+    .page-hero { background: linear-gradient(135deg, #2A1A2A, #3A2040); padding: 44px 24px 40px; position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #E8344A, #A02030); }
+    .hero-inner { max-width: 960px; margin: 0 auto; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #E8344A; margin-bottom: 8px; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 10px; }
+    .page-hero h1 em { font-style: italic; color: #E8344A; }
+    .hero-sub { font-size: 0.92rem; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
+    .page-wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 80px; }
+    .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+    .main-col { min-width: 0; }
+    .side-col { display: flex; flex-direction: column; gap: 18px; }
+    .section { margin-bottom: 36px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    .body-text { font-size: 0.9rem; color: var(--body); line-height: 1.75; margin-bottom: 14px; }
+    .info-rows { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+    .info-row { display: flex; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+    .info-row:last-child { border-bottom: none; }
+    .ir-label { font-weight: 700; color: var(--navy); min-width: 120px; font-size: 0.78rem; flex-shrink: 0; }
+    .ir-val { color: var(--muted); line-height: 1.5; }
+    .ir-val a { color: var(--blue); text-decoration: none; }
+    .provider-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .provider-card { background: var(--white); border: 1px solid var(--border); border-radius: 9px; padding: 14px; }
+    .pc-name { font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 4px; }
+    .pc-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+    .pc-link { font-size: 0.75rem; font-weight: 700; color: var(--blue); text-decoration: none; }
+    .alert-note { border-radius: 8px; padding: 12px 16px; font-size: 0.83rem; line-height: 1.6; margin-bottom: 16px; display: flex; gap: 10px; }
+    .alert-blue { background: #EBF5FB; border-left: 4px solid var(--blue); color: #1A4060; }
+    .alert-yellow { background: #FFF8E8; border-left: 4px solid var(--gold); color: #5A3800; }
+    .alert-green { background: #EAF7EE; border-left: 4px solid var(--lime); color: #1A5020; }
+    .fact-box { background: var(--navy); border-radius: 10px; padding: 20px; }
+    .fact-box h4 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .fact-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .fact-list li { font-size: 0.82rem; color: rgba(255,255,255,0.7); display: flex; gap: 8px; line-height: 1.5; }
+    .fact-list li::before { content: '›'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+    .fact-list li strong { color: #fff; }
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .link-list { display: flex; flex-direction: column; gap: 8px; }
+    .link-list a { font-size: 0.82rem; font-weight: 600; text-decoration: none; }
+    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
+    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+    .ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .ad-inner { padding: 16px; background: var(--white); }
+    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
+    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-decoration: none; }
+    .op-shop-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+    .osc-header { padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; border-bottom: 1px solid var(--border); }
+    .osc-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .osc-meta { flex: 1; }
+    .osc-name { font-family: 'Playfair Display', serif; font-size: 0.97rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .osc-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 4px; }
+    .osc-tag { font-size: 0.6rem; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: rgba(58,171,222,0.08); color: var(--blue); border: 1px solid rgba(58,171,222,0.15); }
+    .osc-tag-hospice { background: rgba(232,52,74,0.08); color: var(--coral); border-color: rgba(232,52,74,0.15); }
+    .osc-tag-church { background: rgba(125,193,67,0.1); color: #3A8020; border-color: rgba(125,193,67,0.2); }
+    .osc-tag-thrift { background: rgba(200,150,42,0.1); color: var(--gold); border-color: rgba(200,150,42,0.2); }
+    .osc-addr { font-size: 0.75rem; color: var(--muted); }
+    .osc-body { padding: 12px 16px; font-size: 0.84rem; color: var(--body); line-height: 1.65; }
+    .osc-hours { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
+    .site-footer a { color: var(--blue); }
+    @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } .side-col { order: -1; } .provider-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
+  <span class="breadcrumb"><a href="/homepage.html">Home</a><span>/</span>Clothing Recycling &mdash; P&#257;p&#257;moa</span>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">&#128084; Local Information &middot; P&#257;p&#257;moa</div>
+    <h1>Clothing Bins <em>&amp; Textile Recycling</em></h1>
+    <p class="hero-sub">Where to donate clothing, find textile recycling bins, and support the Waipuna Hospice shop in P&#257;p&#257;moa. Clothing cannot go in your yellow recycling bin.</p>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <div class="two-col">
+    <div class="main-col">
+      <div class="alert-note alert-blue">
+        <span>&#128204;</span>
+        <div>Textiles and clothing cannot go in your yellow recycling bin. But there are several good options in P&#257;p&#257;moa and nearby for donating, recycling or rehoming unwanted clothes &mdash; from clothing bins and charity shops to specialist textile recyclers.</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">&#128084; Clothing bins in P&#257;p&#257;moa</div>
+        <p class="body-text">Clothing donation bins accept clean, wearable clothing and textiles. The most visible in P&#257;p&#257;moa are operated by charities including the Salvation Army and Dress for Success. Items that are too worn to sell are typically on-sold to textile recyclers or donated to Pacific communities. Most bins accept clothing, shoes, and linen &mdash; but not duvets, pillows, or non-textiles.</p>
+        <div class="info-rows">
+          <div class="info-row"><span class="ir-label">Salvation Army</span><span class="ir-val">Red clothing bins at various Tauranga and P&#257;p&#257;moa locations. Check salvationarmy.org.nz for current bin map.</span></div>
+          <div class="info-row"><span class="ir-label">What they accept</span><span class="ir-val">Clean, wearable clothing, shoes, linen and blankets. No duvets, pillows or soiled items.</span></div>
+          <div class="info-row"><span class="ir-label">Tip</span><span class="ir-val">Bag donations before placing in bins. Items left outside bins can become a nuisance and are sometimes not collected.</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">&#10084;&#65039; Waipuna Hospice Shop &mdash; P&#257;p&#257;moa</div>
+        <p class="body-text">The Waipuna Hospice charity shop on Domain Road is P&#257;p&#257;moa&rsquo;s most established place to donate quality clothing, homewares, books and household items. All proceeds fund specialist palliative care for people in the Bay of Plenty facing a life-limiting illness &mdash; care that is provided at no cost to patients and families.</p>
+        <div class="op-shop-card">
+          <div class="osc-header">
+            <span class="osc-icon">&#10084;&#65039;</span>
+            <div class="osc-meta">
+              <div class="osc-name">Waipuna Hospice Charity Shop &mdash; P&#257;p&#257;moa</div>
+              <div class="osc-tags"><span class="osc-tag osc-tag-hospice">Hospice</span><span class="osc-tag">Donations accepted</span><span class="osc-tag">Free collection available</span></div>
+              <div class="osc-addr">&#128205; 157 Domain Road, P&#257;p&#257;moa Beach &middot; &#128222; 07 282 7143</div>
+            </div>
+          </div>
+          <div class="osc-body">
+            They accept clothing, footwear, homewares, books, furniture and collectables. Quality items only please &mdash; they rely on saleable stock to fund hospice care. A free donation collection service is available if you have larger quantities: call the donation hotline on <a href="tel:072811755">07 281 1755</a> to book a pickup from your door.
+            <div class="osc-hours">&#128336; Mon&ndash;Fri: 9am&ndash;4pm &middot; Sat&ndash;Sun: 10am&ndash;3pm</div>
+          </div>
+        </div>
+        <div class="alert-note alert-green"><span>&#127775;</span><div>Waipuna Hospice also has a <strong>free home collection service</strong> for larger donations. Ring <a href="tel:072811755">07 281 1755</a> to book. They come to you &mdash; no need to transport items yourself.</div></div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">&#127815; Other donation options</div>
+        <p class="body-text">Other charity shops in P&#257;p&#257;moa and nearby also accept clothing donations (see the Op Shops page for full details). Unwearable textiles that cannot be donated can be taken to Te Maunga Transfer Station. A small number of specialist textile recyclers operate in New Zealand and accept items that op shops cannot resell.</p>
+        <div class="info-rows">
+          <div class="info-row"><span class="ir-label">Recycle Boutique</span><span class="ir-val">Buy and sell pre-loved fashion. Bayfair Shopping Centre, Mt Maunganui. <a href="https://www.recycleboutique.co.nz" target="_blank" rel="noopener">recycleboutique.co.nz</a></span></div>
+          <div class="info-row"><span class="ir-label">ImpacTex</span><span class="ir-val">NZ textile recycler for unwearable items. Postal or courier service. <a href="https://impactex.nz" target="_blank" rel="noopener">impactex.nz</a></span></div>
+          <div class="info-row"><span class="ir-label">Te Maunga</span><span class="ir-val">Transfer station will accept unwanted textiles as general waste if no other option available.</span></div>
+          <div class="info-row"><span class="ir-label">Facebook Marketplace</span><span class="ir-val">P&#257;p&#257;moa has active local buy/sell groups. Good for rehoming clothing with value that op shops might pass on.</span></div>
+          <div class="info-row"><span class="ir-label">Trade Me</span><span class="ir-val">Good for quality, branded or vintage items. Ships nationwide.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="side-col">
+      <div class="fact-box">
+        <h4>&#128204; Quick reference</h4>
+        <ul class="fact-list">
+          <li><strong>Clothing bins</strong> &mdash; Salvation Army (various locations)</li>
+          <li><strong>Hospice shop</strong> &mdash; 157 Domain Road, P&#257;p&#257;moa</li>
+          <li><strong>Free collection</strong> &mdash; Waipuna: 07 281 1755</li>
+          <li>Clothing cannot go in the <strong>yellow recycling bin</strong></li>
+          <li>Donate quality items; recycle the rest</li>
+          <li>Unwearable textiles &mdash; Te Maunga or ImpacTex</li>
+        </ul>
+      </div>
+      <div class="ad-spot">
+        <div class="ad-label">Sponsored</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>&#128084; Alterations &amp; repairs in P&#257;p&#257;moa</p>
+            <a href="/index.html">Claim this spot &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#128279; Useful links</div>
+        <div class="link-list">
+          <a href="https://waipunahospice.org.nz/shop-with-us/" target="_blank" rel="noopener">Waipuna Hospice &mdash; donate goods &#8599;</a>
+          <a href="https://www.salvationarmy.org.nz" target="_blank" rel="noopener">Salvation Army clothing bins &#8599;</a>
+          <a href="https://impactex.nz" target="_blank" rel="noopener">ImpacTex &mdash; textile recycling &#8599;</a>
+          <a href="https://www.recycleboutique.co.nz" target="_blank" rel="noopener">Recycle Boutique &#8599;</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#128279; Related pages</div>
+        <div class="link-list">
+          <a href="/articles/op-shops-papamoa.html" style="font-size:0.82rem;font-weight:600">Op Shops &amp; Second-hand</a>
+          <a href="/articles/rubbish-recycling-papamoa.html" style="font-size:0.82rem;font-weight:600">Rubbish &amp; Recycling</a>
+          <a href="/community/community.html" style="font-size:0.82rem;font-weight:600">Community Resources</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="/homepage.html">Papamoa.info</a> &mdash; The local directory for P&#257;p&#257;moa, Bay of Plenty, New Zealand. Always verify details directly with providers.
+</footer>
+
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
+</body>
+</html>
