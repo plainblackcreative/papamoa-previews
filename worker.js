@@ -1,4 +1,4 @@
-// papamoa-claude-proxy v2.0
+// papamoa-claude-proxy v2.2
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
