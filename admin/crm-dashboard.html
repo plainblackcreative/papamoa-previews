@@ -546,9 +546,9 @@
 </div>
 
 <!-- SETUP BANNER -->
-<div class="setup-banner" id="setup-banner">
+<div class="setup-banner hidden" id="setup-banner">
   <strong>⚙️ Setup required:</strong>
-  Add your Google Sheet ID and API Key to the CONFIG section at the top of this file.
+  Add your Google Sheet ID to the CONFIG section at the top of this file.
   <a href="#" onclick="document.getElementById('setup-banner').classList.add('hidden'); return false;">Dismiss</a>
 </div>
 
@@ -710,8 +710,8 @@
 // CONFIG — Update these two values
 // ═══════════════════════════════════════════════════════
 var CONFIG = {
-  SHEET_ID:  '1X5i40RLF-r-yLRbm_XCgVyzJAkgO_o6whaoCzdC3SiM',   // The long ID from your Google Sheet URL
-  API_KEY:   '<!-- API_KEY_HERE -->',    // Google Sheets API key (read-only, public sheet)
+  SHEET_ID:   '1X5i40RLF-r-yLRbm_XCgVyzJAkgO_o6whaoCzdC3SiM',
+  PROXY_URL:  'https://papamoa-claude-proxy.jkbrownnz.workers.dev/sheets',
   SHEET_NAME: 'LEADS',
   // Columns (1-indexed, matching your LEADS tab)
   COL: {
@@ -777,8 +777,9 @@ function loadLeads() {
   document.getElementById('lead-grid').style.display = 'none';
   document.getElementById('setup-banner').classList.add('hidden');
 
-  var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + CONFIG.SHEET_ID +
-            '/values/' + CONFIG.SHEET_NAME + '!A2:X1000?key=' + CONFIG.API_KEY;
+  var url = CONFIG.PROXY_URL +
+            '?sheetId=' + CONFIG.SHEET_ID +
+            '&range=' + encodeURIComponent(CONFIG.SHEET_NAME + '!A2:X1000');
 
   fetch(url)
     .then(function(r) { return r.json(); })
@@ -1055,17 +1056,8 @@ function saveChanges() {
   }
   currentLead.callback = cbInput;
 
-  // If API key is set, update Google Sheet
-  if (CONFIG.API_KEY !== 'YOUR_API_KEY_HERE' && CONFIG.SHEET_ID !== 'YOUR_SHEET_ID_HERE') {
-    var row = currentLead.rowIndex;
-    var c   = CONFIG.COL;
-    var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + CONFIG.SHEET_ID +
-              '/values/' + CONFIG.SHEET_NAME + '!L' + row + ':X' + row +
-              '?valueInputOption=USER_ENTERED&key=' + CONFIG.API_KEY;
-
-    // Note: write-back requires OAuth2, not just API key
-    // For now, show toast and update locally — Phase 2 connect via Apps Script webhook
-  }
+  // Write-back to Google Sheet via Worker — Phase 2
+  // (Worker will need a POST /sheets endpoint with OAuth or Apps Script webhook)
 
   showToast('✓ Updated locally — sync to sheet coming in Phase 2');
   renderAll();
