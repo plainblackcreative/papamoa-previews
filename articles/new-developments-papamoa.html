@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Developments — Pāpāmoa | Papamoa.info</title>
+  <meta name="description" content="New subdivisions, new builds and development projects underway in Pāpāmoa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#0D2B3E;--ocean:#1B6B7D;--accent:#3AABDE;--sand:#F7F3ED;--white:#fff;--body:#1A2832;--muted:#5A6E78;--border:#D8E4E8;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;overflow-x:hidden;}
+    body{font-family:'Figtree',sans-serif;background:var(--sand);color:var(--body);line-height:1.65;overflow-x:hidden;}
+    a{color:var(--accent);text-decoration:none;}
+    nav{background:var(--navy);height:56px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;width:100%;box-sizing:border-box;position:sticky;top:0;z-index:100;}
+    .logo{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:#fff;text-decoration:none;}
+    .logo span{color:var(--accent);}
+    .nav-back{font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;}
+    .nav-back:hover{color:#fff;}
+    .hero{background:var(--navy);padding:52px 28px 48px;}
+    .hero-inner{max-width:900px;margin:0 auto;}
+    .eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+    h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:#fff;margin-bottom:10px;}
+    .sub{font-size:0.95rem;color:rgba(255,255,255,0.55);max-width:560px;line-height:1.7;}
+    .content{max-width:900px;margin:48px auto;padding:0 28px 80px;}
+    .coming-soon{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:28px 32px;}
+    .coming-soon h2{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);margin-bottom:8px;}
+    .coming-soon p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px;}
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--ocean);}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/homepage.html" class="logo">Papamoa<span>.info</span></a>
+  <a href="/homepage.html" class="nav-back">&larr; Home</a>
+</nav>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Property & Real Estate · Pāpāmoa</div>
+    <h1>New Developments — Pāpāmoa</h1>
+    <p class="sub">New subdivisions, new builds and development projects underway in Pāpāmoa.</p>
+  </div>
+</div>
+<div class="content">
+  <div class="coming-soon">
+    <h2>Coming soon</h2>
+    <p>Full content for this page is being prepared. Check back shortly.</p>
+    <a href="/homepage.html" class="back-link">&larr; Back to homepage</a>
+  </div>
+</div>
+<script>
+(function(){
+  var base = location.hostname === 'plainblackcreative.github.io' ? '/papamoa-previews' : '';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || !href.startsWith('/') || href.startsWith(base)) return;
+    e.preventDefault();
+    window.location.href = base + href;
+  });
+})();
+</script>
+</body>
+</html>
