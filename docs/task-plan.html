@@ -439,6 +439,14 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
+          <div class="task-title">Add "Claim this spot" CTA to all unfilled article/info page ad positions</div>
+          <div class="task-desc">Every article, info, and community page with an ad spotlight block needs a "Claim this spot" CTA linking to /sales/claim.html?type=adspot&page={slug} — where slug matches the page filename without .html (e.g. papamoa-hills, dogs-papamoa, aims-games). Only show if the spot is unfilled. Each page tracks separately in Web3Forms via the subject line. Do this pass once placeholder ad blocks are confirmed on each page.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-qa">QA</span></div>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
           <div class="task-title">Check all "Claim this spot" ad placeholder links are live</div>
           <div class="task-desc">Every /advertise link in ad placeholder blocks needs to go somewhere real — /sales/landing.html. Currently most are dead links.</div>
           <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span></div>
@@ -629,6 +637,40 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="qa-item"><div class="qa-icon">🔴</div><div class="qa-body"><h4>Accuracy &amp; Dates</h4><p>Mauao closure status correct (fully closed, April 2026). Pāpāmoa Hills track status correct. Mayor name correct (Mahé Drysdale). AIMS Games dates (5–11 Sep 2026).</p></div></div>
       <div class="qa-item"><div class="qa-icon">💰</div><div class="qa-body"><h4>Pricing Accuracy</h4><p>Silver $599+GST/yr. Gold $1,199+GST/yr. Menu Add-On $199+GST/yr. Extra Spotlights $99+GST/yr. No $1,200 references. No sub-pages. No Bronze as paid product.</p></div></div>
       <div class="qa-item"><div class="qa-icon">⚡</div><div class="qa-body"><h4>Security</h4><p>Claude API key rotated in Cloudflare Worker. Admin password changed in admin/upload.html. No API keys hardcoded in any HTML file. CRM dashboard API routed through Worker proxy.</p></div></div>
+    </div>
+  </div>
+
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">💡 10. Post-Demo Ideas — Explore After Carwyn Presentation</div>
+      <div class="ts-meta"><span class="ts-priority priority-last">Deferred</span></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:18px;">Ideas confirmed as worth pursuing — parked until after the client demo so they don't distract from launch.</p>
+    <div class="task-list">
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Named placeholder listings for outreach targets</div>
+          <div class="task-desc">When actively prospecting a specific business, create a named placeholder for them before making contact — e.g. "Bayline Plumbing" instead of "Plumber Pāpāmoa". Their name is already ranking when they receive the outreach email, which is a much stronger pitch. The "oh that's me" moment drives upgrades. Build named placeholders only for active outreach targets, not as a blanket strategy across all businesses in Pāpāmoa.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-funnel">Funnel</span></div>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Lead gen placeholder listings — own &amp; forward enquiries</div>
+          <div class="task-desc">Create placeholder listings in high-value empty sub-categories where leads can realistically be forwarded to a real business. Capture enquiries via Web3Forms, forward them to the business for free (goodwill + relationship) or hold as pitch ammunition ("we got 6 plumber enquiries last month — here's what a paid listing looks like"). Doubles as analytics for pricing premium ad spots on article pages. Start with sub-categories where you know real businesses who would benefit. Track forwarded leads in CRM as a warm pipeline.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-funnel">Funnel</span></div>
+        </div>
+      </div>
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">/claim named-placeholder state</div>
+          <div class="task-desc">When a business finds their own named placeholder and clicks claim, the /claim page should acknowledge "we already have your listing drafted" and fast-track them to the PPP rather than starting from scratch. Implement via ?type=named param. Requires named placeholder CTAs to pass the business slug. Design after the placeholder lead gen strategy is confirmed.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-tech">Tech</span></div>
+        </div>
+      </div>
     </div>
   </div>
 
