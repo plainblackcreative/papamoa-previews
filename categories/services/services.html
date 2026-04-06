@@ -1,367 +1,575 @@
 <!DOCTYPE html>
 <html lang="en-NZ">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Local Services in P&#257;p&#257;moa | Papamoa.info</title>
-  <meta name="description" content="Local services in Pāpāmoa — automotive, health and fitness, personal care, trades, home services and professional services.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
-  <style>
-    :root { --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0; --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E; --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A; }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
-    a { color: var(--blue); text-decoration: none; }
-    .site-nav { background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
-    .nav-brand em { font-style: normal; color: var(--blue); }
-    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
-    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
-    .breadcrumb a:hover { color: var(--blue); }
-    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
-    .page-hero { background: var(--navy); padding: 44px 24px 40px; position: relative; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; pointer-events: none; }
-    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
-    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
-    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
-    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 12px; }
-    .page-hero h1 em { font-style: italic; }
-    .page-hero p.hero-sub { font-size: 0.95rem; color: rgba(255,255,255,0.65); max-width: 600px; line-height: 1.7; margin-bottom: 20px; }
-    .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-    .hchip { font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); }
-    .subcat-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 20px; overflow-x: auto; scrollbar-width: none; position: sticky; top: 0; z-index: 90; }
-    .subcat-bar::-webkit-scrollbar { display: none; }
-    .subcat-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 8px; }
-    .chip { font-size: 0.75rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; white-space: nowrap; font-family: 'Figtree', sans-serif; transition: all 0.15s; }
-    .chip:hover { border-color: var(--blue); color: var(--blue); }
-    .chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
-    .page-wrap { max-width: 960px; margin: 0 auto; padding: 32px 20px 80px; }
-    .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
-    .main-col { min-width: 0; }
-    .side-col { display: flex; flex-direction: column; gap: 18px; }
-    .section { margin-bottom: 40px; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
-    /* GOLD SPOTLIGHT */
-    .gold-spotlight { background: linear-gradient(135deg, #1A2A3A, #0D1B2A); border: 1px solid rgba(200,150,42,0.35); border-radius: 14px; overflow: hidden; margin-bottom: 24px; }
-    .gs-top { padding: 12px 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(200,150,42,0.15); }
-    .gs-badge { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; padding: 3px 10px; border-radius: 3px; }
-    .gs-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
-    .gs-body { padding: 20px; }
-    .gs-body h2 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .gs-sub { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
-    .gs-desc { font-size: 0.86rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 14px; }
-    .gs-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-    .gs-tag { font-size: 0.62rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.12); }
-    .gs-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-    .gs-btn { font-size: 0.78rem; font-weight: 700; padding: 7px 14px; border-radius: 5px; text-decoration: none; transition: opacity 0.15s; }
-    .gs-btn-primary { background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; }
-    .gs-btn-ghost { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.15); }
-    .gs-btn-ghost:hover { background: rgba(255,255,255,0.14); }
-    /* SILVER LISTINGS */
-    .listings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 0; }
-    .listing-tile { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; transition: border-color 0.15s, box-shadow 0.15s; }
-    .listing-tile:hover { border-color: var(--blue); box-shadow: 0 4px 12px rgba(58,171,222,0.08); }
-    .lt-tier { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; background: rgba(96,112,128,0.1); color: var(--muted); border: 1px solid var(--border); display: inline-block; margin-bottom: 8px; }
-    .lt-name { font-family: 'Playfair Display', serif; font-size: 0.97rem; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
-    .lt-sub { font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; }
-    .lt-desc { font-size: 0.81rem; color: var(--body); line-height: 1.6; flex: 1; margin-bottom: 12px; }
-    .lt-link { font-size: 0.75rem; font-weight: 700; color: var(--blue); text-decoration: none; }
-    .lt-link:hover { color: var(--navy); }
-    /* PLACEHOLDER TILE */
-    .ph-tile { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 10px; padding: 16px; }
-    .ph-tile:hover { border-color: var(--blue); border-style: solid; }
-    .ph-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #3A8020; background: rgba(125,193,67,0.1); border: 1px solid rgba(125,193,67,0.2); padding: 2px 7px; border-radius: 3px; display: inline-block; margin-bottom: 8px; }
-    .ph-name { font-size: 0.93rem; font-weight: 700; color: var(--navy); opacity: 0.65; margin-bottom: 4px; }
-    .ph-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.55; margin-bottom: 10px; }
-    .ph-cta { font-size: 0.75rem; font-weight: 700; color: var(--blue); text-decoration: none; }
-    /* SIDEBAR */
-    .fact-box { background: var(--navy); border-radius: 10px; padding: 20px; }
-    .fact-box h4 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
-    .fact-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .fact-list li { font-size: 0.82rem; color: rgba(255,255,255,0.7); display: flex; gap: 8px; line-height: 1.5; }
-    .fact-list li::before { content: '›'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
-    .fact-list li strong { color: #fff; }
-    .card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
-    .card-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
-    .link-list { display: flex; flex-direction: column; gap: 8px; }
-    .link-list a { font-size: 0.82rem; font-weight: 600; color: var(--blue); }
-    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
-    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
-    .ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .ad-inner { padding: 16px; background: var(--white); }
-    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
-    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
-    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); }
-    .list-cta { background: linear-gradient(135deg, var(--navy), #1A2A40); border-radius: 10px; padding: 18px; text-align: center; }
-    .list-cta p { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-bottom: 10px; line-height: 1.55; }
-    .list-cta a { display: inline-block; background: var(--lime); color: #fff; font-weight: 700; font-size: 0.82rem; padding: 9px 18px; border-radius: 6px; text-decoration: none; }
-    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
-    .site-footer a { color: var(--blue); }
-    @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } .side-col { order: -1; } .listings-grid { grid-template-columns: 1fr; } }
-    .hero-eyebrow { color: var(--lime); }
-    .page-hero h1 em { color: var(--lime); }
-    .page-hero::after { background: linear-gradient(90deg, var(--lime), #3A8020); }
-    .hero-bg { background: radial-gradient(ellipse at 70% 50%, rgba(125,193,67,0.08) 0%, transparent 60%); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Services in Pāpāmoa | Papamoa.info</title>
+<meta name="description" content="Local services in Pāpāmoa — plumbers, electricians, builders, lawyers, real estate, gyms, hairdressers, accountants, automotive and more.">
+<link rel="canonical" href="https://papamoa.info/categories/services.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#2B3F5C;--blue:#3AABDE;--lime:#7DC143;--sand:#F5EFE0;--dune:#D4C4A0;--white:#fff;--body:#1E2D3E;--muted:#607080;--border:#DDE5EE;--bg:#F4F7FA;--gold:#C8962A}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--body);line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+
+/* NAV */
+.pnf-nav{background:#0D2B3E;height:56px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.25);gap:16px}
+.pnf-logo{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:#fff;text-decoration:none;flex-shrink:0}
+.pnf-logo span{color:var(--blue)}
+.pnf-links{display:flex;align-items:center;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none}
+.pnf-links::-webkit-scrollbar{display:none}
+.pnf-link{font-size:13px;font-weight:500;color:rgba(255,255,255,.45);text-decoration:none;padding:6px 12px;white-space:nowrap;border-bottom:2px solid transparent}
+.pnf-link:hover{color:#fff}
+.pnf-link.active{color:#fff;border-bottom-color:var(--blue)}
+.pnf-cta{font-size:13px;font-weight:700;background:var(--blue);color:#fff;padding:8px 18px;border-radius:100px;text-decoration:none;white-space:nowrap;flex-shrink:0}
+.pnf-cta:hover{background:#2d95c4}
+@media(max-width:640px){.pnf-links{display:none}.pnf-nav{padding:0 16px}}
+
+/* HERO */
+.page-hero{background:linear-gradient(135deg,#0D1A10,#152318);padding:44px 24px 40px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(125,193,67,0.07) 0%,transparent 60%);pointer-events:none}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lime),#3A9020)}
+.hero-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:0.72rem;color:rgba(255,255,255,.4);margin-bottom:12px}
+.breadcrumb a{color:rgba(255,255,255,.5)}
+.breadcrumb a:hover{color:#fff}
+.hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;color:var(--lime)}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:12px}
+.page-hero h1 em{font-style:italic;color:var(--lime)}
+.page-hero p.hero-sub{font-size:0.92rem;color:rgba(255,255,255,.62);max-width:600px;line-height:1.7;margin-bottom:20px}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap}
+.hchip{font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:4px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);text-decoration:none;transition:background .15s}
+.hchip:hover{background:rgba(255,255,255,.15);color:#fff}
+
+/* SUBCAT BAR */
+.subcat-bar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 20px;overflow-x:auto;scrollbar-width:none;position:sticky;top:56px;z-index:90}
+.subcat-bar::-webkit-scrollbar{display:none}
+.subcat-inner{max-width:960px;margin:0 auto;display:flex;gap:6px}
+.chip{font-size:0.74rem;font-weight:700;padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;white-space:nowrap;font-family:'Figtree',sans-serif;transition:all .15s}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* LAYOUT */
+.page-wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+.two-col{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start}
+.main-col{min-width:0}
+.side-col{display:flex;flex-direction:column;gap:16px}
+@media(max-width:720px){.two-col{grid-template-columns:1fr}.side-col{order:-1}.listings-grid{grid-template-columns:1fr!important}}
+
+/* SECTION */
+.section{margin-bottom:40px}
+.section-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+
+/* GOLD SPOTLIGHT */
+.gold-spotlight{background:linear-gradient(135deg,#1A2A3A,#0D1B2A);border:1px solid rgba(200,150,42,0.35);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.gs-top{padding:11px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(200,150,42,0.15)}
+.gs-badge{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),#A07020);color:#fff;padding:3px 10px;border-radius:3px}
+.gs-label{font-size:0.72rem;color:rgba(255,255,255,.4)}
+.gs-body{padding:18px 20px}
+.gs-body h2{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:4px}
+.gs-sub{font-size:0.77rem;color:var(--gold);font-weight:600;margin-bottom:10px}
+.gs-desc{font-size:0.85rem;color:rgba(255,255,255,.68);line-height:1.7;margin-bottom:14px}
+.gs-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.gs-tag{font-size:0.62rem;font-weight:700;padding:2px 8px;border-radius:3px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.12)}
+.gs-btns{display:flex;gap:8px;flex-wrap:wrap}
+.gs-btn{font-size:0.77rem;font-weight:700;padding:7px 14px;border-radius:5px;text-decoration:none;transition:opacity .15s}
+.gs-btn-primary{background:linear-gradient(135deg,var(--gold),#A07020);color:#fff}
+.gs-btn-ghost{background:rgba(255,255,255,.08);color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.15)}
+.gs-btn-ghost:hover{background:rgba(255,255,255,.14)}
+
+/* UNCLAIMED SPOTLIGHT */
+.spotlight-claim{background:linear-gradient(135deg,#1A2A3A,#0D1B2A);border:1px solid rgba(200,150,42,0.35);border-radius:12px;overflow:hidden;margin-bottom:20px}
+.sc-top{padding:11px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(200,150,42,0.15)}
+.sc-badge{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),#A07020);color:#fff;padding:3px 10px;border-radius:3px}
+.sc-avail{font-size:0.72rem;color:rgba(255,255,255,.4)}
+.sc-body{padding:16px 18px}
+.sc-body h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:rgba(255,255,255,.45);font-style:italic;margin-bottom:6px}
+.sc-body p{font-size:0.82rem;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:12px}
+.sc-cta{display:inline-block;background:linear-gradient(135deg,var(--gold),#A07020);color:#fff;font-size:0.77rem;font-weight:700;padding:8px 16px;border-radius:5px;text-decoration:none}
+
+/* LISTINGS */
+.listings-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.listing-tile{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s}
+.listing-tile:hover{border-color:var(--blue);box-shadow:0 4px 12px rgba(58,171,222,0.08)}
+.lt-tier{font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:rgba(96,112,128,0.1);color:var(--muted);border:1px solid var(--border);display:inline-block;margin-bottom:8px}
+.lt-name{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:3px}
+.lt-sub{font-size:0.72rem;color:var(--muted);margin-bottom:8px}
+.lt-desc{font-size:0.81rem;color:var(--body);line-height:1.6;flex:1;margin-bottom:12px}
+.lt-link{font-size:0.75rem;font-weight:700;color:var(--blue)}
+.lt-link:hover{color:var(--navy)}
+
+/* PLACEHOLDER */
+.ph-tile{background:var(--bg);border:1.5px dashed var(--dune);border-radius:10px;padding:16px;transition:border-color .15s}
+.ph-tile:hover{border-color:var(--blue);border-style:solid}
+.ph-label{font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#3A8020;background:rgba(125,193,67,0.1);border:1px solid rgba(125,193,67,0.2);padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:8px}
+.ph-name{font-size:0.92rem;font-weight:700;color:var(--navy);opacity:.65;margin-bottom:4px}
+.ph-desc{font-size:0.8rem;color:var(--muted);line-height:1.55;margin-bottom:10px}
+.ph-cta{font-size:0.75rem;font-weight:700;color:var(--blue)}
+
+/* SIDEBAR */
+.fact-box{background:var(--navy);border-radius:10px;padding:18px}
+.fact-box h4{font-size:0.7rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.fact-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.fact-list li{font-size:0.81rem;color:rgba(255,255,255,.68);display:flex;gap:8px;line-height:1.45}
+.fact-list li::before{content:'›';color:var(--blue);font-weight:700;flex-shrink:0}
+.fact-list li strong{color:#fff}
+.card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px}
+.card-title{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:10px}
+.link-list{display:flex;flex-direction:column;gap:7px}
+.link-list a{font-size:0.81rem;font-weight:600;color:var(--blue)}
+.ad-spot{border-radius:10px;overflow:hidden;border:1px solid var(--dune)}
+.ad-label{font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:5px 14px;background:#FAFAF7;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.ad-label::before,.ad-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.ad-inner{padding:14px;background:var(--white)}
+.ad-ph{background:var(--bg);border:1.5px dashed var(--dune);border-radius:7px;padding:14px;text-align:center}
+.ad-ph p{font-size:0.77rem;color:var(--muted);margin-bottom:5px}
+.ad-ph a{font-size:0.77rem;font-weight:700;color:var(--blue)}
+.list-cta{background:linear-gradient(135deg,var(--navy),#1A2A40);border-radius:10px;padding:16px;text-align:center}
+.list-cta p{font-size:0.81rem;color:rgba(255,255,255,.55);margin-bottom:9px;line-height:1.5}
+.list-cta a{display:inline-block;background:var(--lime);color:#fff;font-weight:700;font-size:0.81rem;padding:8px 16px;border-radius:6px;text-decoration:none}
+
+.site-footer{background:var(--navy);padding:18px 24px;text-align:center;font-size:0.75rem;color:rgba(255,255,255,.4);margin-top:40px}
+.site-footer a{color:var(--blue)}
+</style>
 </head>
 <body>
-<nav class="site-nav">
-  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
-  <span class="breadcrumb"><a href="/homepage.html">Home</a><span>/</span>P&#257;p&#257;moa Services</span>
+
+<nav class="pnf-nav">
+  <a href="/papamoa-previews/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
+  <div class="pnf-links">
+    <a href="/papamoa-previews/homepage.html" class="pnf-link">Home</a>
+    <a href="/papamoa-previews/categories/services.html" class="pnf-link active">Services</a>
+    <a href="/papamoa-previews/categories/shopping.html" class="pnf-link">Shopping</a>
+    <a href="/papamoa-previews/categories/restaurants-papamoa.html" class="pnf-link">Food &amp; Drink</a>
+  </div>
+  <a href="/papamoa-previews/sales/landing.html" class="pnf-cta">List your business</a>
 </nav>
+
 <div class="page-hero">
   <div class="hero-bg"></div>
   <div class="hero-inner">
+    <div class="breadcrumb"><a href="/papamoa-previews/homepage.html">Home</a> &rsaquo; Services</div>
     <div class="hero-eyebrow">&#128736; Local Services &middot; P&#257;p&#257;moa</div>
     <h1>P&#257;p&#257;moa <em>Services</em></h1>
-    <p class="hero-sub">Find local services in P&#257;p&#257;moa &mdash; mechanics and WOF, gym and wellness, personal care, trades, professional services and more.</p>
-    <div class="hero-chips"><span class="hchip">Automotive</span><span class="hchip">Health &amp; Fitness</span><span class="hchip">Trades</span><span class="hchip">Personal Care</span><span class="hchip">Professional</span></div>
+    <p class="hero-sub">Plumbers, electricians, builders, real estate, lawyers, gyms, hairdressers, accountants and more &mdash; every commercial service category in P&#257;p&#257;moa, one Gold Listing per sub-category.</p>
+    <div class="hero-chips">
+      <a href="#trades" class="hchip">Trades</a>
+      <a href="#professional" class="hchip">Professional</a>
+      <a href="#health" class="hchip">Health &amp; Fitness</a>
+      <a href="#automotive" class="hchip">Automotive</a>
+      <a href="#beauty" class="hchip">Hair &amp; Beauty</a>
+      <a href="#home" class="hchip">Home &amp; Garden</a>
+    </div>
   </div>
 </div>
+
 <div class="subcat-bar">
-  <div class="subcat-inner"><span class="chip  active" onclick="setChip(this,'all')">All</span><span class="chip" onclick="setChip(this,'auto')">Automotive</span><span class="chip" onclick="setChip(this,'health')">Health &amp; Fitness</span><span class="chip" onclick="setChip(this,'beauty')">Personal Care</span><span class="chip" onclick="setChip(this,'trades')">Trades</span><span class="chip" onclick="setChip(this,'prof')">Professional</span></div>
+  <div class="subcat-inner">
+    <span class="chip active" onclick="setChip(this,'all')">All</span>
+    <span class="chip" onclick="setChip(this,'trades')">Trades</span>
+    <span class="chip" onclick="setChip(this,'prof')">Professional</span>
+    <span class="chip" onclick="setChip(this,'health')">Health &amp; Fitness</span>
+    <span class="chip" onclick="setChip(this,'auto')">Automotive</span>
+    <span class="chip" onclick="setChip(this,'beauty')">Hair &amp; Beauty</span>
+    <span class="chip" onclick="setChip(this,'home')">Home &amp; Garden</span>
+    <span class="chip" onclick="setChip(this,'dental')">Dental</span>
+  </div>
 </div>
+
 <div class="page-wrap">
   <div class="two-col">
     <div class="main-col">
-      <div class="section" data-cat="all">
-                <div class="section-title">&#128663; Automotive</div>
-                <div class="gold-spotlight">
-          <div class="gs-top"><span class="gs-badge">&#11088; Gold Spotlight</span><span class="gs-label">Top listing in this sub-category</span></div>
-          <div class="gs-body">
-            <h2>Coastal Autos</h2>
-            <div class="gs-sub">&#128663; Mechanic &amp; WOF &middot; P&#257;p&#257;moa &middot; MTA Approved</div>
-            <p class="gs-desc">MTA-approved workshop handling WOFs, full servicing, tyres, brakes, auto electrical and vehicle licensing under one roof. Online booking available. Fleet servicing catered for. Reviews consistently mention communication and transparency.</p>
-            <div class="gs-tags"><span class="gs-tag">WOF</span><span class="gs-tag">Servicing</span><span class="gs-tag">Tyres</span><span class="gs-tag">Brakes</span><span class="gs-tag">Auto Electrical</span><span class="gs-tag">Vehicle Licensing</span><span class="gs-tag">Fleet</span><span class="gs-tag">MTA Approved</span></div>
-            <div class="gs-btns"><a href="https://www.coastalautos.nz/bookonline" class="gs-btn gs-btn-primary">&#128222; Book online</a><a href="tel:072827100" class="gs-btn gs-btn-ghost">Call 07 282 7100</a></div>
+
+      <!-- TRADES -->
+      <div class="section" id="trades" data-cat="trades">
+        <div class="section-title">&#128736; Trades &amp; Construction</div>
+        <div class="spotlight-claim">
+          <div class="sc-top"><span class="sc-badge">&#11088; Gold Listing</span><span class="sc-avail">Plumber &mdash; one position, unclaimed</span></div>
+          <div class="sc-body">
+            <h3>Plumber &mdash; P&#257;p&#257;moa&hellip;</h3>
+            <p>P&#257;p&#257;moa is one of New Zealand&rsquo;s fastest-growing suburbs. Every new build, bathroom renovation and burst pipe is a job. The Gold Listing here sits at the top of every local plumber search and captures enquiries passively, 24/7.</p>
+            <a href="/sales/landing.html" class="sc-cta">Claim this Spotlight &rarr;</a>
           </div>
         </div>
         <div class="listings-grid">
-                    <div class="listing-tile">
-            <span class="lt-tier">Silver</span>
-            <div class="lt-name">Speedy Screens P&#257;p&#257;moa</div>
-            <div class="lt-sub">&#128274; Window &amp; Door Screens &middot; P&#257;p&#257;moa</div>
-            <p class="lt-desc">Local installer of fly screens, security screens and door screens for P&#257;p&#257;moa homes. Supply and installation across the Bay of Plenty.</p>
-            <a href="/listings/speedy-screens-papamoa.html" class="lt-link">View listing &rarr;</a>
-          </div>
-                    <div class="ph-tile">
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Tyre Shop &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Placeholder for tyre shops in P&#257;p&#257;moa. Claim this listing to be found by locals needing new tyres.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <div class="ph-name">Plumber &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Local plumbing services covering new builds, renovations, maintenance and emergency call-outs across P&#257;p&#257;moa and the eastern Bay of Plenty.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Panel Beater &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Placeholder for panel beaters and auto body repair in P&#257;p&#257;moa.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <div class="ph-name">Electrician &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Residential and commercial electrical work. New builds, switchboard upgrades, EV charger installation and fault-finding across P&#257;p&#257;moa.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Car Wash &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Placeholder for car wash and detailing services in P&#257;p&#257;moa.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <div class="ph-name">Builder &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">New builds, renovations and extensions. P&#257;p&#257;moa is one of New Zealand&rsquo;s most active residential construction zones with constant demand.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Painter &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Interior and exterior painting for residential and commercial properties. New builds and repaints across P&#257;p&#257;moa and Bay of Plenty.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Roofer &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Roof installations, repairs and re-roofing for P&#257;p&#257;moa homes. High demand from older properties and new builds.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Drainlayer &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Drainage installation and maintenance for residential and commercial properties. Subdivision work and blocked drain call-outs.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
         </div>
       </div>
 
-      <div class="section" data-cat="all">
-                <div class="section-title">&#127947; Health &amp; Fitness</div>
-                <div class="gold-spotlight">
-          <div class="gs-top"><span class="gs-badge">&#11088; Gold Spotlight</span><span class="gs-label">Top listing in this sub-category</span></div>
+      <!-- PROFESSIONAL SERVICES -->
+      <div class="section" id="professional" data-cat="prof">
+        <div class="section-title">&#128188; Professional Services</div>
+        <div class="spotlight-claim">
+          <div class="sc-top"><span class="sc-badge">&#11088; Gold Listing</span><span class="sc-avail">Real Estate &mdash; one position, unclaimed</span></div>
+          <div class="sc-body">
+            <h3>Real Estate &mdash; P&#257;p&#257;moa&hellip;</h3>
+            <p>P&#257;p&#257;moa is one of Tauranga&rsquo;s most active property markets with over 40,000 residents and a decade of growth ahead. The Gold Listing puts your agency or agent at the top of every local real estate search.</p>
+            <a href="/sales/landing.html" class="sc-cta">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+        <div class="listings-grid">
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Real Estate Agent &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Residential property sales and property management across P&#257;p&#257;moa and eastern Tauranga. One of the most active markets in New Zealand.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Lawyer / Solicitor &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Property conveyancing, wills, trusts and family law for P&#257;p&#257;moa residents. High demand from a suburb with active property buying and selling.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Accountant &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Tax returns, business accounting and financial advice for P&#257;p&#257;moa individuals and small businesses. GST, PAYE, and year-end accounts.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Mortgage Broker &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">One of New Zealand&rsquo;s most active property markets. First home buyers, investors and those refinancing are all searching locally for brokers they can trust.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Financial Adviser &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">KiwiSaver, investment planning and insurance advice for P&#257;p&#257;moa families. Growing affluent suburb with increasing demand for financial planning.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Insurance Broker &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Home, contents, vehicle and business insurance for P&#257;p&#257;moa residents. Independent brokers able to compare policies across multiple providers.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- HEALTH & FITNESS -->
+      <div class="section" id="health" data-cat="health">
+        <div class="section-title">&#127947; Health &amp; Fitness</div>
+        <div class="gold-spotlight">
+          <div class="gs-top"><span class="gs-badge">&#11088; Gold Listing</span><span class="gs-label">Top listing &mdash; Gym &amp; Wellness</span></div>
           <div class="gs-body">
             <h2>ReDefined Wellbeing Hub</h2>
             <div class="gs-sub">&#127947; Gym &amp; Wellness &middot; P&#257;p&#257;moa &middot; Exercise NZ Award Winner 2023</div>
             <p class="gs-desc">Award-winning facility with five specialised studios and on-site health practitioners. Single membership covers reformer pilates, yoga, functional training, open gym and recovery lab. Physiotherapy, nutrition, massage and counselling also on site.</p>
             <div class="gs-tags"><span class="gs-tag">Reformer Pilates</span><span class="gs-tag">Yoga</span><span class="gs-tag">Gym</span><span class="gs-tag">Recovery Lab</span><span class="gs-tag">Physio</span><span class="gs-tag">Nutrition</span><span class="gs-tag">Massage</span></div>
-            <div class="gs-btns"><a href="https://www.redefined.nz/bookyourtrial" class="gs-btn gs-btn-primary">Book a trial</a><a href="https://www.redefined.nz/membership-papamoa" class="gs-btn gs-btn-ghost">View memberships</a></div>
+            <div class="gs-btns"><a href="https://www.redefined.nz/bookyourtrial" target="_blank" rel="noopener" class="gs-btn gs-btn-primary">Book a trial</a><a href="https://www.redefined.nz/membership-papamoa" target="_blank" rel="noopener" class="gs-btn gs-btn-ghost">View memberships</a></div>
           </div>
         </div>
         <div class="listings-grid">
-                    <div class="listing-tile">
+          <div class="listing-tile">
             <span class="lt-tier">Silver</span>
             <div class="lt-name">P&#257;p&#257;moa Orthodontist</div>
             <div class="lt-sub">&#129463; Orthodontics &middot; P&#257;p&#257;moa</div>
             <p class="lt-desc">Braces, aligners and retainers for children and adults. Modern equipment and flexible payment options.</p>
             <a href="/listings/papamoa-orthodontist.html" class="lt-link">View listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
-            <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Dentist &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Gold Spotlight unclaimed. Claim this listing to be the first dental practice locals find when searching.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+          <div class="listing-tile">
+            <span class="lt-tier">Silver</span>
+            <div class="lt-name">Tara Road Dental</div>
+            <div class="lt-sub">&#129463; Dentist &middot; P&#257;p&#257;moa East</div>
+            <p class="lt-desc">Full-service dental practice serving P&#257;p&#257;moa East. General dentistry, cosmetic treatment, hygiene and emergency appointments.</p>
+            <a href="/listings/tara-road-dental-papamoa.html" class="lt-link">View listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Physiotherapist &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Sports injury, ACC treatment and rehabilitation for P&#257;p&#257;moa residents. High demand from the suburb&rsquo;s active sporting population.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
             <div class="ph-name">GP / Medical Centre</div>
-            <p class="ph-desc">Placeholder for GPs and medical centres in P&#257;p&#257;moa.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <p class="ph-desc">General practice and walk-in clinic for enrolled and non-enrolled patients in P&#257;p&#257;moa. <a href="/categories/medical-centre-papamoa.html">View medical centres &rarr;</a></p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
+        </div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:14px">&#127947; <a href="/categories/gym-papamoa.html">See the full gyms &amp; fitness guide &rarr;</a> &mdash; ReDefined, Absolute Weights, Snap Fitness, Bout Hybrid, CrossFit Papamoa and more.</p>
+      </div>
+
+      <!-- AUTOMOTIVE -->
+      <div class="section" id="automotive" data-cat="auto">
+        <div class="section-title">&#128663; Automotive</div>
+        <div class="gold-spotlight">
+          <div class="gs-top"><span class="gs-badge">&#11088; Gold Listing</span><span class="gs-label">Top listing &mdash; Mechanic &amp; WOF</span></div>
+          <div class="gs-body">
+            <h2>Coastal Autos</h2>
+            <div class="gs-sub">&#128663; Mechanic &amp; WOF &middot; P&#257;p&#257;moa &middot; MTA Approved</div>
+            <p class="gs-desc">MTA-approved workshop handling WOFs, full servicing, tyres, brakes, auto electrical and vehicle licensing under one roof. Online booking available. Fleet servicing catered for. Reviews consistently mention communication and transparency.</p>
+            <div class="gs-tags"><span class="gs-tag">WOF</span><span class="gs-tag">Servicing</span><span class="gs-tag">Tyres</span><span class="gs-tag">Brakes</span><span class="gs-tag">Auto Electrical</span><span class="gs-tag">Vehicle Licensing</span><span class="gs-tag">Fleet</span><span class="gs-tag">MTA Approved</span></div>
+            <div class="gs-btns"><a href="https://www.coastalautos.nz/bookonline" target="_blank" rel="noopener" class="gs-btn gs-btn-primary">Book online</a><a href="tel:0728271000" class="gs-btn gs-btn-ghost">Call 07 282 7100</a></div>
+          </div>
+        </div>
+        <div class="listings-grid">
+          <div class="listing-tile">
+            <span class="lt-tier">Silver</span>
+            <div class="lt-name">Speedy Screens P&#257;p&#257;moa</div>
+            <div class="lt-sub">&#128274; Window &amp; Door Screens &middot; P&#257;p&#257;moa</div>
+            <p class="lt-desc">Local installer of fly screens, security screens and door screens. Supply and installation across the Bay of Plenty.</p>
+            <a href="/listings/speedy-screens-papamoa.html" class="lt-link">View listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Pharmacy &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Placeholder for pharmacies. Claim this listing to be found by locals looking for a chemist.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <div class="ph-name">Tyre Shop &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">New tyres, puncture repairs and wheel alignments for P&#257;p&#257;moa residents. High year-round demand.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Panel Beater &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Smash repairs and auto body work for P&#257;p&#257;moa vehicles. ACC and insurance work.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Car Wash &amp; Detailing &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Salty beach air means constant demand for quality car washing and detailing in P&#257;p&#257;moa.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
         </div>
       </div>
 
-      <div class="section" data-cat="all">
-                <div class="section-title">&#9986;&#65039; Personal Care &amp; Beauty</div>
+      <!-- HAIR & BEAUTY -->
+      <div class="section" id="beauty" data-cat="beauty">
+        <div class="section-title">&#9986;&#65039; Hair &amp; Beauty</div>
+        <div class="spotlight-claim">
+          <div class="sc-top"><span class="sc-badge">&#11088; Gold Listing</span><span class="sc-avail">Hair Salon &mdash; one position, unclaimed</span></div>
+          <div class="sc-body">
+            <h3>Hair Salon &mdash; P&#257;p&#257;moa&hellip;</h3>
+            <p>Hair salons are one of the highest-traffic personal care searches in any suburb. P&#257;p&#257;moa has 40,000+ residents and the Gold Listing here captures every &ldquo;hair salon Papamoa&rdquo; search. One position. First in wins.</p>
+            <a href="/sales/landing.html" class="sc-cta">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
         <div class="listings-grid">
-                    <div class="listing-tile">
+          <div class="listing-tile">
             <span class="lt-tier">Silver</span>
             <div class="lt-name">Barber Toms</div>
             <div class="lt-sub">&#9986;&#65039; Barber &middot; 80 Parton Road, P&#257;p&#257;moa</div>
             <p class="lt-desc">Neighbourhood barbershop with men&rsquo;s and kids&rsquo; cuts, beard trims, razor fades and The Works package. Walk-ins welcome; book via Fresha. Second location in Mt Maunganui.</p>
-            <a href="#" class="lt-link">View listing &rarr;</a>
+            <a href="/listings/barber-toms-papamoa.html" class="lt-link">View listing &rarr;</a>
           </div>
-                    <div class="listing-tile">
+          <div class="listing-tile">
             <span class="lt-tier">Silver</span>
             <div class="lt-name">Kayco Nails</div>
             <div class="lt-sub">&#128133; Custom Press-On Nails &middot; P&#257;p&#257;moa</div>
             <p class="lt-desc">Hand-crafted custom press-on nail kits made to order and shipped NZ-wide. Order via Instagram @kayco.nails.</p>
             <a href="/listings/kayco-nails-papamoa.html" class="lt-link">View listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
             <div class="ph-name">Hair Salon &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">One of the highest-traffic personal care sub-categories. Claim this listing to be found by locals looking for a new salon.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <p class="ph-desc">P&#257;p&#257;moa has dozens of salons but the Gold Listing here is unclaimed. Cuts, colour, treatments and styling for men and women.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
             <div class="ph-name">Beauty Therapist &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Placeholder for beauty therapists and beauty salons in P&#257;p&#257;moa.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <p class="ph-desc">Facials, waxing, lash extensions, spray tans and beauty treatments for P&#257;p&#257;moa clients.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Massage Therapist &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Remedial, relaxation and sports massage in P&#257;p&#257;moa. Popular with the suburb&rsquo;s active, health-conscious population.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Tattoo Studio &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Tattooing and piercing in P&#257;p&#257;moa. Beach culture makes this one of the higher-search personal care categories in the suburb.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
         </div>
       </div>
 
-      <div class="section" data-cat="all">
-                <div class="section-title">&#128736; Trades &amp; Home Services</div>
+      <!-- HOME & GARDEN -->
+      <div class="section" id="home" data-cat="home">
+        <div class="section-title">&#127968; Home &amp; Garden Services</div>
         <div class="listings-grid">
-                    <div class="ph-tile">
-            <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Plumber &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Enquiries from locals searching for a plumber are being captured here. Claim to receive them directly.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+          <div class="listing-tile">
+            <span class="lt-tier">Gold</span>
+            <div class="lt-name">GreenCut P&#257;p&#257;moa</div>
+            <div class="lt-sub">&#127807; Lawn Mowing &amp; Gardening &middot; P&#257;p&#257;moa</div>
+            <p class="lt-desc">Professional lawn mowing and full garden maintenance across P&#257;p&#257;moa. Regular contracts and one-off tidy-ups.</p>
+            <a href="/listings/greencut-papamoa.html" class="lt-link">View listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
-            <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Electrician &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">High-search sub-category. One Gold Spotlight per sub-category &mdash; this position is unclaimed.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+          <div class="listing-tile">
+            <span class="lt-tier">Silver</span>
+            <div class="lt-name">Lawn Mowing P&#257;p&#257;moa</div>
+            <div class="lt-sub">&#127807; Lawn &amp; Garden &middot; P&#257;p&#257;moa</div>
+            <p class="lt-desc">Residential lawn mowing, edging and garden tidy-ups. Regular scheduling and one-off service available across P&#257;p&#257;moa.</p>
+            <a href="/listings/lawn-mowing-papamoa.html" class="lt-link">View listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Builder &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">One of NZ&rsquo;s fastest-growing suburbs. Constant demand for new builds and renovations.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <div class="ph-name">House Cleaning &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Regular domestic cleaning, end-of-tenancy and one-off deep cleans for P&#257;p&#257;moa homes. Consistently high-search category.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Lawn Mowing &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Real enquiries being captured. Claim this listing to convert them into jobs.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <div class="ph-name">Pool &amp; Spa Maintenance &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">P&#257;p&#257;moa&rsquo;s warm climate means a high proportion of homes with pools. Regular servicing, chemical balancing and equipment repairs.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Pest Control &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Residential and commercial pest control across P&#257;p&#257;moa. Rodents, wasps, cockroaches and ant treatment.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
+          </div>
+          <div class="ph-tile">
+            <span class="ph-label">Placeholder</span>
+            <div class="ph-name">Rubbish Removal &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Household junk removal, skip hire and hard rubbish collection for P&#257;p&#257;moa. Renovations, decluttering and move-outs.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
         </div>
       </div>
 
-      <div class="section" data-cat="all">
-                <div class="section-title">&#128188; Professional Services</div>
+      <!-- DENTAL -->
+      <div class="section" id="dental" data-cat="dental">
+        <div class="section-title">&#129463; Dental</div>
         <div class="listings-grid">
-                    <div class="ph-tile">
-            <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Accountant &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Claim this listing to connect with local businesses and individuals seeking tax and financial services.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+          <div class="listing-tile">
+            <span class="lt-tier">Silver</span>
+            <div class="lt-name">Tara Road Dental</div>
+            <div class="lt-sub">&#129463; Dentist &middot; P&#257;p&#257;moa East</div>
+            <p class="lt-desc">Full-service dental practice in P&#257;p&#257;moa East. General dentistry, cosmetic treatment, hygiene appointments and emergency care.</p>
+            <a href="/listings/tara-road-dental-papamoa.html" class="lt-link">View listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
-            <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Mortgage Broker &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">One of NZ&rsquo;s most active property markets. Claim to be first in front of buyers and those refinancing.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+          <div class="listing-tile">
+            <span class="lt-tier">Silver</span>
+            <div class="lt-name">P&#257;p&#257;moa Orthodontist</div>
+            <div class="lt-sub">&#129463; Orthodontics &middot; P&#257;p&#257;moa</div>
+            <p class="lt-desc">Braces, clear aligners and retainers for children and adults. Modern equipment and flexible payment plans.</p>
+            <a href="/listings/papamoa-orthodontist.html" class="lt-link">View listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Real Estate Agent &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Claim this listing to connect with buyers and sellers searching locally.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <div class="ph-name">Dentist &mdash; P&#257;p&#257;moa West</div>
+            <p class="ph-desc">Dental practice serving the western suburbs of P&#257;p&#257;moa. Gold Listing unclaimed for this area. General, cosmetic and emergency dental care.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
-                    <div class="ph-tile">
+          <div class="ph-tile">
             <span class="ph-label">Placeholder</span>
-            <div class="ph-name">Lawyer / Solicitor &mdash; P&#257;p&#257;moa</div>
-            <p class="ph-desc">Property conveyancing, wills and family law. Claim this listing to appear in local legal searches.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <div class="ph-name">Dental Hygienist &mdash; P&#257;p&#257;moa</div>
+            <p class="ph-desc">Preventive dental hygiene, scale and polish, and oral health assessments for P&#257;p&#257;moa patients.</p>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
         </div>
       </div>
+
     </div>
+
+    <!-- SIDEBAR -->
     <div class="side-col">
       <div class="fact-box">
         <h4>&#128204; Services in P&#257;p&#257;moa</h4>
         <ul class="fact-list">
-          <li><strong>Coastal Autos</strong> &mdash; WOF &amp; servicing, MTA</li>
-          <li><strong>ReDefined</strong> &mdash; gym, pilates, physio</li>
+          <li><strong>Coastal Autos</strong> &mdash; WOF &amp; servicing &middot; MTA</li>
+          <li><strong>ReDefined</strong> &mdash; gym, pilates, physio, wellness</li>
           <li><strong>Barber Toms</strong> &mdash; 80 Parton Road</li>
-          <li><strong>Orthodontist</strong> &mdash; braces &amp; aligners</li>
+          <li><strong>Tara Road Dental</strong> &mdash; P&#257;p&#257;moa East</li>
+          <li><strong>GreenCut</strong> &mdash; lawn &amp; garden</li>
           <li><strong>Speedy Screens</strong> &mdash; fly screen install</li>
-          <li>Gold Spotlight available in most sub-categories</li>
+          <li>Gold Listing available per sub-category</li>
         </ul>
       </div>
-            <div class="ad-spot">
-        <div class="ad-label">Sponsored</div>
-        <div class="ad-inner"><div class="ad-placeholder"><p>&#128736; Trades &amp; home services &mdash; P&#257;p&#257;moa</p><a href="/index.html">Claim this spot &rarr;</a></div></div>
+      <div class="ad-spot">
+        <div class="ad-label">Trades Spotlight</div>
+        <div class="ad-inner"><div class="ad-ph"><p>&#128736; Trades &amp; home services in P&#257;p&#257;moa</p><a href="/sales/landing.html">Claim this Spotlight &rarr;</a></div></div>
       </div>
       <div class="list-cta">
-        <p>One Gold Spotlight available per sub-category. Claim yours before a competitor does.</p>
-        <a href="/index.html">Claim the Spotlight &rarr;</a>
+        <p>One Gold Listing per sub-category. P&#257;p&#257;moa has 40,000+ residents and most positions are unclaimed.</p>
+        <a href="/sales/landing.html">Claim yours &rarr;</a>
       </div>
-            <div class="ad-spot">
-        <div class="ad-label">Sponsored</div>
-        <div class="ad-inner"><div class="ad-placeholder"><p>&#127947; Health &amp; fitness &mdash; P&#257;p&#257;moa</p><a href="/index.html">Claim this spot &rarr;</a></div></div>
+      <div class="ad-spot">
+        <div class="ad-label">Professional Services</div>
+        <div class="ad-inner"><div class="ad-ph"><p>&#128188; Lawyer, accountant or real estate?</p><a href="/sales/landing.html">Claim this Spotlight &rarr;</a></div></div>
       </div>
       <div class="card">
         <div class="card-title">&#128279; Related pages</div>
         <div class="link-list">
-          <a href="/articles/utilities-papamoa.html">Utilities &mdash; Power &amp; Broadband</a>
-          <a href="/articles/water-rates-papamoa.html">Water &amp; Rates</a>
-          <a href="/articles/rubbish-recycling-papamoa.html">Rubbish &amp; Recycling</a>
-          <a href="/articles/local-government.html">Local Government</a>
+          <a href="/categories/gym-papamoa.html">Gyms &amp; Fitness &mdash; full guide</a>
+          <a href="/categories/medical-centre-papamoa.html">GP &amp; Medical Centres</a>
+          <a href="/community/urgent-health.html">Urgent Health</a>
+          <a href="/categories/shops/pharmacy-papamoa.html">Pharmacy in P&#257;p&#257;moa</a>
+          <a href="/listings/greencut-papamoa.html">GreenCut &mdash; lawn mowing</a>
+          <a href="/listings/coastal-autos-papamoa.html">Coastal Autos</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <footer class="site-footer">
-  <a href="/homepage.html">Papamoa.info</a> &mdash; The local directory for P&#257;p&#257;moa, Bay of Plenty, New Zealand.
+  <a href="/papamoa-previews/homepage.html">Papamoa.info</a> &mdash; P&#257;p&#257;moa&rsquo;s independent local directory &middot; <a href="/papamoa-previews/sales/landing.html">List your business</a>
 </footer>
+
 <script>
-  function setChip(btn, cat) {
-    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.section[data-cat]').forEach(s => {
-      s.style.display = (cat === 'all' || s.dataset.cat === cat) ? '' : 'none';
-    });
-  }
+function setChip(btn,cat){
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.section[data-cat]').forEach(s=>{
+    s.style.display=(cat==='all'||s.dataset.cat===cat)?'':'none';
+  });
+}
 </script>
 <script>
-  (function() {
-    var base = '/papamoa-previews';
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('/') && !href.startsWith(base)) {
-        e.preventDefault();
-        window.location.href = base + href;
-      }
-    });
-  })();
+(function(){
+  var base='/papamoa-previews';
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a');
+    if(!a)return;
+    var href=a.getAttribute('href');
+    if(!href||href.startsWith('http')||href.startsWith('tel:')||href.startsWith('#'))return;
+    if(href.startsWith('/')&&!href.startsWith(base)){e.preventDefault();window.location.href=base+href;}
+  });
+})();
 </script>
 </body>
 </html>
