@@ -42,15 +42,15 @@
     .hchip.aims { background: rgba(200,150,42,0.2); border-color: rgba(200,150,42,0.35); color: #D4A840; }
 
     /* SUBCAT FILTER */
-    .subcat-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 20px; overflow-x: auto; scrollbar-width: none; }
+    .subcat-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 20px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; position: sticky; top: 0; z-index: 100; }
     .subcat-bar::-webkit-scrollbar { display: none; }
-    .subcat-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 8px; }
+    .subcat-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 8px; width: max-content; min-width: 100%; }
     .chip { font-size: 0.75rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; white-space: nowrap; font-family: 'Figtree', sans-serif; transition: all 0.15s; }
     .chip:hover { border-color: var(--blue); color: var(--blue); }
     .chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
 
     /* LAYOUT */
-    .page-wrap { max-width: 960px; margin: 0 auto; padding: 32px 20px 80px; }
+    .page-wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px 80px; }
     .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
     .main-col { min-width: 0; }
     .side-col { display: flex; flex-direction: column; gap: 18px; }
@@ -67,43 +67,43 @@
     .section { margin-bottom: 40px; }
     .section-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px; }
 
-    /* GOLD SPOTLIGHT */
-    .gold-spotlight { background: linear-gradient(135deg, #1A2A3A, #0D1B2A); border: 1px solid rgba(200,150,42,0.35); border-radius: 14px; overflow: hidden; margin-bottom: 24px; }
-    .gs-top { padding: 14px 20px 10px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(200,150,42,0.15); }
+    /* GOLD SPOTLIGHT — single-column, pill amenities */
+    .gold-spotlight { background: linear-gradient(160deg, #1A2A3A 0%, #0D1B2A 100%); border: 1px solid rgba(200,150,42,0.35); border-radius: 14px; overflow: hidden; margin-bottom: 24px; }
+    .gs-top { padding: 12px 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(200,150,42,0.15); }
     .gs-badge { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; padding: 3px 10px; border-radius: 3px; }
     .gs-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
-    .gs-body { padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
-    .gs-info h2 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .gs-body { padding: 20px 22px 18px; }
+    .gs-body h2 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
     .gs-sub { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-    .gs-desc { font-size: 0.86rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 14px; }
-    .gs-rows { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+    .gs-desc { font-size: 0.86rem; color: rgba(255,255,255,0.68); line-height: 1.7; margin-bottom: 14px; }
+    .gs-rows { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
     .gs-row { display: flex; gap: 8px; font-size: 0.8rem; }
-    .gs-row-label { color: rgba(255,255,255,0.35); min-width: 70px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; flex-shrink: 0; }
+    .gs-row-label { color: rgba(255,255,255,0.35); min-width: 72px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0; padding-top: 1px; }
     .gs-row-val { color: rgba(255,255,255,0.75); }
     .gs-row-val a { color: var(--blue); text-decoration: none; }
+    /* Amenity pills — horizontal wrap */
+    .gs-amenities { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .gs-amenity { font-size: 0.75rem; color: rgba(255,255,255,0.7); background: rgba(125,193,67,0.08); border: 1px solid rgba(125,193,67,0.18); padding: 3px 10px; border-radius: 20px; display: flex; gap: 5px; align-items: center; }
+    .gs-amenity::before { content: '✓'; color: var(--lime); font-size: 0.68rem; font-weight: 700; }
     .gs-btns { display: flex; gap: 8px; flex-wrap: wrap; }
     .gs-btn-primary { display: inline-block; background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.82rem; padding: 9px 18px; border-radius: 6px; text-decoration: none; transition: opacity 0.15s; }
     .gs-btn-primary:hover { opacity: 0.85; }
     .gs-btn-ghost { display: inline-block; background: transparent; color: rgba(255,255,255,0.5); font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.82rem; padding: 9px 18px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); text-decoration: none; transition: all 0.15s; }
     .gs-btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
-    .gs-amenities { display: flex; flex-direction: column; gap: 6px; }
-    .gs-amenities-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 8px; }
-    .gs-amenity { font-size: 0.8rem; color: rgba(255,255,255,0.65); display: flex; gap: 8px; align-items: center; }
-    .gs-amenity::before { content: '\2713'; color: var(--lime); font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
-    .gs-tripadvisor { background: rgba(52,168,83,0.12); border: 1px solid rgba(52,168,83,0.25); border-radius: 7px; padding: 10px 12px; margin-top: 14px; display: flex; gap: 8px; align-items: center; }
+    .gs-tripadvisor { background: rgba(52,168,83,0.1); border: 1px solid rgba(52,168,83,0.22); border-radius: 7px; padding: 9px 14px; margin-top: 14px; display: flex; gap: 10px; align-items: center; }
     .gs-ta-stars { color: #34A853; font-size: 0.88rem; letter-spacing: 0.05em; }
     .gs-ta-label { font-size: 0.76rem; color: rgba(255,255,255,0.55); }
     .gs-ta-count { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
 
-    /* LISTING CARDS */
-    .listing-grid { display: flex; flex-direction: column; gap: 14px; }
-    .listing-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: grid; grid-template-columns: 90px 1fr; }
+    /* LISTING CARDS — 2-col grid below the Gold spotlight */
+    .listing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .listing-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: grid; grid-template-columns: 72px 1fr; text-decoration: none; color: inherit; transition: all 0.15s; }
     .listing-card:hover { border-color: var(--blue); box-shadow: 0 2px 10px rgba(58,171,222,0.1); }
-    .lc-thumb { background: linear-gradient(135deg, var(--navy), #1A2A40); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
-    .lc-body { padding: 14px 16px; }
-    .lc-name { font-weight: 700; font-size: 0.95rem; color: var(--navy); margin-bottom: 3px; }
-    .lc-sub { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; }
-    .lc-desc { font-size: 0.82rem; color: var(--body); line-height: 1.55; margin-bottom: 8px; }
+    .lc-thumb { background: linear-gradient(135deg, var(--navy), #1A2A40); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+    .lc-body { padding: 13px 14px; }
+    .lc-name { font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 3px; line-height: 1.3; }
+    .lc-sub { font-size: 0.72rem; color: var(--muted); margin-bottom: 6px; }
+    .lc-desc { font-size: 0.8rem; color: var(--body); line-height: 1.55; margin-bottom: 8px; }
     .lc-tags { display: flex; gap: 5px; flex-wrap: wrap; }
     .lc-tag { font-size: 0.62rem; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
     .tag-silver { background: rgba(96,112,128,0.1); color: var(--muted); border: 1px solid var(--border); }
@@ -155,15 +155,17 @@
     .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
     .site-footer a { color: var(--blue); }
 
+    @media (max-width: 900px) {
+      .listing-grid { grid-template-columns: 1fr; }
+    }
     @media (max-width: 720px) {
       .two-col { grid-template-columns: 1fr; }
       .side-col { order: -1; }
-      .gs-body { grid-template-columns: 1fr; }
-      .listing-card { grid-template-columns: 70px 1fr; }
+      .listing-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .listing-card { grid-template-columns: 1fr; }
-      .lc-thumb { height: 60px; }
+      .lc-thumb { height: 56px; }
     }
   </style>
 </head>
@@ -195,9 +197,13 @@
     <span class="chip active" onclick="filterChip(this, 'all')">All</span>
     <span class="chip" onclick="filterChip(this, 'holiday-park')">Holiday Parks</span>
     <span class="chip" onclick="filterChip(this, 'motel')">Motels</span>
-    <span class="chip" onclick="filterChip(this, 'bb')">B&amp;Bs</span>
     <span class="chip" onclick="filterChip(this, 'apartment')">Apartments</span>
+    <span class="chip" onclick="filterChip(this, 'bb')">B&amp;Bs</span>
+    <span class="chip" onclick="filterChip(this, 'rental')">Rental Homes</span>
+    <span class="chip" onclick="filterChip(this, 'self-contained')">Self Contained</span>
     <span class="chip" onclick="filterChip(this, 'short-stay')">Short-Stay &amp; Airbnb</span>
+    <span class="chip" onclick="filterChip(this, 'backpackers')">Backpackers</span>
+    <span class="chip" onclick="filterChip(this, 'book-online')">Book Online</span>
     <span class="chip" onclick="filterChip(this, 'group')">Groups &amp; Camps</span>
   </div>
 </div>
@@ -217,54 +223,52 @@
 
       <!-- GOLD SPOTLIGHT: PACIFIC PARK -->
       <div class="section">
-        <div class="section-title">&#11088; Gold Spotlight</div>
+        <div class="section-title">&#11088; Gold Listing</div>
 
         <div class="gold-spotlight">
           <div class="gs-top">
-            <span class="gs-badge">&#11088; Gold Spotlight</span>
+            <span class="gs-badge">&#11088; Gold Listing</span>
             <span class="gs-label">Pāpāmoa&rsquo;s top-rated accommodation</span>
           </div>
           <div class="gs-body">
-            <div class="gs-info">
-              <h2>Pacific Park Christian Holiday Camp</h2>
-              <div class="gs-sub">&#127968; Holiday Park &middot; 1110 Pāpāmoa Beach Road</div>
-              <p class="gs-desc">Pacific Park is consistently Pāpāmoa&rsquo;s highest-rated accommodation on TripAdvisor — a well-maintained, alcohol and smoke-free holiday park set on five acres just a two-minute walk from the beach. It offers the full range from powered campsites through to fully serviced motel units, villas, cabins and self-contained group lodges — all within a family-friendly, secure environment. Quiet hours from 10pm, no parties, no pets. The atmosphere is relaxed and well-run. Pacific Park regularly hosts school groups, sports teams, church camps and family reunions alongside regular holiday guests.</p>
-              <div class="gs-rows">
-                <div class="gs-row"><span class="gs-row-label">Address</span><span class="gs-row-val">1110 Pāpāmoa Beach Road, Pāpāmoa Beach 3118</span></div>
-                <div class="gs-row"><span class="gs-row-label">Phone</span><span class="gs-row-val"><a href="tel:075420018">07 542 0018</a></span></div>
-                <div class="gs-row"><span class="gs-row-label">Email</span><span class="gs-row-val"><a href="mailto:office@pacificpark.co.nz">office@pacificpark.co.nz</a></span></div>
-                <div class="gs-row"><span class="gs-row-label">Check-in</span><span class="gs-row-val">2:00pm &mdash; Check-out 10:00am</span></div>
-                <div class="gs-row"><span class="gs-row-label">Office</span><span class="gs-row-val">8:30am &ndash; 6:30pm, 7 days</span></div>
-                <div class="gs-row"><span class="gs-row-label">From</span><span class="gs-row-val">$58/night (powered sites)</span></div>
-              </div>
-              <div class="gs-btns">
-                <a href="https://pacificpark.co.nz" class="gs-btn-primary" target="_blank" rel="noopener">Book now &rarr;</a>
-                <a href="https://pacificpark.co.nz" class="gs-btn-ghost" target="_blank" rel="noopener">View website</a>
-              </div>
-              <div class="gs-tripadvisor">
-                <span class="gs-ta-stars">&#9733;&#9733;&#9733;&#9733;</span>
-                <div>
-                  <div class="gs-ta-label">TripAdvisor &mdash; Top rated in Pāpāmoa</div>
-                  <div class="gs-ta-count">321+ reviews</div>
-                </div>
-              </div>
+            <h2>Pacific Park Christian Holiday Camp</h2>
+            <div class="gs-sub">&#127968; Holiday Park &middot; 1110 Pāpāmoa Beach Road</div>
+            <p class="gs-desc">Pacific Park is consistently Pāpāmoa&rsquo;s highest-rated accommodation on TripAdvisor — a well-maintained, alcohol and smoke-free holiday park set on five acres just a two-minute walk from the beach. It offers the full range from powered campsites through to fully serviced motel units, villas, cabins and self-contained group lodges — all within a family-friendly, secure environment. Quiet hours from 10pm, no parties, no pets. Pacific Park regularly hosts school groups, sports teams, church camps and family reunions alongside regular holiday guests.</p>
+            <div class="gs-rows">
+              <div class="gs-row"><span class="gs-row-label">Address</span><span class="gs-row-val">1110 Pāpāmoa Beach Road, Pāpāmoa Beach 3118</span></div>
+              <div class="gs-row"><span class="gs-row-label">Phone</span><span class="gs-row-val"><a href="tel:075420018">07 542 0018</a></span></div>
+              <div class="gs-row"><span class="gs-row-label">Email</span><span class="gs-row-val"><a href="mailto:info@pacificpark.co.nz">info@pacificpark.co.nz</a></span></div>
+              <div class="gs-row"><span class="gs-row-label">Check-in</span><span class="gs-row-val">2:00pm &mdash; Check-out 10:00am</span></div>
+              <div class="gs-row"><span class="gs-row-label">Office</span><span class="gs-row-val">8:30am &ndash; 6:30pm, 7 days</span></div>
+              <div class="gs-row"><span class="gs-row-label">From</span><span class="gs-row-val">$58/night (powered sites)</span></div>
             </div>
             <div class="gs-amenities">
-              <div class="gs-amenities-title">What&rsquo;s included</div>
-              <div class="gs-amenity">Motels, villas, cabins &amp; campsites</div>
-              <div class="gs-amenity">Group lodges (self-contained)</div>
-              <div class="gs-amenity">Outdoor hot tub</div>
-              <div class="gs-amenity">Jumping pillow</div>
-              <div class="gs-amenity">Games room (table tennis, air hockey)</div>
-              <div class="gs-amenity">Mini putt</div>
-              <div class="gs-amenity">BBQ facilities</div>
-              <div class="gs-amenity">Free WiFi throughout</div>
-              <div class="gs-amenity">Shared kitchen facilities</div>
-              <div class="gs-amenity">On-site laundry</div>
-              <div class="gs-amenity">Dump station</div>
-              <div class="gs-amenity">2 min walk to beach</div>
-              <div class="gs-amenity">Alcohol &amp; smoke-free</div>
-              <div class="gs-amenity">AIMS Games groups welcome</div>
+              <span class="gs-amenity">Motels, villas &amp; cabins</span>
+              <span class="gs-amenity">Powered campsites</span>
+              <span class="gs-amenity">Group lodges (self-contained)</span>
+              <span class="gs-amenity">Outdoor hot tub</span>
+              <span class="gs-amenity">Jumping pillow</span>
+              <span class="gs-amenity">Games room</span>
+              <span class="gs-amenity">Mini putt</span>
+              <span class="gs-amenity">BBQ facilities</span>
+              <span class="gs-amenity">Free WiFi</span>
+              <span class="gs-amenity">Shared kitchen</span>
+              <span class="gs-amenity">On-site laundry</span>
+              <span class="gs-amenity">Dump station</span>
+              <span class="gs-amenity">2 min walk to beach</span>
+              <span class="gs-amenity">Alcohol &amp; smoke-free</span>
+              <span class="gs-amenity">AIMS Games groups welcome</span>
+            </div>
+            <div class="gs-btns">
+              <a href="https://pacificpark.co.nz" class="gs-btn-primary" target="_blank" rel="noopener">Book now &rarr;</a>
+              <a href="https://pacificpark.co.nz" class="gs-btn-ghost" target="_blank" rel="noopener">View website</a>
+            </div>
+            <div class="gs-tripadvisor">
+              <span class="gs-ta-stars">&#9733;&#9733;&#9733;&#9733;</span>
+              <div>
+                <div class="gs-ta-label">TripAdvisor &mdash; Top rated in Pāpāmoa</div>
+                <div class="gs-ta-count">321+ reviews</div>
+              </div>
             </div>
           </div>
         </div>
@@ -275,7 +279,7 @@
           <div class="sa-body">
             <h4>Gold Spotlight available &mdash; Motels &amp; Apartments</h4>
             <p>No Gold Spotlight has been claimed for the Motels &amp; Apartments sub-category. One exclusive position, top placement on this page, included in all relevant searches and AIMS Games accommodation guides.</p>
-            <a href="/index.html" class="sa-btn">Claim this Spotlight &rarr;</a>
+            <a href="/sales/landing.html" class="sa-btn">Claim this Spotlight &rarr;</a>
           </div>
         </div>
       </div>
@@ -441,8 +445,103 @@
               <div class="ph-name">Pāpāmoa Short-Stay Manager</div>
               <div class="ph-sub">Holiday home management &middot; Pāpāmoa</div>
               <p class="ph-desc">Is your business managing short-stay or holiday homes in Pāpāmoa? Claim this listing to appear in accommodation searches across Papamoa.info, including the AIMS Games accommodation guide.</p>
-              <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+              <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RENTAL HOMES -->
+      <div class="section" id="rental">
+        <div class="section-title">&#127968; Rental Homes &amp; Baches</div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#127968;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Rental Homes</h4>
+            <p>No Gold Spotlight claimed for holiday rental homes and baches in Pāpāmoa. Top placement on the Rental Homes sub-category page, linked from all accommodation searches and the AIMS Games guide.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=rental-homes" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+        <div class="listing-grid">
+          <div class="listing-card" data-cat="rental">
+            <div class="lc-thumb">&#127968;</div>
+            <div class="lc-body">
+              <div class="lc-name">Pāpāmoa Bach Rental</div>
+              <div class="lc-sub">Holiday home &middot; Pāpāmoa Beach</div>
+              <p class="lc-desc">Private holiday home rentals in Pāpāmoa — from one-bedroom baches to large family homes near the beach. Available direct or via platforms including Bookabach and Airbnb.</p>
+              <div class="lc-tags"><span class="lc-tag tag-placeholder">Placeholder — claim listing</span></div>
+            </div>
+          </div>
+          <div class="listing-card" data-cat="rental">
+            <div class="lc-thumb">&#127968;</div>
+            <div class="lc-body">
+              <div class="lc-name">Holiday Home Pāpāmoa East</div>
+              <div class="lc-sub">Holiday home &middot; Golden Sands, Pāpāmoa</div>
+              <p class="lc-desc">Modern holiday homes in Pāpāmoa East — close to New World The Sands, walking distance to beach access points. Popular with families and groups visiting for AIMS Games.</p>
+              <div class="lc-tags"><span class="lc-tag tag-placeholder">Placeholder — claim listing</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SELF CONTAINED -->
+      <div class="section" id="self-contained">
+        <div class="section-title">&#127981; Self-Contained Units</div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#127981;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Self-Contained Accommodation</h4>
+            <p>No Gold Spotlight claimed for self-contained units in Pāpāmoa. Ideal for motels and apartment operators offering full kitchen facilities and independent stays.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=self-contained" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+        <div class="listing-grid">
+          <div class="listing-card" data-cat="self-contained">
+            <div class="lc-thumb">&#127981;</div>
+            <div class="lc-body">
+              <div class="lc-name">Self-Contained Unit &mdash; Pāpāmoa</div>
+              <div class="lc-sub">Self-contained &middot; Pāpāmoa Beach</div>
+              <p class="lc-desc">Self-contained accommodation in Pāpāmoa with full kitchen, bathroom and private entrance. Suitable for couples and small families wanting independence without the price of a full holiday home.</p>
+              <div class="lc-tags"><span class="lc-tag tag-placeholder">Placeholder — claim listing</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BACKPACKERS -->
+      <div class="section" id="backpackers">
+        <div class="section-title">&#127908; Backpackers &amp; Budget Stays</div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#127908;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Backpackers</h4>
+            <p>No Gold Spotlight claimed for backpacker and budget accommodation in Pāpāmoa. High search volume from seasonal workers, surf travellers and budget visitors to the Bay of Plenty.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=backpackers" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+        <div class="listing-grid">
+          <div class="listing-card" data-cat="backpackers">
+            <div class="lc-thumb">&#127928;</div>
+            <div class="lc-body">
+              <div class="lc-name">Backpacker Accommodation &mdash; Pāpāmoa</div>
+              <div class="lc-sub">Budget / hostel &middot; Pāpāmoa</div>
+              <p class="lc-desc">Budget-friendly accommodation options in the Pāpāmoa area, including shared and private rooms. Pāpāmoa is a short bus or bike ride from Mount Maunganui and popular with seasonal workers and surf travellers.</p>
+              <div class="lc-tags"><span class="lc-tag tag-placeholder">Placeholder — claim listing</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOK ONLINE -->
+      <div class="section" id="book-online">
+        <div class="section-title">&#128241; Book Online &mdash; Pāpāmoa</div>
+        <p style="font-size:0.86rem;color:var(--muted);margin-bottom:14px;line-height:1.65">Pāpāmoa accommodation available to book directly online. All properties below accept online bookings via their own sites or through platforms including Booking.com, Airbnb and Bookabach.</p>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#128241;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Book Online</h4>
+            <p>No Gold Spotlight claimed for the Book Online sub-category. High-intent traffic from travellers ready to book. Gold Listing required.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=book-online" class="sa-btn">Claim this Spotlight &rarr;</a>
           </div>
         </div>
       </div>
@@ -457,7 +556,7 @@
             <div class="ph-name">Group &amp; retreat accommodation in Pāpāmoa</div>
             <div class="ph-sub">Camp / lodge / retreat &middot; Pāpāmoa</div>
             <p class="ph-desc">Does your property cater for group accommodation, church camps or school retreats? Claim your free listing on Papamoa.info.</p>
-            <a href="/index.html" class="ph-cta">Claim this listing &rarr;</a>
+            <a href="/sales/landing.html" class="ph-cta">Claim this listing &rarr;</a>
           </div>
         </div>
       </div>
@@ -486,7 +585,7 @@
         <div class="ad-inner">
           <div class="ad-placeholder">
             <p>&#127968; Pāpāmoa accommodation &mdash; Silver listing</p>
-            <a href="/index.html">Claim this spot &rarr;</a>
+            <a href="/sales/landing.html">Claim this spot &rarr;</a>
           </div>
         </div>
       </div>
@@ -508,7 +607,7 @@
         <div class="ad-inner">
           <div class="ad-placeholder">
             <p>&#128664; Pāpāmoa transport &amp; transfers</p>
-            <a href="/index.html">Claim this spot &rarr;</a>
+            <a href="/sales/landing.html">Claim this spot &rarr;</a>
           </div>
         </div>
       </div>
@@ -532,9 +631,4 @@
 
 <footer class="site-footer">
   <a href="/">Papamoa.info</a> &mdash; The local directory for Pāpāmoa, Bay of Plenty, New Zealand. Accommodation information sourced from individual property websites and publicly available reviews. Always confirm availability and pricing directly with the property. Rolls and details subject to change.
-</footer><script>
-  function filterChip(el, cat) {
-    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-    if (cat === 'all') {
-      do
+</footer><script data-cfasync="false" src="/cdn-cgi/scr
