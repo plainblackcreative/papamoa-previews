@@ -361,14 +361,14 @@
 .pnf-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
 /* MOBILE DRAWER */
-.pnf-drawer-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:190; opacity:0; transition:opacity 0.25s; }
-.pnf-drawer-overlay.open { opacity:1; }
-.pnf-drawer { position:fixed; top:0; left:0; bottom:0; width:min(300px,85vw); background:var(--pnf-navy); z-index:195; transform:translateX(-100%); transition:transform 0.28s cubic-bezier(0.4,0,0.2,1); display:flex; flex-direction:column; box-shadow:4px 0 24px rgba(0,0,0,0.35); }
+.pnf-drawer-overlay { display:block; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:190; opacity:0; pointer-events:none; transition:opacity 0.25s; }
+.pnf-drawer-overlay.open { opacity:1; pointer-events:all; }
+.pnf-drawer { position:fixed; top:0; left:0; bottom:0; width:min(300px,85vw); background:var(--pnf-navy); z-index:195; transform:translateX(-100%); transition:transform 0.28s cubic-bezier(0.4,0,0.2,1); display:flex; flex-direction:column; box-shadow:4px 0 24px rgba(0,0,0,0.35); overflow:hidden; }
 .pnf-drawer.open { transform:translateX(0); }
 .pnf-drawer-head { display:flex; align-items:center; justify-content:space-between; padding:0 18px; height:56px; border-bottom:1px solid rgba(255,255,255,0.08); flex-shrink:0; }
 .pnf-drawer-logo { font-family:var(--pnf-display); font-weight:700; font-size:15px; color:var(--pnf-white); text-decoration:none; }
 .pnf-drawer-logo span { color:var(--pnf-accent); }
-.pnf-drawer-close { background:rgba(255,255,255,0.08); border:none; color:rgba(255,255,255,0.6); width:30px; height:30px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; }
+.pnf-drawer-close { background:rgba(255,255,255,0.08); border:none; color:rgba(255,255,255,0.6); width:30px; height:30px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; flex-shrink:0; }
 .pnf-drawer-nav { flex:1; overflow-y:auto; padding:10px 0; }
 .pnf-drawer-nav a { display:flex; align-items:center; gap:12px; padding:13px 20px; font-family:var(--pnf-font); font-size:15px; font-weight:500; color:rgba(255,255,255,0.65); text-decoration:none; border-left:3px solid transparent; transition:all 0.15s; }
 .pnf-drawer-nav a:hover, .pnf-drawer-nav a.active { color:var(--pnf-white); background:rgba(255,255,255,0.05); border-left-color:var(--pnf-accent); }
@@ -384,8 +384,6 @@
   .pnf-cta { display:none; }
   .pnf-nav { padding:0 16px; }
   .pnf-hamburger { display:flex; }
-  .pnf-drawer-overlay { display:block; pointer-events:none; }
-  .pnf-drawer-overlay.open { pointer-events:all; }
 }
 .pnf-footer { background:var(--pnf-navy); padding:48px 28px 24px; overflow:hidden; }
 .pnf-footer-inner { max-width:960px; margin:0 auto; }
