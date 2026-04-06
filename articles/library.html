@@ -2,8 +2,8 @@
 <html lang="en-NZ">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Te Ao Mārama — Pāpāmoa Library | Hours, Services &amp; Events | Papamoa.info</title>
-  <meta name="description" content="Te Ao Mārama — Pāpāmoa Library at 15 Gravatt Road. Opening hours, services, children's programmes, WiFi, JP visits, digital resources and community space. Part of Tauranga City Libraries.">
+  <title>Te Ao Mārama — Pāpāmoa Library | Hours, JP Visits &amp; Services | Papamoa.info</title>
+  <meta name="description" content="Te Ao Mārama — Pāpāmoa Library at 15 Gravatt Road. Justice of the Peace drop-in Mon 4:30–6pm, Wed &amp; Sat 10am–12noon. Opening hours, children's programmes, WiFi and digital resources.">
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   <style>
     :root{--navy:#2B3F5C;--blue:#3AABDE;--lime:#7DC143;--white:#fff;--body:#1E2D3E;--muted:#607080;--border:#DDE5EE;--bg:#F4F7FA;--gold:#C8962A;--dune:#D4C4A0}
@@ -47,8 +47,62 @@
     .ad-ph a{font-size:0.78rem;font-weight:700;color:var(--blue)}
     .site-footer{background:var(--navy);padding:18px 24px;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:40px}
     .site-footer a{color:var(--blue)}
+    .jp-section{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px}
+    .jp-head{background:linear-gradient(135deg,#1A2B3E,#2B3F5C);padding:16px 18px;display:flex;align-items:center;gap:12px}
+    .jp-head-icon{font-size:1.5rem;flex-shrink:0}
+    .jp-head h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:2px}
+    .jp-head p{font-size:0.72rem;color:rgba(255,255,255,0.55);line-height:1.4}
+    .jp-body{padding:16px 18px}
+    .jp-schedule{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+    @media(max-width:500px){.jp-schedule{grid-template-columns:1fr}}
+    .jp-slot{background:var(--bg);border-radius:7px;padding:10px 12px;text-align:center}
+    .jp-day{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:4px}
+    .jp-time{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:var(--navy);line-height:1.2}
+    .jp-note{font-size:0.75rem;color:var(--muted);background:#F0F5FA;border-radius:5px;padding:8px 12px;margin-bottom:12px;line-height:1.5}
+    .jp-what h4{font-size:0.82rem;font-weight:700;color:var(--navy);margin-bottom:7px}
+    .jp-what ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+    .jp-what li{font-size:0.8rem;color:var(--body);padding-left:14px;position:relative;line-height:1.45}
+    .jp-what li::before{content:'✓';position:absolute;left:0;color:var(--lime);font-weight:700;font-size:0.72rem}
+    .jp-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .jp-btn{font-size:0.73rem;font-weight:700;padding:7px 13px;border-radius:5px;text-decoration:none;transition:all .15s}
+    .jp-btn-dark{background:var(--navy);color:#fff}
+    .jp-btn-dark:hover{background:var(--blue)}
+    .jp-btn-ghost{background:var(--bg);border:1px solid var(--border);color:var(--navy)}
+    .jp-btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
     @media(max-width:680px){.page-wrap{grid-template-columns:1fr}.services-grid{grid-template-columns:1fr}}
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is there a Justice of the Peace in Pāpāmoa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. A free JP drop-in service operates at the Pāpāmoa Library (Community Centre), 15 Gravatt Road. No appointment needed. Sessions run: Monday 4:30pm–6:00pm, Wednesday 10:00am–12:00 noon, Saturday 10:00am–12:00 noon. Operated by the Bay of Plenty Justice of the Peace Association."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can a Justice of the Peace help with in Pāpāmoa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A JP can witness signatures on legal documents, certify copies of original documents (passport, birth certificate, driver licence etc), witness statutory declarations and affidavits, and sign Citizenship or NZ Permanent Residence applications. The service is free. No appointment required at the Pāpāmoa Library drop-in sessions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the Pāpāmoa Library opening hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Te Ao Mārama — Pāpāmoa Library at 15 Gravatt Road is open Monday to Friday 9:30am–5:00pm and Saturday and Sunday 9:30am–4:00pm. Closed on all statutory public holidays."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <nav class="site-nav">
@@ -87,14 +141,61 @@
         <div class="svc"><span>🖨️</span><div><strong style="display:block;margin-bottom:2px;color:var(--navy)">Printing &amp; scanning</strong>Black and white and colour printing. Scanning and photocopying available. Small charge per page.</div></div>
         <div class="svc"><span>👶</span><div><strong style="display:block;margin-bottom:2px;color:var(--navy)">Children's programmes</strong>Story time, school holiday programmes, early literacy activities and more. See the <a href="https://library.tauranga.govt.nz/whats-on/kids-events" target="_blank" rel="noopener">events calendar</a> for upcoming sessions.</div></div>
         <div class="svc"><span>📱</span><div><strong style="display:block;margin-bottom:2px;color:var(--navy)">Digital resources</strong>eBooks and audiobooks (BorrowBox, hoopla), movie streaming (Beamafilm), e-magazines (PressReader), LinkedIn Learning and more — all free with a library card.</div></div>
-        <div class="svc"><span>⚖️</span><div><strong style="display:block;margin-bottom:2px;color:var(--navy)">Justice of the Peace visits</strong>JP services available at the library on a regular schedule. Check <a href="https://library.tauranga.govt.nz/about-us/community-services/jp-visits" target="_blank" rel="noopener">library.tauranga.govt.nz</a> for current dates and times.</div></div>
+        <div class="svc"><span>⚖️</span><div><strong style="display:block;margin-bottom:2px;color:var(--navy)">Justice of the Peace — free drop-in</strong>JP service desks at the library three times a week — no appointment needed. Mon 4:30–6pm, Wed &amp; Sat 10am–12noon. <a href="#jp-service">Full schedule and what JPs can help with &darr;</a></div></div>
         <div class="svc"><span>🏢</span><div><strong style="display:block;margin-bottom:2px;color:var(--navy)">Community spaces</strong>Meeting and community spaces available for groups. Book through the library — see <a href="https://library.tauranga.govt.nz/about-us/community-services/community-spaces" target="_blank" rel="noopener">community spaces page</a>.</div></div>
         <div class="svc"><span>📶</span><div><strong style="display:block;margin-bottom:2px;color:var(--navy)">Skinny Jump</strong>Subsidised home broadband for eligible households. Library staff can help with applications. Free drop-in digital help sessions also available.</div></div>
         <div class="svc"><span>🆓</span><div><strong style="display:block;margin-bottom:2px;color:var(--navy)">Free membership</strong>All Tauranga City residents can join free. Bring ID and proof of address, or <a href="https://onlinereg.kotui.org.nz/forms/23" target="_blank" rel="noopener">register online</a>.</div></div>
       </div>
     </section>
+    </section>
+    <section class="section" id="jp-service">
+      <h2 class="section-title"><span>⚖️</span> Justice of the Peace — Pāpāmoa</h2>
+      <div class="jp-section">
+        <div class="jp-head">
+          <span class="jp-head-icon">⚖️</span>
+          <div>
+            <h3>Free JP Drop-in Service</h3>
+            <p>Pāpāmoa Library / Community Centre &middot; 15 Gravatt Road &middot; No appointment needed</p>
+          </div>
+        </div>
+        <div class="jp-body">
+          <div class="jp-schedule">
+            <div class="jp-slot">
+              <div class="jp-day">Monday</div>
+              <div class="jp-time">4:30pm–<br>6:00pm</div>
+            </div>
+            <div class="jp-slot">
+              <div class="jp-day">Wednesday</div>
+              <div class="jp-time">10:00am–<br>12:00 noon</div>
+            </div>
+            <div class="jp-slot">
+              <div class="jp-day">Saturday</div>
+              <div class="jp-time">10:00am–<br>12:00 noon</div>
+            </div>
+          </div>
+          <div class="jp-note">&#128338; No appointment needed. Just turn up during session times. The service is free. Run by the Bay of Plenty Justice of the Peace Association in partnership with Tauranga City Libraries. Hours can vary on or around public holidays — check the <a href="https://www.facebook.com/taurangacitylibraries/" target="_blank" rel="noopener">Tauranga City Libraries Facebook page</a> before visiting.</div>
+          <div class="jp-what">
+            <h4>What a JP can help you with</h4>
+            <ul>
+              <li>Certifying copies of original documents (passport, birth certificate, driver licence, bank statements and more)</li>
+              <li>Witnessing signatures on legal documents and contracts</li>
+              <li>Witnessing and signing statutory declarations and affidavits</li>
+              <li>Signing Citizenship applications and NZ Permanent Residence documents</li>
+              <li>Certifying documents for immigration, legal, financial or government purposes</li>
+              <li>Administering oaths and affirmations</li>
+            </ul>
+          </div>
+          <div class="jp-actions">
+            <a href="https://library.tauranga.govt.nz/about-us/community-services/jp-visits" target="_blank" rel="noopener" class="jp-btn jp-btn-dark">Library JP visits page &rarr;</a>
+            <a href="https://justiceofthepeace.org.nz/Page/Search?Location=Papamoa" target="_blank" rel="noopener" class="jp-btn jp-btn-ghost">Find a JP near me</a>
+            <a href="https://jpbop.nz" target="_blank" rel="noopener" class="jp-btn jp-btn-ghost">BOP JP Association</a>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:0.78rem;color:var(--muted);line-height:1.5">Need a JP outside of these hours? Individual JPs can also be contacted for appointments at their home or workplace. Search the <a href="https://justiceofthepeace.org.nz/Page/Search?Location=Papamoa" target="_blank" rel="noopener">NZ JP Federation locator</a> for JPs in the Pāpāmoa area available at other times.</p>
+    </section>
     <section class="section">
-      <h2 class="section-title"><span>📍</span> Location & Access</h2>
+      <h2 class="section-title"><span>📍</span> Location &amp; Access</h2>
       <div class="info-card">
         <div class="info-row"><span class="ir-lbl">Name</span><span class="ir-val">Te Ao Mārama — Pāpāmoa Library</span></div>
         <div class="info-row"><span class="ir-lbl">Address</span><span class="ir-val">15 Gravatt Road, Pāpāmoa Beach, Pāpāmoa 3118</span></div>
@@ -116,22 +217,24 @@
         <li>Sat–Sun 9:30am–4:00pm</li>
         <li><strong>Free</strong> membership for all residents</li>
         <li>Free WiFi — no login needed</li>
-        <li>JP visits on a regular schedule</li>
+        <li>JP drop-in: <strong>Mon 4:30–6pm</strong></li>
+        <li>JP drop-in: <strong>Wed &amp; Sat 10am–12noon</strong></li>
         <li>Children's programmes available</li>
         <li>Skinny Jump broadband assistance</li>
         <li>Closed all public holidays</li>
       </ul>
     </div>
     <div class="ad-spot">
-      <div class="ad-label">Tutoring & Education</div>
-      <div class="ad-inner"><div class="ad-ph"><p>Tutoring or education services near the Pāpāmoa Library?</p><a href="/index.html">Get listed →</a></div></div>
+      <div class="ad-label">Legal &amp; Document Services</div>
+      <div class="ad-inner"><div class="ad-ph"><p>Solicitor, notary or document services near Pāpāmoa?</p><a href="/sales/landing.html">Get listed &rarr;</a></div></div>
     </div>
     <div class="sidebar-card">
       <h4>Related pages</h4>
       <ul class="sidebar-list">
-        <li><a href="/community">Community Resources</a></li>
+        <li><a href="/community/community-resources.html">Community Resources</a></li>
         <li><a href="/articles/schools-papamoa.html">Schools in Pāpāmoa</a></li>
-        <li><a href="/articles/kids-birthday-parties.html">Kids activities</a></li>
+        <li><a href="/articles/kids-activities.html">Kids activities</a></li>
+        <li><a href="https://justiceofthepeace.org.nz/Page/Search?Location=Papamoa" target="_blank" rel="noopener">Find a JP near me</a></li>
       </ul>
     </div>
   </aside>
