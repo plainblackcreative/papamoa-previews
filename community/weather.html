@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pāpāmoa Weather — Forecast, Rain Radar &amp; Surf Conditions | Papamoa.info</title>
+  <meta name="description" content="Live Pāpāmoa weather forecast, current conditions, rain radar, UV index and surf conditions. Updated from MetService and Open-Meteo.">
+  <link rel="canonical" href="https://papamoa.info/community/weather.html">
+  <meta property="og:title" content="Pāpāmoa Weather Forecast | Papamoa.info">
+  <meta property="og:description" content="Live weather for Pāpāmoa Beach, Bay of Plenty. Current conditions, 5-day forecast, rain radar and UV index.">
+  <meta property="og:url" content="https://papamoa.info/community/weather.html">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Pāpāmoa Weather Forecast",
+    "url": "https://papamoa.info/community/weather.html",
+    "description": "Live weather forecast for Pāpāmoa, Bay of Plenty, New Zealand. Current conditions, 5-day forecast, UV index, rain radar and surf conditions.",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://papamoa.info/" },
+        { "@type": "ListItem", "position": 2, "name": "Weather", "item": "https://papamoa.info/community/weather.html" }
+      ]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Pāpāmoa?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pāpāmoa has a warm temperate oceanic climate. Summers (December to February) are warm and often dry, with temperatures regularly reaching 25–28°C. Winters (June to August) are mild with temperatures rarely dropping below 8°C. Pāpāmoa receives around 1,300mm of rain annually, spread fairly evenly across the year." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best time of year to visit Pāpāmoa?",
+        "acceptedAnswer": { "@type": "Answer", "text": "December through to March is peak season, with long dry spells, warm sea temperatures and the best surf conditions. March and April offer warm weather with far fewer crowds. Winter (June to August) is mild by NZ standards — cold enough for a jacket but not unpleasant for outdoor activities." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Pāpāmoa safe for swimming?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pāpāmoa Beach is patrolled by Pāpāmoa Surf Life Saving Club during summer (Labour Weekend to Easter). Always swim between the flags. The beach can have rips, particularly after periods of swell. Check the MetService surf forecast and lifeguard flags before entering the water. Water temperature is typically 17–22°C in summer, 13–16°C in winter." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the UV index like in Pāpāmoa?",
+        "acceptedAnswer": { "@type": "Answer", "text": "UV levels in Pāpāmoa can be very high, particularly from October through to March. During summer, the UV index regularly reaches 10–12 (extreme). Sun protection — SPF 50+ sunscreen, hat, and shirt — is recommended whenever the UV index exceeds 3. Reapply sunscreen every two hours when outdoors." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Pāpāmoa weather compare to Tauranga?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pāpāmoa and Tauranga share essentially the same climate — Pāpāmoa is a coastal suburb of Tauranga. The beach-facing aspect in Pāpāmoa means slightly more sea breeze in summer afternoons, which can cool temperatures by 2–3°C compared to inland Tauranga. Rain patterns are virtually identical." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I get the most accurate weather forecast for Pāpāmoa?",
+        "acceptedAnswer": { "@type": "Answer", "text": "MetService (metservice.com) is the New Zealand government weather service and provides the most authoritative NZ forecasts. The closest forecast location for Pāpāmoa is Tauranga. This page also shows live data from Open-Meteo, which aggregates multiple global weather models." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0;
+      --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E;
+      --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; overflow-x: hidden; }
+    a { color: var(--blue); text-decoration: none; }
+
+    /* NAV */
+    :root { --pnf-navy:#0D2B3E; --pnf-accent:#3AABDE; --pnf-dune:#C4985A; --pnf-white:#FFFFFF; --pnf-muted:rgba(255,255,255,0.45); --pnf-font:'Figtree',sans-serif; --pnf-display:'Playfair Display',serif; }
+    .pnf-nav { background:var(--pnf-navy); height:56px; padding:0 28px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:200; box-shadow:0 2px 12px rgba(0,0,0,0.25); gap:16px; width:100%; }
+    .pnf-logo { font-family:var(--pnf-display); font-weight:700; font-size:15px; color:var(--pnf-white); text-decoration:none; flex-shrink:0; }
+    .pnf-logo span { color:var(--pnf-accent); }
+    .pnf-links { display:flex; align-items:center; gap:2px; flex:1; overflow-x:auto; scrollbar-width:none; }
+    .pnf-links::-webkit-scrollbar { display:none; }
+    .pnf-link { font-family:var(--pnf-font); font-size:13px; font-weight:500; color:var(--pnf-muted); text-decoration:none; padding:6px 12px; white-space:nowrap; transition:color 0.15s; border-bottom:2px solid transparent; }
+    .pnf-link:hover { color:var(--pnf-white); }
+    .pnf-link.active { color:var(--pnf-white); border-bottom-color:var(--pnf-accent); }
+    .pnf-cta { font-family:var(--pnf-font); font-size:13px; font-weight:700; background:var(--pnf-accent); color:var(--pnf-white); padding:8px 18px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0; transition:background 0.2s; }
+    .pnf-cta:hover { background:#2d95c4; }
+    @media (max-width:640px) { .pnf-links { display:none; } .pnf-nav { padding:0 16px; } }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, #0D2B3E, #1B4060); padding: 44px 24px 40px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--lime), var(--blue)); }
+    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .breadcrumb { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lime); margin-bottom: 10px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4vw, 2.6rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 10px; }
+    .hero h1 em { font-style: italic; color: var(--blue); }
+    .hero-desc { font-size: 0.92rem; color: rgba(255,255,255,0.58); max-width: 520px; line-height: 1.7; }
+
+    /* LIVE WEATHER CARD */
+    .weather-live { max-width: 960px; margin: -28px auto 0; padding: 0 20px; position: relative; z-index: 10; }
+    .live-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 6px 28px rgba(0,0,0,0.1); overflow: hidden; }
+    .live-card-head { background: linear-gradient(135deg, var(--navy), #1B3555); padding: 14px 22px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .live-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 8px; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .live-updated { font-size: 0.68rem; color: rgba(255,255,255,0.35); }
+    .live-body { padding: 22px 22px 18px; }
+    .live-main { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; margin-bottom: 18px; }
+    .live-temp-block { text-align: center; }
+    .live-temp { font-size: 3.2rem; font-weight: 800; color: var(--navy); line-height: 1; }
+    .live-temp sup { font-size: 1.2rem; font-weight: 600; vertical-align: top; margin-top: 8px; display: inline-block; }
+    .live-feels { font-size: 0.72rem; color: var(--muted); margin-top: 4px; }
+    .live-condition { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .live-location { font-size: 0.75rem; color: var(--muted); margin-bottom: 12px; }
+    .live-stats { display: flex; gap: 18px; flex-wrap: wrap; }
+    .live-stat { display: flex; flex-direction: column; gap: 2px; }
+    .live-stat-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
+    .live-stat-value { font-size: 0.9rem; font-weight: 700; color: var(--navy); }
+    .live-stat-value.uv-low { color: #2E7D32; }
+    .live-stat-value.uv-mod { color: #F9A825; }
+    .live-stat-value.uv-high { color: #E65100; }
+    .live-stat-value.uv-vhigh { color: #B71C1C; }
+    .live-stat-value.uv-extreme { color: #7B1FA2; }
+    .live-divider { height: 1px; background: var(--border); margin: 0 0 16px; }
+    .forecast-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .fc-day { background: var(--bg); border-radius: 8px; padding: 10px 8px; text-align: center; }
+    .fc-day-name { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 6px; }
+    .fc-day-icon { font-size: 1.4rem; margin-bottom: 4px; line-height: 1; }
+    .fc-day-hi { font-size: 0.88rem; font-weight: 700; color: var(--navy); }
+    .fc-day-lo { font-size: 0.75rem; color: var(--muted); }
+    .fc-day-rain { font-size: 0.65rem; color: #3AABDE; margin-top: 3px; }
+    .live-error { padding: 28px 22px; text-align: center; color: var(--muted); font-size: 0.88rem; }
+    .live-error a { color: var(--blue); font-weight: 600; }
+    .loading-shimmer { background: linear-gradient(90deg, var(--bg) 25%, var(--border) 50%, var(--bg) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 6px; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* PAGE LAYOUT */
+    .page-body { max-width: 960px; margin: 0 auto; padding: 36px 20px 60px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+    @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } .forecast-row { grid-template-columns: repeat(3, 1fr); } .forecast-row .fc-day:nth-child(n+4) { display: none; } }
+
+    /* SECTION HEADINGS */
+    .section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+
+    /* INFO CARDS */
+    .info-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; margin-bottom: 12px; }
+    .info-card h3 { font-weight: 700; font-size: 0.92rem; color: var(--navy); margin-bottom: 6px; }
+    .info-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 8px; }
+    .info-card p:last-child { margin-bottom: 0; }
+    .info-card a { color: var(--blue); font-weight: 600; }
+
+    /* LINK CARDS */
+    .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 32px; }
+    .link-card { background: var(--white); border: 1px solid var(--border); border-radius: 9px; padding: 14px 16px; text-decoration: none; color: inherit; transition: all 0.15s; display: flex; gap: 10px; align-items: flex-start; }
+    .link-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 3px 10px rgba(58,171,222,0.08); }
+    .link-card-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+    .link-card h4 { font-weight: 700; font-size: 0.86rem; color: var(--navy); margin-bottom: 3px; }
+    .link-card p { font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
+
+    /* METSERVICE EMBED */
+    .metservice-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+    .metservice-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .metservice-header span { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+    .metservice-iframe-wrap { padding: 16px; }
+    .metservice-iframe-wrap iframe { width: 100%; border: none; border-radius: 6px; display: block; }
+
+    /* UV BAR */
+    .uv-bar-wrap { margin: 12px 0 6px; }
+    .uv-bar-track { height: 8px; border-radius: 4px; background: linear-gradient(90deg, #558B2F 0%, #F9A825 33%, #E65100 55%, #B71C1C 77%, #7B1FA2 100%); position: relative; margin-bottom: 4px; }
+    .uv-indicator { position: absolute; top: -3px; width: 14px; height: 14px; background: white; border: 2px solid var(--navy); border-radius: 50%; transform: translateX(-50%); transition: left 0.8s ease; }
+    .uv-bar-labels { display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--muted); font-weight: 600; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 40px; }
+    .faq-item { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--white); }
+    .faq-q { padding: 14px 16px; font-weight: 700; font-size: 0.88rem; color: var(--navy); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .faq-q:hover { background: var(--bg); }
+    .faq-chevron { font-size: 0.75rem; color: var(--muted); flex-shrink: 0; transition: transform 0.2s; }
+    .faq-a { display: none; padding: 0 16px 14px; font-size: 0.84rem; color: var(--muted); line-height: 1.65; border-top: 1px solid var(--border); }
+    .faq-item.open .faq-a { display: block; padding-top: 12px; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+    /* CLIMATE TABLE */
+    .climate-table { width: 100%; border-collapse: collapse; font-size: 0.79rem; background: var(--white); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 12px; }
+    .climate-table th { background: var(--navy); color: #fff; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.07em; text-transform: uppercase; padding: 10px 10px; text-align: center; }
+    .climate-table td { padding: 9px 10px; text-align: center; border-bottom: 1px solid var(--border); color: var(--body); }
+    .climate-table tr:last-child td { border-bottom: none; }
+    .climate-table tr:nth-child(even) td { background: #FAFBFC; }
+    .climate-table .month { font-weight: 700; color: var(--navy); text-align: left; }
+
+    /* FOOTER */
+    .pnf-footer { background: var(--pnf-navy); padding: 40px 28px 24px; }
+    .pnf-footer-inner { max-width: 960px; margin: 0 auto; }
+    .pnf-footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: rgba(255,255,255,0.25); }
+    .pnf-footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    .pnf-footer-bottom a:hover { color: #fff; }
+    .footer-links-row { display: flex; gap: 24px; flex-wrap: wrap; padding-bottom: 20px; }
+    .footer-links-row a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
+    .footer-links-row a:hover { color: #fff; }
+
+    @media (max-width: 540px) {
+      .live-main { grid-template-columns: 1fr; }
+      .live-temp-block { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="pnf-nav">
+  <a href="/papamoa-previews/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
+  <div class="pnf-links">
+    <a href="/papamoa-previews/homepage.html" class="pnf-link">Home</a>
+    <a href="/papamoa-previews/categories/food-and-drink.html" class="pnf-link">Food &amp; Drink</a>
+    <a href="/papamoa-previews/categories/accommodation.html" class="pnf-link">Accommodation</a>
+    <a href="/papamoa-previews/categories/entertainment.html" class="pnf-link">Activities</a>
+    <a href="/papamoa-previews/community/weather.html" class="pnf-link active">Weather</a>
+    <a href="/papamoa-previews/articles/surf-tides.html" class="pnf-link">Surf &amp; Tides</a>
+  </div>
+  <a href="/papamoa-previews/sales/landing.html" class="pnf-cta">List your business</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="/papamoa-previews/homepage.html">Home</a> &rsaquo; Weather</div>
+    <div class="hero-eyebrow">&#9925; Live conditions</div>
+    <h1>Pāpāmoa <em>Weather</em></h1>
+    <p class="hero-desc">Current conditions, 5-day forecast, UV index and rain radar for Pāpāmoa Beach, Bay of Plenty.</p>
+  </div>
+</div>
+
+<!-- LIVE WEATHER CARD -->
+<div class="weather-live">
+  <div class="live-card">
+    <div class="live-card-head">
+      <div class="live-label">
+        <span class="live-dot"></span>
+        Live conditions &mdash; Pāpāmoa Beach
+      </div>
+      <div class="live-updated" id="weather-updated">Loading&hellip;</div>
+    </div>
+    <div class="live-body" id="weather-body">
+      <!-- Shimmer loading state -->
+      <div class="live-main">
+        <div class="live-temp-block">
+          <div class="loading-shimmer" style="width:80px;height:60px;margin-bottom:6px"></div>
+          <div class="loading-shimmer" style="width:80px;height:14px"></div>
+        </div>
+        <div>
+          <div class="loading-shimmer" style="width:180px;height:20px;margin-bottom:10px"></div>
+          <div class="loading-shimmer" style="width:120px;height:14px;margin-bottom:14px"></div>
+          <div style="display:flex;gap:18px">
+            <div class="loading-shimmer" style="width:60px;height:36px"></div>
+            <div class="loading-shimmer" style="width:60px;height:36px"></div>
+            <div class="loading-shimmer" style="width:60px;height:36px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- METSERVICE EMBED + RADAR LINKS -->
+  <div class="two-col" style="margin-top:32px">
+    <div>
+      <div class="section-label">Official forecast</div>
+      <div class="section-title" style="font-size:1.1rem">MetService — Tauranga</div>
+      <div class="metservice-wrap">
+        <div class="metservice-header">
+          <span>MetService NZ official forecast</span>
+        </div>
+        <div class="metservice-iframe-wrap">
+          <iframe
+            src="https://www.metservice.com/weather-widget/builder.html?location=tauranga&units=metric&days=3&theme=light"
+            width="100%"
+            height="220"
+            loading="lazy"
+            title="MetService Tauranga weather forecast">
+          </iframe>
+        </div>
+      </div>
+      <p style="font-size:0.74rem;color:var(--muted);margin-top:6px">Pāpāmoa uses the Tauranga forecast. Data from <a href="https://www.metservice.com/towns-cities/regions/bay-of-plenty/locations/tauranga" target="_blank" rel="noopener">MetService.com</a> &mdash; New Zealand&rsquo;s official weather service.</p>
+    </div>
+
+    <div>
+      <div class="section-label">Useful links</div>
+      <div class="section-title" style="font-size:1.1rem">Rain radar &amp; resources</div>
+      <div class="link-grid" style="grid-template-columns:1fr">
+        <a href="https://www.metservice.com/towns-cities/regions/bay-of-plenty/locations/tauranga" target="_blank" rel="noopener" class="link-card">
+          <span class="link-card-icon">&#9925;</span>
+          <div><h4>MetService Tauranga</h4><p>Official 7-day forecast, warnings and detailed hourly breakdown</p></div>
+        </a>
+        <a href="https://www.metservice.com/maps-and-radars/radar" target="_blank" rel="noopener" class="link-card">
+          <span class="link-card-icon">&#127783;</span>
+          <div><h4>Rain Radar</h4><p>Real-time MetService rain radar for Bay of Plenty</p></div>
+        </a>
+        <a href="https://www.surf-forecast.com/breaks/Papamoa-Beach" target="_blank" rel="noopener" class="link-card">
+          <span class="link-card-icon">&#127940;</span>
+          <div><h4>Surf Forecast</h4><p>Wave height, period and wind direction for Pāpāmoa Beach</p></div>
+        </a>
+        <a href="https://www.tideschart.com/New-Zealand/Bay-of-Plenty/Papamoa-Beach/" target="_blank" rel="noopener" class="link-card">
+          <span class="link-card-icon">&#127754;</span>
+          <div><h4>Tide Times</h4><p>Today&rsquo;s high and low tides for Pāpāmoa Beach</p></div>
+        </a>
+        <a href="https://www.uvlens.com/nz/tauranga" target="_blank" rel="noopener" class="link-card">
+          <span class="link-card-icon">&#9728;</span>
+          <div><h4>UV Forecast</h4><p>Hourly UV index and sun protection advice for Tauranga</p></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIMATE OVERVIEW -->
+  <div style="margin-bottom:36px">
+    <div class="section-label">Climate data</div>
+    <div class="section-title">Pāpāmoa climate by month</div>
+    <div style="overflow-x:auto">
+      <table class="climate-table">
+        <thead>
+          <tr>
+            <th style="text-align:left">Month</th>
+            <th>Avg high</th>
+            <th>Avg low</th>
+            <th>Rain days</th>
+            <th>Sea temp</th>
+            <th>UV index</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="month">January</td><td>25°C</td><td>16°C</td><td>8</td><td>21°C</td><td style="color:#B71C1C;font-weight:700">11 Very High</td></tr>
+          <tr><td class="month">February</td><td>26°C</td><td>16°C</td><td>8</td><td>22°C</td><td style="color:#B71C1C;font-weight:700">11 Very High</td></tr>
+          <tr><td class="month">March</td><td>24°C</td><td>14°C</td><td>9</td><td>21°C</td><td style="color:#E65100;font-weight:700">9 High</td></tr>
+          <tr><td class="month">April</td><td>21°C</td><td>12°C</td><td>10</td><td>19°C</td><td style="color:#F9A825;font-weight:700">6 Moderate</td></tr>
+          <tr><td class="month">May</td><td>18°C</td><td>10°C</td><td>11</td><td>17°C</td><td style="color:#558B2F;font-weight:700">3 Low</td></tr>
+          <tr><td class="month">June</td><td>15°C</td><td>8°C</td><td>12</td><td>15°C</td><td style="color:#558B2F;font-weight:700">2 Low</td></tr>
+          <tr><td class="month">July</td><td>14°C</td><td>7°C</td><td>13</td><td>14°C</td><td style="color:#558B2F;font-weight:700">2 Low</td></tr>
+          <tr><td class="month">August</td><td>15°C</td><td>8°C</td><td>11</td><td>14°C</td><td style="color:#558B2F;font-weight:700">3 Low</td></tr>
+          <tr><td class="month">September</td><td>17°C</td><td>9°C</td><td>10</td><td>15°C</td><td style="color:#F9A825;font-weight:700">5 Moderate</td></tr>
+          <tr><td class="month">October</td><td>19°C</td><td>11°C</td><td>10</td><td>16°C</td><td style="color:#E65100;font-weight:700">7 High</td></tr>
+          <tr><td class="month">November</td><td>21°C</td><td>13°C</td><td>9</td><td>18°C</td><td style="color:#E65100;font-weight:700">9 High</td></tr>
+          <tr><td class="month">December</td><td>23°C</td><td>15°C</td><td>8</td><td>20°C</td><td style="color:#B71C1C;font-weight:700">11 Very High</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.73rem;color:var(--muted);margin-top:6px">Average climate data for Tauranga / Pāpāmoa. Sea temperatures are approximate for Pāpāmoa Beach. UV index represents typical peak midday values.</p>
+  </div>
+
+  <!-- QUICK INFO CARDS -->
+  <div style="margin-bottom:36px">
+    <div class="section-label">Good to know</div>
+    <div class="section-title">Pāpāmoa weather guide</div>
+    <div class="two-col">
+      <div>
+        <div class="info-card">
+          <h3>&#9728; Sun protection</h3>
+          <p>UV levels in Pāpāmoa are extreme during summer (Oct&ndash;Mar), regularly hitting 11&ndash;12 at midday. SPF 50+ sunscreen, a hat and shirt are essential when the UV index is above 3. Reapply every two hours outdoors. The UV index is shown on this page when current data is available.</p>
+        </div>
+        <div class="info-card">
+          <h3>&#127940; Surf &amp; swimming safety</h3>
+          <p>Pāpāmoa Beach is patrolled by <a href="https://papamoaslsc.co.nz" target="_blank" rel="noopener">Pāpāmoa Surf Life Saving Club</a> during summer (Labour Weekend to Easter). Always swim between the flags. Rips can form quickly after periods of swell or after rain. Check the <a href="/papamoa-previews/articles/surf-tides.html">Surf &amp; Tides page</a> before entering the water.</p>
+        </div>
+      </div>
+      <div>
+        <div class="info-card">
+          <h3>&#127783; Rain &amp; wind</h3>
+          <p>Pāpāmoa averages around 1,300mm of rain annually &mdash; similar to Auckland but typically delivered in shorter, heavier bursts. Afternoon sea breezes are common in summer, cooling beach temperatures by 2&ndash;3°C. Northwest winds ahead of frontal systems can bring warm, humid conditions before rain arrives from the west.</p>
+        </div>
+        <div class="info-card">
+          <h3>&#9201; Best time to visit</h3>
+          <p>December through March brings the best beach conditions: warm temperatures (22&ndash;26°C), calm seas and long days. January and February are the driest months. March and April offer warm weather with far fewer crowds. The AIMS Games each September (5&ndash;11 Sep 2026) is the busiest event period &mdash; accommodation books out months ahead.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="margin-bottom:40px">
+    <div class="section-label">Frequently asked</div>
+    <div class="section-title">Pāpāmoa weather questions</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What is the weather like in Pāpāmoa? <span class="faq-chevron">&#8964;</span></div>
+        <div class="faq-a">Pāpāmoa has a warm temperate oceanic climate. Summers (December to February) are warm and often dry, with temperatures regularly reaching 25&ndash;28°C. Winters (June to August) are mild with temperatures rarely dropping below 8°C overnight. Pāpāmoa receives around 1,300mm of rain annually, spread fairly evenly across the year with no pronounced dry season.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What is the best time of year to visit Pāpāmoa? <span class="faq-chevron">&#8964;</span></div>
+        <div class="faq-a">December through to March is peak season, with long dry spells, warm sea temperatures (19&ndash;22°C) and the best conditions for swimming and surfing. March and April offer very warm weather with far fewer crowds than January and February. Winter (June to August) is mild by NZ standards &mdash; cold enough for a jacket in the evenings but not unpleasant for outdoor activities during the day.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is Pāpāmoa Beach safe for swimming? <span class="faq-chevron">&#8964;</span></div>
+        <div class="faq-a">Pāpāmoa Beach is patrolled by Pāpāmoa Surf Life Saving Club during summer (Labour Weekend to Easter weekend). Always swim between the red and yellow flags. The beach can have rips, particularly after periods of swell or heavy rain. Water temperature is typically 19&ndash;22°C in summer and 13&ndash;16°C in winter. Check surf conditions and lifeguard flag status before entering the water.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What is the UV index like in Pāpāmoa? <span class="faq-chevron">&#8964;</span></div>
+        <div class="faq-a">UV levels in Pāpāmoa can be very high, particularly from October through to March. During summer, the UV index regularly reaches 10&ndash;12 (very high to extreme) at peak midday. Sun protection &mdash; SPF 50+ sunscreen, a wide-brimmed hat and a shirt &mdash; is recommended whenever the UV index exceeds 3. Reapply sunscreen every two hours when outdoors, and more frequently if swimming.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How does Pāpāmoa weather compare to Tauranga? <span class="faq-chevron">&#8964;</span></div>
+        <div class="faq-a">Pāpāmoa and Tauranga share essentially the same climate &mdash; Pāpāmoa is a coastal suburb on the eastern edge of Tauranga. The beach-facing aspect in Pāpāmoa means slightly more sea breeze on summer afternoons, which can cool temperatures by 2&ndash;3°C compared to the Tauranga city centre. Rain patterns and seasonal temperatures are virtually identical.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Where can I get the most accurate Pāpāmoa weather forecast? <span class="faq-chevron">&#8964;</span></div>
+        <div class="faq-a">MetService (metservice.com) is the New Zealand government weather service and provides the most authoritative NZ forecasts. The closest forecast location for Pāpāmoa is Tauranga. This page shows live data from Open-Meteo, which aggregates multiple global weather models including ECMWF and NOAA. For surf-specific forecasts, Surf-Forecast.com and Windguru both carry Pāpāmoa Beach data.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED PAGES -->
+  <div>
+    <div class="section-label">Related pages</div>
+    <div class="section-title">Useful local info</div>
+    <div class="link-grid">
+      <a href="/papamoa-previews/articles/surf-tides.html" class="link-card">
+        <span class="link-card-icon">&#127940;</span>
+        <div><h4>Surf &amp; Tides</h4><p>Surf breaks, tide times and surf schools</p></div>
+      </a>
+      <a href="/papamoa-previews/articles/swimming-papamoa.html" class="link-card">
+        <span class="link-card-icon">&#127946;</span>
+        <div><h4>Swimming in Pāpāmoa</h4><p>Beach guide, public pools and safety</p></div>
+      </a>
+      <a href="/papamoa-previews/articles/parks-playgrounds.html" class="link-card">
+        <span class="link-card-icon">&#127794;</span>
+        <div><h4>Parks &amp; Playgrounds</h4><p>Gordon Spratt Reserve and outdoor spaces</p></div>
+      </a>
+      <a href="/papamoa-previews/articles/walks-tracks.html" class="link-card">
+        <span class="link-card-icon">&#128694;</span>
+        <div><h4>Walks &amp; Tracks</h4><p>Walking and cycling tracks in Pāpāmoa</p></div>
+      </a>
+      <a href="/papamoa-previews/articles/fishing.html" class="link-card">
+        <span class="link-card-icon">&#127907;</span>
+        <div><h4>Fishing in Pāpāmoa</h4><p>Fishing spots, bait and charters</p></div>
+      </a>
+      <a href="/papamoa-previews/articles/fuel-prices.html" class="link-card">
+        <span class="link-card-icon">&#9981;</span>
+        <div><h4>Fuel Prices</h4><p>Current petrol and diesel prices locally</p></div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="pnf-footer">
+  <div class="pnf-footer-inner">
+    <div class="footer-links-row">
+      <a href="/papamoa-previews/homepage.html">Home</a>
+      <a href="/papamoa-previews/categories/food-and-drink.html">Food &amp; Drink</a>
+      <a href="/papamoa-previews/categories/accommodation.html">Accommodation</a>
+      <a href="/papamoa-previews/articles/surf-tides.html">Surf &amp; Tides</a>
+      <a href="/papamoa-previews/sales/landing.html">List your business</a>
+    </div>
+    <div class="pnf-footer-bottom">
+      <span>&copy; 2026 Papamoa.info &middot; Pāpāmoa&rsquo;s Local Business Directory</span>
+      <span>Weather data: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> &amp; <a href="https://metservice.com" target="_blank" rel="noopener">MetService NZ</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── WMO WEATHER CODE TO DESCRIPTION + EMOJI ──
+var WMO = {
+  0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',
+  45:'Foggy',48:'Icy fog',
+  51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',
+  61:'Light rain',63:'Rain',65:'Heavy rain',
+  71:'Light snow',73:'Snow',75:'Heavy snow',
+  77:'Snow grains',
+  80:'Light showers',81:'Showers',82:'Heavy showers',
+  85:'Snow showers',86:'Heavy snow showers',
+  95:'Thunderstorm',96:'Thunderstorm w/ hail',99:'Thunderstorm w/ heavy hail'
+};
+var WMO_EMOJI = {
+  0:'☀️',1:'🌤️',2:'⛅',3:'☁️',
+  45:'🌫️',48:'🌫️',
+  51:'🌦️',53:'🌦️',55:'🌧️',
+  61:'🌦️',63:'🌧️',65:'🌧️',
+  71:'🌨️',73:'❄️',75:'❄️',77:'🌨️',
+  80:'🌦️',81:'🌧️',82:'⛈️',
+  85:'🌨️',86:'🌨️',
+  95:'⛈️',96:'⛈️',99:'⛈️'
+};
+var DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function uvClass(uv) {
+  if (uv <= 2) return 'uv-low';
+  if (uv <= 5) return 'uv-mod';
+  if (uv <= 7) return 'uv-high';
+  if (uv <= 10) return 'uv-vhigh';
+  return 'uv-extreme';
+}
+function uvLabel(uv) {
+  if (uv <= 2) return 'Low';
+  if (uv <= 5) return 'Moderate';
+  if (uv <= 7) return 'High';
+  if (uv <= 10) return 'Very High';
+  return 'Extreme';
+}
+function windDir(deg) {
+  var dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  return dirs[Math.round(deg / 22.5) % 16];
+}
+
+async function loadWeather() {
+  var url = 'https://api.open-meteo.com/v1/forecast'
+    + '?latitude=-37.6833&longitude=176.1833'
+    + '&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,precipitation,relative_humidity_2m,uv_index'
+    + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,uv_index_max'
+    + '&timezone=Pacific%2FAuckland&forecast_days=5';
+  try {
+    var res = await fetch(url);
+    var d = await res.json();
+    var c = d.current;
+    var day = d.daily;
+
+    // Update timestamp
+    var now = new Date();
+    document.getElementById('weather-updated').textContent =
+      'Updated ' + now.toLocaleTimeString('en-NZ', { hour:'2-digit', minute:'2-digit' });
+
+    // UV position on bar (scale 0-12+)
+    var uvPct = Math.min(100, (c.uv_index / 13) * 100);
+
+    // Build forecast days
+    var fcHTML = '';
+    for (var i = 0; i < 5; i++) {
+      var dt = new Date(day.time[i] + 'T12:00:00');
+      var dayName = i === 0 ? 'Today' : DAY_NAMES[dt.getDay()];
+      var rain = day.precipitation_sum[i];
+      fcHTML += '<div class="fc-day">'
+        + '<div class="fc-day-name">' + dayName + '</div>'
+        + '<div class="fc-day-icon">' + (WMO_EMOJI[day.weather_code[i]] || '🌤️') + '</div>'
+        + '<div class="fc-day-hi">' + Math.round(day.temperature_2m_max[i]) + '°</div>'
+        + '<div class="fc-day-lo">' + Math.round(day.temperature_2m_min[i]) + '°</div>'
+        + (rain > 0.2 ? '<div class="fc-day-rain">' + rain.toFixed(1) + 'mm</div>' : '')
+        + '</div>';
+    }
+
+    document.getElementById('weather-body').innerHTML =
+      '<div class="live-main">'
+      + '<div class="live-temp-block">'
+      + '<div class="live-temp">' + Math.round(c.temperature_2m) + '<sup>°C</sup></div>'
+      + '<div class="live-feels">Feels ' + Math.round(c.apparent_temperature) + '°</div>'
+      + '</div>'
+      + '<div>'
+      + '<div class="live-condition">' + (WMO_EMOJI[c.weather_code] || '') + ' ' + (WMO[c.weather_code] || 'Loading') + '</div>'
+      + '<div class="live-location">&#128205; Pāpāmoa Beach, Bay of Plenty</div>'
+      + '<div class="live-stats">'
+      + '<div class="live-stat"><span class="live-stat-label">Humidity</span><span class="live-stat-value">' + c.relative_humidity_2m + '%</span></div>'
+      + '<div class="live-stat"><span class="live-stat-label">Wind</span><span class="live-stat-value">' + Math.round(c.wind_speed_10m) + ' km/h ' + windDir(c.wind_direction_10m) + '</span></div>'
+      + '<div class="live-stat"><span class="live-stat-label">UV Index</span><span class="live-stat-value ' + uvClass(c.uv_index) + '">' + Math.round(c.uv_index) + ' — ' + uvLabel(c.uv_index) + '</span></div>'
+      + (c.precipitation > 0 ? '<div class="live-stat"><span class="live-stat-label">Rain (1h)</span><span class="live-stat-value">' + c.precipitation.toFixed(1) + 'mm</span></div>' : '')
+      + '</div>'
+      + '</div>'
+      + '</div>'
+      + '<div class="uv-bar-wrap">'
+      + '<div class="uv-bar-track"><div class="uv-indicator" style="left:' + uvPct + '%"></div></div>'
+      + '<div class="uv-bar-labels"><span>Low</span><span>Mod</span><span>High</span><span>V.High</span><span>Extreme</span></div>'
+      + '</div>'
+      + '<div class="live-divider"></div>'
+      + '<div class="forecast-row">' + fcHTML + '</div>';
+
+  } catch(e) {
+    document.getElementById('weather-updated').textContent = 'Could not load';
+    document.getElementById('weather-body').innerHTML =
+      '<div class="live-error">Weather data unavailable right now. '
+      + 'View the <a href="https://www.metservice.com/towns-cities/regions/bay-of-plenty/locations/tauranga" target="_blank" rel="noopener">MetService Tauranga forecast</a> directly.</div>';
+  }
+}
+
+// ── FAQ TOGGLE ──
+function toggleFaq(el) {
+  el.parentElement.classList.toggle('open');
+}
+
+// Init
+loadWeather();
+</script>
+
+</body>
+</html>

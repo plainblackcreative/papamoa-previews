@@ -37,6 +37,30 @@
     .hero h1 em { font-style:italic; color:var(--blue); }
     .hero-desc { font-size:0.97rem; color:rgba(255,255,255,0.62); max-width:560px; line-height:1.75; }
 
+    /* WEATHER STRIP */
+    .hero-weather { margin-top: 22px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; gap: 0; flex-wrap: wrap; max-width: 660px; }
+    .hw-current { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 180px; }
+    .hw-temp { font-size: 1.6rem; font-weight: 800; color: #fff; line-height: 1; }
+    .hw-icon { font-size: 1.4rem; line-height: 1; }
+    .hw-detail { display: flex; flex-direction: column; gap: 2px; }
+    .hw-condition { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.85); }
+    .hw-sub { font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+    .hw-stats { display: flex; gap: 14px; flex-wrap: wrap; padding-left: 16px; border-left: 1px solid rgba(255,255,255,0.12); margin-left: 4px; }
+    .hw-stat { display: flex; flex-direction: column; gap: 1px; }
+    .hw-stat-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: rgba(255,255,255,0.38); }
+    .hw-stat-value { font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+    .hw-stat-value.uv-low { color: #7DC143; }
+    .hw-stat-value.uv-mod { color: #F9C84A; }
+    .hw-stat-value.uv-high { color: #F5874A; }
+    .hw-stat-value.uv-vhigh { color: #E8344A; }
+    .hw-stat-value.uv-extreme { color: #C46ADE; }
+    .hw-link { margin-left: auto; padding-left: 14px; font-size: 0.72rem; font-weight: 700; color: var(--lime); white-space: nowrap; text-decoration: none; flex-shrink: 0; }
+    .hw-link:hover { color: #fff; }
+    .hw-loading { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+    .hw-live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); display: inline-block; margin-right: 6px; animation: hwpulse 2s ease-in-out infinite; vertical-align: middle; }
+    @keyframes hwpulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    @media (max-width: 560px) { .hw-stats { padding-left: 0; border-left: none; margin-left: 0; margin-top: 8px; width: 100%; } .hw-weather { flex-wrap: wrap; } }
+
     /* SEARCH */
     .search-bar { background:var(--white); border-bottom:1px solid var(--border); padding:18px 20px; }
     .search-bar-inner { max-width:960px; margin:0 auto; display:flex; gap:10px; align-items:center; }
@@ -278,6 +302,11 @@
     <div class="hero-eyebrow">Pāpāmoa, Bay of Plenty &mdash; 37,800 residents</div>
     <h1>Discover Pāpāmoa,<br><em>from the locals who know it</em></h1>
     <p class="hero-desc">Listings written editorially &mdash; not by the businesses themselves. Local guides kept current as things change. Built so Google and AI engines recommend the right answers to locals searching for what they need.</p>
+
+    <!-- WEATHER STRIP -->
+    <div class="hero-weather" id="hw-strip">
+      <span class="hw-live-dot"></span><span class="hw-loading">Loading weather&hellip;</span>
+    </div>
   </div>
 </div>
 
@@ -612,6 +641,7 @@
       <a href="/papamoa-previews/articles/news-events.html" class="info-card"><span class="ic-icon">&#128240;</span><div class="ic-body"><div class="ic-title">News &amp; Events</div><div class="ic-desc">Upcoming events, regular markets, local news and community submissions.</div><span class="ic-tag ic-tag-live">Updated regularly</span></div></a>
       <a href="/papamoa-previews/articles/shopping-centres.html" class="info-card"><span class="ic-icon">&#128717;</span><div class="ic-body"><div class="ic-title">Shopping Centres</div><div class="ic-desc">Fashion Island, Palm Beach Plaza and The Sands &mdash; tenants, hours and parking.</div></div></a>
       <a href="/papamoa-previews/articles/fuel-prices.html" class="info-card"><span class="ic-icon">&#9981;</span><div class="ic-body"><div class="ic-title">Fuel Prices</div><div class="ic-desc">Local petrol and diesel prices across Pāpāmoa stations.</div><span class="ic-tag ic-tag-live">Updated regularly</span></div></a>
+      <a href="/papamoa-previews/community/weather.html" class="info-card"><span class="ic-icon">&#9925;</span><div class="ic-body"><div class="ic-title">Pāpāmoa Weather</div><div class="ic-desc">Live forecast, rain radar, UV index and surf conditions.</div><span class="ic-tag ic-tag-live">Live data</span></div></a>
       <a href="/papamoa-previews/articles/weddings.html" class="info-card"><span class="ic-icon">&#128141;</span><div class="ic-body"><div class="ic-title">Weddings in Pāpāmoa</div><div class="ic-desc">Venues, photographers, catering and local wedding suppliers.</div></div></a>
       <a href="/papamoa-previews/articles/tauranga.html" class="info-card"><span class="ic-icon">&#127961;</span><div class="ic-body"><div class="ic-title">Tauranga</div><div class="ic-desc">15 min from the CBD. Distance guide, transport and the TaurangaNZ.info network.</div></div></a>
     </div>
@@ -664,6 +694,7 @@
           <li><a href="/papamoa-previews/articles/dogs-papamoa.html">Dogs in Pāpāmoa</a></li>
           <li><a href="/papamoa-previews/articles/aims-games.html">AIMS Games 2026</a></li>
           <li><a href="/papamoa-previews/articles/fuel-prices.html">Fuel Prices</a></li>
+          <li><a href="/papamoa-previews/community/weather.html">Pāpāmoa Weather</a></li>
           <li><a href="/papamoa-previews/articles/rubbish-recycling-papamoa.html">Rubbish &amp; Recycling</a></li>
           <li><a href="/papamoa-previews/articles/news-events.html">News &amp; Events</a></li>
         </ul>
@@ -942,6 +973,67 @@ async function pnfSubmitContact(e) {
     else { btn.textContent='Try again'; btn.disabled=false; }
   } catch(err) { btn.textContent='Try again'; btn.disabled=false; }
 }
+</script>
+
+<script>
+// ── HOMEPAGE WEATHER STRIP ──
+var HW_WMO = {
+  0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',
+  45:'Foggy',48:'Icy fog',
+  51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',
+  61:'Light rain',63:'Rain',65:'Heavy rain',
+  71:'Light snow',73:'Snow',75:'Heavy snow',
+  80:'Light showers',81:'Showers',82:'Heavy showers',
+  95:'Thunderstorm',96:'Thunderstorm w/ hail',99:'Thunderstorm, heavy hail'
+};
+var HW_EMOJI = {
+  0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',
+  51:'🌦️',53:'🌦️',55:'🌧️',61:'🌦️',63:'🌧️',65:'🌧️',
+  71:'🌨️',73:'❄️',75:'❄️',77:'🌨️',80:'🌦️',81:'🌧️',82:'⛈️',
+  85:'🌨️',86:'🌨️',95:'⛈️',96:'⛈️',99:'⛈️'
+};
+function hwUvClass(uv) {
+  if (uv <= 2) return 'uv-low';
+  if (uv <= 5) return 'uv-mod';
+  if (uv <= 7) return 'uv-high';
+  if (uv <= 10) return 'uv-vhigh';
+  return 'uv-extreme';
+}
+function hwWindDir(deg) {
+  var dirs = ['N','NE','E','SE','S','SW','W','NW'];
+  return dirs[Math.round(deg / 45) % 8];
+}
+async function loadHeroWeather() {
+  var strip = document.getElementById('hw-strip');
+  if (!strip) return;
+  try {
+    var url = 'https://api.open-meteo.com/v1/forecast'
+      + '?latitude=-37.6833&longitude=176.1833'
+      + '&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,uv_index'
+      + '&timezone=Pacific%2FAuckland&forecast_days=1';
+    var res = await fetch(url);
+    var d = await res.json();
+    var c = d.current;
+    var uv = Math.round(c.uv_index);
+    strip.innerHTML =
+      '<div class="hw-current">'
+      + '<span class="hw-icon">' + (HW_EMOJI[c.weather_code] || '🌤️') + '</span>'
+      + '<span class="hw-temp">' + Math.round(c.temperature_2m) + '°</span>'
+      + '<div class="hw-detail">'
+      + '<span class="hw-condition">' + (HW_WMO[c.weather_code] || '') + '</span>'
+      + '<span class="hw-sub">Feels ' + Math.round(c.apparent_temperature) + '° &mdash; Pāpāmoa Beach</span>'
+      + '</div>'
+      + '</div>'
+      + '<div class="hw-stats">'
+      + '<div class="hw-stat"><span class="hw-stat-label">Wind</span><span class="hw-stat-value">' + Math.round(c.wind_speed_10m) + ' km/h ' + hwWindDir(c.wind_direction_10m) + '</span></div>'
+      + '<div class="hw-stat"><span class="hw-stat-label">UV Index</span><span class="hw-stat-value ' + hwUvClass(c.uv_index) + '">' + uv + '</span></div>'
+      + '</div>'
+      + '<a href="/papamoa-previews/community/weather.html" class="hw-link">Full forecast &rarr;</a>';
+  } catch(e) {
+    strip.innerHTML = '<span class="hw-loading"><a href="/papamoa-previews/community/weather.html" style="color:var(--lime)">View weather forecast &rarr;</a></span>';
+  }
+}
+loadHeroWeather();
 </script>
 
 </body>
