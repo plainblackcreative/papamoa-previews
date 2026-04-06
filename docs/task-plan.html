@@ -473,7 +473,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <div class="task-section">
     <div class="ts-head">
       <div class="ts-title">⚙️ 6. Tech &amp; Automation</div>
-      <div class="ts-meta"><span class="ts-count">0 / 7</span><span class="ts-priority priority-medium">Medium</span></div>
+      <div class="ts-meta"><span class="ts-count">0 / 8</span><span class="ts-priority priority-medium">Medium</span></div>
     </div>
     <div class="task-list">
       <div class="task-item">
@@ -530,6 +530,15 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <div class="task-title">DNS session with client — all records in one hit</div>
           <div class="task-desc">preview.papamoa.info CNAME, Brevo SPF/DKIM/DMARC, MX if needed. Prepare a one-page DNS checklist so the session takes under 10 minutes. Schedule for post-demo reveal.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-automation">Automation</span></div>
+        </div>
+      </div>
+    
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Deploy fishing data endpoint to Cloudflare Worker &mdash; <em>before demo</em></div>
+          <div class="task-desc">New <code>/fishing-data</code> route added to worker.js. POST endpoint calls Claude (Haiku) to generate today&rsquo;s tides, sunrise/sunset and solunar bite times for P&#257;p&#257;moa Beach. Returns structured JSON. Page caches in localStorage for 24hrs. Any user can trigger a refresh via &ldquo;Update now&rdquo; button when stale. <strong>To deploy:</strong> paste updated worker.js into Cloudflare dashboard &rarr; Workers &amp; Pages &rarr; papamoa-claude-proxy &rarr; Edit code &rarr; Deploy. Then update the repo reference copy of worker.js. The fishing.html page already calls the correct endpoint &mdash; no further page changes needed once the worker is live.</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-ai">AI</span></div>
         </div>
       </div>
     </div>
