@@ -578,11 +578,122 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     </div>
   </div>
 
+  <!-- 7B. QUICK FIXES & QUEUED GAME PLAN -->
+  <div class="task-section">
+    <div class="ts-head">
+      <div class="ts-title">🛠️ 7b. Quick Fixes &amp; Queued Game Plan</div>
+      <div class="ts-meta"><span class="ts-count">0 / 11</span><span class="ts-priority priority-high">High</span></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:18px;">Pending fixes and queued items that don't belong to a specific section above. Do quick fixes first — they unblock live funnel paths.</p>
+    <div class="task-list">
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Fix <code>href="#"</code> links in four files <span class="new-badge">Quick Fix</span></div>
+          <div class="task-desc">Update "Claim this Spotlight" / "List Your Business" links currently pointing to <code>href="#"</code> in: <code>listings/speedy-screens-papamoa.html</code>, <code>listings/greencut-papamoa.html</code>, <code>categories/fishing.html</code>, <code>categories/gardening.html</code>. All should point to <code>/sales/landing.html</code>.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Automate <code>sitemap.html</code> regeneration via GitHub Actions</div>
+          <div class="task-desc">Set up a GitHub Actions workflow that scans the repo for <code>.html</code> files on every push to main and rebuilds <code>sitemap.html</code> automatically. No more manual updates as pages are added.</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-tech">Tech</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Review all listing template/example HTML files — pick a master version</div>
+          <div class="task-desc">Multiple listing template variants exist in the repo. Audit them, pick one canonical master for Gold and one for Silver, archive the rest. All future listings build from the master versions only.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-qa">QA</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Fuel Stations &amp; Fuel Prices page with live AI update</div>
+          <div class="task-desc">Build a Fuel Stations page with a live price update function powered by a Cloudflare Worker — either scraping GasBuddy NZ or another live source. High SEO and utility value. Add placeholder ad spots for fuel station sponsors.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-seo">SEO</span><span class="task-tag tag-automation">Automation</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Add "List your business" nav link to all pages missing it</div>
+          <div class="task-desc">Articles, category, listing, and community pages that don't already have it need a "List your business" link in the nav pointing to <code>/sales/landing.html</code>. Do this as a single Find &amp; Replace pass after content work is complete.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-qa">QA</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Add "Claim this spot" CTA to all article/info/community pages with unfilled ad positions</div>
+          <div class="task-desc">Every article, info, and community page with an unfilled ad spotlight block needs a "Claim this spot" CTA linking to <code>/sales/claim.html?type=adspot&amp;page={slug}</code>. Only show when spot is unfilled. Each page tracks separately in Web3Forms via the subject line.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-qa">QA</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Update Silver/Gold image descriptions across all pricing and "what you get" pages</div>
+          <div class="task-desc">Silver = logo in hero + 1 featured image. Gold = logo in hero + photo gallery up to 9 images (grid + lightbox). Files to update: <code>sales/list-with-us.html</code>, <code>sales/landing.html</code>, <code>sales/post-call-landing.html</code>, <code>previews/driftwood-cafe.html</code>, and any other tier comparison blocks.</div>
+          <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Retrofit gallery placeholder tiles to Gold listings missing them</div>
+          <div class="task-desc">The following Gold listings need gallery placeholder tiles (icon + alt text label) added until real photos are supplied by the client: <code>the-wagon-papamoa.html</code>, <code>tara-road-dental-papamoa.html</code>, <code>speedy-screens-papamoa.html</code>, <code>papamoa-orthodontist.html</code>, <code>coastal-autos-papamoa.html</code>, <code>hakanini-surf-school-papamoa.html</code>, <code>pap-house-papamoa.html</code> (Gold version when built).</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title"><code>index.html</code> star persistence upgrade — localStorage to GitHub Gist or Cloudflare KV</div>
+          <div class="task-desc">Star state currently persists via localStorage, which is device-specific and lost on clear. Upgrade to GitHub Gist or Cloudflare KV via the existing Worker proxy so stars persist across devices and sessions.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-automation">Automation</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Rename <code>categories/entertainment.html</code> to <code>things-to-do.html</code></div>
+          <div class="task-desc">Rename the file, then do a single site-wide pass to fix all internal links pointing to it. Update nav and headers from "Entertainment" to "Things to Do" at the same time. Do this pass after all content work is done to avoid chasing moving links.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-qa">QA</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Menu Add-On audit — remove Silver "Add a menu" CTA, add upgrade-to-Gold prompt</div>
+          <div class="task-desc">Remove "Add a menu" CTA from all Silver listings and templates; replace with an upgrade-to-Gold prompt instead. Files: <code>listing-silver-template.html</code>, <code>xanadu</code>, <code>pizza-pundits</code>, <code>the-cave</code>, <code>redefined</code>, <code>pap-house</code>, <code>mumbai-masala</code>. Also update <code>sales/menu-addon.html</code> to make clear Menu Add-On is Gold only.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- 8. FINAL STEPS (new) -->
   <div class="task-section">
     <div class="ts-head">
       <div class="ts-title">🎨 8. Final Steps — Design, Pricing &amp; Verification Pass <span class="new-badge">New</span></div>
-      <div class="ts-meta"><span class="ts-count">0 / 4</span><span class="ts-priority priority-last">Run last</span></div>
+      <div class="ts-meta"><span class="ts-count">0 / 6</span><span class="ts-priority priority-last">Run last</span></div>
     </div>
     <div class="task-list">
       <div class="task-item new">
@@ -615,6 +726,22 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <div class="task-title">Check all internal links work across every page</div>
           <div class="task-desc">Nav links, CTA buttons, cross-links between articles and listings, footer links. No dead "#" links. No /slug paths that should be /articles/slug or /listings/slug. No old /post-call-landing.html references.</div>
           <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Add <code>legal.html</code> link to all page footers</div>
+          <div class="task-desc">Every page footer needs a link to <code>legal.html</code> (privacy policy / terms). Do this as part of the uniform footer pass so it only needs one sweep.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Rotate Claude API key, update in Cloudflare Worker environment variables</div>
+          <div class="task-desc">Go to console.anthropic.com, rotate the key, then paste the new key into Cloudflare Worker environment variables. Never hardcode it in any HTML file. Do this as the final step before demo.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
       <div class="task-item new">

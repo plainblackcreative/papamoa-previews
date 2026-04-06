@@ -112,9 +112,9 @@
     .hchip { font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); }
 
     /* SUBCAT FILTER BAR */
-    .subcat-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 20px; overflow-x: auto; scrollbar-width: none; position: sticky; top: 0; z-index: 100; }
+    .subcat-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 20px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; position: sticky; top: 0; z-index: 100; }
     .subcat-bar::-webkit-scrollbar { display: none; }
-    .subcat-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 8px; }
+    .subcat-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 8px; width: max-content; min-width: 100%; }
     .chip { font-size: 0.75rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; white-space: nowrap; font-family: 'Figtree', sans-serif; transition: all 0.15s; text-decoration: none; }
     .chip:hover { border-color: var(--amber); color: var(--amber); }
     .chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
@@ -140,30 +140,30 @@
     .sc-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.5; }
     .sc-arrow { font-size: 0.72rem; font-weight: 700; color: var(--amber); margin-top: auto; padding-top: 6px; }
 
-    /* GOLD SPOTLIGHT */
-    .gold-spotlight { background: linear-gradient(135deg, #1A1208, #0D1B2A); border: 1px solid rgba(200,150,42,0.35); border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
-    .gs-top { padding: 14px 20px 10px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(200,150,42,0.15); }
+    /* GOLD SPOTLIGHT — single-column, no cramped two-col split */
+    .gold-spotlight { background: linear-gradient(160deg, #1A1208 0%, #0D1B2A 100%); border: 1px solid rgba(200,150,42,0.35); border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
+    .gs-top { padding: 12px 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(200,150,42,0.15); }
     .gs-badge { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; padding: 3px 10px; border-radius: 3px; }
     .gs-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
-    .gs-body { padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
-    .gs-info h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .gs-body { padding: 20px 22px 18px; }
+    .gs-body h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
     .gs-sub { font-size: 0.78rem; color: var(--amber); font-weight: 600; margin-bottom: 10px; }
-    .gs-desc { font-size: 0.86rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 14px; }
-    .gs-rows { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+    .gs-desc { font-size: 0.86rem; color: rgba(255,255,255,0.68); line-height: 1.7; margin-bottom: 14px; }
+    .gs-rows { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
     .gs-row { display: flex; gap: 8px; font-size: 0.8rem; }
-    .gs-row-label { color: rgba(255,255,255,0.35); min-width: 70px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; flex-shrink: 0; }
+    .gs-row-label { color: rgba(255,255,255,0.35); min-width: 72px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0; padding-top: 1px; }
     .gs-row-val { color: rgba(255,255,255,0.75); }
     .gs-row-val a { color: var(--blue); text-decoration: none; }
+    /* Feature pills — horizontal wrap, no wasted vertical space */
+    .gs-features { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .gs-feature { font-size: 0.75rem; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 20px; display: flex; gap: 5px; align-items: center; }
+    .gs-feature::before { content: '✓'; color: var(--amber); font-size: 0.68rem; font-weight: 700; }
     .gs-btns { display: flex; gap: 8px; flex-wrap: wrap; }
     .gs-btn-primary { display: inline-block; background: linear-gradient(135deg, var(--amber), #B05010); color: #fff; font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.82rem; padding: 9px 18px; border-radius: 6px; text-decoration: none; transition: opacity 0.15s; }
     .gs-btn-primary:hover { opacity: 0.85; }
     .gs-btn-ghost { display: inline-block; background: transparent; color: rgba(255,255,255,0.5); font-family: 'Figtree', sans-serif; font-weight: 700; font-size: 0.82rem; padding: 9px 18px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); text-decoration: none; transition: all 0.15s; }
     .gs-btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
-    .gs-features { display: flex; flex-direction: column; gap: 6px; }
-    .gs-features-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 8px; }
-    .gs-feature { font-size: 0.8rem; color: rgba(255,255,255,0.65); display: flex; gap: 8px; align-items: center; line-height: 1.4; }
-    .gs-feature::before { content: '\2713'; color: var(--amber); font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
-    .gs-rating { background: rgba(224,120,48,0.12); border: 1px solid rgba(224,120,48,0.25); border-radius: 7px; padding: 10px 12px; margin-top: 14px; display: flex; gap: 8px; align-items: center; }
+    .gs-rating { background: rgba(224,120,48,0.1); border: 1px solid rgba(224,120,48,0.2); border-radius: 7px; padding: 9px 14px; margin-top: 14px; display: flex; gap: 10px; align-items: center; }
     .gs-rating-stars { color: var(--amber); font-size: 0.88rem; letter-spacing: 0.05em; }
     .gs-rating-label { font-size: 0.76rem; color: rgba(255,255,255,0.55); }
     .gs-rating-count { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
@@ -242,7 +242,6 @@
     @media (max-width: 720px) {
       .two-col { grid-template-columns: 1fr; }
       .side-col { order: -1; }
-      .gs-body { grid-template-columns: 1fr; }
       .subcat-grid { grid-template-columns: 1fr 1fr; }
       .listing-card { grid-template-columns: 70px 1fr; }
     }
@@ -272,6 +271,9 @@
       <span class="hchip">&#127829; Restaurants</span>
       <span class="hchip">&#127867; Bars &amp; licensed</span>
       <span class="hchip">&#127866; Takeaway &amp; delivery</span>
+      <span class="hchip">&#127828; Burgers</span>
+      <span class="hchip">&#127858; Indian &amp; Asian</span>
+      <span class="hchip">&#127881; Function venues</span>
       <span class="hchip">&#128666; Supermarkets</span>
     </div>
   </div>
@@ -285,11 +287,19 @@
     <a href="#cafes" class="chip">Cafes</a>
     <a href="#bars" class="chip">Bars &amp; Pubs</a>
     <a href="#pizza" class="chip">Pizza</a>
+    <a href="#burgers" class="chip">Burgers</a>
     <a href="#indian" class="chip">Indian</a>
-    <a href="#sushi" class="chip">Sushi</a>
-    <a href="#fish-chips" class="chip">Fish &amp; Chips</a>
+    <a href="#thai" class="chip">Thai</a>
+    <a href="#japanese" class="chip">Japanese</a>
+    <a href="#vietnamese" class="chip">Vietnamese</a>
     <a href="#turkish" class="chip">Turkish</a>
+    <a href="#mexican" class="chip">Mexican</a>
+    <a href="#italian" class="chip">Italian</a>
+    <a href="#french" class="chip">French</a>
+    <a href="#fish-chips" class="chip">Fish &amp; Chips</a>
     <a href="#bakeries" class="chip">Bakeries</a>
+    <a href="#function-venues" class="chip">Function Venues</a>
+    <a href="#order-online" class="chip">Order Online</a>
     <a href="#supermarkets" class="chip">Supermarkets</a>
   </div>
 </div>
@@ -350,6 +360,60 @@
             <span class="sc-desc">Kebabs, d&#246;ner and Mediterranean dining.</span>
             <span class="sc-arrow">Browse &rarr;</span>
           </a>
+          <a href="/categories/burgers-papamoa.html" class="subcat-card">
+            <span class="sc-icon">&#127828;</span>
+            <span class="sc-name">Burgers</span>
+            <span class="sc-desc">Gourmet burgers, smash burgers and burger joints.</span>
+            <span class="sc-arrow">Browse &rarr;</span>
+          </a>
+          <a href="/categories/thai-restaurant-papamoa.html" class="subcat-card">
+            <span class="sc-icon">&#127836;</span>
+            <span class="sc-name">Thai Food</span>
+            <span class="sc-desc">Thai restaurants and takeaways in P&#257;p&#257;moa.</span>
+            <span class="sc-arrow">Browse &rarr;</span>
+          </a>
+          <a href="/categories/japanese-restaurant-papamoa.html" class="subcat-card">
+            <span class="sc-icon">&#127843;</span>
+            <span class="sc-name">Japanese</span>
+            <span class="sc-desc">Sushi, ramen, Japanese dining and sushi trains.</span>
+            <span class="sc-arrow">Browse &rarr;</span>
+          </a>
+          <a href="/categories/vietnamese-restaurant-papamoa.html" class="subcat-card">
+            <span class="sc-icon">&#127839;</span>
+            <span class="sc-name">Vietnamese</span>
+            <span class="sc-desc">Pho, banh mi, Vietnamese dining in P&#257;p&#257;moa.</span>
+            <span class="sc-arrow">Browse &rarr;</span>
+          </a>
+          <a href="/categories/mexican-restaurant-papamoa.html" class="subcat-card">
+            <span class="sc-icon">&#127790;</span>
+            <span class="sc-name">Mexican Food</span>
+            <span class="sc-desc">Tacos, burritos and Mexican dining.</span>
+            <span class="sc-arrow">Browse &rarr;</span>
+          </a>
+          <a href="/categories/italian-restaurant-papamoa.html" class="subcat-card">
+            <span class="sc-icon">&#127837;</span>
+            <span class="sc-name">Italian</span>
+            <span class="sc-desc">Pasta, pizza and Italian restaurants in P&#257;p&#257;moa.</span>
+            <span class="sc-arrow">Browse &rarr;</span>
+          </a>
+          <a href="/categories/french-restaurant-papamoa.html" class="subcat-card">
+            <span class="sc-icon">&#127866;</span>
+            <span class="sc-name">French Food</span>
+            <span class="sc-desc">French caf&#233;s, patisseries and French cuisine.</span>
+            <span class="sc-arrow">Browse &rarr;</span>
+          </a>
+          <a href="/categories/function-venues-papamoa.html" class="subcat-card">
+            <span class="sc-icon">&#127881;</span>
+            <span class="sc-name">Function Venues</span>
+            <span class="sc-desc">Private dining rooms, event spaces and function venues.</span>
+            <span class="sc-arrow">Browse &rarr;</span>
+          </a>
+          <a href="/categories/order-online-papamoa.html" class="subcat-card">
+            <span class="sc-icon">&#128241;</span>
+            <span class="sc-name">Order Online</span>
+            <span class="sc-desc">P&#257;p&#257;moa businesses you can order from online or via app.</span>
+            <span class="sc-arrow">Browse &rarr;</span>
+          </a>
           <a href="/categories/supermarket-papamoa.html" class="subcat-card">
             <span class="sc-icon">&#128666;</span>
             <span class="sc-name">Supermarkets</span>
@@ -371,28 +435,25 @@
             <span class="gs-label">Restaurants &middot; P&#257;p&#257;moa</span>
           </div>
           <div class="gs-body">
-            <div class="gs-info">
-              <h2>The Wagon</h2>
-              <div class="gs-sub">&#127829; Gourmet Burgers &amp; Bar &middot; 8 Toorea Street, P&#257;p&#257;moa</div>
-              <p class="gs-desc">The Wagon is P&#257;p&#257;moa&rsquo;s standout gourmet burger and bar. Everything is made from fresh ingredients &mdash; no frozen patties &mdash; and the drinks list runs to craft cocktails, local wines and an NZ-focused beer selection. Fully licensed, dine-in or takeaway. Relaxed atmosphere with a reputation for quality that draws regulars from across Tauranga.</p>
-              <div class="gs-rows">
-                <div class="gs-row"><span class="gs-row-label">Address</span><span class="gs-row-val">8 Toorea Street, P&#257;p&#257;moa</span></div>
-                <div class="gs-row"><span class="gs-row-label">Hours</span><span class="gs-row-val">Tue&ndash;Sun from 11am (closed Monday)</span></div>
-                <div class="gs-row"><span class="gs-row-label">Order online</span><span class="gs-row-val"><a href="https://ordermeal.co.nz" target="_blank" rel="noopener">ordermeal.co.nz</a></span></div>
-              </div>
-              <div class="gs-btns">
-                <a href="/listings/the-wagon-papamoa.html" class="gs-btn-primary">View full listing &rarr;</a>
-                <a href="tel:0726200123" class="gs-btn-ghost">&#128222; 07 262 0123</a>
-              </div>
+            <h2>The Wagon</h2>
+            <div class="gs-sub">&#127829; Gourmet Burgers &amp; Bar &middot; 8 Toorea Street, P&#257;p&#257;moa</div>
+            <p class="gs-desc">The Wagon is P&#257;p&#257;moa&rsquo;s standout gourmet burger and bar. Everything is made from fresh ingredients &mdash; no frozen patties &mdash; and the drinks list runs to craft cocktails, local wines and an NZ-focused beer selection. Fully licensed, dine-in or takeaway. Relaxed atmosphere with a reputation for quality that draws regulars from across Tauranga.</p>
+            <div class="gs-rows">
+              <div class="gs-row"><span class="gs-row-label">Address</span><span class="gs-row-val">8 Toorea Street, P&#257;p&#257;moa</span></div>
+              <div class="gs-row"><span class="gs-row-label">Hours</span><span class="gs-row-val">Tue&ndash;Sun from 11am (closed Monday)</span></div>
+              <div class="gs-row"><span class="gs-row-label">Order online</span><span class="gs-row-val"><a href="https://ordermeal.co.nz" target="_blank" rel="noopener">ordermeal.co.nz</a></span></div>
             </div>
             <div class="gs-features">
-              <div class="gs-features-title">At a glance</div>
-              <div class="gs-feature">Gourmet burgers, fresh ingredients</div>
-              <div class="gs-feature">Craft cocktails &amp; NZ wines</div>
-              <div class="gs-feature">Dine-in or takeaway</div>
-              <div class="gs-feature">Fully licensed</div>
-              <div class="gs-feature">Order online via Order Meal</div>
-              <div class="gs-feature">Tue&ndash;Sun, closed Monday</div>
+              <span class="gs-feature">Gourmet burgers, fresh ingredients</span>
+              <span class="gs-feature">Craft cocktails &amp; NZ wines</span>
+              <span class="gs-feature">Dine-in or takeaway</span>
+              <span class="gs-feature">Fully licensed</span>
+              <span class="gs-feature">Order online via Order Meal</span>
+              <span class="gs-feature">Tue&ndash;Sun, closed Monday</span>
+            </div>
+            <div class="gs-btns">
+              <a href="/listings/the-wagon-papamoa.html" class="gs-btn-primary">View full listing &rarr;</a>
+              <a href="tel:0726200123" class="gs-btn-ghost">&#128222; 07 262 0123</a>
             </div>
           </div>
         </div>
@@ -435,25 +496,22 @@
             <span class="gs-label">Cafes &middot; P&#257;p&#257;moa</span>
           </div>
           <div class="gs-body">
-            <div class="gs-info">
-              <h2>Blackberry Eatery</h2>
-              <div class="gs-sub">&#9749; All-day Breakfast &amp; Brunch &middot; P&#257;p&#257;moa</div>
-              <p class="gs-desc">Blackberry Eatery is P&#257;p&#257;moa&rsquo;s most-talked-about brunch spot &mdash; an all-day breakfast and brunch cafe known locally for generous portions, quality coffee and the kind of consistently busy Saturday morning floor that says more than any review. Cabinet food, cabinet desserts, and a menu that suits families, solo diners and groups.</p>
-              <div class="gs-rows">
-                <div class="gs-row"><span class="gs-row-label">Style</span><span class="gs-row-val">All-day breakfast &amp; brunch</span></div>
-                <div class="gs-row"><span class="gs-row-label">Known for</span><span class="gs-row-val">Generous portions, good coffee</span></div>
-              </div>
-              <div class="gs-btns">
-                <a href="/listings/blackberry-eatery-papamoa.html" class="gs-btn-primary">View full listing &rarr;</a>
-              </div>
+            <h2>Blackberry Eatery</h2>
+            <div class="gs-sub">&#9749; All-day Breakfast &amp; Brunch &middot; P&#257;p&#257;moa</div>
+            <p class="gs-desc">Blackberry Eatery is P&#257;p&#257;moa&rsquo;s most-talked-about brunch spot &mdash; an all-day breakfast and brunch cafe known locally for generous portions, quality coffee and the kind of consistently busy Saturday morning floor that says more than any review. Cabinet food, cabinet desserts, and a menu that suits families, solo diners and groups.</p>
+            <div class="gs-rows">
+              <div class="gs-row"><span class="gs-row-label">Style</span><span class="gs-row-val">All-day breakfast &amp; brunch</span></div>
+              <div class="gs-row"><span class="gs-row-label">Known for</span><span class="gs-row-val">Generous portions, good coffee</span></div>
             </div>
             <div class="gs-features">
-              <div class="gs-features-title">At a glance</div>
-              <div class="gs-feature">All-day breakfast &amp; brunch</div>
-              <div class="gs-feature">Cabinet food &amp; cabinet desserts</div>
-              <div class="gs-feature">Specialty coffee</div>
-              <div class="gs-feature">Family-friendly</div>
-              <div class="gs-feature">Consistently busy weekends</div>
+              <span class="gs-feature">All-day breakfast &amp; brunch</span>
+              <span class="gs-feature">Cabinet food &amp; desserts</span>
+              <span class="gs-feature">Specialty coffee</span>
+              <span class="gs-feature">Family-friendly</span>
+              <span class="gs-feature">Consistently busy weekends</span>
+            </div>
+            <div class="gs-btns">
+              <a href="/listings/blackberry-eatery-papamoa.html" class="gs-btn-primary">View full listing &rarr;</a>
             </div>
           </div>
         </div>
@@ -478,34 +536,31 @@
             <span class="gs-label">Pizza &middot; P&#257;p&#257;moa</span>
           </div>
           <div class="gs-body">
-            <div class="gs-info">
-              <h2>The Pizza Pundits</h2>
-              <div class="gs-sub">&#127829; Gourmet Pizza &middot; 1/898 P&#257;p&#257;moa Beach Road</div>
-              <p class="gs-desc">The Pizza Pundits is P&#257;p&#257;moa&rsquo;s highest-rated takeaway with a 4.9-star TripAdvisor rating from 58+ reviews. Open seven nights a week from 4:30pm. Gourmet toppings, house-made gluten-free bases, and delivery available via DoorDash, Uber Eats and Delivereasy. A local institution that regularly sells out on busy nights.</p>
-              <div class="gs-rows">
-                <div class="gs-row"><span class="gs-row-label">Address</span><span class="gs-row-val">1/898 P&#257;p&#257;moa Beach Road</span></div>
-                <div class="gs-row"><span class="gs-row-label">Hours</span><span class="gs-row-val">7 nights from 4:30pm</span></div>
-                <div class="gs-row"><span class="gs-row-label">Delivery</span><span class="gs-row-val">DoorDash &middot; Uber Eats &middot; Delivereasy</span></div>
-              </div>
-              <div class="gs-btns">
-                <a href="/listings/the-pizza-pundits-papamoa.html" class="gs-btn-primary">View full listing &rarr;</a>
-              </div>
-              <div class="gs-rating">
-                <span class="gs-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                <div>
-                  <div class="gs-rating-label">4.9 &mdash; TripAdvisor</div>
-                  <div class="gs-rating-count">58+ reviews</div>
-                </div>
-              </div>
+            <h2>The Pizza Pundits</h2>
+            <div class="gs-sub">&#127829; Gourmet Pizza &middot; 1/898 P&#257;p&#257;moa Beach Road</div>
+            <p class="gs-desc">The Pizza Pundits is P&#257;p&#257;moa&rsquo;s highest-rated takeaway with a 4.9-star TripAdvisor rating from 58+ reviews. Open seven nights a week from 4:30pm. Gourmet toppings, house-made gluten-free bases, and delivery available via DoorDash, Uber Eats and Delivereasy. A local institution that regularly sells out on busy nights.</p>
+            <div class="gs-rows">
+              <div class="gs-row"><span class="gs-row-label">Address</span><span class="gs-row-val">1/898 P&#257;p&#257;moa Beach Road</span></div>
+              <div class="gs-row"><span class="gs-row-label">Hours</span><span class="gs-row-val">7 nights from 4:30pm</span></div>
+              <div class="gs-row"><span class="gs-row-label">Delivery</span><span class="gs-row-val">DoorDash &middot; Uber Eats &middot; Delivereasy</span></div>
             </div>
             <div class="gs-features">
-              <div class="gs-features-title">At a glance</div>
-              <div class="gs-feature">Gourmet toppings</div>
-              <div class="gs-feature">House-made GF bases</div>
-              <div class="gs-feature">Open 7 nights from 4:30pm</div>
-              <div class="gs-feature">Delivery available</div>
-              <div class="gs-feature">4.9&#9733; TripAdvisor</div>
-              <div class="gs-feature">Dine-in &amp; takeaway</div>
+              <span class="gs-feature">Gourmet toppings</span>
+              <span class="gs-feature">House-made GF bases</span>
+              <span class="gs-feature">Open 7 nights from 4:30pm</span>
+              <span class="gs-feature">Delivery available</span>
+              <span class="gs-feature">4.9&#9733; TripAdvisor</span>
+              <span class="gs-feature">Dine-in &amp; takeaway</span>
+            </div>
+            <div class="gs-btns">
+              <a href="/listings/the-pizza-pundits-papamoa.html" class="gs-btn-primary">View full listing &rarr;</a>
+            </div>
+            <div class="gs-rating">
+              <span class="gs-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <div>
+                <div class="gs-rating-label">4.9 &mdash; TripAdvisor</div>
+                <div class="gs-rating-count">58+ reviews</div>
+              </div>
             </div>
           </div>
         </div>
@@ -545,12 +600,48 @@
       <div class="section" id="more">
         <div class="section-title">&#127866; More Food &amp; Drink Categories</div>
 
+        <div class="spotlight-avail" id="burgers">
+          <div class="sa-icon">&#127828;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Burgers</h4>
+            <p>No Gold Spotlight claimed for burger restaurants in P&#257;p&#257;moa. See the <a href="/categories/burgers-papamoa.html">Burgers category page</a> for all listings.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=burgers" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+
         <div class="spotlight-avail" id="bars">
           <div class="sa-icon">&#127867;</div>
           <div class="sa-body">
             <h4>Gold Spotlight available &mdash; Bars &amp; Pubs</h4>
             <p>No Gold Spotlight claimed for bars and pubs in P&#257;p&#257;moa. This is the top position on the <a href="/categories/bar-papamoa.html">Bars &amp; Pubs category page</a>.</p>
             <a href="/sales/claim.html?type=spotlight&cat=bars" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+
+        <div class="spotlight-avail" id="thai">
+          <div class="sa-icon">&#127836;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Thai Food</h4>
+            <p>No Gold Spotlight claimed for Thai restaurants in P&#257;p&#257;moa. See the <a href="/categories/thai-restaurant-papamoa.html">Thai Food category page</a>.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=thai" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+
+        <div class="spotlight-avail" id="japanese">
+          <div class="sa-icon">&#127843;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Japanese Food</h4>
+            <p>No Gold Spotlight claimed for Japanese restaurants and sushi in P&#257;p&#257;moa. See the <a href="/categories/japanese-restaurant-papamoa.html">Japanese Food category page</a>.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=japanese" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+
+        <div class="spotlight-avail" id="vietnamese">
+          <div class="sa-icon">&#127839;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Vietnamese Food</h4>
+            <p>No Gold Spotlight claimed for Vietnamese cuisine in P&#257;p&#257;moa. See the <a href="/categories/vietnamese-restaurant-papamoa.html">Vietnamese Food category page</a>.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=vietnamese" class="sa-btn">Claim this Spotlight &rarr;</a>
           </div>
         </div>
 
@@ -563,12 +654,30 @@
           </div>
         </div>
 
-        <div class="spotlight-avail" id="sushi">
-          <div class="sa-icon">&#127843;</div>
+        <div class="spotlight-avail" id="mexican">
+          <div class="sa-icon">&#127790;</div>
           <div class="sa-body">
-            <h4>Gold Spotlight available &mdash; Sushi</h4>
-            <p>No Gold Spotlight claimed for sushi restaurants in P&#257;p&#257;moa. See the <a href="/categories/sushi-papamoa.html">Sushi category page</a> for all listings.</p>
-            <a href="/sales/claim.html?type=spotlight&cat=sushi" class="sa-btn">Claim this Spotlight &rarr;</a>
+            <h4>Gold Spotlight available &mdash; Mexican Food</h4>
+            <p>No Gold Spotlight claimed for Mexican dining in P&#257;p&#257;moa. See the <a href="/categories/mexican-restaurant-papamoa.html">Mexican Food category page</a>.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=mexican" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+
+        <div class="spotlight-avail" id="italian">
+          <div class="sa-icon">&#127837;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Italian Food</h4>
+            <p>No Gold Spotlight claimed for Italian restaurants in P&#257;p&#257;moa. See the <a href="/categories/italian-restaurant-papamoa.html">Italian Food category page</a>.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=italian" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+
+        <div class="spotlight-avail" id="french">
+          <div class="sa-icon">&#127866;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; French Food</h4>
+            <p>No Gold Spotlight claimed for French cuisine in P&#257;p&#257;moa. See the <a href="/categories/french-restaurant-papamoa.html">French Food category page</a>.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=french" class="sa-btn">Claim this Spotlight &rarr;</a>
           </div>
         </div>
 
@@ -587,6 +696,23 @@
             <h4>Gold Spotlight available &mdash; Bakeries</h4>
             <p>No Gold Spotlight claimed for bakeries in P&#257;p&#257;moa. See the <a href="/categories/bakery-papamoa.html">Bakeries category page</a> for all listings.</p>
             <a href="/sales/claim.html?type=spotlight&cat=bakeries" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+
+        <div class="spotlight-avail" id="function-venues">
+          <div class="sa-icon">&#127881;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Function Venues</h4>
+            <p>No Gold Spotlight claimed for function and event venues in P&#257;p&#257;moa. See the <a href="/categories/function-venues-papamoa.html">Function Venues category page</a>.</p>
+            <a href="/sales/claim.html?type=spotlight&cat=function-venues" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+
+        <div class="spotlight-avail" id="order-online">
+          <div class="sa-icon">&#128241;</div>
+          <div class="sa-body">
+            <h4>Order Online in P&#257;p&#257;moa &mdash; <a href="/categories/order-online-papamoa.html">View page &rarr;</a></h4>
+            <p>P&#257;p&#257;moa businesses offering online ordering via their own site or delivery apps. See the <a href="/categories/order-online-papamoa.html">Order Online page</a> for the full list including DoorDash, Uber Eats and Delivereasy operators.</p>
           </div>
         </div>
 
