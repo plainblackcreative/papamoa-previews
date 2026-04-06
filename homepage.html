@@ -1032,7 +1032,6 @@ var TYPE_LABELS = {cat:'Categories',listing:'Businesses',info:'Local Info',tool:
 
 function handleSearch(val) {
   var v = val.trim();
-  if (v.length >= 2) saveRecentSearch(v);
   var q = v.toLowerCase();
   var box = document.getElementById('search-results');
   if (!q || q.length < 2) { box.classList.remove('visible'); return; }
@@ -1063,6 +1062,7 @@ function handleSearchKey(e) {
 function submitSearch() {
   var q = document.getElementById('site-search').value.trim();
   if (!q) return;
+  saveRecentSearch(q);
   handleSearch(q);
 }
 function fillSearch(term) {
