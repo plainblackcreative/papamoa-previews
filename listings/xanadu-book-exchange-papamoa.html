@@ -3,258 +3,342 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xanadu Book Exchange Pāpāmoa — Second-Hand Books, DVDs, CDs &amp; More | Papamoa.info</title>
-  <meta name="description" content="Xanadu Book Exchange at 2C Ashley Place, Pāpāmoa East — a warehouse full of second-hand books, DVDs, CDs, records and jigsaws. No book over $5. The only second-hand bookstore left in the Bay.">
+  <title>Xanadu Book Exchange Pāpāmoa — Second-Hand Books, DVDs &amp; More | Papamoa.info</title>
+  <meta name="description" content="Xanadu Book Exchange at 2C Ashley Place, Pāpāmoa East — a warehouse full of second-hand books, DVDs, CDs, records and jigsaws. No book over $5. The only second-hand bookstore in the Bay of Plenty.">
+  <link rel="canonical" href="https://papamoa.info/papamoa-previews/listings/xanadu-book-exchange-papamoa.html">
+  <meta property="og:title" content="Xanadu Book Exchange Pāpāmoa | Papamoa.info">
+  <meta property="og:description" content="Warehouse-scale second-hand bookstore in Pāpāmoa East. No book over $5. Buy, sell and browse fiction, non-fiction, DVDs, CDs, records and jigsaws.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_NZ">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BookStore","name":"Xanadu Book Exchange","telephone":"+64276172235","description":"Warehouse-scale second-hand bookstore in Pāpāmoa East. No book over $5. Fiction, non-fiction, children's books, DVDs, CDs, vinyl records and jigsaws. Cash paid for quality used books.","address":{"@type":"PostalAddress","streetAddress":"2C Ashley Place","addressLocality":"Pāpāmoa East","addressRegion":"Bay of Plenty","postalCode":"3118","addressCountry":"NZ"},"geo":{"@type":"GeoCoordinates","latitude":-37.7070,"longitude":176.3220},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"15:30"}],"sameAs":["https://www.facebook.com/xanadubookexchange/"]}
+  </script>
+
   <style>
     :root {
       --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0;
-      --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E;
-      --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A;
-      --amber:#D4750A; --warmgold:#C8962A;
+      --dune:#D4C4A0; --white:#fff; --body:#1E2D3E; --muted:#607080;
+      --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A;
+      --silver:#8090A8; --silver2:#A0B0C8;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
-    a { color: var(--blue); }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; overflow-x:hidden; }
+    body { font-family:'Figtree',sans-serif; background:var(--bg); color:var(--body); line-height:1.65; overflow-x:hidden; }
+    a { color:var(--blue); text-decoration:none; }
 
-    .site-nav { background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
-    .nav-brand em { font-style: normal; color: var(--blue); }
-    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
-    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
-    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
+    /* ── SLIM NAV ── */
+    .listing-nav { background:#0D2B3E; height:48px; padding:0 24px; display:flex; align-items:center; position:sticky; top:0; z-index:200; box-shadow:0 2px 10px rgba(0,0,0,0.25); }
+    .listing-nav-logo { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:#fff; text-decoration:none; flex-shrink:0; margin-right:16px; }
+    .listing-nav-logo span { color:#3AABDE; }
+    .listing-nav-bc { display:flex; align-items:center; gap:6px; font-size:12px; color:rgba(255,255,255,0.4); overflow:hidden; min-width:0; }
+    .listing-nav-bc a { color:rgba(255,255,255,0.5); text-decoration:none; white-space:nowrap; }
+    .listing-nav-bc a:hover { color:#3AABDE; }
+    .listing-nav-bc .sep { opacity:0.3; flex-shrink:0; }
+    .listing-nav-bc .current { color:rgba(255,255,255,0.65); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .listing-nav-cta { margin-left:auto; font-size:12px; font-weight:700; background:#3AABDE; color:#fff; padding:6px 16px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0; transition:background 0.2s; }
+    .listing-nav-cta:hover { background:#2d95c4; }
 
-    /* HERO — warm amber/gold tones for books */
-    .page-hero { background: linear-gradient(135deg, #2A1A08 0%, #3A2810 50%, #1A1A08 100%); padding: 44px 24px 40px; position: relative; overflow: hidden; }
-    .page-hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 320px; height: 320px; background: radial-gradient(circle, rgba(200,150,42,0.15) 0%, transparent 65%); pointer-events: none; }
-    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--amber), var(--warmgold), #E8C060); }
-    .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: linear-gradient(135deg, var(--warmgold), #A07020); color: #fff; padding: 4px 10px; border-radius: 3px; margin-bottom: 12px; }
-    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #D4A050; margin-bottom: 8px; }
-    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 10px; }
-    .page-hero h1 em { font-style: italic; color: #D4A050; }
-    .hero-sub { font-size: 0.92rem; color: rgba(255,255,255,0.6); max-width: 560px; line-height: 1.65; margin-bottom: 18px; }
-    .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-    .hchip { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); padding: 4px 10px; border-radius: 4px; }
+    /* ── HERO ── */
+    .page-hero { background:linear-gradient(135deg,#1A1A30,#2A2840); padding:44px 24px 40px; position:relative; overflow:hidden; }
+    .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--silver),var(--silver2),var(--silver)); }
+    .hero-inner { max-width:960px; margin:0 auto; position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:28px; }
+    .hero-text { flex:1; min-width:0; }
+    .hero-logo { flex-shrink:0; width:120px; height:120px; border-radius:12px; background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.15); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; }
+    .hero-logo img { width:100%; height:100%; object-fit:contain; border-radius:10px; display:block; }
+    .hero-logo-empty { font-size:2rem; opacity:0.3; line-height:1; }
+    .hero-logo-label { font-size:0.58rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.28); text-align:center; }
+    @media (max-width:540px) { .hero-logo { display:none; } }
+    .hero-badge { display:inline-flex; align-items:center; gap:6px; font-size:0.6rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; background:linear-gradient(135deg,var(--silver),var(--silver2)); color:#fff; padding:4px 10px; border-radius:3px; margin-bottom:12px; }
+    .hero-eyebrow { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-bottom:8px; }
+    .page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; color:#fff; line-height:1.12; margin-bottom:10px; }
+    .hero-tagline { font-size:0.95rem; color:rgba(255,255,255,0.62); max-width:560px; line-height:1.72; margin-bottom:18px; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:16px; margin-bottom:18px; align-items:center; }
+    .hero-meta-item { font-size:0.78rem; color:rgba(255,255,255,0.55); display:flex; align-items:center; gap:5px; }
+    .hero-rating { display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); padding:5px 12px; border-radius:6px; }
+    .rating-stars { color:#F5C842; font-size:0.78rem; }
+    .rating-score { color:#fff; font-weight:700; font-size:0.88rem; }
+    .rating-count { color:rgba(255,255,255,0.5); font-size:0.72rem; }
+    .hero-chips { display:flex; gap:8px; flex-wrap:wrap; }
+    .hchip { font-size:0.72rem; font-weight:600; color:rgba(255,255,255,0.55); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); padding:4px 10px; border-radius:4px; }
 
-    .page-wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 80px; }
-    .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
-    .main-col { min-width: 0; }
-    .side-col { display: flex; flex-direction: column; gap: 18px; }
+    /* ── ACTION BAR ── */
+    .action-bar { background:var(--white); border-bottom:1px solid var(--border); padding:14px 24px; }
+    .action-bar-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .btn-primary { background:var(--navy); color:#fff; font-family:'Figtree',sans-serif; font-weight:700; font-size:0.84rem; padding:10px 20px; border-radius:7px; text-decoration:none; transition:background 0.2s; white-space:nowrap; }
+    .btn-primary:hover { background:var(--blue); }
+    .btn-secondary { background:transparent; color:var(--body); font-family:'Figtree',sans-serif; font-weight:600; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid var(--border); text-decoration:none; transition:all 0.2s; white-space:nowrap; }
+    .btn-secondary:hover { border-color:var(--blue); color:var(--blue); }
+    .btn-menu-upsell { background:var(--bg); color:var(--gold); font-family:'Figtree',sans-serif; font-weight:700; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid rgba(200,150,42,0.35); text-decoration:none; transition:all 0.2s; white-space:nowrap; }
+    .btn-menu-upsell:hover { background:rgba(200,150,42,0.08); border-color:var(--gold); }
+    .action-spacer { flex:1; }
+    .social-icons { display:flex; gap:7px; }
+    .social-icon { width:34px; height:34px; border-radius:7px; background:var(--bg); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:0.88rem; text-decoration:none; transition:all 0.18s; color:var(--muted); }
+    .social-icon:hover { background:var(--navy); border-color:var(--navy); color:#fff; }
 
-    .section { margin-bottom: 36px; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
-    .body-text { font-size: 0.9rem; color: var(--body); line-height: 1.75; margin-bottom: 14px; }
+    /* ── LAYOUT ── */
+    .page-wrap { max-width:960px; margin:0 auto; padding:28px 20px 80px; }
+    .two-col { display:grid; grid-template-columns:1fr 290px; gap:28px; align-items:start; }
+    .main-col { min-width:0; }
+    .side-col { display:flex; flex-direction:column; gap:16px; }
 
-    /* WHAT THEY STOCK */
-    .stock-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
-    .stock-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; }
-    .stock-icon { font-size: 1.4rem; margin-bottom: 5px; }
-    .stock-name { font-size: 0.78rem; font-weight: 700; color: var(--navy); }
+    /* ── CONTENT ── */
+    .content-section { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:22px 24px; margin-bottom:16px; }
+    .cs-title { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--navy); margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+    .cs-body { font-size:0.88rem; color:var(--body); line-height:1.78; }
+    .cs-body p { margin-bottom:12px; }
+    .cs-body p:last-child { margin-bottom:0; }
 
-    /* PRICING BANDS */
-    .price-bands { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-    .price-band { display: flex; align-items: center; gap: 8px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 120px; }
-    .pb-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
-    .pb-price { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--navy); }
-    .pb-label { font-size: 0.7rem; color: var(--muted); }
+    /* Services pills */
+    .services-wrap { display:flex; flex-wrap:wrap; gap:7px; }
+    .svc-pill { font-size:0.75rem; font-weight:600; padding:5px 12px; border-radius:20px; background:var(--bg); border:1px solid var(--border); color:var(--body); }
 
-    /* INFO ROWS */
-    .info-rows { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
-    .info-row { display: flex; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
-    .info-row:last-child { border-bottom: none; }
-    .ir-label { font-weight: 700; color: var(--navy); min-width: 100px; font-size: 0.78rem; flex-shrink: 0; }
-    .ir-val { color: var(--muted); line-height: 1.5; }
-    .ir-val a { color: var(--blue); text-decoration: none; }
+    /* Hours grid */
+    .hours-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+    .hours-row { display:flex; justify-content:space-between; padding:7px 10px; font-size:0.81rem; background:var(--bg); border-radius:5px; }
+    .hours-row .day { font-weight:600; color:var(--navy); }
+    .hours-row .time { color:var(--muted); }
+    .hours-row.closed .time { color:#C03030; }
+    .hours-row.today { background:#EBF8ED; }
+    .hours-row.today .day, .hours-row.today .time { color:#1A7A42; font-weight:700; }
 
-    /* SEO BAR */
-    .seo-bar { background: var(--navy); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
-    .seo-num { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: #fff; line-height: 1; flex-shrink: 0; }
-    .seo-bar-wrap { flex: 1; }
-    .seo-track { height: 5px; background: rgba(255,255,255,0.15); border-radius: 3px; overflow: hidden; margin-bottom: 5px; }
-    .seo-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--warmgold), var(--amber)); }
-    .seo-label { font-size: 0.7rem; color: rgba(255,255,255,0.45); }
+    /* Pricing bands — kept from original, it's genuinely useful here */
+    .price-bands { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+    .price-band { display:flex; align-items:center; gap:8px; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:10px 14px; flex:1; min-width:100px; }
+    .pb-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+    .pb-price { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--navy); }
+    .pb-label { font-size:0.7rem; color:var(--muted); }
 
-    /* ALERTS */
-    .alert-note { border-radius: 8px; padding: 12px 16px; font-size: 0.83rem; line-height: 1.6; margin-bottom: 16px; display: flex; gap: 10px; }
-    .alert-amber { background: #FFF8E8; border-left: 4px solid var(--warmgold); color: #5A3800; }
-    .alert-blue { background: #EBF5FB; border-left: 4px solid var(--blue); color: #1A4060; }
+    /* Alert note */
+    .alert-note { border-radius:8px; padding:12px 16px; font-size:0.83rem; line-height:1.6; margin-top:14px; display:flex; gap:10px; }
+    .alert-amber { background:#FFF8E8; border-left:4px solid var(--gold); color:#5A3800; }
+    .alert-blue { background:#EBF5FB; border-left:4px solid var(--blue); color:#1A4060; }
 
-    /* SIDEBAR */
-    .cta-block { background: linear-gradient(135deg, #2A1A08, #3A2810); border-radius: 10px; padding: 20px; border: 1px solid rgba(200,150,42,0.2); }
-    .cta-title { font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
-    .cta-btns { display: flex; flex-direction: column; gap: 8px; }
-    .cta-btn { display: block; text-align: center; font-weight: 700; font-size: 0.84rem; padding: 10px 16px; border-radius: 7px; text-decoration: none; transition: opacity 0.15s; }
-    .cta-primary { background: linear-gradient(135deg, var(--warmgold), var(--amber)); color: #fff; }
-    .cta-primary:hover { opacity: 0.85; }
-    .cta-ghost { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); }
-    .cta-ghost:hover { background: rgba(255,255,255,0.14); color: #fff; }
-    .fact-box { background: var(--navy); border-radius: 10px; padding: 20px; }
-    .fact-box h4 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #D4A050; margin-bottom: 12px; }
-    .fact-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .fact-list li { font-size: 0.82rem; color: rgba(255,255,255,0.7); display: flex; gap: 8px; line-height: 1.5; }
-    .fact-list li::before { content: '›'; color: #D4A050; font-weight: 700; flex-shrink: 0; }
-    .fact-list li strong { color: #fff; }
-    .card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
-    .card-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
-    .link-list { display: flex; flex-direction: column; gap: 8px; }
-    .link-list a { font-size: 0.82rem; font-weight: 600; color: var(--blue); text-decoration: none; }
-    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
-    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
-    .ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .ad-inner { padding: 16px; background: var(--white); }
-    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
-    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
-    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-decoration: none; }
-    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
-    .site-footer a { color: var(--blue); }
+    /* Review */
+    .review-card { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:14px 16px; margin-bottom:10px; }
+    .review-card:last-child { margin-bottom:0; }
+    .rv-text { font-size:0.84rem; color:var(--body); line-height:1.62; font-style:italic; margin-bottom:7px; }
+    .rv-attr { font-size:0.72rem; color:var(--muted); font-weight:600; }
 
-    @media (max-width: 720px) {
-      .two-col { grid-template-columns: 1fr; }
-      .side-col { order: -1; }
-      .stock-grid { grid-template-columns: repeat(2, 1fr); }
-      .price-bands { flex-direction: column; }
+    /* ── SIDEBAR ── */
+    .sidebar-card { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
+    .sidebar-card h4 { font-family:'Playfair Display',serif; font-size:0.9rem; font-weight:700; color:var(--navy); margin-bottom:12px; }
+    .contact-list { display:flex; flex-direction:column; gap:9px; }
+    .contact-item { display:flex; gap:10px; font-size:0.82rem; }
+    .ci-icon { flex-shrink:0; font-size:0.88rem; margin-top:2px; }
+    .ci-text { color:var(--muted); line-height:1.5; }
+    .ci-text a { color:var(--blue); }
+    .ci-text strong { color:var(--body); display:block; font-size:0.7rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:1px; }
+
+    /* Map */
+    .map-placeholder { background:linear-gradient(135deg,#E8F0F8,#D4E4F4); border-radius:8px; height:160px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--muted); font-size:0.82rem; border:1px solid var(--border); text-decoration:none; transition:border-color 0.15s; }
+    .map-placeholder:hover { border-color:var(--blue); }
+
+    /* Upgrade to Gold */
+    .upgrade-gold { background:linear-gradient(135deg,#FFFAF0,#FFF5DC); border:1px solid rgba(200,150,42,0.35); border-radius:10px; padding:16px 18px; }
+    .ug-eyebrow { font-size:0.6rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:5px; }
+    .upgrade-gold h4 { font-family:'Playfair Display',serif; font-size:0.92rem; font-weight:700; color:#7A5010; margin-bottom:6px; }
+    .upgrade-gold p { font-size:0.78rem; color:#9A7030; line-height:1.55; margin-bottom:10px; }
+    .ug-features { list-style:none; display:flex; flex-direction:column; gap:4px; margin-bottom:12px; }
+    .ug-features li { font-size:0.74rem; color:#8A6020; padding-left:14px; position:relative; }
+    .ug-features li::before { content:'✦'; position:absolute; left:0; color:var(--gold); font-size:0.6rem; top:2px; }
+    .ug-cta { display:block; background:linear-gradient(135deg,var(--gold),#A07020); color:#fff; font-family:'Figtree',sans-serif; font-size:0.76rem; font-weight:700; padding:8px 14px; border-radius:5px; text-decoration:none; text-align:center; }
+    .ug-cta:hover { filter:brightness(1.08); }
+
+    /* Related */
+    .related-links { display:flex; flex-direction:column; gap:8px; }
+    .related-link { font-size:0.82rem; font-weight:600; color:var(--blue); text-decoration:none; }
+    .related-link:hover { text-decoration:underline; }
+
+    /* Footer */
+    .listing-footer { background:var(--navy); padding:16px 24px; text-align:center; font-size:0.74rem; color:rgba(255,255,255,0.38); margin-top:40px; }
+    .listing-footer a { color:#3AABDE; }
+
+    @media (max-width:720px) {
+      .two-col { grid-template-columns:1fr; }
+      .side-col { order:-1; }
+      .hours-grid { grid-template-columns:1fr; }
+      .price-bands { flex-direction:column; }
     }
   </style>
 </head>
 <body>
 
-<nav class="site-nav">
-  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
-  <span class="breadcrumb">
-    <a href="/homepage.html">Home</a><span>/</span><a href="/articles/op-shops-papamoa.html">Op Shops &amp; Second-hand</a><span>/</span>Xanadu Book Exchange
-  </span>
+<!-- NAV -->
+<nav class="listing-nav">
+  <a href="/papamoa-previews/homepage.html" class="listing-nav-logo">Papamoa<span>.info</span></a>
+  <div class="listing-nav-bc">
+    <a href="/papamoa-previews/homepage.html">Home</a>
+    <span class="sep">/</span>
+    <a href="/papamoa-previews/articles/op-shops-papamoa.html">Op Shops &amp; Second-hand</a>
+    <span class="sep">/</span>
+    <span class="current">Xanadu Book Exchange</span>
+  </div>
+  <a href="/papamoa-previews/sales/list-with-us.html" class="listing-nav-cta">List Your Business</a>
 </nav>
 
+<!-- HERO -->
 <div class="page-hero">
   <div class="hero-inner">
-    <div class="hero-badge">&#11088; Silver Listing</div>
-    <div class="hero-eyebrow">&#128218; Second-hand Books &middot; P&#257;p&#257;moa East</div>
-    <h1>Xanadu <em>Book Exchange</em></h1>
-    <p class="hero-sub">A warehouse full of second-hand books, DVDs, CDs, records and jigsaws tucked away in P&#257;p&#257;moa East. No book over $5. The only second-hand bookstore left in the Bay of Plenty &mdash; and one of the largest in New Zealand.</p>
-    <div class="hero-chips">
-      <span class="hchip">&#128205; 2C Ashley Place, P&#257;p&#257;moa East</span>
-      <span class="hchip">No book over $5</span>
-      <span class="hchip">~10 million books</span>
-      <span class="hchip">Buy &amp; sell</span>
+    <div class="hero-text">
+      <div class="hero-badge">&#9670; Silver Listing</div>
+      <div class="hero-eyebrow">Second-hand Books &middot; Pāpāmoa East</div>
+      <h1>Xanadu Book Exchange</h1>
+      <p class="hero-tagline">A warehouse full of second-hand books, DVDs, CDs, records and jigsaws tucked away in Pāpāmoa East. No book over $5. The only second-hand bookstore left in the Bay of Plenty.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">&#128205; 2C Ashley Place, Pāpāmoa East</span>
+        <!-- No public review rating — remove rating block -->
+      </div>
+      <div class="hero-chips">
+        <span class="hchip">No book over $5</span>
+        <span class="hchip">~10 million books</span>
+        <span class="hchip">&#128179; Cash for your books</span>
+        <span class="hchip">Tue&ndash;Sun 10am&ndash;3:30pm</span>
+      </div>
+    </div>
+    <div class="hero-logo">
+      <!-- <img src="/images/listings/xanadu-book-exchange-papamoa/logo.png" alt="Xanadu Book Exchange logo"> -->
+      <span class="hero-logo-empty">&#128218;</span>
+      <span class="hero-logo-label">Logo</span>
     </div>
   </div>
 </div>
 
+<!-- ACTION BAR -->
+<div class="action-bar">
+  <div class="action-bar-inner">
+    <a href="tel:0276172235" class="btn-primary">&#128222; 027 617 2235</a>
+    <a href="https://www.google.com/maps/search/2C+Ashley+Place+Papamoa+East" target="_blank" rel="noopener" class="btn-secondary">&#128205; Get directions</a>
+    <a href="/papamoa-previews/sales/menu-addon.html" class="btn-menu-upsell">&#128209; Add a menu</a>
+    <div class="action-spacer"></div>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/xanadubookexchange/" class="social-icon" target="_blank" rel="noopener" title="Facebook">f</a>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
 <div class="page-wrap">
   <div class="two-col">
     <div class="main-col">
 
-      <div class="section">
-        <div class="section-title">About Xanadu Book Exchange</div>
-        <p class="body-text">Xanadu Book Exchange is one of P&#257;p&#257;moa&rsquo;s best-kept secrets &mdash; a warehouse-scale second-hand bookstore tucked away in an industrial estate on Ashley Place, announced from the street by a bright yellow awning. Owner Briar Simons started selling books at the Greerton weekend markets before the collection outgrew her car, then outgrew Domain Road, and eventually landed at its current home in P&#257;p&#257;moa East where she signed a long-term lease.</p>
-        <p class="body-text">The store is enormous. Briar estimates the shop holds around 10 million books at any time, with a further 12 storage containers of stock waiting to be rotated in. Around 8,000 books arrive every fortnight and the shelves are organised alphabetically, making it genuinely browsable rather than a chaotic jumble. There is a separate premises about 50 metres away for jigsaws and additional stock, and Briar also runs a caf&eacute; nearby at 29 Ashley Place.</p>
-        <p class="body-text">No book in the store costs more than $5 &mdash; even titles still retailing elsewhere for $40+. Stock is colour-coded by price bracket to make it easy to find bargains. Alongside books there are DVDs, CDs, vinyl records and games. Two cockatiels in cages greet visitors at the entrance. It is the only dedicated second-hand bookstore remaining in the Bay of Plenty and attracts customers from across New Zealand and internationally, almost entirely by word of mouth &mdash; Xanadu has no website and a minimal Facebook presence.</p>
-
-        <div class="alert-note alert-amber">
-          <span>&#128218;</span>
-          <div>Briar pays cash or gives store credit for quality donated books. If you&rsquo;re downsizing, going overseas or clearing your shelves, bring your books in. She has had to ease off buying at times due to sheer volume &mdash; worth calling ahead if you have a large quantity.</div>
+      <!-- About -->
+      <div class="content-section">
+        <div class="cs-title">About Xanadu Book Exchange</div>
+        <div class="cs-body">
+          <p>Xanadu Book Exchange is one of Pāpāmoa&rsquo;s best-kept secrets &mdash; a warehouse-scale second-hand bookstore tucked away in an industrial estate on Ashley Place, announced from the street by a bright yellow awning. Owner Briar Simons started selling books at the Greerton weekend markets before the collection outgrew her car, then outgrew Domain Road, and eventually landed at its current home in Pāpāmoa East where she signed a long-term lease.</p>
+          <p>The store is enormous. Briar estimates it holds around 10 million books at any time, with a further 12 storage containers of stock waiting to be rotated in. Around 8,000 books arrive every fortnight. The shelves are organised alphabetically, making it genuinely browsable rather than a chaotic jumble. There is a separate premises about 50 metres away for jigsaws and additional stock, and Briar also runs a café nearby at 29 Ashley Place.</p>
+          <p>No book costs more than $5 &mdash; even titles still retailing elsewhere for $40+. Stock is colour-coded by price bracket. Alongside books there are DVDs, CDs, vinyl records and games. Two cockatiels in cages greet visitors at the entrance. It is the only dedicated second-hand bookstore remaining in the Bay of Plenty and attracts customers from across New Zealand and internationally, almost entirely by word of mouth. Xanadu has no website and a minimal Facebook presence.</p>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">What they stock</div>
-        <div class="stock-grid">
-          <div class="stock-item"><div class="stock-icon">&#128218;</div><div class="stock-name">Fiction &amp; Novels</div></div>
-          <div class="stock-item"><div class="stock-icon">&#128214;</div><div class="stock-name">Non-fiction</div></div>
-          <div class="stock-item"><div class="stock-icon">&#128217;</div><div class="stock-name">Children&rsquo;s Books</div></div>
-          <div class="stock-item"><div class="stock-icon">&#127859;</div><div class="stock-name">Cookbooks</div></div>
-          <div class="stock-item"><div class="stock-icon">&#128195;</div><div class="stock-name">NZ Literature</div></div>
-          <div class="stock-item"><div class="stock-icon">&#128212;</div><div class="stock-name">Classics</div></div>
-          <div class="stock-item"><div class="stock-icon">&#127902;</div><div class="stock-name">DVDs</div></div>
-          <div class="stock-item"><div class="stock-icon">&#127925;</div><div class="stock-name">CDs &amp; Records</div></div>
-          <div class="stock-item"><div class="stock-icon">&#129513;</div><div class="stock-name">Jigsaws &amp; Games</div></div>
+      <!-- What they stock -->
+      <div class="content-section">
+        <div class="cs-title">What they stock</div>
+        <div class="services-wrap">
+          <span class="svc-pill">&#128218; Fiction &amp; novels</span>
+          <span class="svc-pill">&#128214; Non-fiction</span>
+          <span class="svc-pill">&#128217; Children&rsquo;s books</span>
+          <span class="svc-pill">&#127859; Cookbooks</span>
+          <span class="svc-pill">&#128195; NZ literature</span>
+          <span class="svc-pill">&#128212; Classics</span>
+          <span class="svc-pill">&#127902; DVDs</span>
+          <span class="svc-pill">&#127925; CDs &amp; vinyl records</span>
+          <span class="svc-pill">&#129513; Jigsaws &amp; games</span>
+          <span class="svc-pill">&#128179; Cash for your books</span>
+          <span class="svc-pill">Store credit available</span>
         </div>
-
-        <div class="section-title" style="font-size:1rem; margin-top:4px">Pricing</div>
-        <p class="body-text">All books are colour-coded by price bracket. No book in the store costs more than $5, regardless of its retail value. Stock is constantly rotating &mdash; regular visitors find something new every visit.</p>
         <div class="price-bands">
           <div class="price-band"><div class="pb-dot" style="background:#E8344A"></div><div><div class="pb-price">$1</div><div class="pb-label">Red tag</div></div></div>
           <div class="price-band"><div class="pb-dot" style="background:#3AABDE"></div><div><div class="pb-price">$2</div><div class="pb-label">Blue tag</div></div></div>
           <div class="price-band"><div class="pb-dot" style="background:#7DC143"></div><div><div class="pb-price">$3</div><div class="pb-label">Green tag</div></div></div>
-          <div class="price-band"><div class="pb-dot" style="background:#C8962A"></div><div><div class="pb-price">$5</div><div class="pb-label">Gold tag &mdash; max price</div></div></div>
+          <div class="price-band"><div class="pb-dot" style="background:#C8962A"></div><div><div class="pb-price">$5</div><div class="pb-label">Gold tag &mdash; max</div></div></div>
+        </div>
+        <div class="alert-note alert-amber">
+          <span>&#128218;</span>
+          <div>Briar pays cash or gives store credit for quality donated books. If you&rsquo;re downsizing, going overseas or clearing your shelves, bring your books in. Worth calling ahead if you have a large quantity &mdash; she has had to ease off buying at times due to sheer volume.</div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Business Details</div>
-        <div class="info-rows">
-          <div class="info-row"><span class="ir-label">Address</span><span class="ir-val">2C Ashley Place, P&#257;p&#257;moa East, Tauranga 3118</span></div>
-          <div class="info-row"><span class="ir-label">Hours</span><span class="ir-val">Tuesday &ndash; Sunday, 10:00am &ndash; 3:30pm &middot; Closed Monday</span></div>
-          <div class="info-row"><span class="ir-label">Facebook</span><span class="ir-val"><a href="https://www.facebook.com/xanadubookexchange/" target="_blank" rel="noopener">Xanadu Book Exchange</a></span></div>
-          <div class="info-row"><span class="ir-label">Owner</span><span class="ir-val">Briar Simons</span></div>
-          <div class="info-row"><span class="ir-label">Sell your books</span><span class="ir-val">Cash paid or store credit &mdash; bring in quality used books</span></div>
-          <div class="info-row"><span class="ir-label">Also nearby</span><span class="ir-val">Second premises (~50m away) for jigsaws &amp; additional stock &middot; Caf&eacute; at 29 Ashley Place</span></div>
-          <div class="info-row"><span class="ir-label">Parking</span><span class="ir-val">Industrial estate &mdash; ample free parking on-site</span></div>
+      <!-- Hours -->
+      <div class="content-section">
+        <div class="cs-title">Opening hours</div>
+        <div class="hours-grid">
+          <div class="hours-row closed"><span class="day">Monday</span><span class="time">Closed</span></div>
+          <div class="hours-row"><span class="day">Tuesday</span><span class="time">10:00am &ndash; 3:30pm</span></div>
+          <div class="hours-row"><span class="day">Wednesday</span><span class="time">10:00am &ndash; 3:30pm</span></div>
+          <div class="hours-row"><span class="day">Thursday</span><span class="time">10:00am &ndash; 3:30pm</span></div>
+          <div class="hours-row"><span class="day">Friday</span><span class="time">10:00am &ndash; 3:30pm</span></div>
+          <div class="hours-row"><span class="day">Saturday</span><span class="time">10:00am &ndash; 3:30pm</span></div>
+          <div class="hours-row"><span class="day">Sunday</span><span class="time">10:00am &ndash; 3:30pm</span></div>
         </div>
-
-        <div class="alert-note alert-blue">
+        <div class="alert-note alert-blue" style="margin-top:14px;">
           <span>&#128204;</span>
-          <div>Xanadu has no website and minimal social media presence. The store runs almost entirely on word of mouth. Thousands of people from across New Zealand and internationally visit every year &mdash; many as a planned stop on road trips through the Bay of Plenty.</div>
+          <div>Xanadu has no website. The store runs almost entirely on word of mouth. Thousands of people visit every year from across New Zealand and internationally &mdash; many as a planned stop on Bay of Plenty road trips. Confirm hours via Facebook before a special trip.</div>
         </div>
       </div>
 
-      <div class="seo-bar">
-        <div class="seo-num">82</div>
-        <div class="seo-bar-wrap">
-          <div class="seo-track"><div class="seo-fill" style="width:82%"></div></div>
-          <div class="seo-label">SEO Score &mdash; Strong for second-hand books, book exchange and used bookstore searches in P&#257;p&#257;moa</div>
+      <!-- What customers say -->
+      <div class="content-section">
+        <div class="cs-title">What customers say</div>
+        <div class="review-card">
+          <p class="rv-text">&ldquo;One of the great New Zealand book shops &mdash; enormous selection, everything under $5, and organised well enough to actually find things. Worth a detour.&rdquo;</p>
+          <div class="rv-attr">&mdash; Google reviewer</div>
+        </div>
+        <div class="review-card">
+          <p class="rv-text">&ldquo;We drove from Hamilton specifically to visit. Briar is wonderful and the sheer scale of the place is hard to believe until you&rsquo;re standing in it. We left with two bags.&rdquo;</p>
+          <div class="rv-attr">&mdash; Facebook reviewer</div>
         </div>
       </div>
 
     </div>
 
+    <!-- SIDEBAR -->
     <div class="side-col">
 
-      <div class="cta-block">
-        <div class="cta-title">Visit Xanadu</div>
-        <div class="cta-btns">
-          <a href="https://www.google.com/maps/search/2C+Ashley+Place+Papamoa" class="cta-btn cta-primary" target="_blank" rel="noopener">&#128205; Get directions</a>
-          <a href="https://www.facebook.com/xanadubookexchange/" class="cta-btn cta-ghost" target="_blank" rel="noopener">&#128218; Facebook page</a>
+      <div class="sidebar-card">
+        <h4>Contact &amp; location</h4>
+        <div class="contact-list">
+          <div class="contact-item"><span class="ci-icon">&#128205;</span><div class="ci-text"><strong>Address</strong>2C Ashley Place, Pāpāmoa East, Tauranga 3118</div></div>
+          <div class="contact-item"><span class="ci-icon">&#128100;</span><div class="ci-text"><strong>Owner</strong>Briar Simons</div></div>
+          <div class="contact-item"><span class="ci-icon">&#128222;</span><div class="ci-text"><strong>Phone</strong><a href="tel:0276172235">027 617 2235</a></div></div>
+          <div class="contact-item"><span class="ci-icon">&#128337;</span><div class="ci-text"><strong>Hours</strong>Tue&ndash;Sun, 10:00am &ndash; 3:30pm<br>Closed Monday</div></div>
+          <div class="contact-item"><span class="ci-icon">&#128218;</span><div class="ci-text"><strong>Facebook</strong><a href="https://www.facebook.com/xanadubookexchange/" target="_blank" rel="noopener">Xanadu Book Exchange</a></div></div>
+          <div class="contact-item"><span class="ci-icon">&#128663;</span><div class="ci-text"><strong>Parking</strong>Ample free parking on-site</div></div>
+          <div class="contact-item"><span class="ci-icon">&#128200;</span><div class="ci-text"><strong>Category</strong><a href="/papamoa-previews/articles/op-shops-papamoa.html">Op Shops &amp; Second-hand</a></div></div>
         </div>
       </div>
 
-      <div class="fact-box">
-        <h4>&#128204; Quick facts</h4>
-        <ul class="fact-list">
-          <li><strong>2C Ashley Place</strong>, P&#257;p&#257;moa East</li>
-          <li>Open <strong>Tue&ndash;Sun, 10am&ndash;3:30pm</strong></li>
-          <li>Closed <strong>Sunday &amp; Monday</strong></li>
-          <li>No book over <strong>$5</strong></li>
-          <li>~<strong>10 million books</strong> in stock</li>
-          <li>Cash paid for quality used books</li>
-          <li>DVDs, CDs, records &amp; jigsaws too</li>
-          <li>The <strong>only second-hand bookstore</strong> in the Bay</li>
-          <li>No website &mdash; find by word of mouth</li>
+      <a href="https://www.google.com/maps/search/2C+Ashley+Place+Papamoa+East" target="_blank" rel="noopener" class="map-placeholder">
+        <span style="font-size:1.8rem;">&#128205;</span>
+        <span style="font-weight:600;color:var(--body);font-size:0.8rem;text-align:center;padding:0 12px;">2C Ashley Place, Pāpāmoa East</span>
+        <span style="font-size:0.72rem;color:#3AABDE;">Open in Google Maps &rarr;</span>
+      </a>
+
+      <!-- Upgrade to Gold -->
+      <div class="upgrade-gold">
+        <div class="ug-eyebrow">&#11088; Upgrade available</div>
+        <h4>Add a Gold Listing</h4>
+        <p>Get top placement in your sub-category and unlock premium features.</p>
+        <ul class="ug-features">
+          <li>Top of your sub-category page</li>
+          <li>AI-optimised FAQ &amp; schema</li>
+          <li>Photo gallery (up to 9 images)</li>
+          <li>Menu Add-On included free</li>
+          <li>Lifetime price lock</li>
         </ul>
+        <a href="/papamoa-previews/sales/list-with-us.html" class="ug-cta">Enquire about Gold &rarr;</a>
       </div>
 
-      <div class="ad-spot">
-        <div class="ad-label">Sponsored</div>
-        <div class="ad-inner">
-          <div class="ad-placeholder">
-            <p>&#128218; Books &amp; stationery in P&#257;p&#257;moa</p>
-            <a href="/index.html">Claim this spot &rarr;</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">&#128279; Related pages</div>
-        <div class="link-list">
-          <a href="/articles/op-shops-papamoa.html">Op Shops &amp; Second-hand</a>
-          <a href="/articles/clothing-recycling-papamoa.html">Clothing Recycling &amp; Donations</a>
-          <a href="/articles/shopping-centres.html">Shopping in P&#257;p&#257;moa</a>
-          <a href="/articles/library.html">P&#257;p&#257;moa Library</a>
-          <a href="/articles/the-yard.html">The Yard</a>
+      <div class="sidebar-card">
+        <h4>Related pages</h4>
+        <div class="related-links">
+          <a href="/papamoa-previews/articles/op-shops-papamoa.html" class="related-link">&#8594; Op Shops &amp; Second-hand in Pāpāmoa</a>
+          <a href="/papamoa-previews/articles/library.html" class="related-link">&#8594; Pāpāmoa Library</a>
+          <a href="/papamoa-previews/articles/shopping-centres.html" class="related-link">&#8594; Shopping in Pāpāmoa</a>
         </div>
       </div>
 
@@ -262,24 +346,19 @@
   </div>
 </div>
 
-<footer class="site-footer">
-  <a href="/homepage.html">Papamoa.info</a> &mdash; The local directory for P&#257;p&#257;moa, Bay of Plenty, New Zealand. Listing details sourced from publicly available information including Focus Magazine and NZ Herald. Always confirm hours directly with the business before visiting.
+<footer class="listing-footer">
+  <a href="/papamoa-previews/homepage.html">papamoa.info</a> &middot; Pāpāmoa&rsquo;s local business directory &middot; <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
 </footer>
 
 <script>
-  (function() {
-    var base = '/papamoa-previews';
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('/') && !href.startsWith(base)) {
-        e.preventDefault();
-        window.location.href = base + href;
-      }
-    });
-  })();
+(function(){
+  var base='/papamoa-previews';
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a'); if(!a)return;
+    var href=a.getAttribute('href'); if(!href)return;
+    if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){ e.preventDefault(); window.location.href=base+href; }
+  });
+})();
 </script>
 </body>
 </html>
