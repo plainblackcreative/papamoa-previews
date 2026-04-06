@@ -353,7 +353,40 @@
 .pnf-cta:hover { background:#2d95c4; }
 .pnf-fb { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:6px; background:rgba(255,255,255,0.08); color:var(--pnf-muted); text-decoration:none; font-size:13px; font-weight:700; flex-shrink:0; transition:background 0.15s,color 0.15s; }
 .pnf-fb:hover { background:#1877F2; color:var(--pnf-white); }
-@media (max-width:640px) { .pnf-links { display:none; } .pnf-fb { display:none; } .pnf-nav { padding:0 16px; } }
+/* HAMBURGER BUTTON */
+.pnf-hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:7px; cursor:pointer; padding:0 9px; flex-shrink:0; }
+.pnf-hamburger span { display:block; height:2px; background:rgba(255,255,255,0.75); border-radius:2px; transition:all 0.25s; }
+.pnf-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.pnf-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.pnf-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* MOBILE DRAWER */
+.pnf-drawer-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:190; opacity:0; transition:opacity 0.25s; }
+.pnf-drawer-overlay.open { opacity:1; }
+.pnf-drawer { position:fixed; top:0; left:0; bottom:0; width:min(300px,85vw); background:var(--pnf-navy); z-index:195; transform:translateX(-100%); transition:transform 0.28s cubic-bezier(0.4,0,0.2,1); display:flex; flex-direction:column; box-shadow:4px 0 24px rgba(0,0,0,0.35); }
+.pnf-drawer.open { transform:translateX(0); }
+.pnf-drawer-head { display:flex; align-items:center; justify-content:space-between; padding:0 18px; height:56px; border-bottom:1px solid rgba(255,255,255,0.08); flex-shrink:0; }
+.pnf-drawer-logo { font-family:var(--pnf-display); font-weight:700; font-size:15px; color:var(--pnf-white); text-decoration:none; }
+.pnf-drawer-logo span { color:var(--pnf-accent); }
+.pnf-drawer-close { background:rgba(255,255,255,0.08); border:none; color:rgba(255,255,255,0.6); width:30px; height:30px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; }
+.pnf-drawer-nav { flex:1; overflow-y:auto; padding:10px 0; }
+.pnf-drawer-nav a { display:flex; align-items:center; gap:12px; padding:13px 20px; font-family:var(--pnf-font); font-size:15px; font-weight:500; color:rgba(255,255,255,0.65); text-decoration:none; border-left:3px solid transparent; transition:all 0.15s; }
+.pnf-drawer-nav a:hover, .pnf-drawer-nav a.active { color:var(--pnf-white); background:rgba(255,255,255,0.05); border-left-color:var(--pnf-accent); }
+.pnf-drawer-nav a .dn-icon { font-size:17px; width:22px; text-align:center; flex-shrink:0; }
+.pnf-drawer-foot { padding:16px 18px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; gap:10px; flex-shrink:0; }
+.pnf-drawer-cta { display:block; text-align:center; background:var(--pnf-accent); color:var(--pnf-white); font-family:var(--pnf-font); font-size:14px; font-weight:700; padding:11px; border-radius:8px; text-decoration:none; }
+.pnf-drawer-fb { display:flex; align-items:center; justify-content:center; gap:8px; font-family:var(--pnf-font); font-size:13px; font-weight:600; color:rgba(255,255,255,0.45); text-decoration:none; }
+.pnf-drawer-fb:hover { color:var(--pnf-white); }
+
+@media (max-width:640px) {
+  .pnf-links { display:none; }
+  .pnf-fb { display:none; }
+  .pnf-cta { display:none; }
+  .pnf-nav { padding:0 16px; }
+  .pnf-hamburger { display:flex; }
+  .pnf-drawer-overlay { display:block; pointer-events:none; }
+  .pnf-drawer-overlay.open { pointer-events:all; }
+}
 .pnf-footer { background:var(--pnf-navy); padding:48px 28px 24px; overflow:hidden; }
 .pnf-footer-inner { max-width:960px; margin:0 auto; }
 .pnf-footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:36px; margin-bottom:36px; }
@@ -421,7 +454,35 @@
   </div>
   <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-fb" title="Papamoa.info on Facebook">f</a>
   <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-cta">List Your Business</a>
+  <button class="pnf-hamburger" id="pnf-hamburger" aria-label="Open menu" onclick="pnfDrawerOpen()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="pnf-drawer-overlay" id="pnf-drawer-overlay" onclick="pnfDrawerClose()"></div>
+<div class="pnf-drawer" id="pnf-drawer">
+  <div class="pnf-drawer-head">
+    <a href="/papamoa-previews/homepage.html" class="pnf-drawer-logo">Papamoa<span>.info</span></a>
+    <button class="pnf-drawer-close" onclick="pnfDrawerClose()" aria-label="Close menu">&#10005;</button>
+  </div>
+  <nav class="pnf-drawer-nav">
+    <a href="/papamoa-previews/homepage.html" class="active"><span class="dn-icon">&#127968;</span>Home</a>
+    <a href="/papamoa-previews/community/community.html"><span class="dn-icon">&#129309;</span>Community</a>
+    <a href="/papamoa-previews/categories/accommodation/accommodation.html"><span class="dn-icon">&#127968;</span>Accommodation</a>
+    <a href="/papamoa-previews/categories/food-drink/food-and-drink.html"><span class="dn-icon">&#127829;</span>Food &amp; Drink</a>
+    <a href="/papamoa-previews/categories/activities/entertainment.html"><span class="dn-icon">&#127918;</span>Entertainment</a>
+    <a href="/papamoa-previews/categories/services/services.html"><span class="dn-icon">&#128295;</span>Services</a>
+    <a href="/papamoa-previews/categories/shops/shopping.html"><span class="dn-icon">&#128717;</span>Shopping</a>
+    <a href="/papamoa-previews/homepage.html#local-info"><span class="dn-icon">&#128205;</span>Essential Info</a>
+  </nav>
+  <div class="pnf-drawer-foot">
+    <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-drawer-cta">List Your Business</a>
+    <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-drawer-fb">
+      <span style="font-weight:800;font-size:15px;">f</span> Follow on Facebook
+    </a>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -1139,6 +1200,43 @@ function renderPills() {
 }
 // Init pills on load
 document.addEventListener('DOMContentLoaded', renderPills);
+</script>
+
+<script>
+// ── MOBILE DRAWER ──
+function pnfDrawerOpen() {
+  document.getElementById('pnf-drawer').classList.add('open');
+  document.getElementById('pnf-drawer-overlay').classList.add('open');
+  document.getElementById('pnf-hamburger').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function pnfDrawerClose() {
+  document.getElementById('pnf-drawer').classList.remove('open');
+  document.getElementById('pnf-drawer-overlay').classList.remove('open');
+  document.getElementById('pnf-hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDrawerClose(); });
+(function() {
+  var drawer = document.getElementById('pnf-drawer');
+  var startX = 0, startY = 0, dragging = false;
+  drawer.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX; startY = e.touches[0].clientY; dragging = true;
+  }, { passive: true });
+  drawer.addEventListener('touchmove', function(e) {
+    if (!dragging) return;
+    var dx = e.touches[0].clientX - startX;
+    var dy = Math.abs(e.touches[0].clientY - startY);
+    if (dx < -10 && dy < 40) { drawer.style.transform = 'translateX(' + Math.min(0, dx) + 'px)'; }
+  }, { passive: true });
+  drawer.addEventListener('touchend', function(e) {
+    if (!dragging) return;
+    dragging = false;
+    var dx = e.changedTouches[0].clientX - startX;
+    drawer.style.transform = '';
+    if (dx < -60) pnfDrawerClose();
+  }, { passive: true });
+})();
 </script>
 
 <script>
