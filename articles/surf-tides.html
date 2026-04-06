@@ -209,6 +209,41 @@ a{color:var(--blue);text-decoration:none}
 .ad-placeholder p{font-size:.78rem;color:var(--muted);margin-bottom:6px}
 .ad-placeholder a{font-size:.78rem;font-weight:700;color:var(--blue);text-decoration:none}
 
+/* WEBCAM SECTION */
+.webcam-wrap{max-width:var(--max);margin:0 auto;padding:32px 28px 0}
+.webcam-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:8px}
+.webcam-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:border-color .15s}
+.webcam-card:hover{border-color:rgba(58,171,222,.4)}
+.webcam-card-primary{grid-column:1/-1}
+.wc-preview{position:relative;background:linear-gradient(135deg,#0A2030,#1A3A50);height:220px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;text-decoration:none}
+.webcam-card-primary .wc-preview{height:280px}
+.wc-preview-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7}
+.wc-overlay{position:relative;z-index:1;text-align:center}
+.wc-play{width:56px;height:56px;border-radius:50%;background:rgba(58,171,222,.9);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;transition:transform .15s,background .15s}
+.wc-preview:hover .wc-play{transform:scale(1.08);background:var(--blue)}
+.wc-play-icon{font-size:1.4rem;margin-left:3px}
+.wc-preview-label{font-size:.78rem;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.wc-preview-sub{font-size:.66rem;color:rgba(255,255,255,.65);margin-top:3px;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.wc-status{position:absolute;top:10px;right:10px;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;z-index:2}
+.wc-status-live{background:rgba(125,193,67,.9);color:#fff}
+.wc-status-link{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.wc-body{padding:14px 16px}
+.wc-name{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px}
+.wc-meta{font-size:.74rem;color:var(--muted);margin-bottom:8px;line-height:1.5}
+.wc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.wc-tag{font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:3px;background:var(--bg);border:1px solid var(--border);color:var(--muted)}
+.wc-cta{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:#fff;background:var(--blue);padding:7px 14px;border-radius:5px;text-decoration:none;transition:background .15s}
+.wc-cta:hover{background:#2d95c4}
+.wc-note{font-size:.68rem;color:var(--muted);margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-style:italic;line-height:1.6}
+.wc-note a{color:var(--blue)}
+.webcam-links-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:16px;margin-bottom:8px}
+.wc-link-card{background:#fff;border:1px solid var(--border);border-radius:9px;padding:12px 14px;text-decoration:none;color:inherit;display:flex;gap:10px;align-items:flex-start;transition:all .15s}
+.wc-link-card:hover{border-color:var(--blue);transform:translateY(-1px);box-shadow:0 3px 10px rgba(58,171,222,.08)}
+.wc-link-icon{font-size:1.2rem;flex-shrink:0;line-height:1;margin-top:1px}
+.wc-link-title{font-weight:700;font-size:.82rem;color:var(--navy);margin-bottom:2px}
+.wc-link-desc{font-size:.72rem;color:var(--muted);line-height:1.4}
+@media(max-width:680px){.webcam-grid{grid-template-columns:1fr}.webcam-card-primary{grid-column:auto}}
+
 /* FOOTER */
 .site-footer{background:var(--navy);padding:48px 28px 24px;margin-top:60px}
 .footer-inner{max-width:960px;margin:0 auto}
@@ -253,6 +288,7 @@ a{color:var(--blue);text-decoration:none}
     <p class="hero-sub">Live conditions, today&rsquo;s tide times, 7-day swell forecast, best surf spots, seasonal guide, beach safety and local surf businesses.</p>
     <div class="hero-tabs">
       <a href="#tides" class="hero-tab">Tides &amp; forecast</a>
+      <a href="#webcam" class="hero-tab">&#127909; Live webcam</a>
       <a href="#spots" class="hero-tab">Surf spots</a>
       <a href="#conditions" class="hero-tab">Best conditions</a>
       <a href="#seasonal" class="hero-tab">Seasonal guide</a>
@@ -332,6 +368,146 @@ a{color:var(--blue);text-decoration:none}
     </div>
 
   </div>
+</div>
+
+<!-- WEBCAM SECTION -->
+<div class="webcam-wrap" id="webcam">
+
+  <div class="data-card-title" style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:18px">&#127909; Pāpāmoa &amp; Bay of Plenty Live Surf Cams</div>
+
+  <div class="webcam-grid">
+
+    <!-- PRIMARY: Arataki (closest live cam to Papamoa) -->
+    <div class="webcam-card webcam-card-primary">
+      <a href="https://scissorlifttauranga.nz/surf-cams/" target="_blank" rel="noopener" class="wc-preview">
+        <div class="wc-status wc-status-live">&#9679; Live</div>
+        <!-- Beach scene background -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 800 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="280" fill="#0A2030"/>
+          <rect y="160" width="800" height="120" fill="#0D3A50"/>
+          <!-- Sky gradient -->
+          <rect width="800" height="160" fill="url(#sky)"/>
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1A4060"/>
+              <stop offset="100%" stop-color="#2A6080"/>
+            </linearGradient>
+          </defs>
+          <!-- Horizon glow -->
+          <ellipse cx="400" cy="160" rx="500" ry="40" fill="rgba(58,171,222,0.15)"/>
+          <!-- Wave lines -->
+          <path d="M0 185 Q100 175 200 185 Q300 195 400 183 Q500 171 600 183 Q700 195 800 183" fill="none" stroke="rgba(125,193,200,0.5)" stroke-width="2"/>
+          <path d="M0 200 Q80 190 160 200 Q240 210 320 198 Q400 186 480 198 Q560 210 640 198 Q720 186 800 198" fill="none" stroke="rgba(125,193,200,0.35)" stroke-width="1.5"/>
+          <path d="M0 215 Q120 205 240 215 Q360 225 480 213 Q600 201 720 213 Q760 217 800 213" fill="none" stroke="rgba(125,193,200,0.25)" stroke-width="1"/>
+          <!-- Beach -->
+          <rect y="230" width="800" height="50" fill="#2A4A60" opacity="0.6"/>
+          <!-- Foam -->
+          <ellipse cx="200" cy="230" rx="120" ry="8" fill="rgba(255,255,255,0.12)"/>
+          <ellipse cx="580" cy="233" rx="100" ry="6" fill="rgba(255,255,255,0.1)"/>
+        </svg>
+        <div class="wc-overlay">
+          <div class="wc-play"><span class="wc-play-icon">&#9654;</span></div>
+          <div class="wc-preview-label">Arataki Beach — Live Cam</div>
+          <div class="wc-preview-sub">Mt Maunganui coast &middot; operated by Height for Hire</div>
+        </div>
+      </a>
+      <div class="wc-body">
+        <div class="wc-name">Arataki Beach Surf Cam</div>
+        <div class="wc-meta">&#128205; Arataki, Mt Maunganui &middot; ~7km west of Pāpāmoa Domain &middot; Operated by Height for Hire, Tauranga</div>
+        <div class="wc-tags">
+          <span class="wc-tag">Live video</span>
+          <span class="wc-tag">Free</span>
+          <span class="wc-tag">Nearest cam to Pāpāmoa</span>
+          <span class="wc-tag">Bay of Plenty coast</span>
+        </div>
+        <a href="https://scissorlifttauranga.nz/surf-cams/" target="_blank" rel="noopener" class="wc-cta">&#127909; View live cam &rarr;</a>
+        <div class="wc-note">
+          The closest live surf cam to Pāpāmoa Beach is at Arataki on the Mt Maunganui coast, operated by Height for Hire. Both breaks share the same Bay of Plenty swell window &mdash; if it&rsquo;s good at Arataki, it&rsquo;s usually working at Pāpāmoa too. A second cam covers Yale Street (Mt Main Beach). No dedicated live cam exists at Pāpāmoa Beach directly. <a href="https://scissorlifttauranga.nz/surf-cams/" target="_blank" rel="noopener">scissorlifttauranga.nz/surf-cams</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mt Main Beach cam -->
+    <div class="webcam-card">
+      <a href="https://scissorlifttauranga.nz/surf-cams/" target="_blank" rel="noopener" class="wc-preview" style="height:160px">
+        <div class="wc-status wc-status-live">&#9679; Live</div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="160" fill="#122838"/>
+          <rect y="90" width="400" height="70" fill="#0D3040"/>
+          <path d="M0 105 Q50 97 100 105 Q150 113 200 103 Q250 93 300 103 Q350 113 400 103" fill="none" stroke="rgba(125,193,200,0.5)" stroke-width="2"/>
+          <path d="M0 118 Q60 110 120 118 Q180 126 240 116 Q300 106 360 116 Q380 119 400 116" fill="none" stroke="rgba(125,193,200,0.3)" stroke-width="1.5"/>
+          <ellipse cx="100" cy="128" rx="70" ry="5" fill="rgba(255,255,255,0.1)"/>
+          <ellipse cx="310" cy="130" rx="55" ry="4" fill="rgba(255,255,255,0.08)"/>
+        </svg>
+        <div class="wc-overlay">
+          <div class="wc-play" style="width:44px;height:44px"><span class="wc-play-icon" style="font-size:1.1rem">&#9654;</span></div>
+          <div class="wc-preview-label" style="font-size:.72rem">Yale St — Mt Main Beach</div>
+        </div>
+      </a>
+      <div class="wc-body">
+        <div class="wc-name">Yale Street — Mt Main Beach</div>
+        <div class="wc-meta">&#128205; Mt Maunganui &middot; ~9km from Pāpāmoa &middot; Height for Hire</div>
+        <div class="wc-tags"><span class="wc-tag">Live video</span><span class="wc-tag">Free</span></div>
+        <a href="https://scissorlifttauranga.nz/surf-cams/" target="_blank" rel="noopener" class="wc-cta" style="font-size:.72rem;padding:6px 12px">View cam &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Astro Cam - Mt Main Beach -->
+    <div class="webcam-card">
+      <a href="https://astrolabe.co.nz/live-surf-cam/" target="_blank" rel="noopener" class="wc-preview" style="height:160px">
+        <div class="wc-status wc-status-live">&#9679; Live</div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="160" fill="#0E2535"/>
+          <rect y="95" width="400" height="65" fill="#0A2E42"/>
+          <path d="M0 108 Q80 100 160 108 Q240 116 320 106 Q370 100 400 106" fill="none" stroke="rgba(100,180,200,0.5)" stroke-width="2"/>
+          <path d="M0 122 Q100 114 200 122 Q300 130 400 120" fill="none" stroke="rgba(100,180,200,0.3)" stroke-width="1.5"/>
+          <ellipse cx="180" cy="133" rx="80" ry="5" fill="rgba(255,255,255,0.09)"/>
+        </svg>
+        <div class="wc-overlay">
+          <div class="wc-play" style="width:44px;height:44px"><span class="wc-play-icon" style="font-size:1.1rem">&#9654;</span></div>
+          <div class="wc-preview-label" style="font-size:.72rem">Astro Cam — Mt Main Beach</div>
+        </div>
+      </a>
+      <div class="wc-body">
+        <div class="wc-name">Astrolabe Live Surf Cam</div>
+        <div class="wc-meta">&#128205; Mt Maunganui Main Beach &middot; 24/7 live stream</div>
+        <div class="wc-tags"><span class="wc-tag">24/7</span><span class="wc-tag">Free</span><span class="wc-tag">HD quality</span></div>
+        <a href="https://astrolabe.co.nz/live-surf-cam/" target="_blank" rel="noopener" class="wc-cta" style="font-size:.72rem;padding:6px 12px">View cam &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Additional cam links row -->
+  <div class="webcam-links-row">
+    <a href="https://www.surf-forecast.com/breaks/Papamoa-1/webcams/latest" target="_blank" rel="noopener" class="wc-link-card">
+      <span class="wc-link-icon">&#127940;</span>
+      <div><div class="wc-link-title">Surf-Forecast.com</div><div class="wc-link-desc">Pāpāmoa Beach Park webcam images &amp; swell forecast</div></div>
+    </a>
+    <a href="https://www.windfinder.com/webcams/papamoa-beach" target="_blank" rel="noopener" class="wc-link-card">
+      <span class="wc-link-icon">&#127788;</span>
+      <div><div class="wc-link-title">Windfinder Webcams</div><div class="wc-link-desc">Wind &amp; weather cams near Pāpāmoa Beach</div></div>
+    </a>
+    <a href="https://www.camjam.co.nz/bay-of-plenty/papamoa-surf" target="_blank" rel="noopener" class="wc-link-card">
+      <span class="wc-link-icon">&#128247;</span>
+      <div><div class="wc-link-title">CamJam NZ</div><div class="wc-link-desc">Live surf cams &amp; forecasts for Pāpāmoa</div></div>
+    </a>
+    <a href="https://www.goodsurfnow.co.nz/location/papamoa/" target="_blank" rel="noopener" class="wc-link-card">
+      <span class="wc-link-icon">&#127940;</span>
+      <div><div class="wc-link-title">Good Surf Now</div><div class="wc-link-desc">NZ surf cam aggregator &mdash; Pāpāmoa page</div></div>
+    </a>
+    <a href="https://www.surfline.com/surf-report/papamoa/6168a7a5cb771a17201e2362" target="_blank" rel="noopener" class="wc-link-card">
+      <span class="wc-link-icon">&#127757;</span>
+      <div><div class="wc-link-title">Surfline</div><div class="wc-link-desc">16-day surf forecast for Pāpāmoa Beach</div></div>
+    </a>
+    <a href="https://www.metservice.com/marine/regions/bay-of-plenty/surf/locations/papamoa-beach" target="_blank" rel="noopener" class="wc-link-card">
+      <span class="wc-link-icon">&#9925;</span>
+      <div><div class="wc-link-title">MetService Surf</div><div class="wc-link-desc">Official NZ surf forecast — Pāpāmoa Beach</div></div>
+    </a>
+  </div>
+
+  <p style="font-size:.68rem;color:var(--muted);font-style:italic;margin-top:6px;margin-bottom:4px">&#9888; No dedicated live cam currently exists at Pāpāmoa Beach. The Arataki and Yale Street cams are the closest, both covering the Mt Maunganui coast ~7&ndash;9km west. Same Bay of Plenty swell window applies. If you know of a Pāpāmoa-specific cam, <a href="/sales/list-with-us.html">let us know</a>.</p>
+
 </div>
 
 <!-- TWO-COL CONTENT -->
