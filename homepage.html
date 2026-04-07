@@ -1092,11 +1092,11 @@ var TYPE_LABELS = {cat:'Categories',listing:'Businesses',info:'Local Info',tool:
 
 function handleSearch(val) {
   var v = val.trim();
-  var q = v.toLowerCase();
+  var q = norm(v);
   var box = document.getElementById('search-results');
   if (!q || q.length < 2) { box.classList.remove('visible'); return; }
   var results = SEARCH_INDEX.filter(function(item) {
-    return item.keywords.includes(q) || item.title.toLowerCase().includes(q) || item.sub.toLowerCase().includes(q);
+    return norm(item.keywords).includes(q) || norm(item.title).includes(q) || norm(item.sub).includes(q);
   }).slice(0, 8);
   if (!results.length) {
     box.innerHTML = '<div class="sr-empty">No results for "<strong>' + escHtml(val) + '</strong>" — try a different search term</div>';
@@ -1138,6 +1138,9 @@ function fillSearch(term) {
 }
 function escHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function norm(str) {
+  return str.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 }
 function escAttr(str) {
   return str.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
