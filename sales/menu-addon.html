@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Interactive Menu & Service List Add-On | Papamoa.info</title>
-<meta name="description" content="Put your prices in front of customers who are already looking. Interactive menu on your listing — they browse, filter by dietary needs, and order directly. $199+GST/yr for Silver. Included free with Gold.">
+<meta name="description" content="Put your prices in front of customers who are already looking. Interactive menu on your listing — they browse, filter by dietary needs, and order directly. $199+gst/yr for Silver. Included free with Gold.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --ocean: #1B6B7D; --ocean-deep: #0F4352; --ocean-light: #E4F2F5;
+  --ocean: #1B6B7D; --ocean-deep: #0F4352; --ocean-mid: #1A5F70; --ocean-light: #E4F2F5; --ocean-accent: #3AABDE;
   --sand: #F7F3ED; --sand-dark: #EDE7DB; --dune: #C4985A; --dune-light: #F5EDD8;
   --navy: #0D2B3E; --white: #FFFFFF; --text: #1A2832; --muted: #5A6E78;
   --border: #D8E4E8; --silver: #5A7A8A; --silver-bg: #EDF3F6;
@@ -24,9 +24,9 @@ html { scroll-behavior: smooth; }
 body { font-family: var(--font-body); background: var(--sand); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
 
 /* NAV */
-.nav { background: var(--navy); padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+.nav { background: var(--navy); padding: 0 32px; position: sticky; top: 0; z-index: 100; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
 .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--white); text-decoration: none; }
-.nav-logo span { color: var(--dune); }
+.nav-logo span { color: var(--ocean-accent); }
 .nav-back { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
 .nav-back:hover { color: var(--white); }
 
@@ -424,10 +424,14 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .lb-order-btn:hover { background: #B8840A; }
 
 /* FOOTER */
-.site-footer { background: var(--navy); padding: 24px 32px; text-align: center; }
-.footer-text { font-size: 12px; color: rgba(255,255,255,0.35); }
-.footer-text a { color: rgba(255,255,255,0.5); text-decoration: none; }
-.footer-text a:hover { color: var(--white); }
+.pnf-footer-slim { background: var(--navy); padding: 28px; text-align: center; }
+.pnf-footer-brand { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 6px; display: inline-block; }
+.pnf-footer-brand span { color: var(--ocean-accent); }
+.pnf-footer-tagline { font-size: 12.5px; color: rgba(255,255,255,0.38); line-height: 1.7; text-align: center; margin: 0 auto 16px; }
+.pnf-footer-slim-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+.pnf-footer-slim-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.15s; }
+.pnf-footer-slim-links a:hover { color: var(--white); }
+.pnf-footer-slim-bottom { font-size: 11.5px; color: rgba(255,255,255,0.2); }
 
 @media (max-width: 600px) {
   .hero { padding: 48px 20px 0; }
@@ -453,7 +457,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <p class="hero-sub">An interactive menu or service list that lives on your Papamoa.info listing. Customers browse, filter by dietary needs, and tap straight through to order. You update it yourself in two minutes — no developer, no CMS.</p>
       <div class="hero-price-row">
         <div class="hero-price-chip">
-          <div class="hpc-amount">$199 <span style="font-size:0.7rem;font-weight:400;opacity:0.6;">+GST/yr</span></div>
+          <div class="hpc-amount">$199 <span style="font-size:0.7rem;font-weight:400;opacity:0.6;">+gst/yr</span></div>
           <div class="hpc-label">◆ Silver add-on</div>
         </div>
         <div class="hero-price-chip gold-chip">
@@ -738,7 +742,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="pricing-card">
         <div class="pc-head">
           <div class="pc-tier">◆ Silver listing add-on</div>
-          <div class="pc-price">$199 <span style="font-size:0.8rem;font-weight:400;color:var(--muted);">+GST/yr</span></div>
+          <div class="pc-price">$199 <span style="font-size:0.8rem;font-weight:400;color:var(--muted);">+gst/yr</span></div>
           <div class="pc-price-note">Added to your existing Silver listing</div>
         </div>
         <div class="pc-body">
@@ -759,7 +763,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="pc-body">
           <ul class="pc-feat-list">
             <li><i class="pfi">✓</i>All features above included</li>
-            <li><i class="pfi">✓</i>No extra cost — bundled with Gold ($1,199+GST/yr)</li>
+            <li><i class="pfi">✓</i>No extra cost — bundled with Gold ($1,199+gst/yr)</li>
             <li><i class="pfi">✓</i>Initial menu setup included</li>
             <li><i class="pfi">✓</i>Unlimited updates, lifetime price lock</li>
           </ul>
@@ -816,7 +820,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       </div>
       <div class="faq-item">
         <div class="faq-q">Do I need to be on Gold?</div>
-        <div class="faq-a">No. The Menu Add-On is available for both Gold and Silver listings. It's included free with Gold and an optional extra for Silver at $199+GST/yr.</div>
+        <div class="faq-a">No. The Menu Add-On is available for both Gold and Silver listings. It's included free with Gold and an optional extra for Silver at $199+gst/yr.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Does it replace my own website menu?</div>
@@ -835,12 +839,15 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 
 </div>
 
-<footer class="site-footer">
-  <div class="footer-text">
-    Papamoa.info Menu &amp; Service List Add-On &bull;
-    <a href="/sales/landing.html">View all listing options</a> &bull;
-    <a href="/homepage.html">Back to directory</a>
+<footer class="pnf-footer-slim">
+  <div class="pnf-footer-brand">Papamoa<span>.info</span></div>
+  <p class="pnf-footer-tagline">Pāpāmoa's local business directory &middot; Part of the TaurangaNZ.info network &middot; Trusted since 2005</p>
+  <div class="pnf-footer-slim-links">
+    <a href="/papamoa-previews/homepage.html">Directory</a>
+    <a href="/papamoa-previews/sales/landing.html">View listing options</a>
+    <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener">Facebook</a>
   </div>
+  <div class="pnf-footer-slim-bottom">&copy; 2026 Papamoa.info</div>
 </footer>
 
 <script>
@@ -1061,7 +1068,7 @@ function renderItems() {
     // Organic / default — no listing yet
     label.textContent = 'Not listed yet?';
     heading.textContent = 'Get a listing and your menu is sorted';
-    body.textContent = 'Gold listings include the Menu Add-On free. Silver listings can add it for $199+GST/yr. Either way, we build your menu from whatever you send us — you approve it before it goes live.';
+    body.textContent = 'Gold listings include the Menu Add-On free. Silver listings can add it for $199+gst/yr. Either way, we build your menu from whatever you send us — you approve it before it goes live.';
     primary.textContent = '🚀 Get Listed on Papamoa.info →';
     primary.href = '/sales/landing.html';
     secondary.textContent = 'Already listed? Add menu to Silver →';
