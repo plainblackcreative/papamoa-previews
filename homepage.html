@@ -1573,34 +1573,27 @@ function hwWindDir(deg) {
 async function loadHeroWeather() {
   var strip = document.getElementById('hw-strip');
   if (!strip) return;
-  try {
-    var url = 'https://api.open-meteo.com/v1/forecast'
-      + '?latitude=-37.7167&longitude=176.3167'
-      + '&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m'
-      + '&hourly=uv_index&forecast_days=1'
-      + '&timezone=Pacific%2FAuckland';
-    var res = await fetch(url);
-    var d = await res.json();
-    var c = d.current;
-    var currentHour = new Date().getHours();
-    var uv = Math.round((d.hourly && d.hourly.uv_index && d.hourly.uv_index[currentHour]) ?? 0);
-    strip.innerHTML =
-      '<div class="hw-current">'
-      + '<span class="hw-icon">' + (HW_EMOJI[c.weather_code] || '🌤️') + '</span>'
-      + '<span class="hw-temp">' + Math.round(c.temperature_2m) + '°</span>'
-      + '<div class="hw-detail">'
-      + '<span class="hw-condition">' + (HW_WMO[c.weather_code] || '') + '</span>'
-      + '<span class="hw-sub">Feels ' + Math.round(c.apparent_temperature) + '° &mdash; Pāpāmoa Beach</span>'
-      + '</div>'
-      + '</div>'
-      + '<div class="hw-stats">'
-      + '<div class="hw-stat"><span class="hw-stat-label">Wind</span><span class="hw-stat-value">' + Math.round(c.wind_speed_10m) + ' km/h ' + hwWindDir(c.wind_direction_10m) + '</span></div>'
-      + '<div class="hw-stat"><span class="hw-stat-label">UV Index</span><span class="hw-stat-value ' + hwUvClass(uv) + '">' + uv + '</span></div>'
-      + '</div>'
-      + '<a href="/papamoa-previews/community/weather.html" class="hw-link">Full forecast &rarr;</a>';
-  } catch(e) {
-    strip.innerHTML = '<span class="hw-loading"><a href="/papamoa-previews/community/weather.html" style="color:var(--lime)">View weather forecast &rarr;</a></span>';
-  }
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=-37.7167&longitude=176.3167&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m&timezone=Pacific%2FAuckland&forecast_days=1')
+    .then(function(res) { return res.json(); })
+    .then(function(d) {
+      var c = d.current;
+      strip.innerHTML =
+        '<div class="hw-current">'
+        + '<span class="hw-icon">' + (HW_EMOJI[c.weather_code] || '🌤️') + '</span>'
+        + '<span class="hw-temp">' + Math.round(c.temperature_2m) + '°</span>'
+        + '<div class="hw-detail">'
+        + '<span class="hw-condition">' + (HW_WMO[c.weather_code] || '') + '</span>'
+        + '<span class="hw-sub">Feels ' + Math.round(c.apparent_temperature) + '° &mdash; Pāpāmoa Beach</span>'
+        + '</div>'
+        + '</div>'
+        + '<div class="hw-stats">'
+        + '<div class="hw-stat"><span class="hw-stat-label">Wind</span><span class="hw-stat-value">' + Math.round(c.wind_speed_10m) + ' km/h ' + hwWindDir(c.wind_direction_10m) + '</span></div>'
+        + '</div>'
+        + '<a href="/papamoa-previews/community/weather.html" class="hw-link">Full forecast &rarr;</a>';
+    })
+    .catch(function() {
+      strip.innerHTML = '<span class="hw-loading"><a href="/papamoa-previews/community/weather.html" style="color:var(--lime)">View weather forecast &rarr;</a></span>';
+    });
 }
 loadHeroWeather();
 </script>
