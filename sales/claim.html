@@ -372,7 +372,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <div class="hero-inner" id="hero-inner">
 
     <!-- DEFAULT / GENERIC -->
-    <div id="state-generic">
+    <div id="state-generic" style="display:none">
       <div class="context-tag generic">P&#257;p&#257;moa&rsquo;s local directory</div>
       <h1>List your business on <em class="listing-em">Papamoa.info</em></h1>
       <p class="hero-sub">Get found by P&#257;p&#257;moa customers who are already searching for what you offer. We write your listing, you approve it, it goes live within 24 hours.</p>
@@ -711,13 +711,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (page) el.textContent = page.replace(/-/g, ' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
   });
 
-  // Show the right hero state
-  document.getElementById('state-generic').style.display   = 'none';
-  document.getElementById('state-listing').style.display   = 'none';
-  document.getElementById('state-spotlight').style.display = 'none';
-  document.getElementById('state-adspot').style.display    = 'none';
-  var heroState = document.getElementById('state-' + type) || document.getElementById('state-generic');
-  heroState.style.display = 'block';
+  // Show the right hero state — all hidden by default in HTML
+  var stateEl = document.getElementById('state-' + type) || document.getElementById('state-generic');
+  if (stateEl) stateEl.style.display = 'block';
 
   // Show right content blocks
   if (type === 'listing' || type === 'generic') {
