@@ -9,22 +9,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ocean-deep: #134B58;
+  --ocean-deep: #0F4352;
   --ocean: #1B6B7D;
+  --ocean-mid: #1A5F70;
   --ocean-accent: #3AABDE;
-  --ocean-light: #E8F4F6;
-  --green: #2E7D32;
-  --green-light: #E8F5E9;
-  --red: #DC2626;
+  --ocean-light: #E4F2F5;
+  --green: #1E6B3C;
+  --green-light: #E6F4EC;
+  --red: #8B2020;
   --sand: #F7F3ED;
   --sand-dark: #EDE7DB;
   --dune: #C4985A;
   --dune-light: #F5EDD8;
-  --text: #2C2C2C;
-  --text-soft: #4a4a4a;
-  --text-light: #6B6B6B;
+  --navy: #0D2B3E;
+  --text: #1A2832;
+  --text-soft: #5A6E78;
+  --text-light: #5A6E78;
   --white: #FFFFFF;
-  --silver-col: #4A7A8A;
+  --silver-col: #5A7A8A;
   --silver-bg: #EDF3F6;
   --gold-col: #B8840A;
   --gold-bg: #FBF3E2;
@@ -32,13 +34,16 @@
   --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
   --radius: 12px;
+  --border: #D8E4E8;
+  --font-body: 'Figtree', sans-serif;
+  --font-display: 'Playfair Display', serif;
 }
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 html { scroll-behavior:smooth; }
 body { font-family:'Figtree',sans-serif; background:var(--sand); color:var(--text); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
 
 /* ── HEADER ── */
-.site-header { background:var(--ocean-deep); padding:14px 24px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+.site-header { background:var(--navy); padding:14px 24px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
 .logo-text { font-weight:600; font-size:15px; color:white; letter-spacing:0.02em; text-decoration:none; }
 .logo-text span { color:var(--ocean-accent); }
 .header-badge { background:rgba(58,171,222,0.15); border:1px solid rgba(58,171,222,0.3); color:var(--ocean-accent); font-size:11px; font-weight:500; padding:4px 12px; border-radius:100px; letter-spacing:0.04em; }
@@ -92,7 +97,7 @@ body { font-family:'Figtree',sans-serif; background:var(--sand); color:var(--tex
 .warn .score-item-tag { background:var(--dune); color:white; }
 
 /* ── SEARCH CHECKER ── */
-.search-checker { background:var(--ocean-deep); border-radius:var(--radius); padding:28px; margin-bottom:32px; animation:fadeUp 0.5s ease 0.1s both; }
+.search-checker { background:var(--navy); border-radius:var(--radius); padding:28px; margin-bottom:32px; animation:fadeUp 0.5s ease 0.1s both; }
 .search-checker h3 { font-family:'Playfair Display',serif; color:white; font-size:18px; margin-bottom:6px; }
 .search-checker p { color:rgba(255,255,255,0.6); font-size:13px; margin-bottom:20px; line-height:1.5; }
 .search-input-row { display:flex; gap:10px; flex-wrap:wrap; }
@@ -151,9 +156,14 @@ body { font-family:'Figtree',sans-serif; background:var(--sand); color:var(--tex
 .mockups-section { animation:fadeUp 0.5s ease 0.3s both; margin-bottom:40px; }
 .mockups-section h2 { font-family:'Playfair Display',serif; font-size:22px; color:var(--text); margin-bottom:6px; }
 .mockups-section .sub { font-size:14px; color:var(--text-soft); margin-bottom:20px; }
-.mockup-tabs { display:flex; gap:6px; margin-bottom:20px; }
-.mockup-tab { padding:7px 20px; border-radius:100px; font-size:13px; font-weight:500; cursor:pointer; border:1.5px solid var(--sand-dark); background:white; color:var(--text-soft); font-family:'Figtree',sans-serif; transition:all 0.2s; }
-.mockup-tab.active { border-color:var(--ocean-deep); background:var(--ocean-deep); color:white; }
+.mockup-tabs { display:flex; gap:6px; margin-bottom:20px; flex-wrap:wrap; }
+.mockup-tab { padding:7px 20px; border-radius:100px; font-size:13px; font-weight:600; cursor:pointer; border:1.5px solid var(--border); background:var(--white); color:var(--text-soft); font-family:'Figtree',sans-serif; transition:all 0.2s; }
+.mockup-tab:hover { border-color:var(--ocean); color:var(--ocean); }
+.mockup-tab.active-gold { background:var(--gold-bg); border-color:var(--gold-col); color:var(--gold-col); }
+.mockup-tab.active-silver { background:var(--silver-bg); border-color:var(--silver-col); color:var(--silver-col); }
+.lp-ai-bar { background:linear-gradient(135deg,var(--navy),var(--ocean-deep)); padding:12px 20px; font-size:12.5px; color:rgba(255,255,255,0.65); display:flex; gap:10px; align-items:flex-start; line-height:1.6; }
+.lp-ai-bar strong { color:var(--ocean-accent); }
+.mockup-note { margin-top:12px; font-size:13px; color:var(--text-soft); padding:12px 16px; background:var(--white); border:1px solid var(--border); border-radius:8px; line-height:1.55; }
 .mockup-panel { display:none; }
 .mockup-panel.active { display:block; animation:fadeUp 0.3s ease both; }
 
@@ -302,12 +312,12 @@ body { font-family:'Figtree',sans-serif; background:var(--sand); color:var(--tex
 .pay-note a { color:var(--ocean-accent); text-decoration:none; }
 
 /* ── JAYDEN ── */
-.jayden-section { background:var(--ocean-deep); border-radius:var(--radius); padding:24px 28px; margin-bottom:24px; display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap; animation:fadeUp 0.5s ease 0.5s both; }
+.jayden-section { background:var(--navy); border-radius:var(--radius); padding:24px 28px; margin-bottom:24px; display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap; animation:fadeUp 0.5s ease 0.5s both; }
 .jayden-avatar { width:52px; height:52px; border-radius:50%; background:var(--dune); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:white; flex-shrink:0; }
 .jayden-body { flex:1; }
 .jayden-body strong { display:block; color:white; font-size:14px; margin-bottom:4px; }
 .jayden-body p { color:rgba(255,255,255,0.6); font-size:13px; line-height:1.55; margin-bottom:12px; }
-.jayden-links { display:flex; gap:10px; flex-wrap:wrap; }
+.jayden-links { display:flex; flex-direction:column; gap:6px; }
 .jayden-link { font-size:13px; font-weight:600; color:var(--dune); text-decoration:none; transition:color 0.15s; }
 .jayden-link:hover { color:white; }
 
@@ -392,9 +402,9 @@ const STRIPE_SILVER_URL = "#stripe-silver-placeholder"; // TODO: replace with re
 // ─────────────────────────────────────────────────────────────────────────────
 
 const WORKER_URL = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
-const PRICE_GOLD    = 1200;
+const PRICE_GOLD    = 1199;
 const PRICE_SILVER  = 599;
-const PRICE_EXTRA   = 99;
+const PRICE_EXTRA   = 199;
 </script>
 
 <!-- HEADER -->
@@ -455,21 +465,21 @@ const PRICE_EXTRA   = 99;
         <span class="tier-badge">Full listing</span>
         <div class="tier-header">
           <div class="tier-name">Silver</div>
-          <div class="tier-price">$599 <span>+GST/yr</span></div>
-          <div class="tier-desc">Complete local SEO listing</div>
+          <div class="tier-price">$599 <span>+gst/yr</span></div>
+          <div class="tier-desc">Full listing with logo, local SEO and review badges</div>
         </div>
         <div class="tier-features">
           <div class="tier-feature"><div class="feat-icon yes">✓</div>SEO-optimised description</div>
-          <div class="tier-feature"><div class="feat-icon yes">✓</div>Up to 9 images</div>
+          <div class="tier-feature"><div class="feat-icon yes">✓</div>Logo only</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>Schema markup</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>Contact &amp; social links</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>Google &amp; TripAdvisor badges</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>Facebook welcome post</div>
-          <div class="tier-feature"><div class="feat-icon yes">✓</div>TaurangaNZ.info Silver free</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>Lifetime price lock</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>2027 ROI guarantee</div>
-          <div class="tier-feature"><div class="feat-icon add">+</div>Menu Add-On: $199+GST/yr</div>
+          <div class="tier-feature"><div class="feat-icon add">+</div>Menu Add-On: $199+gst/yr</div>
           <div class="tier-feature"><div class="feat-icon no">✕</div>Spotlight position</div>
+          <div class="tier-feature"><div class="feat-icon no">✕</div>Photo gallery</div>
           <div class="tier-feature"><div class="feat-icon no">✕</div>AI FAQ &amp; AEO schema</div>
         </div>
         <a href="#claim" class="tier-cta">Get Silver →</a>
@@ -478,19 +488,19 @@ const PRICE_EXTRA   = 99;
         <span class="tier-badge">Best value</span>
         <div class="tier-header">
           <div class="tier-name">Gold Spotlight</div>
-          <div class="tier-price">$1,199 <span>+GST/yr</span></div>
+          <div class="tier-price">$1,199 <span>+gst/yr</span></div>
           <div class="tier-desc">Top of your sub-category, always</div>
         </div>
         <div class="tier-features">
           <div class="tier-feature"><div class="feat-icon yes">✓</div>Everything in Silver</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>Spotlight — top of your sub-category</div>
-          <div class="tier-feature"><div class="feat-icon yes">✓</div>Unlimited images</div>
+          <div class="tier-feature"><div class="feat-icon yes">✓</div>Photo gallery — logo + up to 9 images</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>AI-optimised FAQ &amp; AEO schema</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>Menu Add-On included free</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>Access to premium ad spots</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>Lifetime price lock</div>
           <div class="tier-feature"><div class="feat-icon yes">✓</div>2027 ROI guarantee</div>
-          <div class="tier-feature"><div class="feat-icon add">+</div>Extra Spotlights: $99+GST/yr each</div>
+          <div class="tier-feature"><div class="feat-icon add">+</div>Extra sub-category Spotlights: $199+gst/yr each</div>
         </div>
         <div class="tier-scarcity">⚑ Spotlight still available — first in wins</div>
         <a href="#claim" class="tier-cta">Get Gold →</a>
@@ -502,85 +512,209 @@ const PRICE_EXTRA   = 99;
   <div class="mockups-section">
     <div class="section-label">Visual preview</div>
     <h2>See how <span data-biz="name">your listing</span> looks</h2>
-    <p class="sub">Switch between tiers to see the difference. Your photos and logo replace the placeholders once you're live.</p>
+    <p class="sub">This is your actual listing — the copy, hours, and tags are all generated from your website. Switch between tiers to see the difference.</p>
     <div class="mockup-tabs">
-      <button class="mockup-tab active" data-tab="silver" onclick="switchMockup('silver')">Silver</button>
-      <button class="mockup-tab" data-tab="gold" onclick="switchMockup('gold')">Gold</button>
+      <button class="mockup-tab active-gold" data-tab="gold" onclick="switchMockup('gold')">⭐ Gold Spotlight</button>
+      <button class="mockup-tab" data-tab="silver" onclick="switchMockup('silver')">◆ Silver</button>
     </div>
 
-    <!-- Silver mockup -->
-    <div class="mockup-panel active" id="mockup-silver">
+    <!-- GOLD mockup — default active -->
+    <div class="mockup-panel active" id="mockup-gold">
       <div class="listing-preview">
-        <div class="lp-hero silver-hero">
-          <span class="lp-tier-pill">Silver — $599+GST/yr</span>
-          <div class="lp-img-note">
-            <div class="lp-img-badge">🖼 Your hero photo goes here</div>
-          </div>
-          <div class="lp-logo" data-biz="logo">D</div>
-          <div class="lp-name">
-            <h3 data-biz="name">The Driftwood Café</h3>
-            <span data-biz="category">Food &amp; Drink</span>
+        <!-- Hero -->
+        <div style="background:linear-gradient(135deg,#2a1800,#8A5A0A 60%,var(--dune));padding:28px 24px 24px;position:relative;overflow:hidden;">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C8962A,#F0C060,#C8962A);"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:0;">
+              <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:linear-gradient(135deg,#C8962A,#F0C060);color:#1A0A00;padding:4px 10px;border-radius:3px;margin-bottom:12px;">⭐ Gold Spotlight</div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;" data-biz="category">Food &amp; Drink</div>
+              <h3 style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:8px;" data-biz="name">The Driftwood Café</h3>
+              <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;max-width:520px;margin-bottom:14px;" data-biz="description"></p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;">
+                <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:6px;">
+                  <span style="color:#F5C842;font-size:12px;">★★★★★</span>
+                  <strong style="color:#fff;font-weight:700;font-size:13px;" data-biz="googleRating">4.8</strong>
+                  <span style="color:rgba(255,255,255,0.45);font-size:11px;">Google</span>
+                </div>
+                <span style="font-size:12px;color:rgba(255,255,255,0.45);">📍 <span data-biz="address">8 Parton Road</span></span>
+                <span style="font-size:12px;color:rgba(255,255,255,0.45);">📞 <span data-biz="phone">07 555 1234</span></span>
+              </div>
+              <div id="gold-hero-tags" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+            </div>
+            <div style="flex-shrink:0;width:80px;height:80px;border-radius:10px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:rgba(255,255,255,0.85);" data-biz="logo">D</div>
           </div>
         </div>
-        <div class="lp-body">
-          <div class="lp-meta">
-            <div class="lp-meta-item">📍 <span data-biz="address">8 Parton Road</span></div>
-            <div class="lp-meta-item">📞 <span data-biz="phone">07 555 1234</span></div>
-            <div class="lp-meta-item">🌐 <span data-biz="website">driftwoodcafe.co.nz</span></div>
+        <!-- Photo gallery strip -->
+        <div style="background:#E8EEF4;border-bottom:1px solid var(--border);display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:110px;gap:2px;overflow:hidden;">
+          <div style="background:linear-gradient(135deg,#C8D8E8,#A8C0D4);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;">
+            <span style="font-size:22px;opacity:0.3;">📷</span>
+            <span style="font-size:10px;color:#607080;font-weight:600;opacity:0.7;">Your main photo</span>
           </div>
-          <div class="lp-review-badges">
-            <div class="lp-badge">⭐ <strong data-biz="googleRating">4.8</strong><span>Google Reviews</span></div>
-            <div class="lp-badge">⭐ <strong data-biz="tripRating">4.5</strong><span>TripAdvisor</span></div>
+          <div style="background:linear-gradient(135deg,#D4E0EC,#C0D0E0);display:flex;align-items:center;justify-content:center;"><span style="font-size:16px;opacity:0.25;">📷</span></div>
+          <div style="background:linear-gradient(135deg,#CAD8E8,#B8CAD8);display:flex;align-items:center;justify-content:center;position:relative;">
+            <span style="font-size:16px;opacity:0.25;">📷</span>
+            <div style="position:absolute;inset:0;background:rgba(13,43,62,0.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;">
+              <span style="font-size:16px;font-weight:800;color:#fff;font-family:'Playfair Display',serif;">+6</span>
+              <span style="font-size:9px;color:rgba(255,255,255,0.75);font-weight:600;">more photos</span>
+            </div>
           </div>
-          <div class="lp-desc" data-biz="description"></div>
-          <div class="lp-tags" id="silver-tags"></div>
-          <div class="lp-hours"><div class="lp-hours-title">Opening hours</div><div id="silver-hours"></div></div>
-          <div class="lp-social">
-            <a class="lp-social-link" href="#" title="Facebook">📘</a>
-            <a class="lp-social-link" href="#" title="Instagram">📸</a>
-          </div>
-          <div class="lp-seo-bar"><div class="lp-seo-score">91</div><div class="lp-seo-label">/ 100 SEO Score</div></div>
-          <div class="lp-locked"><strong>AI FAQ &amp; AEO schema not included</strong>Upgrade to Gold to appear in ChatGPT and Google AI Overviews</div>
         </div>
+        <!-- Action bar -->
+        <div style="background:var(--white);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <a href="#" style="background:linear-gradient(135deg,#C8962A,#A07020);color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:6px;text-decoration:none;">Visit Website</a>
+          <a href="#" style="background:transparent;color:var(--text);font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid var(--border);text-decoration:none;">Call Now</a>
+          <a href="#" style="background:transparent;color:var(--text);font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid var(--border);text-decoration:none;">Email</a>
+          <button onclick="document.getElementById('mockup-menu-overlay').style.display='flex';document.body.style.overflow='hidden';" style="background:transparent;color:#C8962A;font-size:12px;font-weight:700;padding:8px 14px;border-radius:6px;border:1.5px solid rgba(200,150,42,0.35);cursor:pointer;font-family:'Figtree',sans-serif;">📋 View Menu</button>
+          <span style="flex:1;"></span>
+          <span style="font-size:12px;color:var(--muted);font-weight:700;">f</span>
+        </div>
+        <!-- Body: 2-col -->
+        <div style="background:var(--sand);padding:20px;display:grid;grid-template-columns:1fr 220px;gap:16px;align-items:start;">
+          <div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">About <span data-biz="name">The Driftwood Café</span></div>
+              <p style="font-size:12.5px;color:var(--text);line-height:1.75;" data-biz="description"></p>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">Opening Hours</div>
+              <div id="gold-hours" style="display:flex;flex-direction:column;gap:3px;"></div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;">
+              <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);">AI-Ready FAQ</div>
+              <div id="gold-faq"></div>
+            </div>
+          </div>
+          <!-- Sidebar -->
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+              <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px;">Contact</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;gap:8px;font-size:12px;">📍<span style="color:var(--muted);" data-biz="address">8 Parton Road</span></div>
+                <div style="display:flex;gap:8px;font-size:12px;">📞<a href="#" style="color:var(--ocean);" data-biz="phone">07 555 1234</a></div>
+                <div style="display:flex;gap:8px;font-size:12px;">🌐<a href="#" style="color:var(--ocean);" data-biz="website">driftwoodcafe.co.nz</a></div>
+              </div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+              <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px;">Review Scores</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--sand);border-radius:6px;font-size:12px;"><span style="color:var(--muted);">⭐ Google</span><strong data-biz="googleRating">4.8</strong></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--sand);border-radius:6px;font-size:12px;"><span style="color:var(--muted);">⭐ TripAdvisor</span><strong data-biz="tripRating">4.5</strong></div>
+              </div>
+            </div>
+            <div style="background:var(--dune-light);border:1px solid rgba(196,152,90,0.3);border-radius:10px;padding:14px 16px;">
+              <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px;">⭐ Gold Spotlight</div>
+              <p style="font-size:11.5px;color:var(--muted);line-height:1.6;">Top position in <span data-biz="category">Food &amp; Drink</span> · Pāpāmoa. One per sub-category — held annually.</p>
+            </div>
+            <div style="background:linear-gradient(135deg,#E8F0F8,#D4E4F4);border:1px solid var(--border);border-radius:10px;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+              <span style="font-size:22px;">📍</span>
+              <span style="font-size:11px;font-weight:600;color:var(--muted);">Pāpāmoa, Bay of Plenty</span>
+              <span style="font-size:11px;color:var(--ocean);font-weight:600;">Open in Maps →</span>
+            </div>
+          </div>
+        </div>
+        <!-- AI bar -->
+        <div class="lp-ai-bar">🤖 <span>"According to Papamoa.info, <strong data-biz="name">The Driftwood Café</strong> is one of the top-rated cafés in Pāpāmoa — rated <span data-biz="googleRating">4.8</span> on Google." — how AI tools will cite your listing</span></div>
       </div>
+      <div class="mockup-note">⭐ Gold includes a photo gallery (up to 9 images), AI FAQ &amp; AEO schema, Menu Add-On included free, and the Spotlight position — <strong>one per sub-category, first in keeps it.</strong></div>
     </div>
 
-    <!-- Gold mockup -->
-    <div class="mockup-panel" id="mockup-gold">
+    <!-- SILVER mockup -->
+    <div class="mockup-panel" id="mockup-silver">
       <div class="listing-preview">
-        <div class="lp-hero gold-hero">
-          <span class="lp-tier-pill">Gold Spotlight — $1,199+GST/yr</span>
-          <div class="lp-img-note">
-            <div class="lp-img-badge">🖼 Your hero photo goes here</div>
-          </div>
-          <div class="lp-logo" data-biz="logo">D</div>
-          <div class="lp-name">
-            <h3 data-biz="name">The Driftwood Café</h3>
-            <span data-biz="category">Food &amp; Drink</span>
+        <!-- Hero -->
+        <div style="background:linear-gradient(135deg,#0F2A38,#1B4A5C);padding:28px 24px 24px;position:relative;overflow:hidden;">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#5A7A8A,#8090A8,#5A7A8A);"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:0;">
+              <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:linear-gradient(135deg,#5A7A8A,#8090A8);color:#fff;padding:4px 10px;border-radius:3px;margin-bottom:12px;">◆ Silver Listing</div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;" data-biz="category">Food &amp; Drink</div>
+              <h3 style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:8px;" data-biz="name">The Driftwood Café</h3>
+              <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;max-width:520px;margin-bottom:14px;" data-biz="description"></p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;">
+                <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:6px;">
+                  <span style="color:#F5C842;font-size:12px;">★★★★★</span>
+                  <strong style="color:#fff;font-weight:700;font-size:13px;" data-biz="googleRating">4.8</strong>
+                  <span style="color:rgba(255,255,255,0.45);font-size:11px;">Google</span>
+                </div>
+                <span style="font-size:12px;color:rgba(255,255,255,0.45);">📍 <span data-biz="address">8 Parton Road</span></span>
+                <span style="font-size:12px;color:rgba(255,255,255,0.45);">📞 <span data-biz="phone">07 555 1234</span></span>
+              </div>
+              <div id="silver-hero-tags" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+            </div>
+            <div style="flex-shrink:0;width:80px;height:80px;border-radius:10px;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:rgba(255,255,255,0.8);" data-biz="logo">D</div>
           </div>
         </div>
-        <div class="lp-body">
-          <div class="lp-meta">
-            <div class="lp-meta-item">📍 <span data-biz="address">8 Parton Road</span></div>
-            <div class="lp-meta-item">📞 <span data-biz="phone">07 555 1234</span></div>
-            <div class="lp-meta-item">🌐 <span data-biz="website">driftwoodcafe.co.nz</span></div>
+        <!-- Action bar -->
+        <div style="background:var(--white);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <a href="#" style="background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:6px;text-decoration:none;">Visit Website</a>
+          <a href="#" style="background:transparent;color:var(--text);font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid var(--border);text-decoration:none;">Call Now</a>
+          <a href="#" style="background:transparent;color:var(--text);font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid var(--border);text-decoration:none;">Email</a>
+          <span style="flex:1;"></span>
+          <span style="font-size:12px;color:var(--muted);font-weight:700;">f</span>
+        </div>
+        <!-- Body: 2-col -->
+        <div style="background:var(--sand);padding:20px;display:grid;grid-template-columns:1fr 220px;gap:16px;align-items:start;">
+          <div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">About <span data-biz="name">The Driftwood Café</span></div>
+              <p style="font-size:12.5px;color:var(--text);line-height:1.75;" data-biz="description"></p>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">Opening Hours</div>
+              <div id="silver-hours" style="display:flex;flex-direction:column;gap:3px;"></div>
+            </div>
+            <!-- Locked FAQ — upgrade nudge -->
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;opacity:0.6;">
+              <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px;">AI-Ready FAQ</div>
+              <div style="border:2px dashed var(--border);border-radius:8px;padding:16px;text-align:center;">
+                <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:4px;">Gold only</div>
+                <div style="font-size:12px;color:var(--muted);">Upgrade to Gold to appear in ChatGPT and Google AI Overviews</div>
+              </div>
+            </div>
           </div>
-          <div class="lp-review-badges">
-            <div class="lp-badge">⭐ <strong data-biz="googleRating">4.8</strong><span>Google Reviews</span></div>
-            <div class="lp-badge">⭐ <strong data-biz="tripRating">4.5</strong><span>TripAdvisor</span></div>
+          <!-- Sidebar -->
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+              <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px;">Contact</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;gap:8px;font-size:12px;">📍<span style="color:var(--muted);" data-biz="address">8 Parton Road</span></div>
+                <div style="display:flex;gap:8px;font-size:12px;">📞<a href="#" style="color:var(--ocean);" data-biz="phone">07 555 1234</a></div>
+                <div style="display:flex;gap:8px;font-size:12px;">🌐<a href="#" style="color:var(--ocean);" data-biz="website">driftwoodcafe.co.nz</a></div>
+              </div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+              <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px;">Review Scores</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--sand);border-radius:6px;font-size:12px;"><span style="color:var(--muted);">⭐ Google</span><strong data-biz="googleRating">4.8</strong></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--sand);border-radius:6px;font-size:12px;"><span style="color:var(--muted);">⭐ TripAdvisor</span><strong data-biz="tripRating">4.5</strong></div>
+              </div>
+            </div>
+            <!-- Upgrade nudge -->
+            <div style="background:linear-gradient(135deg,#FFFAF0,#FFF5DC);border:1px solid rgba(200,150,42,0.3);border-radius:10px;padding:14px 16px;">
+              <div style="font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#C8962A;margin-bottom:4px;">Upgrade available</div>
+              <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#7A5010;margin-bottom:8px;">Add Gold Spotlight</div>
+              <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px;">
+                <div style="font-size:11px;color:#8A6020;padding-left:12px;">✦ Spotlight — top of sub-category</div>
+                <div style="font-size:11px;color:#8A6020;padding-left:12px;">✦ Photo gallery (up to 9 images)</div>
+                <div style="font-size:11px;color:#8A6020;padding-left:12px;">✦ Menu Add-On free</div>
+                <div style="font-size:11px;color:#8A6020;padding-left:12px;">✦ AI FAQ &amp; AEO schema</div>
+              </div>
+              <a href="#claim" onclick="switchTier('gold')" style="display:block;text-align:center;background:linear-gradient(135deg,#C8962A,#A07020);color:#fff;font-size:11.5px;font-weight:700;padding:7px 12px;border-radius:5px;text-decoration:none;">See Gold →</a>
+            </div>
+            <div style="background:linear-gradient(135deg,#E8F0F8,#D4E4F4);border:1px solid var(--border);border-radius:10px;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+              <span style="font-size:22px;">📍</span>
+              <span style="font-size:11px;font-weight:600;color:var(--muted);">Pāpāmoa, Bay of Plenty</span>
+              <span style="font-size:11px;color:var(--ocean);font-weight:600;">Open in Maps →</span>
+            </div>
           </div>
-          <div class="lp-desc" data-biz="description"></div>
-          <div class="lp-tags" id="gold-tags"></div>
-          <div class="lp-hours"><div class="lp-hours-title">Opening hours</div><div id="gold-hours"></div></div>
-          <div class="lp-social">
-            <a class="lp-social-link" href="#" title="Facebook">📘</a>
-            <a class="lp-social-link" href="#" title="Instagram">📸</a>
-          </div>
-          <div class="lp-seo-bar"><div class="lp-seo-score">91</div><div class="lp-seo-label">/ 100 SEO Score</div></div>
-          <div class="lp-faq"><div class="lp-faq-label">AI-Ready FAQ</div><div id="gold-faq"></div></div>
-          <div class="lp-spotlight">⭐ Spotlight position — top of sub-category · One per sub-category</div>
+        </div>
+        <!-- Upgrade bar -->
+        <div style="background:linear-gradient(135deg,#FFFAF0,#FFF5DC);border-top:1px solid rgba(200,150,42,0.2);padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <span style="font-size:12px;color:#7A5010;flex:1;line-height:1.5;">⭐ <strong>Upgrade to Gold</strong> to add a photo gallery, Spotlight position, Menu Add-On free, and AI FAQ schema.</span>
+          <a href="#claim" onclick="switchTier('gold')" style="font-size:11px;font-weight:700;color:#C8962A;white-space:nowrap;text-decoration:none;">See Gold →</a>
         </div>
       </div>
+      <div class="mockup-note">◆ Silver is the full claimed listing — SEO description, schema markup, your logo, social links, and review badges. Menu Add-On available for $199+gst/yr extra.</div>
     </div>
   </div>
 
@@ -588,99 +722,119 @@ const PRICE_EXTRA   = 99;
   <div class="menu-addon-section">
     <div class="section-label">Optional add-on</div>
     <h2>Menu / Service List Add-On</h2>
-    <p class="sub">An interactive, filterable menu embedded on your listing. Update it any time via a private link — no CMS login needed. Works for any business with a price list. <strong>$199+GST/yr on Silver — included free with Gold.</strong></p>
-    <div class="menu-addon-pill">📋 Live demo — Driftwood Café menu</div>
+    <p class="sub">An interactive, filterable menu embedded directly on your listing. Customers browse, filter by dietary needs, and tap to order — without leaving the page. Update it yourself via a private link. <strong>$199+gst/yr on Silver — included free with Gold.</strong></p>
+
+    <!-- Menu lightbox overlay -->
+    <div id="mockup-menu-overlay" style="display:none;position:fixed;inset:0;background:rgba(13,27,46,0.88);z-index:600;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+      <div style="background:#fff;border-radius:14px;width:100%;max-width:700px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.35);margin:auto;">
+        <div style="background:linear-gradient(135deg,var(--ocean-deep),var(--ocean));padding:18px 24px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff;" data-biz="name">The Driftwood Café</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;">Menu &amp; Prices · Updated April 2026</div>
+          </div>
+          <button onclick="document.getElementById('mockup-menu-overlay').style.display='none';document.body.style.overflow='';" style="background:rgba(255,255,255,0.12);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">&times;</button>
+        </div>
+        <div class="menu-cats" style="padding:14px 16px 0;">
+          <button class="menu-cat active" onclick="menuCat('all',this)">All</button>
+          <button class="menu-cat" onclick="menuCat('breakfast',this)">Breakfast</button>
+          <button class="menu-cat" onclick="menuCat('lunch',this)">Lunch</button>
+          <button class="menu-cat" onclick="menuCat('drinks',this)">Drinks</button>
+        </div>
+        <div class="menu-filters">
+          <span class="menu-filter-label">Filter:</span>
+          <button class="menu-filter" onclick="menuFilter('vg',this)">🌿 VG</button>
+          <button class="menu-filter" onclick="menuFilter('gf',this)">GF</button>
+          <button class="menu-filter" onclick="menuFilter('df',this)">DF</button>
+        </div>
+        <div class="menu-items" id="menu-items" style="padding:12px 16px 16px;">
+          <div class="menu-item" data-cat="breakfast" data-diet="gf">
+            <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
+            <div class="menu-item-body">
+              <div class="menu-item-name">Driftwood Eggs</div>
+              <div class="menu-item-desc">Two free-range eggs on sourdough with smashed avo and dukkah</div>
+              <div class="menu-item-footer"><div class="menu-item-price">$19</div><div class="menu-item-tags"><span class="diet-tag diet-gf">GF</span></div></div>
+            </div>
+          </div>
+          <div class="menu-item" data-cat="breakfast" data-diet="vg gf df">
+            <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
+            <div class="menu-item-body">
+              <div class="menu-item-name">Avo Toast</div>
+              <div class="menu-item-desc">Smashed avo, cherry tomatoes, lemon, seeds on GF sourdough</div>
+              <div class="menu-item-footer"><div class="menu-item-price">$17</div><div class="menu-item-tags"><span class="diet-tag diet-vg">VG</span><span class="diet-tag diet-gf">GF</span><span class="diet-tag diet-df">DF</span></div></div>
+            </div>
+          </div>
+          <div class="menu-item" data-cat="breakfast" data-diet="gf">
+            <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
+            <div class="menu-item-body">
+              <div class="menu-item-name">Ricotta Hotcakes</div>
+              <div class="menu-item-desc">Stack of three with whipped ricotta, seasonal fruit and maple</div>
+              <div class="menu-item-footer"><div class="menu-item-price">$22</div><div class="menu-item-tags"><span class="diet-tag diet-gf">GF</span></div></div>
+            </div>
+          </div>
+          <div class="menu-item" data-cat="lunch" data-diet="">
+            <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
+            <div class="menu-item-body">
+              <div class="menu-item-name">Driftwood Salad Bowl</div>
+              <div class="menu-item-desc">Grilled chicken, roasted kumara, pumpkin seeds, feta, house dressing</div>
+              <div class="menu-item-footer"><div class="menu-item-price">$24</div><div class="menu-item-tags"></div></div>
+            </div>
+          </div>
+          <div class="menu-item" data-cat="lunch" data-diet="df">
+            <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
+            <div class="menu-item-body">
+              <div class="menu-item-name">BLT Toastie</div>
+              <div class="menu-item-desc">Streaky bacon, heirloom tomato, cos lettuce, aioli on sourdough</div>
+              <div class="menu-item-footer"><div class="menu-item-price">$18</div><div class="menu-item-tags"><span class="diet-tag diet-df">DF</span></div></div>
+            </div>
+          </div>
+          <div class="menu-item" data-cat="drinks" data-diet="vg df gf">
+            <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
+            <div class="menu-item-body">
+              <div class="menu-item-name">Flat White</div>
+              <div class="menu-item-desc">Single-origin house blend, roasted on-site. Oat and almond milk available.</div>
+              <div class="menu-item-footer"><div class="menu-item-price">$5.50</div><div class="menu-item-tags"><span class="diet-tag diet-vg">VG</span><span class="diet-tag diet-df">DF</span></div></div>
+            </div>
+          </div>
+          <div class="menu-item" data-cat="drinks" data-diet="vg gf df">
+            <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
+            <div class="menu-item-body">
+              <div class="menu-item-name">Iced Matcha Latte</div>
+              <div class="menu-item-desc">Ceremonial-grade matcha, oat milk, house simple syrup over ice</div>
+              <div class="menu-item-footer"><div class="menu-item-price">$7.50</div><div class="menu-item-tags"><span class="diet-tag diet-vg">VG</span><span class="diet-tag diet-gf">GF</span><span class="diet-tag diet-df">DF</span></div></div>
+            </div>
+          </div>
+          <div class="menu-item" data-cat="drinks" data-diet="gf">
+            <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
+            <div class="menu-item-body">
+              <div class="menu-item-name">Cabinet Slice</div>
+              <div class="menu-item-desc">Daily selection — ask the team. GF options always available.</div>
+              <div class="menu-item-footer"><div class="menu-item-price">from $6</div><div class="menu-item-tags"><span class="diet-tag diet-gf">GF</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:12px 16px 14px;border-top:1px solid var(--sand-dark);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+          <span style="font-size:11px;color:var(--text-light);">Last updated: April 2026 · Prices include gst</span>
+          <button class="menu-order-btn">Order online</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu entry point (as it appears on the listing) -->
     <div class="menu-demo-wrap">
-      <div class="menu-demo-header">
-        <h4 data-biz="name">The Driftwood Café — Menu</h4>
-        <span class="menu-demo-meta">Updated 1 April 2026</span>
-      </div>
-      <div class="menu-cats">
-        <button class="menu-cat active" onclick="menuCat('all',this)">All</button>
-        <button class="menu-cat" onclick="menuCat('breakfast',this)">Breakfast</button>
-        <button class="menu-cat" onclick="menuCat('lunch',this)">Lunch</button>
-        <button class="menu-cat" onclick="menuCat('drinks',this)">Drinks</button>
-      </div>
-      <div class="menu-filters">
-        <span class="menu-filter-label">Dietary:</span>
-        <button class="menu-filter" onclick="menuFilter('vg',this)">VG</button>
-        <button class="menu-filter" onclick="menuFilter('gf',this)">GF</button>
-        <button class="menu-filter" onclick="menuFilter('df',this)">DF</button>
-      </div>
-      <div class="menu-items" id="menu-items">
-        <div class="menu-item" data-cat="breakfast" data-diet="gf">
-          <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
-          <div class="menu-item-body">
-            <div class="menu-item-name">Driftwood Eggs</div>
-            <div class="menu-item-desc">Two free-range eggs on sourdough with smashed avo and dukkah</div>
-            <div class="menu-item-footer"><div class="menu-item-price">$19</div><div class="menu-item-tags"><span class="diet-tag diet-gf">GF</span></div></div>
+      <div class="menu-demo-header" style="display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;" onclick="document.getElementById('mockup-menu-overlay').style.display='flex';document.body.style.overflow='hidden';">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:18px;">📋</span>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#fff;" data-biz="name">The Driftwood Café — Menu &amp; Prices</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);">Updated April 2026 · Tap to open</div>
           </div>
         </div>
-        <div class="menu-item" data-cat="breakfast" data-diet="vg gf df">
-          <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
-          <div class="menu-item-body">
-            <div class="menu-item-name">Avo Toast</div>
-            <div class="menu-item-desc">Smashed avo, cherry tomatoes, lemon, seeds on GF sourdough</div>
-            <div class="menu-item-footer"><div class="menu-item-price">$17</div><div class="menu-item-tags"><span class="diet-tag diet-vg">VG</span><span class="diet-tag diet-gf">GF</span><span class="diet-tag diet-df">DF</span></div></div>
-          </div>
-        </div>
-        <div class="menu-item" data-cat="breakfast" data-diet="gf">
-          <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
-          <div class="menu-item-body">
-            <div class="menu-item-name">Ricotta Hotcakes</div>
-            <div class="menu-item-desc">Stack of three with whipped ricotta, seasonal fruit and maple</div>
-            <div class="menu-item-footer"><div class="menu-item-price">$22</div><div class="menu-item-tags"><span class="diet-tag diet-gf">GF</span></div></div>
-          </div>
-        </div>
-        <div class="menu-item" data-cat="lunch" data-diet="">
-          <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
-          <div class="menu-item-body">
-            <div class="menu-item-name">Driftwood Salad Bowl</div>
-            <div class="menu-item-desc">Grilled chicken, roasted kumara, pumpkin seeds, feta, house dressing</div>
-            <div class="menu-item-footer"><div class="menu-item-price">$24</div><div class="menu-item-tags"></div></div>
-          </div>
-        </div>
-        <div class="menu-item" data-cat="lunch" data-diet="df">
-          <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
-          <div class="menu-item-body">
-            <div class="menu-item-name">BLT Toastie</div>
-            <div class="menu-item-desc">Streaky bacon, heirloom tomato, cos lettuce, aioli on sourdough</div>
-            <div class="menu-item-footer"><div class="menu-item-price">$18</div><div class="menu-item-tags"><span class="diet-tag diet-df">DF</span></div></div>
-          </div>
-        </div>
-        <div class="menu-item" data-cat="drinks" data-diet="vg df gf">
-          <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
-          <div class="menu-item-body">
-            <div class="menu-item-name">Flat White</div>
-            <div class="menu-item-desc">Single-origin house blend, roasted on-site. Oat and almond milk available.</div>
-            <div class="menu-item-footer"><div class="menu-item-price">$5.50</div><div class="menu-item-tags"><span class="diet-tag diet-vg">VG</span><span class="diet-tag diet-df">DF</span></div></div>
-          </div>
-        </div>
-        <div class="menu-item" data-cat="drinks" data-diet="vg gf df">
-          <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
-          <div class="menu-item-body">
-            <div class="menu-item-name">Iced Matcha Latte</div>
-            <div class="menu-item-desc">Ceremonial-grade matcha, oat milk, house simple syrup over ice</div>
-            <div class="menu-item-footer"><div class="menu-item-price">$7.50</div><div class="menu-item-tags"><span class="diet-tag diet-vg">VG</span><span class="diet-tag diet-gf">GF</span><span class="diet-tag diet-df">DF</span></div></div>
-          </div>
-        </div>
-        <div class="menu-item" data-cat="drinks" data-diet="gf">
-          <div class="menu-item-img placeholder"><span class="img-note">📷 Your photo</span></div>
-          <div class="menu-item-body">
-            <div class="menu-item-name">Cabinet Slice</div>
-            <div class="menu-item-desc">Daily selection — ask the team. GF options always available.</div>
-            <div class="menu-item-footer"><div class="menu-item-price">from $6</div><div class="menu-item-tags"><span class="diet-tag diet-gf">GF</span></div></div>
-          </div>
-        </div>
-      </div>
-      <div class="menu-demo-footer">
-        <span class="menu-updated">Last updated: 1 April 2026</span>
-        <button class="menu-order-btn">Order online</button>
+        <button style="background:var(--ocean-accent);color:#fff;border:none;padding:9px 18px;border-radius:6px;font-family:'Figtree',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">Open Menu</button>
       </div>
     </div>
     <div class="menu-addon-note">
       <span style="font-size:1.1rem;flex-shrink:0">ℹ️</span>
-      <p>Your photos replace the placeholders above. <strong>You update the menu yourself via a private link</strong> — no login needed. Works for any business with a price list. <strong>$199+GST/yr on Silver — included free with Gold.</strong></p>
+      <p>Your photos replace the placeholders. <strong>You update the menu yourself via a private link</strong> — no login needed. Works for any business with a price list. <strong>$199+gst/yr on Silver — included free with Gold.</strong></p>
     </div>
   </div>
 
@@ -691,8 +845,8 @@ const PRICE_EXTRA   = 99;
 
     <!-- Tier toggle -->
     <div class="tier-toggle">
-      <button class="tier-toggle-btn active-gold" id="toggle-gold" onclick="switchTier('gold')">⭐ Gold Spotlight — $1,199+GST</button>
-      <button class="tier-toggle-btn" id="toggle-silver" onclick="switchTier('silver')">◆ Silver — $599+GST</button>
+      <button class="tier-toggle-btn active-gold" id="toggle-gold" onclick="switchTier('gold')">⭐ Gold Spotlight — $1,199+gst</button>
+      <button class="tier-toggle-btn" id="toggle-silver" onclick="switchTier('silver')">◆ Silver — $599+gst</button>
     </div>
 
     <!-- GOLD PANEL -->
@@ -700,7 +854,7 @@ const PRICE_EXTRA   = 99;
       <!-- Sub-category Spotlight selector -->
       <div class="spotlight-selector">
         <h4>Choose your Spotlight sub-categories</h4>
-        <p>Your Gold listing includes one Spotlight position. Add extra sub-categories for $99+GST/yr each — your listing sits at the top of every category you choose.</p>
+        <p>Your Gold listing includes one Spotlight position. Add extra sub-categories for $199+gst/yr each — your listing sits at the top of every category you choose.</p>
         <div class="spotlight-primary">
           <label>Primary Spotlight (included)</label>
           <select class="spotlight-select" id="primary-spotlight" onchange="updatePrice()">
@@ -708,7 +862,7 @@ const PRICE_EXTRA   = 99;
           </select>
         </div>
         <div class="spotlight-extras" id="spotlight-extras">
-          <span class="spotlight-extras-label">Additional Spotlights — $99+GST/yr each</span>
+          <span class="spotlight-extras-label">Additional Spotlights — $199+gst/yr each</span>
           <div class="spotlight-extra-options" id="extra-options">
             <!-- Populated by JS -->
           </div>
@@ -718,12 +872,12 @@ const PRICE_EXTRA   = 99;
       <!-- Live price summary -->
       <div class="price-summary" id="gold-price-summary">
         <div class="ps-breakdown" id="ps-breakdown">
-          Gold Spotlight — $1,199+GST/yr
+          Gold Spotlight — $1,199+gst/yr
         </div>
         <div class="ps-total">
           <div class="ps-total-label">Total per year</div>
           <div class="ps-total-amount" id="ps-total">$1,199</div>
-          <div class="ps-total-gst">+GST</div>
+          <div class="ps-total-gst">+gst</div>
         </div>
       </div>
 
@@ -734,17 +888,29 @@ const PRICE_EXTRA   = 99;
       </div>
 
       <a href="#" id="btn-pay-gold" class="btn-pay btn-pay-gold" onclick="payGold(event)">Pay now — Gold Spotlight →</a>
-      <p class="pay-note">Secure payment via Stripe &nbsp;·&nbsp; GST invoice issued automatically &nbsp;·&nbsp; Listing draft within 24 hours &nbsp;·&nbsp; Questions? <a href="tel:0275332970">027 533 2970</a></p>
+      <p class="pay-note">Secure payment via Stripe &nbsp;·&nbsp; gst invoice issued automatically &nbsp;·&nbsp; Listing draft within 24 hours &nbsp;·&nbsp; Questions? <a href="tel:0275332970">027 533 2970</a></p>
     </div>
 
     <!-- SILVER PANEL -->
     <div class="silver-panel" id="silver-panel">
-      <div class="price-summary" style="background:var(--silver-col)">
-        <div class="ps-breakdown">Silver listing — everything a customer needs to find and choose you</div>
+
+      <!-- Menu Add-On toggle -->
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:16px;">
+        <label style="display:flex;align-items:flex-start;gap:14px;cursor:pointer;">
+          <input type="checkbox" id="silver-menu-addon" onchange="updateSilverPrice()" style="margin-top:3px;width:16px;height:16px;accent-color:var(--ocean);flex-shrink:0;">
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;">Add Menu / Service List Add-On <span style="font-size:12px;font-weight:600;color:var(--ocean);margin-left:6px;">+$199+gst/yr</span></div>
+            <div style="font-size:12.5px;color:var(--text-soft);line-height:1.5;">Interactive filterable menu on your listing. Category tabs, dietary filters, Order Online link. You update it yourself via a private link — no CMS needed.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="price-summary" id="silver-price-summary" style="background:var(--silver-col)">
+        <div class="ps-breakdown" id="silver-breakdown">Silver listing — everything a customer needs to find and choose you</div>
         <div class="ps-total">
           <div class="ps-total-label">Per year</div>
-          <div class="ps-total-amount">$599</div>
-          <div class="ps-total-gst">+GST</div>
+          <div class="ps-total-amount" id="silver-total">$599</div>
+          <div class="ps-total-gst">+gst</div>
         </div>
       </div>
 
@@ -754,8 +920,8 @@ const PRICE_EXTRA   = 99;
         <div class="g-pill"><span>✍️</span><div class="g-pill-text"><strong>Done for You</strong><small>We write everything. You review and approve.</small></div></div>
       </div>
 
-      <a href="#" id="btn-pay-silver" class="btn-pay btn-pay-silver" onclick="paySilver(event)">Pay now — Silver $599+GST →</a>
-      <p class="pay-note">Secure payment via Stripe &nbsp;·&nbsp; GST invoice issued automatically &nbsp;·&nbsp; Listing draft within 24 hours &nbsp;·&nbsp; Questions? <a href="tel:0275332970">027 533 2970</a></p>
+      <a href="#" id="btn-pay-silver" class="btn-pay btn-pay-silver" onclick="paySilver(event)">Pay now — Silver $599+gst →</a>
+      <p class="pay-note">Secure payment via Stripe &nbsp;·&nbsp; gst invoice issued automatically &nbsp;·&nbsp; Listing draft within 24 hours &nbsp;·&nbsp; Questions? <a href="tel:0275332970">027 533 2970</a></p>
     </div>
 
   </div>
@@ -764,7 +930,7 @@ const PRICE_EXTRA   = 99;
   <div class="jayden-section">
     <div class="jayden-avatar">J</div>
     <div class="jayden-body">
-      <strong>We Brown — Local Partner, Papamoa.info</strong>
+      <strong>Jayden Brown — Local Partner, Papamoa.info</strong>
       <p>This preview is based on <span data-biz="name">The Driftwood Café</span>'s website and socials. Once you pay I'll be in touch within a couple of hours to confirm your details, refine the copy with your input, and get your listing live within 24 hours of your sign-off.</p>
       <div class="jayden-links">
         <a href="mailto:jayden@papamoa.info" class="jayden-link">✉ jayden@papamoa.info</a>
@@ -776,8 +942,7 @@ const PRICE_EXTRA   = 99;
 </div>
 
 <footer class="page-footer">
-  <a href="https://papamoa.info">papamoa.info</a> · Part of the TaurangaNZ.info network — trusted since 2005<br>
-  <span style="margin-top:6px;display:block">You received this preview because your business operates in Pāpāmoa. <a href="#">Unsubscribe</a></span>
+  <a href="https://papamoa.info">papamoa.info</a> · Part of the TaurangaNZ.info network — trusted since 2005
 </footer>
 
 <script>
@@ -813,19 +978,28 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>`).join('');
   }
 
-  // Tags and hours in both mockups
-  ['silver-tags','gold-tags'].forEach(id => {
+  // Tags in mockup heroes and body
+  ['gold-hero-tags','silver-hero-tags'].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.innerHTML = BUSINESS.tags.map(t => `<span class="lp-tag">${t}</span>`).join('');
+    if (el) el.innerHTML = BUSINESS.tags.map(t =>
+      `<span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">${t}</span>`
+    ).join('');
   });
+
+  // Hours in both mockups
   ['silver-hours','gold-hours'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.innerHTML = BUSINESS.hours.map(([d,h]) =>
-      `<div class="lp-hours-row"><span>${d}</span><span>${h}</span></div>`).join('');
+      `<div style="display:flex;justify-content:space-between;padding:6px 10px;font-size:11.5px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">${d}</span><span style="color:var(--muted);">${h}</span></div>`
+    ).join('');
   });
   const faqEl = document.getElementById('gold-faq');
-  if (faqEl) faqEl.innerHTML = BUSINESS.faq.map(f =>
-    `<div class="lp-faq-q">${f.q}</div><div class="lp-faq-a">${f.a}</div>`).join('');
+  if (faqEl) faqEl.innerHTML = BUSINESS.faq.map((f, i) =>
+    `<div style="${i < BUSINESS.faq.length-1 ? 'border-bottom:1px solid var(--border);' : ''}padding:10px 0;">
+      <div style="font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:4px;">${f.q}</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6;">${f.a}</div>
+    </div>`
+  ).join('');
 
   // Build Spotlight selector
   const spots = BUSINESS.availableSpotlights;
@@ -841,7 +1015,7 @@ document.addEventListener('DOMContentLoaded', () => {
   spots.slice(1).forEach(s => {
     const div = document.createElement('div');
     div.className = 'spotlight-extra';
-    div.innerHTML = `<input type="checkbox" id="extra-${s.replace(/\s/g,'-')}" value="${s}" onchange="toggleExtra(this)"> <label for="extra-${s.replace(/\s/g,'-')}" style="cursor:pointer;flex:1">${s}</label><span class="extra-price">+$99+GST/yr</span>`;
+    div.innerHTML = `<input type="checkbox" id="extra-${s.replace(/\s/g,'-')}" value="${s}" onchange="toggleExtra(this)"> <label for="extra-${s.replace(/\s/g,'-')}" style="cursor:pointer;flex:1">${s}</label><span class="extra-price">+$199+gst/yr</span>`;
     extraWrap.appendChild(div);
   });
 
@@ -877,8 +1051,8 @@ function updatePrice() {
   const primary = document.getElementById('primary-spotlight')?.value || BUSINESS.availableSpotlights[0];
   const extraNames = [...document.querySelectorAll('.spotlight-extra input:checked')].map(c => c.value);
 
-  let breakdown = `Gold Spotlight — ${primary} — $${PRICE_GOLD.toLocaleString()}+GST/yr`;
-  extraNames.forEach(n => { breakdown += `<br>Extra Spotlight — ${n} — $${PRICE_EXTRA}+GST/yr`; });
+  let breakdown = `Gold Spotlight — ${primary} — $${PRICE_GOLD.toLocaleString()}+gst/yr`;
+  extraNames.forEach(n => { breakdown += `<br>Extra Spotlight — ${n} — $${PRICE_EXTRA}+gst/yr`; });
   document.getElementById('ps-breakdown').innerHTML = breakdown;
   document.getElementById('ps-total').textContent = `$${total.toLocaleString()}`;
 }
@@ -893,6 +1067,17 @@ function switchTier(tier) {
   switchMockup(tier);
 }
 
+/* ── SILVER PRICE ── */
+function updateSilverPrice() {
+  const menuAddon = document.getElementById('silver-menu-addon').checked;
+  const total = PRICE_SILVER + (menuAddon ? 199 : 0);
+  document.getElementById('silver-total').textContent = '$' + total.toLocaleString();
+  document.getElementById('silver-breakdown').textContent = menuAddon
+    ? 'Silver listing + Menu Add-On — $' + PRICE_SILVER + ' + $199+gst/yr'
+    : 'Silver listing — everything a customer needs to find and choose you';
+  document.getElementById('btn-pay-silver').textContent = 'Pay now — Silver $' + total + '+gst →';
+}
+
 /* ── PAYMENT ── */
 function payGold(e) {
   e.preventDefault();
@@ -902,7 +1087,7 @@ function payGold(e) {
   // Build Stripe URL — append metadata when Stripe supports it via URL params
   // For now, redirect with a console note; replace STRIPE_GOLD_URL with real link
   if (STRIPE_GOLD_URL === '#stripe-gold-placeholder') {
-    alert(`Stripe not yet connected.\n\nSelected: Gold — ${primary}${extras ? ' + '+extras : ''}\nTotal: $${total}+GST/yr\n\nAdd your Stripe link to STRIPE_GOLD_URL in the BUSINESS config.`);
+    alert(`Stripe not yet connected.\n\nSelected: Gold — ${primary}${extras ? ' + '+extras : ''}\nTotal: $${total}+gst/yr\n\nAdd your Stripe link to STRIPE_GOLD_URL in the BUSINESS config.`);
     return;
   }
   window.location.href = STRIPE_GOLD_URL;
@@ -910,8 +1095,10 @@ function payGold(e) {
 
 function paySilver(e) {
   e.preventDefault();
+  const menuAddon = document.getElementById('silver-menu-addon').checked;
+  const total = PRICE_SILVER + (menuAddon ? 199 : 0);
   if (STRIPE_SILVER_URL === '#stripe-silver-placeholder') {
-    alert('Stripe not yet connected.\n\nSelected: Silver — $599+GST/yr\n\nAdd your Stripe link to STRIPE_SILVER_URL in the BUSINESS config.');
+    alert('Stripe not yet connected.\n\nSelected: Silver' + (menuAddon ? ' + Menu Add-On' : '') + ' — $' + total + '+gst/yr\n\nAdd your Stripe link to STRIPE_SILVER_URL in the BUSINESS config.');
     return;
   }
   window.location.href = STRIPE_SILVER_URL;
@@ -919,11 +1106,13 @@ function paySilver(e) {
 
 /* ── MOCKUP TABS ── */
 function switchMockup(tier) {
-  document.querySelectorAll('.mockup-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.mockup-tab').forEach(t => {
+    t.classList.remove('active-gold','active-silver');
+  });
   document.querySelectorAll('.mockup-panel').forEach(p => p.classList.remove('active'));
   const tab = document.querySelector(`[data-tab="${tier}"]`);
   const panel = document.getElementById(`mockup-${tier}`);
-  if (tab) tab.classList.add('active');
+  if (tab) tab.classList.add(tier === 'gold' ? 'active-gold' : 'active-silver');
   if (panel) panel.classList.add('active');
 }
 
@@ -966,8 +1155,21 @@ async function checkSearchTerm() {
     result.className = `search-result ${data.positive ? 'positive' : 'negative'}`;
     result.style.display = 'block';
   } catch(err) {
-    result.innerHTML = `<div class="result-headline">Search check temporarily unavailable</div><div class="result-body">Please try again in a moment or call We on 027 533 2970.</div><button class="btn-retry" onclick="resetSearch()">Try again</button>`;
+    result.innerHTML = `<div class="result-headline">Search check coming soon</div><div class="result-body">We're still fine-tuning this feature — check back in a day or two and it'll be ready to go. In the meantime, feel free to call or email if you have questions.</div><button class="btn-retry" onclick="resetSearch()">Try again</button>`;
     result.className = 'search-result negative'; result.style.display = 'block';
+    // Silent notification to Jayden
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: '37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78',
+        subject: 'Search checker error — ' + BUSINESS.name + ' — Papamoa.info',
+        form_name: 'ppp-search-error',
+        business: BUSINESS.name,
+        search_term: term,
+        message: 'Search checker failed for ' + BUSINESS.name + ' (PPP). Search term tried: "' + term + '". Worker may be down. Send a new PPP link when fixed.'
+      })
+    }).catch(() => {}); // silent — never surface to prospect
   }
   btn.disabled = false; btn.textContent = 'Check';
 }
