@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papamoa.info — Follow-up Email Template</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Figtree', sans-serif;
+  background: #E8E4DE;
+  color: #1A1A1A;
+  -webkit-font-smoothing: antialiased;
+  padding: 32px 16px;
+}
+
+/* ── USAGE GUIDE (visible in browser, strip before sending) ── */
+.usage-guide {
+  max-width: 620px;
+  margin: 0 auto 24px;
+  background: #0D2B3E;
+  border-radius: 10px;
+  padding: 20px 24px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.65;
+}
+.usage-guide strong { color: #3AABDE; display: block; margin-bottom: 8px; font-size: 14px; }
+.usage-guide code { background: rgba(58,171,222,0.15); color: #3AABDE; padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+.usage-guide ul { margin: 8px 0 0 16px; }
+.usage-guide li { margin-bottom: 4px; }
+
+/* ── EMAIL WRAPPER ── */
+.wrapper {
+  max-width: 620px;
+  margin: 0 auto;
+  background: #F0EDE8;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+
+/* ── HEADER ── */
+.header {
+  background: #0D2B3E;
+  padding: 28px 44px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  right: -20px; top: -20px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(58,171,222,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.header-logo {
+  font-family: 'Figtree', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: #FFFFFF;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.2px;
+}
+.header-logo span { color: #3AABDE; }
+.header-tagline {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 4px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── BODY ── */
+.body {
+  padding: 36px 44px 28px;
+}
+.body p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #2A2A2A;
+  margin-bottom: 18px;
+}
+.body p:last-child { margin-bottom: 0; }
+
+/* ── PREVIEW STRIP ── */
+.preview-strip {
+  margin: 8px 0 24px;
+  background: #FFFFFF;
+  border: 1.5px solid #D8E4E8;
+  border-left: 4px solid #3AABDE;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+}
+.preview-strip p {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #0D2B3E;
+  margin: 0;
+  line-height: 1.55;
+}
+.preview-strip span {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #5A6E78;
+  margin-top: 4px;
+  line-height: 1.6;
+}
+
+/* ── CTA BUTTON ── */
+.cta-wrap {
+  text-align: center;
+  margin: 28px 0 8px;
+}
+.cta-btn {
+  display: inline-block;
+  background: #3AABDE;
+  color: #FFFFFF;
+  font-family: 'Figtree', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 34px;
+  border-radius: 100px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+.cta-sub {
+  display: block;
+  font-size: 12px;
+  color: #8A9AA4;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: #DDD9D3;
+  margin: 28px 44px;
+}
+
+/* ── WHAT YOU'LL SEE ── */
+.what-section {
+  padding: 0 44px 28px;
+}
+.what-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1B6B7D;
+  margin-bottom: 14px;
+}
+.what-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.what-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 13.5px;
+  color: #2A2A2A;
+  line-height: 1.55;
+}
+.what-tick {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  background: #E4F2F5;
+  color: #1B6B7D;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+/* ── GUARANTEES ── */
+.guarantee-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13px;
+  color: #3A3A3A;
+  line-height: 1.6;
+  margin-bottom: 9px;
+}
+.g-dot {
+  width: 7px; height: 7px;
+  background: #C4985A;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* ── SIGNATURE ── */
+.sig-section {
+  padding: 0 44px 36px;
+}
+.sig-section p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #2A2A2A;
+  margin-bottom: 18px;
+}
+.sig {
+  margin-top: 4px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #3A3A3A;
+}
+.sig strong { color: #0D2B3E; font-size: 14px; display: block; margin-bottom: 2px; }
+.sig a { color: #1B6B7D; text-decoration: none; }
+
+/* ── FOOTER ── */
+.footer {
+  background: #0D2B3E;
+  padding: 18px 44px;
+  text-align: center;
+}
+.footer p {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  line-height: 1.6;
+}
+.footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+
+@media (max-width: 500px) {
+  .body, .what-section, .sig-section { padding-left: 24px; padding-right: 24px; }
+  .header { padding-left: 24px; padding-right: 24px; }
+  .divider { margin-left: 24px; margin-right: 24px; }
+  .footer { padding-left: 24px; padding-right: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- USAGE GUIDE — remove this block before copying into Gmail/Brevo -->
+<div class="usage-guide">
+  <strong>How to use this template</strong>
+  Send after a brief cold call where the prospect gave permission to receive info.
+  Personalise: <code>[FIRST NAME]</code>, <code>[BUSINESS NAME]</code>, <code>[CATEGORY]</code>, <code>[THEIR SUBCATEGORY]</code>.
+  Replace the CTA link with <code>https://papamoa.info/sales/landing.html</code> (or their PPP URL if you've built one).
+  Subject line options:
+  <ul>
+    <li>Good talking with you, [First Name] — here's that info</li>
+    <li>As promised — [Business Name] on Papamoa.info</li>
+    <li>[Business Name] — your free listing preview</li>
+  </ul>
+  Keep the email short. The landing page does the selling. This email just gets the click.
+</div>
+
+<!-- EMAIL -->
+<div class="wrapper">
+
+  <div class="header">
+    <div class="header-logo">papamoa<span>.info</span></div>
+    <div class="header-tagline">Pāpāmoa's local business directory &bull; Part of the TaurangaNZ network</div>
+  </div>
+
+  <div class="body">
+    <p>Hi [FIRST NAME],</p>
+    <p>Good talking with you earlier. As promised, here's the info on getting [BUSINESS NAME] listed on Papamoa.info.</p>
+
+    <div class="preview-strip">
+      <p>The Gold [THEIR SUBCATEGORY] Spotlight is still available.</p>
+      <span>One business per sub-category holds the top position. Once it's claimed, it's gone. Right now that spot is yours if you want it.</span>
+    </div>
+
+    <p>I've put together a free personalised preview so you can see exactly what your listing would look like — your business name, your category, your details — before any commitment.</p>
+  </div>
+
+  <div class="cta-wrap" style="padding: 0 44px;">
+    <a href="https://papamoa.info/sales/landing.html" class="cta-btn">See your free listing preview &rarr;</a>
+    <span class="cta-sub">No payment, no obligation &mdash; takes about 2 minutes</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="what-section">
+    <div class="what-label">What you'll see on the page</div>
+    <ul class="what-list">
+      <li><span class="what-tick">&#10003;</span> What a Gold listing looks like for a real Pāpāmoa business</li>
+      <li><span class="what-tick">&#10003;</span> How your listing appears in Google and AI search results</li>
+      <li><span class="what-tick">&#10003;</span> Silver vs Gold — exactly what each tier includes and costs</li>
+      <li><span class="what-tick">&#10003;</span> How to get your listing live within 24 hours</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="what-section" style="padding-bottom: 20px;">
+    <div class="what-label">Our guarantees</div>
+    <div class="guarantee-row"><div class="g-dot"></div><div><strong>Lifetime Price Lock</strong> — your launch price never increases as long as you renew.</div></div>
+    <div class="guarantee-row"><div class="g-dot"></div><div><strong>2027 ROI Guarantee</strong> — no trackable return from your 2026 listing? Your 2027 renewal is free.</div></div>
+    <div class="guarantee-row"><div class="g-dot"></div><div><strong>Done for you</strong> — we write the listing, handle the SEO, and have you live within 24 hours of approval.</div></div>
+    <div class="guarantee-row"><div class="g-dot"></div><div><strong>Free TaurangaNZ.info listing</strong> — any paid listing includes a Silver on our sister site at no extra cost.</div></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sig-section">
+    <p>Have a look when you get a moment. Happy to answer any questions — just reply here or give me a call.</p>
+    <p>Cheers,</p>
+    <div class="sig">
+      <strong>Jayden Brown</strong>
+      Papamoa.info &mdash; Local Business Directory<br>
+      <a href="tel:+64275332970">027 533 2970</a> &nbsp;&bull;&nbsp; <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a><br>
+      <a href="https://papamoa.info">papamoa.info</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Papamoa.info &bull; Part of the TaurangaNZ.info network &bull; Trusted since 2005<br>
+    <a href="https://papamoa.info/legal.html">Privacy &amp; Terms</a></p>
+  </div>
+
+</div>
+
+</body>
+</html>
