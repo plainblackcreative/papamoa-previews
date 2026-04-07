@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Papamoa.info Listing — Ready to Go Live</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ocean: #1B6B7D;
+  --ocean-deep: #0F4352;
+  --ocean-mid: #1A5F70;
+  --ocean-light: #E4F2F5;
+  --ocean-accent: #3AABDE;
+  --sand: #F7F3ED;
+  --sand-dark: #EDE7DB;
+  --dune: #C4985A;
+  --dune-light: #F5EDD8;
+  --navy: #0D2B3E;
+  --white: #FFFFFF;
+  --text: #1A2832;
+  --muted: #5A6E78;
+  --border: #D8E4E8;
+  --silver: #5A7A8A;
+  --silver-bg: #EDF3F6;
+  --gold: #B8840A;
+  --gold-bg: #FBF3E2;
+  --green: #1E6B3C;
+  --green-bg: #E6F4EC;
+  --green-pulse: #7DC143;
+  --font-body: 'Figtree', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--sand); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* NAV */
+.nav { background: var(--navy); padding: 0 32px; height: 58px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+.nav-logo { font-family: var(--font-body); font-weight: 700; font-size: 15px; color: var(--white); text-decoration: none; }
+.nav-logo span { color: var(--ocean-accent); }
+.nav-contact { font-size: 13px; color: rgba(255,255,255,0.5); }
+.nav-contact a { color: var(--ocean-accent); text-decoration: none; font-weight: 600; transition: color 0.15s; }
+.nav-contact a:hover { color: var(--white); }
+
+/* PERSONAL HEADER */
+.personal-header {
+  background: var(--ocean-deep);
+  padding: 56px 32px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.personal-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 50%, rgba(58,171,222,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 20%, rgba(196,152,90,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.personal-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 60px;
+  background: var(--sand);
+  clip-path: ellipse(65% 100% at 50% 100%);
+}
+.ph-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+.ph-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.pulse { width: 7px; height: 7px; background: var(--green-pulse); border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+.ph-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.ph-title .biz-name { color: #90D4E0; font-style: italic; }
+.ph-sub { font-size: 1rem; color: rgba(255,255,255,0.65); line-height: 1.75; margin-bottom: 32px; max-width: 560px; font-weight: 300; }
+.ph-from { display: flex; align-items: center; gap: 14px; }
+.ph-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--dune); display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; color: var(--white); flex-shrink: 0; }
+.ph-from-text strong { display: block; font-size: 13.5px; color: var(--white); margin-bottom: 2px; }
+.ph-from-text span { font-size: 12.5px; color: rgba(255,255,255,0.45); }
+
+/* CONTENT */
+.content { max-width: 680px; margin: 0 auto; padding: 48px 32px 80px; }
+@media (max-width: 480px) { .content { padding: 32px 20px 60px; } }
+
+/* URGENCY BANNER */
+.urgency-banner {
+  background: var(--gold-bg);
+  border: 1px solid rgba(184,132,10,0.25);
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13.5px;
+}
+.ub-icon { font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+.ub-text strong { display: block; color: var(--gold); font-weight: 700; margin-bottom: 2px; }
+.ub-text span { color: var(--text); opacity: 0.8; line-height: 1.55; }
+
+/* TIER CARDS */
+.tier-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+@media (max-width: 520px) { .tier-choice { grid-template-columns: 1fr; } }
+
+.tier-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+.tier-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(15,67,82,0.1); }
+.tier-card.featured { border-color: var(--dune); box-shadow: 0 4px 20px rgba(196,152,90,0.15); }
+.tier-head { padding: 22px 22px 18px; border-bottom: 1px solid var(--border); }
+.tier-badge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: 10px; }
+.tier-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
+.tier-price { font-size: 1.55rem; font-weight: 800; line-height: 1.1; margin-bottom: 8px; }
+.tier-price span { font-size: 0.82rem; font-weight: 400; opacity: 0.6; }
+.tier-tagline { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+/* Silver */
+.tier-silver .tier-head { background: var(--silver-bg); border-bottom-color: #D0E4EC; }
+.tier-silver .tier-name { color: var(--silver); }
+.tier-silver .tier-price { color: var(--silver); }
+.tier-silver .tier-badge { background: #D8E8EE; color: var(--silver); }
+
+/* Gold */
+.tier-gold .tier-head { background: linear-gradient(135deg, var(--gold-bg), #FEF8EC); border-bottom-color: rgba(184,132,10,0.2); }
+.tier-gold .tier-name { color: var(--gold); }
+.tier-gold .tier-price { color: var(--gold); }
+.tier-gold .tier-badge { background: #FAECC8; color: var(--gold); }
+
+.tier-body { padding: 18px 22px; flex: 1; }
+.feat-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.feat-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.45; }
+.fi { flex-shrink: 0; font-style: normal; font-size: 12px; margin-top: 2px; font-weight: 700; }
+.fi-yes { color: var(--green); }
+.fi-no { color: #C0C8CC; }
+.fi-note { color: var(--dune); }
+
+.tier-footer { padding: 14px 22px 20px; }
+.tier-cta { display: block; text-align: center; padding: 11px 18px; border-radius: 6px; font-weight: 700; font-size: 13.5px; text-decoration: none; transition: all 0.2s; }
+.tier-cta-silver { background: var(--silver-bg); color: var(--silver); border: 1px solid #BDD0D8; }
+.tier-cta-silver:hover { background: var(--silver); color: var(--white); }
+.tier-cta-gold { background: var(--gold); color: var(--white); }
+.tier-cta-gold:hover { background: #9A6E08; }
+.scarcity-note { font-size: 11.5px; color: var(--gold); font-weight: 600; text-align: center; margin-top: 8px; }
+
+/* WHAT HAPPENS NEXT */
+.next-steps { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 26px 28px; margin-bottom: 24px; }
+.next-steps h3 { font-family: var(--font-display); font-size: 1.1rem; color: var(--navy); margin-bottom: 18px; }
+.step-row { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+.step-row:last-child { margin-bottom: 0; }
+.sr-num { width: 28px; height: 28px; border-radius: 50%; background: var(--ocean-light); color: var(--ocean); font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.sr-body strong { display: block; font-size: 13.5px; color: var(--navy); margin-bottom: 2px; }
+.sr-body span { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+/* GUARANTEES */
+.guarantees-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+@media (max-width: 480px) { .guarantees-grid { grid-template-columns: 1fr; } }
+.guarantee-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; display: flex; gap: 12px; align-items: flex-start; }
+.gc-icon { font-size: 20px; flex-shrink: 0; }
+.gc-body h4 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.gc-body p { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+/* CONTACT STRIP */
+.contact-strip {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 24px 26px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.cs-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--dune); display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; color: var(--white); flex-shrink: 0; }
+.cs-body { flex: 1; min-width: 160px; }
+.cs-body strong { display: block; font-size: 14px; color: var(--white); margin-bottom: 3px; }
+.cs-body span { font-size: 12.5px; color: rgba(255,255,255,0.45); }
+.cs-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.cs-link { font-size: 13px; font-weight: 600; color: var(--dune); text-decoration: none; transition: color 0.15s; }
+.cs-link:hover { color: var(--white); }
+
+/* SECTION LABEL */
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocean); margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/index.html" class="nav-logo">papamoa<span>.info</span></a>
+  <div class="nav-contact">Questions? <a href="tel:+64275332970">027 533 2970</a></div>
+</nav>
+
+<div class="personal-header">
+  <div class="ph-inner">
+    <div class="ph-eyebrow"><span class="pulse"></span> Following up from our conversation</div>
+    <h1 class="ph-title">Here are the details for <span class="biz-name">[BUSINESS NAME]</span></h1>
+    <p class="ph-sub">As discussed, your listing options on Papamoa.info are below. Everything is written and ready for you &mdash; just choose your tier and we'll have your listing live within 24 hours of sign-off.</p>
+    <div class="ph-from">
+      <div class="ph-avatar">P</div>
+      <div class="ph-from-text">
+        <strong>Papamoa.info &mdash; Local Business Directory</strong>
+        <span>jayden@papamoa.info &middot; 027 533 2970</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="urgency-banner">
+    <span class="ub-icon">&#9876;</span>
+    <div class="ub-text">
+      <strong>Gold Spotlight &mdash; [SUBCATEGORY] is still available</strong>
+      <span>One Gold Spotlight per sub-category. Once another business in [SUBCATEGORY] claims it, it's gone for good. First in keeps the top position.</span>
+    </div>
+  </div>
+
+  <div class="section-label">Choose your listing</div>
+
+  <div class="tier-choice">
+
+    <!-- SILVER -->
+    <div class="tier-card tier-silver">
+      <div class="tier-head">
+        <div class="tier-badge">&#9670; Silver</div>
+        <div class="tier-name">Silver Listing</div>
+        <div class="tier-price">$599 <span>+GST / yr</span></div>
+        <div class="tier-tagline">Full claimed listing. SEO-optimised, logo, all your contact details &mdash; live within 24 hours.</div>
+      </div>
+      <div class="tier-body">
+        <ul class="feat-list">
+          <li><i class="fi fi-yes">&#10003;</i> SEO-optimised description</li>
+          <li><i class="fi fi-yes">&#10003;</i> Logo</li>
+          <li><i class="fi fi-yes">&#10003;</i> Schema markup</li>
+          <li><i class="fi fi-yes">&#10003;</i> All contact &amp; social links</li>
+          <li><i class="fi fi-yes">&#10003;</i> Google &amp; TripAdvisor review badges</li>
+          <li><i class="fi fi-yes">&#10003;</i> Facebook welcome post</li>
+          <li><i class="fi fi-yes">&#10003;</i> Lifetime price lock</li>
+          <li><i class="fi fi-yes">&#10003;</i> 2027 ROI guarantee</li>
+          <li><i class="fi fi-note">+</i> Menu Add-On: $199+GST/yr</li>
+          <li><i class="fi fi-no">&#10007;</i> Spotlight position</li>
+        </ul>
+      </div>
+      <div class="tier-footer">
+        <a href="#contact" class="tier-cta tier-cta-silver">Choose Silver &rarr;</a>
+      </div>
+    </div>
+
+    <!-- GOLD -->
+    <div class="tier-card tier-gold featured">
+      <div class="tier-head">
+        <div class="tier-badge">&#11088; Gold Spotlight</div>
+        <div class="tier-name">Gold Listing</div>
+        <div class="tier-price">$1,199 <span>+GST / yr</span></div>
+        <div class="tier-tagline">Top of your sub-category. Photo gallery. Menu Add-On included free. Premium ad spot access.</div>
+      </div>
+      <div class="tier-body">
+        <ul class="feat-list">
+          <li><i class="fi fi-yes">&#10003;</i> Everything in Silver</li>
+          <li><i class="fi fi-yes">&#10003;</i> Photo gallery &mdash; logo + up to 9 images</li>
+          <li><i class="fi fi-yes">&#10003;</i> Spotlight &mdash; top of your sub-category</li>
+          <li><i class="fi fi-yes">&#10003;</i> AI-optimised FAQ &amp; AEO schema</li>
+          <li><i class="fi fi-yes">&#10003;</i> Menu / Service List Add-On free</li>
+          <li><i class="fi fi-yes">&#10003;</i> Access to premium article &amp; page ad spots</li>
+          <li><i class="fi fi-yes">&#10003;</i> Lifetime price lock</li>
+          <li><i class="fi fi-yes">&#10003;</i> 2027 ROI guarantee</li>
+          <li><i class="fi fi-note">+</i> Extra sub-category Spotlights: $199+GST/yr each</li>
+        </ul>
+      </div>
+      <div class="tier-footer">
+        <a href="#contact" class="tier-cta tier-cta-gold">Choose Gold &rarr;</a>
+        <div class="scarcity-note">&#9876; One Gold Spotlight per sub-category &mdash; first in wins</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WHAT HAPPENS NEXT -->
+  <div class="next-steps">
+    <h3>What happens after you say yes</h3>
+    <div class="step-row">
+      <div class="sr-num">1</div>
+      <div class="sr-body">
+        <strong>GST invoice sent within 2 hours</strong>
+        <span>You'll receive a tax invoice for your chosen tier. Annual subscription, billed upfront.</span>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="sr-num">2</div>
+      <div class="sr-body">
+        <strong>Listing draft sent within 24 hours</strong>
+        <span>We research your business and write your full SEO listing. You'll receive a preview link to review before anything goes live.</span>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="sr-num">3</div>
+      <div class="sr-body">
+        <strong>You approve, we go live</strong>
+        <span>Request any changes, give the go-ahead, and your listing is published on Papamoa.info &mdash; usually the same day.</span>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="sr-num">4</div>
+      <div class="sr-body">
+        <strong>Facebook welcome post</strong>
+        <span>Every new Silver and Gold listing gets a dedicated welcome post published to our P&#257;p&#257;moa Facebook audience.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUARANTEES -->
+  <div class="section-label">Our guarantees</div>
+  <div class="guarantees-grid" style="margin-top:12px;">
+    <div class="guarantee-card">
+      <span class="gc-icon">&#128274;</span>
+      <div class="gc-body">
+        <h4>Lifetime Price Lock</h4>
+        <p>Your launch price is locked in forever. Renew consecutively and your rate never increases.</p>
+      </div>
+    </div>
+    <div class="guarantee-card">
+      <span class="gc-icon">&#128200;</span>
+      <div class="gc-body">
+        <h4>2027 ROI Guarantee</h4>
+        <p>No trackable return from your 2026 listing? Your 2027 renewal is on us.</p>
+      </div>
+    </div>
+    <div class="guarantee-card">
+      <span class="gc-icon">&#9997;&#65039;</span>
+      <div class="gc-body">
+        <h4>Done-for-You</h4>
+        <p>We write everything. You review and approve. You don't touch a single line of code.</p>
+      </div>
+    </div>
+    <div class="guarantee-card">
+      <span class="gc-icon">&#11088;</span>
+      <div class="gc-body">
+        <h4>Free TaurangaNZ.info Silver</h4>
+        <p>Any paid Papamoa.info listing includes a Silver listing on TaurangaNZ.info at no extra cost.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-strip" id="contact">
+    <div class="cs-avatar">P</div>
+    <div class="cs-body">
+      <strong>Ready to go? Get in touch</strong>
+      <span>Reply by email or call &mdash; we'll get your invoice out and listing started today.</span>
+    </div>
+    <div class="cs-links">
+      <a href="mailto:jayden@papamoa.info" class="cs-link">&#9993; jayden@papamoa.info</a>
+      <a href="tel:+64275332970" class="cs-link">&#128222; 027 533 2970</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
+</body>
+</html>
