@@ -14,6 +14,27 @@ export default {
       });
     }
 
+    // ── Weather proxy ─────────────────────────────────
+    if (url.pathname === '/weather') {
+      const lat = url.searchParams.get('latitude') || '-37.7167';
+      const lon = url.searchParams.get('longitude') || '176.3167';
+      const weatherUrl = 'https://api.open-meteo.com/v1/forecast'
+        + '?latitude=' + lat
+        + '&longitude=' + lon
+        + '&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m'
+        + '&daily=uv_index_max&timezone=Pacific%2FAuckland&forecast_days=1';
+      const resp = await fetch(weatherUrl);
+      const data = await resp.json();
+      return new Response(JSON.stringify(data), {
+        status: resp.status,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'public, max-age=600',
+        }
+      });
+    }
+
     // ── Google Sheets proxy ───────────────────────────
     if (url.pathname === '/sheets') {
       if (request.method !== 'GET') {
