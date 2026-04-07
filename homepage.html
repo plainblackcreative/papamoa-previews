@@ -404,9 +404,17 @@
 .pnf-footer { background:var(--pnf-navy); padding:48px 28px 24px; overflow:hidden; }
 .pnf-footer-inner { max-width:1200px; margin:0 auto; }
 .pnf-footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:36px; margin-bottom:36px; }
-@media (max-width:900px) { .pnf-footer-grid { grid-template-columns:1fr 1fr 1fr; gap:24px; } }
-@media (max-width:600px) { .pnf-footer-grid { grid-template-columns:1fr 1fr; gap:20px; } }
-@media (max-width:400px) { .pnf-footer-grid { grid-template-columns:1fr; } }
+.pnf-footer-brand-col { grid-column:1; }
+@media (max-width:900px) {
+  .pnf-footer-grid { grid-template-columns:1fr 1fr; gap:24px 28px; }
+  .pnf-footer-brand-col { grid-column:1 / -1; display:grid; grid-template-columns:1fr 1fr; gap:0 28px; align-items:start; }
+  .pnf-footer-brand-col .pnf-footer-tagline { max-width:none; }
+}
+@media (max-width:480px) {
+  .pnf-footer-grid { grid-template-columns:1fr 1fr; gap:20px 20px; }
+  .pnf-footer-brand-col { grid-column:1 / -1; display:block; margin-bottom:4px; }
+  .pnf-footer-brand-col .pnf-footer-tagline { display:none; }
+}
 .pnf-footer-brand { font-family:var(--pnf-display); font-size:1.1rem; font-weight:700; color:var(--pnf-white); margin-bottom:8px; }
 .pnf-footer-brand span { color:var(--pnf-accent); }
 .pnf-footer-tagline { font-size:12.5px; color:rgba(255,255,255,0.38); line-height:1.7; margin-bottom:18px; max-width:280px; }
@@ -914,7 +922,7 @@
 <footer class="pnf-footer">
   <div class="pnf-footer-inner">
     <div class="pnf-footer-grid">
-      <div>
+      <div class="pnf-footer-brand-col">
         <div class="pnf-footer-brand">Papamoa<span>.info</span></div>
         <p class="pnf-footer-tagline">Pāpāmoa&rsquo;s independent local business directory. Every listing written editorially &mdash; built for Google, AI engines, and the people who live here.</p>
         <div class="pnf-footer-social"><a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-social-btn"><span class="fb-icon">f</span> Facebook</a></div>
