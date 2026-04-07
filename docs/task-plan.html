@@ -582,7 +582,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <div class="task-section">
     <div class="ts-head">
       <div class="ts-title">🛠️ 7b. Quick Fixes &amp; Queued Game Plan</div>
-      <div class="ts-meta"><span class="ts-count">0 / 11</span><span class="ts-priority priority-high">High</span></div>
+      <div class="ts-meta"><span class="ts-count">0 / 16</span><span class="ts-priority priority-high">High</span></div>
     </div>
     <p style="font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:18px;">Pending fixes and queued items that don't belong to a specific section above. Do quick fixes first — they unblock live funnel paths.</p>
     <div class="task-list">
@@ -686,6 +686,42 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         </div>
       </div>
 
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Homepage category sections rebuilt — retrofit all listing pages to match <span class="new-badge">Done on homepage</span></div>
+          <div class="task-desc">Homepage category sections (Food & Drink, Services, Accommodation, Activities, Shopping) now show subcategory cards + scoped search instead of listing cards. Subcategory cards have enriched <code>data-tags</code> from real listing content — "pizza" surfaces Turkish Food, "dentist"/"braces"/"invisalign" surface Medical & Dental, etc. Cards capped at 8 visible by default; search un-caps all matches. Spotlight Ads repositioned as premium homepage product (~$1,000/month), independent of listing tier, price removed from ghost ad copy. No listing cards shown on homepage. Category and subcategory pages remain the full directory — homepage is navigation only.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-seo">SEO</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Homepage footer nav restructured — 5 columns, updated links, Privacy &amp; Terms added <span class="new-badge">Done</span></div>
+          <div class="task-desc">Footer updated: Browse column now leads with all 5 main category pages then 5 high-intent subcategories. Local Info reordered by utility (Weather, Surf &amp; Tides, Urgent Health first). Featured Agent removed. For Businesses trimmed to 3 links. Network is now its own column (TaurangaNZ.info, Contact Us, Privacy &amp; Terms). <code>legal.html</code> linked from both Network column and footer bottom bar. Grid updated to 5 columns with responsive breakpoints (3-col at 900px, 2-col at 480px).</div>
+          <div class="task-tags"><span class="task-tag tag-seo">SEO</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Homepage search pills — swipeable single row, verified against listings <span class="new-badge">Done</span></div>
+          <div class="task-desc">Search suggestion pills under homepage search bar now display in a single swipeable row (no wrap) on all screen sizes. Pills updated to 10 keywords tied directly to current listings: WOF, Dentist, Pilates yoga, Surf school, Sim racing, Indian restaurant, Burgers, Orthodontist, Fly screen, Holiday park. All 10 verified to return search results via the search index. Recent searches preserved and shown at front of row.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+
+      <div class="task-item new">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Retrofit all pages to use <code>nav.js</code> shared nav <span class="new-badge">Built — needs rollout</span></div>
+          <div class="task-desc"><code>nav.js</code> is built and committed to repo root. Three nav variants controlled by <code>data-nav</code> attribute on <code>&lt;body&gt;</code>: <strong>default</strong> (homepage, community, info pages), <strong>category</strong> (all listing and category pages — logo + dynamic breadcrumb from <code>data-breadcrumb</code> attribute + "List Your Business" CTA + full drawer), <strong>sales</strong> (logo + "← Directory" centred link + "Get started →" CTA anchoring to page form + simplified drawer with sales links). Reference guide at <code>docs/nav-usage.md</code>. To retrofit a page: remove hardcoded nav and drawer HTML, remove nav/drawer CSS from <code>&lt;style&gt;</code> block, add <code>&lt;div id="pnf-nav-placeholder"&gt;&lt;/div&gt;</code> at top of body, add <code>&lt;script src="/papamoa-previews/nav.js"&gt;&lt;/script&gt;</code> at bottom of body, set correct <code>data-nav</code> (and <code>data-breadcrumb</code> / <code>data-cta-href</code> as needed). At custom domain launch: add <code>&lt;script&gt;var PNF_BASE = '';&lt;/script&gt;</code> before nav.js on every page, or do a single find-and-replace.</div>
+          <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -699,8 +735,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item new">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Uniform nav &amp; footer across all repo pages <span class="new-badge">New</span></div>
-          <div class="task-desc">Every page currently has a slightly different nav and footer — different logo styles, different link sets, some with phone numbers, some without, inconsistent CTA buttons. Do a single Find &amp; Replace pass to standardise: one nav component (logo + directory link + "List your business" CTA), one footer (logo, tagline, links to directory / pricing / contact). Phone number stays in the footer only, not the nav. Do this pass after all content/feature work is complete, alongside the design system upgrade.</div>
+          <div class="task-title">Retrofit all pages to <code>nav.js</code> shared nav system <span class="new-badge">nav.js built</span></div>
+          <div class="task-desc"><code>nav.js</code> is complete and committed. Rollout means removing hardcoded nav/drawer HTML and CSS from every page, adding the placeholder div and script tag, and setting the correct <code>data-nav</code> attribute. Three variants: <strong>default</strong> (homepage, community, info), <strong>category</strong> (listing and category pages — includes dynamic breadcrumb), <strong>sales</strong> (sales/business pages — stripped back with form anchor CTA). See <code>docs/nav-usage.md</code> for the full retrofit checklist per page type. Do this pass after all content work is complete — changing the nav on every page mid-build creates unnecessary churn.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
         </div>
       </div>
@@ -819,7 +855,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   </div>
 
   <div class="page-footer">
-    Papamoa.info internal use only &nbsp;·&nbsp; PlainBlack Creative &nbsp;·&nbsp; Updated April 2026
+    Papamoa.info internal use only &nbsp;·&nbsp; PlainBlack Creative &nbsp;·&nbsp; Updated April 2026 (homepage &amp; nav pass)
   </div>
 
 </div>
