@@ -69,6 +69,93 @@ export default {
       });
     }
 
+
+    // ── Fishing data (tides, sun, bite times) ────────
+    if (url.pathname === '/fishing-data') {
+      if (!env.CLAUDE_API_KEY) {
+        return new Response(JSON.stringify({ error: 'CLAUDE_API_KEY not configured' }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      const now = new Date().toLocaleDateString('en-NZ', { timeZone: 'Pacific/Auckland', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+      const fishingResp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': env.CLAUDE_API_KEY,
+          'anthropic-version': '2023-06-01'
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 1200,
+          system: 'You are a fishing and tide data assistant for Papamoa Beach, Bay of Plenty, New Zealand. Return valid JSON only, no markdown.',
+          messages: [{
+            role: 'user',
+            content: `Today is ${now}. Generate realistic tides, sunrise/sunset, and solunar bite times for Papamoa Beach NZ. Return this exact JSON:
+{
+  "date_label": "full date string",
+  "updated_iso": "ISO timestamp",
+  "tides": [
+    { "type": "high", "time": "6:14 AM", "height_m": 1.82 },
+    { "type": "low", "time": "12:28 PM", "height_m": 0.31 },
+    { "type": "high", "time": "6:45 PM", "height_m": 1.74 },
+    { "type": "low", "time": "12:52 AM", "height_m": 0.28 }
+  ],
+  "sun": {
+    "first_light": "6:02 AM",
+    "sunrise": "6:28 AM",
+    "solar_noon": "12:44 PM",
+    "sunset": "7:00 PM",
+    "last_light": "7:26 PM",
+    "daylight_hours": "12h 32m",
+    "sunrise_bearing": 88,
+    "sunset_bearing": 272,
+    "solar_altitude_deg": 52
+  },
+  "bite_times": [
+    { "period": "major", "start": "6:10 AM", "end": "8:10 AM", "quality": "Excellent" },
+    { "period": "minor", "start": "12:20 PM", "end": "1:20 PM", "quality": "Good" },
+    { "period": "major", "start": "6:40 PM", "end": "8:40 PM", "quality": "Excellent" },
+    { "period": "minor", "start": "12:50 AM", "end": "1:50 AM", "quality": "Fair" }
+  ],
+  "moon": {
+    "phase_name": "Waning Gibbous",
+    "illumination_pct": 68,
+    "fishing_note": "Good solunar activity. Fish the major periods around tide changes."
+  },
+  "conditions_summary": "Autumn conditions. Easterly 15 knots easing afternoon. Good surf fishing on the incoming tide."
+}`
+          }]
+        })
+      });
+
+      const fishingData = await fishingResp.json();
+      const textBlock = fishingData.content && fishingData.content.find(b => b.type === 'text');
+      const rawText = textBlock ? textBlock.text : '';
+
+      let result;
+      try {
+        result = JSON.parse(rawText.replace(/```json|```/g, '').trim());
+        result.updated_iso = new Date().toISOString();
+      } catch(e) {
+        return new Response(JSON.stringify({ error: 'Failed to parse fishing data' }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      return new Response(JSON.stringify(result), {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-store',
+        }
+      });
+    }
+
     // ── Claude proxy (existing, unchanged) ───────────
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
