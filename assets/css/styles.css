@@ -1,311 +1,622 @@
 /* ============================================================
-   Papamoa.info â€” Shared Stylesheet
-   DM Sans (body) + Fraunces (display)
-   Ocean / Sand / Dune palette
+   Papamoa.info — Shared Stylesheet
+   SOURCE OF TRUTH — April 2026
+   Figtree (body) + Playfair Display (headings)
+   Navy / Ocean / Sand / Dune / Blue accent palette
    ============================================================ */
 
 /* ---- RESET ---- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ---- DESIGN TOKENS ---- */
+/* ============================================================
+   DESIGN TOKENS
+   These are the canonical values. Use these everywhere.
+   Do NOT invent new colour values — map everything to this set.
+   ============================================================ */
 :root {
-  /* Brand palette */
-  --color-sand: #F7F3ED;
-  --color-sand-dark: #EDE7DB;
-  --color-ocean: #1B6B7D;
-  --color-ocean-deep: #134B58;
-  --color-ocean-light: #E8F4F6;
-  --color-dune: #C4985A;
-  --color-dune-light: #F5EDD8;
 
-  /* Text */
-  --color-text: #2C2C2C;
-  --color-text-light: #6B6B6B;
-  --color-white: #FFFFFF;
-  --color-border: #E0D9CE;
+  /* ── Core palette ── */
+  --navy:        #0D2B3E;   /* darkest — nav bg, headings, dark sections */
+  --navy-mid:    #2B3F5C;   /* homepage hero bg */
+  --ocean:       #1B6B7D;   /* primary brand colour */
+  --ocean-deep:  #0F4352;   /* darker ocean — hero gradients, form bg */
+  --ocean-mid:   #1A5F70;   /* mid gradient stop */
+  --ocean-light: #E4F2F5;   /* tinted bg for tags, badges, highlights */
+  --blue:        #3AABDE;   /* accent — CTAs, links, active states, .info in logo */
+  --sand:        #F7F3ED;   /* page background */
+  --sand-alt:    #F5EFE0;   /* homepage body bg (slightly warmer) */
+  --sand-dark:   #EDE7DB;   /* darker sand — section dividers, input bg */
+  --dune:        #C4985A;   /* warm gold — secondary accent, borders, highlights */
+  --dune-light:  #F5EDD8;   /* dune tint bg */
+  --white:       #FFFFFF;
+  --body:        #1E2D3E;   /* homepage body text */
+  --text:        #1A2832;   /* sales/listing page body text */
+  --muted:       #5A6E78;   /* secondary text */
+  --muted-alt:   #607080;   /* homepage muted (slightly cooler) */
+  --border:      #D8E4E8;   /* standard border */
+  --border-alt:  #DDE5EE;   /* homepage border (slightly cooler) */
+  --bg:          #F4F7FA;   /* homepage section bg (cool white) */
 
-  /* Status colours */
-  --color-green: #2E7D32;
-  --color-green-light: #E8F5E9;
-  --color-amber: #F59E0B;
-  --color-amber-light: #FEF3C7;
-  --color-red: #DC2626;
-  --color-red-light: #FEE2E2;
+  /* ── Tier colours ── */
+  --gold:        #B8840A;   /* Gold listing tier */
+  --gold-bg:     #FBF3E2;
+  --gold-alt:    #C8962A;   /* homepage gold (slightly brighter) */
+  --silver:      #5A7A8A;   /* Silver listing tier */
+  --silver-bg:   #EDF3F6;
+  --bronze:      #9A7060;   /* Bronze placeholder (internal only) */
+  --bronze-bg:   #F5EDE8;
 
-  /* Typography */
-  --font-body: 'Figtree', sans-serif;
+  /* ── Status colours ── */
+  --green:       #1E6B3C;
+  --green-bg:    #E6F4EC;
+  --green-pulse: #7DC143;   /* live indicator, lime accent */
+  --lime:        #7DC143;   /* alias — used in homepage */
+  --red:         #8B2020;
+  --red-bg:      #FAEAEA;
+  --amber:       #8A5A00;
+  --amber-bg:    #FFF8E6;
+  --coral:       #E8344A;   /* homepage alert/error */
+
+  /* ── Typography ── */
+  --font-body:    'Figtree', sans-serif;
   --font-display: 'Playfair Display', serif;
 
-  /* Spacing & shape */
-  --radius: 8px;
-  --radius-lg: 16px;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
-  --max-width: 1140px;
+  /* ── Spacing & shape ── */
+  --radius:      8px;
+  --radius-lg:   14px;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md:   0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg:   0 8px 32px rgba(0,0,0,0.10);
+  --max-width:   1200px;
+  --content-width: 960px;  /* sales/listing pages */
+
+  /* ── PNF nav/footer system tokens (used by nav.js) ── */
+  --pnf-navy:    #0D2B3E;
+  --pnf-accent:  #3AABDE;
+  --pnf-dune:    #C4985A;
+  --pnf-white:   #FFFFFF;
+  --pnf-muted:   rgba(255,255,255,0.45);
+  --pnf-font:    'Figtree', sans-serif;
+  --pnf-display: 'Playfair Display', serif;
 }
 
-/* ---- BASE ---- */
-html { scroll-behavior: smooth; }
+/* ============================================================
+   BASE
+   ============================================================ */
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--font-body);
-  color: var(--color-text);
-  background: var(--color-sand);
+  color: var(--text);
+  background: var(--sand);
   line-height: 1.65;
-  font-size: 16px;
+  font-size: 15px;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-a { color: var(--color-ocean); }
-
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
 img { max-width: 100%; height: auto; }
 
-/* ---- TOP BAR ---- */
-.top-bar {
-  background: var(--color-ocean-deep);
-  color: rgba(255,255,255,0.7);
-  font-size: 13px;
-  padding: 6px 0;
-}
-.top-bar-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.top-bar a {
-  color: rgba(255,255,255,0.7);
-  text-decoration: none;
-  margin-left: 16px;
-  transition: color 0.2s;
-}
-.top-bar a:hover { color: #fff; }
+/* ============================================================
+   NAV (pnf-nav system — injected by nav.js)
+   Reference only. Do not override these in page <style> blocks.
+   ============================================================ */
 
-/* ---- SITE HEADER ---- */
-.site-header {
-  background: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.header-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 72px;
-}
-.logo {
+/*
+  .pnf-nav          — sticky top nav bar, bg: --pnf-navy (#0D2B3E), height: 56px
+  .pnf-logo         — "Papamoa" in white Playfair Display 15px bold
+  .pnf-logo span    — ".info" in --pnf-accent (#3AABDE)
+  .pnf-link         — nav links, Figtree 13px, color: --pnf-muted
+  .pnf-link.active  — white text + --pnf-accent underline
+  .pnf-cta          — pill CTA button, bg: --pnf-accent, white text, 100px radius
+  .pnf-fb           — Facebook icon square button
+  .pnf-hamburger    — mobile menu toggle (hidden on desktop)
+
+  Logo treatment (LOCKED):
+    <a class="pnf-logo" href="/">Papamoa<span>.info</span></a>
+
+  Phone number in nav (post-call-landing only):
+    Color: --blue (#3AABDE) — NOT dune/gold
+*/
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--color-ocean);
-  text-decoration: none;
-}
-.logo span { color: var(--color-dune); }
-
-.main-nav { display: flex; gap: 4px; }
-.main-nav a {
-  text-decoration: none;
-  color: var(--color-text);
-  font-size: 14px;
-  font-weight: 500;
-  padding: 8px 14px;
-  border-radius: var(--radius);
-  transition: all 0.2s;
-}
-.main-nav a:hover {
-  background: var(--color-ocean-light);
-  color: var(--color-ocean);
-}
-.main-nav a.active {
-  background: var(--color-ocean);
-  color: var(--color-white);
+  color: var(--navy);
+  line-height: 1.2;
 }
 
-/* ---- BREADCRUMBS ---- */
-.breadcrumb-bar {
-  background: var(--color-sand-dark);
-  border-bottom: 1px solid var(--color-border);
-  padding: 12px 0;
-}
-.breadcrumb-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
-  font-size: 13px;
-  color: var(--color-text-light);
-}
-.breadcrumb-inner a {
-  color: var(--color-ocean);
-  text-decoration: none;
-}
-.breadcrumb-sep { margin: 0 8px; opacity: 0.4; }
-
-/* ---- FOOTER ---- */
-.site-footer {
-  background: var(--color-ocean-deep);
-  color: rgba(255,255,255,0.7);
-  padding: 48px 0 24px;
-}
-.footer-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 40px;
-}
-.footer-brand {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--color-white);
-  margin-bottom: 12px;
-}
-.footer-brand span { color: var(--color-dune); }
-.footer-desc { font-size: 14px; line-height: 1.6; max-width: 300px; }
-.footer-heading {
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-white);
-  margin-bottom: 16px;
-}
-.footer-links { list-style: none; }
-.footer-links li { margin-bottom: 8px; }
-.footer-links a {
-  color: rgba(255,255,255,0.6);
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.2s;
-}
-.footer-links a:hover { color: var(--color-white); }
-.footer-bottom {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 24px 24px 0;
-  margin-top: 40px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  font-size: 13px;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* ---- COMMON COMPONENTS ---- */
-
-/* Section headings */
-.section-heading {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--color-ocean-deep);
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--color-border);
-}
-
-/* Gold badge */
-.gold-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: var(--color-dune);
-  color: var(--color-white);
+.eyebrow {
   font-size: 11px;
   font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 5px 12px;
-  border-radius: 100px;
+  color: var(--ocean);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 8px;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.content-wrap {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================================
+   HERO PATTERNS
+   ============================================================ */
+
+/* Directory homepage hero */
+.hero-directory {
+  background: var(--navy-mid);
+  padding: 52px 24px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-directory::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--lime), var(--blue));
+}
+
+/* Sales/listing page hero */
+.hero-sales {
+  background: var(--ocean-deep);
+  padding: 56px 32px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-sales::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 50%, rgba(58,171,222,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 20%, rgba(196,152,90,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-sales::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 60px;
+  background: var(--sand);
+  clip-path: ellipse(65% 100% at 50% 100%);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
   white-space: nowrap;
 }
 
-/* Feature tags */
-.features-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 32px;
-}
-.feature-tag {
-  padding: 6px 14px;
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: 100px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-text);
-}
-
-/* CTA buttons */
+/* Primary — blue accent */
 .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 28px;
-  background: var(--color-ocean);
-  color: var(--color-white);
-  border: none;
-  border-radius: var(--radius);
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s;
+  background: var(--blue);
+  color: var(--white);
 }
 .btn-primary:hover {
-  background: var(--color-ocean-deep);
+  background: #2d95c4;
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
+  text-decoration: none;
 }
 
+/* Secondary — ocean */
+.btn-ocean {
+  background: var(--ocean);
+  color: var(--white);
+}
+.btn-ocean:hover { background: var(--ocean-deep); text-decoration: none; }
+
+/* Dune/warm gold */
 .btn-dune {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 28px;
-  background: var(--color-dune);
-  color: var(--color-white);
-  border: none;
+  background: var(--dune);
+  color: var(--white);
+}
+.btn-dune:hover { background: #B38845; text-decoration: none; }
+
+/* Gold tier */
+.btn-gold {
+  background: var(--gold);
+  color: var(--white);
+}
+.btn-gold:hover { background: #9A6E08; text-decoration: none; }
+
+/* Silver tier */
+.btn-silver {
+  background: var(--silver-bg);
+  color: var(--silver);
+  border: 1px solid #BDD0D8;
+}
+.btn-silver:hover { background: var(--silver); color: var(--white); text-decoration: none; }
+
+/* Pill variant */
+.btn-pill { border-radius: 100px; }
+
+/* ============================================================
+   TIER CARDS
+   ============================================================ */
+
+.tier-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.tier-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.tier-card.featured {
+  border-color: var(--dune);
+  box-shadow: 0 6px 30px rgba(196,152,90,0.18);
+}
+
+.tier-head { padding: 24px 24px 20px; border-bottom: 1px solid var(--border); }
+.tier-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+}
+.tier-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+.tier-price { font-size: 1.6rem; font-weight: 800; line-height: 1.1; margin-bottom: 6px; }
+.tier-price span { font-size: 0.85rem; font-weight: 400; opacity: 0.6; }
+.tier-tagline { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.tier-body { padding: 20px 24px; flex: 1; }
+.tier-footer { padding: 16px 24px 20px; }
+
+/* Gold tier */
+.tier-gold .tier-head { background: linear-gradient(135deg, var(--gold-bg), #FEF8EC); border-bottom-color: rgba(184,132,10,0.2); }
+.tier-gold .tier-name { color: var(--gold); }
+.tier-gold .tier-price { color: var(--gold); }
+.tier-gold .tier-badge { background: #FAECC8; color: var(--gold); }
+
+/* Silver tier */
+.tier-silver .tier-head { background: var(--silver-bg); border-bottom-color: #D0E4EC; }
+.tier-silver .tier-name { color: var(--silver); }
+.tier-silver .tier-price { color: var(--silver); }
+.tier-silver .tier-badge { background: #D8E8EE; color: var(--silver); }
+
+/* Bronze/placeholder */
+.tier-placeholder .tier-head { background: var(--bronze-bg); }
+.tier-placeholder .tier-name { color: var(--bronze); }
+.tier-placeholder .tier-price { color: var(--bronze); }
+.tier-placeholder .tier-badge { background: #F0EBE4; color: var(--bronze); }
+
+/* Feature list inside tier cards */
+.feat-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.feat-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; line-height: 1.45; }
+.fi { flex-shrink: 0; font-style: normal; font-size: 13px; margin-top: 1px; font-weight: 700; }
+.fi-yes { color: var(--green); }
+.fi-no  { color: #C0C8CC; }
+.fi-note { color: var(--dune); }
+
+.scarcity-note { font-size: 11.5px; color: var(--gold); font-weight: 600; text-align: center; margin-top: 10px; }
+
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
   border-radius: var(--radius);
   font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.btn-dune:hover {
-  background: #B38845;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--sand);
+  transition: border-color 0.2s, background 0.2s;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-/* Cards */
+input:focus, select:focus, textarea:focus {
+  border-color: var(--ocean);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(27,107,125,0.08);
+}
+
+textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+/* ============================================================
+   CARDS & PANELS
+   ============================================================ */
+
 .card {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
+  background: var(--white);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 24px;
   box-shadow: var(--shadow-sm);
 }
 
-/* ---- RESPONSIVE ---- */
+.panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+/* Guarantee card */
+.guarantee-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.gc-icon { font-size: 26px; flex-shrink: 0; }
+.gc-body h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; font-family: var(--font-body); }
+.gc-body p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+/* ============================================================
+   ALERT / NOTICE BOXES
+   ============================================================ */
+
+.alert {
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  display: flex;
+  gap: 12px;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.alert-icon { flex-shrink: 0; margin-top: 1px; }
+.alert.warn   { background: var(--amber-bg); border: 1px solid #E8C96A; color: var(--amber); }
+.alert.info   { background: var(--ocean-light); border: 1px solid #B0D4DC; color: var(--ocean-deep); }
+.alert.ok     { background: var(--green-bg); border: 1px solid #9ED0B4; color: var(--green); }
+.alert.danger { background: var(--red-bg); border: 1px solid #E8AAAA; color: var(--red); }
+
+/* ============================================================
+   BADGES & TAGS
+   ============================================================ */
+
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 3px;
+}
+
+.badge-gold    { background: var(--gold-bg); color: var(--gold); }
+.badge-silver  { background: var(--silver-bg); color: var(--silver); }
+.badge-ocean   { background: var(--ocean-light); color: var(--ocean-deep); }
+.badge-green   { background: var(--green-bg); color: var(--green); }
+.badge-amber   { background: var(--amber-bg); color: var(--amber); }
+.badge-red     { background: var(--red-bg); color: var(--red); }
+
+.tag {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 100px;
+  background: var(--ocean-light);
+  color: var(--ocean);
+}
+
+/* ============================================================
+   SEARCH BAR (homepage pattern)
+   ============================================================ */
+
+.search-bar { background: var(--white); border-bottom: 1px solid var(--border-alt); padding: 18px 20px; position: relative; z-index: 51; }
+.search-bar-inner { max-width: var(--max-width); margin: 0 auto; display: flex; gap: 10px; align-items: center; }
+.search-input {
+  width: 100%;
+  padding: 11px 14px 11px 40px;
+  border: 1.5px solid var(--border-alt);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--body);
+  background: var(--bg);
+  transition: all 0.15s;
+  outline: none;
+}
+.search-input:focus { border-color: var(--blue); background: var(--white); box-shadow: 0 0 0 3px rgba(58,171,222,0.1); }
+.search-btn {
+  padding: 11px 22px;
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.88rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.search-btn:hover { background: #2A8FBE; }
+
+/* Search suggestion pills */
+.search-suggestion {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--muted-alt);
+  background: var(--bg);
+  border: 1px solid var(--border-alt);
+  border-radius: 20px;
+  padding: 3px 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.search-suggestion:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
+.search-suggestion-recent { background: rgba(58,171,222,0.08); border-color: rgba(58,171,222,0.25); color: var(--blue); }
+
+/* ============================================================
+   FOOTER (pnf-footer system — injected by nav.js)
+   Reference only.
+   ============================================================ */
+
+/*
+  Slim footer (sales pages):
+    bg: --pnf-navy, centred brand + tagline + 3 links + copyright
+    .pnf-footer-brand  — "Papamoa" white Playfair, ".info" in --pnf-accent
+    .pnf-footer-tagline — rgba(255,255,255,0.38)
+    .pnf-footer-slim-links a — rgba(255,255,255,0.4), hover white
+
+  Full footer (directory pages):
+    5-column grid: brand col + Browse + Local Info + For Businesses + Network
+    .pnf-footer-col h4 — rgba(255,255,255,0.4), uppercase 11px
+    .pnf-footer-links a — rgba(255,255,255,0.5), hover white
+    .pnf-footer-bottom — rgba(255,255,255,0.25), legal.html linked
+*/
+
+/* ============================================================
+   CATEGORY COLOUR CLASSES (hero backgrounds — LOCKED)
+   ============================================================ */
+
+.hero-cat-food        { background: linear-gradient(135deg, #5C2D1E, #8B4513); }
+.hero-cat-services    { background: linear-gradient(135deg, #0F3352, #1B5F7D); }
+.hero-cat-shopping    { background: linear-gradient(135deg, #3D2B6E, #6A4CA0); }
+.hero-cat-activities  { background: linear-gradient(135deg, #1A4A2E, #2E7D50); }
+.hero-cat-accommodation { background: linear-gradient(135deg, #2B3A5C, #3D5A8A); }
+.hero-cat-community   { background: linear-gradient(135deg, #0D2B3E, #1B6B7D); }
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+
+.text-muted   { color: var(--muted); }
+.text-navy    { color: var(--navy); }
+.text-ocean   { color: var(--ocean); }
+.text-gold    { color: var(--gold); }
+.text-silver  { color: var(--silver); }
+
+.bg-white  { background: var(--white); }
+.bg-sand   { background: var(--sand); }
+.bg-navy   { background: var(--navy); }
+.bg-ocean  { background: var(--ocean-light); }
+
+.divider { height: 1px; background: var(--border); margin: 40px 0; }
+
+/* Live pulse dot */
+.pulse {
+  width: 7px; height: 7px;
+  background: var(--green-pulse);
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
 @media (max-width: 900px) {
-  .main-nav { display: none; }
-  .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .pnf-links { display: none; }
+}
+
+@media (max-width: 720px) {
+  .tiers-grid-3 { grid-template-columns: 1fr; }
+  .guarantees-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
-  .footer-inner { grid-template-columns: 1fr; gap: 24px; }
-  .footer-bottom { flex-direction: column; gap: 8px; }
+  .tier-choice { grid-template-columns: 1fr; }
+  .content-wrap { padding: 0 16px; }
 }
+
+/* ============================================================
+   FONT IMPORT NOTE
+   Include this in every page <head>:
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+   NEVER use DM Sans, Fraunces, Inter, Roboto, or any other font.
+   Figtree = body/nav/UI. Playfair Display = headings/display only.
+   ============================================================ */
+
+/* ============================================================
+   KNOWN CONFLICTS TO WATCH FOR
+
+   Old styles.css (assets/css/styles.css pre-April 2026) used:
+     --color-ocean-deep: #134B58  ← WRONG, now #0F4352
+     --font-body: 'DM Sans'       ← WRONG, now Figtree
+     --font-display: 'Fraunces'   ← WRONG, now Playfair Display
+     .logo color: --color-ocean   ← WRONG, logo text is white / .info is --blue
+
+   If you see DM Sans, Fraunces, Libre Baskerville, or Space Grotesk
+   in any file — replace with Figtree / Playfair Display.
+
+   Gold price: $1,199+GST/yr (NOT $1,200, NOT $1,199 without GST note)
+   Silver price: $599+GST/yr
+   Menu Add-On: $199+GST/yr (Gold: free, Silver: paid add-on)
+   Extra Spotlights: $99+GST/yr each
+   ============================================================ */
