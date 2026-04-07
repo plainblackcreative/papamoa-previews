@@ -198,8 +198,9 @@
     .search-input::placeholder { color:var(--muted); }
     .search-btn { padding:11px 22px; background:var(--blue); color:#fff; font-family:'Figtree',sans-serif; font-weight:700; font-size:0.88rem; border:none; border-radius:8px; cursor:pointer; white-space:nowrap; transition:background 0.15s; flex-shrink:0; }
     .search-btn:hover { background:#2A8FBE; }
-    .search-suggestions { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; align-items:center; }
-    .search-suggestion { font-size:0.74rem; font-weight:600; color:var(--muted); background:var(--bg); border:1px solid var(--border); border-radius:20px; padding:3px 11px; cursor:pointer; transition:all 0.15s; font-family:'Figtree',sans-serif; }
+    .search-suggestions { display:flex; gap:6px; flex-wrap:nowrap; margin-top:10px; align-items:center; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding-bottom:2px; }
+    .search-suggestions::-webkit-scrollbar { display:none; }
+    .search-suggestion { font-size:0.74rem; font-weight:600; color:var(--muted); background:var(--bg); border:1px solid var(--border); border-radius:20px; padding:3px 11px; cursor:pointer; transition:all 0.15s; font-family:'Figtree',sans-serif; white-space:nowrap; flex-shrink:0; }
     .search-suggestion:hover { background:var(--blue); color:#fff; border-color:var(--blue); }
     .search-suggestion-recent { background:rgba(58,171,222,0.08); border-color:rgba(58,171,222,0.25); color:var(--blue); }
     .search-results { position:absolute; top:calc(100% + 6px); left:0; right:0; background:var(--white); border:1px solid var(--border); border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.1); z-index:50; max-height:340px; overflow-y:auto; display:none; }
@@ -1203,7 +1204,7 @@ document.addEventListener('click', function(e) {
 });
 
 // ── RECENT SEARCHES + STATIC FALLBACK PILLS (Decision 7) ──
-var DEFAULT_PILLS = ['Plumber','Café','Mechanic','Gym','Accommodation','Electrician','Sushi','Physio','Fish & chips','Schools','Dogs','Real estate'];
+var DEFAULT_PILLS = ['Mechanic & WOF','Dentist','Physio & gym','Surf lessons','VR & gaming','Indian restaurant','Burgers','Orthodontist','Insect screens','Holiday park'];
 var RECENT_KEY = 'pnf_recent';
 var MAX_RECENT = 6;
 function saveRecentSearch(term) {
@@ -1242,7 +1243,7 @@ function renderPills() {
     out += '<span class="search-suggestion" style="opacity:0.5;font-size:0.7rem;" data-clear-recent="1">Clear</span>';
     out += '<span style="margin:0 6px;color:var(--border);align-self:center;">|</span>';
   }
-  var defaults = DEFAULT_PILLS.slice(0, recent.length > 0 ? 6 : 12);
+  var defaults = DEFAULT_PILLS;
   defaults.forEach(function(term) {
     out += '<span class="search-suggestion" data-fill="' + escAttr(term) + '">' + escHtml(term) + '</span>';
   });
