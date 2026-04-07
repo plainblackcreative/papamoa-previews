@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Local Services in Pāpāmoa | Papamoa.info</title>
+<title>Services &amp; Trades in Pāpāmoa — Mechanics, Plumbers, Electricians &amp; More | Papamoa.info</title>
 <meta name="description" content="Local services in Pāpāmoa — plumbers, electricians, builders, lawyers, real estate, gyms, hairdressers, accountants, automotive and more.">
 <link rel="canonical" href="https://papamoa.info/categories/services.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,6 +135,108 @@ a{color:var(--blue);text-decoration:none}
 .site-footer{background:var(--navy);padding:18px 24px;text-align:center;font-size:0.75rem;color:rgba(255,255,255,.4);margin-top:40px}
 .site-footer a{color:var(--blue)}
 </style>
+<!-- PNF NAV + FOOTER STYLES -->
+  <style>
+:root {
+  --pnf-navy:#0D2B3E; --pnf-accent:#3AABDE; --pnf-dune:#C4985A;
+  --pnf-white:#FFFFFF; --pnf-muted:rgba(255,255,255,0.45);
+  --pnf-font:'Figtree',sans-serif; --pnf-display:'Playfair Display',serif;
+}
+.pnf-nav { background:var(--pnf-navy); height:56px; padding:0 28px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:200; box-shadow:0 2px 12px rgba(0,0,0,0.25); gap:16px; width:100%; box-sizing:border-box; }
+.pnf-logo { font-family:var(--pnf-display); font-weight:700; font-size:15px; color:var(--pnf-white); text-decoration:none; flex-shrink:0; }
+.pnf-logo span { color:var(--pnf-accent); }
+.pnf-links { display:flex; align-items:center; gap:2px; flex:1; overflow-x:auto; scrollbar-width:none; }
+.pnf-links::-webkit-scrollbar { display:none; }
+.pnf-link { font-family:var(--pnf-font); font-size:13px; font-weight:500; color:var(--pnf-muted); text-decoration:none; padding:6px 12px; white-space:nowrap; transition:color 0.15s; border-bottom:2px solid transparent; }
+.pnf-link:hover { color:var(--pnf-white); }
+.pnf-link.active { color:var(--pnf-white); border-bottom-color:var(--pnf-accent); }
+.pnf-cta { font-family:var(--pnf-font); font-size:13px; font-weight:700; background:var(--pnf-accent); color:var(--pnf-white); padding:8px 18px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0; transition:background 0.2s; }
+.pnf-cta:hover { background:#2d95c4; }
+.pnf-fb { display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:6px; background:rgba(255,255,255,0.08); color:var(--pnf-muted); text-decoration:none; font-size:13px; font-weight:700; flex-shrink:0; transition:background 0.15s,color 0.15s; }
+.pnf-fb:hover { background:#1877F2; color:var(--pnf-white); }
+/* HAMBURGER BUTTON */
+.pnf-hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:7px; cursor:pointer; padding:0 9px; flex-shrink:0; }
+.pnf-hamburger span { display:block; height:2px; background:rgba(255,255,255,0.75); border-radius:2px; transition:all 0.25s; }
+.pnf-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.pnf-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.pnf-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.pnf-hamburger.open { opacity:0; pointer-events:none; }
+
+/* MOBILE DRAWER */
+.pnf-drawer-overlay { display:block; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:190; opacity:0; pointer-events:none; transition:opacity 0.25s; }
+.pnf-drawer-overlay.open { opacity:1; pointer-events:all; }
+.pnf-drawer { position:fixed; top:0; left:0; bottom:0; width:min(300px,85vw); background:var(--pnf-navy); z-index:201; transform:translateX(-100%); transition:transform 0.28s cubic-bezier(0.4,0,0.2,1); display:flex; flex-direction:column; box-shadow:4px 0 24px rgba(0,0,0,0.35); overflow:hidden; }
+.pnf-drawer.open { transform:translateX(0); }
+.pnf-drawer-head { display:flex; align-items:center; justify-content:space-between; padding:0 18px; height:56px; border-bottom:1px solid rgba(255,255,255,0.08); flex-shrink:0; }
+.pnf-drawer-logo { font-family:var(--pnf-display); font-weight:700; font-size:15px; color:var(--pnf-white); text-decoration:none; }
+.pnf-drawer-logo span { color:var(--pnf-accent); }
+.pnf-drawer-close { background:rgba(255,255,255,0.08); border:none; color:rgba(255,255,255,0.6); width:30px; height:30px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; flex-shrink:0; }
+.pnf-drawer-nav { flex:1; overflow-y:auto; padding:10px 0; }
+.pnf-drawer-nav a { display:flex; align-items:center; gap:12px; padding:13px 20px; font-family:var(--pnf-font); font-size:15px; font-weight:500; color:rgba(255,255,255,0.65); text-decoration:none; border-left:3px solid transparent; transition:all 0.15s; }
+.pnf-drawer-nav a:hover, .pnf-drawer-nav a.active { color:var(--pnf-white); background:rgba(255,255,255,0.05); border-left-color:var(--pnf-accent); }
+.pnf-drawer-nav a .dn-icon { font-size:17px; width:22px; text-align:center; flex-shrink:0; }
+.pnf-drawer-foot { padding:16px 18px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; gap:10px; flex-shrink:0; }
+.pnf-drawer-cta { display:block; text-align:center; background:var(--pnf-accent); color:var(--pnf-white); font-family:var(--pnf-font); font-size:14px; font-weight:700; padding:11px; border-radius:8px; text-decoration:none; }
+.pnf-drawer-fb { display:flex; align-items:center; justify-content:center; gap:8px; font-family:var(--pnf-font); font-size:13px; font-weight:600; color:rgba(255,255,255,0.45); text-decoration:none; }
+.pnf-drawer-fb:hover { color:var(--pnf-white); }
+
+@media (max-width:640px) {
+  .pnf-links { display:none; }
+  .pnf-fb { display:none; }
+  .pnf-cta { display:none; }
+  .pnf-nav { padding:0 16px; }
+  .pnf-hamburger { display:flex; }
+}
+.pnf-footer { background:var(--pnf-navy); padding:48px 28px 24px; overflow:hidden; }
+.pnf-footer-inner { max-width:960px; margin:0 auto; }
+.pnf-footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:36px; margin-bottom:36px; }
+@media (max-width:760px) { .pnf-footer-grid { grid-template-columns:1fr 1fr; gap:24px; } }
+@media (max-width:480px) { .pnf-footer-grid { grid-template-columns:1fr; } }
+.pnf-footer-brand { font-family:var(--pnf-display); font-size:1.1rem; font-weight:700; color:var(--pnf-white); margin-bottom:8px; }
+.pnf-footer-brand span { color:var(--pnf-accent); }
+.pnf-footer-tagline { font-size:12.5px; color:rgba(255,255,255,0.38); line-height:1.7; margin-bottom:18px; max-width:280px; }
+.pnf-footer-social { display:flex; gap:8px; margin-bottom:16px; }
+.pnf-social-btn { display:flex; align-items:center; gap:7px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:7px; padding:7px 12px; font-size:12px; font-weight:600; color:rgba(255,255,255,0.6); text-decoration:none; transition:all 0.15s; }
+.pnf-social-btn:hover { background:#1877F2; border-color:#1877F2; color:var(--pnf-white); }
+.pnf-social-btn .fb-icon { font-size:14px; font-weight:800; }
+.pnf-contact-link { display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:var(--pnf-accent); cursor:pointer; background:none; border:none; padding:0; margin:0; font-family:var(--pnf-font); line-height:1.5; appearance:none; }
+.pnf-contact-link:hover { color:var(--pnf-white); }
+.pnf-footer-col h4 { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:12px; }
+.pnf-footer-col h4+h4 { margin-top:20px; }
+.pnf-footer-links { list-style:none; display:flex; flex-direction:column; gap:7px; }
+.pnf-footer-links a { font-size:13px; color:rgba(255,255,255,0.5); text-decoration:none; transition:color 0.15s; }
+.pnf-footer-links a:hover { color:var(--pnf-white); }
+.pnf-footer-links button { font-size:13px; color:rgba(255,255,255,0.5); background:none; border:none; padding:0; cursor:pointer; font-family:var(--pnf-font); transition:color 0.15s; text-align:left; }
+.pnf-footer-links button:hover { color:var(--pnf-white); }
+.pnf-footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:12px; color:rgba(255,255,255,0.25); }
+.pnf-footer-bottom a { color:rgba(255,255,255,0.35); text-decoration:none; }
+.pnf-footer-bottom a:hover { color:var(--pnf-white); }
+.pnf-overlay { position:fixed; inset:0; background:rgba(13,43,62,0.7); backdrop-filter:blur(4px); z-index:1000; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity 0.2s; }
+.pnf-overlay.open { opacity:1; pointer-events:all; }
+.pnf-modal { background:#fff; border-radius:16px; width:100%; max-width:520px; overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,0.3); transform:translateY(16px); transition:transform 0.25s; }
+.pnf-overlay.open .pnf-modal { transform:translateY(0); }
+.pnf-modal-head { background:#0D2B3E; padding:22px 28px 18px; display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+.pnf-modal-head h2 { font-family:var(--pnf-display); font-size:1.2rem; font-weight:700; color:#fff; margin-bottom:3px; }
+.pnf-modal-head p { font-size:12.5px; color:rgba(255,255,255,0.5); }
+.pnf-modal-close { background:rgba(255,255,255,0.1); border:none; color:rgba(255,255,255,0.6); width:32px; height:32px; border-radius:50%; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s; line-height:1; }
+.pnf-modal-close:hover { background:rgba(255,255,255,0.2); color:#fff; }
+.pnf-modal-body { padding:24px 28px 28px; }
+.pnf-cf { display:flex; flex-direction:column; gap:14px; }
+.pnf-cf-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:420px) { .pnf-cf-row { grid-template-columns:1fr; } }
+.pnf-cf label { font-size:11px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:#5A6E78; margin-bottom:5px; display:block; }
+.pnf-cf input,.pnf-cf select,.pnf-cf textarea { width:100%; padding:11px 14px; border:1.5px solid #D8E4E8; border-radius:7px; font-family:var(--pnf-font); font-size:14px; color:#1A2832; background:#F7F3ED; outline:none; transition:border-color 0.2s; }
+.pnf-cf input:focus,.pnf-cf select:focus,.pnf-cf textarea:focus { border-color:#1B6B7D; background:#fff; }
+.pnf-cf textarea { resize:vertical; min-height:80px; line-height:1.55; }
+.pnf-cf-submit { width:100%; background:#1B6B7D; color:#fff; border:none; padding:13px; border-radius:8px; font-family:var(--pnf-font); font-size:15px; font-weight:700; cursor:pointer; transition:background 0.2s; margin-top:2px; }
+.pnf-cf-submit:hover { background:#0F4352; }
+.pnf-cf-submit:disabled { opacity:0.6; cursor:not-allowed; }
+.pnf-cf-fine { font-size:11.5px; color:#5A6E78; text-align:center; margin-top:6px; }
+.pnf-cf-success { display:none; text-align:center; padding:16px 0 8px; }
+.pnf-cf-success .pnf-tick { font-size:40px; margin-bottom:10px; }
+.pnf-cf-success h3 { font-size:18px; font-weight:700; color:#1E6B3C; margin-bottom:6px; }
+.pnf-cf-success p { font-size:13.5px; color:#5A6E78; line-height:1.6; }
+  </style>
 </head>
 <body>
 
@@ -142,19 +244,50 @@ a{color:var(--blue);text-decoration:none}
   <a href="/papamoa-previews/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
   <div class="pnf-links">
     <a href="/papamoa-previews/homepage.html" class="pnf-link">Home</a>
-    <a href="/papamoa-previews/categories/services.html" class="pnf-link active">Services</a>
-    <a href="/papamoa-previews/categories/shopping.html" class="pnf-link">Shopping</a>
-    <a href="/papamoa-previews/categories/restaurants-papamoa.html" class="pnf-link">Food &amp; Drink</a>
+    <a href="/papamoa-previews/community/essential-info.html" class="pnf-link">Info</a>
+    <a href="/papamoa-previews/community/community.html" class="pnf-link">Community</a>
+    <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="pnf-link">Stay</a>
+    <a href="/papamoa-previews/categories/activities/entertainment.html" class="pnf-link">Do</a>
+    <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="pnf-link">Eat</a>
+    <a href="/papamoa-previews/categories/services/services.html" class="pnf-link  active">Services</a>
+    <a href="/papamoa-previews/categories/shops/shopping.html" class="pnf-link">Shop</a>
   </div>
-  <a href="/papamoa-previews/sales/landing.html" class="pnf-cta">List your business</a>
+  <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-fb" title="Papamoa.info on Facebook">f</a>
+  <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-cta">List Your Business</a>
+  <button class="pnf-hamburger" id="pnf-hamburger" aria-label="Open menu" onclick="pnfDrawerOpen()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="pnf-drawer-overlay" id="pnf-drawer-overlay" onclick="pnfDrawerClose()"></div>
+<div class="pnf-drawer" id="pnf-drawer">
+  <div class="pnf-drawer-head">
+    <a href="/papamoa-previews/homepage.html" class="pnf-drawer-logo">Papamoa<span>.info</span></a>
+    <button class="pnf-drawer-close" onclick="pnfDrawerClose()" aria-label="Close menu">&#10005;</button>
+  </div>
+  <nav class="pnf-drawer-nav">
+    <a href="/papamoa-previews/homepage.html"><span class="dn-icon">&#127968;</span>Home</a>
+    <a href="/papamoa-previews/community/essential-info.html"><span class="dn-icon">&#128205;</span>Info</a>
+    <a href="/papamoa-previews/community/community.html"><span class="dn-icon">&#129309;</span>Community</a>
+    <a href="/papamoa-previews/categories/accommodation/accommodation.html"><span class="dn-icon">&#127968;</span>Stay</a>
+    <a href="/papamoa-previews/categories/activities/entertainment.html"><span class="dn-icon">&#127918;</span>Do</a>
+    <a href="/papamoa-previews/categories/food-drink/food-and-drink.html"><span class="dn-icon">&#127829;</span>Eat</a>
+    <a href="/papamoa-previews/categories/services/services.html" class="active"><span class="dn-icon">&#128295;</span>Services</a>
+    <a href="/papamoa-previews/categories/shops/shopping.html"><span class="dn-icon">&#128717;</span>Shop</a>
+  </nav>
+  <div class="pnf-drawer-foot">
+    <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-drawer-cta">List Your Business</a>
+    <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-drawer-fb"><span style="font-weight:800;font-size:15px;">f</span> Follow on Facebook</a>
+  </div>
+</div>
 
 <div class="page-hero">
   <div class="hero-bg"></div>
   <div class="hero-inner">
     <div class="breadcrumb"><a href="/papamoa-previews/homepage.html">Home</a> &rsaquo; Services</div>
     <div class="hero-eyebrow">&#128736; Local Services &middot; P&#257;p&#257;moa</div>
-    <h1>P&#257;p&#257;moa <em>Services</em></h1>
+    <h1>Services &amp; Trades in Pāpāmoa</h1>
     <p class="hero-sub">Plumbers, electricians, builders, real estate, lawyers, gyms, hairdressers, accountants and more &mdash; every commercial service category in P&#257;p&#257;moa, one Gold Listing per sub-category.</p>
     <div class="hero-chips">
       <a href="#trades" class="hchip">Trades</a>
@@ -547,7 +680,7 @@ a{color:var(--blue);text-decoration:none}
 </div>
 
 <footer class="site-footer">
-  <a href="/papamoa-previews/homepage.html">Papamoa.info</a> &mdash; P&#257;p&#257;moa&rsquo;s independent local directory &middot; <a href="/papamoa-previews/sales/landing.html">List your business</a>
+  <a href="/papamoa-previews/homepage.html">Papamoa.info</a> &mdash; P&#257;p&#257;moa&rsquo;s independent local directory &middot; <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
 </footer>
 
 <script>
