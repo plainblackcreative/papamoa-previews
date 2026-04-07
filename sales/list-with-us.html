@@ -304,7 +304,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .form-section-inner { max-width: 640px; margin: 0 auto; text-align: center; }
 .form-section .section-label { color: rgba(255,255,255,0.45); }
 .form-section h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--white); margin-bottom: 10px; line-height: 1.25; }
-.form-section p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.form-section > .form-section-inner > p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
 .vis-box { background: var(--white); border-radius: 14px; padding: 36px; text-align: left; }
 .vis-box h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--navy); margin-bottom: 6px; }
 .vis-box .vis-box-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
@@ -896,7 +896,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="network-strip">
         <div class="network-strip-text">
           <strong>Part of the TaurangaNZ.info network &mdash; trusted since 2005</strong>
-          <span>Gold listings include a free Silver listing on TaurangaNZ.info &mdash; extending your reach across the whole Bay of Plenty.</span>
+          <span>Papamoa.info carries 20+ years of Bay of Plenty domain authority. Your listing benefits from that trust from day one.</span>
         </div>
         <div class="network-badge">20-year domain authority</div>
       </div>
@@ -921,68 +921,400 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 
     <!-- GOLD -->
     <div class="demo-panel active" id="demo-gold">
-      <div class="listing-demo">
-        <div class="ld-tier-bar gold">&#11088; Gold Spotlight &mdash; Top of Plumbing &amp; Gasfitting &middot; P&#257;p&#257;moa</div>
-        <div class="ld-body">
-          <div class="ld-name">Bayline Plumbing</div>
-          <div class="ld-cat">Plumbing &amp; Gasfitting &middot; P&#257;p&#257;moa, Bay of Plenty</div>
-          <div class="ld-desc">Bayline Plumbing provides residential and commercial plumbing services across P&#257;p&#257;moa, Mount Maunganui, and the wider Bay of Plenty. Owned by Mike Renata and backed by over 15 years in the trade, the team handles everything from routine maintenance and emergency call-outs through to new builds, bathroom renovations, and gasfitting work. A 4.8-star Google rating from 47 reviews reflects a consistent track record for turning up on time, pricing clearly, and leaving the site clean.</div>
-          <div class="ld-tags">
-            <span class="ld-tag">&#127969; P&#257;p&#257;moa Local</span>
-            <span class="ld-tag">&#11088; Gold Spotlight</span>
-            <span class="ld-tag">&#9989; AI-Recommended</span>
-            <span class="ld-tag">&#128247; Photo Gallery</span>
-            <span class="ld-tag">&#9733; 4.8 Google</span>
+      <!-- MENU LIGHTBOX -->
+      <div id="demo-menu-overlay" style="display:none;position:fixed;inset:0;background:rgba(13,27,46,0.88);z-index:600;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+        <div style="background:#fff;border-radius:14px;width:100%;max-width:780px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.35);margin:auto;">
+          <div style="background:linear-gradient(135deg,#0F4352,#1B6B7D);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-family:var(--font-display);font-size:17px;font-weight:700;color:#fff;">Papamoa.info — Listing Packages &amp; Ad Spots</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;">Prices exclude gst &middot; Annual subscriptions unless noted &middot; Updated April 2026</div>
+            </div>
+            <button onclick="document.getElementById('demo-menu-overlay').style.display='none';document.body.style.overflow='';" style="background:rgba(255,255,255,0.12);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">&times;</button>
           </div>
-          <div class="ld-links">
-            <span class="ld-btn">Visit Website</span>
-            <span class="ld-btn">Call Now</span>
-            <span class="ld-btn">Email</span>
+          <!-- Tabs -->
+          <div style="display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--sand);overflow-x:auto;" id="demo-menu-tabs">
+            <button onclick="demoMenuTab('listings',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--navy);border-bottom:2px solid var(--ocean);border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Listings</button>
+            <button onclick="demoMenuTab('addons',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Add-Ons</button>
+            <button onclick="demoMenuTab('spotlights',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Spotlight Ad Spots</button>
+            <button onclick="demoMenuTab('specials',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Specials</button>
+          </div>
+          <!-- Listings panel -->
+          <div id="dmenu-listings" style="display:block;padding:20px 24px;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Silver Listing</div><div style="font-size:11.5px;color:var(--muted);">Logo, SEO description, schema markup, social links, review badges, lifetime price lock, 2027 ROI guarantee.</div></div>
+              <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$599<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Gold Listing <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Most popular</span></div><div style="font-size:11.5px;color:var(--muted);">Everything in Silver + photo gallery (up to 9 images), Spotlight position, AI FAQ &amp; AEO schema, Menu Add-On free, premium ad spot access.</div></div>
+              <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$1,199<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr</span></div>
+            </div>
+            <div style="padding:12px 0;">
+              <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Placeholder <span style="font-size:10px;font-weight:700;color:var(--muted);font-style:italic;">(auto-generated, not sold)</span></div>
+              <div style="font-size:11.5px;color:var(--muted);">Every empty sub-category gets one automatically. Ranks in Google, captures enquiry leads, generates traffic data used to convert the slot to a paid listing.</div>
+            </div>
+          </div>
+          <!-- Add-Ons panel -->
+          <div id="dmenu-addons" style="display:none;padding:20px 24px;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Menu / Service List Add-On <span style="font-size:10px;font-weight:800;background:#D8E8EE;color:var(--silver);padding:2px 7px;border-radius:3px;margin-left:4px;">Silver</span></div><div style="font-size:11.5px;color:var(--muted);">Interactive filterable menu or price list on your listing. Category tabs, dietary filters, Last Updated date, Order Online link. Client updates via private form — no CMS login.</div></div>
+              <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$199<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Menu / Service List Add-On <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Gold — free</span></div><div style="font-size:11.5px;color:var(--muted);">Included at no extra cost with any Gold listing. Same full-featured interactive menu.</div></div>
+              <div style="font-size:14px;font-weight:800;color:var(--green);white-space:nowrap;">Free</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Extra Sub-Category Spotlight <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Gold only</span></div><div style="font-size:11.5px;color:var(--muted);">Gold includes one primary sub-category Spotlight. Each additional sub-category is $199+gst/yr. E.g. a plumber in Drainage + Gas Fitting + Bathroom Renos = 2 extras.</div></div>
+              <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$199<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr each</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;gap:12px;">
+              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Premium Article &amp; Page Ad Spots <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Gold only</span></div><div style="font-size:11.5px;color:var(--muted);">Monthly placements on high-traffic category pages, article pages, and homepage sections. Priced by page and position once analytics data is available.</div></div>
+              <div style="font-size:14px;font-weight:800;color:var(--muted);white-space:nowrap;">From $99<span style="font-size:11px;font-weight:400;">/mo</span></div>
+            </div>
+          </div>
+          <!-- Spotlight Ad Spots panel -->
+          <div id="dmenu-spotlights" style="display:none;padding:20px 24px;">
+            <div style="background:var(--ocean-light);border:1px solid #B0D4DC;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--ocean-deep);line-height:1.55;">&#128202; Positions are priced once real traffic data is available. All Spotlight Ad Spots are available to <strong>Gold listing holders only</strong>. Monthly placements, cancel anytime.</div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Homepage Section Spotlight <span style="font-size:10px;font-weight:700;background:#E6F4EC;color:var(--green);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 1</span></div><div style="font-size:11.5px;color:var(--muted);">Featured position at the top of a homepage category section (Food &amp; Drink, Services, Accommodation, Entertainment). Seen by every homepage visitor.</div></div>
+              <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Main Category Page Spotlight <span style="font-size:10px;font-weight:700;background:#E6F4EC;color:var(--green);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 2</span></div><div style="font-size:11.5px;color:var(--muted);">Featured position at the top of a main category page (e.g. Food &amp; Drink, Services, Shopping). Targeted to visitors actively browsing that category.</div></div>
+              <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Article Page Spotlight <span style="font-size:10px;font-weight:700;background:var(--sand);color:var(--muted);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 3</span></div><div style="font-size:11.5px;color:var(--muted);">Featured position on high-traffic editorial and community pages — e.g. surf &amp; tides, schools, new developments. Context-targeted to relevant audiences.</div></div>
+              <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;gap:12px;">
+              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">News &amp; Events Spotlight <span style="font-size:10px;font-weight:700;background:var(--sand);color:var(--muted);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 4</span></div><div style="font-size:11.5px;color:var(--muted);">Featured on the News &amp; Events page. High seasonal traffic spikes during AIMS Games, Easter, and summer. Strong for hospitality, retail, and event-based businesses.</div></div>
+              <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
+            </div>
+          </div>
+          <!-- Specials panel -->
+          <div id="dmenu-specials" style="display:none;padding:20px 24px;">
+            <div style="background:#FFF8E6;border:1px solid #E8C96A;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#7A5500;line-height:1.55;">&#9203; These offers have expired. Enquire about current availability and upcoming promotions via the form below.</div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border);gap:12px;opacity:0.6;">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                  <div style="font-size:13px;font-weight:700;color:var(--navy);text-decoration:line-through;">Launch Special — Gold at Silver Price</div>
+                  <span style="font-size:10px;font-weight:800;background:#FAEAEA;color:#8B2020;padding:2px 8px;border-radius:3px;">Expired</span>
+                </div>
+                <div style="font-size:11.5px;color:var(--muted);">Full Gold listing — Spotlight position, photo gallery, AI FAQ, Menu Add-On free — at the Silver price of $599+gst/yr. Available to founding members only during the March 2026 launch window.</div>
+              </div>
+              <div style="font-size:14px;font-weight:800;color:var(--muted);white-space:nowrap;text-decoration:line-through;">$599<span style="font-size:11px;font-weight:400;">/yr</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:14px 0;gap:12px;opacity:0.6;">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                  <div style="font-size:13px;font-weight:700;color:var(--navy);text-decoration:line-through;">Easter 2026 — First Month Free on Any Ad Spot</div>
+                  <span style="font-size:10px;font-weight:800;background:#FAEAEA;color:#8B2020;padding:2px 8px;border-radius:3px;">Expired</span>
+                </div>
+                <div style="font-size:11.5px;color:var(--muted);">First month free on any Spotlight Ad Spot position when booked before Easter Sunday, 20 April 2026. Required an active Gold listing. One position per business.</div>
+              </div>
+              <div style="font-size:14px;font-weight:800;color:var(--muted);white-space:nowrap;text-decoration:line-through;">1 mo free</div>
+            </div>
+          </div>
+          <!-- Footer -->
+          <div style="padding:14px 24px;border-top:1px solid var(--border);background:var(--sand);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">All prices exclude gst &middot; Annual subscriptions renew at locked rate &middot; 2027 ROI guarantee on all paid listings</div>
+            <a href="#get-found" onclick="document.getElementById('demo-menu-overlay').style.display='none';document.body.style.overflow='';" style="background:linear-gradient(135deg,var(--ocean),var(--ocean-deep));color:#fff;font-size:12px;font-weight:700;padding:9px 18px;border-radius:6px;text-decoration:none;white-space:nowrap;">Get your listing &rarr;</a>
           </div>
         </div>
-        <div class="ld-ai-bar">&#129302; <span>&ldquo;According to Papamoa.info, the top plumber in P&#257;p&#257;moa is <strong>Bayline Plumbing</strong>.&rdquo; &mdash; how AI tools cite your listing</span></div>
       </div>
-      <div class="demo-note">&#11088; Gold includes unlimited images, AI FAQ &amp; AEO schema, Menu Add-On included free, and the Spotlight position &mdash; <strong>one per sub-category, first in keeps it.</strong> Gold also includes a free Silver listing on TaurangaNZ.info.</div>
+
+      <div class="listing-demo">
+        <!-- Hero -->
+        <div style="background:linear-gradient(135deg,#0F2A38,#1B4A5C);padding:32px 24px 28px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:radial-gradient(circle,rgba(58,171,222,0.08) 0%,transparent 65%);pointer-events:none;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C8962A,#F0C060,#C8962A);"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:100%;">
+            <div style="flex:1;min-width:0;">
+              <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:linear-gradient(135deg,#C8962A,#F0C060);color:#1A0A00;padding:4px 10px;border-radius:3px;margin-bottom:12px;">&#11088; Gold Spotlight</div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;">Local Business Directory &middot; P&#257;p&#257;moa</div>
+              <h3 style="font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:#fff;line-height:1.12;margin-bottom:8px;">Papamoa.info</h3>
+              <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;max-width:520px;margin-bottom:14px;">P&#257;p&#257;moa&rsquo;s only dedicated local business directory, built exclusively for the community. Every listing is researched, written and SEO-optimised by the team. Backed by 20+ years of Bay of Plenty domain authority through the TaurangaNZ.info network.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;">
+                <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:6px;">
+                  <span style="color:#F5C842;font-size:12px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                  <span style="color:#fff;font-weight:700;font-size:13px;">5.0</span>
+                  <span style="color:rgba(255,255,255,0.45);font-size:11px;">Google reviews</span>
+                </div>
+                <span style="font-size:12px;color:rgba(255,255,255,0.45);">&#128205; P&#257;p&#257;moa, Bay of Plenty</span>
+                <span style="font-size:12px;color:rgba(255,255,255,0.45);">&#128222; 027 533 2970</span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">Gold Listings</span>
+                <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">Silver Listings</span>
+                <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">AI-Optimised SEO</span>
+                <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">Spotlight Ad Spots</span>
+                <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">Written for you</span>
+              </div>
+            </div>
+            <div style="flex-shrink:0;width:96px;height:96px;border-radius:10px;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
+              <span style="font-family:var(--font-display);font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);">papamoa</span>
+              <span style="font-size:9px;font-weight:700;color:rgba(196,152,90,0.9);">.info</span>
+            </div>
+          </div>
+        </div>
+        <!-- Photo gallery strip -->
+        <div style="background:#E8EEF4;border-bottom:1px solid var(--border);display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:120px;gap:2px;overflow:hidden;">
+          <div style="background:linear-gradient(135deg,#1B4A5C,#0F2A38);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;">
+            <span style="font-family:var(--font-display);font-size:15px;color:rgba(255,255,255,0.5);font-weight:700;">papamoa<span style="color:rgba(196,152,90,0.8);">.info</span></span>
+            <span style="font-size:9px;color:rgba(255,255,255,0.3);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">P&#257;p&#257;moa&rsquo;s local directory</span>
+          </div>
+          <div style="background:linear-gradient(135deg,#C8D8E8,#B0C4D8);display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:16px;opacity:0.3;">&#128247;</span>
+          </div>
+          <div style="background:linear-gradient(135deg,#CAD8E8,#B8CAD8);display:flex;align-items:center;justify-content:center;position:relative;">
+            <span style="font-size:16px;opacity:0.3;">&#128247;</span>
+            <div style="position:absolute;inset:0;background:rgba(13,43,62,0.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;">
+              <span style="font-size:16px;font-weight:800;color:#fff;font-family:var(--font-display);">+6</span>
+              <span style="font-size:9px;color:rgba(255,255,255,0.75);font-weight:600;">more photos</span>
+            </div>
+          </div>
+        </div>
+        <!-- Action bar -->
+        <div style="background:var(--white);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <a href="/papamoa-previews/homepage.html" target="_blank" style="background:linear-gradient(135deg,#C8962A,#A07020);color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:6px;text-decoration:none;">Visit Website</a>
+          <a href="tel:+64275332970" style="background:transparent;color:var(--text);font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid var(--border);text-decoration:none;">Call Now</a>
+          <a href="mailto:jayden@papamoa.info" style="background:transparent;color:var(--text);font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid var(--border);text-decoration:none;">Email</a>
+          <button onclick="document.getElementById('demo-menu-overlay').style.display='flex';document.body.style.overflow='hidden';" style="background:transparent;color:#C8962A;font-size:12px;font-weight:700;padding:8px 14px;border-radius:6px;border:1.5px solid rgba(200,150,42,0.35);cursor:pointer;font-family:var(--font-body);">&#128209; View Packages &amp; Pricing</button>
+          <span style="flex:1;"></span>
+          <a href="https://www.facebook.com/papamoa.info/" target="_blank" style="font-size:12px;color:var(--muted);font-weight:700;text-decoration:none;">f</a>
+        </div>
+        <!-- Content body -->
+        <div style="background:var(--sand);padding:20px;display:grid;grid-template-columns:1fr 240px;gap:16px;align-items:start;">
+          <div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">About Papamoa.info</div>
+              <p style="font-size:12.5px;color:var(--text);line-height:1.75;margin-bottom:8px;">Papamoa.info is P&#257;p&#257;moa&rsquo;s only dedicated local business directory, run by a P&#257;p&#257;moa local. Every listing is researched and written by the team from your website and socials &mdash; you don&rsquo;t need to write a word. Listings are live within 24 hours and SEO-optimised from day one, structured for both Google and AI search tools like ChatGPT and Google AI Overviews.</p>
+              <p style="font-size:12.5px;color:var(--text);line-height:1.75;">The site carries 20+ years of Bay of Plenty domain authority through the TaurangaNZ.info network. Listings include Gold Spotlight positions (one per sub-category), Silver claimed listings, and monthly Spotlight Ad Spots for high-traffic pages.</p>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);">What they offer</div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Gold Listing — $1,199+gst/yr</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Silver Listing — $599+gst/yr</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Menu / Service List Add-On</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Spotlight Ad Spots</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">AI-Optimised FAQ &amp; AEO Schema</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Listing written for you</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Live within 24 hours</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Lifetime price lock</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">2027 ROI guarantee</span>
+              </div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);">Opening hours</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+                <div style="display:flex;justify-content:space-between;padding:6px 10px;font-size:11.5px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Monday &ndash; Friday</span><span style="color:var(--muted);">24 / 7 &mdash; always on</span></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 10px;font-size:11.5px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Saturday</span><span style="color:var(--muted);">By arrangement</span></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 10px;font-size:11.5px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Sunday</span><span style="color:var(--muted);">By arrangement</span></div>
+              </div>
+              <div style="margin-top:8px;font-size:11px;color:var(--muted);">&#128222; The directory is live 24/7. For listing enquiries, Jayden responds same day Mon&ndash;Fri.</div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);">What customers say</div>
+              <div style="background:var(--sand);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:8px;">
+                <p style="font-size:12.5px;color:var(--text);line-height:1.65;font-style:italic;margin-bottom:6px;">&ldquo;Had our listing live within 24 hours and written better than anything I could have done myself. Already showing up on Google. Genuinely impressed.&rdquo;</p>
+                <div style="font-size:11px;color:var(--muted);font-weight:600;">&mdash; Google reviewer</div>
+              </div>
+              <div style="background:var(--sand);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+                <p style="font-size:12.5px;color:var(--text);line-height:1.65;font-style:italic;margin-bottom:6px;">&ldquo;The Gold Spotlight was an easy decision. We&rsquo;re the first result in our sub-category and new customers mention Papamoa.info regularly. Best local marketing we&rsquo;ve done.&rdquo;</p>
+                <div style="font-size:11px;color:var(--muted);font-weight:600;">&mdash; Google reviewer</div>
+              </div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;">
+              <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);">AI-Ready FAQ</div>
+              <div style="border-bottom:1px solid var(--border);padding:10px 0;">
+                <div style="font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:4px;">What is the best local business directory in P&#257;p&#257;moa?</div>
+                <div style="font-size:12px;color:var(--muted);line-height:1.6;">Papamoa.info is P&#257;p&#257;moa&rsquo;s only dedicated local directory, built exclusively for businesses in the area. Every listing is written and SEO-optimised by the team, backed by 20+ years of Bay of Plenty domain authority.</div>
+              </div>
+              <div style="padding:10px 0;">
+                <div style="font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:4px;">How much does it cost to list a business on Papamoa.info?</div>
+                <div style="font-size:12px;color:var(--muted);line-height:1.6;">Silver listings are $599+gst per year. Gold listings, which include the Spotlight position at the top of a sub-category, are $1,199+gst per year. A free personalised preview is available before any commitment.</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+              <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px;">Contact</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;gap:8px;font-size:12px;"><span>&#128205;</span><span style="color:var(--muted);">P&#257;p&#257;moa, Bay of Plenty</span></div>
+                <div style="display:flex;gap:8px;font-size:12px;"><span>&#128222;</span><a href="tel:+64275332970" style="color:var(--ocean);">027 533 2970</a></div>
+                <div style="display:flex;gap:8px;font-size:12px;"><span>&#9993;</span><a href="mailto:jayden@papamoa.info" style="color:var(--ocean);">jayden@papamoa.info</a></div>
+                <div style="display:flex;gap:8px;font-size:12px;"><span>&#127760;</span><a href="/papamoa-previews/homepage.html" target="_blank" style="color:var(--ocean);">papamoa.info</a></div>
+              </div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+              <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px;">Hours</div>
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <div style="display:flex;justify-content:space-between;font-size:11.5px;padding:5px 8px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Mon &ndash; Fri</span><span style="color:var(--muted);">24/7 online</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:11.5px;padding:5px 8px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Enquiries</span><span style="color:var(--muted);">Same day reply</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:11.5px;padding:5px 8px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Weekends</span><span style="color:var(--muted);">By arrangement</span></div>
+              </div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+              <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px;">&#11088; Gold Spotlight</div>
+              <p style="font-size:11.5px;color:var(--muted);line-height:1.6;">Top position in Local Business Directory &middot; P&#257;p&#257;moa. One per sub-category &mdash; held annually.</p>
+            </div>
+            <a href="https://maps.google.com/?q=Papamoa+Beach,+Bay+of+Plenty,+New+Zealand" target="_blank" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#E8F0F8,#D4E4F4);border:1px solid var(--border);border-radius:10px;height:148px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--ocean)'" onmouseout="this.style.borderColor='var(--border)'">
+              <span style="font-size:22px;">&#128205;</span>
+              <span style="font-size:12px;font-weight:600;color:var(--muted);">P&#257;p&#257;moa, Bay of Plenty</span>
+              <span style="font-size:11px;color:var(--ocean);font-weight:600;">Open in Maps &rarr;</span>
+            </a>
+          </div>
+        </div>
+        <!-- AI citation bar -->
+        <div class="ld-ai-bar">&#129302; <span>&ldquo;According to Papamoa.info, the leading local directory in P&#257;p&#257;moa is <strong>Papamoa.info</strong> itself &mdash; trusted since 2005.&rdquo; &mdash; how AI tools cite your listing</span></div>
+      </div>
+      <div class="demo-note">&#11088; Gold includes a photo gallery (up to 9 images), AI FAQ &amp; AEO schema, Menu Add-On included free, and the Spotlight position &mdash; <strong>one per sub-category, first in keeps it.</strong></div>
     </div>
 
     <!-- SILVER -->
     <div class="demo-panel" id="demo-silver">
       <div class="listing-demo">
-        <div class="ld-tier-bar silver">&#9670; Silver Listing &middot; P&#257;p&#257;moa</div>
-        <div class="ld-body">
-          <div class="ld-name">Bayline Plumbing</div>
-          <div class="ld-cat">Plumbing &amp; Gasfitting &middot; P&#257;p&#257;moa, Bay of Plenty</div>
-          <div class="ld-desc">Bayline Plumbing offers residential and commercial plumbing services across P&#257;p&#257;moa and surrounds. The team handles maintenance, repairs, bathroom renovations, and gasfitting, with a reputation for clear communication and upfront pricing. Rated 4.8 stars on Google from 47 reviews.</div>
-          <div class="ld-tags">
-            <span class="ld-tag">&#127969; P&#257;p&#257;moa Local</span>
-            <span class="ld-tag">&#128279; Backlink Included</span>
-            <span class="ld-tag">&#128247; Up to 9 Photos</span>
-            <span class="ld-tag">&#9733; 4.8 Google</span>
-          </div>
-          <div class="ld-links">
-            <span class="ld-btn">Visit Website</span>
-            <span class="ld-btn">Call Now</span>
-            <span class="ld-btn">Email</span>
+        <!-- Hero -->
+        <div style="background:linear-gradient(135deg,#0F2A38,#1B4A5C);padding:32px 24px 28px;position:relative;overflow:hidden;">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#5A7A8A,#8090A8,#5A7A8A);"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:100%;">
+            <div style="flex:1;min-width:0;">
+              <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:linear-gradient(135deg,#5A7A8A,#8090A8);color:#fff;padding:4px 10px;border-radius:3px;margin-bottom:12px;">&#9670; Silver Listing</div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;">Local Business Directory &middot; P&#257;p&#257;moa</div>
+              <h3 style="font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:#fff;line-height:1.12;margin-bottom:8px;">Papamoa.info</h3>
+              <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;max-width:520px;margin-bottom:14px;">P&#257;p&#257;moa&rsquo;s only dedicated local business directory, built exclusively for the community. Every listing is researched, written and SEO-optimised by the team. Backed by 20+ years of Bay of Plenty domain authority through the TaurangaNZ.info network.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;">
+                <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:6px;">
+                  <span style="color:#F5C842;font-size:12px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                  <span style="color:#fff;font-weight:700;font-size:13px;">5.0</span>
+                  <span style="color:rgba(255,255,255,0.45);font-size:11px;">Google reviews</span>
+                </div>
+                <span style="font-size:12px;color:rgba(255,255,255,0.45);">&#128205; P&#257;p&#257;moa, Bay of Plenty</span>
+                <span style="font-size:12px;color:rgba(255,255,255,0.45);">&#128222; 027 533 2970</span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">Gold Listings</span>
+                <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">Silver Listings</span>
+                <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">Written for you</span>
+              </div>
+            </div>
+            <div style="flex-shrink:0;width:96px;height:96px;border-radius:10px;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
+              <span style="font-family:var(--font-display);font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);">papamoa</span>
+              <span style="font-size:9px;font-weight:700;color:rgba(196,152,90,0.9);">.info</span>
+            </div>
           </div>
         </div>
+        <!-- Action bar -->
+        <div style="background:var(--white);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <a href="/papamoa-previews/homepage.html" target="_blank" style="background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:6px;text-decoration:none;">Visit Website</a>
+          <a href="tel:+64275332970" style="background:transparent;color:var(--text);font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid var(--border);text-decoration:none;">Call Now</a>
+          <a href="mailto:jayden@papamoa.info" style="background:transparent;color:var(--text);font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid var(--border);text-decoration:none;">Email</a>
+          <span style="flex:1;"></span>
+          <a href="https://www.facebook.com/papamoa.info/" target="_blank" style="font-size:12px;color:var(--muted);font-weight:700;text-decoration:none;">f</a>
+        </div>
+        <!-- Content body -->
+        <div style="background:var(--sand);padding:20px;display:grid;grid-template-columns:1fr 240px;gap:16px;align-items:start;">
+          <div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">About Papamoa.info</div>
+              <p style="font-size:12.5px;color:var(--text);line-height:1.75;margin-bottom:8px;">Papamoa.info is P&#257;p&#257;moa&rsquo;s only dedicated local business directory, run by a P&#257;p&#257;moa local. Every listing is researched and written by the team from your website and socials &mdash; you don&rsquo;t need to write a word. Listings are live within 24 hours and SEO-optimised from day one.</p>
+              <p style="font-size:12.5px;color:var(--text);line-height:1.75;">The site carries 20+ years of Bay of Plenty domain authority through the TaurangaNZ.info network. Silver listings include a full SEO description, schema markup, logo, social links, review badges, and a lifetime price lock.</p>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);">What they offer</div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Silver Listing — $599+gst/yr</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Gold Listing — $1,199+gst/yr</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">AI-Optimised SEO</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Listing written for you</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Live within 24 hours</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">Lifetime price lock</span>
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;background:var(--sand);border:1px solid var(--border);color:var(--text);">2027 ROI guarantee</span>
+              </div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
+              <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);">Opening hours</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+                <div style="display:flex;justify-content:space-between;padding:6px 10px;font-size:11.5px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Monday &ndash; Friday</span><span style="color:var(--muted);">24/7 &mdash; always on</span></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 10px;font-size:11.5px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Saturday</span><span style="color:var(--muted);">By arrangement</span></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 10px;font-size:11.5px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Sunday</span><span style="color:var(--muted);">By arrangement</span></div>
+              </div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;">
+              <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);">What customers say</div>
+              <div style="background:var(--sand);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:8px;">
+                <p style="font-size:12.5px;color:var(--text);line-height:1.65;font-style:italic;margin-bottom:6px;">&ldquo;Had our listing live within 24 hours and written better than anything I could have done myself. Already showing up on Google. Genuinely impressed.&rdquo;</p>
+                <div style="font-size:11px;color:var(--muted);font-weight:600;">&mdash; Google reviewer</div>
+              </div>
+              <div style="background:var(--sand);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+                <p style="font-size:12.5px;color:var(--text);line-height:1.65;font-style:italic;margin-bottom:6px;">&ldquo;Simple process, fast turnaround, and the description actually captured what we do. Worth every cent.&rdquo;</p>
+                <div style="font-size:11px;color:var(--muted);font-weight:600;">&mdash; Google reviewer</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+              <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px;">Contact</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;gap:8px;font-size:12px;"><span>&#128205;</span><span style="color:var(--muted);">P&#257;p&#257;moa, Bay of Plenty</span></div>
+                <div style="display:flex;gap:8px;font-size:12px;"><span>&#128222;</span><a href="tel:+64275332970" style="color:var(--ocean);">027 533 2970</a></div>
+                <div style="display:flex;gap:8px;font-size:12px;"><span>&#9993;</span><a href="mailto:jayden@papamoa.info" style="color:var(--ocean);">jayden@papamoa.info</a></div>
+                <div style="display:flex;gap:8px;font-size:12px;"><span>&#127760;</span><a href="/papamoa-previews/homepage.html" target="_blank" style="color:var(--ocean);">papamoa.info</a></div>
+              </div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+              <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px;">Hours</div>
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <div style="display:flex;justify-content:space-between;font-size:11.5px;padding:5px 8px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Mon &ndash; Fri</span><span style="color:var(--muted);">24/7 online</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:11.5px;padding:5px 8px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Enquiries</span><span style="color:var(--muted);">Same day reply</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:11.5px;padding:5px 8px;background:var(--sand);border-radius:4px;"><span style="font-weight:600;color:var(--navy);">Weekends</span><span style="color:var(--muted);">By arrangement</span></div>
+              </div>
+            </div>
+            <!-- Upgrade nudge -->
+            <div style="background:linear-gradient(135deg,#FFFAF0,#FFF5DC);border:1px solid rgba(200,150,42,0.3);border-radius:10px;padding:14px 16px;">
+              <div style="font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#C8962A;margin-bottom:4px;">Upgrade available</div>
+              <div style="font-family:var(--font-display);font-size:13px;font-weight:700;color:#7A5010;margin-bottom:6px;">Upgrade to Gold</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:4px;margin-bottom:10px;">
+                <li style="font-size:11px;color:#8A6020;padding-left:12px;">&#10022; Spotlight &mdash; top of sub-category</li>
+                <li style="font-size:11px;color:#8A6020;padding-left:12px;">&#10022; Photo gallery (up to 9 images)</li>
+                <li style="font-size:11px;color:#8A6020;padding-left:12px;">&#10022; Menu Add-On included free</li>
+                <li style="font-size:11px;color:#8A6020;padding-left:12px;">&#10022; AI FAQ &amp; AEO schema</li>
+              </ul>
+              <a href="#get-found" style="display:block;text-align:center;background:linear-gradient(135deg,#C8962A,#A07020);color:#fff;font-size:11.5px;font-weight:700;padding:7px 12px;border-radius:5px;text-decoration:none;">Enquire about Gold &rarr;</a>
+            </div>
+            <a href="https://maps.google.com/?q=Papamoa+Beach,+Bay+of+Plenty,+New+Zealand" target="_blank" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#E8F0F8,#D4E4F4);border:1px solid var(--border);border-radius:10px;height:148px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--ocean)'" onmouseout="this.style.borderColor='var(--border)'">
+              <span style="font-size:22px;">&#128205;</span>
+              <span style="font-size:12px;font-weight:600;color:var(--muted);">P&#257;p&#257;moa, Bay of Plenty</span>
+              <span style="font-size:11px;color:var(--ocean);font-weight:600;">Open in Maps &rarr;</span>
+            </a>
+          </div>
+        </div>
+        <!-- Upgrade nudge bar -->
+        <div style="background:linear-gradient(135deg,#FFFAF0,#FFF5DC);border-top:1px solid rgba(200,150,42,0.2);padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <span style="font-size:12px;color:#7A5010;flex:1;line-height:1.5;">&#11088; <strong>Upgrade to Gold</strong> to add a photo gallery, Spotlight position, Menu Add-On and AI FAQ schema.</span>
+          <a href="#get-found" style="font-size:11px;font-weight:700;color:#C8962A;white-space:nowrap;text-decoration:none;">Enquire about Gold &rarr;</a>
+        </div>
       </div>
-      <div class="demo-note">&#9670; Silver is the full claimed listing &mdash; SEO description, schema markup, images, social links, and review badges. Menu Add-On available for $199+GST/yr extra.</div>
+      <div class="demo-note">&#9670; Silver is the full claimed listing &mdash; SEO description, schema markup, your logo, social links, and review badges. Menu Add-On available for $199+gst/yr extra.</div>
     </div>
 
     <!-- PLACEHOLDER -->
     <div class="demo-panel" id="demo-placeholder">
       <div class="listing-demo" style="opacity:0.85;">
-        <div class="ld-tier-bar placeholder">Placeholder &mdash; Unclaimed &middot; Plumbing &amp; Gasfitting &middot; P&#257;p&#257;moa</div>
-        <div class="ld-body">
-          <div class="ld-name" style="color:#9A7060;">Plumber P&#257;p&#257;moa</div>
-          <div class="ld-cat">Plumbing &amp; Gasfitting &middot; P&#257;p&#257;moa, Bay of Plenty</div>
-          <div class="ld-desc" style="color:var(--muted);font-style:italic;">No business has claimed this slot. Basic name and category only &mdash; no description, no images, no schema markup. This page is already ranking in Google and receiving enquiries each month.</div>
-          <div class="ld-links">
-            <span class="ld-btn" style="opacity:0.3;border-color:#CCC;color:#999;">Website</span>
-            <span class="ld-btn" style="opacity:0.3;border-color:#CCC;color:#999;">Call</span>
-          </div>
+        <div style="background:#4A3828;padding:32px 24px 28px;position:relative;overflow:hidden;">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:#9A7060;"></div>
+          <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:#9A7060;color:#fff;padding:4px 10px;border-radius:3px;margin-bottom:12px;">Placeholder &mdash; Unclaimed</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:6px;">Local Business Directory &middot; P&#257;p&#257;moa</div>
+          <h3 style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:rgba(255,255,255,0.55);line-height:1.12;margin-bottom:8px;">Business Directory P&#257;p&#257;moa</h3>
+          <p style="font-size:13px;color:rgba(255,255,255,0.35);line-height:1.6;max-width:500px;font-style:italic;">No description. No images. No contact details beyond a phone number. This slot is already ranking in Google &mdash; it just isn&rsquo;t doing anything with the traffic.</p>
         </div>
-        <div class="ld-ai-bar warning">&#128308; <span>This slot generated <strong>18 enquiries last month</strong> from locals searching for a plumber. Those leads go nowhere right now. The business that claims it gets them all.</span></div>
+        <div style="background:var(--white);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;gap:8px;">
+          <span style="background:transparent;color:#BBB;font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid #DDD;cursor:default;opacity:0.5;">Website</span>
+          <span style="background:transparent;color:#BBB;font-size:12px;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid #DDD;cursor:default;opacity:0.5;">Call</span>
+        </div>
+        <div class="ld-ai-bar warning">&#128308; <span>This slot generated <strong>18 enquiries last month</strong> from locals searching for a local directory. Those leads go nowhere right now. The business that claims it gets them all.</span></div>
       </div>
       <div class="demo-note">Every empty sub-category has a placeholder like this already ranking in Google &mdash; capturing real search traffic while the slot sits unclaimed. We contact businesses with the actual traffic data. That number is the pitch.</div>
     </div>
@@ -1150,20 +1482,20 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <div class="tier-head">
             <div class="tier-badge">Most popular</div>
             <div class="tier-name">Silver</div>
-            <div class="tier-price">$599 <span>+GST / yr</span></div>
-            <div class="tier-tagline">Full claimed listing. SEO-optimised, images, all your contact details &mdash; live within 24 hours.</div>
+            <div class="tier-price">$599 <span>+gst / yr</span></div>
+            <div class="tier-tagline">Full claimed listing. SEO-optimised, logo, all your contact details &mdash; live within 24 hours.</div>
           </div>
           <div class="tier-body">
             <ul class="feat-list">
               <li><i class="fi fi-yes">&#10003;</i> SEO-optimised description</li>
-              <li><i class="fi fi-yes">&#10003;</i> Up to 9 images</li>
+              <li><i class="fi fi-yes">&#10003;</i> Logo</li>
               <li><i class="fi fi-yes">&#10003;</i> Schema markup</li>
               <li><i class="fi fi-yes">&#10003;</i> All contact &amp; social links</li>
               <li><i class="fi fi-yes">&#10003;</i> Google &amp; TripAdvisor review badges</li>
               <li><i class="fi fi-yes">&#10003;</i> Facebook welcome post</li>
               <li><i class="fi fi-yes">&#10003;</i> Lifetime price lock</li>
               <li><i class="fi fi-yes">&#10003;</i> 2027 ROI guarantee</li>
-              <li><i class="fi fi-note">+</i> Menu / Service List Add-On: $199+GST/yr</li>
+              <li><i class="fi fi-note">+</i> Menu / Service List Add-On: $199+gst/yr</li>
               <li><i class="fi fi-no">&#10007;</i> Spotlight position</li>
             </ul>
           </div>
@@ -1177,21 +1509,20 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <div class="tier-head">
             <div class="tier-badge">&#11088; Gold Spotlight</div>
             <div class="tier-name">Gold</div>
-            <div class="tier-price">$1,199 <span>+GST / yr</span></div>
+            <div class="tier-price">$1,199 <span>+gst / yr</span></div>
             <div class="tier-tagline">Top of your sub-category. AI-optimised. Menu Add-On included free. Premium ad spot access.</div>
           </div>
           <div class="tier-body">
             <ul class="feat-list">
               <li><i class="fi fi-yes">&#10003;</i> Everything in Silver</li>
-              <li><i class="fi fi-yes">&#10003;</i> Unlimited images</li>
+              <li><i class="fi fi-yes">&#10003;</i> Photo gallery &mdash; logo + up to 9 images</li>
               <li><i class="fi fi-yes">&#10003;</i> Spotlight &mdash; top of your sub-category</li>
               <li><i class="fi fi-yes">&#10003;</i> AI-optimised FAQ &amp; AEO schema</li>
               <li><i class="fi fi-yes">&#10003;</i> Menu / Service List Add-On free</li>
-              <li><i class="fi fi-yes">&#10003;</i> TaurangaNZ.info Silver listing free</li>
               <li><i class="fi fi-yes">&#10003;</i> Access to premium article &amp; page ad spots</li>
               <li><i class="fi fi-yes">&#10003;</i> Lifetime price lock</li>
               <li><i class="fi fi-yes">&#10003;</i> 2027 ROI guarantee</li>
-              <li><i class="fi fi-note">+</i> Extra Spotlights: $99+GST/yr each</li>
+              <li><i class="fi fi-note">+</i> Extra sub-category Spotlights: $199+gst/yr each</li>
             </ul>
           </div>
           <div class="tier-footer">
@@ -1209,7 +1540,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <p>Add an interactive menu or service list to any listing. Category tabs, dietary filters (VG/V/GF/DF), Last Updated date, Order Online link, and per-item photos. Works for restaurants, spas, mechanics, dentists &mdash; any business with a list and prices. Update yourself anytime via a private form, no login needed.</p>
         </div>
         <div class="addon-strip-price">
-          <strong>$199+GST/yr</strong>
+          <strong>$199+gst/yr</strong>
           <span>Included free with Gold</span>
           <a href="/sales/menu-addon.html">See how it works &rarr;</a>
         </div>
@@ -1385,7 +1716,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     </div>
     <div class="jayden-contact">
       <a href="tel:+64275332970" class="jayden-btn primary">027 533 2970</a>
-      <a href="mailto:jayden@papamoa.info" class="jayden-btn secondary">jayden@papamoa.info</a>
+      <a href="/cdn-cgi/l/email-protection#1379726a77767d53637263727e7c723d7a7d757c" class="jayden-btn secondary"><span class="__cf_email__" data-cfemail="6f050e160b0a012f1f0e1f0e02000e4106010900">[email&#160;protected]</span></a>
     </div>
   </div>
 </div>
@@ -1397,7 +1728,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     <p class="pnf-footer-tagline">P&#257;p&#257;moa&rsquo;s local business directory &middot; Part of the TaurangaNZ.info network &middot; Trusted since 2005</p>
     <div class="pnf-footer-slim-links">
       <a href="/homepage.html">Directory</a>
-      <a href="/sales/list-with-us.html">Pricing</a>
       <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener">Facebook</a>
       <button onclick="pnfOpenContact()">Contact</button>
     </div>
@@ -1405,7 +1735,19 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function demoMenuTab(tab, btn) {
+  ['listings','addons','spotlights','specials'].forEach(function(t) {
+    document.getElementById('dmenu-' + t).style.display = t === tab ? 'block' : 'none';
+  });
+  document.querySelectorAll('#demo-menu-tabs button').forEach(function(b) {
+    b.style.color = 'var(--muted)';
+    b.style.borderBottomColor = 'transparent';
+  });
+  btn.style.color = 'var(--navy)';
+  btn.style.borderBottomColor = 'var(--ocean)';
+}
+
 function showDemo(tier, btn) {
   document.querySelectorAll('.demo-panel').forEach(function(p) { p.classList.remove('active'); });
   document.getElementById('demo-' + tier).classList.add('active');
@@ -1554,16 +1896,4 @@ async function pnfSubmitContact(e) {
       document.getElementById('pnf-cf-success').style.display = 'block';
     } else {
       btn.textContent = 'Try again';
-      btn.disabled = false;
-    }
-  } catch(err) {
-    btn.textContent = 'Try again';
-    btn.disabled = false;
-  }
-}
-
-// Auto-open on /contact.html
-if (window.location.pathname.indexOf('contact') !== -1) pnfOpenContact();
-</script>
-</body>
-</html>
+      
