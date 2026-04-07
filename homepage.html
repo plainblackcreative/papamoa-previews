@@ -301,6 +301,32 @@
     
     .tier-row-label { font-size:0.68rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin:16px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--border); }
     .section-footer { display:flex; align-items:center; justify-content:space-between; padding-top:8px; flex-wrap:wrap; gap:12px; }
+
+    /* ── CATEGORY SEARCH ── */
+    .cat-search-wrap { position:relative; margin-bottom:20px; }
+    .cat-search-wrap::before { content:''; position:absolute; left:12px; top:50%; transform:translateY(-50%); width:14px; height:14px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7' stroke='%23607080' stroke-width='2'/%3E%3Cpath stroke='%23607080' stroke-width='2' stroke-linecap='round' d='m16 16 4 4'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-size:contain; pointer-events:none; }
+    .cat-search-input { width:100%; padding:10px 12px 10px 34px; border:1.5px solid var(--border); border-radius:8px; font-family:'Figtree',sans-serif; font-size:0.88rem; color:var(--body); background:var(--white); transition:all 0.15s; }
+    .cat-search-input:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(58,171,222,0.1); }
+    .cat-search-input::placeholder { color:var(--muted); }
+
+    /* ── SUBCAT CARDS ── */
+    .subcat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:10px; margin-bottom:8px; }
+    .subcat-card { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:16px 14px; display:flex; align-items:center; gap:11px; text-decoration:none; color:inherit; transition:all 0.15s; }
+    .subcat-card:hover { border-color:var(--blue); box-shadow:0 3px 10px rgba(58,171,222,0.08); transform:translateY(-1px); }
+    .subcat-card.hidden { display:none; }
+    .sc-icon { font-size:1.4rem; flex-shrink:0; }
+    .sc-body { min-width:0; }
+    .sc-title { font-weight:700; font-size:0.88rem; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .sc-desc { font-size:0.72rem; color:var(--muted); line-height:1.4; margin-top:2px; }
+    .subcat-empty { display:none; padding:24px 0; text-align:center; font-size:0.84rem; color:var(--muted); }
+    .subcat-empty.visible { display:block; }
+
+    /* ── SECTION FOOTER CTA ── */
+    .cat-section-footer { display:flex; align-items:center; justify-content:space-between; margin-top:20px; padding-top:16px; border-top:1px solid var(--border); flex-wrap:wrap; gap:12px; }
+    .cat-full-link { font-size:0.84rem; font-weight:700; color:var(--blue); text-decoration:none; display:flex; align-items:center; gap:6px; }
+    .cat-full-link:hover { text-decoration:underline; }
+    .cat-spotlight-cta { font-size:0.75rem; color:var(--muted); text-decoration:none; }
+    .cat-spotlight-cta:hover { color:var(--navy); }
     .claim-spot-link { font-size:0.78rem; font-weight:700; color:var(--blue); background:rgba(58,171,222,0.08); border:1px solid rgba(58,171,222,0.2); padding:6px 14px; border-radius:5px; text-decoration:none; }
     .claim-spot-link:hover { background:rgba(58,171,222,0.15); }
 
@@ -342,7 +368,7 @@
 
       .info-grid { grid-template-columns:1fr 1fr; }
       .feature-row { grid-template-columns:1fr; }
-      .list-grid { grid-template-columns:1fr; }
+      .subcat-grid { grid-template-columns:1fr 1fr; }
     }
     @media (max-width:480px) {
 
@@ -706,7 +732,7 @@
       <h2>Where to Eat</h2>
       <p>Restaurants, cafes, bars, takeaways and every place to eat and drink in Pāpāmoa</p>
     </div>
-        <div class="subcat-bar">
+    <div class="subcat-bar">
       <div class="subcat-inner">
         <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="chip active">All food &amp; drink</a>
         <a href="/papamoa-previews/categories/food-drink/restaurants-papamoa.html" class="chip">Restaurants</a>
@@ -719,6 +745,36 @@
         <a href="/papamoa-previews/categories/food-drink/turkish-restaurant-papamoa.html" class="chip">Turkish</a>
       </div>
     </div>
+    <div class="cat-search-wrap">
+      <input type="text" class="cat-search-input" placeholder="Search food &amp; drink — try &ldquo;pizza&rdquo;, &ldquo;brunch&rdquo;, &ldquo;coffee&rdquo;&hellip;" oninput="catSearch('food',this.value)" autocomplete="off">
+    </div>
+    <div class="subcat-grid" id="food-grid">
+      <a href="/papamoa-previews/categories/food-drink/restaurants-papamoa.html" class="subcat-card" data-tags="restaurants dining dinner lunch sit down meals dine">
+        <span class="sc-icon">🍽</span><div class="sc-body"><div class="sc-title">Restaurants</div><div class="sc-desc">Sit-down dining in Pāpāmoa</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/food-drink/cafe-papamoa.html" class="subcat-card" data-tags="cafe coffee flat white brunch breakfast morning tea espresso">
+        <span class="sc-icon">☕</span><div class="sc-body"><div class="sc-title">Cafes</div><div class="sc-desc">Specialty coffee &amp; brunch spots</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/food-drink/bar-papamoa.html" class="subcat-card" data-tags="bar pub craft beer cocktail drinks nightlife licensed happy hour">
+        <span class="sc-icon">🍺</span><div class="sc-body"><div class="sc-title">Bars &amp; Pubs</div><div class="sc-desc">Craft beer, cocktails &amp; local pubs</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/food-drink/fish-and-chips-papamoa.html" class="subcat-card" data-tags="fish chips chippie takeaway battered deep fried">
+        <span class="sc-icon">🐟</span><div class="sc-body"><div class="sc-title">Fish &amp; Chips</div><div class="sc-desc">Fresh-battered chippies in Pāpāmoa</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/food-drink/sushi-papamoa.html" class="subcat-card" data-tags="sushi japanese sashimi rolls bento noodles ramen train">
+        <span class="sc-icon">🍣</span><div class="sc-body"><div class="sc-title">Sushi</div><div class="sc-desc">Sushi trains &amp; Japanese food</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/food-drink/indian-restaurant-papamoa.html" class="subcat-card" data-tags="indian curry tandoor naan butter chicken tikka masala biryani spicy">
+        <span class="sc-icon">🍛</span><div class="sc-body"><div class="sc-title">Indian Restaurants</div><div class="sc-desc">Curry, tandoor &amp; Indian cuisine</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/food-drink/bakery-papamoa.html" class="subcat-card" data-tags="bakery bread pies pastries rolls buns fresh baked">
+        <span class="sc-icon">🥐</span><div class="sc-body"><div class="sc-title">Bakeries</div><div class="sc-desc">Fresh bread, pies &amp; pastries</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/food-drink/turkish-restaurant-papamoa.html" class="subcat-card" data-tags="turkish kebab doner mediterranean pizza pita falafel">
+        <span class="sc-icon">🥙</span><div class="sc-body"><div class="sc-title">Turkish Food</div><div class="sc-desc">Kebabs, d&ouml;ner &amp; Mediterranean</div></div>
+      </a>
+    </div>
+    <div class="subcat-empty" id="food-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/food-drink/food-and-drink.html">browse all food &amp; drink &rarr;</a></div>
     <div class="spotlight-ad">
       <div class="sa-label"><span class="sa-label-badge">&#11088; Spotlight Ad</span> Food &amp; Drink &mdash; Homepage</div>
       <div class="sa-name">PAP House</div>
@@ -726,20 +782,10 @@
       <p class="sa-desc">The local's living room. Dog-friendly, open seven days, casual dining and strong drinks list. A default for locals after a beach session.</p>
       <a href="/papamoa-previews/listings/pap-house-papamoa.html" class="sa-link">View full listing &rarr;</a>
     </div>
-    <div class="list-head">
-      <h3>All Food &amp; Drink</h3>
-      <div class="list-head-right"><span class="list-count">Showing all current listings</span><a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="see-all-link">See all &rarr;</a></div>
+    <div class="cat-section-footer">
+      <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="cat-full-link">Browse all Food &amp; Drink listings &rarr;</a>
+      <a href="/papamoa-previews/sales/spotlight-ads.html" class="cat-spotlight-cta">About homepage Spotlight Ads</a>
     </div>
-    <div class="tier-row-label">&#11088; Gold Listings</div><div class="list-grid">
-      <a href="/papamoa-previews/listings/pap-house-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#2A1A1A,#4A2020)"><span class="l-badge badge-gold">&#11088; Gold</span>&#127860;</div><div class="l-body"><h3>PAP House</h3><div class="l-sub">Restaurant &amp; Bar &middot; Pāpāmoa Beach Road</div><p class="l-desc">Dog-friendly restaurant and bar open seven days. Casual dining, strong drinks list.</p><div class="l-tags"><span class="l-tag">Restaurant</span><span class="l-tag">Bar</span><span class="l-tag">Dog-friendly</span></div></div></a>
-      <a href="/papamoa-previews/listings/the-wagon-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#1A1208,#3A2810)"><span class="l-badge badge-gold">&#11088; Gold</span>&#127828;</div><div class="l-body"><h3>The Wagon</h3><div class="l-sub">Restaurant &middot; Toorea Street</div><p class="l-desc">Gourmet burgers, craft cocktails and a relaxed vibe on Toorea Street.</p><div class="l-tags"><span class="l-tag">Burgers</span><span class="l-tag">Cocktails</span><span class="l-tag">Dine-in</span></div></div></a>
-    </div>
-    <div class="tier-row-label">Silver Listings</div><div class="list-grid">
-      <a href="/papamoa-previews/listings/blackberry-eatery-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#1A2A1A,#2A4030)"><span class="l-badge badge-silver">Silver</span>&#9749;</div><div class="l-body"><h3>Blackberry Eatery</h3><div class="l-sub">Cafe &amp; Brunch &middot; Pāpāmoa</div><p class="l-desc">All-day brunch cafe known for generous portions and quality coffee.</p><div class="l-tags"><span class="l-tag">Cafe</span><span class="l-tag">Brunch</span><span class="l-tag">All-day</span></div></div></a>
-      <a href="/papamoa-previews/listings/mumbai-masala-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#2A1A0A,#4A3010)"><span class="l-badge badge-silver">Silver</span>&#127834;</div><div class="l-body"><h3>Mumbai Masala</h3><div class="l-sub">Indian Restaurant &middot; Fashion Island</div><p class="l-desc">BYO Indian restaurant with curries, tandoor, biryanis and vegetarian options.</p><div class="l-tags"><span class="l-tag">Indian</span><span class="l-tag">BYO</span><span class="l-tag">Takeaway</span></div></div></a>
-      <a href="/papamoa-previews/listings/the-pizza-pundits-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#2A1010,#4A1818)"><span class="l-badge badge-silver">Silver</span>&#127829;</div><div class="l-body"><h3>The Pizza Pundits</h3><div class="l-sub">Pizza &middot; 898 Pāpāmoa Beach Road</div><p class="l-desc">Gourmet pizza open seven nights from 4:30pm. 4.9 stars on TripAdvisor.</p><div class="l-tags"><span class="l-tag">Pizza</span><span class="l-tag">Takeaway</span><span class="l-tag">Dine-in</span></div></div></a>
-    </div>
-    <div class="section-footer"><a href="/papamoa-previews/sales/claim.html?type=spotlight&subcat=Food&cat=Food&status=waitlist" class="claim-spot-link" style="background:rgba(200,150,42,0.08);border-color:rgba(200,150,42,0.3);color:var(--gold);">&#9203; Spotlight taken &mdash; join the waitlist</a><a href="/papamoa-previews/sales/spotlight-ads.html" style="font-size:0.75rem;color:var(--muted);">About Spotlight Ads &rarr;</a></div>
   </div>
 </div>
 
@@ -751,7 +797,7 @@
       <h2>Services &amp; Trades</h2>
       <p>Mechanics, tradespeople, health professionals and the services that keep Pāpāmoa running</p>
     </div>
-        <div class="subcat-bar">
+    <div class="subcat-bar">
       <div class="subcat-inner">
         <a href="/papamoa-previews/categories/services/services.html" class="chip active">All services</a>
         <a href="/papamoa-previews/categories/services/mechanic-papamoa.html" class="chip">Mechanics</a>
@@ -767,6 +813,48 @@
         <a href="/papamoa-previews/categories/services/lawn-mowing.html" class="chip">Lawn Mowing</a>
       </div>
     </div>
+    <div class="cat-search-wrap">
+      <input type="text" class="cat-search-input" placeholder="Search services — try &ldquo;WOF&rdquo;, &ldquo;dentist&rdquo;, &ldquo;heat pump&rdquo;&hellip;" oninput="catSearch('services',this.value)" autocomplete="off">
+    </div>
+    <div class="subcat-grid" id="services-grid">
+      <a href="/papamoa-previews/categories/services/mechanic-papamoa.html" class="subcat-card" data-tags="mechanic wof warrant fitness service tyre brake auto car repair automotive">
+        <span class="sc-icon">🚗</span><div class="sc-body"><div class="sc-title">Mechanics &amp; Auto</div><div class="sc-desc">WOF, servicing &amp; tyres</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/electrician-papamoa.html" class="subcat-card" data-tags="electrician electrical wiring switchboard ev charger heat pump sparky registered">
+        <span class="sc-icon">⚡</span><div class="sc-body"><div class="sc-title">Electricians</div><div class="sc-desc">Registered electricians &amp; EV chargers</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/plumber-papamoa.html" class="subcat-card" data-tags="plumber plumbing gasfitter gas pipe drain blocked hot water cylinder bathroom">
+        <span class="sc-icon">🔧</span><div class="sc-body"><div class="sc-title">Plumbers</div><div class="sc-desc">Licensed plumbers &amp; gasfitters</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/physio-papamoa.html" class="subcat-card" data-tags="physio physiotherapy acc sports rehab injury back neck shoulder knee pain">
+        <span class="sc-icon">🦴</span><div class="sc-body"><div class="sc-title">Physiotherapy</div><div class="sc-desc">ACC registered physio &amp; sports rehab</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/gym-papamoa.html" class="subcat-card" data-tags="gym fitness pilates yoga reformer weights classes personal training crossfit wellbeing">
+        <span class="sc-icon">🏋</span><div class="sc-body"><div class="sc-title">Gyms &amp; Fitness</div><div class="sc-desc">24hr gyms, pilates &amp; group classes</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/medical-centre-papamoa.html" class="subcat-card" data-tags="medical centre gp doctor enrolled patient health care clinic dentist teeth dental orthodontist braces">
+        <span class="sc-icon">🏥</span><div class="sc-body"><div class="sc-title">Medical &amp; Dental</div><div class="sc-desc">GPs, dentists &amp; orthodontists</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/painter-papamoa.html" class="subcat-card" data-tags="painter painting decorator interior exterior house painting walls">
+        <span class="sc-icon">🎨</span><div class="sc-body"><div class="sc-title">Painters &amp; Decorators</div><div class="sc-desc">Interior &amp; exterior house painting</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/fencing-papamoa.html" class="subcat-card" data-tags="fencing fence timber steel pool gate boundary privacy">
+        <span class="sc-icon">🪚</span><div class="sc-body"><div class="sc-title">Fencing</div><div class="sc-desc">Timber, steel &amp; pool fencing</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/aircon-papamoa.html" class="subcat-card" data-tags="air conditioning aircon heat pump mitsubishi fujitsu daikin hvac heating cooling install">
+        <span class="sc-icon">❄️</span><div class="sc-body"><div class="sc-title">Air Conditioning</div><div class="sc-desc">Heat pump supply &amp; installation</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/childcare-papamoa.html" class="subcat-card" data-tags="childcare early childhood education ece kindy kindergarten creche daycare licensed">
+        <span class="sc-icon">👶</span><div class="sc-body"><div class="sc-title">Childcare &amp; ECE</div><div class="sc-desc">Licensed early learning centres</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/lawn-mowing.html" class="subcat-card" data-tags="lawn mowing garden maintenance landscaping hedge trimming weeding grass cut">
+        <span class="sc-icon">🌿</span><div class="sc-body"><div class="sc-title">Lawn Mowing</div><div class="sc-desc">Lawn care &amp; garden maintenance</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/services/mechanic-papamoa.html" class="subcat-card" data-tags="screen fly screen insect screen security screen window door wardrobe">
+        <span class="sc-icon">🪟</span><div class="sc-body"><div class="sc-title">Home Services</div><div class="sc-desc">Screens, security &amp; home solutions</div></div>
+      </a>
+    </div>
+    <div class="subcat-empty" id="services-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/services/services.html">browse all services &rarr;</a></div>
     <div class="spotlight-ad">
       <div class="sa-label"><span class="sa-label-badge">&#11088; Spotlight Ad</span> Services &amp; Trades &mdash; Homepage</div>
       <div class="sa-name">Coastal Autos</div>
@@ -774,23 +862,10 @@
       <p class="sa-desc">MTA Assured workshop — WOFs, servicing, tyres, brakes, auto electrical and vehicle licensing. Online bookings.</p>
       <a href="/papamoa-previews/listings/coastal-autos-papamoa.html" class="sa-link">View full listing &rarr;</a>
     </div>
-    <div class="list-head">
-      <h3>All Services &amp; Trades</h3>
-      <div class="list-head-right"><span class="list-count">Showing all current listings</span><a href="/papamoa-previews/categories/services/services.html" class="see-all-link">See all &rarr;</a></div>
+    <div class="cat-section-footer">
+      <a href="/papamoa-previews/categories/services/services.html" class="cat-full-link">Browse all Services &amp; Trades listings &rarr;</a>
+      <a href="/papamoa-previews/sales/spotlight-ads.html" class="cat-spotlight-cta">About homepage Spotlight Ads</a>
     </div>
-    <div class="tier-row-label">&#11088; Gold Listings</div><div class="list-grid">
-      <a href="/papamoa-previews/listings/coastal-autos-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#1A3020,#2A5030)"><span class="l-badge badge-gold">&#11088; Gold</span>&#128663;</div><div class="l-body"><h3>Coastal Autos</h3><div class="l-sub">Mechanic &amp; WOF &middot; Ashley Place</div><p class="l-desc">MTA Assured — WOF, servicing, tyres, brakes, auto electrical and licensing.</p><div class="l-tags"><span class="l-tag">WOF</span><span class="l-tag">Servicing</span><span class="l-tag">Tyres</span></div></div></a>
-      <a href="/papamoa-previews/listings/redefined-wellbeing-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#0D2A40,#1A4060)"><span class="l-badge badge-gold">&#11088; Gold</span>&#127947;</div><div class="l-body"><h3>ReDefined Wellbeing Hub</h3><div class="l-sub">Health &amp; Fitness &middot; Ashley Place</div><p class="l-desc">NZ's first integrated wellbeing centre — pilates, yoga, gym, physio, nutrition.</p><div class="l-tags"><span class="l-tag">Pilates</span><span class="l-tag">Yoga</span><span class="l-tag">Physio</span></div></div></a>
-      <a href="/papamoa-previews/listings/tara-road-dental-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#1A1A3A,#2A2A5A)"><span class="l-badge badge-gold">&#11088; Gold</span>&#129463;</div><div class="l-body"><h3>Tara Road Dental</h3><div class="l-sub">Dentist &middot; 1G Tara Road</div><p class="l-desc">Modern dental practice — general, cosmetic and family dentistry. New patients welcome.</p><div class="l-tags"><span class="l-tag">Dentist</span><span class="l-tag">Cosmetic</span><span class="l-tag">Family</span></div></div></a>
-      <a href="/papamoa-previews/listings/papamoa-orthodontist.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#1A2A3A,#2A3A4A)"><span class="l-badge badge-gold">&#11088; Gold</span>&#128512;</div><div class="l-body"><h3>Pāpāmoa Orthodontist</h3><div class="l-sub">Orthodontist &middot; 1G Tara Road</div><p class="l-desc">Orthodontic care for children, teens and adults. Braces and Invisalign.</p><div class="l-tags"><span class="l-tag">Braces</span><span class="l-tag">Invisalign</span><span class="l-tag">Children</span></div></div></a>
-      <a href="/papamoa-previews/listings/speedy-screens-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#2A3A1A,#3A5020)"><span class="l-badge badge-gold">&#11088; Gold</span>&#128306;</div><div class="l-body"><h3>Speedy Screens</h3><div class="l-sub">Home Services &middot; Pāpāmoa</div><p class="l-desc">Custom insect screens, security doors and built-in wardrobe solutions.</p><div class="l-tags"><span class="l-tag">Screens</span><span class="l-tag">Security</span><span class="l-tag">Wardrobes</span></div></div></a>
-    </div>
-    <div class="tier-row-label">Silver Listings</div><div class="list-grid">
-      <a href="/papamoa-previews/listings/barber-toms-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#2A1A2A,#402040)"><span class="l-badge badge-silver">Silver</span>&#9986;&#65039;</div><div class="l-body"><h3>Barber Toms</h3><div class="l-sub">Barber &middot; 80 Parton Road</div><p class="l-desc">Men's and kids' cuts, beard trims and razor fades. Walk-ins welcome.</p><div class="l-tags"><span class="l-tag">Men's Cuts</span><span class="l-tag">Kids</span><span class="l-tag">Beard Trims</span></div></div></a>
-      <a href="/papamoa-previews/listings/greencut-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#1A2A10,#2A4018)"><span class="l-badge badge-silver">Silver</span>&#127807;</div><div class="l-body"><h3>GreenCut Pāpāmoa</h3><div class="l-sub">Lawn &amp; Garden &middot; Pāpāmoa</div><p class="l-desc">Vetted local lawn care operators. Residential mowing from $45.</p><div class="l-tags"><span class="l-tag">Lawn Mowing</span><span class="l-tag">Garden</span><span class="l-tag">Residential</span></div></div></a>
-      <a href="/papamoa-previews/listings/kayco-nails-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#2A1A2A,#3A2038)"><span class="l-badge badge-silver">Silver</span>&#128133;</div><div class="l-body"><h3>Kayco Nails</h3><div class="l-sub">Nail Studio &middot; Pāpāmoa</div><p class="l-desc">Custom press-on nail kits handmade in Pāpāmoa. Shipped NZ-wide.</p><div class="l-tags"><span class="l-tag">Nails</span><span class="l-tag">Custom</span><span class="l-tag">Press-on</span></div></div></a>
-    </div>
-    <div class="section-footer"><a href="/papamoa-previews/sales/claim.html?type=spotlight&subcat=Services&cat=Services&status=waitlist" class="claim-spot-link" style="background:rgba(200,150,42,0.08);border-color:rgba(200,150,42,0.3);color:var(--gold);">&#9203; Spotlight taken &mdash; join the waitlist</a><a href="/papamoa-previews/sales/spotlight-ads.html" style="font-size:0.75rem;color:var(--muted);">About Spotlight Ads &rarr;</a></div>
   </div>
 </div>
 
@@ -800,9 +875,9 @@
     <div class="cat-hero-bar cat-hero-accom">
       <div class="breadcrumb-bar"><a href="/papamoa-previews/homepage.html">Home</a> / Accommodation</div>
       <h2>Where to Stay</h2>
-      <p>Motels, holiday parks, Airbnb managers, luxury stays and everywhere to rest your head in Pāpāmoa</p>
+      <p>Motels, holiday parks, short stays and everywhere to rest your head in Pāpāmoa</p>
     </div>
-        <div class="subcat-bar">
+    <div class="subcat-bar">
       <div class="subcat-inner">
         <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="chip active">All accommodation</a>
         <span class="chip soon">Holiday Parks</span>
@@ -813,26 +888,41 @@
         <span class="chip soon">Self-contained</span>
       </div>
     </div>
+    <div class="cat-search-wrap">
+      <input type="text" class="cat-search-input" placeholder="Search accommodation — try &ldquo;holiday park&rdquo;, &ldquo;motel&rdquo;, &ldquo;beach&rdquo;&hellip;" oninput="catSearch('accom',this.value)" autocomplete="off">
+    </div>
+    <div class="subcat-grid" id="accom-grid">
+      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="subcat-card" data-tags="holiday park camping powered sites cabins family beach aims games">
+        <span class="sc-icon">🏕</span><div class="sc-body"><div class="sc-title">Holiday Parks</div><div class="sc-desc">Camping, cabins &amp; powered sites</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="subcat-card" data-tags="motel self contained units studio bedroom accommodation sleep stay">
+        <span class="sc-icon">🏨</span><div class="sc-body"><div class="sc-title">Motels</div><div class="sc-desc">Self-contained units &amp; short stays</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="subcat-card" data-tags="apartment unit serviced accommodation short stay holiday rental">
+        <span class="sc-icon">🏢</span><div class="sc-body"><div class="sc-title">Apartments</div><div class="sc-desc">Serviced &amp; holiday apartments</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="subcat-card" data-tags="b&b bed breakfast boutique guesthouse">
+        <span class="sc-icon">🛏</span><div class="sc-body"><div class="sc-title">B&amp;Bs</div><div class="sc-desc">Boutique bed &amp; breakfast</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="subcat-card" data-tags="rental home airbnb holiday house bach private whole home">
+        <span class="sc-icon">🏡</span><div class="sc-body"><div class="sc-title">Rental Homes</div><div class="sc-desc">Whole homes, baches &amp; Airbnb</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="subcat-card" data-tags="self contained unit studio kitchen private accommodation">
+        <span class="sc-icon">🔑</span><div class="sc-body"><div class="sc-title">Self-contained</div><div class="sc-desc">Kitchen &amp; full facilities included</div></div>
+      </a>
+    </div>
+    <div class="subcat-empty" id="accom-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/accommodation/accommodation.html">browse all accommodation &rarr;</a></div>
     <div class="spotlight-ad-ghost">
       <div class="sag-text">
-        <h3>&#11088; Spotlight Ad available &mdash; Accommodation</h3>
-        <p>The homepage Spotlight Ad position for Accommodation is unclaimed. Monthly placement. Gold listing required.</p>
+        <h3>&#11088; Homepage Spotlight Ad &mdash; Accommodation</h3>
+        <p>Premium homepage placement for accommodation businesses. ~$1,000/month. Independent of listing tier.</p>
       </div>
-      <a href="/papamoa-previews/sales/claim.html?type=spotlight&amp;subcat=Accommodation&amp;cat=Accommodation" class="sag-cta">Claim this spot &rarr;</a>
+      <a href="/papamoa-previews/sales/claim.html?type=spotlight&amp;subcat=Accommodation&amp;cat=Accommodation" class="sag-cta">Enquire about this spot &rarr;</a>
     </div>
-    <div class="list-head">
-      <h3>All Accommodation</h3>
-      <div class="list-head-right"><span class="list-count">Showing all current listings</span><a href="/papamoa-previews/categories/accommodation/accommodation.html" class="see-all-link">See all &rarr;</a></div>
+    <div class="cat-section-footer">
+      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="cat-full-link">Browse all Accommodation listings &rarr;</a>
+      <a href="/papamoa-previews/sales/spotlight-ads.html" class="cat-spotlight-cta">About homepage Spotlight Ads</a>
     </div>
-    <div class="tier-row-label">&#11088; Gold Listings</div><div class="list-grid">
-      <a href="/papamoa-previews/listings/pacific-park-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#0D2A20,#1A4830)"><span class="l-badge badge-gold">&#11088; Gold</span>&#127957;</div><div class="l-body"><h3>Pacific Park Holiday Camp</h3><div class="l-sub">Holiday Park &middot; Pāpāmoa Beach</div><p class="l-desc">#1 rated on TripAdvisor. Alcohol-free family holiday park since 1944.</p><div class="l-tags"><span class="l-tag">Holiday Park</span><span class="l-tag">Family</span><span class="l-tag">Beach</span></div></div></a>
-      <a href="/papamoa-previews/listings/karaka-pines-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#1A2838,#2A3A50)"><span class="l-badge badge-gold">&#11088; Gold</span>&#127968;</div><div class="l-body"><h3>Karaka Pines Papamoa</h3><div class="l-sub">Retirement Village &middot; Simpson Road</div><p class="l-desc">Premium retirement village one street from the beach.</p><div class="l-tags"><span class="l-tag">Retirement</span><span class="l-tag">Beachside</span><span class="l-tag">Village</span></div></div></a>
-    </div>
-    <div class="tier-row-label">Silver Listings</div><div class="list-grid">
-      <a href="/papamoa-previews/listings/pacific-palms-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#0D2A40,#1A4060)"><span class="l-badge badge-silver">Silver</span>&#127964;</div><div class="l-body"><h3>Pacific Palms Motel</h3><div class="l-sub">Motel &middot; Pāpāmoa</div><p class="l-desc">Self-contained units a short walk from the beach. Studio to two-bedroom.</p><div class="l-tags"><span class="l-tag">Motel</span><span class="l-tag">Self-contained</span><span class="l-tag">Beach</span></div></div></a>
-      <a href="/papamoa-previews/listings/papamoa-beach-resort.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#0D2040,#1A3060)"><span class="l-badge badge-silver">Silver</span>&#127940;</div><div class="l-body"><h3>Pāpāmoa Beach Resort</h3><div class="l-sub">Holiday Park &middot; 535 Pāpāmoa Beach Road</div><p class="l-desc">Powered and non-powered sites, cabins and motel units on the beach road.</p><div class="l-tags"><span class="l-tag">Holiday Park</span><span class="l-tag">Cabins</span><span class="l-tag">Beach</span></div></div></a>
-    </div>
-    <div class="section-footer"><a href="/papamoa-previews/sales/claim.html?type=spotlight&subcat=Accommodation&cat=Accommodation" class="claim-spot-link">&#11088; Claim this Spotlight Ad</a><a href="/papamoa-previews/sales/spotlight-ads.html" style="font-size:0.75rem;color:var(--muted);">About Spotlight Ads &rarr;</a></div>
   </div>
 </div>
 
@@ -842,9 +932,9 @@
     <div class="cat-hero-bar cat-hero-entertain">
       <div class="breadcrumb-bar"><a href="/papamoa-previews/homepage.html">Home</a> / Entertainment &amp; Activities</div>
       <h2>What to Do</h2>
-      <p>Things to do in Pāpāmoa &mdash; surf schools, gyms, fitness, tours, events and local attractions</p>
+      <p>Things to do in Pāpāmoa &mdash; surf, fitness, indoor entertainment, tours and local attractions</p>
     </div>
-        <div class="subcat-bar">
+    <div class="subcat-bar">
       <div class="subcat-inner">
         <a href="/papamoa-previews/categories/activities/entertainment.html" class="chip active">All activities</a>
         <span class="chip soon">Surf &amp; Water</span>
@@ -854,6 +944,27 @@
         <span class="chip soon">Events</span>
       </div>
     </div>
+    <div class="cat-search-wrap">
+      <input type="text" class="cat-search-input" placeholder="Search activities — try &ldquo;surf&rdquo;, &ldquo;VR&rdquo;, &ldquo;kids&rdquo;&hellip;" oninput="catSearch('activities',this.value)" autocomplete="off">
+    </div>
+    <div class="subcat-grid" id="activities-grid">
+      <a href="/papamoa-previews/categories/activities/entertainment.html" class="subcat-card" data-tags="surf surfing lessons board hire school beginner holiday programme waves beach">
+        <span class="sc-icon">🏄</span><div class="sc-body"><div class="sc-title">Surf &amp; Water</div><div class="sc-desc">Surf lessons, board hire &amp; water sports</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/activities/entertainment.html" class="subcat-card" data-tags="fitness gym pilates yoga reformer classes personal training health wellbeing">
+        <span class="sc-icon">🏋</span><div class="sc-body"><div class="sc-title">Fitness &amp; Wellbeing</div><div class="sc-desc">Gyms, pilates &amp; group classes</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/activities/entertainment.html" class="subcat-card" data-tags="indoor entertainment vr virtual reality sim racing escape room arcade gaming kids birthday party">
+        <span class="sc-icon">🎮</span><div class="sc-body"><div class="sc-title">Indoor Entertainment</div><div class="sc-desc">VR, sim racing &amp; escape rooms</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/activities/entertainment.html" class="subcat-card" data-tags="tours guided kayak fishing charter boat walk hike nature">
+        <span class="sc-icon">🗺</span><div class="sc-body"><div class="sc-title">Tours &amp; Experiences</div><div class="sc-desc">Guided tours, charters &amp; day trips</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/activities/entertainment.html" class="subcat-card" data-tags="events market community festival live music dinner domain aims games">
+        <span class="sc-icon">🎉</span><div class="sc-body"><div class="sc-title">Events</div><div class="sc-desc">What&rsquo;s on in Pāpāmoa</div></div>
+      </a>
+    </div>
+    <div class="subcat-empty" id="activities-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/activities/entertainment.html">browse all activities &rarr;</a></div>
     <div class="spotlight-ad">
       <div class="sa-label"><span class="sa-label-badge">&#11088; Spotlight Ad</span> Things to Do &mdash; Homepage</div>
       <div class="sa-name">The Cave Pāpāmoa</div>
@@ -861,17 +972,10 @@
       <p class="sa-desc">Hosted VR, escape rooms and sim racing. Ages 10+. Great for birthdays and team events. All equipment provided.</p>
       <a href="/papamoa-previews/listings/the-cave-papamoa.html" class="sa-link">View full listing &rarr;</a>
     </div>
-    <div class="list-head">
-      <h3>All Things to Do</h3>
-      <div class="list-head-right"><span class="list-count">Showing all current listings</span><a href="/papamoa-previews/categories/activities/entertainment.html" class="see-all-link">See all &rarr;</a></div>
+    <div class="cat-section-footer">
+      <a href="/papamoa-previews/categories/activities/entertainment.html" class="cat-full-link">Browse all Things to Do &rarr;</a>
+      <a href="/papamoa-previews/sales/spotlight-ads.html" class="cat-spotlight-cta">About homepage Spotlight Ads</a>
     </div>
-    <div class="tier-row-label">&#11088; Gold Listings</div><div class="list-grid">
-      <a href="/papamoa-previews/listings/the-cave-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#1A0A2A,#2A1040)"><span class="l-badge badge-gold">&#11088; Gold</span>&#127918;</div><div class="l-body"><h3>The Cave Pāpāmoa</h3><div class="l-sub">VR &amp; Sim Racing &middot; Ashley Place</div><p class="l-desc">Hosted VR, escape rooms and sim racing. Ages 10+, all equipment provided.</p><div class="l-tags"><span class="l-tag">VR</span><span class="l-tag">Sim Racing</span><span class="l-tag">Escape Rooms</span></div></div></a>
-      <a href="/papamoa-previews/listings/hakanini-surf-school-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#0A2030,#1A3848)"><span class="l-badge badge-gold">&#11088; Gold</span>&#127940;</div><div class="l-body"><h3>Hakanini Surf School</h3><div class="l-sub">Surf School &middot; Pāpāmoa Domain</div><p class="l-desc">Group and private lessons, board hire from $35. All ages.</p><div class="l-tags"><span class="l-tag">Surf Lessons</span><span class="l-tag">Board Hire</span><span class="l-tag">All ages</span></div></div></a>
-      <div class="l-card dim"><div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Available</span>&#127907;</div><div class="l-body"><h3>Activities Spotlight</h3><div class="l-sub">Things to Do &middot; Pāpāmoa</div><p class="l-desc">Gold Spotlight available for activities and tours in Pāpāmoa.</p></div></div>
-      <div class="l-card dim"><div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Available</span>&#127918;</div><div class="l-body"><h3>Entertainment Spotlight</h3><div class="l-sub">Entertainment &middot; Pāpāmoa</div><p class="l-desc">Gold Spotlight available. Feature your entertainment business.</p></div></div>
-    </div>
-    <div class="section-footer"><a href="/papamoa-previews/sales/claim.html?type=spotlight&subcat=Entertainment&cat=Entertainment&status=waitlist" class="claim-spot-link" style="background:rgba(200,150,42,0.08);border-color:rgba(200,150,42,0.3);color:var(--gold);">&#9203; Spotlight taken &mdash; join the waitlist</a><a href="/papamoa-previews/sales/spotlight-ads.html" style="font-size:0.75rem;color:var(--muted);">About Spotlight Ads &rarr;</a></div>
   </div>
 </div>
 
@@ -883,7 +987,7 @@
       <h2>Where to Shop</h2>
       <p>Fashion, gifts, books, specialty stores and retail across Pāpāmoa</p>
     </div>
-        <div class="subcat-bar">
+    <div class="subcat-bar">
       <div class="subcat-inner">
         <a href="/papamoa-previews/categories/shops/shopping.html" class="chip active">All shops</a>
         <a href="/papamoa-previews/categories/shops/supermarkets-papamoa.html" class="chip">Supermarkets</a>
@@ -898,24 +1002,56 @@
         <a href="/papamoa-previews/categories/shops/vape-shop-papamoa.html" class="chip">Vape Shops</a>
       </div>
     </div>
+    <div class="cat-search-wrap">
+      <input type="text" class="cat-search-input" placeholder="Search shops — try &ldquo;books&rdquo;, &ldquo;supplements&rdquo;, &ldquo;hardware&rdquo;&hellip;" oninput="catSearch('shops',this.value)" autocomplete="off">
+    </div>
+    <div class="subcat-grid" id="shops-grid">
+      <a href="/papamoa-previews/categories/shops/supermarkets-papamoa.html" class="subcat-card" data-tags="supermarket grocery countdown pak n save new world food store">
+        <span class="sc-icon">🛒</span><div class="sc-body"><div class="sc-title">Supermarkets</div><div class="sc-desc">Countdown, New World &amp; more</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/shops/pharmacy-papamoa.html" class="subcat-card" data-tags="pharmacy chemist dispensary prescription medicine health">
+        <span class="sc-icon">💊</span><div class="sc-body"><div class="sc-title">Pharmacies</div><div class="sc-desc">Chemists &amp; dispensaries</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/shops/clothing-papamoa.html" class="subcat-card" data-tags="clothing fashion boutique apparel shoes accessories retail stores">
+        <span class="sc-icon">👗</span><div class="sc-body"><div class="sc-title">Clothing &amp; Fashion</div><div class="sc-desc">Boutiques &amp; clothing stores</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/shops/surf-skate-papamoa.html" class="subcat-card" data-tags="surf skate surfboard skateboard bodyboard hire rental beach wax leash">
+        <span class="sc-icon">🏄</span><div class="sc-body"><div class="sc-title">Surf &amp; Skate</div><div class="sc-desc">Boards, gear &amp; beach supplies</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/shops/supplement-store-papamoa.html" class="subcat-card" data-tags="supplement sports nutrition vitamins protein creatine wellness health store">
+        <span class="sc-icon">💪</span><div class="sc-body"><div class="sc-title">Supplement Stores</div><div class="sc-desc">Sports nutrition &amp; vitamins</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/shops/liquor-papamoa.html" class="subcat-card" data-tags="liquor bottle store wine beer spirits alcohol off licence">
+        <span class="sc-icon">🍷</span><div class="sc-body"><div class="sc-title">Liquor &amp; Bottle Stores</div><div class="sc-desc">Wine, beer &amp; spirits</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/shops/garden-centre-papamoa.html" class="subcat-card" data-tags="garden centre plants nursery trees shrubs pots soil gardening supplies">
+        <span class="sc-icon">🌿</span><div class="sc-body"><div class="sc-title">Garden Centres</div><div class="sc-desc">Plants, nurseries &amp; garden supplies</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/shops/building-supplies-papamoa.html" class="subcat-card" data-tags="building supplies hardware timber plasterboard roofing paint tools tradie merchant">
+        <span class="sc-icon">🏗</span><div class="sc-body"><div class="sc-title">Building Supplies</div><div class="sc-desc">Hardware &amp; building merchants</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/shops/cars-papamoa.html" class="subcat-card" data-tags="cars car yard dealership used vehicles auto sales buy">
+        <span class="sc-icon">🚗</span><div class="sc-body"><div class="sc-title">Cars &amp; Dealerships</div><div class="sc-desc">Car yards &amp; used vehicles</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/shops/vape-shop-papamoa.html" class="subcat-card" data-tags="vape shop e-cigarette vaping device e-liquid pods nicotine">
+        <span class="sc-icon">💨</span><div class="sc-body"><div class="sc-title">Vape Shops</div><div class="sc-desc">E-cigarettes, devices &amp; e-liquids</div></div>
+      </a>
+      <a href="/papamoa-previews/categories/shops/shopping.html" class="subcat-card" data-tags="books second hand secondhand dvd cd collectibles used trade exchange">
+        <span class="sc-icon">📚</span><div class="sc-body"><div class="sc-title">Books &amp; Second-hand</div><div class="sc-desc">Used books, DVDs &amp; collectibles</div></div>
+      </a>
+    </div>
+    <div class="subcat-empty" id="shops-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/shops/shopping.html">browse all shops &rarr;</a></div>
     <div class="spotlight-ad-ghost">
       <div class="sag-text">
-        <h3>&#11088; Spotlight Ad available &mdash; Shopping &amp; Retail</h3>
-        <p>The homepage Shopping Spotlight position is unclaimed. Monthly placement. Gold listing required.</p>
+        <h3>&#11088; Homepage Spotlight Ad &mdash; Shopping &amp; Retail</h3>
+        <p>Premium homepage placement for retail businesses. ~$1,000/month. Independent of listing tier.</p>
       </div>
-      <a href="/papamoa-previews/sales/claim.html?type=spotlight&amp;subcat=Shopping&amp;cat=Shopping" class="sag-cta">Claim this spot &rarr;</a>
+      <a href="/papamoa-previews/sales/claim.html?type=spotlight&amp;subcat=Shopping&amp;cat=Shopping" class="sag-cta">Enquire about this spot &rarr;</a>
     </div>
-    <div class="list-head">
-      <h3>All Shops &amp; Retail</h3>
-      <div class="list-head-right"><span class="list-count">Showing all current listings</span><a href="/papamoa-previews/categories/shops/shopping.html" class="see-all-link">See all &rarr;</a></div>
+    <div class="cat-section-footer">
+      <a href="/papamoa-previews/categories/shops/shopping.html" class="cat-full-link">Browse all Shopping &amp; Retail listings &rarr;</a>
+      <a href="/papamoa-previews/sales/spotlight-ads.html" class="cat-spotlight-cta">About homepage Spotlight Ads</a>
     </div>
-    <div class="tier-row-label">Silver Listings</div><div class="list-grid">
-      <a href="/papamoa-previews/listings/xanadu-book-exchange-papamoa.html" class="l-card"><div class="l-img" style="background:linear-gradient(135deg,#1A1A30,#282848)"><span class="l-badge badge-silver">Silver</span>&#128218;</div><div class="l-body"><h3>Xanadu Book Exchange</h3><div class="l-sub">Books &amp; Second-hand &middot; Ashley Place</div><p class="l-desc">Warehouse of second-hand books, DVDs, CDs and collectibles. Always buying.</p><div class="l-tags"><span class="l-tag">Books</span><span class="l-tag">Second-hand</span><span class="l-tag">DVDs</span></div></div></a>
-      <div class="l-card dim"><div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Available</span>&#128717;</div><div class="l-body"><h3>Retail Gold Spotlight</h3><div class="l-sub">Shopping &middot; Pāpāmoa</div><p class="l-desc">No Gold listing claimed for retail. Gold Spotlight available.</p></div></div>
-      <div class="l-card dim"><div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Available</span>&#128085;</div><div class="l-body"><h3>Fashion Spotlight</h3><div class="l-sub">Clothing &middot; Pāpāmoa</div><p class="l-desc">No Gold listing claimed for clothing. Gold Spotlight available.</p></div></div>
-      <div class="l-card dim"><div class="l-img" style="background:linear-gradient(135deg,#2A2A2A,#3A3A3A)"><span class="l-badge badge-spot">Available</span>&#128138;</div><div class="l-body"><h3>Pharmacy Spotlight</h3><div class="l-sub">Health &amp; Pharmacy &middot; Pāpāmoa</div><p class="l-desc">No Gold listing claimed for pharmacies. Gold Spotlight available.</p></div></div>
-    </div>
-    <div class="section-footer"><a href="/papamoa-previews/sales/claim.html?type=spotlight&subcat=Shopping&cat=Shopping" class="claim-spot-link">&#11088; Claim this Spotlight Ad</a><a href="/papamoa-previews/sales/spotlight-ads.html" style="font-size:0.75rem;color:var(--muted);">About Spotlight Ads &rarr;</a></div>
   </div>
 </div>
 
@@ -1328,7 +1464,26 @@ async function pnfSubmitContact(e) {
 </script>
 
 <script>
-// ── HOMEPAGE WEATHER STRIP ──
+// ── CATEGORY SECTION SEARCH ──
+var CAT_GRIDS = { food:'food-grid', services:'services-grid', accom:'accom-grid', activities:'activities-grid', shops:'shops-grid' };
+var CAT_EMPTY = { food:'food-empty', services:'services-empty', accom:'accom-empty', activities:'activities-empty', shops:'shops-empty' };
+function catSearch(cat, val) {
+  var q = val.trim().toLowerCase();
+  var grid = document.getElementById(CAT_GRIDS[cat]);
+  var empty = document.getElementById(CAT_EMPTY[cat]);
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card');
+  var anyVisible = false;
+  cards.forEach(function(card) {
+    var tags = (card.getAttribute('data-tags') || '').toLowerCase();
+    var title = (card.querySelector('.sc-title') ? card.querySelector('.sc-title').textContent : '').toLowerCase();
+    var match = !q || tags.indexOf(q) > -1 || title.indexOf(q) > -1;
+    card.classList.toggle('hidden', !match);
+    if (match) anyVisible = true;
+  });
+  if (empty) empty.classList.toggle('visible', !anyVisible && q.length > 0);
+}
+
 var HW_WMO = {
   0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',
   45:'Foggy',48:'Icy fog',
