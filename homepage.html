@@ -1116,14 +1116,14 @@ function handleSearch(val) {
   box.classList.add('visible');
 }
 function handleSearchKey(e) {
-  if (e.key === 'Enter') submitSearch();
+  if (e.key === 'Enter') { submitSearch(); return; }
   if (e.key === 'Escape') document.getElementById('search-results').classList.remove('visible');
 }
 function submitSearch() {
   var q = document.getElementById('site-search').value.trim();
   if (!q) return;
   saveRecentSearch(q);
-  handleSearch(q);
+  window.location.href = '/papamoa-previews/search.html?q=' + encodeURIComponent(q);
 }
 function fillSearch(term) {
   var input = document.getElementById('site-search');
