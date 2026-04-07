@@ -313,6 +313,12 @@
     .local-info-sub { font-size:0.84rem; color:rgba(255,255,255,0.45); margin-bottom:24px; }
     .info-section-label { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:10px; }
     .info-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; margin-bottom:20px; }
+    .info-scroll-row { overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; margin-bottom:20px; padding-bottom:4px; }
+    .info-scroll-row::-webkit-scrollbar { display:none; }
+    .info-scroll-inner { display:flex; gap:10px; align-items:stretch; }
+    .info-scroll-inner .info-card { flex:0 0 260px; min-height:90px; box-sizing:border-box; }
+    @media (max-width:900px) { .info-scroll-inner .info-card { flex:0 0 220px; } }
+    @media (max-width:500px) { .info-scroll-inner .info-card { flex:0 0 calc(80vw - 40px); } }
     .info-card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:9px; padding:14px 16px; text-decoration:none; color:inherit; display:flex; gap:11px; align-items:flex-start; transition:all 0.15s; }
     .info-card:hover { background:rgba(255,255,255,0.09); border-color:rgba(58,171,222,0.35); }
     .ic-icon { font-size:1.3rem; flex-shrink:0; line-height:1; margin-top:1px; }
@@ -599,54 +605,62 @@
       <a href="/papamoa-previews/community/essential-info.html">See all 28 pages &rarr;</a>
     </div>
     <p class="local-info-sub">Practical day-to-day guides for residents and visitors — kept current</p>
-
-        <div class="info-section-label">Beach &amp; Outdoors</div>
-    <div class="info-grid">
-      <a href="/papamoa-previews/community/weather.html" class="info-card"><span class="ic-icon">🌤</span><div class="ic-body"><div class="ic-title">Pāpāmoa Weather</div><div class="ic-desc">Live forecast, UV &amp; conditions</div><span class="ic-tag ic-tag-live">Live</span></div></a>
-      <a href="/papamoa-previews/community/surf-tides.html" class="info-card"><span class="ic-icon">🏄</span><div class="ic-body"><div class="ic-title">Surf &amp; Tides</div><div class="ic-desc">Live conditions, forecast &amp; surf spots</div><span class="ic-tag ic-tag-live">Live</span></div></a>
-      <a href="/papamoa-previews/community/fishing.html" class="info-card"><span class="ic-icon">🎣</span><div class="ic-body"><div class="ic-title">Fishing in Pāpāmoa</div><div class="ic-desc">Spots, tides, bite times &amp; charters</div></div></a>
-      <a href="/papamoa-previews/community/swimming-papamoa.html" class="info-card"><span class="ic-icon">🏊</span><div class="ic-body"><div class="ic-title">Swimming in Pāpāmoa</div><div class="ic-desc">Beach guide, pools &amp; rip safety</div></div></a>
-      <a href="/papamoa-previews/community/walks-tracks.html" class="info-card"><span class="ic-icon">🚶</span><div class="ic-body"><div class="ic-title">Walks &amp; Tracks</div><div class="ic-desc">Best walks near Pāpāmoa Beach</div></div></a>
+    <div class="info-section-label">Health &amp; Safety</div>
+    <div class="info-scroll-row">
+      <div class="info-scroll-inner">
+        <a href="/papamoa-previews/community/urgent-health.html" class="info-card"><span class="ic-icon">🚑</span><div class="ic-body"><div class="ic-title">Urgent Health</div><div class="ic-desc">After-hours medical &amp; emergency</div></div></a>
+        <a href="/papamoa-previews/community/emergencies.html" class="info-card"><span class="ic-icon">🚨</span><div class="ic-body"><div class="ic-title">Emergency Preparedness</div><div class="ic-desc">Tsunami, earthquake &amp; evacuation</div></div></a>
+        <a href="/papamoa-previews/community/community-resources.html" class="info-card"><span class="ic-icon">📋</span><div class="ic-body"><div class="ic-title">Community Resources</div><div class="ic-desc">Emergency contacts &amp; support</div></div></a>
+        <a href="/papamoa-previews/community/neighbourhood-support.html" class="info-card"><span class="ic-icon">🏘</span><div class="ic-body"><div class="ic-title">Neighbourhood Support</div><div class="ic-desc">Community safety network</div></div></a>
+        <a href="/papamoa-previews/community/police.html" class="info-card"><span class="ic-icon">👮</span><div class="ic-body"><div class="ic-title">Police &amp; Crime</div><div class="ic-desc">Pāpāmoa Station · How to report</div></div></a>
+      </div>
     </div>
-        <div class="info-section-label">Parks &amp; Green Spaces</div>
-    <div class="info-grid">
-      <a href="/papamoa-previews/community/papamoa-hills.html" class="info-card"><span class="ic-icon">⛰</span><div class="ic-body"><div class="ic-title">Pāpāmoa Hills</div><div class="ic-desc">Track status, closures &amp; history</div></div></a>
-      <a href="/papamoa-previews/community/gordon-spratt-reserve.html" class="info-card"><span class="ic-icon">🌳</span><div class="ic-body"><div class="ic-title">Gordon Spratt Reserve</div><div class="ic-desc">Sports fields, playground &amp; wetland walk</div></div></a>
-      <a href="/papamoa-previews/community/parks-playgrounds.html" class="info-card"><span class="ic-icon">🛝</span><div class="ic-body"><div class="ic-title">Parks &amp; Playgrounds</div><div class="ic-desc">Every park, skate spot &amp; picnic area</div></div></a>
-      <a href="/papamoa-previews/community/animals-papamoa.html" class="info-card"><span class="ic-icon">🐾</span><div class="ic-body"><div class="ic-title">Animals in Pāpāmoa</div><div class="ic-desc">SPCA, lost pets, adoption &amp; vets</div></div></a>
-      <a href="/papamoa-previews/community/dogs-papamoa.html" class="info-card"><span class="ic-icon">🐕</span><div class="ic-body"><div class="ic-title">Dogs in Pāpāmoa</div><div class="ic-desc">Off-leash zones, beach rules &amp; registration</div></div></a>
+    <div class="info-section-label">Beach, Outdoors &amp; Parks</div>
+    <div class="info-scroll-row">
+      <div class="info-scroll-inner">
+        <a href="/papamoa-previews/community/weather.html" class="info-card"><span class="ic-icon">🌤</span><div class="ic-body"><div class="ic-title">Pāpāmoa Weather</div><div class="ic-desc">Live forecast, UV &amp; conditions</div><span class="ic-tag ic-tag-live">Live</span></div></a>
+        <a href="/papamoa-previews/community/surf-tides.html" class="info-card"><span class="ic-icon">🏄</span><div class="ic-body"><div class="ic-title">Surf &amp; Tides</div><div class="ic-desc">Live conditions &amp; surf spots</div><span class="ic-tag ic-tag-live">Live</span></div></a>
+        <a href="/papamoa-previews/community/fishing.html" class="info-card"><span class="ic-icon">🎣</span><div class="ic-body"><div class="ic-title">Fishing in Pāpāmoa</div><div class="ic-desc">Spots, tides, bite times &amp; charters</div></div></a>
+        <a href="/papamoa-previews/community/swimming-papamoa.html" class="info-card"><span class="ic-icon">🏊</span><div class="ic-body"><div class="ic-title">Swimming in Pāpāmoa</div><div class="ic-desc">Beach guide, pools &amp; rip safety</div></div></a>
+        <a href="/papamoa-previews/community/walks-tracks.html" class="info-card"><span class="ic-icon">🚶</span><div class="ic-body"><div class="ic-title">Walks &amp; Tracks</div><div class="ic-desc">Best walks near Pāpāmoa Beach</div></div></a>
+        <a href="/papamoa-previews/community/papamoa-hills.html" class="info-card"><span class="ic-icon">⛰</span><div class="ic-body"><div class="ic-title">Pāpāmoa Hills</div><div class="ic-desc">Track status, closures &amp; history</div></div></a>
+        <a href="/papamoa-previews/community/gordon-spratt-reserve.html" class="info-card"><span class="ic-icon">🌳</span><div class="ic-body"><div class="ic-title">Gordon Spratt Reserve</div><div class="ic-desc">Sports fields, playground &amp; wetland walk</div></div></a>
+        <a href="/papamoa-previews/community/parks-playgrounds.html" class="info-card"><span class="ic-icon">🛝</span><div class="ic-body"><div class="ic-title">Parks &amp; Playgrounds</div><div class="ic-desc">Every park, skate spot &amp; picnic area</div></div></a>
+        <a href="/papamoa-previews/community/animals-papamoa.html" class="info-card"><span class="ic-icon">🐾</span><div class="ic-body"><div class="ic-title">Animals in Pāpāmoa</div><div class="ic-desc">SPCA, lost pets, adoption &amp; vets</div></div></a>
+        <a href="/papamoa-previews/community/dogs-papamoa.html" class="info-card"><span class="ic-icon">🐕</span><div class="ic-body"><div class="ic-title">Dogs in Pāpāmoa</div><div class="ic-desc">Off-leash zones, beach rules &amp; registration</div></div></a>
+      </div>
     </div>
-        <div class="info-section-label">Health &amp; Safety</div>
-    <div class="info-grid">
-      <a href="/papamoa-previews/community/urgent-health.html" class="info-card"><span class="ic-icon">🚑</span><div class="ic-body"><div class="ic-title">Urgent Health</div><div class="ic-desc">After-hours medical &amp; emergency</div></div></a>
-      <a href="/papamoa-previews/community/emergencies.html" class="info-card"><span class="ic-icon">🚨</span><div class="ic-body"><div class="ic-title">Emergency Preparedness</div><div class="ic-desc">Tsunami, earthquake &amp; evacuation</div></div></a>
-      <a href="/papamoa-previews/community/rubbish-recycling-papamoa.html" class="info-card"><span class="ic-icon">♻️</span><div class="ic-body"><div class="ic-title">Rubbish &amp; Recycling</div><div class="ic-desc">4-bin guide &amp; transfer station</div></div></a>
-      <a href="/papamoa-previews/community/fuel-prices.html" class="info-card"><span class="ic-icon">⛽</span><div class="ic-body"><div class="ic-title">Fuel Prices</div><div class="ic-desc">Petrol &amp; diesel stations</div><span class="ic-tag ic-tag-updated">Updated</span></div></a>
-      <a href="/papamoa-previews/community/ev-charging.html" class="info-card"><span class="ic-icon">⚡</span><div class="ic-body"><div class="ic-title">EV Charging</div><div class="ic-desc">Charging stations near Pāpāmoa</div></div></a>
+    <div class="info-section-label">Getting Around &amp; Nearby</div>
+    <div class="info-scroll-row">
+      <div class="info-scroll-inner">
+        <a href="/papamoa-previews/community/airport.html" class="info-card"><span class="ic-icon">✈️</span><div class="ic-body"><div class="ic-title">Tauranga Airport</div><div class="ic-desc">Flights, parking &amp; transport</div></div></a>
+        <a href="/papamoa-previews/community/tauranga.html" class="info-card"><span class="ic-icon">🏙</span><div class="ic-body"><div class="ic-title">Tauranga</div><div class="ic-desc">City guide · 15 min from Pāpāmoa</div></div></a>
+        <a href="/papamoa-previews/community/mount-maunganui.html" class="info-card"><span class="ic-icon">⛰</span><div class="ic-body"><div class="ic-title">Mount Maunganui</div><div class="ic-desc">Mauao · Village &amp; beach guide</div></div></a>
+        <a href="/papamoa-previews/community/the-yard.html" class="info-card"><span class="ic-icon">🪵</span><div class="ic-body"><div class="ic-title">The Yard</div><div class="ic-desc">Retail &amp; dining precinct · Pāpāmoa</div></div></a>
+        <a href="/papamoa-previews/community/fuel-prices.html" class="info-card"><span class="ic-icon">⛽</span><div class="ic-body"><div class="ic-title">Fuel Prices</div><div class="ic-desc">Petrol &amp; diesel stations</div><span class="ic-tag ic-tag-updated">Updated</span></div></a>
+        <a href="/papamoa-previews/community/ev-charging.html" class="info-card"><span class="ic-icon">⚡</span><div class="ic-body"><div class="ic-title">EV Charging</div><div class="ic-desc">Charging stations near Pāpāmoa</div></div></a>
+      </div>
     </div>
-        <div class="info-section-label">Property &amp; Living</div>
-    <div class="info-grid">
-      <a href="/papamoa-previews/community/real-estate.html" class="info-card"><span class="ic-icon">🏡</span><div class="ic-body"><div class="ic-title">Real Estate</div><div class="ic-desc">Property market &amp; local agents</div></div></a>
-      <a href="/papamoa-previews/community/rentals-papamoa.html" class="info-card"><span class="ic-icon">🏠</span><div class="ic-body"><div class="ic-title">Rentals in Pāpāmoa</div><div class="ic-desc">Average rents &amp; property management</div></div></a>
-      <a href="/papamoa-previews/community/shopping-centres.html" class="info-card"><span class="ic-icon">🛍</span><div class="ic-body"><div class="ic-title">Shopping Centres</div><div class="ic-desc">Fashion Island, Palm Beach Plaza, The Sands</div></div></a>
-      <a href="/papamoa-previews/community/utilities-papamoa.html" class="info-card"><span class="ic-icon">💡</span><div class="ic-body"><div class="ic-title">Utilities</div><div class="ic-desc">Power, gas &amp; broadband providers</div></div></a>
-      <a href="/papamoa-previews/community/water-rates-papamoa.html" class="info-card"><span class="ic-icon">💧</span><div class="ic-body"><div class="ic-title">Water &amp; Rates</div><div class="ic-desc">Metered water and council rates</div></div></a>
+    <div class="info-section-label">Seasonal &amp; Practical</div>
+    <div class="info-scroll-row">
+      <div class="info-scroll-inner">
+        <a href="/papamoa-previews/community/easter-trading-hours.html" class="info-card"><span class="ic-icon">🐣</span><div class="ic-body"><div class="ic-title">Easter Trading Hours</div><div class="ic-desc">Which shops are open over Easter</div><span class="ic-tag ic-tag-seasonal">Seasonal</span></div></a>
+        <a href="/papamoa-previews/community/gardening.html" class="info-card"><span class="ic-icon">🌿</span><div class="ic-body"><div class="ic-title">Gardening in Pāpāmoa</div><div class="ic-desc">Garden services, tips &amp; lawn mowing</div></div></a>
+        <a href="/papamoa-previews/community/summer-insects-papamoa.html" class="info-card"><span class="ic-icon">🦟</span><div class="ic-body"><div class="ic-title">Summer Insects</div><div class="ic-desc">Mosquitoes, wasps &amp; sandflies</div><span class="ic-tag ic-tag-seasonal">Seasonal</span></div></a>
+        <a href="/papamoa-previews/community/clothing-recycling-papamoa.html" class="info-card"><span class="ic-icon">👕</span><div class="ic-body"><div class="ic-title">Clothing Recycling</div><div class="ic-desc">Donation bins and recycling options</div></div></a>
+        <a href="/papamoa-previews/community/op-shops-papamoa.html" class="info-card"><span class="ic-icon">🛒</span><div class="ic-body"><div class="ic-title">Op Shops &amp; Second-hand</div><div class="ic-desc">Charity shops near Pāpāmoa</div></div></a>
+        <a href="/papamoa-previews/community/tax-kiwisaver.html" class="info-card"><span class="ic-icon">💰</span><div class="ic-body"><div class="ic-title">Tax, PAYE &amp; KiwiSaver</div><div class="ic-desc">Calculators for Kiwis &amp; businesses</div></div></a>
+      </div>
     </div>
-        <div class="info-section-label">Getting Around &amp; Nearby</div>
-    <div class="info-grid">
-      <a href="/papamoa-previews/community/airport.html" class="info-card"><span class="ic-icon">✈️</span><div class="ic-body"><div class="ic-title">Tauranga Airport</div><div class="ic-desc">Flights, parking &amp; transport</div></div></a>
-      <a href="/papamoa-previews/community/tauranga.html" class="info-card"><span class="ic-icon">🏙</span><div class="ic-body"><div class="ic-title">Tauranga</div><div class="ic-desc">City guide · 15 min from Pāpāmoa</div></div></a>
-      <a href="/papamoa-previews/community/mount-maunganui.html" class="info-card"><span class="ic-icon">⛰</span><div class="ic-body"><div class="ic-title">Mount Maunganui</div><div class="ic-desc">Mauao · Village &amp; beach guide</div></div></a>
-      <a href="/papamoa-previews/community/the-yard.html" class="info-card"><span class="ic-icon">🪵</span><div class="ic-body"><div class="ic-title">The Yard</div><div class="ic-desc">Retail &amp; dining precinct · Pāpāmoa</div></div></a>
-      <a href="/papamoa-previews/community/tax-kiwisaver.html" class="info-card"><span class="ic-icon">💰</span><div class="ic-body"><div class="ic-title">Tax, PAYE &amp; KiwiSaver</div><div class="ic-desc">Calculators for Kiwis &amp; businesses</div></div></a>
-    </div>
-        <div class="info-section-label">Seasonal &amp; Practical</div>
-    <div class="info-grid">
-      <a href="/papamoa-previews/community/easter-trading-hours.html" class="info-card"><span class="ic-icon">🐣</span><div class="ic-body"><div class="ic-title">Easter Trading Hours</div><div class="ic-desc">Which shops are open over Easter</div><span class="ic-tag ic-tag-seasonal">Seasonal</span></div></a>
-      <a href="/papamoa-previews/community/gardening.html" class="info-card"><span class="ic-icon">🌿</span><div class="ic-body"><div class="ic-title">Gardening in Pāpāmoa</div><div class="ic-desc">Garden services, tips &amp; lawn mowing</div></div></a>
-      <a href="/papamoa-previews/community/summer-insects-papamoa.html" class="info-card"><span class="ic-icon">🦟</span><div class="ic-body"><div class="ic-title">Summer Insects</div><div class="ic-desc">Mosquitoes, wasps &amp; sandflies</div><span class="ic-tag ic-tag-seasonal">Seasonal</span></div></a>
-      <a href="/papamoa-previews/community/clothing-recycling-papamoa.html" class="info-card"><span class="ic-icon">👕</span><div class="ic-body"><div class="ic-title">Clothing Recycling</div><div class="ic-desc">Donation bins and recycling options</div></div></a>
-      <a href="/papamoa-previews/community/op-shops-papamoa.html" class="info-card"><span class="ic-icon">🛒</span><div class="ic-body"><div class="ic-title">Op Shops &amp; Second-hand</div><div class="ic-desc">Charity shops near Pāpāmoa</div></div></a>
+    <div class="info-section-label">Place &amp; History</div>
+    <div class="info-scroll-row">
+      <div class="info-scroll-inner">
+        <a href="/papamoa-previews/community/maori-history.html" class="info-card"><span class="ic-icon">🪶</span><div class="ic-body"><div class="ic-title">Māori History of Pāpāmoa</div><div class="ic-desc">Ngā Pōtiki, Ngāi Te Rangi &amp; heritage</div></div></a>
+        <a href="/papamoa-previews/community/population-statistics.html" class="info-card"><span class="ic-icon">📊</span><div class="ic-body"><div class="ic-title">Population &amp; Statistics</div><div class="ic-desc">37,910 residents · Census data</div></div></a>
+        <a href="/papamoa-previews/community/local-government.html" class="info-card"><span class="ic-icon">🏛</span><div class="ic-body"><div class="ic-title">Local Government</div><div class="ic-desc">Mayor, TCC councillors and MP</div></div></a>
+        <a href="/papamoa-previews/community/new-developments-papamoa.html" class="info-card"><span class="ic-icon">🏗</span><div class="ic-body"><div class="ic-title">New Developments</div><div class="ic-desc">Golden Sands, Te Tumu &amp; East</div></div></a>
+        <a href="/papamoa-previews/community/notable-people.html" class="info-card"><span class="ic-icon">⭐</span><div class="ic-body"><div class="ic-title">Notable People</div><div class="ic-desc">Athletes, artists &amp; public figures</div></div></a>
+      </div>
     </div>
   </div>
 </div>
@@ -659,38 +673,56 @@
       <a href="/papamoa-previews/community/community.html">See all 21 pages &rarr;</a>
     </div>
     <p class="local-info-sub">People, groups, schools, events and organisations that make Pāpāmoa tick</p>
-
-        <div class="info-section-label">Safety &amp; Support</div>
-    <div class="info-grid">
-      <a href="/papamoa-previews/community/community-resources.html" class="info-card"><span class="ic-icon">📋</span><div class="ic-body"><div class="ic-title">Community Resources</div><div class="ic-desc">Emergency contacts &amp; support</div></div></a>
-      <a href="/papamoa-previews/community/neighbourhood-support.html" class="info-card"><span class="ic-icon">🏘</span><div class="ic-body"><div class="ic-title">Neighbourhood Support</div><div class="ic-desc">Community safety network</div></div></a>
-      <a href="/papamoa-previews/community/police.html" class="info-card"><span class="ic-icon">👮</span><div class="ic-body"><div class="ic-title">Police &amp; Crime</div><div class="ic-desc">Pāpāmoa Station · How to report</div></div></a>
-      <a href="/papamoa-previews/community/community-groups.html" class="info-card"><span class="ic-icon">🤝</span><div class="ic-body"><div class="ic-title">Community Groups</div><div class="ic-desc">Clubs, volunteers &amp; organisations</div></div></a>
-      <a href="/papamoa-previews/community/seniors-retirement.html" class="info-card"><span class="ic-icon">👴</span><div class="ic-body"><div class="ic-title">Seniors &amp; Retirement</div><div class="ic-desc">Villages, home care &amp; NZ Super</div></div></a>
+    <div class="info-section-label">News &amp; Weather</div>
+    <div class="info-scroll-row">
+      <div class="info-scroll-inner">
+        <a href="/papamoa-previews/community/weather.html" class="info-card"><span class="ic-icon">🌤</span><div class="ic-body"><div class="ic-title">Pāpāmoa Weather</div><div class="ic-desc">Live forecast, UV &amp; conditions</div><span class="ic-tag ic-tag-live">Live</span></div></a>
+        <a href="/papamoa-previews/community/news-events.html" class="info-card"><span class="ic-icon">📰</span><div class="ic-body"><div class="ic-title">News &amp; Events</div><div class="ic-desc">What's on in Pāpāmoa</div></div></a>
+        <a href="/papamoa-previews/community/surf-tides.html" class="info-card"><span class="ic-icon">🏄</span><div class="ic-body"><div class="ic-title">Surf &amp; Tides</div><div class="ic-desc">Live surf &amp; tide conditions</div><span class="ic-tag ic-tag-live">Live</span></div></a>
+        <a href="/papamoa-previews/community/fuel-prices.html" class="info-card"><span class="ic-icon">⛽</span><div class="ic-body"><div class="ic-title">Fuel Prices</div><div class="ic-desc">Petrol &amp; diesel stations</div><span class="ic-tag ic-tag-updated">Updated</span></div></a>
+      </div>
     </div>
-        <div class="info-section-label">Schools &amp; Families</div>
-    <div class="info-grid">
-      <a href="/papamoa-previews/community/schools-papamoa.html" class="info-card"><span class="ic-icon">🏫</span><div class="ic-body"><div class="ic-title">Schools in Pāpāmoa</div><div class="ic-desc">All 8 schools · Zones &amp; contacts</div></div></a>
-      <a href="/papamoa-previews/community/school-terms-holidays.html" class="info-card"><span class="ic-icon">📅</span><div class="ic-body"><div class="ic-title">School Terms 2026</div><div class="ic-desc">All term dates &amp; holidays</div></div></a>
-      <a href="/papamoa-previews/community/library.html" class="info-card"><span class="ic-icon">📚</span><div class="ic-body"><div class="ic-title">Pāpāmoa Library</div><div class="ic-desc">Te Ao Mārama · 15 Gravatt Rd</div></div></a>
-      <a href="/papamoa-previews/community/kids-birthday-parties.html" class="info-card"><span class="ic-icon">🎂</span><div class="ic-body"><div class="ic-title">Kids Birthday Parties</div><div class="ic-desc">Venues, entertainers &amp; hire</div></div></a>
-      <a href="/papamoa-previews/community/sports-clubs.html" class="info-card"><span class="ic-icon">⚽</span><div class="ic-body"><div class="ic-title">Sports Clubs</div><div class="ic-desc">Football, surf lifesaving &amp; more</div></div></a>
+    <div class="info-section-label">Safety &amp; Support</div>
+    <div class="info-scroll-row">
+      <div class="info-scroll-inner">
+        <a href="/papamoa-previews/community/community-resources.html" class="info-card"><span class="ic-icon">📋</span><div class="ic-body"><div class="ic-title">Community Resources</div><div class="ic-desc">Emergency contacts &amp; support</div></div></a>
+        <a href="/papamoa-previews/community/neighbourhood-support.html" class="info-card"><span class="ic-icon">🏘</span><div class="ic-body"><div class="ic-title">Neighbourhood Support</div><div class="ic-desc">Community safety network</div></div></a>
+        <a href="/papamoa-previews/community/police.html" class="info-card"><span class="ic-icon">👮</span><div class="ic-body"><div class="ic-title">Police &amp; Crime</div><div class="ic-desc">Pāpāmoa Station · How to report</div></div></a>
+        <a href="/papamoa-previews/community/community-groups.html" class="info-card"><span class="ic-icon">🤝</span><div class="ic-body"><div class="ic-title">Community Groups</div><div class="ic-desc">Clubs, volunteers &amp; organisations</div></div></a>
+        <a href="/papamoa-previews/community/seniors-retirement.html" class="info-card"><span class="ic-icon">👴</span><div class="ic-body"><div class="ic-title">Seniors &amp; Retirement</div><div class="ic-desc">Villages, home care &amp; NZ Super</div></div></a>
+      </div>
     </div>
-        <div class="info-section-label">Place &amp; History</div>
-    <div class="info-grid">
-      <a href="/papamoa-previews/community/maori-history.html" class="info-card"><span class="ic-icon">🪶</span><div class="ic-body"><div class="ic-title">Māori History of Pāpāmoa</div><div class="ic-desc">Ngā Pōtiki, Ngāi Te Rangi &amp; heritage</div></div></a>
-      <a href="/papamoa-previews/community/population-statistics.html" class="info-card"><span class="ic-icon">📊</span><div class="ic-body"><div class="ic-title">Population &amp; Statistics</div><div class="ic-desc">37,910 residents · Census data</div></div></a>
-      <a href="/papamoa-previews/community/local-government.html" class="info-card"><span class="ic-icon">🏛</span><div class="ic-body"><div class="ic-title">Local Government</div><div class="ic-desc">Mayor, TCC councillors and MP</div></div></a>
-      <a href="/papamoa-previews/community/new-developments-papamoa.html" class="info-card"><span class="ic-icon">🏗</span><div class="ic-body"><div class="ic-title">New Developments</div><div class="ic-desc">Golden Sands, Te Tumu &amp; East</div></div></a>
-      <a href="/papamoa-previews/community/notable-people.html" class="info-card"><span class="ic-icon">⭐</span><div class="ic-body"><div class="ic-title">Notable People</div><div class="ic-desc">Athletes, artists &amp; public figures</div></div></a>
+    <div class="info-section-label">Schools &amp; Families</div>
+    <div class="info-scroll-row">
+      <div class="info-scroll-inner">
+        <a href="/papamoa-previews/community/schools-papamoa.html" class="info-card"><span class="ic-icon">🏫</span><div class="ic-body"><div class="ic-title">Schools in Pāpāmoa</div><div class="ic-desc">All 8 schools · Zones &amp; contacts</div></div></a>
+        <a href="/papamoa-previews/community/school-terms-holidays.html" class="info-card"><span class="ic-icon">📅</span><div class="ic-body"><div class="ic-title">School Terms 2026</div><div class="ic-desc">All term dates &amp; holidays</div></div></a>
+        <a href="/papamoa-previews/community/library.html" class="info-card"><span class="ic-icon">📚</span><div class="ic-body"><div class="ic-title">Pāpāmoa Library</div><div class="ic-desc">Te Ao Mārama · 15 Gravatt Rd</div></div></a>
+        <a href="/papamoa-previews/community/kids-birthday-parties.html" class="info-card"><span class="ic-icon">🎂</span><div class="ic-body"><div class="ic-title">Kids Birthday Parties</div><div class="ic-desc">Venues, entertainers &amp; hire</div></div></a>
+        <a href="/papamoa-previews/community/sports-clubs.html" class="info-card"><span class="ic-icon">⚽</span><div class="ic-body"><div class="ic-title">Sports Clubs</div><div class="ic-desc">Football, surf lifesaving &amp; more</div></div></a>
+      </div>
     </div>
-        <div class="info-section-label">Events &amp; Community Life</div>
-    <div class="info-grid">
-      <a href="/papamoa-previews/community/aims-games.html" class="info-card"><span class="ic-icon">🏆</span><div class="ic-body"><div class="ic-title">AIMS Games 2026</div><div class="ic-desc">5–11 September · Family guide</div><span class="ic-tag ic-tag-seasonal">Sept 2026</span></div></a>
-      <a href="/papamoa-previews/community/news-events.html" class="info-card"><span class="ic-icon">📰</span><div class="ic-body"><div class="ic-title">News &amp; Events</div><div class="ic-desc">What's on in Pāpāmoa</div></div></a>
-      <a href="/papamoa-previews/community/dinner-at-the-domain.html" class="info-card"><span class="ic-icon">🍽</span><div class="ic-body"><div class="ic-title">Dinner at the Domain</div><div class="ic-desc">Outdoor dining event · Pāpāmoa Domain</div></div></a>
-      <a href="/papamoa-previews/community/weddings.html" class="info-card"><span class="ic-icon">💒</span><div class="ic-body"><div class="ic-title">Weddings in Pāpāmoa</div><div class="ic-desc">Venues, photographers &amp; suppliers</div></div></a>
-      <a href="/papamoa-previews/community/animals-papamoa.html" class="info-card"><span class="ic-icon">🐾</span><div class="ic-body"><div class="ic-title">Animals in Pāpāmoa</div><div class="ic-desc">SPCA, lost pets, adoption &amp; vets</div></div></a>
+    <div class="info-section-label">Events &amp; Community Life</div>
+    <div class="info-scroll-row">
+      <div class="info-scroll-inner">
+        <a href="/papamoa-previews/community/aims-games.html" class="info-card"><span class="ic-icon">🏆</span><div class="ic-body"><div class="ic-title">AIMS Games 2026</div><div class="ic-desc">5–11 September · Family guide</div><span class="ic-tag ic-tag-seasonal">Sept 2026</span></div></a>
+        <a href="/papamoa-previews/community/dinner-at-the-domain.html" class="info-card"><span class="ic-icon">🍽</span><div class="ic-body"><div class="ic-title">Dinner at the Domain</div><div class="ic-desc">Outdoor dining event · Pāpāmoa Domain</div></div></a>
+        <a href="/papamoa-previews/community/weddings.html" class="info-card"><span class="ic-icon">💒</span><div class="ic-body"><div class="ic-title">Weddings in Pāpāmoa</div><div class="ic-desc">Venues, photographers &amp; suppliers</div></div></a>
+        <a href="/papamoa-previews/community/notable-people.html" class="info-card"><span class="ic-icon">⭐</span><div class="ic-body"><div class="ic-title">Notable People</div><div class="ic-desc">Athletes, artists &amp; public figures</div></div></a>
+        <a href="/papamoa-previews/community/animals-papamoa.html" class="info-card"><span class="ic-icon">🐾</span><div class="ic-body"><div class="ic-title">Animals in Pāpāmoa</div><div class="ic-desc">SPCA, lost pets &amp; adoption</div></div></a>
+      </div>
+    </div>
+    <div class="info-section-label">Property &amp; Living</div>
+    <div class="info-scroll-row">
+      <div class="info-scroll-inner">
+        <a href="/papamoa-previews/community/real-estate.html" class="info-card"><span class="ic-icon">🏡</span><div class="ic-body"><div class="ic-title">Real Estate</div><div class="ic-desc">Property market &amp; local agents</div></div></a>
+        <a href="/papamoa-previews/community/rentals-papamoa.html" class="info-card"><span class="ic-icon">🏠</span><div class="ic-body"><div class="ic-title">Rentals in Pāpāmoa</div><div class="ic-desc">Average rents &amp; property management</div></div></a>
+        <a href="/papamoa-previews/community/new-developments-papamoa.html" class="info-card"><span class="ic-icon">🏗</span><div class="ic-body"><div class="ic-title">New Developments</div><div class="ic-desc">Golden Sands, Te Tumu &amp; East</div></div></a>
+        <a href="/papamoa-previews/community/shopping-centres.html" class="info-card"><span class="ic-icon">🛍</span><div class="ic-body"><div class="ic-title">Shopping Centres</div><div class="ic-desc">Fashion Island, Palm Beach Plaza, The Sands</div></div></a>
+        <a href="/papamoa-previews/community/utilities-papamoa.html" class="info-card"><span class="ic-icon">💡</span><div class="ic-body"><div class="ic-title">Utilities</div><div class="ic-desc">Power, gas &amp; broadband providers</div></div></a>
+        <a href="/papamoa-previews/community/water-rates-papamoa.html" class="info-card"><span class="ic-icon">💧</span><div class="ic-body"><div class="ic-title">Water &amp; Rates</div><div class="ic-desc">Metered water and council rates</div></div></a>
+        <a href="/papamoa-previews/community/rubbish-recycling-papamoa.html" class="info-card"><span class="ic-icon">♻️</span><div class="ic-body"><div class="ic-title">Rubbish &amp; Recycling</div><div class="ic-desc">4-bin guide &amp; transfer station</div></div></a>
+      </div>
     </div>
   </div>
 </div>
