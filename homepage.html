@@ -1578,13 +1578,14 @@ async function loadHeroWeather() {
     var timeout = setTimeout(function() { controller.abort(); }, 8000);
     var url = 'https://api.open-meteo.com/v1/forecast'
       + '?latitude=-37.7167&longitude=176.3167'
-      + '&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,uv_index'
-      + '&timezone=Pacific%2FAuckland&forecast_days=1';
+      + '&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m'
+      + '&hourly=uv_index&forecast_days=1'
+      + '&timezone=Pacific%2FAuckland';
     var res = await fetch(url, { signal: controller.signal });
     clearTimeout(timeout);
     var d = await res.json();
     var c = d.current;
-    var uv = Math.round(c.uv_index ?? 0);
+    var uv = Math.round((d.hourly && d.hourly.uv_index && d.hourly.uv_index[0]) ?? 0);
     strip.innerHTML =
       '<div class="hw-current">'
       + '<span class="hw-icon">' + (HW_EMOJI[c.weather_code] || '🌤️') + '</span>'
@@ -1596,7 +1597,7 @@ async function loadHeroWeather() {
       + '</div>'
       + '<div class="hw-stats">'
       + '<div class="hw-stat"><span class="hw-stat-label">Wind</span><span class="hw-stat-value">' + Math.round(c.wind_speed_10m) + ' km/h ' + hwWindDir(c.wind_direction_10m) + '</span></div>'
-      + '<div class="hw-stat"><span class="hw-stat-label">UV Index</span><span class="hw-stat-value ' + hwUvClass(c.uv_index ?? 0) + '">' + uv + '</span></div>'
+      + '<div class="hw-stat"><span class="hw-stat-label">UV Index</span><span class="hw-stat-value ' + hwUvClass(uv) + '">' + uv + '</span></div>'
       + '</div>'
       + '<a href="/papamoa-previews/community/weather.html" class="hw-link">Full forecast &rarr;</a>';
   } catch(e) {
