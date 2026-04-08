@@ -752,4 +752,12 @@ document.querySelectorAll('.faq-q').forEach(function(q){
     if(!a)return;
     var href=a.getAttribute('href');
     if(!href)return;
-    if(href.startsWith('/')&&!h
+    if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){
+      e.preventDefault();
+      window.location.href=base+href;
+    }
+  });
+})();
+</script>
+</body>
+</html>
