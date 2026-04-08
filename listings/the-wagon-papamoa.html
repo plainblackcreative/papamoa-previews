@@ -556,6 +556,159 @@
   }
 })();
 
+// ── MENU DATA ──
+var MENU_DATA = {
+  categories: [
+    { id:'beef',     label:'Beef Burgers',    note:'Includes two flame grilled beef patties & fries' },
+    { id:'chicken',  label:'Chicken Burgers', note:'Includes fried buttermilk chicken & fries' },
+    { id:'garden',   label:'Garden',          note:'' },
+    { id:'ribs',     label:'Ribs & BBQ',      note:'' },
+    { id:'wings',    label:'Wings',           note:'' },
+    { id:'sides',    label:'Sides',           note:'' },
+    { id:'platter',  label:'Wagon Platter',   note:'Delicious & perfect for sharing' },
+    { id:'kids',     label:'Kids',            note:'Meals include juice and tomato sauce' },
+    { id:'desserts', label:'Desserts',        note:'' },
+    { id:'juices',   label:'Juices',          note:'' },
+    { id:'addons',   label:'Add Ons',         note:'' }
+  ],
+  items: [
+    {cat:'beef',    name:'Classic Cheese Burger',         desc:'Cheese, tomato, red onion, lettuce, pickles, tomato sauce, mustard & aioli',                               price:'$23.30', tags:[],               emoji:'&#127828;'},
+    {cat:'beef',    name:'Blue Cheese Burger',            desc:'Blue cheese, caramelised onion, red onion, mesclun pear & aioli',                                         price:'$26.50', tags:[],               emoji:'&#127828;'},
+    {cat:'beef',    name:'Wicked Wagon Burger',           desc:'Cheese, bacon, tomato, red onion, lettuce, jalapenos, onion rings, BBQ sauces & aioli',                   price:'$28.60', tags:[],               emoji:'&#127828;'},
+    {cat:'beef',    name:'Breakfast Burger',              desc:'Hash brown, egg, mushrooms, 2x bacon, red onion, tomato, tomato sauce & aioli',                           price:'$20.10', tags:[],               emoji:'&#127823;'},
+    {cat:'beef',    name:'@%!#ing Good Burger',           desc:'Smoked cheddar cheese, lettuce, pickles & secret sauce',                                                  price:'$24.40', tags:[],               emoji:'&#127828;'},
+    {cat:'beef',    name:'Avocowdo Burger',               desc:'Camembert cheese, red onion, lettuce, beetroot, avocado & aioli',                                         price:'$28.60', tags:[],               emoji:'&#127828;'},
+    {cat:'beef',    name:'Fully Loaded Burger',           desc:'Cheese, bacon, egg, tomato, red onion, lettuce, onion rings & aioli',                                     price:'$28.60', tags:[],               emoji:'&#127828;'},
+    {cat:'chicken', name:'Fried Chick Burger',            desc:'Crunchy tangy slaw & chipotle mayo',                                                                      price:'$24.40', tags:[],               emoji:'&#127831;'},
+    {cat:'chicken', name:'Satay Party Burger',            desc:'Tomato, red onion, mesclun, sriracha mayo & satay sauce',                                                 price:'$24.40', tags:[],               emoji:'&#127831;'},
+    {cat:'chicken', name:'TW Hawaiian Burger',            desc:'Cheese, bacon, red onion, lettuce, grilled pineapple & aioli',                                           price:'$26.50', tags:[],               emoji:'&#127831;'},
+    {cat:'chicken', name:'Clucking Good Burger',          desc:'Smoked cheddar cheese, lettuce, pickles & secret sauce',                                                  price:'$24.40', tags:[],               emoji:'&#127831;'},
+    {cat:'chicken', name:'Flying Beast Burger',           desc:'Cheese, bacon, red onion, tomato, lettuce, BBQ sauce & aioli',                                           price:'$26.50', tags:[],               emoji:'&#127831;'},
+    {cat:'chicken', name:'Rosy Chick Burger',             desc:'Flame grilled chicken, red onion, camembert cheese, lettuce, beetroot, avocado & aioli',                 price:'$28.60', tags:[],               emoji:'&#127831;'},
+    {cat:'garden',  name:'Vegan Jackfruit Burger',        desc:'BBQ pulled jackfruit & vegan coles',                                                                      price:'$22.30', tags:['vg'],           emoji:'&#127807;'},
+    {cat:'garden',  name:'The Vegan Med Burger',          desc:'Falafel, tomato, red onion, lettuce, black olives, cucumber, coconut yoghurt tzatziki & harissa paste',   price:'$23.30', tags:['vg'],           emoji:'&#127807;'},
+    {cat:'garden',  name:'Vegan Portobello Burger',       desc:'Roast squash, portobello mushroom, tomato, red onion, lettuce, fried capers, BBQ sauces & basil mayo',    price:'$24.40', tags:['vg'],           emoji:'&#127807;'},
+    {cat:'garden',  name:'Portobello Road Burger',        desc:'Goat cheese, roast squash, portobello, mushroom, tomato, red onion, mesclun, fried capers & basil mayo',  price:'$25.40', tags:['v'],            emoji:'&#127807;'},
+    {cat:'ribs',    name:'Oriental Ribs',                 desc:'Juicy pork ribs with house made oriental rib sauce, fries, side salad & aioli',                          price:'$38.20', tags:[],               emoji:'&#129385;'},
+    {cat:'ribs',    name:'Grilled BBQ Chicken',           desc:'BBQ chicken glazed & marinated in Filipino style smoky sauce, side salad & choice of rice or fries',     price:'$27.60', tags:[],               emoji:'&#127831;'},
+    {cat:'ribs',    name:'Grilled BBQ Pork Belly',        desc:'BBQ pork belly glazed and marinated in Filipino style smoky sauce, side salad & choice of rice or fries', price:'$27.60', tags:[],               emoji:'&#129385;'},
+    {cat:'wings',   name:'Asian Wings',                   desc:'5 x sweet and spicy asian wings',                                                                         price:'$23.30', tags:[],               emoji:'&#127831;'},
+    {cat:'wings',   name:'Honey Soy Garlic Wings',        desc:'5 x honey soy garlic wings',                                                                              price:'$23.30', tags:[],               emoji:'&#127831;'},
+    {cat:'wings',   name:'Spicy US Buffalo Wings',        desc:'5 x spicy US wings',                                                                                      price:'$23.30', tags:[],               emoji:'&#127831;'},
+    {cat:'sides',   name:'Straight Cut Fries',            desc:'',                                                                                                         price:'$11.70', tags:['vg'],           emoji:'&#127798;'},
+    {cat:'sides',   name:'Sweet Potato Fries',            desc:'',                                                                                                         price:'$13.80', tags:['vg'],           emoji:'&#127798;'},
+    {cat:'sides',   name:'Onion Rings',                   desc:'',                                                                                                         price:'$12.70', tags:['v'],            emoji:'&#127858;'},
+    {cat:'sides',   name:'Cheesy Loaded Fries',           desc:'Fries with melted cheese & chipotle mayo',                                                                price:'$19.10', tags:[],               emoji:'&#127798;'},
+    {cat:'sides',   name:'Buffalo Loaded Fries',          desc:'Fries with popcorn chicken, cheese, asian sauce & aioli',                                                 price:'$24.40', tags:[],               emoji:'&#127798;'},
+    {cat:'sides',   name:'Cheese Sticks',                 desc:'Crispy outside, gooey inside with mango dip',                                                             price:'$13.50', tags:['v'],            emoji:'&#129472;'},
+    {cat:'sides',   name:'Cheese Balls',                  desc:'Crispy and filled with melty cheese and jalapenos',                                                       price:'$13.50', tags:['v'],            emoji:'&#129472;'},
+    {cat:'sides',   name:'Popcorn Chicken',               desc:'',                                                                                                         price:'$20.10', tags:[],               emoji:'&#127831;'},
+    {cat:'platter', name:'Wagon Platter',                 desc:'2x single classic cheese burgers, oriental ribs, buffalo wings, straight cut fries, coleslaw, tomato sauce & aioli', price:'$71.00', tags:[], emoji:'&#127869;'},
+    {cat:'platter', name:'Extra Takeaway Boxes',          desc:'Extra takeaway boxes for platter',                                                                        price:'$2.50',  tags:[],               emoji:'&#128230;'},
+    {cat:'kids',    name:'Kids Corndog & Fries',          desc:'4x battered hotdogs & fries',                                                                             price:'$19.10', tags:[],               emoji:'&#127821;'},
+    {cat:'kids',    name:'Kids Cheese Burger & Fries',    desc:'Flame grilled patty, cheese, mayo, tomato sauce & fries',                                                price:'$19.10', tags:[],               emoji:'&#127828;'},
+    {cat:'kids',    name:'Kids Chicken Burger & Fries',   desc:'Buttermilk fried chicken, lettuce, mayo & fries',                                                        price:'$19.10', tags:[],               emoji:'&#127831;'},
+    {cat:'kids',    name:'Kids Popcorn Chicken & Fries',  desc:'Popcorn chicken bites & fries',                                                                           price:'$19.10', tags:[],               emoji:'&#127831;'},
+    {cat:'desserts',name:'Ice Cream Sundae',              desc:'2x ice cream scoops, whip cream',                                                                         price:'$9.50',  tags:['v'],            emoji:'&#127846;'},
+    {cat:'desserts',name:'Super Ice Cream Sundae',        desc:'3x ice cream scoops, whip cream',                                                                         price:'$12.70', tags:['v'],            emoji:'&#127846;'},
+    {cat:'desserts',name:'Chocolate Mudcake',             desc:'Warm, moist chocolate mud cake with ice cream',                                                           price:'$13.80', tags:['v'],            emoji:'&#127856;'},
+    {cat:'juices',  name:'Keri Apple Juice',              desc:'',                                                                                                         price:'$4.00',  tags:['vg','gf','df'], emoji:'&#127821;'},
+    {cat:'juices',  name:'Keri Apple Blackcurrant Juice', desc:'',                                                                                                         price:'$4.00',  tags:['vg','gf','df'], emoji:'&#127821;'},
+    {cat:'juices',  name:'Gold Kiwifruit NZ Juice',       desc:'Bottled NZ juice',                                                                                        price:'$4.50',  tags:['vg','gf','df'], emoji:'&#129373;'},
+    {cat:'juices',  name:'Gold Peach NZ Juice',           desc:'Bottled NZ juice',                                                                                        price:'$4.50',  tags:['vg','gf','df'], emoji:'&#127825;'},
+    {cat:'juices',  name:'Carrot & Beetroot NZ Juice',    desc:'Bottled NZ juice',                                                                                        price:'$4.50',  tags:['vg','gf','df'], emoji:'&#129365;'},
+    {cat:'juices',  name:'Organic Apple, Orange & Mango', desc:'',                                                                                                         price:'$6.00',  tags:['vg','gf','df'], emoji:'&#127818;'},
+    {cat:'addons',  name:'Extra Flame Grilled Patty',     desc:'',                                                                                                         price:'$5.30',  tags:[],               emoji:'&#127828;'},
+    {cat:'addons',  name:'Extra Chicken',                 desc:'',                                                                                                         price:'$7.40',  tags:[],               emoji:'&#127831;'},
+    {cat:'addons',  name:'Extra Fries',                   desc:'',                                                                                                         price:'$6.40',  tags:['vg'],           emoji:'&#127798;'},
+    {cat:'addons',  name:'Gluten Free Bun',               desc:'',                                                                                                         price:'$3.50',  tags:['gf'],           emoji:'&#127838;'},
+    {cat:'addons',  name:'Smoked Cheddar Cheese',         desc:'',                                                                                                         price:'$4.00',  tags:['v','gf'],       emoji:'&#129472;'},
+    {cat:'addons',  name:'Blue Cheese',                   desc:'',                                                                                                         price:'$4.00',  tags:['v','gf'],       emoji:'&#129472;'},
+    {cat:'addons',  name:'Camembert Cheese',              desc:'',                                                                                                         price:'$4.00',  tags:['v','gf'],       emoji:'&#129472;'},
+    {cat:'addons',  name:'Goats Cheese',                  desc:'',                                                                                                         price:'$4.00',  tags:['v','gf'],       emoji:'&#129472;'},
+    {cat:'addons',  name:'Caramelised Onion',             desc:'',                                                                                                         price:'$3.00',  tags:['vg','gf'],      emoji:'&#129381;'},
+    {cat:'addons',  name:'Olives',                        desc:'',                                                                                                         price:'$2.00',  tags:['vg','gf','df'], emoji:'&#129373;'},
+    {cat:'addons',  name:'Rice',                          desc:'',                                                                                                         price:'$4.00',  tags:['vg','gf','df'], emoji:'&#127859;'},
+    {cat:'addons',  name:'Extra Sauce',                   desc:'',                                                                                                         price:'$2.10',  tags:['vg'],           emoji:'&#129517;'},
+    {cat:'addons',  name:'Lettuce',                       desc:'',                                                                                                         price:'$3.20',  tags:['vg','gf','df'], emoji:'&#129388;'},
+    {cat:'addons',  name:'Beetroot',                      desc:'',                                                                                                         price:'$3.20',  tags:['vg','gf','df'], emoji:'&#129381;'},
+    {cat:'addons',  name:'Pickles',                       desc:'',                                                                                                         price:'$3.20',  tags:['vg','gf','df'], emoji:'&#129372;'},
+    {cat:'addons',  name:'Tomato',                        desc:'',                                                                                                         price:'$2.00',  tags:['vg','gf','df'], emoji:'&#127813;'},
+    {cat:'addons',  name:'Bacon',                         desc:'',                                                                                                         price:'$4.20',  tags:['gf','df'],      emoji:'&#129385;'},
+    {cat:'addons',  name:'Cheese',                        desc:'',                                                                                                         price:'$4.00',  tags:['v','gf'],       emoji:'&#129472;'},
+    {cat:'addons',  name:'Egg',                           desc:'',                                                                                                         price:'$4.20',  tags:['v','gf'],       emoji:'&#129371;'},
+    {cat:'addons',  name:'Jalapenos',                     desc:'',                                                                                                         price:'$4.20',  tags:['vg','gf','df'], emoji:'&#127798;'},
+    {cat:'addons',  name:'Mushrooms',                     desc:'',                                                                                                         price:'$4.20',  tags:['vg','gf','df'], emoji:'&#127812;'},
+    {cat:'addons',  name:'Pineapple',                     desc:'',                                                                                                         price:'$4.20',  tags:['vg','gf','df'], emoji:'&#127821;'},
+    {cat:'addons',  name:'Avocado',                       desc:'',                                                                                                         price:'$4.20',  tags:['vg','gf','df'], emoji:'&#129361;'}
+  ]
+};
+
+// ── MENU LIGHTBOX ──
+(function(){
+  var data=MENU_DATA;
+  var lb=document.getElementById('menu-lightbox');
+  var catsEl=document.getElementById('menu-cats');
+  var itemsEl=document.getElementById('menu-items');
+  var noteEl=document.getElementById('menu-cat-note');
+  var closeBtn=document.getElementById('menu-close');
+  if(!lb||!catsEl||!itemsEl)return;
+  var activeCat=data.categories[0].id;
+  var activeFilter='all';
+  function closeMenu(){lb.classList.remove('open');document.body.style.overflow='';}
+  closeBtn.addEventListener('click',closeMenu);
+  lb.addEventListener('click',function(e){if(e.target===lb)closeMenu();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))closeMenu();});
+  function renderCats(){
+    catsEl.innerHTML='';
+    data.categories.forEach(function(c){
+      var btn=document.createElement('button');
+      btn.className='menu-cat'+(c.id===activeCat?' active':'');
+      btn.textContent=c.label;
+      btn.addEventListener('click',function(){activeCat=c.id;renderCats();renderItems();});
+      catsEl.appendChild(btn);
+    });
+  }
+  function renderItems(){
+    itemsEl.innerHTML='';
+    var cat=data.categories.find(function(c){return c.id===activeCat;});
+    if(noteEl){noteEl.textContent=cat&&cat.note?cat.note:'';noteEl.style.display=cat&&cat.note?'block':'none';}
+    var filtered=data.items.filter(function(item){
+      if(item.cat!==activeCat)return false;
+      if(activeFilter==='all')return true;
+      return item.tags.indexOf(activeFilter)>-1;
+    });
+    if(!filtered.length){
+      var empty=document.createElement('p');
+      empty.style.cssText='grid-column:1/-1;text-align:center;color:var(--muted);font-size:0.85rem;padding:20px 0;';
+      empty.textContent='No items match this filter in this category.';
+      itemsEl.appendChild(empty);return;
+    }
+    filtered.forEach(function(item){
+      var el=document.createElement('div');
+      el.className='menu-item';
+      var tagHtml=item.tags.map(function(t){return'<span class="diet-tag diet-'+t+'">'+t.toUpperCase()+'</span>';}).join('');
+      el.innerHTML='<div class="menu-item-img">'+item.emoji+'</div>'
+        +'<div class="menu-item-body">'
+        +'<div class="menu-item-name">'+item.name+'</div>'
+        +(item.desc?'<div class="menu-item-desc">'+item.desc+'</div>':'')
+        +'<div class="menu-item-footer"><span class="menu-item-price">'+item.price+'</span><span class="menu-item-tags">'+tagHtml+'</span></div>'
+        +'</div>';
+      itemsEl.appendChild(el);
+    });
+  }
+  document.querySelectorAll('.menu-filter').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      activeFilter=this.getAttribute('data-filter');
+      document.querySelectorAll('.menu-filter').forEach(function(b){b.classList.remove('active');});
+      this.classList.add('active');
+      renderItems();
+    });
+  });
+  renderCats();
+  renderItems();
+})();
+
 // FAQ ACCORDION
 document.querySelectorAll('.faq-q').forEach(function(q) {
   q.addEventListener('click', function() { this.closest('.faq-item').classList.toggle('open'); });
