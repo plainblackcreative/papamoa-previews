@@ -1121,12 +1121,9 @@ function drawClouds(cam, color) {
   const clouds = [[100,80,80,30],[300,60,100,35],[600,90,70,25],[780,55,90,30]];
   for (const [bx,y,w,h] of clouds) {
     const x = ((bx - cam*0.15) % (W+200) + (W+200)) % (W+200) - 100;
-    ctx.beginPath();
-    ctx.ellipse(x,y,w,h,0,0,Math.PI*2); ctx.fill();
-    ctx.beginPath();
-    ctx.ellipse(x-30,y+10,w*0.6,h*0.8,0,0,Math.PI*2); ctx.fill();
-    ctx.beginPath();
-    ctx.ellipse(x+30,y+8,w*0.7,h*0.7,0,0,Math.PI*2); ctx.fill();
+    fillEllipse(x,y,w,h);
+    fillEllipse(x-30,y+10,w*0.6,h*0.8);
+    fillEllipse(x+30,y+8,w*0.7,h*0.7);
   }
 }
 
@@ -1175,6 +1172,32 @@ function drawTree(x, y, w, h, color) {
   ctx.fill();
 }
 
+
+// ─── COMPAT HELPERS ───────────────────────────────────────────────────────────
+function fillRoundRect(x,y,w,h,r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y);
+  ctx.arcTo(x+w,y,x+w,y+r,r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+  ctx.lineTo(x+r,y+h);
+  ctx.arcTo(x,y+h,x,y+h-r,r);
+  ctx.lineTo(x,y+r);
+  ctx.arcTo(x,y,x+r,y,r);
+  ctx.closePath();
+  ctx.fill();
+}
+function fillEllipse(x,y,rx,ry) {
+  ctx.beginPath();
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.scale(rx,ry);
+  ctx.arc(0,0,1,0,Math.PI*2);
+  ctx.restore();
+  ctx.fill();
+}
+
 // ─── PLATFORM DRAWING ─────────────────────────────────────────────────────────
 function drawPlatforms() {
   for (const p of level.platforms) {
@@ -1186,9 +1209,7 @@ function drawPlatforms() {
       ctx.fillRect(p.x, p.y+6, p.w, p.h-6);
     } else if (t==='branch' || t==='grass') {
       ctx.fillStyle = '#2d5a1a';
-      ctx.beginPath();
-      ctx.roundRect(p.x, p.y, p.w, p.h, 4);
-      ctx.fill();
+      fillRoundRect(p.x, p.y, p.w, p.h, 4);
       ctx.fillStyle = '#3d7a2a';
       ctx.fillRect(p.x, p.y, p.w, 5);
       // moss
@@ -1451,8 +1472,7 @@ function drawPlayer() {
 
   // shadow
   ctx.fillStyle = 'rgba(0,0,0,0.2)';
-  ctx.ellipse(px+player.w/2, py+player.h+2, 14, 5, 0, 0, Math.PI*2);
-  ctx.fill();
+  fillEllipse(px+player.w/2, py+player.h+2, 14, 5);
 
   // legs
   ctx.fillStyle = '#335577';
@@ -1549,7 +1569,7 @@ function drawProjectiles() {
       ctx.fillStyle = '#cc7700';
       ctx.fillRect(p.x+2, p.y+2, 8, 4);
     } else if (p.wIdx===2) { // fart
-      ctx.beginPath(); ctx.ellipse(p.x+10, p.y+10, 12, 8, 0, 0, Math.PI*2); ctx.fill();
+      fillEllipse(p.x+10, p.y+10, 12, 8);
     } else { // spitball
       ctx.beginPath(); ctx.arc(p.x+7, p.y+7, 7, 0, Math.PI*2); ctx.fill();
       // trail
