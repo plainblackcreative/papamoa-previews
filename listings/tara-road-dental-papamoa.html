@@ -293,13 +293,9 @@
     /* ── SIDEBAR ── */
     .sidebar-card { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
     .sidebar-card h4 { font-family:'Playfair Display',serif; font-size:0.9rem; font-weight:700; color:var(--navy); margin-bottom:12px; }
-    .contact-list { display:flex; flex-direction:column; gap:0; }
-    .contact-item { display:grid; grid-template-columns:22px 72px 1fr; align-items:start; gap:0 8px; padding:8px 0; border-bottom:1px solid var(--border); font-size:0.82rem; }
-    .contact-item:last-child { border-bottom:none; }
-    .ci-icon { font-size:0.88rem; padding-top:1px; }
-    .ci-label { font-size:0.7rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--body); padding-top:2px; }
-    .ci-value { color:var(--muted); line-height:1.5; }
-    .ci-value a { color:var(--blue); }
+    .contact-list { display:flex; flex-direction:column; gap:9px; }
+    .contact-item { display:flex; gap:10px; font-size:0.82rem; }
+    .ci-icon { flex-shrink:0; font-size:0.88rem; margin-top:2px; }
     .ci-text { color:var(--muted); line-height:1.5; }
     .ci-text a { color:var(--blue); }
     .ci-text strong { color:var(--body); display:block; font-size:0.7rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:1px; }
@@ -344,6 +340,8 @@
       <div class="hero-meta">
         <span class="hero-meta-item">&#128205; 1G Tara Road, Pāpāmoa</span>
         <span class="hero-meta-item">&#128222; 07 579 5291</span>
+        <span class="hero-meta-item">&#11088; 4.8 &nbsp;<a href="https://www.google.com/maps/search/Tara+Road+Dental+Papamoa" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.7);text-decoration:underline;">14 Google reviews</a></span>
+        <span class="hero-meta-item">&#11088; 4.8 &nbsp;<a href="https://www.google.com/maps/search/Tara+Road+Dental+Papamoa" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.7);text-decoration:underline;">14 Google reviews</a></span>
       </div>
       <div class="hero-chips">
         <span class="hchip">&#128004; IV sedation available</span>
@@ -401,13 +399,7 @@
     </div>
     <div class="menu-modal-body">
       <div class="menu-cats" id="menu-cats"></div>
-      <div class="menu-filters">
-        <span class="menu-filter-label">Dietary:</span>
-        <button class="menu-filter active" data-filter="all">All</button>
-        <button class="menu-filter" data-filter="vg">VG</button>
-        <button class="menu-filter" data-filter="v">V</button>
-        <button class="menu-filter" data-filter="gf">GF</button>
-      </div>
+
       <div id="menu-cat-note" class="menu-cat-note"></div>
       <div class="menu-items" id="menu-items"></div>
     </div>
@@ -515,11 +507,11 @@
       <div class="sidebar-card">
         <h4>Contact &amp; location</h4>
         <div class="contact-list">
-          <div class="contact-item"><span class="ci-icon">&#128205;</span><div class="ci-text"><strong>Address</strong>1G Tara Road, Pāpāmoa Beach, Tauranga</div></div>
+          <div class="contact-item"><span class="ci-icon">&#128205;</span><div class="ci-text"><strong>Address</strong>1G Tara Road<br>Pāpāmoa Beach, Tauranga</div></div>
           <div class="contact-item"><span class="ci-icon">&#128222;</span><div class="ci-text"><strong>Phone</strong><a href="tel:0757595291">07 579 5291</a></div></div>
           <div class="contact-item"><span class="ci-icon">&#128231;</span><div class="ci-text"><strong>Email</strong><a href="mailto:hello&#64;tararddental.co.nz">hello&#64;tararddental.co.nz</a></div></div>
           <div class="contact-item"><span class="ci-icon">&#127760;</span><div class="ci-text"><strong>Website</strong><a href="https://tararddental.co.nz" target="_blank" rel="noopener">tararddental.co.nz</a></div></div>
-          <div class="contact-item"><span class="ci-icon">&#128337;</span><div class="ci-text"><strong>Hours</strong>Monday&ndash;Friday by appointment<br>Closed weekends</div></div>
+          <div class="contact-item"><span class="ci-icon">&#128337;</span><div class="ci-text"><strong>Hours</strong>Mon&ndash;Fri by appointment<br>Closed weekends</div></div>
           <div class="contact-item"><span class="ci-icon">&#128200;</span><div class="ci-text"><strong>Category</strong><a href="/papamoa-previews/categories/health/health-papamoa.html">Health &amp; Medical</a></div></div>
         </div>
       </div>
@@ -547,7 +539,7 @@
   <a href="/papamoa-previews/homepage.html">papamoa.info</a> &middot; Pāpāmoa&rsquo;s local business directory &middot; <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── TIER BADGE ──
 (function(){
   var badge = document.getElementById('tier-badge');
@@ -574,7 +566,7 @@
   if(BUSINESS.hasMenu && MENU_DATA && MENU_DATA.items && MENU_DATA.items.length) {
     var btn = document.createElement('button');
     btn.className = 'btn-menu';
-    btn.innerHTML = '&#128209; View menu';
+    btn.innerHTML = '&#129463; View services';
     btn.addEventListener('click', function(){
       document.getElementById('menu-lightbox').classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -700,7 +692,6 @@
   var closeBtn = document.getElementById('menu-close');
   if(!lb || !catsEl || !itemsEl) return;
   var activeCat = MENU_DATA.categories[0].id;
-  var activeFilter = 'all';
   function closeMenu(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
   closeBtn.addEventListener('click', closeMenu);
   lb.addEventListener('click', function(e){ if(e.target === lb) closeMenu(); });
@@ -721,8 +712,7 @@
     if(noteEl){ noteEl.textContent = cat && cat.note ? cat.note : ''; noteEl.style.display = cat && cat.note ? 'block' : 'none'; }
     var filtered = MENU_DATA.items.filter(function(item){
       if(item.cat !== activeCat) return false;
-      if(activeFilter === 'all') return true;
-      return item.tags.indexOf(activeFilter) > -1;
+      return true;
     });
     if(!filtered.length){
       var empty = document.createElement('p');
@@ -743,14 +733,7 @@
       itemsEl.appendChild(el);
     });
   }
-  document.querySelectorAll('.menu-filter').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      activeFilter = this.getAttribute('data-filter');
-      document.querySelectorAll('.menu-filter').forEach(function(b){ b.classList.remove('active'); });
-      this.classList.add('active');
-      renderItems();
-    });
-  });
+
   renderCats();
   renderItems();
 })();
