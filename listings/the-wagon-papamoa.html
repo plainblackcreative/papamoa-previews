@@ -386,41 +386,64 @@
 (function(){
   var photos=(typeof PHOTOS!=='undefined')?PHOTOS.slice(0,9):[];
   var galleryEl=document.getElementById('photo-gallery');
-  if(!galleryEl||!photos.length)return;
+  if(!galleryEl)return;
 
-  // Probe each image — show slot only if it loads, placeholder if it 404s
   var phIcons=['&#9978;','&#127956;','&#9918;','&#128247;','&#127968;','&#127795;','&#9968;','&#128008;','&#127759;'];
-  var showSlots=Math.min(photos.length,4);
-  var hasMore=photos.length>4;
+  // Always render 5 slots: main + 3 + see-all. First 4 show images or empty tiles.
+  var TOTAL_SLOTS=5;
   var grid=document.createElement('div');
   grid.className='gallery-grid';
 
   var slots=[];
-  for(var i=0;i<showSlots;i++){
+  for(var i=0;i<TOTAL_SLOTS;i++){
     (function(idx){
       var slot=document.createElement('div');
       slot.className='gallery-slot';
       slot.setAttribute('data-index',idx);
-      // Placeholder always renders immediately
-      var ph=document.createElement('div');
-      ph.className='gallery-slot-placeholder';
-      ph.innerHTML='<span class="ph-icon">'+phIcons[idx%phIcons.length]+'</span><span class="ph-label">'+photos[idx].alt+'</span>';
-      slot.appendChild(ph);
-      // Image overlays placeholder when loaded
-      var img=new Image();
-      img.alt=photos[idx].alt;
-      img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;transition:transform 0.3s ease;';
-      img.onload=function(){this.style.display='block';};
-      img.src=photos[idx].src;
-      slot.appendChild(img);
-      // See-more overlay on last slot
-      if(idx===showSlots-1&&hasMore){
+
+      if(idx===TOTAL_SLOTS-1){
+        // 5th slot: always the see-all overlay, opens lightbox at slot 4 (or 0 if fewer images)
+        var remaining=photos.length-(TOTAL_SLOTS-1);
         var ov=document.createElement('div');
         ov.className='gallery-see-more';
-        ov.innerHTML='<span class="sm-count">+'+(photos.length-showSlots+1)+'</span><span class="sm-label">See all photos</span>';
+        // Show +N only if there are images beyond the 4th slot
+        var countStr=remaining>0?'<span class="sm-count">+'+remaining+'</span>':'';
+        ov.innerHTML=countStr+'<span class="sm-label">See all photos</span>';
         slot.appendChild(ov);
+        // If there's a 5th image, show it darkened behind overlay
+        if(photos[idx]){
+          var ph=document.createElement('div');
+          ph.className='gallery-slot-placeholder';
+          ph.innerHTML='<span class="ph-icon">'+phIcons[idx%phIcons.length]+'</span>';
+          slot.appendChild(ph);
+          var img=new Image();
+          img.alt=photos[idx].alt;
+          img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;transition:transform 0.3s ease;';
+          img.onload=function(){this.style.display='block';};
+          img.src=photos[idx].src;
+          slot.insertBefore(img,ov);
+        }
+        var openIdx=photos.length>0?Math.min(idx,photos.length-1):0;
+        slot.addEventListener('click',function(){if(photos.length)openLightbox(openIdx);});
+      } else if(photos[idx]){
+        // Slots 1-4: real image with placeholder fallback
+        var ph=document.createElement('div');
+        ph.className='gallery-slot-placeholder';
+        ph.innerHTML='<span class="ph-icon">'+phIcons[idx%phIcons.length]+'</span><span class="ph-label">'+photos[idx].alt+'</span>';
+        slot.appendChild(ph);
+        var img=new Image();
+        img.alt=photos[idx].alt;
+        img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;transition:transform 0.3s ease;';
+        img.onload=function(){this.style.display='block';};
+        img.src=photos[idx].src;
+        slot.appendChild(img);
+        slot.addEventListener('click',function(){openLightbox(parseInt(this.getAttribute('data-index')));});
+      } else {
+        // Empty slot — neutral placeholder tile
+        var ph=document.createElement('div');
+        ph.className='gallery-slot-placeholder';
+        slot.appendChild(ph);
       }
-      slot.addEventListener('click',function(){openLightbox(parseInt(this.getAttribute('data-index')));});
       slots.push(slot);
     })(i);
   }
