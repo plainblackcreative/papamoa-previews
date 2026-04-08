@@ -759,7 +759,7 @@ document.querySelectorAll('.faq-q').forEach(function(q){
   var base='/papamoa-previews';
   document.addEventListener('click',function(e){
     var a=e.target.closest('a');
-    if(!a)return;
-    var href=a.getAttribute('href');
-    if(!href)return;
-    if(href.startsWith('/')&
+    if(!a)return;var href=a.getAttribute('href');if(!href)return;if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){e.preventDefault();window.location.href=base+href;}});})();
+</script>
+</body>
+</html>
