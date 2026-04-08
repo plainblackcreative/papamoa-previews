@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <!--
+  ╔═══════════════════════════════════════════════════════════════════════════╗
+  ║  PAPAMOA.INFO — SILVER LISTING TEMPLATE                                   ║
+  ║                                                                            ║
+  ║  HOW TO USE                                                                ║
+  ║  1. Fill in the BUSINESS object below                                     ║
+  ║  2. Set hasMenu: true if they've purchased the Menu Add-On, else false    ║
+  ║  3. If hasMenu: true — add categories/items to MENU_DATA                 ║
+  ║  4. Upload logo: images/listings/SLUG/logo.png                           ║
+  ║  5. Upload logo: images/listings/SLUG/logo.png (logo only, no gallery)   ║
+  ║  6. Set hero category class on .page-hero (hero-cat-CATEGORY)            ║
+  ║  7. Fill in nav breadcrumb, about, services, hours, reviews, sidebar     ║
+  ║                                                                            ║
+  ║  MENU LOGIC (automatic)                                                   ║
+  ║  hasMenu: true  → "View menu" button → opens lightbox (add-on purchased) ║
+  ║  hasMenu: false → gold upsell button → links to menu-addon sales page    ║
+  ║                                                                            ║
+  ║  HERO CATEGORY CLASSES                                                     ║
+  ║  hero-cat-food | hero-cat-services | hero-cat-accommodation               ║
+  ║  hero-cat-entertainment | hero-cat-shopping | hero-cat-health             ║
+  ║  hero-cat-realestate                                                       ║
+  ╚═══════════════════════════════════════════════════════════════════════════╝
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUSINESS_NAME Pāpāmoa — BUSINESS_SUBCAT | Papamoa.info</title>
+  <meta name="description" content="BUSINESS_METADESC">
+  <link rel="canonical" href="https://papamoa.info/papamoa-previews/listings/BUSINESS_SLUG.html">
+  <meta property="og:title" content="BUSINESS_NAME Pāpāmoa | Papamoa.info">
+  <meta property="og:description" content="BUSINESS_METADESC">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_NZ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+  <!-- ╔══════════════════════════════════════════════════════════════════════╗
+       ║  BUSINESS CONFIG — edit this block only for each new listing        ║
+       ╚══════════════════════════════════════════════════════════════════════╝ -->
+  <script>
+
+  // ── LISTING CONFIG ──────────────────────────────────────────────────────
+  var BUSINESS = {
+    tier:      'silver',
+    hasMenu:   false,            // true = Menu Add-On purchased; false = upsell shown
+    category:  'food-drink',
+    // Category options: 'food-drink' | 'services' | 'accommodation' | 'health'
+    //                   'entertainment' | 'shopping' | 'real-estate' | 'default'
+  };
+
+// ── MENU DATA (only if hasMenu: true) ───────────────────────────────────
+  var MENU_DATA = {
+    categories: [
+      // { id: 'mains', label: 'Mains', note: '' },
+    ],
+    items: [
+      // { cat: 'mains', name: 'ITEM NAME', desc: 'Description', price: '$XX.XX', tags: [], emoji: '&#127828;' },
+    ]
+  };
+
+  </script>
+
+  <script type="application/ld+json">
+  { "REPLACE": "with LocalBusiness schema JSON" }
+  </script>
+  <script id="schema-faq" type="application/ld+json"></script>
+  <script id="schema-images" type="application/ld+json"></script>
+
+  <style>
+    :root {
+      --navy:#2B3F5C; --blue:#3AABDE; --sand:#F5EFE0;
+      --dune:#D4C4A0; --white:#fff; --body:#1E2D3E; --muted:#607080;
+      --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A; --gold2:#F0C060;
+      --silver:#8090A8; --silver2:#A0B0C8;
+    }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; overflow-x:hidden; }
+    body { font-family:'Figtree',sans-serif; background:var(--bg); color:var(--body); line-height:1.65; overflow-x:hidden; }
+    a { color:var(--blue); text-decoration:none; }
+
+    /* ── NAV ── */
+    .listing-nav { background:#0D2B3E; height:48px; padding:0 24px; display:flex; align-items:center; position:sticky; top:0; z-index:200; box-shadow:0 2px 10px rgba(0,0,0,0.25); }
+    .listing-nav-logo { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:#fff; text-decoration:none; flex-shrink:0; margin-right:16px; }
+    .listing-nav-logo span { color:#3AABDE; }
+    .listing-nav-bc { display:flex; align-items:center; gap:6px; font-size:12px; color:rgba(255,255,255,0.4); overflow:hidden; min-width:0; }
+    .listing-nav-bc a { color:rgba(255,255,255,0.5); text-decoration:none; white-space:nowrap; }
+    .listing-nav-bc a:hover { color:#3AABDE; }
+    .listing-nav-bc .sep { opacity:0.3; flex-shrink:0; }
+    .listing-nav-bc .current { color:rgba(255,255,255,0.65); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .listing-nav-cta { margin-left:auto; font-size:12px; font-weight:700; background:#3AABDE; color:#fff; padding:6px 16px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0; transition:background 0.2s; }
+    .listing-nav-cta:hover { background:#2d95c4; }
+
+    /* ── HERO CATEGORY COLOURS ── */
+    .hero-cat-food          { background:linear-gradient(135deg,#1A1208,#2A2010) !important; }
+    .hero-cat-food::after   { background:linear-gradient(90deg,var(--silver),var(--silver2)) !important; }
+    .hero-cat-services      { background:linear-gradient(135deg,#1A2A3A,#2B3F5C) !important; }
+    .hero-cat-services::after { background:linear-gradient(90deg,var(--silver),var(--silver2)) !important; }
+    .hero-cat-accommodation { background:linear-gradient(135deg,#1A2038,#2B3060) !important; }
+    .hero-cat-accommodation::after { background:linear-gradient(90deg,var(--silver),var(--silver2)) !important; }
+    .hero-cat-entertainment { background:linear-gradient(135deg,#0A1A20,#1A3040) !important; }
+    .hero-cat-entertainment::after { background:linear-gradient(90deg,var(--silver),var(--silver2)) !important; }
+    .hero-cat-shopping      { background:linear-gradient(135deg,#1A1A30,#2A2840) !important; }
+    .hero-cat-shopping::after { background:linear-gradient(90deg,var(--silver),var(--silver2)) !important; }
+    .hero-cat-health        { background:linear-gradient(135deg,#0A1A25,#1A2A35) !important; }
+    .hero-cat-health::after { background:linear-gradient(90deg,var(--silver),var(--silver2)) !important; }
+    .hero-cat-realestate    { background:linear-gradient(135deg,#0D2038,#1A3055) !important; }
+    .hero-cat-realestate::after { background:linear-gradient(90deg,var(--silver),var(--silver2)) !important; }
+
+    /* ── HERO ── */
+    .page-hero { padding:44px 24px 40px; position:relative; overflow:hidden; background:linear-gradient(135deg,#0D2B3E,#1A3A50); }
+    .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--silver),var(--silver2),var(--silver)); }
+    .hero-inner { max-width:960px; margin:0 auto; position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:28px; }
+    .hero-text { flex:1; min-width:0; }
+    .hero-logo { flex-shrink:0; width:120px; height:120px; border-radius:12px; background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.15); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; overflow:hidden; }
+    .hero-logo img { width:100%; height:100%; object-fit:contain; border-radius:10px; display:block; }
+    .hero-logo-empty { font-size:2rem; opacity:0.3; line-height:1; }
+    .hero-logo-label { font-size:0.58rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.28); text-align:center; }
+    @media (max-width:540px) { .hero-logo { display:none; } }
+    .hero-badge { display:inline-flex; align-items:center; gap:6px; font-size:0.6rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; background:linear-gradient(135deg,var(--silver),var(--silver2)); color:#fff; padding:4px 10px; border-radius:3px; margin-bottom:12px; }
+    .hero-eyebrow { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-bottom:8px; }
+    .page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; color:#fff; line-height:1.12; margin-bottom:10px; }
+    .hero-tagline { font-size:0.95rem; color:rgba(255,255,255,0.62); max-width:560px; line-height:1.72; margin-bottom:18px; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:16px; margin-bottom:18px; align-items:center; }
+    .hero-meta-item { font-size:0.78rem; color:rgba(255,255,255,0.55); display:flex; align-items:center; gap:5px; }
+    .hero-meta-item a { color:rgba(255,255,255,0.7); text-decoration:underline; }
+    .hero-chips { display:flex; gap:8px; flex-wrap:wrap; }
+    .hchip { font-size:0.72rem; font-weight:600; color:rgba(255,255,255,0.55); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); padding:4px 10px; border-radius:4px; }
+
+/* ── ACTION BAR ── */
+    .action-bar { background:var(--white); border-bottom:1px solid var(--border); padding:14px 24px; }
+    .action-bar-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .btn-primary { background:var(--navy); color:#fff; font-family:'Figtree',sans-serif; font-weight:700; font-size:0.84rem; padding:10px 20px; border-radius:7px; text-decoration:none; transition:background 0.2s; white-space:nowrap; border:none; cursor:pointer; }
+    .btn-primary:hover { background:var(--blue); }
+    .btn-secondary { background:transparent; color:var(--body); font-family:'Figtree',sans-serif; font-weight:600; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid var(--border); text-decoration:none; transition:all 0.2s; white-space:nowrap; cursor:pointer; }
+    .btn-secondary:hover { border-color:var(--blue); color:var(--blue); }
+    .btn-menu { background:transparent; color:var(--body); font-family:'Figtree',sans-serif; font-weight:600; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid var(--border); text-decoration:none; transition:all 0.2s; white-space:nowrap; cursor:pointer; }
+    .btn-menu:hover { border-color:var(--silver); color:var(--silver); }
+    .btn-upsell { background:var(--bg); color:var(--gold); font-family:'Figtree',sans-serif; font-weight:700; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid rgba(200,150,42,0.35); text-decoration:none; transition:all 0.2s; white-space:nowrap; cursor:pointer; }
+    .btn-upsell:hover { background:rgba(200,150,42,0.08); border-color:var(--gold); }
+    .action-spacer { flex:1; }
+    .social-icons { display:flex; gap:7px; }
+    .social-icon { width:34px; height:34px; border-radius:7px; background:var(--bg); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:0.88rem; text-decoration:none; transition:all 0.18s; color:var(--muted); }
+    .social-icon:hover { background:var(--navy); border-color:var(--navy); color:#fff; }
+
+    /* ── MENU LIGHTBOX ── */
+    .menu-lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; display:flex; align-items:center; justify-content:center; padding:16px; opacity:0; pointer-events:none; transition:opacity 0.2s; }
+    .menu-lightbox.open { opacity:1; pointer-events:all; }
+    .menu-modal { background:var(--white); border-radius:14px; width:100%; max-width:720px; max-height:90vh; display:flex; flex-direction:column; overflow:hidden; }
+    .menu-modal-header { background:#0D2B3E; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+    .menu-modal-header h3 { color:#fff; font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; margin:0; }
+    .menu-modal-close { background:rgba(255,255,255,0.12); border:none; color:#fff; width:32px; height:32px; border-radius:50%; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .menu-modal-close:hover { background:rgba(255,255,255,0.25); }
+    .menu-modal-body { overflow-y:auto; flex:1; }
+    .menu-cats { display:flex; gap:6px; padding:14px 16px 0; flex-wrap:wrap; }
+    .menu-cat { padding:6px 14px; border-radius:100px; font-size:12px; font-weight:600; cursor:pointer; border:1.5px solid var(--border); background:var(--white); color:var(--muted); font-family:'Figtree',sans-serif; transition:all 0.15s; }
+    .menu-cat:hover { border-color:#3AABDE; color:#3AABDE; }
+    .menu-cat.active { background:#0D2B3E; color:#fff; border-color:#0D2B3E; }
+    .menu-filters { display:flex; gap:6px; padding:10px 16px; flex-wrap:wrap; align-items:center; border-bottom:1px solid var(--border); }
+    .menu-filter-label { font-size:11px; color:var(--muted); font-weight:600; margin-right:2px; }
+    .menu-filter { padding:3px 10px; border-radius:100px; font-size:11px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--white); color:var(--muted); font-family:'Figtree',sans-serif; transition:all 0.15s; }
+    .menu-filter.active { background:#3AABDE; color:#fff; border-color:#3AABDE; }
+    .menu-cat-note { font-size:11px; color:var(--muted); padding:8px 16px 0; font-style:italic; display:none; }
+    .menu-items { padding:12px 16px 16px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    @media (max-width:540px) { .menu-items { grid-template-columns:1fr; } }
+    .menu-item { background:var(--bg); border-radius:9px; overflow:hidden; display:flex; flex-direction:column; }
+    .menu-item-img { height:72px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#1a2038,#2B3060); font-size:1.6rem; }
+    .menu-item-body { padding:10px 12px; flex:1; }
+    .menu-item-name { font-size:13px; font-weight:700; color:var(--body); margin-bottom:3px; }
+    .menu-item-desc { font-size:11px; color:var(--muted); line-height:1.45; margin-bottom:6px; }
+    .menu-item-footer { display:flex; align-items:center; justify-content:space-between; }
+    .menu-item-price { font-size:14px; font-weight:700; color:#0D2B3E; }
+    .menu-item-tags { display:flex; gap:3px; }
+    .diet-tag { font-size:9px; font-weight:700; padding:2px 5px; border-radius:3px; }
+    .diet-vg { background:rgba(46,125,50,0.12); color:#1E6B3C; border:1px solid rgba(46,125,50,0.2); }
+    .diet-v  { background:rgba(46,125,50,0.08); color:#1E6B3C; border:1px solid rgba(46,125,50,0.15); }
+    .diet-gf { background:rgba(196,152,90,0.12); color:#C4985A; border:1px solid rgba(196,152,90,0.2); }
+    .diet-df { background:rgba(58,171,222,0.1); color:#1B6B7D; border:1px solid rgba(58,171,222,0.2); }
+    .menu-modal-footer { padding:12px 16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
+    .menu-updated { font-size:11px; color:var(--muted); }
+    .menu-order-btn { font-size:12px; font-weight:700; color:#fff; background:#3AABDE; padding:7px 16px; border-radius:6px; text-decoration:none; }
+    .menu-order-btn:hover { background:#2d95c4; }
+
+    /* ── LAYOUT ── */
+    .page-wrap { max-width:960px; margin:0 auto; padding:28px 20px 80px; }
+    .two-col { display:grid; grid-template-columns:1fr 290px; gap:28px; align-items:start; }
+    .main-col { min-width:0; }
+    .side-col { display:flex; flex-direction:column; gap:16px; }
+
+    /* ── CONTENT SECTIONS ── */
+    .content-section { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:22px 24px; margin-bottom:16px; }
+    .cs-title { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--navy); margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+    .cs-body { font-size:0.88rem; color:var(--body); line-height:1.78; }
+    .cs-body p { margin-bottom:12px; }
+    .cs-body p:last-child { margin-bottom:0; }
+    .services-wrap { display:flex; flex-wrap:wrap; gap:7px; }
+    .svc-pill { font-size:0.75rem; font-weight:600; padding:5px 12px; border-radius:20px; background:var(--bg); border:1px solid var(--border); color:var(--body); }
+    .hours-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+    .hours-row { display:flex; justify-content:space-between; padding:7px 10px; font-size:0.81rem; background:var(--bg); border-radius:5px; }
+    .hours-row .day { font-weight:600; color:var(--navy); }
+    .hours-row .time { color:var(--muted); }
+    .hours-row.closed .time { color:#C03030; }
+    .review-card { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:14px 16px; margin-bottom:10px; }
+    .review-card:last-child { margin-bottom:0; }
+    .rv-text { font-size:0.88rem; font-style:italic; color:var(--body); margin-bottom:8px; line-height:1.65; }
+    .rv-attr { font-size:0.72rem; color:var(--muted); font-weight:600; }
+
+    /* ── SIDEBAR ── */
+    .sidebar-card { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
+    .sidebar-card h4 { font-family:'Playfair Display',serif; font-size:0.9rem; font-weight:700; color:var(--navy); margin-bottom:12px; }
+    .contact-list { display:flex; flex-direction:column; gap:0; }
+    .contact-item { display:grid; grid-template-columns:22px 72px 1fr; align-items:start; gap:0 8px; padding:8px 0; border-bottom:1px solid var(--border); font-size:0.82rem; }
+    .contact-item:last-child { border-bottom:none; }
+    .ci-icon { font-size:0.88rem; padding-top:1px; }
+    .ci-label { font-size:0.7rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--body); padding-top:2px; }
+    .ci-value { color:var(--muted); line-height:1.5; }
+    .ci-value a { color:var(--blue); }
+    .map-placeholder { background:linear-gradient(135deg,#E8F0F8,#D4E4F4); border-radius:8px; height:160px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--muted); font-size:0.82rem; border:1px solid var(--border); text-decoration:none; transition:border-color 0.15s; }
+    .map-placeholder:hover { border-color:var(--blue); }
+    .related-links { display:flex; flex-direction:column; gap:8px; }
+    .related-link { font-size:0.82rem; font-weight:600; color:var(--blue); text-decoration:none; }
+    .related-link:hover { text-decoration:underline; }
+
+/* ── FOOTER ── */
+    .listing-footer { background:var(--navy); padding:16px 24px; text-align:center; font-size:0.74rem; color:rgba(255,255,255,0.38); margin-top:40px; }
+    .listing-footer a { color:#3AABDE; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:720px) { .two-col { grid-template-columns:1fr; } .side-col { order:-1; } .hours-grid { grid-template-columns:1fr; } .action-bar-inner { gap:8px; } }
+    @media (max-width:480px) { .action-spacer { display:none; } }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="listing-nav">
+  <a href="/papamoa-previews/homepage.html" class="listing-nav-logo">Papamoa<span>.info</span></a>
+  <div class="listing-nav-bc">
+    <a href="/papamoa-previews/homepage.html">Home</a>
+    <span class="sep">/</span>
+    <a href="/papamoa-previews/categories/CATEGORY_PATH.html">CATEGORY_NAME</a>
+    <span class="sep">/</span>
+    <!-- Add subcategory crumb if needed: -->
+    <!-- <a href="/papamoa-previews/categories/SUBCAT_PATH.html">SUBCAT_NAME</a> -->
+    <!-- <span class="sep">/</span> -->
+    <span class="current">BUSINESS_NAME</span>
+  </div>
+  <a href="/papamoa-previews/sales/list-with-us.html" class="listing-nav-cta">List Your Business</a>
+</nav>
+
+<!-- ── HERO ── Add hero-cat-CATEGORY class below ── -->
+<div class="page-hero hero-cat-food" id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">&#9670; Silver Listing</div>
+      <div class="hero-eyebrow">SUBCAT &middot; CATEGORY &middot; Pāpāmoa</div>
+      <h1>BUSINESS_NAME</h1>
+      <p class="hero-tagline">TAGLINE</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">&#128205; ADDRESS_SHORT</span>
+        <span class="hero-meta-item">&#128222; PHONE_DISPLAY</span>
+        <!-- Review rating — remove if no public rating -->
+        <span class="hero-meta-item">&#11088; RATING &nbsp;<a href="GOOGLE_MAPS_URL" target="_blank" rel="noopener">REVIEW_COUNT Google reviews</a></span>
+      </div>
+      <div class="hero-chips">
+        <!-- <span class="hchip">&#EMOJI; CHIP_TEXT</span> -->
+      </div>
+    </div>
+    <div class="hero-logo">
+      <img src="/papamoa-previews/images/listings/BUSINESS_SLUG/logo.png" alt="BUSINESS_NAME logo">
+      <!-- If no logo yet, replace img with: -->
+      <!-- <span class="hero-logo-empty">&#127968;</span><span class="hero-logo-label">Logo</span> -->
+    </div>
+  </div>
+</div>
+
+<!-- ── ACTION BAR ── -->
+<div class="action-bar">
+  <div class="action-bar-inner">
+    <a href="tel:PHONE" class="btn-primary">&#128222; PHONE_DISPLAY</a>
+    <a href="WEBSITE_URL" target="_blank" rel="noopener" class="btn-secondary">&#127760; Visit website</a>
+    <!-- Menu button — rendered by JS based on BUSINESS.hasMenu -->
+    <span id="menu-btn-slot"></span>
+    <div class="action-spacer"></div>
+    <div class="social-icons">
+      <a href="FACEBOOK_URL" class="social-icon" target="_blank" rel="noopener" title="Facebook">f</a>
+      <a href="INSTAGRAM_URL" class="social-icon" target="_blank" rel="noopener" title="Instagram">&#128247;</a>
+      <!-- <a href="TIKTOK_URL" class="social-icon" target="_blank" rel="noopener" title="TikTok">&#9654;</a> -->
+    </div>
+  </div>
+</div>
+
+
+<!-- ── MENU LIGHTBOX (only used if hasMenu: true) ── -->
+<div class="menu-lightbox" id="menu-lightbox" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="menu-modal">
+    <div class="menu-modal-header">
+      <h3>&#128209; BUSINESS_NAME &mdash; Menu</h3>
+      <button class="menu-modal-close" id="menu-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="menu-modal-body">
+      <div class="menu-cats" id="menu-cats"></div>
+      <div class="menu-filters">
+        <span class="menu-filter-label">Dietary:</span>
+        <button class="menu-filter active" data-filter="all">All</button>
+        <button class="menu-filter" data-filter="vg">VG</button>
+        <button class="menu-filter" data-filter="v">V</button>
+        <button class="menu-filter" data-filter="gf">GF</button>
+      </div>
+      <div id="menu-cat-note" class="menu-cat-note"></div>
+      <div class="menu-items" id="menu-items"></div>
+    </div>
+    <div class="menu-modal-footer">
+      <span class="menu-updated">Prices as at MONTH YEAR</span>
+      <a href="ORDER_ONLINE_URL" target="_blank" rel="noopener" class="menu-order-btn">&#128666; Order online</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── BODY ── -->
+<div class="page-wrap">
+  <div class="two-col">
+
+    <!-- MAIN COLUMN -->
+    <div class="main-col">
+
+      <!-- About -->
+      <div class="content-section">
+        <div class="cs-title">About BUSINESS_NAME</div>
+        <div class="cs-body">
+          <p>DESCRIPTION_PARA_1</p>
+          <p>DESCRIPTION_PARA_2</p>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="content-section">
+        <div class="cs-title">What they offer</div>
+        <div class="services-wrap">
+          <!-- <span class="svc-pill">SERVICE</span> -->
+        </div>
+      </div>
+
+      <!-- Hours -->
+      <div class="content-section">
+        <div class="cs-title">Opening hours</div>
+        <div class="hours-grid">
+          <!-- <div class="hours-row"><span class="day">Monday</span><span class="time">9:00am &ndash; 5:00pm</span></div> -->
+          <!-- <div class="hours-row closed"><span class="day">Sunday</span><span class="time">Closed</span></div> -->
+        </div>
+      </div>
+
+      <!-- Reviews -->
+      <div class="content-section">
+        <div class="cs-title">What customers say</div>
+        <!-- <div class="review-card"><p class="rv-text">&ldquo;QUOTE&rdquo;</p><div class="rv-attr">&mdash; SOURCE, YEAR</div></div> -->
+      </div>
+
+      <!-- No FAQ section on Silver -->
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="side-col">
+
+      <div class="sidebar-card">
+        <h4>Contact &amp; location</h4>
+        <div class="contact-list">
+          <div class="contact-item"><span class="ci-icon">&#128205;</span><span class="ci-label">Address</span><span class="ci-value">FULL_ADDRESS</span></div>
+          <div class="contact-item"><span class="ci-icon">&#128222;</span><span class="ci-label">Phone</span><span class="ci-value"><a href="tel:PHONE">PHONE_DISPLAY</a></span></div>
+          <div class="contact-item"><span class="ci-icon">&#128231;</span><span class="ci-label">Email</span><span class="ci-value"><a href="mailto:EMAIL">EMAIL_DISPLAY</a></span></div>
+          <div class="contact-item"><span class="ci-icon">&#127760;</span><span class="ci-label">Website</span><span class="ci-value"><a href="WEBSITE_URL" target="_blank" rel="noopener">WEBSITE_DISPLAY</a></span></div>
+          <div class="contact-item"><span class="ci-icon">&#128337;</span><span class="ci-label">Hours</span><span class="ci-value">HOURS_SHORT</span></div>
+          <div class="contact-item"><span class="ci-icon">&#128200;</span><span class="ci-label">Category</span><span class="ci-value"><a href="/papamoa-previews/categories/CATEGORY_PATH.html">CATEGORY_NAME</a></span></div>
+        </div>
+      </div>
+
+      <a href="GOOGLE_MAPS_URL" target="_blank" rel="noopener" class="map-placeholder">
+        <span style="font-size:1.8rem;">&#128205;</span>
+        <span style="font-weight:600;color:var(--body);font-size:0.8rem;text-align:center;padding:0 12px;">FULL_ADDRESS</span>
+        <span style="font-size:0.72rem;color:#3AABDE;">Open in Google Maps &rarr;</span>
+      </a>
+
+      <div class="sidebar-card">
+        <h4>Related pages</h4>
+        <div class="related-links">
+          <a href="/papamoa-previews/categories/CATEGORY_PATH.html" class="related-link">&#8594; All CATEGORY_NAME in Pāpāmoa</a>
+          <a href="/papamoa-previews/RELATED_PAGE_1.html" class="related-link">&#8594; RELATED_TITLE_1</a>
+          <a href="/papamoa-previews/RELATED_PAGE_2.html" class="related-link">&#8594; RELATED_TITLE_2</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="listing-footer">
+  <a href="/papamoa-previews/homepage.html">papamoa.info</a> &middot; Pāpāmoa&rsquo;s local business directory &middot; <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
+</footer>
+
+<script>
+// ── MENU BUTTON ──
+(function(){
+  var slot = document.getElementById('menu-btn-slot');
+  if(!slot) return;
+  var upsellLabels = {
+    'food-drink':    '&#128209; Add your menu',
+    'services':      '&#128209; Add services & pricing',
+    'accommodation': '&#128209; Add rooms & rates',
+    'health':        '&#128209; Add treatments & pricing',
+    'entertainment': '&#128209; Add your services',
+    'shopping':      '&#128209; Add your product range',
+    'real-estate':   '&#128209; Add your listings',
+    'default':       '&#128209; Add a menu'
+  };
+  if(BUSINESS.hasMenu && MENU_DATA && MENU_DATA.items && MENU_DATA.items.length) {
+    var btn = document.createElement('button');
+    btn.className = 'btn-menu';
+    btn.innerHTML = '&#128209; View menu';
+    btn.addEventListener('click', function(){
+      document.getElementById('menu-lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+    slot.appendChild(btn);
+  } else {
+    var label = upsellLabels[BUSINESS.category] || upsellLabels['default'];
+    var btn = document.createElement('a');
+    btn.className = 'btn-upsell';
+    btn.href = '/papamoa-previews/sales/menu-addon.html';
+    btn.innerHTML = label;
+    slot.appendChild(btn);
+  }
+})();
+
+// ── MENU LIGHTBOX ──
+(function(){
+  if(!BUSINESS.hasMenu || !MENU_DATA || !MENU_DATA.items || !MENU_DATA.items.length) return;
+  var lb = document.getElementById('menu-lightbox');
+  var catsEl = document.getElementById('menu-cats');
+  var itemsEl = document.getElementById('menu-items');
+  var noteEl = document.getElementById('menu-cat-note');
+  var closeBtn = document.getElementById('menu-close');
+  if(!lb || !catsEl || !itemsEl) return;
+  var activeCat = MENU_DATA.categories[0].id;
+  var activeFilter = 'all';
+  function closeMenu(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
+  closeBtn.addEventListener('click', closeMenu);
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeMenu(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && lb.classList.contains('open')) closeMenu(); });
+  function renderCats(){
+    catsEl.innerHTML = '';
+    MENU_DATA.categories.forEach(function(c){
+      var btn = document.createElement('button');
+      btn.className = 'menu-cat' + (c.id === activeCat ? ' active' : '');
+      btn.textContent = c.label;
+      btn.addEventListener('click', function(){ activeCat = c.id; renderCats(); renderItems(); });
+      catsEl.appendChild(btn);
+    });
+  }
+  function renderItems(){
+    itemsEl.innerHTML = '';
+    var cat = MENU_DATA.categories.find(function(c){ return c.id === activeCat; });
+    if(noteEl){ noteEl.textContent = cat && cat.note ? cat.note : ''; noteEl.style.display = cat && cat.note ? 'block' : 'none'; }
+    var filtered = MENU_DATA.items.filter(function(item){
+      if(item.cat !== activeCat) return false;
+      if(activeFilter === 'all') return true;
+      return item.tags.indexOf(activeFilter) > -1;
+    });
+    if(!filtered.length){
+      var empty = document.createElement('p');
+      empty.style.cssText = 'grid-column:1/-1;text-align:center;color:var(--muted);font-size:0.85rem;padding:20px 0;';
+      empty.textContent = 'No items match this filter in this category.';
+      itemsEl.appendChild(empty); return;
+    }
+    filtered.forEach(function(item){
+      var el = document.createElement('div');
+      el.className = 'menu-item';
+      var tagHtml = item.tags.map(function(t){ return '<span class="diet-tag diet-' + t + '">' + t.toUpperCase() + '</span>'; }).join('');
+      el.innerHTML = '<div class="menu-item-img">' + item.emoji + '</div>'
+        + '<div class="menu-item-body">'
+        + '<div class="menu-item-name">' + item.name + '</div>'
+        + (item.desc ? '<div class="menu-item-desc">' + item.desc + '</div>' : '')
+        + '<div class="menu-item-footer"><span class="menu-item-price">' + item.price + '</span><span class="menu-item-tags">' + tagHtml + '</span></div>'
+        + '</div>';
+      itemsEl.appendChild(el);
+    });
+  }
+  document.querySelectorAll('.menu-filter').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      activeFilter = this.getAttribute('data-filter');
+      document.querySelectorAll('.menu-filter').forEach(function(b){ b.classList.remove('active'); });
+      this.classList.add('active');
+      renderItems();
+    });
+  });
+  renderCats();
+  renderItems();
+})();
+
+// ── FAQ SCHEMA (no FAQ section on Silver, but keep for safety) ──
+(function(){
+  var faqs = [];
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    if(q && a) faqs.push({'@type':'Question','name':q.childNodes[0].textContent.trim(),'acceptedAnswer':{'@type':'Answer','text':a.textContent.trim()}});
+  });
+  if(faqs.length){ var el = document.getElementById('schema-faq'); if(el) el.textContent = JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':faqs}); }
+})();
+
+// ── URL PREFIX FIX (GitHub Pages) ──
+(function(){
+  var base='/papamoa-previews';
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a');
+    if(!a)return;
+    var href=a.getAttribute('href');
+    if(!href)return;
+    if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){
+      e.preventDefault();
+      window.location.href=base+href;
+    }
+  });
+})();
+</script>
+</body>
+</html>
