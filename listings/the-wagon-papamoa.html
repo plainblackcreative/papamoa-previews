@@ -381,7 +381,7 @@
   <a href="/papamoa-previews/homepage.html">papamoa.info</a> &middot; Pāpāmoa&rsquo;s local business directory &middot; <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── PHOTO GALLERY ──
 (function(){
   var photos=(typeof PHOTOS!=='undefined')?PHOTOS.slice(0,9):[];
@@ -489,4 +489,7 @@ document.querySelectorAll('.faq-q').forEach(function(q) {
   }
 })();
 
-(function(){var base='/papamoa-previews';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var href=a.getAttribute('href');if(!href)retur
+(function(){var base='/papamoa-previews';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var href=a.getAttribute('href');if(!href)return;if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){e.preventDefault();window.location.href=base+href;}});})();
+</script>
+</body>
+</html>
