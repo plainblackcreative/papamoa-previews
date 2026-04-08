@@ -52,16 +52,16 @@ canvas {
 
 .hud-text {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-size: clamp(11px, 2.2vw, 16px);
   color: #fff;
   text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 #weapon-display {
   text-align: right;
   font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-size: clamp(10px, 2vw, 14px);
   color: #ffe066;
   text-shadow: 2px 2px 0 #000;
 }
@@ -72,34 +72,35 @@ canvas {
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-size: clamp(9px, 1.8vw, 12px);
   color: #aaffaa;
   text-shadow: 1px 1px 0 #000;
   text-align: center;
   pointer-events: none;
   z-index: 10;
+  white-space: nowrap;
 }
 
-/* Touch controls - below canvas */
+/* Touch controls - below canvas, bigger for mobile */
 #touchControls {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 14px;
-  background: #111;
-  border-top: 1px solid #222;
+  padding: 10px 16px;
+  background: #0d0d0d;
+  border-top: 2px solid #333;
   width: 100%;
   max-width: 900px;
 }
 
 .touch-btn {
   pointer-events: all;
-  background: rgba(255,255,255,0.12);
-  border: 2px solid rgba(255,255,255,0.25);
-  border-radius: 12px;
-  color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.14);
+  border: 2.5px solid rgba(255,255,255,0.3);
+  border-radius: 14px;
+  color: rgba(255,255,255,0.9);
   font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-size: clamp(11px, 2.5vw, 15px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,32 +108,34 @@ canvas {
   -webkit-user-select: none;
   cursor: pointer;
   text-shadow: 1px 1px 0 #000;
-  transition: background 0.1s;
+  transition: background 0.08s;
+  -webkit-tap-highlight-color: transparent;
 }
 .touch-btn:active, .touch-btn.pressed {
-  background: rgba(255,255,255,0.3);
-  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.35);
+  border-color: rgba(255,255,255,0.7);
+  transform: scale(0.94);
 }
 
 #dpad {
   display: grid;
-  grid-template-columns: 52px 52px 52px;
-  grid-template-rows: 52px 52px;
-  gap: 4px;
+  grid-template-columns: 62px 62px 62px;
+  grid-template-rows: 62px 62px;
+  gap: 5px;
 }
-#btn-left  { grid-column: 1; grid-row: 2; border-radius: 10px; }
-#btn-right { grid-column: 3; grid-row: 2; border-radius: 10px; }
-#btn-down  { grid-column: 2; grid-row: 2; border-radius: 10px; }
-#btn-jump  { grid-column: 2; grid-row: 1; border-radius: 10px; font-size: 8px; }
+#btn-left  { grid-column: 1; grid-row: 2; border-radius: 12px; }
+#btn-right { grid-column: 3; grid-row: 2; border-radius: 12px; }
+#btn-down  { grid-column: 2; grid-row: 2; border-radius: 12px; }
+#btn-jump  { grid-column: 2; grid-row: 1; border-radius: 12px; font-size: clamp(9px,2vw,12px); }
 
 #action-btns {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   align-items: flex-end;
 }
-#btn-shoot { width: 64px; height: 64px; background: rgba(200,80,80,0.25); border-color: rgba(200,80,80,0.5); }
-#btn-melee { width: 64px; height: 52px; background: rgba(80,180,80,0.25); border-color: rgba(80,180,80,0.5); font-size: 7px; }
+#btn-shoot { width: 74px; height: 74px; background: rgba(220,60,60,0.3); border-color: rgba(220,60,60,0.6); font-size: clamp(11px,2.2vw,14px); }
+#btn-melee { width: 74px; height: 60px; background: rgba(60,200,60,0.3); border-color: rgba(60,200,60,0.6); font-size: clamp(9px,2vw,12px); }
 
 /* Overlays */
 #overlay {
@@ -143,69 +146,70 @@ canvas {
   align-items: center;
   justify-content: center;
   z-index: 50;
-  background: rgba(0,0,0,0.82);
-  padding: 20px;
+  background: rgba(0,0,0,0.88);
+  padding: 24px;
 }
 
 #overlay h1 {
   font-family: 'Press Start 2P', monospace;
-  font-size: clamp(14px, 3vw, 22px);
+  font-size: clamp(18px, 4vw, 28px);
   color: #ffe066;
   text-shadow: 3px 3px 0 #b85c00, -1px -1px 0 #000;
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   line-height: 1.5;
 }
 #overlay .sub {
   font-family: 'VT323', monospace;
-  font-size: clamp(16px, 3.5vw, 22px);
+  font-size: clamp(20px, 4.5vw, 28px);
   color: #cceeff;
   text-align: center;
   margin-bottom: 20px;
-  line-height: 1.5;
-  max-width: 500px;
+  line-height: 1.6;
+  max-width: 540px;
 }
 #overlay .pressStart {
   font-family: 'Press Start 2P', monospace;
-  font-size: clamp(8px, 2vw, 11px);
+  font-size: clamp(10px, 2.5vw, 14px);
   color: #fff;
   animation: blink 1s infinite;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 .start-btn {
-  margin-top: 16px;
-  padding: 12px 24px;
+  margin-top: 20px;
+  padding: 16px 32px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-size: clamp(12px, 2.5vw, 16px);
   background: #ffe066;
   color: #000;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   pointer-events: all;
+  -webkit-tap-highlight-color: transparent;
 }
-.start-btn:active { transform: scale(0.96); }
+.start-btn:active { transform: scale(0.95); }
 
 #message-box {
   position: absolute;
-  bottom: 40px;
+  bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0,0,20,0.92);
+  background: rgba(0,0,20,0.93);
   border: 2px solid #ffe066;
-  border-radius: 6px;
-  padding: 10px 14px;
+  border-radius: 8px;
+  padding: 12px 18px;
   font-family: 'VT323', monospace;
-  font-size: 18px;
+  font-size: clamp(20px, 4vw, 26px);
   color: #fff;
-  max-width: 80%;
+  max-width: 84%;
   text-align: center;
   z-index: 30;
   pointer-events: none;
   display: none;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 </style>
 </head>
@@ -267,210 +271,207 @@ const W = 900, H = 500;
 // ─── SOUND ENGINE (Web Audio API — no files needed) ───────────────────────────
 var AC = null;
 function getAC() {
-  if (!AC) {
-    try {
-      AC = new (window.AudioContext || window.webkitAudioContext)();
-    } catch(e) {}
-  }
+  if (!AC) { try { AC = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){} }
   return AC;
 }
-
-// Resume context on first user interaction (browser autoplay policy)
 function resumeAC() {
-  var ac = getAC();
-  if (ac && ac.state === 'suspended') ac.resume();
+  if (!AC) { try { AC = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){ return; } }
+  if (AC.state==='suspended') AC.resume().catch(function(){});
+  // iOS silent buffer unlock
+  try {
+    var b=AC.createBuffer(1,1,22050), s=AC.createBufferSource();
+    s.buffer=b; s.connect(AC.destination); s.start(0);
+  } catch(e){}
 }
-document.addEventListener('keydown', resumeAC, {once:false});
-canvas.addEventListener('mousedown', resumeAC, {once:false});
-canvas.addEventListener('touchstart', resumeAC, {once:false});
+['touchstart','touchend','mousedown','keydown','pointerdown'].forEach(function(ev){
+  document.addEventListener(ev, resumeAC, {passive:true});
+});
 
-// Generic tone player
-// type: 'sine'|'square'|'sawtooth'|'triangle'
-// freq: Hz or array of [Hz, durationSec] for sequence
-// dur: seconds, vol: 0-1, slide: optional end freq
-function playTone(freq, dur, vol, type, slide, delay) {
-  var ac = getAC(); if (!ac) return;
-  vol = vol||0.18; type = type||'square'; delay = delay||0;
-  var osc = ac.createOscillator();
-  var gain = ac.createGain();
-  osc.connect(gain); gain.connect(ac.destination);
-  osc.type = type;
-  var t = ac.currentTime + delay;
-  osc.frequency.setValueAtTime(freq, t);
-  if (slide) osc.frequency.linearRampToValueAtTime(slide, t + dur);
-  gain.gain.setValueAtTime(0, t);
-  gain.gain.linearRampToValueAtTime(vol, t + 0.01);
-  gain.gain.setValueAtTime(vol, t + dur - 0.04);
-  gain.gain.linearRampToValueAtTime(0, t + dur);
-  osc.start(t);
-  osc.stop(t + dur + 0.01);
+function playTone(freq,dur,vol,type,slide,delay) {
+  var ac=getAC(); if(!ac) return;
+  vol=vol||0.18; type=type||'square'; delay=delay||0;
+  var osc=ac.createOscillator(), gain=ac.createGain();
+  // Add a subtle compressor to avoid clipping
+  var comp=ac.createDynamicsCompressor();
+  osc.connect(gain); gain.connect(comp); comp.connect(ac.destination);
+  osc.type=type;
+  var t=ac.currentTime+delay;
+  osc.frequency.setValueAtTime(freq,t);
+  if(slide) osc.frequency.exponentialRampToValueAtTime(slide,t+dur);
+  gain.gain.setValueAtTime(0,t);
+  gain.gain.linearRampToValueAtTime(vol,t+0.012);
+  gain.gain.setValueAtTime(vol,t+dur-0.05);
+  gain.gain.linearRampToValueAtTime(0,t+dur);
+  osc.start(t); osc.stop(t+dur+0.02);
 }
 
-// Noise burst (for fart/splat sounds)
-function playNoise(dur, vol, freq, type) {
-  var ac = getAC(); if (!ac) return;
-  var buf = ac.createBuffer(1, ac.sampleRate * dur, ac.sampleRate);
-  var data = buf.getChannelData(0);
-  for (var i=0; i<data.length; i++) data[i] = (Math.random()*2-1);
-  var src2 = ac.createBufferSource();
-  src2.buffer = buf;
-  var filt = ac.createBiquadFilter();
-  filt.type = type||'bandpass';
-  filt.frequency.value = freq||400;
-  filt.Q.value = 0.8;
-  var gain = ac.createGain();
-  gain.gain.setValueAtTime(vol||0.12, ac.currentTime);
-  gain.gain.linearRampToValueAtTime(0, ac.currentTime+dur);
+function playNoise(dur,vol,freq,type,delay) {
+  var ac=getAC(); if(!ac) return;
+  delay=delay||0;
+  var buf=ac.createBuffer(1,ac.sampleRate*dur,ac.sampleRate);
+  var data=buf.getChannelData(0);
+  for(var i=0;i<data.length;i++) data[i]=(Math.random()*2-1);
+  var src2=ac.createBufferSource(); src2.buffer=buf;
+  var filt=ac.createBiquadFilter(); filt.type=type||'bandpass'; filt.frequency.value=freq||400; filt.Q.value=1.2;
+  var gain=ac.createGain();
+  var t=ac.currentTime+delay;
+  gain.gain.setValueAtTime(vol||0.12,t);
+  gain.gain.exponentialRampToValueAtTime(0.001,t+dur);
   src2.connect(filt); filt.connect(gain); gain.connect(ac.destination);
-  src2.start();
+  src2.start(t);
 }
 
-// ── INDIVIDUAL SOUND EFFECTS ──────────────────────────────────────────────────
-
+// ── JUMP — springy boing ──────────────────────────────────────────────────────
 function sndJump() {
-  // Quick upward pitch sweep
-  playTone(180, 0.12, 0.15, 'square', 420);
-  playTone(280, 0.08, 0.08, 'sine',   520, 0.04);
+  playTone(200,0.08,0.12,'sine',480);
+  playTone(320,0.06,0.06,'triangle',600,0.03);
 }
 
+// ── LAND ─────────────────────────────────────────────────────────────────────
 function sndLand() {
-  playTone(80, 0.06, 0.12, 'triangle', 50);
+  playTone(70,0.07,0.14,'triangle',45);
+  playNoise(0.05,0.07,200,'lowpass');
 }
 
+// ── SHOOT SOUNDS — each weapon has personality ────────────────────────────────
 function sndShootBogey() {
-  // Wet snotty splat launch
-  playTone(320, 0.04, 0.12, 'sawtooth', 180);
-  playNoise(0.06, 0.08, 600, 'bandpass');
+  // Wet nasal launch — pffflt
+  playNoise(0.04,0.12,800,'bandpass');
+  playTone(260,0.06,0.1,'sawtooth',140);
+  playNoise(0.05,0.08,400,'bandpass',0.03);
 }
-
 function sndShootSteamer() {
-  // Low heavy plop
-  playTone(90, 0.12, 0.18, 'sawtooth', 60);
-  playNoise(0.1, 0.1, 200, 'lowpass');
+  // Low heavy splat plop
+  playTone(70,0.14,0.2,'sawtooth',45);
+  playNoise(0.12,0.14,180,'lowpass');
+  playTone(110,0.06,0.08,'square',70,0.08);
 }
-
 function sndShootFart() {
-  // Classic raspberry
-  playNoise(0.22, 0.18, 180, 'bandpass');
-  playTone(120, 0.18, 0.1, 'sawtooth', 80);
+  // Full wet raspberry
+  playNoise(0.28,0.22,140,'bandpass');
+  playTone(90,0.22,0.12,'sawtooth',65);
+  playNoise(0.1,0.08,300,'bandpass',0.15);
 }
-
 function sndShootSpitball() {
-  // High whistle
-  playTone(900, 0.08, 0.1, 'sine', 600);
+  // High-velocity whistle snap
+  playTone(1100,0.05,0.1,'sine',600);
+  playNoise(0.03,0.06,2000,'highpass');
 }
-
-function sndMelee() {
-  // Thwack
-  playTone(150, 0.04, 0.2, 'square', 60);
-  playNoise(0.06, 0.15, 800, 'highpass');
-}
-
-function sndEnemyHit() {
-  // Descending squeal
-  playTone(440, 0.08, 0.12, 'square', 200);
-}
-
-function sndEnemyDie() {
-  // Funny deflate
-  playTone(380, 0.18, 0.15, 'sawtooth', 80);
-  playTone(200, 0.1,  0.08, 'square',   60, 0.1);
-}
-
-function sndBossDie() {
-  // Big dramatic descend
-  playTone(500, 0.08, 0.2, 'sawtooth', 400);
-  playTone(400, 0.1,  0.18,'sawtooth', 200, 0.08);
-  playTone(200, 0.2,  0.15,'square',   60,  0.18);
-  playNoise(0.3, 0.12, 300, 'bandpass');
-}
-
-function sndCoin() {
-  // Classic coin ding
-  playTone(880, 0.06, 0.12, 'sine');
-  playTone(1320,0.08, 0.1,  'sine', 1760, 0.01);
-}
-
-function sndSnot() {
-  // Wet squelch
-  playNoise(0.06, 0.1, 500, 'bandpass');
-  playTone(200, 0.05, 0.08, 'sawtooth', 280);
-}
-
-function sndToy() {
-  // Triumphant little fanfare
-  var notes = [523, 659, 784, 1047];
-  notes.forEach(function(n, i) { playTone(n, 0.1, 0.15, 'square', n*1.02, i*0.08); });
-}
-
-function sndAllyRescue() {
-  // Happy ascending arpeggio
-  var notes = [392, 494, 587, 784, 988];
-  notes.forEach(function(n, i) { playTone(n, 0.12, 0.13, 'sine', n, i*0.07); });
-}
-
-function sndHurt() {
-  // Ow! descending noise
-  playTone(600, 0.06, 0.18, 'square', 200);
-  playNoise(0.08, 0.1, 400, 'bandpass');
-}
-
-function sndDie() {
-  // Sad wah-wah
-  playTone(440, 0.15, 0.15, 'sawtooth', 220);
-  playTone(330, 0.2,  0.12, 'sawtooth', 165, 0.12);
-  playTone(220, 0.25, 0.1,  'sawtooth', 110, 0.28);
-}
-
-function sndLevelUp() {
-  // Ascending fanfare
-  var notes = [262, 330, 392, 523, 659, 784];
-  notes.forEach(function(n,i) { playTone(n, 0.1, 0.14, 'square', n, i*0.06); });
-}
-
-function sndWin() {
-  // Victory tune - Hulk Hogan energy
-  var melody = [
-    [523,0.12],[523,0.12],[523,0.12],[415,0.09],[523,0.18],
-    [659,0.18],[523,0.18],[659,0.22],[784,0.35]
-  ];
-  var t = 0;
-  melody.forEach(function(m) {
-    playTone(m[0], m[1]+0.02, 0.16, 'square', m[0], t);
-    t += m[1];
-  });
-}
-
-function sndPortal() {
-  // Shimmer whoosh
-  playTone(440, 0.4, 0.12, 'sine', 880);
-  playTone(660, 0.4, 0.08, 'sine', 1320, 0.05);
-  playNoise(0.15, 0.06, 2000, 'highpass');
-}
-
-function sndIntroChime() {
-  // Soft cinematic chime between intro scenes
-  playTone(523, 0.4, 0.08, 'sine');
-  playTone(659, 0.5, 0.06, 'sine', 659, 0.1);
-  playTone(784, 0.6, 0.05, 'sine', 784, 0.2);
-}
-
-// Current weapon -> shoot sound
 function sndShoot() {
-  if (GS.weaponIndex===0) sndShootBogey();
-  else if (GS.weaponIndex===1) sndShootSteamer();
-  else if (GS.weaponIndex===2) sndShootFart();
+  if(GS.weaponIndex===0) sndShootBogey();
+  else if(GS.weaponIndex===1) sndShootSteamer();
+  else if(GS.weaponIndex===2) sndShootFart();
   else sndShootSpitball();
 }
 
-// Footstep ticker
-var footTick = 0;
+// ── MELEE — meaty thwack ──────────────────────────────────────────────────────
+function sndMelee() {
+  playTone(130,0.05,0.22,'square',50);
+  playNoise(0.07,0.18,900,'highpass');
+  playTone(200,0.04,0.1,'triangle',100,0.02);
+}
+
+// ── ENEMY SOUNDS ─────────────────────────────────────────────────────────────
+function sndEnemyHit() {
+  playTone(520,0.07,0.14,'square',240);
+  playNoise(0.05,0.08,600,'bandpass');
+}
+function sndEnemyDie() {
+  playTone(440,0.06,0.14,'sawtooth',220);
+  playTone(330,0.1,0.1,'sawtooth',110,0.06);
+  playNoise(0.12,0.08,300,'bandpass',0.08);
+}
+function sndBossDie() {
+  // Huge dramatic crash
+  playTone(500,0.06,0.22,'sawtooth',300);
+  playTone(380,0.1,0.18,'sawtooth',160,0.06);
+  playTone(260,0.18,0.14,'square',80,0.14);
+  playTone(120,0.25,0.12,'sawtooth',50,0.22);
+  playNoise(0.35,0.16,280,'bandpass',0.1);
+  playNoise(0.2,0.12,80,'lowpass',0.25);
+}
+function sndStumpyCharge() {
+  playTone(80,0.15,0.18,'sawtooth',60);
+  playNoise(0.1,0.12,200,'lowpass');
+}
+function sndWindyFart() {
+  // Long wet BRAP
+  playNoise(0.35,0.22,130,'bandpass');
+  playTone(80,0.3,0.14,'sawtooth',55);
+  playNoise(0.15,0.1,260,'bandpass',0.2);
+}
+function sndVomit() {
+  // Horrible wet splurch
+  playNoise(0.2,0.2,350,'bandpass');
+  playTone(160,0.1,0.18,'sawtooth',90);
+  playNoise(0.12,0.15,600,'bandpass',0.1);
+  playTone(200,0.08,0.1,'sawtooth',120,0.14);
+}
+
+// ── PLAYER SOUNDS ────────────────────────────────────────────────────────────
+function sndHurt() {
+  playTone(700,0.04,0.2,'square',260);
+  playNoise(0.1,0.12,500,'bandpass');
+}
+function sndDie() {
+  playTone(500,0.12,0.18,'sawtooth',250);
+  playTone(380,0.16,0.14,'sawtooth',190,0.1);
+  playTone(250,0.22,0.12,'sawtooth',125,0.22);
+  playNoise(0.15,0.1,400,'bandpass',0.18);
+}
+
+// ── COLLECTIBLES ─────────────────────────────────────────────────────────────
+function sndCoin() {
+  playTone(1046,0.05,0.1,'sine');
+  playTone(1318,0.09,0.09,'sine',1760,0.01);
+}
+function sndSnot() {
+  playNoise(0.07,0.1,600,'bandpass');
+  playTone(220,0.05,0.07,'sawtooth',300);
+}
+function sndToy() {
+  var n=[523,659,784,1047];
+  n.forEach(function(n,i){playTone(n,0.12,0.14,'square',n*1.01,i*0.08);});
+  playNoise(0.08,0.06,1200,'highpass',0.02);
+}
+function sndAllyRescue() {
+  var n=[392,494,587,784,988];
+  n.forEach(function(n,i){playTone(n,0.13,0.12,'sine',n,i*0.065);});
+}
+
+// ── EVENTS ───────────────────────────────────────────────────────────────────
+function sndLevelUp() {
+  var n=[262,330,392,523,659,784];
+  n.forEach(function(n,i){playTone(n,0.1,0.13,'square',n,i*0.055);});
+}
+function sndWin() {
+  var m=[[523,0.1],[523,0.1],[523,0.1],[415,0.08],[523,0.15],[659,0.15],[523,0.15],[659,0.2],[784,0.32]];
+  var t=0; m.forEach(function(m){playTone(m[0],m[1]+0.02,0.16,'square',m[0],t); t+=m[1];});
+  // Add drum hits
+  [0,0.2,0.4,0.6].forEach(function(t){ playNoise(0.05,0.14,200,'lowpass',t); });
+}
+function sndPortal() {
+  playTone(440,0.5,0.1,'sine',1100);
+  playTone(660,0.5,0.07,'sine',1320,0.06);
+  playNoise(0.2,0.06,2200,'highpass');
+}
+function sndIntroChime() {
+  playTone(523,0.6,0.07,'sine');
+  playTone(659,0.7,0.05,'sine',659,0.12);
+  playTone(784,0.8,0.04,'sine',784,0.24);
+  playTone(1046,0.5,0.03,'sine',1046,0.36);
+}
+
+// ── FOOTSTEP ─────────────────────────────────────────────────────────────────
+var footTick=0;
 function sndFootstep() {
   footTick++;
-  if (footTick % 16 === 0) {
-    playTone(60 + Math.random()*20, 0.04, 0.06, 'triangle');
+  if(footTick%14===0) {
+    playNoise(0.03,0.05,120,'lowpass');
+    playTone(65+Math.random()*15,0.04,0.05,'triangle');
   }
 }
+
 
 
 
@@ -572,8 +573,8 @@ function buildLevel0() {
       makePlatform(2700,360,500,'grass'),
     ],
     enemies: [
-      makeEnemy(900,428,'scratchy'),
-      makeEnemy(2200,428,'scratchy'),
+      makeEnemy(800,428,'scratchy'),
+      makeEnemy(2000,428,'scratchy'),
     ],
     collectibles: [
       makeCollectible(400,430,'snot'),
@@ -617,7 +618,8 @@ function buildLevel1() {
     ],
     enemies: [
       makeEnemy(700,428,'scratchy'),
-      makeEnemy(2400,428,'scratchy'),
+      makeEnemy(1800,428,'stumpy'),
+      makeEnemy(2800,428,'scratchy'),
     ],
     collectibles: [
       makeCollectible(200,350,'snot'), makeCollectible(600,270,'snot'),
@@ -659,8 +661,10 @@ function buildLevel2() {
       makePlatform(3350,300,250,'branch'),
     ],
     enemies: [
-      makeEnemy(1100,428,'scratchy'),
-      makeEnemy(2800,428,'scratchy'),
+      makeEnemy(800,428,'stumpy'),
+      makeEnemy(1600,428,'windy'),
+      makeEnemy(2600,428,'scratchy'),
+      makeEnemy(3200,428,'stumpy'),
     ],
     collectibles: [
       makeCollectible(150,370,'snot'), makeCollectible(500,270,'snot'),
@@ -698,7 +702,9 @@ function buildLevel3() {
       makePlatform(2600,300,80,'branch'),
     ],
     enemies: [
-      makeEnemy(600,428,'scratchy'),
+      makeEnemy(400,428,'windy'),
+      makeEnemy(900,428,'stumpy'),
+      makeEnemy(1400,428,'scratchy'),
       makeEnemy(2400,338,'lars',1),
     ],
     collectibles: [
@@ -734,7 +740,8 @@ function buildLevel4() {
       makePlatform(2200,340,80,'branch'),
     ],
     enemies: [
-      makeEnemy(700,428,'scratchy'),
+      makeEnemy(400,428,'windy'),
+      makeEnemy(900,428,'stumpy'),
       makeEnemy(1500,356,'monique',2),
     ],
     collectibles: [
@@ -1068,157 +1075,434 @@ function updatePlayer() {
 
 // ─── ENEMY UPDATE ─────────────────────────────────────────────────────────────
 function updateEnemies() {
-  for (const e of level.enemies) {
+  for (var ei=0; ei<level.enemies.length; ei++) {
+    var e = level.enemies[ei];
     if (e.dead) continue;
     if (e.stunTick > 0) { e.stunTick--; continue; }
+    if (e.type==='monique'||e.type==='lars') updateBoss(e);
+    else if (e.type==='scratchy') updateScratchy(e);
+    else if (e.type==='stumpy')   updateStumpy(e);
+    else if (e.type==='windy')    updateWindy(e);
 
-    if (e.type === 'monique' || e.type === 'lars') {
-      updateBoss(e);
-    } else if (e.type === 'scratchy') {
-      updateScratchy(e);
-    }
-
-    // player collision - 12px inner margin so you have to really walk into them
-    var hm = 12;
-    if (!e.dead && player.invTick <= 0 &&
-        player.x+hm < e.x+e.w-hm && player.x+player.w-hm > e.x+hm &&
-        player.y+hm < e.y+e.h-hm && player.y+player.h-hm > e.y+hm) {
-      hurtPlayer(1);
-    }
-  }
-}
-
-
-function updateScratchy(e) {
-  // Scratchy just shuffles slowly on the ground, minding his own business
-  // Every few seconds he stops to scratch himself and flings flakes
-  e.scratchTick = (e.scratchTick||0) + 1;
-  e.flakeCooldown = (e.flakeCooldown||0) - 1;
-
-  var scratchCycle = 200; // frames between scratches
-  var withinCycle = e.scratchTick % scratchCycle;
-
-  if (withinCycle < 60) {
-    // Scratching phase — stopped, animation twitching
-    e.vx = 0;
-    e.state = 'scratch';
-    // Shoot a flake every 18 frames during scratch
-    if (withinCycle % 18 === 8 && e.flakeCooldown <= 0) {
-      e.flakeCooldown = 18;
-      // Flake fires toward player if nearby, otherwise random direction
-      var dx = player.x - e.x;
-      var flakeDir = dx > 0 ? 1 : -1;
-      var flakeVx = flakeDir * (3 + Math.random() * 2);
-      var flakeVy = -2 - Math.random() * 3;
-      // store as a special projectile type on level.flakes array
-      if (!level.flakes) level.flakes = [];
-      level.flakes.push({
-        x: e.x + e.w/2,
-        y: e.y + 8,
-        vx: flakeVx,
-        vy: flakeVy,
-        life: 1.0,
-        alive: true,
-        tick: 0
-      });
-      // scratchy sound
-      playNoise(0.08, 0.07, 600, 'highpass');
-    }
-  } else {
-    // Shuffle phase — slow walk
-    e.state = 'walk';
-    e.x += e.vx * 0.6;
-    // bounce off level edges
-    if (e.x < 20) { e.vx = Math.abs(e.vx)||1; }
-    if (e.x + e.w > level.width - 20) { e.vx = -(Math.abs(e.vx)||1); }
-    // reverse at platform edges (stay on ground, don't fall off)
-    for (var pi=0; pi<level.platforms.length; pi++) {
-      var p = level.platforms[pi];
-      if (e.x + e.w/2 > p.x && e.x + e.w/2 < p.x+p.w && Math.abs((e.y+e.h)-p.y)<8) {
-        var edgeFwd = e.vx > 0 ? e.x+e.w+4 : e.x-4;
-        if (edgeFwd < p.x || edgeFwd > p.x+p.w) e.vx *= -1;
+    // contact damage (tight hitbox)
+    if (!e.dead && player.invTick<=0) {
+      var hm=10;
+      if (player.x+hm < e.x+e.w-hm && player.x+player.w-hm > e.x+hm &&
+          player.y+hm < e.y+e.h-hm && player.y+player.h-hm > e.y+hm) {
+        hurtPlayer(1);
       }
     }
   }
-  e.dir = e.vx >= 0 ? 1 : -1;
-  // Apply gravity so Scratchy stays on ground
+}
+
+// ── Ground physics helper for enemies ────────────────────────────────────────
+function enemyGravity(e) {
   e.vy = (e.vy||0) + 0.55;
   e.y += e.vy;
-  for (var pi2=0; pi2<level.platforms.length; pi2++) {
-    var p2 = level.platforms[pi2];
-    if (e.x+e.w > p2.x && e.x < p2.x+p2.w && e.vy >= 0 && e.y+e.h > p2.y && e.y+e.h < p2.y+20) {
-      e.y = p2.y - e.h; e.vy = 0;
+  e.onGround = false;
+  for (var pi=0; pi<level.platforms.length; pi++) {
+    var p=level.platforms[pi];
+    if (e.x+e.w>p.x && e.x<p.x+p.w && e.vy>=0 && e.y+e.h>p.y && e.y+e.h<p.y+22+e.vy) {
+      e.y=p.y-e.h; e.vy=0; e.onGround=true; break;
     }
   }
-}
-
-function updateFlakes() {
-  if (!level || !level.flakes) return;
-  for (var i=0; i<level.flakes.length; i++) {
-    var f = level.flakes[i];
-    if (!f.alive) continue;
-    f.x += f.vx;
-    f.y += f.vy;
-    f.vy += 0.18; // gentle gravity on flake
-    f.tick++;
-    f.life -= 0.018;
-    if (f.life <= 0 || f.tick > 120) { f.alive = false; continue; }
-    // Check if hits player — stuns briefly (no damage, just stops Ada)
-    if (player.invTick <= 0 &&
-        f.x > player.x+4 && f.x < player.x+player.w-4 &&
-        f.y > player.y+4 && f.y < player.y+player.h-4) {
-      f.alive = false;
-      // Stun — freeze movement for 40 frames
-      player.state = 'hurt';
-      player.stateTick = 40;
-      player.vx = 0;
-      player.invTick = 50; // brief invincibility after stun
-      spawnParticle(player.x+player.w/2, player.y+player.h/2, '#ffeeaa', 5);
-      playNoise(0.1, 0.08, 800, 'highpass');
-      showDialogue("scratchy", "itchy itchy itchy...");
-    }
-  }
-  level.flakes = level.flakes.filter(function(f){ return f.alive; });
-}
-
-function updateBoss(e) {
-  const dx = player.x - e.x;
-  e.dir = dx > 0 ? 1 : -1;
-  const dist = Math.abs(dx);
-
-  if (e.type === 'lars') {
-    // Lars charges, then backs off (he's not really mean)
-    if (dist < 250) {
-      e.vx = e.dir * 1.2;
-    } else {
-      e.vx *= 0.9;
-    }
-    e.x += e.vx;
-  } else {
-    // Monique charges aggressively
-    if (dist < 350) {
-      e.vx = e.dir * (GS.frame%120 < 60 ? 2.0 : 1.0);
-    } else {
-      e.vx = e.dir * 0.7;
-    }
-    e.x += e.vx;
-    // Monique jump attack every 3 sec
-    if (GS.frame % 180 === 0 && dist < 300) {
-      e.vy = -10;
-    }
-  }
-
   e.x = Math.max(0, Math.min(level.width-e.w, e.x));
-  // gravity for boss
-  if (!e.onGround) {
-    e.vy = (e.vy||0) + GRAVITY;
-    e.y += e.vy;
+}
+
+// ── SCRATCHY — mobile, chases player while scratching, sprays flakes ─────────
+function updateScratchy(e) {
+  e.scratchTick = (e.scratchTick||0)+1;
+  var dx = player.x - e.x;
+  var dist = Math.abs(dx);
+  e.dir = dx>=0?1:-1;
+  var cycle = e.scratchTick % 180;
+
+  if (cycle < 55) {
+    // SCRATCH + SPRAY: shuffles toward Ada while flinging flakes
+    e.state = 'scratch';
+    e.x += e.dir * 1.2;
+    if (cycle % 12 === 4) {
+      if (!level.flakes) level.flakes = [];
+      for (var fi=0; fi<3; fi++) {
+        var ang = -0.5 + fi*0.5;
+        var spd = 3.5+Math.random()*2.5;
+        level.flakes.push({
+          x:e.x+e.w/2, y:e.y+8,
+          vx:Math.cos(ang)*spd*e.dir,
+          vy:Math.sin(ang)*spd-1.5,
+          life:1, alive:true, tick:0
+        });
+      }
+      playNoise(0.08,0.07,700,'highpass');
+    }
+  } else {
+    // WALK: slow chase
+    e.state = 'walk';
+    e.x += e.dir * (dist>80 ? 1.0 : 0.4);
   }
-  for (const p of level.platforms) {
-    if (e.x+e.w > p.x && e.x < p.x+p.w && e.vy >= 0 && e.y+e.h > p.y && e.y+e.h < p.y+20+e.vy) {
-      e.y = p.y - e.h; e.vy = 0; e.onGround = true;
+  // bounds
+  if (e.x<10){e.x=10; e.dir=1;}
+  if (e.x+e.w>level.width-10){e.x=level.width-e.w-10; e.dir=-1;}
+  enemyGravity(e);
+}
+
+// ── STUMPY — fat, slow, but charges when Ada gets close ──────────────────────
+function updateStumpy(e) {
+  e.chargeTick = (e.chargeTick||0)+1;
+  var dx = player.x - e.x;
+  var dist = Math.abs(dx);
+  e.dir = dx>=0?1:-1;
+
+  if (dist < 160 && e.chargeTick > 40) {
+    // CHARGE — fast rush for 30 frames
+    e.state = 'charge';
+    e.vx = e.dir * 4.5;
+    if (e.chargeTick % 40 === 0) {
+      sndStumpyCharge();
+    }
+  } else if (dist > 250) {
+    // Idle shuffle back and forth
+    e.state = 'walk';
+    e.vx = e.dir * 0.6;
+    if (e.chargeTick > 90) e.chargeTick = 0; // reset charge timer
+  } else {
+    // Slow approach
+    e.state = 'walk';
+    e.vx = e.dir * 1.2;
+  }
+  e.x += e.vx;
+  e.vx *= 0.88;
+  enemyGravity(e);
+}
+
+// ── WINDY — floats fart clouds in a ring that hurt Ada ───────────────────────
+function updateWindy(e) {
+  e.windyTick = (e.windyTick||0)+1;
+  var dx = player.x - e.x;
+  e.dir = dx>=0?1:-1;
+  // Slow patrol
+  e.x += e.dir * 0.5;
+  e.state = 'walk';
+  // Emit fart cloud every 80 frames
+  if (e.windyTick % 80 === 0) {
+    if (!level.hazards) level.hazards = [];
+    // A rolling cloud that drifts toward Ada
+    level.hazards.push({
+      x: e.x+e.w/2, y: e.y+e.h/2,
+      vx: e.dir*1.8, vy:-0.5,
+      r:22, life:1, alive:true, tick:0, type:'fart'
+    });
+    // fart sound
+    sndWindyFart();
+  }
+  enemyGravity(e);
+}
+
+// ── FLAKE UPDATE ─────────────────────────────────────────────────────────────
+function updateFlakes() {
+  if (!level||!level.flakes) return;
+  for (var i=0;i<level.flakes.length;i++) {
+    var f=level.flakes[i];
+    if (!f.alive) continue;
+    f.x+=f.vx; f.y+=f.vy; f.vy+=0.15; f.tick++; f.life-=0.02;
+    if (f.life<=0||f.tick>100) { f.alive=false; continue; }
+    if (player.invTick<=0 &&
+        f.x>player.x+4 && f.x<player.x+player.w-4 &&
+        f.y>player.y+4 && f.y<player.y+player.h-4) {
+      f.alive=false;
+      player.state='hurt'; player.stateTick=45; player.vx=0;
+      player.invTick=60;
+      spawnParticle(player.x+player.w/2,player.y+player.h/2,'#ffeeaa',6);
+      playNoise(0.12,0.1,900,'highpass');
+      showDialogue('scratchy','itchy itchy itchy...','Ada: GROSS!');
     }
   }
+  level.flakes=level.flakes.filter(function(f){return f.alive;});
+}
+
+// ── HAZARD UPDATE (fart clouds, vomit puddles) ────────────────────────────────
+function updateHazards() {
+  if (!level||!level.hazards) return;
+  for (var i=0;i<level.hazards.length;i++) {
+    var h=level.hazards[i];
+    if (!h.alive) continue;
+    h.x+=h.vx; h.y+=h.vy; h.tick++; h.life-=0.004;
+    if (h.life<=0||h.tick>280) { h.alive=false; continue; }
+    // Fart cloud - apply gentle gravity and slow drift
+    if (h.type==='fart') {
+      h.vy+=0.02; h.vx*=0.99;
+      h.r = 22 + Math.sin(h.tick*0.1)*4;
+    } else if (h.type==='vomit') {
+      h.vy+=0.3; h.vx*=0.9;
+      // Puddle when it lands
+      if (h.tick>30) { h.vx=0; h.vy=0; h.r=18; }
+    }
+    // Hit player
+    if (player.invTick<=0) {
+      var pdx=player.x+player.w/2-h.x, pdy=player.y+player.h/2-h.y;
+      var pdist=Math.sqrt(pdx*pdx+pdy*pdy);
+      if (pdist < h.r+8) {
+        hurtPlayer(1);
+        if (h.type==='fart') h.life-=0.3; // fart dissipates on hit
+        else h.alive=false;
+      }
+    }
+  }
+  level.hazards=level.hazards.filter(function(h){return h.alive;});
+}
+
+// ── DRAW STUMPY ───────────────────────────────────────────────────────────────
+function drawStumpy(e) {
+  var ex=Math.round(e.x), ey=Math.round(e.y);
+  var wk=e.state==='charge'?0:Math.sin(GS.frame*0.15)*3;
+  var flip=(e.vx||0)>0;
+  ctx.save();
+  if(flip){ctx.scale(-1,1);ctx.translate(-2*ex-e.w,0);}
+
+  // Fat stumpy legs
+  ctx.fillStyle='#445533';
+  ctx.fillRect(ex+4,ey+38,14,14+wk);
+  ctx.fillRect(ex+26,ey+38,14,14-wk);
+  ctx.fillStyle='#222';
+  ctx.fillRect(ex+2,ey+50+wk,16,6);
+  ctx.fillRect(ex+24,ey+50-wk,16,6);
+
+  // Big round body - torn muddy shirt
+  ctx.fillStyle='#7a6644';
+  ctx.fillRect(ex,ey+14,44,26);
+  ctx.fillStyle='#8a7654';
+  ctx.fillRect(ex+1,ey+14,14,26);
+  ctx.fillStyle='#5a4624';
+  ctx.fillRect(ex+30,ey+14,14,26);
+  // Mud stains
+  ctx.fillStyle='#3a2810';
+  ctx.fillRect(ex+8,ey+20,6,5);
+  ctx.fillRect(ex+26,ey+24,8,4);
+  ctx.fillRect(ex+16,ey+30,6,4);
+
+  // Short arms - charge pose
+  ctx.fillStyle=e.state==='charge'?'#cc4422':'#8a7244';
+  if(e.state==='charge'){
+    ctx.fillRect(ex-6,ey+14,10,12);
+    ctx.fillRect(ex+40,ey+14,10,12);
+  } else {
+    ctx.fillRect(ex-4,ey+16,8,14);
+    ctx.fillRect(ex+40,ey+16,8,14);
+  }
+
+  // Big round head
+  ctx.fillStyle='#d4a060';
+  ctx.fillRect(ex+6,ey-2,32,18);
+  ctx.fillStyle='#b88040';
+  ctx.fillRect(ex+28,ey-2,10,18);
+  // Red face from exertion
+  ctx.fillStyle='rgba(200,50,20,0.3)';
+  ctx.fillRect(ex+6,ey+6,14,8);
+  ctx.fillRect(ex+22,ey+6,14,8);
+
+  // Short brown hair
+  ctx.fillStyle='#441a00';
+  ctx.fillRect(ex+5,ey-7,34,8);
+  ctx.fillStyle='#552200';
+  ctx.fillRect(ex+6,ey-7,12,5);
+
+  // Eyes - mean little piggy eyes
+  ctx.fillStyle='#fff';
+  ctx.fillRect(ex+10,ey+3,6,5);
+  ctx.fillRect(ex+26,ey+3,6,5);
+  ctx.fillStyle='#550000';
+  ctx.fillRect(ex+11,ey+4,4,3);
+  ctx.fillRect(ex+27,ey+4,4,3);
+  ctx.fillStyle='#000';
+  ctx.fillRect(ex+12,ey+5,2,2);
+  ctx.fillRect(ex+28,ey+5,2,2);
+
+  // Mouth - panting or grimace
+  if(e.state==='charge'){
+    ctx.fillStyle='#aa2200';
+    ctx.fillRect(ex+12,ey+13,18,4);
+    ctx.fillStyle='#fff';
+    ctx.fillRect(ex+13,ey+13,4,3);
+    ctx.fillRect(ex+19,ey+13,4,3);
+    ctx.fillRect(ex+24,ey+13,4,3);
+  } else {
+    ctx.fillStyle='#882200';
+    ctx.fillRect(ex+14,ey+13,14,3);
+  }
+
+  // Charge glow
+  if(e.state==='charge'){
+    ctx.globalAlpha=0.25;
+    ctx.fillStyle='#ff4400';
+    ctx.fillRect(ex-4,ey-6,e.w+8,e.h+8);
+    ctx.globalAlpha=1;
+  }
+  ctx.restore();
+}
+
+// ── DRAW WINDY ────────────────────────────────────────────────────────────────
+function drawWindy(e) {
+  var ex=Math.round(e.x), ey=Math.round(e.y);
+  var bob=Math.sin(GS.frame*0.12)*2;
+  var flip=(e.vx||0)>0;
+  ctx.save();
+  if(flip){ctx.scale(-1,1);ctx.translate(-2*ex-e.w,0);}
+
+  // Skinny legs
+  ctx.fillStyle='#335566';
+  ctx.fillRect(ex+5,ey+26,7,12);
+  ctx.fillRect(ex+18,ey+26,7,12);
+  ctx.fillStyle='#222';
+  ctx.fillRect(ex+3,ey+36,9,5);
+  ctx.fillRect(ex+16,ey+36,9,5);
+
+  // Thin body - greenish (gaseous)
+  ctx.fillStyle='#4a7755';
+  ctx.fillRect(ex+3,ey+12+bob,24,16);
+  ctx.fillStyle='#5a9966';
+  ctx.fillRect(ex+4,ey+12+bob,8,16);
+  // Gas shimmer
+  ctx.globalAlpha=0.4;
+  ctx.fillStyle='#aaff66';
+  ctx.fillRect(ex+3,ey+14+bob,24,4);
+  ctx.globalAlpha=1;
+  // Cloud puffs floating off body
+  var windyFrame=GS.frame*0.08;
+  ctx.globalAlpha=0.45;
+  ctx.fillStyle='#88cc55';
+  ctx.fillRect(ex-4+Math.sin(windyFrame)*3,ey+14+bob,10,8);
+  ctx.fillRect(ex+22+Math.sin(windyFrame+1)*3,ey+16+bob,10,7);
+  ctx.globalAlpha=1;
+
+  // Head - slightly bloated
+  ctx.fillStyle='#c8d890';
+  ctx.fillRect(ex+4,ey+bob,22,14);
+  ctx.fillStyle='#a8b870';
+  ctx.fillRect(ex+18,ey+bob,8,14);
+  // Green tinge
+  ctx.fillStyle='rgba(80,180,40,0.25)';
+  ctx.fillRect(ex+4,ey+bob,22,14);
+
+  // Lank greasy hair
+  ctx.fillStyle='#556622';
+  ctx.fillRect(ex+3,ey-4+bob,24,7);
+  ctx.fillStyle='#667733';
+  ctx.fillRect(ex+4,ey-4+bob,8,4);
+  // Hair clumps
+  ctx.fillStyle='#445522';
+  ctx.fillRect(ex+3,ey-4+bob,4,12);
+
+  // Watery eyes, pleased with himself
+  ctx.fillStyle='#fff';
+  ctx.fillRect(ex+6,ey+3+bob,5,5);
+  ctx.fillRect(ex+17,ey+3+bob,5,5);
+  ctx.fillStyle='#226633';
+  ctx.fillRect(ex+7,ey+4+bob,3,3);
+  ctx.fillRect(ex+18,ey+4+bob,3,3);
+  ctx.fillStyle='#000';
+  ctx.fillRect(ex+8,ey+5+bob,2,2);
+  ctx.fillRect(ex+19,ey+5+bob,2,2);
+  // Satisfied expression
+  ctx.strokeStyle='#557744';
+  ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.arc(ex+14,ey+11+bob,4,0,Math.PI);
+  ctx.stroke();
+  ctx.lineWidth=1;
+
+  ctx.restore();
+}
+
+
+// ── BOSS UPDATE - Lars & Monique with projectile attacks ─────────────────────
+function updateBoss(e) {
+  e.bossTick=(e.bossTick||0)+1;
+  var dx=player.x-e.x;
+  e.dir=dx>=0?1:-1;
+  var dist=Math.abs(dx);
+
+  if (e.type==='lars') {
+    // Lars: charges in bursts, retreats, shoots vomit arcs every 4 sec
+    var phase = e.bossTick%240;
+    if (phase<80) {
+      // charge at player
+      e.vx=e.dir*(dist<200?2.8:1.5);
+    } else if (phase<140) {
+      // retreat
+      e.vx=-e.dir*1.8;
+    } else if (phase===141) {
+      // VOMIT ATTACK - arc of 3 projectiles
+      if (!level.hazards) level.hazards=[];
+      for (var vi=0;vi<4;vi++) {
+        level.hazards.push({
+          x:e.x+e.w/2, y:e.y+8,
+          vx:e.dir*(3+vi*1.5), vy:-8+vi*1.5,
+          r:10, life:1, alive:true, tick:0, type:'vomit'
+        });
+      }
+      sndVomit();
+      spawnParticle(e.x+e.w/2,e.y+8,'#aaff44',8);
+    } else {
+      // idle shuffle
+      e.vx=e.dir*0.4;
+    }
+    e.x+=e.vx; e.vx*=0.9;
+    // Fart shield: permanent cloud orbiting Lars at low HP
+    if (e.hp<=3 && e.bossTick%50===0) {
+      if (!level.hazards) level.hazards=[];
+      var ang=(e.bossTick/60)*1.2;
+      level.hazards.push({
+        x:e.x+e.w/2+Math.cos(ang)*50, y:e.y+e.h/2+Math.sin(ang)*30,
+        vx:0,vy:0,r:18,life:0.6,alive:true,tick:0,type:'fart'
+      });
+    }
+
+  } else {
+    // Monique: faster, jumps, constant vomit shots, fart cloud barrier
+    var mphase=e.bossTick%200;
+    if (mphase<60) {
+      e.vx=e.dir*(dist<280?3.5:2);
+    } else if (mphase===61) {
+      // JUMP + vomit salvo
+      e.vy=-12;
+      if (!level.hazards) level.hazards=[];
+      for (var mi=0;mi<5;mi++) {
+        level.hazards.push({
+          x:e.x+e.w/2, y:e.y,
+          vx:e.dir*(2+mi*2), vy:-10+mi*1.5,
+          r:12, life:1.2, alive:true, tick:0, type:'vomit'
+        });
+      }
+      sndVomit();
+      spawnParticle(e.x+e.w/2,e.y,'#88ff44',10);
+    } else if (mphase<140) {
+      e.vx=e.dir*1.2;
+    } else if (mphase===141) {
+      // FART CLOUD BURST - 3 clouds spread
+      if (!level.hazards) level.hazards=[];
+      for (var fci=0;fci<3;fci++) {
+        level.hazards.push({
+          x:e.x+e.w/2+(fci-1)*40, y:e.y+e.h/2,
+          vx:(fci-1)*1.5, vy:-1,
+          r:28,life:1,alive:true,tick:0,type:'fart'
+        });
+      }
+      sndWindyFart();
+    } else {
+      e.vx=-e.dir*0.8;
+    }
+    e.x+=e.vx; e.vx*=0.88;
+    // Monique fart shield when hurt (hp<=4)
+    if (e.hp<=4 && e.bossTick%45===0) {
+      if (!level.hazards) level.hazards=[];
+      var ma=(e.bossTick/45)*0.9;
+      level.hazards.push({x:e.x+e.w/2+Math.cos(ma)*55,y:e.y+e.h/2+Math.sin(ma)*35,
+        vx:0,vy:0,r:24,life:0.7,alive:true,tick:0,type:'fart'});
+    }
+  }
+
+  e.x=Math.max(0,Math.min(level.width-e.w,e.x));
+  enemyGravity(e);
 }
 
 function hitEnemy(e, dmg) {
@@ -1496,6 +1780,10 @@ function draw() {
 
   // Draw flakes
   drawFlakes();
+  drawHazards();
+
+  // Canvas HUD — large, always readable on mobile
+  drawCanvasHUD();
 
   // Draw dialogue bubble on top of everything
   if (GS.state === 'dialogue' && GS.dialogue) {
@@ -2388,14 +2676,14 @@ function drawIntroScene5(t, raw) {
 
     // subtitle
     ctx.fillStyle = '#aaffaa';
-    ctx.font = '13px "VT323", monospace';
+    ctx.font = '22px "VT323", monospace';
     ctx.fillText('The Island — Helston Rd, Johnsonville', W/2, H/2+52);
 
     // Press start hint
     var blink = Math.sin(GS.frame * 0.1) > 0;
     if (blink) {
       ctx.fillStyle = '#fff';
-      ctx.font = '10px "Press Start 2P", monospace';
+      ctx.font = '11px "Press Start 2P", monospace';
       ctx.fillText('PRESS ANY KEY TO PLAY', W/2, H/2+90);
     }
     ctx.textAlign = 'left';
@@ -2415,23 +2703,283 @@ function drawIntroScene5(t, raw) {
 }
 
 
+
+// ─── DRAW STUMPY ──────────────────────────────────────────────────────────────
+function drawStumpy(e) {
+  var ex=Math.round(e.x), ey=Math.round(e.y);
+  var isCharging = e.state==='charge';
+  var lean = isCharging ? e.dir*5 : 0;
+  var wk = isCharging ? 0 : Math.sin(GS.frame*0.12)*3;
+  ctx.save();
+  // Lean forward when charging
+  ctx.translate(ex+e.w/2, ey+e.h);
+  ctx.rotate(lean*0.04);
+  ctx.translate(-(ex+e.w/2), -(ey+e.h));
+
+  // Fat legs - stubby
+  ctx.fillStyle = '#3a3a5a';
+  ctx.fillRect(ex+4,  ey+34, 12, 14+wk);
+  ctx.fillRect(ex+20, ey+34, 12, 14-wk);
+  ctx.fillStyle = '#222';
+  ctx.fillRect(ex+2,  ey+46+wk, 14, 6);
+  ctx.fillRect(ex+18, ey+46-wk, 14, 6);
+
+  // Big round belly - orange/brown jacket
+  ctx.fillStyle = '#bb6622';
+  ctx.fillRect(ex+0, ey+14, 36, 22);
+  // Belly bulge highlight
+  ctx.fillStyle = '#dd8844';
+  ctx.fillRect(ex+2, ey+15, 14, 20);
+  // Jacket shadow side
+  ctx.fillStyle = '#993311';
+  ctx.fillRect(ex+26, ey+14, 10, 22);
+  // Shirt underneath showing at bottom
+  ctx.fillStyle = '#ccaaaa';
+  ctx.fillRect(ex+4, ey+34, 28, 3);
+  // Jacket buttons
+  ctx.fillStyle = '#663300';
+  ctx.fillRect(ex+16, ey+17, 4, 4);
+  ctx.fillRect(ex+16, ey+24, 4, 4);
+
+  // Big arms - stubby
+  ctx.fillStyle = '#bb6622';
+  ctx.fillRect(ex-5, ey+15, 8, 14);
+  ctx.fillRect(ex+33, ey+15, 8, 14);
+  ctx.fillStyle = '#f0b888';
+  ctx.fillRect(ex-5, ey+26, 8, 7);
+  ctx.fillRect(ex+33, ey+26, 8, 7);
+
+  // Big round head
+  ctx.fillStyle = '#f0b888';
+  ctx.fillRect(ex+4, ey-2, 28, 18);
+  ctx.fillStyle = '#d8a070';
+  ctx.fillRect(ex+24, ey-2, 8, 18);
+  // Double chin
+  ctx.fillStyle = '#e0a878';
+  ctx.fillRect(ex+6, ey+14, 24, 5);
+
+  // Brown hair - thin on top (receding)
+  ctx.fillStyle = '#553311';
+  ctx.fillRect(ex+4, ey-5, 14, 6);
+  ctx.fillRect(ex+24, ey-5, 8, 4);
+  // Bald spot
+  ctx.fillStyle = '#e8a878';
+  ctx.fillRect(ex+16, ey-5, 10, 5);
+
+  // Small beady eyes
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+9, ey+4, 6, 5);
+  ctx.fillRect(ex+21, ey+4, 6, 5);
+  ctx.fillStyle = '#2a2a88';
+  ctx.fillRect(ex+10, ey+5, 4, 3);
+  ctx.fillRect(ex+22, ey+5, 4, 3);
+  ctx.fillStyle = '#000';
+  ctx.fillRect(ex+11, ey+6, 2, 2);
+  ctx.fillRect(ex+23, ey+6, 2, 2);
+
+  // Grumpy brow
+  ctx.fillStyle = '#443311';
+  ctx.fillRect(ex+8, ey+2, 8, 2);
+  ctx.fillRect(ex+20, ey+2, 8, 2);
+  ctx.fillRect(ex+14, ey+3, 4, 2); // middle frown
+
+  // Mouth - thin grumpy line
+  ctx.fillStyle = '#884422';
+  ctx.fillRect(ex+10, ey+13, 16, 2);
+  ctx.fillRect(ex+9, ey+12, 3, 2);
+  ctx.fillRect(ex+24, ey+12, 3, 2);
+
+  // Charge effect - motion lines
+  if (isCharging) {
+    ctx.fillStyle = 'rgba(255,140,0,0.5)';
+    for (var ci=1;ci<=3;ci++) {
+      ctx.fillRect(ex-e.dir*ci*12, ey+8, 8, 3);
+      ctx.fillRect(ex-e.dir*ci*12, ey+20, 6, 3);
+      ctx.fillRect(ex-e.dir*ci*12, ey+32, 7, 3);
+    }
+    // Red face from exertion
+    ctx.fillStyle = 'rgba(220,80,40,0.3)';
+    ctx.fillRect(ex+4, ey-2, 28, 18);
+  }
+
+  ctx.restore();
+}
+
+// ─── DRAW WINDY ───────────────────────────────────────────────────────────────
+function drawWindy(e) {
+  var ex=Math.round(e.x), ey=Math.round(e.y);
+  var puffed = (e.windyTick||0)%80 > 60; // puffing up before blast
+  var sway = Math.sin(GS.frame*0.08)*2;
+  var scaleY = puffed ? 1.08 : 1.0;
+  ctx.save();
+  ctx.translate(ex+e.w/2, ey+e.h);
+  ctx.scale(1, scaleY);
+  ctx.translate(-(ex+e.w/2), -(ey+e.h));
+
+  // Skinny legs
+  ctx.fillStyle = '#334422';
+  ctx.fillRect(ex+8,  ey+32, 7, 16+sway);
+  ctx.fillRect(ex+19, ey+32, 7, 16-sway);
+  ctx.fillStyle = '#222';
+  ctx.fillRect(ex+6,  ey+46+sway, 9, 5);
+  ctx.fillRect(ex+17, ey+46-sway, 9, 5);
+
+  // Body - green puffy jacket (full of gas)
+  ctx.fillStyle = '#447733';
+  ctx.fillRect(ex+2, ey+14, 28, 20);
+  ctx.fillStyle = '#559944';
+  ctx.fillRect(ex+3, ey+15, 10, 18);
+  ctx.fillStyle = '#336622';
+  ctx.fillRect(ex+22, ey+14, 8, 20);
+  // Puffy jacket seams
+  ctx.fillStyle = '#336622';
+  ctx.fillRect(ex+2,  ey+20, 28, 2);
+  ctx.fillRect(ex+2,  ey+27, 28, 2);
+  // Gas bulge when puffed
+  if (puffed) {
+    ctx.fillStyle = 'rgba(180,255,100,0.25)';
+    ctx.fillRect(ex+2, ey+14, 28, 20);
+  }
+
+  // Arms - thin
+  ctx.fillStyle = '#447733';
+  ctx.fillRect(ex-3, ey+15, 7, 12);
+  ctx.fillRect(ex+28, ey+15, 7, 12);
+  ctx.fillStyle = '#c8d888';
+  ctx.fillRect(ex-3, ey+24, 7, 6);
+  ctx.fillRect(ex+28, ey+24, 7, 6);
+
+  // Thin neck
+  ctx.fillStyle = '#c8d888';
+  ctx.fillRect(ex+12, ey+12, 8, 5);
+
+  // Head - gaunt, greenish tinge from the gas
+  ctx.fillStyle = '#d8e8a0';
+  ctx.fillRect(ex+5, ey+0, 22, 14);
+  ctx.fillStyle = '#c8d888';
+  ctx.fillRect(ex+20, ey+0, 7, 14);
+
+  // Scraggly hair
+  ctx.fillStyle = '#667733';
+  ctx.fillRect(ex+4, ey-5, 24, 7);
+  ctx.fillStyle = '#778844';
+  ctx.fillRect(ex+5, ey-5, 8, 4);
+  ctx.fillRect(ex+4, ey-3, 4, 10);
+
+  // Eyes - slightly bulging (from internal pressure)
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+8, ey+3, 5, 5);
+  ctx.fillRect(ex+19, ey+3, 5, 5);
+  ctx.fillStyle = '#2a5522';
+  ctx.fillRect(ex+9, ey+4, 3, 3);
+  ctx.fillRect(ex+20, ey+4, 3, 3);
+  ctx.fillStyle = '#000';
+  ctx.fillRect(ex+10, ey+5, 2, 2);
+  ctx.fillRect(ex+21, ey+5, 2, 2);
+  // Bulge whites
+  if (puffed) {
+    ctx.fillStyle = 'rgba(255,255,200,0.6)';
+    ctx.fillRect(ex+7, ey+2, 7, 7);
+    ctx.fillRect(ex+18, ey+2, 7, 7);
+  }
+
+  // Expression - straining/puffed cheeks
+  ctx.fillStyle = '#b8c880';
+  ctx.fillRect(ex+6, ey+9, 5, 4); // puffed left cheek
+  ctx.fillRect(ex+21, ey+9, 5, 4); // puffed right cheek
+  // Mouth - tight pursed for holding it in
+  ctx.fillStyle = '#667733';
+  ctx.fillRect(ex+11, ey+11, 10, 2);
+
+  // Gas leak particles when puffed
+  if (puffed) {
+    ctx.globalAlpha = 0.5;
+    ctx.fillStyle = '#aaff66';
+    ctx.fillRect(ex+14, ey+34, 4, 4);
+    ctx.fillRect(ex+12, ey+38, 6, 4);
+    ctx.fillRect(ex+14, ey+42, 4, 3);
+    ctx.globalAlpha = 1;
+  }
+
+  ctx.restore();
+}
+
 // ─── DRAW FLAKES ──────────────────────────────────────────────────────────────
 function drawFlakes() {
-  if (!level || !level.flakes) return;
-  for (var i=0; i<level.flakes.length; i++) {
-    var f = level.flakes[i];
-    if (!f.alive) continue;
-    var cam = Math.round(GS.camera);
-    var sx = f.x - cam;
-    var sy = f.y;
-    ctx.globalAlpha = f.life * 0.9;
-    // Flake - tiny white/grey irregular chip
-    ctx.fillStyle = '#f0ede0';
-    ctx.fillRect(sx-3, sy-2, 5, 3);
-    ctx.fillRect(sx-1, sy-4, 3, 2);
-    ctx.fillStyle = '#d0cdbc';
-    ctx.fillRect(sx,   sy-2, 2, 2);
-    ctx.globalAlpha = 1;
+  if (!level||!level.flakes) return;
+  var cam=Math.round(GS.camera);
+  for (var i=0;i<level.flakes.length;i++) {
+    var f=level.flakes[i]; if (!f.alive) continue;
+    var sx=f.x-cam, sy=f.y;
+    var rot=f.tick*0.3;
+    ctx.save();
+    ctx.globalAlpha=f.life*0.88;
+    ctx.translate(sx,sy);
+    ctx.rotate(rot);
+    // Irregular flake chip - 3 overlapping rects at angles
+    ctx.fillStyle='#f5f2e8';
+    ctx.fillRect(-4,-2,7,3);
+    ctx.fillStyle='#e0ddd0';
+    ctx.fillRect(-2,-4,4,3);
+    ctx.fillStyle='#ccc8b8';
+    ctx.fillRect(-1,-1,3,3);
+    // Tiny flake highlight
+    ctx.fillStyle='#ffffff';
+    ctx.fillRect(-3,-1,2,1);
+    ctx.restore();
+  }
+}
+
+// ─── DRAW HAZARDS (fart clouds, vomit blobs) ──────────────────────────────────
+function drawHazards() {
+  if (!level||!level.hazards) return;
+  var cam=Math.round(GS.camera);
+  for (var i=0;i<level.hazards.length;i++) {
+    var h=level.hazards[i]; if (!h.alive) continue;
+    var sx=Math.round(h.x-cam), sy=Math.round(h.y);
+    var pulse=0.7+0.3*Math.sin(h.tick*0.15);
+    if (h.type==='fart') {
+      // Fart cloud - layered green wobbly circles
+      ctx.globalAlpha=h.life*0.55*pulse;
+      ctx.fillStyle='#88cc44';
+      ctx.beginPath(); ctx.arc(sx,sy,h.r,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle='#aae066';
+      ctx.beginPath(); ctx.arc(sx-h.r*0.25,sy-h.r*0.2,h.r*0.65,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle='#ccff88';
+      ctx.beginPath(); ctx.arc(sx+h.r*0.15,sy+h.r*0.1,h.r*0.4,0,Math.PI*2); ctx.fill();
+      // Inner darker swirl
+      ctx.globalAlpha=h.life*0.3;
+      ctx.fillStyle='#445522';
+      ctx.beginPath(); ctx.arc(sx+h.r*0.1,sy-h.r*0.15,h.r*0.3,0,Math.PI*2); ctx.fill();
+      ctx.globalAlpha=1;
+    } else if (h.type==='vomit') {
+      // Vomit blob - chunky yellowy green
+      var settled=h.tick>30;
+      ctx.globalAlpha=h.life*0.85;
+      ctx.fillStyle='#88aa22';
+      if (settled) {
+        // Puddle
+        ctx.fillRect(sx-h.r,sy-6,h.r*2,12);
+        ctx.fillStyle='#aabb44';
+        ctx.fillRect(sx-h.r+3,sy-4,h.r*2-6,7);
+        // Chunks
+        ctx.fillStyle='#cc9922';
+        ctx.fillRect(sx-8,sy-5,6,5);
+        ctx.fillRect(sx+4,sy-3,5,4);
+        ctx.fillRect(sx-2,sy+1,4,4);
+      } else {
+        // Flying blob
+        ctx.beginPath(); ctx.arc(sx,sy,h.r,0,Math.PI*2); ctx.fill();
+        ctx.fillStyle='#aacc44';
+        ctx.beginPath(); ctx.arc(sx-h.r*0.2,sy-h.r*0.2,h.r*0.55,0,Math.PI*2); ctx.fill();
+        // Splatter trail
+        ctx.fillStyle='#669911';
+        ctx.globalAlpha=h.life*0.4;
+        ctx.fillRect(sx-h.vx*6,sy-h.vy*3,5,5);
+        ctx.fillRect(sx-h.vx*10,sy-h.vy*5,3,3);
+      }
+      ctx.globalAlpha=1;
+    }
   }
 }
 
@@ -2445,7 +2993,7 @@ function drawDialogueBubble() {
   ctx.fillStyle = 'rgba(0,0,0,0.45)';
   ctx.fillRect(0, 0, W, H);
 
-  var bx = 30, bw = W-60, bh = 110, by = H-bh-20;
+  var bx = 20, bw = W-40, bh = 130, by = H-bh-14;
 
   // Bubble background
   ctx.fillStyle = meta.bg;
@@ -2461,17 +3009,17 @@ function drawDialogueBubble() {
     ctx.fillStyle = meta.color;
     ctx.fillRect(bx, by-22, meta.label.length*10+16, 24);
     ctx.fillStyle = meta.bg||'#000';
-    ctx.font = 'bold 13px "Press Start 2P", monospace';
+    ctx.font = 'bold 14px "Press Start 2P", monospace';
     ctx.textAlign = 'left';
     ctx.fillText(meta.label, bx+8, by-5);
   }
 
   // Dialogue text — word-wrapped
   ctx.fillStyle = '#ffffff';
-  ctx.font = '13px "VT323", monospace';
+  ctx.font = '22px "VT323", monospace';
   ctx.textAlign = 'left';
   var words = line.split(' ');
-  var lineH = 22, maxW = bw-32, textX = bx+16, textY = by+32;
+  var lineH = 26, maxW = bw-40, textX = bx+16, textY = by+32;
   var curLine = '';
   words.forEach(function(word) {
     var test = curLine ? curLine+' '+word : word;
@@ -2489,7 +3037,7 @@ function drawDialogueBubble() {
   if (GS.frame % 60 < 35) {
     ctx.fillStyle = meta.color;
     ctx.globalAlpha = 0.8;
-    ctx.font = '10px "Press Start 2P", monospace';
+    ctx.font = '11px "Press Start 2P", monospace';
     ctx.textAlign = 'right';
     // Show if more lines remain
     if (d.lineIdx < d.lines.length-1) {
@@ -2812,8 +3360,10 @@ function drawEnemies() {
     const flash = e.stunTick > 0 && GS.frame%4 < 2;
     ctx.globalAlpha = flash ? 0.5 : 1;
 
-    if (e.type === 'monique') drawMonique(e);
-    else if (e.type === 'lars') drawLars(e);
+    if (e.type==='monique') drawMonique(e);
+    else if (e.type==='lars') drawLars(e);
+    else if (e.type==='stumpy') drawStumpy(e);
+    else if (e.type==='windy') drawWindy(e);
     else drawScratchy(e);
 
     ctx.globalAlpha = 1;
