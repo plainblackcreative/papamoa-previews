@@ -381,7 +381,7 @@
   <a href="/homepage.html">papamoa.info</a> &middot; Pāpāmoa&rsquo;s local business directory &middot; <a href="/sales/list-with-us.html">List your business</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── PHOTO GALLERY ──
 (function(){
   var photos=(typeof PHOTOS!=='undefined')?PHOTOS.slice(0,9):[];
@@ -422,4 +422,7 @@
 // ── FAQ ACCORDION ──
 document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('click',function(){this.closest('.faq-item').classList.toggle('open');});});
 (function(){var faqs=[];document.querySelectorAll('.faq-item').forEach(function(item){var q=item.querySelector('.faq-q');var a=item.querySelector('.faq-a');if(q&&a)faqs.push({'@type':'Question','name':q.childNodes[0].textContent.trim(),'acceptedAnswer':{'@type':'Answer','text':a.textContent.trim()}});});if(faqs.length){var el=document.getElementById('schema-faq');if(el)el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':faqs});}})();
-(function(){var base='/papamoa-previews';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var 
+(function(){var base='/papamoa-previews';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var href=a.getAttribute('href');if(!href)return;if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){e.preventDefault();window.location.href=base+href;}});})();
+</script>
+</body>
+</html>
