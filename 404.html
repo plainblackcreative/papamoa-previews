@@ -37,7 +37,6 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* NOISE OVERLAY */
 body::before {
   content: '';
   position: fixed;
@@ -47,7 +46,6 @@ body::before {
   z-index: 0;
 }
 
-/* NAV */
 .site-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -78,7 +76,6 @@ body::before {
 }
 .nav-home:hover { color: var(--white); }
 
-/* MAIN LAYOUT */
 .page {
   min-height: 100vh;
   display: flex;
@@ -90,7 +87,6 @@ body::before {
   z-index: 1;
 }
 
-/* STARS BACKGROUND */
 .stars {
   position: fixed;
   inset: 0;
@@ -110,7 +106,6 @@ body::before {
   50% { opacity: 0.9; transform: scale(1.3); }
 }
 
-/* 404 HEADING */
 .error-code {
   font-family: var(--font-display);
   font-size: clamp(5rem, 18vw, 11rem);
@@ -168,7 +163,6 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* GAME ARENA */
 .game-wrapper {
   width: 100%;
   max-width: 480px;
@@ -184,7 +178,10 @@ body::before {
   letter-spacing: 0.1em;
   margin-bottom: 10px;
   text-align: center;
+  transition: color 0.3s;
 }
+.game-label.warning { color: rgba(255,160,0,0.8); }
+.game-label.danger  { color: rgba(255,80,80,0.8); }
 
 .arena {
   position: relative;
@@ -207,7 +204,7 @@ body::before {
   pointer-events: none;
 }
 
-/* GREMLIN */
+/* GREMLINS */
 .gremlin {
   position: absolute;
   width: 52px;
@@ -222,14 +219,26 @@ body::before {
 .gremlin:active { cursor: grabbing; }
 .gremlin.caught {
   animation: none;
-  transition: left 0.3s cubic-bezier(.2,1.4,.6,1), top 0.3s cubic-bezier(.2,1.4,.6,1);
   cursor: grabbing;
   filter: drop-shadow(0 0 12px rgba(76,175,80,0.8));
 }
 .gremlin.yeeted {
-  transition: left 0.5s cubic-bezier(.4,0,.2,1), top 0.5s cubic-bezier(.4,0,.2,1), opacity 0.5s ease, transform 0.5s ease;
+  animation: none;
   opacity: 0;
   transform: translate(-50%,-50%) scale(0.3) rotate(720deg);
+  transition: left 0.4s cubic-bezier(.4,0,.2,1), top 0.4s cubic-bezier(.4,0,.2,1), opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+.gremlin.hidden { display: none; }
+
+/* Dead gremlin roll animation */
+.gremlin.dead {
+  animation: rollout var(--roll-dur, 1.5s) ease-in both;
+  pointer-events: none;
+}
+@keyframes rollout {
+  0%   { opacity: 1; transform: translate(-50%,-50%) rotate(0deg) scale(1); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--roll-x, 120px)), calc(-50% + 200px)) rotate(1080deg) scale(0.4); }
 }
 
 @keyframes gremlinjiggle {
@@ -237,12 +246,11 @@ body::before {
   to   { transform: translate(-50%, -50%) rotate(4deg) scale(1.05); }
 }
 
-/* SVG Gremlin face */
-.gremlin-svg {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.5));
-}
+/* GREMLIN 2 slightly different tint */
+.gremlin-b .gremlin-body { fill: #E65100; }
+.gremlin-b .gremlin-head { fill: #FF7043; }
+.gremlin-b .gremlin-ear  { fill: #FF7043; }
+.gremlin-b .gremlin-limb { fill: #BF360C; }
 
 /* BIN */
 .bin {
@@ -253,27 +261,78 @@ body::before {
   height: 56px;
   cursor: default;
   z-index: 5;
+  transform-origin: bottom center;
   transition: transform 0.15s;
 }
 .bin.active {
   transform: scale(1.15);
   filter: drop-shadow(0 0 10px rgba(58,171,222,0.7));
 }
+.bin.shaking {
+  animation: binshake 0.12s ease-in-out infinite;
+}
+@keyframes binshake {
+  0%,100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-8deg) scale(1.05); }
+  75%      { transform: rotate(8deg)  scale(1.05); }
+}
+.bin.tipping {
+  animation: bintip 0.8s ease-in both;
+}
+@keyframes bintip {
+  0%   { transform: rotate(0deg) translateY(0); }
+  40%  { transform: rotate(-30deg) translateY(0); }
+  100% { transform: rotate(-100deg) translateY(60px); opacity: 0; }
+}
 .bin-svg { width: 100%; height: 100%; }
 
-/* SCORE */
-.score-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px 0;
-  font-size: 12px;
-  font-weight: 700;
-  color: rgba(255,255,255,0.4);
+/* PROGRESS BAR */
+.progress-bar-wrap {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 80px;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
 }
-.score-val { color: var(--accent); }
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease, background 0.3s ease;
+  width: 0%;
+}
+.progress-bar-fill.hot { background: #FF7043; }
 
-/* CAUGHT FLASH */
+/* Score */
+.score-display {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.3);
+}
+.score-display span { color: var(--accent); }
+
+/* Speed indicator */
+.speed-indicator {
+  position: absolute;
+  top: 24px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.speed-indicator.fast  { color: rgba(255,160,0,0.6); }
+.speed-indicator.turbo { color: rgba(255,80,80,0.7); }
+
+/* Caught flash */
 .caught-flash {
   position: absolute;
   inset: 0;
@@ -285,8 +344,8 @@ body::before {
 }
 .caught-flash.show { opacity: 1; }
 
-/* THANKS POPUP */
-.thanks-popup {
+/* POPUP SYSTEM */
+.popup {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -294,23 +353,96 @@ body::before {
   background: linear-gradient(135deg, #1B6B7D, #0D2B3E);
   border: 2px solid var(--accent);
   border-radius: 16px;
-  padding: 28px 32px;
+  padding: 20px 28px;
   text-align: center;
   z-index: 20;
   opacity: 0;
   pointer-events: none;
   transition: transform 0.3s cubic-bezier(.2,1.4,.6,1), opacity 0.3s ease;
-  min-width: 200px;
+  min-width: 180px;
 }
-.thanks-popup.show {
+.popup.show {
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
+  pointer-events: all;
 }
-.thanks-emoji { font-size: 2.5rem; margin-bottom: 8px; }
-.thanks-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
-.thanks-sub { font-size: 12px; color: rgba(255,255,255,0.5); }
+.popup.danger { border-color: #FF7043; background: linear-gradient(135deg, #3E1B0D, #0D2B3E); }
+.popup-emoji  { font-size: 2rem; margin-bottom: 6px; }
+.popup-title  { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 3px; }
+.popup-sub    { font-size: 11px; color: rgba(255,255,255,0.5); }
 
-/* CATCH HINT */
+/* WINNER OVERLAY */
+.winner-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13,43,62,0);
+  pointer-events: none;
+  transition: background 0.6s ease;
+}
+.winner-overlay.show {
+  background: rgba(13,43,62,0.97);
+  pointer-events: all;
+}
+.winner-content {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s 0.4s ease, transform 0.6s 0.4s ease;
+  padding: 40px 24px;
+}
+.winner-overlay.show .winner-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+.winner-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+.winner-title em { color: var(--accent); font-style: italic; }
+.winner-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 32px;
+}
+.winner-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--accent);
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+/* CONFETTI CANVAS */
+#confettiCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+#confettiCanvas.show { opacity: 1; }
+
+/* Hint */
 .hint-bubble {
   position: absolute;
   top: 12px;
@@ -326,8 +458,24 @@ body::before {
   pointer-events: none;
   white-space: nowrap;
   transition: opacity 0.5s;
+  z-index: 30;
 }
 .hint-bubble.hide { opacity: 0; }
+
+/* MULTIPLIER BADGE */
+.multiplier {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 10px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: color 0.3s;
+}
+.multiplier.hot   { color: rgba(255,160,0,0.8); }
+.multiplier.turbo { color: rgba(255,80,80,0.9); }
 
 /* NAV BUTTONS */
 .nav-buttons {
@@ -352,20 +500,14 @@ body::before {
 .btn-ghost { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.12); }
 .btn-ghost:hover { background: rgba(255,255,255,0.12); color: var(--white); }
 
-/* BROKEN LINK NOTICE */
 .broken-notice {
   margin-top: 28px;
   font-size: 12px;
   color: rgba(255,255,255,0.25);
   animation: fadeUp 0.6s 0.5s ease both;
 }
-.broken-notice a {
-  color: rgba(58,171,222,0.6);
-  text-decoration: none;
-}
+.broken-notice a { color: rgba(58,171,222,0.6); text-decoration: none; }
 .broken-notice a:hover { color: var(--accent); }
-
-/* REPORT SENT */
 .report-sent {
   display: inline-flex;
   align-items: center;
@@ -385,7 +527,16 @@ body::before {
 </head>
 <body>
 
-<!-- Stars bg -->
+<canvas id="confettiCanvas"></canvas>
+<div class="winner-overlay" id="winnerOverlay">
+  <div class="winner-content">
+    <div style="font-size:3.5rem;margin-bottom:16px;">&#127881;</div>
+    <h2 class="winner-title">You <em>got</em> them all.</h2>
+    <p class="winner-sub">Every last gremlin neutralised. Papamoa is safe.</p>
+    <button class="winner-btn" id="winnerBtn">&#127968; Back to safety</button>
+  </div>
+</div>
+
 <div class="stars" id="stars"></div>
 
 <nav class="site-nav">
@@ -402,84 +553,106 @@ body::before {
     <p class="subline">Some little menace has chewed through the link you followed. Catch the gremlin and chuck him in the bin &mdash; then head back somewhere useful.</p>
 
     <div class="game-wrapper">
-      <div class="game-label">&#127918; Grab the gremlin &mdash; drag to bin</div>
+      <div class="game-label" id="gameLabel">&#127918; Grab the gremlin &mdash; drag to bin</div>
       <div class="arena" id="arena">
         <div class="caught-flash" id="caughtFlash"></div>
         <div class="hint-bubble" id="hint">&#128070; Grab &amp; drag to bin</div>
 
-        <!-- GREMLIN -->
-        <div class="gremlin" id="gremlin" style="left:50%;top:50%">
+        <!-- Progress bar -->
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Speed / multiplier -->
+        <div class="speed-indicator" id="speedIndicator"></div>
+        <div class="multiplier" id="multiplierBadge"></div>
+
+        <!-- GREMLIN A (green) -->
+        <div class="gremlin" id="gremlinA" style="left:50%;top:50%">
           <svg class="gremlin-svg" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Body -->
-            <ellipse cx="26" cy="30" rx="13" ry="11" fill="#388E3C"/>
-            <!-- Head -->
-            <ellipse cx="26" cy="20" rx="11" ry="10" fill="#4CAF50"/>
-            <!-- Ears (pointy) -->
-            <polygon points="15,14 10,6 18,12" fill="#4CAF50"/>
-            <polygon points="37,14 42,6 34,12" fill="#4CAF50"/>
-            <!-- Eyes -->
+            <ellipse cx="26" cy="30" rx="13" ry="11" fill="#388E3C" class="gremlin-body"/>
+            <ellipse cx="26" cy="20" rx="11" ry="10" fill="#4CAF50" class="gremlin-head"/>
+            <polygon points="15,14 10,6 18,12" fill="#4CAF50" class="gremlin-ear"/>
+            <polygon points="37,14 42,6 34,12" fill="#4CAF50" class="gremlin-ear"/>
             <ellipse cx="22" cy="19" rx="3.5" ry="3.5" fill="#fff"/>
             <ellipse cx="30" cy="19" rx="3.5" ry="3.5" fill="#fff"/>
             <circle cx="23" cy="19.5" r="2" fill="#C62828"/>
             <circle cx="31" cy="19.5" r="2" fill="#C62828"/>
-            <!-- Pupils -->
             <circle cx="23.5" cy="19.5" r="1" fill="#1a1a1a"/>
             <circle cx="31.5" cy="19.5" r="1" fill="#1a1a1a"/>
-            <!-- Eye shine -->
             <circle cx="24.2" cy="18.5" r="0.5" fill="#fff"/>
             <circle cx="32.2" cy="18.5" r="0.5" fill="#fff"/>
-            <!-- Nose -->
             <ellipse cx="26" cy="23" rx="2" ry="1.5" fill="#2E7D32"/>
             <circle cx="25" cy="23" r="0.6" fill="#1B5E20"/>
             <circle cx="27" cy="23" r="0.6" fill="#1B5E20"/>
-            <!-- Mouth (grin) -->
             <path d="M20 26 Q26 31 32 26" stroke="#1B5E20" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <!-- Teeth -->
             <rect x="22.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/>
             <rect x="26.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/>
-            <!-- Arms -->
-            <ellipse cx="13" cy="29" rx="3.5" ry="2.5" fill="#388E3C" transform="rotate(-20 13 29)"/>
-            <ellipse cx="39" cy="29" rx="3.5" ry="2.5" fill="#388E3C" transform="rotate(20 39 29)"/>
-            <!-- Little fingers -->
+            <ellipse cx="13" cy="29" rx="3.5" ry="2.5" fill="#388E3C" transform="rotate(-20 13 29)" class="gremlin-limb"/>
+            <ellipse cx="39" cy="29" rx="3.5" ry="2.5" fill="#388E3C" transform="rotate(20 39 29)" class="gremlin-limb"/>
             <circle cx="10" cy="27" r="2" fill="#4CAF50"/>
             <circle cx="42" cy="27" r="2" fill="#4CAF50"/>
-            <!-- Feet -->
-            <ellipse cx="21" cy="40" rx="4" ry="2.5" fill="#2E7D32"/>
-            <ellipse cx="31" cy="40" rx="4" ry="2.5" fill="#2E7D32"/>
-            <!-- Tail -->
+            <ellipse cx="21" cy="40" rx="4" ry="2.5" fill="#2E7D32" class="gremlin-limb"/>
+            <ellipse cx="31" cy="40" rx="4" ry="2.5" fill="#2E7D32" class="gremlin-limb"/>
             <path d="M39 34 Q46 28 44 20 Q42 14 46 10" stroke="#388E3C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <!-- Horns -->
             <polygon points="21,11 19,4 23,10" fill="#2E7D32"/>
             <polygon points="31,11 33,4 29,10" fill="#2E7D32"/>
+          </svg>
+        </div>
+
+        <!-- GREMLIN B (orange, hidden initially) -->
+        <div class="gremlin gremlin-b hidden" id="gremlinB" style="left:30%;top:40%">
+          <svg class="gremlin-svg" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="26" cy="30" rx="13" ry="11" fill="#E65100" class="gremlin-body"/>
+            <ellipse cx="26" cy="20" rx="11" ry="10" fill="#FF7043" class="gremlin-head"/>
+            <polygon points="15,14 10,6 18,12" fill="#FF7043" class="gremlin-ear"/>
+            <polygon points="37,14 42,6 34,12" fill="#FF7043" class="gremlin-ear"/>
+            <ellipse cx="22" cy="19" rx="3.5" ry="3.5" fill="#fff"/>
+            <ellipse cx="30" cy="19" rx="3.5" ry="3.5" fill="#fff"/>
+            <circle cx="23" cy="19.5" r="2" fill="#1565C0"/>
+            <circle cx="31" cy="19.5" r="2" fill="#1565C0"/>
+            <circle cx="23.5" cy="19.5" r="1" fill="#1a1a1a"/>
+            <circle cx="31.5" cy="19.5" r="1" fill="#1a1a1a"/>
+            <circle cx="24.2" cy="18.5" r="0.5" fill="#fff"/>
+            <circle cx="32.2" cy="18.5" r="0.5" fill="#fff"/>
+            <ellipse cx="26" cy="23" rx="2" ry="1.5" fill="#BF360C"/>
+            <circle cx="25" cy="23" r="0.6" fill="#7F0000"/>
+            <circle cx="27" cy="23" r="0.6" fill="#7F0000"/>
+            <path d="M20 26 Q26 31 32 26" stroke="#BF360C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <rect x="22.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/>
+            <rect x="26.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/>
+            <ellipse cx="13" cy="29" rx="3.5" ry="2.5" fill="#E65100" transform="rotate(-20 13 29)"/>
+            <ellipse cx="39" cy="29" rx="3.5" ry="2.5" fill="#E65100" transform="rotate(20 39 29)"/>
+            <circle cx="10" cy="27" r="2" fill="#FF7043"/>
+            <circle cx="42" cy="27" r="2" fill="#FF7043"/>
+            <ellipse cx="21" cy="40" rx="4" ry="2.5" fill="#BF360C"/>
+            <ellipse cx="31" cy="40" rx="4" ry="2.5" fill="#BF360C"/>
+            <path d="M39 34 Q46 28 44 20 Q42 14 46 10" stroke="#E65100" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <polygon points="21,11 19,4 23,10" fill="#BF360C"/>
+            <polygon points="31,11 33,4 29,10" fill="#BF360C"/>
           </svg>
         </div>
 
         <!-- BIN -->
         <div class="bin" id="bin">
           <svg class="bin-svg" viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Lid -->
             <rect x="4" y="8" width="40" height="6" rx="3" fill="#5A6E78"/>
             <rect x="18" y="4" width="12" height="6" rx="2" fill="#5A6E78"/>
-            <!-- Body -->
             <path d="M8 14 L10 50 Q10 52 12 52 L36 52 Q38 52 38 50 L40 14 Z" fill="#455A64"/>
-            <!-- Stripes -->
             <line x1="20" y1="18" x2="19" y2="48" stroke="rgba(255,255,255,0.12)" stroke-width="3" stroke-linecap="round"/>
             <line x1="28" y1="18" x2="27" y2="48" stroke="rgba(255,255,255,0.12)" stroke-width="3" stroke-linecap="round"/>
-            <!-- Shine -->
             <rect x="8" y="14" width="40" height="3" fill="rgba(255,255,255,0.08)" rx="1"/>
           </svg>
         </div>
 
         <!-- Score -->
-        <div style="position:absolute;bottom:14px;left:16px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);">
-          Caught: <span id="score" style="color:var(--accent)">0</span>
-        </div>
+        <div class="score-display">Caught: <span id="score">0</span>/20</div>
 
-        <!-- Thanks popup -->
-        <div class="thanks-popup" id="thanksPopup">
-          <div class="thanks-emoji">&#127881;</div>
-          <div class="thanks-title">Got him!</div>
-          <div class="thanks-sub">Gremlin neutralised</div>
+        <!-- Popup -->
+        <div class="popup" id="popup">
+          <div class="popup-emoji" id="popupEmoji">&#127881;</div>
+          <div class="popup-title" id="popupTitle">Got him!</div>
+          <div class="popup-sub" id="popupSub">Gremlin neutralised</div>
         </div>
       </div>
     </div>
@@ -498,7 +671,7 @@ body::before {
 </div>
 
 <script>
-// ── STARS ──────────────────────────────────────────────────────────
+/* ── STARS ── */
 (function() {
   var container = document.getElementById('stars');
   for (var i = 0; i < 80; i++) {
@@ -517,12 +690,9 @@ body::before {
   }
 })();
 
-// ── WEB3FORMS NOTIFICATION ─────────────────────────────────────────
+/* ── WEB3FORMS ── */
 (function() {
-  var brokenUrl = window.location.href;
-  var referrer = document.referrer || 'Direct / unknown';
   var reportSent = document.getElementById('reportSent');
-
   fetch('https://api.web3forms.com/submit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -530,218 +700,395 @@ body::before {
       access_key: '37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78',
       subject: '404 Broken Link — Papamoa.info',
       from_name: 'Papamoa.info 404 Bot',
-      message: [
-        '404 error detected on Papamoa.info',
-        '',
-        'Broken URL: ' + brokenUrl,
-        'Referred from: ' + referrer,
-        'Time: ' + new Date().toLocaleString('en-NZ', { timeZone: 'Pacific/Auckland' }),
-        'User agent: ' + navigator.userAgent
-      ].join('\n'),
+      message: ['404 error on Papamoa.info','','Broken URL: ' + window.location.href,'Referred from: ' + (document.referrer || 'Direct'),'Time: ' + new Date().toLocaleString('en-NZ', {timeZone:'Pacific/Auckland'}),'UA: ' + navigator.userAgent].join('\n'),
       botcheck: ''
     })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    if (data.success) {
-      if (reportSent) reportSent.style.display = 'inline-flex';
-    }
-  })
-  .catch(function() {});
+  }).then(function(r){return r.json();}).then(function(d){if(d.success && reportSent) reportSent.style.display='inline-flex';}).catch(function(){});
 })();
 
-// ── GREMLIN GAME ───────────────────────────────────────────────────
+/* ── CONFETTI ── */
+function launchConfetti() {
+  var canvas = document.getElementById('confettiCanvas');
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.classList.add('show');
+  var ctx = canvas.getContext('2d');
+  var pieces = [];
+  var colors = ['#3AABDE','#C4985A','#4CAF50','#FF7043','#fff','#FFD600','#E040FB'];
+  for (var i = 0; i < 160; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: -10 - Math.random() * 200,
+      w: 6 + Math.random() * 8,
+      h: 10 + Math.random() * 6,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - 0.5) * 4,
+      vy: 2 + Math.random() * 4,
+      rot: Math.random() * 360,
+      rotv: (Math.random() - 0.5) * 8,
+      dead: false
+    });
+  }
+  var frame;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var alive = false;
+    pieces.forEach(function(p) {
+      if (p.dead) return;
+      p.x  += p.vx;
+      p.y  += p.vy;
+      p.vy += 0.07;
+      p.rot += p.rotv;
+      if (p.y > canvas.height + 20) { p.dead = true; return; }
+      alive = true;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI / 180);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = 0.9;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+    });
+    if (alive) { frame = requestAnimationFrame(draw); }
+    else { canvas.classList.remove('show'); }
+  }
+  draw();
+}
+
+/* ── GAME ENGINE ── */
 (function() {
-  var arena = document.getElementById('arena');
-  var gremlin = document.getElementById('gremlin');
-  var bin = document.getElementById('bin');
-  var hint = document.getElementById('hint');
+  var arena       = document.getElementById('arena');
+  var bin         = document.getElementById('bin');
+  var hint        = document.getElementById('hint');
   var caughtFlash = document.getElementById('caughtFlash');
-  var thanksPopup = document.getElementById('thanksPopup');
-  var scoreEl = document.getElementById('score');
+  var popup       = document.getElementById('popup');
+  var popupEmoji  = document.getElementById('popupEmoji');
+  var popupTitle  = document.getElementById('popupTitle');
+  var popupSub    = document.getElementById('popupSub');
+  var scoreEl     = document.getElementById('score');
+  var progressFill    = document.getElementById('progressFill');
+  var speedIndicator  = document.getElementById('speedIndicator');
+  var multiplierBadge = document.getElementById('multiplierBadge');
+  var gameLabel       = document.getElementById('gameLabel');
+  var winnerOverlay   = document.getElementById('winnerOverlay');
+  var winnerBtn       = document.getElementById('winnerBtn');
 
-  var score = 0;
-  var dragging = false;
-  var dragOffX = 0, dragOffY = 0;
-  var hintHidden = false;
-  var respawnTimer = null;
+  var TOTAL_CATCHES = 20;
+  var PHASE_TWO_AT  = 10;
+  var BASE_SPEED    = 0.35;
+  var MAX_SPEED     = 1.8;
 
-  // Gremlin wanders freely when not dragged
-  var wanderX = 50, wanderY = 50;
-  var velX = (Math.random() - 0.5) * 0.4;
-  var velY = (Math.random() - 0.5) * 0.4;
-  var wanderActive = true;
+  var totalCaught = 0;
+  var phaseTwo    = false;
+  var gameOver    = false;
 
-  function getArenaRect() {
-    return arena.getBoundingClientRect();
-  }
-
-  function getBinRect() {
-    return bin.getBoundingClientRect();
-  }
-
-  function setGremlinPos(x, y) {
-    // x, y as % of arena
-    gremlin.style.left = x + '%';
-    gremlin.style.top  = y + '%';
-  }
-
-  function wander() {
-    if (!wanderActive || dragging) return;
-    var ar = getArenaRect();
-    var margin = 8;
-    wanderX += velX;
-    wanderY += velY;
-    // Bounce off walls (in % terms)
-    var xPct = (margin / ar.width * 100);
-    var yPct = (margin / ar.height * 100);
-    if (wanderX < xPct || wanderX > 100 - xPct) velX *= -1;
-    if (wanderY < yPct || wanderY > 100 - yPct) velY *= -1;
-    wanderX = Math.max(xPct, Math.min(100 - xPct, wanderX));
-    wanderY = Math.max(yPct, Math.min(100 - yPct, wanderY));
-    setGremlinPos(wanderX, wanderY);
-    // Occasionally change direction
-    if (Math.random() < 0.01) {
-      velX = (Math.random() - 0.5) * 0.5;
-      velY = (Math.random() - 0.5) * 0.5;
-    }
-    requestAnimationFrame(wander);
-  }
-
-  function startWander() {
-    wanderActive = true;
-    velX = (Math.random() - 0.5) * 0.6;
-    velY = (Math.random() - 0.5) * 0.6;
-    wander();
-  }
-
-  function getPosFromEvent(e) {
-    var r = getArenaRect();
-    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  /* ── GREMLIN STATE ── */
+  function makeGremlinState(el, startX, startY) {
     return {
-      x: clientX - r.left,
-      y: clientY - r.top
+      el: el,
+      x: startX, y: startY,
+      vx: (Math.random() - 0.5) * BASE_SPEED * 2,
+      vy: (Math.random() - 0.5) * BASE_SPEED * 2,
+      active: false,
+      dragging: false,
+      dragOffX: 0, dragOffY: 0,
+      wandering: false,
+      catchCount: 0
     };
   }
 
-  function onGrabStart(e) {
-    e.preventDefault();
-    dragging = true;
-    wanderActive = false;
-    gremlin.classList.add('caught');
-    gremlin.classList.remove('yeeted');
+  var gA = makeGremlinState(document.getElementById('gremlinA'), 50, 50);
+  var gB = makeGremlinState(document.getElementById('gremlinB'), 30, 40);
+  gA.active = true;
+  gA.wandering = true;
 
-    if (!hintHidden) {
-      hint.classList.add('hide');
-      hintHidden = true;
+  var hintHidden  = false;
+  var respawnTimer = null;
+  var shakeTimer   = null;
+
+  /* ── HELPERS ── */
+  function arenaRect() { return arena.getBoundingClientRect(); }
+  function binRect()   { return bin.getBoundingClientRect(); }
+
+  function setPos(g, x, y) {
+    g.x = x; g.y = y;
+    g.el.style.left = x + '%';
+    g.el.style.top  = y + '%';
+  }
+
+  function getSpeed() {
+    var t = Math.min(totalCaught, TOTAL_CATCHES);
+    var frac = t / TOTAL_CATCHES;
+    return BASE_SPEED + (MAX_SPEED - BASE_SPEED) * frac;
+  }
+
+  function updateSpeedUI() {
+    var spd = getSpeed();
+    var label = '';
+    var cls   = '';
+    if (spd > 1.2)      { label = 'TURBO'; cls = 'turbo'; }
+    else if (spd > 0.7) { label = 'FAST';  cls = 'fast'; }
+    speedIndicator.textContent = label;
+    speedIndicator.className = 'speed-indicator' + (cls ? ' ' + cls : '');
+    var pct = Math.round((totalCaught / TOTAL_CATCHES) * 100);
+    progressFill.style.width = pct + '%';
+    progressFill.className = 'progress-bar-fill' + (spd > 0.9 ? ' hot' : '');
+    multiplierBadge.textContent = phaseTwo ? '2x GREMLINS' : (totalCaught >= 7 ? 'SPEEDING UP' : '');
+    multiplierBadge.className = 'multiplier' + (phaseTwo ? ' turbo' : totalCaught >= 7 ? ' hot' : '');
+    scoreEl.textContent = totalCaught;
+    gameLabel.textContent = phaseTwo
+      ? '\uD83D\uDCA5 Two gremlins! Catch both!'
+      : '\uD83C\uDFAE Grab the gremlin \u2014 drag to bin';
+    gameLabel.className = 'game-label' + (phaseTwo ? ' danger' : totalCaught >= 7 ? ' warning' : '');
+  }
+
+  /* ── WANDER LOOP ── */
+  function wander(g) {
+    if (!g.wandering || !g.active || g.dragging || gameOver) return;
+    var ar = arenaRect();
+    var speed = getSpeed();
+    var norm = Math.sqrt(g.vx*g.vx + g.vy*g.vy);
+    if (norm > 0) { g.vx = (g.vx/norm)*speed; g.vy = (g.vy/norm)*speed; }
+    g.x += g.vx;
+    g.y += g.vy;
+    var marginX = (10 / ar.width)  * 100;
+    var marginY = (10 / ar.height) * 100;
+    if (g.x < marginX || g.x > 100 - marginX) g.vx *= -1;
+    if (g.y < marginY || g.y > 100 - marginY) g.vy *= -1;
+    g.x = Math.max(marginX, Math.min(100-marginX, g.x));
+    g.y = Math.max(marginY, Math.min(100-marginY, g.y));
+    g.el.style.left = g.x + '%';
+    g.el.style.top  = g.y + '%';
+    if (Math.random() < 0.008) {
+      var ang = Math.random() * Math.PI * 2;
+      g.vx = Math.cos(ang) * speed;
+      g.vy = Math.sin(ang) * speed;
     }
-
-    var pos = getPosFromEvent(e);
-    var ar = getArenaRect();
-    var gx = parseFloat(gremlin.style.left) / 100 * ar.width;
-    var gy = parseFloat(gremlin.style.top) / 100 * ar.height;
-    dragOffX = pos.x - gx;
-    dragOffY = pos.y - gy;
+    requestAnimationFrame(function() { wander(g); });
   }
 
-  function onDragMove(e) {
-    if (!dragging) return;
+  function startWander(g, startX, startY) {
+    if (startX !== undefined) { g.x = startX; g.y = startY; }
+    g.el.style.transition = 'none';
+    g.el.style.left = g.x + '%';
+    g.el.style.top  = g.y + '%';
+    var ang = Math.random() * Math.PI * 2;
+    var spd = getSpeed();
+    g.vx = Math.cos(ang) * spd;
+    g.vy = Math.sin(ang) * spd;
+    g.wandering = true;
+    wander(g);
+  }
+
+  /* ── DRAG ── */
+  function eventPos(e) {
+    var ar = arenaRect();
+    var cx = e.touches ? e.touches[0].clientX : e.clientX;
+    var cy = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: cx - ar.left, y: cy - ar.top, cx: cx, cy: cy };
+  }
+
+  function grabStart(g, e) {
+    if (!g.active || gameOver) return;
     e.preventDefault();
-    var pos = getPosFromEvent(e);
-    var ar = getArenaRect();
-    var x = pos.x - dragOffX;
-    var y = pos.y - dragOffY;
-    var pctX = (x / ar.width) * 100;
-    var pctY = (y / ar.height) * 100;
-    pctX = Math.max(3, Math.min(97, pctX));
-    pctY = Math.max(3, Math.min(97, pctY));
-    gremlin.style.transition = 'none';
-    setGremlinPos(pctX, pctY);
-
-    // Check if hovering over bin
-    var binRect = getBinRect();
-    var arRect = getArenaRect();
-    var absX = arRect.left + x;
-    var absY = arRect.top + y;
-    var overBin = absX >= binRect.left && absX <= binRect.right && absY >= binRect.top && absY <= binRect.bottom;
-    bin.classList.toggle('active', overBin);
+    e.stopPropagation();
+    g.dragging  = true;
+    g.wandering = false;
+    g.el.classList.add('caught');
+    g.el.classList.remove('yeeted');
+    if (!hintHidden) { hint.classList.add('hide'); hintHidden = true; }
+    var pos = eventPos(e);
+    var ar  = arenaRect();
+    var gx  = g.x / 100 * ar.width;
+    var gy  = g.y / 100 * ar.height;
+    g.dragOffX = pos.x - gx;
+    g.dragOffY = pos.y - gy;
   }
 
-  function onDragEnd(e) {
-    if (!dragging) return;
-    dragging = false;
-    gremlin.classList.remove('caught');
-
-    var pos = e.changedTouches
-      ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY }
-      : { x: e.clientX, y: e.clientY };
-
-    var binRect = getBinRect();
-    var overBin = pos.x >= binRect.left && pos.x <= binRect.right &&
-                  pos.y >= binRect.top  && pos.y <= binRect.bottom;
-
-    if (overBin) {
-      yeetGremlin();
-    } else {
-      bin.classList.remove('active');
-      gremlin.style.transition = '';
-      startWander();
-    }
+  function dragMove(e) {
+    [gA, gB].forEach(function(g) {
+      if (!g.dragging) return;
+      e.preventDefault();
+      var pos = eventPos(e);
+      var ar  = arenaRect();
+      var x   = pos.x - g.dragOffX;
+      var y   = pos.y - g.dragOffY;
+      var px  = Math.max(3, Math.min(97, (x / ar.width)  * 100));
+      var py  = Math.max(3, Math.min(97, (y / ar.height) * 100));
+      g.el.style.transition = 'none';
+      setPos(g, px, py);
+      var br = binRect();
+      var ax = ar.left + x;
+      var ay = ar.top  + y;
+      var over = ax >= br.left && ax <= br.right && ay >= br.top && ay <= br.bottom;
+      bin.classList.toggle('active', over);
+    });
   }
 
-  function yeetGremlin() {
+  function dragEnd(e) {
+    [gA, gB].forEach(function(g) {
+      if (!g.dragging) return;
+      g.dragging = false;
+      g.el.classList.remove('caught');
+      var cx = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+      var cy = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+      var br = binRect();
+      var over = cx >= br.left && cx <= br.right && cy >= br.top && cy <= br.bottom;
+      if (over) { yeetGremlin(g); }
+      else { bin.classList.remove('active'); g.el.style.transition = ''; startWander(g); }
+    });
+  }
+
+  /* ── YEET ── */
+  function yeetGremlin(g) {
     bin.classList.remove('active');
-    score++;
-    scoreEl.textContent = score;
+    totalCaught++;
+    g.catchCount++;
+    g.active   = false;
+    g.wandering = false;
+    updateSpeedUI();
 
-    // Fly gremlin into bin
-    var binRect = getBinRect();
-    var arRect = getArenaRect();
-    var targetX = (binRect.left + binRect.width/2 - arRect.left) / arRect.width * 100;
-    var targetY = (binRect.top + binRect.height/2 - arRect.top) / arRect.height * 100;
+    var br  = binRect();
+    var ar  = arenaRect();
+    var tx  = (br.left + br.width/2  - ar.left) / ar.width  * 100;
+    var ty  = (br.top  + br.height/2 - ar.top)  / ar.height * 100;
+    g.el.style.transition = 'left 0.35s cubic-bezier(.4,0,.2,1), top 0.35s cubic-bezier(.4,0,.2,1), opacity 0.35s ease, transform 0.35s ease';
+    g.el.classList.add('yeeted');
+    setPos(g, tx, ty);
 
-    gremlin.style.transition = '';
-    gremlin.classList.add('yeeted');
-    setGremlinPos(targetX, targetY);
-
-    // Flash
     caughtFlash.classList.add('show');
     setTimeout(function() { caughtFlash.classList.remove('show'); }, 300);
 
-    // Popup
-    thanksPopup.classList.add('show');
+    if (totalCaught >= TOTAL_CATCHES) {
+      setTimeout(triggerEndGame, 500);
+      return;
+    }
 
-    // Respawn after delay
-    clearTimeout(respawnTimer);
-    respawnTimer = setTimeout(function() {
-      thanksPopup.classList.remove('show');
-      gremlin.classList.remove('yeeted');
-      gremlin.style.transition = 'none';
-      wanderX = 20 + Math.random() * 60;
-      wanderY = 20 + Math.random() * 60;
-      setGremlinPos(wanderX, wanderY);
-      setTimeout(startWander, 100);
-    }, 1800);
+    if (!phaseTwo && totalCaught >= PHASE_TWO_AT) {
+      setTimeout(triggerPhaseTwo, 500);
+      return;
+    }
+
+    if (phaseTwo) {
+      showPopup('&#128293;', 'One down!', 'Still one more out there...', false);
+      setTimeout(function() {
+        hidePopup();
+        g.el.classList.remove('yeeted', 'hidden');
+        g.active = true;
+        startWander(g, 20 + Math.random() * 60, 20 + Math.random() * 60);
+      }, 1200);
+    } else {
+      showPopup('&#127881;', 'Got him!', 'Gremlin neutralised', false);
+      setTimeout(function() {
+        hidePopup();
+        g.el.classList.remove('yeeted');
+        g.active = true;
+        startWander(g, 20 + Math.random() * 60, 20 + Math.random() * 60);
+      }, 1400);
+    }
   }
 
-  // Mouse events
-  gremlin.addEventListener('mousedown', onGrabStart);
-  document.addEventListener('mousemove', onDragMove);
-  document.addEventListener('mouseup', onDragEnd);
+  /* ── PHASE TWO: bin shakes, two gremlins burst out ── */
+  function triggerPhaseTwo() {
+    phaseTwo = true;
+    bin.classList.remove('active');
+    bin.classList.add('shaking');
+    gA.active   = false;
+    gA.wandering = false;
+    gA.el.classList.remove('yeeted');
+    gA.el.style.opacity = '0';
 
-  // Touch events
-  gremlin.addEventListener('touchstart', onGrabStart, { passive: false });
-  document.addEventListener('touchmove', onDragMove, { passive: false });
-  document.addEventListener('touchend', onDragEnd);
+    showPopup('&#128165;', 'He escaped!', 'And brought a friend...', true);
 
-  // Start wandering
-  startWander();
+    clearTimeout(shakeTimer);
+    shakeTimer = setTimeout(function() {
+      bin.classList.remove('shaking');
+      hidePopup();
 
-})();
+      var ar = arenaRect();
+      var bx = (binRect().left + binRect().width/2  - ar.left) / ar.width  * 100;
+      var by = (binRect().top  + binRect().height/2 - ar.top)  / ar.height * 100;
 
-// GitHub Pages URL prefix fix
-(function() {
+      gA.el.style.transition = 'none';
+      gA.el.style.opacity = '1';
+      gA.el.classList.remove('yeeted','hidden');
+      gA.active = true;
+      startWander(gA, bx, by);
+
+      gB.el.classList.remove('hidden');
+      gB.active = true;
+      startWander(gB, bx + 5, by - 5);
+
+      updateSpeedUI();
+    }, 3000);
+  }
+
+  /* ── END GAME ── */
+  function triggerEndGame() {
+    gameOver = true;
+    gA.active   = false;
+    gA.wandering = false;
+    gB.active   = false;
+    gB.wandering = false;
+
+    bin.classList.remove('shaking','active');
+    bin.classList.add('tipping');
+
+    var ar = arenaRect();
+    var binCenter = binRect();
+    var bx = (binCenter.left + binCenter.width/2 - ar.left) / ar.width * 100;
+    var by = (binCenter.top  + binCenter.height/2 - ar.top) / ar.height * 100;
+
+    function rollOutGremlin(g, offsetX) {
+      g.el.classList.remove('yeeted','hidden');
+      g.el.style.transition = 'none';
+      g.el.style.opacity    = '1';
+      g.el.style.transform  = 'translate(-50%,-50%)';
+      setPos(g, bx + offsetX, by);
+      g.el.style.setProperty('--roll-x', (offsetX > 0 ? 140 : -140) + 'px');
+      g.el.style.setProperty('--roll-dur', '1.6s');
+      setTimeout(function() { g.el.classList.add('dead'); }, 100);
+    }
+
+    setTimeout(function() {
+      rollOutGremlin(gA, -8);
+      rollOutGremlin(gB,  8);
+    }, 400);
+
+    setTimeout(function() {
+      launchConfetti();
+      winnerOverlay.classList.add('show');
+    }, 1600);
+  }
+
+  /* ── POPUP ── */
+  function showPopup(emoji, title, sub, isDanger) {
+    popupEmoji.innerHTML = emoji;
+    popupTitle.textContent = title;
+    popupSub.textContent   = sub;
+    popup.className = 'popup' + (isDanger ? ' danger' : '') + ' show';
+  }
+  function hidePopup() { popup.classList.remove('show'); }
+
+  /* ── EVENT LISTENERS ── */
+  gA.el.addEventListener('mousedown',  function(e){ grabStart(gA,e); });
+  gB.el.addEventListener('mousedown',  function(e){ grabStart(gB,e); });
+  gA.el.addEventListener('touchstart', function(e){ grabStart(gA,e); }, { passive:false });
+  gB.el.addEventListener('touchstart', function(e){ grabStart(gB,e); }, { passive:false });
+  document.addEventListener('mousemove',  dragMove);
+  document.addEventListener('touchmove',  dragMove, { passive:false });
+  document.addEventListener('mouseup',    dragEnd);
+  document.addEventListener('touchend',   dragEnd);
+
+  winnerBtn.addEventListener('click', function() {
+    window.location.href = '/papamoa-previews/homepage.html';
+  });
+
+  /* ── KICK OFF ── */
+  updateSpeedUI();
+  startWander(gA, 50, 50);
+
+  /* ── GITHUB PAGES PREFIX FIX ── */
   var base = '/papamoa-previews';
   document.addEventListener('click', function(e) {
     var a = e.target.closest('a');
@@ -753,6 +1100,7 @@ body::before {
       window.location.href = base + href;
     }
   });
+
 })();
 </script>
 </body>
