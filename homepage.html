@@ -1599,6 +1599,84 @@ async function loadHeroWeather() {
 }
 loadHeroWeather();
 </script>
+<script>
+// ── MOUSE DRAG SCROLLING ──
+// Applies click-and-drag to all horizontal scroll containers
+(function () {
+  var SELECTORS = [
+    '.cat-row',
+    '.subcat-bar',
+    '.info-scroll-row',
+    '.search-suggestions',
+    '.subcat-chips'
+  ];
 
+  function enableDrag(el) {
+    var isDown = false;
+    var startX = 0;
+    var scrollLeft = 0;
+    var moved = false;
+
+    el.addEventListener('mousedown', function (e) {
+      // Ignore right-clicks and clicks on links/buttons
+      if (e.button !== 0) return;
+      isDown = true;
+      moved = false;
+      startX = e.pageX - el.offsetLeft;
+      scrollLeft = el.scrollLeft;
+      el.style.cursor = 'grabbing';
+      el.style.userSelect = 'none';
+      e.preventDefault();
+    });
+
+    el.addEventListener('mouseleave', function () {
+      if (!isDown) return;
+      isDown = false;
+      el.style.cursor = '';
+      el.style.userSelect = '';
+    });
+
+    el.addEventListener('mouseup', function () {
+      if (!isDown) return;
+      isDown = false;
+      el.style.cursor = '';
+      el.style.userSelect = '';
+      // If we actually dragged, suppress the next click so links don't fire
+      if (moved) {
+        el.dataset.dragged = '1';
+        setTimeout(function () { delete el.dataset.dragged; }, 0);
+      }
+    });
+
+    el.addEventListener('mousemove', function (e) {
+      if (!isDown) return;
+      var x = e.pageX - el.offsetLeft;
+      var walk = (x - startX) * 1.2; // 1.2× multiplier for feel
+      if (Math.abs(walk) > 3) moved = true;
+      el.scrollLeft = scrollLeft - walk;
+    });
+
+    // Suppress click on child links if we dragged
+    el.addEventListener('click', function (e) {
+      if (el.dataset.dragged) e.preventDefault();
+    }, true);
+
+    // Visual hint: show grab cursor on hover
+    el.style.cursor = 'grab';
+  }
+
+  function init() {
+    SELECTORS.forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(enableDrag);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 </body>
 </html>
