@@ -264,6 +264,216 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const W = 900, H = 500;
 
+// ─── SOUND ENGINE (Web Audio API — no files needed) ───────────────────────────
+var AC = null;
+function getAC() {
+  if (!AC) {
+    try {
+      AC = new (window.AudioContext || window.webkitAudioContext)();
+    } catch(e) {}
+  }
+  return AC;
+}
+
+// Resume context on first user interaction (browser autoplay policy)
+function resumeAC() {
+  var ac = getAC();
+  if (ac && ac.state === 'suspended') ac.resume();
+}
+document.addEventListener('keydown', resumeAC, {once:false});
+canvas.addEventListener('mousedown', resumeAC, {once:false});
+canvas.addEventListener('touchstart', resumeAC, {once:false});
+
+// Generic tone player
+// type: 'sine'|'square'|'sawtooth'|'triangle'
+// freq: Hz or array of [Hz, durationSec] for sequence
+// dur: seconds, vol: 0-1, slide: optional end freq
+function playTone(freq, dur, vol, type, slide, delay) {
+  var ac = getAC(); if (!ac) return;
+  vol = vol||0.18; type = type||'square'; delay = delay||0;
+  var osc = ac.createOscillator();
+  var gain = ac.createGain();
+  osc.connect(gain); gain.connect(ac.destination);
+  osc.type = type;
+  var t = ac.currentTime + delay;
+  osc.frequency.setValueAtTime(freq, t);
+  if (slide) osc.frequency.linearRampToValueAtTime(slide, t + dur);
+  gain.gain.setValueAtTime(0, t);
+  gain.gain.linearRampToValueAtTime(vol, t + 0.01);
+  gain.gain.setValueAtTime(vol, t + dur - 0.04);
+  gain.gain.linearRampToValueAtTime(0, t + dur);
+  osc.start(t);
+  osc.stop(t + dur + 0.01);
+}
+
+// Noise burst (for fart/splat sounds)
+function playNoise(dur, vol, freq, type) {
+  var ac = getAC(); if (!ac) return;
+  var buf = ac.createBuffer(1, ac.sampleRate * dur, ac.sampleRate);
+  var data = buf.getChannelData(0);
+  for (var i=0; i<data.length; i++) data[i] = (Math.random()*2-1);
+  var src2 = ac.createBufferSource();
+  src2.buffer = buf;
+  var filt = ac.createBiquadFilter();
+  filt.type = type||'bandpass';
+  filt.frequency.value = freq||400;
+  filt.Q.value = 0.8;
+  var gain = ac.createGain();
+  gain.gain.setValueAtTime(vol||0.12, ac.currentTime);
+  gain.gain.linearRampToValueAtTime(0, ac.currentTime+dur);
+  src2.connect(filt); filt.connect(gain); gain.connect(ac.destination);
+  src2.start();
+}
+
+// ── INDIVIDUAL SOUND EFFECTS ──────────────────────────────────────────────────
+
+function sndJump() {
+  // Quick upward pitch sweep
+  playTone(180, 0.12, 0.15, 'square', 420);
+  playTone(280, 0.08, 0.08, 'sine',   520, 0.04);
+}
+
+function sndLand() {
+  playTone(80, 0.06, 0.12, 'triangle', 50);
+}
+
+function sndShootBogey() {
+  // Wet snotty splat launch
+  playTone(320, 0.04, 0.12, 'sawtooth', 180);
+  playNoise(0.06, 0.08, 600, 'bandpass');
+}
+
+function sndShootSteamer() {
+  // Low heavy plop
+  playTone(90, 0.12, 0.18, 'sawtooth', 60);
+  playNoise(0.1, 0.1, 200, 'lowpass');
+}
+
+function sndShootFart() {
+  // Classic raspberry
+  playNoise(0.22, 0.18, 180, 'bandpass');
+  playTone(120, 0.18, 0.1, 'sawtooth', 80);
+}
+
+function sndShootSpitball() {
+  // High whistle
+  playTone(900, 0.08, 0.1, 'sine', 600);
+}
+
+function sndMelee() {
+  // Thwack
+  playTone(150, 0.04, 0.2, 'square', 60);
+  playNoise(0.06, 0.15, 800, 'highpass');
+}
+
+function sndEnemyHit() {
+  // Descending squeal
+  playTone(440, 0.08, 0.12, 'square', 200);
+}
+
+function sndEnemyDie() {
+  // Funny deflate
+  playTone(380, 0.18, 0.15, 'sawtooth', 80);
+  playTone(200, 0.1,  0.08, 'square',   60, 0.1);
+}
+
+function sndBossDie() {
+  // Big dramatic descend
+  playTone(500, 0.08, 0.2, 'sawtooth', 400);
+  playTone(400, 0.1,  0.18,'sawtooth', 200, 0.08);
+  playTone(200, 0.2,  0.15,'square',   60,  0.18);
+  playNoise(0.3, 0.12, 300, 'bandpass');
+}
+
+function sndCoin() {
+  // Classic coin ding
+  playTone(880, 0.06, 0.12, 'sine');
+  playTone(1320,0.08, 0.1,  'sine', 1760, 0.01);
+}
+
+function sndSnot() {
+  // Wet squelch
+  playNoise(0.06, 0.1, 500, 'bandpass');
+  playTone(200, 0.05, 0.08, 'sawtooth', 280);
+}
+
+function sndToy() {
+  // Triumphant little fanfare
+  var notes = [523, 659, 784, 1047];
+  notes.forEach(function(n, i) { playTone(n, 0.1, 0.15, 'square', n*1.02, i*0.08); });
+}
+
+function sndAllyRescue() {
+  // Happy ascending arpeggio
+  var notes = [392, 494, 587, 784, 988];
+  notes.forEach(function(n, i) { playTone(n, 0.12, 0.13, 'sine', n, i*0.07); });
+}
+
+function sndHurt() {
+  // Ow! descending noise
+  playTone(600, 0.06, 0.18, 'square', 200);
+  playNoise(0.08, 0.1, 400, 'bandpass');
+}
+
+function sndDie() {
+  // Sad wah-wah
+  playTone(440, 0.15, 0.15, 'sawtooth', 220);
+  playTone(330, 0.2,  0.12, 'sawtooth', 165, 0.12);
+  playTone(220, 0.25, 0.1,  'sawtooth', 110, 0.28);
+}
+
+function sndLevelUp() {
+  // Ascending fanfare
+  var notes = [262, 330, 392, 523, 659, 784];
+  notes.forEach(function(n,i) { playTone(n, 0.1, 0.14, 'square', n, i*0.06); });
+}
+
+function sndWin() {
+  // Victory tune - Hulk Hogan energy
+  var melody = [
+    [523,0.12],[523,0.12],[523,0.12],[415,0.09],[523,0.18],
+    [659,0.18],[523,0.18],[659,0.22],[784,0.35]
+  ];
+  var t = 0;
+  melody.forEach(function(m) {
+    playTone(m[0], m[1]+0.02, 0.16, 'square', m[0], t);
+    t += m[1];
+  });
+}
+
+function sndPortal() {
+  // Shimmer whoosh
+  playTone(440, 0.4, 0.12, 'sine', 880);
+  playTone(660, 0.4, 0.08, 'sine', 1320, 0.05);
+  playNoise(0.15, 0.06, 2000, 'highpass');
+}
+
+function sndIntroChime() {
+  // Soft cinematic chime between intro scenes
+  playTone(523, 0.4, 0.08, 'sine');
+  playTone(659, 0.5, 0.06, 'sine', 659, 0.1);
+  playTone(784, 0.6, 0.05, 'sine', 784, 0.2);
+}
+
+// Current weapon -> shoot sound
+function sndShoot() {
+  if (GS.weaponIndex===0) sndShootBogey();
+  else if (GS.weaponIndex===1) sndShootSteamer();
+  else if (GS.weaponIndex===2) sndShootFart();
+  else sndShootSpitball();
+}
+
+// Footstep ticker
+var footTick = 0;
+function sndFootstep() {
+  footTick++;
+  if (footTick % 16 === 0) {
+    playTone(60 + Math.random()*20, 0.04, 0.06, 'triangle');
+  }
+}
+
+
+
 // ─── GAME STATE ───────────────────────────────────────────────────────────────
 const GS = {
   state: 'intro', // intro, title, playing, dead, win, levelTransition
@@ -562,6 +772,7 @@ const player = {
   stateTick: 0,
   invTick: 0,
   jumpPressed: false,
+  wasOnGround: false,
   animFrame: 0,
   animTick: 0,
   shootCooldown: 0,
@@ -766,6 +977,7 @@ function updatePlayer() {
     player.vy = JUMP_FORCE;
     player.jumpPressed = true;
     spawnParticle(player.x+player.w/2, player.y+player.h, '#ffffff', 4);
+    sndJump();
   }
   if (!jump) player.jumpPressed = false;
 
@@ -777,6 +989,7 @@ function updatePlayer() {
     player.state = 'shoot';
     player.stateTick = 12;
     spawnParticle(px, player.y+10, WEAPONS[GS.weaponIndex].color, 3);
+    sndShoot();
   }
   if (player.shootCooldown > 0) player.shootCooldown--;
 
@@ -785,6 +998,7 @@ function updatePlayer() {
     player.meleeCooldown = 28;
     player.state = 'melee';
     player.stateTick = 18;
+    sndMelee();
     // hitbox in front
     const mx = player.dir > 0 ? player.x + player.w : player.x - 36;
     for (const e of level.enemies) {
@@ -807,6 +1021,11 @@ function updatePlayer() {
   else if (Math.abs(player.vx) > 0.3) { player.state = 'walk'; }
   else { player.state = 'idle'; }
 
+  // land sound
+  if (player.onGround && !player.wasOnGround) sndLand();
+  player.wasOnGround = player.onGround;
+  // footsteps
+  if (player.onGround && Math.abs(player.vx) > 0.5) sndFootstep();
   // anim
   player.animTick++;
   if (player.animTick >= 8) { player.animTick = 0; player.animFrame = (player.animFrame+1)%4; }
@@ -898,10 +1117,12 @@ function hitEnemy(e, dmg) {
   e.stunTick = 20;
   spawnParticle(e.x+e.w/2, e.y+e.h/2, '#ff4444', 5);
   GS.score += 10;
+  sndEnemyHit();
   if (e.hp <= 0) {
     e.dead = true;
     GS.score += e.type==='monique'?500:e.type==='lars'?200:50;
     spawnParticle(e.x+e.w/2, e.y+e.h/2, '#ffff00', 12);
+    if (e.type==='monique'||e.type==='lars') sndBossDie(); else sndEnemyDie();
     if (e.type==='monique') {
       showMessage("MONIQUE RUNS HOME CRYING!\n'MUUUUUMMMMMeeee!'\nLars: 'Nice one, Ada...'", 220);
       setTimeout(() => triggerWin(), 3000);
@@ -923,9 +1144,11 @@ function hurtPlayer(dmg) { if(dmg===undefined)dmg=1;
   spawnParticle(player.x+player.w/2, player.y+player.h/2, '#ff0000', 8);
   updateHUD();
   if (GS.lives <= 0) {
+    sndDie();
     const msg = DEATH_MSGS[Math.floor(Math.random()*DEATH_MSGS.length)];
     killPlayer(msg);
   } else {
+    sndHurt();
     showMessage("OW! " + GS.lives + " lives left!", 80);
   }
 }
@@ -988,6 +1211,7 @@ function updateCollectibles() {
       c.collected = true;
       GS.score += c.type==='coin' ? 25 : 10;
       spawnParticle(c.x+c.w/2, c.y+c.h/2, c.type==='coin'?'#ffdd44':'#44ff44', 4);
+      if (c.type==='coin') sndCoin(); else sndSnot();
       updateHUD();
     }
   }
@@ -1002,6 +1226,7 @@ function updateCollectibles() {
     showMessage("🏆 GOT IT!\n" + toy.name + "!\n+" + 100 + " points!", 140);
     GS.score += 100;
     spawnParticle(t.x+t.w/2, t.y+t.h/2, '#ffdd44', 10);
+    sndToy();
     updateHUD();
   }
   // ally
@@ -1017,6 +1242,7 @@ function updateCollectibles() {
     showMessage("👦 " + ally.name + " RESCUED!\n'" + getAllyQuote(ally) + "'\nNEW WEAPON: " + wName, 180);
     GS.score += 200;
     spawnParticle(a.x+a.w/2, a.y+a.h/2, ally.color, 12);
+    sndAllyRescue();
     updateHUD();
   }
 }
@@ -1043,6 +1269,7 @@ function checkExit() {
     } else {
       GS.level++;
       GS.state = 'levelTransition';
+      sndLevelUp();
       const nextName = buildLevel(GS.level).name;
       const ov = document.getElementById('overlay');
       ov.style.display = 'flex';
@@ -1064,6 +1291,7 @@ function nextLevel() {
 
 function triggerWin() {
   GS.state = 'win';
+  sndWin();
   const ov = document.getElementById('overlay');
   ov.style.display = 'flex';
   ov.innerHTML = `
@@ -3010,9 +3238,18 @@ function loop() {
   try {
     GS.frame++;
     if (GS.state === 'intro') {
+      var prevTick = GS.introTick;
       GS.introTick++;
-      // Auto-advance: total intro ~12 seconds (720 frames at 60fps)
       if (GS.introTick > 1920) skipIntro();
+      // chime at each scene boundary
+      var prevScene = 0, curScene = 0;
+      for (var si=INTRO_SCENES.length-1; si>=0; si--) {
+        if (prevTick >= INTRO_SCENES[si].start) { prevScene=si; break; }
+      }
+      for (var si2=INTRO_SCENES.length-1; si2>=0; si2--) {
+        if (GS.introTick >= INTRO_SCENES[si2].start) { curScene=si2; break; }
+      }
+      if (curScene !== prevScene) sndIntroChime();
       updateParticles();
     } else if (GS.state === 'playing') {
       updatePlayer();
