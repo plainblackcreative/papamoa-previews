@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Ada's Adventure — The Island</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Press Start 2P', monospace;
+  overflow: hidden;
+  touch-action: none;
+}
+
+#gameContainer {
+  position: relative;
+  width: 100vw;
+  max-width: 900px;
+  background: #000;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  image-rendering: pixelated;
+}
+
+#ui {
+  position: absolute;
+  top: 8px; left: 8px; right: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#lives-score {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hud-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: #fff;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
+  line-height: 1.6;
+}
+
+#weapon-display {
+  text-align: right;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #ffe066;
+  text-shadow: 2px 2px 0 #000;
+}
+
+#allies-display {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #aaffaa;
+  text-shadow: 1px 1px 0 #000;
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Touch controls */
+#touchControls {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px 14px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.touch-btn {
+  pointer-events: all;
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 12px;
+  color: rgba(255,255,255,0.8);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px 0 #000;
+  transition: background 0.1s;
+}
+.touch-btn:active, .touch-btn.pressed {
+  background: rgba(255,255,255,0.3);
+  border-color: rgba(255,255,255,0.6);
+}
+
+#dpad {
+  display: grid;
+  grid-template-columns: 52px 52px 52px;
+  grid-template-rows: 52px 52px;
+  gap: 4px;
+}
+#btn-left  { grid-column: 1; grid-row: 2; border-radius: 10px; }
+#btn-right { grid-column: 3; grid-row: 2; border-radius: 10px; }
+#btn-down  { grid-column: 2; grid-row: 2; border-radius: 10px; }
+#btn-jump  { grid-column: 2; grid-row: 1; border-radius: 10px; font-size: 8px; }
+
+#action-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+#btn-shoot { width: 64px; height: 64px; background: rgba(200,80,80,0.25); border-color: rgba(200,80,80,0.5); }
+#btn-melee { width: 64px; height: 52px; background: rgba(80,180,80,0.25); border-color: rgba(80,180,80,0.5); font-size: 7px; }
+
+/* Overlays */
+#overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  background: rgba(0,0,0,0.82);
+  padding: 20px;
+}
+
+#overlay h1 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(14px, 3vw, 22px);
+  color: #ffe066;
+  text-shadow: 3px 3px 0 #b85c00, -1px -1px 0 #000;
+  text-align: center;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+#overlay .sub {
+  font-family: 'VT323', monospace;
+  font-size: clamp(16px, 3.5vw, 22px);
+  color: #cceeff;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  max-width: 500px;
+}
+#overlay .pressStart {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(8px, 2vw, 11px);
+  color: #fff;
+  animation: blink 1s infinite;
+  margin-top: 10px;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.start-btn {
+  margin-top: 16px;
+  padding: 12px 24px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  background: #ffe066;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  pointer-events: all;
+}
+.start-btn:active { transform: scale(0.96); }
+
+#message-box {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,20,0.92);
+  border: 2px solid #ffe066;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  color: #fff;
+  max-width: 80%;
+  text-align: center;
+  z-index: 30;
+  pointer-events: none;
+  display: none;
+  line-height: 1.4;
+}
+</style>
+</head>
+<body>
+
+<div id="gameContainer">
+  <canvas id="gameCanvas" width="900" height="500"></canvas>
+
+  <div id="ui">
+    <div id="lives-score">
+      <div class="hud-text" id="livesDisplay">❤️ x3</div>
+      <div class="hud-text" id="scoreDisplay">SCORE: 0</div>
+      <div class="hud-text" id="toyDisplay">TOYS: 0</div>
+    </div>
+    <div id="allies-display" id="alliesDisplay"></div>
+    <div id="weapon-display" id="weaponDisplay">💚 BOGEY BLAST</div>
+  </div>
+
+  <div id="message-box" id="messageBox"></div>
+
+  <div id="touchControls">
+    <div id="dpad">
+      <div class="touch-btn" id="btn-jump" data-action="jump">↑<br>JUMP</div>
+      <div class="touch-btn" id="btn-left" data-action="left">◀</div>
+      <div class="touch-btn" id="btn-down" data-action="down">▼</div>
+      <div class="touch-btn" id="btn-right" data-action="right">▶</div>
+    </div>
+    <div id="action-btns">
+      <div class="touch-btn" id="btn-shoot" data-action="shoot">🤧<br>SHOOT</div>
+      <div class="touch-btn" id="btn-melee" data-action="melee">👊<br>SMASH</div>
+    </div>
+  </div>
+
+  <div id="overlay">
+    <h1>ADA'S ADVENTURE</h1>
+    <div class="sub">
+      Adrian 'Ada' heads to THE ISLAND...<br>
+      Monique & Lars have captured his crew<br>
+      and nicked ALL his wrestling figures!<br><br>
+      🤢 Bogey-blast your way to victory! 🤢
+    </div>
+    <div class="sub" style="font-size:14px; color:#ffddaa;">
+      Rescue: Rory • Matthew • Dennis • Chris • Todd<br>
+      Recover: Hulk • Warrior • Jake the Snake • He-Man • Ewoks
+    </div>
+    <button class="start-btn" id="startBtn">▶ START ADVENTURE</button>
+    <div class="pressStart" style="margin-top:14px; font-size:8px; color:#aaa;">
+      Arrow keys / WASD + Z(shoot) X(melee) — or touch controls
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const W = 900, H = 500;
+
+// ─── GAME STATE ───────────────────────────────────────────────────────────────
+const GS = {
+  state: 'title', // title, playing, dead, win, levelTransition
+  level: 0,
+  score: 0,
+  lives: 3,
+  toys: 0,
+  alliesRescued: [],
+  weaponIndex: 0,
+  frame: 0,
+  camera: 0,
+  keys: {},
+  touch: {},
+  message: '',
+  messageTick: 0,
+  deathMsg: '',
+};
+
+const WEAPONS = [
+  { name: '💚 BOGEY BLAST', color: '#44ff44', emoji: '🤢', damage: 1 },
+  { name: '💩 STEAMER',     color: '#aa6600', emoji: '💩', damage: 2 },
+  { name: '💨 FART BOMB',   color: '#aaff00', emoji: '💨', damage: 1, aoe: true },
+  { name: '💦 SPITBALL',    color: '#66ccff', emoji: '💦', damage: 3 },
+];
+
+const ALLY_DATA = [
+  { name: 'RORY',    trait: 'GRUMPY',  color: '#ddaa44', hair: '#ddcc88' },
+  { name: 'MATTHEW', trait: 'SPEEDY',  color: '#44aadd', hair: '#eeddaa' },
+  { name: 'DENNIS',  trait: 'TRICKY',  color: '#aa44dd', hair: '#ddcc88' },
+  { name: 'CHRIS',   trait: 'GOOFY',   color: '#dd4444', hair: '#eeddaa' },
+  { name: 'TODD',    trait: 'STRONG',  color: '#44dd88', hair: '#885533' },
+];
+
+const TOY_DATA = [
+  { name: 'HULK HOGAN',       color: '#ffaa00', icon: 'H' },
+  { name: 'ULTIMATE WARRIOR', color: '#ff44ff', icon: 'W' },
+  { name: 'JAKE THE SNAKE',   color: '#44cc44', icon: 'S' },
+  { name: 'HE-MAN',          color: '#ffdd44', icon: 'M' },
+  { name: 'EWOK WICKET',     color: '#aa7733', icon: 'E' },
+];
+
+const DEATH_MSGS = [
+  "Ada tripped on a root.\nMonique cackled 'GOOOOOBER!'",
+  "A bogey backfired.\nAda's face is now green.",
+  "Ada slipped on dog poo.\nDennis would've dodged that.",
+  "Lars felt bad about it,\nbut Monique did not.",
+  "Ada sat on a fart cloud.\nGame over, mate.",
+];
+
+// ─── LEVEL DEFINITIONS ───────────────────────────────────────────────────────
+// Each level: platforms, enemies, collectibles, ally to rescue, toy to find
+function buildLevel(num) {
+  const levels = [buildLevel0, buildLevel1, buildLevel2, buildLevel3, buildLevel4];
+  return levels[Math.min(num, levels.length-1)]();
+}
+
+function makePlatform(x,y,w,type='ground') { return {x,y,w,h:16,type}; }
+function makeEnemy(x,y,type='goon',bossId=-1) {
+  return {x,y,w:32,h:40,type,bossId,vx:type==='lars'?0:-1,hp:type==='monique'?8:type==='lars'?4:2,
+    maxHp:type==='monique'?8:type==='lars'?4:2,dir:-1,state:'walk',stunTick:0,
+    alertTick:0,groundY:y};
+}
+function makeToy(x,y,idx) { return {x,y,w:24,h:24,toyIdx:idx,collected:false}; }
+function makeAlly(x,y,idx) { return {x,y,w:28,h:40,allyIdx:idx,freed:false,bounce:0}; }
+function makeCollectible(x,y,type='coin') { return {x,y,w:16,h:16,type,collected:false}; }
+
+// Level 0 — Helston Rd exterior, suburban, transition to island
+function buildLevel0() {
+  return {
+    name: "HELSTON RD",
+    width: 3200,
+    bgType: 'suburban',
+    platforms: [
+      // ground
+      makePlatform(0,460,3200),
+      // garage roof
+      makePlatform(60,320,120,'roof'),
+      // fence top
+      makePlatform(220,400,180,'fence'),
+      // retaining wall
+      makePlatform(550,420,120,'wall'),
+      // tree stumps
+      makePlatform(800,400,60,'stump'),
+      makePlatform(900,370,60,'stump'),
+      makePlatform(1050,340,80,'stump'),
+      // island entrance - ground rises
+      makePlatform(1200,440,200,'grass'),
+      makePlatform(1500,420,200,'grass'),
+      makePlatform(1800,400,300,'grass'),
+      makePlatform(2200,380,400,'grass'),
+      makePlatform(2700,360,500,'grass'),
+    ],
+    enemies: [
+      makeEnemy(700,428,'goon'),
+      makeEnemy(1100,460,'goon'),
+      makeEnemy(1600,388,'goon'),
+      makeEnemy(2000,368,'goon'),
+      makeEnemy(2500,326,'goon'),
+      makeEnemy(2900,328,'goon'),
+    ],
+    collectibles: [
+      makeCollectible(400,430,'snot'),
+      makeCollectible(650,430,'snot'),
+      makeCollectible(1300,408,'snot'),
+      makeCollectible(1700,388,'snot'),
+      makeCollectible(2100,348,'snot'),
+      makeCollectible(2600,328,'coin'),
+      makeCollectible(2700,328,'coin'),
+    ],
+    toy: makeToy(3000, 324, 0),
+    ally: makeAlly(3050, 298, 0),
+    exit: { x: 3150, y: 360, w: 40, h: 100 },
+    portalText: "INTO THE ISLAND ▶",
+  };
+}
+
+// Level 1 — The Island entrance, jungle starts
+function buildLevel1() {
+  return {
+    name: "THE ISLAND — DEEP IN",
+    width: 3400,
+    bgType: 'jungle',
+    platforms: [
+      makePlatform(0,460,3400),
+      makePlatform(100,380,120,'branch'),
+      makePlatform(300,340,100,'branch'),
+      makePlatform(500,300,140,'branch'),
+      makePlatform(700,360,100,'branch'),
+      makePlatform(900,320,120,'branch'),
+      makePlatform(1100,280,160,'branch'),
+      makePlatform(1300,350,120,'branch'),
+      makePlatform(1500,300,200,'branch'),
+      makePlatform(1750,340,160,'branch'),
+      makePlatform(2000,260,180,'branch'),
+      makePlatform(2200,320,140,'branch'),
+      makePlatform(2400,280,200,'branch'),
+      makePlatform(2650,240,180,'branch'),
+      makePlatform(2900,300,200,'branch'),
+      makePlatform(3100,360,300,'branch'),
+    ],
+    enemies: [
+      makeEnemy(400,308,'goon'),
+      makeEnemy(800,328,'goon'),
+      makeEnemy(1200,248,'goon'),
+      makeEnemy(1600,268,'goon'),
+      makeEnemy(1900,228,'goon'),
+      makeEnemy(2300,288,'goon'),
+      makeEnemy(2600,208,'goon'),
+      makeEnemy(3000,268,'goon'),
+    ],
+    collectibles: [
+      makeCollectible(200,350,'snot'), makeCollectible(600,270,'snot'),
+      makeCollectible(1000,290,'snot'), makeCollectible(1400,320,'snot'),
+      makeCollectible(1800,310,'snot'), makeCollectible(2100,230,'coin'),
+      makeCollectible(2500,250,'coin'), makeCollectible(2800,270,'coin'),
+    ],
+    toy: makeToy(3150, 324, 1),
+    ally: makeAlly(3200, 298, 1),
+    exit: { x: 3320, y: 360, w: 40, h: 100 },
+    portalText: "DEEPER ▶",
+  };
+}
+
+// Level 2 — Middle of the island, denser, trickier
+function buildLevel2() {
+  return {
+    name: "THE HEART OF THE ISLAND",
+    width: 3600,
+    bgType: 'jungledark',
+    platforms: [
+      makePlatform(0,460,3600),
+      makePlatform(80,400,100,'branch'),
+      makePlatform(250,350,80,'branch'),
+      makePlatform(420,300,100,'branch'),
+      makePlatform(580,350,80,'branch'),
+      makePlatform(750,280,120,'branch'),
+      makePlatform(950,320,100,'branch'),
+      makePlatform(1150,260,80,'branch'),
+      makePlatform(1300,300,120,'branch'),
+      makePlatform(1500,240,100,'branch'),
+      makePlatform(1700,280,140,'branch'),
+      makePlatform(1950,220,120,'branch'),
+      makePlatform(2150,260,100,'branch'),
+      makePlatform(2350,200,140,'branch'),
+      makePlatform(2600,240,160,'branch'),
+      makePlatform(2850,280,200,'branch'),
+      makePlatform(3100,240,180,'branch'),
+      makePlatform(3350,300,250,'branch'),
+    ],
+    enemies: [
+      makeEnemy(300,318,'goon'), makeEnemy(580,318,'goon'),
+      makeEnemy(900,288,'goon'), makeEnemy(1200,228,'goon'),
+      makeEnemy(1600,208,'goon'), makeEnemy(2000,188,'goon'),
+      makeEnemy(2400,168,'goon'), makeEnemy(2700,208,'goon'),
+      makeEnemy(3000,208,'goon'), makeEnemy(3200,208,'goon'),
+    ],
+    collectibles: [
+      makeCollectible(150,370,'snot'), makeCollectible(500,270,'snot'),
+      makeCollectible(850,290,'snot'), makeCollectible(1200,230,'snot'),
+      makeCollectible(1600,210,'coin'), makeCollectible(2000,190,'coin'),
+      makeCollectible(2500,210,'coin'), makeCollectible(2900,250,'coin'),
+    ],
+    toy: makeToy(3400, 264, 2),
+    ally: makeAlly(3450, 238, 2),
+    exit: { x: 3520, y: 300, w: 40, h: 100 },
+    portalText: "LARS'S LAIR ▶",
+  };
+}
+
+// Level 3 — Lars encounter
+function buildLevel3() {
+  return {
+    name: "LARS'S TURF",
+    width: 2800,
+    bgType: 'jungledark',
+    platforms: [
+      makePlatform(0,460,2800),
+      makePlatform(100,380,120,'branch'),
+      makePlatform(300,320,140,'branch'),
+      makePlatform(550,360,120,'branch'),
+      makePlatform(750,300,160,'branch'),
+      makePlatform(1000,340,140,'branch'),
+      makePlatform(1250,280,160,'branch'),
+      makePlatform(1500,320,200,'branch'),
+      makePlatform(1750,280,200,'branch'),
+      makePlatform(2050,340,120,'branch'),
+      // boss arena
+      makePlatform(2300,380,400,'ground'),
+      makePlatform(2250,300,80,'branch'),
+      makePlatform(2600,300,80,'branch'),
+    ],
+    enemies: [
+      makeEnemy(350,288,'goon'), makeEnemy(800,268,'goon'),
+      makeEnemy(1200,248,'goon'), makeEnemy(1600,288,'goon'),
+      makeEnemy(2100,308,'goon'),
+      makeEnemy(2400,338,'lars',1), // Lars boss
+    ],
+    collectibles: [
+      makeCollectible(200,350,'snot'), makeCollectible(600,330,'snot'),
+      makeCollectible(1000,310,'snot'), makeCollectible(1400,290,'coin'),
+      makeCollectible(1800,250,'coin'), makeCollectible(2100,308,'coin'),
+    ],
+    toy: makeToy(2500, 340, 3),
+    ally: makeAlly(2560, 314, 3),
+    exit: { x: 2680, y: 340, w: 40, h: 120 },
+    portalText: "MONIQUE'S LAIR ▶",
+  };
+}
+
+// Level 4 — Final boss Monique
+function buildLevel4() {
+  return {
+    name: "MONIQUE'S LAIR",
+    width: 2400,
+    bgType: 'lair',
+    platforms: [
+      makePlatform(0,460,2400),
+      makePlatform(100,380,120,'branch'),
+      makePlatform(350,320,100,'branch'),
+      makePlatform(600,360,100,'branch'),
+      makePlatform(850,300,140,'branch'),
+      makePlatform(1100,340,120,'branch'),
+      // boss arena
+      makePlatform(1400,400,900,'ground'),
+      makePlatform(1380,300,80,'branch'),
+      makePlatform(1700,260,100,'branch'),
+      makePlatform(2000,300,80,'branch'),
+      makePlatform(2200,340,80,'branch'),
+    ],
+    enemies: [
+      makeEnemy(300,288,'goon'),
+      makeEnemy(700,268,'goon'),
+      makeEnemy(1000,308,'goon'),
+      makeEnemy(1500,356,'monique',2),
+    ],
+    collectibles: [
+      makeCollectible(200,350,'snot'), makeCollectible(700,330,'snot'),
+      makeCollectible(1100,310,'snot'), makeCollectible(1200,310,'coin'),
+    ],
+    toy: makeToy(2050, 360, 4),
+    ally: makeAlly(2100, 334, 4),
+    exit: { x: 2300, y: 360, w: 60, h: 140 },
+    portalText: "🏆 VICTORY! 🏆",
+  };
+}
+
+// ─── PLAYER ──────────────────────────────────────────────────────────────────
+const player = {
+  x: 80, y: 380, w: 28, h: 44,
+  vx: 0, vy: 0,
+  onGround: false,
+  dir: 1,
+  state: 'idle', // idle walk jump fall shoot melee hurt
+  stateTick: 0,
+  invTick: 0,
+  jumpPressed: false,
+  animFrame: 0,
+  animTick: 0,
+  shootCooldown: 0,
+  meleeCooldown: 0,
+};
+
+// ─── PROJECTILES ─────────────────────────────────────────────────────────────
+let projectiles = [];
+let particles_arr = [];
+
+function spawnProjectile(x,y,dir,wIdx) {
+  const w = WEAPONS[wIdx];
+  const speed = wIdx===3 ? 14 : wIdx===1 ? 9 : 11;
+  if (w.aoe) {
+    // fart — spawn cloud
+    for (let i=0; i<6; i++) {
+      projectiles.push({x:x+dir*10,y,vx:dir*(speed+Math.random()*3),vy:-2+Math.random()*4,
+        w:20,h:20,wIdx,alive:true,tick:0,maxTick:35,color:w.color,aoe:true});
+    }
+  } else {
+    projectiles.push({x:x+dir*10,y,vx:dir*speed,vy:-1,w:14,h:14,wIdx,alive:true,tick:0,maxTick:60,
+      color:w.color,aoe:false});
+  }
+}
+
+function spawnParticle(x,y,color,n=5) {
+  for(let i=0;i<n;i++) {
+    const a = Math.random()*Math.PI*2;
+    const s = 2+Math.random()*4;
+    particles_arr.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,life:1,color,size:4+Math.random()*4});
+  }
+}
+
+// ─── LEVEL CURRENT STATE ──────────────────────────────────────────────────────
+let level = null;
+
+function loadLevel(num) {
+  level = buildLevel(num);
+  player.x = 80; player.y = 380;
+  player.vx = 0; player.vy = 0;
+  player.state = 'idle';
+  player.invTick = 0;
+  GS.camera = 0;
+  projectiles = [];
+  particles_arr = [];
+  // Unlock weapon per ally
+  GS.weaponIndex = Math.min(GS.alliesRescued.length, WEAPONS.length-1);
+  updateHUD();
+}
+
+// ─── INPUT ────────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  GS.keys[e.code] = true;
+  if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.key)) e.preventDefault();
+  if (GS.state === 'title' || GS.state === 'win' || GS.state === 'dead') {
+    if (e.code==='Space'||e.code==='Enter') startGame();
+  }
+});
+document.addEventListener('keyup', e => { GS.keys[e.code] = false; });
+
+// Touch controls
+document.querySelectorAll('.touch-btn').forEach(btn => {
+  const action = btn.dataset.action;
+  btn.addEventListener('touchstart', e => { e.preventDefault(); GS.touch[action]=true; btn.classList.add('pressed'); }, {passive:false});
+  btn.addEventListener('touchend',   e => { e.preventDefault(); GS.touch[action]=false; btn.classList.remove('pressed'); }, {passive:false});
+  btn.addEventListener('touchcancel',e => { GS.touch[action]=false; btn.classList.remove('pressed'); });
+});
+
+function isKey(...codes) { return codes.some(c => GS.keys[c]||GS.touch[c]); }
+
+// ─── GAME START ───────────────────────────────────────────────────────────────
+document.getElementById('startBtn').addEventListener('click', startGame);
+
+function startGame() {
+  GS.state = 'playing';
+  GS.level = 0;
+  GS.score = 0;
+  GS.lives = 3;
+  GS.toys = 0;
+  GS.alliesRescued = [];
+  GS.weaponIndex = 0;
+  document.getElementById('overlay').style.display = 'none';
+  loadLevel(0);
+  showMessage("Ada grabs his cap and heads\ntowards THE ISLAND...", 180);
+}
+
+// ─── MESSAGE SYSTEM ───────────────────────────────────────────────────────────
+function showMessage(text, duration=150) {
+  GS.message = text;
+  GS.messageTick = duration;
+  const mb = document.getElementById('message-box');
+  mb.innerHTML = text.replace(/\n/g,'<br>');
+  mb.style.display = 'block';
+}
+function clearMessage() {
+  GS.messageTick = 0;
+  document.getElementById('message-box').style.display = 'none';
+}
+
+// ─── HUD UPDATE ───────────────────────────────────────────────────────────────
+function updateHUD() {
+  document.getElementById('livesDisplay').textContent = '❤️ x' + GS.lives;
+  document.getElementById('scoreDisplay').textContent = 'SCORE: ' + GS.score;
+  document.getElementById('toyDisplay').textContent = 'TOYS: ' + GS.toys + '/5';
+  document.getElementById('weaponDisplay').textContent = WEAPONS[GS.weaponIndex].name;
+  const rescued = GS.alliesRescued.map(i => ALLY_DATA[i].name.slice(0,3)).join(' ');
+  document.getElementById('allies-display').textContent = rescued ? '👦 ' + rescued : '';
+}
+
+// ─── PHYSICS ──────────────────────────────────────────────────────────────────
+const GRAVITY = 0.55;
+const WALK_SPEED = 3.8;
+const JUMP_FORCE = -13;
+
+function applyPhysics(obj, platforms) {
+  obj.vy += GRAVITY;
+  obj.x += obj.vx;
+  obj.y += obj.vy;
+
+  obj.onGround = false;
+  for (const p of platforms) {
+    if (obj.x + obj.w > p.x && obj.x < p.x + p.w) {
+      // landing on top
+      if (obj.vy >= 0 && obj.y + obj.h > p.y && obj.y + obj.h < p.y + p.h + 12 + obj.vy) {
+        obj.y = p.y - obj.h;
+        obj.vy = 0;
+        obj.onGround = true;
+      }
+    }
+  }
+
+  // world bounds
+  if (obj.x < 0) { obj.x = 0; obj.vx = 0; }
+  if (obj.x + obj.w > level.width) { obj.x = level.width - obj.w; obj.vx = 0; }
+  if (obj.y > H + 100) obj.y = H + 100;
+}
+
+// ─── PLAYER UPDATE ────────────────────────────────────────────────────────────
+function updatePlayer() {
+  if (GS.state !== 'playing') return;
+
+  const left  = isKey('ArrowLeft','KeyA','left');
+  const right = isKey('ArrowRight','KeyD','right');
+  const jump  = isKey('ArrowUp','KeyW','Space','jump');
+  const shoot = isKey('KeyZ','down','shoot');
+  const melee = isKey('KeyX','melee');
+
+  // horizontal
+  if (player.state !== 'hurt') {
+    if (left)       { player.vx = -WALK_SPEED; player.dir = -1; }
+    else if (right) { player.vx =  WALK_SPEED; player.dir =  1; }
+    else            { player.vx *= 0.7; }
+  } else {
+    player.vx *= 0.85;
+  }
+
+  // jump
+  if (jump && player.onGround && !player.jumpPressed) {
+    player.vy = JUMP_FORCE;
+    player.jumpPressed = true;
+    spawnParticle(player.x+player.w/2, player.y+player.h, '#ffffff', 4);
+  }
+  if (!jump) player.jumpPressed = false;
+
+  // shoot
+  if (shoot && player.shootCooldown <= 0) {
+    const px = player.dir > 0 ? player.x + player.w : player.x;
+    spawnProjectile(px, player.y + 10, player.dir, GS.weaponIndex);
+    player.shootCooldown = 22;
+    player.state = 'shoot';
+    player.stateTick = 12;
+    spawnParticle(px, player.y+10, WEAPONS[GS.weaponIndex].color, 3);
+  }
+  if (player.shootCooldown > 0) player.shootCooldown--;
+
+  // melee
+  if (melee && player.meleeCooldown <= 0) {
+    player.meleeCooldown = 28;
+    player.state = 'melee';
+    player.stateTick = 18;
+    // hitbox in front
+    const mx = player.dir > 0 ? player.x + player.w : player.x - 36;
+    for (const e of level.enemies) {
+      if (!e.dead && e.x < mx+40 && e.x+e.w > mx && e.y < player.y+player.h && e.y+e.h > player.y) {
+        hitEnemy(e, 2);
+        spawnParticle(e.x+e.w/2, e.y+e.h/2, '#ffaa00', 6);
+      }
+    }
+  }
+  if (player.meleeCooldown > 0) player.meleeCooldown--;
+
+  applyPhysics(player, level.platforms);
+
+  // invincibility frames
+  if (player.invTick > 0) player.invTick--;
+
+  // state machine
+  if (player.stateTick > 0) { player.stateTick--; }
+  else if (!player.onGround) { player.state = player.vy < 0 ? 'jump' : 'fall'; }
+  else if (Math.abs(player.vx) > 0.3) { player.state = 'walk'; }
+  else { player.state = 'idle'; }
+
+  // anim
+  player.animTick++;
+  if (player.animTick >= 8) { player.animTick = 0; player.animFrame = (player.animFrame+1)%4; }
+
+  // fall death
+  if (player.y > H + 60) { killPlayer("Ada fell off the island.\nMonique yelled 'LOSER GOOOBER!'"); }
+
+  // camera
+  const targetCam = player.x - W/3;
+  GS.camera += (targetCam - GS.camera) * 0.1;
+  GS.camera = Math.max(0, Math.min(level.width - W, GS.camera));
+}
+
+// ─── ENEMY UPDATE ─────────────────────────────────────────────────────────────
+function updateEnemies() {
+  for (const e of level.enemies) {
+    if (e.dead) continue;
+    if (e.stunTick > 0) { e.stunTick--; continue; }
+
+    if (e.type === 'monique' || e.type === 'lars') {
+      updateBoss(e);
+    } else {
+      // patrol
+      e.x += e.vx * 1.8;
+      if (e.x < 10 || e.x + e.w > level.width - 10) e.vx *= -1;
+      // reverse at platform edges
+      let onPlatform = false;
+      for (const p of level.platforms) {
+        if (e.x + e.w/2 > p.x && e.x + e.w/2 < p.x+p.w && Math.abs((e.y+e.h)-p.y)<8) {
+          onPlatform = true;
+          const edgeFwd = e.vx > 0 ? e.x+e.w+4 : e.x-4;
+          if (edgeFwd < p.x || edgeFwd > p.x+p.w) e.vx *= -1;
+        }
+      }
+    }
+
+    // player collision
+    if (!e.dead && player.invTick <= 0 &&
+        player.x < e.x+e.w && player.x+player.w > e.x &&
+        player.y < e.y+e.h && player.y+player.h > e.y) {
+      hurtPlayer(e.type==='monique'?2:1);
+    }
+  }
+}
+
+function updateBoss(e) {
+  const dx = player.x - e.x;
+  e.dir = dx > 0 ? 1 : -1;
+  const dist = Math.abs(dx);
+
+  if (e.type === 'lars') {
+    // Lars charges, then backs off (he's not really mean)
+    if (dist < 250) {
+      e.vx = e.dir * 2.2;
+    } else {
+      e.vx *= 0.9;
+    }
+    e.x += e.vx;
+  } else {
+    // Monique charges aggressively
+    if (dist < 350) {
+      e.vx = e.dir * (GS.frame%120 < 60 ? 3.5 : 1.5);
+    } else {
+      e.vx = e.dir * 1;
+    }
+    e.x += e.vx;
+    // Monique jump attack every 3 sec
+    if (GS.frame % 180 === 0 && dist < 300) {
+      e.vy = -10;
+    }
+  }
+
+  e.x = Math.max(0, Math.min(level.width-e.w, e.x));
+  // gravity for boss
+  if (!e.onGround) {
+    e.vy = (e.vy||0) + GRAVITY;
+    e.y += e.vy;
+  }
+  for (const p of level.platforms) {
+    if (e.x+e.w > p.x && e.x < p.x+p.w && e.vy >= 0 && e.y+e.h > p.y && e.y+e.h < p.y+20+e.vy) {
+      e.y = p.y - e.h; e.vy = 0; e.onGround = true;
+    }
+  }
+}
+
+function hitEnemy(e, dmg) {
+  e.hp -= dmg;
+  e.stunTick = 20;
+  spawnParticle(e.x+e.w/2, e.y+e.h/2, '#ff4444', 5);
+  GS.score += 10;
+  if (e.hp <= 0) {
+    e.dead = true;
+    GS.score += e.type==='monique'?500:e.type==='lars'?200:50;
+    spawnParticle(e.x+e.w/2, e.y+e.h/2, '#ffff00', 12);
+    if (e.type==='monique') {
+      showMessage("MONIQUE RUNS HOME CRYING!\n'MUUUUUMMMMMeeee!'\nLars: 'Nice one, Ada...'", 220);
+      setTimeout(() => triggerWin(), 3000);
+    } else if (e.type==='lars') {
+      showMessage("Lars: 'OK OK! I'll show you\nwhere Monique hid everything!'\nLars joins the crew! 🤜🤛", 200);
+    }
+    updateHUD();
+  }
+}
+
+function hurtPlayer(dmg=1) {
+  if (player.invTick > 0) return;
+  GS.lives -= dmg;
+  player.invTick = 90;
+  player.state = 'hurt';
+  player.stateTick = 30;
+  player.vy = -8;
+  player.vx = -player.dir * 5;
+  spawnParticle(player.x+player.w/2, player.y+player.h/2, '#ff0000', 8);
+  updateHUD();
+  if (GS.lives <= 0) {
+    const msg = DEATH_MSGS[Math.floor(Math.random()*DEATH_MSGS.length)];
+    killPlayer(msg);
+  } else {
+    showMessage("OW! " + GS.lives + " lives left!", 80);
+  }
+}
+
+function killPlayer(msg) {
+  GS.state = 'dead';
+  GS.deathMsg = msg;
+  showDeadScreen();
+}
+
+function showDeadScreen() {
+  const ov = document.getElementById('overlay');
+  ov.style.display = 'flex';
+  ov.innerHTML = `
+    <h1 style="color:#ff4444;">GAME OVER!</h1>
+    <div class="sub">${GS.deathMsg.replace(/\n/g,'<br>')}</div>
+    <div class="sub" style="color:#aaa; font-size:14px;">Score: ${GS.score}</div>
+    <button class="start-btn" onclick="startGame()">▶ TRY AGAIN</button>
+  `;
+}
+
+// ─── PROJECTILE UPDATE ────────────────────────────────────────────────────────
+function updateProjectiles() {
+  for (const p of projectiles) {
+    if (!p.alive) continue;
+    p.x += p.vx;
+    p.y += p.vy;
+    p.tick++;
+    if (p.tick > p.maxTick || p.x < GS.camera-50 || p.x > GS.camera+W+50) { p.alive=false; continue; }
+    // hit enemies
+    for (const e of level.enemies) {
+      if (!e.dead && p.x < e.x+e.w && p.x+p.w > e.x && p.y < e.y+e.h && p.y+p.h > e.y) {
+        hitEnemy(e, WEAPONS[p.wIdx].damage);
+        p.alive = false;
+        spawnParticle(p.x, p.y, p.color, 5);
+        break;
+      }
+    }
+  }
+  projectiles = projectiles.filter(p=>p.alive);
+}
+
+// ─── COLLECTIBLE UPDATE ───────────────────────────────────────────────────────
+function updateCollectibles() {
+  for (const c of level.collectibles) {
+    if (c.collected) continue;
+    if (player.x < c.x+c.w && player.x+player.w > c.x &&
+        player.y < c.y+c.h && player.y+player.h > c.y) {
+      c.collected = true;
+      GS.score += c.type==='coin' ? 25 : 10;
+      spawnParticle(c.x+c.w/2, c.y+c.h/2, c.type==='coin'?'#ffdd44':'#44ff44', 4);
+      updateHUD();
+    }
+  }
+  // toy
+  const t = level.toy;
+  if (!t.collected &&
+      player.x < t.x+t.w && player.x+player.w > t.x &&
+      player.y < t.y+t.h && player.y+player.h > t.y) {
+    t.collected = true;
+    GS.toys++;
+    const toy = TOY_DATA[t.toyIdx];
+    showMessage("🏆 GOT IT!\n" + toy.name + "!\n+" + 100 + " points!", 140);
+    GS.score += 100;
+    spawnParticle(t.x+t.w/2, t.y+t.h/2, '#ffdd44', 10);
+    updateHUD();
+  }
+  // ally
+  const a = level.ally;
+  if (!a.freed &&
+      player.x < a.x+a.w && player.x+player.w > a.x &&
+      player.y < a.y+a.h && player.y+player.h > a.y) {
+    a.freed = true;
+    GS.alliesRescued.push(a.allyIdx);
+    const ally = ALLY_DATA[a.allyIdx];
+    GS.weaponIndex = Math.min(GS.alliesRescued.length, WEAPONS.length-1);
+    const wName = WEAPONS[GS.weaponIndex].name;
+    showMessage("👦 " + ally.name + " RESCUED!\n'" + getAllyQuote(ally) + "'\nNEW WEAPON: " + wName, 180);
+    GS.score += 200;
+    spawnParticle(a.x+a.w/2, a.y+a.h/2, ally.color, 12);
+    updateHUD();
+  }
+}
+
+function getAllyQuote(ally) {
+  const quotes = {
+    RORY: "About time. I was GRUMPY in there.",
+    MATTHEW: "I could've run out FAST if they untied me.",
+    DENNIS: "I was ALMOST out already actually.",
+    CHRIS: "HEHEHE I wasn't even scared hehehe",
+    TODD: "I WILL DESTROY MONIQUE WITH MY BARE HANDS",
+  };
+  return quotes[ally.name] || "Thanks Ada!";
+}
+
+// ─── EXIT CHECK ───────────────────────────────────────────────────────────────
+function checkExit() {
+  const ex = level.exit;
+  if (!level.ally.freed) return; // must rescue ally first
+  if (player.x < ex.x+ex.w && player.x+player.w > ex.x &&
+      player.y < ex.y+ex.h && player.y+player.h > ex.y) {
+    if (GS.level >= 4) {
+      triggerWin();
+    } else {
+      GS.level++;
+      GS.state = 'levelTransition';
+      const nextName = buildLevel(GS.level).name;
+      const ov = document.getElementById('overlay');
+      ov.style.display = 'flex';
+      ov.innerHTML = `
+        <h1 style="font-size:14px; color:#aaffaa;">LEVEL ${GS.level+1}</h1>
+        <div class="sub">${nextName}</div>
+        <div class="sub" style="font-size:14px; color:#ffddaa;">Score: ${GS.score} | Allies: ${GS.alliesRescued.length}</div>
+        <button class="start-btn" onclick="nextLevel()">▶ CONTINUE</button>
+      `;
+    }
+  }
+}
+
+function nextLevel() {
+  document.getElementById('overlay').style.display = 'none';
+  GS.state = 'playing';
+  loadLevel(GS.level);
+}
+
+function triggerWin() {
+  GS.state = 'win';
+  const ov = document.getElementById('overlay');
+  ov.style.display = 'flex';
+  ov.innerHTML = `
+    <h1 style="color:#ffe066; font-size:13px;">🏆 ADA WINS! 🏆</h1>
+    <div class="sub">
+      All toys recovered!<br>
+      Monique ran home crying!<br>
+      Lars joined the crew!<br><br>
+      The boys celebrated on THE ISLAND<br>
+      with wrestling figure battles<br>
+      until the streetlights came on.
+    </div>
+    <div class="sub" style="color:#ffe066;">FINAL SCORE: ${GS.score}</div>
+    <div class="sub" style="font-size:13px; color:#aaffaa;">
+      Hulk Hogan ✓ Ultimate Warrior ✓<br>
+      Jake the Snake ✓ He-Man ✓ Wicket ✓
+    </div>
+    <button class="start-btn" onclick="startGame()">▶ PLAY AGAIN</button>
+  `;
+}
+
+// ─── PARTICLE UPDATE ──────────────────────────────────────────────────────────
+function updateParticles() {
+  for (const p of particles_arr) {
+    p.x += p.vx; p.y += p.vy; p.vy += 0.2;
+    p.life -= 0.045;
+  }
+  particles_arr = particles_arr.filter(p=>p.life>0);
+}
+
+// ─── DRAWING ──────────────────────────────────────────────────────────────────
+function draw() {
+  ctx.clearRect(0,0,W,H);
+  const cam = Math.round(GS.camera);
+
+  drawBackground(cam);
+  ctx.save();
+  ctx.translate(-cam, 0);
+
+  drawPlatforms();
+  drawCollectibles();
+  drawProjectiles();
+  drawEnemies();
+  drawPlayer();
+  drawParticles();
+  drawExit();
+
+  ctx.restore();
+
+  // foreground effects
+  if (player.invTick > 0 && GS.frame % 6 < 3) {
+    ctx.globalAlpha = 0.15;
+    ctx.fillStyle = '#ff0000';
+    ctx.fillRect(0,0,W,H);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ─── BACKGROUND ───────────────────────────────────────────────────────────────
+function drawBackground(cam) {
+  const t = level.bgType;
+  if (t === 'suburban') {
+    // sky
+    ctx.fillStyle = '#87CEEB';
+    ctx.fillRect(0,0,W,H);
+    // clouds
+    drawClouds(cam, '#fff');
+    // hills
+    ctx.fillStyle = '#5a8a3a';
+    ctx.beginPath();
+    ctx.moveTo(0,300); ctx.quadraticCurveTo(W*0.3,220,W*0.6,280);
+    ctx.quadraticCurveTo(W*0.8,240,W,260); ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.fill();
+    // ground
+    ctx.fillStyle = '#6b8c42';
+    ctx.fillRect(0, H-60, W, 60);
+    ctx.fillStyle = '#4a6b2a';
+    ctx.fillRect(0, H-44, W, 44);
+    // road
+    ctx.fillStyle = '#555';
+    ctx.fillRect(0, H-30, W, 30);
+    ctx.fillStyle = '#888';
+    for (let x = (-cam*0.4)%60; x < W; x+=60) {
+      ctx.fillRect(x, H-16, 30, 4);
+    }
+    // house (parallax)
+    drawHouse(200 - cam*0.05, 300);
+    drawHouse(600 - cam*0.05, 310);
+  } else if (t === 'jungle' || t === 'jungledark') {
+    const dark = t === 'jungledark';
+    ctx.fillStyle = dark ? '#0d1f0d' : '#1a3a1a';
+    ctx.fillRect(0,0,W,H);
+    // jungle layers
+    drawJungleBG(cam, dark);
+  } else if (t === 'lair') {
+    ctx.fillStyle = '#0a0010';
+    ctx.fillRect(0,0,W,H);
+    // eerie purple glow
+    const grd = ctx.createRadialGradient(W/2,H/2,50,W/2,H/2,400);
+    grd.addColorStop(0,'rgba(80,0,120,0.3)');
+    grd.addColorStop(1,'transparent');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0,0,W,H);
+    drawJungleBG(cam, true);
+    // purple tint overlay
+    ctx.fillStyle = 'rgba(60,0,80,0.25)';
+    ctx.fillRect(0,0,W,H);
+  }
+}
+
+function drawClouds(cam, color) {
+  ctx.fillStyle = color;
+  const clouds = [[100,80,80,30],[300,60,100,35],[600,90,70,25],[780,55,90,30]];
+  for (const [bx,y,w,h] of clouds) {
+    const x = ((bx - cam*0.15) % (W+200) + (W+200)) % (W+200) - 100;
+    ctx.beginPath();
+    ctx.ellipse(x,y,w,h,0,0,Math.PI*2); ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(x-30,y+10,w*0.6,h*0.8,0,0,Math.PI*2); ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(x+30,y+8,w*0.7,h*0.7,0,0,Math.PI*2); ctx.fill();
+  }
+}
+
+function drawHouse(x, y) {
+  // Simple NZ bungalow shape
+  ctx.fillStyle = '#b0b8c0';
+  ctx.fillRect(x, y, 120, 80);
+  ctx.fillStyle = '#888';
+  ctx.beginPath();
+  ctx.moveTo(x-10,y); ctx.lineTo(x+60,y-40); ctx.lineTo(x+130,y); ctx.fill();
+  ctx.fillStyle = '#666';
+  ctx.fillRect(x+10,y+30,30,50); // garage
+  ctx.fillStyle = '#8ab4c8';
+  ctx.fillRect(x+70,y+20,25,25); // window
+}
+
+function drawJungleBG(cam, dark) {
+  // layered parallax trees
+  const layers = [
+    { offset: 0.1, color: dark ? '#0a1f0a' : '#152d15', count: 8, w: 120 },
+    { offset: 0.2, color: dark ? '#112811' : '#1f401f', count: 10, w: 90 },
+    { offset: 0.35, color: dark ? '#172f17' : '#2a5a2a', count: 12, w: 70 },
+  ];
+  for (const l of layers) {
+    ctx.fillStyle = l.color;
+    for (let i=0; i<l.count; i++) {
+      const bx = i * (W/l.count * 1.4);
+      const x = ((bx - cam*l.offset) % (W+l.w*2) + (W+l.w*2)) % (W+l.w*2) - l.w;
+      drawTree(x, H-80, l.w, 160+i*10, l.color);
+    }
+  }
+  // ground
+  ctx.fillStyle = dark ? '#0e1f0e' : '#1a3a1a';
+  ctx.fillRect(0, H-60, W, 60);
+  ctx.fillStyle = dark ? '#0a1a0a' : '#143014';
+  ctx.fillRect(0, H-40, W, 40);
+}
+
+function drawTree(x, y, w, h, color) {
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(x+w/2, y-h);
+  ctx.bezierCurveTo(x+w*0.8, y-h*0.7, x+w, y-h*0.3, x+w, y);
+  ctx.bezierCurveTo(x+w*0.8, y+10, x+w*0.2, y+10, x, y);
+  ctx.bezierCurveTo(x, y-h*0.3, x+w*0.2, y-h*0.7, x+w/2, y-h);
+  ctx.fill();
+}
+
+// ─── PLATFORM DRAWING ─────────────────────────────────────────────────────────
+function drawPlatforms() {
+  for (const p of level.platforms) {
+    const t = p.type;
+    if (t==='ground') {
+      ctx.fillStyle = '#5a8a3a';
+      ctx.fillRect(p.x, p.y, p.w, p.h);
+      ctx.fillStyle = '#3a5a1a';
+      ctx.fillRect(p.x, p.y+6, p.w, p.h-6);
+    } else if (t==='branch' || t==='grass') {
+      ctx.fillStyle = '#2d5a1a';
+      ctx.beginPath();
+      ctx.roundRect(p.x, p.y, p.w, p.h, 4);
+      ctx.fill();
+      ctx.fillStyle = '#3d7a2a';
+      ctx.fillRect(p.x, p.y, p.w, 5);
+      // moss
+      ctx.fillStyle = '#4a9a33';
+      for (let mx=p.x; mx<p.x+p.w; mx+=18) {
+        ctx.fillRect(mx, p.y-2, 8, 4);
+      }
+    } else if (t==='roof') {
+      ctx.fillStyle = '#7a7a88';
+      ctx.fillRect(p.x, p.y, p.w, p.h);
+    } else if (t==='fence') {
+      ctx.fillStyle = '#8a6a4a';
+      for (let fx=p.x; fx<p.x+p.w; fx+=14) {
+        ctx.fillRect(fx, p.y-10, 10, p.h+10);
+      }
+    } else if (t==='wall') {
+      ctx.fillStyle = '#888';
+      ctx.fillRect(p.x, p.y, p.w, p.h);
+      // concrete texture
+      ctx.fillStyle = '#999';
+      for (let wx=p.x; wx<p.x+p.w; wx+=20) {
+        ctx.fillRect(wx, p.y+4, 18, 4);
+      }
+    } else if (t==='stump') {
+      ctx.fillStyle = '#6b4a2a';
+      ctx.fillRect(p.x, p.y, p.w, p.h);
+      ctx.fillStyle = '#8b6a4a';
+      ctx.fillRect(p.x+2, p.y, p.w-4, 6);
+    }
+  }
+}
+
+// ─── COLLECTIBLE DRAWING ─────────────────────────────────────────────────────
+function drawCollectibles() {
+  const bounce = Math.sin(GS.frame*0.08)*3;
+  for (const c of level.collectibles) {
+    if (c.collected) continue;
+    if (c.type==='coin') {
+      ctx.fillStyle = '#ffdd44';
+      ctx.beginPath(); ctx.arc(c.x+8, c.y+8+bounce, 8, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#ffaa00';
+      ctx.font = '8px sans-serif';
+      ctx.fillText('$', c.x+5, c.y+12+bounce);
+    } else {
+      // snot pickup
+      ctx.fillStyle = '#44ff66';
+      ctx.beginPath(); ctx.arc(c.x+8, c.y+8+bounce, 7, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#00cc44';
+      ctx.beginPath(); ctx.arc(c.x+11, c.y+5+bounce, 4, 0, Math.PI*2); ctx.fill();
+    }
+  }
+
+  // toy
+  const t = level.toy;
+  if (!t.collected) {
+    const tb = Math.sin(GS.frame*0.06)*4;
+    ctx.fillStyle = '#ffdd00';
+    ctx.fillRect(t.x-2, t.y+tb-2, t.w+4, t.h+4);
+    ctx.fillStyle = TOY_DATA[t.toyIdx].color;
+    ctx.fillRect(t.x, t.y+tb, t.w, t.h);
+    ctx.fillStyle = '#000';
+    ctx.font = 'bold 14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(TOY_DATA[t.toyIdx].icon, t.x+t.w/2, t.y+t.h/2+5+tb);
+    ctx.textAlign = 'left';
+    // label
+    ctx.fillStyle = '#ffdd00';
+    ctx.font = '7px sans-serif';
+    const label = TOY_DATA[t.toyIdx].name;
+    ctx.fillText(label, t.x - label.length*1.5, t.y+tb-6);
+  }
+
+  // ally
+  const a = level.ally;
+  if (!a.freed) {
+    a.bounce = Math.sin(GS.frame*0.07)*3;
+    drawAllyCharacter(a);
+    // cage
+    ctx.strokeStyle = '#888';
+    ctx.lineWidth = 2;
+    for (let i=0;i<4;i++) {
+      ctx.beginPath();
+      ctx.moveTo(a.x-4 + i*10, a.y-8);
+      ctx.lineTo(a.x-4 + i*10, a.y+a.h+4);
+      ctx.stroke();
+    }
+    ctx.strokeRect(a.x-4, a.y-8, a.w+8, a.h+12);
+    ctx.lineWidth = 1;
+    // name bubble
+    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+    ctx.fillRect(a.x-10, a.y-30, 50, 18);
+    ctx.fillStyle = ALLY_DATA[a.allyIdx].color;
+    ctx.font = '8px sans-serif';
+    ctx.fillText(ALLY_DATA[a.allyIdx].name, a.x-6, a.y-17);
+  }
+}
+
+function drawAllyCharacter(a) {
+  const d = ALLY_DATA[a.allyIdx];
+  const by = a.bounce;
+  // body
+  ctx.fillStyle = d.color;
+  ctx.fillRect(a.x+4, a.y+16+by, 20, 20);
+  // head
+  ctx.fillStyle = '#f5d5a0';
+  ctx.fillRect(a.x+6, a.y+2+by, 16, 14);
+  // hair
+  ctx.fillStyle = d.hair;
+  ctx.fillRect(a.x+5, a.y-1+by, 18, 6);
+  // eyes
+  ctx.fillStyle = '#333';
+  ctx.fillRect(a.x+9, a.y+6+by, 3, 3);
+  ctx.fillRect(a.x+16, a.y+6+by, 3, 3);
+}
+
+// ─── ENEMY DRAWING ────────────────────────────────────────────────────────────
+function drawEnemies() {
+  for (const e of level.enemies) {
+    if (e.dead) continue;
+    const flash = e.stunTick > 0 && GS.frame%4 < 2;
+    ctx.globalAlpha = flash ? 0.5 : 1;
+
+    if (e.type === 'monique') drawMonique(e);
+    else if (e.type === 'lars') drawLars(e);
+    else drawGoon(e);
+
+    ctx.globalAlpha = 1;
+
+    // HP bar for bosses
+    if (e.type==='monique'||e.type==='lars') {
+      const bw = 60;
+      const bx = e.x + e.w/2 - bw/2;
+      const by = e.y - 14;
+      ctx.fillStyle = '#333';
+      ctx.fillRect(bx, by, bw, 7);
+      ctx.fillStyle = e.type==='monique'?'#ff44aa':'#4488ff';
+      ctx.fillRect(bx, by, bw * (e.hp/e.maxHp), 7);
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(bx, by, bw, 7);
+      ctx.lineWidth = 1;
+    }
+  }
+}
+
+function drawGoon(e) {
+  const wk = Math.sin(GS.frame*0.18)*3;
+  // body - generic island goon (neighbourhood kid with stick)
+  ctx.fillStyle = '#cc5533';
+  ctx.fillRect(e.x+4, e.y+16, 24, 20);
+  ctx.fillStyle = '#f5d0a0';
+  ctx.fillRect(e.x+6, e.y+2, 20, 16);
+  // hair
+  ctx.fillStyle = '#3a2a10';
+  ctx.fillRect(e.x+5, e.y, 22, 7);
+  ctx.fillStyle = '#333';
+  ctx.fillRect(e.x + (e.dir>0?18:6), e.y+7, 4, 4);
+  ctx.fillRect(e.x + (e.dir>0?8:14), e.y+7, 4, 4);
+  // legs
+  ctx.fillStyle = '#336699';
+  ctx.fillRect(e.x+4, e.y+36, 9, 12+wk);
+  ctx.fillRect(e.x+17, e.y+36, 9, 12-wk);
+  // angry eyebrow
+  ctx.fillStyle = '#333';
+  ctx.fillRect(e.x+7, e.y+5, 6, 2);
+  ctx.fillRect(e.x+17, e.y+5, 6, 2);
+}
+
+function drawLars(e) {
+  // Lars - big, blonde, actually friendly looking
+  const wk = Math.sin(GS.frame*0.12)*4;
+  ctx.fillStyle = '#4477cc';
+  ctx.fillRect(e.x+2, e.y+18, 28, 24);
+  ctx.fillStyle = '#f5d0a0';
+  ctx.fillRect(e.x+4, e.y, 24, 18);
+  ctx.fillStyle = '#ddcc66';
+  ctx.fillRect(e.x+3, e.y-3, 26, 8);
+  ctx.fillStyle = '#555';
+  ctx.fillRect(e.x+8, e.y+6, 4, 5);
+  ctx.fillRect(e.x+20, e.y+6, 4, 5);
+  // smile (he's actually nice)
+  ctx.strokeStyle = '#555';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(e.x+e.w/2, e.y+14, 5, 0, Math.PI);
+  ctx.stroke();
+  ctx.lineWidth = 1;
+  ctx.fillStyle = '#336633';
+  ctx.fillRect(e.x+2, e.y+42, 12, 14+wk);
+  ctx.fillRect(e.x+18, e.y+42, 12, 14-wk);
+  // HP label
+  ctx.fillStyle = '#88aaff';
+  ctx.font = '7px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('LARS', e.x+e.w/2, e.y-18);
+  ctx.textAlign = 'left';
+}
+
+function drawMonique(e) {
+  // Monique - big, mean, blonde, husky
+  const wk = Math.sin(GS.frame*0.14)*5;
+  const ang = Math.sin(GS.frame*0.08)*0.1;
+  ctx.save();
+  ctx.translate(e.x+e.w/2, e.y+e.h/2);
+  ctx.rotate(ang);
+  ctx.translate(-(e.x+e.w/2), -(e.y+e.h/2));
+
+  ctx.fillStyle = '#cc2266';
+  ctx.fillRect(e.x, e.y+20, 40, 28);
+  ctx.fillStyle = '#f5d0a0';
+  ctx.fillRect(e.x+4, e.y, 32, 22);
+  // big blonde hair
+  ctx.fillStyle = '#eedd44';
+  ctx.fillRect(e.x+2, e.y-8, 36, 14);
+  ctx.fillRect(e.x-4, e.y-4, 12, 26);
+  ctx.fillRect(e.x+32, e.y-4, 12, 26);
+  // mean eyes
+  ctx.fillStyle = '#333';
+  ctx.fillRect(e.x+8, e.y+7, 7, 6);
+  ctx.fillRect(e.x+25, e.y+7, 7, 6);
+  // angry brows
+  ctx.fillStyle = '#b8860b';
+  ctx.fillRect(e.x+7, e.y+4, 10, 3);
+  ctx.fillRect(e.x+23, e.y+4, 10, 3);
+  // frown
+  ctx.strokeStyle = '#554433';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(e.x+e.w/2, e.y+16, 6, Math.PI, 0);
+  ctx.stroke();
+  ctx.lineWidth = 1;
+  ctx.fillStyle = '#993344';
+  ctx.fillRect(e.x+2, e.y+48, 14, 16+wk);
+  ctx.fillRect(e.x+24, e.y+48, 14, 16-wk);
+
+  ctx.restore();
+
+  ctx.fillStyle = '#ff44aa';
+  ctx.font = 'bold 8px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('MONIQUE', e.x+e.w/2, e.y-22);
+  ctx.textAlign = 'left';
+}
+
+// ─── PLAYER DRAWING ───────────────────────────────────────────────────────────
+function drawPlayer() {
+  if (GS.state !== 'playing') return;
+  if (player.invTick > 0 && GS.frame%6 < 3) return;
+
+  const px = player.x, py = player.y;
+  const d = player.dir;
+  const af = player.animFrame;
+  const legSwing = player.state==='walk' ? Math.sin(af * Math.PI/2) * 6 : 0;
+
+  ctx.save();
+  if (d < 0) {
+    ctx.scale(-1,1);
+    ctx.translate(-2*px - player.w, 0);
+  }
+
+  // shadow
+  ctx.fillStyle = 'rgba(0,0,0,0.2)';
+  ctx.ellipse(px+player.w/2, py+player.h+2, 14, 5, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // legs
+  ctx.fillStyle = '#335577';
+  ctx.fillRect(px+2, py+28, 10, 14 + legSwing);
+  ctx.fillRect(px+16, py+28, 10, 14 - legSwing);
+  // shoes
+  ctx.fillStyle = '#222';
+  ctx.fillRect(px, py+40+legSwing, 12, 5);
+  ctx.fillRect(px+14, py+40-legSwing, 12, 5);
+
+  // body - green polo
+  ctx.fillStyle = '#3a8a4a';
+  ctx.fillRect(px+2, py+16, 24, 16);
+  // collar
+  ctx.fillStyle = '#2a6a3a';
+  ctx.fillRect(px+10, py+14, 8, 5);
+
+  // arms
+  ctx.fillStyle = '#3a8a4a';
+  if (player.state==='shoot') {
+    ctx.fillRect(px+22, py+16, 14, 8);
+  } else if (player.state==='melee') {
+    ctx.fillRect(px+22, py+14, 16, 10);
+  } else {
+    ctx.fillRect(px+22, py+18, 7, 10+legSwing*0.5);
+    ctx.fillRect(px-1, py+18, 7, 10-legSwing*0.5);
+  }
+
+  // head
+  ctx.fillStyle = '#f5d5a0';
+  ctx.fillRect(px+4, py+2, 20, 16);
+
+  // blonde hair
+  ctx.fillStyle = '#eeddaa';
+  ctx.fillRect(px+3, py-2, 22, 8);
+  ctx.fillRect(px+3, py-2, 5, 14); // side sweep
+
+  // eyes
+  ctx.fillStyle = '#334455';
+  ctx.fillRect(px+8, py+7, 4, 4);
+  ctx.fillRect(px+16, py+7, 4, 4);
+  // whites
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(px+8, py+7, 2, 2);
+  ctx.fillRect(px+16, py+7, 2, 2);
+
+  // smile or concentration face
+  if (player.state==='shoot'||player.state==='melee') {
+    ctx.fillStyle = '#994422';
+    ctx.fillRect(px+9, py+14, 10, 3);
+  } else {
+    ctx.strokeStyle = '#884422';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(px+14, py+13, 4, 0.1, Math.PI-0.1);
+    ctx.stroke();
+    ctx.lineWidth = 1;
+  }
+
+  // adventure cap
+  ctx.fillStyle = '#cc6600';
+  ctx.fillRect(px+2, py-6, 24, 6);
+  ctx.fillStyle = '#aa4400';
+  ctx.fillRect(px-2, py-2, 30, 4);
+
+  // shoot VFX
+  if (player.state==='shoot') {
+    ctx.fillStyle = WEAPONS[GS.weaponIndex].color;
+    ctx.beginPath();
+    ctx.arc(px+36, py+20, 7, 0, Math.PI*2);
+    ctx.fill();
+    ctx.globalAlpha = 0.5;
+    ctx.beginPath();
+    ctx.arc(px+44, py+20, 4, 0, Math.PI*2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  ctx.restore();
+}
+
+// ─── PROJECTILE DRAWING ───────────────────────────────────────────────────────
+function drawProjectiles() {
+  for (const p of projectiles) {
+    if (!p.alive) continue;
+    ctx.globalAlpha = 0.85;
+    ctx.fillStyle = p.color;
+    if (p.wIdx===0) { // bogey
+      ctx.beginPath(); ctx.arc(p.x+7, p.y+7, 7, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#00cc00';
+      ctx.beginPath(); ctx.arc(p.x+10, p.y+4, 4, 0, Math.PI*2); ctx.fill();
+    } else if (p.wIdx===1) { // steamer
+      ctx.fillRect(p.x, p.y, 16, 14);
+      ctx.fillStyle = '#cc7700';
+      ctx.fillRect(p.x+2, p.y+2, 8, 4);
+    } else if (p.wIdx===2) { // fart
+      ctx.beginPath(); ctx.ellipse(p.x+10, p.y+10, 12, 8, 0, 0, Math.PI*2); ctx.fill();
+    } else { // spitball
+      ctx.beginPath(); ctx.arc(p.x+7, p.y+7, 7, 0, Math.PI*2); ctx.fill();
+      // trail
+      ctx.fillStyle = '#88aaff';
+      ctx.beginPath(); ctx.arc(p.x-6, p.y+7, 4, 0, Math.PI*2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ─── PARTICLE DRAWING ─────────────────────────────────────────────────────────
+function drawParticles() {
+  for (const p of particles_arr) {
+    ctx.globalAlpha = p.life;
+    ctx.fillStyle = p.color;
+    ctx.fillRect(p.x - p.size/2, p.y - p.size/2, p.size, p.size);
+  }
+  ctx.globalAlpha = 1;
+}
+
+// ─── EXIT DRAWING ─────────────────────────────────────────────────────────────
+function drawExit() {
+  const ex = level.exit;
+  const pulse = 0.6 + 0.4*Math.sin(GS.frame*0.07);
+  ctx.globalAlpha = level.ally.freed ? pulse : 0.3;
+  ctx.fillStyle = level.ally.freed ? '#44ffaa' : '#666';
+  ctx.fillRect(ex.x, ex.y, ex.w, ex.h);
+  ctx.globalAlpha = 1;
+  // arrow
+  if (level.ally.freed) {
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('▶', ex.x+ex.w/2, ex.y+ex.h/2);
+    ctx.font = '7px sans-serif';
+    ctx.fillText(level.portalText, ex.x+ex.w/2, ex.y-5);
+    ctx.textAlign = 'left';
+  } else {
+    ctx.fillStyle = '#ff4444';
+    ctx.font = '7px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('RESCUE ALLY!', ex.x+ex.w/2, ex.y-5);
+    ctx.textAlign = 'left';
+  }
+}
+
+// ─── MAIN LOOP ────────────────────────────────────────────────────────────────
+function loop() {
+  GS.frame++;
+  if (GS.state === 'playing') {
+    updatePlayer();
+    updateEnemies();
+    updateProjectiles();
+    updateCollectibles();
+    updateParticles();
+    checkExit();
+    if (GS.messageTick > 0) { GS.messageTick--; if (GS.messageTick<=0) clearMessage(); }
+  } else {
+    updateParticles();
+  }
+  draw();
+  requestAnimationFrame(loop);
+}
+
+// Kick off render loop always
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
