@@ -269,7 +269,7 @@ const GS = {
   state: 'intro', // intro, title, playing, dead, win, levelTransition
   level: 0,
   score: 0,
-  lives: 3,
+  lives: 5,
   toys: 0,
   alliesRescued: [],
   weaponIndex: 0,
@@ -324,8 +324,8 @@ function buildLevel(num) {
 
 function makePlatform(x,y,w,type) { if(type===undefined)type='ground'; return {x,y,w,h:16,type}; }
 function makeEnemy(x,y,type,bossId) { if(type===undefined)type='goon'; if(bossId===undefined)bossId=-1;
-  return {x,y,w:32,h:40,type,bossId,vx:type==='lars'?0:-1,hp:type==='monique'?8:type==='lars'?4:2,
-    maxHp:type==='monique'?8:type==='lars'?4:2,dir:-1,state:'walk',stunTick:0,
+  return {x,y,w:32,h:40,type,bossId,vx:type==='lars'?0:-1,hp:type==='monique'?6:type==='lars'?3:1,
+    maxHp:type==='monique'?6:type==='lars'?3:1,dir:-1,state:'walk',stunTick:0,
     alertTick:0,groundY:y};
 }
 function makeToy(x,y,idx) { return {x,y,w:24,h:24,toyIdx:idx,collected:false}; }
@@ -773,7 +773,7 @@ function updatePlayer() {
   if (shoot && player.shootCooldown <= 0) {
     const px = player.dir > 0 ? player.x + player.w : player.x;
     spawnProjectile(px, player.y + 10, player.dir, GS.weaponIndex);
-    player.shootCooldown = 22;
+    player.shootCooldown = 12;
     player.state = 'shoot';
     player.stateTick = 12;
     spawnParticle(px, player.y+10, WEAPONS[GS.weaponIndex].color, 3);
@@ -830,7 +830,7 @@ function updateEnemies() {
       updateBoss(e);
     } else {
       // patrol
-      e.x += e.vx * 1.8;
+      e.x += e.vx * 0.9;
       if (e.x < 10 || e.x + e.w > level.width - 10) e.vx *= -1;
       // reverse at platform edges
       let onPlatform = false;
@@ -843,11 +843,12 @@ function updateEnemies() {
       }
     }
 
-    // player collision
+    // player collision - 12px inner margin so you have to really walk into them
+    var hm = 12;
     if (!e.dead && player.invTick <= 0 &&
-        player.x < e.x+e.w && player.x+player.w > e.x &&
-        player.y < e.y+e.h && player.y+player.h > e.y) {
-      hurtPlayer(e.type==='monique'?2:1);
+        player.x+hm < e.x+e.w-hm && player.x+player.w-hm > e.x+hm &&
+        player.y+hm < e.y+e.h-hm && player.y+player.h-hm > e.y+hm) {
+      hurtPlayer(1);
     }
   }
 }
@@ -860,7 +861,7 @@ function updateBoss(e) {
   if (e.type === 'lars') {
     // Lars charges, then backs off (he's not really mean)
     if (dist < 250) {
-      e.vx = e.dir * 2.2;
+      e.vx = e.dir * 1.2;
     } else {
       e.vx *= 0.9;
     }
@@ -868,9 +869,9 @@ function updateBoss(e) {
   } else {
     // Monique charges aggressively
     if (dist < 350) {
-      e.vx = e.dir * (GS.frame%120 < 60 ? 3.5 : 1.5);
+      e.vx = e.dir * (GS.frame%120 < 60 ? 2.0 : 1.0);
     } else {
-      e.vx = e.dir * 1;
+      e.vx = e.dir * 0.7;
     }
     e.x += e.vx;
     // Monique jump attack every 3 sec
@@ -914,7 +915,7 @@ function hitEnemy(e, dmg) {
 function hurtPlayer(dmg) { if(dmg===undefined)dmg=1;
   if (player.invTick > 0) return;
   GS.lives -= dmg;
-  player.invTick = 90;
+  player.invTick = 150;
   player.state = 'hurt';
   player.stateTick = 30;
   player.vy = -8;
@@ -930,9 +931,20 @@ function hurtPlayer(dmg) { if(dmg===undefined)dmg=1;
 }
 
 function killPlayer(msg) {
-  GS.state = 'dead';
-  GS.deathMsg = msg;
-  showDeadScreen();
+  // Only true game over when 0 lives - otherwise just restart the level
+  if (GS.lives <= 0) {
+    GS.state = 'dead';
+    GS.deathMsg = msg;
+    showDeadScreen();
+  } else {
+    // Respawn at level start, keep score and progress
+    showMessage(msg + '\n\nBack to the start!', 160);
+    player.x = 80; player.y = 380;
+    player.vx = 0; player.vy = 0;
+    player.state = 'idle';
+    player.invTick = 120;
+    GS.camera = 0;
+  }
 }
 
 function showDeadScreen() {
