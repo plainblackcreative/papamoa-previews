@@ -163,6 +163,17 @@ body::before {
   .nav-buttons { flex-direction:column; align-items:center; }
   .btn { width:100%; max-width:260px; text-align:center; }
 }
+
+.fairy { position:absolute; width:52px; height:52px; cursor:grab; touch-action:none; z-index:11; transform:translate(-50%,-50%); animation:fairyfloat 1.2s ease-in-out infinite alternate; filter:drop-shadow(0 0 8px rgba(255,220,100,0.8)); }
+.fairy:active { cursor:grabbing; }
+.fairy.caught { animation:none; cursor:grabbing; filter:drop-shadow(0 0 16px rgba(255,220,60,1)); }
+.fairy.hidden { display:none; }
+.fairy.yeeted { animation:none; opacity:0; transform:translate(-50%,-50%) scale(0.3) rotate(720deg); transition:left 0.4s cubic-bezier(.4,0,.2,1),top 0.4s cubic-bezier(.4,0,.2,1),opacity 0.4s ease,transform 0.4s ease; pointer-events:none; }
+@keyframes fairyfloat { from{transform:translate(-50%,-60%) rotate(-6deg) scale(1)} to{transform:translate(-50%,-40%) rotate(6deg) scale(1.08)} }
+.fairy-warning { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(90deg,rgba(255,200,0,0.18),rgba(255,100,200,0.18),rgba(255,200,0,0.18)); border-top:1px solid rgba(255,200,60,0.35); text-align:center; font-size:10px; font-weight:800; color:rgba(255,220,80,0.9); letter-spacing:0.08em; padding:4px 0; pointer-events:none; z-index:25; animation:warnpulse 0.7s ease-in-out infinite alternate; }
+@keyframes warnpulse { from{opacity:0.6} to{opacity:1} }
+.spill-flash { position:absolute; inset:0; background:rgba(255,50,50,0.22); border-radius:16px; opacity:0; pointer-events:none; transition:opacity 0.15s; }
+.spill-flash.show { opacity:1; }
 </style>
 </head>
 <body>
@@ -263,6 +274,40 @@ body::before {
           </svg>
         </div>
 
+
+        <!-- FAIRY (trap character) -->
+        <div class="fairy hidden" id="fairyEl" style="left:70%;top:35%">
+          <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+            <ellipse cx="13" cy="22" rx="10" ry="6" fill="rgba(180,240,255,0.55)" transform="rotate(-30 13 22)"/>
+            <ellipse cx="11" cy="30" rx="8" ry="5" fill="rgba(200,180,255,0.45)" transform="rotate(-20 11 30)"/>
+            <ellipse cx="39" cy="22" rx="10" ry="6" fill="rgba(180,240,255,0.55)" transform="rotate(30 39 22)"/>
+            <ellipse cx="41" cy="30" rx="8" ry="5" fill="rgba(200,180,255,0.45)" transform="rotate(20 41 30)"/>
+            <path d="M14 20 Q10 24 13 28" stroke="rgba(255,255,255,0.5)" stroke-width="0.8" fill="none"/>
+            <path d="M38 20 Q42 24 39 28" stroke="rgba(255,255,255,0.5)" stroke-width="0.8" fill="none"/>
+            <ellipse cx="26" cy="33" rx="7" ry="9" fill="#F48FB1"/>
+            <ellipse cx="26" cy="37" rx="8" ry="5" fill="#F06292"/>
+            <ellipse cx="26" cy="19" rx="9" ry="9" fill="#FFCC80"/>
+            <ellipse cx="26" cy="13" rx="9" ry="5" fill="#FFD54F"/>
+            <ellipse cx="18" cy="17" rx="4" ry="6" fill="#FFD54F"/>
+            <ellipse cx="34" cy="17" rx="4" ry="6" fill="#FFD54F"/>
+            <ellipse cx="22" cy="19" rx="2.5" ry="2.8" fill="#fff"/>
+            <ellipse cx="30" cy="19" rx="2.5" ry="2.8" fill="#fff"/>
+            <circle cx="22.5" cy="19.5" r="1.6" fill="#7B1FA2"/>
+            <circle cx="30.5" cy="19.5" r="1.6" fill="#7B1FA2"/>
+            <circle cx="23" cy="18.8" r="0.6" fill="#fff"/>
+            <circle cx="31" cy="18.8" r="0.6" fill="#fff"/>
+            <ellipse cx="19" cy="22" rx="2.5" ry="1.5" fill="rgba(255,120,120,0.35)"/>
+            <ellipse cx="33" cy="22" rx="2.5" ry="1.5" fill="rgba(255,120,120,0.35)"/>
+            <path d="M22 24 Q26 27.5 30 24" stroke="#E91E63" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <line x1="36" y1="28" x2="44" y2="18" stroke="#FFF176" stroke-width="1.5" stroke-linecap="round"/>
+            <polygon points="44,14 42,18 46,18" fill="#FFD600"/>
+            <circle cx="46" cy="12" r="1.2" fill="#FFF59D"/>
+            <circle cx="41" cy="10" r="0.8" fill="#FFF59D"/>
+            <circle cx="48" cy="16" r="0.8" fill="#FFF59D"/>
+          </svg>
+        </div>
+        <div class="fairy-warning hidden" id="fairyWarning">&#10024; DON'T BIN THE FAIRY &#10024;</div>
+        <div class="spill-flash" id="spillFlash"></div>
         <!-- BIN -->
         <div class="bin" id="bin">
           <svg viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
@@ -354,16 +399,20 @@ function launchConfetti(){
   draw();
 }
 
-/* LEADERBOARD */
-var LS_KEY='papamoa_gremlin_v1';
-function loadScores(){ try{return JSON.parse(localStorage.getItem(LS_KEY))||[];}catch(e){return [];} }
-function saveScore(initials,ms){
-  var scores=loadScores();
-  scores.push({name:(initials||'???').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,3)||'???',time:ms,date:new Date().toLocaleDateString('en-NZ',{day:'numeric',month:'short'})});
-  scores.sort(function(a,b){return a.time-b.time;}); scores=scores.slice(0,10);
-  try{localStorage.setItem(LS_KEY,JSON.stringify(scores));}catch(e){}
-  return scores;
-}
+/* =====================================================================
+   JSONBIN SHARED LEADERBOARD
+   ---------------------------------------------------------------------
+   Setup (free, ~2 minutes):
+   1. Go to https://jsonbin.io and sign up for a free account
+   2. API Keys tab -> Create Access Key -> paste it into JSONBIN_KEY below
+   3. Click "New Bin", paste {"scores":[]} as content -> copy the Bin ID into JSONBIN_BIN
+   4. In Bin settings set Access to "Public (Read)" so anyone can see scores
+   ===================================================================== */
+var JSONBIN_KEY = '$2a$10$ut1FATX8950uykBW2KhtbuX26okziekhT.7zVgo.7S9S3Ncjss/Ee';
+var JSONBIN_BIN = '69d6320b856a6821890ee8c4';
+var JSONBIN_URL = 'https://api.jsonbin.io/v3/b/'+JSONBIN_BIN;
+var LS_CACHE    = 'papamoa_gremlin_cache_v1';
+
 function fmtTime(ms){
   var s=ms/1000;
   return s<60 ? s.toFixed(1)+'s' : Math.floor(s/60)+'m '+(s%60).toFixed(1)+'s';
@@ -375,7 +424,50 @@ function renderLb(tbl,scores,highlightMs){
     return '<tr'+(s.time===highlightMs?' class="lb-new"':'')+'><td class="lb-rank">'+(i<3?medals[i]:i+1)+'</td><td class="lb-name">'+s.name+'</td><td class="lb-time">'+fmtTime(s.time)+'</td><td class="lb-date">'+s.date+'</td></tr>';
   }).join('');
 }
-function refreshPanel(){ var t=document.getElementById('lbPanelTable'); if(t) renderLb(t,loadScores()); }
+function renderLbLoading(tbl){
+  tbl.innerHTML='<tr><td class="lb-empty" colspan="4" style="color:rgba(255,255,255,0.2)">Loading scores\u2026</td></tr>';
+}
+function fetchScores(cb){
+  if(JSONBIN_BIN==='YOUR_BIN_ID_HERE'){ try{cb(JSON.parse(localStorage.getItem(LS_CACHE))||[]);}catch(e){cb([]);} return; }
+  fetch(JSONBIN_URL+'/latest',{headers:{'X-Access-Key':JSONBIN_KEY}})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var sc=(d.record&&d.record.scores)||[];
+      try{localStorage.setItem(LS_CACHE,JSON.stringify(sc));}catch(e){}
+      cb(sc);
+    })
+    .catch(function(){ try{cb(JSON.parse(localStorage.getItem(LS_CACHE))||[]);}catch(e){cb([]);} });
+}
+function pushScores(scores,cb){
+  if(JSONBIN_BIN==='YOUR_BIN_ID_HERE'){
+    try{localStorage.setItem(LS_CACHE,JSON.stringify(scores));}catch(e){}
+    if(cb) cb(scores); return;
+  }
+  fetch(JSONBIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Access-Key':JSONBIN_KEY},body:JSON.stringify({scores:scores})})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var updated=(d.record&&d.record.scores)||scores;
+      try{localStorage.setItem(LS_CACHE,JSON.stringify(updated));}catch(e){}
+      if(cb) cb(updated);
+    })
+    .catch(function(){
+      try{localStorage.setItem(LS_CACHE,JSON.stringify(scores));}catch(e){}
+      if(cb) cb(scores);
+    });
+}
+function saveScore(initials,ms,cb){
+  fetchScores(function(scores){
+    scores.push({name:(initials||'???').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,3)||'???',time:ms,date:new Date().toLocaleDateString('en-NZ',{day:'numeric',month:'short'})});
+    scores.sort(function(a,b){return a.time-b.time;}); scores=scores.slice(0,10);
+    pushScores(scores,cb);
+  });
+}
+function refreshPanel(){
+  var t=document.getElementById('lbPanelTable'); if(!t) return;
+  renderLbLoading(t);
+  fetchScores(function(sc){ renderLb(t,sc); });
+}
+
 
 /* GAME */
 (function(){
@@ -390,19 +482,23 @@ function refreshPanel(){ var t=document.getElementById('lbPanelTable'); if(t) re
   var initialsPanel=document.getElementById('initialsPanel'),initialsInput=document.getElementById('initialsInput');
   var initialsSubmit=document.getElementById('initialsSubmit'),winnerLb=document.getElementById('winnerLb'),winnerLbTable=document.getElementById('winnerLbTable');
 
-  var TOTAL=20, PHASE2_AT=10, BASE_SPD=0.35, MAX_SPD=1.8;
+  var TOTAL=20, PHASE2_AT=10, FAIRY_AT=18, BASE_SPD=0.35, MAX_SPD=1.8;
   var totalCaught=0, phaseTwo=false, gameOver=false;
+  var fairyRound=false, fairyUsed=false;
   var timerStart=null, timerRunning=false, timerRaf=null, finalMs=0;
 
   function startTimer(){ if(timerRunning)return; timerStart=Date.now(); timerRunning=true; timerDisplay.classList.add('running'); tick(); }
   function tick(){ if(!timerRunning)return; timerDisplay.textContent=fmtTime(Date.now()-timerStart); timerRaf=requestAnimationFrame(tick); }
   function stopTimer(){ finalMs=Date.now()-timerStart; timerRunning=false; cancelAnimationFrame(timerRaf); timerDisplay.textContent=fmtTime(finalMs); timerDisplay.classList.remove('running'); }
 
-  function makeG(el,x,y){ return {el:el,x:x,y:y,vx:0,vy:0,active:false,dragging:false,dox:0,doy:0,wandering:false}; }
+  function makeG(el,x,y){ return {el:el,x:x,y:y,vx:0,vy:0,active:false,dragging:false,dox:0,doy:0,wandering:false,isFairy:false}; }
   var gA=makeG(document.getElementById('gremlinA'),50,50);
   var gB=makeG(document.getElementById('gremlinB'),30,40);
+  var gF=makeG(document.getElementById('fairyEl'),70,35); gF.isFairy=true;
   gA.active=true;
   var hintHidden=false, shakeTimer=null;
+  var fairyWarning=document.getElementById('fairyWarning');
+  var spillFlash=document.getElementById('spillFlash');
 
   function AR(){ return arena.getBoundingClientRect(); }
   function BR(){ return bin.getBoundingClientRect(); }
@@ -418,8 +514,9 @@ function refreshPanel(){ var t=document.getElementById('lbPanelTable'); if(t) re
     multiplierBadge.textContent=phaseTwo?'2x GREMLINS':totalCaught>=7?'SPEEDING UP':'';
     multiplierBadge.className='multiplier'+(phaseTwo?' turbo':totalCaught>=7?' hot':'');
     scoreEl.textContent=totalCaught;
-    gameLabel.textContent=phaseTwo?'\uD83D\uDCA5 Two gremlins! Catch both!':'\uD83C\uDFAE Grab the gremlin \u2014 drag to bin';
-    gameLabel.className='game-label'+(phaseTwo?' danger':totalCaught>=7?' warning':'');
+    var lbl=fairyRound?'\u2728 Dodge the fairy! Bin the gremlin only!':phaseTwo?'\uD83D\uDCA5 Two gremlins! Catch both!':'\uD83C\uDFAE Grab the gremlin \u2014 drag to bin';
+    gameLabel.textContent=lbl;
+    gameLabel.className='game-label'+(fairyRound||phaseTwo?' danger':totalCaught>=7?' warning':'');
   }
 
   function wander(g){
@@ -456,7 +553,7 @@ function refreshPanel(){ var t=document.getElementById('lbPanelTable'); if(t) re
     g.dox=pos.x-g.x/100*ar.width; g.doy=pos.y-g.y/100*ar.height;
   }
   function onMove(e){
-    [gA,gB].forEach(function(g){
+    [gA,gB,gF].forEach(function(g){
       if(!g.dragging)return; e.preventDefault();
       var pos=evPos(e), ar=AR();
       var px=Math.max(3,Math.min(97,(pos.x-g.dox)/ar.width*100));
@@ -467,7 +564,7 @@ function refreshPanel(){ var t=document.getElementById('lbPanelTable'); if(t) re
     });
   }
   function onEnd(e){
-    [gA,gB].forEach(function(g){
+    [gA,gB,gF].forEach(function(g){
       if(!g.dragging)return; g.dragging=false; g.el.classList.remove('caught');
       var cx=e.changedTouches?e.changedTouches[0].clientX:e.clientX;
       var cy=e.changedTouches?e.changedTouches[0].clientY:e.clientY;
@@ -477,36 +574,102 @@ function refreshPanel(){ var t=document.getElementById('lbPanelTable'); if(t) re
     });
   }
 
-  function yeet(g){
-    bin.classList.remove('active'); totalCaught++; g.active=false; g.wandering=false; updateHUD();
+  function flyToBin(g,cb){
     var br=BR(),ar=AR();
     var tx=(br.left+br.width/2-ar.left)/ar.width*100, ty=(br.top+br.height/2-ar.top)/ar.height*100;
     g.el.style.transition='left 0.35s cubic-bezier(.4,0,.2,1),top 0.35s cubic-bezier(.4,0,.2,1),opacity 0.35s ease,transform 0.35s ease';
     g.el.classList.add('yeeted'); setPos(g,tx,ty);
-    caughtFlash.classList.add('show'); setTimeout(function(){caughtFlash.classList.remove('show');},300);
-    if(totalCaught>=TOTAL){setTimeout(endGame,500);return;}
-    if(!phaseTwo&&totalCaught>=PHASE2_AT){setTimeout(triggerPhaseTwo,500);return;}
-    if(phaseTwo){
-      showPopup('&#128293;','One down!','Still one more out there\u2026',false);
-      setTimeout(function(){hidePopup(); g.el.classList.remove('yeeted','hidden'); g.active=true; startWander(g,20+Math.random()*60,20+Math.random()*60);},1200);
-    } else {
-      showPopup('&#127881;','Got him!','Gremlin neutralised',false);
-      setTimeout(function(){hidePopup(); g.el.classList.remove('yeeted'); g.active=true; startWander(g,20+Math.random()*60,20+Math.random()*60);},1400);
+    setTimeout(cb,380);
+  }
+
+  function yeet(g){
+    bin.classList.remove('active'); g.active=false; g.wandering=false;
+
+    if(g.isFairy){
+      fairyRound=false;
+      fairyWarning.classList.add('hidden');
+      [gA,gB].forEach(function(x){ x.active=false; x.wandering=false; });
+      flyToBin(g,function(){ g.el.style.display='none'; spillGremlins(); });
+      return;
     }
+
+    totalCaught++; updateHUD();
+    flyToBin(g,function(){
+      caughtFlash.classList.add('show'); setTimeout(function(){caughtFlash.classList.remove('show');},300);
+      if(totalCaught>=TOTAL){setTimeout(endGame,120);return;}
+      if(!phaseTwo&&totalCaught>=PHASE2_AT){setTimeout(triggerPhaseTwo,120);return;}
+      if(phaseTwo){
+        var remaining=TOTAL-totalCaught;
+        var subMsg=remaining===1?'One more to go!':remaining+' more to catch...';
+        showPopup('&#128293;','One down!',subMsg,false);
+        setTimeout(function(){
+          hidePopup();
+          g.el.classList.remove('yeeted','hidden');
+          g.active=true;
+          if(!fairyUsed&&totalCaught>=FAIRY_AT){ spawnFairy(); return; }
+          startWander(g,20+Math.random()*60,20+Math.random()*60);
+        },1200);
+      } else {
+        showPopup('&#127881;','Got him!','Gremlin neutralised',false);
+        setTimeout(function(){
+          hidePopup(); g.el.classList.remove('yeeted'); g.active=true;
+          startWander(g,20+Math.random()*60,20+Math.random()*60);
+        },1400);
+      }
+    });
+  }
+
+  function spawnFairy(){
+    fairyRound=true; fairyUsed=true;
+    gB.active=false; gB.wandering=false; gB.el.classList.add('hidden');
+    var fe=document.getElementById('fairyEl');
+    fe.style.display=''; fe.classList.remove('hidden','yeeted');
+    fe.style.opacity='1'; fe.style.transform='';
+    gF.active=true; gF.wandering=false;
+    fairyWarning.classList.remove('hidden');
+    updateHUD();
+    startWander(gF,15+Math.random()*40,15+Math.random()*50);
+    showPopup('&#10024;','A fairy!','Don\'t bin her or you\'ll regret it...',true);
+    setTimeout(hidePopup,2500);
+  }
+
+  function spillGremlins(){
+    var spilled=totalCaught;
+    totalCaught=0; updateHUD();
+    spillFlash.classList.add('show');
+    setTimeout(function(){ spillFlash.classList.remove('show'); },500);
+    showPopup('&#128122;','The fairy freed them!',spilled+' gremlins spilled out...',true);
+    setTimeout(function(){
+      hidePopup();
+      gF.active=false; gF.wandering=false;
+      document.getElementById('fairyEl').style.display='none';
+      fairyWarning.classList.add('hidden');
+      gA.el.classList.remove('hidden','yeeted','dead');
+      gA.el.style.opacity='1'; gA.el.style.transform='translate(-50%,-50%)';
+      gA.active=true;
+      gB.el.classList.remove('hidden','yeeted','dead');
+      gB.el.style.opacity='1'; gB.el.style.transform='translate(-50%,-50%)';
+      gB.active=true;
+      phaseTwo=true; updateHUD();
+      var ar=AR(),bx=(BR().left+BR().width/2-ar.left)/ar.width*100,by=(BR().top+BR().height/2-ar.top)/ar.height*100;
+      startWander(gA,bx-12,by-5);
+      startWander(gB,bx+12,by-5);
+    },2400);
   }
 
   function triggerPhaseTwo(){
     phaseTwo=true; bin.classList.add('shaking');
     gA.active=false; gA.wandering=false; gA.el.classList.remove('yeeted'); gA.el.style.opacity='0';
-    showPopup('&#128165;','He escaped!','And brought a friend\u2026',true);
     clearTimeout(shakeTimer);
     shakeTimer=setTimeout(function(){
-      bin.classList.remove('shaking'); hidePopup();
+      bin.classList.remove('shaking');
       var ar=AR(),bx=(BR().left+BR().width/2-ar.left)/ar.width*100,by=(BR().top+BR().height/2-ar.top)/ar.height*100;
       gA.el.style.transition='none'; gA.el.style.opacity='1'; gA.el.classList.remove('yeeted','hidden');
       gA.active=true; startWander(gA,bx,by);
       gB.el.classList.remove('hidden'); gB.active=true; startWander(gB,bx+5,by-5);
       updateHUD();
+      showPopup('&#128165;','He escaped!','And brought a friend...',true);
+      setTimeout(hidePopup,2000);
     },3000);
   }
 
@@ -537,9 +700,12 @@ function refreshPanel(){ var t=document.getElementById('lbPanelTable'); if(t) re
   function submitScore(){
     var raw=initialsInput.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase().slice(0,3);
     if(!raw){initialsInput.focus(); initialsInput.style.borderColor='#FF7043'; return;}
-    var scores=saveScore(raw,finalMs);
-    initialsPanel.style.display='none'; winnerLb.style.display='block';
-    renderLb(winnerLbTable,scores,finalMs); refreshPanel();
+    /* disable button while saving */
+    initialsSubmit.disabled=true; initialsSubmit.textContent='Saving…';
+    saveScore(raw,finalMs,function(scores){
+      initialsPanel.style.display='none'; winnerLb.style.display='block';
+      renderLb(winnerLbTable,scores,finalMs); refreshPanel();
+    });
   }
   initialsSubmit.addEventListener('click',submitScore);
   initialsInput.addEventListener('keydown',function(e){if(e.key==='Enter')submitScore();});
@@ -547,8 +713,10 @@ function refreshPanel(){ var t=document.getElementById('lbPanelTable'); if(t) re
 
   gA.el.addEventListener('mousedown',function(e){grabStart(gA,e);});
   gB.el.addEventListener('mousedown',function(e){grabStart(gB,e);});
+  gF.el.addEventListener('mousedown',function(e){grabStart(gF,e);});
   gA.el.addEventListener('touchstart',function(e){grabStart(gA,e);},{passive:false});
   gB.el.addEventListener('touchstart',function(e){grabStart(gB,e);},{passive:false});
+  gF.el.addEventListener('touchstart',function(e){grabStart(gF,e);},{passive:false});
   document.addEventListener('mousemove',onMove); document.addEventListener('touchmove',onMove,{passive:false});
   document.addEventListener('mouseup',onEnd);    document.addEventListener('touchend',onEnd);
   winnerBtn.addEventListener('click',function(){window.location.href='/papamoa-previews/homepage.html';});
