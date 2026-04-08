@@ -156,6 +156,39 @@
     .review-card:last-child { margin-bottom:0; }
     .rv-text { font-size:0.84rem; color:var(--body); line-height:1.62; font-style:italic; margin-bottom:7px; }
     .rv-attr { font-size:0.72rem; color:var(--muted); font-weight:600; }
+
+    /* ── MENU ADD-ON ── */
+    .menu-section { background:var(--white); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:16px; }
+    .menu-header { background:#0D2B3E; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+    .menu-header h3 { color:#fff; font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; margin:0; }
+    .menu-updated { font-size:11px; color:rgba(255,255,255,0.45); }
+    .menu-cats { display:flex; gap:6px; padding:14px 16px 0; flex-wrap:wrap; }
+    .menu-cat { padding:6px 14px; border-radius:100px; font-size:12px; font-weight:600; cursor:pointer; border:1.5px solid var(--border); background:var(--white); color:var(--muted); font-family:'Figtree',sans-serif; transition:all 0.15s; }
+    .menu-cat:hover { border-color:var(--ocean); color:var(--ocean); }
+    .menu-cat.active { background:#0D2B3E; color:#fff; border-color:#0D2B3E; }
+    .menu-filters { display:flex; gap:6px; padding:10px 16px; flex-wrap:wrap; align-items:center; }
+    .menu-filter-label { font-size:11px; color:var(--muted); font-weight:600; margin-right:2px; }
+    .menu-filter { padding:3px 10px; border-radius:100px; font-size:11px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--white); color:var(--muted); font-family:'Figtree',sans-serif; transition:all 0.15s; }
+    .menu-filter.active { background:#3AABDE; color:#fff; border-color:#3AABDE; }
+    .menu-items { padding:12px 16px 16px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    @media (max-width:540px) { .menu-items { grid-template-columns:1fr; } }
+    .menu-item { background:var(--bg); border-radius:9px; overflow:hidden; display:flex; flex-direction:column; }
+    .menu-item.hidden { display:none; }
+    .menu-item-img { height:80px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#1a2038,#2B3060); font-size:1.6rem; }
+    .menu-item-body { padding:10px 12px; flex:1; }
+    .menu-item-name { font-size:13px; font-weight:700; color:var(--body); margin-bottom:3px; }
+    .menu-item-desc { font-size:11px; color:var(--muted); line-height:1.45; margin-bottom:6px; }
+    .menu-item-footer { display:flex; align-items:center; justify-content:space-between; }
+    .menu-item-price { font-size:14px; font-weight:700; color:#0D2B3E; }
+    .menu-item-tags { display:flex; gap:3px; }
+    .diet-tag { font-size:9px; font-weight:700; padding:2px 5px; border-radius:3px; }
+    .diet-vg { background:rgba(46,125,50,0.12); color:#1E6B3C; border:1px solid rgba(46,125,50,0.2); }
+    .diet-v  { background:rgba(46,125,50,0.08); color:#1E6B3C; border:1px solid rgba(46,125,50,0.15); }
+    .diet-gf { background:rgba(196,152,90,0.12); color:#C4985A; border:1px solid rgba(196,152,90,0.2); }
+    .diet-df { background:rgba(58,171,222,0.1); color:#1B6B7D; border:1px solid rgba(58,171,222,0.2); }
+    .menu-footer { padding:10px 16px 14px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; }
+    .menu-order-btn { font-size:12px; font-weight:700; color:#fff; background:#3AABDE; padding:7px 16px; border-radius:6px; text-decoration:none; }
+    .menu-order-btn:hover { background:#2d95c4; }
     .faq-item { border-bottom:1px solid var(--border); }
     .faq-item:last-child { border-bottom:none; }
     .faq-q { display:flex; justify-content:space-between; align-items:center; padding:13px 0; cursor:pointer; font-size:0.88rem; font-weight:600; color:var(--navy); gap:12px; user-select:none; }
@@ -313,6 +346,27 @@
         <div class="review-card">
           <p class="rv-text">&ldquo;Ordered online for pickup &mdash; quick, accurate and the food was still hot. Smoky BBQ burger is excellent. Good to have a proper burger spot in this part of Pāpāmoa.&rdquo;</p>
           <div class="rv-attr">&mdash; Google reviewer</div>
+        </div>
+      </div>
+
+      <!-- Menu -->
+      <div class="menu-section" id="menu-section">
+        <div class="menu-header">
+          <h3>&#128209; Menu</h3>
+          <span class="menu-updated">Prices as at April 2026</span>
+        </div>
+        <div class="menu-cats" id="menu-cats"></div>
+        <div class="menu-filters">
+          <span class="menu-filter-label">Dietary:</span>
+          <button class="menu-filter active" data-filter="all">All</button>
+          <button class="menu-filter" data-filter="vg">VG</button>
+          <button class="menu-filter" data-filter="v">V</button>
+          <button class="menu-filter" data-filter="gf">GF</button>
+        </div>
+        <div class="menu-items" id="menu-items"></div>
+        <div class="menu-footer">
+          <span class="menu-updated">Order online or dine in</span>
+          <a href="https://www.ordermeal.co.nz/the-wagon-papamoa/" target="_blank" rel="noopener" class="menu-order-btn">&#128666; Order online</a>
         </div>
       </div>
 
