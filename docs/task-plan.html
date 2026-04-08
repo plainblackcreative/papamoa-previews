@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Papamoa.info — Post-Demo Task Plan</title>
+<title>Papamoa.info — Master Task Plan</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,9 +16,9 @@
   --navy: #0D2B3E; --white: #FFFFFF; --text: #1A2832; --muted: #5A6E78;
   --border: #D8E4E8; --silver: #5A7A8A; --silver-bg: #EDF3F6;
   --gold: #B8840A; --gold-bg: #FBF3E2;
-  --green: #1E6B3C; --green-bg: #E6F4EC;
+  --green: #1E6B3C; --green-bg: #E6F4EC; --green-border: #9ED0B4;
   --red: #8B2020; --red-bg: #FAEAEA;
-  --amber: #8A5A00; --amber-bg: #FFF8E6;
+  --amber: #8A5A00; --amber-bg: #FFF8E6; --amber-border: #E8C96A;
   --purple: #5B3FA0; --purple-bg: #F0EBF8;
   --font-body: 'Figtree', sans-serif;
   --font-display: 'Playfair Display', serif;
@@ -28,7 +28,9 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .nav { background: var(--navy); padding: 0 28px; height: 54px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
 .nav-logo { font-weight: 700; font-size: 15px; color: var(--white); text-decoration: none; }
 .nav-logo em { font-style: italic; color: var(--dune); }
-.nav-tag { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 500; }
+.nav-right { display: flex; gap: 16px; font-size: 13px; }
+.nav-right a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
+.nav-right a:hover { color: var(--white); }
 .page-header { background: linear-gradient(135deg, var(--navy), var(--ocean-deep)); padding: 48px 32px 44px; }
 .page-header-inner { max-width: 900px; margin: 0 auto; }
 .header-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
@@ -41,6 +43,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .hs-label { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.05em; margin-top: 3px; }
 .header-pill { font-size: 12px; color: rgba(255,255,255,0.5); }
 .page-body { max-width: 900px; margin: 0 auto; padding: 36px 28px 80px; }
+
+/* PRICING MODEL */
 .pricing-model { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 40px; }
 .pm-head { background: var(--navy); padding: 14px 20px; }
 .pm-head h3 { font-size: 13px; font-weight: 700; color: var(--white); }
@@ -53,10 +57,21 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .pm-tier-price span { font-family: var(--font-body); font-size: 11px; font-weight: 400; opacity: 0.6; }
 .pm-tier-note { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
 .pm-tier-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
-.pm-bronze { border-top: 3px solid #9A7060; } .pm-bronze .pm-tier-name { color: #9A7060; } .pm-bronze .pm-tier-price { color: #9A7060; } .pm-bronze .pm-tier-tag { background: #F5EDE8; color: #9A7060; }
-.pm-silver { border-top: 3px solid var(--silver); } .pm-silver .pm-tier-name { color: var(--silver); } .pm-silver .pm-tier-price { color: var(--silver); } .pm-silver .pm-tier-tag { background: var(--silver-bg); color: var(--silver); }
-.pm-gold { border-top: 3px solid var(--gold); } .pm-gold .pm-tier-name { color: var(--gold); } .pm-gold .pm-tier-price { color: var(--gold); } .pm-gold .pm-tier-tag { background: var(--gold-bg); color: var(--gold); }
-.pm-addons { border-top: 3px solid var(--ocean); } .pm-addons .pm-tier-name { color: var(--ocean); } .pm-addons .pm-tier-price { color: var(--ocean); } .pm-addons .pm-tier-tag { background: var(--ocean-light); color: var(--ocean); }
+.pm-bronze { border-top: 3px solid #9A7060; } .pm-bronze .pm-tier-name { color: #9A7060; } .pm-bronze .pm-tier-price { color: #9A7060; }
+.pm-silver { border-top: 3px solid var(--silver); } .pm-silver .pm-tier-name { color: var(--silver); } .pm-silver .pm-tier-price { color: var(--silver); }
+.pm-gold { border-top: 3px solid var(--gold); } .pm-gold .pm-tier-name { color: var(--gold); } .pm-gold .pm-tier-price { color: var(--gold); }
+.pm-addons { border-top: 3px solid var(--ocean); } .pm-addons .pm-tier-name { color: var(--ocean); } .pm-addons .pm-tier-price { color: var(--ocean); }
+
+/* DEMO PATH */
+.demo-urls { background: var(--navy); border-radius: 12px; padding: 24px 28px; margin-bottom: 40px; }
+.demo-urls h3 { font-family: var(--font-display); font-size: 1rem; color: var(--white); margin-bottom: 16px; }
+.url-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+.url-item:last-child { margin-bottom: 0; }
+.url-num { width: 22px; height: 22px; background: #3AABDE; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--white); flex-shrink: 0; margin-top: 1px; }
+.url-body strong { display: block; font-size: 13px; color: var(--white); margin-bottom: 2px; }
+.url-body code { font-size: 11px; color: rgba(255,255,255,0.45); }
+
+/* TASK SECTIONS */
 .task-section { margin-bottom: 44px; }
 .ts-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
 .ts-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); }
@@ -67,6 +82,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .priority-high { background: var(--amber-bg); color: var(--amber); }
 .priority-medium { background: var(--ocean-light); color: var(--ocean); }
 .priority-last { background: var(--green-bg); color: var(--green); }
+
+/* TASK ITEMS */
 .task-list { display: flex; flex-direction: column; gap: 10px; }
 .task-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
 .task-item.new { border-left: 3px solid var(--dune); }
@@ -89,44 +106,77 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .tag-qa { background: var(--red-bg); color: var(--red); }
 .tag-new { background: var(--dune-light); color: #8A5A00; }
 .new-badge { display: inline-flex; align-items: center; background: var(--dune-light); color: #8A5A00; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 3px; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 8px; vertical-align: middle; }
+
+/* DNS REFERENCE BLOCK */
+.dns-ref { margin-top: 14px; }
+.dns-ref-toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--ocean); cursor: pointer; padding: 5px 12px; background: var(--ocean-light); border: 1px solid #B0D4DC; border-radius: 5px; user-select: none; }
+.dns-ref-toggle:hover { background: #D0E8EE; }
+.dns-ref-body { display: none; margin-top: 10px; }
+.dns-ref-body.open { display: block; }
+.dns-steps { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+.dns-step { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--muted); }
+.dns-step-num { width: 18px; height: 18px; background: var(--ocean); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+.dns-records { display: flex; flex-direction: column; gap: 8px; }
+.dns-record { background: var(--sand); border: 1px solid var(--border); border-radius: 7px; overflow: hidden; }
+.dns-record-head { background: var(--navy); padding: 7px 12px; font-size: 11px; font-weight: 700; color: var(--white); display: flex; justify-content: space-between; align-items: center; }
+.dns-record-head span { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 400; }
+.dns-record-body { padding: 10px 12px; display: grid; grid-template-columns: 60px 1fr auto; gap: 6px 10px; align-items: center; }
+.dns-field-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.dns-field-val { font-family: 'Courier New', monospace; font-size: 11.5px; color: var(--ocean-deep); background: var(--white); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); word-break: break-all; }
+.copy-btn { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-family: var(--font-body); font-size: 10px; font-weight: 600; color: var(--muted); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+.copy-btn:hover { border-color: var(--ocean); color: var(--ocean); }
+.copy-btn.copied { border-color: var(--green); color: var(--green); }
+.dns-note { font-size: 11.5px; color: var(--muted); background: var(--amber-bg); border: 1px solid var(--amber-border); border-radius: 5px; padding: 8px 11px; margin-top: 6px; line-height: 1.55; }
+
+/* QA GRID */
 .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (max-width: 600px) { .qa-grid { grid-template-columns: 1fr; } }
 .qa-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 16px; display: flex; gap: 12px; }
 .qa-icon { font-size: 20px; flex-shrink: 0; }
 .qa-body h4 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
 .qa-body p { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
 .page-footer { text-align: center; font-size: 12px; color: var(--muted); padding-top: 24px; border-top: 1px solid var(--border); }
+
+@media(max-width:640px) {
+  .page-header, .page-body { padding-left: 16px; padding-right: 16px; }
+  .nav { padding: 0 16px; }
+}
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <a href="/papamoa-previews/homepage.html" class="nav-logo">Papamoa<em>.info</em></a>
-  <span class="nav-tag">Post-Demo Task Plan · Internal — PlainBlack Creative</span>
+  <div class="nav-right">
+    <a href="/papamoa-previews/index.html">&#8592; Site Index</a>
+    <a href="/papamoa-previews/docs/pricing-master.html">Pricing</a>
+  </div>
 </nav>
 
 <div class="page-header">
   <div class="page-header-inner">
-    <div class="header-tag">Internal — PlainBlack Creative</div>
-    <h1 class="header-title">Post-Demo <em>Task Plan</em></h1>
-    <p class="header-sub">Carwyn demo complete. This plan covers what still needs doing before launch — funnel activation, QA sweep, and outstanding build items.</p>
+    <div class="header-tag">Internal &mdash; Plain Black Creative</div>
+    <h1 class="header-title">Master <em>Task Plan</em></h1>
+    <p class="header-sub">Single source of truth. Merged from post-demo task plan, demo prep checklist and DNS setup doc. Carwyn demo complete &mdash; this is what's left before launch.</p>
     <div class="header-meta">
-      <div class="header-stat"><div class="hs-num">149</div><div class="hs-label">Pages in repo</div></div>
-      <div class="header-stat"><div class="hs-num">20</div><div class="hs-label">Subcat pages with broken links</div></div>
-      <span class="header-pill">📅 Updated: April 2026 (post-demo)</span>
+      <div class="header-stat"><div class="hs-num">160</div><div class="hs-label">Pages in repo</div></div>
+      <div class="header-stat"><div class="hs-num">32</div><div class="hs-label">Tasks remaining</div></div>
+      <span class="header-pill">&#128197; Updated: April 2026 (post-demo)</span>
     </div>
   </div>
 </div>
 
 <div class="page-body">
 
+  <!-- PRICING MODEL -->
   <div class="pricing-model">
-    <div class="pm-head"><h3>💰 Confirmed Pricing Model — Locked April 2026</h3></div>
+    <div class="pm-head"><h3>&#128176; Confirmed Pricing Model &mdash; Locked April 2026</h3></div>
     <div class="pm-grid">
       <div class="pm-tier pm-bronze">
         <div class="pm-tier-name">Bronze</div>
         <div class="pm-tier-price">Free <span>/ placeholder</span></div>
-        <div class="pm-tier-note">Auto-generated. Captures real enquiries. Internal only — never sold.</div>
+        <div class="pm-tier-note">Auto-generated. Captures real enquiries. Internal only &mdash; never sold.</div>
         <span class="pm-tier-tag" style="background:#F5EDE8;color:#9A7060;">Core lead gen</span>
       </div>
       <div class="pm-tier pm-silver">
@@ -138,7 +188,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="pm-tier pm-gold">
         <div class="pm-tier-name">Gold Listing</div>
         <div class="pm-tier-price">$1,199 <span>+GST / yr</span></div>
-        <div class="pm-tier-note">Spotlight position. Photo gallery (up to 9). AI FAQ/AEO schema. Menu Add-On free. Premium ad access.</div>
+        <div class="pm-tier-note">Spotlight position. Photo gallery up to 9. AI FAQ/AEO schema. Menu Add-On free. Premium ad access.</div>
         <span class="pm-tier-tag" style="background:var(--gold-bg);color:var(--gold);">Upsell target</span>
       </div>
       <div class="pm-tier pm-addons">
@@ -150,10 +200,22 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     </div>
   </div>
 
+  <!-- DEMO PATH REFERENCE -->
+  <div class="demo-urls">
+    <h3>&#128279; Demo Path (reference)</h3>
+    <div class="url-item"><div class="url-num">1</div><div class="url-body"><strong>Homepage</strong><code>https://plainblackcreative.github.io/papamoa-previews/homepage.html</code></div></div>
+    <div class="url-item"><div class="url-num">2</div><div class="url-body"><strong>Food &amp; Drink category</strong><code>/papamoa-previews/categories/food-drink/food-and-drink.html</code></div></div>
+    <div class="url-item"><div class="url-num">3</div><div class="url-body"><strong>Gold listing (Mumbai Masala)</strong><code>/papamoa-previews/listings/mumbai-masala-papamoa.html</code></div></div>
+    <div class="url-item"><div class="url-num">4</div><div class="url-body"><strong>Sales landing</strong><code>/papamoa-previews/sales/landing.html</code></div></div>
+    <div class="url-item"><div class="url-num">5</div><div class="url-body"><strong>PPP (personalised preview)</strong><code>/papamoa-previews/previews/driftwood-cafe.html</code></div></div>
+    <div class="url-item"><div class="url-num">6</div><div class="url-body"><strong>Add Lead (CRM intake)</strong><code>/papamoa-previews/admin/add-lead.html</code></div></div>
+    <div class="url-item"><div class="url-num">7</div><div class="url-body"><strong>Fishing page (live AI data)</strong><code>/papamoa-previews/community/fishing.html</code></div></div>
+  </div>
+
   <!-- 1. IMMEDIATE QA FIXES -->
   <div class="task-section">
     <div class="ts-head">
-      <div class="ts-title">🔧 1. Immediate QA Fixes</div>
+      <div class="ts-title">&#128295; 1. Immediate QA Fixes</div>
       <div class="ts-meta"><span class="ts-count" id="c1">0 / 7 done</span><span class="ts-priority priority-critical">Do first</span></div>
     </div>
     <div class="task-list" id="s1">
@@ -162,8 +224,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Fix <code>href="#"</code> in 20 subcategory pages <span class="new-badge">Repo scan</span></div>
-          <div class="task-desc">Repo scan confirmed 20 category subpages with broken claim/list links. Affected: all food-drink subcats (cafe, restaurants, bar, bakery, indian, sushi, turkish, fish-and-chips), all services subcats (plumber, electrician, mechanic, physio, childcare, aircon, medical, painter, fencing, lawn-mowing), shops (supplement-store, vape-shop). All <code>href="#"</code> should point to <code>/papamoa-previews/sales/landing.html</code>.</div>
-          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-new">New</span></div>
+          <div class="task-desc">Repo scan confirmed 20 category subpages with broken claim/list links. Affected: all food-drink subcats (cafe, restaurants, bar, bakery, indian, sushi, turkish, fish-and-chips), services subcats (plumber, electrician, mechanic, physio, childcare, aircon, medical, painter, fencing, lawn-mowing), shops (supplement-store, vape-shop). All <code>href="#"</code> should point to <code>/papamoa-previews/sales/landing.html</code>.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
 
@@ -171,8 +233,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Fix "Gold Spotlight" naming in <code>sales/list-with-us.html</code> and <code>sales/post-call-landing.html</code> <span class="new-badge">Repo scan</span></div>
-          <div class="task-desc">11 instances remain in list-with-us.html, 4 in post-call-landing.html. Replace "Gold Spotlight" with "Gold Listing" throughout. The word "Spotlight" should only appear when describing the sub-category position feature, not as the product name.</div>
-          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-new">New</span></div>
+          <div class="task-desc">11 instances remain in list-with-us.html, 4 in post-call-landing.html. Replace "Gold Spotlight" with "Gold Listing" throughout. "Spotlight" should only appear when describing the sub-category position feature, not as the product name.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
 
@@ -180,8 +242,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Remove Menu Add-On CTA from Silver listings <span class="new-badge">Repo scan</span></div>
-          <div class="task-desc">Menu Add-On is Gold only. Remove "Add a menu" CTAs from: <code>xanadu-book-exchange-papamoa.html</code>, <code>the-pizza-pundits-papamoa.html</code>, <code>redefined-wellbeing-papamoa.html</code>, <code>pap-house-papamoa.html</code>, <code>mumbai-masala-papamoa.html</code>. Replace with an upgrade-to-Gold prompt. Also update <code>listing-silver-template.html</code> and <code>sales/menu-addon.html</code> to show Gold-only clearly.</div>
-          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-new">New</span></div>
+          <div class="task-desc">Menu Add-On is Gold only. Remove "Add a menu" CTAs from: <code>xanadu-book-exchange-papamoa.html</code>, <code>the-pizza-pundits-papamoa.html</code>, <code>redefined-wellbeing-papamoa.html</code>, <code>pap-house-papamoa.html</code>, <code>mumbai-masala-papamoa.html</code>. Replace with upgrade-to-Gold prompt. Also update <code>listing-silver-template.html</code> and <code>sales/menu-addon.html</code>.</div>
+          <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-listing">Listing</span></div>
         </div>
       </div>
 
@@ -189,8 +251,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Add gallery placeholder tiles to <code>papamoa-orthodontist.html</code> <span class="new-badge">Repo scan</span></div>
-          <div class="task-desc">This is the only Gold listing confirmed missing gallery tiles. All others (the-wagon, tara-road-dental, speedy-screens, coastal-autos, hakanini-surf-school) already have gallery references. Add icon + alt text placeholder tiles until real photos are supplied.</div>
-          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-qa">QA</span><span class="task-tag tag-new">New</span></div>
+          <div class="task-desc">Only Gold listing confirmed missing gallery tiles. Add icon + alt text placeholder tiles until real photos supplied. All other Gold listings (the-wagon, tara-road-dental, speedy-screens, coastal-autos, hakanini-surf-school) already have gallery references.</div>
+          <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-qa">QA</span></div>
         </div>
       </div>
 
@@ -198,7 +260,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Fix Stripe URLs in <code>previews/driftwood-cafe.html</code> PPP template</div>
-          <div class="task-desc"><code>STRIPE_GOLD_URL</code> and <code>STRIPE_SILVER_URL</code> currently point to <code>/papamoa-previews/sales/landing.html</code> as a placeholder. When Stripe is activated, replace with real payment links. Currently functional for demo — just shows landing.html instead of payment.</div>
+          <div class="task-desc"><code>STRIPE_GOLD_URL</code> and <code>STRIPE_SILVER_URL</code> currently fallback to landing.html. When Stripe is activated, replace with real $1,199 and $599+GST payment links. Currently functional for demo.</div>
           <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-automation">Automation</span></div>
         </div>
       </div>
@@ -207,7 +269,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Add <code>legal.html</code> link to all page footers <span class="new-badge">121 pages missing it</span></div>
-          <div class="task-desc">Repo scan: 121 pages are missing a <code>legal.html</code> link in the footer. Do this as a single nav.js rollout pass — add legal link to the shared footer component so all pages get it at once rather than editing each file individually.</div>
+          <div class="task-desc">Do this as a single nav.js rollout pass &mdash; add legal link to the shared footer component so all pages get it at once rather than editing individually.</div>
           <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
@@ -216,7 +278,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Build <code>404.html</code> page</div>
-          <div class="task-desc">No 404 page exists in the repo. GitHub Pages serves a generic 404. Build a branded page with nav, search bar, and links to homepage/categories. Prompt visitor to report the broken link via Web3Forms.</div>
+          <div class="task-desc">No 404 page exists. GitHub Pages serves a generic error. Build a branded page with nav, search bar, links to homepage/categories, and a Web3Forms prompt for visitors to report broken links.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-qa">QA</span></div>
         </div>
       </div>
@@ -227,7 +289,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <!-- 2. FUNNEL ACTIVATION -->
   <div class="task-section">
     <div class="ts-head">
-      <div class="ts-title">🚀 2. Funnel Activation</div>
+      <div class="ts-title">&#128640; 2. Funnel Activation</div>
       <div class="ts-meta"><span class="ts-count" id="c2">0 / 6 done</span><span class="ts-priority priority-high">High</span></div>
     </div>
     <div class="task-list" id="s2">
@@ -235,7 +297,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Activate Stripe — create Silver and Gold payment links</div>
+          <div class="task-title">Activate Stripe &mdash; create Silver and Gold payment links</div>
           <div class="task-desc">Create $599+GST NZD (Silver) and $1,199+GST NZD (Gold) annual subscription payment links in Stripe. Plug URLs into <code>STRIPE_SILVER_URL</code> and <code>STRIPE_GOLD_URL</code> in the PPP template. Automated receipt email is the minimum viable onboarding trigger.</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
@@ -245,16 +307,89 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">DNS consolidation session with Carwyn</div>
-          <div class="task-desc">GitHub CNAME (<code>preview.papamoa.info</code>), Brevo SPF/DKIM/DMARC, MX if needed. Prepare a one-page DNS checklist so the session takes under 10 minutes.</div>
+          <div class="task-desc">One session covers everything below. Get login access or sit with Carwyn. All records should be added in a single 15-minute session. Authentication can take up to 48 hours to propagate after adding.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span></div>
+
+          <div class="dns-ref">
+            <div class="dns-ref-toggle" onclick="toggleDns(this)">&#9660; Show DNS records &amp; steps</div>
+            <div class="dns-ref-body">
+              <div class="dns-steps">
+                <div class="dns-step"><div class="dns-step-num">1</div><span>Get DNS login access for papamoa.info (registrar or hosting panel)</span></div>
+                <div class="dns-step"><div class="dns-step-num">2</div><span>Add GitHub Pages CNAME &mdash; points <code>preview.papamoa.info</code> at <code>plainblackcreative.github.io</code></span></div>
+                <div class="dns-step"><div class="dns-step-num">3</div><span>Add Brevo verification TXT, DKIM 1, DKIM 2, DMARC records (see below)</span></div>
+                <div class="dns-step"><div class="dns-step-num">4</div><span>Check if SPF record already exists on @. If yes &mdash; merge includes. If no &mdash; add fresh.</span></div>
+                <div class="dns-step"><div class="dns-step-num">5</div><span>After 48hrs: verify domain in Brevo &rarr; Settings &rarr; Senders, Domains &amp; IPs &rarr; Domains</span></div>
+              </div>
+
+              <div class="dns-records">
+
+                <div class="dns-record">
+                  <div class="dns-record-head">GitHub Pages CNAME <span>preview subdomain</span></div>
+                  <div class="dns-record-body">
+                    <span class="dns-field-label">Type</span><span class="dns-field-val">CNAME</span><span></span>
+                    <span class="dns-field-label">Name</span><span class="dns-field-val">preview</span><button class="copy-btn" onclick="copyDns(this,'preview')">Copy</button>
+                    <span class="dns-field-label">Value</span><span class="dns-field-val">plainblackcreative.github.io</span><button class="copy-btn" onclick="copyDns(this,'plainblackcreative.github.io')">Copy</button>
+                    <span class="dns-field-label">TTL</span><span class="dns-field-val">3600 or Auto</span><span></span>
+                  </div>
+                </div>
+
+                <div class="dns-record">
+                  <div class="dns-record-head">Brevo domain verification <span>proves ownership</span></div>
+                  <div class="dns-record-body">
+                    <span class="dns-field-label">Type</span><span class="dns-field-val">TXT</span><span></span>
+                    <span class="dns-field-label">Name</span><span class="dns-field-val">@</span><button class="copy-btn" onclick="copyDns(this,'@')">Copy</button>
+                    <span class="dns-field-label">Value</span><span class="dns-field-val">brevo-code:fe02c41a77fa17740f1b2071d2ac3af4</span><button class="copy-btn" onclick="copyDns(this,'brevo-code:fe02c41a77fa17740f1b2071d2ac3af4')">Copy</button>
+                  </div>
+                </div>
+
+                <div class="dns-record">
+                  <div class="dns-record-head">DKIM 1 <span>email signing key 1</span></div>
+                  <div class="dns-record-body">
+                    <span class="dns-field-label">Type</span><span class="dns-field-val">CNAME</span><span></span>
+                    <span class="dns-field-label">Name</span><span class="dns-field-val">brevo1._domainkey</span><button class="copy-btn" onclick="copyDns(this,'brevo1._domainkey')">Copy</button>
+                    <span class="dns-field-label">Value</span><span class="dns-field-val">b1.papamoa-info.dkim.brevo.com</span><button class="copy-btn" onclick="copyDns(this,'b1.papamoa-info.dkim.brevo.com')">Copy</button>
+                  </div>
+                </div>
+
+                <div class="dns-record">
+                  <div class="dns-record-head">DKIM 2 <span>email signing key 2</span></div>
+                  <div class="dns-record-body">
+                    <span class="dns-field-label">Type</span><span class="dns-field-val">CNAME</span><span></span>
+                    <span class="dns-field-label">Name</span><span class="dns-field-val">brevo2._domainkey</span><button class="copy-btn" onclick="copyDns(this,'brevo2._domainkey')">Copy</button>
+                    <span class="dns-field-label">Value</span><span class="dns-field-val">b2.papamoa-info.dkim.brevo.com</span><button class="copy-btn" onclick="copyDns(this,'b2.papamoa-info.dkim.brevo.com')">Copy</button>
+                  </div>
+                </div>
+
+                <div class="dns-record">
+                  <div class="dns-record-head">DMARC <span>email policy</span></div>
+                  <div class="dns-record-body">
+                    <span class="dns-field-label">Type</span><span class="dns-field-val">TXT</span><span></span>
+                    <span class="dns-field-label">Name</span><span class="dns-field-val">_dmarc</span><button class="copy-btn" onclick="copyDns(this,'_dmarc')">Copy</button>
+                    <span class="dns-field-label">Value</span><span class="dns-field-val">v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com</span><button class="copy-btn" onclick="copyDns(this,'v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com')">Copy</button>
+                  </div>
+                </div>
+
+                <div class="dns-record">
+                  <div class="dns-record-head">SPF <span>authorises Gmail + Brevo sending</span></div>
+                  <div class="dns-record-body">
+                    <span class="dns-field-label">Type</span><span class="dns-field-val">TXT</span><span></span>
+                    <span class="dns-field-label">Name</span><span class="dns-field-val">@</span><span></span>
+                    <span class="dns-field-label">Value</span><span class="dns-field-val">v=spf1 include:_spf.google.com include:spf.brevo.com ~all</span><button class="copy-btn" onclick="copyDns(this,'v=spf1 include:_spf.google.com include:spf.brevo.com ~all')">Copy</button>
+                  </div>
+                  <div style="padding:0 12px 10px"><div class="dns-note">&#9888; Only one SPF record allowed on @. If one already exists, merge the includes into it &mdash; don't add a second record.</div></div>
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Brevo — set up Day 0/3/6/10 email sequences</div>
-          <div class="task-desc">Domain auth pending Carwyn DNS access. Set up sequences using Gmail send domain in the meantime. Test trigger from Web3Forms submission. Must fire automatically — no manual steps. Follow-up email template is built (<code>sales/followup-emails.html</code>).</div>
+          <div class="task-title">Brevo &mdash; set up Day 0/3/6/10 email sequences</div>
+          <div class="task-desc">Domain auth pending DNS session. Set up using Gmail send domain in the meantime. Test trigger from Web3Forms submission. Must fire automatically &mdash; no manual steps. Follow-up email template is built (<code>sales/followup-emails.html</code>).</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
@@ -262,8 +397,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Outscraper lead scrape — Pāpāmoa businesses, first 200 records</div>
-          <div class="task-desc">Pull business name, website, phone, email, category from Google Maps for Pāpāmoa. Clean the CSV. This is the cold outreach list. Without this there are no leads to funnel.</div>
+          <div class="task-title">Outscraper lead scrape &mdash; P&#257;p&#257;moa businesses, first 200 records</div>
+          <div class="task-desc">Pull business name, website, phone, email, category from Google Maps for P&#257;p&#257;moa. Clean the CSV. This is the cold outreach list. Without this there are no leads to funnel.</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
@@ -271,8 +406,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Send first cold email batch — 20 businesses, track opens</div>
-          <div class="task-desc">Import first 20 leads into Brevo. Send cold email template. Monitor open rate and click-through to placeholder listings. This is proof the funnel triggers from cold traffic.</div>
+          <div class="task-title">Send first cold email batch &mdash; 20 businesses, track opens</div>
+          <div class="task-desc">Import first 20 leads into Brevo. Send cold email template. Monitor open rate and click-through to placeholder listings. Proof the funnel triggers from cold traffic.</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
@@ -280,8 +415,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Google Analytics + Search Console — add to site</div>
-          <div class="task-desc">Add GA tag to homepage and all category pages now. Real traffic data from this point forward is gold for sales conversations. Request Carwyn's Search Console access post-demo.</div>
+          <div class="task-title">Google Analytics + Search Console &mdash; add to site</div>
+          <div class="task-desc">Add GA4 tag to homepage and all category pages. Real traffic data from this point is sales proof. Request Carwyn's Search Console access post-demo.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-seo">SEO</span></div>
         </div>
       </div>
@@ -292,7 +427,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <!-- 3. SITE-WIDE CONSISTENCY -->
   <div class="task-section">
     <div class="ts-head">
-      <div class="ts-title">🎨 3. Site-Wide Consistency Pass</div>
+      <div class="ts-title">&#127912; 3. Site-Wide Consistency Pass</div>
       <div class="ts-meta"><span class="ts-count" id="c3">0 / 5 done</span><span class="ts-priority priority-medium">Medium</span></div>
     </div>
     <div class="task-list" id="s3">
@@ -301,7 +436,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Retrofit all pages to <code>nav.js</code> shared nav system</div>
-          <div class="task-desc"><code>nav.js</code> is built and committed. Rollout means removing hardcoded nav/drawer HTML and CSS from every page, adding the placeholder div and script tag, and setting the correct <code>data-nav</code> attribute. Three variants: default, category, sales. This fixes nav consistency across all 149 pages in one pass. Do after all content work is complete.</div>
+          <div class="task-desc"><code>nav.js</code> is built and committed. Rollout means removing hardcoded nav HTML/CSS from every page and adding the placeholder div and script tag with correct <code>data-nav</code> attribute. Three variants: default, category, sales. Fixes nav consistency across all 160 pages in one pass. Do after all content work is complete.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-qa">QA</span></div>
         </div>
       </div>
@@ -310,7 +445,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Rename <code>categories/activities/entertainment.html</code> to <code>things-to-do.html</code></div>
-          <div class="task-desc">Rename the file, then do a single site-wide pass to fix all internal links pointing to it. Update nav and headers from "Entertainment" to "Things to Do" at the same time. Do this pass after all content work is done to avoid chasing moving links.</div>
+          <div class="task-desc">Rename the file, then do a site-wide pass to fix all internal links. Update nav and headers from "Entertainment" to "Things to Do". Do after all content work to avoid chasing moving links.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-qa">QA</span></div>
         </div>
       </div>
@@ -319,7 +454,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Add "List Your Business" nav link to all pages missing it</div>
-          <div class="task-desc">Articles, category, listing, and community pages that don't already have it need a "List your business" link in the nav pointing to <code>/sales/landing.html</code>. Do this as a single Find and Replace pass after content work is complete.</div>
+          <div class="task-desc">Articles, category, listing, and community pages missing the link need it pointing to <code>/sales/landing.html</code>. Do as a single Find and Replace pass after content work is complete.</div>
           <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-qa">QA</span></div>
         </div>
       </div>
@@ -328,7 +463,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Add "Claim this spot" CTA to all article/info/community pages with unfilled ad positions</div>
-          <div class="task-desc">Every article, info, and community page with an unfilled ad spotlight block needs a "Claim this spot" CTA linking to <code>/sales/claim.html?type=adspot&amp;page={slug}</code>. Only show when spot is unfilled. Each page tracks separately in Web3Forms via the subject line.</div>
+          <div class="task-desc">Every article/info/community page with an unfilled spotlight block needs a "Claim this spot" CTA linking to <code>/sales/claim.html?type=adspot&amp;page={slug}</code>. Only show when spot is unfilled. Each page tracked separately via Web3Forms subject line.</div>
           <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-qa">QA</span></div>
         </div>
       </div>
@@ -337,7 +472,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Remove all "Jayden" first-person references from public-facing pages</div>
-          <div class="task-desc">Replace with "we/us" throughout. VS Code Find and Replace (Cmd+Shift+H). Remaining instances confirmed in: <code>sales/partners/real-estate-outreach.html</code>, <code>sales/partners/real-estate-agent.html</code>. Check all sales and listing pages too.</div>
+          <div class="task-desc">Replace with "we/us" throughout. VS Code Find and Replace (Cmd+Shift+H). Confirmed in: <code>sales/partners/real-estate-outreach.html</code>, <code>sales/partners/real-estate-agent.html</code>. Check all sales and listing pages too.</div>
           <div class="task-tags"><span class="task-tag tag-qa">QA</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
@@ -348,7 +483,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <!-- 4. TECH & AUTOMATION -->
   <div class="task-section">
     <div class="ts-head">
-      <div class="ts-title">⚙️ 4. Tech &amp; Automation</div>
+      <div class="ts-title">&#9881;&#65039; 4. Tech &amp; Automation</div>
       <div class="ts-meta"><span class="ts-count" id="c4">0 / 6 done</span><span class="ts-priority priority-medium">Medium</span></div>
     </div>
     <div class="task-list" id="s4">
@@ -356,8 +491,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">CRM dashboard — route Google API calls through Cloudflare Worker</div>
-          <div class="task-desc">Hardcoded API key was exposed in <code>admin/crm-dashboard.html</code> (revoked). When rebuilding CRM connection, route all Google Sheets API calls through the existing Cloudflare Worker. Key lives in Worker environment variables, never in HTML.</div>
+          <div class="task-title">CRM dashboard &mdash; route Google API calls through Cloudflare Worker</div>
+          <div class="task-desc">Hardcoded API key was exposed in <code>admin/crm-dashboard.html</code> (revoked). When rebuilding, route all Google Sheets API calls through the existing Cloudflare Worker. Key lives in Worker environment variables only &mdash; never in HTML.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-automation">Automation</span></div>
         </div>
       </div>
@@ -366,7 +501,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Rotate Claude API key</div>
-          <div class="task-desc">Go to <code>console.anthropic.com</code>, rotate the key, then paste the new key into Cloudflare Worker environment variables. Never hardcode it in any HTML file. Do this after all build work is complete.</div>
+          <div class="task-desc">Go to <code>console.anthropic.com</code>, rotate the key, paste new key into Cloudflare Worker environment variables. Never hardcode in HTML. Do after all build work is complete.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
@@ -374,8 +509,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">GitHub Actions — auto-regenerate <code>sitemap.html</code> on every push</div>
-          <div class="task-desc">Set up a GitHub Actions workflow that scans the repo for <code>.html</code> files on every push to main and rebuilds <code>sitemap.html</code> automatically. No more manual updates as pages are added.</div>
+          <div class="task-title">GitHub Actions &mdash; auto-regenerate <code>sitemap.html</code> on every push</div>
+          <div class="task-desc">Workflow scans repo for <code>.html</code> files on every push to main and rebuilds <code>sitemap.html</code> automatically. No more manual updates as pages are added.</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
@@ -383,8 +518,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Fuel Stations &amp; Fuel Prices page — data source investigation</div>
-          <div class="task-desc">Gaspy NZ API or crowd-source via Web3Forms + GitHub Actions. High SEO and repeat-visit value. Even a weekly manual update beats a static placeholder. Worker route pattern already established from fishing-data.</div>
+          <div class="task-title">Fuel Stations &amp; Fuel Prices page &mdash; data source investigation</div>
+          <div class="task-desc">Gaspy NZ API or crowd-source via Web3Forms + GitHub Actions. High SEO and repeat-visit value. Worker route pattern already established from fishing-data endpoint.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-seo">SEO</span><span class="task-tag tag-automation">Automation</span></div>
         </div>
       </div>
@@ -392,8 +527,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title"><code>index.html</code> star persistence — localStorage to Cloudflare KV</div>
-          <div class="task-desc">Star state currently persists via localStorage (device-specific, lost on clear). Upgrade to Cloudflare KV via the existing Worker proxy for cross-device persistence.</div>
+          <div class="task-title"><code>index.html</code> star persistence &mdash; localStorage to Cloudflare KV</div>
+          <div class="task-desc">Star state currently persists via localStorage (device-specific, lost on clear). Upgrade to Cloudflare KV via existing Worker proxy for cross-device persistence.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-automation">Automation</span></div>
         </div>
       </div>
@@ -401,8 +536,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Admin <code>sales-funnel.html</code> — fix truncated JS + copy</div>
-          <div class="task-desc">Replace truncated <code>updateUI()</code> function (buttons/navigation broken). Also update "What Happens Next" Month 3 copy: change "Gold Founding Member two-for-one bonus" to "included free with any paid listing".</div>
+          <div class="task-title">Admin <code>sales-funnel.html</code> &mdash; fix truncated JS + copy</div>
+          <div class="task-desc">Replace truncated <code>updateUI()</code> function (buttons/navigation broken). Update "What Happens Next" Month 3 copy: change "Gold Founding Member two-for-one bonus" to "included free with any paid listing".</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
@@ -413,7 +548,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <!-- 5. CONTENT & LISTINGS -->
   <div class="task-section">
     <div class="ts-head">
-      <div class="ts-title">📍 5. Content &amp; Listings</div>
+      <div class="ts-title">&#128205; 5. Content &amp; Listings</div>
       <div class="ts-meta"><span class="ts-count" id="c5">0 / 5 done</span><span class="ts-priority priority-medium">Medium</span></div>
     </div>
     <div class="task-list" id="s5">
@@ -422,7 +557,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Build missing food &amp; drink subcategory pages</div>
-          <div class="task-desc">Confirmed missing from repo: burgers, thai, japanese, vietnamese, mexican, italian, french, function-venues, order-online, supermarket. Currently redirecting to landing.html. Build placeholder pages for each to improve SEO and user experience.</div>
+          <div class="task-desc">Confirmed missing: burgers, thai, japanese, vietnamese, mexican, italian, french, function-venues, order-online, supermarket. Currently redirecting to landing.html. Build placeholder pages for each to capture long-tail SEO.</div>
           <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-seo">SEO</span><span class="task-tag tag-content">Content</span></div>
         </div>
       </div>
@@ -431,7 +566,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Named placeholder listings for active outreach targets</div>
-          <div class="task-desc">When actively prospecting a specific business, create a named placeholder for them before making contact. Their name is already ranking when they receive the outreach email — the "oh that's me" moment drives upgrades. Build named placeholders only for active outreach targets.</div>
+          <div class="task-desc">When actively prospecting a business, create a named placeholder before making contact. Their name is already ranking when they receive the outreach email. Build named placeholders only for active outreach targets &mdash; not en masse.</div>
           <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
@@ -439,8 +574,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">PPP BUSINESS object generator — automate with Claude prompt</div>
-          <div class="task-desc">The PPP prompt template is built (part 4 of the notes dump). Next step: paste a business URL into Claude, get a complete BUSINESS object back ready to drop into the driftwood template. Build as an admin page using the Cloudflare proxy. One URL in, one paste-ready object out.</div>
+          <div class="task-title">PPP BUSINESS object generator &mdash; automate with Claude prompt</div>
+          <div class="task-desc">Paste a business URL into an admin page, get a complete BUSINESS object back ready to drop into the driftwood PPP template. Build as an admin page using the Cloudflare proxy. One URL in, one paste-ready object out.</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
@@ -448,8 +583,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Scrape 21 other business directories as Bronze placeholder sources</div>
-          <div class="task-desc">Good leads to set up as named placeholders and send claim-your-listing links via the funnel. Outscraper or manual scrape. Add to cold outreach CSV.</div>
+          <div class="task-title">Scrape business directories as Bronze placeholder sources</div>
+          <div class="task-desc">Good leads for named placeholders and claim-your-listing funnel sends. Outscraper or manual scrape. Add to cold outreach CSV.</div>
           <div class="task-tags"><span class="task-tag tag-listing">Listing</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
@@ -457,8 +592,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Facebook growth — post #1 and daily schedule</div>
-          <div class="task-desc">30 Facebook posts are ready in <code>sales/facebook-posts.html</code>. Post #1: "Pāpāmoa is getting its own local directory." Pin to top. Then post daily. Join Pāpāmoa community groups. Target 500 followers before first outreach batch. Consider starting a Pāpāmoa Community Info group for articles and community content.</div>
+          <div class="task-title">Facebook growth &mdash; post #1 and daily schedule</div>
+          <div class="task-desc">30 posts ready in <code>sales/facebook-posts.html</code>. Post #1: "P&#257;p&#257;moa is getting its own local directory." Pin to top. Post daily. Join P&#257;p&#257;moa community groups. Target 500 followers before first outreach batch.</div>
           <div class="task-tags"><span class="task-tag tag-content">Content</span><span class="task-tag tag-funnel">Funnel</span></div>
         </div>
       </div>
@@ -469,7 +604,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <!-- 6. DOCS & CRM -->
   <div class="task-section">
     <div class="ts-head">
-      <div class="ts-title">📋 6. Docs &amp; CRM</div>
+      <div class="ts-title">&#128203; 6. Docs &amp; CRM</div>
       <div class="ts-meta"><span class="ts-count" id="c6">0 / 3 done</span><span class="ts-priority priority-medium">Medium</span></div>
     </div>
     <div class="task-list" id="s6">
@@ -477,8 +612,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="task-item">
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
-          <div class="task-title">Fix <code>docs/crm-sheet-reference.html</code> — 3 small changes</div>
-          <div class="task-desc">Remove Bronze from Tier dropdown in LISTINGS tab (col D) and RENEWALS tab (col B). Remove Sub-Pages Count column H from LISTINGS tab — sub-pages removed from product entirely.</div>
+          <div class="task-title">Fix <code>docs/crm-sheet-reference.html</code> &mdash; 3 small changes</div>
+          <div class="task-desc">Remove Bronze from Tier dropdown in LISTINGS tab (col D) and RENEWALS tab (col B). Remove Sub-Pages Count column H from LISTINGS tab &mdash; sub-pages removed from product entirely.</div>
           <div class="task-tags"><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
@@ -487,7 +622,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">CRM platform decision + setup</div>
-          <div class="task-desc">Leaning Google Sheets + custom GitHub-hosted dashboard. HubSpot and Monday.com set aside. <code>admin/add-lead.html</code> already fires to Web3Forms. Next step: route Web3Forms submissions into Google Sheets via Zapier or Make.com webhook, then display in CRM dashboard.</div>
+          <div class="task-desc">Leaning Google Sheets + custom GitHub-hosted dashboard. <code>admin/add-lead.html</code> already fires to Web3Forms. Next: route Web3Forms submissions into Google Sheets via Make.com webhook, display in CRM dashboard.</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
@@ -496,7 +631,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <div class="task-check" onclick="toggle(this)"></div>
         <div class="task-body">
           <div class="task-title">Build <code>sales/spotlight-ads.html</code> properly</div>
-          <div class="task-desc">Stub page exists with "pricing coming soon" state. Build out once analytics data is available for pricing. Include live availability per spot, pricing table, enquiry form (Web3Forms, form_name: spotlight-ads-enquiry), Gold listing requirement clearly stated.</div>
+          <div class="task-desc">Stub page exists with "pricing coming soon". Build once analytics data is available. Include live availability per spot, pricing table, enquiry form (Web3Forms, form_name: spotlight-ads-enquiry), Gold listing requirement clearly stated.</div>
           <div class="task-tags"><span class="task-tag tag-funnel">Funnel</span><span class="task-tag tag-tech">Tech</span></div>
         </div>
       </div>
@@ -504,26 +639,26 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     </div>
   </div>
 
-  <!-- QA CHECKLIST -->
+  <!-- 7. PRE-LAUNCH QA -->
   <div class="task-section">
     <div class="ts-head">
-      <div class="ts-title">✅ 7. Pre-Launch QA Checklist</div>
+      <div class="ts-title">&#9989; 7. Pre-Launch QA Checklist</div>
       <div class="ts-meta"><span class="ts-priority priority-last">Run last</span></div>
     </div>
     <div class="qa-grid">
-      <div class="qa-item"><div class="qa-icon">🎨</div><div class="qa-body"><h4>Design System</h4><p>Figtree + Playfair Display everywhere. No DM Sans/Fraunces remnants. CSS variables match styles.css. Nav logo: white Figtree + cyan .info span.</p></div></div>
-      <div class="qa-item"><div class="qa-icon">🔗</div><div class="qa-body"><h4>Internal Links</h4><p>No href="#" remaining. No /slug paths — all should be /categories/folder/slug. No dead claim, advertise, or Home links.</p></div></div>
-      <div class="qa-item"><div class="qa-icon">💰</div><div class="qa-body"><h4>Pricing Accuracy</h4><p>Silver $599+GST/yr. Gold $1,199+GST/yr. Menu Add-On $199+GST/yr Gold only. Extra Spotlights $99+GST/yr. No Bronze as paid product. No sub-pages.</p></div></div>
-      <div class="qa-item"><div class="qa-icon">📊</div><div class="qa-body"><h4>Forms &amp; APIs</h4><p>Web3Forms: test from each active form type on live GitHub Pages. Cloudflare Worker: test via PPP search checker and fishing page Update button.</p></div></div>
-      <div class="qa-item"><div class="qa-icon">📱</div><div class="qa-body"><h4>Mobile Rendering</h4><p>Every page tested at 375px. Two-col layouts collapse. Tables scroll horizontally. No horizontal overflow. Nav drawer opens/closes cleanly.</p></div></div>
-      <div class="qa-item"><div class="qa-icon">🔍</div><div class="qa-body"><h4>SEO Basics</h4><p>Every page has unique title tag. Meta description present. No duplicate H1s. noindex only on admin/sales pages. Sitemap current.</p></div></div>
-      <div class="qa-item"><div class="qa-icon">🔤</div><div class="qa-body"><h4>Editorial Voice</h4><p>No "we/us/our" in listing copy. No "contact us" — all should be "call them/visit them". Macron on Pāpāmoa. No em dashes. No "Jayden" in public pages.</p></div></div>
-      <div class="qa-item"><div class="qa-icon">⚡</div><div class="qa-body"><h4>Security</h4><p>Claude API key rotated. Admin password changed in upload.html. No API keys hardcoded in HTML. CRM dashboard API routed through Worker.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">&#127912;</div><div class="qa-body"><h4>Design System</h4><p>Figtree + Playfair Display everywhere. No DM Sans/Fraunces remnants. CSS variables match styles.css. Nav logo: white Figtree + cyan .info span.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">&#128279;</div><div class="qa-body"><h4>Internal Links</h4><p>No href="#" remaining. No /slug paths &mdash; all should be /categories/folder/slug. No dead claim, advertise, or Home links.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">&#128176;</div><div class="qa-body"><h4>Pricing Accuracy</h4><p>Silver $599+GST/yr. Gold $1,199+GST/yr. Menu Add-On $199+GST/yr Gold only. Extra Spotlights $99+GST/yr. No Bronze as paid product. No sub-pages.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">&#128202;</div><div class="qa-body"><h4>Forms &amp; APIs</h4><p>Web3Forms: test from each active form type on live GitHub Pages. Cloudflare Worker: test via PPP search checker and fishing page Update button.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">&#128241;</div><div class="qa-body"><h4>Mobile Rendering</h4><p>Every page tested at 375px. Two-col layouts collapse. Tables scroll horizontally. No horizontal overflow. Nav drawer opens/closes cleanly.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">&#128269;</div><div class="qa-body"><h4>SEO Basics</h4><p>Every page has unique title tag. Meta description present. No duplicate H1s. noindex only on admin/sales pages. Sitemap current.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">&#128064;</div><div class="qa-body"><h4>Editorial Voice</h4><p>No "we/us/our" in listing copy. No "contact us" &mdash; all should be "call them/visit them". Macron on P&#257;p&#257;moa. No em dashes. No "Jayden" in public pages.</p></div></div>
+      <div class="qa-item"><div class="qa-icon">&#9889;</div><div class="qa-body"><h4>Security</h4><p>Claude API key rotated. Admin password changed in upload.html. No API keys hardcoded in HTML. CRM dashboard API routed through Worker.</p></div></div>
     </div>
   </div>
 
   <div class="page-footer">
-    Papamoa.info internal use only &nbsp;·&nbsp; PlainBlack Creative &nbsp;·&nbsp; Updated April 2026 (post-demo)
+    Papamoa.info internal use only &nbsp;&middot;&nbsp; Plain Black Creative &nbsp;&middot;&nbsp; Master task plan &mdash; updated April 2026
   </div>
 
 </div>
@@ -541,8 +676,7 @@ function updateCounts() {
     if (!sec) return;
     var total = sec.querySelectorAll('.task-check').length;
     var done = sec.querySelectorAll('.task-check.done').length;
-    var cid = 'c' + (i+1);
-    var cel = document.getElementById(cid);
+    var cel = document.getElementById('c' + (i+1));
     if (cel) cel.textContent = done + ' / ' + total + ' done';
   });
 }
@@ -550,8 +684,21 @@ document.querySelectorAll('.task-check').forEach(function(el, i) {
   if (localStorage.getItem('task-' + i) === '1') el.classList.add('done');
 });
 updateCounts();
-</script>
-<script>
+
+function toggleDns(btn) {
+  var body = btn.parentElement.querySelector('.dns-ref-body');
+  var open = body.classList.toggle('open');
+  btn.textContent = (open ? '\u25BC Hide DNS records & steps' : '\u25BC Show DNS records & steps');
+}
+
+function copyDns(btn, val) {
+  navigator.clipboard.writeText(val).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
 (function() {
   var base = '/papamoa-previews';
   document.addEventListener('click', function(e) {
