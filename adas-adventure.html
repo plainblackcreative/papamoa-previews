@@ -270,9 +270,31 @@ const W = 900, H = 500;
 
 // ─── SOUND ENGINE (Web Audio API — no files needed) ───────────────────────────
 var AC = null;
+var AC_MASTER = null; // master gain to prevent clipping
+
 function getAC() {
-  if (!AC) { try { AC = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){} }
+  if (!AC) {
+    try {
+      AC = new (window.AudioContext||window.webkitAudioContext)();
+      // Master limiter chain: gain -> compressor -> destination
+      AC_MASTER = AC.createGain();
+      AC_MASTER.gain.value = 0.42;
+      var limiter = AC.createDynamicsCompressor();
+      limiter.threshold.value = -6;
+      limiter.knee.value = 3;
+      limiter.ratio.value = 12;
+      limiter.attack.value = 0.001;
+      limiter.release.value = 0.08;
+      AC_MASTER.connect(limiter);
+      limiter.connect(AC.destination);
+    } catch(e) {}
+  }
   return AC;
+}
+
+function getOut() {
+  getAC();
+  return AC_MASTER || (AC ? AC.destination : null);
 }
 function resumeAC() {
   if (!AC) { try { AC = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){ return; } }
@@ -288,36 +310,38 @@ function resumeAC() {
 });
 
 function playTone(freq,dur,vol,type,slide,delay) {
-  var ac=getAC(); if(!ac) return;
-  vol=vol||0.18; type=type||'square'; delay=delay||0;
+  var ac=getAC(); var out=getOut(); if(!ac||!out) return;
+  vol=(vol||0.18)*0.45; // halved + master handles the rest
+  type=type||'square'; delay=delay||0;
   var osc=ac.createOscillator(), gain=ac.createGain();
-  // Add a subtle compressor to avoid clipping
-  var comp=ac.createDynamicsCompressor();
-  osc.connect(gain); gain.connect(comp); comp.connect(ac.destination);
+  osc.connect(gain); gain.connect(out);
   osc.type=type;
   var t=ac.currentTime+delay;
   osc.frequency.setValueAtTime(freq,t);
-  if(slide) osc.frequency.exponentialRampToValueAtTime(slide,t+dur);
-  gain.gain.setValueAtTime(0,t);
-  gain.gain.linearRampToValueAtTime(vol,t+0.012);
-  gain.gain.setValueAtTime(vol,t+dur-0.05);
-  gain.gain.linearRampToValueAtTime(0,t+dur);
-  osc.start(t); osc.stop(t+dur+0.02);
+  if(slide) osc.frequency.exponentialRampToValueAtTime(Math.max(slide,1),t+dur);
+  gain.gain.setValueAtTime(0.0001,t);
+  gain.gain.linearRampToValueAtTime(vol,t+0.01);
+  gain.gain.setValueAtTime(vol,t+Math.max(dur-0.04,0.01));
+  gain.gain.linearRampToValueAtTime(0.0001,t+dur);
+  osc.start(t); osc.stop(t+dur+0.01);
 }
 
 function playNoise(dur,vol,freq,type,delay) {
-  var ac=getAC(); if(!ac) return;
+  var ac=getAC(); var out=getOut(); if(!ac||!out) return;
   delay=delay||0;
-  var buf=ac.createBuffer(1,ac.sampleRate*dur,ac.sampleRate);
+  var bufLen=Math.floor(ac.sampleRate*Math.min(dur,1.0)); // cap buffer size
+  var buf=ac.createBuffer(1,bufLen,ac.sampleRate);
   var data=buf.getChannelData(0);
   for(var i=0;i<data.length;i++) data[i]=(Math.random()*2-1);
   var src2=ac.createBufferSource(); src2.buffer=buf;
-  var filt=ac.createBiquadFilter(); filt.type=type||'bandpass'; filt.frequency.value=freq||400; filt.Q.value=1.2;
+  var filt=ac.createBiquadFilter(); filt.type=type||'bandpass';
+  filt.frequency.value=Math.max(freq||400,20); filt.Q.value=0.8;
   var gain=ac.createGain();
   var t=ac.currentTime+delay;
-  gain.gain.setValueAtTime(vol||0.12,t);
-  gain.gain.exponentialRampToValueAtTime(0.001,t+dur);
-  src2.connect(filt); filt.connect(gain); gain.connect(ac.destination);
+  var safeVol=(vol||0.12)*0.45;
+  gain.gain.setValueAtTime(safeVol,t);
+  gain.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  src2.connect(filt); filt.connect(gain); gain.connect(out);
   src2.start(t);
 }
 
@@ -786,7 +810,7 @@ function spawnProjectile(x,y,dir,wIdx) {
         w:20,h:20,wIdx,alive:true,tick:0,maxTick:35,color:w.color,aoe:true});
     }
   } else {
-    projectiles.push({x:x+dir*10,y,vx:dir*speed,vy:-1,w:14,h:14,wIdx,alive:true,tick:0,maxTick:60,
+    projectiles.push({x:x+dir*10,y,vx:dir*speed,vy:0,w:14,h:14,wIdx,alive:true,tick:0,maxTick:60,
       color:w.color,aoe:false});
   }
 }
@@ -810,7 +834,7 @@ function loadLevel(num) {
     if (e.type === 'lars') { larsCount++; return larsCount <= 1; }
     return true;
   });
-  player.x = 80; player.y = 380;
+  player.x = 80; player.y = 410;  // start closer to ground
   player.vx = 0; player.vy = 0;
   player.state = 'idle';
   player.invTick = 0;
@@ -1558,7 +1582,7 @@ function killPlayer(msg) {
     player.x = 80; player.y = 380;
     player.vx = 0; player.vy = 0;
     player.state = 'idle';
-    player.invTick = 120;
+    player.invTick = 60;
     GS.camera = 0;
   }
 }
@@ -1582,9 +1606,11 @@ function updateProjectiles() {
     p.y += p.vy;
     p.tick++;
     if (p.tick > p.maxTick || p.x < GS.camera-50 || p.x > GS.camera+W+50) { p.alive=false; continue; }
-    // hit enemies
+    // hit enemies — only enemies on screen
+    var camL = GS.camera - 20, camR = GS.camera + W + 20;
     for (const e of level.enemies) {
-      if (!e.dead && p.x < e.x+e.w && p.x+p.w > e.x && p.y < e.y+e.h && p.y+p.h > e.y) {
+      if (!e.dead && e.x+e.w > camL && e.x < camR &&
+          p.x < e.x+e.w && p.x+p.w > e.x && p.y < e.y+e.h && p.y+p.h > e.y) {
         hitEnemy(e, WEAPONS[p.wIdx].damage);
         p.alive = false;
         spawnParticle(p.x, p.y, p.color, 5);
@@ -3270,6 +3296,7 @@ function drawCollectibles() {
   }
 
   // toy - glowing chest/trophy
+  ctx.save();
   const t = level.toy;
   if (!t.collected) {
     const tb = Math.sin(GS.frame*0.06)*4;
@@ -3309,6 +3336,7 @@ function drawCollectibles() {
     ctx.fillText(TOY_DATA[t.toyIdx].name, t.x+t.w/2, t.y+tb-5);
     ctx.textAlign = 'left';
   }
+  ctx.restore(); // end toy save
 
   // ally
   const a = level.ally;
@@ -3735,7 +3763,8 @@ function drawMonique(e) {
 
 // ─── PLAYER DRAWING ───────────────────────────────────────────────────────────
 function drawPlayer() {
-  if (GS.state !== 'playing') return;
+  // Draw Ada during play AND dialogue (dialogue pauses but Ada stays visible)
+  if (GS.state!=='playing' && GS.state!=='dialogue') return;
   if (player.invTick > 0 && GS.frame%6 < 3) return;
 
   const px = Math.round(player.x), py = Math.round(player.y);
