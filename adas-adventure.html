@@ -1174,12 +1174,12 @@ function drawTitleBg() {
 
 // Scene timing: each scene has a start tick
 var INTRO_SCENES = [
-  { start:0,   dur:130 }, // Scene 0: aerial pullback - Johnsonville hills
-  { start:130, dur:140 }, // Scene 1: Helston Rd from the road - see the bend, power poles
-  { start:270, dur:130 }, // Scene 2: THE ISLAND - the green wedge from the kerb
-  { start:400, dur:110 }, // Scene 3: 125 Helston Rd house / garage close-up
-  { start:510, dur:110 }, // Scene 4: Ada walks out the gate toward the island
-  { start:620, dur:100 }, // Scene 5: zoom into island, trees close up, title card
+  { start:0,   dur:320 }, // Scene 0: aerial pullback - Johnsonville hills
+  { start:320, dur:360 }, // Scene 1: Helston Rd from the road - see the bend, power poles
+  { start:680, dur:340 }, // Scene 2: THE ISLAND - the green wedge from the kerb
+  { start:1020,dur:300 }, // Scene 3: 125 Helston Rd house / garage close-up
+  { start:1320,dur:300 }, // Scene 4: Ada walks out the gate toward the island
+  { start:1620,dur:300 }, // Scene 5: zoom into island, trees close up, title card
 ];
 
 function getSceneT() {
@@ -3012,7 +3012,7 @@ function loop() {
     if (GS.state === 'intro') {
       GS.introTick++;
       // Auto-advance: total intro ~12 seconds (720 frames at 60fps)
-      if (GS.introTick > 720) skipIntro();
+      if (GS.introTick > 1920) skipIntro();
       updateParticles();
     } else if (GS.state === 'playing') {
       updatePlayer();
