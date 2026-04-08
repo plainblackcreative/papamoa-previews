@@ -476,7 +476,7 @@ function sndFootstep() {
 
 // ─── GAME STATE ───────────────────────────────────────────────────────────────
 const GS = {
-  state: 'intro', // intro, title, playing, dead, win, levelTransition
+  state: 'intro', // intro, title, playing, dead, win, levelTransition, dialogue
   level: 0,
   score: 0,
   lives: 5,
@@ -492,6 +492,8 @@ const GS = {
   deathMsg: '',
   introTick: 0,
   introScene: 0,
+  dialogue: null,   // {speaker, lines[], lineIdx, returnState}
+  dialogueTick: 0,
 };
 
 const WEAPONS = [
@@ -535,7 +537,8 @@ function buildLevel(num) {
 function makePlatform(x,y,w,type) { if(type===undefined)type='ground'; return {x,y,w,h:16,type}; }
 function makeEnemy(x,y,type,bossId) { if(type===undefined)type='goon'; if(bossId===undefined)bossId=-1;
   return {x,y,w:32,h:40,type,bossId,vx:type==='lars'?0:-1,hp:type==='monique'?6:type==='lars'?3:1,
-    maxHp:type==='monique'?6:type==='lars'?3:1,dir:-1,state:'walk',stunTick:0,
+    maxHp:type==='monique'?6:type==='lars'?3:1,
+    scratchTick:0,flakeCooldown:0,dir:-1,state:'walk',stunTick:0,
     alertTick:0,groundY:y};
 }
 function makeToy(x,y,idx) { return {x,y,w:24,h:24,toyIdx:idx,collected:false}; }
@@ -569,12 +572,8 @@ function buildLevel0() {
       makePlatform(2700,360,500,'grass'),
     ],
     enemies: [
-      makeEnemy(700,428,'goon'),
-      makeEnemy(1100,460,'goon'),
-      makeEnemy(1600,388,'goon'),
-      makeEnemy(2000,368,'goon'),
-      makeEnemy(2500,326,'goon'),
-      makeEnemy(2900,328,'goon'),
+      makeEnemy(900,428,'scratchy'),
+      makeEnemy(2200,428,'scratchy'),
     ],
     collectibles: [
       makeCollectible(400,430,'snot'),
@@ -617,14 +616,8 @@ function buildLevel1() {
       makePlatform(3100,360,300,'branch'),
     ],
     enemies: [
-      makeEnemy(400,308,'goon'),
-      makeEnemy(800,328,'goon'),
-      makeEnemy(1200,248,'goon'),
-      makeEnemy(1600,268,'goon'),
-      makeEnemy(1900,228,'goon'),
-      makeEnemy(2300,288,'goon'),
-      makeEnemy(2600,208,'goon'),
-      makeEnemy(3000,268,'goon'),
+      makeEnemy(700,428,'scratchy'),
+      makeEnemy(2400,428,'scratchy'),
     ],
     collectibles: [
       makeCollectible(200,350,'snot'), makeCollectible(600,270,'snot'),
@@ -666,11 +659,8 @@ function buildLevel2() {
       makePlatform(3350,300,250,'branch'),
     ],
     enemies: [
-      makeEnemy(300,318,'goon'), makeEnemy(580,318,'goon'),
-      makeEnemy(900,288,'goon'), makeEnemy(1200,228,'goon'),
-      makeEnemy(1600,208,'goon'), makeEnemy(2000,188,'goon'),
-      makeEnemy(2400,168,'goon'), makeEnemy(2700,208,'goon'),
-      makeEnemy(3000,208,'goon'), makeEnemy(3200,208,'goon'),
+      makeEnemy(1100,428,'scratchy'),
+      makeEnemy(2800,428,'scratchy'),
     ],
     collectibles: [
       makeCollectible(150,370,'snot'), makeCollectible(500,270,'snot'),
@@ -708,10 +698,8 @@ function buildLevel3() {
       makePlatform(2600,300,80,'branch'),
     ],
     enemies: [
-      makeEnemy(350,288,'goon'), makeEnemy(800,268,'goon'),
-      makeEnemy(1200,248,'goon'), makeEnemy(1600,288,'goon'),
-      makeEnemy(2100,308,'goon'),
-      makeEnemy(2400,338,'lars',1), // Lars boss
+      makeEnemy(600,428,'scratchy'),
+      makeEnemy(2400,338,'lars',1),
     ],
     collectibles: [
       makeCollectible(200,350,'snot'), makeCollectible(600,330,'snot'),
@@ -746,9 +734,7 @@ function buildLevel4() {
       makePlatform(2200,340,80,'branch'),
     ],
     enemies: [
-      makeEnemy(300,288,'goon'),
-      makeEnemy(700,268,'goon'),
-      makeEnemy(1000,308,'goon'),
+      makeEnemy(700,428,'scratchy'),
       makeEnemy(1500,356,'monique',2),
     ],
     collectibles: [
@@ -833,6 +819,7 @@ function loadLevel(num) {
 document.addEventListener('keydown', e => {
   GS.keys[e.code] = true;
   if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.key)) e.preventDefault();
+  if (GS.state === 'dialogue') { advanceDialogue(); return; }
   if (GS.state === 'intro') { skipIntro(); return; }
   if (GS.state === 'title' || GS.state === 'win' || GS.state === 'dead') {
     if (e.code==='Space'||e.code==='Enter') startGame();
@@ -843,6 +830,7 @@ document.addEventListener('keyup', e => { GS.keys[e.code] = false; });
 // Mouse: left click = shoot, right click = melee
 canvas.addEventListener('mousedown', e => {
   e.preventDefault();
+  if (GS.state === 'dialogue') { advanceDialogue(); return; }
   if (GS.state === 'intro') { skipIntro(); return; }
   if (GS.state === 'title' || GS.state === 'win' || GS.state === 'dead') { startGame(); return; }
   if (e.button === 0) GS.keys['MouseShoot'] = true;
@@ -856,6 +844,7 @@ canvas.addEventListener('contextmenu', e => e.preventDefault());
 
 // Touch controls
 canvas.addEventListener('touchstart', function(e) {
+  if (GS.state === 'dialogue') { e.preventDefault(); advanceDialogue(); return; }
   if (GS.state === 'intro') { e.preventDefault(); skipIntro(); }
 }, {passive:false});
 
@@ -881,7 +870,7 @@ function startGame() {
   GS.weaponIndex = 0;
   document.getElementById('overlay').style.display = 'none';
   loadLevel(0);
-  showMessage("Ada grabs his cap and heads\ntowards THE ISLAND...", 180);
+  showDialogue("narrator", "Helston Road. A perfectly ordinary Saturday morning.", "Except Monique has nicked all of Ada's wrestling figures.", "And captured everyone.", "Ada grabs his cap.", "Time to go to The Island.");
 }
 
 function skipIntro() {
@@ -902,13 +891,51 @@ function skipIntro() {
   }
 }
 
-// ─── MESSAGE SYSTEM ───────────────────────────────────────────────────────────
-function showMessage(text, duration) { if (duration===undefined) duration=150;
-  GS.message = text;
-  GS.messageTick = duration;
-  const mb = document.getElementById('message-box');
+// ─── DIALOGUE SYSTEM ──────────────────────────────────────────────────────────
+// showDialogue(speaker, line1, line2, ...) — pauses game, speech bubble on canvas
+// showMessage still works for brief non-blocking HUD toasts
+var SPEAKER_META = {
+  ada:      { label: "Ada",      color: "#ffe066", bg: "#1a3a1a" },
+  rory:     { label: "Rory",     color: "#ddaa44", bg: "#2a1a00" },
+  matthew:  { label: "Matthew",  color: "#44aadd", bg: "#001a2a" },
+  dennis:   { label: "Dennis",   color: "#cc88ff", bg: "#1a002a" },
+  chris:    { label: "Chris",    color: "#ff8888", bg: "#2a0000" },
+  todd:     { label: "Todd",     color: "#44dd88", bg: "#002a10" },
+  lars:     { label: "Lars",     color: "#88aaff", bg: "#00102a" },
+  monique:  { label: "MONIQUE",  color: "#ff44aa", bg: "#2a0018" },
+  scratchy: { label: "Scratchy", color: "#ffddaa", bg: "#2a1800" },
+  narrator: { label: "",         color: "#cceeff", bg: "#0a0a0a" },
+};
+
+function showDialogue(speaker) {
+  var lines = [];
+  for (var i=1; i<arguments.length; i++) lines.push(arguments[i]);
+  // Don't interrupt existing dialogue, just queue first line as toast
+  if (GS.state === 'dialogue') return;
+  GS.dialogue = { speaker: speaker, lines: lines, lineIdx: 0, returnState: GS.state };
+  GS.state = 'dialogue';
+  GS.dialogueTick = 0;
+}
+
+function advanceDialogue() {
+  if (!GS.dialogue) return;
+  GS.dialogueTick = 0;
+  GS.dialogue.lineIdx++;
+  if (GS.dialogue.lineIdx >= GS.dialogue.lines.length) {
+    GS.state = GS.dialogue.returnState;
+    GS.dialogue = null;
+  }
+}
+
+// showMessage = non-blocking brief toast (kept for HUD things)
+function showMessage(text, duration) {
+  if (duration===undefined) duration=150;
+  // Convert to single-line dialogue for important stuff, toast otherwise
+  var mb = document.getElementById('message-box');
   mb.innerHTML = text.replace(/\n/g,'<br>');
   mb.style.display = 'block';
+  GS.message = text;
+  GS.messageTick = duration;
 }
 function clearMessage() {
   GS.messageTick = 0;
@@ -1047,19 +1074,8 @@ function updateEnemies() {
 
     if (e.type === 'monique' || e.type === 'lars') {
       updateBoss(e);
-    } else {
-      // patrol
-      e.x += e.vx * 0.9;
-      if (e.x < 10 || e.x + e.w > level.width - 10) e.vx *= -1;
-      // reverse at platform edges
-      let onPlatform = false;
-      for (const p of level.platforms) {
-        if (e.x + e.w/2 > p.x && e.x + e.w/2 < p.x+p.w && Math.abs((e.y+e.h)-p.y)<8) {
-          onPlatform = true;
-          const edgeFwd = e.vx > 0 ? e.x+e.w+4 : e.x-4;
-          if (edgeFwd < p.x || edgeFwd > p.x+p.w) e.vx *= -1;
-        }
-      }
+    } else if (e.type === 'scratchy') {
+      updateScratchy(e);
     }
 
     // player collision - 12px inner margin so you have to really walk into them
@@ -1070,6 +1086,99 @@ function updateEnemies() {
       hurtPlayer(1);
     }
   }
+}
+
+
+function updateScratchy(e) {
+  // Scratchy just shuffles slowly on the ground, minding his own business
+  // Every few seconds he stops to scratch himself and flings flakes
+  e.scratchTick = (e.scratchTick||0) + 1;
+  e.flakeCooldown = (e.flakeCooldown||0) - 1;
+
+  var scratchCycle = 200; // frames between scratches
+  var withinCycle = e.scratchTick % scratchCycle;
+
+  if (withinCycle < 60) {
+    // Scratching phase — stopped, animation twitching
+    e.vx = 0;
+    e.state = 'scratch';
+    // Shoot a flake every 18 frames during scratch
+    if (withinCycle % 18 === 8 && e.flakeCooldown <= 0) {
+      e.flakeCooldown = 18;
+      // Flake fires toward player if nearby, otherwise random direction
+      var dx = player.x - e.x;
+      var flakeDir = dx > 0 ? 1 : -1;
+      var flakeVx = flakeDir * (3 + Math.random() * 2);
+      var flakeVy = -2 - Math.random() * 3;
+      // store as a special projectile type on level.flakes array
+      if (!level.flakes) level.flakes = [];
+      level.flakes.push({
+        x: e.x + e.w/2,
+        y: e.y + 8,
+        vx: flakeVx,
+        vy: flakeVy,
+        life: 1.0,
+        alive: true,
+        tick: 0
+      });
+      // scratchy sound
+      playNoise(0.08, 0.07, 600, 'highpass');
+    }
+  } else {
+    // Shuffle phase — slow walk
+    e.state = 'walk';
+    e.x += e.vx * 0.6;
+    // bounce off level edges
+    if (e.x < 20) { e.vx = Math.abs(e.vx)||1; }
+    if (e.x + e.w > level.width - 20) { e.vx = -(Math.abs(e.vx)||1); }
+    // reverse at platform edges (stay on ground, don't fall off)
+    for (var pi=0; pi<level.platforms.length; pi++) {
+      var p = level.platforms[pi];
+      if (e.x + e.w/2 > p.x && e.x + e.w/2 < p.x+p.w && Math.abs((e.y+e.h)-p.y)<8) {
+        var edgeFwd = e.vx > 0 ? e.x+e.w+4 : e.x-4;
+        if (edgeFwd < p.x || edgeFwd > p.x+p.w) e.vx *= -1;
+      }
+    }
+  }
+  e.dir = e.vx >= 0 ? 1 : -1;
+  // Apply gravity so Scratchy stays on ground
+  e.vy = (e.vy||0) + 0.55;
+  e.y += e.vy;
+  for (var pi2=0; pi2<level.platforms.length; pi2++) {
+    var p2 = level.platforms[pi2];
+    if (e.x+e.w > p2.x && e.x < p2.x+p2.w && e.vy >= 0 && e.y+e.h > p2.y && e.y+e.h < p2.y+20) {
+      e.y = p2.y - e.h; e.vy = 0;
+    }
+  }
+}
+
+function updateFlakes() {
+  if (!level || !level.flakes) return;
+  for (var i=0; i<level.flakes.length; i++) {
+    var f = level.flakes[i];
+    if (!f.alive) continue;
+    f.x += f.vx;
+    f.y += f.vy;
+    f.vy += 0.18; // gentle gravity on flake
+    f.tick++;
+    f.life -= 0.018;
+    if (f.life <= 0 || f.tick > 120) { f.alive = false; continue; }
+    // Check if hits player — stuns briefly (no damage, just stops Ada)
+    if (player.invTick <= 0 &&
+        f.x > player.x+4 && f.x < player.x+player.w-4 &&
+        f.y > player.y+4 && f.y < player.y+player.h-4) {
+      f.alive = false;
+      // Stun — freeze movement for 40 frames
+      player.state = 'hurt';
+      player.stateTick = 40;
+      player.vx = 0;
+      player.invTick = 50; // brief invincibility after stun
+      spawnParticle(player.x+player.w/2, player.y+player.h/2, '#ffeeaa', 5);
+      playNoise(0.1, 0.08, 800, 'highpass');
+      showDialogue("scratchy", "itchy itchy itchy...");
+    }
+  }
+  level.flakes = level.flakes.filter(function(f){ return f.alive; });
 }
 
 function updateBoss(e) {
@@ -1124,10 +1233,10 @@ function hitEnemy(e, dmg) {
     spawnParticle(e.x+e.w/2, e.y+e.h/2, '#ffff00', 12);
     if (e.type==='monique'||e.type==='lars') sndBossDie(); else sndEnemyDie();
     if (e.type==='monique') {
-      showMessage("MONIQUE RUNS HOME CRYING!\n'MUUUUUMMMMMeeee!'\nLars: 'Nice one, Ada...'", 220);
+      showDialogue('monique', "MUUUUUMMMMMeeee!", "THIS ISN'T OVER ADAAAAAN!", "Lars: Nice one, Ada.", "Lars: She'll be fine. Probably.", "Ada: Worth it.");
       setTimeout(() => triggerWin(), 3000);
     } else if (e.type==='lars') {
-      showMessage("Lars: 'OK OK! I'll show you\nwhere Monique hid everything!'\nLars joins the crew! 🤜🤛", 200);
+      showDialogue('lars', "OK OK! I'll show you where Monique hid everything!", "She's my sister but she's gone too far.", "...I know where the toys are.", "Ada: Lars. You're one of us now.");
     }
     updateHUD();
   }
@@ -1223,11 +1332,11 @@ function updateCollectibles() {
     t.collected = true;
     GS.toys++;
     const toy = TOY_DATA[t.toyIdx];
-    showMessage("🏆 GOT IT!\n" + toy.name + "!\n+" + 100 + " points!", 140);
     GS.score += 100;
     spawnParticle(t.x+t.w/2, t.y+t.h/2, '#ffdd44', 10);
     sndToy();
     updateHUD();
+    showDialogue('ada', "YES! " + toy.name + "!", "Monique is NOT getting this back.");
   }
   // ally
   const a = level.ally;
@@ -1239,12 +1348,24 @@ function updateCollectibles() {
     const ally = ALLY_DATA[a.allyIdx];
     GS.weaponIndex = Math.min(GS.alliesRescued.length, WEAPONS.length-1);
     const wName = WEAPONS[GS.weaponIndex].name;
-    showMessage("👦 " + ally.name + " RESCUED!\n'" + getAllyQuote(ally) + "'\nNEW WEAPON: " + wName, 180);
     GS.score += 200;
     spawnParticle(a.x+a.w/2, a.y+a.h/2, ally.color, 12);
     sndAllyRescue();
     updateHUD();
+    var aq = getAllyDialogue(ally, wName);
+    showDialogue.apply(null, aq);
   }
+}
+
+function getAllyDialogue(ally, wName) {
+  var lines = { 
+    RORY:    ['rory',    "About time. I was GRUMPY in there.", "Ada: New weapon unlocked: "+wName],
+    MATTHEW: ['matthew', "I could've run out if they untied me.", "I would've been FAST about it.", "Ada: "+wName+" unlocked!"],
+    DENNIS:  ['dennis',  "I was almost out already actually.", "I had a whole plan.", "Ada: "+ wName+"!"],
+    CHRIS:   ['chris',   "HEHEHE wasn't even scared hehehe", "HEHEHE", "Ada: "+wName+"!!"],
+    TODD:    ['todd',    "I WILL DESTROY MONIQUE WITH MY BARE HANDS.", "Let's go Ada.", "Ada: "+wName+" — let's use it."],
+  };
+  return lines[ally.name] || ['narrator', ally.name+" rescued!", "New weapon: "+wName];
 }
 
 function getAllyQuote(ally) {
@@ -1268,8 +1389,22 @@ function checkExit() {
       triggerWin();
     } else {
       GS.level++;
-      GS.state = 'levelTransition';
       sndLevelUp();
+      var lvlNames = ['','Deep in the island now...','The heart of it. Getting darker.','Lars country. Careful.','Monique\'s lair. This is it.'];
+      var ln = lvlNames[GS.level]||'';
+      if (ln) {
+        GS.state = 'levelTransition';
+        var nextName2 = buildLevel(GS.level).name;
+        var ov2 = document.getElementById('overlay');
+        ov2.style.display = 'flex';
+        ov2.innerHTML = '<h1 style="font-size:14px; color:#aaffaa;">LEVEL '+(GS.level+1)+'</h1><div class="sub">'+nextName2+'</div><button class="start-btn" onclick="nextLevel()">&#9658; CONTINUE</button>';
+      } else {
+        GS.state = 'levelTransition';
+        var nextName3 = buildLevel(GS.level).name;
+        var ov3 = document.getElementById('overlay');
+        ov3.style.display = 'flex';
+        ov3.innerHTML = '<h1 style="font-size:14px; color:#aaffaa;">LEVEL '+(GS.level+1)+'</h1><div class="sub">'+nextName3+'</div><button class="start-btn" onclick="nextLevel()">&#9658; CONTINUE</button>';
+      }
       const nextName = buildLevel(GS.level).name;
       const ov = document.getElementById('overlay');
       ov.style.display = 'flex';
@@ -1357,6 +1492,14 @@ function draw() {
     ctx.fillStyle = '#ff0000';
     ctx.fillRect(0,0,W,H);
     ctx.globalAlpha = 1;
+  }
+
+  // Draw flakes
+  drawFlakes();
+
+  // Draw dialogue bubble on top of everything
+  if (GS.state === 'dialogue' && GS.dialogue) {
+    drawDialogueBubble();
   }
 }
 
@@ -2271,6 +2414,100 @@ function drawIntroScene5(t, raw) {
   }
 }
 
+
+// ─── DRAW FLAKES ──────────────────────────────────────────────────────────────
+function drawFlakes() {
+  if (!level || !level.flakes) return;
+  for (var i=0; i<level.flakes.length; i++) {
+    var f = level.flakes[i];
+    if (!f.alive) continue;
+    var cam = Math.round(GS.camera);
+    var sx = f.x - cam;
+    var sy = f.y;
+    ctx.globalAlpha = f.life * 0.9;
+    // Flake - tiny white/grey irregular chip
+    ctx.fillStyle = '#f0ede0';
+    ctx.fillRect(sx-3, sy-2, 5, 3);
+    ctx.fillRect(sx-1, sy-4, 3, 2);
+    ctx.fillStyle = '#d0cdbc';
+    ctx.fillRect(sx,   sy-2, 2, 2);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ─── DRAW DIALOGUE BUBBLE ─────────────────────────────────────────────────────
+function drawDialogueBubble() {
+  var d = GS.dialogue;
+  var meta = SPEAKER_META[d.speaker] || SPEAKER_META.narrator;
+  var line = d.lines[d.lineIdx] || '';
+
+  // Dim the game behind the bubble
+  ctx.fillStyle = 'rgba(0,0,0,0.45)';
+  ctx.fillRect(0, 0, W, H);
+
+  var bx = 30, bw = W-60, bh = 110, by = H-bh-20;
+
+  // Bubble background
+  ctx.fillStyle = meta.bg;
+  ctx.fillRect(bx, by, bw, bh);
+  // Border
+  ctx.strokeStyle = meta.color;
+  ctx.lineWidth = 2.5;
+  ctx.strokeRect(bx, by, bw, bh);
+  ctx.lineWidth = 1;
+
+  // Speaker name tag
+  if (meta.label) {
+    ctx.fillStyle = meta.color;
+    ctx.fillRect(bx, by-22, meta.label.length*10+16, 24);
+    ctx.fillStyle = meta.bg||'#000';
+    ctx.font = 'bold 13px "Press Start 2P", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(meta.label, bx+8, by-5);
+  }
+
+  // Dialogue text — word-wrapped
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '13px "VT323", monospace';
+  ctx.textAlign = 'left';
+  var words = line.split(' ');
+  var lineH = 22, maxW = bw-32, textX = bx+16, textY = by+32;
+  var curLine = '';
+  words.forEach(function(word) {
+    var test = curLine ? curLine+' '+word : word;
+    if (ctx.measureText(test).width > maxW && curLine) {
+      ctx.fillText(curLine, textX, textY);
+      textY += lineH;
+      curLine = word;
+    } else {
+      curLine = test;
+    }
+  });
+  if (curLine) ctx.fillText(curLine, textX, textY);
+
+  // Blinking "press to continue" prompt
+  if (GS.frame % 60 < 35) {
+    ctx.fillStyle = meta.color;
+    ctx.globalAlpha = 0.8;
+    ctx.font = '10px "Press Start 2P", monospace';
+    ctx.textAlign = 'right';
+    // Show if more lines remain
+    if (d.lineIdx < d.lines.length-1) {
+      ctx.fillText('tap / any key ▶', bx+bw-12, by+bh-10);
+    } else {
+      ctx.fillText('tap / any key to close', bx+bw-12, by+bh-10);
+    }
+    ctx.globalAlpha = 1;
+  }
+  ctx.textAlign = 'left';
+
+  // Line counter dots
+  for (var li=0; li<d.lines.length; li++) {
+    ctx.fillStyle = li===d.lineIdx ? meta.color : 'rgba(255,255,255,0.25)';
+    ctx.fillRect(bx+16+li*14, by+bh-12, 8, 6);
+  }
+}
+
 // ─── BACKGROUND ───────────────────────────────────────────────────────────────
 function drawBackground(cam) {
   const t = level.bgType;
@@ -2577,7 +2814,7 @@ function drawEnemies() {
 
     if (e.type === 'monique') drawMonique(e);
     else if (e.type === 'lars') drawLars(e);
-    else drawGoon(e);
+    else drawScratchy(e);
 
     ctx.globalAlpha = 1;
 
@@ -2598,78 +2835,106 @@ function drawEnemies() {
   }
 }
 
-function drawGoon(e) {
-  const wk = Math.sin(GS.frame*0.18)*4;
-  const ex = Math.round(e.x), ey = Math.round(e.y);
-  const flip = e.vx > 0;
+function drawScratchy(e) {
+  var ex = Math.round(e.x), ey = Math.round(e.y);
+  var scrCycle = (e.scratchTick||0) % 200;
+  var isScratching = scrCycle < 60;
+  var twitch = isScratching ? Math.sin(GS.frame*0.6)*3 : 0;
+  var wk = isScratching ? 0 : Math.sin(GS.frame*0.14)*3;
+  var flip = (e.vx||0) >= 0;
   ctx.save();
   if (flip) { ctx.scale(-1,1); ctx.translate(-2*ex - e.w, 0); }
 
-  // legs
-  ctx.fillStyle = '#224466';
-  ctx.fillRect(ex+4, ey+28, 9, 12+wk);
-  ctx.fillRect(ex+17, ey+28, 9, 12-wk);
-  ctx.fillStyle = '#111';
-  ctx.fillRect(ex+2, ey+38+wk, 11, 5);
-  ctx.fillRect(ex+15, ey+38-wk, 11, 5);
+  // Scratchy is small (Dennis' little brother), pale, blotchy skin
+  // Legs — short, shuffly
+  ctx.fillStyle = '#334455';
+  ctx.fillRect(ex+5, ey+26, 8, 13+wk);
+  ctx.fillRect(ex+16, ey+26, 8, 13-wk);
+  ctx.fillStyle = '#222';
+  ctx.fillRect(ex+3, ey+37+wk, 10, 4);
+  ctx.fillRect(ex+14, ey+37-wk, 10, 4);
 
-  // body - red jersey
-  ctx.fillStyle = '#bb3322';
-  ctx.fillRect(ex+3, ey+14, 26, 16);
-  ctx.fillStyle = '#dd4433';
-  ctx.fillRect(ex+4, ey+14, 8, 16);
-  ctx.fillStyle = '#991111';
-  ctx.fillRect(ex+22, ey+14, 7, 16);
-  // jersey number "1"
-  ctx.fillStyle = '#fff';
-  ctx.fillRect(ex+13, ey+17, 2, 9);
-  ctx.fillRect(ex+11, ey+17, 3, 2);
-
-  // arms
-  ctx.fillStyle = '#f0c090';
-  ctx.fillRect(ex-1, ey+15, 6, 10);
-  ctx.fillRect(ex+27, ey+15, 6, 10);
-  // fists
+  // Body — pale yellowish shirt, slightly grubby
+  ctx.fillStyle = '#c8b870';
+  ctx.fillRect(ex+3, ey+13, 24, 15);
+  ctx.fillStyle = '#b8a860';
+  ctx.fillRect(ex+18, ey+13, 9, 15);
+  // Blotchy patches on shirt (itchy rash showing through)
   ctx.fillStyle = '#d8a878';
-  ctx.fillRect(ex-2, ey+23, 7, 6);
-  ctx.fillRect(ex+27, ey+23, 7, 6);
+  ctx.fillRect(ex+6, ey+15, 5, 4);
+  ctx.fillRect(ex+14, ey+19, 4, 3);
 
-  // head
-  ctx.fillStyle = '#f0c090';
-  ctx.fillRect(ex+5, ey+1, 22, 16);
-  ctx.fillStyle = '#d8a878';
-  ctx.fillRect(ex+21, ey+1, 6, 16);
+  // Arms — one raised scratching if in scratch phase
+  ctx.fillStyle = '#eec898';
+  if (isScratching) {
+    // Scratching arm up near head/body
+    ctx.fillRect(ex-2, ey+12+twitch, 7, 8);
+    ctx.fillRect(ex-4, ey+8+twitch, 6, 6);  // hand near armpit
+    // Other arm hanging
+    ctx.fillRect(ex+27, ey+16, 6, 10);
+    ctx.fillStyle = '#ddb888';
+    ctx.fillRect(ex-4, ey+9+twitch, 6, 4);
+  } else {
+    ctx.fillRect(ex-2, ey+14, 6, 10);
+    ctx.fillRect(ex+27, ey+14, 6, 10);
+  }
+  // Blotchy arms (eczema patches)
+  ctx.fillStyle = '#ffaaaa';
+  ctx.fillRect(ex+0, ey+18, 3, 3);
+  ctx.fillRect(ex+27, ey+20, 3, 2);
 
-  // dark messy hair
-  ctx.fillStyle = '#221100';
-  ctx.fillRect(ex+4, ey-3, 24, 8);
-  ctx.fillStyle = '#332211';
-  ctx.fillRect(ex+5, ey-3, 8, 4);
-  // spiky bits
-  ctx.fillStyle = '#221100';
-  ctx.fillRect(ex+6, ey-5, 4, 3);
-  ctx.fillRect(ex+14, ey-5, 4, 3);
-  ctx.fillRect(ex+22, ey-5, 4, 3);
+  // Head — round, pale, slightly red from scratching
+  ctx.fillStyle = '#f0c898';
+  ctx.fillRect(ex+4, ey+1, 20, 14);
+  ctx.fillStyle = '#e8b888';
+  ctx.fillRect(ex+18, ey+1, 6, 14);
+  // Red blotchy cheeks
+  ctx.fillStyle = 'rgba(220,80,60,0.35)';
+  ctx.fillRect(ex+4, ey+7, 5, 5);
+  ctx.fillRect(ex+17, ey+7, 5, 5);
 
-  // mean eyes
+  // Hair — blonde like Dennis but messier, a bit flaky
+  ctx.fillStyle = '#ccaa44';
+  ctx.fillRect(ex+3, ey-4+twitch*0.3, 22, 7);
+  ctx.fillStyle = '#ddbb55';
+  ctx.fillRect(ex+4, ey-4+twitch*0.3, 8, 4);
+  // Flake particles in hair
+  ctx.fillStyle = '#f5f0e0';
+  ctx.fillRect(ex+8,  ey-3+twitch*0.3, 3, 2);
+  ctx.fillRect(ex+16, ey-2+twitch*0.3, 2, 2);
+  ctx.fillRect(ex+12, ey-4+twitch*0.3, 2, 1);
+
+  // Eyes — watery, slightly squinting from itchiness
   ctx.fillStyle = '#fff';
-  ctx.fillRect(ex+8, ey+5, 5, 5);
-  ctx.fillRect(ex+19, ey+5, 5, 5);
-  ctx.fillStyle = '#440000';
-  ctx.fillRect(ex+9, ey+6, 3, 3);
-  ctx.fillRect(ex+20, ey+6, 3, 3);
-  // angry brows - angled inward
-  ctx.fillStyle = '#221100';
-  ctx.fillRect(ex+7, ey+2, 7, 2);
-  ctx.fillRect(ex+7, ey+3, 2, 2);  // inner corner lower
-  ctx.fillRect(ex+18, ey+2, 7, 2);
-  ctx.fillRect(ex+23, ey+3, 2, 2);
+  ctx.fillRect(ex+6, ey+4, 5, 5);
+  ctx.fillRect(ex+17, ey+4, 5, 5);
+  ctx.fillStyle = '#336688';
+  ctx.fillRect(ex+7, ey+5, 3, 3);
+  ctx.fillRect(ex+18, ey+5, 3, 3);
+  ctx.fillStyle = '#000';
+  ctx.fillRect(ex+8, ey+6, 2, 2);
+  ctx.fillRect(ex+19, ey+6, 2, 2);
+  // Squint lines
+  ctx.fillStyle = '#cc8866';
+  ctx.fillRect(ex+5, ey+4, 7, 1);
+  ctx.fillRect(ex+16, ey+4, 7, 1);
 
-  // scowl mouth
-  ctx.fillStyle = '#771111';
-  ctx.fillRect(ex+10, ey+13, 12, 2);
-  ctx.fillRect(ex+9, ey+12, 2, 2);
-  ctx.fillRect(ex+21, ey+12, 2, 2);
+  // Expression — miserable, itchy
+  ctx.fillStyle = '#bb6644';
+  ctx.fillRect(ex+8, ey+11, 11, 2);
+  ctx.fillRect(ex+7, ey+10, 2, 2);
+  ctx.fillRect(ex+18, ey+10, 2, 2);
+
+  // Name tag only when scratching (he looks up)
+  if (isScratching) {
+    ctx.fillStyle = 'rgba(0,0,0,0.6)';
+    ctx.fillRect(ex+e.w/2-22, ey-20, 44, 14);
+    ctx.fillStyle = '#ffddaa';
+    ctx.font = '8px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Scratchy', ex+e.w/2, ey-10);
+    ctx.textAlign = 'left';
+  }
 
   ctx.restore();
 }
