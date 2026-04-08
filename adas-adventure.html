@@ -221,11 +221,11 @@ canvas {
       <div class="hud-text" id="scoreDisplay">SCORE: 0</div>
       <div class="hud-text" id="toyDisplay">TOYS: 0</div>
     </div>
-    <div id="allies-display" id="alliesDisplay"></div>
-    <div id="weapon-display" id="weaponDisplay">💚 BOGEY BLAST</div>
+    <div id="allies-display"></div>
+    <div id="weapon-display">💚 BOGEY BLAST</div>
   </div>
 
-  <div id="message-box" id="messageBox"></div>
+  <div id="message-box"></div>
 
   <div id="touchControls">
     <div id="dpad">
@@ -664,7 +664,7 @@ function updateHUD() {
   document.getElementById('livesDisplay').textContent = '❤️ x' + GS.lives;
   document.getElementById('scoreDisplay').textContent = 'SCORE: ' + GS.score;
   document.getElementById('toyDisplay').textContent = 'TOYS: ' + GS.toys + '/5';
-  document.getElementById('weaponDisplay').textContent = WEAPONS[GS.weaponIndex].name;
+  document.getElementById('weapon-display').textContent = WEAPONS[GS.weaponIndex].name;
   const rescued = GS.alliesRescued.map(i => ALLY_DATA[i].name.slice(0,3)).join(' ');
   document.getElementById('allies-display').textContent = rescued ? '👦 ' + rescued : '';
 }
@@ -1040,6 +1040,27 @@ function updateParticles() {
 // ─── DRAWING ──────────────────────────────────────────────────────────────────
 function draw() {
   ctx.clearRect(0,0,W,H);
+
+  // Title screen - just draw a simple background so canvas isn't black
+  if (!level) {
+    ctx.fillStyle = '#0d2a0d';
+    ctx.fillRect(0,0,W,H);
+    // draw some jungle silhouette
+    ctx.fillStyle = '#0a1f0a';
+    for (var ti=0; ti<12; ti++) {
+      var tx = ti*(W/12);
+      ctx.fillRect(tx, H-160-ti%3*30, 60, 160+ti%3*30);
+      ctx.beginPath();
+      ctx.moveTo(tx+30, H-180-ti%3*30-60);
+      ctx.lineTo(tx-10, H-160-ti%3*30);
+      ctx.lineTo(tx+70, H-160-ti%3*30);
+      ctx.fill();
+    }
+    ctx.fillStyle = '#061406';
+    ctx.fillRect(0, H-40, W, 40);
+    return;
+  }
+
   const cam = Math.round(GS.camera);
 
   drawBackground(cam);
@@ -1618,24 +1639,32 @@ function drawExit() {
 
 // ─── MAIN LOOP ────────────────────────────────────────────────────────────────
 function loop() {
-  GS.frame++;
-  if (GS.state === 'playing') {
-    updatePlayer();
-    updateEnemies();
-    updateProjectiles();
-    updateCollectibles();
-    updateParticles();
-    checkExit();
-    if (GS.messageTick > 0) { GS.messageTick--; if (GS.messageTick<=0) clearMessage(); }
-  } else {
-    updateParticles();
+  try {
+    GS.frame++;
+    if (GS.state === 'playing') {
+      updatePlayer();
+      updateEnemies();
+      updateProjectiles();
+      updateCollectibles();
+      updateParticles();
+      checkExit();
+      if (GS.messageTick > 0) { GS.messageTick--; if (GS.messageTick<=0) clearMessage(); }
+    } else {
+      updateParticles();
+    }
+    draw();
+  } catch(e) {
+    console.error('Game loop error:', e);
   }
-  draw();
   requestAnimationFrame(loop);
 }
 
 // Kick off render loop always
-requestAnimationFrame(loop);
+try {
+  requestAnimationFrame(loop);
+} catch(e) {
+  console.error('Loop start error:', e);
+}
 </script>
 </body>
 </html>
