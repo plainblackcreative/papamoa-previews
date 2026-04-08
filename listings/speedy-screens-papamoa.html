@@ -274,13 +274,12 @@
     /* ── SIDEBAR ── */
     .sidebar-card { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
     .sidebar-card h4 { font-family:'Playfair Display',serif; font-size:0.9rem; font-weight:700; color:var(--navy); margin-bottom:12px; }
-    .contact-list { display:flex; flex-direction:column; gap:0; }
-    .contact-item { display:grid; grid-template-columns:22px 72px 1fr; align-items:start; gap:0 8px; padding:8px 0; border-bottom:1px solid var(--border); font-size:0.82rem; }
-    .contact-item:last-child { border-bottom:none; }
-    .ci-icon { font-size:0.88rem; padding-top:1px; }
-    .ci-label { font-size:0.7rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--body); padding-top:2px; }
-    .ci-value { color:var(--muted); line-height:1.5; }
-    .ci-value a { color:var(--blue); }
+    .contact-list { display:flex; flex-direction:column; gap:9px; }
+    .contact-item { display:flex; gap:10px; font-size:0.82rem; }
+    .ci-icon { flex-shrink:0; font-size:0.88rem; margin-top:2px; }
+    .ci-text { color:var(--muted); line-height:1.5; }
+    .ci-text a { color:var(--blue); }
+    .ci-text strong { color:var(--body); display:block; font-size:0.7rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:1px; }
     .map-placeholder { background:linear-gradient(135deg,#E8F0F8,#D4E4F4); border-radius:8px; height:160px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--muted); font-size:0.82rem; border:1px solid var(--border); text-decoration:none; transition:border-color 0.15s; }
     .map-placeholder:hover { border-color:var(--blue); }
     .related-links { display:flex; flex-direction:column; gap:8px; }
@@ -449,8 +448,6 @@
           <div class="hours-row closed"><span class="day">Sunday</span><span class="time">Closed</span></div>
         </div>
         <p style="font-size:0.76rem;color:var(--muted);margin-top:10px;">&#128204; Mobile service only &mdash; no shopfront. Call <a href="tel:0211501566">021 150 1566</a> to arrange a free on-site measure and quote.</p>
-
-        </div>
       </div>
 
       <!-- Reviews (optional) -->
@@ -481,7 +478,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-q">Is there a showroom to visit? <span class="faq-chevron">&#9660;</span></div>
-          <div class="faq-a">No. Speedy Screens is a mobile service with no shopfront or showroom. All consultations take place at the customer&rsquo;s property. Rob comes out, measures up and provides a quote on the spot. Call 021 150 1566 or email <a href="/cdn-cgi/l/email-protection#3f4c5e535a4c191c090b044c4f5a5a5b464c5c4d5a5a514c115c50115145">sales&#64;speedyscreens.co.nz</a> to arrange a free visit.</div>
+          <div class="faq-a">No. Speedy Screens is a mobile service with no shopfront or showroom. All consultations take place at the customer&rsquo;s property. Rob comes out, measures up and provides a quote on the spot. Call 021 150 1566 or email <a href="mailto:sales&#64;speedyscreens.co.nz">sales&#64;speedyscreens.co.nz</a> to arrange a free visit.</div>
         </div>
       </div>
 
@@ -493,11 +490,11 @@
       <div class="sidebar-card">
         <h4>Contact</h4>
         <div class="contact-list">
-          <div class="contact-item"><span class="ci-icon">&#128222;</span><span class="ci-label">Phone</span><span class="ci-value"><a href="tel:0211501566">021 150 1566</a></span></div>
-          <div class="contact-item"><span class="ci-icon">&#128231;</span><span class="ci-label">Email</span><span class="ci-value"><a href="/cdn-cgi/l/email-protection#4734262b2234616471737c34372222233e3424352222293469242869293d">sales&#64;speedyscreens.co.nz</a></span></div>
-          <div class="contact-item"><span class="ci-icon">&#127760;</span><span class="ci-label">Website</span><span class="ci-value"><a href="https://www.speedyscreens.co.nz" target="_blank" rel="noopener">speedyscreens.co.nz</a></span></div>
-          <div class="contact-item"><span class="ci-icon">&#128205;</span><span class="ci-label">Base</span><span class="ci-value">Pāpāmoa, Bay of Plenty</span></div>
-          <div class="contact-item"><span class="ci-icon">&#128200;</span><span class="ci-label">Category</span><span class="ci-value"><a href="/papamoa-previews/categories/services/services.html">Services</a></span></div>
+          <div class="contact-item"><span class="ci-icon">&#128222;</span><div class="ci-text"><strong>Phone</strong><a href="tel:0211501566">021 150 1566</a></div></div>
+          <div class="contact-item"><span class="ci-icon">&#128231;</span><div class="ci-text"><strong>Email</strong><a href="mailto:sales&#64;speedyscreens.co.nz">sales&#64;speedyscreens.co.nz</a></div></div>
+          <div class="contact-item"><span class="ci-icon">&#127760;</span><div class="ci-text"><strong>Website</strong><a href="https://www.speedyscreens.co.nz" target="_blank" rel="noopener">speedyscreens.co.nz</a></div></div>
+          <div class="contact-item"><span class="ci-icon">&#128205;</span><div class="ci-text"><strong>Base</strong>Pāpāmoa, Bay of Plenty</div></div>
+          <div class="contact-item"><span class="ci-icon">&#128200;</span><div class="ci-text"><strong>Category</strong><a href="/papamoa-previews/categories/services/services.html">Services</a></div></div>
         </div>
         <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-top:10px;">
           <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;">Service area</div>
@@ -533,7 +530,7 @@
   <a href="/papamoa-previews/homepage.html">papamoa.info</a> &middot; Pāpāmoa&rsquo;s local business directory &middot; <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── TIER BADGE ──
 (function(){
   var badge = document.getElementById('tier-badge');
@@ -758,7 +755,7 @@ document.querySelectorAll('.faq-q').forEach(function(q){
 })();
 
 // ── URL PREFIX FIX (GitHub Pages) ──
-(function(){
-  var base='/papamoa-previews';
-  document.addEventListener('click',function(e){
-    var a=e.target.closest('a');
+(function(){var base='/papamoa-previews';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var href=a.getAttribute('href');if(!href)return;if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){e.preventDefault();window.location.href=base+href;}});})();
+</script>
+</body>
+</html>
