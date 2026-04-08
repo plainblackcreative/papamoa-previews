@@ -362,7 +362,7 @@
   <div class="action-bar-inner">
     <a href="tel:0757595291" class="btn-primary">&#128222; 07 579 5291</a>
     <a href="https://tararddental.co.nz" target="_blank" rel="noopener" class="btn-secondary">&#127760; Visit website</a>
-    <a href="mailto:hello&#64;tararddental.co.nz" class="btn-secondary">&#9993; Email us</a>
+    <a href="/cdn-cgi/l/email-protection#18707d7474773e3b2e2c236c796a796a7c7c7d766c7974367b77367662" class="btn-secondary">&#9993; Email us</a>
     <!-- Menu button — rendered by JS based on BUSINESS.hasMenu and BUSINESS.tier -->
     <span id="menu-btn-slot"></span>
     <div class="action-spacer"></div>
@@ -539,7 +539,7 @@
   <a href="/papamoa-previews/homepage.html">papamoa.info</a> &middot; Pāpāmoa&rsquo;s local business directory &middot; <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── TIER BADGE ──
 (function(){
   var badge = document.getElementById('tier-badge');
@@ -759,7 +759,14 @@ document.querySelectorAll('.faq-q').forEach(function(q){
   var base='/papamoa-previews';
   document.addEventListener('click',function(e){
     var a=e.target.closest('a');
-    if(!a)return;var href=a.getAttribute('href');if(!href)return;if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){e.preventDefault();window.location.href=base+href;}});})();
+    if(!a)return;
+    var href=a.getAttribute('href');
+    if(!href)return;
+    if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('//'))
+      a.setAttribute('href',base+href);
+  });
+})();
+
 </script>
 </body>
 </html>
