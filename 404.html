@@ -15,524 +15,177 @@
   --ocean: #1B6B7D;
   --accent: #3AABDE;
   --dune: #C4985A;
-  --sand: #F7F3ED;
   --white: #fff;
-  --muted: #5A6E78;
-  --border: #D8E4E8;
-  --green: #1E6B3C;
-  --green-bg: #E6F4EC;
-  --red: #C0392B;
-  --gremlin-green: #4CAF50;
-  --gremlin-dark: #2E7D32;
   --font-body: 'Figtree', sans-serif;
   --font-display: 'Playfair Display', serif;
 }
-
-html, body {
-  height: 100%;
-  font-family: var(--font-body);
-  background: var(--navy);
-  color: var(--white);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
+html, body { height: 100%; font-family: var(--font-body); background: var(--navy); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
 }
+.site-nav { position: fixed; top:0; left:0; right:0; height:56px; background:rgba(13,43,62,0.95); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:space-between; padding:0 28px; z-index:500; border-bottom:1px solid rgba(255,255,255,0.06); }
+.nav-brand { font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--white); text-decoration:none; }
+.nav-brand em { font-style:normal; color:var(--accent); }
+.nav-home { font-size:13px; font-weight:600; color:rgba(255,255,255,0.5); text-decoration:none; transition:color 0.15s; }
+.nav-home:hover { color:var(--white); }
+.page { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:80px 24px 40px; position:relative; z-index:1; }
+.stars { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.star { position:absolute; background:rgba(255,255,255,0.6); border-radius:50%; animation:twinkle var(--dur,3s) ease-in-out infinite; animation-delay:var(--delay,0s); }
+@keyframes twinkle { 0%,100%{opacity:0.2;transform:scale(1)} 50%{opacity:0.9;transform:scale(1.3)} }
+.error-code { font-family:var(--font-display); font-size:clamp(5rem,18vw,11rem); font-weight:700; color:var(--white); opacity:0.08; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; user-select:none; white-space:nowrap; }
+.content { text-align:center; max-width:540px; position:relative; z-index:2; }
+.eyebrow { font-size:11px; font-weight:800; letter-spacing:0.15em; text-transform:uppercase; color:var(--dune); margin-bottom:12px; animation:fadeUp 0.6s ease both; }
+.headline { font-family:var(--font-display); font-size:clamp(1.6rem,4vw,2.4rem); font-weight:700; line-height:1.2; margin-bottom:14px; animation:fadeUp 0.6s 0.1s ease both; }
+.headline em { font-style:italic; color:var(--accent); }
+.subline { font-size:15px; color:rgba(255,255,255,0.55); line-height:1.7; margin-bottom:32px; animation:fadeUp 0.6s 0.2s ease both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
-.site-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 56px;
-  background: rgba(13,43,62,0.95);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-  z-index: 500;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.nav-brand {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--white);
-  text-decoration: none;
-}
-.nav-brand em { font-style: normal; color: var(--accent); }
-.nav-home {
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.5);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.nav-home:hover { color: var(--white); }
-
-.page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 24px 40px;
-  position: relative;
-  z-index: 1;
-}
-
-.stars {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.star {
-  position: absolute;
-  background: rgba(255,255,255,0.6);
-  border-radius: 50%;
-  animation: twinkle var(--dur, 3s) ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
-}
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.3); }
-}
-
-.error-code {
-  font-family: var(--font-display);
-  font-size: clamp(5rem, 18vw, 11rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--white);
-  opacity: 0.08;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.content {
-  text-align: center;
-  max-width: 540px;
-  position: relative;
-  z-index: 2;
-}
-
-.eyebrow {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--dune);
-  margin-bottom: 12px;
-  animation: fadeUp 0.6s ease both;
-}
-
-.headline {
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 14px;
-  animation: fadeUp 0.6s 0.1s ease both;
-}
-.headline em { font-style: italic; color: var(--accent); }
-
-.subline {
-  font-size: 15px;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.7;
-  margin-bottom: 32px;
-  animation: fadeUp 0.6s 0.2s ease both;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.game-wrapper {
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto 32px;
-  animation: fadeUp 0.6s 0.3s ease both;
-}
-
-.game-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: rgba(255,255,255,0.4);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 10px;
-  text-align: center;
-  transition: color 0.3s;
-}
-.game-label.warning { color: rgba(255,160,0,0.8); }
-.game-label.danger  { color: rgba(255,80,80,0.8); }
-
-.arena {
-  position: relative;
-  width: 100%;
-  height: 220px;
-  background: linear-gradient(160deg, rgba(27,107,125,0.25), rgba(13,43,62,0.8));
-  border: 1px solid rgba(58,171,222,0.2);
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: crosshair;
-  user-select: none;
-  touch-action: none;
-}
-
-.arena::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 30% 60%, rgba(58,171,222,0.06) 0%, transparent 60%);
-  pointer-events: none;
-}
+/* GAME WRAPPER */
+.game-wrapper { width:100%; max-width:480px; margin:0 auto 14px; animation:fadeUp 0.6s 0.3s ease both; }
+.game-label { font-size:12px; font-weight:700; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px; text-align:center; transition:color 0.3s; }
+.game-label.warning { color:rgba(255,160,0,0.8); }
+.game-label.danger  { color:rgba(255,80,80,0.8); }
+.arena { position:relative; width:100%; height:220px; background:linear-gradient(160deg,rgba(27,107,125,0.25),rgba(13,43,62,0.8)); border:1px solid rgba(58,171,222,0.2); border-radius:16px; overflow:hidden; cursor:crosshair; user-select:none; touch-action:none; }
+.arena::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 60%,rgba(58,171,222,0.06) 0%,transparent 60%); pointer-events:none; }
 
 /* GREMLINS */
-.gremlin {
-  position: absolute;
-  width: 52px;
-  height: 52px;
-  cursor: grab;
-  transition: filter 0.15s;
-  touch-action: none;
-  z-index: 10;
-  transform: translate(-50%, -50%);
-  animation: gremlinjiggle 0.4s ease-in-out infinite alternate;
-}
-.gremlin:active { cursor: grabbing; }
-.gremlin.caught {
-  animation: none;
-  cursor: grabbing;
-  filter: drop-shadow(0 0 12px rgba(76,175,80,0.8));
-}
-.gremlin.yeeted {
-  animation: none;
-  opacity: 0;
-  transform: translate(-50%,-50%) scale(0.3) rotate(720deg);
-  transition: left 0.4s cubic-bezier(.4,0,.2,1), top 0.4s cubic-bezier(.4,0,.2,1), opacity 0.4s ease, transform 0.4s ease;
-  pointer-events: none;
-}
-.gremlin.hidden { display: none; }
-
-/* Dead gremlin roll animation */
-.gremlin.dead {
-  animation: rollout var(--roll-dur, 1.5s) ease-in both;
-  pointer-events: none;
-}
-@keyframes rollout {
-  0%   { opacity: 1; transform: translate(-50%,-50%) rotate(0deg) scale(1); }
-  100% { opacity: 0; transform: translate(calc(-50% + var(--roll-x, 120px)), calc(-50% + 200px)) rotate(1080deg) scale(0.4); }
-}
-
-@keyframes gremlinjiggle {
-  from { transform: translate(-50%, -50%) rotate(-4deg) scale(1); }
-  to   { transform: translate(-50%, -50%) rotate(4deg) scale(1.05); }
-}
-
-/* GREMLIN 2 slightly different tint */
-.gremlin-b .gremlin-body { fill: #E65100; }
-.gremlin-b .gremlin-head { fill: #FF7043; }
-.gremlin-b .gremlin-ear  { fill: #FF7043; }
-.gremlin-b .gremlin-limb { fill: #BF360C; }
+.gremlin { position:absolute; width:52px; height:52px; cursor:grab; touch-action:none; z-index:10; transform:translate(-50%,-50%); animation:jiggle 0.4s ease-in-out infinite alternate; }
+.gremlin:active { cursor:grabbing; }
+.gremlin.caught { animation:none; cursor:grabbing; filter:drop-shadow(0 0 12px rgba(76,175,80,0.8)); }
+.gremlin.yeeted { animation:none; opacity:0; transform:translate(-50%,-50%) scale(0.3) rotate(720deg); transition:left 0.4s cubic-bezier(.4,0,.2,1),top 0.4s cubic-bezier(.4,0,.2,1),opacity 0.4s ease,transform 0.4s ease; pointer-events:none; }
+.gremlin.hidden { display:none; }
+.gremlin.dead { animation:rollout var(--roll-dur,1.5s) ease-in both; pointer-events:none; }
+@keyframes jiggle { from{transform:translate(-50%,-50%) rotate(-4deg) scale(1)} to{transform:translate(-50%,-50%) rotate(4deg) scale(1.05)} }
+@keyframes rollout { 0%{opacity:1;transform:translate(-50%,-50%) rotate(0deg) scale(1)} 100%{opacity:0;transform:translate(calc(-50% + var(--roll-x,120px)),calc(-50% + 200px)) rotate(1080deg) scale(0.4)} }
 
 /* BIN */
-.bin {
-  position: absolute;
-  bottom: 14px;
-  right: 20px;
-  width: 48px;
-  height: 56px;
-  cursor: default;
-  z-index: 5;
-  transform-origin: bottom center;
-  transition: transform 0.15s;
-}
-.bin.active {
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 10px rgba(58,171,222,0.7));
-}
-.bin.shaking {
-  animation: binshake 0.12s ease-in-out infinite;
-}
-@keyframes binshake {
-  0%,100% { transform: rotate(0deg); }
-  25%      { transform: rotate(-8deg) scale(1.05); }
-  75%      { transform: rotate(8deg)  scale(1.05); }
-}
-.bin.tipping {
-  animation: bintip 0.8s ease-in both;
-}
-@keyframes bintip {
-  0%   { transform: rotate(0deg) translateY(0); }
-  40%  { transform: rotate(-30deg) translateY(0); }
-  100% { transform: rotate(-100deg) translateY(60px); opacity: 0; }
-}
-.bin-svg { width: 100%; height: 100%; }
+.bin { position:absolute; bottom:14px; right:20px; width:48px; height:56px; cursor:default; z-index:5; transform-origin:bottom center; transition:transform 0.15s; }
+.bin.active { transform:scale(1.15); filter:drop-shadow(0 0 10px rgba(58,171,222,0.7)); }
+.bin.shaking { animation:binshake 0.12s ease-in-out infinite; }
+@keyframes binshake { 0%,100%{transform:rotate(0deg)} 25%{transform:rotate(-8deg) scale(1.05)} 75%{transform:rotate(8deg) scale(1.05)} }
+.bin.tipping { animation:bintip 0.8s ease-in both; }
+@keyframes bintip { 0%{transform:rotate(0deg) translateY(0)} 40%{transform:rotate(-30deg) translateY(0)} 100%{transform:rotate(-100deg) translateY(60px);opacity:0} }
 
-/* PROGRESS BAR */
-.progress-bar-wrap {
-  position: absolute;
-  top: 10px;
-  left: 12px;
-  right: 80px;
-  height: 4px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.progress-bar-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 2px;
-  transition: width 0.3s ease, background 0.3s ease;
-  width: 0%;
-}
-.progress-bar-fill.hot { background: #FF7043; }
+/* HUD */
+.progress-bar-wrap { position:absolute; top:10px; left:12px; right:80px; height:4px; background:rgba(255,255,255,0.08); border-radius:2px; overflow:hidden; }
+.progress-bar-fill { height:100%; background:var(--accent); border-radius:2px; transition:width 0.3s ease,background 0.3s ease; width:0%; }
+.progress-bar-fill.hot { background:#FF7043; }
+.score-display { position:absolute; bottom:14px; left:16px; font-size:11px; font-weight:700; color:rgba(255,255,255,0.3); }
+.score-display span { color:var(--accent); }
+.speed-indicator { position:absolute; top:24px; left:12px; font-size:10px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.08em; text-transform:uppercase; transition:color 0.3s; }
+.speed-indicator.fast  { color:rgba(255,160,0,0.6); }
+.speed-indicator.turbo { color:rgba(255,80,80,0.7); }
+.timer-display { position:absolute; top:10px; right:10px; font-size:10px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.05em; z-index:15; }
+.timer-display.running { color:rgba(58,171,222,0.7); }
+.multiplier { position:absolute; top:22px; right:10px; font-size:10px; font-weight:800; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.06em; transition:color 0.3s; }
+.multiplier.hot   { color:rgba(255,160,0,0.8); }
+.multiplier.turbo { color:rgba(255,80,80,0.9); }
 
-/* Score */
-.score-display {
-  position: absolute;
-  bottom: 14px;
-  left: 16px;
-  font-size: 11px;
-  font-weight: 700;
-  color: rgba(255,255,255,0.3);
-}
-.score-display span { color: var(--accent); }
+/* FLASH / POPUP */
+.caught-flash { position:absolute; inset:0; background:rgba(76,175,80,0.15); border-radius:16px; opacity:0; pointer-events:none; transition:opacity 0.2s; }
+.caught-flash.show { opacity:1; }
+.popup { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.7); background:linear-gradient(135deg,#1B6B7D,#0D2B3E); border:2px solid var(--accent); border-radius:16px; padding:20px 28px; text-align:center; z-index:20; opacity:0; pointer-events:none; transition:transform 0.3s cubic-bezier(.2,1.4,.6,1),opacity 0.3s ease; min-width:180px; }
+.popup.show { transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:all; }
+.popup.danger { border-color:#FF7043; background:linear-gradient(135deg,#3E1B0D,#0D2B3E); }
+.popup-emoji { font-size:2rem; margin-bottom:6px; }
+.popup-title { font-family:var(--font-display); font-size:1.2rem; font-weight:700; color:var(--white); margin-bottom:3px; }
+.popup-sub   { font-size:11px; color:rgba(255,255,255,0.5); }
+.hint-bubble { position:absolute; top:12px; left:50%; transform:translateX(-50%); background:rgba(13,43,62,0.85); border:1px solid rgba(58,171,222,0.3); border-radius:20px; padding:5px 14px; font-size:11px; font-weight:600; color:rgba(255,255,255,0.5); pointer-events:none; white-space:nowrap; transition:opacity 0.5s; z-index:30; }
+.hint-bubble.hide { opacity:0; }
 
-/* Speed indicator */
-.speed-indicator {
-  position: absolute;
-  top: 24px;
-  left: 12px;
-  font-size: 10px;
-  font-weight: 700;
-  color: rgba(255,255,255,0.25);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: color 0.3s;
-}
-.speed-indicator.fast  { color: rgba(255,160,0,0.6); }
-.speed-indicator.turbo { color: rgba(255,80,80,0.7); }
-
-/* Caught flash */
-.caught-flash {
-  position: absolute;
-  inset: 0;
-  background: rgba(76,175,80,0.15);
-  border-radius: 16px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-}
-.caught-flash.show { opacity: 1; }
-
-/* POPUP SYSTEM */
-.popup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.7);
-  background: linear-gradient(135deg, #1B6B7D, #0D2B3E);
-  border: 2px solid var(--accent);
-  border-radius: 16px;
-  padding: 20px 28px;
-  text-align: center;
-  z-index: 20;
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.3s cubic-bezier(.2,1.4,.6,1), opacity 0.3s ease;
-  min-width: 180px;
-}
-.popup.show {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-  pointer-events: all;
-}
-.popup.danger { border-color: #FF7043; background: linear-gradient(135deg, #3E1B0D, #0D2B3E); }
-.popup-emoji  { font-size: 2rem; margin-bottom: 6px; }
-.popup-title  { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 3px; }
-.popup-sub    { font-size: 11px; color: rgba(255,255,255,0.5); }
+/* LEADERBOARD PANEL */
+.lb-panel { width:100%; max-width:480px; margin:0 auto 20px; animation:fadeUp 0.6s 0.45s ease both; }
+.lb-panel-inner { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:12px 16px; }
+.lb-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.lb-title { font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:var(--dune); }
+.lb-sub   { font-size:9px; color:rgba(255,255,255,0.18); letter-spacing:0.05em; text-transform:uppercase; }
+.lb-table { width:100%; border-collapse:collapse; }
+.lb-table tr { border-bottom:1px solid rgba(255,255,255,0.05); }
+.lb-table tr:last-child { border-bottom:none; }
+.lb-table tr.lb-new { background:rgba(58,171,222,0.1); }
+.lb-table td { padding:5px 3px; font-size:11px; color:rgba(255,255,255,0.45); }
+.lb-rank { width:26px; font-weight:800; color:rgba(255,255,255,0.2); text-align:center; font-size:10px; }
+.lb-table tr:nth-child(1) .lb-rank { color:#FFD600; }
+.lb-table tr:nth-child(2) .lb-rank { color:#B0BEC5; }
+.lb-table tr:nth-child(3) .lb-rank { color:#C4985A; }
+.lb-name { font-weight:700; color:var(--white); letter-spacing:0.1em; text-transform:uppercase; }
+.lb-time { text-align:right; font-weight:700; color:var(--accent); font-variant-numeric:tabular-nums; }
+.lb-date { text-align:right; font-size:9px; color:rgba(255,255,255,0.2); padding-left:6px; }
+.lb-empty { text-align:center; color:rgba(255,255,255,0.2); padding:10px 0; }
 
 /* WINNER OVERLAY */
-.winner-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(13,43,62,0);
-  pointer-events: none;
-  transition: background 0.6s ease;
-}
-.winner-overlay.show {
-  background: rgba(13,43,62,0.97);
-  pointer-events: all;
-}
-.winner-content {
-  text-align: center;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s 0.4s ease, transform 0.6s 0.4s ease;
-  padding: 40px 24px;
-}
-.winner-overlay.show .winner-content {
-  opacity: 1;
-  transform: translateY(0);
-}
-.winner-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 10px;
-  line-height: 1.1;
-}
-.winner-title em { color: var(--accent); font-style: italic; }
-.winner-sub {
-  font-size: 16px;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 32px;
-}
-.winner-btn {
-  display: inline-block;
-  padding: 14px 32px;
-  background: var(--accent);
-  color: var(--navy);
-  font-size: 14px;
-  font-weight: 800;
-  border-radius: 10px;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.04); }
-}
+.winner-overlay { position:fixed; inset:0; z-index:1000; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(13,43,62,0); pointer-events:none; transition:background 0.6s ease; overflow-y:auto; }
+.winner-overlay.show { background:rgba(13,43,62,0.97); pointer-events:all; }
+.winner-content { text-align:center; max-width:400px; width:100%; padding:40px 24px; opacity:0; transform:translateY(30px); transition:opacity 0.6s 0.4s ease,transform 0.6s 0.4s ease; }
+.winner-overlay.show .winner-content { opacity:1; transform:translateY(0); }
+.winner-title { font-family:var(--font-display); font-size:clamp(2rem,6vw,3rem); font-weight:700; color:var(--white); margin-bottom:8px; line-height:1.1; }
+.winner-title em { color:var(--accent); font-style:italic; }
+.winner-sub  { font-size:15px; color:rgba(255,255,255,0.5); margin-bottom:4px; }
+.winner-time { font-size:13px; color:rgba(255,255,255,0.35); margin-bottom:24px; }
+.winner-time strong { color:var(--accent); font-size:16px; }
 
-/* CONFETTI CANVAS */
-#confettiCanvas {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 999;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-#confettiCanvas.show { opacity: 1; }
+/* INITIALS */
+.initials-panel { margin-bottom:20px; }
+.initials-label { font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:10px; }
+.initials-row { display:flex; align-items:center; justify-content:center; gap:10px; }
+.initials-input { width:84px; padding:10px 12px; background:rgba(255,255,255,0.07); border:1px solid rgba(58,171,222,0.4); border-radius:8px; color:var(--white); font-family:var(--font-body); font-size:20px; font-weight:800; text-align:center; text-transform:uppercase; letter-spacing:0.2em; outline:none; transition:border-color 0.15s,background 0.15s; }
+.initials-input:focus { border-color:var(--accent); background:rgba(58,171,222,0.1); }
+.initials-input::placeholder { color:rgba(255,255,255,0.2); font-size:14px; letter-spacing:0.1em; }
+.initials-submit { padding:10px 22px; background:var(--accent); color:var(--navy); font-family:var(--font-body); font-size:13px; font-weight:800; border:none; border-radius:8px; cursor:pointer; transition:background 0.15s,transform 0.1s; }
+.initials-submit:hover { background:#5BC4EF; }
+.initials-submit:active { transform:scale(0.97); }
 
-/* Hint */
-.hint-bubble {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(13,43,62,0.85);
-  border: 1px solid rgba(58,171,222,0.3);
-  border-radius: 20px;
-  padding: 5px 14px;
-  font-size: 11px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.5);
-  pointer-events: none;
-  white-space: nowrap;
-  transition: opacity 0.5s;
-  z-index: 30;
-}
-.hint-bubble.hide { opacity: 0; }
+/* WINNER LB */
+.winner-lb { margin:0 auto 24px; width:100%; max-width:320px; }
+.winner-lb-title { font-size:10px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:var(--dune); margin-bottom:10px; text-align:center; }
+.winner-btn { display:inline-block; padding:14px 32px; background:var(--accent); color:var(--navy); font-size:14px; font-weight:800; border-radius:10px; text-decoration:none; cursor:pointer; border:none; animation:pulse 1.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
 
-/* MULTIPLIER BADGE */
-.multiplier {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 10px;
-  font-weight: 800;
-  color: rgba(255,255,255,0.3);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  transition: color 0.3s;
-}
-.multiplier.hot   { color: rgba(255,160,0,0.8); }
-.multiplier.turbo { color: rgba(255,80,80,0.9); }
+#confettiCanvas { position:fixed; inset:0; pointer-events:none; z-index:999; opacity:0; transition:opacity 0.3s; }
+#confettiCanvas.show { opacity:1; }
 
-/* NAV BUTTONS */
-.nav-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  animation: fadeUp 0.6s 0.4s ease both;
-}
-.btn {
-  display: inline-block;
-  padding: 11px 22px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-.btn-primary { background: var(--accent); color: var(--navy); }
-.btn-primary:hover { background: #5BC4EF; }
-.btn-ghost { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.12); }
-.btn-ghost:hover { background: rgba(255,255,255,0.12); color: var(--white); }
-
-.broken-notice {
-  margin-top: 28px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.25);
-  animation: fadeUp 0.6s 0.5s ease both;
-}
-.broken-notice a { color: rgba(58,171,222,0.6); text-decoration: none; }
-.broken-notice a:hover { color: var(--accent); }
-.report-sent {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  color: rgba(76,175,80,0.7);
-  margin-top: 6px;
-}
+/* BUTTONS */
+.nav-buttons { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; animation:fadeUp 0.6s 0.5s ease both; }
+.btn { display:inline-block; padding:11px 22px; border-radius:8px; font-size:13px; font-weight:700; text-decoration:none; transition:all 0.15s; white-space:nowrap; }
+.btn-primary { background:var(--accent); color:var(--navy); }
+.btn-primary:hover { background:#5BC4EF; }
+.btn-ghost { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.12); }
+.btn-ghost:hover { background:rgba(255,255,255,0.12); color:var(--white); }
+.broken-notice { margin-top:28px; font-size:12px; color:rgba(255,255,255,0.25); animation:fadeUp 0.6s 0.6s ease both; }
+.broken-notice a { color:rgba(58,171,222,0.6); text-decoration:none; }
+.broken-notice a:hover { color:var(--accent); }
+.report-sent { display:inline-flex; align-items:center; gap:5px; font-size:11px; color:rgba(76,175,80,0.7); margin-top:6px; }
 
 @media(max-width:480px) {
-  .arena { height: 200px; }
-  .gremlin { width: 44px; height: 44px; }
-  .nav-buttons { flex-direction: column; align-items: center; }
-  .btn { width: 100%; max-width: 260px; text-align: center; }
+  .arena { height:190px; }
+  .gremlin { width:44px; height:44px; }
+  .nav-buttons { flex-direction:column; align-items:center; }
+  .btn { width:100%; max-width:260px; text-align:center; }
 }
 </style>
 </head>
 <body>
 
 <canvas id="confettiCanvas"></canvas>
+
 <div class="winner-overlay" id="winnerOverlay">
   <div class="winner-content">
-    <div style="font-size:3.5rem;margin-bottom:16px;">&#127881;</div>
+    <div style="font-size:3rem;margin-bottom:10px;">&#127881;</div>
     <h2 class="winner-title">You <em>got</em> them all.</h2>
     <p class="winner-sub">Every last gremlin neutralised. Papamoa is safe.</p>
+    <p class="winner-time">Your time: <strong id="finalTime">--</strong></p>
+    <div class="initials-panel" id="initialsPanel">
+      <div class="initials-label">Enter your initials for the leaderboard</div>
+      <div class="initials-row">
+        <input class="initials-input" id="initialsInput" maxlength="3" placeholder="AAA" autocomplete="off" spellcheck="false">
+        <button class="initials-submit" id="initialsSubmit">Submit &#10003;</button>
+      </div>
+    </div>
+    <div class="winner-lb" id="winnerLb" style="display:none">
+      <div class="winner-lb-title">&#127942; Top 10 Gremlin Hunters</div>
+      <table class="lb-table" id="winnerLbTable"></table>
+    </div>
     <button class="winner-btn" id="winnerBtn">&#127968; Back to safety</button>
   </div>
 </div>
@@ -557,85 +210,62 @@ body::before {
       <div class="arena" id="arena">
         <div class="caught-flash" id="caughtFlash"></div>
         <div class="hint-bubble" id="hint">&#128070; Grab &amp; drag to bin</div>
-
-        <!-- Progress bar -->
-        <div class="progress-bar-wrap">
-          <div class="progress-bar-fill" id="progressFill"></div>
-        </div>
-
-        <!-- Speed / multiplier -->
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill"></div></div>
         <div class="speed-indicator" id="speedIndicator"></div>
+        <div class="timer-display" id="timerDisplay">0.0s</div>
         <div class="multiplier" id="multiplierBadge"></div>
 
-        <!-- GREMLIN A (green) -->
+        <!-- GREMLIN A: green -->
         <div class="gremlin" id="gremlinA" style="left:50%;top:50%">
-          <svg class="gremlin-svg" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="26" cy="30" rx="13" ry="11" fill="#388E3C" class="gremlin-body"/>
-            <ellipse cx="26" cy="20" rx="11" ry="10" fill="#4CAF50" class="gremlin-head"/>
-            <polygon points="15,14 10,6 18,12" fill="#4CAF50" class="gremlin-ear"/>
-            <polygon points="37,14 42,6 34,12" fill="#4CAF50" class="gremlin-ear"/>
-            <ellipse cx="22" cy="19" rx="3.5" ry="3.5" fill="#fff"/>
-            <ellipse cx="30" cy="19" rx="3.5" ry="3.5" fill="#fff"/>
-            <circle cx="23" cy="19.5" r="2" fill="#C62828"/>
-            <circle cx="31" cy="19.5" r="2" fill="#C62828"/>
-            <circle cx="23.5" cy="19.5" r="1" fill="#1a1a1a"/>
-            <circle cx="31.5" cy="19.5" r="1" fill="#1a1a1a"/>
-            <circle cx="24.2" cy="18.5" r="0.5" fill="#fff"/>
-            <circle cx="32.2" cy="18.5" r="0.5" fill="#fff"/>
+          <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;filter:drop-shadow(0 3px 8px rgba(0,0,0,0.5))">
+            <ellipse cx="26" cy="30" rx="13" ry="11" fill="#388E3C"/>
+            <ellipse cx="26" cy="20" rx="11" ry="10" fill="#4CAF50"/>
+            <polygon points="15,14 10,6 18,12" fill="#4CAF50"/>
+            <polygon points="37,14 42,6 34,12" fill="#4CAF50"/>
+            <ellipse cx="22" cy="19" rx="3.5" ry="3.5" fill="#fff"/><ellipse cx="30" cy="19" rx="3.5" ry="3.5" fill="#fff"/>
+            <circle cx="23" cy="19.5" r="2" fill="#C62828"/><circle cx="31" cy="19.5" r="2" fill="#C62828"/>
+            <circle cx="23.5" cy="19.5" r="1" fill="#1a1a1a"/><circle cx="31.5" cy="19.5" r="1" fill="#1a1a1a"/>
+            <circle cx="24.2" cy="18.5" r="0.5" fill="#fff"/><circle cx="32.2" cy="18.5" r="0.5" fill="#fff"/>
             <ellipse cx="26" cy="23" rx="2" ry="1.5" fill="#2E7D32"/>
-            <circle cx="25" cy="23" r="0.6" fill="#1B5E20"/>
-            <circle cx="27" cy="23" r="0.6" fill="#1B5E20"/>
+            <circle cx="25" cy="23" r="0.6" fill="#1B5E20"/><circle cx="27" cy="23" r="0.6" fill="#1B5E20"/>
             <path d="M20 26 Q26 31 32 26" stroke="#1B5E20" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <rect x="22.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/>
-            <rect x="26.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/>
-            <ellipse cx="13" cy="29" rx="3.5" ry="2.5" fill="#388E3C" transform="rotate(-20 13 29)" class="gremlin-limb"/>
-            <ellipse cx="39" cy="29" rx="3.5" ry="2.5" fill="#388E3C" transform="rotate(20 39 29)" class="gremlin-limb"/>
-            <circle cx="10" cy="27" r="2" fill="#4CAF50"/>
-            <circle cx="42" cy="27" r="2" fill="#4CAF50"/>
-            <ellipse cx="21" cy="40" rx="4" ry="2.5" fill="#2E7D32" class="gremlin-limb"/>
-            <ellipse cx="31" cy="40" rx="4" ry="2.5" fill="#2E7D32" class="gremlin-limb"/>
+            <rect x="22.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/><rect x="26.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/>
+            <ellipse cx="13" cy="29" rx="3.5" ry="2.5" fill="#388E3C" transform="rotate(-20 13 29)"/>
+            <ellipse cx="39" cy="29" rx="3.5" ry="2.5" fill="#388E3C" transform="rotate(20 39 29)"/>
+            <circle cx="10" cy="27" r="2" fill="#4CAF50"/><circle cx="42" cy="27" r="2" fill="#4CAF50"/>
+            <ellipse cx="21" cy="40" rx="4" ry="2.5" fill="#2E7D32"/><ellipse cx="31" cy="40" rx="4" ry="2.5" fill="#2E7D32"/>
             <path d="M39 34 Q46 28 44 20 Q42 14 46 10" stroke="#388E3C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <polygon points="21,11 19,4 23,10" fill="#2E7D32"/>
-            <polygon points="31,11 33,4 29,10" fill="#2E7D32"/>
+            <polygon points="21,11 19,4 23,10" fill="#2E7D32"/><polygon points="31,11 33,4 29,10" fill="#2E7D32"/>
           </svg>
         </div>
 
-        <!-- GREMLIN B (orange, hidden initially) -->
-        <div class="gremlin gremlin-b hidden" id="gremlinB" style="left:30%;top:40%">
-          <svg class="gremlin-svg" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="26" cy="30" rx="13" ry="11" fill="#E65100" class="gremlin-body"/>
-            <ellipse cx="26" cy="20" rx="11" ry="10" fill="#FF7043" class="gremlin-head"/>
-            <polygon points="15,14 10,6 18,12" fill="#FF7043" class="gremlin-ear"/>
-            <polygon points="37,14 42,6 34,12" fill="#FF7043" class="gremlin-ear"/>
-            <ellipse cx="22" cy="19" rx="3.5" ry="3.5" fill="#fff"/>
-            <ellipse cx="30" cy="19" rx="3.5" ry="3.5" fill="#fff"/>
-            <circle cx="23" cy="19.5" r="2" fill="#1565C0"/>
-            <circle cx="31" cy="19.5" r="2" fill="#1565C0"/>
-            <circle cx="23.5" cy="19.5" r="1" fill="#1a1a1a"/>
-            <circle cx="31.5" cy="19.5" r="1" fill="#1a1a1a"/>
-            <circle cx="24.2" cy="18.5" r="0.5" fill="#fff"/>
-            <circle cx="32.2" cy="18.5" r="0.5" fill="#fff"/>
+        <!-- GREMLIN B: orange -->
+        <div class="gremlin hidden" id="gremlinB" style="left:30%;top:40%">
+          <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;filter:drop-shadow(0 3px 8px rgba(0,0,0,0.5))">
+            <ellipse cx="26" cy="30" rx="13" ry="11" fill="#E65100"/>
+            <ellipse cx="26" cy="20" rx="11" ry="10" fill="#FF7043"/>
+            <polygon points="15,14 10,6 18,12" fill="#FF7043"/>
+            <polygon points="37,14 42,6 34,12" fill="#FF7043"/>
+            <ellipse cx="22" cy="19" rx="3.5" ry="3.5" fill="#fff"/><ellipse cx="30" cy="19" rx="3.5" ry="3.5" fill="#fff"/>
+            <circle cx="23" cy="19.5" r="2" fill="#1565C0"/><circle cx="31" cy="19.5" r="2" fill="#1565C0"/>
+            <circle cx="23.5" cy="19.5" r="1" fill="#1a1a1a"/><circle cx="31.5" cy="19.5" r="1" fill="#1a1a1a"/>
+            <circle cx="24.2" cy="18.5" r="0.5" fill="#fff"/><circle cx="32.2" cy="18.5" r="0.5" fill="#fff"/>
             <ellipse cx="26" cy="23" rx="2" ry="1.5" fill="#BF360C"/>
-            <circle cx="25" cy="23" r="0.6" fill="#7F0000"/>
-            <circle cx="27" cy="23" r="0.6" fill="#7F0000"/>
+            <circle cx="25" cy="23" r="0.6" fill="#7F0000"/><circle cx="27" cy="23" r="0.6" fill="#7F0000"/>
             <path d="M20 26 Q26 31 32 26" stroke="#BF360C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <rect x="22.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/>
-            <rect x="26.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/>
+            <rect x="22.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/><rect x="26.5" y="26" width="3" height="2.5" rx="0.5" fill="#fff"/>
             <ellipse cx="13" cy="29" rx="3.5" ry="2.5" fill="#E65100" transform="rotate(-20 13 29)"/>
             <ellipse cx="39" cy="29" rx="3.5" ry="2.5" fill="#E65100" transform="rotate(20 39 29)"/>
-            <circle cx="10" cy="27" r="2" fill="#FF7043"/>
-            <circle cx="42" cy="27" r="2" fill="#FF7043"/>
-            <ellipse cx="21" cy="40" rx="4" ry="2.5" fill="#BF360C"/>
-            <ellipse cx="31" cy="40" rx="4" ry="2.5" fill="#BF360C"/>
+            <circle cx="10" cy="27" r="2" fill="#FF7043"/><circle cx="42" cy="27" r="2" fill="#FF7043"/>
+            <ellipse cx="21" cy="40" rx="4" ry="2.5" fill="#BF360C"/><ellipse cx="31" cy="40" rx="4" ry="2.5" fill="#BF360C"/>
             <path d="M39 34 Q46 28 44 20 Q42 14 46 10" stroke="#E65100" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <polygon points="21,11 19,4 23,10" fill="#BF360C"/>
-            <polygon points="31,11 33,4 29,10" fill="#BF360C"/>
+            <polygon points="21,11 19,4 23,10" fill="#BF360C"/><polygon points="31,11 33,4 29,10" fill="#BF360C"/>
           </svg>
         </div>
 
         <!-- BIN -->
         <div class="bin" id="bin">
-          <svg class="bin-svg" viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
             <rect x="4" y="8" width="40" height="6" rx="3" fill="#5A6E78"/>
             <rect x="18" y="4" width="12" height="6" rx="2" fill="#5A6E78"/>
             <path d="M8 14 L10 50 Q10 52 12 52 L36 52 Q38 52 38 50 L40 14 Z" fill="#455A64"/>
@@ -645,15 +275,26 @@ body::before {
           </svg>
         </div>
 
-        <!-- Score -->
         <div class="score-display">Caught: <span id="score">0</span>/20</div>
 
-        <!-- Popup -->
         <div class="popup" id="popup">
           <div class="popup-emoji" id="popupEmoji">&#127881;</div>
           <div class="popup-title" id="popupTitle">Got him!</div>
-          <div class="popup-sub" id="popupSub">Gremlin neutralised</div>
+          <div class="popup-sub"   id="popupSub">Gremlin neutralised</div>
         </div>
+      </div>
+    </div>
+
+    <!-- PERSISTENT LEADERBOARD -->
+    <div class="lb-panel" id="lbPanel">
+      <div class="lb-panel-inner">
+        <div class="lb-header">
+          <span class="lb-title">&#127942; Leaderboard</span>
+          <span class="lb-sub">fastest time wins</span>
+        </div>
+        <table class="lb-table" id="lbPanelTable">
+          <tr><td class="lb-empty" colspan="4">No scores yet &mdash; be first!</td></tr>
+        </table>
       </div>
     </div>
 
@@ -663,444 +304,264 @@ body::before {
       <a href="/papamoa-previews/categories/services/services.html" class="btn btn-ghost">Services</a>
     </div>
 
-    <div class="broken-notice" id="brokenNotice">
-      <span id="brokenMsg">Found a broken link? We've been notified.</span>
+    <div class="broken-notice">
+      <span>Found a broken link? We've been notified.</span>
       <span class="report-sent" id="reportSent" style="display:none">&#10003; Error report sent</span>
     </div>
   </div>
 </div>
 
 <script>
-/* ── STARS ── */
-(function() {
-  var container = document.getElementById('stars');
-  for (var i = 0; i < 80; i++) {
-    var s = document.createElement('div');
-    s.className = 'star';
-    var size = Math.random() * 2.5 + 0.5;
-    s.style.cssText = [
-      'width:' + size + 'px',
-      'height:' + size + 'px',
-      'left:' + (Math.random() * 100) + '%',
-      'top:' + (Math.random() * 100) + '%',
-      '--dur:' + (2 + Math.random() * 4) + 's',
-      '--delay:' + (Math.random() * 4) + 's'
-    ].join(';');
-    container.appendChild(s);
+/* STARS */
+(function(){
+  var c=document.getElementById('stars');
+  for(var i=0;i<80;i++){
+    var s=document.createElement('div'); s.className='star';
+    var sz=Math.random()*2.5+0.5;
+    s.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;--dur:'+(2+Math.random()*4)+'s;--delay:'+(Math.random()*4)+'s';
+    c.appendChild(s);
   }
 })();
 
-/* ── WEB3FORMS ── */
-(function() {
-  var reportSent = document.getElementById('reportSent');
-  fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
-      access_key: '37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78',
-      subject: '404 Broken Link — Papamoa.info',
-      from_name: 'Papamoa.info 404 Bot',
-      message: ['404 error on Papamoa.info','','Broken URL: ' + window.location.href,'Referred from: ' + (document.referrer || 'Direct'),'Time: ' + new Date().toLocaleString('en-NZ', {timeZone:'Pacific/Auckland'}),'UA: ' + navigator.userAgent].join('\n'),
-      botcheck: ''
-    })
-  }).then(function(r){return r.json();}).then(function(d){if(d.success && reportSent) reportSent.style.display='inline-flex';}).catch(function(){});
+/* WEB3FORMS */
+(function(){
+  fetch('https://api.web3forms.com/submit',{
+    method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({access_key:'37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78',subject:'404 Broken Link — Papamoa.info',from_name:'Papamoa.info 404 Bot',message:'URL: '+window.location.href+'\nReferrer: '+(document.referrer||'Direct')+'\nTime: '+new Date().toLocaleString('en-NZ',{timeZone:'Pacific/Auckland'}),botcheck:''})
+  }).then(function(r){return r.json();}).then(function(d){if(d.success){var el=document.getElementById('reportSent');if(el)el.style.display='inline-flex';}}).catch(function(){});
 })();
 
-/* ── CONFETTI ── */
-function launchConfetti() {
-  var canvas = document.getElementById('confettiCanvas');
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
+/* CONFETTI */
+function launchConfetti(){
+  var canvas=document.getElementById('confettiCanvas');
+  canvas.width=window.innerWidth; canvas.height=window.innerHeight;
   canvas.classList.add('show');
-  var ctx = canvas.getContext('2d');
-  var pieces = [];
-  var colors = ['#3AABDE','#C4985A','#4CAF50','#FF7043','#fff','#FFD600','#E040FB'];
-  for (var i = 0; i < 160; i++) {
-    pieces.push({
-      x: Math.random() * canvas.width,
-      y: -10 - Math.random() * 200,
-      w: 6 + Math.random() * 8,
-      h: 10 + Math.random() * 6,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      vx: (Math.random() - 0.5) * 4,
-      vy: 2 + Math.random() * 4,
-      rot: Math.random() * 360,
-      rotv: (Math.random() - 0.5) * 8,
-      dead: false
+  var ctx=canvas.getContext('2d');
+  var colors=['#3AABDE','#C4985A','#4CAF50','#FF7043','#fff','#FFD600','#E040FB'];
+  var pieces=[];
+  for(var i=0;i<160;i++) pieces.push({x:Math.random()*canvas.width,y:-10-Math.random()*200,w:6+Math.random()*8,h:10+Math.random()*6,color:colors[Math.floor(Math.random()*colors.length)],vx:(Math.random()-0.5)*4,vy:2+Math.random()*4,rot:Math.random()*360,rotv:(Math.random()-0.5)*8,dead:false});
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    var alive=false;
+    pieces.forEach(function(p){
+      if(p.dead)return; p.x+=p.vx; p.y+=p.vy; p.vy+=0.07; p.rot+=p.rotv;
+      if(p.y>canvas.height+20){p.dead=true;return;} alive=true;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.color; ctx.globalAlpha=0.9; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
     });
-  }
-  var frame;
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var alive = false;
-    pieces.forEach(function(p) {
-      if (p.dead) return;
-      p.x  += p.vx;
-      p.y  += p.vy;
-      p.vy += 0.07;
-      p.rot += p.rotv;
-      if (p.y > canvas.height + 20) { p.dead = true; return; }
-      alive = true;
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rot * Math.PI / 180);
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = 0.9;
-      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
-      ctx.restore();
-    });
-    if (alive) { frame = requestAnimationFrame(draw); }
-    else { canvas.classList.remove('show'); }
+    if(alive) requestAnimationFrame(draw); else canvas.classList.remove('show');
   }
   draw();
 }
 
-/* ── GAME ENGINE ── */
-(function() {
-  var arena       = document.getElementById('arena');
-  var bin         = document.getElementById('bin');
-  var hint        = document.getElementById('hint');
-  var caughtFlash = document.getElementById('caughtFlash');
-  var popup       = document.getElementById('popup');
-  var popupEmoji  = document.getElementById('popupEmoji');
-  var popupTitle  = document.getElementById('popupTitle');
-  var popupSub    = document.getElementById('popupSub');
-  var scoreEl     = document.getElementById('score');
-  var progressFill    = document.getElementById('progressFill');
-  var speedIndicator  = document.getElementById('speedIndicator');
-  var multiplierBadge = document.getElementById('multiplierBadge');
-  var gameLabel       = document.getElementById('gameLabel');
-  var winnerOverlay   = document.getElementById('winnerOverlay');
-  var winnerBtn       = document.getElementById('winnerBtn');
+/* LEADERBOARD */
+var LS_KEY='papamoa_gremlin_v1';
+function loadScores(){ try{return JSON.parse(localStorage.getItem(LS_KEY))||[];}catch(e){return [];} }
+function saveScore(initials,ms){
+  var scores=loadScores();
+  scores.push({name:(initials||'???').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,3)||'???',time:ms,date:new Date().toLocaleDateString('en-NZ',{day:'numeric',month:'short'})});
+  scores.sort(function(a,b){return a.time-b.time;}); scores=scores.slice(0,10);
+  try{localStorage.setItem(LS_KEY,JSON.stringify(scores));}catch(e){}
+  return scores;
+}
+function fmtTime(ms){
+  var s=ms/1000;
+  return s<60 ? s.toFixed(1)+'s' : Math.floor(s/60)+'m '+(s%60).toFixed(1)+'s';
+}
+function renderLb(tbl,scores,highlightMs){
+  if(!scores||!scores.length){tbl.innerHTML='<tr><td class="lb-empty" colspan="4">No scores yet &mdash; be first!</td></tr>';return;}
+  var medals=['&#127942;','&#129352;','&#129353;'];
+  tbl.innerHTML=scores.map(function(s,i){
+    return '<tr'+(s.time===highlightMs?' class="lb-new"':'')+'><td class="lb-rank">'+(i<3?medals[i]:i+1)+'</td><td class="lb-name">'+s.name+'</td><td class="lb-time">'+fmtTime(s.time)+'</td><td class="lb-date">'+s.date+'</td></tr>';
+  }).join('');
+}
+function refreshPanel(){ var t=document.getElementById('lbPanelTable'); if(t) renderLb(t,loadScores()); }
 
-  var TOTAL_CATCHES = 20;
-  var PHASE_TWO_AT  = 10;
-  var BASE_SPEED    = 0.35;
-  var MAX_SPEED     = 1.8;
+/* GAME */
+(function(){
+  var arena=document.getElementById('arena'),bin=document.getElementById('bin'),hint=document.getElementById('hint');
+  var caughtFlash=document.getElementById('caughtFlash'),popup=document.getElementById('popup');
+  var popupEmoji=document.getElementById('popupEmoji'),popupTitle=document.getElementById('popupTitle'),popupSub=document.getElementById('popupSub');
+  var scoreEl=document.getElementById('score'),progressFill=document.getElementById('progressFill');
+  var speedIndicator=document.getElementById('speedIndicator'),multiplierBadge=document.getElementById('multiplierBadge');
+  var gameLabel=document.getElementById('gameLabel'),timerDisplay=document.getElementById('timerDisplay');
+  var winnerOverlay=document.getElementById('winnerOverlay'),winnerBtn=document.getElementById('winnerBtn');
+  var finalTimeEl=document.getElementById('finalTime');
+  var initialsPanel=document.getElementById('initialsPanel'),initialsInput=document.getElementById('initialsInput');
+  var initialsSubmit=document.getElementById('initialsSubmit'),winnerLb=document.getElementById('winnerLb'),winnerLbTable=document.getElementById('winnerLbTable');
 
-  var totalCaught = 0;
-  var phaseTwo    = false;
-  var gameOver    = false;
+  var TOTAL=20, PHASE2_AT=10, BASE_SPD=0.35, MAX_SPD=1.8;
+  var totalCaught=0, phaseTwo=false, gameOver=false;
+  var timerStart=null, timerRunning=false, timerRaf=null, finalMs=0;
 
-  /* ── GREMLIN STATE ── */
-  function makeGremlinState(el, startX, startY) {
-    return {
-      el: el,
-      x: startX, y: startY,
-      vx: (Math.random() - 0.5) * BASE_SPEED * 2,
-      vy: (Math.random() - 0.5) * BASE_SPEED * 2,
-      active: false,
-      dragging: false,
-      dragOffX: 0, dragOffY: 0,
-      wandering: false,
-      catchCount: 0
-    };
+  function startTimer(){ if(timerRunning)return; timerStart=Date.now(); timerRunning=true; timerDisplay.classList.add('running'); tick(); }
+  function tick(){ if(!timerRunning)return; timerDisplay.textContent=fmtTime(Date.now()-timerStart); timerRaf=requestAnimationFrame(tick); }
+  function stopTimer(){ finalMs=Date.now()-timerStart; timerRunning=false; cancelAnimationFrame(timerRaf); timerDisplay.textContent=fmtTime(finalMs); timerDisplay.classList.remove('running'); }
+
+  function makeG(el,x,y){ return {el:el,x:x,y:y,vx:0,vy:0,active:false,dragging:false,dox:0,doy:0,wandering:false}; }
+  var gA=makeG(document.getElementById('gremlinA'),50,50);
+  var gB=makeG(document.getElementById('gremlinB'),30,40);
+  gA.active=true;
+  var hintHidden=false, shakeTimer=null;
+
+  function AR(){ return arena.getBoundingClientRect(); }
+  function BR(){ return bin.getBoundingClientRect(); }
+  function setPos(g,x,y){ g.x=x; g.y=y; g.el.style.left=x+'%'; g.el.style.top=y+'%'; }
+  function getSpd(){ return BASE_SPD+(MAX_SPD-BASE_SPD)*Math.min(totalCaught,TOTAL)/TOTAL; }
+
+  function updateHUD(){
+    var spd=getSpd();
+    speedIndicator.textContent=spd>1.2?'TURBO':spd>0.7?'FAST':'';
+    speedIndicator.className='speed-indicator'+(spd>1.2?' turbo':spd>0.7?' fast':'');
+    progressFill.style.width=Math.round(totalCaught/TOTAL*100)+'%';
+    progressFill.className='progress-bar-fill'+(spd>0.9?' hot':'');
+    multiplierBadge.textContent=phaseTwo?'2x GREMLINS':totalCaught>=7?'SPEEDING UP':'';
+    multiplierBadge.className='multiplier'+(phaseTwo?' turbo':totalCaught>=7?' hot':'');
+    scoreEl.textContent=totalCaught;
+    gameLabel.textContent=phaseTwo?'\uD83D\uDCA5 Two gremlins! Catch both!':'\uD83C\uDFAE Grab the gremlin \u2014 drag to bin';
+    gameLabel.className='game-label'+(phaseTwo?' danger':totalCaught>=7?' warning':'');
   }
 
-  var gA = makeGremlinState(document.getElementById('gremlinA'), 50, 50);
-  var gB = makeGremlinState(document.getElementById('gremlinB'), 30, 40);
-  gA.active = true;
-  gA.wandering = true;
-
-  var hintHidden  = false;
-  var respawnTimer = null;
-  var shakeTimer   = null;
-
-  /* ── HELPERS ── */
-  function arenaRect() { return arena.getBoundingClientRect(); }
-  function binRect()   { return bin.getBoundingClientRect(); }
-
-  function setPos(g, x, y) {
-    g.x = x; g.y = y;
-    g.el.style.left = x + '%';
-    g.el.style.top  = y + '%';
+  function wander(g){
+    if(!g.wandering||!g.active||g.dragging||gameOver)return;
+    var ar=AR(), spd=getSpd(), len=Math.sqrt(g.vx*g.vx+g.vy*g.vy);
+    if(len>0){g.vx=g.vx/len*spd; g.vy=g.vy/len*spd;}
+    g.x+=g.vx; g.y+=g.vy;
+    var mx=10/ar.width*100, my=10/ar.height*100;
+    if(g.x<mx||g.x>100-mx) g.vx*=-1;
+    if(g.y<my||g.y>100-my) g.vy*=-1;
+    g.x=Math.max(mx,Math.min(100-mx,g.x)); g.y=Math.max(my,Math.min(100-my,g.y));
+    g.el.style.left=g.x+'%'; g.el.style.top=g.y+'%';
+    if(Math.random()<0.008){var a=Math.random()*Math.PI*2; g.vx=Math.cos(a)*spd; g.vy=Math.sin(a)*spd;}
+    requestAnimationFrame(function(){wander(g);});
+  }
+  function startWander(g,x,y){
+    if(x!==undefined){g.x=x; g.y=y;}
+    g.el.style.transition='none'; g.el.style.left=g.x+'%'; g.el.style.top=g.y+'%';
+    var a=Math.random()*Math.PI*2, spd=getSpd();
+    g.vx=Math.cos(a)*spd; g.vy=Math.sin(a)*spd;
+    g.wandering=true; wander(g);
   }
 
-  function getSpeed() {
-    var t = Math.min(totalCaught, TOTAL_CATCHES);
-    var frac = t / TOTAL_CATCHES;
-    return BASE_SPEED + (MAX_SPEED - BASE_SPEED) * frac;
-  }
+  function evPos(e){ var ar=AR(),cx=e.touches?e.touches[0].clientX:e.clientX,cy=e.touches?e.touches[0].clientY:e.clientY; return{x:cx-ar.left,y:cy-ar.top,cx:cx,cy:cy}; }
 
-  function updateSpeedUI() {
-    var spd = getSpeed();
-    var label = '';
-    var cls   = '';
-    if (spd > 1.2)      { label = 'TURBO'; cls = 'turbo'; }
-    else if (spd > 0.7) { label = 'FAST';  cls = 'fast'; }
-    speedIndicator.textContent = label;
-    speedIndicator.className = 'speed-indicator' + (cls ? ' ' + cls : '');
-    var pct = Math.round((totalCaught / TOTAL_CATCHES) * 100);
-    progressFill.style.width = pct + '%';
-    progressFill.className = 'progress-bar-fill' + (spd > 0.9 ? ' hot' : '');
-    multiplierBadge.textContent = phaseTwo ? '2x GREMLINS' : (totalCaught >= 7 ? 'SPEEDING UP' : '');
-    multiplierBadge.className = 'multiplier' + (phaseTwo ? ' turbo' : totalCaught >= 7 ? ' hot' : '');
-    scoreEl.textContent = totalCaught;
-    gameLabel.textContent = phaseTwo
-      ? '\uD83D\uDCA5 Two gremlins! Catch both!'
-      : '\uD83C\uDFAE Grab the gremlin \u2014 drag to bin';
-    gameLabel.className = 'game-label' + (phaseTwo ? ' danger' : totalCaught >= 7 ? ' warning' : '');
+  function grabStart(g,e){
+    if(!g.active||gameOver)return;
+    e.preventDefault(); e.stopPropagation();
+    if(!timerRunning) startTimer();
+    g.dragging=true; g.wandering=false;
+    g.el.classList.add('caught'); g.el.classList.remove('yeeted');
+    if(!hintHidden){hint.classList.add('hide'); hintHidden=true;}
+    var pos=evPos(e), ar=AR();
+    g.dox=pos.x-g.x/100*ar.width; g.doy=pos.y-g.y/100*ar.height;
   }
-
-  /* ── WANDER LOOP ── */
-  function wander(g) {
-    if (!g.wandering || !g.active || g.dragging || gameOver) return;
-    var ar = arenaRect();
-    var speed = getSpeed();
-    var norm = Math.sqrt(g.vx*g.vx + g.vy*g.vy);
-    if (norm > 0) { g.vx = (g.vx/norm)*speed; g.vy = (g.vy/norm)*speed; }
-    g.x += g.vx;
-    g.y += g.vy;
-    var marginX = (10 / ar.width)  * 100;
-    var marginY = (10 / ar.height) * 100;
-    if (g.x < marginX || g.x > 100 - marginX) g.vx *= -1;
-    if (g.y < marginY || g.y > 100 - marginY) g.vy *= -1;
-    g.x = Math.max(marginX, Math.min(100-marginX, g.x));
-    g.y = Math.max(marginY, Math.min(100-marginY, g.y));
-    g.el.style.left = g.x + '%';
-    g.el.style.top  = g.y + '%';
-    if (Math.random() < 0.008) {
-      var ang = Math.random() * Math.PI * 2;
-      g.vx = Math.cos(ang) * speed;
-      g.vy = Math.sin(ang) * speed;
-    }
-    requestAnimationFrame(function() { wander(g); });
+  function onMove(e){
+    [gA,gB].forEach(function(g){
+      if(!g.dragging)return; e.preventDefault();
+      var pos=evPos(e), ar=AR();
+      var px=Math.max(3,Math.min(97,(pos.x-g.dox)/ar.width*100));
+      var py=Math.max(3,Math.min(97,(pos.y-g.doy)/ar.height*100));
+      g.el.style.transition='none'; setPos(g,px,py);
+      var br=BR(),ax=ar.left+pos.x-g.dox,ay=ar.top+pos.y-g.doy;
+      bin.classList.toggle('active',ax>=br.left&&ax<=br.right&&ay>=br.top&&ay<=br.bottom);
+    });
   }
-
-  function startWander(g, startX, startY) {
-    if (startX !== undefined) { g.x = startX; g.y = startY; }
-    g.el.style.transition = 'none';
-    g.el.style.left = g.x + '%';
-    g.el.style.top  = g.y + '%';
-    var ang = Math.random() * Math.PI * 2;
-    var spd = getSpeed();
-    g.vx = Math.cos(ang) * spd;
-    g.vy = Math.sin(ang) * spd;
-    g.wandering = true;
-    wander(g);
-  }
-
-  /* ── DRAG ── */
-  function eventPos(e) {
-    var ar = arenaRect();
-    var cx = e.touches ? e.touches[0].clientX : e.clientX;
-    var cy = e.touches ? e.touches[0].clientY : e.clientY;
-    return { x: cx - ar.left, y: cy - ar.top, cx: cx, cy: cy };
-  }
-
-  function grabStart(g, e) {
-    if (!g.active || gameOver) return;
-    e.preventDefault();
-    e.stopPropagation();
-    g.dragging  = true;
-    g.wandering = false;
-    g.el.classList.add('caught');
-    g.el.classList.remove('yeeted');
-    if (!hintHidden) { hint.classList.add('hide'); hintHidden = true; }
-    var pos = eventPos(e);
-    var ar  = arenaRect();
-    var gx  = g.x / 100 * ar.width;
-    var gy  = g.y / 100 * ar.height;
-    g.dragOffX = pos.x - gx;
-    g.dragOffY = pos.y - gy;
-  }
-
-  function dragMove(e) {
-    [gA, gB].forEach(function(g) {
-      if (!g.dragging) return;
-      e.preventDefault();
-      var pos = eventPos(e);
-      var ar  = arenaRect();
-      var x   = pos.x - g.dragOffX;
-      var y   = pos.y - g.dragOffY;
-      var px  = Math.max(3, Math.min(97, (x / ar.width)  * 100));
-      var py  = Math.max(3, Math.min(97, (y / ar.height) * 100));
-      g.el.style.transition = 'none';
-      setPos(g, px, py);
-      var br = binRect();
-      var ax = ar.left + x;
-      var ay = ar.top  + y;
-      var over = ax >= br.left && ax <= br.right && ay >= br.top && ay <= br.bottom;
-      bin.classList.toggle('active', over);
+  function onEnd(e){
+    [gA,gB].forEach(function(g){
+      if(!g.dragging)return; g.dragging=false; g.el.classList.remove('caught');
+      var cx=e.changedTouches?e.changedTouches[0].clientX:e.clientX;
+      var cy=e.changedTouches?e.changedTouches[0].clientY:e.clientY;
+      var br=BR();
+      if(cx>=br.left&&cx<=br.right&&cy>=br.top&&cy<=br.bottom) yeet(g);
+      else{bin.classList.remove('active'); g.el.style.transition=''; startWander(g);}
     });
   }
 
-  function dragEnd(e) {
-    [gA, gB].forEach(function(g) {
-      if (!g.dragging) return;
-      g.dragging = false;
-      g.el.classList.remove('caught');
-      var cx = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-      var cy = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-      var br = binRect();
-      var over = cx >= br.left && cx <= br.right && cy >= br.top && cy <= br.bottom;
-      if (over) { yeetGremlin(g); }
-      else { bin.classList.remove('active'); g.el.style.transition = ''; startWander(g); }
-    });
-  }
-
-  /* ── YEET ── */
-  function yeetGremlin(g) {
-    bin.classList.remove('active');
-    totalCaught++;
-    g.catchCount++;
-    g.active   = false;
-    g.wandering = false;
-    updateSpeedUI();
-
-    var br  = binRect();
-    var ar  = arenaRect();
-    var tx  = (br.left + br.width/2  - ar.left) / ar.width  * 100;
-    var ty  = (br.top  + br.height/2 - ar.top)  / ar.height * 100;
-    g.el.style.transition = 'left 0.35s cubic-bezier(.4,0,.2,1), top 0.35s cubic-bezier(.4,0,.2,1), opacity 0.35s ease, transform 0.35s ease';
-    g.el.classList.add('yeeted');
-    setPos(g, tx, ty);
-
-    caughtFlash.classList.add('show');
-    setTimeout(function() { caughtFlash.classList.remove('show'); }, 300);
-
-    if (totalCaught >= TOTAL_CATCHES) {
-      setTimeout(triggerEndGame, 500);
-      return;
-    }
-
-    if (!phaseTwo && totalCaught >= PHASE_TWO_AT) {
-      setTimeout(triggerPhaseTwo, 500);
-      return;
-    }
-
-    if (phaseTwo) {
-      showPopup('&#128293;', 'One down!', 'Still one more out there...', false);
-      setTimeout(function() {
-        hidePopup();
-        g.el.classList.remove('yeeted', 'hidden');
-        g.active = true;
-        startWander(g, 20 + Math.random() * 60, 20 + Math.random() * 60);
-      }, 1200);
+  function yeet(g){
+    bin.classList.remove('active'); totalCaught++; g.active=false; g.wandering=false; updateHUD();
+    var br=BR(),ar=AR();
+    var tx=(br.left+br.width/2-ar.left)/ar.width*100, ty=(br.top+br.height/2-ar.top)/ar.height*100;
+    g.el.style.transition='left 0.35s cubic-bezier(.4,0,.2,1),top 0.35s cubic-bezier(.4,0,.2,1),opacity 0.35s ease,transform 0.35s ease';
+    g.el.classList.add('yeeted'); setPos(g,tx,ty);
+    caughtFlash.classList.add('show'); setTimeout(function(){caughtFlash.classList.remove('show');},300);
+    if(totalCaught>=TOTAL){setTimeout(endGame,500);return;}
+    if(!phaseTwo&&totalCaught>=PHASE2_AT){setTimeout(triggerPhaseTwo,500);return;}
+    if(phaseTwo){
+      showPopup('&#128293;','One down!','Still one more out there\u2026',false);
+      setTimeout(function(){hidePopup(); g.el.classList.remove('yeeted','hidden'); g.active=true; startWander(g,20+Math.random()*60,20+Math.random()*60);},1200);
     } else {
-      showPopup('&#127881;', 'Got him!', 'Gremlin neutralised', false);
-      setTimeout(function() {
-        hidePopup();
-        g.el.classList.remove('yeeted');
-        g.active = true;
-        startWander(g, 20 + Math.random() * 60, 20 + Math.random() * 60);
-      }, 1400);
+      showPopup('&#127881;','Got him!','Gremlin neutralised',false);
+      setTimeout(function(){hidePopup(); g.el.classList.remove('yeeted'); g.active=true; startWander(g,20+Math.random()*60,20+Math.random()*60);},1400);
     }
   }
 
-  /* ── PHASE TWO: bin shakes, two gremlins burst out ── */
-  function triggerPhaseTwo() {
-    phaseTwo = true;
-    bin.classList.remove('active');
-    bin.classList.add('shaking');
-    gA.active   = false;
-    gA.wandering = false;
-    gA.el.classList.remove('yeeted');
-    gA.el.style.opacity = '0';
-
-    showPopup('&#128165;', 'He escaped!', 'And brought a friend...', true);
-
+  function triggerPhaseTwo(){
+    phaseTwo=true; bin.classList.add('shaking');
+    gA.active=false; gA.wandering=false; gA.el.classList.remove('yeeted'); gA.el.style.opacity='0';
+    showPopup('&#128165;','He escaped!','And brought a friend\u2026',true);
     clearTimeout(shakeTimer);
-    shakeTimer = setTimeout(function() {
-      bin.classList.remove('shaking');
-      hidePopup();
-
-      var ar = arenaRect();
-      var bx = (binRect().left + binRect().width/2  - ar.left) / ar.width  * 100;
-      var by = (binRect().top  + binRect().height/2 - ar.top)  / ar.height * 100;
-
-      gA.el.style.transition = 'none';
-      gA.el.style.opacity = '1';
-      gA.el.classList.remove('yeeted','hidden');
-      gA.active = true;
-      startWander(gA, bx, by);
-
-      gB.el.classList.remove('hidden');
-      gB.active = true;
-      startWander(gB, bx + 5, by - 5);
-
-      updateSpeedUI();
-    }, 3000);
+    shakeTimer=setTimeout(function(){
+      bin.classList.remove('shaking'); hidePopup();
+      var ar=AR(),bx=(BR().left+BR().width/2-ar.left)/ar.width*100,by=(BR().top+BR().height/2-ar.top)/ar.height*100;
+      gA.el.style.transition='none'; gA.el.style.opacity='1'; gA.el.classList.remove('yeeted','hidden');
+      gA.active=true; startWander(gA,bx,by);
+      gB.el.classList.remove('hidden'); gB.active=true; startWander(gB,bx+5,by-5);
+      updateHUD();
+    },3000);
   }
 
-  /* ── END GAME ── */
-  function triggerEndGame() {
-    gameOver = true;
-    gA.active   = false;
-    gA.wandering = false;
-    gB.active   = false;
-    gB.wandering = false;
-
-    bin.classList.remove('shaking','active');
-    bin.classList.add('tipping');
-
-    var ar = arenaRect();
-    var binCenter = binRect();
-    var bx = (binCenter.left + binCenter.width/2 - ar.left) / ar.width * 100;
-    var by = (binCenter.top  + binCenter.height/2 - ar.top) / ar.height * 100;
-
-    function rollOutGremlin(g, offsetX) {
-      g.el.classList.remove('yeeted','hidden');
-      g.el.style.transition = 'none';
-      g.el.style.opacity    = '1';
-      g.el.style.transform  = 'translate(-50%,-50%)';
-      setPos(g, bx + offsetX, by);
-      g.el.style.setProperty('--roll-x', (offsetX > 0 ? 140 : -140) + 'px');
-      g.el.style.setProperty('--roll-dur', '1.6s');
-      setTimeout(function() { g.el.classList.add('dead'); }, 100);
+  function endGame(){
+    gameOver=true; stopTimer();
+    gA.active=false; gA.wandering=false; gB.active=false; gB.wandering=false;
+    bin.classList.remove('shaking','active'); bin.classList.add('tipping');
+    var ar=AR(),bc=BR();
+    var bx=(bc.left+bc.width/2-ar.left)/ar.width*100, by=(bc.top+bc.height/2-ar.top)/ar.height*100;
+    function rollOut(g,ox){
+      g.el.classList.remove('yeeted','hidden'); g.el.style.transition='none'; g.el.style.opacity='1'; g.el.style.transform='translate(-50%,-50%)';
+      setPos(g,bx+ox,by); g.el.style.setProperty('--roll-x',(ox>0?140:-140)+'px'); g.el.style.setProperty('--roll-dur','1.6s');
+      setTimeout(function(){g.el.classList.add('dead');},100);
     }
-
-    setTimeout(function() {
-      rollOutGremlin(gA, -8);
-      rollOutGremlin(gB,  8);
-    }, 400);
-
-    setTimeout(function() {
+    setTimeout(function(){rollOut(gA,-8); rollOut(gB,8);},400);
+    setTimeout(function(){
       launchConfetti();
+      finalTimeEl.textContent=fmtTime(finalMs);
       winnerOverlay.classList.add('show');
-    }, 1600);
+      setTimeout(function(){initialsInput.focus();},600);
+      refreshPanel();
+    },1600);
   }
 
-  /* ── POPUP ── */
-  function showPopup(emoji, title, sub, isDanger) {
-    popupEmoji.innerHTML = emoji;
-    popupTitle.textContent = title;
-    popupSub.textContent   = sub;
-    popup.className = 'popup' + (isDanger ? ' danger' : '') + ' show';
+  function showPopup(emoji,title,sub,danger){ popupEmoji.innerHTML=emoji; popupTitle.textContent=title; popupSub.textContent=sub; popup.className='popup'+(danger?' danger':'')+' show'; }
+  function hidePopup(){ popup.classList.remove('show'); }
+
+  function submitScore(){
+    var raw=initialsInput.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase().slice(0,3);
+    if(!raw){initialsInput.focus(); initialsInput.style.borderColor='#FF7043'; return;}
+    var scores=saveScore(raw,finalMs);
+    initialsPanel.style.display='none'; winnerLb.style.display='block';
+    renderLb(winnerLbTable,scores,finalMs); refreshPanel();
   }
-  function hidePopup() { popup.classList.remove('show'); }
+  initialsSubmit.addEventListener('click',submitScore);
+  initialsInput.addEventListener('keydown',function(e){if(e.key==='Enter')submitScore();});
+  initialsInput.addEventListener('input',function(){this.style.borderColor=''; this.value=this.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase().slice(0,3);});
 
-  /* ── EVENT LISTENERS ── */
-  gA.el.addEventListener('mousedown',  function(e){ grabStart(gA,e); });
-  gB.el.addEventListener('mousedown',  function(e){ grabStart(gB,e); });
-  gA.el.addEventListener('touchstart', function(e){ grabStart(gA,e); }, { passive:false });
-  gB.el.addEventListener('touchstart', function(e){ grabStart(gB,e); }, { passive:false });
-  document.addEventListener('mousemove',  dragMove);
-  document.addEventListener('touchmove',  dragMove, { passive:false });
-  document.addEventListener('mouseup',    dragEnd);
-  document.addEventListener('touchend',   dragEnd);
+  gA.el.addEventListener('mousedown',function(e){grabStart(gA,e);});
+  gB.el.addEventListener('mousedown',function(e){grabStart(gB,e);});
+  gA.el.addEventListener('touchstart',function(e){grabStart(gA,e);},{passive:false});
+  gB.el.addEventListener('touchstart',function(e){grabStart(gB,e);},{passive:false});
+  document.addEventListener('mousemove',onMove); document.addEventListener('touchmove',onMove,{passive:false});
+  document.addEventListener('mouseup',onEnd);    document.addEventListener('touchend',onEnd);
+  winnerBtn.addEventListener('click',function(){window.location.href='/papamoa-previews/homepage.html';});
 
-  winnerBtn.addEventListener('click', function() {
-    window.location.href = '/papamoa-previews/homepage.html';
+  updateHUD(); refreshPanel(); startWander(gA,50,50);
+
+  /* GITHUB PAGES PREFIX */
+  var base='/papamoa-previews';
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a'); if(!a)return;
+    var href=a.getAttribute('href');
+    if(href&&href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){ e.preventDefault(); window.location.href=base+href; }
   });
-
-  /* ── KICK OFF ── */
-  updateSpeedUI();
-  startWander(gA, 50, 50);
-
-  /* ── GITHUB PAGES PREFIX FIX ── */
-  var base = '/papamoa-previews';
-  document.addEventListener('click', function(e) {
-    var a = e.target.closest('a');
-    if (!a) return;
-    var href = a.getAttribute('href');
-    if (!href) return;
-    if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('http')) {
-      e.preventDefault();
-      window.location.href = base + href;
-    }
-  });
-
 })();
 </script>
 </body>
