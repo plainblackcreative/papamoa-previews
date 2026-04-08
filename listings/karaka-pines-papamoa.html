@@ -214,7 +214,6 @@
       <div class="hero-meta">
         <span class="hero-meta-item">&#128205; 84 Simpson Road, Pāpāmoa</span>
         <span class="hero-meta-item">&#128222; 027 230 2997</span>
-        <span class="hero-meta-item">&#11088; 5.0 &nbsp;<a href="https://www.google.com/maps/search/Karaka+Pines+Papamoa+Retirement+Village" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.7);text-decoration:underline;">1 Google review</a></span>
       </div>
       <div class="hero-chips">
         <span class="hchip">&#127944; One street from the beach</span>
@@ -387,25 +386,65 @@
 (function(){
   var photos=(typeof PHOTOS!=='undefined')?PHOTOS.slice(0,9):[];
   var galleryEl=document.getElementById('photo-gallery');
-  if(!galleryEl||!photos.length)return;
-  var grid=document.createElement('div');grid.className='gallery-grid';
-  var showSlots=Math.min(photos.length,4),hasMore=photos.length>4;
-  var phIcons=['&#9978;','&#127956;','&#9918;','&#128247;','&#127968;'];
-  for(var i=0;i<showSlots;i++){
+  if(!galleryEl)return;
+
+  var phIcons=['&#9978;','&#127956;','&#9918;','&#128247;','&#127968;','&#127795;','&#9968;','&#128008;','&#127759;'];
+  // Always render 5 slots: main + 3 + see-all. First 4 show images or empty tiles.
+  var TOTAL_SLOTS=5;
+  var grid=document.createElement('div');
+  grid.className='gallery-grid';
+
+  var slots=[];
+  for(var i=0;i<TOTAL_SLOTS;i++){
     (function(idx){
-      var slot=document.createElement('div');slot.className='gallery-slot';slot.setAttribute('data-index',idx);
-      var ph=document.createElement('div');ph.className='gallery-slot-placeholder';
-      ph.innerHTML='<span class="ph-icon">'+phIcons[idx%phIcons.length]+'</span><span class="ph-label">'+photos[idx].alt+'</span>';
-      slot.appendChild(ph);
-      var img=document.createElement('img');img.alt=photos[idx].alt;
-      img.setAttribute('style','position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;transition:transform 0.3s ease;');
-      img.onload=function(){this.setAttribute('style','position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s ease;');};
-      img.src=photos[idx].src;slot.appendChild(img);
-      if(idx===showSlots-1&&hasMore){var ov=document.createElement('div');ov.className='gallery-see-more';ov.innerHTML='<span class="sm-count">+'+(photos.length-showSlots+1)+'</span><span class="sm-label">See all photos</span>';slot.appendChild(ov);}
-      slot.addEventListener('click',function(){openLightbox(parseInt(this.getAttribute('data-index')));});
-      grid.appendChild(slot);
+      var slot=document.createElement('div');
+      slot.className='gallery-slot';
+      slot.setAttribute('data-index',idx);
+
+      if(idx===TOTAL_SLOTS-1){
+        // 5th slot: always the see-all overlay
+        var remaining=photos.length-(TOTAL_SLOTS-1);
+        var ov=document.createElement('div');
+        ov.className='gallery-see-more';
+        var countStr=remaining>0?'<span class="sm-count">+'+remaining+'</span>':'';
+        ov.innerHTML=countStr+'<span class="sm-label">See all photos</span>';
+        slot.appendChild(ov);
+        if(photos[idx]){
+          var ph=document.createElement('div');
+          ph.className='gallery-slot-placeholder';
+          ph.innerHTML='<span class="ph-icon">'+phIcons[idx%phIcons.length]+'</span>';
+          slot.appendChild(ph);
+          var img=new Image();
+          img.alt=photos[idx].alt;
+          img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;transition:transform 0.3s ease;';
+          img.onload=function(){this.style.display='block';};
+          img.src=photos[idx].src;
+          slot.insertBefore(img,ov);
+        }
+        var openIdx=photos.length>0?Math.min(idx,photos.length-1):0;
+        slot.addEventListener('click',function(){if(photos.length)openLightbox(openIdx);});
+      } else if(photos[idx]){
+        var ph=document.createElement('div');
+        ph.className='gallery-slot-placeholder';
+        ph.innerHTML='<span class="ph-icon">'+phIcons[idx%phIcons.length]+'</span><span class="ph-label">'+photos[idx].alt+'</span>';
+        slot.appendChild(ph);
+        var img=new Image();
+        img.alt=photos[idx].alt;
+        img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;transition:transform 0.3s ease;';
+        img.onload=function(){this.style.display='block';};
+        img.src=photos[idx].src;
+        slot.appendChild(img);
+        slot.addEventListener('click',function(){openLightbox(parseInt(this.getAttribute('data-index')));});
+      } else {
+        var ph=document.createElement('div');
+        ph.className='gallery-slot-placeholder';
+        slot.appendChild(ph);
+      }
+      slots.push(slot);
     })(i);
   }
+
+  slots.forEach(function(s){grid.appendChild(s);});
   galleryEl.appendChild(grid);
   var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-img'),lbCaption=document.getElementById('lb-caption'),lbCounter=document.getElementById('lb-counter'),lbThumbs=document.getElementById('lb-thumbs'),currentIndex=0;
   photos.forEach(function(p,idx){var t=document.createElement('div');t.className='lightbox-thumb';t.setAttribute('data-idx',idx);var ti=document.createElement('img');ti.src=p.src;ti.alt=p.alt;ti.loading='lazy';t.appendChild(ti);t.addEventListener('click',function(e){e.stopPropagation();goTo(parseInt(this.getAttribute('data-idx')));});lbThumbs.appendChild(t);});
