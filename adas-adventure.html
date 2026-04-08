@@ -80,17 +80,16 @@ canvas {
   z-index: 10;
 }
 
-/* Touch controls */
+/* Touch controls - below canvas */
 #touchControls {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 140px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  padding: 10px 14px;
-  z-index: 20;
-  pointer-events: none;
+  align-items: center;
+  padding: 8px 14px;
+  background: #111;
+  border-top: 1px solid #222;
+  width: 100%;
+  max-width: 900px;
 }
 
 .touch-btn {
@@ -191,7 +190,7 @@ canvas {
 
 #message-box {
   position: absolute;
-  bottom: 150px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0,0,20,0.92);
@@ -240,7 +239,7 @@ canvas {
     </div>
   </div>
 
-  <div id="overlay">
+  <div id="overlay" style="display:none;">
     <h1>ADA'S ADVENTURE</h1>
     <div class="sub">
       Adrian 'Ada' heads to THE ISLAND...<br>
@@ -253,8 +252,9 @@ canvas {
       Recover: Hulk • Warrior • Jake the Snake • He-Man • Ewoks
     </div>
     <button class="start-btn" id="startBtn">▶ START ADVENTURE</button>
+    <div style="font-size:8px; color:#888; margin-top:6px; font-family: sans-serif;">tap/click anywhere to skip intro</div>
     <div class="pressStart" style="margin-top:14px; font-size:8px; color:#aaa;">
-      Arrow keys / WASD + Z(shoot) X(melee) — or touch controls
+      Arrows/WASD move • Z or LEFT CLICK = shoot • X or RIGHT CLICK = melee
     </div>
   </div>
 </div>
@@ -266,7 +266,7 @@ const W = 900, H = 500;
 
 // ─── GAME STATE ───────────────────────────────────────────────────────────────
 const GS = {
-  state: 'title', // title, playing, dead, win, levelTransition
+  state: 'intro', // intro, title, playing, dead, win, levelTransition
   level: 0,
   score: 0,
   lives: 3,
@@ -280,6 +280,8 @@ const GS = {
   message: '',
   messageTick: 0,
   deathMsg: '',
+  introTick: 0,
+  introScene: 0,
 };
 
 const WEAPONS = [
@@ -320,15 +322,15 @@ function buildLevel(num) {
   return levels[Math.min(num, levels.length-1)]();
 }
 
-function makePlatform(x,y,w,type='ground') { return {x,y,w,h:16,type}; }
-function makeEnemy(x,y,type='goon',bossId=-1) {
+function makePlatform(x,y,w,type) { if(type===undefined)type='ground'; return {x,y,w,h:16,type}; }
+function makeEnemy(x,y,type,bossId) { if(type===undefined)type='goon'; if(bossId===undefined)bossId=-1;
   return {x,y,w:32,h:40,type,bossId,vx:type==='lars'?0:-1,hp:type==='monique'?8:type==='lars'?4:2,
     maxHp:type==='monique'?8:type==='lars'?4:2,dir:-1,state:'walk',stunTick:0,
     alertTick:0,groundY:y};
 }
 function makeToy(x,y,idx) { return {x,y,w:24,h:24,toyIdx:idx,collected:false}; }
 function makeAlly(x,y,idx) { return {x,y,w:28,h:40,allyIdx:idx,freed:false,bounce:0}; }
-function makeCollectible(x,y,type='coin') { return {x,y,w:16,h:16,type,collected:false}; }
+function makeCollectible(x,y,type) { if(type===undefined)type='coin'; return {x,y,w:16,h:16,type,collected:false}; }
 
 // Level 0 — Helston Rd exterior, suburban, transition to island
 function buildLevel0() {
@@ -585,7 +587,7 @@ function spawnProjectile(x,y,dir,wIdx) {
   }
 }
 
-function spawnParticle(x,y,color,n=5) {
+function spawnParticle(x,y,color,n) { if(n===undefined)n=5;
   for(let i=0;i<n;i++) {
     const a = Math.random()*Math.PI*2;
     const s = 2+Math.random()*4;
@@ -598,6 +600,12 @@ let level = null;
 
 function loadLevel(num) {
   level = buildLevel(num);
+  // Enforce max 1 lars on screen at a time
+  let larsCount = 0;
+  level.enemies = level.enemies.filter(e => {
+    if (e.type === 'lars') { larsCount++; return larsCount <= 1; }
+    return true;
+  });
   player.x = 80; player.y = 380;
   player.vx = 0; player.vy = 0;
   player.state = 'idle';
@@ -614,13 +622,32 @@ function loadLevel(num) {
 document.addEventListener('keydown', e => {
   GS.keys[e.code] = true;
   if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.key)) e.preventDefault();
+  if (GS.state === 'intro') { skipIntro(); return; }
   if (GS.state === 'title' || GS.state === 'win' || GS.state === 'dead') {
     if (e.code==='Space'||e.code==='Enter') startGame();
   }
 });
 document.addEventListener('keyup', e => { GS.keys[e.code] = false; });
 
+// Mouse: left click = shoot, right click = melee
+canvas.addEventListener('mousedown', e => {
+  e.preventDefault();
+  if (GS.state === 'intro') { skipIntro(); return; }
+  if (GS.state === 'title' || GS.state === 'win' || GS.state === 'dead') { startGame(); return; }
+  if (e.button === 0) GS.keys['MouseShoot'] = true;
+  if (e.button === 2) GS.keys['MouseMelee'] = true;
+});
+canvas.addEventListener('mouseup', e => {
+  if (e.button === 0) GS.keys['MouseShoot'] = false;
+  if (e.button === 2) GS.keys['MouseMelee'] = false;
+});
+canvas.addEventListener('contextmenu', e => e.preventDefault());
+
 // Touch controls
+canvas.addEventListener('touchstart', function(e) {
+  if (GS.state === 'intro') { e.preventDefault(); skipIntro(); }
+}, {passive:false});
+
 document.querySelectorAll('.touch-btn').forEach(btn => {
   const action = btn.dataset.action;
   btn.addEventListener('touchstart', e => { e.preventDefault(); GS.touch[action]=true; btn.classList.add('pressed'); }, {passive:false});
@@ -631,7 +658,7 @@ document.querySelectorAll('.touch-btn').forEach(btn => {
 function isKey(...codes) { return codes.some(c => GS.keys[c]||GS.touch[c]); }
 
 // ─── GAME START ───────────────────────────────────────────────────────────────
-document.getElementById('startBtn').addEventListener('click', startGame);
+var sbtn = document.getElementById('startBtn'); if(sbtn) sbtn.addEventListener('click', startGame);
 
 function startGame() {
   GS.state = 'playing';
@@ -646,8 +673,26 @@ function startGame() {
   showMessage("Ada grabs his cap and heads\ntowards THE ISLAND...", 180);
 }
 
+function skipIntro() {
+  GS.state = 'title';
+  GS.introTick = 0;
+  GS.introScene = 0;
+  var ov = document.getElementById('overlay');
+  ov.style.display = 'flex';
+  // restore original title content if it was replaced
+  if (!document.getElementById('startBtn')) {
+    ov.innerHTML = "<h1>ADA'S ADVENTURE</h1>"
+      + '<div class="sub">Adrian &apos;Ada&apos; heads to THE ISLAND...<br>Monique &amp; Lars have captured his crew<br>and nicked ALL his wrestling figures!<br><br>Bogey-blast your way to victory!</div>'
+      + '<div class="sub" style="font-size:14px; color:#ffddaa;">Rescue: Rory &bull; Matthew &bull; Dennis &bull; Chris &bull; Todd<br>Recover: Hulk &bull; Warrior &bull; Jake the Snake &bull; He-Man &bull; Ewoks</div>'
+      + '<button class="start-btn" id="startBtn2" onclick="startGame()">&#9658; START ADVENTURE</button>'
+      + '<div class="pressStart" style="margin-top:14px; font-size:8px; color:#aaa;">Arrows/WASD move | Z or LEFT CLICK = shoot | X or RIGHT CLICK = melee</div>';
+    var sb2 = document.getElementById('startBtn2');
+    if (sb2) sb2.addEventListener('click', startGame);
+  }
+}
+
 // ─── MESSAGE SYSTEM ───────────────────────────────────────────────────────────
-function showMessage(text, duration=150) {
+function showMessage(text, duration) { if (duration===undefined) duration=150;
   GS.message = text;
   GS.messageTick = duration;
   const mb = document.getElementById('message-box');
@@ -704,8 +749,8 @@ function updatePlayer() {
   const left  = isKey('ArrowLeft','KeyA','left');
   const right = isKey('ArrowRight','KeyD','right');
   const jump  = isKey('ArrowUp','KeyW','Space','jump');
-  const shoot = isKey('KeyZ','down','shoot');
-  const melee = isKey('KeyX','melee');
+  const shoot = isKey('KeyZ','down','shoot','MouseShoot');
+  const melee = isKey('KeyX','melee','MouseMelee');
 
   // horizontal
   if (player.state !== 'hurt') {
@@ -866,7 +911,7 @@ function hitEnemy(e, dmg) {
   }
 }
 
-function hurtPlayer(dmg=1) {
+function hurtPlayer(dmg) { if(dmg===undefined)dmg=1;
   if (player.invTick > 0) return;
   GS.lives -= dmg;
   player.invTick = 90;
@@ -1041,23 +1086,12 @@ function updateParticles() {
 function draw() {
   ctx.clearRect(0,0,W,H);
 
-  // Title screen - just draw a simple background so canvas isn't black
   if (!level) {
-    ctx.fillStyle = '#0d2a0d';
-    ctx.fillRect(0,0,W,H);
-    // draw some jungle silhouette
-    ctx.fillStyle = '#0a1f0a';
-    for (var ti=0; ti<12; ti++) {
-      var tx = ti*(W/12);
-      ctx.fillRect(tx, H-160-ti%3*30, 60, 160+ti%3*30);
-      ctx.beginPath();
-      ctx.moveTo(tx+30, H-180-ti%3*30-60);
-      ctx.lineTo(tx-10, H-160-ti%3*30);
-      ctx.lineTo(tx+70, H-160-ti%3*30);
-      ctx.fill();
+    if (GS.state === 'intro') {
+      drawIntro();
+    } else {
+      drawTitleBg();
     }
-    ctx.fillStyle = '#061406';
-    ctx.fillRect(0, H-40, W, 40);
     return;
   }
 
@@ -1082,6 +1116,917 @@ function draw() {
     ctx.globalAlpha = 0.15;
     ctx.fillStyle = '#ff0000';
     ctx.fillRect(0,0,W,H);
+    ctx.globalAlpha = 1;
+  }
+}
+
+
+// ─── INTRO SEQUENCE ───────────────────────────────────────────────────────────
+// 6 scenes, ~120 frames each, hand-crafted from the real Helston Rd photos
+
+function drawTitleBg() {
+  // Static jungle silhouette behind HTML overlay
+  var sky1 = '#c8dde8', sky2 = '#aaccdd';
+  ctx.fillStyle = sky1;
+  ctx.fillRect(0,0,W,H);
+  // overcast NZ sky gradient bands
+  ctx.fillStyle = sky2;
+  ctx.fillRect(0,0,W,H/2);
+  // rolling green hills in background
+  ctx.fillStyle = '#5a7a3a';
+  ctx.beginPath();
+  ctx.moveTo(0,H*0.55);
+  ctx.bezierCurveTo(W*0.15,H*0.38,W*0.3,H*0.44,W*0.45,H*0.42);
+  ctx.bezierCurveTo(W*0.6,H*0.4,W*0.75,H*0.5,W,H*0.45);
+  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.fill();
+  ctx.fillStyle = '#4a6a2a';
+  ctx.beginPath();
+  ctx.moveTo(0,H*0.65);
+  ctx.bezierCurveTo(W*0.2,H*0.55,W*0.5,H*0.6,W*0.7,H*0.58);
+  ctx.bezierCurveTo(W*0.85,H*0.56,W*0.95,H*0.6,W,H*0.62);
+  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.fill();
+  // dark tree silhouettes
+  ctx.fillStyle = '#1a3a1a';
+  for (var i=0;i<14;i++) {
+    var tx=i*70-10, th=100+i%4*30;
+    ctx.fillRect(tx,H-th-20,40,th+20);
+    ctx.beginPath();
+    ctx.moveTo(tx+20,H-th-80);
+    ctx.lineTo(tx-15,H-th-20);
+    ctx.lineTo(tx+55,H-th-20);
+    ctx.fill();
+  }
+  ctx.fillStyle = '#0d2010';
+  ctx.fillRect(0,H-30,W,30);
+}
+
+// Scene timing: each scene has a start tick
+var INTRO_SCENES = [
+  { start:0,   dur:130 }, // Scene 0: aerial pullback - Johnsonville hills
+  { start:130, dur:140 }, // Scene 1: Helston Rd from the road - see the bend, power poles
+  { start:270, dur:130 }, // Scene 2: THE ISLAND - the green wedge from the kerb
+  { start:400, dur:110 }, // Scene 3: 125 Helston Rd house / garage close-up
+  { start:510, dur:110 }, // Scene 4: Ada walks out the gate toward the island
+  { start:620, dur:100 }, // Scene 5: zoom into island, trees close up, title card
+];
+
+function getSceneT() {
+  var t = GS.introTick;
+  for (var i = INTRO_SCENES.length-1; i>=0; i--) {
+    if (t >= INTRO_SCENES[i].start) {
+      var st = (t - INTRO_SCENES[i].start) / INTRO_SCENES[i].dur;
+      return { scene: i, t: Math.min(st,1), raw: t - INTRO_SCENES[i].start };
+    }
+  }
+  return { scene:0, t:0, raw:0 };
+}
+
+function easeIn(t)  { return t*t; }
+function easeOut(t) { return 1-(1-t)*(1-t); }
+function easeInOut(t) { return t<0.5 ? 2*t*t : 1-2*(1-t)*(1-t); }
+function lerp(a,b,t) { return a+(b-a)*t; }
+function fadeAlpha(t, inDur, outStart, outDur) {
+  var a=1;
+  if (t < inDur) a = t/inDur;
+  if (t > outStart) a = Math.max(0,1-(t-outStart)/outDur);
+  return a;
+}
+
+function drawIntro() {
+  var info = getSceneT();
+  var scene = info.scene, t = info.t, raw = info.raw;
+
+  ctx.clearRect(0,0,W,H);
+
+  if (scene === 0) drawIntroScene0(t, raw);
+  else if (scene === 1) drawIntroScene1(t, raw);
+  else if (scene === 2) drawIntroScene2(t, raw);
+  else if (scene === 3) drawIntroScene3(t, raw);
+  else if (scene === 4) drawIntroScene4(t, raw);
+  else if (scene === 5) drawIntroScene5(t, raw);
+
+  // Skip prompt - bottom right, subtle
+  ctx.globalAlpha = 0.5 + 0.3*Math.sin(GS.frame*0.08);
+  ctx.fillStyle = '#fff';
+  ctx.font = '9px sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText('TAP / CLICK TO SKIP', W-12, H-10);
+  ctx.textAlign = 'left';
+  ctx.globalAlpha = 1;
+}
+
+// ── NZ sky helper ──
+function drawNZSky(darken) {
+  darken = darken||0;
+  var r=Math.round(lerp(200,150,darken)), g=Math.round(lerp(220,180,darken)), b=Math.round(lerp(235,200,darken));
+  ctx.fillStyle = 'rgb('+r+','+g+','+b+')';
+  ctx.fillRect(0,0,W,H);
+  // cloud layer
+  ctx.fillStyle = 'rgba(255,255,255,0.35)';
+  ctx.fillRect(0,0,W,H*0.3);
+  // subtle cloud shapes
+  ctx.fillStyle = 'rgba(255,255,255,0.2)';
+  ctx.beginPath(); ctx.arc(180,60,80,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(280,50,60,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(600,80,90,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(720,65,60,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(820,75,50,0,Math.PI*2); ctx.fill();
+}
+
+// ── Johnsonville hills helper ──
+function drawJohnsonvilleHills(yOffset) {
+  yOffset = yOffset||0;
+  // Far hills - dark green
+  ctx.fillStyle = '#3d5c22';
+  ctx.beginPath();
+  ctx.moveTo(0,220+yOffset);
+  ctx.bezierCurveTo(100,170+yOffset, 250,190+yOffset, 400,180+yOffset);
+  ctx.bezierCurveTo(500,172+yOffset, 620,160+yOffset, 750,175+yOffset);
+  ctx.bezierCurveTo(820,183+yOffset, 880,178+yOffset, W,185+yOffset);
+  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.fill();
+  // Mid hills - medium green
+  ctx.fillStyle = '#4a7028';
+  ctx.beginPath();
+  ctx.moveTo(0,280+yOffset);
+  ctx.bezierCurveTo(150,240+yOffset, 300,260+yOffset, 450,250+yOffset);
+  ctx.bezierCurveTo(580,242+yOffset, 700,255+yOffset, 800,248+yOffset);
+  ctx.bezierCurveTo(850,244+yOffset, W,252+yOffset, W,260+yOffset);
+  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.fill();
+  // House dots on the hills (Johnsonville suburb feel)
+  ctx.fillStyle = '#557a30';
+  var houses = [[80,255],[160,248],[300,242],[420,250],[520,248],[650,252],[780,248]];
+  houses.forEach(function(h) {
+    ctx.fillRect(h[0]+0,h[1]+yOffset,14,10);
+    ctx.fillStyle='#445522';
+    ctx.beginPath();
+    ctx.moveTo(h[0]-2,h[1]+yOffset); ctx.lineTo(h[0]+7,h[1]-6+yOffset); ctx.lineTo(h[0]+16,h[1]+yOffset);
+    ctx.fill();
+    ctx.fillStyle='#557a30';
+  });
+}
+
+// ── Road helper - Helston Rd asphalt ──
+function drawRoad(horizonY, vanishX, roadWidth, yPerspective) {
+  horizonY = horizonY||320; vanishX=vanishX||W/2; roadWidth=roadWidth||180; yPerspective=yPerspective||1;
+  // asphalt
+  ctx.fillStyle = '#4a4a4a';
+  ctx.beginPath();
+  ctx.moveTo(vanishX-10, horizonY);
+  ctx.lineTo(vanishX+10, horizonY);
+  ctx.lineTo(vanishX+roadWidth*yPerspective, H+20);
+  ctx.lineTo(vanishX-roadWidth*yPerspective, H+20);
+  ctx.fill();
+  // road surface texture
+  ctx.fillStyle = '#555';
+  ctx.beginPath();
+  ctx.moveTo(vanishX-8, horizonY);
+  ctx.lineTo(vanishX+6, horizonY);
+  ctx.lineTo(vanishX+roadWidth*yPerspective*0.4, H+20);
+  ctx.lineTo(vanishX-roadWidth*yPerspective*0.6, H+20);
+  ctx.fill();
+  // HELSTON RD road marking - white text on asphalt
+  ctx.save();
+  ctx.translate(vanishX-20, H-80);
+  ctx.rotate(-0.12);
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('Helston Rd', 0, 0);
+  ctx.restore();
+  // centre line dashes
+  ctx.fillStyle = '#ffcc00';
+  for (var d=0; d<6; d++) {
+    var dz = d/6;
+    var dy = lerp(H, horizonY, dz);
+    var dw = lerp(4,1,dz);
+    ctx.fillRect(vanishX-dw/2, dy-lerp(18,4,dz), dw, lerp(18,4,dz));
+  }
+}
+
+// ── Retaining wall - the distinctive curved concrete kerb ──
+function drawRetainingWall(x, y, w, h) {
+  ctx.fillStyle = '#8a8a82';
+  ctx.fillRect(x, y, w, h);
+  ctx.fillStyle = '#9a9a92';
+  ctx.fillRect(x, y, w, h*0.35);
+  ctx.fillStyle = '#7a7a72';
+  ctx.fillRect(x, y+h*0.7, w, h*0.3);
+  // crack lines
+  ctx.fillStyle = '#6a6a62';
+  for (var ci=0; ci<w; ci+=28) {
+    ctx.fillRect(x+ci, y, 1, h);
+  }
+  // moss on top
+  ctx.fillStyle = '#4a6a2a';
+  for (var mi=0; mi<w; mi+=18) {
+    ctx.fillRect(x+mi, y-3, 10, 5);
+    ctx.fillRect(x+mi+4, y-5, 4, 3);
+  }
+}
+
+// ── Power pole ──
+function drawPowerPole(x, h, wireEndX) {
+  ctx.fillStyle = '#5a4a30';
+  ctx.fillRect(x-4, H-h, 8, h);
+  ctx.fillStyle = '#6a5a40';
+  ctx.fillRect(x-4, H-h, 3, h);
+  // crossarm
+  ctx.fillStyle = '#5a4a30';
+  ctx.fillRect(x-28, H-h+20, 56, 6);
+  ctx.fillRect(x-20, H-h+10, 40, 6);
+  // insulators
+  ctx.fillStyle = '#7a8888';
+  ctx.fillRect(x-26, H-h+14, 5, 12);
+  ctx.fillRect(x+22, H-h+14, 5, 12);
+  ctx.fillRect(x-18, H-h+4, 5, 12);
+  ctx.fillRect(x+14, H-h+4, 5, 12);
+  // wires - drooping
+  if (wireEndX !== undefined) {
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(x-26, H-h+16);
+    ctx.quadraticCurveTo((x+wireEndX)/2, H-h+80, wireEndX-26, H-h+16);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x+22, H-h+16);
+    ctx.quadraticCurveTo((x+wireEndX)/2, H-h+76, wireEndX+22, H-h+16);
+    ctx.stroke();
+    ctx.lineWidth = 1;
+  }
+}
+
+// ── NZ wooden fence ──
+function drawFence(x1, x2, y, h) {
+  ctx.fillStyle = '#5a3a20';
+  ctx.fillRect(x1, y-4, x2-x1, 5);
+  ctx.fillRect(x1, y+h*0.4-2, x2-x1, 5);
+  for (var fi=x1; fi<x2; fi+=13) {
+    ctx.fillStyle = '#6a4a30';
+    ctx.fillRect(fi, y-10, 10, h+10);
+    ctx.fillStyle = '#7a5a40';
+    ctx.fillRect(fi+1, y-10, 3, h+10);
+    ctx.fillStyle = '#4a2a10';
+    ctx.fillRect(fi, y-10, 10, 3);
+  }
+}
+
+// ── Dense NZ bush / trees ──
+function drawNZBush(x, y, w, h, dense) {
+  dense = dense||1;
+  // background layer
+  ctx.fillStyle = '#1f4010';
+  ctx.beginPath();
+  ctx.moveTo(x, y+h);
+  ctx.bezierCurveTo(x-10,y+h*0.3, x+w*0.1,y-20, x+w*0.25,y+10);
+  ctx.bezierCurveTo(x+w*0.35,y-30, x+w*0.5,y-40, x+w*0.6,y-20);
+  ctx.bezierCurveTo(x+w*0.7,y-35, x+w*0.85,y-15, x+w,y+h);
+  ctx.fill();
+  // mid layer
+  ctx.fillStyle = '#2a5518';
+  ctx.beginPath();
+  ctx.moveTo(x+5, y+h);
+  ctx.bezierCurveTo(x+5,y+h*0.4, x+w*0.15,y, x+w*0.3,y+20);
+  ctx.bezierCurveTo(x+w*0.4,y-15, x+w*0.55,y-30, x+w*0.65,y-10);
+  ctx.bezierCurveTo(x+w*0.75,y-25, x+w*0.88,y-5, x+w-5,y+h);
+  ctx.fill();
+  if (dense>1) {
+    // front highlights
+    ctx.fillStyle = '#3a7a22';
+    ctx.beginPath();
+    ctx.moveTo(x+w*0.1, y+h);
+    ctx.bezierCurveTo(x+w*0.1,y+h*0.5, x+w*0.2,y+15, x+w*0.35,y+25);
+    ctx.bezierCurveTo(x+w*0.45,y+5, x+w*0.6,y-10, x+w*0.7,y+15);
+    ctx.bezierCurveTo(x+w*0.8,y,     x+w*0.9,y+20, x+w*0.95,y+h);
+    ctx.fill();
+  }
+  // overhanging branches
+  ctx.fillStyle = '#1a3a0a';
+  ctx.beginPath();
+  ctx.moveTo(x+w*0.3, y-30);
+  ctx.bezierCurveTo(x+w*0.6,y-60, x+w*0.9,y-20, x+w*1.1,y+20);
+  ctx.lineTo(x+w*1.1,y+40);
+  ctx.bezierCurveTo(x+w*0.8,y+10, x+w*0.5,y-10, x+w*0.3,y-10);
+  ctx.fill();
+}
+
+// ── Large mature tree with trunk ──
+function drawBigTree(x, y, trunkH, canopyW, canopyH) {
+  // roots / base
+  ctx.fillStyle = '#3a2a10';
+  ctx.fillRect(x-6, y-trunkH, 12, trunkH);
+  ctx.fillStyle = '#4a3a18';
+  ctx.fillRect(x-5, y-trunkH, 5, trunkH);
+  // multiple trunks splitting (like the real trees in the photos)
+  ctx.fillStyle = '#3a2a10';
+  ctx.fillRect(x-14, y-trunkH*0.6, 8, trunkH*0.6);
+  ctx.fillRect(x+6,  y-trunkH*0.5, 8, trunkH*0.5);
+  // bark detail
+  ctx.fillStyle = '#2a1a08';
+  ctx.fillRect(x-6, y-trunkH+10, 2, trunkH-10);
+  // canopy layers
+  ctx.fillStyle = '#1a4010';
+  ctx.beginPath();
+  ctx.moveTo(x, y-trunkH-canopyH);
+  ctx.bezierCurveTo(x+canopyW*0.8,y-trunkH-canopyH*0.8, x+canopyW,y-trunkH-canopyH*0.3, x+canopyW*0.9,y-trunkH+canopyH*0.2);
+  ctx.bezierCurveTo(x+canopyW*0.5,y-trunkH+canopyH*0.35, x-canopyW*0.5,y-trunkH+canopyH*0.3, x-canopyW*0.9,y-trunkH+canopyH*0.15);
+  ctx.bezierCurveTo(x-canopyW,y-trunkH-canopyH*0.2, x-canopyW*0.8,y-trunkH-canopyH*0.7, x,y-trunkH-canopyH);
+  ctx.fill();
+  ctx.fillStyle = '#2a5518';
+  ctx.beginPath();
+  ctx.moveTo(x-10, y-trunkH-canopyH*0.9);
+  ctx.bezierCurveTo(x+canopyW*0.7,y-trunkH-canopyH*0.9, x+canopyW*0.85,y-trunkH-canopyH*0.2, x+canopyW*0.7,y-trunkH+canopyH*0.1);
+  ctx.bezierCurveTo(x+canopyW*0.3,y-trunkH+canopyH*0.25, x-canopyW*0.3,y-trunkH+canopyH*0.2, x-canopyW*0.8,y-trunkH);
+  ctx.bezierCurveTo(x-canopyW*0.9,y-trunkH-canopyH*0.4, x-canopyW*0.6,y-trunkH-canopyH*0.8, x-10,y-trunkH-canopyH*0.9);
+  ctx.fill();
+  ctx.fillStyle = '#3a7020';
+  ctx.beginPath();
+  ctx.moveTo(x-20, y-trunkH-canopyH*0.7);
+  ctx.bezierCurveTo(x+canopyW*0.4,y-trunkH-canopyH*0.85, x+canopyW*0.6,y-trunkH-canopyH*0.3, x+canopyW*0.5,y-trunkH);
+  ctx.bezierCurveTo(x+canopyW*0.1,y-trunkH+canopyH*0.12, x-canopyW*0.1,y-trunkH+canopyH*0.1, x-canopyW*0.6,y-trunkH-canopyH*0.1);
+  ctx.bezierCurveTo(x-canopyW*0.7,y-trunkH-canopyH*0.4, x-canopyW*0.4,y-trunkH-canopyH*0.6, x-20,y-trunkH-canopyH*0.7);
+  ctx.fill();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SCENE 0: Aerial pull-back revealing Johnsonville, NZ — overcast summer sky
+// Camera pulls back from close-up hills to reveal the suburb
+// ─────────────────────────────────────────────────────────────────────────────
+function drawIntroScene0(t, raw) {
+  var zoom = lerp(1.4, 1.0, easeOut(t));
+  var panY = lerp(-60, 0, easeOut(t));
+
+  ctx.save();
+  ctx.translate(W/2, H/2);
+  ctx.scale(zoom,zoom);
+  ctx.translate(-W/2, -H/2+panY);
+
+  drawNZSky(0.1);
+  drawJohnsonvilleHills(0);
+
+  // Suburb rooftops silhouette
+  ctx.fillStyle = '#3a4a2a';
+  var roofs = [
+    [30,360,80,40],[130,370,60,35],[220,355,90,45],[340,365,70,38],
+    [440,360,80,42],[560,368,65,36],[660,355,85,44],[780,362,75,40]
+  ];
+  roofs.forEach(function(r) {
+    ctx.fillStyle = '#4a4a5a';
+    ctx.fillRect(r[0],r[1],r[2],r[3]);
+    ctx.fillStyle = '#3a3a4a';
+    ctx.beginPath();
+    ctx.moveTo(r[0]-5,r[1]); ctx.lineTo(r[0]+r[2]/2,r[1]-25); ctx.lineTo(r[0]+r[2]+5,r[1]);
+    ctx.fill();
+  });
+
+  // Trees scattered on hillside
+  [60,200,380,520,680,820].forEach(function(tx) {
+    drawBigTree(tx, 310, 80, 55, 70);
+  });
+
+  ctx.restore();
+
+  // Caption
+  var fa = fadeAlpha(t, 0.15, 0.75, 0.2);
+  ctx.globalAlpha = fa;
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, H-56, W, 56);
+  ctx.fillStyle = '#ddeeff';
+  ctx.font = 'bold 15px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Johnsonville, Wellington, New Zealand', W/2, H-32);
+  ctx.font = '11px sans-serif';
+  ctx.fillStyle = '#aaccdd';
+  ctx.fillText('Early 1990s', W/2, H-14);
+  ctx.textAlign = 'left';
+  ctx.globalAlpha = 1;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SCENE 1: Looking down Helston Rd — the bend, power poles, fence on left
+// Faithful recreation of the Nov 2022 street view looking down the road
+// ─────────────────────────────────────────────────────────────────────────────
+function drawIntroScene1(t, raw) {
+  var panX = lerp(30, 0, easeOut(t));
+
+  drawNZSky(0.05);
+  drawJohnsonvilleHills(-20);
+
+  ctx.save();
+  ctx.translate(panX, 0);
+
+  // Road curving to the right (like the real Helston Rd bend)
+  ctx.fillStyle = '#4a4a4a';
+  ctx.beginPath();
+  ctx.moveTo(-20, H+10);
+  ctx.bezierCurveTo(100, H-50, 300, 380, 520, 320);
+  ctx.bezierCurveTo(600, 308, 660, 310, W+50, 315);
+  ctx.lineTo(W+50,H+10);
+  ctx.fill();
+  // road centre line
+  ctx.fillStyle = '#ffcc00';
+  for (var di=0; di<8; di++) {
+    var dby = H-di*60;
+    if (dby < 310) break;
+    ctx.fillRect(lerp(180,W/2-10,di/8), dby-20, lerp(5,2,di/8), lerp(22,10,di/8));
+  }
+  // Helston Rd painted letters on road
+  ctx.save();
+  ctx.translate(120, H-60);
+  ctx.rotate(-0.05);
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  ctx.font = 'bold 20px sans-serif';
+  ctx.fillText('Helston Rd', 0, 0);
+  ctx.restore();
+
+  // LEFT SIDE: weathered wooden fence + retaining wall (like the photos)
+  drawFence(-20, 260, H-160, 120);
+  drawRetainingWall(260, H-90, 200, 22);
+
+  // LEFT SIDE: hedge / bush overhanging from left
+  drawNZBush(-30, H-220, 200, 180, 2);
+  drawNZBush(160, H-200, 160, 160, 2);
+
+  // RIGHT SIDE: The island vegetation (dense trees)
+  drawNZBush(480, H-280, 300, 260, 3);
+  drawBigTree(600, H-60, 240, 100, 120);
+  drawBigTree(720, H-60, 210, 90, 110);
+
+  // Power pole on left  
+  drawPowerPole(80, 200, 380);
+
+  // Brydon Way sign glimpse
+  ctx.fillStyle = '#2a6a2a';
+  ctx.fillRect(460, H-170, 90, 22);
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 9px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('BRYDON WAY', 505, H-155);
+  ctx.fillStyle = '#2a6a2a';
+  ctx.fillRect(462, H-145, 86, 18);
+  ctx.fillStyle = '#fff';
+  ctx.font = '7px sans-serif';
+  ctx.fillText('HELSTON RD', 505, H-133);
+  ctx.textAlign = 'left';
+  // Sign pole
+  ctx.fillStyle = '#888';
+  ctx.fillRect(502, H-148, 6, 80);
+
+  ctx.restore();
+
+  // Caption
+  var fa = fadeAlpha(t, 0.12, 0.78, 0.18);
+  ctx.globalAlpha = fa;
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, H-56, W, 56);
+  ctx.fillStyle = '#ddeeff';
+  ctx.font = 'bold 15px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Helston Road', W/2, H-32);
+  ctx.font = '11px sans-serif';
+  ctx.fillStyle = '#aaccdd';
+  ctx.fillText('Numbers 119–137', W/2, H-14);
+  ctx.textAlign = 'left';
+  ctx.globalAlpha = 1;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SCENE 2: THE ISLAND — the green wedge, from the kerb looking in
+// The concrete retaining wall in foreground, dense trees above
+// ─────────────────────────────────────────────────────────────────────────────
+function drawIntroScene2(t, raw) {
+  var zoomT = easeInOut(Math.min(t*1.5,1));
+  var zoom = lerp(1.0, 1.15, zoomT);
+
+  drawNZSky(0.08);
+
+  ctx.save();
+  ctx.translate(W/2*(1-zoom), H*(1-zoom)*0.3);
+  ctx.scale(zoom, zoom);
+
+  // Road in foreground
+  ctx.fillStyle = '#484848';
+  ctx.fillRect(0, H-90, W, 90);
+  ctx.fillStyle = '#555';
+  ctx.fillRect(0, H-90, W, 20);
+
+  // Helston Rd text on road
+  ctx.save();
+  ctx.translate(W*0.3, H-30);
+  ctx.rotate(-0.04);
+  ctx.fillStyle = 'rgba(255,255,255,0.55)';
+  ctx.font = 'bold 24px sans-serif';
+  ctx.fillText('Helston Rd', 0, 0);
+  ctx.restore();
+
+  // THE RETAINING WALL - the signature concrete curved kerb from photos
+  // Curved front edge
+  ctx.fillStyle = '#8a8a82';
+  ctx.beginPath();
+  ctx.moveTo(-10, H-88);
+  ctx.bezierCurveTo(W*0.2, H-80, W*0.5, H-75, W*0.75, H-82);
+  ctx.bezierCurveTo(W*0.85, H-85, W, H-90, W+10, H-90);
+  ctx.lineTo(W+10, H-65);
+  ctx.bezierCurveTo(W, H-68, W*0.85, H-62, W*0.75, H-58);
+  ctx.bezierCurveTo(W*0.5, H-50, W*0.2, H-55, -10, H-62);
+  ctx.fill();
+  // wall highlight top
+  ctx.fillStyle = '#9a9a92';
+  ctx.beginPath();
+  ctx.moveTo(-10, H-88);
+  ctx.bezierCurveTo(W*0.2, H-80, W*0.5, H-75, W*0.75, H-82);
+  ctx.bezierCurveTo(W*0.85, H-85, W, H-90, W+10, H-90);
+  ctx.lineTo(W+10, H-82);
+  ctx.bezierCurveTo(W, H-82, W*0.85, H-77, W*0.75, H-74);
+  ctx.bezierCurveTo(W*0.5, H-67, W*0.2, H-72, -10, H-80);
+  ctx.fill();
+  // wall moss
+  ctx.fillStyle = '#3a5a18';
+  for (var wi=20; wi<W-30; wi+=22) {
+    ctx.fillRect(wi, H-88, 12, 6);
+  }
+
+  // ISLAND VEGETATION - the dense green wedge
+  // Back layer - dark
+  ctx.fillStyle = '#0d2008';
+  ctx.fillRect(0, 0, W, H-88);
+  // Hill layer rising behind
+  ctx.fillStyle = '#1a3a0d';
+  ctx.beginPath();
+  ctx.moveTo(-10, H-88);
+  ctx.bezierCurveTo(80, H-200, 200, H-250, 350, H-280);
+  ctx.bezierCurveTo(500, H-300, 650, H-270, W+10, H-220);
+  ctx.lineTo(W+10, H-88);
+  ctx.fill();
+
+  // Main island trees - multiple layers
+  drawNZBush(-20,   H-340, 200, 280, 3);
+  drawNZBush(150,   H-380, 220, 320, 3);
+  drawNZBush(350,   H-360, 200, 300, 3);
+  drawNZBush(530,   H-340, 220, 280, 3);
+  drawNZBush(720,   H-320, 200, 260, 3);
+
+  // Big feature trees with visible trunks (like the photos)
+  drawBigTree(120,  H-88, 280, 130, 150);
+  drawBigTree(380,  H-88, 260, 120, 140);
+  drawBigTree(650,  H-88, 250, 110, 130);
+
+  // Foreground scrubby vegetation at wall base
+  ctx.fillStyle = '#2a5010';
+  for (var gi=0; gi<W; gi+=40) {
+    var gh = 25 + (gi%3)*10;
+    ctx.fillRect(gi, H-88-gh, 28, gh);
+    ctx.fillRect(gi+10, H-88-gh-8, 12, 10);
+  }
+
+  ctx.restore();
+
+  // Caption
+  var fa = fadeAlpha(t, 0.12, 0.78, 0.18);
+  ctx.globalAlpha = fa;
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, H-56, W, 56);
+  ctx.fillStyle = '#aaffaa';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('"The Island"', W/2, H-30);
+  ctx.font = '11px sans-serif';
+  ctx.fillStyle = '#aaccdd';
+  ctx.fillText('A triangular patch of bush. A whole jungle to us.', W/2, H-12);
+  ctx.textAlign = 'left';
+  ctx.globalAlpha = 1;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SCENE 3: 125 Helston Rd — the house, garage, fence
+// White weatherboard, corrugated iron garage, low set NZ bungalow
+// ─────────────────────────────────────────────────────────────────────────────
+function drawIntroScene3(t, raw) {
+  var panX = lerp(20, 0, easeOut(t));
+  ctx.save();
+  ctx.translate(panX, 0);
+
+  drawNZSky(0.05);
+  drawJohnsonvilleHills(10);
+
+  // Ground
+  ctx.fillStyle = '#5a7a38';
+  ctx.fillRect(0, H-80, W, 80);
+  ctx.fillStyle = '#4a6a28';
+  ctx.fillRect(0, H-55, W, 55);
+
+  // Driveway / concrete apron
+  ctx.fillStyle = '#7a7a70';
+  ctx.beginPath();
+  ctx.moveTo(250, H);
+  ctx.lineTo(280, H-80);
+  ctx.lineTo(560, H-80);
+  ctx.lineTo(580, H);
+  ctx.fill();
+  ctx.fillStyle = '#6a6a68';
+  ctx.fillRect(280, H-80, 280, 4);
+
+  // THE HOUSE - 125 Helston Rd
+  // Weatherboard body - white/cream
+  ctx.fillStyle = '#dde0da';
+  ctx.fillRect(200, H-200, 380, 120);
+  // weatherboard lines
+  ctx.fillStyle = '#cacdc8';
+  for (var wb=0; wb<120; wb+=8) {
+    ctx.fillRect(200, H-200+wb, 380, 1.5);
+  }
+  // window highlight
+  ctx.fillStyle = '#e8ebe5';
+  ctx.fillRect(202, H-200, 180, 120);
+
+  // Roof - dark grey
+  ctx.fillStyle = '#3a3a3a';
+  ctx.beginPath();
+  ctx.moveTo(180, H-200);
+  ctx.lineTo(390, H-260);
+  ctx.lineTo(600, H-200);
+  ctx.fill();
+  ctx.fillStyle = '#2a2a2a';
+  ctx.fillRect(180, H-205, 420, 8);
+
+  // Garage - corrugated iron, grey
+  ctx.fillStyle = '#a0a0a0';
+  ctx.fillRect(280, H-195, 160, 115);
+  // corrugated lines
+  ctx.fillStyle = '#909090';
+  for (var gi=0; gi<160; gi+=7) {
+    ctx.fillRect(280+gi, H-195, 3, 115);
+  }
+  ctx.fillStyle = '#888';
+  ctx.fillRect(280, H-198, 160, 5);
+  // garage door panel lines
+  ctx.fillStyle = '#777';
+  ctx.fillRect(280, H-155, 160, 3);
+  ctx.fillRect(280, H-120, 160, 3);
+  // garage number "125"
+  ctx.fillStyle = '#555';
+  ctx.font = 'bold 14px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('125', 360, H-100);
+  ctx.textAlign = 'left';
+
+  // Windows
+  ctx.fillStyle = '#7a9aaa';
+  ctx.fillRect(430, H-185, 55, 45);
+  ctx.fillRect(210, H-185, 55, 45);
+  ctx.fillStyle = '#8aaacc';
+  ctx.fillRect(432, H-183, 25, 20);
+  ctx.fillRect(212, H-183, 25, 20);
+  // window frames
+  ctx.fillStyle = '#dde0da';
+  ctx.fillRect(430, H-187, 55, 3);
+  ctx.fillRect(430, H-187, 3, 47);
+  ctx.fillRect(482, H-187, 3, 47);
+  ctx.fillRect(210, H-187, 55, 3);
+  ctx.fillRect(210, H-187, 3, 47);
+  ctx.fillRect(262, H-187, 3, 47);
+
+  // FENCE on left side of driveway (weathered wood like in photos)
+  drawFence(0, 250, H-180, 100);
+  // Fence on right
+  drawFence(580, W, H-175, 100);
+
+  // LEFT: some garden / hedges
+  ctx.fillStyle = '#2a5a18';
+  ctx.fillRect(0, H-130, 200, 50);
+  ctx.fillStyle = '#3a7a22';
+  ctx.fillRect(0, H-145, 180, 20);
+
+  // Power pole right side
+  drawPowerPole(820, 220, undefined);
+
+  ctx.restore();
+
+  // Caption
+  var fa = fadeAlpha(t, 0.1, 0.78, 0.18);
+  ctx.globalAlpha = fa;
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, H-56, W, 56);
+  ctx.fillStyle = '#ddeeff';
+  ctx.font = 'bold 15px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('125 Helston Road — home base', W/2, H-30);
+  ctx.font = '11px sans-serif';
+  ctx.fillStyle = '#aaccdd';
+  ctx.fillText('Every adventure starts here', W/2, H-12);
+  ctx.textAlign = 'left';
+  ctx.globalAlpha = 1;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SCENE 4: Ada walks out the gate heading toward The Island
+// He's small, the island is visible ahead, late morning light
+// ─────────────────────────────────────────────────────────────────────────────
+function drawIntroScene4(t, raw) {
+  drawNZSky(0.05);
+  drawJohnsonvilleHills(5);
+
+  // Road
+  ctx.fillStyle = '#484848';
+  ctx.fillRect(0, H-95, W, 95);
+  ctx.fillStyle = '#545454';
+  ctx.fillRect(0, H-95, W, 22);
+  // Helston Rd text
+  ctx.save();
+  ctx.translate(W*0.45, H-28);
+  ctx.rotate(-0.02);
+  ctx.fillStyle = 'rgba(255,255,255,0.45)';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText('Helston Rd', 0, 0);
+  ctx.restore();
+
+  // House on left (receding)
+  ctx.fillStyle = '#cdd0ca';
+  ctx.fillRect(0, H-210, 200, 115);
+  ctx.fillStyle = '#3a3a3a';
+  ctx.beginPath();
+  ctx.moveTo(-10,H-210); ctx.lineTo(100,H-260); ctx.lineTo(210,H-210); ctx.fill();
+  ctx.fillStyle = '#8a8a8a';
+  ctx.fillRect(50, H-205, 120, 110);
+  drawFence(200, 380, H-175, 80);
+  drawRetainingWall(380, H-100, 120, 20);
+
+  // THE ISLAND ahead - right side
+  drawNZBush(480, H-320, 400, 260, 3);
+  drawBigTree(550, H-95, 250, 120, 140);
+  drawBigTree(750, H-95, 220, 100, 120);
+
+  // Overhanging branch from island trees over road
+  ctx.fillStyle = '#1a3a0a';
+  ctx.beginPath();
+  ctx.moveTo(500, H-320);
+  ctx.bezierCurveTo(600,H-380, W*0.6,H-350, W*0.55,H-280);
+  ctx.lineTo(W*0.55,H-260);
+  ctx.bezierCurveTo(W*0.58,H-300, W*0.55,H-340, 500,H-300);
+  ctx.fill();
+
+  // Power pole  
+  drawPowerPole(350, 185, 650);
+
+  // SIDEWALK / kerb
+  ctx.fillStyle = '#9a9a90';
+  ctx.fillRect(0, H-97, W, 8);
+  ctx.fillStyle = '#8a8a82';
+  ctx.fillRect(0, H-100, W, 5);
+
+  // ADA walking - tiny pixel figure
+  var adaX = lerp(-30, W*0.35, easeOut(t));
+  var adaY = H-95;
+  var walkPhase = raw * 0.25;
+  var legS = Math.sin(walkPhase)*4;
+  // shadow
+  ctx.fillStyle = 'rgba(0,0,0,0.2)';
+  ctx.beginPath(); ctx.arc(adaX+10, adaY+2, 10, 0, Math.PI*2); ctx.fill();
+  // legs
+  ctx.fillStyle = '#224466';
+  ctx.fillRect(adaX+2, adaY-24, 7, 12+legS);
+  ctx.fillRect(adaX+11, adaY-24, 7, 12-legS);
+  ctx.fillStyle = '#111';
+  ctx.fillRect(adaX+0, adaY-13+legS, 9, 5);
+  ctx.fillRect(adaX+9, adaY-13-legS, 9, 5);
+  // body - green polo
+  ctx.fillStyle = '#2d7a3d';
+  ctx.fillRect(adaX+1, adaY-38, 18, 15);
+  // arms swing
+  ctx.fillStyle = '#2d7a3d';
+  ctx.fillRect(adaX-2, adaY-36, 5, 8+legS*0.5);
+  ctx.fillRect(adaX+17, adaY-36, 5, 8-legS*0.5);
+  ctx.fillStyle = '#f0c88a';
+  ctx.fillRect(adaX-2, adaY-28+legS*0.5, 5, 4);
+  ctx.fillRect(adaX+17, adaY-28-legS*0.5, 5, 4);
+  // head
+  ctx.fillStyle = '#f0c88a';
+  ctx.fillRect(adaX+3, adaY-52, 15, 13);
+  // blonde hair
+  ctx.fillStyle = '#ddc060';
+  ctx.fillRect(adaX+2, adaY-56, 16, 7);
+  ctx.fillRect(adaX+2, adaY-53, 3, 10);
+  // eye (just one dot facing right)
+  ctx.fillStyle = '#333';
+  ctx.fillRect(adaX+14, adaY-47, 2, 2);
+  // cap
+  ctx.fillStyle = '#dd5500';
+  ctx.fillRect(adaX+2, adaY-59, 14, 5);
+  ctx.fillStyle = '#bb3300';
+  ctx.fillRect(adaX-1, adaY-55, 18, 3);
+
+  // Caption
+  var fa = fadeAlpha(t, 0.1, 0.78, 0.18);
+  ctx.globalAlpha = fa;
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, H-56, W, 56);
+  ctx.fillStyle = '#ddeeff';
+  ctx.font = 'bold 15px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Every weekend, Ada heads to The Island', W/2, H-30);
+  ctx.font = '11px sans-serif';
+  ctx.fillStyle = '#ffddaa';
+  ctx.fillText('...with his mates. Until today.', W/2, H-12);
+  ctx.textAlign = 'left';
+  ctx.globalAlpha = 1;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SCENE 5: Close-up into the trees — then TITLE CARD fades in
+// ─────────────────────────────────────────────────────────────────────────────
+function drawIntroScene5(t, raw) {
+  // Zoom into the vegetation
+  var zoom = lerp(1.0, 1.6, easeIn(t));
+  ctx.save();
+  ctx.translate(W/2*(1-zoom), H/2*(1-zoom)*0.5);
+  ctx.scale(zoom, zoom);
+
+  // Dark jungle sky peeking through
+  ctx.fillStyle = '#0d1f0d';
+  ctx.fillRect(0,0,W,H);
+  // sunlight shafts through canopy
+  ctx.fillStyle = 'rgba(200,230,150,0.08)';
+  ctx.beginPath();
+  ctx.moveTo(W*0.3, 0);
+  ctx.lineTo(W*0.2, H);
+  ctx.lineTo(W*0.4, H);
+  ctx.lineTo(W*0.5, 0);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(W*0.65, 0);
+  ctx.lineTo(W*0.55, H);
+  ctx.lineTo(W*0.7, H);
+  ctx.lineTo(W*0.8, 0);
+  ctx.fill();
+
+  // Layers of jungle
+  drawNZBush(-50,  H-320, 220, 300, 3);
+  drawNZBush(150,  H-380, 250, 360, 3);
+  drawNZBush(370,  H-400, 260, 380, 3);
+  drawNZBush(590,  H-360, 240, 340, 3);
+  drawNZBush(790,  H-320, 200, 300, 3);
+
+  drawBigTree(100, H-10, 320, 150, 180);
+  drawBigTree(400, H-10, 360, 160, 200);
+  drawBigTree(700, H-10, 300, 140, 170);
+
+  // Ground foliage
+  ctx.fillStyle = '#1a3a0a';
+  ctx.fillRect(0, H-40, W, 40);
+  ctx.fillStyle = '#254a10';
+  for (var fgi=0; fgi<W; fgi+=35) {
+    ctx.fillRect(fgi, H-55, 22, 20);
+    ctx.fillRect(fgi+8, H-68, 12, 16);
+  }
+
+  ctx.restore();
+
+  // TITLE CARD - fades in after halfway
+  var titleT = Math.max(0, (t-0.4)/0.6);
+  if (titleT > 0) {
+    ctx.globalAlpha = easeIn(titleT);
+
+    // Dark vignette overlay
+    ctx.fillStyle = 'rgba(0,0,0,0.65)';
+    ctx.fillRect(0,0,W,H);
+
+    // Title text - ADA'S ADVENTURE
+    ctx.textAlign = 'center';
+    // shadow
+    ctx.fillStyle = '#000';
+    ctx.font = 'bold 48px "Press Start 2P", monospace';
+    ctx.fillText("ADA'S", W/2+3, H/2-33);
+    ctx.fillText('ADVENTURE', W/2+3, H/2+23);
+    // main
+    ctx.fillStyle = '#ffe066';
+    ctx.font = 'bold 44px "Press Start 2P", monospace';
+    ctx.fillText("ADA'S", W/2, H/2-36);
+    ctx.fillStyle = '#ffcc00';
+    ctx.fillText('ADVENTURE', W/2, H/2+20);
+
+    // subtitle
+    ctx.fillStyle = '#aaffaa';
+    ctx.font = '13px "VT323", monospace';
+    ctx.fillText('The Island — Helston Rd, Johnsonville', W/2, H/2+52);
+
+    // Press start hint
+    var blink = Math.sin(GS.frame * 0.1) > 0;
+    if (blink) {
+      ctx.fillStyle = '#fff';
+      ctx.font = '10px "Press Start 2P", monospace';
+      ctx.fillText('PRESS ANY KEY TO PLAY', W/2, H/2+90);
+    }
+    ctx.textAlign = 'left';
+    ctx.globalAlpha = 1;
+  }
+
+  // At very end, clicking/pressing skips to title
+  if (t > 0.85) {
+    ctx.globalAlpha = 0.6;
+    ctx.fillStyle = '#fff';
+    ctx.font = '9px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('TAP TO START', W-12, H-10);
+    ctx.textAlign = 'left';
     ctx.globalAlpha = 1;
   }
 }
@@ -1269,38 +2214,75 @@ function drawCollectibles() {
   for (const c of level.collectibles) {
     if (c.collected) continue;
     if (c.type==='coin') {
-      ctx.fillStyle = '#ffdd44';
-      ctx.beginPath(); ctx.arc(c.x+8, c.y+8+bounce, 8, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle = '#ffaa00';
-      ctx.font = '8px sans-serif';
-      ctx.fillText('$', c.x+5, c.y+12+bounce);
+      const spin = Math.sin(GS.frame*0.15 + c.x*0.01);
+      const cw = Math.max(2, Math.abs(spin) * 12 + 4);
+      // gold coin with spin illusion
+      ctx.fillStyle = '#cc8800';
+      ctx.fillRect(c.x+8-cw/2, c.y+4+bounce, cw, 14);
+      ctx.fillStyle = '#ffcc00';
+      ctx.fillRect(c.x+8-cw/2+1, c.y+4+bounce, cw-2, 10);
+      if (cw > 6) {
+        ctx.fillStyle = '#ffee44';
+        ctx.fillRect(c.x+8-cw/2+2, c.y+5+bounce, 3, 5);
+        ctx.fillStyle = '#aa6600';
+        ctx.font = '7px sans-serif';
+        ctx.textAlign='center';
+        ctx.fillText('$', c.x+8, c.y+14+bounce);
+        ctx.textAlign='left';
+      }
     } else {
-      // snot pickup
-      ctx.fillStyle = '#44ff66';
-      ctx.beginPath(); ctx.arc(c.x+8, c.y+8+bounce, 7, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle = '#00cc44';
-      ctx.beginPath(); ctx.arc(c.x+11, c.y+5+bounce, 4, 0, Math.PI*2); ctx.fill();
+      // snot pickup - boogery green drip
+      ctx.fillStyle = '#116611';
+      ctx.fillRect(c.x+4, c.y+2+bounce, 8, 8);
+      ctx.fillStyle = '#33bb33';
+      ctx.fillRect(c.x+5, c.y+3+bounce, 6, 6);
+      ctx.fillStyle = '#55dd55';
+      ctx.fillRect(c.x+5, c.y+3+bounce, 3, 3);
+      // drip
+      ctx.fillStyle = '#22aa22';
+      ctx.fillRect(c.x+7, c.y+9+bounce, 3, 4+Math.sin(GS.frame*0.2)*2);
     }
   }
 
-  // toy
+  // toy - glowing chest/trophy
   const t = level.toy;
   if (!t.collected) {
     const tb = Math.sin(GS.frame*0.06)*4;
-    ctx.fillStyle = '#ffdd00';
-    ctx.fillRect(t.x-2, t.y+tb-2, t.w+4, t.h+4);
+    const tpulse = 0.6 + 0.4*Math.sin(GS.frame*0.1);
+    // glow
+    ctx.globalAlpha = 0.25 * tpulse;
     ctx.fillStyle = TOY_DATA[t.toyIdx].color;
-    ctx.fillRect(t.x, t.y+tb, t.w, t.h);
-    ctx.fillStyle = '#000';
-    ctx.font = 'bold 14px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText(TOY_DATA[t.toyIdx].icon, t.x+t.w/2, t.y+t.h/2+5+tb);
-    ctx.textAlign = 'left';
+    ctx.beginPath(); ctx.arc(t.x+t.w/2, t.y+t.h/2+tb, 22, 0, Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 1;
+    // chest base
+    ctx.fillStyle = '#8B5A00';
+    ctx.fillRect(t.x-1, t.y+tb+6, t.w+2, t.h-6);
+    ctx.fillStyle = '#AA7700';
+    ctx.fillRect(t.x, t.y+tb+7, t.w, t.h-8);
+    // chest lid
+    ctx.fillStyle = '#CC9900';
+    ctx.fillRect(t.x-1, t.y+tb, t.w+2, 9);
+    ctx.fillStyle = '#FFCC00';
+    ctx.fillRect(t.x, t.y+tb+1, t.w, 4);
+    // metal straps
+    ctx.fillStyle = '#DDAA00';
+    ctx.fillRect(t.x+t.w/2-2, t.y+tb, 4, t.h);
+    ctx.fillRect(t.x, t.y+tb+t.h/2-1, t.w, 4);
+    // keyhole
+    ctx.fillStyle = '#553300';
+    ctx.fillRect(t.x+t.w/2-2, t.y+tb+t.h/2+1, 4, 5);
+    ctx.beginPath(); ctx.arc(t.x+t.w/2, t.y+tb+t.h/2, 3, 0, Math.PI*2); ctx.fill();
+    // toy colour indicator inside lid
+    ctx.fillStyle = TOY_DATA[t.toyIdx].color;
+    ctx.globalAlpha = tpulse;
+    ctx.fillRect(t.x+4, t.y+tb+2, t.w-8, 3);
+    ctx.globalAlpha = 1;
     // label
-    ctx.fillStyle = '#ffdd00';
-    ctx.font = '7px sans-serif';
-    const label = TOY_DATA[t.toyIdx].name;
-    ctx.fillText(label, t.x - label.length*1.5, t.y+tb-6);
+    ctx.fillStyle = '#ffee44';
+    ctx.font = 'bold 7px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(TOY_DATA[t.toyIdx].name, t.x+t.w/2, t.y+tb-5);
+    ctx.textAlign = 'left';
   }
 
   // ally
@@ -1377,102 +2359,323 @@ function drawEnemies() {
 }
 
 function drawGoon(e) {
-  const wk = Math.sin(GS.frame*0.18)*3;
-  // body - generic island goon (neighbourhood kid with stick)
-  ctx.fillStyle = '#cc5533';
-  ctx.fillRect(e.x+4, e.y+16, 24, 20);
-  ctx.fillStyle = '#f5d0a0';
-  ctx.fillRect(e.x+6, e.y+2, 20, 16);
-  // hair
-  ctx.fillStyle = '#3a2a10';
-  ctx.fillRect(e.x+5, e.y, 22, 7);
-  ctx.fillStyle = '#333';
-  ctx.fillRect(e.x + (e.dir>0?18:6), e.y+7, 4, 4);
-  ctx.fillRect(e.x + (e.dir>0?8:14), e.y+7, 4, 4);
+  const wk = Math.sin(GS.frame*0.18)*4;
+  const ex = Math.round(e.x), ey = Math.round(e.y);
+  const flip = e.vx > 0;
+  ctx.save();
+  if (flip) { ctx.scale(-1,1); ctx.translate(-2*ex - e.w, 0); }
+
   // legs
-  ctx.fillStyle = '#336699';
-  ctx.fillRect(e.x+4, e.y+36, 9, 12+wk);
-  ctx.fillRect(e.x+17, e.y+36, 9, 12-wk);
-  // angry eyebrow
-  ctx.fillStyle = '#333';
-  ctx.fillRect(e.x+7, e.y+5, 6, 2);
-  ctx.fillRect(e.x+17, e.y+5, 6, 2);
+  ctx.fillStyle = '#224466';
+  ctx.fillRect(ex+4, ey+28, 9, 12+wk);
+  ctx.fillRect(ex+17, ey+28, 9, 12-wk);
+  ctx.fillStyle = '#111';
+  ctx.fillRect(ex+2, ey+38+wk, 11, 5);
+  ctx.fillRect(ex+15, ey+38-wk, 11, 5);
+
+  // body - red jersey
+  ctx.fillStyle = '#bb3322';
+  ctx.fillRect(ex+3, ey+14, 26, 16);
+  ctx.fillStyle = '#dd4433';
+  ctx.fillRect(ex+4, ey+14, 8, 16);
+  ctx.fillStyle = '#991111';
+  ctx.fillRect(ex+22, ey+14, 7, 16);
+  // jersey number "1"
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+13, ey+17, 2, 9);
+  ctx.fillRect(ex+11, ey+17, 3, 2);
+
+  // arms
+  ctx.fillStyle = '#f0c090';
+  ctx.fillRect(ex-1, ey+15, 6, 10);
+  ctx.fillRect(ex+27, ey+15, 6, 10);
+  // fists
+  ctx.fillStyle = '#d8a878';
+  ctx.fillRect(ex-2, ey+23, 7, 6);
+  ctx.fillRect(ex+27, ey+23, 7, 6);
+
+  // head
+  ctx.fillStyle = '#f0c090';
+  ctx.fillRect(ex+5, ey+1, 22, 16);
+  ctx.fillStyle = '#d8a878';
+  ctx.fillRect(ex+21, ey+1, 6, 16);
+
+  // dark messy hair
+  ctx.fillStyle = '#221100';
+  ctx.fillRect(ex+4, ey-3, 24, 8);
+  ctx.fillStyle = '#332211';
+  ctx.fillRect(ex+5, ey-3, 8, 4);
+  // spiky bits
+  ctx.fillStyle = '#221100';
+  ctx.fillRect(ex+6, ey-5, 4, 3);
+  ctx.fillRect(ex+14, ey-5, 4, 3);
+  ctx.fillRect(ex+22, ey-5, 4, 3);
+
+  // mean eyes
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+8, ey+5, 5, 5);
+  ctx.fillRect(ex+19, ey+5, 5, 5);
+  ctx.fillStyle = '#440000';
+  ctx.fillRect(ex+9, ey+6, 3, 3);
+  ctx.fillRect(ex+20, ey+6, 3, 3);
+  // angry brows - angled inward
+  ctx.fillStyle = '#221100';
+  ctx.fillRect(ex+7, ey+2, 7, 2);
+  ctx.fillRect(ex+7, ey+3, 2, 2);  // inner corner lower
+  ctx.fillRect(ex+18, ey+2, 7, 2);
+  ctx.fillRect(ex+23, ey+3, 2, 2);
+
+  // scowl mouth
+  ctx.fillStyle = '#771111';
+  ctx.fillRect(ex+10, ey+13, 12, 2);
+  ctx.fillRect(ex+9, ey+12, 2, 2);
+  ctx.fillRect(ex+21, ey+12, 2, 2);
+
+  ctx.restore();
 }
 
 function drawLars(e) {
-  // Lars - big, blonde, actually friendly looking
-  const wk = Math.sin(GS.frame*0.12)*4;
-  ctx.fillStyle = '#4477cc';
-  ctx.fillRect(e.x+2, e.y+18, 28, 24);
-  ctx.fillStyle = '#f5d0a0';
-  ctx.fillRect(e.x+4, e.y, 24, 18);
-  ctx.fillStyle = '#ddcc66';
-  ctx.fillRect(e.x+3, e.y-3, 26, 8);
-  ctx.fillStyle = '#555';
-  ctx.fillRect(e.x+8, e.y+6, 4, 5);
-  ctx.fillRect(e.x+20, e.y+6, 4, 5);
-  // smile (he's actually nice)
-  ctx.strokeStyle = '#555';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.arc(e.x+e.w/2, e.y+14, 5, 0, Math.PI);
-  ctx.stroke();
-  ctx.lineWidth = 1;
-  ctx.fillStyle = '#336633';
-  ctx.fillRect(e.x+2, e.y+42, 12, 14+wk);
-  ctx.fillRect(e.x+18, e.y+42, 12, 14-wk);
-  // HP label
-  ctx.fillStyle = '#88aaff';
-  ctx.font = '7px sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('LARS', e.x+e.w/2, e.y-18);
-  ctx.textAlign = 'left';
-}
-
-function drawMonique(e) {
-  // Monique - big, mean, blonde, husky
-  const wk = Math.sin(GS.frame*0.14)*5;
-  const ang = Math.sin(GS.frame*0.08)*0.1;
+  const wk = Math.sin(GS.frame*0.12)*5;
+  const ex = Math.round(e.x), ey = Math.round(e.y);
+  const flip = (e.vx||0) > 0;
   ctx.save();
-  ctx.translate(e.x+e.w/2, e.y+e.h/2);
-  ctx.rotate(ang);
-  ctx.translate(-(e.x+e.w/2), -(e.y+e.h/2));
+  if (flip) { ctx.scale(-1,1); ctx.translate(-2*ex - e.w, 0); }
 
-  ctx.fillStyle = '#cc2266';
-  ctx.fillRect(e.x, e.y+20, 40, 28);
-  ctx.fillStyle = '#f5d0a0';
-  ctx.fillRect(e.x+4, e.y, 32, 22);
-  // big blonde hair
-  ctx.fillStyle = '#eedd44';
-  ctx.fillRect(e.x+2, e.y-8, 36, 14);
-  ctx.fillRect(e.x-4, e.y-4, 12, 26);
-  ctx.fillRect(e.x+32, e.y-4, 12, 26);
-  // mean eyes
-  ctx.fillStyle = '#333';
-  ctx.fillRect(e.x+8, e.y+7, 7, 6);
-  ctx.fillRect(e.x+25, e.y+7, 7, 6);
-  // angry brows
-  ctx.fillStyle = '#b8860b';
-  ctx.fillRect(e.x+7, e.y+4, 10, 3);
-  ctx.fillRect(e.x+23, e.y+4, 10, 3);
-  // frown
-  ctx.strokeStyle = '#554433';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.arc(e.x+e.w/2, e.y+16, 6, Math.PI, 0);
-  ctx.stroke();
-  ctx.lineWidth = 1;
-  ctx.fillStyle = '#993344';
-  ctx.fillRect(e.x+2, e.y+48, 14, 16+wk);
-  ctx.fillRect(e.x+24, e.y+48, 14, 16-wk);
+  // Lars is bigger than goons (w:32, h:50 effectively drawn)
+  // legs - green cargo pants
+  ctx.fillStyle = '#3a5a2a';
+  ctx.fillRect(ex+2, ey+30, 12, 16+wk);
+  ctx.fillRect(ex+18, ey+30, 12, 16-wk);
+  ctx.fillStyle = '#2a4a1a';
+  ctx.fillRect(ex+3, ey+30, 4, 16+wk);
+  ctx.fillRect(ex+19, ey+30, 4, 16-wk);
+  // big sneakers
+  ctx.fillStyle = '#eee';
+  ctx.fillRect(ex+0, ey+44+wk, 14, 7);
+  ctx.fillRect(ex+16, ey+44-wk, 14, 7);
+  ctx.fillStyle = '#cc3333';
+  ctx.fillRect(ex+1, ey+44+wk, 5, 3);
+  ctx.fillRect(ex+17, ey+44-wk, 5, 3);
+
+  // body - blue hoodie
+  ctx.fillStyle = '#3355aa';
+  ctx.fillRect(ex+0, ey+14, 32, 18);
+  ctx.fillStyle = '#4466cc';
+  ctx.fillRect(ex+1, ey+14, 10, 18);
+  ctx.fillStyle = '#224488';
+  // hoodie pocket
+  ctx.fillStyle = '#224488'; 
+  ctx.fillStyle = '#2244aa';
+  ctx.fillRect(ex+10, ey+24, 12, 8);
+  ctx.fillStyle = '#113388';
+  ctx.fillStyle = '#1133aa';
+  ctx.fillRect(ex+11, ey+25, 10, 6);
+
+  // big arms
+  ctx.fillStyle = '#3355aa';
+  ctx.fillRect(ex-3, ey+15, 8, 14);
+  ctx.fillRect(ex+27, ey+15, 8, 14);
+  ctx.fillStyle = '#f0c090';
+  ctx.fillRect(ex-3, ey+26, 8, 7);
+  ctx.fillRect(ex+27, ey+26, 8, 7);
+
+  // big head
+  ctx.fillStyle = '#f0c090';
+  ctx.fillRect(ex+4, ey-2, 24, 18);
+  ctx.fillStyle = '#d8a878';
+  ctx.fillRect(ex+22, ey-2, 6, 18);
+
+  // shaggy blonde hair
+  ctx.fillStyle = '#ccaa44';
+  ctx.fillRect(ex+2, ey-8, 28, 10);
+  ctx.fillStyle = '#ddbb55';
+  ctx.fillRect(ex+3, ey-8, 12, 6);
+  ctx.fillStyle = '#bbaa33';
+  ctx.fillRect(ex+2, ey-5, 5, 18);  // side flop
+  ctx.fillRect(ex+25, ey-5, 5, 12);
+  // hair tufts on top
+  ctx.fillStyle = '#ccaa44';
+  ctx.fillRect(ex+8, ey-10, 5, 4);
+  ctx.fillRect(ex+16, ey-10, 5, 4);
+
+  // friendly eyes - bigger
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+7, ey+4, 6, 6);
+  ctx.fillRect(ex+19, ey+4, 6, 6);
+  ctx.fillStyle = '#3355aa';
+  ctx.fillRect(ex+8, ey+5, 4, 4);
+  ctx.fillRect(ex+20, ey+5, 4, 4);
+  ctx.fillStyle = '#000';
+  ctx.fillRect(ex+9, ey+6, 2, 2);
+  ctx.fillRect(ex+21, ey+6, 2, 2);
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+9, ey+5, 1, 1);
+  ctx.fillRect(ex+21, ey+5, 1, 1);
+
+  // friendly brows - slightly raised
+  ctx.fillStyle = '#aa8822';
+  ctx.fillRect(ex+7, ey+1, 6, 2);
+  ctx.fillRect(ex+19, ey+1, 6, 2);
+
+  // BIG smile - he's actually nice
+  ctx.fillStyle = '#cc6633';
+  ctx.fillRect(ex+9, ey+13, 14, 3);
+  ctx.fillRect(ex+8, ey+11, 2, 3);
+  ctx.fillRect(ex+22, ey+11, 2, 3);
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+10, ey+13, 3, 2);
+  ctx.fillRect(ex+14, ey+13, 3, 2);
+  ctx.fillRect(ex+18, ey+13, 3, 2);
 
   ctx.restore();
 
-  ctx.fillStyle = '#ff44aa';
-  ctx.font = 'bold 8px sans-serif';
+  // floating name tag
+  ctx.save();
+  ctx.fillStyle = 'rgba(0,30,80,0.75)';
+  ctx.fillRect(ex+e.w/2-20, ey-28, 40, 14);
+  ctx.fillStyle = '#88aaff';
+  ctx.font = 'bold 9px sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('MONIQUE', e.x+e.w/2, e.y-22);
+  ctx.fillText('LARS', ex+e.w/2, ey-18);
   ctx.textAlign = 'left';
+  ctx.restore();
+}
+
+function drawMonique(e) {
+  const wk = Math.sin(GS.frame*0.14)*5;
+  const rage = Math.sin(GS.frame*0.1);
+  const ex = Math.round(e.x), ey = Math.round(e.y);
+  const flip = (e.vx||0) > 0;
+
+  ctx.save();
+  if (flip) { ctx.scale(-1,1); ctx.translate(-2*ex - e.w, 0); }
+
+  // Monique is biggest character (w:40, tall)
+  // legs - leggings
+  ctx.fillStyle = '#220033';
+  ctx.fillRect(ex+2, ey+44, 14, 18+wk);
+  ctx.fillRect(ex+24, ey+44, 14, 18-wk);
+  ctx.fillStyle = '#330044';
+  ctx.fillRect(ex+3, ey+44, 5, 18+wk);
+  ctx.fillRect(ex+25, ey+44, 5, 18-wk);
+  // platform shoes (she thinks she's cool)
+  ctx.fillStyle = '#111';
+  ctx.fillRect(ex+0, ey+60+wk, 16, 8);
+  ctx.fillRect(ex+22, ey+60-wk, 16, 8);
+  ctx.fillStyle = '#cc2255';
+  ctx.fillRect(ex+1, ey+64+wk, 14, 4);
+  ctx.fillRect(ex+23, ey+64-wk, 14, 4);
+
+  // big body - pink jacket
+  ctx.fillStyle = '#cc2266';
+  ctx.fillRect(ex+0, ey+20, 40, 26);
+  ctx.fillStyle = '#ee3388';
+  ctx.fillRect(ex+1, ey+20, 12, 26);
+  ctx.fillStyle = '#aa1144';
+  ctx.fillRect(ex+28, ey+20, 12, 26);
+  // jacket collar/lapels
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+14, ey+18, 12, 6);
+  ctx.fillStyle = '#ee3388';
+  ctx.fillRect(ex+17, ey+18, 6, 8);
+  // jacket buttons
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+19, ey+26, 3, 3);
+  ctx.fillRect(ex+19, ey+32, 3, 3);
+  ctx.fillRect(ex+19, ey+38, 3, 3);
+
+  // big arms
+  ctx.fillStyle = '#cc2266';
+  ctx.fillRect(ex-5, ey+20, 9, 18);
+  ctx.fillRect(ex+36, ey+20, 9, 18);
+  ctx.fillStyle = '#f0c090';
+  ctx.fillRect(ex-5, ey+34, 9, 8);
+  ctx.fillRect(ex+36, ey+34, 9, 8);
+  // hands on hips when not moving
+  ctx.fillStyle = '#d8a878';
+  ctx.fillRect(ex-4, ey+35, 7, 6);
+  ctx.fillRect(ex+37, ey+35, 7, 6);
+
+  // big head
+  ctx.fillStyle = '#f0c090';
+  ctx.fillRect(ex+4, ey-2, 32, 24);
+  ctx.fillStyle = '#d8a878';
+  ctx.fillRect(ex+28, ey-2, 8, 24);
+  ctx.fillStyle = '#e8b07a';
+  ctx.fillRect(ex+4, ey+16, 32, 8);
+
+  // BIG BLONDE HAIR - the signature
+  ctx.fillStyle = '#ddbb33';
+  ctx.fillRect(ex+2, ey-14, 36, 16);  // top volume
+  ctx.fillStyle = '#eecc44';
+  ctx.fillRect(ex+3, ey-14, 16, 10);  // highlight
+  ctx.fillStyle = '#ccaa22';
+  ctx.fillRect(ex-6, ey-10, 14, 32);  // left side curtain
+  ctx.fillRect(ex+32, ey-10, 14, 32);  // right side curtain
+  // hair wave detail
+  ctx.fillStyle = '#bbaa22';
+  ctx.fillRect(ex-6, ey+5, 14, 3);
+  ctx.fillRect(ex+32, ey+5, 14, 3);
+  ctx.fillRect(ex-6, ey+15, 14, 3);
+  ctx.fillRect(ex+32, ey+15, 14, 3);
+  // top hair tufts for volume
+  ctx.fillStyle = '#ddbb33';
+  ctx.fillRect(ex+5, ey-16, 6, 4);
+  ctx.fillRect(ex+14, ey-17, 8, 5);
+  ctx.fillRect(ex+26, ey-16, 6, 4);
+
+  // MEAN EYES - distinctive
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+8, ey+6, 8, 7);
+  ctx.fillRect(ex+24, ey+6, 8, 7);
+  ctx.fillStyle = '#553300';
+  ctx.fillRect(ex+9, ey+7, 5, 5);
+  ctx.fillRect(ex+25, ey+7, 5, 5);
+  ctx.fillStyle = '#221100';
+  ctx.fillRect(ex+10, ey+8, 3, 3);
+  ctx.fillRect(ex+26, ey+8, 3, 3);
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ex+10, ey+7, 1, 1);
+  ctx.fillRect(ex+26, ey+7, 1, 1);
+
+  // ANGRY BROWS angled sharply inward
+  ctx.fillStyle = '#aa8800';
+  ctx.fillRect(ex+7, ey+2, 10, 3);
+  ctx.fillRect(ex+7, ey+2, 3, 2);   // inner lower left
+  ctx.fillRect(ex+23, ey+2, 10, 3);
+  ctx.fillRect(ex+30, ey+2, 3, 2);  // inner lower right
+  // extra rage wrinkle between brows
+  ctx.fillStyle = '#cc8800';
+  ctx.fillRect(ex+18, ey+3, 4, 2);
+  ctx.fillRect(ex+19, ey+5, 2, 2);
+
+  // SNEER / frown with curled lip
+  ctx.fillStyle = '#cc3355';
+  ctx.fillRect(ex+10, ey+19, 20, 3);
+  ctx.fillRect(ex+9, ey+17, 3, 3);  // left curl
+  ctx.fillRect(ex+28, ey+17, 3, 3); // right curl up
+  ctx.fillRect(ex+9, ey+20, 3, 2);
+  ctx.fillRect(ex+28, ey+20, 3, 2);
+  // teeth showing slightly
+  ctx.fillStyle = '#ffe0dd';
+  ctx.fillRect(ex+14, ey+19, 4, 2);
+  ctx.fillRect(ex+20, ey+19, 4, 2);
+
+  ctx.restore();
+
+  // floating name tag with anger indicator
+  ctx.save();
+  const pulse = 0.7 + 0.3*Math.abs(rage);
+  ctx.fillStyle = 'rgba(80,0,20,0.85)';
+  ctx.fillRect(ex+e.w/2-28, ey-32, 56, 16);
+  ctx.fillStyle = '#ff44aa';
+  ctx.globalAlpha = pulse;
+  ctx.font = 'bold 9px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('⚡ MONIQUE ⚡', ex+e.w/2, ey-20);
+  ctx.globalAlpha = 1;
+  ctx.textAlign = 'left';
+  ctx.restore();
 }
 
 // ─── PLAYER DRAWING ───────────────────────────────────────────────────────────
@@ -1480,95 +2683,191 @@ function drawPlayer() {
   if (GS.state !== 'playing') return;
   if (player.invTick > 0 && GS.frame%6 < 3) return;
 
-  const px = player.x, py = player.y;
+  const px = Math.round(player.x), py = Math.round(player.y);
   const d = player.dir;
   const af = player.animFrame;
-  const legSwing = player.state==='walk' ? Math.sin(af * Math.PI/2) * 6 : 0;
+  const walking = player.state === 'walk';
+  const leg1 = walking ? Math.sin(af * Math.PI / 2) * 5 : 0;
+  const leg2 = -leg1;
+  const bobY = walking ? Math.abs(Math.sin(af * Math.PI / 2)) * -1 : 0;
+  const shooting = player.state === 'shoot';
+  const meleeing = player.state === 'melee';
+  const jumping = player.state === 'jump';
 
   ctx.save();
-  if (d < 0) {
-    ctx.scale(-1,1);
-    ctx.translate(-2*px - player.w, 0);
-  }
+  if (d < 0) { ctx.scale(-1,1); ctx.translate(-2*px - player.w, 0); }
 
-  // shadow
-  ctx.fillStyle = 'rgba(0,0,0,0.2)';
-  fillEllipse(px+player.w/2, py+player.h+2, 14, 5);
+  const bx = px, by = py + bobY;
 
-  // legs
-  ctx.fillStyle = '#335577';
-  ctx.fillRect(px+2, py+28, 10, 14 + legSwing);
-  ctx.fillRect(px+16, py+28, 10, 14 - legSwing);
-  // shoes
-  ctx.fillStyle = '#222';
-  ctx.fillRect(px, py+40+legSwing, 12, 5);
-  ctx.fillRect(px+14, py+40-legSwing, 12, 5);
+  // ground shadow
+  ctx.fillStyle = 'rgba(0,0,0,0.18)';
+  ctx.beginPath(); ctx.arc(bx+14, py+player.h+1, 12, 0, Math.PI*2); ctx.fill();
 
-  // body - green polo
-  ctx.fillStyle = '#3a8a4a';
-  ctx.fillRect(px+2, py+16, 24, 16);
-  // collar
-  ctx.fillStyle = '#2a6a3a';
-  ctx.fillRect(px+10, py+14, 8, 5);
+  // ── LEGS ──
+  // left leg
+  ctx.fillStyle = '#2a4a6a';
+  ctx.fillRect(bx+3, by+27, 9, 12+leg1);
+  ctx.fillStyle = '#1a3a5a';
+  ctx.fillRect(bx+4, by+27, 4, 12+leg1);
+  // left shoe
+  ctx.fillStyle = '#111';
+  ctx.fillRect(bx+1, by+38+leg1, 11, 6);
+  ctx.fillStyle = '#333';
+  ctx.fillRect(bx+2, by+38+leg1, 5, 3);
+  // right leg
+  ctx.fillStyle = '#2a4a6a';
+  ctx.fillRect(bx+16, by+27, 9, 12+leg2);
+  ctx.fillStyle = '#1a3a5a';
+  ctx.fillRect(bx+17, by+27, 4, 12+leg2);
+  // right shoe
+  ctx.fillStyle = '#111';
+  ctx.fillRect(bx+14, by+38+leg2, 11, 6);
+  ctx.fillStyle = '#333';
+  ctx.fillRect(bx+15, by+38+leg2, 5, 3);
 
-  // arms
-  ctx.fillStyle = '#3a8a4a';
-  if (player.state==='shoot') {
-    ctx.fillRect(px+22, py+16, 14, 8);
-  } else if (player.state==='melee') {
-    ctx.fillRect(px+22, py+14, 16, 10);
+  // ── BODY - green polo shirt ──
+  ctx.fillStyle = '#2d7a3d';
+  ctx.fillRect(bx+2, by+15, 24, 14);
+  // shirt highlight (left side)
+  ctx.fillStyle = '#3d9a4d';
+  ctx.fillRect(bx+3, by+15, 6, 14);
+  // shirt shadow (right side)
+  ctx.fillStyle = '#1d5a2d';
+  ctx.fillRect(bx+20, by+15, 6, 14);
+  // collar V
+  ctx.fillStyle = '#1d5a2d';
+  ctx.fillRect(bx+10, by+14, 8, 4);
+  ctx.fillStyle = '#2d7a3d';
+  ctx.fillRect(bx+12, by+14, 4, 6);
+  // shirt bottom
+  ctx.fillStyle = '#1d5a2d';
+  ctx.fillRect(bx+2, by+27, 24, 2);
+
+  // ── ARMS ──
+  ctx.fillStyle = '#f0c88a';  // bare skin arms
+  if (shooting) {
+    // arm extended straight out shooting
+    ctx.fillRect(bx+24, by+16, 14, 7);
+    ctx.fillStyle = '#d8a870';
+    ctx.fillRect(bx+24, by+16, 4, 7);
+    // fist
+    ctx.fillStyle = '#e0b07a';
+    ctx.fillRect(bx+36, by+15, 8, 9);
+  } else if (meleeing) {
+    // arm swung forward and up
+    ctx.fillStyle = '#2d7a3d';
+    ctx.fillRect(bx+24, by+13, 10, 8);
+    ctx.fillStyle = '#f0c88a';
+    ctx.fillRect(bx+32, by+11, 8, 10);
+    ctx.fillStyle = '#d8a870';
+    ctx.fillRect(bx+32, by+11, 3, 10);
+    // star impact if just triggered
   } else {
-    ctx.fillRect(px+22, py+18, 7, 10+legSwing*0.5);
-    ctx.fillRect(px-1, py+18, 7, 10-legSwing*0.5);
+    // normal arms swing with walk
+    ctx.fillStyle = '#2d7a3d';
+    ctx.fillRect(bx+24, by+16, 6, 9+leg2*0.5);
+    ctx.fillRect(bx-2, by+16, 6, 9+leg1*0.5);
+    ctx.fillStyle = '#f0c88a';
+    ctx.fillRect(bx+24, by+22+leg2*0.5, 6, 5);
+    ctx.fillRect(bx-2, by+22+leg1*0.5, 6, 5);
   }
 
-  // head
-  ctx.fillStyle = '#f5d5a0';
-  ctx.fillRect(px+4, py+2, 20, 16);
+  // ── HEAD ──
+  ctx.fillStyle = '#f0c88a';
+  ctx.fillRect(bx+4, by+1, 20, 16);
+  // face shading
+  ctx.fillStyle = '#d8a870';
+  ctx.fillRect(bx+19, by+1, 5, 16);
+  ctx.fillStyle = '#e8b87a';
+  ctx.fillRect(bx+4, by+12, 20, 5);
+  // neck
+  ctx.fillStyle = '#d8a870';
+  ctx.fillRect(bx+9, by+14, 10, 4);
 
-  // blonde hair
-  ctx.fillStyle = '#eeddaa';
-  ctx.fillRect(px+3, py-2, 22, 8);
-  ctx.fillRect(px+3, py-2, 5, 14); // side sweep
+  // ── HAIR - blonde, side parted ──
+  ctx.fillStyle = '#ddc060';
+  ctx.fillRect(bx+3, by-4, 22, 8);
+  // hair highlight
+  ctx.fillStyle = '#eedc80';
+  ctx.fillRect(bx+4, by-4, 8, 4);
+  // side sweep
+  ctx.fillStyle = '#ccaa40';
+  ctx.fillRect(bx+3, by-4, 4, 16);
+  ctx.fillRect(bx+3, by+4, 2, 8);
 
-  // eyes
-  ctx.fillStyle = '#334455';
-  ctx.fillRect(px+8, py+7, 4, 4);
-  ctx.fillRect(px+16, py+7, 4, 4);
-  // whites
+  // ── EYES ──
   ctx.fillStyle = '#fff';
-  ctx.fillRect(px+8, py+7, 2, 2);
-  ctx.fillRect(px+16, py+7, 2, 2);
+  ctx.fillRect(bx+7, by+6, 5, 5);
+  ctx.fillRect(bx+16, by+6, 5, 5);
+  ctx.fillStyle = '#2a5a88';  // blue eyes
+  ctx.fillRect(bx+8, by+7, 3, 3);
+  ctx.fillRect(bx+17, by+7, 3, 3);
+  ctx.fillStyle = '#000';
+  ctx.fillRect(bx+9, by+8, 2, 2);
+  ctx.fillRect(bx+18, by+8, 2, 2);
+  // eye shine
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(bx+9, by+7, 1, 1);
+  ctx.fillRect(bx+18, by+7, 1, 1);
+  // brows
+  ctx.fillStyle = '#aa8830';
+  ctx.fillRect(bx+7, by+4, 5, 2);
+  ctx.fillRect(bx+16, by+4, 5, 2);
 
-  // smile or concentration face
-  if (player.state==='shoot'||player.state==='melee') {
-    ctx.fillStyle = '#994422';
-    ctx.fillRect(px+9, py+14, 10, 3);
+  // ── EXPRESSION ──
+  if (shooting || meleeing) {
+    // determined gritted teeth
+    ctx.fillStyle = '#cc5522';
+    ctx.fillRect(bx+8, by+12, 12, 3);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(bx+9, by+12, 3, 2);
+    ctx.fillRect(bx+13, by+12, 3, 2);
+  } else if (jumping) {
+    // excited open mouth
+    ctx.fillStyle = '#cc5522';
+    ctx.fillRect(bx+9, by+12, 10, 4);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(bx+9, by+12, 10, 2);
   } else {
-    ctx.strokeStyle = '#884422';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.arc(px+14, py+13, 4, 0.1, Math.PI-0.1);
-    ctx.stroke();
-    ctx.lineWidth = 1;
+    // smile
+    ctx.fillStyle = '#cc5522';
+    ctx.fillRect(bx+9, by+13, 10, 2);
+    ctx.fillRect(bx+8, by+12, 2, 2);
+    ctx.fillRect(bx+18, by+12, 2, 2);
   }
 
-  // adventure cap
-  ctx.fillStyle = '#cc6600';
-  ctx.fillRect(px+2, py-6, 24, 6);
-  ctx.fillStyle = '#aa4400';
-  ctx.fillRect(px-2, py-2, 30, 4);
+  // ── CAP - orange adventure cap ──
+  ctx.fillStyle = '#dd5500';
+  ctx.fillRect(bx+2, by-9, 24, 7);
+  // cap brim
+  ctx.fillStyle = '#bb3300';
+  ctx.fillRect(bx-3, by-4, 32, 4);
+  // cap highlight
+  ctx.fillStyle = '#ff7722';
+  ctx.fillRect(bx+3, by-9, 12, 3);
+  // cap button on top
+  ctx.fillStyle = '#cc3300';
+  ctx.fillRect(bx+12, by-11, 4, 3);
 
-  // shoot VFX
-  if (player.state==='shoot') {
-    ctx.fillStyle = WEAPONS[GS.weaponIndex].color;
-    ctx.beginPath();
-    ctx.arc(px+36, py+20, 7, 0, Math.PI*2);
-    ctx.fill();
-    ctx.globalAlpha = 0.5;
-    ctx.beginPath();
-    ctx.arc(px+44, py+20, 4, 0, Math.PI*2);
-    ctx.fill();
+  // ── SHOOT EFFECT ──
+  if (shooting) {
+    const wc = WEAPONS[GS.weaponIndex].color;
+    ctx.fillStyle = wc;
+    ctx.globalAlpha = 0.9;
+    ctx.beginPath(); ctx.arc(bx+44, by+20, 8, 0, Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 0.4;
+    ctx.beginPath(); ctx.arc(bx+52, by+20, 5, 0, Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 0.2;
+    ctx.beginPath(); ctx.arc(bx+59, by+20, 3, 0, Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  // ── MELEE EFFECT ──
+  if (meleeing && player.meleeCooldown > 18) {
+    ctx.fillStyle = '#ffdd44';
+    ctx.globalAlpha = 0.8;
+    ctx.font = 'bold 18px sans-serif';
+    ctx.fillText('★', bx+36, by+14);
     ctx.globalAlpha = 1;
   }
 
@@ -1579,25 +2878,82 @@ function drawPlayer() {
 function drawProjectiles() {
   for (const p of projectiles) {
     if (!p.alive) continue;
-    ctx.globalAlpha = 0.85;
-    ctx.fillStyle = p.color;
-    if (p.wIdx===0) { // bogey
-      ctx.beginPath(); ctx.arc(p.x+7, p.y+7, 7, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle = '#00cc00';
-      ctx.beginPath(); ctx.arc(p.x+10, p.y+4, 4, 0, Math.PI*2); ctx.fill();
-    } else if (p.wIdx===1) { // steamer
-      ctx.fillRect(p.x, p.y, 16, 14);
-      ctx.fillStyle = '#cc7700';
-      ctx.fillRect(p.x+2, p.y+2, 8, 4);
-    } else if (p.wIdx===2) { // fart
-      fillEllipse(p.x+10, p.y+10, 12, 8);
-    } else { // spitball
-      ctx.beginPath(); ctx.arc(p.x+7, p.y+7, 7, 0, Math.PI*2); ctx.fill();
-      // trail
-      ctx.fillStyle = '#88aaff';
-      ctx.beginPath(); ctx.arc(p.x-6, p.y+7, 4, 0, Math.PI*2); ctx.fill();
+    const px = Math.round(p.x), py = Math.round(p.y);
+    const spin = p.tick * (p.vx > 0 ? 0.3 : -0.3);
+
+    ctx.save();
+    if (p.wIdx===0) { // BOGEY BLAST - green wobbly blob
+      const wobble = Math.sin(p.tick * 0.8) * 2;
+      ctx.globalAlpha = 0.92;
+      // glow
+      ctx.fillStyle = '#002200';
+      ctx.globalAlpha = 0.3;
+      ctx.beginPath(); ctx.arc(px+8, py+8, 12, 0, Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 0.92;
+      // main blob
+      ctx.fillStyle = '#22aa22';
+      ctx.fillRect(px+2, py+1+wobble, 11, 12-wobble);
+      ctx.fillStyle = '#44dd44';
+      ctx.fillRect(px+3, py+1+wobble, 8, 6);
+      // drip
+      ctx.fillStyle = '#22aa22';
+      ctx.fillRect(px+5, py+11, 4, 4+wobble);
+      // highlight
+      ctx.fillStyle = '#88ff88';
+      ctx.fillRect(px+3, py+2+wobble, 3, 3);
+    } else if (p.wIdx===1) { // STEAMER - chunky brown poop
+      ctx.globalAlpha = 0.9;
+      ctx.fillStyle = '#553300';
+      ctx.fillRect(px+2, py+4, 12, 10);
+      ctx.fillRect(px+4, py+2, 8, 12);
+      ctx.fillStyle = '#774400';
+      ctx.fillRect(px+3, py+3, 5, 8);
+      // smell waves
+      ctx.globalAlpha = 0.4;
+      ctx.fillStyle = '#aaff44';
+      ctx.fillRect(px+6, py-4, 2, 3);
+      ctx.fillRect(px+10, py-6, 2, 4);
+      ctx.fillRect(px+2, py-5, 2, 3);
+      ctx.globalAlpha = 0.9;
+      // shine
+      ctx.fillStyle = '#886633';
+      ctx.fillRect(px+3, py+4, 3, 3);
+    } else if (p.wIdx===2) { // FART BOMB - green cloud
+      ctx.globalAlpha = 0.6;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(px, py+4, 18, 10);
+      ctx.fillRect(px+3, py, 12, 16);
+      ctx.fillRect(px+1, py+2, 16, 12);
+      ctx.fillStyle = '#ccff44';
+      ctx.fillRect(px+3, py+4, 5, 5);
+      // floating letters
+      ctx.globalAlpha = 0.7;
+      ctx.fillStyle = '#ffff00';
+      ctx.font = 'bold 8px sans-serif';
+      ctx.fillText('💨', px, py);
+    } else { // SPITBALL - wet shiny ball
+      ctx.globalAlpha = 0.88;
+      // main ball
+      ctx.fillStyle = '#aaddff';
+      ctx.fillRect(px+1, py+2, 12, 10);
+      ctx.fillRect(px+3, py, 8, 14);
+      ctx.fillRect(px+2, py+1, 10, 12);
+      // wet shine
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(px+3, py+2, 4, 4);
+      ctx.fillRect(px+3, py+2, 2, 2);
+      // dark core
+      ctx.fillStyle = '#6699cc';
+      ctx.fillRect(px+5, py+5, 4, 4);
+      // speed trail
+      ctx.globalAlpha = 0.3;
+      ctx.fillStyle = '#88ccff';
+      const trailDir = p.vx > 0 ? -1 : 1;
+      ctx.fillRect(px+trailDir*8, py+4, 8, 6);
+      ctx.fillRect(px+trailDir*15, py+5, 6, 4);
     }
     ctx.globalAlpha = 1;
+    ctx.restore();
   }
 }
 
@@ -1641,7 +2997,12 @@ function drawExit() {
 function loop() {
   try {
     GS.frame++;
-    if (GS.state === 'playing') {
+    if (GS.state === 'intro') {
+      GS.introTick++;
+      // Auto-advance: total intro ~12 seconds (720 frames at 60fps)
+      if (GS.introTick > 720) skipIntro();
+      updateParticles();
+    } else if (GS.state === 'playing') {
       updatePlayer();
       updateEnemies();
       updateProjectiles();
