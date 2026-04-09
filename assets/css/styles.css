@@ -1,6 +1,6 @@
 /* ============================================================
-   Papamoa.info — Shared Stylesheet
-   SOURCE OF TRUTH — April 2026
+   Papamoa.info -- Shared Stylesheet
+   SOURCE OF TRUTH -- April 2026
    Figtree (body) + Playfair Display (headings)
    Navy / Ocean / Sand / Dune / Blue accent palette
    ============================================================ */
@@ -11,22 +11,22 @@
 /* ============================================================
    DESIGN TOKENS
    These are the canonical values. Use these everywhere.
-   Do NOT invent new colour values — map everything to this set.
+   Do NOT invent new colour values -- map everything to this set.
    ============================================================ */
 :root {
 
-  /* ── Core palette ── */
-  --navy:        #0D2B3E;   /* darkest — nav bg, headings, dark sections */
+  /* -- Core palette -- */
+  --navy:        #0D2B3E;   /* darkest -- nav bg, headings, dark sections */
   --navy-mid:    #2B3F5C;   /* homepage hero bg */
   --ocean:       #1B6B7D;   /* primary brand colour */
-  --ocean-deep:  #0F4352;   /* darker ocean — hero gradients, form bg */
+  --ocean-deep:  #0F4352;   /* darker ocean -- hero gradients, form bg */
   --ocean-mid:   #1A5F70;   /* mid gradient stop */
   --ocean-light: #E4F2F5;   /* tinted bg for tags, badges, highlights */
-  --blue:        #3AABDE;   /* accent — CTAs, links, active states, .info in logo */
+  --blue:        #3AABDE;   /* accent -- CTAs, links, active states, .info in logo */
   --sand:        #F7F3ED;   /* page background */
   --sand-alt:    #F5EFE0;   /* homepage body bg (slightly warmer) */
-  --sand-dark:   #EDE7DB;   /* darker sand — section dividers, input bg */
-  --dune:        #C4985A;   /* warm gold — secondary accent, borders, highlights */
+  --sand-dark:   #EDE7DB;   /* darker sand -- section dividers, input bg */
+  --dune:        #C4985A;   /* warm gold -- secondary accent, borders, highlights */
   --dune-light:  #F5EDD8;   /* dune tint bg */
   --white:       #FFFFFF;
   --body:        #1E2D3E;   /* homepage body text */
@@ -37,7 +37,7 @@
   --border-alt:  #DDE5EE;   /* homepage border (slightly cooler) */
   --bg:          #F4F7FA;   /* homepage section bg (cool white) */
 
-  /* ── Tier colours ── */
+  /* -- Tier colours -- */
   --gold:        #B8840A;   /* Gold listing tier */
   --gold-bg:     #FBF3E2;
   --gold-alt:    #C8962A;   /* homepage gold (slightly brighter) */
@@ -46,22 +46,22 @@
   --bronze:      #9A7060;   /* Bronze placeholder (internal only) */
   --bronze-bg:   #F5EDE8;
 
-  /* ── Status colours ── */
+  /* -- Status colours -- */
   --green:       #1E6B3C;
   --green-bg:    #E6F4EC;
   --green-pulse: #7DC143;   /* live indicator, lime accent */
-  --lime:        #7DC143;   /* alias — used in homepage */
+  --lime:        #7DC143;   /* alias -- used in homepage */
   --red:         #8B2020;
   --red-bg:      #FAEAEA;
   --amber:       #8A5A00;
   --amber-bg:    #FFF8E6;
   --coral:       #E8344A;   /* homepage alert/error */
 
-  /* ── Typography ── */
+  /* -- Typography -- */
   --font-body:    'Figtree', sans-serif;
   --font-display: 'Playfair Display', serif;
 
-  /* ── Spacing & shape ── */
+  /* -- Spacing & shape -- */
   --radius:      8px;
   --radius-lg:   14px;
   --shadow-sm:   0 1px 3px rgba(0,0,0,0.06);
@@ -70,7 +70,7 @@
   --max-width:   1200px;
   --content-width: 960px;  /* sales/listing pages */
 
-  /* ── PNF nav/footer system tokens (used by nav.js) ── */
+  /* -- PNF nav/footer system tokens (used by nav.js) -- */
   --pnf-navy:    #0D2B3E;
   --pnf-accent:  #3AABDE;
   --pnf-dune:    #C4985A;
@@ -100,25 +100,25 @@ a:hover { text-decoration: underline; }
 img { max-width: 100%; height: auto; }
 
 /* ============================================================
-   NAV (pnf-nav system — injected by nav.js)
+   NAV (pnf-nav system -- injected by nav.js)
    Reference only. Do not override these in page <style> blocks.
    ============================================================ */
 
 /*
-  .pnf-nav          — sticky top nav bar, bg: --pnf-navy (#0D2B3E), height: 56px
-  .pnf-logo         — "Papamoa" in white Playfair Display 15px bold
-  .pnf-logo span    — ".info" in --pnf-accent (#3AABDE)
-  .pnf-link         — nav links, Figtree 13px, color: --pnf-muted
-  .pnf-link.active  — white text + --pnf-accent underline
-  .pnf-cta          — pill CTA button, bg: --pnf-accent, white text, 100px radius
-  .pnf-fb           — Facebook icon square button
-  .pnf-hamburger    — mobile menu toggle (hidden on desktop)
+  .pnf-nav          -- sticky top nav bar, bg: --pnf-navy (#0D2B3E), height: 56px
+  .pnf-logo         -- "Papamoa" in white Playfair Display 15px bold
+  .pnf-logo span    -- ".info" in --pnf-accent (#3AABDE)
+  .pnf-link         -- nav links, Figtree 13px, color: --pnf-muted
+  .pnf-link.active  -- white text + --pnf-accent underline
+  .pnf-cta          -- pill CTA button, bg: --pnf-accent, white text, 100px radius
+  .pnf-fb           -- Facebook icon square button
+  .pnf-hamburger    -- mobile menu toggle (hidden on desktop)
 
   Logo treatment (LOCKED):
     <a class="pnf-logo" href="/">Papamoa<span>.info</span></a>
 
   Phone number in nav (post-call-landing only):
-    Color: --blue (#3AABDE) — NOT dune/gold
+    Color: --blue (#3AABDE) -- NOT dune/gold
 */
 
 /* ============================================================
@@ -228,83 +228,28 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
 }
 
-/* Primary — blue accent */
-.btn-primary {
-  background: var(--blue);
-  color: var(--white);
-}
-.btn-primary:hover {
-  background: #2d95c4;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-  text-decoration: none;
-}
-
-/* Secondary — ocean */
-.btn-ocean {
-  background: var(--ocean);
-  color: var(--white);
-}
+.btn-primary { background: var(--blue); color: var(--white); }
+.btn-primary:hover { background: #2d95c4; transform: translateY(-1px); box-shadow: var(--shadow-md); text-decoration: none; }
+.btn-ocean { background: var(--ocean); color: var(--white); }
 .btn-ocean:hover { background: var(--ocean-deep); text-decoration: none; }
-
-/* Dune/warm gold */
-.btn-dune {
-  background: var(--dune);
-  color: var(--white);
-}
+.btn-dune { background: var(--dune); color: var(--white); }
 .btn-dune:hover { background: #B38845; text-decoration: none; }
-
-/* Gold tier */
-.btn-gold {
-  background: var(--gold);
-  color: var(--white);
-}
+.btn-gold { background: var(--gold); color: var(--white); }
 .btn-gold:hover { background: #9A6E08; text-decoration: none; }
-
-/* Silver tier */
-.btn-silver {
-  background: var(--silver-bg);
-  color: var(--silver);
-  border: 1px solid #BDD0D8;
-}
+.btn-silver { background: var(--silver-bg); color: var(--silver); border: 1px solid #BDD0D8; }
 .btn-silver:hover { background: var(--silver); color: var(--white); text-decoration: none; }
-
-/* Pill variant */
 .btn-pill { border-radius: 100px; }
 
 /* ============================================================
    TIER CARDS
    ============================================================ */
 
-.tier-card {
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.tier-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-}
-.tier-card.featured {
-  border-color: var(--dune);
-  box-shadow: 0 6px 30px rgba(196,152,90,0.18);
-}
+.tier-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+.tier-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.tier-card.featured { border-color: var(--dune); box-shadow: 0 6px 30px rgba(196,152,90,0.18); }
 
 .tier-head { padding: 24px 24px 20px; border-bottom: 1px solid var(--border); }
-.tier-badge {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 3px;
-  margin-bottom: 12px;
-}
+.tier-badge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: 12px; }
 .tier-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
 .tier-price { font-size: 1.6rem; font-weight: 800; line-height: 1.1; margin-bottom: 6px; }
 .tier-price span { font-size: 0.85rem; font-weight: 400; opacity: 0.6; }
@@ -312,25 +257,21 @@ h1, h2, h3, h4, h5, h6 {
 .tier-body { padding: 20px 24px; flex: 1; }
 .tier-footer { padding: 16px 24px 20px; }
 
-/* Gold tier */
 .tier-gold .tier-head { background: linear-gradient(135deg, var(--gold-bg), #FEF8EC); border-bottom-color: rgba(184,132,10,0.2); }
 .tier-gold .tier-name { color: var(--gold); }
 .tier-gold .tier-price { color: var(--gold); }
 .tier-gold .tier-badge { background: #FAECC8; color: var(--gold); }
 
-/* Silver tier */
 .tier-silver .tier-head { background: var(--silver-bg); border-bottom-color: #D0E4EC; }
 .tier-silver .tier-name { color: var(--silver); }
 .tier-silver .tier-price { color: var(--silver); }
 .tier-silver .tier-badge { background: #D8E8EE; color: var(--silver); }
 
-/* Bronze/placeholder */
 .tier-placeholder .tier-head { background: var(--bronze-bg); }
 .tier-placeholder .tier-name { color: var(--bronze); }
 .tier-placeholder .tier-price { color: var(--bronze); }
 .tier-placeholder .tier-badge { background: #F0EBE4; color: var(--bronze); }
 
-/* Feature list inside tier cards */
 .feat-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
 .feat-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; line-height: 1.45; }
 .fi { flex-shrink: 0; font-style: normal; font-size: 13px; margin-top: 1px; font-weight: 700; }
@@ -344,72 +285,23 @@ h1, h2, h3, h4, h5, h6 {
    FORM ELEMENTS
    ============================================================ */
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--text);
-  background: var(--sand);
-  transition: border-color 0.2s, background 0.2s;
-  outline: none;
-  -webkit-appearance: none;
-  appearance: none;
+input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+  width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--radius);
+  font-family: var(--font-body); font-size: 14px; color: var(--text); background: var(--sand);
+  transition: border-color 0.2s, background 0.2s; outline: none; -webkit-appearance: none; appearance: none;
 }
-
-input:focus, select:focus, textarea:focus {
-  border-color: var(--ocean);
-  background: var(--white);
-  box-shadow: 0 0 0 3px rgba(27,107,125,0.08);
-}
-
+input:focus, select:focus, textarea:focus { border-color: var(--ocean); background: var(--white); box-shadow: 0 0 0 3px rgba(27,107,125,0.08); }
 textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
-
-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 5px;
-}
+label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
 
 /* ============================================================
    CARDS & PANELS
    ============================================================ */
 
-.card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  box-shadow: var(--shadow-sm);
-}
+.card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); }
+.panel { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; }
 
-.panel {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-}
-
-/* Guarantee card */
-.guarantee-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
+.guarantee-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; display: flex; gap: 16px; align-items: flex-start; }
 .gc-icon { font-size: 26px; flex-shrink: 0; }
 .gc-body h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; font-family: var(--font-body); }
 .gc-body p { font-size: 13px; color: var(--muted); line-height: 1.55; }
@@ -418,14 +310,7 @@ label {
    ALERT / NOTICE BOXES
    ============================================================ */
 
-.alert {
-  border-radius: var(--radius);
-  padding: 14px 18px;
-  display: flex;
-  gap: 12px;
-  font-size: 13.5px;
-  line-height: 1.6;
-}
+.alert { border-radius: var(--radius); padding: 14px 18px; display: flex; gap: 12px; font-size: 13.5px; line-height: 1.6; }
 .alert-icon { flex-shrink: 0; margin-top: 1px; }
 .alert.warn   { background: var(--amber-bg); border: 1px solid #E8C96A; color: var(--amber); }
 .alert.info   { background: var(--ocean-light); border: 1px solid #B0D4DC; color: var(--ocean-deep); }
@@ -436,16 +321,7 @@ label {
    BADGES & TAGS
    ============================================================ */
 
-.badge {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 3px 9px;
-  border-radius: 3px;
-}
-
+.badge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 3px; }
 .badge-gold    { background: var(--gold-bg); color: var(--gold); }
 .badge-silver  { background: var(--silver-bg); color: var(--silver); }
 .badge-ocean   { background: var(--ocean-light); color: var(--ocean-deep); }
@@ -453,15 +329,7 @@ label {
 .badge-amber   { background: var(--amber-bg); color: var(--amber); }
 .badge-red     { background: var(--red-bg); color: var(--red); }
 
-.tag {
-  display: inline-block;
-  font-size: 11.5px;
-  font-weight: 600;
-  padding: 4px 11px;
-  border-radius: 100px;
-  background: var(--ocean-light);
-  color: var(--ocean);
-}
+.tag { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 4px 11px; border-radius: 100px; background: var(--ocean-light); color: var(--ocean); }
 
 /* ============================================================
    SEARCH BAR (homepage pattern)
@@ -469,74 +337,40 @@ label {
 
 .search-bar { background: var(--white); border-bottom: 1px solid var(--border-alt); padding: 18px 20px; position: relative; z-index: 51; }
 .search-bar-inner { max-width: var(--max-width); margin: 0 auto; display: flex; gap: 10px; align-items: center; }
-.search-input {
-  width: 100%;
-  padding: 11px 14px 11px 40px;
-  border: 1.5px solid var(--border-alt);
-  border-radius: var(--radius);
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--body);
-  background: var(--bg);
-  transition: all 0.15s;
-  outline: none;
-}
+.search-input { width: 100%; padding: 11px 14px 11px 40px; border: 1.5px solid var(--border-alt); border-radius: var(--radius); font-family: var(--font-body); font-size: 0.95rem; color: var(--body); background: var(--bg); transition: all 0.15s; outline: none; }
 .search-input:focus { border-color: var(--blue); background: var(--white); box-shadow: 0 0 0 3px rgba(58,171,222,0.1); }
-.search-btn {
-  padding: 11px 22px;
-  background: var(--blue);
-  color: var(--white);
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.88rem;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.15s;
-  flex-shrink: 0;
-}
+.search-btn { padding: 11px 22px; background: var(--blue); color: var(--white); font-family: var(--font-body); font-weight: 700; font-size: 0.88rem; border: none; border-radius: var(--radius); cursor: pointer; white-space: nowrap; transition: background 0.15s; flex-shrink: 0; }
 .search-btn:hover { background: #2A8FBE; }
 
-/* Search suggestion pills */
-.search-suggestion {
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: var(--muted-alt);
-  background: var(--bg);
-  border: 1px solid var(--border-alt);
-  border-radius: 20px;
-  padding: 3px 11px;
-  cursor: pointer;
-  transition: all 0.15s;
-  font-family: var(--font-body);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
+.search-suggestion { font-size: 0.74rem; font-weight: 600; color: var(--muted-alt); background: var(--bg); border: 1px solid var(--border-alt); border-radius: 20px; padding: 3px 11px; cursor: pointer; transition: all 0.15s; font-family: var(--font-body); white-space: nowrap; flex-shrink: 0; }
 .search-suggestion:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
 .search-suggestion-recent { background: rgba(58,171,222,0.08); border-color: rgba(58,171,222,0.25); color: var(--blue); }
 
 /* ============================================================
-   FOOTER (pnf-footer system — injected by nav.js)
+   FOOTER (pnf-footer system -- injected manually from snippet)
    Reference only.
    ============================================================ */
 
 /*
-  Slim footer (sales pages):
-    bg: --pnf-navy, centred brand + tagline + 3 links + copyright
-    .pnf-footer-brand  — "Papamoa" white Playfair, ".info" in --pnf-accent
-    .pnf-footer-tagline — rgba(255,255,255,0.38)
-    .pnf-footer-slim-links a — rgba(255,255,255,0.4), hover white
-
   Full footer (directory pages):
     5-column grid: brand col + Browse + Local Info + For Businesses + Network
-    .pnf-footer-col h4 — rgba(255,255,255,0.4), uppercase 11px
-    .pnf-footer-links a — rgba(255,255,255,0.5), hover white
-    .pnf-footer-bottom — rgba(255,255,255,0.25), legal.html linked
+    .pnf-footer-col h4 -- rgba(255,255,255,0.4), uppercase 11px
+    .pnf-footer-links a -- rgba(255,255,255,0.5), hover white
+    .pnf-footer-bottom -- rgba(255,255,255,0.25), legal.html linked
+
+  Slim footer (sales pages):
+    bg: --pnf-navy, centred brand + tagline + links + copyright
+    legal.html linked
+
+  Admin footer (internal):
+    Single line, minimal
 */
 
 /* ============================================================
-   CATEGORY COLOUR CLASSES (hero backgrounds — LOCKED)
+   CATEGORY COLOUR CLASSES (hero backgrounds -- LOCKED)
+   NOTE: Three sets exist across the codebase. These are the
+   styles.css canonical set. Homepage and listing templates
+   use different gradients. Reconciliation needed.
    ============================================================ */
 
 .hero-cat-food        { background: linear-gradient(135deg, #5C2D1E, #8B4513); }
@@ -564,32 +398,16 @@ label {
 .divider { height: 1px; background: var(--border); margin: 40px 0; }
 
 /* Live pulse dot */
-.pulse {
-  width: 7px; height: 7px;
-  background: var(--green-pulse);
-  border-radius: 50%;
-  display: inline-block;
-  animation: pulse 2s infinite;
-}
+.pulse { width: 7px; height: 7px; background: var(--green-pulse); border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
 
-@media (max-width: 900px) {
-  .pnf-links { display: none; }
-}
-
-@media (max-width: 720px) {
-  .tiers-grid-3 { grid-template-columns: 1fr; }
-  .guarantees-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 600px) {
-  .tier-choice { grid-template-columns: 1fr; }
-  .content-wrap { padding: 0 16px; }
-}
+@media (max-width: 900px) { .pnf-links { display: none; } }
+@media (max-width: 720px) { .tiers-grid-3 { grid-template-columns: 1fr; } .guarantees-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .tier-choice { grid-template-columns: 1fr; } .content-wrap { padding: 0 16px; } }
 
 /* ============================================================
    FONT IMPORT NOTE
@@ -607,16 +425,16 @@ label {
    KNOWN CONFLICTS TO WATCH FOR
 
    Old styles.css (assets/css/styles.css pre-April 2026) used:
-     --color-ocean-deep: #134B58  ← WRONG, now #0F4352
-     --font-body: 'DM Sans'       ← WRONG, now Figtree
-     --font-display: 'Fraunces'   ← WRONG, now Playfair Display
-     .logo color: --color-ocean   ← WRONG, logo text is white / .info is --blue
+     --color-ocean-deep: #134B58  -- WRONG, now #0F4352
+     --font-body: 'DM Sans'       -- WRONG, now Figtree
+     --font-display: 'Fraunces'   -- WRONG, now Playfair Display
+     .logo color: --color-ocean   -- WRONG, logo text is white / .info is --blue
 
    If you see DM Sans, Fraunces, Libre Baskerville, or Space Grotesk
-   in any file — replace with Figtree / Playfair Display.
+   in any file -- replace with Figtree / Playfair Display.
 
-   Gold price: $1,199+GST/yr (NOT $1,200, NOT $1,199 without GST note)
-   Silver price: $599+GST/yr
-   Menu Add-On: $199+GST/yr (Gold: free, Silver: paid add-on)
-   Extra Spotlights: $99+GST/yr each
+   Gold price: $1,199+gst/yr (NOT $1,200, NOT $1,199 without gst note)
+   Silver price: $599+gst/yr
+   Menu Add-On: $199+gst/yr (Gold: free, Silver: paid add-on)
+   Extra Spotlights: $199+gst/yr each
    ============================================================ */
