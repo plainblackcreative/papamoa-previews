@@ -1175,40 +1175,32 @@
 
 <script>
 // ============================================================
-// SCRATCHPAD (persistent storage)
+// SCRATCHPAD (localStorage - works on GitHub Pages)
 // ============================================================
 var SP_KEY = 'papamoa_notes';
 var spOpen = false;
 
-async function loadNotes() {
-  try {
-    var result = await window.storage.get(SP_KEY);
-    return result ? JSON.parse(result.value) : [];
-  } catch(e) { return []; }
+function loadNotes() {
+  try { return JSON.parse(localStorage.getItem(SP_KEY) || '[]'); } catch(e) { return []; }
 }
 
-async function saveNotes(notes) {
-  try {
-    await window.storage.set(SP_KEY, JSON.stringify(notes));
-  } catch(e) { console.error('Storage error:', e); }
+function saveNotes(notes) {
+  try { localStorage.setItem(SP_KEY, JSON.stringify(notes)); } catch(e) { console.error('Storage error:', e); }
 }
 
-async function renderNotes() {
-  var notes = await loadNotes();
+function renderNotes() {
+  var notes = loadNotes();
   var list = document.getElementById('sp-notes-list');
-  var empty = document.getElementById('sp-empty');
   var count = document.getElementById('sp-count');
   var pending = notes.filter(function(n){ return !n.done; }).length;
   count.textContent = notes.length + ' note' + (notes.length !== 1 ? 's' : '') + (pending > 0 ? ' (' + pending + ' open)' : '');
   if (notes.length === 0) {
-    list.innerHTML = '';
-    if (empty) { empty.style.display = 'block'; list.appendChild(empty); }
+    list.innerHTML = '<div class="sp-empty">No notes yet. Brain dump away.</div>';
     return;
   }
-  if (empty) empty.style.display = 'none';
   list.innerHTML = notes.map(function(note, i) {
     var tagClass = 'tag-' + note.tag;
-    return '<div class="sp-note' + (note.done ? ' done' : '') + '" data-idx="' + i + '">' +
+    return '<div class="sp-note' + (note.done ? ' done' : '') + '">' +
       '<span class="sp-note-tag ' + tagClass + '">' + note.tag + '</span>' +
       '<div class="sp-note-body">' +
         '<div class="sp-note-text">' + escHtml(note.text) + '</div>' +
@@ -1223,36 +1215,36 @@ async function renderNotes() {
 }
 
 function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-async function addNote() {
+function addNote() {
   var input = document.getElementById('sp-input');
   var tag = document.getElementById('sp-tag').value;
   var text = input.value.trim();
   if (!text) { input.focus(); return; }
-  var notes = await loadNotes();
+  var notes = loadNotes();
   var now = new Date();
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var timeStr = now.getDate() + ' ' + months[now.getMonth()] + ', ' + now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
   notes.unshift({ text: text, tag: tag, time: timeStr, done: false });
-  await saveNotes(notes);
+  saveNotes(notes);
   input.value = '';
   input.focus();
   renderNotes();
 }
 
-async function deleteNote(idx) {
-  var notes = await loadNotes();
+function deleteNote(idx) {
+  var notes = loadNotes();
   notes.splice(idx, 1);
-  await saveNotes(notes);
+  saveNotes(notes);
   renderNotes();
 }
 
-async function toggleDone(idx) {
-  var notes = await loadNotes();
+function toggleDone(idx) {
+  var notes = loadNotes();
   notes[idx].done = !notes[idx].done;
-  await saveNotes(notes);
+  saveNotes(notes);
   renderNotes();
 }
 
