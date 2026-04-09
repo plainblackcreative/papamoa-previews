@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papamoa.info — Project Master | April 2026</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D2B3E;--ocean:#1B6B7D;--ocean-deep:#0F4352;--ocean-light:#E4F2F5;
+  --blue:#3AABDE;--sand:#F7F3ED;--sand-dark:#EDE7DB;--dune:#C4985A;--dune-light:#F5EDD8;
+  --white:#FFFFFF;--text:#1A2832;--muted:#5A6E78;--border:#D8E4E8;
+  --gold:#B8840A;--gold-bg:#FBF3E2;--silver:#5A7A8A;--silver-bg:#EDF3F6;
+  --bronze:#9A7060;--bronze-bg:#F5EDE8;
+  --green:#1E6B3C;--green-bg:#E6F4EC;--red:#8B2020;--red-bg:#FAEAEA;
+  --amber:#8A5A00;--amber-bg:#FFF8E6;
+  --font-body:'Figtree',sans-serif;--font-display:'Playfair Display',serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+.nav{background:var(--navy);height:54px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--blue)}
+.nav-badge{font-size:10px;font-weight:700;background:rgba(58,171,222,0.15);border:1px solid rgba(58,171,222,0.3);color:var(--blue);padding:4px 12px;border-radius:100px;letter-spacing:0.04em}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy),var(--ocean-deep));padding:56px 32px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 50%,rgba(58,171,222,0.06) 0%,transparent 60%),radial-gradient(ellipse at 85% 20%,rgba(196,152,90,0.06) 0%,transparent 50%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:50px;background:var(--sand);clip-path:ellipse(65% 100% at 50% 100%)}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.hero-tag{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--dune);margin-bottom:10px}
+.hero h1{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:var(--white);line-height:1.2;margin-bottom:12px}
+.hero h1 em{font-style:italic;color:var(--blue)}
+.hero-sub{font-size:14px;color:rgba(255,255,255,0.6);max-width:600px;line-height:1.7;margin-bottom:20px}
+.hero-stats{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stat{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 18px;text-align:center}
+.hero-stat-num{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--white);line-height:1}
+.hero-stat-label{font-size:10px;color:rgba(255,255,255,0.45);font-weight:600;margin-top:3px}
+
+/* BODY */
+.page{max-width:900px;margin:0 auto;padding:40px 24px 80px}
+
+/* OVERRIDE BANNER */
+.override{background:var(--red);color:var(--white);padding:12px 24px;font-size:13px;font-weight:600;text-align:center;letter-spacing:0.02em}
+.override strong{font-weight:800}
+
+/* SECTIONS */
+.section{margin-bottom:48px}
+.section-label{font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--ocean);margin-bottom:8px}
+.section-title{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+
+/* ALERTS */
+.alert{border-radius:8px;padding:14px 18px;margin-bottom:16px;font-size:13px;display:flex;gap:12px;line-height:1.6}
+.alert-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+.alert.warn{background:var(--amber-bg);border:1px solid #E8C96A;color:var(--amber)}
+.alert.info{background:var(--ocean-light);border:1px solid #B0D4DC;color:var(--ocean-deep)}
+.alert.dead{background:var(--red-bg);border:1px solid #E8AAAA;color:var(--red)}
+.alert.ok{background:var(--green-bg);border:1px solid #9ED0B4;color:var(--green)}
+.alert strong{font-weight:700}
+
+/* TABLES */
+.data-table{width:100%;border-collapse:collapse;font-size:13px;background:var(--white);border-radius:10px;overflow:hidden;border:1px solid var(--border);margin-bottom:16px}
+.data-table th{background:var(--navy);color:rgba(255,255,255,0.8);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:11px 14px;text-align:left}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:#FAFBFC}
+.data-table code{font-size:11px;background:var(--sand-dark);padding:1px 5px;border-radius:3px;color:var(--ocean-deep)}
+
+/* PRICING GRID */
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+@media(max-width:700px){.tier-grid{grid-template-columns:1fr}}
+.tier-card{border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--white)}
+.tier-head{padding:18px 20px 14px;border-bottom:1px solid var(--border)}
+.tier-name{font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:4px}
+.tier-price{font-size:1.3rem;font-weight:800;line-height:1.1;margin-bottom:4px}
+.tier-price span{font-size:0.75rem;font-weight:400;opacity:0.6}
+.tier-note{font-size:12px;color:var(--muted);line-height:1.4}
+.tier-body{padding:16px 20px}
+.feat{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;line-height:1.45;margin-bottom:6px}
+.feat i{flex-shrink:0;font-style:normal;font-size:11px;margin-top:2px;font-weight:700}
+.fy{color:var(--green)}.fn{color:#bbb}.fd{color:var(--dune)}
+.t-bronze .tier-head{background:var(--bronze-bg)}.t-bronze .tier-name,.t-bronze .tier-price{color:var(--bronze)}
+.t-silver .tier-head{background:var(--silver-bg)}.t-silver .tier-name,.t-silver .tier-price{color:var(--silver)}
+.t-gold{border-color:var(--dune);box-shadow:0 4px 20px rgba(196,152,90,0.12)}.t-gold .tier-head{background:linear-gradient(135deg,var(--gold-bg),#FDF7E8);border-bottom-color:rgba(196,152,90,0.2)}.t-gold .tier-name,.t-gold .tier-price{color:var(--gold)}
+
+/* COLOUR SWATCHES */
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:16px}
+.swatch{border-radius:8px;overflow:hidden;border:1px solid var(--border);background:var(--white)}
+.swatch-color{height:40px}
+.swatch-info{padding:8px 10px}
+.swatch-name{font-size:11px;font-weight:700;color:var(--navy)}
+.swatch-hex{font-size:10px;color:var(--muted);font-family:monospace}
+
+/* DEAD ITEMS */
+.dead-list{display:flex;flex-direction:column;gap:8px}
+.dead-item{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:6px;padding:10px 14px;font-size:12.5px;display:flex;gap:10px}
+.dead-strike{text-decoration:line-through;color:var(--muted);flex:1}
+.dead-reason{font-size:11px;color:var(--red);font-weight:600;white-space:nowrap}
+
+/* TASK LIST */
+.task-group{margin-bottom:24px}
+.task-group-head{font-size:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:8px 14px;border-radius:6px;margin-bottom:10px;display:inline-block}
+.tg-critical{background:var(--red-bg);color:var(--red)}
+.tg-high{background:var(--amber-bg);color:var(--amber)}
+.tg-medium{background:var(--ocean-light);color:var(--ocean)}
+.tg-deferred{background:var(--green-bg);color:var(--green)}
+.tg-done{background:var(--sand-dark);color:var(--muted)}
+.task-items{display:flex;flex-direction:column;gap:6px}
+.task{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:10px 14px;font-size:12.5px;color:var(--text);line-height:1.5}
+.task code{font-size:11px;background:var(--sand-dark);padding:1px 4px;border-radius:3px;color:var(--ocean-deep)}
+.task.done{opacity:0.5;text-decoration:line-through}
+
+/* GREY AREA */
+.grey{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--dune);border-radius:6px;padding:12px 16px;margin-bottom:10px}
+.grey-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.grey-body{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+/* NAV TOC */
+.toc{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin-bottom:40px}
+.toc-title{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+@media(max-width:600px){.toc-grid{grid-template-columns:1fr 1fr}}
+.toc a{font-size:12px;color:var(--ocean);text-decoration:none;padding:4px 0;display:block;transition:color 0.15s}
+.toc a:hover{color:var(--navy)}
+
+/* FOOTER */
+.doc-footer{text-align:center;font-size:12px;color:var(--muted);padding-top:24px;border-top:1px solid var(--border)}
+
+/* FILE TREE */
+.file-tree{background:var(--navy);border-radius:10px;padding:20px 24px;font-family:'Courier New',monospace;font-size:12px;color:rgba(255,255,255,0.6);line-height:1.8;overflow-x:auto;margin-bottom:16px;white-space:pre}
+.file-tree strong{color:var(--blue);font-weight:700}
+
+@media(max-width:640px){
+  .hero{padding:40px 20px 44px}
+  .page{padding:28px 16px 60px}
+  .nav{padding:0 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="override"><strong>MASTER OVERRIDE:</strong> This document supersedes all previous project memory files, session exports, pricing references, and project briefs.</div>
+
+<nav class="nav">
+  <a href="#" class="nav-logo">Papamoa<span>.info</span></a>
+  <span class="nav-badge">Project Master v1</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Single Source of Truth</div>
+    <h1>Project <em>Master</em></h1>
+    <p class="hero-sub">Consolidated April 9, 2026. Every locked decision, every design token, every rule, every pending task. Feed the companion .md file to Claude at session start. Use this HTML as the visual team reference.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">160+</div><div class="hero-stat-label">Pages in repo</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">20</div><div class="hero-stat-label">Live listings</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">97</div><div class="hero-stat-label">CRM leads</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">60+</div><div class="hero-stat-label">Source files consolidated</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <div class="toc-grid">
+      <a href="#pricing">1. Pricing (locked)</a>
+      <a href="#design">2. Design System (locked)</a>
+      <a href="#terminology">3. Terminology (locked)</a>
+      <a href="#nav">4. Nav System (locked)</a>
+      <a href="#files">5. File Structure</a>
+      <a href="#listings">6. Listings</a>
+      <a href="#infra">7. Infrastructure</a>
+      <a href="#quality">8. Quality Standard</a>
+      <a href="#features">9. Key Features & Pages</a>
+      <a href="#dead">10. Dead Offers & Outdated Docs</a>
+      <a href="#grey">11. Grey Areas & TBCs</a>
+      <a href="#tasks">12. Pending Tasks</a>
+    </div>
+  </div>
+
+  <!-- 1. PRICING -->
+  <div class="section" id="pricing">
+    <div class="section-label">Locked April 2026</div>
+    <h2 class="section-title">1. Pricing & Tier Structure</h2>
+
+    <div class="alert warn"><span class="alert-icon">&#9888;</span><div><strong>GST formatting:</strong> Always lowercase <code>+gst</code> in customer-facing content. Never <code>+GST</code>.</div></div>
+
+    <div class="tier-grid">
+      <div class="tier-card t-bronze">
+        <div class="tier-head">
+          <div class="tier-name">Bronze</div>
+          <div class="tier-price">Free <span>/ internal only</span></div>
+          <div class="tier-note">Auto-generated placeholder. Never sold.</div>
+        </div>
+        <div class="tier-body">
+          <div class="feat"><i class="fy">&#10003;</i> Name, address, phone, website link</div>
+          <div class="feat"><i class="fy">&#10003;</i> Ranks in Google, captures leads via Web3Forms</div>
+          <div class="feat"><i class="fn">&#10005;</i> SEO description, images, schema, review badges</div>
+        </div>
+      </div>
+      <div class="tier-card t-silver">
+        <div class="tier-head">
+          <div class="tier-name">Silver Listing</div>
+          <div class="tier-price">$599 <span>+gst/yr</span></div>
+          <div class="tier-note">Claimed listing. Logo only (1 image). Annual subscription.</div>
+        </div>
+        <div class="tier-body">
+          <div class="feat"><i class="fy">&#10003;</i> SEO-optimised description + schema markup</div>
+          <div class="feat"><i class="fy">&#10003;</i> Logo only (1 image)</div>
+          <div class="feat"><i class="fy">&#10003;</i> Contact, social links, review badges</div>
+          <div class="feat"><i class="fy">&#10003;</i> Facebook welcome post</div>
+          <div class="feat"><i class="fy">&#10003;</i> Lifetime Price Lock</div>
+          <div class="feat"><i class="fd">+</i> Menu Add-On: $199+gst/yr</div>
+          <div class="feat"><i class="fn">&#10005;</i> Spotlight position, photo gallery, AI FAQ</div>
+        </div>
+      </div>
+      <div class="tier-card t-gold">
+        <div class="tier-head">
+          <div class="tier-name">Gold Listing</div>
+          <div class="tier-price">$1,199 <span>+gst/yr</span></div>
+          <div class="tier-note">Spotlight position. Logo + up to 9 hero images. Annual subscription.</div>
+        </div>
+        <div class="tier-body">
+          <div class="feat"><i class="fy">&#10003;</i> Everything in Silver</div>
+          <div class="feat"><i class="fy">&#10003;</i> Spotlight: top of primary subcategory</div>
+          <div class="feat"><i class="fy">&#10003;</i> Photo gallery (logo + up to 9 images)</div>
+          <div class="feat"><i class="fy">&#10003;</i> AI-optimised FAQ & AEO schema</div>
+          <div class="feat"><i class="fy">&#10003;</i> Menu Add-On included free</div>
+          <div class="feat"><i class="fy">&#10003;</i> Access to premium ad spots</div>
+          <div class="feat"><i class="fy">&#10003;</i> Lifetime Price Lock</div>
+          <div class="feat"><i class="fd">+</i> Extra Subcategory Spotlights: $199+gst/yr each</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead><tr><th>Add-On</th><th>Price</th><th>Available to</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Menu / Service List Add-On</strong></td><td>$199+gst/yr</td><td>Silver (paid). Gold (free).</td></tr>
+        <tr><td><strong>Extra Subcategory Spotlight</strong></td><td>$199+gst/yr each</td><td>Gold only</td></tr>
+        <tr><td><strong>Spotlight Ad Spots</strong></td><td>POA/TBC</td><td>Variable pricing. Not publicly shown.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="alert info"><span class="alert-icon">&#8505;</span><div><strong>Guarantees:</strong> Lifetime Price Lock = standard feature on both tiers, show everywhere. 2027 ROI Guarantee = sales tool only (PPP, scripts, landing pages). Not a refund; it's a free renewal year if no value felt. Do NOT show on organic/public pages.</div></div>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:20px 0 10px;">Sales Funnel Offers (non-public)</h3>
+    <div class="alert ok"><span class="alert-icon">1</span><div><strong>Standard:</strong> Free Silver listing on TaurangaNZ.info included with any paid Papamoa.info listing.</div></div>
+    <div class="alert warn"><span class="alert-icon">2</span><div><strong>Last-ditch only:</strong> "Pay Silver price, get Gold" -- $599+gst/yr unlocks full Gold. Final lever before dropout. Not offered by default.</div></div>
+  </div>
+
+  <!-- 2. DESIGN SYSTEM -->
+  <div class="section" id="design">
+    <div class="section-label">Locked April 2026</div>
+    <h2 class="section-title">2. Design System</h2>
+
+    <div class="alert info"><span class="alert-icon">&#127912;</span><div><strong>Fonts:</strong> Figtree (body/UI) + Playfair Display (headings). NEVER use DM Sans, Fraunces, Inter, Libre Baskerville, Space Grotesk, Roboto, Arial, Outfit.</div></div>
+
+    <div class="alert info"><span class="alert-icon">&#127968;</span><div><strong>Nav logo:</strong> Playfair Display bold "Papamoa" in white + <code>.info</code> span in <code>#3AABDE</code> (blue). Phone in nav: blue, NOT dune.</div></div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--navy);margin:20px 0 12px;">Core Palette</h3>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#0D2B3E"></div><div class="swatch-info"><div class="swatch-name">Navy</div><div class="swatch-hex">#0D2B3E</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#1B6B7D"></div><div class="swatch-info"><div class="swatch-name">Ocean</div><div class="swatch-hex">#1B6B7D</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#0F4352"></div><div class="swatch-info"><div class="swatch-name">Ocean Deep</div><div class="swatch-hex">#0F4352</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#3AABDE"></div><div class="swatch-info"><div class="swatch-name">Blue (accent)</div><div class="swatch-hex">#3AABDE</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F7F3ED"></div><div class="swatch-info"><div class="swatch-name">Sand</div><div class="swatch-hex">#F7F3ED</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#C4985A"></div><div class="swatch-info"><div class="swatch-name">Dune</div><div class="swatch-hex">#C4985A</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#B8840A"></div><div class="swatch-info"><div class="swatch-name">Gold</div><div class="swatch-hex">#B8840A</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#5A7A8A"></div><div class="swatch-info"><div class="swatch-name">Silver</div><div class="swatch-hex">#5A7A8A</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#9A7060"></div><div class="swatch-info"><div class="swatch-name">Bronze</div><div class="swatch-hex">#9A7060</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#1E6B3C"></div><div class="swatch-info"><div class="swatch-name">Green</div><div class="swatch-hex">#1E6B3C</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#7DC143"></div><div class="swatch-info"><div class="swatch-name">Lime / Pulse</div><div class="swatch-hex">#7DC143</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E8344A"></div><div class="swatch-info"><div class="swatch-name">Coral</div><div class="swatch-hex">#E8344A</div></div></div>
+    </div>
+
+    <div class="alert warn"><span class="alert-icon">&#9888;</span><div><strong>Homepage variant tokens are intentional:</strong> <code>--navy-mid:#2B3F5C</code>, <code>--gold-alt:#C8962A</code>, <code>--sand-alt:#F5EFE0</code> etc. are warmer variants used only on the homepage. Not bugs.</div></div>
+    <div class="alert warn"><span class="alert-icon">&#9888;</span><div><strong>Category hero gradients:</strong> Three conflicting sets exist (homepage, listing templates, styles.css). Need reconciling in design audit.</div></div>
+  </div>
+
+  <!-- 3. TERMINOLOGY -->
+  <div class="section" id="terminology">
+    <div class="section-label">Locked</div>
+    <h2 class="section-title">3. Terminology</h2>
+    <table class="data-table">
+      <thead><tr><th>Term</th><th>Meaning</th><th>Rules</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gold Listing</strong></td><td>$1,199+gst/yr tier</td><td>Never "Gold Spotlight" as tier name</td></tr>
+        <tr><td><strong>Silver Listing</strong></td><td>$599+gst/yr tier</td><td>Never "Silver Spotlight"</td></tr>
+        <tr><td><strong>Spotlight</strong></td><td>Ad placements on category pages</td><td>Separate from listing tiers</td></tr>
+        <tr><td><strong>Bronze</strong></td><td>Internal placeholder label</td><td>Never mentioned to prospects</td></tr>
+        <tr><td><strong>GEO</strong></td><td>Generative Engine Optimisation</td><td>Umbrella term for all AI engines. Preferred over AEO.</td></tr>
+        <tr><td><strong>Papamoa</strong></td><td>Content spelling</td><td>Always with macron in body text. Domain: no macron.</td></tr>
+      </tbody>
+    </table>
+    <div class="alert info"><span class="alert-icon">&#9997;</span><div><strong>Listing voice:</strong> Third-party "they/them/call them". Never "we/us". Neutral editorial. Specific and honest. No em dashes. No dummy phone numbers.</div></div>
+  </div>
+
+  <!-- 4. NAV SYSTEM -->
+  <div class="section" id="nav">
+    <div class="section-label">Locked</div>
+    <h2 class="section-title">4. Nav System</h2>
+    <div class="alert info"><span class="alert-icon">&#128279;</span><div><strong>Desktop nav links:</strong> Home | Info | Community | Stay | Do | Eat | Services | Shop<br><strong>CTA:</strong> "List Your Business" linking to <code>/sales/list-with-us.html</code></div></div>
+    <table class="data-table">
+      <thead><tr><th>Variant</th><th>Usage</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr><td><code>data-nav="default"</code></td><td>Homepage, community, info</td><td>Full nav + Facebook + CTA + full drawer</td></tr>
+        <tr><td><code>data-nav="category"</code></td><td>Category, listing pages</td><td>Logo + breadcrumb + CTA + full drawer</td></tr>
+        <tr><td><code>data-nav="sales"</code></td><td>Sales pages</td><td>Logo + back link + custom CTA + slim drawer</td></tr>
+      </tbody>
+    </table>
+    <div class="alert warn"><span class="alert-icon">&#9888;</span><div><strong>nav.js status:</strong> In repo but not confirmed correct. Not yet rolled out to all pages. Part of final consolidation steps.</div></div>
+  </div>
+
+  <!-- 5. FILE STRUCTURE -->
+  <div class="section" id="files">
+    <div class="section-label">Current state</div>
+    <h2 class="section-title">5. File Structure</h2>
+    <div class="file-tree"><strong>papamoa-previews/</strong>
+  homepage.html              -- Public homepage
+  index.html                 -- Internal sitemap (noindex)
+  search.html / legal.html / 404.html
+  nav.js / worker.js / wrangler.toml
+  <strong>assets/</strong>
+    css/styles.css            -- Global stylesheet (source of truth)
+    nav-footer-snippet.html   -- Nav/footer HTML reference
+    sm-icons/                 -- Social media icon files (to add)
+  <strong>categories/</strong>
+    accommodation/ activities/ food-drink/ services/ shops/
+  <strong>community/</strong>               -- 50+ info/article pages
+  <strong>listings/</strong>                -- 20 live + 2 templates
+  <strong>sales/</strong>
+    partners/real-estate-agent.html + real-estate-outreach.html
+  <strong>previews/</strong>               -- PPP template (driftwood-cafe.html)
+  <strong>admin/</strong>                  -- 6 internal tool pages
+  <strong>docs/</strong>                   -- 6 HTML + 9 markdown docs
+  <strong>images/listings/{slug}/</strong> -- logo.png + hero-1.jpg to hero-9.jpg</div>
+    <div class="alert dead"><span class="alert-icon">&#10005;</span><div><strong>articles/ folder is EMPTY.</strong> Everything moved to community/. Any link pointing to articles/ is broken.</div></div>
+  </div>
+
+  <!-- 6. LISTINGS -->
+  <div class="section" id="listings">
+    <div class="section-label">20 live + 2 templates</div>
+    <h2 class="section-title">6. Listings</h2>
+    <table class="data-table">
+      <thead><tr><th>Business</th><th>Tier</th><th>Business</th><th>Tier</th></tr></thead>
+      <tbody>
+        <tr><td>Coastal Autos</td><td style="color:var(--gold);font-weight:700">Gold</td><td>Barber Toms</td><td style="color:var(--silver);font-weight:700">Silver</td></tr>
+        <tr><td>Hakanini Surf School</td><td style="color:var(--gold);font-weight:700">Gold</td><td>Blackberry Eatery</td><td style="color:var(--silver);font-weight:700">Silver</td></tr>
+        <tr><td>Karaka Pines</td><td style="color:var(--gold);font-weight:700">Gold</td><td>Greencut</td><td style="color:var(--silver);font-weight:700">Silver</td></tr>
+        <tr><td>PAP House</td><td style="color:var(--gold);font-weight:700">Gold</td><td>Kayco Nails</td><td style="color:var(--silver);font-weight:700">Silver</td></tr>
+        <tr><td>Pacific Park</td><td style="color:var(--gold);font-weight:700">Gold</td><td>Mumbai Masala</td><td style="color:var(--silver);font-weight:700">Silver</td></tr>
+        <tr><td>Papamoa Orthodontist</td><td style="color:var(--gold);font-weight:700">Gold</td><td>Pacific Palms</td><td style="color:var(--silver);font-weight:700">Silver</td></tr>
+        <tr><td>ReDefined Wellbeing</td><td style="color:var(--gold);font-weight:700">Gold</td><td>Papamoa Beach Resort</td><td style="color:var(--silver);font-weight:700">Silver</td></tr>
+        <tr><td>Speedy Screens</td><td style="color:var(--gold);font-weight:700">Gold</td><td>The Pizza Pundits</td><td style="color:var(--silver);font-weight:700">Silver</td></tr>
+        <tr><td>Tara Road Dental</td><td style="color:var(--gold);font-weight:700">Gold</td><td>Xanadu Book Exchange</td><td style="color:var(--silver);font-weight:700">Silver</td></tr>
+        <tr><td>The Cave</td><td style="color:var(--gold);font-weight:700">Gold</td><td></td><td></td></tr>
+        <tr><td>The Wagon</td><td style="color:var(--gold);font-weight:700">Gold</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 7. INFRASTRUCTURE -->
+  <div class="section" id="infra">
+    <div class="section-label">Current state</div>
+    <h2 class="section-title">7. Infrastructure</h2>
+    <table class="data-table">
+      <thead><tr><th>Service</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Repo</strong></td><td><code>plainblackcreative/papamoa-previews</code> (GitHub Pages)</td></tr>
+        <tr><td><strong>Worker</strong></td><td><code>papamoa-claude-proxy.jkbrownnz.workers.dev</code> (v2.2)</td></tr>
+        <tr><td><strong>Worker routes</strong></td><td>GET /weather, GET /sheets, POST /fishing-data, POST / (Claude proxy)</td></tr>
+        <tr><td><strong>Claude model (Worker)</strong></td><td><code>claude-haiku-4-5-20251001</code></td></tr>
+        <tr><td><strong>Web3Forms key</strong></td><td><code>37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78</code></td></tr>
+        <tr><td><strong>CRM Sheet ID</strong></td><td><code>1X5i40RLF-r-yLRbm_XCgVyzJAkgO_o6whaoCzdC3SiM</code></td></tr>
+        <tr><td><strong>Brevo</strong></td><td>Under <code>jkbrownnz@gmail.com</code>, sending domain pending DNS</td></tr>
+        <tr><td><strong>Stripe</strong></td><td>Prepared, not active. Placeholder URLs in PPP.</td></tr>
+        <tr><td><strong>Coordinates</strong></td><td>-37.7167, 176.3167 (NOT -37.6833, 176.1833)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 8. QUALITY STANDARD -->
+  <div class="section" id="quality">
+    <div class="section-label">Locked -- no exceptions</div>
+    <h2 class="section-title">8. Quality Standard</h2>
+    <div class="alert info"><span class="alert-icon">&#9989;</span><div>Every page must have: specific <code>&lt;meta description&gt;</code>, <code>&lt;link rel="canonical"&gt;</code>, Open Graph tags, appropriate schema markup, AEO FAQ on category pages (min 4 questions), no tier labels on Bronze, no dummy phone numbers, correct design system applied throughout.</div></div>
+  </div>
+
+  <!-- 9. KEY FEATURES -->
+  <div class="section" id="features">
+    <div class="section-label">Reference</div>
+    <h2 class="section-title">9. Key Features & Pages</h2>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:16px 0 8px;">Menu Add-On -- Known Bugs</h3>
+    <div class="alert dead"><span class="alert-icon">1</span><div>Menu lightbox button crashes page on PPP and list-with-us. Quick fix: anchor link to menu section.</div></div>
+    <div class="alert dead"><span class="alert-icon">2</span><div>Dietary filters (V, VG, GF, DF) hardcoded but non-functional. Make dynamic and wire up filtering.</div></div>
+    <div class="alert warn"><span class="alert-icon">3</span><div>Menu item images need auto-discovery from <code>images/listings/{slug}/menu/</code>.</div></div>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:16px 0 8px;">Search -- Known Bugs</h3>
+    <div class="alert dead"><span class="alert-icon">1</span><div><code>handleSearch()</code> uses undefined <code>ql</code> variable. Should be <code>q</code>.</div></div>
+    <div class="alert dead"><span class="alert-icon">2</span><div>Weather widget fetches wrong coordinates directly from Open-Meteo. Should use Worker proxy.</div></div>
+    <div class="alert dead"><span class="alert-icon">3</span><div>Duplicate script blocks with broken <code>&lt;script&gt;</code> tag.</div></div>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:16px 0 8px;">404 Page -- Monthly Giveaway Concept</h3>
+    <div class="alert ok"><span class="alert-icon">&#127881;</span><div>Monthly sponsor provides prize + gets spotlight ad. Game re-themed to sponsor's business. Investigate SEO/GEO benefits of high-engagement 404 pages.</div></div>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:16px 0 8px;">To Build</h3>
+    <div class="alert info"><span class="alert-icon">&#128736;</span><div><strong>Social icons:</strong> All listings get icon slots (hidden until URL provided). Files at <code>/assets/sm-icons/</code>.</div></div>
+    <div class="alert info"><span class="alert-icon">&#128736;</span><div><strong>Live reviews:</strong> Google/TripAdvisor widgets in hero. Live-check on load. Show/hide per URL availability.</div></div>
+    <div class="alert info"><span class="alert-icon">&#128736;</span><div><strong>Sidebar categories:</strong> Gold: main + all subcats. Silver: main + 1 subcat. Automated from listing data.</div></div>
+    <div class="alert info"><span class="alert-icon">&#128736;</span><div><strong>Listing management portal:</strong> Magic-link per listing for owner updates. Review step before live.</div></div>
+  </div>
+
+  <!-- 10. DEAD OFFERS & OUTDATED DOCS -->
+  <div class="section" id="dead">
+    <div class="section-label">Archived -- do not use</div>
+    <h2 class="section-title">10. Dead Offers & Outdated Documents</h2>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:0 0 10px;">Dead Offers</h3>
+    <div class="dead-list">
+      <div class="dead-item"><span class="dead-strike">Gold-for-Silver-price as default Founding Member perk</span><span class="dead-reason">Last-ditch only</span></div>
+      <div class="dead-item"><span class="dead-strike">Unlimited AI Sub-Pages / Sub-page add-on ($150+gst)</span><span class="dead-reason">Removed entirely</span></div>
+      <div class="dead-item"><span class="dead-strike">Bronze as $99 lifetime product</span><span class="dead-reason">Internal only</span></div>
+      <div class="dead-item"><span class="dead-strike">Silver as one-off lifetime cost</span><span class="dead-reason">Annual</span></div>
+      <div class="dead-item"><span class="dead-strike">"Founding Member" package concept</span><span class="dead-reason">Dead</span></div>
+      <div class="dead-item"><span class="dead-strike">Offers bank / situational incentives</span><span class="dead-reason">Deferred indefinitely</span></div>
+      <div class="dead-item"><span class="dead-strike">Glenn's Glass & The Phoenix as examples</span><span class="dead-reason">No longer needed</span></div>
+    </div>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:20px 0 10px;">Outdated Documents (do not reference)</h3>
+    <table class="data-table">
+      <thead><tr><th>File</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><code>Project_Memory.rtf</code></td><td>Wrong on Menu Add-On, Founding Member, Bronze, Extra Spotlight price</td></tr>
+        <tr><td><code>docs/papamoa-project-master.md</code></td><td>March 2026. Wrong pricing, tier names, tool stack</td></tr>
+        <tr><td><code>docs/papamoa-info-system-brief.md</code></td><td>March 2026. $1,200 Gold, Tally.so, HubSpot</td></tr>
+        <tr><td><code>docs/papamoa-consolidation.md</code></td><td>March 2026. Everything superseded</td></tr>
+        <tr><td>All other <code>docs/*.md</code> files</td><td>March 2026 planning docs. All superseded.</td></tr>
+        <tr><td>All <code>session-memory-*.md</code> files</td><td>Superseded by this document</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 11. GREY AREAS -->
+  <div class="section" id="grey">
+    <div class="section-label">Needs decisions</div>
+    <h2 class="section-title">11. Grey Areas & TBCs</h2>
+
+    <div class="grey"><div class="grey-title">Category hero gradients</div><div class="grey-body">Three conflicting colour sets across homepage, listing templates, and styles.css. Which set wins?</div></div>
+    <div class="grey"><div class="grey-title">Homepage nav labels</div><div class="grey-body">Homepage uses full labels, nav.js uses locked short labels. Does homepage need updating?</div></div>
+    <div class="grey"><div class="grey-title">Repo folder restructure</div><div class="grey-body">Move root pages into folder? Define articles vs community boundary? Major link-breaking change.</div></div>
+    <div class="grey"><div class="grey-title">Business model</div><div class="grey-body">Revenue share with Carwyn (50/50) vs Jay operates independently. Decision pending.</div></div>
+    <div class="grey"><div class="grey-title">sales/post-call-landing.html</div><div class="grey-body">Referenced in task-plan but not found in file structure listings. Confirm status.</div></div>
+    <div class="grey"><div class="grey-title">Scored search algorithm</div><div class="grey-body">Discussed but unclear if implemented. Current search uses simple substring matching.</div></div>
+  </div>
+
+  <!-- 12. TASKS -->
+  <div class="section" id="tasks">
+    <div class="section-label">All sessions consolidated</div>
+    <h2 class="section-title">12. Pending Tasks</h2>
+
+    <div class="task-group">
+      <div class="task-group-head tg-critical">Critical -- Before Launch</div>
+      <div class="task-items">
+        <div class="task">Update <code>pricing-master.html</code>: Silver images (logo only), Extra Spotlight $199, +gst, Gold images cap</div>
+        <div class="task">Replace <code>Project_Memory.rtf</code> with Project_Master.md</div>
+        <div class="task">Fix search.html bugs (undefined ql, weather widget, duplicate scripts)</div>
+        <div class="task">Rotate Claude API key, update in Cloudflare Worker env vars</div>
+        <div class="task">Fix <code>href="#"</code> in 20+ subcategory pages</div>
+        <div class="task">Fix "Gold Spotlight" naming everywhere it appears as a product name</div>
+        <div class="task">Fix menu lightbox crash (anchor link as quick fix)</div>
+        <div class="task">Fix menu dietary filters (make dynamic, wire up filtering)</div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-head tg-high">High Priority -- Pre-Launch</div>
+      <div class="task-items">
+        <div class="task">Update <code>styles.css</code>, <code>nav-footer-snippet.html</code>, <code>README.md</code></div>
+        <div class="task">Fix listing template contact pattern (ci-text flex)</div>
+        <div class="task">Site-wide +GST to +gst and articles/ to community/ fixes</div>
+        <div class="task">Design system audit + pricing audit across all pages</div>
+        <div class="task">Site-wide style/layout audit (width, nav, category colours, sidebar)</div>
+        <div class="task">Menu Add-On audit: Silver CTA = purchase option, NOT upgrade prompt</div>
+        <div class="task">Add social icon slots + live review widgets to listings</div>
+        <div class="task">Implement automated sidebar categories (Gold: all subcats, Silver: 1)</div>
+        <div class="task">Build admin new-listing intake form/checklist</div>
+        <div class="task">DNS consolidation + Stripe activation</div>
+        <div class="task">Build <code>list-with-us.html</code> rebuild + <code>/onboarding/add-menu.html</code></div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-head tg-medium">Medium -- Post-Launch</div>
+      <div class="task-items">
+        <div class="task">nav.js rollout + sales pages rebuild + category glow-up</div>
+        <div class="task">Rename entertainment > things-to-do (fix all links)</div>
+        <div class="task">Build search management system, menu image system, listing portal</div>
+        <div class="task">Self-upgrade flow (Silver > Gold, add-ons via Stripe)</div>
+        <div class="task">Brevo sequences + Google Analytics/Search Console</div>
+        <div class="task">CRM dashboard rebuild + GitHub Actions sitemap</div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-head tg-deferred">Deferred -- Game Plan</div>
+      <div class="task-items">
+        <div class="task">Repo folder restructure (major link-breaking change)</div>
+        <div class="task">Sub-cat pill auto-discovery + Live Check button</div>
+        <div class="task">PPP BUSINESS object generator + Mumbai Masala menu test</div>
+        <div class="task">Outscraper lead scrape + first cold email batch + Facebook growth</div>
+        <div class="task">404 monthly giveaway system + investigate SEO/GEO impact</div>
+        <div class="task">Fuel Stations live data + index.html star persistence</div>
+      </div>
+    </div>
+
+    <div class="task-group">
+      <div class="task-group-head tg-done">Completed</div>
+      <div class="task-items">
+        <div class="task done">Admin password changed</div>
+        <div class="task done">community.html typo fixed</div>
+        <div class="task done">electricians/plumbers duplicates deleted</div>
+        <div class="task done">health/ folder moved to services/</div>
+        <div class="task done">lawn-mowing-papamoa.html deleted</div>
+        <div class="task done">404.html built (gremlin game + leaderboard)</div>
+        <div class="task done">Carwyn demo completed</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="doc-footer">
+    Papamoa.info -- Plain Black Creative -- Project Master v1 -- Consolidated April 9, 2026<br>
+    This document replaces all previous memory files, session exports, and project briefs.
+  </div>
+
+</div>
+</body>
+</html>
