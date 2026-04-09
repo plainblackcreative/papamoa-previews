@@ -10,14 +10,16 @@
   ║  1. Fill in the BUSINESS object below                                     ║
   ║  2. Set hasMenu: true if they've purchased the Menu Add-On, else false    ║
   ║  3. If hasMenu: true — add categories/items to MENU_DATA                 ║
-  ║  4. Upload logo: images/listings/SLUG/logo.png                           ║
-  ║  5. Upload logo: images/listings/SLUG/logo.png (logo only, no gallery)   ║
-  ║  6. Set hero category class on .page-hero (hero-cat-CATEGORY)            ║
-  ║  7. Fill in nav breadcrumb, about, services, hours, reviews, sidebar     ║
+  ║  4. Upload logo: images/listings/SLUG/logo.png (logo only, no gallery)   ║
+  ║  5. Set hero category class on .page-hero (hero-cat-CATEGORY)            ║
+  ║  6. Set SOCIAL URLs — icons auto-show when a URL is provided             ║
+  ║  7. Set REVIEWS URLs — widgets auto-show when a URL is provided          ║
+  ║  8. Fill in nav breadcrumb, about, services, hours, reviews, sidebar     ║
   ║                                                                            ║
   ║  MENU LOGIC (automatic)                                                   ║
   ║  hasMenu: true  → "View menu" button → opens lightbox (add-on purchased) ║
-  ║  hasMenu: false → gold upsell button → links to menu-addon sales page    ║
+  ║  hasMenu: false → purchase CTA → links to /sales/menu-addon.html         ║
+  ║                    ($199+gst/yr, category-specific label)                  ║
   ║                                                                            ║
   ║  HERO CATEGORY CLASSES                                                     ║
   ║  hero-cat-food | hero-cat-services | hero-cat-accommodation               ║
@@ -45,13 +47,33 @@
   // ── LISTING CONFIG ──────────────────────────────────────────────────────
   var BUSINESS = {
     tier:      'silver',
-    hasMenu:   false,            // true = Menu Add-On purchased; false = upsell shown
+    hasMenu:   false,            // true = Menu Add-On purchased ($199+gst/yr); false = purchase CTA shown
     category:  'food-drink',
     // Category options: 'food-drink' | 'services' | 'accommodation' | 'health'
     //                   'entertainment' | 'shopping' | 'real-estate' | 'default'
   };
 
-// ── MENU DATA (only if hasMenu: true) ───────────────────────────────────
+  // ── SOCIAL MEDIA — set URLs below. Icons hidden when URL is empty. ──
+  var SOCIAL = {
+    facebook:  '',  // e.g. 'https://facebook.com/businessname'
+    instagram: '',  // e.g. 'https://instagram.com/businessname'
+    tiktok:    '',  // e.g. 'https://tiktok.com/@businessname'
+    youtube:   '',  // e.g. 'https://youtube.com/@businessname'
+    linkedin:  '',  // e.g. 'https://linkedin.com/company/businessname'
+    twitter:   '',  // e.g. 'https://twitter.com/businessname'
+  };
+
+  // ── REVIEW WIDGETS — set URLs to enable. Leave blank to hide. ──
+  var REVIEWS = {
+    googleUrl:      '',  // e.g. 'https://www.google.com/maps/place/...'
+    googleRating:   '',  // e.g. '4.8'
+    googleCount:    '',  // e.g. '127 reviews'
+    tripUrl:        '',  // e.g. 'https://www.tripadvisor.co.nz/...'
+    tripRating:     '',  // e.g. '4.5'
+    tripCount:      '',  // e.g. '84 reviews'
+  };
+
+  // ── MENU DATA (only if hasMenu: true) ───────────────────────────────────
   var MENU_DATA = {
     categories: [
       // { id: 'mains', label: 'Mains', note: '' },
@@ -71,10 +93,21 @@
 
   <style>
     :root {
-      --navy:#2B3F5C; --blue:#3AABDE; --sand:#F5EFE0;
-      --dune:#D4C4A0; --white:#fff; --body:#1E2D3E; --muted:#607080;
-      --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A; --gold2:#F0C060;
-      --silver:#8090A8; --silver2:#A0B0C8;
+      /* Core palette — from design system (assets/css/styles.css) */
+      --navy:#0D2B3E; --blue:#3AABDE;
+      --sand:#F7F3ED; --sand-dark:#EDE7DB;
+      --ocean:#1B6B7D; --ocean-deep:#0F4352; --ocean-light:#E4F2F5;
+      --dune:#C4985A; --dune-light:#F5EDD8;
+      --white:#FFFFFF;
+      /* Text & borders */
+      --body:#1E2D3E; --text:#1A2832; --muted:#5A6E78;
+      --border:#D8E4E8; --bg:#F4F7FA;
+      /* Tier */
+      --gold:#B8840A; --gold-bg:#FBF3E2; --gold-alt:#C8962A; --gold2:#F0C060;
+      --silver:#5A7A8A; --silver-bg:#EDF3F6;
+      --silver2:#A0B0C8;
+      /* Status */
+      --green:#1E6B3C; --green-bg:#E6F4EC;
     }
     *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; overflow-x:hidden; }
@@ -82,15 +115,15 @@
     a { color:var(--blue); text-decoration:none; }
 
     /* ── NAV ── */
-    .listing-nav { background:#0D2B3E; height:48px; padding:0 24px; display:flex; align-items:center; position:sticky; top:0; z-index:200; box-shadow:0 2px 10px rgba(0,0,0,0.25); }
+    .listing-nav { background:var(--navy); height:48px; padding:0 24px; display:flex; align-items:center; position:sticky; top:0; z-index:200; box-shadow:0 2px 10px rgba(0,0,0,0.25); }
     .listing-nav-logo { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:#fff; text-decoration:none; flex-shrink:0; margin-right:16px; }
-    .listing-nav-logo span { color:#3AABDE; }
+    .listing-nav-logo span { color:var(--blue); }
     .listing-nav-bc { display:flex; align-items:center; gap:6px; font-size:12px; color:rgba(255,255,255,0.4); overflow:hidden; min-width:0; }
     .listing-nav-bc a { color:rgba(255,255,255,0.5); text-decoration:none; white-space:nowrap; }
-    .listing-nav-bc a:hover { color:#3AABDE; }
+    .listing-nav-bc a:hover { color:var(--blue); }
     .listing-nav-bc .sep { opacity:0.3; flex-shrink:0; }
     .listing-nav-bc .current { color:rgba(255,255,255,0.65); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .listing-nav-cta { margin-left:auto; font-size:12px; font-weight:700; background:#3AABDE; color:#fff; padding:6px 16px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0; transition:background 0.2s; }
+    .listing-nav-cta { margin-left:auto; font-size:12px; font-weight:700; background:var(--blue); color:#fff; padding:6px 16px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0; transition:background 0.2s; }
     .listing-nav-cta:hover { background:#2d95c4; }
 
     /* ── HERO CATEGORY COLOURS ── */
@@ -110,7 +143,7 @@
     .hero-cat-realestate::after { background:linear-gradient(90deg,var(--silver),var(--silver2)) !important; }
 
     /* ── HERO ── */
-    .page-hero { padding:44px 24px 40px; position:relative; overflow:hidden; background:linear-gradient(135deg,#0D2B3E,#1A3A50); }
+    .page-hero { padding:44px 24px 40px; position:relative; overflow:hidden; background:linear-gradient(135deg,var(--navy),#1A3A50); }
     .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--silver),var(--silver2),var(--silver)); }
     .hero-inner { max-width:960px; margin:0 auto; position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:28px; }
     .hero-text { flex:1; min-width:0; }
@@ -126,10 +159,30 @@
     .hero-meta { display:flex; flex-wrap:wrap; gap:16px; margin-bottom:18px; align-items:center; }
     .hero-meta-item { font-size:0.78rem; color:rgba(255,255,255,0.55); display:flex; align-items:center; gap:5px; }
     .hero-meta-item a { color:rgba(255,255,255,0.7); text-decoration:underline; }
+
+    /* ── REVIEW WIDGETS (hero) ── */
+    .hero-reviews { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
+    .hero-review-widget {
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      background:rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.18);
+      padding:5px 12px;
+      border-radius:6px;
+      text-decoration:none;
+      transition:background 0.15s;
+    }
+    .hero-review-widget:hover { background:rgba(255,255,255,0.16); }
+    .rating-stars { color:#F5C842; font-size:0.78rem; }
+    .rating-score { color:#fff; font-weight:700; font-size:0.88rem; }
+    .rating-count { color:rgba(255,255,255,0.5); font-size:0.72rem; }
+    .rating-source { color:rgba(255,255,255,0.4); font-size:0.68rem; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; }
+
     .hero-chips { display:flex; gap:8px; flex-wrap:wrap; }
     .hchip { font-size:0.72rem; font-weight:600; color:rgba(255,255,255,0.55); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); padding:4px 10px; border-radius:4px; }
 
-/* ── ACTION BAR ── */
+    /* ── ACTION BAR ── */
     .action-bar { background:var(--white); border-bottom:1px solid var(--border); padding:14px 24px; }
     .action-bar-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
     .btn-primary { background:var(--navy); color:#fff; font-family:'Figtree',sans-serif; font-weight:700; font-size:0.84rem; padding:10px 20px; border-radius:7px; text-decoration:none; transition:background 0.2s; white-space:nowrap; border:none; cursor:pointer; }
@@ -138,30 +191,51 @@
     .btn-secondary:hover { border-color:var(--blue); color:var(--blue); }
     .btn-menu { background:transparent; color:var(--body); font-family:'Figtree',sans-serif; font-weight:600; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid var(--border); text-decoration:none; transition:all 0.2s; white-space:nowrap; cursor:pointer; }
     .btn-menu:hover { border-color:var(--silver); color:var(--silver); }
-    .btn-upsell { background:var(--bg); color:var(--gold); font-family:'Figtree',sans-serif; font-weight:700; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid rgba(200,150,42,0.35); text-decoration:none; transition:all 0.2s; white-space:nowrap; cursor:pointer; }
-    .btn-upsell:hover { background:rgba(200,150,42,0.08); border-color:var(--gold); }
+    /* Menu Add-On purchase CTA (Silver only, when hasMenu: false) */
+    .btn-menu-purchase { background:var(--bg); color:var(--ocean-deep); font-family:'Figtree',sans-serif; font-weight:700; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid var(--ocean); text-decoration:none; transition:all 0.2s; white-space:nowrap; cursor:pointer; }
+    .btn-menu-purchase:hover { background:var(--ocean-light); border-color:var(--ocean-deep); }
     .action-spacer { flex:1; }
+
+    /* ── SOCIAL ICONS (image-based from /assets/sm-icons/) ── */
     .social-icons { display:flex; gap:7px; }
-    .social-icon { width:34px; height:34px; border-radius:7px; background:var(--bg); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:0.88rem; text-decoration:none; transition:all 0.18s; color:var(--muted); }
-    .social-icon:hover { background:var(--navy); border-color:var(--navy); color:#fff; }
+    .social-icon {
+      width:34px; height:34px;
+      border-radius:7px;
+      background:var(--bg);
+      border:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      transition:all 0.18s;
+    }
+    .social-icon:hover { background:var(--navy); border-color:var(--navy); }
+    .social-icon img {
+      width:18px; height:18px;
+      object-fit:contain;
+      display:block;
+      opacity:0.55;
+      transition:opacity 0.18s, filter 0.18s;
+    }
+    .social-icon:hover img { opacity:1; filter:brightness(10); }
 
     /* ── MENU LIGHTBOX ── */
     .menu-lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; display:flex; align-items:center; justify-content:center; padding:16px; opacity:0; pointer-events:none; transition:opacity 0.2s; }
     .menu-lightbox.open { opacity:1; pointer-events:all; }
     .menu-modal { background:var(--white); border-radius:14px; width:100%; max-width:720px; max-height:90vh; display:flex; flex-direction:column; overflow:hidden; }
-    .menu-modal-header { background:#0D2B3E; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+    .menu-modal-header { background:var(--navy); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
     .menu-modal-header h3 { color:#fff; font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; margin:0; }
     .menu-modal-close { background:rgba(255,255,255,0.12); border:none; color:#fff; width:32px; height:32px; border-radius:50%; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
     .menu-modal-close:hover { background:rgba(255,255,255,0.25); }
     .menu-modal-body { overflow-y:auto; flex:1; }
     .menu-cats { display:flex; gap:6px; padding:14px 16px 0; flex-wrap:wrap; }
     .menu-cat { padding:6px 14px; border-radius:100px; font-size:12px; font-weight:600; cursor:pointer; border:1.5px solid var(--border); background:var(--white); color:var(--muted); font-family:'Figtree',sans-serif; transition:all 0.15s; }
-    .menu-cat:hover { border-color:#3AABDE; color:#3AABDE; }
-    .menu-cat.active { background:#0D2B3E; color:#fff; border-color:#0D2B3E; }
+    .menu-cat:hover { border-color:var(--blue); color:var(--blue); }
+    .menu-cat.active { background:var(--navy); color:#fff; border-color:var(--navy); }
     .menu-filters { display:flex; gap:6px; padding:10px 16px; flex-wrap:wrap; align-items:center; border-bottom:1px solid var(--border); }
     .menu-filter-label { font-size:11px; color:var(--muted); font-weight:600; margin-right:2px; }
     .menu-filter { padding:3px 10px; border-radius:100px; font-size:11px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--white); color:var(--muted); font-family:'Figtree',sans-serif; transition:all 0.15s; }
-    .menu-filter.active { background:#3AABDE; color:#fff; border-color:#3AABDE; }
+    .menu-filter.active { background:var(--blue); color:#fff; border-color:var(--blue); }
     .menu-cat-note { font-size:11px; color:var(--muted); padding:8px 16px 0; font-style:italic; display:none; }
     .menu-items { padding:12px 16px 16px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     @media (max-width:540px) { .menu-items { grid-template-columns:1fr; } }
@@ -171,16 +245,16 @@
     .menu-item-name { font-size:13px; font-weight:700; color:var(--body); margin-bottom:3px; }
     .menu-item-desc { font-size:11px; color:var(--muted); line-height:1.45; margin-bottom:6px; }
     .menu-item-footer { display:flex; align-items:center; justify-content:space-between; }
-    .menu-item-price { font-size:14px; font-weight:700; color:#0D2B3E; }
+    .menu-item-price { font-size:14px; font-weight:700; color:var(--navy); }
     .menu-item-tags { display:flex; gap:3px; }
     .diet-tag { font-size:9px; font-weight:700; padding:2px 5px; border-radius:3px; }
-    .diet-vg { background:rgba(46,125,50,0.12); color:#1E6B3C; border:1px solid rgba(46,125,50,0.2); }
-    .diet-v  { background:rgba(46,125,50,0.08); color:#1E6B3C; border:1px solid rgba(46,125,50,0.15); }
-    .diet-gf { background:rgba(196,152,90,0.12); color:#C4985A; border:1px solid rgba(196,152,90,0.2); }
-    .diet-df { background:rgba(58,171,222,0.1); color:#1B6B7D; border:1px solid rgba(58,171,222,0.2); }
+    .diet-vg { background:rgba(46,125,50,0.12); color:var(--green); border:1px solid rgba(46,125,50,0.2); }
+    .diet-v  { background:rgba(46,125,50,0.08); color:var(--green); border:1px solid rgba(46,125,50,0.15); }
+    .diet-gf { background:rgba(196,152,90,0.12); color:var(--dune); border:1px solid rgba(196,152,90,0.2); }
+    .diet-df { background:rgba(58,171,222,0.1); color:var(--ocean); border:1px solid rgba(58,171,222,0.2); }
     .menu-modal-footer { padding:12px 16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
     .menu-updated { font-size:11px; color:var(--muted); }
-    .menu-order-btn { font-size:12px; font-weight:700; color:#fff; background:#3AABDE; padding:7px 16px; border-radius:6px; text-decoration:none; }
+    .menu-order-btn { font-size:12px; font-weight:700; color:#fff; background:var(--blue); padding:7px 16px; border-radius:6px; text-decoration:none; }
     .menu-order-btn:hover { background:#2d95c4; }
 
     /* ── LAYOUT ── */
@@ -210,22 +284,31 @@
     /* ── SIDEBAR ── */
     .sidebar-card { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
     .sidebar-card h4 { font-family:'Playfair Display',serif; font-size:0.9rem; font-weight:700; color:var(--navy); margin-bottom:12px; }
+
+    /* ── CONTACT LIST (ci-text flex pattern) ── */
     .contact-list { display:flex; flex-direction:column; gap:0; }
-    .contact-item { display:grid; grid-template-columns:22px 72px 1fr; align-items:start; gap:0 8px; padding:8px 0; border-bottom:1px solid var(--border); font-size:0.82rem; }
+    .contact-item {
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:8px 0;
+      border-bottom:1px solid var(--border);
+      font-size:0.82rem;
+    }
     .contact-item:last-child { border-bottom:none; }
-    .ci-icon { font-size:0.88rem; padding-top:1px; }
-    .ci-label { font-size:0.7rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--body); padding-top:2px; }
-    .ci-value { color:var(--muted); line-height:1.5; }
-    .ci-value a { color:var(--blue); }
+    .ci-icon { font-size:0.88rem; flex-shrink:0; padding-top:1px; }
+    .ci-text { color:var(--muted); line-height:1.5; }
+    .ci-text a { color:var(--blue); }
+
     .map-placeholder { background:linear-gradient(135deg,#E8F0F8,#D4E4F4); border-radius:8px; height:160px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--muted); font-size:0.82rem; border:1px solid var(--border); text-decoration:none; transition:border-color 0.15s; }
     .map-placeholder:hover { border-color:var(--blue); }
     .related-links { display:flex; flex-direction:column; gap:8px; }
     .related-link { font-size:0.82rem; font-weight:600; color:var(--blue); text-decoration:none; }
     .related-link:hover { text-decoration:underline; }
 
-/* ── FOOTER ── */
+    /* ── FOOTER ── */
     .listing-footer { background:var(--navy); padding:16px 24px; text-align:center; font-size:0.74rem; color:rgba(255,255,255,0.38); margin-top:40px; }
-    .listing-footer a { color:#3AABDE; }
+    .listing-footer a { color:var(--blue); }
 
     /* ── RESPONSIVE ── */
     @media (max-width:720px) { .two-col { grid-template-columns:1fr; } .side-col { order:-1; } .hours-grid { grid-template-columns:1fr; } .action-bar-inner { gap:8px; } }
@@ -261,9 +344,9 @@
       <div class="hero-meta">
         <span class="hero-meta-item">&#128205; ADDRESS_SHORT</span>
         <span class="hero-meta-item">&#128222; PHONE_DISPLAY</span>
-        <!-- Review rating — remove if no public rating -->
-        <span class="hero-meta-item">&#11088; RATING &nbsp;<a href="GOOGLE_MAPS_URL" target="_blank" rel="noopener">REVIEW_COUNT Google reviews</a></span>
       </div>
+      <!-- Review widgets — rendered by JS from REVIEWS object. Hidden when URLs empty. -->
+      <div class="hero-reviews" id="hero-reviews"></div>
       <div class="hero-chips">
         <!-- <span class="hchip">&#EMOJI; CHIP_TEXT</span> -->
       </div>
@@ -284,11 +367,8 @@
     <!-- Menu button — rendered by JS based on BUSINESS.hasMenu -->
     <span id="menu-btn-slot"></span>
     <div class="action-spacer"></div>
-    <div class="social-icons">
-      <a href="FACEBOOK_URL" class="social-icon" target="_blank" rel="noopener" title="Facebook">f</a>
-      <a href="INSTAGRAM_URL" class="social-icon" target="_blank" rel="noopener" title="Instagram">&#128247;</a>
-      <!-- <a href="TIKTOK_URL" class="social-icon" target="_blank" rel="noopener" title="TikTok">&#9654;</a> -->
-    </div>
+    <!-- Social icons — rendered by JS from SOCIAL object. Hidden when URL is empty. -->
+    <div class="social-icons" id="social-icons"></div>
   </div>
 </div>
 
@@ -297,17 +377,13 @@
 <div class="menu-lightbox" id="menu-lightbox" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="menu-modal">
     <div class="menu-modal-header">
-      <h3>&#128209; BUSINESS_NAME &mdash; Menu</h3>
+      <h3>&#128209; BUSINESS_NAME Menu</h3>
       <button class="menu-modal-close" id="menu-close" aria-label="Close">&times;</button>
     </div>
     <div class="menu-modal-body">
       <div class="menu-cats" id="menu-cats"></div>
-      <div class="menu-filters">
-        <span class="menu-filter-label">Dietary:</span>
-        <button class="menu-filter active" data-filter="all">All</button>
-        <button class="menu-filter" data-filter="vg">VG</button>
-        <button class="menu-filter" data-filter="v">V</button>
-        <button class="menu-filter" data-filter="gf">GF</button>
+      <div class="menu-filters" id="menu-filters-container">
+        <!-- Dietary filters rendered dynamically by JS — only shows tags that exist in menu data -->
       </div>
       <div id="menu-cat-note" class="menu-cat-note"></div>
       <div class="menu-items" id="menu-items"></div>
@@ -355,7 +431,7 @@
       <!-- Reviews -->
       <div class="content-section">
         <div class="cs-title">What customers say</div>
-        <!-- <div class="review-card"><p class="rv-text">&ldquo;QUOTE&rdquo;</p><div class="rv-attr">&mdash; SOURCE, YEAR</div></div> -->
+        <!-- <div class="review-card"><p class="rv-text">&ldquo;QUOTE&rdquo;</p><div class="rv-attr">SOURCE, YEAR</div></div> -->
       </div>
 
       <!-- No FAQ section on Silver -->
@@ -365,30 +441,31 @@
     <!-- SIDEBAR -->
     <div class="side-col">
 
+      <!-- Contact details (ci-text flex pattern) -->
       <div class="sidebar-card">
         <h4>Contact &amp; location</h4>
         <div class="contact-list">
-          <div class="contact-item"><span class="ci-icon">&#128205;</span><span class="ci-label">Address</span><span class="ci-value">FULL_ADDRESS</span></div>
-          <div class="contact-item"><span class="ci-icon">&#128222;</span><span class="ci-label">Phone</span><span class="ci-value"><a href="tel:PHONE">PHONE_DISPLAY</a></span></div>
-          <div class="contact-item"><span class="ci-icon">&#128231;</span><span class="ci-label">Email</span><span class="ci-value"><a href="mailto:EMAIL">EMAIL_DISPLAY</a></span></div>
-          <div class="contact-item"><span class="ci-icon">&#127760;</span><span class="ci-label">Website</span><span class="ci-value"><a href="WEBSITE_URL" target="_blank" rel="noopener">WEBSITE_DISPLAY</a></span></div>
-          <div class="contact-item"><span class="ci-icon">&#128337;</span><span class="ci-label">Hours</span><span class="ci-value">HOURS_SHORT</span></div>
-          <div class="contact-item"><span class="ci-icon">&#128200;</span><span class="ci-label">Category</span><span class="ci-value"><a href="/papamoa-previews/categories/CATEGORY_PATH.html">CATEGORY_NAME</a></span></div>
+          <div class="contact-item"><span class="ci-icon">&#128205;</span><span class="ci-text">FULL_ADDRESS</span></div>
+          <div class="contact-item"><span class="ci-icon">&#128222;</span><span class="ci-text"><a href="tel:PHONE">PHONE_DISPLAY</a></span></div>
+          <div class="contact-item"><span class="ci-icon">&#128231;</span><span class="ci-text"><a href="mailto:EMAIL">EMAIL_DISPLAY</a></span></div>
+          <div class="contact-item"><span class="ci-icon">&#127760;</span><span class="ci-text"><a href="WEBSITE_URL" target="_blank" rel="noopener">WEBSITE_DISPLAY</a></span></div>
+          <div class="contact-item"><span class="ci-icon">&#128337;</span><span class="ci-text">HOURS_SHORT</span></div>
+          <div class="contact-item"><span class="ci-icon">&#128200;</span><span class="ci-text"><a href="/papamoa-previews/categories/CATEGORY_PATH.html">CATEGORY_NAME</a></span></div>
         </div>
       </div>
 
       <a href="GOOGLE_MAPS_URL" target="_blank" rel="noopener" class="map-placeholder">
         <span style="font-size:1.8rem;">&#128205;</span>
         <span style="font-weight:600;color:var(--body);font-size:0.8rem;text-align:center;padding:0 12px;">FULL_ADDRESS</span>
-        <span style="font-size:0.72rem;color:#3AABDE;">Open in Google Maps &rarr;</span>
+        <span style="font-size:0.72rem;color:var(--blue);">Open in Google Maps &rarr;</span>
       </a>
 
       <div class="sidebar-card">
         <h4>Related pages</h4>
         <div class="related-links">
           <a href="/papamoa-previews/categories/CATEGORY_PATH.html" class="related-link">&#8594; All CATEGORY_NAME in Pāpāmoa</a>
-          <a href="/papamoa-previews/RELATED_PAGE_1.html" class="related-link">&#8594; RELATED_TITLE_1</a>
-          <a href="/papamoa-previews/RELATED_PAGE_2.html" class="related-link">&#8594; RELATED_TITLE_2</a>
+          <a href="/papamoa-previews/community/RELATED_PAGE_1.html" class="related-link">&#8594; RELATED_TITLE_1</a>
+          <a href="/papamoa-previews/community/RELATED_PAGE_2.html" class="related-link">&#8594; RELATED_TITLE_2</a>
         </div>
       </div>
 
@@ -397,25 +474,90 @@
 </div>
 
 <footer class="listing-footer">
-  <a href="/papamoa-previews/homepage.html">papamoa.info</a> &middot; Pāpāmoa&rsquo;s local business directory &middot; <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
+  <a href="/papamoa-previews/homepage.html">papamoa.info</a> &middot; Pāpāmoa&rsquo;s local business directory &middot; <a href="/papamoa-previews/sales/list-with-us.html">List your business</a> &middot; <a href="/papamoa-previews/legal.html">Privacy &amp; Terms</a>
 </footer>
 
 <script>
+// ── SOCIAL ICONS — renders from SOCIAL object using image files ──
+(function(){
+  var container = document.getElementById('social-icons');
+  if (!container || typeof SOCIAL === 'undefined') return;
+  var iconMap = {
+    facebook:  { file: 'facebook.png',  title: 'Facebook' },
+    instagram: { file: 'instagram.png', title: 'Instagram' },
+    tiktok:    { file: 'tiktok.png',    title: 'TikTok' },
+    youtube:   { file: 'youtube.png',   title: 'YouTube' },
+    linkedin:  { file: 'linkedin.png',  title: 'LinkedIn' },
+    twitter:   { file: 'twitter.png',   title: 'Twitter / X' },
+  };
+  Object.keys(iconMap).forEach(function(key) {
+    var url = SOCIAL[key];
+    if (!url) return;
+    var info = iconMap[key];
+    var a = document.createElement('a');
+    a.href = url;
+    a.className = 'social-icon';
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.title = info.title;
+    var img = document.createElement('img');
+    img.src = '/papamoa-previews/assets/sm-icons/' + info.file;
+    img.alt = info.title;
+    img.width = 18;
+    img.height = 18;
+    a.appendChild(img);
+    container.appendChild(a);
+  });
+})();
+
+// ── REVIEW WIDGETS — renders from REVIEWS object ──
+(function(){
+  var container = document.getElementById('hero-reviews');
+  if (!container || typeof REVIEWS === 'undefined') return;
+  if (REVIEWS.googleUrl && REVIEWS.googleRating) {
+    var g = document.createElement('a');
+    g.href = REVIEWS.googleUrl;
+    g.target = '_blank';
+    g.rel = 'noopener';
+    g.className = 'hero-review-widget';
+    g.innerHTML = '<span class="rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>'
+      + '<span class="rating-score">' + REVIEWS.googleRating + '</span>'
+      + '<span class="rating-count">' + (REVIEWS.googleCount || '') + '</span>'
+      + '<span class="rating-source">Google</span>';
+    container.appendChild(g);
+  }
+  if (REVIEWS.tripUrl && REVIEWS.tripRating) {
+    var t = document.createElement('a');
+    t.href = REVIEWS.tripUrl;
+    t.target = '_blank';
+    t.rel = 'noopener';
+    t.className = 'hero-review-widget';
+    t.innerHTML = '<span class="rating-stars">&#9733;&#9733;&#9733;&#9733;</span>'
+      + '<span class="rating-score">' + REVIEWS.tripRating + '</span>'
+      + '<span class="rating-count">' + (REVIEWS.tripCount || '') + '</span>'
+      + '<span class="rating-source">TripAdvisor</span>';
+    container.appendChild(t);
+  }
+  if (!container.children.length) container.style.display = 'none';
+})();
+
 // ── MENU BUTTON ──
 (function(){
   var slot = document.getElementById('menu-btn-slot');
   if(!slot) return;
-  var upsellLabels = {
-    'food-drink':    '&#128209; Add your menu',
-    'services':      '&#128209; Add services & pricing',
-    'accommodation': '&#128209; Add rooms & rates',
-    'health':        '&#128209; Add treatments & pricing',
-    'entertainment': '&#128209; Add your services',
-    'shopping':      '&#128209; Add your product range',
-    'real-estate':   '&#128209; Add your listings',
-    'default':       '&#128209; Add a menu'
+  // Category-specific labels for the purchase CTA
+  var purchaseLabels = {
+    'food-drink':    '&#128209; Add your menu - $199+gst/yr',
+    'services':      '&#128209; Add services &amp; pricing - $199+gst/yr',
+    'accommodation': '&#128209; Add rooms &amp; rates - $199+gst/yr',
+    'health':        '&#128209; Add treatments &amp; pricing - $199+gst/yr',
+    'entertainment': '&#128209; Add your services - $199+gst/yr',
+    'shopping':      '&#128209; Add your product range - $199+gst/yr',
+    'real-estate':   '&#128209; Add your listings - $199+gst/yr',
+    'default':       '&#128209; Add a menu - $199+gst/yr'
   };
   if(BUSINESS.hasMenu && MENU_DATA && MENU_DATA.items && MENU_DATA.items.length) {
+    // Menu Add-On is active — show "View menu" button
     var btn = document.createElement('button');
     btn.className = 'btn-menu';
     btn.innerHTML = '&#128209; View menu';
@@ -425,9 +567,10 @@
     });
     slot.appendChild(btn);
   } else {
-    var label = upsellLabels[BUSINESS.category] || upsellLabels['default'];
+    // Menu Add-On not purchased — show purchase CTA linking to /sales/menu-addon.html
+    var label = purchaseLabels[BUSINESS.category] || purchaseLabels['default'];
     var btn = document.createElement('a');
-    btn.className = 'btn-upsell';
+    btn.className = 'btn-menu-purchase';
     btn.href = '/papamoa-previews/sales/menu-addon.html';
     btn.innerHTML = label;
     slot.appendChild(btn);
@@ -441,10 +584,30 @@
   var catsEl = document.getElementById('menu-cats');
   var itemsEl = document.getElementById('menu-items');
   var noteEl = document.getElementById('menu-cat-note');
+  var filtersEl = document.getElementById('menu-filters-container');
   var closeBtn = document.getElementById('menu-close');
   if(!lb || !catsEl || !itemsEl) return;
   var activeCat = MENU_DATA.categories[0].id;
   var activeFilter = 'all';
+
+  // Build dynamic dietary filters from actual menu data
+  var allTags = {};
+  MENU_DATA.items.forEach(function(item) {
+    if (item.tags) item.tags.forEach(function(t) { allTags[t] = true; });
+  });
+  var tagLabels = { vg:'VG', v:'V', gf:'GF', df:'DF' };
+  if (filtersEl && Object.keys(allTags).length) {
+    filtersEl.innerHTML = '<span class="menu-filter-label">Dietary:</span>'
+      + '<button class="menu-filter active" data-filter="all">All</button>';
+    Object.keys(tagLabels).forEach(function(tag) {
+      if (allTags[tag]) {
+        filtersEl.innerHTML += '<button class="menu-filter" data-filter="' + tag + '">' + tagLabels[tag] + '</button>';
+      }
+    });
+  } else if (filtersEl) {
+    filtersEl.style.display = 'none';
+  }
+
   function closeMenu(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
   closeBtn.addEventListener('click', closeMenu);
   lb.addEventListener('click', function(e){ if(e.target === lb) closeMenu(); });
@@ -466,7 +629,7 @@
     var filtered = MENU_DATA.items.filter(function(item){
       if(item.cat !== activeCat) return false;
       if(activeFilter === 'all') return true;
-      return item.tags.indexOf(activeFilter) > -1;
+      return item.tags && item.tags.indexOf(activeFilter) > -1;
     });
     if(!filtered.length){
       var empty = document.createElement('p');
@@ -477,7 +640,7 @@
     filtered.forEach(function(item){
       var el = document.createElement('div');
       el.className = 'menu-item';
-      var tagHtml = item.tags.map(function(t){ return '<span class="diet-tag diet-' + t + '">' + t.toUpperCase() + '</span>'; }).join('');
+      var tagHtml = (item.tags || []).map(function(t){ return '<span class="diet-tag diet-' + t + '">' + t.toUpperCase() + '</span>'; }).join('');
       el.innerHTML = '<div class="menu-item-img">' + item.emoji + '</div>'
         + '<div class="menu-item-body">'
         + '<div class="menu-item-name">' + item.name + '</div>'
@@ -487,14 +650,17 @@
       itemsEl.appendChild(el);
     });
   }
-  document.querySelectorAll('.menu-filter').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      activeFilter = this.getAttribute('data-filter');
-      document.querySelectorAll('.menu-filter').forEach(function(b){ b.classList.remove('active'); });
-      this.classList.add('active');
+  // Wire up filter buttons (dynamically created)
+  if (filtersEl) {
+    filtersEl.addEventListener('click', function(e) {
+      var btn = e.target.closest('.menu-filter');
+      if (!btn) return;
+      activeFilter = btn.getAttribute('data-filter');
+      filtersEl.querySelectorAll('.menu-filter').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
       renderItems();
     });
-  });
+  }
   renderCats();
   renderItems();
 })();
