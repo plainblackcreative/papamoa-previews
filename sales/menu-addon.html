@@ -7,7 +7,7 @@
 <meta name="description" content="Put your prices in front of customers who are already looking. Interactive menu on your listing — they browse, filter by dietary needs, and order directly. $199+gst/yr for Silver. Included free with Gold.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -400,10 +400,14 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .lb-tabs::-webkit-scrollbar { display: none; }
 .lb-tab { font-family: var(--font-body); font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 100px; border: none; background: var(--sand); color: var(--muted); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
 .lb-tab.active { background: var(--navy); color: var(--white); }
+
+/* Filters — hidden by default, shown only when dietary tags exist */
 .lb-filters { display: flex; align-items: center; gap: 6px; padding: 10px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; overflow-x: auto; }
+.lb-filters.hidden { display: none; }
 .lb-filter-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; white-space: nowrap; }
 .lb-filter { font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
 .lb-filter.active { background: var(--ocean); border-color: var(--ocean); color: var(--white); }
+
 .lb-items { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
 .lb-item { display: flex; gap: 12px; padding: 12px; background: var(--sand); border-radius: 8px; border: 1px solid var(--border); }
 .lb-item-photo { width: 72px; height: 72px; border-radius: 7px; flex-shrink: 0; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 28px; }
@@ -594,11 +598,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="lb-tabs" id="lb-tabs"></div>
       <div class="lb-filters" id="lb-filters">
         <span class="lb-filter-label">Filter:</span>
-        <button class="lb-filter active" data-filter="all" onclick="setFilter('all', this)">All</button>
-        <button class="lb-filter" data-filter="VG" onclick="setFilter('VG', this)">🌿 VG</button>
-        <button class="lb-filter" data-filter="V" onclick="setFilter('V', this)">🌱 V</button>
-        <button class="lb-filter" data-filter="GF" onclick="setFilter('GF', this)">GF</button>
-        <button class="lb-filter" data-filter="DF" onclick="setFilter('DF', this)">DF</button>
+        <!-- Filter buttons rendered dynamically by JS -->
       </div>
       <div class="lb-items" id="lb-items"></div>
       <div class="lb-footer">
@@ -945,6 +945,20 @@ let currentBiz = 'wagon';
 let currentCat = null;
 let currentFilter = 'all';
 
+// Returns all unique tags across ALL items in a business
+function bizHasTags(bizKey) {
+  return businesses[bizKey].items.some(i => i.tags && i.tags.length > 0);
+}
+
+// Returns all unique tags present in a specific category
+function tagsInCategory(bizKey, cat) {
+  const tags = new Set();
+  businesses[bizKey].items
+    .filter(i => i.cat === cat)
+    .forEach(i => i.tags.forEach(t => tags.add(t)));
+  return Array.from(tags);
+}
+
 // ── DEMO CONTROLS ───────────────────────────────────────────
 function selectBiz(bizKey, btn) {
   document.querySelectorAll('.demo-btn').forEach(b => b.classList.remove('active'));
@@ -966,56 +980,94 @@ function openLightbox() {
   document.getElementById('lb-updated').textContent = biz.lbUpdated;
   document.getElementById('lb-order-btn').href = biz.orderHref;
   document.getElementById('lb-footer-note').textContent = biz.footerNote;
-  renderTabs(); renderFilters(); renderItems();
+  renderTabs();
+  renderFilters();
+  renderItems();
   document.getElementById('lb-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+
 function closeLightbox() {
   document.getElementById('lb-overlay').classList.remove('open');
   document.body.style.overflow = '';
 }
+
 function closeLightboxOutside(e) {
   if (e.target === document.getElementById('lb-overlay')) closeLightbox();
 }
+
 function renderTabs() {
   const biz = businesses[currentBiz];
   document.getElementById('lb-tabs').innerHTML = biz.categories.map(cat =>
     `<button class="lb-tab${cat === currentCat ? ' active' : ''}" onclick="setTab('${cat.replace(/'/g,"\\'")}', this)">${cat}</button>`
   ).join('');
 }
+
 function setTab(cat, btn) {
   currentCat = cat;
   document.querySelectorAll('.lb-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   currentFilter = 'all';
-  document.querySelectorAll('.lb-filter').forEach(b => b.classList.remove('active'));
-  document.querySelector('.lb-filter[data-filter="all"]').classList.add('active');
+  renderFilters();
   renderItems();
 }
+
+// Render only the filter tags that actually exist in the current category.
+// Hides the entire filter bar if no dietary tags exist in the current category.
 function renderFilters() {
-  document.querySelectorAll('.lb-filter').forEach(b => {
-    b.classList.toggle('active', b.dataset.filter === 'all');
-  });
+  const filtersEl = document.getElementById('lb-filters');
+  const availableTags = tagsInCategory(currentBiz, currentCat);
+
+  if (availableTags.length === 0) {
+    filtersEl.classList.add('hidden');
+    return;
+  }
+
+  filtersEl.classList.remove('hidden');
+
+  const tagMeta = {
+    VG: '🌿 VG',
+    V:  '🌱 V',
+    GF: 'GF',
+    DF: 'DF'
+  };
+
+  // Preserve order: VG, V, GF, DF — only show tags present in this category
+  const orderedTags = ['VG','V','GF','DF'].filter(t => availableTags.includes(t));
+
+  filtersEl.innerHTML = `
+    <span class="lb-filter-label">Filter:</span>
+    <button class="lb-filter active" data-filter="all" onclick="setFilter('all', this)">All</button>
+    ${orderedTags.map(t =>
+      `<button class="lb-filter" data-filter="${t}" onclick="setFilter('${t}', this)">${tagMeta[t]}</button>`
+    ).join('')}
+  `;
 }
+
 function setFilter(filter, btn) {
   currentFilter = filter;
-  document.querySelectorAll('.lb-filter').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#lb-filters .lb-filter').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderItems();
 }
+
 function renderItems() {
   const biz = businesses[currentBiz];
   const items = biz.items.filter(i => i.cat === currentCat);
   const container = document.getElementById('lb-items');
+
   if (!items.length) {
     container.innerHTML = '<p style="text-align:center;color:var(--muted);font-size:13px;padding:24px 0;">No items in this category.</p>';
     return;
   }
+
   const filtered = currentFilter === 'all' ? items : items.filter(i => i.tags.includes(currentFilter));
+
   if (!filtered.length) {
     container.innerHTML = `<p style="text-align:center;color:var(--muted);font-size:13px;padding:24px 0;">No ${currentFilter} items in this category.</p>`;
     return;
   }
+
   container.innerHTML = filtered.map(item => `
     <div class="lb-item">
       <div class="lb-item-photo">${item.photo}</div>
@@ -1036,10 +1088,10 @@ function renderItems() {
   const params = new URLSearchParams(window.location.search);
   const ref = params.get('ref') || 'organic';
 
-  const label   = document.getElementById('cta-context-label');
-  const heading = document.getElementById('cta-heading');
-  const body    = document.getElementById('cta-body');
-  const primary = document.getElementById('cta-primary-btn');
+  const label     = document.getElementById('cta-context-label');
+  const heading   = document.getElementById('cta-heading');
+  const body      = document.getElementById('cta-body');
+  const primary   = document.getElementById('cta-primary-btn');
   const secondary = document.getElementById('cta-secondary-link');
   const addMenuFlow = document.getElementById('add-menu-flow');
 
