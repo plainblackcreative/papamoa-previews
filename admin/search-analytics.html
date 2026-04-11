@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Analytics — Papamoa.info Admin</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:    #0D2B3E;
+      --ocean:   #1B6B7D;
+      --blue:    #3AABDE;
+      --sand:    #F7F3ED;
+      --dune:    #C4985A;
+      --white:   #FFFFFF;
+      --body:    #1A2832;
+      --muted:   #5A6E78;
+      --border:  #D8E4E8;
+      --bg:      #F4F7FA;
+      --green:   #1E6B3C;
+      --green-bg:#E6F4EC;
+      --lime:    #7DC143;
+      --amber:   #8A5A00;
+      --amber-bg:#FFF8E6;
+      --red:     #8B2020;
+      --red-bg:  #FAEAEA;
+    }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Figtree',sans-serif; background:var(--bg); color:var(--body); line-height:1.6; }
+    a { color:var(--blue); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    /* NAV */
+    .adm-nav { background:var(--navy); height:52px; padding:0 24px; display:flex; align-items:center; gap:16px; }
+    .adm-logo { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:#fff; }
+    .adm-logo span { color:var(--blue); }
+    .adm-sep { color:rgba(255,255,255,0.2); }
+    .adm-title { font-size:13px; font-weight:600; color:rgba(255,255,255,0.6); }
+    .adm-back { margin-left:auto; font-size:12px; font-weight:600; color:rgba(255,255,255,0.5); }
+    .adm-back:hover { color:#fff; text-decoration:none; }
+
+    /* LAYOUT */
+    .wrap { max-width:1100px; margin:0 auto; padding:32px 20px 64px; }
+    .page-head { margin-bottom:28px; }
+    .page-head h1 { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:var(--navy); margin-bottom:6px; }
+    .page-head p { font-size:0.88rem; color:var(--muted); }
+
+    /* STAT CARDS */
+    .stat-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px; margin-bottom:28px; }
+    .stat-card { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:18px 20px; }
+    .stat-label { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+    .stat-value { font-size:1.8rem; font-weight:800; color:var(--navy); line-height:1; }
+    .stat-sub { font-size:0.74rem; color:var(--muted); margin-top:5px; }
+
+    /* SECTION CARD */
+    .section-card { background:var(--white); border:1px solid var(--border); border-radius:12px; margin-bottom:20px; overflow:hidden; }
+    .section-head { padding:18px 22px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .section-head h2 { font-size:0.95rem; font-weight:700; color:var(--navy); }
+    .section-head p { font-size:0.78rem; color:var(--muted); }
+    .section-body { padding:20px 22px; }
+
+    /* TABLE */
+    .data-table { width:100%; border-collapse:collapse; font-size:0.84rem; }
+    .data-table th { text-align:left; font-size:0.65rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding:6px 12px 8px; border-bottom:2px solid var(--border); }
+    .data-table td { padding:9px 12px; border-bottom:1px solid var(--bg); vertical-align:top; }
+    .data-table tr:last-child td { border-bottom:none; }
+    .data-table tr:hover td { background:var(--bg); }
+    .data-table .rank { font-weight:800; color:var(--muted); width:36px; }
+    .data-table .term { font-weight:600; color:var(--navy); }
+    .data-table .count { font-weight:700; color:var(--ocean); text-align:right; }
+    .data-table .pct { color:var(--muted); text-align:right; width:60px; }
+    .data-table .bar-cell { width:120px; }
+    .bar { height:8px; border-radius:4px; background:var(--blue); opacity:0.6; }
+
+    /* NO-MATCH TERMS */
+    .no-match-term { display:inline-block; background:var(--amber-bg); border:1px solid rgba(138,90,0,0.2); color:var(--amber); font-size:0.78rem; font-weight:600; padding:3px 10px; border-radius:20px; margin:3px; cursor:pointer; }
+    .no-match-term:hover { background:var(--amber); color:#fff; }
+    .badge-new { display:inline-block; background:var(--green-bg); border:1px solid rgba(30,107,60,0.2); color:var(--green); font-size:0.6rem; font-weight:700; padding:2px 6px; border-radius:3px; margin-left:6px; vertical-align:middle; }
+
+    /* SEARCH INDEX GENERATOR */
+    .gen-form { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media (max-width:640px) { .gen-form { grid-template-columns:1fr; } }
+    .gen-form label { font-size:0.72rem; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:5px; }
+    .gen-form input, .gen-form select, .gen-form textarea {
+      width:100%; padding:9px 12px; border:1.5px solid var(--border); border-radius:7px;
+      font-family:'Figtree',sans-serif; font-size:0.87rem; color:var(--body);
+      background:var(--sand); outline:none; transition:border-color 0.15s;
+    }
+    .gen-form input:focus, .gen-form select:focus, .gen-form textarea:focus { border-color:var(--ocean); background:#fff; }
+    .gen-form textarea { min-height:70px; resize:vertical; line-height:1.5; }
+    .gen-form .full { grid-column:1/-1; }
+    .gen-btn { background:var(--ocean); color:#fff; border:none; padding:10px 22px; border-radius:7px; font-family:'Figtree',sans-serif; font-size:0.88rem; font-weight:700; cursor:pointer; transition:background 0.15s; }
+    .gen-btn:hover { background:var(--navy); }
+    .gen-output { background:var(--navy); border-radius:8px; padding:16px 18px; margin-top:14px; display:none; }
+    .gen-output code { font-family:'Courier New',monospace; font-size:0.78rem; color:#7DC143; white-space:pre-wrap; word-break:break-all; display:block; }
+    .gen-copy { font-size:0.74rem; font-weight:700; color:var(--blue); cursor:pointer; margin-top:10px; display:inline-block; }
+    .gen-copy:hover { color:#fff; }
+    .gen-instructions { font-size:0.78rem; color:var(--muted); margin-top:10px; padding:12px 14px; background:var(--bg); border-radius:6px; border-left:3px solid var(--blue); }
+
+    /* DATE FILTER */
+    .filter-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:18px; }
+    .filter-btn { font-size:0.75rem; font-weight:700; padding:5px 14px; border-radius:20px; border:1.5px solid var(--border); background:#fff; color:var(--muted); cursor:pointer; font-family:'Figtree',sans-serif; transition:all 0.15s; }
+    .filter-btn.active { background:var(--navy); color:#fff; border-color:var(--navy); }
+    .filter-label { font-size:0.72rem; font-weight:700; color:var(--muted); }
+    .refresh-btn { margin-left:auto; font-size:0.74rem; font-weight:700; color:var(--blue); background:none; border:none; cursor:pointer; font-family:'Figtree',sans-serif; padding:0; }
+    .refresh-btn:hover { color:var(--navy); }
+
+    /* LOADING */
+    .loading { text-align:center; padding:40px; color:var(--muted); font-size:0.88rem; }
+    .loading-dot { display:inline-block; animation:ldot 1.2s infinite; }
+    .loading-dot:nth-child(2) { animation-delay:0.2s; }
+    .loading-dot:nth-child(3) { animation-delay:0.4s; }
+    @keyframes ldot { 0%,100%{opacity:0.2} 50%{opacity:1} }
+
+    /* ERROR / EMPTY */
+    .state-box { padding:28px; text-align:center; }
+    .state-icon { font-size:2rem; margin-bottom:10px; }
+    .state-msg { font-size:0.88rem; color:var(--muted); max-width:380px; margin:0 auto; line-height:1.6; }
+    .state-msg strong { color:var(--body); }
+
+    /* TREND SPARKLINE (CSS only, uses divs) */
+    .sparkline { display:flex; gap:3px; align-items:flex-end; height:28px; }
+    .spark-bar { flex:1; background:var(--blue); opacity:0.5; border-radius:2px 2px 0 0; min-height:3px; }
+
+    /* RESPONSIVE */
+    @media (max-width:600px) {
+      .stat-row { grid-template-columns:1fr 1fr; }
+      .data-table .bar-cell { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="adm-nav">
+  <a href="/papamoa-previews/homepage.html" class="adm-logo">Papamoa<span>.info</span></a>
+  <span class="adm-sep">/</span>
+  <span class="adm-title">Search Analytics</span>
+  <a href="/papamoa-previews/admin/" class="adm-back">← Admin home</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="page-head">
+    <h1>Search Analytics</h1>
+    <p>Every search submitted on Papamoa.info — what people are looking for, what's missing, and what to build next.</p>
+  </div>
+
+  <!-- DATE FILTER -->
+  <div class="filter-row">
+    <span class="filter-label">Period:</span>
+    <button class="filter-btn active" onclick="setFilter('7')">Last 7 days</button>
+    <button class="filter-btn" onclick="setFilter('30')">Last 30 days</button>
+    <button class="filter-btn" onclick="setFilter('90')">Last 90 days</button>
+    <button class="filter-btn" onclick="setFilter('all')">All time</button>
+    <button class="refresh-btn" onclick="loadAll()">↻ Refresh data</button>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stat-row" id="stat-row">
+    <div class="stat-card"><div class="stat-label">Total Searches</div><div class="stat-value" id="stat-total">—</div><div class="stat-sub">in selected period</div></div>
+    <div class="stat-card"><div class="stat-label">Unique Terms</div><div class="stat-value" id="stat-unique">—</div><div class="stat-sub">distinct queries</div></div>
+    <div class="stat-card"><div class="stat-label">Zero-Result Terms</div><div class="stat-value" id="stat-zero" style="color:var(--amber)">—</div><div class="stat-sub">content gap alerts</div></div>
+    <div class="stat-card"><div class="stat-label">Top Term</div><div class="stat-value" id="stat-top" style="font-size:1rem;padding-top:4px">—</div><div class="stat-sub" id="stat-top-count"></div></div>
+  </div>
+
+  <!-- TOP SEARCH TERMS TABLE -->
+  <div class="section-card">
+    <div class="section-head">
+      <div>
+        <h2>Top Search Terms</h2>
+        <p>Most searched queries — these drive the homepage pills</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div id="top-terms-container">
+        <div class="loading"><span class="loading-dot">●</span> <span class="loading-dot">●</span> <span class="loading-dot">●</span> Loading search data…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZERO-RESULT TERMS — CONTENT GAPS -->
+  <div class="section-card">
+    <div class="section-head">
+      <div>
+        <h2>Content Gap Alert <span class="badge-new">Action Required</span></h2>
+        <p>Terms searched but returning zero results — these are pages you should build</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div id="zero-results-container">
+        <div class="loading"><span class="loading-dot">●</span> <span class="loading-dot">●</span> <span class="loading-dot">●</span> Analysing…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECENT SEARCHES — RAW LOG -->
+  <div class="section-card">
+    <div class="section-head">
+      <div>
+        <h2>Recent Searches</h2>
+        <p>Last 50 submitted searches in chronological order</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div id="recent-container">
+        <div class="loading"><span class="loading-dot">●</span> <span class="loading-dot">●</span> <span class="loading-dot">●</span> Loading…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH INDEX ENTRY GENERATOR -->
+  <div class="section-card">
+    <div class="section-head">
+      <div>
+        <h2>Search Index Entry Generator</h2>
+        <p>Fill in the details of a new page — get a ready-to-paste SEARCH_INDEX entry</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="gen-form" id="gen-form">
+        <div>
+          <label>Page Title *</label>
+          <input type="text" id="gen-title" placeholder="e.g. Hairdressers in Pāpāmoa" oninput="genPreview()">
+        </div>
+        <div>
+          <label>Subtitle / Description *</label>
+          <input type="text" id="gen-sub" placeholder="e.g. Salons and barbers near Pāpāmoa Beach" oninput="genPreview()">
+        </div>
+        <div>
+          <label>Page Type</label>
+          <select id="gen-type" onchange="genPreview()">
+            <option value="cat">Category / Subcategory</option>
+            <option value="listing">Business Listing</option>
+            <option value="info">Community / Info Page</option>
+            <option value="tool">Tool / Calculator</option>
+          </select>
+        </div>
+        <div>
+          <label>Icon (emoji)</label>
+          <input type="text" id="gen-icon" placeholder="✂️" value="📄" oninput="genPreview()">
+        </div>
+        <div class="full">
+          <label>URL path (from /papamoa-previews/…)</label>
+          <input type="text" id="gen-url" placeholder="/papamoa-previews/categories/services/hairdresser-papamoa.html" oninput="genPreview()">
+        </div>
+        <div class="full">
+          <label>Keywords (space or comma separated — think: what would someone type?)</label>
+          <textarea id="gen-keywords" placeholder="hairdresser hair salon cut colour highlights blow dry womens mens papamoa" oninput="genPreview()"></textarea>
+        </div>
+        <div class="full">
+          <button class="gen-btn" onclick="genPreview()">Generate Entry</button>
+        </div>
+      </div>
+      <div class="gen-output" id="gen-output">
+        <code id="gen-code"></code>
+        <span class="gen-copy" onclick="copyGenCode()">Copy to clipboard ↗</span>
+      </div>
+      <div class="gen-instructions">
+        <strong>How to use:</strong> Copy the output above. Open <code>homepage.html</code> in GitHub's editor. Find the <code>SEARCH_INDEX</code> array. Paste the new entry at the end of the appropriate section (e.g. after the last category entry, or after the last listing). Also paste the same entry into <code>search.html</code>. Save both files.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+var WORKER_URL  = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
+var SHEET_ID    = '163qFZn4Iit3Pt7HFBou4B3W_OYeOOlLHjdNChmj960w';
+var SHEET_TAB   = 'Search Logs';
+var activeFilter = 7; // days
+var allRows = [];
+
+// ── SEARCH INDEX (same as homepage — used for zero-result detection) ──
+// Paste the full SEARCH_INDEX keywords array here as a flat string for matching
+// For the admin tool, we just need to know what terms return results.
+// We reuse the homepage index by running the same filter logic.
+// Since this is a standalone admin page, we embed a compact keyword corpus.
+var KEYWORD_CORPUS = [
+  'wof warrant fitness mechanic service tyre brake auto',
+  'dentist dental orthodontist braces invisalign',
+  'pilates yoga gym fitness reformer classes personal training',
+  'surf school lessons board hire beginner',
+  'vr virtual reality sim racing escape room gaming the cave',
+  'indian restaurant curry tandoor biryani',
+  'burger gourmet burgers bar the wagon',
+  'orthodontist braces clear aligners invisalign',
+  'fly screen insect screen security screen window',
+  'holiday park camping cabins pacific park',
+  'cafe coffee brunch breakfast flat white blackberry',
+  'pizza gourmet delivery pundits',
+  'plumber plumbing gasfitter hot water cylinder',
+  'electrician electrical heat pump ev charger',
+  'physio physiotherapy acc sports rehab',
+  'medical gp doctor health centre clinic',
+  'retirement village karaka pines 55 plus',
+  'hair salon barber haircut beard trim fade',
+  'lawn mowing garden maintenance landscaping greencut',
+  'book exchange secondhand books xanadu',
+  'nail salon kayco nails manicure pedicure',
+  'weather forecast uv wind conditions',
+  'surf tides tide times conditions beach',
+  'fishing spots bite times charters',
+  'school terms holidays 2026',
+  'schools papamoa college zones',
+  'aims games 2026 sport families',
+  'rubbish recycling bins transfer station',
+  'dogs off leash beach rules papamoa',
+  'supermarket countdown new world grocery',
+  'pharmacy chemist dispensary',
+  'property real estate buy sell agent',
+  'swimming rips patrol beach safety',
+  'playground park gordon spratt reserve',
+  'papamoa hills track walk hike',
+  'fuel prices petrol diesel gaspy',
+  'ev charging electric vehicle charger',
+  'easter trading hours open closed',
+  'urgent health after hours medical',
+  'emergency preparedness tsunami earthquake evacuation',
+  'accommodation motel hotel stay sleep',
+  'food drink restaurant cafe bar takeaway',
+  'shopping retail clothing fashion',
+  'activities entertainment things to do',
+  'community groups clubs volunteers',
+  'maori history nga potiki ngai te rangi',
+  'population stats census demographics',
+  'new developments golden sands te tumu',
+  'utilities power gas broadband fibre',
+  'water rates tcc metered billing',
+  'tax paye gst calculator kiwisaver',
+  'seniors retirement village aged care home care',
+  'childcare ece kindy kindergarten creche',
+  'wedding venue photographer celebrant',
+  'painting painter decorator interior exterior',
+  'fencing fence timber steel pool gate',
+  'aircon heat pump install hvac',
+  'air conditioning heating cooling',
+  'speedy screens fly screen insect security',
+  'redefined wellbeing hub physio nutrition sauna ice bath',
+  'coastal autos mta ashley place wof online booking',
+  'mumbai masala fashion island gravatt road',
+  'pap house dog friendly open 7 days',
+  'the cave vr ashley place birthday corporate',
+  'tara road dental iv sedation',
+  'hakanini surf school domain beginners',
+  'karaka pines retirement beachside simpson road',
+  'blackberry eatery brunch generous portions',
+  'the wagon toorea street gourmet',
+  'pizza pundits 4.9 tripadvisor 898',
+  'pacific park christian tripadvisor 1 alcohol free',
+  'xanadu 2c ashley place secondhand',
+  'greencut vetted operators lawn residential',
+  'barber toms parton road walk in',
+  'kayco nails press on custom gel acrylic',
+  'papamoa beach resort powered sites cabins',
+  'pacific palms motel self contained',
+  'papamoa orthodontist clear aligners early treatment',
+  'library te ao marama gravatt road',
+  'sports clubs football surf lifesaving cricket',
+  'kids birthday parties venues entertainers',
+  'notable people athletes artists',
+  'local government tcc mayor councillors mp',
+  'mount maunganui mauao hot pools',
+  'tauranga city centre nearby distance',
+  'airport flights arrivals departures parking',
+  'rentals rent property management tenants',
+  'op shops charity second hand thrift',
+  'clothing recycling textile donation',
+  'summer insects mosquitoes wasps sandflies',
+  'gardening garden services tips',
+  'seniors retirement nz super aged care',
+  'dinner at the domain outdoor dining event',
+  'weddings venue photographer celebrant',
+  'neighbourhood support safety watch',
+  'news events whats on community',
+  'animals pets vets spca lost adoption',
+  'walks tracks walk cycling nature trail',
+  'the yard retail dining precinct',
+  'shopping centres fashion island the sands plaza',
+  'supplement store sports nutrition vitamins protein'
+].join(' ');
+
+function termHasResults(term) {
+  var q = term.toLowerCase().trim();
+  return KEYWORD_CORPUS.indexOf(q) > -1;
+}
+
+// ── LOAD DATA ──
+function setFilter(days) {
+  activeFilter = days === 'all' ? 9999 : parseInt(days);
+  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  event.target.classList.add('active');
+  renderAll();
+}
+
+function loadAll() {
+  var container = document.getElementById('top-terms-container');
+  container.innerHTML = '<div class="loading"><span class="loading-dot">●</span> <span class="loading-dot">●</span> <span class="loading-dot">●</span> Fetching from Google Sheets…</div>';
+
+  var rangeEncoded = encodeURIComponent(SHEET_TAB + '!A2:E5000');
+  var url = WORKER_URL + '/sheets?sheetId=' + SHEET_ID + '&range=' + rangeEncoded;
+
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      allRows = (data.values || []).filter(function(r) { return r && r[0] && r[1]; });
+      renderAll();
+    })
+    .catch(function(e) {
+      document.getElementById('top-terms-container').innerHTML = '<div class="state-box"><div class="state-icon">⚠️</div><div class="state-msg"><strong>Could not load data.</strong> Make sure the "Search Logs" tab exists in the CRM sheet, and that the Worker has been updated to v2.3. <br><br>Error: ' + e.message + '</div></div>';
+      document.getElementById('zero-results-container').innerHTML = '';
+      document.getElementById('recent-container').innerHTML = '';
+    });
+}
+
+function getFilteredRows() {
+  if (activeFilter >= 9999) return allRows;
+  var cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - activeFilter);
+  return allRows.filter(function(r) {
+    try { return new Date(r[0]) >= cutoff; } catch(e) { return true; }
+  });
+}
+
+function renderAll() {
+  var rows = getFilteredRows();
+  renderStats(rows);
+  renderTopTerms(rows);
+  renderZeroResults(rows);
+  renderRecent(rows);
+}
+
+function renderStats(rows) {
+  var total = rows.length;
+  var termMap = buildTermMap(rows);
+  var uniqueCount = Object.keys(termMap).length;
+  var zeroCount = Object.keys(termMap).filter(function(t) { return !termHasResults(t); }).length;
+  var topEntry = Object.entries(termMap).sort(function(a,b){ return b[1].count - a[1].count; })[0];
+
+  document.getElementById('stat-total').textContent = total.toLocaleString();
+  document.getElementById('stat-unique').textContent = uniqueCount.toLocaleString();
+  document.getElementById('stat-zero').textContent = zeroCount;
+  if (topEntry) {
+    document.getElementById('stat-top').textContent = capitalise(topEntry[0]);
+    document.getElementById('stat-top-count').textContent = topEntry[1].count + ' searches';
+  }
+}
+
+function buildTermMap(rows) {
+  var map = {};
+  rows.forEach(function(r) {
+    var lower = (r[2] || r[1] || '').toLowerCase().trim();
+    var disp  = (r[1] || '').trim();
+    if (!lower || lower.length < 2) return;
+    if (!map[lower]) map[lower] = { count: 0, display: disp };
+    map[lower].count++;
+    map[lower].display = disp;
+  });
+  return map;
+}
+
+function renderTopTerms(rows) {
+  var container = document.getElementById('top-terms-container');
+  var termMap = buildTermMap(rows);
+  var sorted = Object.entries(termMap)
+    .sort(function(a,b){ return b[1].count - a[1].count; })
+    .slice(0, 30);
+
+  if (!sorted.length) {
+    container.innerHTML = '<div class="state-box"><div class="state-icon">🔍</div><div class="state-msg"><strong>No searches recorded yet.</strong><br>Once visitors start using the search bar, their submitted terms will appear here. Pills will switch to dynamic mode once 50+ searches are logged.</div></div>';
+    return;
+  }
+
+  var maxCount = sorted[0][1].count;
+  var total = rows.length;
+
+  var html = '<table class="data-table"><thead><tr><th>#</th><th>Search Term</th><th style="text-align:right">Searches</th><th style="text-align:right">%</th><th class="bar-cell"></th><th>Results?</th></tr></thead><tbody>';
+  sorted.forEach(function(entry, i) {
+    var term  = entry[0];
+    var data  = entry[1];
+    var pct   = total > 0 ? ((data.count / total) * 100).toFixed(1) : 0;
+    var barW  = Math.round((data.count / maxCount) * 100);
+    var hasResults = termHasResults(term);
+    var resultBadge = hasResults
+      ? '<span style="font-size:0.7rem;color:var(--green);font-weight:700">✓ results found</span>'
+      : '<span style="font-size:0.7rem;color:var(--amber);font-weight:700">⚠ no results</span>';
+    html += '<tr>'
+      + '<td class="rank">' + (i + 1) + '</td>'
+      + '<td class="term">' + escHtml(capitalise(term)) + '</td>'
+      + '<td class="count">' + data.count + '</td>'
+      + '<td class="pct">' + pct + '%</td>'
+      + '<td class="bar-cell"><div class="bar" style="width:' + barW + '%"></div></td>'
+      + '<td>' + resultBadge + '</td>'
+      + '</tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+function renderZeroResults(rows) {
+  var container = document.getElementById('zero-results-container');
+  var termMap = buildTermMap(rows);
+  var gapTerms = Object.entries(termMap)
+    .filter(function(e){ return !termHasResults(e[0]); })
+    .sort(function(a,b){ return b[1].count - a[1].count; });
+
+  if (!gapTerms.length) {
+    container.innerHTML = '<div class="state-box"><div class="state-icon">✅</div><div class="state-msg">No zero-result terms found in this period. All searched terms are covered by the current index.</div></div>';
+    return;
+  }
+
+  var html = '<p style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;">These terms returned no results in the search. Click any term to pre-fill the index generator below.</p><div>';
+  gapTerms.forEach(function(entry) {
+    html += '<span class="no-match-term" onclick="prefillGenerator(\'' + escAttr(entry[0]) + '\')">'
+      + escHtml(capitalise(entry[0]))
+      + ' <span style="font-size:0.7em;opacity:0.7">×' + entry[1].count + '</span>'
+      + '</span>';
+  });
+  html += '</div><p style="font-size:0.78rem;color:var(--muted);margin-top:14px;">These are your highest-value content gaps. Consider building pages or adding keywords for the most-searched terms.</p>';
+  container.innerHTML = html;
+}
+
+function renderRecent(rows) {
+  var container = document.getElementById('recent-container');
+  var recent = rows.slice().reverse().slice(0, 50);
+
+  if (!recent.length) {
+    container.innerHTML = '<div class="state-box"><div class="state-icon">📭</div><div class="state-msg">No searches in this period yet.</div></div>';
+    return;
+  }
+
+  var html = '<table class="data-table"><thead><tr><th>Time (NZT approx)</th><th>Search Term</th><th>Source Page</th><th>Results?</th></tr></thead><tbody>';
+  recent.forEach(function(r) {
+    var ts   = r[0] ? new Date(r[0]).toLocaleString('en-NZ', {timeZone:'Pacific/Auckland',hour12:false,year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+    var term = r[1] || '—';
+    var page = r[3] || '—';
+    var hasResults = termHasResults((r[2] || r[1] || '').toLowerCase());
+    var badge = hasResults
+      ? '<span style="font-size:0.7rem;color:var(--green);font-weight:700">✓</span>'
+      : '<span style="font-size:0.7rem;color:var(--amber);font-weight:700">⚠ gap</span>';
+    html += '<tr>'
+      + '<td style="color:var(--muted);font-size:0.8rem;white-space:nowrap">' + escHtml(ts) + '</td>'
+      + '<td class="term">' + escHtml(term) + '</td>'
+      + '<td style="color:var(--muted);font-size:0.8rem">' + escHtml(page) + '</td>'
+      + '<td>' + badge + '</td>'
+      + '</tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+// ── INDEX GENERATOR ──
+function prefillGenerator(term) {
+  document.getElementById('gen-keywords').value = term;
+  document.getElementById('gen-title').value = capitalise(term) + ' in Pāpāmoa';
+  document.getElementById('gen-sub').value = '';
+  document.getElementById('gen-type').value = 'cat';
+  document.getElementById('gen-icon').value = '📄';
+  document.getElementById('gen-url').value = '';
+  document.querySelector('.gen-btn').scrollIntoView({behavior:'smooth', block:'center'});
+  document.getElementById('gen-title').focus();
+  genPreview();
+}
+
+function genPreview() {
+  var title    = document.getElementById('gen-title').value.trim();
+  var sub      = document.getElementById('gen-sub').value.trim();
+  var type     = document.getElementById('gen-type').value;
+  var icon     = document.getElementById('gen-icon').value.trim() || '📄';
+  var url      = document.getElementById('gen-url').value.trim();
+  var keywords = document.getElementById('gen-keywords').value.trim()
+    .replace(/,/g,' ').replace(/\s+/g,' ').toLowerCase();
+
+  if (!title) { document.getElementById('gen-output').style.display='none'; return; }
+
+  var entry = "  {type:'" + escStr(type) + "',icon:'" + escStr(icon) + "',title:'" + escStr(title) + "',sub:'" + escStr(sub) + "',url:'" + escStr(url || '/papamoa-previews/REPLACE-WITH-URL.html') + "',keywords:'" + escStr(keywords) + "'},";
+
+  document.getElementById('gen-code').textContent = entry;
+  document.getElementById('gen-output').style.display = 'block';
+}
+
+function copyGenCode() {
+  var code = document.getElementById('gen-code').textContent;
+  navigator.clipboard.writeText(code).then(function() {
+    var btn = document.querySelector('.gen-copy');
+    btn.textContent = '✓ Copied!';
+    setTimeout(function() { btn.textContent = 'Copy to clipboard ↗'; }, 2000);
+  }).catch(function() {
+    // Fallback
+    var ta = document.createElement('textarea');
+    ta.value = code;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+}
+
+// ── HELPERS ──
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escAttr(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function escStr(str) {
+  return String(str).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+}
+function capitalise(str) {
+  return String(str).split(' ').map(function(w){ return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ');
+}
+
+// Init
+loadAll();
+</script>
+</body>
+</html>
