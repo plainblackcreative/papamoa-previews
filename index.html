@@ -81,30 +81,6 @@
   .qa-btn.primary { background:rgba(58,171,222,0.2); border-color:rgba(58,171,222,0.4); color:#3AABDE; }
   .qa-btn.primary:hover { background:rgba(58,171,222,0.3); color:#fff; }
 
-  /* GMAIL PANEL */
-  .gmail-panel { max-width:1100px; margin:0 auto; padding:20px 28px 0; }
-  .gmail-card { background:#fff; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
-  .gmail-header { display:flex; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--border); background:var(--bg); }
-  .gmail-title { font-size:13px; font-weight:700; color:var(--navy); flex:1; }
-  .gmail-status { font-size:11px; color:var(--muted); }
-  .gmail-refresh { font-size:11px; font-weight:700; color:var(--accent); background:none; border:1px solid var(--border); border-radius:5px; padding:4px 10px; cursor:pointer; font-family:'Figtree',sans-serif; transition:all 0.15s; }
-  .gmail-refresh:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
-  .gmail-refresh:disabled { opacity:0.5; cursor:default; }
-  .gmail-body { padding:14px 18px; max-height:260px; overflow-y:auto; }
-  .gmail-email { padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px; align-items:flex-start; }
-  .gmail-email:last-child { border-bottom:none; padding-bottom:0; }
-  .gmail-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; margin-top:5px; }
-  .gmail-dot.read { background:var(--border); }
-  .gmail-meta { flex:1; min-width:0; }
-  .gmail-from { font-size:12px; font-weight:700; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .gmail-subject { font-size:12px; color:var(--body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .gmail-snippet { font-size:11px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:1px; }
-  .gmail-date { font-size:11px; color:var(--muted); flex-shrink:0; }
-  .gmail-empty { font-size:13px; color:var(--muted); text-align:center; padding:20px 0; }
-  .gmail-loading { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); padding:16px 0; }
-  .spinner { width:14px; height:14px; border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 0.7s linear infinite; flex-shrink:0; }
-  @keyframes spin { to { transform:rotate(360deg); } }
-
   /* FILTER BAR */
   .filter-bar { max-width:1100px; margin:0 auto; padding:20px 28px 0; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
   .filter-input { flex:1; min-width:200px; padding:10px 14px; border:1.5px solid var(--border); border-radius:8px; font-family:'Figtree',sans-serif; font-size:14px; color:var(--body); background:var(--white); outline:none; transition:border-color 0.15s; }
@@ -171,7 +147,7 @@
   .csf-btn span { opacity:0.6; margin-left:3px; }
 
   @media(max-width:640px) {
-    .filter-bar,.gmail-panel,.page-wrap { padding-left:16px; padding-right:16px; }
+    .filter-bar,.page-wrap { padding-left:16px; padding-right:16px; }
     .cards-grid { grid-template-columns:1fr; }
     .page-hero { padding:24px 16px; }
     .site-nav { padding:0 16px; }
@@ -244,26 +220,13 @@
     <div class="quick-actions">
       <a href="https://github.com/plainblackcreative/papamoa-previews" target="_blank" rel="noopener" class="qa-btn">&#9729; GitHub</a>
       <a href="https://mail.google.com/mail/u/0/#search/papamoa" target="_blank" rel="noopener" class="qa-btn">&#128140; Gmail - Papamoa</a>
+      <a href="https://docs.google.com/spreadsheets/d/1X5i40RLF-r-yLRbm_XCgVyzJAkgO_o6whaoCzdC3SiM/edit" target="_blank" rel="noopener" class="qa-btn">&#128203; CRM Sheet</a>
       <a href="https://dash.cloudflare.com/13e541077f6e7848ad3eb3d0cd2004c7/home/overview" target="_blank" rel="noopener" class="qa-btn">&#9729; Cloudflare</a>
       <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="qa-btn">&#128241; Facebook</a>
       <a href="/papamoa-previews/admin/add-lead.html" target="_blank" class="qa-btn primary">&#43; Add Lead</a>
       <a href="/papamoa-previews/admin/crm-dashboard.html" target="_blank" class="qa-btn">&#128202; CRM Dashboard</a>
       <a href="https://console.cloud.google.com/welcome?project=papamoa-info" target="_blank" rel="noopener" class="qa-btn">&#9729; Google Cloud</a>
       <a href="https://webmail.1stdomains.co.nz/wm/10/webmail.php" target="_blank" rel="noopener" class="qa-btn">&#128140; Webmail</a>
-    </div>
-  </div>
-</div>
-
-<a href="https://mail.google.com/mail/u/0/#search/papamoa" target="_blank" rel="noopener" class="qa-btn">&#128140; Gmail</a>
-  <div class="gmail-card">
-    <div class="gmail-header">
-      <span style="font-size:1.1rem;">&#128140;</span>
-      <span class="gmail-title">Gmail - Papamoa.info Related Emails</span>
-      <span class="gmail-status" id="gmail-status">Not loaded</span>
-      <button class="gmail-refresh" id="gmail-refresh-btn" onclick="loadGmail()">&#8635; Load emails</button>
-    </div>
-    <div class="gmail-body" id="gmail-body">
-      <div class="gmail-empty">Click "Load emails" to fetch recent Papamoa.info emails from your Gmail.</div>
     </div>
   </div>
 </div>
@@ -304,7 +267,7 @@
     <span class="stat"><strong>20</strong> listings</span>
     <span class="stat"><strong>13</strong> sales</span>
     <span class="stat"><strong>8</strong> docs</span>
-    <span class="stat"><strong>6</strong> admin</span>
+    <span class="stat"><strong>7</strong> admin</span>
     <span class="stat"><strong>1</strong> preview</span>
     <span class="stat"><strong>17</strong> assets</span>
   </div>
@@ -330,7 +293,7 @@
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/index.html" target="_blank" data-section="root" data-keywords="site index internal dashboard pages starred">
       <span class="pc-icon">&#128290;</span>
-      <div class="pc-body"><div class="pc-title">Project Dashboard (this page)</div><div class="pc-path">index.html</div><div class="pc-desc">Internal dashboard. All pages, scratchpad, Gmail feed, starred tracking and filter.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
+      <div class="pc-body"><div class="pc-title">Project Dashboard (this page)</div><div class="pc-path">index.html</div><div class="pc-desc">Internal dashboard. All pages, scratchpad, starred tracking and filter.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/search.html" target="_blank" data-section="root" data-keywords="search results site query">
       <span class="pc-icon">&#128269;</span>
@@ -1036,7 +999,7 @@
     <div class="section-header">
       <span class="sh-icon">&#9881;&#65039;</span>
       <div>
-        <div class="sh-title">Admin <span class="sh-count">6</span></div>
+        <div class="sh-title">Admin <span class="sh-count">7</span></div>
         <div class="sh-desc">Internal admin tools and dashboards</div>
       </div>
       <span class="sh-toggle">&#9660; collapse</span>
@@ -1108,7 +1071,7 @@
     </a>
     <a class="page-card asset-card" href="#" data-section="assets" data-keywords="worker js cloudflare worker claude proxy">
       <span class="pc-icon">&#9881;&#65039;</span>
-      <div class="pc-body"><div class="pc-title">worker.js</div><div class="pc-path">worker.js</div><div class="pc-desc">Cloudflare Worker source - Claude proxy, weather, sheets, fishing data endpoints.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
+      <div class="pc-body"><div class="pc-title">worker.js</div><div class="pc-path">worker.js</div><div class="pc-desc">Cloudflare Worker source - Claude proxy, weather, sheets, fishing data, search tracking endpoints.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
     </a>
     <a class="page-card asset-card" href="#" data-section="assets" data-keywords="wrangler toml cloudflare config">
       <span class="pc-icon">&#9881;&#65039;</span>
@@ -1262,85 +1225,6 @@ function toggleScratchpad() {
   body.classList.toggle('open', spOpen);
   icon.innerHTML = spOpen ? '&#9650; close' : '&#9660; open';
   if (spOpen) renderNotes();
-}
-
-// ============================================================
-// GMAIL FEED
-// ============================================================
-async function loadGmail() {
-  var btn = document.getElementById('gmail-refresh-btn');
-  var status = document.getElementById('gmail-status');
-  var body = document.getElementById('gmail-body');
-  btn.disabled = true;
-  btn.textContent = 'Loading...';
-  status.textContent = 'Fetching...';
-  body.innerHTML = '<div class="gmail-loading"><div class="spinner"></div> Connecting to Gmail...</div>';
-
-  try {
-    var response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: 'You are a helpful assistant. Search Gmail for recent emails related to Papamoa.info business. Look for emails from or to jayden@papamoa.info, or with subjects containing "papamoa", "listing", "lead", "directory". Return ONLY a JSON array (no markdown, no preamble) of up to 10 emails, each with: { "from": string, "subject": string, "date": string, "snippet": string, "unread": boolean }. If no emails found, return an empty array [].',
-        messages: [{ role: 'user', content: 'Search my Gmail for recent emails related to papamoa.info - from/to jayden@papamoa.info or subject containing papamoa, listing, lead. Return JSON array only.' }],
-        mcp_servers: [{ type: 'url', url: 'https://gmail.mcp.claude.com/mcp', name: 'gmail' }]
-      })
-    });
-
-    var data = await response.json();
-
-    // Extract text from response
-    var fullText = (data.content || [])
-      .filter(function(b){ return b.type === 'text'; })
-      .map(function(b){ return b.text; })
-      .join('');
-
-    // Try to parse JSON from the response
-    var emails = [];
-    try {
-      var jsonMatch = fullText.match(/\[[\s\S]*\]/);
-      if (jsonMatch) {
-        emails = JSON.parse(jsonMatch[0]);
-      }
-    } catch(parseErr) {
-      // If parsing fails, show the raw response as a message
-      body.innerHTML = '<div class="gmail-empty" style="text-align:left;color:var(--body);font-size:12px;white-space:pre-wrap;">' + escHtmlGmail(fullText.substring(0, 500)) + '</div>';
-      status.textContent = 'Check response above';
-      btn.disabled = false;
-      btn.textContent = '&#8635; Refresh';
-      return;
-    }
-
-    if (!emails.length) {
-      body.innerHTML = '<div class="gmail-empty">No Papamoa.info related emails found.</div>';
-      status.textContent = 'No results';
-    } else {
-      body.innerHTML = emails.map(function(e) {
-        return '<div class="gmail-email">' +
-          '<div class="gmail-dot' + (e.unread ? '' : ' read') + '"></div>' +
-          '<div class="gmail-meta">' +
-            '<div class="gmail-from">' + escHtmlGmail(e.from || '') + '</div>' +
-            '<div class="gmail-subject">' + escHtmlGmail(e.subject || '(no subject)') + '</div>' +
-            '<div class="gmail-snippet">' + escHtmlGmail(e.snippet || '') + '</div>' +
-          '</div>' +
-          '<div class="gmail-date">' + escHtmlGmail(e.date || '') + '</div>' +
-        '</div>';
-      }).join('');
-      status.textContent = emails.length + ' email' + (emails.length !== 1 ? 's' : '');
-    }
-  } catch(err) {
-    body.innerHTML = '<div class="gmail-empty" style="color:var(--red);">Error: ' + escHtmlGmail(err.message) + '. Make sure Gmail is connected in Claude.ai settings.</div>';
-    status.textContent = 'Error';
-  }
-
-  btn.disabled = false;
-  btn.textContent = '&#8635; Refresh';
-}
-
-function escHtmlGmail(str) {
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
 // ============================================================
