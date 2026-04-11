@@ -1427,18 +1427,13 @@ function trackSearch(term) {
       page: 'homepage',
       ts: new Date().toISOString()
     });
-    // Use sendBeacon if available (survives page navigation)
-    if (navigator.sendBeacon) {
-      var blob = new Blob([payload], {type: 'application/json'});
-      navigator.sendBeacon(WORKER_URL + '/search-track', blob);
-    } else {
-      fetch(WORKER_URL + '/search-track', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: payload,
-        keepalive: true
-      }).catch(function() {});
-    }
+    fetch(WORKER_URL + '/search-track', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: payload,
+      credentials: 'omit',
+      keepalive: true
+    }).catch(function() {});
   } catch(e) {}
 }
 
