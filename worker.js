@@ -34,7 +34,7 @@ export default {
       });
     }
 
-    // ── Google Sheets proxy ───────────────────────────
+    // ── Google Sheets proxy (read-only, uses API key) ─
     if (url.pathname === '/sheets') {
       if (request.method !== 'GET') {
         return new Response('Method not allowed', { status: 405 });
@@ -71,16 +71,16 @@ export default {
     // ── Search tracking ───────────────────────────────
     // POST /search-track
     // Body: { term, page, ts }
-    // Appends one row to Search Logs tab in the analytics sheet.
+    // Appends one row to Search Logs tab using service account OAuth.
     if (url.pathname === '/search-track' && request.method === 'POST') {
       const ANALYTICS_SHEET_ID = '163qFZn4Iit3Pt7HFBou4B3W_OYeOOlLHjdNChmj960w';
       const ANALYTICS_TAB      = 'Search Logs';
 
       try {
-        const body      = await request.json();
-        const term      = (body.term || '').trim().slice(0, 120);
-        const page      = (body.page || 'unknown').slice(0, 60);
-        const ts        = body.ts || new Date().toISOString();
+        const body = await request.json();
+        const term = (body.term || '').trim().slice(0, 120);
+        const page = (body.page || 'unknown').slice(0, 60);
+        const ts   = body.ts || new Date().toISOString();
 
         if (!term) {
           return new Response(JSON.stringify({ ok: false, error: 'empty term' }), {
@@ -88,19 +88,27 @@ export default {
           });
         }
 
-        // Per-hour session bucket using CF connecting IP
         const ip        = request.headers.get('CF-Connecting-IP') || 'unknown';
         const sessionId = await hashString(ip + ts.slice(0, 13));
+        const row       = [ts, term, term.toLowerCase(), page, sessionId];
 
-        const row = [ts, term, term.toLowerCase(), page, sessionId];
+        // Get OAuth token for service account
+        const token = await getServiceAccountToken(
+          'papamoa-sheets-writer@papamoa-info.iam.gserviceaccount.com',
+          env.GOOGLE_SERVICE_ACCOUNT_KEY,
+          'https://www.googleapis.com/auth/spreadsheets'
+        );
 
-        const sheetsUrl = `https://sheets.googleapis.com/v4/spreadsheets/${ANALYTICS_SHEET_ID}/values/${encodeURIComponent(ANALYTICS_TAB)}:append?valueInputOption=USER_ENTERED&key=${env.GOOGLE_SHEETS_KEY}`;
+        const sheetsUrl = `https://sheets.googleapis.com/v4/spreadsheets/${ANALYTICS_SHEET_ID}/values/${encodeURIComponent(ANALYTICS_TAB)}:append?valueInputOption=USER_ENTERED`;
 
-        // Fire-and-forget — response returns immediately
+        // Fire-and-forget
         ctx.waitUntil(
           fetch(sheetsUrl, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
             body: JSON.stringify({ values: [row] }),
           }).catch(() => {})
         );
@@ -109,7 +117,7 @@ export default {
           headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
       } catch (e) {
-        return new Response(JSON.stringify({ ok: false, error: 'parse error' }), {
+        return new Response(JSON.stringify({ ok: false, error: e.message }), {
           status: 400,
           headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
@@ -118,7 +126,7 @@ export default {
 
     // ── Search top 10 ─────────────────────────────────
     // GET /search-top10
-    // Reads Search Logs, counts by TermLower, returns top 10.
+    // Reads Search Logs via service account, counts by TermLower, returns top 10.
     // Cached for 1 hour.
     if (url.pathname === '/search-top10' && request.method === 'GET') {
       const ANALYTICS_SHEET_ID = '163qFZn4Iit3Pt7HFBou4B3W_OYeOOlLHjdNChmj960w';
@@ -136,8 +144,16 @@ export default {
       }
 
       try {
-        const sheetsUrl = `https://sheets.googleapis.com/v4/spreadsheets/${ANALYTICS_SHEET_ID}/values/${encodeURIComponent(ANALYTICS_TAB)}?key=${env.GOOGLE_SHEETS_KEY}`;
-        const res  = await fetch(sheetsUrl);
+        const token = await getServiceAccountToken(
+          'papamoa-sheets-writer@papamoa-info.iam.gserviceaccount.com',
+          env.GOOGLE_SERVICE_ACCOUNT_KEY,
+          'https://www.googleapis.com/auth/spreadsheets.readonly'
+        );
+
+        const sheetsUrl = `https://sheets.googleapis.com/v4/spreadsheets/${ANALYTICS_SHEET_ID}/values/${encodeURIComponent(ANALYTICS_TAB)}`;
+        const res  = await fetch(sheetsUrl, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
         const data = await res.json();
         const rows = (data.values || []).slice(1); // skip header row
 
@@ -172,13 +188,13 @@ export default {
           headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
       } catch (e) {
-        return new Response(JSON.stringify({ terms: [], total: 0 }), {
+        return new Response(JSON.stringify({ terms: [], total: 0, error: e.message }), {
           headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
       }
     }
 
-    // ── Fishing data (tides, sun, bite times) ────────
+    // ── Fishing data ──────────────────────────────────
     if (url.pathname === '/fishing-data') {
       if (!env.CLAUDE_API_KEY) {
         return new Response(JSON.stringify({ error: 'CLAUDE_API_KEY not configured' }), {
@@ -289,10 +305,7 @@ export default {
         body: 'API key not found in environment.',
         search_term_used: searchTerm
       }), {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
       });
     }
 
@@ -335,10 +348,7 @@ Return this exact JSON:
         body: errorText,
         search_term_used: searchTerm
       }), {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
       });
     }
 
@@ -366,6 +376,62 @@ Return this exact JSON:
     });
   }
 };
+
+// ── Service account OAuth ─────────────────────────────
+// Generates a short-lived Bearer token using a Google service account private key.
+async function getServiceAccountToken(clientEmail, privateKeyPem, scope) {
+  const now     = Math.floor(Date.now() / 1000);
+  const payload = {
+    iss: clientEmail,
+    scope,
+    aud: 'https://oauth2.googleapis.com/token',
+    exp: now + 3600,
+    iat: now,
+  };
+
+  const header  = { alg: 'RS256', typ: 'JWT' };
+  const b64     = str => btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  const encHead  = b64(JSON.stringify(header));
+  const encPay   = b64(JSON.stringify(payload));
+  const sigInput = `${encHead}.${encPay}`;
+
+  // Import the private key
+  const pemBody = privateKeyPem
+    .replace(/-----BEGIN PRIVATE KEY-----/g, '')
+    .replace(/-----END PRIVATE KEY-----/g, '')
+    .replace(/\n/g, '')
+    .trim();
+
+  const keyData = Uint8Array.from(atob(pemBody), c => c.charCodeAt(0));
+  const key = await crypto.subtle.importKey(
+    'pkcs8',
+    keyData,
+    { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+
+  const signature = await crypto.subtle.sign(
+    'RSASSA-PKCS1-v1_5',
+    key,
+    new TextEncoder().encode(sigInput)
+  );
+
+  const encSig = b64(String.fromCharCode(...new Uint8Array(signature)));
+  const jwt    = `${sigInput}.${encSig}`;
+
+  const tokenResp = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${jwt}`,
+  });
+
+  const tokenData = await tokenResp.json();
+  if (!tokenData.access_token) {
+    throw new Error('Failed to get OAuth token: ' + JSON.stringify(tokenData));
+  }
+  return tokenData.access_token;
+}
 
 // ── Helpers ───────────────────────────────────────────
 async function hashString(str) {
