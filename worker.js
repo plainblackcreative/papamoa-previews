@@ -1,6 +1,5 @@
-// papamoa-claude-proxy v2.2
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     // ── CORS preflight ────────────────────────────────
@@ -69,6 +68,115 @@ export default {
       });
     }
 
+    // ── Search tracking ───────────────────────────────
+    // POST /search-track
+    // Body: { term, page, ts }
+    // Appends one row to Search Logs tab in the analytics sheet.
+    if (url.pathname === '/search-track' && request.method === 'POST') {
+      const ANALYTICS_SHEET_ID = '163qFZn4Iit3Pt7HFBou4B3W_OYeOOlLHjdNChmj960w';
+      const ANALYTICS_TAB      = 'Search Logs';
+
+      try {
+        const body      = await request.json();
+        const term      = (body.term || '').trim().slice(0, 120);
+        const page      = (body.page || 'unknown').slice(0, 60);
+        const ts        = body.ts || new Date().toISOString();
+
+        if (!term) {
+          return new Response(JSON.stringify({ ok: false, error: 'empty term' }), {
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+          });
+        }
+
+        // Per-hour session bucket using CF connecting IP
+        const ip        = request.headers.get('CF-Connecting-IP') || 'unknown';
+        const sessionId = await hashString(ip + ts.slice(0, 13));
+
+        const row = [ts, term, term.toLowerCase(), page, sessionId];
+
+        const sheetsUrl = `https://sheets.googleapis.com/v4/spreadsheets/${ANALYTICS_SHEET_ID}/values/${encodeURIComponent(ANALYTICS_TAB)}:append?valueInputOption=USER_ENTERED&key=${env.GOOGLE_SHEETS_KEY}`;
+
+        // Fire-and-forget — response returns immediately
+        ctx.waitUntil(
+          fetch(sheetsUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ values: [row] }),
+          }).catch(() => {})
+        );
+
+        return new Response(JSON.stringify({ ok: true }), {
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      } catch (e) {
+        return new Response(JSON.stringify({ ok: false, error: 'parse error' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+    }
+
+    // ── Search top 10 ─────────────────────────────────
+    // GET /search-top10
+    // Reads Search Logs, counts by TermLower, returns top 10.
+    // Cached for 1 hour.
+    if (url.pathname === '/search-top10' && request.method === 'GET') {
+      const ANALYTICS_SHEET_ID = '163qFZn4Iit3Pt7HFBou4B3W_OYeOOlLHjdNChmj960w';
+      const ANALYTICS_TAB      = 'Search Logs';
+      const TOP10_CACHE_TTL    = 3600;
+
+      const cache    = caches.default;
+      const cacheKey = new Request('https://papamoa-internal/search-top10-cache');
+      const cached   = await cache.match(cacheKey);
+      if (cached) {
+        const body = await cached.json();
+        return new Response(JSON.stringify(body), {
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      try {
+        const sheetsUrl = `https://sheets.googleapis.com/v4/spreadsheets/${ANALYTICS_SHEET_ID}/values/${encodeURIComponent(ANALYTICS_TAB)}?key=${env.GOOGLE_SHEETS_KEY}`;
+        const res  = await fetch(sheetsUrl);
+        const data = await res.json();
+        const rows = (data.values || []).slice(1); // skip header row
+
+        const counts  = {};
+        const display = {};
+        rows.forEach(row => {
+          const lower = (row[2] || '').trim();
+          const disp  = (row[1] || '').trim();
+          if (!lower || lower.length < 2) return;
+          counts[lower]  = (counts[lower] || 0) + 1;
+          display[lower] = disp;
+        });
+
+        const total = rows.length;
+
+        const top10 = Object.keys(counts)
+          .sort((a, b) => counts[b] - counts[a])
+          .slice(0, 10)
+          .map(k => capitalise(display[k] || k));
+
+        const result = { terms: top10, total };
+
+        const cacheResponse = new Response(JSON.stringify(result), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': `public, max-age=${TOP10_CACHE_TTL}`,
+          },
+        });
+        ctx.waitUntil(cache.put(cacheKey, cacheResponse.clone()));
+
+        return new Response(JSON.stringify(result), {
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      } catch (e) {
+        return new Response(JSON.stringify({ terms: [], total: 0 }), {
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+    }
 
     // ── Fishing data (tides, sun, bite times) ────────
     if (url.pathname === '/fishing-data') {
@@ -156,7 +264,7 @@ export default {
       });
     }
 
-    // ── Claude proxy (existing, unchanged) ───────────
+    // ── Claude proxy (search visibility checker) ─────
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
     }
@@ -258,3 +366,15 @@ Return this exact JSON:
     });
   }
 };
+
+// ── Helpers ───────────────────────────────────────────
+async function hashString(str) {
+  const msgBuffer  = new TextEncoder().encode(str);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray  = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.slice(0, 8).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function capitalise(str) {
+  return String(str).split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+}
