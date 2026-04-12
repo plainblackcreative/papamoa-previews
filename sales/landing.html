@@ -150,8 +150,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocean); margin-bottom: 10px; }
 .section-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--navy); margin-bottom: 16px; line-height: 1.25; }
 .section-sub { font-size: 1rem; color: var(--muted); max-width: 600px; line-height: 1.7; margin-bottom: 40px; }
-.bg-white { background: var(--white); }
-.bg-sand { background: var(--sand); }
 
 /* ── SCARCITY BANNER ── */
 .scarcity-banner {
@@ -183,17 +181,10 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .tier-price { font-size: 1.6rem; font-weight: 800; line-height: 1.1; margin-bottom: 6px; }
 .tier-price span { font-size: 0.85rem; font-weight: 400; opacity: 0.6; }
 .tier-tagline { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
-/* Placeholder */
-.tier-placeholder .tier-head { background: #FAF6F3; }
-.tier-placeholder .tier-name { color: #9A7060; }
-.tier-placeholder .tier-price { color: #9A7060; }
-.tier-placeholder .tier-badge { background: #F0EBE4; color: #9A7060; }
-/* Silver */
 .tier-silver .tier-head { background: var(--silver-bg); }
 .tier-silver .tier-name { color: var(--silver); }
 .tier-silver .tier-price { color: var(--silver); }
 .tier-silver .tier-badge { background: #D8E8EE; color: var(--silver); }
-/* Gold */
 .tier-gold .tier-head { background: var(--gold-bg); border-bottom-color: rgba(184,132,10,0.2); }
 .tier-gold .tier-name { color: var(--gold); }
 .tier-gold .tier-price { color: var(--gold); }
@@ -337,35 +328,23 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .jayden-btn.secondary:hover { background: var(--sand-dark); }
 @media (max-width: 560px) { .jayden-section { flex-direction: column; text-align: center; } .jayden-contact { flex-direction: row; justify-content: center; } }
 
-@media (max-width: 600px) {
-  .hero { padding: 60px 20px 90px; }
-  .section { padding: 48px 0; }
-  .form-section { padding: 48px 20px; }
-  .vis-box { padding: 24px 20px; }
-}
-</style>
-
-<style id="papamoa-nav-footer-css">
+/* ── NAV / FOOTER ── */
 :root {
   --pnf-navy:    #0D2B3E;
-  --pnf-ocean:   #1B6B7D;
   --pnf-accent:  #3AABDE;
-  --pnf-dune:    #C4985A;
   --pnf-white:   #FFFFFF;
-  --pnf-border:  rgba(255,255,255,0.1);
   --pnf-muted:   rgba(255,255,255,0.45);
   --pnf-font:    'Figtree', sans-serif;
   --pnf-display: 'Playfair Display', serif;
 }
 .pnf-nav { background: var(--pnf-navy); height: 56px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.25); gap: 16px; }
-.pnf-logo { font-family: var(--pnf-display); font-weight: 700; font-size: 15px; color: var(--pnf-white); text-decoration: none; letter-spacing: 0.01em; flex-shrink: 0; }
+.pnf-logo { font-family: var(--pnf-display); font-weight: 700; font-size: 15px; color: var(--pnf-white); text-decoration: none; flex-shrink: 0; }
 .pnf-logo span { color: var(--pnf-accent); }
 .pnf-back { font-size: 13px; color: var(--pnf-muted); text-decoration: none; transition: color 0.2s; }
 .pnf-back:hover { color: var(--pnf-white); }
 .pnf-cta { font-family: var(--pnf-font); font-size: 13px; font-weight: 700; background: var(--pnf-accent); color: var(--pnf-white); padding: 8px 18px; border-radius: 100px; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
 .pnf-cta:hover { background: #2d95c4; }
 @media (max-width: 640px) { .pnf-nav { padding: 0 16px; } }
-
 .pnf-footer-slim { background: var(--pnf-navy); padding: 28px; text-align: center; }
 .pnf-footer-brand { font-family: var(--pnf-display); font-size: 1.1rem; font-weight: 700; color: var(--pnf-white); margin-bottom: 6px; display: inline-block; }
 .pnf-footer-brand span { color: var(--pnf-accent); }
@@ -374,8 +353,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .pnf-footer-slim-links a, .pnf-footer-slim-links button { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; background: none; border: none; padding: 0; cursor: pointer; font-family: var(--pnf-font); transition: color 0.15s; }
 .pnf-footer-slim-links a:hover, .pnf-footer-slim-links button:hover { color: var(--pnf-white); }
 .pnf-footer-slim-bottom { font-size: 11.5px; color: rgba(255,255,255,0.2); }
-
-/* Contact lightbox */
 .pnf-overlay { position: fixed; inset: 0; background: rgba(13,43,62,0.7); backdrop-filter: blur(4px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
 .pnf-overlay.open { opacity: 1; pointer-events: all; }
 .pnf-modal { background: #fff; border-radius: 16px; width: 100%; max-width: 520px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.3); transform: translateY(16px); transition: transform 0.25s; }
@@ -383,15 +360,15 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .pnf-modal-head { background: var(--pnf-navy); padding: 22px 28px 18px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .pnf-modal-head h2 { font-family: var(--pnf-display); font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
 .pnf-modal-head p { font-size: 12.5px; color: rgba(255,255,255,0.5); line-height: 1.5; }
-.pnf-modal-close { background: rgba(255,255,255,0.1); border: none; color: rgba(255,255,255,0.6); width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s, color 0.15s; line-height: 1; }
+.pnf-modal-close { background: rgba(255,255,255,0.1); border: none; color: rgba(255,255,255,0.6); width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .pnf-modal-close:hover { background: rgba(255,255,255,0.2); color: #fff; }
 .pnf-modal-body { padding: 24px 28px 28px; }
 .pnf-cf { display: flex; flex-direction: column; gap: 14px; }
 .pnf-cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (max-width: 420px) { .pnf-cf-row { grid-template-columns: 1fr; } }
 .pnf-cf label { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #5A6E78; margin-bottom: 5px; display: block; }
-.pnf-cf input, .pnf-cf select, .pnf-cf textarea { width: 100%; padding: 11px 14px; border: 1.5px solid #D8E4E8; border-radius: 7px; font-family: var(--pnf-font); font-size: 14px; color: #1A2832; background: #F7F3ED; outline: none; transition: border-color 0.2s; }
-.pnf-cf input:focus, .pnf-cf select:focus, .pnf-cf textarea:focus { border-color: #1B6B7D; background: #fff; }
+.pnf-cf input, .pnf-cf textarea { width: 100%; padding: 11px 14px; border: 1.5px solid #D8E4E8; border-radius: 7px; font-family: var(--pnf-font); font-size: 14px; color: #1A2832; background: #F7F3ED; outline: none; transition: border-color 0.2s; }
+.pnf-cf input:focus, .pnf-cf textarea:focus { border-color: #1B6B7D; background: #fff; }
 .pnf-cf textarea { resize: vertical; min-height: 80px; line-height: 1.55; }
 .pnf-cf-submit { width: 100%; background: #1B6B7D; color: #fff; border: none; padding: 13px; border-radius: 8px; font-family: var(--pnf-font); font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; margin-top: 2px; }
 .pnf-cf-submit:hover { background: #0F4352; }
@@ -401,13 +378,20 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .pnf-cf-success .pnf-tick { font-size: 40px; margin-bottom: 10px; }
 .pnf-cf-success h3 { font-size: 18px; font-weight: 700; color: #1E6B3C; margin-bottom: 6px; }
 .pnf-cf-success p { font-size: 13.5px; color: #5A6E78; line-height: 1.6; }
+
+@media (max-width: 600px) {
+  .hero { padding: 60px 20px 90px; }
+  .section { padding: 48px 0; }
+  .form-section { padding: 48px 20px; }
+  .vis-box { padding: 24px 20px; }
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="pnf-nav">
-  <a href="/papamoa-previews/homepage.html" class="pnf-logo">papamoa<span>.info</span></a>
+  <a href="/papamoa-previews/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
   <a href="/papamoa-previews/homepage.html" class="pnf-back">&larr; Directory</a>
   <a href="#get-preview" class="pnf-cta">Get your free preview &rarr;</a>
 </nav>
@@ -444,16 +428,16 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 
 <!-- TRUST BAR -->
 <div class="trust-bar">
-  <div class="trust-item"><span class="trust-icon">✦</span> We write your listing for you</div>
-  <div class="trust-item"><span class="trust-icon">✦</span> Live within 24 hours</div>
-  <div class="trust-item"><span class="trust-icon">✦</span> Lifetime price lock</div>
-  <div class="trust-item"><span class="trust-icon">✦</span> 2027 ROI guarantee</div>
-  <div class="trust-item"><span class="trust-icon">✦</span> No commitment to view your preview</div>
+  <div class="trust-item"><span class="trust-icon">&#10022;</span> We write your listing for you</div>
+  <div class="trust-item"><span class="trust-icon">&#10022;</span> Live within 24 hours</div>
+  <div class="trust-item"><span class="trust-icon">&#10022;</span> Lifetime price lock</div>
+  <div class="trust-item"><span class="trust-icon">&#10022;</span> 2027 ROI guarantee</div>
+  <div class="trust-item"><span class="trust-icon">&#10022;</span> No commitment to view your preview</div>
 </div>
 
 <div class="container">
 
-  <!-- SCARCITY BANNER (shown when ?cat= param present) -->
+  <!-- SCARCITY BANNER -->
   <div class="scarcity-banner" id="scarcity-banner">
     <span class="sb-icon">&#9876;</span>
     <div class="sb-text">
@@ -474,7 +458,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="tier-card tier-silver">
         <div class="tier-head">
           <div class="tier-badge">Most popular</div>
-          <div class="tier-name">Silver</div>
+          <div class="tier-name">Silver Listing</div>
           <div class="tier-price">$599 <span>+gst / yr</span></div>
           <div class="tier-tagline">Full claimed listing. SEO-optimised, your logo, all contact details &mdash; live within 24 hours.</div>
         </div>
@@ -502,7 +486,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="tier-card tier-gold featured">
         <div class="tier-head">
           <div class="tier-badge">&#11088; Gold Listing</div>
-          <div class="tier-name">Gold</div>
+          <div class="tier-name">Gold Listing</div>
           <div class="tier-price">$1,199 <span>+gst / yr</span></div>
           <div class="tier-tagline">Top of your sub-category. AI-optimised. Photo gallery. Menu Add-On free. Premium ad access.</div>
         </div>
@@ -528,7 +512,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     </div>
 
     <div class="addon-strip">
-      <div class="addon-strip-icon">📋</div>
+      <div class="addon-strip-icon">&#128203;</div>
       <div class="addon-strip-body">
         <h4>Menu / Service List Add-On</h4>
         <p>Interactive filterable menu or service pricing list on your listing page. Works for restaurants, gyms, dental, spas, trades &mdash; any business with a price list. Update any time via a private link, no CMS login needed.</p>
@@ -545,28 +529,28 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <div class="section" style="padding-top:0;">
     <div class="guarantees-grid">
       <div class="guarantee-card">
-        <span class="gc-icon">🔒</span>
+        <span class="gc-icon">&#128274;</span>
         <div class="gc-body">
           <h4>Lifetime Price Lock</h4>
           <p>Your launch price is locked forever. Renew consecutively and it never increases &mdash; no matter what Silver or Gold costs in future years.</p>
         </div>
       </div>
       <div class="guarantee-card">
-        <span class="gc-icon">📈</span>
+        <span class="gc-icon">&#128200;</span>
         <div class="gc-body">
           <h4>2027 ROI Guarantee</h4>
           <p>No trackable return from your 2026 listing? Your 2027 renewal is on us. We back every listing with this guarantee.</p>
         </div>
       </div>
       <div class="guarantee-card">
-        <span class="gc-icon">✍️</span>
+        <span class="gc-icon">&#9997;&#65039;</span>
         <div class="gc-body">
           <h4>Done for You</h4>
           <p>We write everything from your website and socials. You review, request any changes, and give the go-ahead. Takes maybe 10 minutes of your time.</p>
         </div>
       </div>
       <div class="guarantee-card">
-        <span class="gc-icon">⚡</span>
+        <span class="gc-icon">&#9889;</span>
         <div class="gc-body">
           <h4>Live in 24 Hours</h4>
           <p>From approval to published listing, usually the same day. Your preview arrives within 24 hours of submitting the form below.</p>
@@ -608,97 +592,94 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     </div>
   </div>
 
-  <!-- THE FORM -->
+</div>
 
-</div><!-- /container -->
-
+<!-- FORM SECTION -->
 <div class="form-section" id="get-preview">
-    <div class="form-section-inner">
-      <div class="section-label">Step 1 of 4</div>
-      <h2>Get your free <em>personalised preview</em></h2>
-      <p>Fill in your details and we&rsquo;ll build your listing preview &mdash; showing your real business, your SEO score and exactly how you&rsquo;ll look on Papamoa.info. Free, no obligation, within 24 hours.</p>
-      <div class="vis-box">
-        <h3>Request your free preview</h3>
-        <p class="vis-box-sub">We personally review every submission and have your preview ready within 24 hours.</p>
-        <div class="vis-note">
-          <span class="vis-note-icon">🎯</span>
-          <span><strong>This is not a generic demo.</strong> Your preview uses your real business name, website, photos and local search data &mdash; built specifically for your business.</span>
+  <div class="form-section-inner">
+    <div class="section-label">Step 1 of 4</div>
+    <h2>Get your free <em>personalised preview</em></h2>
+    <p>Fill in your details and we&rsquo;ll build your listing preview &mdash; showing your real business, your SEO score and exactly how you&rsquo;ll look on Papamoa.info. Free, no obligation, within 24 hours.</p>
+    <div class="vis-box">
+      <h3>Request your free preview</h3>
+      <p class="vis-box-sub">We personally review every submission and have your preview ready within 24 hours.</p>
+      <div class="vis-note">
+        <span class="vis-note-icon">&#127919;</span>
+        <span><strong>This is not a generic demo.</strong> Your preview uses your real business name, website, photos and local search data &mdash; built specifically for your business.</span>
+      </div>
+      <form class="vis-form" id="preview-form" onsubmit="submitPreview(event)">
+        <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
+        <input type="hidden" name="form_name" value="funnel-landing">
+        <input type="hidden" name="subject" value="New preview request -- Papamoa.info funnel">
+        <input type="hidden" name="redirect" value="false">
+        <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="source_biz" id="hidden-biz" value="">
+        <input type="hidden" name="source_cat" id="hidden-cat" value="">
+
+        <div class="vis-form-row">
+          <div class="vis-field">
+            <label class="vis-label">Your first name <span class="req">*</span></label>
+            <input type="text" name="first_name" placeholder="e.g. Sarah" required>
+          </div>
+          <div class="vis-field">
+            <label class="vis-label">Business name <span class="req">*</span></label>
+            <input type="text" name="business_name" id="form-biz" placeholder="e.g. Coastal Plumbing" required>
+          </div>
         </div>
-        <form class="vis-form" id="preview-form" onsubmit="submitPreview(event)">
-          <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
-          <input type="hidden" name="form_name" value="funnel-landing">
-          <input type="hidden" name="subject" value="New preview request — Papamoa.info funnel">
-          <input type="hidden" name="redirect" value="false">
-          <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-          <input type="hidden" name="source_biz" id="hidden-biz" value="">
-          <input type="hidden" name="source_cat" id="hidden-cat" value="">
 
-          <div class="vis-form-row">
-            <div class="vis-field">
-              <label class="vis-label">Your first name <span class="req">*</span></label>
-              <input type="text" name="first_name" placeholder="e.g. Sarah" required>
-            </div>
-            <div class="vis-field">
-              <label class="vis-label">Business name <span class="req">*</span></label>
-              <input type="text" name="business_name" id="form-biz" placeholder="e.g. Coastal Plumbing" required>
-            </div>
-          </div>
-
-          <div class="vis-field">
-            <label class="vis-label">Business category <span class="req">*</span></label>
-            <select name="category" required>
-              <option value="" disabled selected>Select your category</option>
-              <option>Accommodation</option>
-              <option>Activities &amp; Attractions</option>
-              <option>Automotive</option>
-              <option>Beauty &amp; Personal Care</option>
-              <option>Caf&eacute; &amp; Restaurant</option>
-              <option>Food &amp; Drink</option>
-              <option>Health &amp; Fitness</option>
-              <option>Professional Services</option>
-              <option>Shops &amp; Retail</option>
-              <option>Trades &amp; Home Services</option>
-              <option>Other</option>
-            </select>
-          </div>
-
-          <div class="vis-field">
-            <label class="vis-label">Website</label>
-            <input type="text" name="website" placeholder="yourbusiness.co.nz (helps us build a better preview)">
-          </div>
-
-          <div class="vis-form-row">
-            <div class="vis-field">
-              <label class="vis-label">Email address <span class="req">*</span></label>
-              <input type="email" name="email" placeholder="your@email.com" required>
-            </div>
-            <div class="vis-field">
-              <label class="vis-label">Phone number <span class="req">*</span></label>
-              <input type="tel" name="phone" placeholder="027 xxx xxxx" required>
-            </div>
-          </div>
-
-          <div class="vis-field">
-            <label class="vis-label">Anything useful? <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--muted);">(optional)</span></label>
-            <textarea name="notes" placeholder="e.g. 'We specialise in residential plumbing' — helps us make your preview more accurate"></textarea>
-          </div>
-
-          <button type="submit" class="vis-submit" id="submit-btn">Send me my free personalised preview &rarr;</button>
-          <p class="vis-fine">Your preview arrives within 24 hours &middot; No payment required &middot; No spam, ever</p>
-        </form>
-
-        <div class="success-msg" id="success-msg">
-          <div class="success-tick">&#10003;</div>
-          <h3>You&rsquo;re in &mdash; preview on its way.</h3>
-          <p>We&rsquo;ll have your personalised preview ready within 24 hours.<br>It&rsquo;ll show your real listing, SEO score and search term coverage.<br><br>Questions in the meantime? Call <a href="tel:+64275332970" style="color:var(--ocean);">027 533 2970</a> or email <a href="/cdn-cgi/l/email-protection#402a213924252e00302130212d2f216e292e262f" style="color:var(--ocean);"><span class="__cf_email__" data-cfemail="610b001805040f21110011000c0e004f080f070e">[email&#160;protected]</span></a>.</p>
+        <div class="vis-field">
+          <label class="vis-label">Business category <span class="req">*</span></label>
+          <select name="category" required>
+            <option value="" disabled selected>Select your category</option>
+            <option>Accommodation</option>
+            <option>Activities &amp; Attractions</option>
+            <option>Automotive</option>
+            <option>Beauty &amp; Personal Care</option>
+            <option>Caf&eacute; &amp; Restaurant</option>
+            <option>Food &amp; Drink</option>
+            <option>Health &amp; Fitness</option>
+            <option>Professional Services</option>
+            <option>Shops &amp; Retail</option>
+            <option>Trades &amp; Home Services</option>
+            <option>Other</option>
+          </select>
         </div>
+
+        <div class="vis-field">
+          <label class="vis-label">Website</label>
+          <input type="text" name="website" placeholder="yourbusiness.co.nz (helps us build a better preview)">
+        </div>
+
+        <div class="vis-form-row">
+          <div class="vis-field">
+            <label class="vis-label">Email address <span class="req">*</span></label>
+            <input type="email" name="email" placeholder="your&#64;email.com" required>
+          </div>
+          <div class="vis-field">
+            <label class="vis-label">Phone number <span class="req">*</span></label>
+            <input type="tel" name="phone" placeholder="027 xxx xxxx" required>
+          </div>
+        </div>
+
+        <div class="vis-field">
+          <label class="vis-label">Anything useful? <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--muted);">(optional)</span></label>
+          <textarea name="notes" placeholder="e.g. 'We specialise in residential plumbing' -- helps us make your preview more accurate"></textarea>
+        </div>
+
+        <button type="submit" class="vis-submit" id="submit-btn">Send me my free personalised preview &rarr;</button>
+        <p class="vis-fine">Your preview arrives within 24 hours &middot; No payment required &middot; No spam, ever</p>
+      </form>
+
+      <div class="success-msg" id="success-msg">
+        <div class="success-tick">&#10003;</div>
+        <h3>You&rsquo;re in &mdash; preview on its way.</h3>
+        <p>We&rsquo;ll have your personalised preview ready within 24 hours.<br>It&rsquo;ll show your real listing, SEO score and search term coverage.<br><br>Questions in the meantime? Call <a href="tel:+64275332970" style="color:var(--ocean);">027 533 2970</a> or email <a href="mailto:jayden&#64;papamoa.info" style="color:var(--ocean);">jayden&#64;papamoa.info</a>.</p>
       </div>
     </div>
-  </div><!-- /form-section -->
+  </div>
+</div>
 
 <div class="container">
-
-  <!-- JAYDEN -->
   <div class="jayden-section">
     <div class="jayden-avatar">J</div>
     <div class="jayden-text">
@@ -707,10 +688,9 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     </div>
     <div class="jayden-contact">
       <a href="tel:+64275332970" class="jayden-btn primary">027 533 2970</a>
-      <a href="/cdn-cgi/l/email-protection#690308100d0c0729190819080406084700070f06" class="jayden-btn secondary"><span class="__cf_email__" data-cfemail="84eee5fde0e1eac4f4e5f4e5e9ebe5aaedeae2eb">[email&#160;protected]</span></a>
+      <a href="mailto:jayden&#64;papamoa.info" class="jayden-btn secondary">jayden&#64;papamoa.info</a>
     </div>
   </div>
-
 </div>
 
 <!-- FOOTER -->
@@ -721,6 +701,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     <a href="/papamoa-previews/homepage.html">Directory</a>
     <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener">Facebook</a>
     <button onclick="pnfOpenContact()">Contact</button>
+    <a href="/papamoa-previews/legal.html">Privacy &amp; Terms</a>
   </div>
   <div class="pnf-footer-slim-bottom">&copy; 2026 Papamoa.info</div>
 </footer>
@@ -738,7 +719,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     <div class="pnf-modal-body">
       <form class="pnf-cf" id="pnf-contact-form" onsubmit="pnfSubmitContact(event)">
         <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
-        <input type="hidden" name="form_name" value="contact-lightbox">
+        <input type="hidden" name="form_name" value="contact-landing-lightbox">
         <input type="hidden" name="redirect" value="false">
         <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <div class="pnf-cf-row">
@@ -748,7 +729,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           </div>
           <div>
             <label>Email *</label>
-            <input type="email" name="email" placeholder="you@email.com" required>
+            <input type="email" name="email" placeholder="you&#64;email.com" required>
           </div>
         </div>
         <div>
@@ -767,7 +748,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── Internal link prefix ──
 (function() {
   var base = '/papamoa-previews';
@@ -776,7 +757,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     if (!a) return;
     var href = a.getAttribute('href');
     if (!href) return;
-    if (href.startsWith('/') && !href.startsWith(base)) {
+    if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
       e.preventDefault();
       window.location.href = base + href;
     }
@@ -785,9 +766,9 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 
 // ── URL param personalisation ──
 (function() {
-  const p = new URLSearchParams(window.location.search);
-  const biz = p.get('biz') || '';
-  const cat = p.get('cat') || '';
+  var p = new URLSearchParams(window.location.search);
+  var biz = p.get('biz') || '';
+  var cat = p.get('cat') || '';
 
   if (biz) {
     document.getElementById('hidden-biz').value = biz;
@@ -806,21 +787,21 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   }
 })();
 
-// ── Form submission ──
+// ── Preview form submission ──
 async function submitPreview(e) {
   e.preventDefault();
-  const btn = document.getElementById('submit-btn');
+  var btn = document.getElementById('submit-btn');
   btn.textContent = 'Sending\u2026';
   btn.disabled = true;
   try {
-    const res = await fetch('https://api.web3forms.com/submit', {
+    var res = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       body: new FormData(document.getElementById('preview-form'))
     });
-    const json = await res.json();
+    var json = await res.json();
     if (json.success) {
       document.getElementById('preview-form').style.display = 'none';
-      const success = document.getElementById('success-msg');
+      var success = document.getElementById('success-msg');
       success.style.display = 'block';
       success.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
@@ -859,4 +840,19 @@ async function pnfSubmitContact(e) {
       method: 'POST',
       body: new FormData(document.getElementById('pnf-contact-form'))
     });
-    var json = await 
+    var json = await res.json();
+    if (json.success) {
+      document.getElementById('pnf-contact-form').style.display = 'none';
+      document.getElementById('pnf-cf-success').style.display = 'block';
+    } else {
+      btn.textContent = 'Send message \u2192';
+      btn.disabled = false;
+    }
+  } catch(err) {
+    btn.textContent = 'Send message \u2192';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
