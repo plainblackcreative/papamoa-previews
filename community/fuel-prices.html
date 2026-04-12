@@ -3,205 +3,238 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fuel Stations & Fuel Prices in Pāpāmoa | Papamoa.info</title>
+  <title>Fuel Stations &amp; Fuel Prices in P&#257;p&#257;moa | Papamoa.info</title>
   <meta name="description" content="Fuel stations in Pāpāmoa — petrol and diesel prices, station locations, hours and EV charging nearby. Community-updated prices via Gaspy NZ.">
+  <link rel="canonical" href="https://papamoa.info/community/fuel-prices.html">
+  <meta property="og:title" content="Fuel Stations &amp; Prices in P&#257;p&#257;moa | Papamoa.info">
+  <meta property="og:description" content="Every petrol station in Pāpāmoa — locations, hours and community-reported fuel prices. Use Gaspy for live prices.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://papamoa.info/community/fuel-prices.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
   <style>
-    :root{--navy:#2B3F5C;--blue:#3AABDE;--lime:#7DC143;--sand:#F5EFE0;--dune:#D4C4A0;--coral:#E8344A;--white:#fff;--body:#1E2D3E;--muted:#607080;--border:#DDE5EE;--bg:#F4F7FA;--gold:#C8962A}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--body);line-height:1.65}
-    a{color:var(--blue)}
-    .site-nav{background:var(--navy);padding:10px 24px;display:flex;align-items:center;gap:16px}
-    .nav-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff;text-decoration:none}
-    .nav-brand em{font-style:normal;color:var(--blue)}
-    .breadcrumb{font-size:0.75rem;color:rgba(255,255,255,0.45)}
-    .breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none}
-    .breadcrumb span{margin:0 5px;opacity:0.4}
-    .hero{background:linear-gradient(135deg,#0D1B2A,#1A2D3A);padding:40px 24px 36px;position:relative;overflow:hidden}
-    .hero::before{content:'⛽';position:absolute;right:50px;top:50%;transform:translateY(-50%);font-size:7rem;opacity:0.07}
-    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--coral))}
-    .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
-    .hero-eye{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px}
-    .hero h1 em{font-style:italic;color:var(--gold)}
-    .hero-sub{font-size:0.93rem;color:rgba(255,255,255,0.65);max-width:580px;line-height:1.7}
-    .page-wrap{max-width:900px;margin:0 auto;padding:32px 20px 80px;display:grid;grid-template-columns:1fr 260px;gap:28px;align-items:start}
-    .section{margin-bottom:40px}
-    .section-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px}
-    p{font-size:0.87rem;color:var(--body);line-height:1.75;margin-bottom:12px}
+    :root {
+      --navy:#0D2B3E; --ocean:#1B6B7D; --blue:#3AABDE; --lime:#7DC143;
+      --sand:#F7F3ED; --sand-dark:#EDE7DB; --dune:#C4985A; --dune-light:#F5EDD8;
+      --coral:#E8344A; --white:#fff; --body:#1A2832; --muted:#5A6E78;
+      --border:#D8E4E8; --bg:#F4F7FA; --gold:#C8962A; --gold-bg:#FBF3E2;
+      --font-body:'Figtree',sans-serif; --font-display:'Playfair Display',serif;
+      --pnf-navy:#0D2B3E; --pnf-accent:#3AABDE; --pnf-white:#FFFFFF; --pnf-muted:rgba(255,255,255,0.45);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--body); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: var(--blue); }
+
+    /* PNF NAV */
+    .pnf-nav { background: var(--pnf-navy); height: 56px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.25); gap: 16px; }
+    .pnf-logo { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--pnf-white); text-decoration: none; flex-shrink: 0; }
+    .pnf-logo span { color: var(--pnf-accent); }
+    .pnf-breadcrumb { font-size: 12px; color: var(--pnf-muted); display: flex; align-items: center; gap: 6px; flex: 1; overflow: hidden; white-space: nowrap; }
+    .pnf-breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; flex-shrink: 0; }
+    .pnf-breadcrumb a:hover { color: var(--pnf-white); }
+    .pnf-breadcrumb .sep { opacity: 0.3; }
+    .pnf-breadcrumb .current { overflow: hidden; text-overflow: ellipsis; opacity: 0.6; }
+    .pnf-cta { font-family: var(--font-body); font-size: 13px; font-weight: 700; background: var(--pnf-accent); color: var(--pnf-white); padding: 8px 18px; border-radius: 100px; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
+    .pnf-cta:hover { background: #2d95c4; }
+    @media (max-width: 640px) { .pnf-nav { padding: 0 16px; } .pnf-cta { display: none; } }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, #0D1B2A, #1A2D3A); padding: 44px 24px 40px; position: relative; overflow: hidden; }
+    .hero::before { content: '&#9981;'; position: absolute; right: 50px; top: 50%; transform: translateY(-50%); font-size: 7rem; opacity: 0.07; pointer-events: none; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--coral)); }
+    .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+    .breadcrumb { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+    .hero-eye { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 10px; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub { font-size: 0.93rem; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.7; }
+
+    /* LAYOUT */
+    .page-wrap { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; display: grid; grid-template-columns: 1fr 260px; gap: 28px; align-items: start; }
+    @media (max-width: 680px) { .page-wrap { grid-template-columns: 1fr; } }
+    .section { margin-bottom: 40px; }
+    .section-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px; }
+    p { font-size: 0.87rem; color: var(--body); line-height: 1.75; margin-bottom: 12px; }
+
     /* STATION CARDS */
-    .station-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px}
-    .sc-head{display:flex;gap:0}
-    .sc-logo{width:60px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
-    .sc-header{padding:14px 16px;flex:1}
-    .sc-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:3px}
-    .sc-addr{font-size:0.75rem;color:var(--muted)}
-    .sc-body{padding:12px 16px;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .fuel-price{text-align:center;padding:10px;background:var(--bg);border-radius:7px}
-    .fp-type{font-size:0.68rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-    .fp-val{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy)}
-    .fp-val.na{font-size:0.8rem;color:var(--muted);font-family:'Figtree',sans-serif;font-style:italic}
-    .fp-updated{font-size:0.66rem;color:var(--muted);margin-top:2px}
+    .station-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 12px; }
+    .sc-head { display: flex; }
+    .sc-logo { width: 60px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .sc-header { padding: 14px 16px; flex: 1; }
+    .sc-name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .sc-addr { font-size: 0.75rem; color: var(--muted); }
+    .sc-body { padding: 12px 16px; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    @media (max-width: 680px) { .sc-body { grid-template-columns: 1fr 1fr; } }
+    .fuel-price { text-align: center; padding: 10px; background: var(--bg); border-radius: 7px; }
+    .fp-type { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .fp-val { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+    .fp-val.na { font-size: 0.8rem; color: var(--muted); font-family: var(--font-body); font-style: italic; }
+    .fp-updated { font-size: 0.66rem; color: var(--muted); margin-top: 2px; }
+
     /* PRICE NOTE */
-    .price-note{background:#FFF8E8;border:1px solid #F5C842;border-radius:8px;padding:12px 15px;font-size:0.82rem;color:#6A4800;margin-bottom:16px;line-height:1.55}
+    .price-note { background: #FFF8E8; border: 1px solid #F5C842; border-radius: 8px; padding: 12px 15px; font-size: 0.82rem; color: #6A4800; margin-bottom: 16px; line-height: 1.55; }
+
     /* GASPY PROMO */
-    .gaspy-box{background:linear-gradient(135deg,#1A3050,#2B4060);border-radius:10px;padding:16px 18px;margin-bottom:16px;display:flex;align-items:center;gap:16px}
-    .gaspy-icon{font-size:2rem;flex-shrink:0}
-    .gaspy-text h4{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:4px}
-    .gaspy-text p{font-size:0.81rem;color:rgba(255,255,255,0.55);line-height:1.5;margin:0}
-    .gaspy-text a{color:var(--blue)}
+    .gaspy-box { background: linear-gradient(135deg, #1A3050, #2B4060); border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 16px; }
+    .gaspy-icon { font-size: 2rem; flex-shrink: 0; }
+    .gaspy-text h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .gaspy-text p { font-size: 0.81rem; color: rgba(255,255,255,0.55); line-height: 1.5; margin: 0; }
+    .gaspy-text a { color: var(--blue); }
+
     /* SUBMIT FORM */
-    .submit-form{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px}
-    .submit-form h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:12px}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-    .form-group{display:flex;flex-direction:column;gap:5px}
-    .form-group label{font-size:0.75rem;font-weight:700;color:var(--navy)}
-    .form-group select,.form-group input{padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.84rem;font-family:'Figtree',sans-serif;background:var(--bg);color:var(--body)}
-    .form-group select:focus,.form-group input:focus{outline:none;border-color:var(--blue)}
-    .submit-btn{background:var(--navy);color:#fff;border:none;padding:10px 20px;border-radius:6px;font-family:'Figtree',sans-serif;font-weight:700;font-size:0.84rem;cursor:pointer;width:100%;margin-top:4px}
-    .submit-btn:hover{background:#1A2A40}
-    .form-note{font-size:0.72rem;color:var(--muted);margin-top:8px;line-height:1.5}
-    /* AD */
-    .ad-spot{border-radius:10px;overflow:hidden;border:1px solid var(--dune);margin-bottom:12px}
-    .ad-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:5px 12px;background:#FAFAF7;border-bottom:1px solid var(--border);text-align:center}
-    .ad-inner{padding:14px;background:#fff}
-    .ad-ph{background:var(--bg);border:1.5px dashed var(--dune);border-radius:7px;padding:14px;text-align:center}
-    .ad-ph p{font-size:0.78rem;color:var(--muted);margin-bottom:5px}
-    .ad-ph a{font-size:0.78rem;font-weight:700;color:var(--blue)}
-    .sidebar-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
-    .sidebar-card h4{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:10px}
-    .sidebar-list{list-style:none;display:flex;flex-direction:column;gap:6px}
-    .sidebar-list li{font-size:0.82rem;color:var(--muted);padding-left:13px;position:relative;line-height:1.4}
-    .sidebar-list li::before{content:'›';position:absolute;left:0;color:var(--blue);font-weight:700}
-    .site-footer{background:var(--navy);padding:18px 24px;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:40px}
-    .site-footer a{color:var(--blue)}
-    #success-msg{display:none;background:#EAF7EE;border:1px solid var(--lime);border-radius:8px;padding:12px 15px;font-size:0.84rem;color:#1A5A2A;margin-top:10px}
-    @media(max-width:680px){.page-wrap{grid-template-columns:1fr}.sc-body{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}}
+    .submit-form { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+    .submit-form h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    @media (max-width: 680px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group label { font-size: 0.75rem; font-weight: 700; color: var(--navy); }
+    .form-group select, .form-group input { padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.84rem; font-family: var(--font-body); background: var(--bg); color: var(--body); }
+    .form-group select:focus, .form-group input:focus { outline: none; border-color: var(--blue); }
+    .submit-btn { background: var(--navy); color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-family: var(--font-body); font-weight: 700; font-size: 0.84rem; cursor: pointer; width: 100%; margin-top: 4px; transition: background 0.15s; }
+    .submit-btn:hover { background: #1A2A40; }
+    .form-note { font-size: 0.72rem; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+    #success-msg { display: none; background: #EAF7EE; border: 1px solid var(--lime); border-radius: 8px; padding: 12px 15px; font-size: 0.84rem; color: #1A5A2A; margin-top: 10px; }
+
+    /* AD SPOT */
+    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); margin-bottom: 12px; }
+    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+    .ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .ad-inner { padding: 14px; background: #fff; }
+    .ad-placeholder { background: var(--gold-bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 16px; text-align: center; }
+    .ad-placeholder strong { display: block; font-size: 0.82rem; color: var(--navy); margin-bottom: 4px; }
+    .ad-placeholder p { font-size: 0.78rem; color: #7A5800; margin-bottom: 8px; line-height: 1.55; }
+    .ad-claim-btn { display: inline-block; font-size: 0.75rem; font-weight: 700; color: var(--white); background: var(--ocean); padding: 7px 14px; border-radius: 5px; text-decoration: none; }
+    .ad-claim-btn:hover { background: var(--navy); }
+
+    /* SIDEBAR */
+    .sidebar-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+    .sidebar-card h4 { font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .sidebar-list li { font-size: 0.82rem; color: var(--muted); padding-left: 13px; position: relative; line-height: 1.4; }
+    .sidebar-list li::before { content: '\203A'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+    .sidebar-list li a { color: var(--blue); text-decoration: none; font-weight: 600; }
+    .sidebar-list li a:hover { text-decoration: underline; }
+
+    /* PNF FOOTER */
+    .pnf-footer-slim { background: var(--pnf-navy); padding: 28px; text-align: center; }
+    .pnf-footer-brand { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--pnf-white); margin-bottom: 6px; display: inline-block; }
+    .pnf-footer-brand span { color: var(--pnf-accent); }
+    .pnf-footer-tagline { font-size: 12.5px; color: rgba(255,255,255,0.38); line-height: 1.7; text-align: center; margin: 0 auto 16px; }
+    .pnf-footer-slim-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+    .pnf-footer-slim-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.15s; }
+    .pnf-footer-slim-links a:hover { color: var(--pnf-white); }
+    .pnf-footer-slim-bottom { font-size: 11.5px; color: rgba(255,255,255,0.2); }
   </style>
 </head>
 <body>
-<nav class="site-nav">
-  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
-  <span class="breadcrumb"><a href="/">Home</a><span>/</span>Fuel Prices</span>
+
+<!-- NAV -->
+<nav class="pnf-nav">
+  <a href="/papamoa-previews/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
+  <div class="pnf-breadcrumb">
+    <a href="/papamoa-previews/homepage.html">Home</a>
+    <span class="sep">/</span>
+    <span class="current">Fuel Prices</span>
+  </div>
+  <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-cta">List your business &rarr;</a>
 </nav>
+
+<!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
-    <div class="hero-eye">Fuel Stations · Pāpāmoa Beach · Bay of Plenty</div>
-    <h1>Fuel Stations &amp;<br><em>Prices</em> in Pāpāmoa</h1>
-    <p class="hero-sub">Every petrol station in Pāpāmoa — locations, hours and community-reported fuel prices. Help keep prices current by submitting what you paid.</p>
+    <div class="breadcrumb"><a href="/papamoa-previews/homepage.html">Home</a> &rsaquo; Fuel Prices</div>
+    <div class="hero-eye">Fuel Stations &middot; P&#257;p&#257;moa Beach &middot; Bay of Plenty</div>
+    <h1>Fuel Stations &amp;<br><em>Prices</em> in P&#257;p&#257;moa</h1>
+    <p class="hero-sub">Every petrol station in P&#257;p&#257;moa &mdash; locations, hours and community-reported fuel prices. Help keep prices current by submitting what you paid.</p>
   </div>
 </header>
+
 <div class="page-wrap">
   <main>
 
     <div class="price-note">
-      <strong>Community-reported prices:</strong> Fuel prices below are reported by Pāpāmoa residents and are not guaranteed to be current. For the most accurate real-time prices, use the <strong>Gaspy app</strong> — the best free fuel price tracker in New Zealand. Prices shown are the most recent community submissions.
+      <strong>Community-reported prices:</strong> Fuel prices below are reported by P&#257;p&#257;moa residents and are not guaranteed to be current. For accurate real-time prices, use the <strong>Gaspy app</strong> &mdash; the best free fuel price tracker in New Zealand. Prices shown are the most recent community submissions.
     </div>
 
     <section class="section">
-      <h2 class="section-title"><span>⛽</span> Pāpāmoa Fuel Stations</h2>
+      <h2 class="section-title"><span>&#9981;</span> P&#257;p&#257;moa Fuel Stations</h2>
 
       <div class="station-card">
         <div class="sc-head">
-          <div class="sc-logo">⛽</div>
+          <div class="sc-logo">&#9981;</div>
           <div class="sc-header">
-            <div class="sc-name">Mobil Pāpāmoa</div>
-            <div class="sc-addr">Pāpāmoa Beach Road, near Fashion Island</div>
+            <div class="sc-name">Mobil P&#257;p&#257;moa</div>
+            <div class="sc-addr">P&#257;p&#257;moa Beach Road, near Fashion Island &middot; <a href="https://www.gaspy.co.nz" target="_blank" rel="noopener">See live price on Gaspy</a></div>
           </div>
         </div>
         <div class="sc-body">
-          <div class="fuel-price">
-            <div class="fp-type">91 Unleaded</div>
-            <div class="fp-val na">Check Gaspy</div>
-          </div>
-          <div class="fuel-price">
-            <div class="fp-type">95 Premium</div>
-            <div class="fp-val na">Check Gaspy</div>
-          </div>
-          <div class="fuel-price">
-            <div class="fp-type">Diesel</div>
-            <div class="fp-val na">Check Gaspy</div>
-          </div>
+          <div class="fuel-price"><div class="fp-type">91 Unleaded</div><div class="fp-val na">Check Gaspy</div></div>
+          <div class="fuel-price"><div class="fp-type">95 Premium</div><div class="fp-val na">Check Gaspy</div></div>
+          <div class="fuel-price"><div class="fp-type">Diesel</div><div class="fp-val na">Check Gaspy</div></div>
         </div>
       </div>
 
       <div class="station-card">
         <div class="sc-head">
-          <div class="sc-logo">⛽</div>
+          <div class="sc-logo">&#9981;</div>
           <div class="sc-header">
-            <div class="sc-name">Z Energy Pāpāmoa</div>
-            <div class="sc-addr">Pāpāmoa Beach Road, Pāpāmoa</div>
+            <div class="sc-name">Z Energy P&#257;p&#257;moa</div>
+            <div class="sc-addr">P&#257;p&#257;moa Beach Road &middot; <a href="https://www.gaspy.co.nz" target="_blank" rel="noopener">See live price on Gaspy</a></div>
           </div>
         </div>
         <div class="sc-body">
-          <div class="fuel-price">
-            <div class="fp-type">91 Unleaded</div>
-            <div class="fp-val na">Check Gaspy</div>
-          </div>
-          <div class="fuel-price">
-            <div class="fp-type">95 Premium</div>
-            <div class="fp-val na">Check Gaspy</div>
-          </div>
-          <div class="fuel-price">
-            <div class="fp-type">Diesel</div>
-            <div class="fp-val na">Check Gaspy</div>
-          </div>
+          <div class="fuel-price"><div class="fp-type">91 Unleaded</div><div class="fp-val na">Check Gaspy</div></div>
+          <div class="fuel-price"><div class="fp-type">95 Premium</div><div class="fp-val na">Check Gaspy</div></div>
+          <div class="fuel-price"><div class="fp-type">Diesel</div><div class="fp-val na">Check Gaspy</div></div>
         </div>
       </div>
 
       <div class="station-card">
         <div class="sc-head">
-          <div class="sc-logo">⛽</div>
+          <div class="sc-logo">&#9981;</div>
           <div class="sc-header">
             <div class="sc-name">BP / Gull / New World fuel</div>
-            <div class="sc-addr">Various locations — check Gaspy for current stations</div>
+            <div class="sc-addr">Various locations &mdash; <a href="https://www.gaspy.co.nz" target="_blank" rel="noopener">find all on Gaspy</a></div>
           </div>
         </div>
         <div class="sc-body">
-          <div class="fuel-price">
-            <div class="fp-type">All grades</div>
-            <div class="fp-val na">Use Gaspy app</div>
-            <div class="fp-updated">For real-time prices</div>
-          </div>
-          <div class="fuel-price">
-            <div class="fp-type">Location</div>
-            <div class="fp-val na">Pāpāmoa &amp; nearby</div>
-          </div>
-          <div class="fuel-price">
-            <div class="fp-type">Live data</div>
-            <div class="fp-val na">gaspy.co.nz</div>
-          </div>
+          <div class="fuel-price"><div class="fp-type">All grades</div><div class="fp-val na">Use Gaspy app</div><div class="fp-updated">For real-time prices</div></div>
+          <div class="fuel-price"><div class="fp-type">Location</div><div class="fp-val na">P&#257;p&#257;moa &amp; nearby</div></div>
+          <div class="fuel-price"><div class="fp-type">Live data</div><div class="fp-val na">gaspy.co.nz</div></div>
         </div>
       </div>
     </section>
 
     <!-- GASPY PROMO -->
     <div class="gaspy-box">
-      <span class="gaspy-icon">📱</span>
+      <span class="gaspy-icon">&#128241;</span>
       <div class="gaspy-text">
         <h4>Use Gaspy for real-time fuel prices</h4>
-        <p>Gaspy is the free NZ app for finding the cheapest petrol near you — right now. Crowd-sourced, up-to-the-minute prices across all stations. Download at <a href="https://www.gaspy.co.nz" target="_blank" rel="noopener">gaspy.co.nz</a> or search "Gaspy" in the App Store / Google Play.</p>
+        <p>Gaspy is the free NZ app for finding the cheapest petrol near you &mdash; right now. Crowd-sourced, up-to-the-minute prices across all stations. Download at <a href="https://www.gaspy.co.nz" target="_blank" rel="noopener">gaspy.co.nz</a> or search &ldquo;Gaspy&rdquo; in the App Store / Google Play.</p>
       </div>
     </div>
 
-    <!-- COMMUNITY SUBMIT FORM -->
+    <!-- SUBMIT FORM -->
     <section class="section">
-      <h2 class="section-title"><span>📢</span> Submit a Price</h2>
+      <h2 class="section-title"><span>&#128226;</span> Submit a Price</h2>
       <div class="submit-form">
-        <h4>Seen a price at a Pāpāmoa station? Let the community know.</h4>
+        <h4>Seen a price at a P&#257;p&#257;moa station? Let the community know.</h4>
         <form id="price-form">
           <div class="form-row">
             <div class="form-group">
               <label for="station">Station</label>
               <select id="station" name="station" required>
                 <option value="">Select station...</option>
-                <option>Mobil Pāpāmoa Beach Road</option>
-                <option>Z Energy Pāpāmoa</option>
-                <option>BP Pāpāmoa</option>
-                <option>Gull Pāpāmoa</option>
-                <option>New World Pāpāmoa fuel</option>
-                <option>Other — specify below</option>
+                <option>Mobil P&#257;p&#257;moa Beach Road</option>
+                <option>Z Energy P&#257;p&#257;moa</option>
+                <option>BP P&#257;p&#257;moa</option>
+                <option>Gull P&#257;p&#257;moa</option>
+                <option>New World P&#257;p&#257;moa fuel</option>
+                <option>Other &mdash; specify below</option>
               </select>
             </div>
             <div class="form-group">
@@ -227,32 +260,38 @@
             </div>
           </div>
           <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
-          <input type="hidden" name="subject" value="Fuel price submission — Papamoa.info">
+          <input type="hidden" name="subject" value="Fuel price submission &mdash; Papamoa.info">
           <input type="hidden" name="from_name" value="Papamoa.info Fuel Prices">
-          <button type="submit" class="submit-btn">Submit price →</button>
-          <div id="success-msg">✓ Thanks — price submitted! It'll appear after verification.</div>
-          <p class="form-note">Prices are reviewed before publishing. Submissions help keep this page useful for everyone in Pāpāmoa.</p>
+          <input type="hidden" name="redirect" value="false">
+          <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <button type="submit" class="submit-btn">Submit price &rarr;</button>
+          <div id="success-msg">&#10003; Thanks &mdash; price submitted! It&rsquo;ll appear after verification.</div>
+          <p class="form-note">Prices are reviewed before publishing. Submissions help keep this page useful for everyone in P&#257;p&#257;moa. Submitted to <strong>jayden&#64;papamoa.info</strong> for review.</p>
         </form>
       </div>
     </section>
 
-    <!-- AD SPOTS -->
+    <!-- GOLD SPOTLIGHT AD -->
     <div class="ad-spot">
-      <div class="ad-label">⭐ Gold Spotlight — Fuel Station</div>
-      <div class="ad-inner"><div class="ad-ph">
-        <p>Fuel station in Pāpāmoa? A Gold Spotlight gets your station seen first by every local searching for petrol prices.</p>
-        <a href="/index.html">Claim Gold Spotlight →</a>
-      </div></div>
+      <div class="ad-label">Gold Spotlight &mdash; Fuel Station</div>
+      <div class="ad-inner">
+        <div class="ad-placeholder">
+          <strong>&#9981; Fuel station in P&#257;p&#257;moa?</strong>
+          <p>A Gold Spotlight gets your station seen first by every local searching for petrol prices. Gold listing holders only.</p>
+          <a href="/papamoa-previews/sales/claim.html?type=spotlight&subcat=fuel-station" class="ad-claim-btn">Claim Gold Spotlight &rarr;</a>
+        </div>
+      </div>
     </div>
 
+    <!-- EV CHARGING -->
     <section class="section">
-      <h2 class="section-title"><span>🔋</span> EV Charging in Pāpāmoa</h2>
+      <h2 class="section-title"><span>&#9889;</span> EV Charging in P&#257;p&#257;moa</h2>
       <div style="background:#EBF5FB;border:1px solid rgba(58,171,222,0.3);border-left:4px solid #3AABDE;border-radius:10px;padding:18px 20px;margin:0 0 16px;display:flex;gap:14px;align-items:flex-start">
         <span style="font-size:1.4rem;flex-shrink:0;line-height:1;margin-top:2px">&#9889;</span>
         <div>
-          <div style="font-weight:700;font-size:0.92rem;color:#1A4060;margin-bottom:4px">Switching to an EV? Find chargers in Pāpāmoa</div>
-          <p style="font-size:0.82rem;color:#2A5070;line-height:1.65;margin-bottom:10px">Pāpāmoa has public EV charging at Excelsa Suburban Centre (Golden Sands) and in the Pāpāmoa Plaza area. The Bay of Plenty's largest rapid charging hub &mdash; 10 bays, up to 300kW &mdash; is at Tauranga Crossing, about 18km away.</p>
-          <a href="/papamoa-previews/community/ev-charging.html" style="display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:700;background:#3AABDE;color:#fff;padding:7px 14px;border-radius:5px;text-decoration:none">EV charging stations in Pāpāmoa &rarr;</a>
+          <div style="font-weight:700;font-size:0.92rem;color:#1A4060;margin-bottom:4px">Switching to an EV? Find chargers in P&#257;p&#257;moa</div>
+          <p style="font-size:0.82rem;color:#2A5070;line-height:1.65;margin-bottom:10px">P&#257;p&#257;moa has public EV charging at Excelsa Suburban Centre (Golden Sands) and in the P&#257;p&#257;moa Plaza area. The Bay of Plenty&rsquo;s largest rapid charging hub &mdash; 10 bays, up to 300kW &mdash; is at Tauranga Crossing, about 18km away.</p>
+          <a href="/papamoa-previews/community/ev-charging.html" style="display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:700;background:#3AABDE;color:#fff;padding:7px 14px;border-radius:5px;text-decoration:none">EV charging stations in P&#257;p&#257;moa &rarr;</a>
         </div>
       </div>
     </section>
@@ -263,56 +302,72 @@
     <div class="sidebar-card">
       <h4>Live price tools</h4>
       <ul class="sidebar-list">
-        <li><a href="https://www.gaspy.co.nz" target="_blank" rel="noopener">Gaspy NZ — free fuel app</a></li>
-        <li><a href="/papamoa-previews/community/ev-charging.html">EV charging in Pāpāmoa</a></li>
-        <li><a href="https://www.plugshare.com" target="_blank" rel="noopener">PlugShare — EV charger map</a></li>
+        <li><a href="https://www.gaspy.co.nz" target="_blank" rel="noopener">Gaspy NZ &mdash; free fuel app</a></li>
+        <li><a href="/papamoa-previews/community/ev-charging.html">EV charging in P&#257;p&#257;moa</a></li>
+        <li><a href="https://www.plugshare.com" target="_blank" rel="noopener">PlugShare &mdash; EV charger map</a></li>
         <li><a href="https://www.mbie.govt.nz/building-and-energy/energy-and-natural-resources/energy-statistics-and-modelling/energy-statistics/weekly-fuel-prices/" target="_blank" rel="noopener">MBIE weekly fuel data</a></li>
       </ul>
     </div>
     <div class="sidebar-card">
-      <h4>Nearby</h4>
+      <h4>Related pages</h4>
       <ul class="sidebar-list">
-        <li><a href="/articles/shopping-centres.html">Shopping centres</a></li>
-        <li><a href="/articles/tauranga.html">Tauranga fuel stations</a></li>
+        <li><a href="/papamoa-previews/community/shopping-centres.html">Shopping centres</a></li>
+        <li><a href="/papamoa-previews/community/weather.html">P&#257;p&#257;moa weather</a></li>
+        <li><a href="/papamoa-previews/homepage.html">P&#257;p&#257;moa directory</a></li>
       </ul>
     </div>
   </aside>
 </div>
-<footer class="site-footer">
-  <a href="/">Papamoa.info</a> — Fuel prices are community-reported and may not reflect current pump prices. Always confirm at the pump. Use Gaspy for real-time data.
+
+<!-- FOOTER -->
+<footer class="pnf-footer-slim">
+  <div class="pnf-footer-brand">Papamoa<span>.info</span></div>
+  <p class="pnf-footer-tagline">P&#257;p&#257;moa&rsquo;s local business directory &middot; Part of the TaurangaNZ.info network &middot; Trusted since 2005</p>
+  <div class="pnf-footer-slim-links">
+    <a href="/papamoa-previews/homepage.html">Directory</a>
+    <a href="/papamoa-previews/community/ev-charging.html">EV Charging</a>
+    <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
+    <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+  <div class="pnf-footer-slim-bottom">&copy; 2026 Papamoa.info &mdash; Fuel prices are community-reported and may not reflect current pump prices. Always confirm at the pump. Use Gaspy for real-time data.</div>
 </footer>
+
 <script>
 document.getElementById('price-form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const btn = this.querySelector('.submit-btn');
-  btn.textContent = 'Submitting...';
+  var btn = this.querySelector('.submit-btn');
+  btn.textContent = 'Submitting\u2026';
   btn.disabled = true;
-  const data = new FormData(this);
+  var data = new FormData(this);
   try {
-    const res = await fetch('https://api.web3forms.com/submit', {method:'POST',body:data});
-    if (res.ok) {
+    var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+    var json = await res.json();
+    if (json.success) {
       document.getElementById('success-msg').style.display = 'block';
       this.reset();
+    } else {
+      btn.textContent = 'Try again';
+      btn.disabled = false;
     }
-  } catch(err) {}
-  btn.textContent = 'Submit price →';
-  btn.disabled = false;
+  } catch(err) {
+    btn.textContent = 'Try again';
+    btn.disabled = false;
+  }
 });
-</script>
-<script>
-  (function() {
-    var base = '/papamoa-previews';
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('/') && !href.startsWith(base)) {
-        e.preventDefault();
-        window.location.href = base + href;
-      }
-    });
-  })();
+
+(function() {
+  var base = '/papamoa-previews';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:') || href.startsWith('#')) return;
+    if (href.startsWith('/') && !href.startsWith(base)) {
+      e.preventDefault();
+      window.location.href = base + href;
+    }
+  });
+})();
 </script>
 </body>
 </html>
