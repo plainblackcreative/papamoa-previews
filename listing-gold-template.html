@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><!-- BUSINESS.name --> Pāpāmoa — <!-- BUSINESS.subcat --> | Papamoa.info</title>
   <meta name="description" content="<!-- BUSINESS.metaDesc -->">
-  <link rel="canonical" href="https://papamoa.info/papamoa-previews/listings/<!-- BUSINESS.slug -->.html">
+  <link rel="canonical" href="https://papamoa.info/listings/<!-- BUSINESS.slug -->.html">
   <meta property="og:title" content="<!-- BUSINESS.name --> Pāpāmoa | Papamoa.info">
   <meta property="og:description" content="<!-- BUSINESS.metaDesc -->">
   <meta property="og:type" content="website">
@@ -48,21 +48,21 @@
 
   <!-- ╔══════════════════════════════════════════════════════════════════╗
        ║  PHOTOS — upload images to:                                      ║
-       ║    images/listings/listing-gold-template/logo.png                               ║
-       ║    images/listings/listing-gold-template/hero-1.jpg  (or .png, up to hero-9)   ║
+       ║    images/listings/BUSINESS_SLUG/logo.png                        ║
+       ║    images/listings/BUSINESS_SLUG/hero-1.jpg  (up to hero-9)      ║
        ║  Then uncomment the logo <img> tag in the hero section.          ║
        ╚══════════════════════════════════════════════════════════════════╝ -->
   <script>
   var PHOTOS = [
-    { src: '/images/listings/listing-gold-template/hero-1.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
-    { src: '/images/listings/listing-gold-template/hero-2.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
-    { src: '/images/listings/listing-gold-template/hero-3.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
-    { src: '/images/listings/listing-gold-template/hero-4.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
-    // { src: '/images/listings/listing-gold-template/hero-5.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
-    // { src: '/images/listings/listing-gold-template/hero-6.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
-    // { src: '/images/listings/listing-gold-template/hero-7.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
-    // { src: '/images/listings/listing-gold-template/hero-8.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
-    // { src: '/images/listings/listing-gold-template/hero-9.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
+    { src: '/papamoa-previews/images/listings/BUSINESS_SLUG/hero-1.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
+    { src: '/papamoa-previews/images/listings/BUSINESS_SLUG/hero-2.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
+    { src: '/papamoa-previews/images/listings/BUSINESS_SLUG/hero-3.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
+    { src: '/papamoa-previews/images/listings/BUSINESS_SLUG/hero-4.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
+    // { src: '/papamoa-previews/images/listings/BUSINESS_SLUG/hero-5.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
+    // { src: '/papamoa-previews/images/listings/BUSINESS_SLUG/hero-6.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
+    // { src: '/papamoa-previews/images/listings/BUSINESS_SLUG/hero-7.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
+    // { src: '/papamoa-previews/images/listings/BUSINESS_SLUG/hero-8.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
+    // { src: '/papamoa-previews/images/listings/BUSINESS_SLUG/hero-9.jpg', alt: 'DESCRIBE THE IMAGE', caption: '' },
   ];
 
   // ── SOCIAL MEDIA — set URLs below. Icons hidden when URL is empty. ──
@@ -93,21 +93,42 @@
 
   <style>
     :root {
-      /* Core palette — from design system (assets/css/styles.css) */
-      --navy:#0D2B3E; --blue:#3AABDE; --lime:#7DC143;
-      --sand:#F7F3ED; --sand-dark:#EDE7DB;
-      --ocean:#1B6B7D; --ocean-deep:#0F4352; --ocean-light:#E4F2F5;
-      --dune:#C4985A; --dune-light:#F5EDD8;
-      --white:#FFFFFF;
+      /* Core palette — canonical design system tokens (assets/css/styles.css) */
+      --navy:        #0D2B3E;   /* darkest — nav bg, headings */
+      --navy-mid:    #2B3F5C;   /* homepage hero bg variant only */
+      --ocean:       #1B6B7D;   /* primary brand colour */
+      --ocean-deep:  #0F4352;   /* darker ocean — hero gradients */
+      --ocean-mid:   #1A5F70;   /* mid gradient stop */
+      --ocean-light: #E4F2F5;   /* tinted bg */
+      --blue:        #3AABDE;   /* accent — CTAs, links, .info in logo */
+      --sand:        #F7F3ED;   /* page background */
+      --sand-dark:   #EDE7DB;   /* section dividers */
+      --dune:        #C4985A;   /* warm gold — secondary accent */
+      --dune-light:  #F5EDD8;   /* dune tint bg */
+      --white:       #FFFFFF;
       /* Text & borders */
-      --body:#1E2D3E; --text:#1A2832; --muted:#5A6E78;
-      --border:#D8E4E8; --bg:#F4F7FA;
-      /* Tier */
-      --gold:#B8840A; --gold-bg:#FBF3E2; --gold-alt:#C8962A;
-      --gold2:#F0C060;
-      /* Status */
-      --green:#1E6B3C; --green-bg:#E6F4EC;
-      --red:#8B2020; --red-bg:#FAEAEA;
+      --body:        #1E2D3E;
+      --text:        #1A2832;
+      --muted:       #5A6E78;
+      --border:      #D8E4E8;
+      --bg:          #F4F7FA;
+      /* Tier colours */
+      --gold:        #B8840A;
+      --gold-bg:     #FBF3E2;
+      --gold-alt:    #C8962A;
+      --gold2:       #F0C060;
+      --silver:      #5A7A8A;
+      --silver-bg:   #EDF3F6;
+      --bronze:      #9A7060;
+      --bronze-bg:   #F5EDE8;
+      /* Status colours */
+      --green:       #1E6B3C;
+      --green-bg:    #E6F4EC;
+      --lime:        #7DC143;
+      --red:         #8B2020;
+      --red-bg:      #FAEAEA;
+      --amber:       #8A5A00;
+      --amber-bg:    #FFF8E6;
     }
     *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; overflow-x:hidden; }
@@ -167,7 +188,6 @@
 
     /* ── CATEGORY HERO COLOUR TOKENS ──
        Apply class "hero-cat-CATEGORY" to .page-hero to set the background gradient.
-       Also set style="background:var(--hero-CATEGORY)" as inline fallback.
 
        Classes:  hero-cat-services | hero-cat-food | hero-cat-accommodation
                  hero-cat-entertainment | hero-cat-shopping | hero-cat-health
@@ -233,6 +253,7 @@
       align-items:center;
       justify-content:center;
       gap:6px;
+      overflow:hidden;
     }
     .hero-logo img {
       width:100%;
@@ -703,7 +724,7 @@
       margin-bottom:12px;
     }
 
-    /* ── CONTACT LIST (ci-text flex pattern) ── */
+    /* ── CONTACT LIST (ci-text flex pattern — locked) ── */
     .contact-list { display:flex; flex-direction:column; gap:0; }
     .contact-item {
       display:flex;
@@ -717,20 +738,6 @@
     .ci-icon { font-size:0.88rem; flex-shrink:0; padding-top:1px; }
     .ci-text { color:var(--muted); line-height:1.5; }
     .ci-text a { color:var(--blue); }
-
-    /* Review badge */
-    .review-badge-card {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      background:var(--bg);
-      border:1px solid var(--border);
-      border-radius:7px;
-      padding:10px 12px;
-    }
-    .rb-stars { color:#F5A623; font-size:0.88rem; }
-    .rb-score { font-weight:700; color:var(--navy); font-size:0.88rem; }
-    .rb-label { font-size:0.74rem; color:var(--muted); }
 
     /* Related links */
     .related-links { display:flex; flex-direction:column; gap:8px; }
@@ -813,7 +820,7 @@
     <!-- Logo — replace src with actual logo URL, or remove img and keep placeholder -->
     <div class="hero-logo">
       <!-- OPTION A: Real logo — upload to repo first, then uncomment -->
-      <!-- <img src="/images/listings/BUSINESS_SLUG/logo.png" alt="BUSINESS_NAME logo"> -->
+      <!-- <img src="/papamoa-previews/images/listings/BUSINESS_SLUG/logo.png" alt="BUSINESS_NAME logo"> -->
       <!-- OPTION B: No logo yet — shows a placeholder box -->
       <span class="hero-logo-empty">&#127968;</span>
       <span class="hero-logo-label">Logo</span>
@@ -830,7 +837,7 @@
     <!-- Website button -->
     <a href="WEBSITE_URL" target="_blank" rel="noopener" class="btn-secondary">&#127760; Visit website</a>
     <!-- Menu Add-On button — replace MENU_URL, or remove if Menu Add-On not active -->
-    <a href="MENU_URL" target="_blank" rel="noopener" class="btn-menu">&#128209; View menu</a>
+    <!-- <a href="MENU_URL" target="_blank" rel="noopener" class="btn-menu">&#128209; View menu</a> -->
     <div class="action-spacer"></div>
     <!-- Social icons — rendered by JS from SOCIAL object. Hidden when URL is empty. -->
     <div class="social-icons" id="social-icons"></div>
@@ -904,7 +911,7 @@
     <!-- SIDEBAR -->
     <div class="side-col">
 
-      <!-- Contact details (ci-text flex pattern) -->
+      <!-- Contact details (ci-text flex pattern — locked) -->
       <div class="sidebar-card">
         <h4>Contact &amp; location</h4>
         <div class="contact-list">
@@ -945,6 +952,7 @@
 // ══════════════════════════════════════════════════════════
 // SOCIAL ICONS — renders from SOCIAL object in <head>
 // Uses image files from /assets/sm-icons/
+// Icons are hidden when a URL is empty — no changes needed per listing
 // ══════════════════════════════════════════════════════════
 (function() {
   var container = document.getElementById('social-icons');
@@ -959,7 +967,7 @@
   };
   Object.keys(iconMap).forEach(function(key) {
     var url = SOCIAL[key];
-    if (!url) return; // skip if no URL provided
+    if (!url) return; // hidden when no URL
     var info = iconMap[key];
     var a = document.createElement('a');
     a.href = url;
@@ -1044,16 +1052,16 @@
       overlay.innerHTML = '<span class="sm-count">+' + (photos.length - showSlots + 1) + '</span><span class="sm-label">See all photos</span>';
       slot.appendChild(overlay);
     } else {
-      var img = document.createElement('img');
-      img.src = photos[i].src;
-      img.alt = photos[i].alt;
-      img.loading = i === 0 ? 'eager' : 'lazy';
-      slot.appendChild(img);
+      var img2 = document.createElement('img');
+      img2.src = photos[i].src;
+      img2.alt = photos[i].alt;
+      img2.loading = i === 0 ? 'eager' : 'lazy';
+      slot.appendChild(img2);
     }
 
-    slot.addEventListener('click', function() {
-      openLightbox(parseInt(this.getAttribute('data-index')));
-    });
+    slot.addEventListener('click', (function(idx) {
+      return function() { openLightbox(idx); };
+    })(i));
     grid.appendChild(slot);
   }
 

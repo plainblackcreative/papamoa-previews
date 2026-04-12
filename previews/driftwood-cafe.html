@@ -226,6 +226,7 @@ body { font-family:'Figtree',sans-serif; background:var(--sand); color:var(--tex
 .menu-filter-label { font-size:11px; color:var(--text-light); font-weight:600; margin-right:2px; }
 .menu-filter { padding:3px 10px; border-radius:100px; font-size:11px; font-weight:600; cursor:pointer; border:1px solid var(--sand-dark); background:white; color:var(--text-soft); font-family:'Figtree',sans-serif; transition:all 0.15s; }
 .menu-filter.active { background:var(--ocean-accent); color:white; border-color:var(--ocean-accent); }
+.menu-cat-note { font-size:11px; color:var(--text-light); padding:8px 16px 0; font-style:italic; display:none; }
 .menu-items { padding:12px 16px 16px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 @media (max-width:480px) { .menu-items { grid-template-columns:1fr; } }
 .menu-item { background:var(--sand); border-radius:9px; overflow:hidden; display:flex; flex-direction:column; }
@@ -247,7 +248,7 @@ body { font-family:'Figtree',sans-serif; background:var(--sand); color:var(--tex
 .diet-df { background:rgba(58,171,222,0.1); color:var(--ocean); border:1px solid rgba(58,171,222,0.2); }
 .menu-demo-footer { padding:10px 16px 14px; border-top:1px solid var(--sand-dark); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; }
 .menu-updated { font-size:11px; color:var(--text-light); }
-.menu-order-btn { font-size:12px; font-weight:600; color:white; background:var(--ocean-accent); padding:6px 14px; border-radius:6px; text-decoration:none; border:none; cursor:pointer; font-family:'Figtree',sans-serif; }
+.menu-order-btn { font-size:12px; font-weight:600; color:white; background:var(--ocean-accent); padding:6px 14px; border-radius:6px; border:none; cursor:pointer; font-family:'Figtree',sans-serif; }
 .menu-addon-note { background:var(--ocean-light); border-radius:9px; padding:14px 18px; margin-top:14px; display:flex; gap:12px; align-items:flex-start; }
 .menu-addon-note p { font-size:13px; color:var(--ocean-deep); line-height:1.55; }
 
@@ -404,12 +405,12 @@ const STRIPE_SILVER_URL = "/papamoa-previews/sales/landing.html"; // TODO: repla
 const WORKER_URL = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
 const PRICE_GOLD    = 1199;
 const PRICE_SILVER  = 599;
-const PRICE_EXTRA   = 199;
+const PRICE_EXTRA   = 199;  // Extra Spotlight: $199+gst/yr each
 </script>
 
 <!-- HEADER -->
 <header class="site-header">
-  <a href="/homepage.html" class="logo-text">papamoa<span>.info</span></a>
+  <a href="/papamoa-previews/homepage.html" class="logo-text">papamoa<span>.info</span></a>
   <span class="header-badge">Personal Preview</span>
 </header>
 
@@ -459,7 +460,7 @@ const PRICE_EXTRA   = 199;
   <div class="tiers-section">
     <div class="section-label">Listing options</div>
     <h2>What each tier gets <span data-biz="name">your business</span></h2>
-    <p class="sub">Every tier is written and optimised by us — you don't lift a finger. Gold is the only tier with a Spotlight position. One Gold per sub-category, first in wins.</p>
+    <p class="sub">Every tier is written and optimised by us — you don't lift a finger. Gold is the only tier with a Spotlight position. One Gold Spotlight per sub-category, first in wins.</p>
     <div class="tiers-grid">
       <div class="tier-card silver-card">
         <span class="tier-badge">Full listing</span>
@@ -487,7 +488,7 @@ const PRICE_EXTRA   = 199;
       <div class="tier-card gold-card">
         <span class="tier-badge">Best value</span>
         <div class="tier-header">
-          <div class="tier-name">Gold Spotlight</div>
+          <div class="tier-name">Gold Listing</div>
           <div class="tier-price">$1,199 <span>+gst/yr</span></div>
           <div class="tier-desc">Top of your sub-category, always</div>
         </div>
@@ -514,7 +515,7 @@ const PRICE_EXTRA   = 199;
     <h2>See how <span data-biz="name">your listing</span> looks</h2>
     <p class="sub">This is your actual listing — the copy, hours, and tags are all generated from your website. Switch between tiers to see the difference.</p>
     <div class="mockup-tabs">
-      <button class="mockup-tab active-gold" data-tab="gold" onclick="switchMockup('gold')">⭐ Gold Spotlight</button>
+      <button class="mockup-tab active-gold" data-tab="gold" onclick="switchMockup('gold')">⭐ Gold Listing</button>
       <button class="mockup-tab" data-tab="silver" onclick="switchMockup('silver')">◆ Silver</button>
     </div>
 
@@ -526,7 +527,7 @@ const PRICE_EXTRA   = 199;
           <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C8962A,#F0C060,#C8962A);"></div>
           <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
             <div style="flex:1;min-width:0;">
-              <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:linear-gradient(135deg,#C8962A,#F0C060);color:#1A0A00;padding:4px 10px;border-radius:3px;margin-bottom:12px;">⭐ Gold Spotlight</div>
+              <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:linear-gradient(135deg,#C8962A,#F0C060);color:#1A0A00;padding:4px 10px;border-radius:3px;margin-bottom:12px;">⭐ Gold Listing</div>
               <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;" data-biz="category">Food &amp; Drink</div>
               <h3 style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:8px;" data-biz="name">The Driftwood Café</h3>
               <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;max-width:520px;margin-bottom:14px;" data-biz="description"></p>
@@ -692,7 +693,7 @@ const PRICE_EXTRA   = 199;
             <!-- Upgrade nudge -->
             <div style="background:linear-gradient(135deg,#FFFAF0,#FFF5DC);border:1px solid rgba(200,150,42,0.3);border-radius:10px;padding:14px 16px;">
               <div style="font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#C8962A;margin-bottom:4px;">Upgrade available</div>
-              <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#7A5010;margin-bottom:8px;">Add Gold Spotlight</div>
+              <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#7A5010;margin-bottom:8px;">Add Gold Listing</div>
               <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px;">
                 <div style="font-size:11px;color:#8A6020;padding-left:12px;">✦ Spotlight — top of sub-category</div>
                 <div style="font-size:11px;color:#8A6020;padding-left:12px;">✦ Photo gallery (up to 9 images)</div>
@@ -845,7 +846,7 @@ const PRICE_EXTRA   = 199;
 
     <!-- Tier toggle -->
     <div class="tier-toggle">
-      <button class="tier-toggle-btn active-gold" id="toggle-gold" onclick="switchTier('gold')">⭐ Gold Spotlight — $1,199+gst</button>
+      <button class="tier-toggle-btn active-gold" id="toggle-gold" onclick="switchTier('gold')">⭐ Gold Listing — $1,199+gst</button>
       <button class="tier-toggle-btn" id="toggle-silver" onclick="switchTier('silver')">◆ Silver — $599+gst</button>
     </div>
 
@@ -872,7 +873,7 @@ const PRICE_EXTRA   = 199;
       <!-- Live price summary -->
       <div class="price-summary" id="gold-price-summary">
         <div class="ps-breakdown" id="ps-breakdown">
-          Gold Spotlight — $1,199+gst/yr
+          Gold Listing — $1,199+gst/yr
         </div>
         <div class="ps-total">
           <div class="ps-total-label">Total per year</div>
@@ -887,7 +888,7 @@ const PRICE_EXTRA   = 199;
         <div class="g-pill"><span>✍️</span><div class="g-pill-text"><strong>Done for You</strong><small>We write everything. You review and approve.</small></div></div>
       </div>
 
-      <a href="#" id="btn-pay-gold" class="btn-pay btn-pay-gold" onclick="payGold(event)">Pay now — Gold Spotlight →</a>
+      <a href="#" id="btn-pay-gold" class="btn-pay btn-pay-gold" onclick="payGold(event)">Pay now — Gold Listing →</a>
       <p class="pay-note">Secure payment via Stripe &nbsp;·&nbsp; gst invoice issued automatically &nbsp;·&nbsp; Listing draft within 24 hours &nbsp;·&nbsp; Questions? <a href="tel:0275332970">027 533 2970</a></p>
     </div>
 
@@ -933,7 +934,7 @@ const PRICE_EXTRA   = 199;
       <strong>Jayden Brown — Local Partner, Papamoa.info</strong>
       <p>This preview is based on <span data-biz="name">The Driftwood Café</span>'s website and socials. Once you pay I'll be in touch within a couple of hours to confirm your details, refine the copy with your input, and get your listing live within 24 hours of your sign-off.</p>
       <div class="jayden-links">
-        <a href="/cdn-cgi/l/email-protection#3258534b56575c72425342535f5d531c5b5c545d" class="jayden-link">✉ <span class="__cf_email__" data-cfemail="187279617c7d7658687968797577793671767e77">[email&#160;protected]</span></a>
+        <a href="mailto:jayden&#64;papamoa.info" class="jayden-link">✉ jayden&#64;papamoa.info</a>
         <a href="tel:0275332970" class="jayden-link">📞 027 533 2970</a>
       </div>
     </div>
@@ -942,10 +943,10 @@ const PRICE_EXTRA   = 199;
 </div>
 
 <footer class="page-footer">
-  <a href="https://papamoa.info">papamoa.info</a> · Part of the TaurangaNZ.info network — trusted since 2005
+  <a href="/papamoa-previews/homepage.html">papamoa.info</a> · Part of the TaurangaNZ.info network — trusted since 2005
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* ── INIT ── */
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -978,7 +979,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>`).join('');
   }
 
-  // Tags in mockup heroes and body
+  // Tags in mockup heroes
   ['gold-hero-tags','silver-hero-tags'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.innerHTML = BUSINESS.tags.map(t =>
@@ -1051,7 +1052,7 @@ function updatePrice() {
   const primary = document.getElementById('primary-spotlight')?.value || BUSINESS.availableSpotlights[0];
   const extraNames = [...document.querySelectorAll('.spotlight-extra input:checked')].map(c => c.value);
 
-  let breakdown = `Gold Spotlight — ${primary} — $${PRICE_GOLD.toLocaleString()}+gst/yr`;
+  let breakdown = `Gold Listing — ${primary} — $${PRICE_GOLD.toLocaleString()}+gst/yr`;
   extraNames.forEach(n => { breakdown += `<br>Extra Spotlight — ${n} — $${PRICE_EXTRA}+gst/yr`; });
   document.getElementById('ps-breakdown').innerHTML = breakdown;
   document.getElementById('ps-total').textContent = `$${total.toLocaleString()}`;
@@ -1084,8 +1085,6 @@ function payGold(e) {
   const primary  = document.getElementById('primary-spotlight')?.value || BUSINESS.availableSpotlights[0];
   const extras   = [...document.querySelectorAll('.spotlight-extra input:checked')].map(c => c.value).join(', ');
   const total    = PRICE_GOLD + ([...document.querySelectorAll('.spotlight-extra input:checked')].length * PRICE_EXTRA);
-  // Build Stripe URL — append metadata when Stripe supports it via URL params
-  // For now, redirect with a console note; replace STRIPE_GOLD_URL with real link
   if (STRIPE_GOLD_URL === '#stripe-gold-placeholder') {
     alert(`Stripe not yet connected.\n\nSelected: Gold — ${primary}${extras ? ' + '+extras : ''}\nTotal: $${total}+gst/yr\n\nAdd your Stripe link to STRIPE_GOLD_URL in the BUSINESS config.`);
     return;
@@ -1169,7 +1168,7 @@ async function checkSearchTerm() {
         search_term: term,
         message: 'Search checker failed for ' + BUSINESS.name + ' (PPP). Search term tried: "' + term + '". Worker may be down. Send a new PPP link when fixed.'
       })
-    }).catch(() => {}); // silent — never surface to prospect
+    }).catch(() => {}); // silent
   }
   btn.disabled = false; btn.textContent = 'Check';
 }
@@ -1186,4 +1185,14 @@ function resetSearch() {
     document.addEventListener('click', function(e) {
       var a = e.target.closest('a');
       if (!a) return;
-     
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('http')) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
+</body>
+</html>

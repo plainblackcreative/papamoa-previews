@@ -18,8 +18,8 @@
   ║                                                                            ║
   ║  MENU LOGIC (automatic)                                                   ║
   ║  hasMenu: true  → "View menu" button → opens lightbox (add-on purchased) ║
-  ║  hasMenu: false → purchase CTA → links to /sales/menu-addon.html         ║
-  ║                    ($199+gst/yr, category-specific label)                  ║
+  ║  hasMenu: false → purchase CTA for $199+gst/yr → /sales/menu-addon.html  ║
+  ║                    (category-specific label rendered by JS)               ║
   ║                                                                            ║
   ║  HERO CATEGORY CLASSES                                                     ║
   ║  hero-cat-food | hero-cat-services | hero-cat-accommodation               ║
@@ -30,7 +30,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BUSINESS_NAME Pāpāmoa — BUSINESS_SUBCAT | Papamoa.info</title>
   <meta name="description" content="BUSINESS_METADESC">
-  <link rel="canonical" href="https://papamoa.info/papamoa-previews/listings/BUSINESS_SLUG.html">
+  <link rel="canonical" href="https://papamoa.info/listings/BUSINESS_SLUG.html">
   <meta property="og:title" content="BUSINESS_NAME Pāpāmoa | Papamoa.info">
   <meta property="og:description" content="BUSINESS_METADESC">
   <meta property="og:type" content="website">
@@ -93,21 +93,42 @@
 
   <style>
     :root {
-      /* Core palette — from design system (assets/css/styles.css) */
-      --navy:#0D2B3E; --blue:#3AABDE;
-      --sand:#F7F3ED; --sand-dark:#EDE7DB;
-      --ocean:#1B6B7D; --ocean-deep:#0F4352; --ocean-light:#E4F2F5;
-      --dune:#C4985A; --dune-light:#F5EDD8;
-      --white:#FFFFFF;
+      /* Core palette — canonical design system tokens (assets/css/styles.css) */
+      --navy:        #0D2B3E;   /* darkest — nav bg, headings */
+      --navy-mid:    #2B3F5C;   /* homepage hero bg variant only */
+      --ocean:       #1B6B7D;   /* primary brand colour */
+      --ocean-deep:  #0F4352;   /* darker ocean — hero gradients */
+      --ocean-mid:   #1A5F70;   /* mid gradient stop */
+      --ocean-light: #E4F2F5;   /* tinted bg */
+      --blue:        #3AABDE;   /* accent — CTAs, links, .info in logo */
+      --sand:        #F7F3ED;   /* page background */
+      --sand-dark:   #EDE7DB;   /* section dividers */
+      --dune:        #C4985A;   /* warm gold — secondary accent */
+      --dune-light:  #F5EDD8;   /* dune tint bg */
+      --white:       #FFFFFF;
       /* Text & borders */
-      --body:#1E2D3E; --text:#1A2832; --muted:#5A6E78;
-      --border:#D8E4E8; --bg:#F4F7FA;
-      /* Tier */
-      --gold:#B8840A; --gold-bg:#FBF3E2; --gold-alt:#C8962A; --gold2:#F0C060;
-      --silver:#5A7A8A; --silver-bg:#EDF3F6;
-      --silver2:#A0B0C8;
-      /* Status */
-      --green:#1E6B3C; --green-bg:#E6F4EC;
+      --body:        #1E2D3E;
+      --text:        #1A2832;
+      --muted:       #5A6E78;
+      --border:      #D8E4E8;
+      --bg:          #F4F7FA;
+      /* Tier colours */
+      --gold:        #B8840A;
+      --gold-bg:     #FBF3E2;
+      --gold-alt:    #C8962A;
+      --silver:      #5A7A8A;
+      --silver-bg:   #EDF3F6;
+      --silver2:     #A0B0C8;
+      --bronze:      #9A7060;
+      --bronze-bg:   #F5EDE8;
+      /* Status colours */
+      --green:       #1E6B3C;
+      --green-bg:    #E6F4EC;
+      --lime:        #7DC143;
+      --red:         #8B2020;
+      --red-bg:      #FAEAEA;
+      --amber:       #8A5A00;
+      --amber-bg:    #FFF8E6;
     }
     *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; overflow-x:hidden; }
@@ -189,9 +210,10 @@
     .btn-primary:hover { background:var(--blue); }
     .btn-secondary { background:transparent; color:var(--body); font-family:'Figtree',sans-serif; font-weight:600; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid var(--border); text-decoration:none; transition:all 0.2s; white-space:nowrap; cursor:pointer; }
     .btn-secondary:hover { border-color:var(--blue); color:var(--blue); }
+    /* Active menu button — shown when hasMenu: true */
     .btn-menu { background:transparent; color:var(--body); font-family:'Figtree',sans-serif; font-weight:600; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid var(--border); text-decoration:none; transition:all 0.2s; white-space:nowrap; cursor:pointer; }
     .btn-menu:hover { border-color:var(--silver); color:var(--silver); }
-    /* Menu Add-On purchase CTA (Silver only, when hasMenu: false) */
+    /* Menu Add-On purchase CTA — shown when hasMenu: false ($199+gst/yr) */
     .btn-menu-purchase { background:var(--bg); color:var(--ocean-deep); font-family:'Figtree',sans-serif; font-weight:700; font-size:0.83rem; padding:10px 18px; border-radius:7px; border:1.5px solid var(--ocean); text-decoration:none; transition:all 0.2s; white-space:nowrap; cursor:pointer; }
     .btn-menu-purchase:hover { background:var(--ocean-light); border-color:var(--ocean-deep); }
     .action-spacer { flex:1; }
@@ -285,7 +307,7 @@
     .sidebar-card { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
     .sidebar-card h4 { font-family:'Playfair Display',serif; font-size:0.9rem; font-weight:700; color:var(--navy); margin-bottom:12px; }
 
-    /* ── CONTACT LIST (ci-text flex pattern) ── */
+    /* ── CONTACT LIST (ci-text flex pattern — locked) ── */
     .contact-list { display:flex; flex-direction:column; gap:0; }
     .contact-item {
       display:flex;
@@ -364,7 +386,10 @@
   <div class="action-bar-inner">
     <a href="tel:PHONE" class="btn-primary">&#128222; PHONE_DISPLAY</a>
     <a href="WEBSITE_URL" target="_blank" rel="noopener" class="btn-secondary">&#127760; Visit website</a>
-    <!-- Menu button — rendered by JS based on BUSINESS.hasMenu -->
+    <!-- Menu button slot — rendered by JS based on BUSINESS.hasMenu:
+         true  → "View menu" button opening the lightbox
+         false → purchase CTA linking to /sales/menu-addon.html ($199+gst/yr)
+         Label is category-specific (see JS below) -->
     <span id="menu-btn-slot"></span>
     <div class="action-spacer"></div>
     <!-- Social icons — rendered by JS from SOCIAL object. Hidden when URL is empty. -->
@@ -441,13 +466,13 @@
     <!-- SIDEBAR -->
     <div class="side-col">
 
-      <!-- Contact details (ci-text flex pattern) -->
+      <!-- Contact details (ci-text flex pattern — locked) -->
       <div class="sidebar-card">
         <h4>Contact &amp; location</h4>
         <div class="contact-list">
           <div class="contact-item"><span class="ci-icon">&#128205;</span><span class="ci-text">FULL_ADDRESS</span></div>
           <div class="contact-item"><span class="ci-icon">&#128222;</span><span class="ci-text"><a href="tel:PHONE">PHONE_DISPLAY</a></span></div>
-          <div class="contact-item"><span class="ci-icon">&#128231;</span><span class="ci-text"><a href="mailto:EMAIL">EMAIL_DISPLAY</a></span></div>
+          <div class="contact-item"><span class="ci-icon">&#128231;</span><span class="ci-text"><a href="mailto:&#69;&#77;&#65;&#73;&#76;">EMAIL_DISPLAY</a></span></div>
           <div class="contact-item"><span class="ci-icon">&#127760;</span><span class="ci-text"><a href="WEBSITE_URL" target="_blank" rel="noopener">WEBSITE_DISPLAY</a></span></div>
           <div class="contact-item"><span class="ci-icon">&#128337;</span><span class="ci-text">HOURS_SHORT</span></div>
           <div class="contact-item"><span class="ci-icon">&#128200;</span><span class="ci-text"><a href="/papamoa-previews/categories/CATEGORY_PATH.html">CATEGORY_NAME</a></span></div>
@@ -478,7 +503,8 @@
 </footer>
 
 <script>
-// ── SOCIAL ICONS — renders from SOCIAL object using image files ──
+// ── SOCIAL ICONS — renders from SOCIAL object using image files from /assets/sm-icons/ ──
+// Icons are automatically hidden when a URL is empty — no HTML changes needed per listing
 (function(){
   var container = document.getElementById('social-icons');
   if (!container || typeof SOCIAL === 'undefined') return;
@@ -492,7 +518,7 @@
   };
   Object.keys(iconMap).forEach(function(key) {
     var url = SOCIAL[key];
-    if (!url) return;
+    if (!url) return; // hidden when no URL
     var info = iconMap[key];
     var a = document.createElement('a');
     a.href = url;
@@ -541,20 +567,23 @@
   if (!container.children.length) container.style.display = 'none';
 })();
 
-// ── MENU BUTTON ──
+// ── MENU BUTTON — purchase CTA or active "View menu" based on hasMenu ──
+// Silver: when hasMenu is false, shows a purchase CTA for $199+gst/yr
+//         linking to /sales/menu-addon.html (NOT a Gold upgrade prompt)
+// Silver: when hasMenu is true, shows "View menu" button opening the lightbox
 (function(){
   var slot = document.getElementById('menu-btn-slot');
   if(!slot) return;
   // Category-specific labels for the purchase CTA
   var purchaseLabels = {
-    'food-drink':    '&#128209; Add your menu - $199+gst/yr',
-    'services':      '&#128209; Add services &amp; pricing - $199+gst/yr',
-    'accommodation': '&#128209; Add rooms &amp; rates - $199+gst/yr',
-    'health':        '&#128209; Add treatments &amp; pricing - $199+gst/yr',
-    'entertainment': '&#128209; Add your services - $199+gst/yr',
-    'shopping':      '&#128209; Add your product range - $199+gst/yr',
-    'real-estate':   '&#128209; Add your listings - $199+gst/yr',
-    'default':       '&#128209; Add a menu - $199+gst/yr'
+    'food-drink':    '&#128209; Add your menu &mdash; $199+gst/yr',
+    'services':      '&#128209; Add services &amp; pricing &mdash; $199+gst/yr',
+    'accommodation': '&#128209; Add rooms &amp; rates &mdash; $199+gst/yr',
+    'health':        '&#128209; Add treatments &amp; pricing &mdash; $199+gst/yr',
+    'entertainment': '&#128209; Add your services &mdash; $199+gst/yr',
+    'shopping':      '&#128209; Add your product range &mdash; $199+gst/yr',
+    'real-estate':   '&#128209; Add your listings &mdash; $199+gst/yr',
+    'default':       '&#128209; Add a menu &mdash; $199+gst/yr'
   };
   if(BUSINESS.hasMenu && MENU_DATA && MENU_DATA.items && MENU_DATA.items.length) {
     // Menu Add-On is active — show "View menu" button
@@ -567,13 +596,14 @@
     });
     slot.appendChild(btn);
   } else {
-    // Menu Add-On not purchased — show purchase CTA linking to /sales/menu-addon.html
+    // Menu Add-On not purchased — show $199+gst/yr purchase CTA
+    // Links to /sales/menu-addon.html (NOT a Gold upgrade prompt)
     var label = purchaseLabels[BUSINESS.category] || purchaseLabels['default'];
-    var btn = document.createElement('a');
-    btn.className = 'btn-menu-purchase';
-    btn.href = '/papamoa-previews/sales/menu-addon.html';
-    btn.innerHTML = label;
-    slot.appendChild(btn);
+    var cta = document.createElement('a');
+    cta.className = 'btn-menu-purchase';
+    cta.href = '/papamoa-previews/sales/menu-addon.html';
+    cta.innerHTML = label;
+    slot.appendChild(cta);
   }
 })();
 
@@ -590,7 +620,7 @@
   var activeCat = MENU_DATA.categories[0].id;
   var activeFilter = 'all';
 
-  // Build dynamic dietary filters from actual menu data
+  // Build dynamic dietary filters — only show tags that exist in menu data
   var allTags = {};
   MENU_DATA.items.forEach(function(item) {
     if (item.tags) item.tags.forEach(function(t) { allTags[t] = true; });
@@ -663,17 +693,6 @@
   }
   renderCats();
   renderItems();
-})();
-
-// ── FAQ SCHEMA (no FAQ section on Silver, but keep for safety) ──
-(function(){
-  var faqs = [];
-  document.querySelectorAll('.faq-item').forEach(function(item){
-    var q = item.querySelector('.faq-q');
-    var a = item.querySelector('.faq-a');
-    if(q && a) faqs.push({'@type':'Question','name':q.childNodes[0].textContent.trim(),'acceptedAnswer':{'@type':'Answer','text':a.textContent.trim()}});
-  });
-  if(faqs.length){ var el = document.getElementById('schema-faq'); if(el) el.textContent = JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':faqs}); }
 })();
 
 // ── URL PREFIX FIX (GitHub Pages) ──
