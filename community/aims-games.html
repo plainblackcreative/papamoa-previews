@@ -1,199 +1,520 @@
 <!DOCTYPE html>
 <html lang="en-NZ">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AIMS Games 2026 Tauranga — Accommodation, Restaurants & Family Guide | Papamoa.info</title>
-  <meta name="description" content="Zespri AIMS Games 2026 in Tauranga — Saturday 5 to Friday 11 September 2026. Accommodation guide for families, restaurants near venues, parking and local tips from Pāpāmoa.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
-  <style>
-    :root{--navy:#2B3F5C;--blue:#3AABDE;--lime:#7DC143;--sand:#F5EFE0;--dune:#D4C4A0;--coral:#E8344A;--white:#fff;--body:#1E2D3E;--muted:#607080;--border:#DDE5EE;--bg:#F4F7FA;--gold:#C8962A}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--body);line-height:1.65}
-    a{color:var(--blue)}
-    .site-nav{background:var(--navy);padding:10px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-    .nav-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff;text-decoration:none}
-    .nav-brand em{font-style:normal;color:var(--blue)}
-    .breadcrumb{font-size:0.75rem;color:rgba(255,255,255,0.45)}
-    .breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none}
-    .breadcrumb span{margin:0 5px;opacity:0.4}
-    .hero{background:linear-gradient(135deg,#0D2A50,#1A3A6A);padding:44px 24px 40px;position:relative;overflow:hidden}
-    .hero::before{content:'🏅';position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:8rem;opacity:0.06}
-    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),#F0C060,var(--gold))}
-    .hero-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
-    .hero-eye{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:12px}
-    .hero h1 em{font-style:italic;color:var(--gold)}
-    .hero-sub{font-size:0.97rem;color:rgba(255,255,255,0.65);max-width:600px;line-height:1.7;margin-bottom:20px}
-    .hero-date-box{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:16px 20px;display:inline-flex;gap:20px;flex-wrap:wrap}
-    .hdb-item{text-align:center}
-    .hdb-val{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#fff;line-height:1}
-    .hdb-lbl{font-size:0.67rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:3px}
-    .page-wrap{max-width:960px;margin:0 auto;padding:36px 20px 80px}
-    .two-col{display:grid;grid-template-columns:1fr 280px;gap:28px;align-items:start}
-    .section{margin-bottom:44px}
-    .section-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px}
-    .section-intro{font-size:0.88rem;color:var(--muted);margin-bottom:18px;line-height:1.7}
-    /* ACCOMMODATION */
-    .accom-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px}
-    .ac-head{display:flex;gap:0}
-    .ac-icon{width:56px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
-    .ac-header{padding:14px 16px;flex:1}
-    .ac-name{font-family:'Playfair Display',serif;font-size:0.97rem;font-weight:700;color:var(--navy);margin-bottom:4px}
-    .ac-tags{display:flex;flex-wrap:wrap;gap:5px}
-    .act{font-size:0.67rem;font-weight:700;padding:2px 8px;border-radius:3px;background:var(--bg);border:1px solid var(--border);color:var(--muted)}
-    .act.gold-tag{background:#FFFBF0;border-color:var(--gold);color:var(--gold)}
-    .ac-body{padding:0 16px 16px;font-size:0.84rem;color:var(--muted);line-height:1.6}
-    /* AD GOLD */
-    .ad-gold{background:linear-gradient(135deg,var(--navy),#1A2A40);border-radius:10px;padding:18px;margin-bottom:12px}
-    .ag-eye{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:5px}
-    .ag-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:4px}
-    .ag-desc{font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:10px}
-    .ag-link{display:block;background:linear-gradient(135deg,var(--gold),#A07020);color:#fff;font-family:'Figtree',sans-serif;font-weight:700;font-size:0.78rem;padding:9px 14px;border-radius:5px;text-decoration:none;text-align:center}
-    /* TIP BOX */
-    .tip-box{background:linear-gradient(135deg,#EBF8F5,#DDF0E8);border:1px solid #A8D8C0;border-radius:10px;padding:16px 18px;margin-bottom:16px}
-    .tip-box h4{font-size:0.8rem;font-weight:700;color:#1A5C3C;margin-bottom:8px}
-    .tip-box ul{list-style:none;display:flex;flex-direction:column;gap:5px}
-    .tip-box li{font-size:0.82rem;color:#2A6A48;padding-left:14px;position:relative}
-    .tip-box li::before{content:'✓';position:absolute;left:0;color:var(--lime)}
-    /* SIDEBAR */
-    .sidebar-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px}
-    .sidebar-card h4{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:10px}
-    .sidebar-list{list-style:none;display:flex;flex-direction:column;gap:6px}
-    .sidebar-list li{font-size:0.82rem;color:var(--muted);padding-left:13px;position:relative;line-height:1.4}
-    .sidebar-list li::before{content:'›';position:absolute;left:0;color:var(--blue);font-weight:700}
-    .sidebar-list li strong{color:var(--body)}
-    .ad-spot{border-radius:10px;overflow:hidden;border:1px solid var(--dune)}
-    .ad-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:5px 12px;background:#FAFAF7;border-bottom:1px solid var(--border);text-align:center}
-    .ad-inner{padding:14px}
-    .ad-placeholder{background:var(--bg);border:1.5px dashed var(--dune);border-radius:7px;padding:16px;text-align:center}
-    .ad-placeholder p{font-size:0.78rem;color:var(--muted);margin-bottom:6px}
-    .ad-placeholder a{font-size:0.78rem;font-weight:700;color:var(--blue)}
-    .site-footer{background:var(--navy);padding:20px 24px;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:40px}
-    .site-footer a{color:var(--blue)}
-    @media(max-width:720px){.two-col{grid-template-columns:1fr}.side-col{order:-1}.hero-date-box{gap:12px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIMS Games 2026 Tauranga — Accommodation, Restaurants &amp; Family Guide | Papamoa.info</title>
+<meta name="description" content="Zespri AIMS Games 2026, Tauranga — 5–11 September 2026. Accommodation near venues, restaurants for families, parking, sports list, venue guide and local tips from Pāpāmoa.">
+<link rel="canonical" href="https://papamoa.info/community/aims-games.html">
+<meta property="og:title" content="AIMS Games 2026 Tauranga — Accommodation, Restaurants &amp; Family Guide">
+<meta property="og:description" content="Everything families need for AIMS Games 2026 in Tauranga. Accommodation, restaurants, venues, sports list and local tips from Pāpāmoa.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://papamoa.info/community/aims-games.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Zespri AIMS Games 2026",
+  "description": "The largest junior multi-sport event in Australasia. Over 14,000 athletes aged 11–13 from 430+ schools competing in 27 sports across Tauranga and the Western Bay of Plenty.",
+  "startDate": "2026-09-05",
+  "endDate": "2026-09-11",
+  "location": {
+    "@type": "City",
+    "name": "Tauranga",
+    "addressCountry": "NZ"
+  },
+  "url": "https://www.nzaimsgames.co.nz",
+  "organizer": {
+    "@type": "Organization",
+    "name": "AIMS Games",
+    "url": "https://www.nzaimsgames.co.nz"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When are the AIMS Games 2026?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Zespri AIMS Games 2026 run from Saturday 5 September to Friday 11 September 2026 in Tauranga and the Western Bay of Plenty." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is the best place to stay for AIMS Games 2026?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Pāpāmoa is an ideal base for AIMS Games families — 10 minutes from central Tauranga, directly connected to Mount Maunganui, and with beach access for after-competition downtime. Beyonder is the official AIMS Games accommodation partner. Book early as accommodation sells out across all of Tauranga during Games week." }
+    },
+    {
+      "@type": "Question",
+      "name": "What sports are in the AIMS Games?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The AIMS Games features 27 sports including swimming, athletics, football, netball, basketball, volleyball, rugby league, touch rugby, cricket, tennis, squash, badminton, table tennis, golf, triathlon, mountain biking, road cycling, orienteering, shooting, artistic gymnastics, rhythmic gymnastics, weightlifting, waka ama, rowing, kayaking, underwater hockey and chess." }
+    },
+    {
+      "@type": "Question",
+      "name": "Who is eligible for the AIMS Games 2026?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Student athletes must be aged over 10 and under 13 as of 31 December 2025. Eligible birth years for 2026 are 2013, 2014 and 2015. Athletes must compete through a registered school." }
+    },
+    {
+      "@type": "Question",
+      "name": "How far is Pāpāmoa from AIMS Games venues?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Pāpāmoa is approximately 10–20 minutes from most AIMS Games venues in Tauranga and Mount Maunganui via State Highway 2. It is directly connected to the Mount and Tauranga CBD by the main arterial road." }
+    },
+    {
+      "@type": "Question",
+      "name": "When do AIMS Games 2026 registrations open?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Registrations for AIMS Games 2026 open on 20 March 2026 through school AIMS Games coordinators." }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --navy: #0D2B3E; --ocean: #1B6B7D; --ocean-deep: #0F4352; --ocean-light: #E4F2F5;
+  --blue: #3AABDE; --lime: #7DC143; --sand: #F7F3ED; --sand-dark: #EDE7DB;
+  --dune: #C4985A; --dune-light: #F5EDD8; --coral: #E8344A; --white: #FFFFFF;
+  --body: #1A2832; --muted: #5A6E78; --border: #D8E4E8; --gold: #C8962A; --gold-bg: #FBF3E2;
+  --font-body: 'Figtree', sans-serif; --font-display: 'Playfair Display', serif;
+  --pnf-navy: #0D2B3E; --pnf-accent: #3AABDE; --pnf-white: #FFFFFF;
+  --pnf-muted: rgba(255,255,255,0.45);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--sand); color: var(--body); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+a { color: var(--blue); }
+
+/* ── PNF NAV ── */
+.pnf-nav { background: var(--pnf-navy); height: 56px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.25); gap: 16px; }
+.pnf-logo { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--pnf-white); text-decoration: none; flex-shrink: 0; }
+.pnf-logo span { color: var(--pnf-accent); }
+.pnf-breadcrumb { font-size: 12px; color: var(--pnf-muted); display: flex; align-items: center; gap: 6px; flex: 1; overflow: hidden; white-space: nowrap; }
+.pnf-breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; flex-shrink: 0; }
+.pnf-breadcrumb a:hover { color: var(--pnf-white); }
+.pnf-breadcrumb .sep { opacity: 0.3; }
+.pnf-breadcrumb .current { overflow: hidden; text-overflow: ellipsis; opacity: 0.6; }
+.pnf-cta { font-family: var(--font-body); font-size: 13px; font-weight: 700; background: var(--pnf-accent); color: var(--pnf-white); padding: 8px 18px; border-radius: 100px; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
+.pnf-cta:hover { background: #2d95c4; }
+@media (max-width: 640px) { .pnf-nav { padding: 0 16px; } .pnf-cta { display: none; } }
+
+/* ── HERO ── */
+.hero { background: linear-gradient(135deg, #0D2A50, #1A3A6A); padding: 44px 24px 48px; position: relative; overflow: hidden; }
+.hero::before { content: '&#127885;'; position: absolute; right: 40px; top: 50%; transform: translateY(-50%); font-size: 8rem; opacity: 0.06; pointer-events: none; }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), #F0C060, var(--gold)); }
+.hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eye { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.7rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 12px; }
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 0.97rem; color: rgba(255,255,255,0.65); max-width: 620px; line-height: 1.7; margin-bottom: 24px; }
+.hero-date-box { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 16px 20px; display: inline-flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+.hdb-item { text-align: center; }
+.hdb-val { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1; }
+.hdb-lbl { font-size: 0.67rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 3px; }
+.hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.hero-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.75); }
+
+/* ── LAYOUT ── */
+.page-wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 80px; }
+.two-col { display: grid; grid-template-columns: 1fr 280px; gap: 28px; align-items: start; }
+@media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } .side-col { order: -1; } }
+.section { margin-bottom: 44px; }
+.section-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px; }
+.section-intro { font-size: 0.88rem; color: var(--muted); margin-bottom: 18px; line-height: 1.78; }
+
+/* ACCOMMODATION */
+.accom-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 12px; }
+.ac-head { display: flex; }
+.ac-icon { width: 56px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+.ac-header { padding: 14px 16px; flex: 1; }
+.ac-name { font-family: var(--font-display); font-size: 0.97rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.ac-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.act { font-size: 0.67rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; background: var(--sand); border: 1px solid var(--border); color: var(--muted); }
+.act.gold-tag { background: #FFFBF0; border-color: var(--gold); color: var(--gold); }
+.ac-body { padding: 0 16px 16px; font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
+
+/* GOLD SPOTLIGHT AD */
+.ad-gold { background: linear-gradient(135deg, var(--navy), #1A2A40); border-radius: 10px; padding: 18px; margin-bottom: 12px; }
+.ag-eye { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
+.ag-name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.ag-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 10px; }
+.ag-link { display: block; background: linear-gradient(135deg, var(--gold), #A07020); color: #fff; font-family: var(--font-body); font-weight: 700; font-size: 0.78rem; padding: 9px 14px; border-radius: 5px; text-decoration: none; text-align: center; transition: opacity 0.15s; }
+.ag-link:hover { opacity: 0.88; }
+
+/* SPOTLIGHT AVAILABLE */
+.ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); margin-bottom: 16px; }
+.ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+.ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.ad-inner { padding: 14px; background: var(--white); }
+.ad-placeholder { background: var(--gold-bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
+.ad-placeholder strong { display: block; font-size: 0.82rem; color: var(--navy); margin-bottom: 4px; }
+.ad-placeholder p { font-size: 0.78rem; color: #7A5800; margin-bottom: 8px; line-height: 1.55; }
+.ad-claim-btn { display: inline-block; font-size: 0.75rem; font-weight: 700; color: var(--white); background: var(--ocean); padding: 7px 14px; border-radius: 5px; text-decoration: none; transition: background 0.15s; }
+.ad-claim-btn:hover { background: var(--ocean-deep); }
+
+/* SPORTS GRID */
+.sports-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 16px; }
+@media (max-width: 500px) { .sports-grid { grid-template-columns: repeat(2, 1fr); } }
+.sport-pill { background: var(--white); border: 1px solid var(--border); border-radius: 5px; padding: 7px 10px; font-size: 0.78rem; font-weight: 600; color: var(--body); display: flex; align-items: center; gap: 6px; }
+.sport-pill .sp-icon { font-size: 0.9rem; flex-shrink: 0; }
+
+/* TIP BOX */
+.tip-box { background: linear-gradient(135deg, #EBF8F5, #DDF0E8); border: 1px solid #A8D8C0; border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; }
+.tip-box h4 { font-size: 0.8rem; font-weight: 700; color: #1A5C3C; margin-bottom: 8px; }
+.tip-box ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.tip-box li { font-size: 0.82rem; color: #2A6A48; padding-left: 14px; position: relative; }
+.tip-box li::before { content: '\2713'; position: absolute; left: 0; color: var(--lime); }
+
+/* CATEGORY LINKS STRIP */
+.cat-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 8px; }
+.cat-link-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; text-decoration: none; transition: box-shadow 0.15s, transform 0.15s; }
+.cat-link-card:hover { box-shadow: 0 4px 16px rgba(27,107,125,0.1); transform: translateY(-1px); }
+.cat-link-icon { font-size: 1.3rem; flex-shrink: 0; }
+.cat-link-body .cat-link-name { font-size: 0.84rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.cat-link-body .cat-link-desc { font-size: 0.72rem; color: var(--muted); }
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+.faq-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.faq-q { padding: 13px 16px; font-size: 0.88rem; font-weight: 700; color: var(--navy); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; user-select: none; }
+.faq-q::after { content: '+'; font-size: 16px; font-weight: 400; color: var(--muted); flex-shrink: 0; transition: transform 0.2s; }
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a { padding: 0 16px; font-size: 0.84rem; color: var(--muted); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+.faq-item.open .faq-a { max-height: 300px; padding: 0 16px 14px; }
+
+/* SIDEBAR */
+.sidebar-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.sidebar-card h4 { font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.sidebar-list li { font-size: 0.82rem; color: var(--muted); padding-left: 13px; position: relative; line-height: 1.4; }
+.sidebar-list li::before { content: '\203A'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+.sidebar-list li strong { color: var(--body); }
+.sidebar-list li a { color: var(--blue); text-decoration: none; font-weight: 600; }
+.sidebar-list li a:hover { text-decoration: underline; }
+
+/* RELATED LINKS */
+.related-links { display: flex; flex-direction: column; gap: 5px; }
+.related-link { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600; color: var(--blue); text-decoration: none; padding: 7px 10px; background: var(--sand); border-radius: 5px; transition: background 0.15s; }
+.related-link:hover { background: var(--sand-dark); }
+.related-link .rl-icon { font-size: 0.9rem; flex-shrink: 0; }
+
+/* DISTANCE TABLE */
+.dist-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 16px; }
+.dist-table th { text-align: left; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 7px 10px; background: #F8F6F2; border-bottom: 2px solid var(--sand-dark); }
+.dist-table td { padding: 9px 10px; border-bottom: 1px solid #F0EDE6; color: var(--body); vertical-align: top; }
+.dist-table tr:last-child td { border-bottom: none; }
+.dist-table tr:hover td { background: #FAFAF8; }
+.dist-km { font-weight: 700; color: var(--navy); white-space: nowrap; }
+.dist-time { color: var(--muted); font-size: 0.78rem; }
+
+/* PNF FOOTER */
+.pnf-footer-slim { background: var(--pnf-navy); padding: 28px; text-align: center; }
+.pnf-footer-brand { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--pnf-white); margin-bottom: 6px; display: inline-block; }
+.pnf-footer-brand span { color: var(--pnf-accent); }
+.pnf-footer-tagline { font-size: 12.5px; color: rgba(255,255,255,0.38); line-height: 1.7; text-align: center; margin: 0 auto 16px; }
+.pnf-footer-slim-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+.pnf-footer-slim-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.15s; }
+.pnf-footer-slim-links a:hover { color: var(--pnf-white); }
+.pnf-footer-slim-bottom { font-size: 11.5px; color: rgba(255,255,255,0.2); }
+</style>
 </head>
 <body>
-<nav class="site-nav">
-  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
-  <span class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/articles/news-events.html">Events</a><span>/</span>AIMS Games 2026</span>
+
+<!-- NAV -->
+<nav class="pnf-nav">
+  <a href="/papamoa-previews/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
+  <div class="pnf-breadcrumb">
+    <a href="/papamoa-previews/homepage.html">Home</a>
+    <span class="sep">/</span>
+    <a href="/papamoa-previews/community/news-events.html">Events</a>
+    <span class="sep">/</span>
+    <span class="current">AIMS Games 2026</span>
+  </div>
+  <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-cta">List your business &rarr;</a>
 </nav>
 
+<!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
-    <div class="hero-eye">Zespri AIMS Games 2026 · Tauranga &amp; Mount Maunganui</div>
+    <div class="hero-eye">Zespri AIMS Games 2026 &middot; Tauranga &amp; Mount Maunganui</div>
     <h1>AIMS Games <em>2026</em><br>Family Guide</h1>
-    <p class="hero-sub">The largest junior multi-sport event in Australasia returns to Tauranga. More than 14,000 athletes, 430+ schools and 27 sports — staying near Pāpāmoa puts families in the perfect position.</p>
+    <p class="hero-sub">The largest junior multi-sport event in Australasia returns to Tauranga. More than 14,000 athletes, 430+ schools and 27 sports &mdash; this guide covers accommodation near venues, food for families, travel tips and what P&#257;p&#257;moa families need to know.</p>
     <div class="hero-date-box">
       <div class="hdb-item"><div class="hdb-val">Sat 5</div><div class="hdb-lbl">September</div></div>
-      <div class="hdb-item" style="display:flex;align-items:center;color:rgba(255,255,255,0.3);font-size:1.2rem">→</div>
+      <div class="hdb-item" style="display:flex;align-items:center;color:rgba(255,255,255,0.3);font-size:1.2rem">&rarr;</div>
       <div class="hdb-item"><div class="hdb-val">Fri 11</div><div class="hdb-lbl">September 2026</div></div>
       <div class="hdb-item" style="border-left:1px solid rgba(255,255,255,0.2);padding-left:20px"><div class="hdb-val">7 days</div><div class="hdb-lbl">Tauranga &amp; surrounds</div></div>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">&#127881; 14,000+ athletes</span>
+      <span class="hero-tag">&#127942; 27 sports</span>
+      <span class="hero-tag">&#127979; 430+ schools</span>
+      <span class="hero-tag">&#127968; Accommodation guide</span>
+      <span class="hero-tag">&#127860; Restaurant guide</span>
     </div>
   </div>
 </header>
 
 <div class="page-wrap">
   <div class="two-col">
+
     <main>
+
+      <!-- WHAT IS AIMS -->
       <section class="section">
-        <h2 class="section-title"><span>🏅</span> What is AIMS Games?</h2>
-        <p class="section-intro">The Zespri AIMS Games (Association of Intermediate and Middle Schools) is an annual multi-sport championship held in Tauranga, New Zealand. It is the largest sporting event for children aged 11 to 13 in New Zealand and Australasia — in 2025 it attracted more competitors than the Paris Olympics. Athletes compete in 27 different sports across venues throughout Tauranga and the Western Bay of Plenty. The event began in 2004 and has grown every year since.</p>
-        <p class="section-intro">Student athletes must be aged over 10 and under 13 as of 31 December 2025 — for the 2026 Games, eligible birth years are 2013, 2014 and 2015. Registrations open 20 March 2026 through school AIMS Games coordinators.</p>
+        <h2 class="section-title"><span>&#127885;</span> What is the AIMS Games?</h2>
+        <p class="section-intro">The Zespri AIMS Games (Association of Intermediate and Middle Schools) is an annual multi-sport championship held in Tauranga, New Zealand. It is the largest sporting event for children aged 11 to 13 in New Zealand and Australasia &mdash; the 2025 event attracted more competitors than the Paris Olympics, with 14,022 athletes from 431 schools competing across 27 sports.</p>
+        <p class="section-intro">The event was founded in 2004 and has grown every year, now drawing families from across New Zealand and internationally. Most events are spread across venues throughout Tauranga, Mount Maunganui, and the wider Western Bay of Plenty. Athletes compete by sport rather than as school teams, meaning schedules vary significantly across the week.</p>
+        <p class="section-intro">Student athletes must be aged over 10 and under 13 as of 31 December 2025. Eligible birth years for the 2026 Games are <strong>2013, 2014 and 2015</strong>. Registrations open 20 March 2026 through school AIMS Games coordinators. All official information is at <a href="https://www.nzaimsgames.co.nz" target="_blank" rel="noopener">nzaimsgames.co.nz</a>.</p>
       </section>
 
+      <!-- ACCOMMODATION -->
       <section class="section">
-        <h2 class="section-title"><span>🏠</span> Where to Stay — Pāpāmoa Area</h2>
-        <p class="section-intro">Pāpāmoa is ideally positioned for AIMS Games families — 10 minutes from central Tauranga venues, directly connected to Mount Maunganui, with beach access for after-competition relaxation. Accommodation books out fast every year. Book as early as possible.</p>
+        <h2 class="section-title"><span>&#127968;</span> Where to Stay &mdash; P&#257;p&#257;moa &amp; Tauranga</h2>
+        <p class="section-intro">P&#257;p&#257;moa is ideally positioned for AIMS Games families &mdash; 10 to 20 minutes from all major Tauranga venues, directly connected to Mount Maunganui, and with P&#257;p&#257;moa Beach for after-competition downtime. Accommodation across all of Tauranga books out every year during Games week. Book as early as possible.</p>
 
         <!-- PACIFIC PARK GOLD SPOTLIGHT -->
         <div class="ad-gold">
-          <div class="ag-eye">⭐ Gold Spotlight · Official AIMS Games accommodation area</div>
+          <div class="ag-eye">&#11088; Gold Spotlight &middot; P&#257;p&#257;moa accommodation</div>
           <div class="ag-name">Pacific Park Christian Holiday Camp</div>
-          <p class="ag-desc">Pāpāmoa's #1 TripAdvisor accommodation — 321 reviews, 4 stars. Family-friendly cabins, motel units, powered campsites and group lodges. Alcohol and smoke-free environment. Two minutes from the beach. Hot tub, jumping pillow, games room. Beyonder is the official AIMS Games accommodation provider — Pacific Park works with visiting families annually.</p>
-          <a href="/categories/accommodation.html" class="ag-link">View Pacific Park listing →</a>
+          <p class="ag-desc">P&#257;p&#257;moa&rsquo;s top-rated accommodation on TripAdvisor &mdash; 321 reviews, 4 stars. Family-friendly cabins, motel units, powered campsites and group lodges two minutes from the beach. Alcohol and smoke-free. Hot tub, jumping pillow, games room. Beyonder is the official AIMS Games accommodation partner &mdash; Pacific Park works with visiting AIMS families annually.</p>
+          <a href="/papamoa-previews/listings/pacific-park-papamoa.html" class="ag-link">View Pacific Park listing &rarr;</a>
         </div>
 
         <div class="accom-card">
           <div class="ac-head">
-            <div class="ac-icon">🏡</div>
+            <div class="ac-icon">&#127968;</div>
             <div class="ac-header">
-              <div class="ac-name">Holiday homes via Beyonder</div>
-              <div class="ac-tags"><span class="act gold-tag">Official AIMS Games provider</span><span class="act">Groups & families</span><span class="act">Pāpāmoa & region</span></div>
+              <div class="ac-name">Beyonder &mdash; Official AIMS Games accommodation partner</div>
+              <div class="ac-tags"><span class="act gold-tag">Official AIMS Games partner</span><span class="act">Groups &amp; families</span><span class="act">Holiday homes region-wide</span></div>
             </div>
           </div>
-          <div class="ac-body">Beyonder is the official accommodation partner for the 2026 Zespri AIMS Games. They specialise in holiday home management and offer a wide range of accommodation options across Tauranga and Pāpāmoa to suit teams, families and supporters. From one-bedroom units to spacious five-bedroom homes. Book early — available now for 2026. Visit <a href="https://www.nzaimsgames.co.nz/more/accommodation" target="_blank" rel="noopener">nzaimsgames.co.nz/more/accommodation</a></div>
+          <div class="ac-body">Beyonder is the official accommodation partner for the 2026 Zespri AIMS Games. They manage a wide range of holiday homes across Tauranga and P&#257;p&#257;moa &mdash; from one-bedroom units to spacious five-bedroom family homes. Book early, as their inventory sells through quickly once registrations open. Visit <a href="https://www.nzaimsgames.co.nz/more/accommodation" target="_blank" rel="noopener">nzaimsgames.co.nz/more/accommodation</a></div>
         </div>
 
         <div class="accom-card">
           <div class="ac-head">
-            <div class="ac-icon">🏨</div>
+            <div class="ac-icon">&#127964;</div>
             <div class="ac-header">
-              <div class="ac-name">Tauranga city hotels & motels</div>
-              <div class="ac-tags"><span class="act">10–15 min to Pāpāmoa</span><span class="act">Central access</span></div>
+              <div class="ac-name">Tauranga city hotels &amp; motels</div>
+              <div class="ac-tags"><span class="act">10&ndash;15 min to P&#257;p&#257;moa</span><span class="act">Close to central venues</span></div>
             </div>
           </div>
-          <div class="ac-body">Tauranga CBD hotels put families close to many AIMS Games venues and within reach of Pāpāmoa and the Mount. Book through major booking platforms. Be aware that AIMS Games week sees very high demand across all Tauranga accommodation — do not leave booking until the last minute.</div>
+          <div class="ac-body">Tauranga CBD hotels put families close to many AIMS Games venues. Options range from budget motels to apartment-style accommodation. Book well in advance &mdash; demand across all of Tauranga is very high during Games week. Major booking platforms will show current availability.</div>
         </div>
+
+        <div class="accom-card">
+          <div class="ac-head">
+            <div class="ac-icon">&#127956;</div>
+            <div class="ac-header">
+              <div class="ac-name">Mount Maunganui &amp; P&#257;p&#257;moa holiday parks</div>
+              <div class="ac-tags"><span class="act">Family friendly</span><span class="act">Multiple price points</span></div>
+            </div>
+          </div>
+          <div class="ac-body">The Mount Maunganui strip and P&#257;p&#257;moa have several holiday parks and camping grounds offering budget-friendly options for families. These fill up fast during AIMS Games &mdash; book directly with venues as early as possible.</div>
+        </div>
+
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:8px">Browse all P&#257;p&#257;moa accommodation on Papamoa.info:</p>
+        <a href="/papamoa-previews/categories/accommodation.html" style="display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:700;color:var(--white);background:var(--ocean);padding:9px 16px;border-radius:6px;text-decoration:none">&#127968; See all P&#257;p&#257;moa accommodation &rarr;</a>
       </section>
 
+      <!-- FOOD & RESTAURANTS -->
       <section class="section">
-        <h2 class="section-title"><span>🍽️</span> Food & Restaurants Near Venues</h2>
-        <p class="section-intro">Pāpāmoa and Mount Maunganui offer a broad range of dining options for families between competition days. Pāpāmoa Beach Road has cafes, pizza, takeaways and bakeries along its length.</p>
+        <h2 class="section-title"><span>&#127860;</span> Food &amp; Restaurants for Families</h2>
+        <p class="section-intro">P&#257;p&#257;moa and Mount Maunganui have a wide range of dining options for families between and after competition days. P&#257;p&#257;moa Beach Road has cafes, pizza, takeaways, bakeries and restaurants along its length &mdash; easy access for families staying locally.</p>
 
         <div class="ad-spot">
-          <div class="ad-label">Restaurant Gold Spotlight — AIMS Games Families</div>
+          <div class="ad-label">Spotlight available &mdash; AIMS Games families</div>
           <div class="ad-inner">
             <div class="ad-placeholder">
-              <p>Restaurant or café near AIMS Games venues? Reach 14,000+ families looking for somewhere to eat during Games week.</p>
-              <a href="/index.html">Get a Gold Spotlight →</a>
+              <strong>Restaurant or caf&eacute; near AIMS Games venues?</strong>
+              <p>This spot reaches 14,000+ visiting families searching for somewhere to eat during Games week. Gold listing holders only.</p>
+              <a href="/papamoa-previews/sales/claim.html?type=adspot&page=aims-games-tauranga" class="ad-claim-btn">Claim this spot &rarr;</a>
             </div>
           </div>
         </div>
 
-        <p class="section-intro">The Pizza Pundits (898 Pāpāmoa Beach Road) is open seven nights from 4:30pm with delivery via DoorDash, Uber Eats and Delivereasy — ideal for exhausted families after a competition day. Fashion Island and Palm Beach Plaza shopping centres have food options for quick family meals.</p>
+        <p class="section-intro">P&#257;p&#257;moa has takeaway, pizza, Indian, Thai, Chinese, fish &amp; chips and fast food options within easy reach. The suburb&rsquo;s shopping centres include food courts suitable for quick family meals. Most restaurants can accommodate large groups with advance booking during Games week.</p>
+        <p class="section-intro">Mount Maunganui&rsquo;s main street has a wide range of cafes and restaurants within walking distance for families staying on the Mount. The Tauranga CBD has the largest concentration of dining options across all cuisines.</p>
+
+        <a href="/papamoa-previews/categories/food-drink.html" style="display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:700;color:var(--white);background:var(--ocean);padding:9px 16px;border-radius:6px;text-decoration:none;margin-top:4px">&#127860; Browse P&#257;p&#257;moa food &amp; drink listings &rarr;</a>
       </section>
 
+      <!-- DISTANCES & TRAVEL -->
       <section class="section">
-        <h2 class="section-title"><span>🚗</span> Getting Around</h2>
-        <p class="section-intro">Most AIMS Games venues are within the Tauranga urban area, connected by the main arterials. Pāpāmoa is on State Highway 2, giving direct motorway access to Tauranga, Mount Maunganui and most venue areas. Allow extra time during Games week as traffic around Tauranga increases substantially.</p>
+        <h2 class="section-title"><span>&#128663;</span> Getting Around &mdash; Distances from P&#257;p&#257;moa</h2>
+        <p class="section-intro">P&#257;p&#257;moa sits on State Highway 2, giving direct arterial access to Tauranga, Mount Maunganui and most AIMS Games venue areas. Allow extra travel time during Games week as traffic around Tauranga increases substantially on competition days.</p>
+
+        <table class="dist-table">
+          <thead>
+            <tr><th>Destination</th><th>Distance</th><th>Drive time</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tauranga CBD</td><td class="dist-km">~18 km</td><td class="dist-time">15&ndash;20 min</td><td>Via SH2. Allow extra time peak hours and Games days.</td></tr>
+            <tr><td>Mount Maunganui</td><td class="dist-km">~8 km</td><td class="dist-time">10&ndash;15 min</td><td>Direct via Maunganui Road. Several AIMS venues in the Mount.</td></tr>
+            <tr><td>Baypark / Stadium</td><td class="dist-km">~10 km</td><td class="dist-time">12&ndash;15 min</td><td>Multiple AIMS sports held at Baypark Arena complex.</td></tr>
+            <tr><td>Tauranga Domain</td><td class="dist-km">~18 km</td><td class="dist-time">15&ndash;20 min</td><td>Athletics and field events venue.</td></tr>
+            <tr><td>ASB Arena</td><td class="dist-km">~17 km</td><td class="dist-time">15&ndash;20 min</td><td>Indoor sports venue, Tauranga CBD.</td></tr>
+            <tr><td>P&#257;p&#257;moa Beach</td><td class="dist-km">2 min walk</td><td class="dist-time">&mdash;</td><td>Perfect for after-competition downtime.</td></tr>
+          </tbody>
+        </table>
 
         <div class="tip-box">
-          <h4>Family tips for AIMS Games week</h4>
+          <h4>Family tips for AIMS Games 2026</h4>
           <ul>
             <li>Download the AIMS Games app for real-time results and schedules</li>
             <li>Bring camp chairs, sun hats and sunscreen to outdoor venues</li>
-            <li>Many venues have limited food options — pack food for competition days</li>
-            <li>Pāpāmoa Beach is 5 minutes away for a post-competition swim</li>
-            <li>Gordon Spratt Reserve is available for warm-up runs and kicks</li>
-            <li>Check venue start times — travel time from Pāpāmoa is 10–20 min to most venues</li>
-            <li>Accommodation books out — lock in Beyonder or Pacific Park now</li>
+            <li>Many venues have limited food &mdash; pack snacks and water for competition days</li>
+            <li>P&#257;p&#257;moa Beach is minutes away for a post-competition swim</li>
+            <li>Gordon Spratt Reserve is available for warm-up runs and training</li>
+            <li>Allow 20&ndash;30 min travel to Tauranga venues on busy competition mornings</li>
+            <li>Most sports have public spectator access &mdash; check nzaimsgames.co.nz for specifics</li>
+            <li>Accommodation sells out fast &mdash; lock in Beyonder or Pacific Park now</li>
           </ul>
         </div>
       </section>
+
+      <!-- 27 SPORTS -->
+      <section class="section">
+        <h2 class="section-title"><span>&#127942;</span> 27 Sports at AIMS Games 2026</h2>
+        <p class="section-intro">Athletes compete in one of 27 sports codes. Venues are spread across Tauranga and the Western Bay of Plenty. Check the official AIMS Games website for sport-specific venue and schedule information.</p>
+        <div class="sports-grid">
+          <div class="sport-pill"><span class="sp-icon">&#127946;</span> Swimming</div>
+          <div class="sport-pill"><span class="sp-icon">&#127939;</span> Athletics</div>
+          <div class="sport-pill"><span class="sp-icon">&#9917;</span> Football</div>
+          <div class="sport-pill"><span class="sp-icon">&#127944;</span> Netball</div>
+          <div class="sport-pill"><span class="sp-icon">&#127936;</span> Basketball</div>
+          <div class="sport-pill"><span class="sp-icon">&#127945;</span> Volleyball</div>
+          <div class="sport-pill"><span class="sp-icon">&#127919;</span> Rugby league</div>
+          <div class="sport-pill"><span class="sp-icon">&#127919;</span> Touch rugby</div>
+          <div class="sport-pill"><span class="sp-icon">&#127936;</span> Cricket</div>
+          <div class="sport-pill"><span class="sp-icon">&#127934;</span> Tennis</div>
+          <div class="sport-pill"><span class="sp-icon">&#127934;</span> Squash</div>
+          <div class="sport-pill"><span class="sp-icon">&#127992;</span> Badminton</div>
+          <div class="sport-pill"><span class="sp-icon">&#127993;</span> Table tennis</div>
+          <div class="sport-pill"><span class="sp-icon">&#9971;</span> Golf</div>
+          <div class="sport-pill"><span class="sp-icon">&#127943;</span> Triathlon</div>
+          <div class="sport-pill"><span class="sp-icon">&#128692;</span> Mountain biking</div>
+          <div class="sport-pill"><span class="sp-icon">&#128692;</span> Road cycling</div>
+          <div class="sport-pill"><span class="sp-icon">&#127968;</span> Orienteering</div>
+          <div class="sport-pill"><span class="sp-icon">&#127919;</span> Shooting</div>
+          <div class="sport-pill"><span class="sp-icon">&#129337;</span> Artistic gymnastics</div>
+          <div class="sport-pill"><span class="sp-icon">&#129337;</span> Rhythmic gymnastics</div>
+          <div class="sport-pill"><span class="sp-icon">&#127959;</span> Weightlifting</div>
+          <div class="sport-pill"><span class="sp-icon">&#128758;</span> Waka ama</div>
+          <div class="sport-pill"><span class="sp-icon">&#128758;</span> Rowing</div>
+          <div class="sport-pill"><span class="sp-icon">&#128758;</span> Kayaking</div>
+          <div class="sport-pill"><span class="sp-icon">&#127946;</span> Underwater hockey</div>
+          <div class="sport-pill"><span class="sp-icon">&#9822;</span> Chess</div>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted)">Sport codes and venues confirmed at <a href="https://www.nzaimsgames.co.nz" target="_blank" rel="noopener">nzaimsgames.co.nz</a>. Some sports may vary year to year.</p>
+      </section>
+
+      <!-- EXPLORE PAPAMOA -->
+      <section class="section">
+        <h2 class="section-title"><span>&#127756;</span> Explore P&#257;p&#257;moa While You&rsquo;re Here</h2>
+        <p class="section-intro">If your athlete has a rest day, or you&rsquo;re staying the full week, P&#257;p&#257;moa has plenty for visiting families. Browse the directory for local businesses, activities and services.</p>
+        <div class="cat-strip">
+          <a href="/papamoa-previews/categories/accommodation.html" class="cat-link-card">
+            <span class="cat-link-icon">&#127968;</span>
+            <div class="cat-link-body"><div class="cat-link-name">Accommodation</div><div class="cat-link-desc">Holiday parks, motels &amp; cabins</div></div>
+          </a>
+          <a href="/papamoa-previews/categories/food-drink.html" class="cat-link-card">
+            <span class="cat-link-icon">&#127860;</span>
+            <div class="cat-link-body"><div class="cat-link-name">Food &amp; Drink</div><div class="cat-link-desc">Cafes, restaurants &amp; takeaways</div></div>
+          </a>
+          <a href="/papamoa-previews/categories/activities.html" class="cat-link-card">
+            <span class="cat-link-icon">&#127940;</span>
+            <div class="cat-link-body"><div class="cat-link-name">Activities</div><div class="cat-link-desc">Surf, beach, things to do</div></div>
+          </a>
+          <a href="/papamoa-previews/categories/services.html" class="cat-link-card">
+            <span class="cat-link-icon">&#127973;</span>
+            <div class="cat-link-body"><div class="cat-link-name">Health &amp; Services</div><div class="cat-link-desc">Physio, medical &amp; more</div></div>
+          </a>
+          <a href="/papamoa-previews/categories/shops.html" class="cat-link-card">
+            <span class="cat-link-icon">&#128722;</span>
+            <div class="cat-link-body"><div class="cat-link-name">Shopping</div><div class="cat-link-desc">Retail &amp; sports gear</div></div>
+          </a>
+          <a href="/papamoa-previews/homepage.html" class="cat-link-card">
+            <span class="cat-link-icon">&#128205;</span>
+            <div class="cat-link-body"><div class="cat-link-name">Full directory</div><div class="cat-link-desc">All P&#257;p&#257;moa businesses</div></div>
+          </a>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section">
+        <h2 class="section-title"><span>&#10067;</span> AIMS Games 2026 &mdash; Common Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q">When are the AIMS Games 2026?</div>
+            <div class="faq-a">The Zespri AIMS Games 2026 run from Saturday 5 September to Friday 11 September 2026. Wednesday 9 September is a contingency day. Events are held across Tauranga and the Western Bay of Plenty.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Who is eligible for AIMS Games 2026?</div>
+            <div class="faq-a">Students must be aged over 10 and under 13 as of 31 December 2025. Eligible birth years are 2013, 2014 and 2015. Athletes must compete through a registered school. Registrations open 20 March 2026.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Where is the best place to stay for AIMS Games?</div>
+            <div class="faq-a">P&#257;p&#257;moa is an ideal base &mdash; 10 to 20 minutes from all major venues, with beach access. Beyonder is the official AIMS Games accommodation partner. Pacific Park Christian Holiday Camp in P&#257;p&#257;moa is popular with AIMS Games families annually. Book as early as possible as all Tauranga accommodation sells out during Games week.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">How far is P&#257;p&#257;moa from AIMS Games venues?</div>
+            <div class="faq-a">P&#257;p&#257;moa is approximately 10&ndash;20 minutes from most AIMS Games venues in Tauranga and Mount Maunganui. It sits on State Highway 2 with direct arterial access to the Mount, Tauranga CBD, and Baypark. Allow extra travel time on busy competition mornings.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">What sports are at the AIMS Games?</div>
+            <div class="faq-a">The 2026 AIMS Games features 27 sports including swimming, athletics, football, netball, basketball, volleyball, rugby league, touch, cricket, tennis, squash, badminton, table tennis, golf, triathlon, mountain biking, road cycling, orienteering, shooting, gymnastics (artistic and rhythmic), weightlifting, waka ama, rowing, kayaking, underwater hockey and chess.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Is there parking at AIMS Games venues?</div>
+            <div class="faq-a">Parking varies by venue. Major venues like Baypark Arena have on-site parking, but it fills quickly on competition days. For Tauranga CBD venues, use paid parking buildings or arrive early. Carpooling with other families is highly recommended.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Where can I find AIMS Games results and schedules?</div>
+            <div class="faq-a">Official results and schedules are on the AIMS Games website at nzaimsgames.co.nz and through the official AIMS Games app, which shows real-time results, draw updates and venue information.</div>
+          </div>
+        </div>
+      </section>
+
     </main>
 
-    <aside style="display:flex;flex-direction:column;gap:16px">
+    <!-- SIDEBAR -->
+    <aside class="side-col" style="display:flex;flex-direction:column;gap:0">
+
       <div class="sidebar-card">
-        <h4>2026 Key dates</h4>
+        <h4>&#128197; 2026 Key dates</h4>
         <ul class="sidebar-list">
           <li><strong>Registrations open:</strong> 20 March 2026</li>
-          <li><strong>Games start:</strong> Saturday 5 September 2026</li>
-          <li><strong>Games end:</strong> Friday 11 September 2026</li>
+          <li><strong>Games start:</strong> Sat 5 September 2026</li>
+          <li><strong>Games end:</strong> Fri 11 September 2026</li>
           <li><strong>Contingency day:</strong> Wed 9 September</li>
           <li><strong>Duration:</strong> 7 days</li>
           <li><strong>Location:</strong> Tauranga &amp; Western BOP</li>
-          <li><strong>Official accom partner:</strong> Beyonder</li>
+          <li><strong>Accom partner:</strong> Beyonder</li>
         </ul>
       </div>
 
-      <div class="sidebar-card">
-        <h4>About the games</h4>
+      <div class="ad-spot" style="margin-top:16px">
+        <div class="ad-label">Spotlight available</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <strong>Sports shop, physio or hire near P&#257;p&#257;moa?</strong>
+            <p>Reach AIMS Games families &amp; athletes actively searching for local services during Games week. Gold listing holders only.</p>
+            <a href="/papamoa-previews/sales/claim.html?type=adspot&page=aims-games-tauranga" class="ad-claim-btn">Claim this spot &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card" style="margin-top:16px">
+        <h4>&#127942; About the games</h4>
         <ul class="sidebar-list">
-          <li><strong>Ages:</strong> Year 7 &amp; 8 (11–13 years)</li>
+          <li><strong>Ages:</strong> Year 7 &amp; 8 (11&ndash;13 years)</li>
           <li><strong>Sports:</strong> 27 codes</li>
           <li><strong>Schools (2025):</strong> 431</li>
           <li><strong>Athletes (2025):</strong> 14,022</li>
@@ -202,45 +523,58 @@
         </ul>
       </div>
 
-      <div class="ad-spot">
-        <div class="ad-label">Sports Equipment & Hire</div>
-        <div class="ad-inner">
-          <div class="ad-placeholder">
-            <p>Sports shop, equipment hire or physio near Pāpāmoa? Reach AIMS Games families &amp; athletes.</p>
-            <a href="/index.html">Advertise here →</a>
-          </div>
+      <div class="sidebar-card" style="margin-top:16px">
+        <h4>&#128279; Official &amp; related links</h4>
+        <div class="related-links">
+          <a href="https://www.nzaimsgames.co.nz" target="_blank" rel="noopener" class="related-link"><span class="rl-icon">&#127760;</span> nzaimsgames.co.nz</a>
+          <a href="https://www.nzaimsgames.co.nz/more/accommodation" target="_blank" rel="noopener" class="related-link"><span class="rl-icon">&#127968;</span> Official accommodation (Beyonder)</a>
+          <a href="https://www.nzaimsgames.co.nz/sports" target="_blank" rel="noopener" class="related-link"><span class="rl-icon">&#127942;</span> Sports &amp; venues</a>
+          <a href="/papamoa-previews/listings/pacific-park-papamoa.html" class="related-link"><span class="rl-icon">&#9733;</span> Pacific Park P&#257;p&#257;moa</a>
+          <a href="/papamoa-previews/categories/accommodation.html" class="related-link"><span class="rl-icon">&#127968;</span> All P&#257;p&#257;moa accommodation</a>
+          <a href="/papamoa-previews/categories/food-drink.html" class="related-link"><span class="rl-icon">&#127860;</span> Restaurants &amp; caf&eacute;s</a>
+          <a href="/papamoa-previews/categories/activities.html" class="related-link"><span class="rl-icon">&#127940;</span> Activities in P&#257;p&#257;moa</a>
+          <a href="/papamoa-previews/categories/services.html" class="related-link"><span class="rl-icon">&#127973;</span> Health &amp; physio services</a>
+          <a href="/papamoa-previews/community/news-events.html" class="related-link"><span class="rl-icon">&#128197;</span> More P&#257;p&#257;moa events</a>
         </div>
       </div>
 
-      <div class="sidebar-card">
-        <h4>Official links</h4>
-        <ul class="sidebar-list">
-          <li><a href="https://www.nzaimsgames.co.nz" target="_blank" rel="noopener">nzaimsgames.co.nz</a></li>
-          <li><a href="https://www.nzaimsgames.co.nz/more/accommodation" target="_blank" rel="noopener">Official accommodation (Beyonder)</a></li>
-          <li><a href="/categories/accommodation.html">Pacific Park Pāpāmoa</a></li>
-        </ul>
-      </div>
     </aside>
+
   </div>
 </div>
 
-<footer class="site-footer">
-  <a href="/">Papamoa.info</a> — AIMS Games dates confirmed from nzaimsgames.co.nz (April 2026). Always verify current information at the official AIMS Games website.
+<!-- FOOTER -->
+<footer class="pnf-footer-slim">
+  <div class="pnf-footer-brand">Papamoa<span>.info</span></div>
+  <p class="pnf-footer-tagline">P&#257;p&#257;moa&rsquo;s local business directory &middot; Part of the TaurangaNZ.info network &middot; Trusted since 2005</p>
+  <div class="pnf-footer-slim-links">
+    <a href="/papamoa-previews/homepage.html">Directory</a>
+    <a href="/papamoa-previews/categories/accommodation.html">Accommodation</a>
+    <a href="/papamoa-previews/categories/food-drink.html">Food &amp; Drink</a>
+    <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
+    <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+  <div class="pnf-footer-slim-bottom">&copy; 2026 Papamoa.info &mdash; AIMS Games dates confirmed from nzaimsgames.co.nz (April 2026). Always verify current information at the official AIMS Games website.</div>
 </footer>
+
 <script>
-  (function() {
-    var base = '/papamoa-previews';
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('/') && !href.startsWith(base)) {
-        e.preventDefault();
-        window.location.href = base + href;
-      }
-    });
-  })();
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() { q.parentElement.classList.toggle('open'); });
+});
+
+(function() {
+  var base = '/papamoa-previews';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+      e.preventDefault();
+      window.location.href = base + href;
+    }
+  });
+})();
 </script>
 </body>
 </html>
