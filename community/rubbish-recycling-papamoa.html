@@ -1,97 +1,181 @@
 <!DOCTYPE html>
 <html lang="en-NZ">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rubbish, Recycling & Te Maunga Transfer Station | Papamoa.info</title>
-  <meta name="description" content="Complete guide to rubbish and recycling in Pāpāmoa — kerbside bins, collection days, Te Maunga Transfer Station hours, fees and what goes where.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
-  <style>
-    /* === SHARED === */
-    :root { --navy:#2B3F5C; --blue:#3AABDE; --lime:#7DC143; --sand:#F5EFE0; --dune:#D4C4A0; --coral:#E8344A; --white:#fff; --body:#1E2D3E; --muted:#607080; --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A; }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--body); line-height: 1.65; }
-    a { color: var(--blue); }
-    .site-nav { background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; text-decoration: none; }
-    .nav-brand em { font-style: normal; color: var(--blue); }
-    .breadcrumb { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
-    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
-    .breadcrumb span { margin: 0 5px; opacity: 0.4; }
-    .page-hero { background: linear-gradient(135deg, #1A2A1A, #2A3A20); padding: 44px 24px 40px; position: relative; overflow: hidden; }
-    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #7DC143, #3A8020); }
-    .hero-inner { max-width: 960px; margin: 0 auto; }
-    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #7DC143; margin-bottom: 8px; }
-    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 10px; }
-    .page-hero h1 em { font-style: italic; color: #7DC143; }
-    .hero-sub { font-size: 0.92rem; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.65; }
-    .page-wrap { max-width: 960px; margin: 0 auto; padding: 36px 20px 80px; }
-    .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
-    .main-col { min-width: 0; }
-    .side-col { display: flex; flex-direction: column; gap: 18px; }
-    .section { margin-bottom: 36px; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
-    .body-text { font-size: 0.9rem; color: var(--body); line-height: 1.75; margin-bottom: 14px; }
-    .info-rows { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
-    .info-row { display: flex; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
-    .info-row:last-child { border-bottom: none; }
-    .ir-label { font-weight: 700; color: var(--navy); min-width: 120px; font-size: 0.78rem; flex-shrink: 0; }
-    .ir-val { color: var(--muted); line-height: 1.5; }
-    .ir-val a { color: var(--blue); text-decoration: none; }
-    .provider-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-    .provider-card { background: var(--white); border: 1px solid var(--border); border-radius: 9px; padding: 14px; }
-    .pc-name { font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 4px; }
-    .pc-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
-    .pc-link { font-size: 0.75rem; font-weight: 700; color: var(--blue); text-decoration: none; }
-    .alert-note { border-radius: 8px; padding: 12px 16px; font-size: 0.83rem; line-height: 1.6; margin-bottom: 16px; display: flex; gap: 10px; }
-    .alert-blue { background: #EBF5FB; border-left: 4px solid var(--blue); color: #1A4060; }
-    .alert-yellow { background: #FFF8E8; border-left: 4px solid var(--gold); color: #5A3800; }
-    .alert-green { background: #EAF7EE; border-left: 4px solid var(--lime); color: #1A5020; }
-    .fact-box { background: var(--navy); border-radius: 10px; padding: 20px; }
-    .fact-box h4 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
-    .fact-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .fact-list li { font-size: 0.82rem; color: rgba(255,255,255,0.7); display: flex; gap: 8px; line-height: 1.5; }
-    .fact-list li::before { content: '›'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
-    .fact-list li strong { color: #fff; }
-    .card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
-    .card-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
-    .link-list { display: flex; flex-direction: column; gap: 8px; }
-    .link-list a { font-size: 0.82rem; font-weight: 600; text-decoration: none; }
-    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
-    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
-    .ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .ad-inner { padding: 16px; background: var(--white); }
-    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
-    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
-    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-decoration: none; }
-    .op-shop-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
-    .osc-header { padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; border-bottom: 1px solid var(--border); }
-    .osc-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
-    .osc-meta { flex: 1; }
-    .osc-name { font-family: 'Playfair Display', serif; font-size: 0.97rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-    .osc-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 4px; }
-    .osc-tag { font-size: 0.6rem; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: rgba(58,171,222,0.08); color: var(--blue); border: 1px solid rgba(58,171,222,0.15); }
-    .osc-tag-hospice { background: rgba(232,52,74,0.08); color: var(--coral); border-color: rgba(232,52,74,0.15); }
-    .osc-tag-church { background: rgba(125,193,67,0.1); color: #3A8020; border-color: rgba(125,193,67,0.2); }
-    .osc-tag-thrift { background: rgba(200,150,42,0.1); color: var(--gold); border-color: rgba(200,150,42,0.2); }
-    .osc-addr { font-size: 0.75rem; color: var(--muted); }
-    .osc-body { padding: 12px 16px; font-size: 0.84rem; color: var(--body); line-height: 1.65; }
-    .osc-hours { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
-    .site-footer { background: var(--navy); padding: 20px 24px; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 40px; }
-    .site-footer a { color: var(--blue); }
-    @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } .side-col { order: -1; } .provider-grid { grid-template-columns: 1fr; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rubbish, Recycling &amp; Te Maunga Transfer Station | Papamoa.info</title>
+<meta name="description" content="Complete guide to rubbish and recycling in Pāpāmoa — kerbside bins, collection days, Te Maunga Transfer Station hours, fees and what goes where.">
+<link rel="canonical" href="https://papamoa.info/community/rubbish-recycling-papamoa.html">
+<meta property="og:title" content="Rubbish, Recycling &amp; Te Maunga Transfer Station | Papamoa.info">
+<meta property="og:description" content="Kerbside bin guide, collection day finder, and full details on Te Maunga Transfer Station — hours, costs and what you can drop off.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://papamoa.info/community/rubbish-recycling-papamoa.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Rubbish, Recycling & Te Maunga Transfer Station — Pāpāmoa Guide",
+  "description": "Complete guide to rubbish and recycling in Pāpāmoa including kerbside bins, collection days, Te Maunga Transfer Station hours and fees.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Papamoa.info",
+    "url": "https://papamoa.info"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://papamoa.info" },
+      { "@type": "ListItem", "position": 2, "name": "Rubbish & Recycling" }
+    ]
+  }
+}
+</script>
+
+<style>
+:root {
+  --navy: #0D2B3E;
+  --ocean: #1B6B7D;
+  --ocean-deep: #0F4352;
+  --ocean-light: #E4F2F5;
+  --blue: #3AABDE;
+  --lime: #7DC143;
+  --sand: #F7F3ED;
+  --sand-dark: #EDE7DB;
+  --dune: #C4985A;
+  --white: #FFFFFF;
+  --body: #1A2832;
+  --muted: #5A6E78;
+  --border: #D8E4E8;
+  --bg: #F4F7FA;
+  --gold: #C8962A;
+  --gold-bg: #FBF3E2;
+  --coral: #E8344A;
+  --green: #1E6B3C;
+  --font-body: 'Figtree', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --pnf-navy: #0D2B3E;
+  --pnf-accent: #3AABDE;
+  --pnf-dune: #C4985A;
+  --pnf-white: #FFFFFF;
+  --pnf-muted: rgba(255,255,255,0.45);
+  --pnf-font: 'Figtree', sans-serif;
+  --pnf-display: 'Playfair Display', serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--sand); color: var(--body); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+a { color: var(--blue); }
+
+/* ── PNF NAV ── */
+.pnf-nav { background: var(--pnf-navy); height: 56px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.25); gap: 16px; }
+.pnf-logo { font-family: var(--pnf-display); font-weight: 700; font-size: 15px; color: var(--pnf-white); text-decoration: none; flex-shrink: 0; }
+.pnf-logo span { color: var(--pnf-accent); }
+.pnf-breadcrumb { font-size: 12px; color: var(--pnf-muted); display: flex; align-items: center; gap: 6px; flex: 1; overflow: hidden; white-space: nowrap; }
+.pnf-breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; flex-shrink: 0; }
+.pnf-breadcrumb a:hover { color: var(--pnf-white); }
+.pnf-breadcrumb .sep { opacity: 0.3; flex-shrink: 0; }
+.pnf-breadcrumb .current { overflow: hidden; text-overflow: ellipsis; opacity: 0.6; }
+.pnf-cta { font-family: var(--pnf-font); font-size: 13px; font-weight: 700; background: var(--pnf-accent); color: var(--pnf-white); padding: 8px 18px; border-radius: 100px; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
+.pnf-cta:hover { background: #2d95c4; }
+@media (max-width: 640px) { .pnf-nav { padding: 0 16px; } .pnf-cta { display: none; } }
+
+/* ── PAGE HERO ── */
+.page-hero { background: linear-gradient(135deg, #1A2A1A, #2A3A20); padding: 44px 24px 48px; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(125,193,67,0.08) 0%, transparent 55%); pointer-events: none; }
+.page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #7DC143, #3A8020); }
+.hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); margin-bottom: 10px; }
+.page-hero h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 12px; }
+.page-hero h1 em { font-style: italic; color: var(--lime); }
+.hero-sub { font-size: 0.95rem; color: rgba(255,255,255,0.6); max-width: 560px; line-height: 1.7; }
+
+/* ── LAYOUT ── */
+.page-wrap { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+.two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+.main-col { min-width: 0; }
+.side-col { display: flex; flex-direction: column; gap: 18px; }
+@media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } .side-col { order: -1; } }
+
+/* ── CONTENT ── */
+.section { margin-bottom: 36px; }
+.section-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+.body-text { font-size: 0.9rem; color: var(--body); line-height: 1.78; margin-bottom: 14px; }
+.info-rows { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+.info-row { display: flex; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+.info-row:last-child { border-bottom: none; }
+.ir-label { font-weight: 700; color: var(--navy); min-width: 130px; font-size: 0.78rem; flex-shrink: 0; }
+.ir-val { color: var(--muted); line-height: 1.5; }
+.ir-val a { color: var(--blue); text-decoration: none; }
+.alert-note { border-radius: 8px; padding: 12px 16px; font-size: 0.83rem; line-height: 1.6; margin-bottom: 16px; display: flex; gap: 10px; }
+.alert-blue { background: #EBF5FB; border-left: 4px solid var(--blue); color: #1A4060; }
+.alert-yellow { background: #FFF8E8; border-left: 4px solid var(--gold); color: #5A3800; }
+.alert-green { background: #EAF7EE; border-left: 4px solid var(--lime); color: #1A5020; }
+
+/* ── SIDEBAR CARDS ── */
+.card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+.card-title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+.link-list { display: flex; flex-direction: column; gap: 8px; }
+.link-list a { font-size: 0.82rem; font-weight: 600; text-decoration: none; color: var(--blue); transition: color 0.15s; }
+.link-list a:hover { color: var(--ocean-deep); }
+
+/* ── QUICK REFERENCE BOX ── */
+.fact-box { background: var(--navy); border-radius: 10px; padding: 20px; }
+.fact-box h4 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+.fact-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.fact-list li {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.45;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.fact-list li:last-child { border-bottom: none; }
+.fact-key { font-weight: 700; color: #fff; }
+.fact-val { color: rgba(255,255,255,0.65); }
+
+/* ── AD / SPOTLIGHT SPOT ── */
+.ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
+.ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+.ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.ad-inner { padding: 16px; background: var(--white); }
+.ad-placeholder { background: var(--gold-bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
+.ad-placeholder p { font-size: 0.78rem; color: #7A5800; margin-bottom: 8px; line-height: 1.55; }
+.ad-placeholder strong { display: block; font-size: 0.82rem; color: var(--navy); margin-bottom: 4px; }
+.ad-claim-btn { display: inline-block; font-size: 0.75rem; font-weight: 700; color: var(--white); background: var(--ocean); padding: 7px 14px; border-radius: 5px; text-decoration: none; transition: background 0.15s; }
+.ad-claim-btn:hover { background: var(--ocean-deep); }
+
+/* ── PNF FOOTER ── */
+.pnf-footer-slim { background: var(--pnf-navy); padding: 28px; text-align: center; margin-top: 0; }
+.pnf-footer-brand { font-family: var(--pnf-display); font-size: 1.1rem; font-weight: 700; color: var(--pnf-white); margin-bottom: 6px; display: inline-block; }
+.pnf-footer-brand span { color: var(--pnf-accent); }
+.pnf-footer-tagline { font-size: 12.5px; color: rgba(255,255,255,0.38); line-height: 1.7; text-align: center; margin: 0 auto 16px; }
+.pnf-footer-slim-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+.pnf-footer-slim-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.15s; }
+.pnf-footer-slim-links a:hover { color: var(--pnf-white); }
+.pnf-footer-slim-bottom { font-size: 11.5px; color: rgba(255,255,255,0.2); }
+</style>
 </head>
 <body>
 
-<nav class="site-nav">
-  <a href="/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
-  <span class="breadcrumb"><a href="/homepage.html">Home</a><span>/</span>Rubbish &amp; Recycling &mdash; P&#257;p&#257;moa</span>
+<!-- NAV -->
+<nav class="pnf-nav">
+  <a href="/papamoa-previews/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
+  <div class="pnf-breadcrumb">
+    <a href="/papamoa-previews/homepage.html">Home</a>
+    <span class="sep">/</span>
+    <span class="current">Rubbish &amp; Recycling</span>
+  </div>
+  <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-cta">List your business &rarr;</a>
 </nav>
 
+<!-- HERO -->
 <div class="page-hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">&#128682; Local Information &middot; P&#257;p&#257;moa</div>
@@ -102,7 +186,9 @@
 
 <div class="page-wrap">
   <div class="two-col">
+
     <div class="main-col">
+
       <div class="alert-note alert-blue">
         <span>&#128204;</span>
         <div>P&#257;p&#257;moa is part of Tauranga City&rsquo;s kerbside collection scheme, which launched in July 2021. Households have four bins: red (rubbish), yellow (recycling), green (food scraps), and blue (glass). Collections are fortnightly for rubbish and weekly for recycling and food scraps.</div>
@@ -147,30 +233,39 @@
           <div class="info-row"><span class="ir-label">Garden waste</span><span class="ir-val">Accepted at Te Maunga. Made into certified organic compost on-site.</span></div>
         </div>
       </div>
-    </div>
+
+    </div><!-- /main-col -->
+
     <div class="side-col">
+
+      <!-- QUICK REFERENCE -->
       <div class="fact-box">
         <h4>&#128204; Quick reference</h4>
         <ul class="fact-list">
-          <li><strong>Red bin</strong> &mdash; rubbish, fortnightly</li>
-          <li><strong>Yellow bin</strong> &mdash; recycling, weekly</li>
-          <li><strong>Green bin</strong> &mdash; food scraps, weekly</li>
-          <li><strong>Blue crate</strong> &mdash; glass, weekly</li>
-          <li><strong>Transfer station</strong> &mdash; Te Maunga, Truman Rd</li>
-          <li><strong>Station hours</strong> &mdash; Mon&ndash;Fri 7:30am&ndash;5pm</li>
-          <li><strong>Weekends/PH</strong> &mdash; 9am&ndash;5pm</li>
-          <li><strong>No cash</strong> &mdash; EFTPOS only at transfer station</li>
+          <li><span class="fact-key">Red bin</span><span class="fact-val">Rubbish, fortnightly</span></li>
+          <li><span class="fact-key">Yellow bin</span><span class="fact-val">Recycling, weekly</span></li>
+          <li><span class="fact-key">Green bin</span><span class="fact-val">Food scraps, weekly</span></li>
+          <li><span class="fact-key">Blue crate</span><span class="fact-val">Glass, weekly</span></li>
+          <li><span class="fact-key">Transfer station</span><span class="fact-val">Te Maunga, Truman Rd</span></li>
+          <li><span class="fact-key">Mon&ndash;Fri</span><span class="fact-val">7:30am&ndash;5:00pm</span></li>
+          <li><span class="fact-key">Weekends/PH</span><span class="fact-val">9:00am&ndash;5:00pm</span></li>
+          <li><span class="fact-key">Payment</span><span class="fact-val">EFTPOS only, no cash</span></li>
         </ul>
       </div>
+
+      <!-- SPOTLIGHT AD SPOT -->
       <div class="ad-spot">
-        <div class="ad-label">Sponsored</div>
+        <div class="ad-label">Spotlight available</div>
         <div class="ad-inner">
           <div class="ad-placeholder">
-            <p>&#127981; Skip bin hire in P&#257;p&#257;moa</p>
-            <a href="/index.html">Claim this spot &rarr;</a>
+            <strong>Skip bin hire in P&#257;p&#257;moa?</strong>
+            <p>This spot reaches locals searching for rubbish and waste removal services. Gold listing holders only.</p>
+            <a href="/papamoa-previews/sales/claim.html?page=rubbish-recycling-papamoa&spot=sidebar&label=Skip+bin+hire+in+P%C4%81p%C4%81moa" class="ad-claim-btn">Claim this spot &rarr;</a>
           </div>
         </div>
       </div>
+
+      <!-- USEFUL LINKS -->
       <div class="card">
         <div class="card-title">&#128279; Useful links</div>
         <div class="link-list">
@@ -180,37 +275,50 @@
           <a href="https://www.tauranga.govt.nz/council/fees-and-charges/transfer-station-fees-and-charges" target="_blank" rel="noopener">Transfer station fees &#8599;</a>
         </div>
       </div>
+
+      <!-- RELATED PAGES -->
       <div class="card">
         <div class="card-title">&#128279; Related pages</div>
         <div class="link-list">
-          <a href="/articles/clothing-recycling-papamoa.html" style="font-size:0.82rem;font-weight:600">Clothing &amp; Textile Recycling</a>
-          <a href="/articles/op-shops-papamoa.html" style="font-size:0.82rem;font-weight:600">Op Shops &amp; Second-hand</a>
-          <a href="/articles/utilities-papamoa.html" style="font-size:0.82rem;font-weight:600">Utilities &mdash; Power &amp; Broadband</a>
-          <a href="/articles/local-government.html" style="font-size:0.82rem;font-weight:600">Local Government</a>
+          <a href="/papamoa-previews/community/clothing-recycling-papamoa.html">Clothing &amp; Textile Recycling</a>
+          <a href="/papamoa-previews/community/op-shops-papamoa.html">Op Shops &amp; Second-hand</a>
+          <a href="/papamoa-previews/community/utilities-papamoa.html">Utilities &mdash; Power &amp; Broadband</a>
+          <a href="/papamoa-previews/community/local-government.html">Local Government</a>
         </div>
       </div>
-    </div>
+
+    </div><!-- /side-col -->
+
   </div>
 </div>
 
-<footer class="site-footer">
-  <a href="/homepage.html">Papamoa.info</a> &mdash; The local directory for P&#257;p&#257;moa, Bay of Plenty, New Zealand. Always verify details directly with providers.
+<!-- FOOTER -->
+<footer class="pnf-footer-slim">
+  <div class="pnf-footer-brand">Papamoa<span>.info</span></div>
+  <p class="pnf-footer-tagline">P&#257;p&#257;moa&rsquo;s local business directory &middot; Part of the TaurangaNZ.info network &middot; Trusted since 2005</p>
+  <div class="pnf-footer-slim-links">
+    <a href="/papamoa-previews/homepage.html">Directory</a>
+    <a href="/papamoa-previews/sales/list-with-us.html">List your business</a>
+    <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener">Facebook</a>
+    <a href="/papamoa-previews/legal.html">Privacy &amp; Terms</a>
+  </div>
+  <div class="pnf-footer-slim-bottom">&copy; 2026 Papamoa.info &mdash; Always verify details directly with providers.</div>
 </footer>
 
 <script>
-  (function() {
-    var base = '/papamoa-previews';
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('/') && !href.startsWith(base)) {
-        e.preventDefault();
-        window.location.href = base + href;
-      }
-    });
-  })();
+(function() {
+  var base = '/papamoa-previews';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+      e.preventDefault();
+      window.location.href = base + href;
+    }
+  });
+})();
 </script>
 </body>
 </html>
