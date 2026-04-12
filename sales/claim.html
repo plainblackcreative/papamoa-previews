@@ -12,80 +12,29 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --ocean: #1B6B7D;
-  --ocean-deep: #0F4352;
-  --ocean-mid: #1A5F70;
-  --ocean-light: #E4F2F5;
-  --ocean-accent: #3AABDE;
-  --sand: #F7F3ED;
-  --sand-dark: #EDE7DB;
-  --dune: #C4985A;
-  --dune-light: #F5EDD8;
-  --navy: #0D2B3E;
-  --white: #FFFFFF;
-  --text: #1A2832;
-  --muted: #5A6E78;
-  --border: #D8E4E8;
-  --silver: #5A7A8A;
-  --silver-bg: #EDF3F6;
-  --gold: #B8840A;
-  --gold-bg: #FBF3E2;
-  --green: #1E6B3C;
-  --green-bg: #E6F4EC;
-  --green-pulse: #7DC143;
-  --font-body: 'Figtree', sans-serif;
-  --font-display: 'Playfair Display', serif;
+  --ocean: #1B6B7D; --ocean-deep: #0F4352; --ocean-mid: #1A5F70; --ocean-light: #E4F2F5; --ocean-accent: #3AABDE;
+  --sand: #F7F3ED; --sand-dark: #EDE7DB; --dune: #C4985A; --dune-light: #F5EDD8;
+  --navy: #0D2B3E; --white: #FFFFFF; --text: #1A2832; --muted: #5A6E78;
+  --border: #D8E4E8; --silver: #5A7A8A; --silver-bg: #EDF3F6;
+  --gold: #B8840A; --gold-bg: #FBF3E2;
+  --green: #1E6B3C; --green-bg: #E6F4EC; --green-pulse: #7DC143;
+  --font-body: 'Figtree', sans-serif; --font-display: 'Playfair Display', serif;
 }
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-body); background: var(--sand); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-/* ── NAV ── */
 .nav { background: var(--ocean-deep); padding: 0 28px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
 .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--white); text-decoration: none; }
 .nav-logo span { color: var(--ocean-accent); }
 .nav-back { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
 .nav-back:hover { color: var(--white); }
 
-/* ── HERO ── */
-.hero {
-  background: var(--ocean-deep);
-  padding: 72px 24px 100px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(58,171,222,0.1) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(196,152,90,0.1) 0%, transparent 50%);
-  pointer-events: none;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -2px; left: 0; right: 0;
-  height: 80px;
-  background: var(--sand);
-  clip-path: ellipse(65% 100% at 50% 100%);
-}
+.hero { background: var(--ocean-deep); padding: 72px 24px 100px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(58,171,222,0.1) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(196,152,90,0.1) 0%, transparent 50%); pointer-events: none; }
+.hero::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 80px; background: var(--sand); clip-path: ellipse(65% 100% at 50% 100%); }
 .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
 
-/* Context tag */
-.context-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 100px;
-  padding: 6px 16px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-bottom: 22px;
-}
+.context-tag { display: inline-flex; align-items: center; gap: 8px; border-radius: 100px; padding: 6px 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 22px; }
 .context-tag.listing { background: rgba(90,122,138,0.2); border: 1px solid rgba(90,122,138,0.35); color: rgba(255,255,255,0.75); }
 .context-tag.spotlight { background: rgba(184,132,10,0.2); border: 1px solid rgba(184,132,10,0.35); color: var(--dune); }
 .context-tag.adspot { background: rgba(58,171,222,0.15); border: 1px solid rgba(58,171,222,0.3); color: var(--ocean-accent); }
@@ -98,17 +47,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .hero h1 em.adspot-em { color: var(--ocean-accent); }
 .hero-sub { color: rgba(255,255,255,0.6); font-size: 1rem; font-weight: 300; line-height: 1.75; max-width: 520px; margin: 0 auto 32px; }
 
-/* Spot confirmation pill */
-.spot-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border-radius: 10px;
-  padding: 12px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 32px;
-}
+.spot-pill { display: inline-flex; align-items: center; gap: 10px; border-radius: 10px; padding: 12px 20px; font-size: 14px; font-weight: 600; margin-bottom: 32px; }
 .spot-pill.spotlight { background: rgba(184,132,10,0.15); border: 1px solid rgba(184,132,10,0.3); color: var(--dune); }
 .spot-pill.listing { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
 .spot-pill.adspot { background: rgba(58,171,222,0.12); border: 1px solid rgba(58,171,222,0.25); color: var(--ocean-accent); }
@@ -121,14 +60,12 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .hero-cta.gold-cta:hover { background: #9A6E08; box-shadow: 0 12px 36px rgba(184,132,10,0.4); }
 .hero-cta-sub { display: block; margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.38); }
 
-/* ── CONTAINER ── */
 .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
 .section { padding: 48px 0; }
 .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocean); margin-bottom: 10px; }
 .section h2 { font-family: var(--font-display); font-size: clamp(1.4rem, 2.8vw, 1.85rem); color: var(--navy); margin-bottom: 12px; line-height: 1.25; }
 .section .lead { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; max-width: 560px; }
 
-/* ── TIER CARDS (listing type) ── */
 .tier-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
 @media (max-width: 580px) { .tier-split { grid-template-columns: 1fr; } }
 .tier-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.15s, transform 0.15s; }
@@ -163,25 +100,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .gold-tier-cta:hover { background: #9A6E08; }
 .scarcity-note { font-size: 11px; color: var(--gold); font-weight: 600; text-align: center; margin-top: 8px; }
 
-/* ── GOLD SPOTLIGHT DETAILS (spotlight type) ── */
-.spotlight-box {
-  background: var(--white);
-  border: 1px solid rgba(184,132,10,0.3);
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 20px rgba(184,132,10,0.08);
-}
-.sb-head {
-  background: linear-gradient(135deg, var(--gold-bg), #FEF8EC);
-  padding: 22px 28px 18px;
-  border-bottom: 1px solid rgba(184,132,10,0.15);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
+.spotlight-box { background: var(--white); border: 1px solid rgba(184,132,10,0.3); border-radius: 14px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(184,132,10,0.08); }
+.sb-head { background: linear-gradient(135deg, var(--gold-bg), #FEF8EC); padding: 22px 28px 18px; border-bottom: 1px solid rgba(184,132,10,0.15); display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .sb-tier { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
 .sb-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
 .sb-price { font-size: 1.6rem; font-weight: 800; color: var(--gold); line-height: 1; }
@@ -192,25 +112,9 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 @media (max-width: 500px) { .sb-feats { grid-template-columns: 1fr; } }
 .sb-feat { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--muted); line-height: 1.4; }
 .sb-tick { color: var(--green); font-weight: 700; flex-shrink: 0; font-size: 12px; margin-top: 2px; }
-.sb-premium-note {
-  background: var(--dune-light);
-  border: 1px solid rgba(196,152,90,0.25);
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 13px;
-  color: #7A5800;
-  line-height: 1.6;
-}
+.sb-premium-note { background: var(--dune-light); border: 1px solid rgba(196,152,90,0.25); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #7A5800; line-height: 1.6; }
 
-/* ── AD SPOT BOX (adspot type) ── */
-.adspot-box {
-  background: var(--white);
-  border: 1px solid rgba(58,171,222,0.25);
-  border-radius: 14px;
-  padding: 28px 32px;
-  margin-bottom: 20px;
-  text-align: center;
-}
+.adspot-box { background: var(--white); border: 1px solid rgba(58,171,222,0.25); border-radius: 14px; padding: 28px 32px; margin-bottom: 20px; text-align: center; }
 .adspot-box .adspot-icon { font-size: 40px; margin-bottom: 14px; }
 .adspot-box h3 { font-family: var(--font-display); font-size: 1.3rem; color: var(--navy); margin-bottom: 8px; }
 .adspot-box p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; max-width: 480px; margin-left: auto; margin-right: auto; }
@@ -223,8 +127,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .adspot-gold-note { margin-top: 16px; font-size: 12px; color: var(--muted); }
 .adspot-gold-note a { color: var(--ocean); font-weight: 600; text-decoration: none; }
 .adspot-gold-note a:hover { text-decoration: underline; }
+.adspot-page-label { display: inline-block; background: var(--ocean-light); color: var(--ocean-deep); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
 
-/* ── HOW IT WORKS (listing + spotlight) ── */
 .flow-steps { display: flex; flex-direction: column; gap: 0; }
 .flow-step { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
 .flow-step:last-child { border-bottom: none; }
@@ -233,113 +137,40 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .flow-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 .flow-time { font-size: 11px; font-weight: 700; color: var(--ocean-accent); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
 
-/* ── GUARANTEES ── */
 .guarantee-row { display: flex; gap: 10px; flex-wrap: wrap; }
 .g-pill { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; display: flex; align-items: flex-start; gap: 9px; flex: 1; min-width: 160px; }
 .g-icon { font-size: 16px; flex-shrink: 0; }
 .g-text strong { display: block; font-size: 12.5px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
 .g-text span { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
 
-/* ── THE FORM ── */
-.form-section {
-  background: linear-gradient(140deg, var(--ocean-deep), var(--ocean-mid));
-  border-radius: 16px;
-  padding: 48px 40px;
-  position: relative;
-  overflow: hidden;
-  margin: 48px 0 0;
-}
-.form-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 15% 60%, rgba(58,171,222,0.1) 0%, transparent 55%);
-  pointer-events: none;
-}
+.form-section { background: linear-gradient(140deg, var(--ocean-deep), var(--ocean-mid)); border-radius: 16px; padding: 48px 40px; position: relative; overflow: hidden; margin: 48px 0 0; }
+.form-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 15% 60%, rgba(58,171,222,0.1) 0%, transparent 55%); pointer-events: none; }
 .form-inner { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; }
 .form-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ocean-accent); margin-bottom: 10px; text-align: center; }
 .form-section h2 { font-family: var(--font-display); color: var(--white); font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: 8px; line-height: 1.2; text-align: center; }
 .form-section > .form-inner > p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.65; margin-bottom: 28px; text-align: center; }
-
 .vis-form { display: flex; flex-direction: column; gap: 14px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
 .field-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 5px; display: block; }
-.vis-input {
-  width: 100%;
-  padding: 13px 16px;
-  border-radius: 8px;
-  border: 1.5px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
-  color: var(--white);
-  font-family: var(--font-body);
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s, background 0.2s;
-}
+.vis-input { width: 100%; padding: 13px 16px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); color: var(--white); font-family: var(--font-body); font-size: 14px; outline: none; transition: border-color 0.2s, background 0.2s; }
 .vis-input:focus { border-color: var(--ocean-accent); background: rgba(255,255,255,0.12); }
 .vis-input::placeholder { color: rgba(255,255,255,0.3); }
-.vis-select {
-  width: 100%;
-  padding: 13px 16px;
-  border-radius: 8px;
-  border: 1.5px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
-  color: var(--white);
-  font-family: var(--font-body);
-  font-size: 14px;
-  outline: none;
-  cursor: pointer;
-  appearance: none;
-  transition: border-color 0.2s;
-}
-.vis-select:focus { border-color: var(--ocean-accent); }
-.vis-select option { background: var(--ocean-deep); color: var(--white); }
-.vis-textarea {
-  width: 100%;
-  padding: 13px 16px;
-  border-radius: 8px;
-  border: 1.5px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
-  color: var(--white);
-  font-family: var(--font-body);
-  font-size: 14px;
-  outline: none;
-  resize: vertical;
-  min-height: 80px;
-  line-height: 1.55;
-  transition: border-color 0.2s;
-}
+.vis-textarea { width: 100%; padding: 13px 16px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); color: var(--white); font-family: var(--font-body); font-size: 14px; outline: none; resize: vertical; min-height: 80px; line-height: 1.55; transition: border-color 0.2s; }
 .vis-textarea:focus { border-color: var(--ocean-accent); background: rgba(255,255,255,0.12); }
 .vis-textarea::placeholder { color: rgba(255,255,255,0.3); }
-.btn-submit {
-  width: 100%;
-  background: var(--ocean-accent);
-  color: var(--white);
-  border: none;
-  padding: 16px;
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 4px;
-  box-shadow: 0 6px 24px rgba(58,171,222,0.3);
-}
+.btn-submit { width: 100%; background: var(--ocean-accent); color: var(--white); border: none; padding: 16px; border-radius: 8px; font-family: var(--font-body); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-top: 4px; box-shadow: 0 6px 24px rgba(58,171,222,0.3); }
 .btn-submit:hover { background: #2d95c4; transform: translateY(-1px); }
 .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 .btn-submit.gold-submit { background: var(--gold); box-shadow: 0 6px 24px rgba(184,132,10,0.3); }
 .btn-submit.gold-submit:hover { background: #9A6E08; }
 .form-promise { margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.35); text-align: center; }
-
 .form-success { display: none; text-align: center; padding: 32px 0; }
 .form-success .tick { font-size: 48px; margin-bottom: 16px; }
 .form-success h3 { color: var(--white); font-family: var(--font-display); font-size: 24px; margin-bottom: 8px; }
 .form-success p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.65; }
 .form-success a { color: var(--ocean-accent); }
 
-/* ── CONTACT STRIP ── */
 .contact-strip { background: var(--navy); border-radius: 12px; padding: 20px 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 28px 0 52px; }
 .cs-body { flex: 1; }
 .cs-body strong { color: var(--white); display: block; font-size: 13.5px; margin-bottom: 2px; }
@@ -348,30 +179,22 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .cs-link { font-size: 13px; font-weight: 600; color: var(--ocean-accent); text-decoration: none; transition: color 0.15s; }
 .cs-link:hover { color: var(--white); }
 
-/* ── FOOTER ── */
 .footer { background: var(--ocean-deep); padding: 28px 24px; text-align: center; color: rgba(255,255,255,0.35); font-size: 12px; line-height: 2; }
 .footer a { color: var(--ocean-accent); text-decoration: none; }
 
-@media (max-width: 600px) {
-  .hero { padding: 56px 20px 90px; }
-  .section { padding: 36px 0; }
-  .form-section { padding: 32px 20px; }
-  .nav { padding: 0 20px; }
-}
+@media (max-width: 600px) { .hero { padding: 56px 20px 90px; } .section { padding: 36px 0; } .form-section { padding: 32px 20px; } .nav { padding: 0 20px; } }
 </style>
 </head>
 <body>
 
 <nav class="nav">
-  <a href="/homepage.html" class="nav-logo">papamoa<span>.info</span></a>
-  <a href="/homepage.html" class="nav-back" id="nav-back">&#8592; Directory</a>
+  <a href="/papamoa-previews/homepage.html" class="nav-logo">Papamoa<span>.info</span></a>
+  <a href="/papamoa-previews/homepage.html" class="nav-back" id="nav-back">&#8592; Directory</a>
 </nav>
 
-<!-- HERO — swapped by JS -->
 <div class="hero">
   <div class="hero-inner" id="hero-inner">
 
-    <!-- DEFAULT / GENERIC -->
     <div id="state-generic" style="display:none">
       <div class="context-tag generic">P&#257;p&#257;moa&rsquo;s local directory</div>
       <h1>List your business on <em class="listing-em">Papamoa.info</em></h1>
@@ -380,39 +203,30 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <span class="hero-cta-sub">Free preview &middot; No obligation &middot; Approve before you pay</span>
     </div>
 
-    <!-- LISTING (Bronze placeholder claim) -->
     <div id="state-listing" style="display:none">
       <div class="context-tag listing">&#128205; Unclaimed listing</div>
       <h1>Claim your listing in <em class="listing-em js-subcat">P&#257;p&#257;moa</em></h1>
       <div class="spot-pill listing">
         <span class="spot-pill-icon">&#128205;</span>
-        <div>
-          <span class="spot-label">Unclaimed slot</span>
-          <span class="js-slot-label">This listing is available to claim</span>
-        </div>
+        <div><span class="spot-label">Unclaimed slot</span><span class="js-slot-label">This listing is available to claim</span></div>
       </div>
       <p class="hero-sub">This slot is already ranking in Google and receiving enquiries. Claim it as Silver or Gold and those leads come to you instead.</p>
       <a href="#claim-form" class="hero-cta">Claim this listing &rarr;</a>
       <span class="hero-cta-sub">See your listing before you pay &middot; Live within 24 hours of approval</span>
     </div>
 
-    <!-- SPOTLIGHT (Gold subcategory claim) -->
     <div id="state-spotlight" style="display:none">
       <div class="context-tag spotlight">&#11088; Gold Listing</div>
       <h1>Claim the <em class="spotlight-em js-subcat">Spotlight</em> position</h1>
       <div class="spot-pill spotlight">
         <span class="spot-pill-icon">&#11088;</span>
-        <div>
-          <span class="spot-label">Available now</span>
-          <span class="js-slot-label">Gold Listing &mdash; P&#257;p&#257;moa</span>
-        </div>
+        <div><span class="spot-label">Available now</span><span class="js-slot-label">Gold Listing &mdash; P&#257;p&#257;moa</span></div>
       </div>
       <p class="hero-sub">The top position in this sub-category is still available. One Gold Listing per sub-category &mdash; once it&rsquo;s claimed, it&rsquo;s gone.</p>
       <a href="#claim-form" class="hero-cta gold-cta">Claim this Spotlight &rarr;</a>
       <span class="hero-cta-sub">We build your listing &middot; You approve it &middot; Then it goes live</span>
     </div>
 
-    <!-- AD SPOT (article/page ad position) -->
     <div id="state-adspot" style="display:none">
       <div class="context-tag adspot">&#128202; Premium Ad Spot</div>
       <h1>Enquire about this <em class="adspot-em">ad position</em></h1>
@@ -433,13 +247,11 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 
 <div class="container">
 
-  <!-- ══ LISTING STATE CONTENT ══ -->
   <div id="content-listing" style="display:none">
     <div class="section">
       <div class="section-label">Your options</div>
       <h2>Silver or Gold &mdash; here&rsquo;s the difference</h2>
       <p class="lead">Both are full claimed listings, written by us from your website and socials. Gold adds the Spotlight position and access to premium ad spots on our highest-traffic pages.</p>
-
       <div class="tier-split">
         <div class="tier-card">
           <div class="tier-head silver-head">
@@ -460,11 +272,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
               <li><i class="fi fi-no">&#10007;</i> Spotlight position</li>
             </ul>
           </div>
-          <div class="tier-footer">
-            <a href="#claim-form" class="tier-cta silver-tier-cta">Claim Silver &rarr;</a>
-          </div>
+          <div class="tier-footer"><a href="#claim-form" class="tier-cta silver-tier-cta">Claim Silver &rarr;</a></div>
         </div>
-
         <div class="tier-card gold-card">
           <div class="tier-head gold-head">
             <div class="tier-badge gold-badge">&#11088; Gold Listing</div>
@@ -486,14 +295,13 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           </div>
           <div class="tier-footer">
             <a href="#claim-form" class="tier-cta gold-tier-cta">Claim Gold &rarr;</a>
-            <div class="scarcity-note">&#9876; One Gold Listing per sub-category</div>
+            <div class="scarcity-note">&#9876; One Gold Spotlight per sub-category</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ══ SPOTLIGHT STATE CONTENT ══ -->
   <div id="content-spotlight" style="display:none">
     <div class="section">
       <div class="section-label">What you&rsquo;re claiming</div>
@@ -520,72 +328,40 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
             <div class="sb-feat"><span class="sb-tick">&#10003;</span> Access to premium article ad spots</div>
             <div class="sb-feat"><span class="sb-tick">&#10003;</span> Lifetime price lock + 2027 ROI guarantee</div>
           </div>
-          <div class="sb-premium-note">
-            &#9876; <strong>Premium ad spots included:</strong> Gold gives you access to positioned ad spots on our highest-traffic article and info pages &mdash; genuinely limited by page, not by category. These positions aren&rsquo;t available to Silver listings.
-          </div>
+          <div class="sb-premium-note">&#9876; <strong>Premium ad spots included:</strong> Gold gives you access to positioned ad spots on our highest-traffic article and info pages &mdash; genuinely limited by page, not by category. These positions aren&rsquo;t available to Silver listings.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ══ AD SPOT STATE CONTENT ══ -->
   <div id="content-adspot" style="display:none">
     <div class="section" id="adspot-contact">
       <div class="adspot-box">
         <div class="adspot-icon">&#128202;</div>
+        <div class="adspot-page-label" id="adspot-page-label" style="display:none"></div>
         <h3>Premium ad spot enquiry</h3>
         <p>Pricing for article and info page ad spots is based on page traffic and position. These spots are available exclusively to Gold listing holders. Get in touch and we&rsquo;ll send through current availability and pricing for the page you&rsquo;re interested in.</p>
         <div class="adspot-contact-row">
           <a href="tel:+64275332970" class="adspot-btn primary">&#128222; 027 533 2970</a>
-          <a href="/cdn-cgi/l/email-protection#0a606b736e6f644a7a6b7a6b67656b2463646c65" class="adspot-btn secondary">&#9993; <span class="__cf_email__" data-cfemail="1c767d657879725c6c7d6c7d71737d3275727a73">[email&#160;protected]</span></a>
+          <a href="mailto:jayden&#64;papamoa.info" class="adspot-btn secondary">&#9993; jayden&#64;papamoa.info</a>
         </div>
-        <p class="adspot-gold-note">Don&rsquo;t have a Gold listing yet? <a href="/sales/list-with-us.html">See what&rsquo;s included &rarr;</a></p>
+        <p class="adspot-gold-note">Don&rsquo;t have a Gold listing yet? <a href="/papamoa-previews/sales/list-with-us.html">See what&rsquo;s included &rarr;</a></p>
       </div>
     </div>
   </div>
 
-  <!-- ══ HOW IT WORKS (listing + spotlight only) ══ -->
   <div id="content-flow" style="display:none">
     <div class="section" style="padding-top:0">
       <div class="section-label">How it works</div>
       <h2>Approve before you pay</h2>
       <p class="lead">We build your listing first. You see exactly how it looks before anything goes live or costs you anything.</p>
       <div class="flow-steps">
-        <div class="flow-step">
-          <div class="flow-num">1</div>
-          <div class="flow-body">
-            <h4>Fill in the form below</h4>
-            <p>Your name, business, and contact details. 60 seconds.</p>
-            <div class="flow-time">Right now</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-num">2</div>
-          <div class="flow-body">
-            <h4>We build your listing</h4>
-            <p>We research your business and write a full SEO-optimised listing from your website and socials. You get a preview link.</p>
-            <div class="flow-time">Within 24 hours</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-num">3</div>
-          <div class="flow-body">
-            <h4>You approve it</h4>
-            <p>Review your listing preview. Request any changes. Give the go-ahead when you&rsquo;re happy.</p>
-            <div class="flow-time">Your timeline</div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-num">4</div>
-          <div class="flow-body">
-            <h4>Pay and go live</h4>
-            <p>Payment is taken at approval. Your listing publishes immediately. We post a Facebook welcome to the P&#257;p&#257;moa community.</p>
-            <div class="flow-time">Same day as approval</div>
-          </div>
-        </div>
+        <div class="flow-step"><div class="flow-num">1</div><div class="flow-body"><h4>Fill in the form below</h4><p>Your name, business, and contact details. 60 seconds.</p><div class="flow-time">Right now</div></div></div>
+        <div class="flow-step"><div class="flow-num">2</div><div class="flow-body"><h4>We build your listing</h4><p>We research your business and write a full SEO-optimised listing from your website and socials. You get a preview link.</p><div class="flow-time">Within 24 hours</div></div></div>
+        <div class="flow-step"><div class="flow-num">3</div><div class="flow-body"><h4>You approve it</h4><p>Review your listing preview. Request any changes. Give the go-ahead when you&rsquo;re happy.</p><div class="flow-time">Your timeline</div></div></div>
+        <div class="flow-step"><div class="flow-num">4</div><div class="flow-body"><h4>Pay and go live</h4><p>Payment is taken at approval. Your listing publishes immediately. We post a Facebook welcome to the P&#257;p&#257;moa community.</p><div class="flow-time">Same day as approval</div></div></div>
       </div>
     </div>
-
     <div class="section" style="padding-top:0">
       <div class="guarantee-row">
         <div class="g-pill"><span class="g-icon">&#128274;</span><div class="g-text"><strong>Lifetime Price Lock</strong><span>Your launch price never increases.</span></div></div>
@@ -596,14 +372,12 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     </div>
   </div>
 
-  <!-- ══ THE FORM (listing + spotlight only) ══ -->
   <div id="content-form" style="display:none">
     <div class="form-section" id="claim-form">
       <div class="form-inner">
         <div class="form-eyebrow" id="form-eyebrow">Get your free listing preview</div>
         <h2 id="form-heading">Lock in your spot</h2>
         <p id="form-subtext">Fill in your details and we&rsquo;ll build your listing preview within 24 hours. You approve it before anything goes live or costs you anything.</p>
-
         <form class="vis-form" id="claim-form-el" onsubmit="submitClaim(event)">
           <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
           <input type="hidden" name="form_name" value="claim" id="hidden-form-name">
@@ -615,51 +389,26 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <input type="hidden" name="claim_cat" id="hidden-cat" value="">
           <input type="hidden" name="claim_slug" id="hidden-slug" value="">
           <input type="hidden" name="claim_page" id="hidden-page" value="">
-
           <div class="form-row">
-            <div>
-              <label class="field-label">Your first name *</label>
-              <input type="text" name="first_name" placeholder="e.g. Sarah" required class="vis-input">
-            </div>
-            <div>
-              <label class="field-label">Business name *</label>
-              <input type="text" name="business_name" placeholder="e.g. Coastal Plumbing" required class="vis-input">
-            </div>
+            <div><label class="field-label">Your first name *</label><input type="text" name="first_name" placeholder="e.g. Sarah" required class="vis-input"></div>
+            <div><label class="field-label">Business name *</label><input type="text" name="business_name" placeholder="e.g. Coastal Plumbing" required class="vis-input"></div>
           </div>
-
-          <div>
-            <label class="field-label">Website</label>
-            <input type="text" name="website" placeholder="yourbusiness.co.nz" class="vis-input">
-          </div>
-
+          <div><label class="field-label">Website</label><input type="text" name="website" placeholder="yourbusiness.co.nz" class="vis-input"></div>
           <div class="form-row">
-            <div>
-              <label class="field-label">Email address *</label>
-              <input type="email" name="email" placeholder="your@email.com" required class="vis-input">
-            </div>
-            <div>
-              <label class="field-label">Phone number *</label>
-              <input type="tel" name="phone" placeholder="027 xxx xxxx" required class="vis-input">
-            </div>
+            <div><label class="field-label">Email address *</label><input type="email" name="email" placeholder="your&#64;email.com" required class="vis-input"></div>
+            <div><label class="field-label">Phone number *</label><input type="tel" name="phone" placeholder="027 xxx xxxx" required class="vis-input"></div>
           </div>
-
-          <div>
-            <label class="field-label">Anything useful? <span style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.6;">(optional)</span></label>
-            <textarea name="notes" class="vis-textarea" placeholder="e.g. what you specialise in, if you have photos ready, anything that helps us build a better preview"></textarea>
-          </div>
-
+          <div><label class="field-label">Anything useful? <span style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.6;">(optional)</span></label><textarea name="notes" class="vis-textarea" placeholder="e.g. what you specialise in, if you have photos ready, anything that helps us build a better preview"></textarea></div>
           <button type="submit" class="btn-submit" id="submit-btn">Send my claim &rarr;</button>
           <p class="form-promise">We&rsquo;ll have your preview ready within 24 hours &middot; No payment until you approve &middot; No spam</p>
         </form>
-
         <div class="form-success" id="form-success">
           <div class="tick">&#10003;</div>
           <h3>Claim received &mdash; we&rsquo;re on it.</h3>
-          <p>We&rsquo;ll have your listing preview ready within 24 hours.<br>You&rsquo;ll review and approve before anything goes live.<br><br>Questions? Call <a href="tel:+64275332970">027 533 2970</a> or email <a href="/cdn-cgi/l/email-protection#e48e859d80818aa494859485898b85ca8d8a828b"><span class="__cf_email__" data-cfemail="573d362e33323917273627363a3836793e393138">[email&#160;protected]</span></a>.</p>
+          <p>We&rsquo;ll have your listing preview ready within 24 hours.<br>You&rsquo;ll review and approve before anything goes live.<br><br>Questions? Call <a href="tel:+64275332970">027 533 2970</a> or email <a href="mailto:jayden&#64;papamoa.info">jayden&#64;papamoa.info</a>.</p>
         </div>
       </div>
     </div>
-
     <div class="contact-strip">
       <div class="cs-body">
         <strong>A local directory, run by locals</strong>
@@ -667,7 +416,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       </div>
       <div class="cs-links">
         <a href="tel:+64275332970" class="cs-link">&#128222; 027 533 2970</a>
-        <a href="/cdn-cgi/l/email-protection#b0dad1c9d4d5def0c0d1c0d1dddfd19ed9ded6df" class="cs-link">&#9993; <span class="__cf_email__" data-cfemail="472d263e23222907372637262a2826692e292128">[email&#160;protected]</span></a>
+        <a href="mailto:jayden&#64;papamoa.info" class="cs-link">&#9993; jayden&#64;papamoa.info</a>
       </div>
     </div>
   </div>
@@ -675,79 +424,79 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 </div>
 
 <footer class="footer">
-  <a href="/homepage.html">papamoa.info</a> &middot; Part of the TaurangaNZ.info network &mdash; trusted since 2005<br>
-  &copy; 2026 Papamoa.info &middot; <a href="/cdn-cgi/l/email-protection#761c170f12131836061706171b1917581f181019"><span class="__cf_email__" data-cfemail="b0dad1c9d4d5def0c0d1c0d1dddfd19ed9ded6df">[email&#160;protected]</span></a> &middot; 027 533 2970
+  <a href="/papamoa-previews/homepage.html">Papamoa.info</a> &middot; Part of the TaurangaNZ.info network &mdash; trusted since 2005<br>
+  &copy; 2026 Papamoa.info &middot; <a href="mailto:jayden&#64;papamoa.info">jayden&#64;papamoa.info</a> &middot; 027 533 2970
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
-(function() {
-  var p = new URLSearchParams(window.location.search);
-  var type   = p.get('type')   || 'generic';
-  var subcat = p.get('subcat') || '';
-  var cat    = p.get('cat')    || '';
-  var slug   = p.get('slug')   || '';
-  var page   = p.get('page')   || '';
+  (function() {
+    var p = new URLSearchParams(window.location.search);
+    var type   = p.get('type')   || 'generic';
+    var subcat = p.get('subcat') || '';
+    var cat    = p.get('cat')    || '';
+    var slug   = p.get('slug')   || '';
+    var page   = p.get('page')   || '';
 
-  // Pass all params into hidden form fields
-  document.getElementById('hidden-type').value   = type;
-  document.getElementById('hidden-subcat').value = subcat;
-  document.getElementById('hidden-cat').value    = cat;
-  document.getElementById('hidden-slug').value   = slug;
-  document.getElementById('hidden-page').value   = page;
+    document.getElementById('hidden-type').value   = type;
+    document.getElementById('hidden-subcat').value = subcat;
+    document.getElementById('hidden-cat').value    = cat;
+    document.getElementById('hidden-slug').value   = slug;
+    document.getElementById('hidden-page').value   = page;
 
-  // Populate dynamic text nodes
-  var subcatLabel = subcat || (cat ? cat : 'your sub-category');
-  document.querySelectorAll('.js-subcat').forEach(function(el) { el.textContent = subcatLabel; });
-  document.querySelectorAll('.js-subcat-full').forEach(function(el) {
-    el.textContent = 'Top of ' + subcatLabel + (cat ? ' \u2014 ' + cat : '') + ' \u00B7 P\u0101p\u0101moa';
-  });
-  document.querySelectorAll('.js-slot-label').forEach(function(el) {
-    if (type === 'spotlight') el.textContent = 'Gold Listing \u2014 ' + subcatLabel + (cat ? ', ' + cat : '');
-    if (type === 'listing')   el.textContent = (subcat || cat || 'P\u0101p\u0101moa') + ' listing \u2014 unclaimed';
-    if (type === 'adspot')    el.textContent = (page ? page.replace(/-/g,' ') : 'High-traffic page') + ' \u2014 Papamoa.info';
-  });
-  document.querySelectorAll('.js-page-label').forEach(function(el) {
-    if (page) el.textContent = page.replace(/-/g, ' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
-  });
+    var subcatLabel = subcat || (cat ? cat : 'your sub-category');
+    document.querySelectorAll('.js-subcat').forEach(function(el) { el.textContent = subcatLabel; });
+    document.querySelectorAll('.js-subcat-full').forEach(function(el) {
+      el.textContent = 'Top of ' + subcatLabel + (cat ? ' \u2014 ' + cat : '') + ' \u00B7 P\u0101p\u0101moa';
+    });
+    document.querySelectorAll('.js-slot-label').forEach(function(el) {
+      if (type === 'spotlight') el.textContent = 'Gold Listing \u2014 ' + subcatLabel + (cat ? ', ' + cat : '');
+      if (type === 'listing')   el.textContent = (subcat || cat || 'P\u0101p\u0101moa') + ' listing \u2014 unclaimed';
+      if (type === 'adspot')    el.textContent = (page ? page.replace(/-/g,' ') : 'High-traffic page') + ' \u2014 Papamoa.info';
+    });
 
-  // Show the right hero state — all hidden by default in HTML
-  var stateEl = document.getElementById('state-' + type) || document.getElementById('state-generic');
-  if (stateEl) stateEl.style.display = 'block';
+    // Show page label pill for adspot
+    if (type === 'adspot' && page) {
+      var pageLabel = page.replace(/-/g,' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+      document.querySelectorAll('.js-page-label').forEach(function(el) { el.textContent = pageLabel; });
+      var pill = document.getElementById('adspot-page-label');
+      if (pill) { pill.textContent = pageLabel; pill.style.display = 'inline-block'; }
+    }
 
-  // Show right content blocks
-  if (type === 'listing' || type === 'generic') {
-    document.getElementById('content-listing').style.display = 'block';
-    document.getElementById('content-flow').style.display    = 'block';
-    document.getElementById('content-form').style.display    = 'block';
-    document.getElementById('hidden-form-name').value = 'claim-listing';
-    document.getElementById('hidden-subject').value   = 'Listing claim \u2014 ' + (subcat || cat || 'generic') + ' \u2014 Papamoa.info';
-  }
-  if (type === 'spotlight') {
-    document.getElementById('content-spotlight').style.display = 'block';
-    document.getElementById('content-flow').style.display      = 'block';
-    document.getElementById('content-form').style.display      = 'block';
-    document.getElementById('hidden-form-name').value = 'claim-spotlight';
-    document.getElementById('hidden-subject').value   = 'Spotlight claim \u2014 ' + subcatLabel + ' \u2014 Papamoa.info';
-    // Gold-tint the submit button
-    document.getElementById('submit-btn').classList.add('gold-submit');
-    document.getElementById('submit-btn').textContent = 'Claim this Spotlight \u2192';
-    document.getElementById('form-heading').textContent = 'Claim this Gold Listing';
-    document.getElementById('form-eyebrow').textContent = 'Step 1 of 4';
-  }
-  if (type === 'adspot') {
-    document.getElementById('content-adspot').style.display = 'block';
-    // No form for adspot — contact directly
-    document.getElementById('nav-back').href = '/papamoa-previews/homepage.html';
-  }
+    var stateEl = document.getElementById('state-' + type) || document.getElementById('state-generic');
+    if (stateEl) stateEl.style.display = 'block';
 
-})();
-}); // DOMContentLoaded
+    if (type === 'listing' || type === 'generic') {
+      document.getElementById('content-listing').style.display = 'block';
+      document.getElementById('content-flow').style.display    = 'block';
+      document.getElementById('content-form').style.display    = 'block';
+      document.getElementById('hidden-form-name').value = 'claim-listing';
+      document.getElementById('hidden-subject').value   = 'Listing claim \u2014 ' + (subcat || cat || 'generic') + ' \u2014 Papamoa.info';
+    }
+    if (type === 'spotlight') {
+      document.getElementById('content-spotlight').style.display = 'block';
+      document.getElementById('content-flow').style.display      = 'block';
+      document.getElementById('content-form').style.display      = 'block';
+      document.getElementById('hidden-form-name').value = 'claim-spotlight';
+      document.getElementById('hidden-subject').value   = 'Spotlight claim \u2014 ' + subcatLabel + ' \u2014 Papamoa.info';
+      document.getElementById('submit-btn').classList.add('gold-submit');
+      document.getElementById('submit-btn').textContent = 'Claim this Spotlight \u2192';
+      document.getElementById('form-heading').textContent = 'Claim this Gold Listing';
+      document.getElementById('form-eyebrow').textContent = 'Step 1 of 4';
+    }
+    if (type === 'adspot') {
+      document.getElementById('content-adspot').style.display = 'block';
+      document.getElementById('nav-back').href = '/papamoa-previews/homepage.html';
+      // Set subject for ad spot enquiry (no form, but sets context)
+      document.getElementById('hidden-subject').value = 'Ad spot enquiry \u2014 ' + (page || 'unknown page') + ' \u2014 Papamoa.info';
+    }
+  })();
+});
 
 async function submitClaim(e) {
   e.preventDefault();
   var btn = document.getElementById('submit-btn');
-  btn.textContent = 'Sending…';
+  btn.textContent = 'Sending\u2026';
   btn.disabled = true;
   try {
     var res = await fetch('https://api.web3forms.com/submit', {
@@ -767,9 +516,8 @@ async function submitClaim(e) {
     btn.disabled = false;
   }
 }
-</script>
 
-<script>
+// Internal link rewriter
 (function() {
   var base = '/papamoa-previews';
   document.addEventListener('click', function(e) {
