@@ -187,6 +187,7 @@
         </select>
         <button class="sp-add-btn" onclick="addNote()">+ Add</button>
       </div>
+      <div id="sp-status" style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:10px;min-height:16px;"></div>
       <div class="sp-notes-list" id="sp-notes-list">
         <div class="sp-empty" id="sp-empty">No notes yet. Brain dump away.</div>
       </div>
@@ -201,44 +202,40 @@
       <div>
         <div class="hero-eyebrow">Internal - plainblackcreative/papamoa-previews</div>
         <h1>Papamoa<span class="dot-info">.info</span> - Project Dashboard</h1>
-        <p id="hero-count">159 HTML pages &middot; 17 assets &middot; GitHub Pages &middot; <span id="last-updated">Updated April 2026</span></p>
+        <p id="hero-count">229 HTML pages &middot; 17 assets &middot; GitHub Pages &middot; <span id="last-updated">Updated April 2026</span></p>
       </div>
-      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;flex-wrap:wrap;">
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <a href="https://github.com/plainblackcreative/papamoa-previews" target="_blank" rel="noopener" class="qa-btn primary">&#8599; GitHub Repo</a>
           <a href="https://plainblackcreative.github.io/papamoa-previews/homepage.html" target="_blank" class="qa-btn">&#127968; Live Homepage</a>
+          <a href="/papamoa-previews/docs/task-plan.html" class="qa-btn">&#10003; Task Plan</a>
           <a href="/papamoa-previews/docs/Project_Master.html" class="qa-btn primary">&#9733; Project Master</a>
+          <a href="https://webmail.1stdomains.co.nz/wm/10/webmail.php" target="_blank" rel="noopener" class="qa-btn">&#128140; Webmail</a>
+          <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="qa-btn">&#128241; Facebook</a>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <a href="/papamoa-previews/docs/task-plan.html" class="qa-btn">&#10003; Task Plan</a>
+          <a href="/papamoa-previews/admin/add-lead.html" target="_blank" class="qa-btn primary">&#43; Add Lead</a>
+          <a href="/papamoa-previews/admin/crm-dashboard.html" target="_blank" class="qa-btn">&#128202; CRM Dashboard</a>
+          <a href="https://docs.google.com/spreadsheets/d/1X5i40RLF-r-yLRbm_XCgVyzJAkgO_o6whaoCzdC3SiM/edit" target="_blank" rel="noopener" class="qa-btn">&#128203; CRM Sheet</a>
           <a href="/papamoa-previews/docs/pricing-master.html" class="qa-btn">&#128176; Pricing</a>
+          <a href="https://github.com/plainblackcreative/papamoa-previews" target="_blank" rel="noopener" class="qa-btn">&#9729; GitHub</a>
+          <a href="https://dash.cloudflare.com/13e541077f6e7848ad3eb3d0cd2004c7/workers" target="_blank" rel="noopener" class="qa-btn">&#9729; Cloudflare Worker</a>
+          <a href="https://console.cloud.google.com/welcome?project=papamoa-info" target="_blank" rel="noopener" class="qa-btn">&#9729; Google Cloud</a>
+          <a href="https://plainblackcreative.github.io/papamoa-previews/admin/search-analytics.html" target="_blank" class="qa-btn">&#128269; Search Analytics</a>
         </div>
       </div>
     </div>
-
-    <!-- QUICK ACTIONS -->
-    <div class="quick-actions">
-      <a href="https://github.com/plainblackcreative/papamoa-previews" target="_blank" rel="noopener" class="qa-btn">&#9729; GitHub</a>
-      <a href="https://mail.google.com/mail/u/0/#search/papamoa" target="_blank" rel="noopener" class="qa-btn">&#128140; Gmail - Papamoa</a>
-      <a href="https://docs.google.com/spreadsheets/d/1X5i40RLF-r-yLRbm_XCgVyzJAkgO_o6whaoCzdC3SiM/edit" target="_blank" rel="noopener" class="qa-btn">&#128203; CRM Sheet</a>
-      <a href="https://dash.cloudflare.com/13e541077f6e7848ad3eb3d0cd2004c7/home/overview" target="_blank" rel="noopener" class="qa-btn">&#9729; Cloudflare</a>
-      <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="qa-btn">&#128241; Facebook</a>
-      <a href="/papamoa-previews/admin/add-lead.html" target="_blank" class="qa-btn primary">&#43; Add Lead</a>
-      <a href="/papamoa-previews/admin/crm-dashboard.html" target="_blank" class="qa-btn">&#128202; CRM Dashboard</a>
-      <a href="https://console.cloud.google.com/welcome?project=papamoa-info" target="_blank" rel="noopener" class="qa-btn">&#9729; Google Cloud</a>
-      <a href="https://webmail.1stdomains.co.nz/wm/10/webmail.php" target="_blank" rel="noopener" class="qa-btn">&#128140; Webmail</a>
-    </div>
+    <div class="quick-actions" style="display:none;"></div>
   </div>
 </div>
 
 <!-- FILTER BAR -->
 <div class="filter-bar">
-  <input type="text" class="filter-input" id="search-input" placeholder="Search 159 pages..." oninput="filterPages()">
+  <input type="text" class="filter-input" id="search-input" placeholder="Search 229 pages..." oninput="filterPages()">
   <div class="filter-tabs">
-    <button class="ftab active" onclick="setTab('all',this)">All <span style="opacity:0.55" id="all-count">159</span></button>
+    <button class="ftab active" onclick="setTab('all',this)">All <span style="opacity:0.55" id="all-count">229</span></button>
     <button class="ftab" onclick="setTab('root',this)">&#127968; Root</button>
     <button class="ftab" onclick="setTab('community',this)">&#129309; Community</button>
-    <button class="ftab" onclick="setTab('articles',this)">&#128240; Articles</button>
     <button class="ftab" onclick="setTab('categories',this)">&#128193; Categories</button>
     <button class="ftab" onclick="setTab('listings',this)">&#127968; Listings</button>
     <button class="ftab" onclick="setTab('sales',this)">&#128176; Sales</button>
@@ -247,7 +244,7 @@
     <button class="ftab" onclick="setTab('previews',this)">&#127793; Previews</button>
     <button class="ftab" onclick="setTab('assets',this)">&#128230; Assets</button>
   </div>
-  <span class="filter-count" id="filter-count">159 shown</span>
+  <span class="filter-count" id="filter-count">229 shown</span>
 </div>
 
 <div class="page-wrap">
@@ -262,11 +259,10 @@
   <div class="stats-bar">
     <span class="stat"><strong>8</strong> root &amp; templates</span>
     <span class="stat"><strong>44</strong> community</span>
-    <span class="stat"><strong>10</strong> articles</span>
-    <span class="stat"><strong>50</strong> categories</span>
+    <span class="stat"><strong>96</strong> categories</span>
     <span class="stat"><strong>20</strong> listings</span>
     <span class="stat"><strong>13</strong> sales</span>
-    <span class="stat"><strong>8</strong> docs</span>
+    <span class="stat"><strong>7</strong> docs</span>
     <span class="stat"><strong>7</strong> admin</span>
     <span class="stat"><strong>1</strong> preview</span>
     <span class="stat"><strong>17</strong> assets</span>
@@ -328,7 +324,7 @@
       <span class="sh-icon">&#129309;</span>
       <div>
         <div class="sh-title">Community &amp; Info <span class="sh-count">44</span></div>
-        <div class="sh-desc">Local info, services and community pages - community/ folder</div>
+        <div class="sh-desc">Local info, guides and community pages - community/ folder</div>
       </div>
       <span class="sh-toggle">&#9660; collapse</span>
     </div>
@@ -413,6 +409,10 @@
       <span class="pc-icon">&#127963;</span>
       <div class="pc-body"><div class="pc-title">Local Government</div><div class="pc-path">community/local-government.html</div><div class="pc-desc">Mayor, TCC councillors, MP and local government contacts.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/maori-history.html" target="_blank" data-section="community" data-keywords="maori history nga potiki ngai te rangi heritage">
+      <span class="pc-icon">&#129782;</span>
+      <div class="pc-body"><div class="pc-title">Maori History of Papamoa</div><div class="pc-path">community/maori-history.html</div><div class="pc-desc">Nga Potiki, Ngai Te Rangi and local cultural heritage.</div></div>
+    </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/mount-maunganui.html" target="_blank" data-section="community" data-keywords="mount maunganui mauao village beach tracks">
       <span class="pc-icon">&#9968;</span>
       <div class="pc-body"><div class="pc-title">Mount Maunganui</div><div class="pc-path">community/mount-maunganui.html</div><div class="pc-desc">Mauao guide, village, beach and track information.</div></div>
@@ -420,6 +420,14 @@
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/neighbourhood-support.html" target="_blank" data-section="community" data-keywords="neighbourhood support safety watch patrol">
       <span class="pc-icon">&#127978;</span>
       <div class="pc-body"><div class="pc-title">Neighbourhood Support</div><div class="pc-path">community/neighbourhood-support.html</div><div class="pc-desc">Community safety network and street coordinator contacts.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/new-builds-papamoa.html" target="_blank" data-section="community" data-keywords="new builds papamoa subdivisions golden sands builders consents trades">
+      <span class="pc-icon">&#127959;</span>
+      <div class="pc-body"><div class="pc-title">New Builds in Papamoa</div><div class="pc-path">community/new-builds-papamoa.html</div><div class="pc-desc">Guide to subdivisions, council consents, builders, house and land packages and trades directory.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/new-developments-papamoa.html" target="_blank" data-section="community" data-keywords="new developments golden sands te tumu east">
+      <span class="pc-icon">&#127959;</span>
+      <div class="pc-body"><div class="pc-title">New Developments</div><div class="pc-path">community/new-developments-papamoa.html</div><div class="pc-desc">Golden Sands, Te Tumu, Papamoa East - growth guide.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/news-events.html" target="_blank" data-section="community" data-keywords="news events upcoming community local market">
       <span class="pc-icon">&#128240;</span>
@@ -445,9 +453,41 @@
       <span class="pc-icon">&#128110;</span>
       <div class="pc-body"><div class="pc-title">Police &amp; Safety</div><div class="pc-path">community/police.html</div><div class="pc-desc">Tauranga Police contact, local safety and crime prevention.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/population-statistics.html" target="_blank" data-section="community" data-keywords="population statistics census demographics growth">
+      <span class="pc-icon">&#128202;</span>
+      <div class="pc-body"><div class="pc-title">Population &amp; Stats</div><div class="pc-path">community/population-statistics.html</div><div class="pc-desc">Census data, demographics and growth statistics.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/real-estate.html" target="_blank" data-section="community" data-keywords="real estate property market buying selling agents">
+      <span class="pc-icon">&#127969;</span>
+      <div class="pc-body"><div class="pc-title">Real Estate in Papamoa</div><div class="pc-path">community/real-estate.html</div><div class="pc-desc">Property market overview, buying and selling guides.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/rentals-papamoa.html" target="_blank" data-section="community" data-keywords="rentals rental market rent prices tenants">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body"><div class="pc-title">Rentals in Papamoa</div><div class="pc-path">community/rentals-papamoa.html</div><div class="pc-desc">Rental market data, tenant rights and property management.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/retirement-papamoa.html" target="_blank" data-section="community" data-keywords="retirement villages costs healthcare community life">
+      <span class="pc-icon">&#127978;</span>
+      <div class="pc-body"><div class="pc-title">Retiring in Papamoa</div><div class="pc-path">community/retirement-papamoa.html</div><div class="pc-desc">Villages, costs, healthcare and community life for retirees.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/rubbish-recycling-papamoa.html" target="_blank" data-section="community" data-keywords="rubbish recycling waste bins collection tcc">
+      <span class="pc-icon">&#9851;&#65039;</span>
+      <div class="pc-body"><div class="pc-title">Rubbish &amp; Recycling</div><div class="pc-path">community/rubbish-recycling-papamoa.html</div><div class="pc-desc">Bin collection schedules, recycling and transfer stations.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/school-terms-holidays.html" target="_blank" data-section="community" data-keywords="school terms holidays 2026 nz dates calendar">
+      <span class="pc-icon">&#128197;</span>
+      <div class="pc-body"><div class="pc-title">School Terms 2026</div><div class="pc-path">community/school-terms-holidays.html</div><div class="pc-desc">NZ school term and holiday dates for 2026.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/schools-papamoa.html" target="_blank" data-section="community" data-keywords="schools papamoa primary intermediate secondary enrolment">
+      <span class="pc-icon">&#127979;</span>
+      <div class="pc-body"><div class="pc-title">Schools in Papamoa</div><div class="pc-path">community/schools-papamoa.html</div><div class="pc-desc">Primary, intermediate and secondary schools with enrolment zones.</div></div>
+    </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/seniors-retirement.html" target="_blank" data-section="community" data-keywords="seniors retirement villages aged care services">
       <span class="pc-icon">&#127978;</span>
       <div class="pc-body"><div class="pc-title">Seniors &amp; Retirement</div><div class="pc-path">community/seniors-retirement.html</div><div class="pc-desc">Retirement villages, aged care and senior services.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/shopping-centres.html" target="_blank" data-section="community" data-keywords="shopping centres papamoa plaza fashion island retail the sands">
+      <span class="pc-icon">&#128717;</span>
+      <div class="pc-body"><div class="pc-title">Shopping Centres</div><div class="pc-path">community/shopping-centres.html</div><div class="pc-desc">Fashion Island, Palm Beach Plaza and The Sands - store lists, hours and parking.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/sports-clubs.html" target="_blank" data-section="community" data-keywords="sports clubs papamoa rugby football cricket teams">
       <span class="pc-icon">&#9917;</span>
@@ -472,6 +512,10 @@
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/tax-kiwisaver.html" target="_blank" data-section="community" data-keywords="tax kiwisaver paye gst calculator nz income">
       <span class="pc-icon">&#128176;</span>
       <div class="pc-body"><div class="pc-title">PAYE &amp; GST Calculator</div><div class="pc-path">community/tax-kiwisaver.html</div><div class="pc-desc">NZ income tax and KiwiSaver calculator.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/the-sands.html" target="_blank" data-section="community" data-keywords="the sands town centre papamoa east golden sands new world mitre 10">
+      <span class="pc-icon">&#127959;</span>
+      <div class="pc-body"><div class="pc-title">The Sands Town Centre</div><div class="pc-path">community/the-sands.html</div><div class="pc-desc">Stage One open - New World, Anytime Fitness, food precinct. Mitre 10 MEGA coming 2026.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/the-yard.html" target="_blank" data-section="community" data-keywords="the yard papamoa market artisan event venue">
       <span class="pc-icon">&#129683;</span>
@@ -501,68 +545,6 @@
       <span class="pc-icon">&#128146;</span>
       <div class="pc-body"><div class="pc-title">Weddings in Papamoa</div><div class="pc-path">community/weddings.html</div><div class="pc-desc">Wedding venues, photographers, caterers and planning guide.</div></div>
     </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/the-sands.html" target="_blank" data-section="community" data-keywords="the sands town centre papamoa east golden sands new world mitre 10">
-      <span class="pc-icon">&#127959;</span>
-      <div class="pc-body"><div class="pc-title">The Sands Town Centre</div><div class="pc-path">community/the-sands.html</div><div class="pc-desc">Stage One open - New World, Anytime Fitness, food precinct. Mitre 10 MEGA coming 2026.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/shopping-centres.html" target="_blank" data-section="community" data-keywords="shopping centres papamoa plaza fashion island retail the sands">
-      <span class="pc-icon">&#128717;</span>
-      <div class="pc-body"><div class="pc-title">Shopping Centres</div><div class="pc-path">community/shopping-centres.html</div><div class="pc-desc">Fashion Island, Palm Beach Plaza and The Sands - store lists, hours and parking.</div></div>
-    </a>
-    </div>
-  </div>
-
-  <!-- ARTICLES -->
-  <div class="section-block" data-section="articles">
-    <div class="section-header">
-      <span class="sh-icon">&#128240;</span>
-      <div>
-        <div class="sh-title">Articles &amp; Guides <span class="sh-count">10</span></div>
-        <div class="sh-desc">Informational guides and editorial content - mix of articles/ and community/ paths</div>
-      </div>
-      <span class="sh-toggle">&#9660; collapse</span>
-    </div>
-    <div class="cards-grid" id="grid-articles">
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/articles/new-builds-papamoa.html" target="_blank" data-section="articles" data-keywords="new builds papamoa subdivisions golden sands builders consents trades">
-      <span class="pc-icon">&#127959;</span>
-      <div class="pc-body"><div class="pc-title">New Builds in Papamoa</div><div class="pc-path">articles/new-builds-papamoa.html</div><div class="pc-desc">Guide to subdivisions, council consents, builders, house and land packages and trades directory.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/real-estate.html" target="_blank" data-section="articles" data-keywords="real estate property market buying selling agents">
-      <span class="pc-icon">&#127969;</span>
-      <div class="pc-body"><div class="pc-title">Real Estate in Papamoa</div><div class="pc-path">community/real-estate.html</div><div class="pc-desc">Property market overview, buying and selling guides.</div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/rentals-papamoa.html" target="_blank" data-section="articles" data-keywords="rentals rental market rent prices tenants">
-      <span class="pc-icon">&#127968;</span>
-      <div class="pc-body"><div class="pc-title">Rentals in Papamoa</div><div class="pc-path">community/rentals-papamoa.html</div><div class="pc-desc">Rental market data, tenant rights and property management.</div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/retirement-papamoa.html" target="_blank" data-section="articles" data-keywords="retirement villages costs healthcare community life">
-      <span class="pc-icon">&#127978;</span>
-      <div class="pc-body"><div class="pc-title">Retiring in Papamoa</div><div class="pc-path">community/retirement-papamoa.html</div><div class="pc-desc">Villages, costs, healthcare and community life for retirees.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/new-developments-papamoa.html" target="_blank" data-section="articles" data-keywords="new developments golden sands te tumu east">
-      <span class="pc-icon">&#127959;</span>
-      <div class="pc-body"><div class="pc-title">New Developments</div><div class="pc-path">community/new-developments-papamoa.html</div><div class="pc-desc">Golden Sands, Te Tumu, Papamoa East - growth guide.</div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/population-statistics.html" target="_blank" data-section="articles" data-keywords="population statistics census demographics growth">
-      <span class="pc-icon">&#128202;</span>
-      <div class="pc-body"><div class="pc-title">Population &amp; Stats</div><div class="pc-path">community/population-statistics.html</div><div class="pc-desc">Census data, demographics and growth statistics.</div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/maori-history.html" target="_blank" data-section="articles" data-keywords="maori history nga potiki ngai te rangi heritage">
-      <span class="pc-icon">&#129782;</span>
-      <div class="pc-body"><div class="pc-title">Maori History of Papamoa</div><div class="pc-path">community/maori-history.html</div><div class="pc-desc">Nga Potiki, Ngai Te Rangi and local cultural heritage.</div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/school-terms-holidays.html" target="_blank" data-section="articles" data-keywords="school terms holidays 2026 nz dates calendar">
-      <span class="pc-icon">&#128197;</span>
-      <div class="pc-body"><div class="pc-title">School Terms 2026</div><div class="pc-path">community/school-terms-holidays.html</div><div class="pc-desc">NZ school term and holiday dates for 2026.</div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/schools-papamoa.html" target="_blank" data-section="articles" data-keywords="schools papamoa primary intermediate secondary enrolment">
-      <span class="pc-icon">&#127979;</span>
-      <div class="pc-body"><div class="pc-title">Schools in Papamoa</div><div class="pc-path">community/schools-papamoa.html</div><div class="pc-desc">Primary, intermediate and secondary schools with enrolment zones.</div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/community/rubbish-recycling-papamoa.html" target="_blank" data-section="articles" data-keywords="rubbish recycling waste bins collection tcc">
-      <span class="pc-icon">&#9851;&#65039;</span>
-      <div class="pc-body"><div class="pc-title">Rubbish &amp; Recycling</div><div class="pc-path">community/rubbish-recycling-papamoa.html</div><div class="pc-desc">Bin collection schedules, recycling and transfer stations.</div></div>
-    </a>
     </div>
   </div>
 
@@ -571,27 +553,161 @@
     <div class="section-header">
       <span class="sh-icon">&#128193;</span>
       <div>
-        <div class="sh-title">Category Pages <span class="sh-count">50</span></div>
+        <div class="sh-title">Category Pages <span class="sh-count">96</span></div>
         <div class="sh-desc">Sub-category listing pages - organised by type</div>
       </div>
       <span class="sh-toggle">&#9660; collapse</span>
     </div>
     <div class="cat-subfilter" id="cat-subfilter">
-      <button class="csf-btn active" onclick="setCatFilter('all',this)">All 50</button>
-      <button class="csf-btn" onclick="setCatFilter('services',this)">&#128296; Services &amp; Health <span>21</span></button>
-      <button class="csf-btn" onclick="setCatFilter('food',this)">&#127374; Food &amp; Drink <span>10</span></button>
-      <button class="csf-btn" onclick="setCatFilter('shops',this)">&#128717; Shops <span>11</span></button>
-      <button class="csf-btn" onclick="setCatFilter('activities',this)">&#127918; Activities <span>3</span></button>
-      <button class="csf-btn" onclick="setCatFilter('accommodation',this)">&#127968; Accommodation <span>5</span></button>
+      <button class="csf-btn active" onclick="setCatFilter('all',this)">All 96</button>
+      <button class="csf-btn" onclick="setCatFilter('services',this)">&#128296; Services &amp; Health <span>22</span></button>
+      <button class="csf-btn" onclick="setCatFilter('food',this)">&#127374; Food &amp; Drink <span>19</span></button>
+      <button class="csf-btn" onclick="setCatFilter('shops',this)">&#128717; Shops <span>22</span></button>
+      <button class="csf-btn" onclick="setCatFilter('activities',this)">&#127918; Activities <span>20</span></button>
+      <button class="csf-btn" onclick="setCatFilter('accommodation',this)">&#127968; Accommodation <span>13</span></button>
     </div>
     <div class="cards-grid" id="grid-categories">
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/health-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="health medical gp dentist orthodontist physio pharmacy papamoa">
-      <span class="pc-icon">&#127973;</span>
-      <div class="pc-body"><div class="pc-title">Health &amp; Medical</div><div class="pc-path">categories/services/health-papamoa.html</div><div class="pc-desc">GPs, dentists, orthodontists, physio, pharmacy and integrated wellbeing in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+
+    <!-- ACCOMMODATION (13) -->
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/accommodation.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="accommodation hotels motels holiday parks papamoa">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body"><div class="pc-title">Accommodation (Top Level)</div><div class="pc-path">categories/accommodation/accommodation.html</div><div class="pc-desc">Top-level accommodation category - all types.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/apartments-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="apartments self contained holiday papamoa">
+      <span class="pc-icon">&#127963;</span>
+      <div class="pc-body"><div class="pc-title">Apartments</div><div class="pc-path">categories/accommodation/apartments-papamoa.html</div><div class="pc-desc">Apartment accommodation in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/backpackers-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="backpackers hostel budget travellers papamoa">
+      <span class="pc-icon">&#127957;</span>
+      <div class="pc-body"><div class="pc-title">Backpackers &amp; Hostels</div><div class="pc-path">categories/accommodation/backpackers-papamoa.html</div><div class="pc-desc">Budget and backpacker accommodation near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/bed-and-breakfast-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="bed and breakfast bnb boutique papamoa">
+      <span class="pc-icon">&#9749;</span>
+      <div class="pc-body"><div class="pc-title">Bed &amp; Breakfast</div><div class="pc-path">categories/accommodation/bed-and-breakfast-papamoa.html</div><div class="pc-desc">B&amp;B and boutique stays near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/holiday-homes-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="holiday homes bach rental airbnb papamoa">
+      <span class="pc-icon">&#127969;</span>
+      <div class="pc-body"><div class="pc-title">Holiday Homes</div><div class="pc-path">categories/accommodation/holiday-homes-papamoa.html</div><div class="pc-desc">Baches and whole-home rentals near Papamoa Beach.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/holiday-parks-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="holiday park camping cabins pacific park papamoa">
+      <span class="pc-icon">&#127957;</span>
+      <div class="pc-body"><div class="pc-title">Holiday Parks</div><div class="pc-path">categories/accommodation/holiday-parks-papamoa.html</div><div class="pc-desc">Camping, cabins and family-friendly holiday parks.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/luxury-stays-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="luxury boutique premium beachfront accommodation">
+      <span class="pc-icon">&#10024;</span>
+      <div class="pc-body"><div class="pc-title">Luxury Stays</div><div class="pc-path">categories/accommodation/luxury-stays-papamoa.html</div><div class="pc-desc">Premium and boutique accommodation in Papamoa.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/motels-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="motels units self contained papamoa">
+      <span class="pc-icon">&#127958;</span>
+      <div class="pc-body"><div class="pc-title">Motels</div><div class="pc-path">categories/accommodation/motels-papamoa.html</div><div class="pc-desc">Motel units and self-contained stays in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/pet-friendly-accommodation-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="pet friendly dogs allowed accommodation papamoa">
+      <span class="pc-icon">&#128021;</span>
+      <div class="pc-body"><div class="pc-title">Pet-Friendly Accommodation</div><div class="pc-path">categories/accommodation/pet-friendly-accommodation-papamoa.html</div><div class="pc-desc">Places to stay that welcome pets near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/rental-homes-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="rental homes long term tenants papamoa">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body"><div class="pc-title">Rental Homes</div><div class="pc-path">categories/accommodation/rental-homes-papamoa.html</div><div class="pc-desc">Long-term rental homes and property management in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/retirement-villages-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="retirement village over 55 lifestyle karaka pines">
+      <span class="pc-icon">&#127978;</span>
+      <div class="pc-body"><div class="pc-title">Retirement Villages</div><div class="pc-path">categories/accommodation/retirement-villages-papamoa.html</div><div class="pc-desc">Over-55 living and lifestyle villages.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/self-contained-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="self contained kitchen laundry accommodation papamoa">
+      <span class="pc-icon">&#127969;</span>
+      <div class="pc-body"><div class="pc-title">Self-Contained Stays</div><div class="pc-path">categories/accommodation/self-contained-papamoa.html</div><div class="pc-desc">Self-contained accommodation with kitchen and laundry.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/short-stays-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="short stays weekend getaway papamoa airbnb">
+      <span class="pc-icon">&#128197;</span>
+      <div class="pc-body"><div class="pc-title">Short Stays</div><div class="pc-path">categories/accommodation/short-stays-papamoa.html</div><div class="pc-desc">Weekend getaways and short-term stays near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+
+    <!-- ACTIVITIES (20) -->
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/entertainment.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="entertainment activities things to do papamoa">
+      <span class="pc-icon">&#127917;</span>
+      <div class="pc-body"><div class="pc-title">Activities &amp; Things To Do (Top Level)</div><div class="pc-path">categories/activities/entertainment.html</div><div class="pc-desc">Top-level activities category - indoor, outdoor, water, sport.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/cycling-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="cycling bikes trails hire papamoa">
+      <span class="pc-icon">&#128690;</span>
+      <div class="pc-body"><div class="pc-title">Cycling</div><div class="pc-path">categories/activities/cycling-papamoa.html</div><div class="pc-desc">Cycling trails, bike hire and routes in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/family-activities-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="family activities kids things to do papamoa">
+      <span class="pc-icon">&#128106;</span>
+      <div class="pc-body"><div class="pc-title">Family Activities</div><div class="pc-path">categories/activities/family-activities-papamoa.html</div><div class="pc-desc">Family-friendly things to do with kids in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/fishing-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="fishing charters spots tackle papamoa">
+      <span class="pc-icon">&#127907;</span>
+      <div class="pc-body"><div class="pc-title">Fishing</div><div class="pc-path">categories/activities/fishing-papamoa.html</div><div class="pc-desc">Fishing charters, spots and tackle in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/go-karts-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="go karts karting racing papamoa">
+      <span class="pc-icon">&#127955;</span>
+      <div class="pc-body"><div class="pc-title">Go-Karts</div><div class="pc-path">categories/activities/go-karts-papamoa.html</div><div class="pc-desc">Go-kart tracks and racing near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/golf-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="golf course driving range papamoa">
+      <span class="pc-icon">&#9971;</span>
+      <div class="pc-body"><div class="pc-title">Golf</div><div class="pc-path">categories/activities/golf-papamoa.html</div><div class="pc-desc">Golf courses and driving ranges near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/gym-fitness-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="gym fitness classes exercise papamoa">
+      <span class="pc-icon">&#127947;</span>
+      <div class="pc-body"><div class="pc-title">Gym &amp; Fitness Classes</div><div class="pc-path">categories/activities/gym-fitness-papamoa.html</div><div class="pc-desc">Gyms, fitness classes and training in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/indoor-entertainment-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="vr sim racing escape room indoor entertainment">
+      <span class="pc-icon">&#127918;</span>
+      <div class="pc-body"><div class="pc-title">Indoor Entertainment</div><div class="pc-path">categories/activities/indoor-entertainment-papamoa.html</div><div class="pc-desc">VR, sim racing and escape rooms in Papamoa.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/kayaking-boating-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="kayaking boating paddleboard water hire papamoa">
+      <span class="pc-icon">&#128675;</span>
+      <div class="pc-body"><div class="pc-title">Kayaking &amp; Boating</div><div class="pc-path">categories/activities/kayaking-boating-papamoa.html</div><div class="pc-desc">Kayak hire, boating and paddleboard activities in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/maori-culture-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="maori culture experiences cultural tours papamoa">
+      <span class="pc-icon">&#129782;</span>
+      <div class="pc-body"><div class="pc-title">Maori Culture</div><div class="pc-path">categories/activities/maori-culture-papamoa.html</div><div class="pc-desc">Cultural experiences and Maori heritage activities.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/mini-golf-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="mini golf putt putt family papamoa">
+      <span class="pc-icon">&#9971;</span>
+      <div class="pc-body"><div class="pc-title">Mini Golf</div><div class="pc-path">categories/activities/mini-golf-papamoa.html</div><div class="pc-desc">Mini golf and putt-putt near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/padel-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="padel court racket sport papamoa">
+      <span class="pc-icon">&#127955;</span>
+      <div class="pc-body"><div class="pc-title">Padel</div><div class="pc-path">categories/activities/padel-papamoa.html</div><div class="pc-desc">Padel courts and coaching in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/paintball-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="paintball laser tag team activities papamoa">
+      <span class="pc-icon">&#127918;</span>
+      <div class="pc-body"><div class="pc-title">Paintball &amp; Laser Tag</div><div class="pc-path">categories/activities/paintball-papamoa.html</div><div class="pc-desc">Paintball and laser tag venues near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/skydiving-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="skydiving tandem jump tauranga papamoa">
+      <span class="pc-icon">&#129658;</span>
+      <div class="pc-body"><div class="pc-title">Skydiving</div><div class="pc-path">categories/activities/skydiving-papamoa.html</div><div class="pc-desc">Tandem skydiving and drop zones near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/sports-clubs-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="sports clubs leagues teams join papamoa">
+      <span class="pc-icon">&#9917;</span>
+      <div class="pc-body"><div class="pc-title">Sports Clubs</div><div class="pc-path">categories/activities/sports-clubs-papamoa.html</div><div class="pc-desc">Join a local sports club or league in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/surf-school-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="surf school lessons board hire papamoa">
+      <span class="pc-icon">&#127940;</span>
+      <div class="pc-body"><div class="pc-title">Surf Schools</div><div class="pc-path">categories/activities/surf-school-papamoa.html</div><div class="pc-desc">Surf lessons, board hire and holiday programmes.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/swimming-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="swimming pools lessons squads papamoa">
+      <span class="pc-icon">&#127944;</span>
+      <div class="pc-body"><div class="pc-title">Swimming</div><div class="pc-path">categories/activities/swimming-papamoa.html</div><div class="pc-desc">Pools, lessons and swim squads in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/walking-trails-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="walking trails tracks hikes papamoa">
+      <span class="pc-icon">&#128694;</span>
+      <div class="pc-body"><div class="pc-title">Walking Trails</div><div class="pc-path">categories/activities/walking-trails-papamoa.html</div><div class="pc-desc">Walking tracks and nature trails in and around Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/winery-tours-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="winery tours wine tasting bay of plenty papamoa">
+      <span class="pc-icon">&#127863;</span>
+      <div class="pc-body"><div class="pc-title">Winery Tours</div><div class="pc-path">categories/activities/winery-tours-papamoa.html</div><div class="pc-desc">Winery tours and wine tasting in the Bay of Plenty.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/yoga-pilates-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="yoga pilates classes studio papamoa">
+      <span class="pc-icon">&#129340;</span>
+      <div class="pc-body"><div class="pc-title">Yoga &amp; Pilates</div><div class="pc-path">categories/activities/yoga-pilates-papamoa.html</div><div class="pc-desc">Yoga and pilates studios and classes in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+
+    <!-- FOOD & DRINK (19) -->
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/food-and-drink.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="food drink top level category">
       <span class="pc-icon">&#127374;</span>
-      <div class="pc-body"><div class="pc-title">Food &amp; Drink (Top Level)</div><div class="pc-path">categories/food-drink/food-and-drink.html</div><div class="pc-desc">Top-level food and drink category - all sub-categories.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Food &amp; Drink (Top Level)</div><div class="pc-path">categories/food-drink/food-and-drink.html</div><div class="pc-desc">Top-level food and drink category - all sub-categories.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/bakery-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="bakery bread pastry papamoa">
       <span class="pc-icon">&#129360;</span>
@@ -601,21 +717,45 @@
       <span class="pc-icon">&#127866;</span>
       <div class="pc-body"><div class="pc-title">Bars &amp; Pubs</div><div class="pc-path">categories/food-drink/bar-papamoa.html</div><div class="pc-desc">Licensed bars and pubs in Papamoa.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/burgers-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="burgers gourmet takeaway papamoa">
+      <span class="pc-icon">&#127828;</span>
+      <div class="pc-body"><div class="pc-title">Burgers</div><div class="pc-path">categories/food-drink/burgers-papamoa.html</div><div class="pc-desc">Burger restaurants and takeaways in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/cafe-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="cafes coffee brunch papamoa">
       <span class="pc-icon">&#9749;</span>
       <div class="pc-body"><div class="pc-title">Cafes</div><div class="pc-path">categories/food-drink/cafe-papamoa.html</div><div class="pc-desc">Cafes and brunch spots in Papamoa.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/fast-food-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="fast food chains mcdonald kfc papamoa">
+      <span class="pc-icon">&#127839;</span>
+      <div class="pc-body"><div class="pc-title">Fast Food</div><div class="pc-path">categories/food-drink/fast-food-papamoa.html</div><div class="pc-desc">Fast food chains and quick service restaurants in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/fish-and-chips-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="fish chips takeaway papamoa">
       <span class="pc-icon">&#128032;</span>
       <div class="pc-body"><div class="pc-title">Fish &amp; Chips</div><div class="pc-path">categories/food-drink/fish-and-chips-papamoa.html</div><div class="pc-desc">Fish and chip shops in Papamoa.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/function-venues-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="function venues events hire catering papamoa">
+      <span class="pc-icon">&#127881;</span>
+      <div class="pc-body"><div class="pc-title">Function Venues</div><div class="pc-path">categories/food-drink/function-venues-papamoa.html</div><div class="pc-desc">Event and function venue hire in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/indian-restaurant-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="indian restaurant curry papamoa">
       <span class="pc-icon">&#127835;</span>
       <div class="pc-body"><div class="pc-title">Indian Restaurants</div><div class="pc-path">categories/food-drink/indian-restaurant-papamoa.html</div><div class="pc-desc">Indian restaurants and curry houses in Papamoa.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/italian-restaurant-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="italian restaurant pasta pizza papamoa">
+      <span class="pc-icon">&#127837;</span>
+      <div class="pc-body"><div class="pc-title">Italian Restaurants</div><div class="pc-path">categories/food-drink/italian-restaurant-papamoa.html</div><div class="pc-desc">Italian restaurants and pasta in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/japanese-restaurant-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="japanese restaurant ramen teriyaki papamoa">
+      <span class="pc-icon">&#127843;</span>
+      <div class="pc-body"><div class="pc-title">Japanese Restaurants</div><div class="pc-path">categories/food-drink/japanese-restaurant-papamoa.html</div><div class="pc-desc">Japanese restaurants and ramen in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/mexican-restaurant-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="mexican restaurant tacos burritos papamoa">
+      <span class="pc-icon">&#127790;</span>
+      <div class="pc-body"><div class="pc-title">Mexican Restaurants</div><div class="pc-path">categories/food-drink/mexican-restaurant-papamoa.html</div><div class="pc-desc">Mexican restaurants and taquerias in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/pizza-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="pizza gourmet delivery papamoa pundits">
       <span class="pc-icon">&#127829;</span>
-      <div class="pc-body"><div class="pc-title">Pizza</div><div class="pc-path">categories/food-drink/pizza-papamoa.html</div><div class="pc-desc">Gourmet pizza and delivery in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Pizza</div><div class="pc-path">categories/food-drink/pizza-papamoa.html</div><div class="pc-desc">Gourmet pizza and delivery in Papamoa.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/restaurants-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="restaurants dining food papamoa">
       <span class="pc-icon">&#127374;</span>
@@ -625,10 +765,28 @@
       <span class="pc-icon">&#127843;</span>
       <div class="pc-body"><div class="pc-title">Sushi &amp; Japanese</div><div class="pc-path">categories/food-drink/sushi-papamoa.html</div><div class="pc-desc">Sushi restaurants and Japanese takeaways.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/takeaways-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="takeaways delivery food papamoa">
+      <span class="pc-icon">&#127871;</span>
+      <div class="pc-body"><div class="pc-title">Takeaways</div><div class="pc-path">categories/food-drink/takeaways-papamoa.html</div><div class="pc-desc">Takeaway and delivery food options in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/thai-restaurant-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="thai restaurant pad thai papamoa">
+      <span class="pc-icon">&#127836;</span>
+      <div class="pc-body"><div class="pc-title">Thai Restaurants</div><div class="pc-path">categories/food-drink/thai-restaurant-papamoa.html</div><div class="pc-desc">Thai restaurants in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/turkish-restaurant-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="turkish restaurant kebab pizza papamoa">
       <span class="pc-icon">&#129369;</span>
       <div class="pc-body"><div class="pc-title">Turkish &amp; Pizza</div><div class="pc-path">categories/food-drink/turkish-restaurant-papamoa.html</div><div class="pc-desc">Turkish restaurants and kebab shops in Papamoa.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/vegan-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="vegan vegetarian plant based papamoa">
+      <span class="pc-icon">&#127807;</span>
+      <div class="pc-body"><div class="pc-title">Vegan &amp; Vegetarian</div><div class="pc-path">categories/food-drink/vegan-papamoa.html</div><div class="pc-desc">Vegan and vegetarian-friendly restaurants in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/food-drink/vietnamese-restaurant-papamoa.html" target="_blank" data-section="categories" data-subgroup="food" data-keywords="vietnamese restaurant pho banh mi papamoa">
+      <span class="pc-icon">&#127836;</span>
+      <div class="pc-body"><div class="pc-title">Vietnamese Restaurants</div><div class="pc-path">categories/food-drink/vietnamese-restaurant-papamoa.html</div><div class="pc-desc">Vietnamese restaurants and pho in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+
+    <!-- SERVICES (22) -->
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/services.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="services essential tradespeople papamoa">
       <span class="pc-icon">&#128296;</span>
       <div class="pc-body"><div class="pc-title">Essential Services (Top Level)</div><div class="pc-path">categories/services/services.html</div><div class="pc-desc">Top-level services and tradespeople category page.</div></div>
@@ -639,15 +797,15 @@
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/architects-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="architects designers draftspeople new builds papamoa">
       <span class="pc-icon">&#128208;</span>
-      <div class="pc-body"><div class="pc-title">Architects &amp; Designers</div><div class="pc-path">categories/services/architects-papamoa.html</div><div class="pc-desc">Architectural designers and draftspeople for new builds in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Architects &amp; Designers</div><div class="pc-path">categories/services/architects-papamoa.html</div><div class="pc-desc">Architectural designers and draftspeople for new builds in Papamoa.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/beauty-grooming-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="barber nail beauty grooming papamoa">
       <span class="pc-icon">&#9986;&#65039;</span>
-      <div class="pc-body"><div class="pc-title">Beauty &amp; Grooming</div><div class="pc-path">categories/services/beauty-grooming-papamoa.html</div><div class="pc-desc">Barbers, nail studios and beauty services.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Beauty &amp; Grooming</div><div class="pc-path">categories/services/beauty-grooming-papamoa.html</div><div class="pc-desc">Barbers, nail studios and beauty services.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/builders-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="builders new builds custom homes lbp papamoa">
       <span class="pc-icon">&#127959;</span>
-      <div class="pc-body"><div class="pc-title">Builders</div><div class="pc-path">categories/services/builders-papamoa.html</div><div class="pc-desc">LBP-licensed builders for new homes and custom builds in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Builders</div><div class="pc-path">categories/services/builders-papamoa.html</div><div class="pc-desc">LBP-licensed builders for new homes and custom builds in Papamoa.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/childcare-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="childcare ece daycare papamoa">
       <span class="pc-icon">&#128118;</span>
@@ -655,7 +813,7 @@
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/dentist-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="dentist orthodontist braces papamoa">
       <span class="pc-icon">&#129463;</span>
-      <div class="pc-body"><div class="pc-title">Dentists &amp; Orthodontists</div><div class="pc-path">categories/services/dentist-papamoa.html</div><div class="pc-desc">General dentistry, implants, braces and Invisalign.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Dentists &amp; Orthodontists</div><div class="pc-path">categories/services/dentist-papamoa.html</div><div class="pc-desc">General dentistry, implants, braces and Invisalign.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/electrician-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="electrician electrical wiring ev solar papamoa">
       <span class="pc-icon">&#9889;</span>
@@ -669,29 +827,37 @@
       <span class="pc-icon">&#127947;</span>
       <div class="pc-body"><div class="pc-title">Gyms &amp; Fitness</div><div class="pc-path">categories/services/gym-papamoa.html</div><div class="pc-desc">Every gym in Papamoa - 24/7, CrossFit, pilates, hybrid training.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/health-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="health medical gp dentist orthodontist physio pharmacy papamoa">
+      <span class="pc-icon">&#127973;</span>
+      <div class="pc-body"><div class="pc-title">Health &amp; Medical</div><div class="pc-path">categories/services/health-papamoa.html</div><div class="pc-desc">GPs, dentists, orthodontists, physio, pharmacy and integrated wellbeing in Papamoa.</div></div>
+    </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/kitchens-bathrooms-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="kitchens bathrooms designers fitters cabinetmakers papamoa">
       <span class="pc-icon">&#127859;</span>
-      <div class="pc-body"><div class="pc-title">Kitchens &amp; Bathrooms</div><div class="pc-path">categories/services/kitchens-bathrooms-papamoa.html</div><div class="pc-desc">Kitchen designers, bathroom fitters and cabinetmakers for Papamoa builds.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Kitchens &amp; Bathrooms</div><div class="pc-path">categories/services/kitchens-bathrooms-papamoa.html</div><div class="pc-desc">Kitchen designers, bathroom fitters and cabinetmakers for Papamoa builds.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/landscapers-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="landscapers coastal planting driveways outdoor papamoa">
       <span class="pc-icon">&#127807;</span>
-      <div class="pc-body"><div class="pc-title">Landscapers</div><div class="pc-path">categories/services/landscapers-papamoa.html</div><div class="pc-desc">Landscaping, coastal planting, driveways and outdoor living for Papamoa homes.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Landscapers</div><div class="pc-path">categories/services/landscapers-papamoa.html</div><div class="pc-desc">Landscaping, coastal planting, driveways and outdoor living for Papamoa homes.</div></div>
     </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/lawn-mowing.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="lawn mowing garden maintenance papamoa">
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/lawn-mowing-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="lawn mowing garden maintenance papamoa">
       <span class="pc-icon">&#127807;</span>
-      <div class="pc-body"><div class="pc-title">Lawn Mowing</div><div class="pc-path">categories/services/lawn-mowing.html</div><div class="pc-desc">Lawn mowing and garden maintenance services.</div></div>
+      <div class="pc-body"><div class="pc-title">Lawn Mowing</div><div class="pc-path">categories/services/lawn-mowing-papamoa.html</div><div class="pc-desc">Lawn mowing and garden maintenance services.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/mechanic-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="mechanic wof auto service papamoa">
       <span class="pc-icon">&#128663;</span>
       <div class="pc-body"><div class="pc-title">Mechanics &amp; Auto</div><div class="pc-path">categories/services/mechanic-papamoa.html</div><div class="pc-desc">Mechanics, WOF and auto services in Papamoa.</div></div>
     </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/medical-centre-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="medical centre gp doctor health papamoa">
-      <span class="pc-icon">&#127973;</span>
-      <div class="pc-body"><div class="pc-title">Medical Centres</div><div class="pc-path">categories/services/medical-centre-papamoa.html</div><div class="pc-desc">GP and medical centres in Papamoa.</div></div>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/motorcycle-service-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="motorcycle service repair wof papamoa">
+      <span class="pc-icon">&#128662;</span>
+      <div class="pc-body"><div class="pc-title">Motorcycle Services</div><div class="pc-path">categories/services/motorcycle-service-papamoa.html</div><div class="pc-desc">Motorcycle servicing, repairs and WOF in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/painter-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="painter decorator interior exterior papamoa">
       <span class="pc-icon">&#127912;</span>
       <div class="pc-body"><div class="pc-title">Painters &amp; Decorators</div><div class="pc-path">categories/services/painter-papamoa.html</div><div class="pc-desc">Painting and decorating contractors.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/pet-services-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="pet services grooming vet boarding papamoa">
+      <span class="pc-icon">&#128062;</span>
+      <div class="pc-body"><div class="pc-title">Pet Services</div><div class="pc-path">categories/services/pet-services-papamoa.html</div><div class="pc-desc">Pet grooming, boarding and veterinary services in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/physio-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="physiotherapy physio rehabilitation acc papamoa">
       <span class="pc-icon">&#129460;</span>
@@ -703,15 +869,25 @@
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/retirement-services-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="retirement services villages aged care papamoa">
       <span class="pc-icon">&#127969;</span>
-      <div class="pc-body"><div class="pc-title">Retirement Services</div><div class="pc-path">categories/services/retirement-services-papamoa.html</div><div class="pc-desc">Retirement villages, care and over-55 living.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Retirement Services</div><div class="pc-path">categories/services/retirement-services-papamoa.html</div><div class="pc-desc">Retirement villages, care and over-55 living.</div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/services/security-papamoa.html" target="_blank" data-section="categories" data-subgroup="services" data-keywords="security alarm cctv access control monitored papamoa">
       <span class="pc-icon">&#128274;</span>
-      <div class="pc-body"><div class="pc-title">Security Systems</div><div class="pc-path">categories/services/security-papamoa.html</div><div class="pc-desc">Alarm installation, CCTV, access control and monitored security for Papamoa homes and businesses.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Security Systems</div><div class="pc-path">categories/services/security-papamoa.html</div><div class="pc-desc">Alarm installation, CCTV, access control and monitored security for Papamoa homes and businesses.</div></div>
     </a>
+
+    <!-- SHOPS (22) -->
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/shopping.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="shopping retail stores papamoa">
       <span class="pc-icon">&#128717;</span>
       <div class="pc-body"><div class="pc-title">Shopping &amp; Retail (Top Level)</div><div class="pc-path">categories/shops/shopping.html</div><div class="pc-desc">Top-level shopping and retail category page.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/arts-crafts-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="arts crafts supplies hobby papamoa">
+      <span class="pc-icon">&#127912;</span>
+      <div class="pc-body"><div class="pc-title">Arts &amp; Crafts</div><div class="pc-path">categories/shops/arts-crafts-papamoa.html</div><div class="pc-desc">Art supplies and craft stores near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/books-secondhand-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="books secondhand xanadu library used papamoa">
+      <span class="pc-icon">&#128218;</span>
+      <div class="pc-body"><div class="pc-title">Books &amp; Second-hand</div><div class="pc-path">categories/shops/books-secondhand-papamoa.html</div><div class="pc-desc">Bookshops and second-hand stores in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/building-supplies-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="building supplies hardware timber papamoa">
       <span class="pc-icon">&#127959;</span>
@@ -725,17 +901,53 @@
       <span class="pc-icon">&#128507;</span>
       <div class="pc-body"><div class="pc-title">Clothing &amp; Fashion</div><div class="pc-path">categories/shops/clothing-papamoa.html</div><div class="pc-desc">Clothing stores and boutiques in Papamoa.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/computers-phones-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="computers phones repair tech papamoa">
+      <span class="pc-icon">&#128187;</span>
+      <div class="pc-body"><div class="pc-title">Computers &amp; Phones</div><div class="pc-path">categories/shops/computers-phones-papamoa.html</div><div class="pc-desc">Tech stores, computer and phone repair in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/florist-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="florist flowers bouquet delivery papamoa">
+      <span class="pc-icon">&#127799;</span>
+      <div class="pc-body"><div class="pc-title">Florists</div><div class="pc-path">categories/shops/florist-papamoa.html</div><div class="pc-desc">Florists and flower delivery in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/garden-centre-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="garden centre plants nursery papamoa">
       <span class="pc-icon">&#127807;</span>
       <div class="pc-body"><div class="pc-title">Garden Centres</div><div class="pc-path">categories/shops/garden-centre-papamoa.html</div><div class="pc-desc">Garden centres and plant nurseries near Papamoa.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/gifts-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="gifts souvenirs presents shop papamoa">
+      <span class="pc-icon">&#127873;</span>
+      <div class="pc-body"><div class="pc-title">Gifts &amp; Souvenirs</div><div class="pc-path">categories/shops/gifts-papamoa.html</div><div class="pc-desc">Gift shops and souvenir stores in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/home-interiors-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="home interiors furniture decor papamoa">
+      <span class="pc-icon">&#127968;</span>
+      <div class="pc-body"><div class="pc-title">Home &amp; Interiors</div><div class="pc-path">categories/shops/home-interiors-papamoa.html</div><div class="pc-desc">Homewares, furniture and interior decor stores.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/jewellery-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="jewellery rings watches accessories papamoa">
+      <span class="pc-icon">&#128142;</span>
+      <div class="pc-body"><div class="pc-title">Jewellery</div><div class="pc-path">categories/shops/jewellery-papamoa.html</div><div class="pc-desc">Jewellery stores and watchmakers in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/liquor-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="liquor bottle store wine beer papamoa">
       <span class="pc-icon">&#127863;</span>
       <div class="pc-body"><div class="pc-title">Liquor &amp; Bottle Stores</div><div class="pc-path">categories/shops/liquor-papamoa.html</div><div class="pc-desc">Bottle stores and liquor shops in Papamoa.</div></div>
     </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/outdoors-adventure-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="outdoors adventure gear camping papamoa">
+      <span class="pc-icon">&#127956;</span>
+      <div class="pc-body"><div class="pc-title">Outdoors &amp; Adventure</div><div class="pc-path">categories/shops/outdoors-adventure-papamoa.html</div><div class="pc-desc">Outdoor gear, camping and adventure equipment.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/pharmacy-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="pharmacy chemist dispensary papamoa">
       <span class="pc-icon">&#128138;</span>
       <div class="pc-body"><div class="pc-title">Pharmacies</div><div class="pc-path">categories/shops/pharmacy-papamoa.html</div><div class="pc-desc">Pharmacies and chemists in Papamoa.</div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/powersports-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="powersports jetski boats atv papamoa">
+      <span class="pc-icon">&#128674;</span>
+      <div class="pc-body"><div class="pc-title">Powersports</div><div class="pc-path">categories/shops/powersports-papamoa.html</div><div class="pc-desc">Jetski, boat and powersport sales and hire near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/sporting-equipment-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="sporting equipment sports gear papamoa">
+      <span class="pc-icon">&#9917;</span>
+      <div class="pc-body"><div class="pc-title">Sporting Equipment</div><div class="pc-path">categories/shops/sporting-equipment-papamoa.html</div><div class="pc-desc">Sports gear and equipment stores near Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
+    </a>
+    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/stationery-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="stationery office supplies papamoa">
+      <span class="pc-icon">&#128393;</span>
+      <div class="pc-body"><div class="pc-title">Stationery &amp; Office</div><div class="pc-path">categories/shops/stationery-papamoa.html</div><div class="pc-desc">Stationery and office supply stores in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/shops/supermarkets-papamoa.html" target="_blank" data-section="categories" data-subgroup="shops" data-keywords="supermarket grocery countdown new world papamoa">
       <span class="pc-icon">&#128717;</span>
@@ -753,38 +965,7 @@
       <span class="pc-icon">&#128168;</span>
       <div class="pc-body"><div class="pc-title">Vape Shops</div><div class="pc-path">categories/shops/vape-shop-papamoa.html</div><div class="pc-desc">Vape and disposable pod shops in Papamoa.</div></div>
     </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/entertainment.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="entertainment activities things to do papamoa">
-      <span class="pc-icon">&#127917;</span>
-      <div class="pc-body"><div class="pc-title">Activities &amp; Things To Do (Top Level)</div><div class="pc-path">categories/activities/entertainment.html</div><div class="pc-desc">Top-level activities category - indoor, outdoor, water, sport.</div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/indoor-entertainment-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="vr sim racing escape room indoor entertainment">
-      <span class="pc-icon">&#127918;</span>
-      <div class="pc-body"><div class="pc-title">Indoor Entertainment</div><div class="pc-path">categories/activities/indoor-entertainment-papamoa.html</div><div class="pc-desc">VR, sim racing and escape rooms in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/activities/surf-school-papamoa.html" target="_blank" data-section="categories" data-subgroup="activities" data-keywords="surf school lessons board hire papamoa">
-      <span class="pc-icon">&#127940;</span>
-      <div class="pc-body"><div class="pc-title">Surf Schools</div><div class="pc-path">categories/activities/surf-school-papamoa.html</div><div class="pc-desc">Surf lessons, board hire and holiday programmes.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/accommodation.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="accommodation hotels motels holiday parks papamoa">
-      <span class="pc-icon">&#127968;</span>
-      <div class="pc-body"><div class="pc-title">Accommodation (Top Level)</div><div class="pc-path">categories/accommodation/accommodation.html</div><div class="pc-desc">Top-level accommodation category - all types.</div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/holiday-homes-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="holiday homes bach rental airbnb papamoa">
-      <span class="pc-icon">&#127969;</span>
-      <div class="pc-body"><div class="pc-title">Holiday Homes</div><div class="pc-path">categories/accommodation/holiday-homes-papamoa.html</div><div class="pc-desc">Baches and whole-home rentals near Papamoa Beach.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/holiday-parks-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="holiday park camping cabins pacific park papamoa">
-      <span class="pc-icon">&#127957;</span>
-      <div class="pc-body"><div class="pc-title">Holiday Parks</div><div class="pc-path">categories/accommodation/holiday-parks-papamoa.html</div><div class="pc-desc">Camping, cabins and family-friendly holiday parks.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/luxury-stays-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="luxury boutique premium beachfront accommodation">
-      <span class="pc-icon">&#10024;</span>
-      <div class="pc-body"><div class="pc-title">Luxury Stays</div><div class="pc-path">categories/accommodation/luxury-stays-papamoa.html</div><div class="pc-desc">Premium and boutique accommodation in Papamoa.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/categories/accommodation/retirement-villages-papamoa.html" target="_blank" data-section="categories" data-subgroup="accommodation" data-keywords="retirement village over 55 lifestyle karaka pines">
-      <span class="pc-icon">&#127978;</span>
-      <div class="pc-body"><div class="pc-title">Retirement Villages</div><div class="pc-path">categories/accommodation/retirement-villages-papamoa.html</div><div class="pc-desc">Over-55 living and lifestyle villages.</div><div class="pc-tags"><span class="pc-tag tag-new">New</span></div></div>
-    </a>
+
     </div>
   </div>
 
@@ -953,7 +1134,7 @@
     <div class="section-header">
       <span class="sh-icon">&#128196;</span>
       <div>
-        <div class="sh-title">Docs <span class="sh-count">8</span></div>
+        <div class="sh-title">Docs <span class="sh-count">7</span></div>
         <div class="sh-desc">Internal HTML documentation and planning pages</div>
       </div>
       <span class="sh-toggle">&#9660; collapse</span>
@@ -961,7 +1142,7 @@
     <div class="cards-grid" id="grid-docs">
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/docs/Project_Master.html" target="_blank" data-section="docs" data-keywords="project master single source of truth canonical reference">
       <span class="pc-icon">&#9733;</span>
-      <div class="pc-body"><div class="pc-title">Project Master - Single Source of Truth</div><div class="pc-path">docs/Project_Master.html</div><div class="pc-desc">Canonical project reference. Feed this to Claude at the start of every session. Supersedes all other docs.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Project Master - Single Source of Truth</div><div class="pc-path">docs/Project_Master.html</div><div class="pc-desc">Canonical project reference. Feed this to Claude at the start of every session. Supersedes all other docs.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/docs/task-plan.html" target="_blank" data-section="docs" data-keywords="task plan checklist priorities progress">
       <span class="pc-icon">&#10003;</span>
@@ -986,10 +1167,6 @@
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/docs/page-structure-plan.html" target="_blank" data-section="docs" data-keywords="page structure plan architecture hierarchy">
       <span class="pc-icon">&#128290;</span>
       <div class="pc-body"><div class="pc-title">Page Structure Plan</div><div class="pc-path">docs/page-structure-plan.html</div><div class="pc-desc">Site architecture and page hierarchy planning document.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
-    </a>
-    <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/docs/demo-prep-checklist.html" target="_blank" data-section="docs" data-keywords="demo prep checklist carwyn completed tasks post demo">
-      <span class="pc-icon">&#10003;</span>
-      <div class="pc-body"><div class="pc-title">Demo Prep Checklist</div><div class="pc-path">docs/demo-prep-checklist.html</div><div class="pc-desc">Post-demo summary - completed tasks and next priorities.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
     </a>
     </div>
   </div>
@@ -1031,7 +1208,7 @@
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/admin/search-analytics.html" target="_blank" data-section="admin" data-keywords="search analytics terms trending pills content gaps zero results">
       <span class="pc-icon">&#128269;</span>
-      <div class="pc-body"><div class="pc-title">Search Analytics</div><div class="pc-path">admin/search-analytics.html</div><div class="pc-desc">Top search terms, content gap alerts, zero-result tracking and search index entry generator.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span><span class="pc-tag tag-new">New</span></div></div>
+      <div class="pc-body"><div class="pc-title">Search Analytics</div><div class="pc-path">admin/search-analytics.html</div><div class="pc-desc">Top search terms, content gap alerts, zero-result tracking and search index entry generator.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
     </a>
     </div>
   </div>
@@ -1141,94 +1318,152 @@
 
 <script>
 // ============================================================
-// SCRATCHPAD (localStorage - works on GitHub Pages)
+// SCRATCHPAD — JSONBin shared sync (read/write, all devices)
 // ============================================================
-var SP_KEY = 'papamoa_notes';
+// SETUP: Create a free bin at https://jsonbin.io
+// 1. Sign up free → New Bin → paste: {"notes":[]} → Save
+// 2. Copy the Bin ID (looks like 6619abc123...)
+// 3. Copy your Master API Key from Account > API Keys
+// 4. Paste both below:
+var JSONBIN_BIN_ID  = 'PASTE_BIN_ID_HERE';
+var JSONBIN_API_KEY = 'PASTE_API_KEY_HERE';
+var JSONBIN_URL     = 'https://api.jsonbin.io/v3/b/' + JSONBIN_BIN_ID;
+
 var spOpen = false;
+var spNotes = [];   // in-memory cache
+var spSaving = false;
 
-function loadNotes() {
-  try { return JSON.parse(localStorage.getItem(SP_KEY) || '[]'); } catch(e) { return []; }
-}
+function escHtml(str) { return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-function saveNotes(notes) {
-  try { localStorage.setItem(SP_KEY, JSON.stringify(notes)); } catch(e) { console.error('Storage error:', e); }
+function updateCount(notes) {
+  var pending = notes.filter(function(n){ return !n.done; }).length;
+  document.getElementById('sp-count').textContent =
+    notes.length + ' note' + (notes.length !== 1 ? 's' : '') +
+    (pending > 0 ? ' (' + pending + ' open)' : '');
 }
 
 function renderNotes() {
-  var notes = loadNotes();
+  var notes = spNotes;
+  updateCount(notes);
   var list = document.getElementById('sp-notes-list');
-  var count = document.getElementById('sp-count');
-  var pending = notes.filter(function(n){ return !n.done; }).length;
-  count.textContent = notes.length + ' note' + (notes.length !== 1 ? 's' : '') + (pending > 0 ? ' (' + pending + ' open)' : '');
-  if (notes.length === 0) {
-    list.innerHTML = '<div class="sp-empty">No notes yet. Brain dump away.</div>';
-    return;
-  }
+  if (notes.length === 0) { list.innerHTML = '<div class="sp-empty">No notes yet. Brain dump away.</div>'; return; }
   list.innerHTML = notes.map(function(note, i) {
     var tagClass = 'tag-' + note.tag;
     return '<div class="sp-note' + (note.done ? ' done' : '') + '">' +
       '<span class="sp-note-tag ' + tagClass + '">' + note.tag + '</span>' +
-      '<div class="sp-note-body">' +
-        '<div class="sp-note-text">' + escHtml(note.text) + '</div>' +
-        '<div class="sp-note-time">' + note.time + '</div>' +
-      '</div>' +
+      '<div class="sp-note-body"><div class="sp-note-text">' + escHtml(note.text) + '</div><div class="sp-note-time">' + escHtml(note.time) + (note.author ? ' &middot; ' + escHtml(note.author) : '') + '</div></div>' +
       '<div class="sp-note-actions">' +
         (note.tag === 'todo' ? '<button class="sp-btn" title="' + (note.done ? 'Reopen' : 'Mark done') + '" onclick="toggleDone(' + i + ')">' + (note.done ? '&#9898;' : '&#10003;') + '</button>' : '') +
         '<button class="sp-btn" title="Delete" onclick="deleteNote(' + i + ')">&#128465;</button>' +
-      '</div>' +
-    '</div>';
+      '</div></div>';
   }).join('');
 }
 
-function escHtml(str) {
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function setSpStatus(msg, isError) {
+  var el = document.getElementById('sp-status');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.color = isError ? '#F07080' : 'rgba(255,255,255,0.4)';
 }
 
-function addNote() {
+async function fetchNotes() {
+  if (JSONBIN_BIN_ID === 'PASTE_BIN_ID_HERE') {
+    setSpStatus('⚠ Add your JSONBin credentials to enable sync', true);
+    return;
+  }
+  setSpStatus('Syncing...');
+  try {
+    var res = await fetch(JSONBIN_URL + '/latest', {
+      headers: { 'X-Master-Key': JSONBIN_API_KEY }
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var data = await res.json();
+    spNotes = (data.record && Array.isArray(data.record.notes)) ? data.record.notes : [];
+    renderNotes();
+    setSpStatus('Synced');
+  } catch(e) {
+    setSpStatus('Sync failed - check credentials', true);
+  }
+}
+
+async function saveNotes() {
+  if (JSONBIN_BIN_ID === 'PASTE_BIN_ID_HERE') return;
+  if (spSaving) return;
+  spSaving = true;
+  setSpStatus('Saving...');
+  try {
+    var res = await fetch(JSONBIN_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': JSONBIN_API_KEY
+      },
+      body: JSON.stringify({ notes: spNotes })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    setSpStatus('Saved');
+  } catch(e) {
+    setSpStatus('Save failed', true);
+  } finally {
+    spSaving = false;
+  }
+}
+
+async function addNote() {
   var input = document.getElementById('sp-input');
   var tag = document.getElementById('sp-tag').value;
   var text = input.value.trim();
   if (!text) { input.focus(); return; }
-  var notes = loadNotes();
   var now = new Date();
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var timeStr = now.getDate() + ' ' + months[now.getMonth()] + ', ' + now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
-  notes.unshift({ text: text, tag: tag, time: timeStr, done: false });
-  saveNotes(notes);
-  input.value = '';
-  input.focus();
+  spNotes.unshift({
+    text: text, tag: tag,
+    time: now.getDate() + ' ' + months[now.getMonth()] + ', ' + now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0'),
+    done: false
+  });
+  input.value = ''; input.focus();
   renderNotes();
+  await saveNotes();
 }
 
-function deleteNote(idx) {
-  var notes = loadNotes();
-  notes.splice(idx, 1);
-  saveNotes(notes);
+async function deleteNote(idx) {
+  spNotes.splice(idx, 1);
   renderNotes();
+  await saveNotes();
 }
 
-function toggleDone(idx) {
-  var notes = loadNotes();
-  notes[idx].done = !notes[idx].done;
-  saveNotes(notes);
+async function toggleDone(idx) {
+  spNotes[idx].done = !spNotes[idx].done;
   renderNotes();
+  await saveNotes();
 }
 
-function spKeydown(e) {
-  if (e.key === 'Enter') addNote();
-}
+function spKeydown(e) { if (e.key === 'Enter') addNote(); }
 
 function toggleScratchpad() {
   spOpen = !spOpen;
-  var body = document.getElementById('scratchpad-body');
-  var icon = document.getElementById('sp-toggle-icon');
-  body.classList.toggle('open', spOpen);
-  icon.innerHTML = spOpen ? '&#9650; close' : '&#9660; open';
-  if (spOpen) renderNotes();
+  document.getElementById('scratchpad-body').classList.toggle('open', spOpen);
+  document.getElementById('sp-toggle-icon').innerHTML = spOpen ? '&#9650; close' : '&#9660; open';
+  if (spOpen) fetchNotes();
 }
 
+// Load count on page load without opening the panel
+(function initScratchpad() {
+  if (JSONBIN_BIN_ID === 'PASTE_BIN_ID_HERE') {
+    updateCount([]);
+    return;
+  }
+  fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_API_KEY } })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      spNotes = (data.record && Array.isArray(data.record.notes)) ? data.record.notes : [];
+      updateCount(spNotes);
+    })
+    .catch(function(){ updateCount([]); });
+})();
+
 // ============================================================
-// PAGE INDEX - FILTER & SEARCH
+// PAGE INDEX
 // ============================================================
 var STAR_KEY = 'papamoa_starred';
 var activeTab = 'all';
@@ -1237,12 +1472,10 @@ var activeCatFilter = 'all';
 (function(){
   var d = new Date();
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var hrs = d.getHours(), mins = d.getMinutes();
-  var ampm = hrs >= 12 ? 'pm' : 'am';
+  var hrs = d.getHours(), mins = d.getMinutes(), ampm = hrs >= 12 ? 'pm' : 'am';
   hrs = hrs % 12 || 12;
-  var str = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear() + ', ' + hrs + ':' + (mins < 10 ? '0' : '') + mins + ampm;
   var el = document.getElementById('last-updated');
-  if (el) el.textContent = 'Updated ' + str;
+  if (el) el.textContent = 'Updated ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear() + ', ' + hrs + ':' + (mins < 10 ? '0' : '') + mins + ampm;
 })();
 
 function getStarred() { try { return JSON.parse(localStorage.getItem(STAR_KEY) || '[]'); } catch(e) { return []; } }
@@ -1252,16 +1485,15 @@ function toggleStar(e, path) {
   e.preventDefault(); e.stopPropagation();
   var starred = getStarred();
   var idx = starred.indexOf(path);
-  if (idx === -1) { starred.push(path); } else { starred.splice(idx, 1); }
+  if (idx === -1) { starred.push(path); } else { starred.splice(idx,1); }
   saveStarred(starred); renderStars();
 }
-
 function renderStars() {
   var starred = getStarred();
   document.querySelectorAll('.page-card').forEach(function(card) {
     var btn = card.querySelector('.star-btn');
     var path = card.getAttribute('href') || '';
-    var isStarred = starred.some(function(s) { return path.endsWith(s); });
+    var isStarred = starred.some(function(s){ return path.endsWith(s); });
     card.classList.toggle('starred', isStarred);
     if (btn) btn.textContent = isStarred ? '\u2605' : '\u2606';
   });
@@ -1275,28 +1507,24 @@ function renderStars() {
     return '<a href="https://plainblackcreative.github.io/papamoa-previews/' + path + '" target="_blank" class="starred-chip">\u2605 ' + title + '</a>';
   }).join('');
 }
-
 function clearAllStars() { saveStarred([]); renderStars(); }
 
 function setCatFilter(group, btn) {
   activeCatFilter = group;
-  document.querySelectorAll('.csf-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.csf-btn').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
   filterPages();
 }
-
 function setTab(tab, btn) {
   activeTab = tab;
-  document.querySelectorAll('.ftab').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.ftab').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
   filterPages();
 }
-
 function filterPages() {
   var q = document.getElementById('search-input').value.toLowerCase().trim();
   var total = 0;
   var sectionVisible = {};
-
   document.querySelectorAll('.page-card').forEach(function(card) {
     var section = card.getAttribute('data-section');
     var subgroup = card.getAttribute('data-subgroup') || '';
@@ -1311,15 +1539,11 @@ function filterPages() {
     card.classList.toggle('card-hidden', !show);
     if (show) { total++; sectionVisible[section] = true; }
   });
-
   var csf = document.getElementById('cat-subfilter');
   if (csf) csf.style.display = (activeTab === 'all' || activeTab === 'categories') ? 'flex' : 'none';
-
   document.querySelectorAll('.section-block').forEach(function(block) {
-    var sec = block.getAttribute('data-section');
-    block.classList.toggle('hidden', !sectionVisible[sec]);
+    block.classList.toggle('hidden', !sectionVisible[block.getAttribute('data-section')]);
   });
-
   document.getElementById('filter-count').textContent = total + ' shown';
   document.getElementById('no-results').classList.toggle('visible', total === 0);
 }
@@ -1329,16 +1553,13 @@ document.querySelectorAll('.page-card:not(.asset-card)').forEach(function(card) 
   var href = card.getAttribute('href') || '';
   var path = href.replace('https://plainblackcreative.github.io/papamoa-previews/', '');
   var btn = document.createElement('button');
-  btn.className = 'star-btn';
-  btn.textContent = '\u2606';
-  btn.title = 'Star this page';
-  btn.onclick = function(e) { toggleStar(e, path); };
+  btn.className = 'star-btn'; btn.textContent = '\u2606'; btn.title = 'Star this page';
+  btn.onclick = function(e){ toggleStar(e, path); };
   card.appendChild(btn);
 });
-
 renderStars();
 
-// Collapse/expand sections
+// Collapse/expand
 document.querySelectorAll('.section-header').forEach(function(header) {
   header.addEventListener('click', function(e) {
     if (e.target.closest('a')) return;
@@ -1349,7 +1570,7 @@ document.querySelectorAll('.section-header').forEach(function(header) {
   });
 });
 
-// GitHub Pages URL prefix fix
+// GitHub Pages path fix
 (function(){
   var base = '/papamoa-previews';
   document.addEventListener('click', function(e) {
