@@ -54,6 +54,7 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
 .section{margin-bottom:48px}
 .section-label{font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--ocean);margin-bottom:8px}
 .section-title{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.subsection-title{font-size:13px;font-weight:700;color:var(--navy);margin:20px 0 12px}
 
 /* ALERTS */
 .alert{border-radius:8px;padding:14px 18px;margin-bottom:16px;font-size:13px;display:flex;gap:12px;line-height:1.6}
@@ -97,6 +98,17 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
 .swatch-name{font-size:11px;font-weight:700;color:var(--navy)}
 .swatch-hex{font-size:10px;color:var(--muted);font-family:monospace}
 
+/* CATEGORY HERO SWATCHES */
+.cat-hero-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:16px}
+.cat-hero-card{border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.cat-hero-preview{height:60px;display:flex;align-items:flex-end;padding:8px 12px;position:relative}
+.cat-hero-preview::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.cat-hero-label{font-size:11px;font-weight:700;color:rgba(255,255,255,0.9);position:relative;z-index:1;text-shadow:0 1px 3px rgba(0,0,0,0.4)}
+.cat-hero-info{background:var(--white);padding:10px 12px}
+.cat-hero-page{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.cat-hero-accent{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-family:monospace}
+.cat-accent-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
 /* DEAD ITEMS */
 .dead-list{display:flex;flex-direction:column;gap:8px}
 .dead-item{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:6px;padding:10px 14px;font-size:12.5px;display:flex;gap:10px}
@@ -118,7 +130,9 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
 
 /* GREY AREA */
 .grey{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--dune);border-radius:6px;padding:12px 16px;margin-bottom:10px}
+.grey.resolved{border-left-color:var(--green);background:var(--green-bg)}
 .grey-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.grey.resolved .grey-title{color:var(--green)}
 .grey-body{font-size:12.5px;color:var(--muted);line-height:1.55}
 
 /* NAV TOC */
@@ -149,19 +163,19 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
 
 <nav class="nav">
   <a href="#" class="nav-logo">Papamoa<span>.info</span></a>
-  <span class="nav-badge">Project Master v1</span>
+  <span class="nav-badge">Project Master v2 &mdash; Updated April 13, 2026</span>
 </nav>
 
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-tag">Single Source of Truth</div>
     <h1>Project <em>Master</em></h1>
-    <p class="hero-sub">Consolidated April 9, 2026. Every locked decision, every design token, every rule, every pending task. Feed the companion .md file to Claude at session start. Use this HTML as the visual team reference.</p>
+    <p class="hero-sub">Consolidated April 9, 2026. Updated April 13, 2026. Every locked decision, every design token, every rule, every pending task. Feed the companion .md file to Claude at session start. Use this HTML as the visual team reference.</p>
     <div class="hero-stats">
       <div class="hero-stat"><div class="hero-stat-num">160+</div><div class="hero-stat-label">Pages in repo</div></div>
       <div class="hero-stat"><div class="hero-stat-num">20</div><div class="hero-stat-label">Live listings</div></div>
       <div class="hero-stat"><div class="hero-stat-num">97</div><div class="hero-stat-label">CRM leads</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">60+</div><div class="hero-stat-label">Source files consolidated</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label">Category pages rebuilt</div></div>
     </div>
   </div>
 </div>
@@ -174,15 +188,16 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
     <div class="toc-grid">
       <a href="#pricing">1. Pricing (locked)</a>
       <a href="#design">2. Design System (locked)</a>
+      <a href="#category-heroes">2.4 Category Hero Colours (locked)</a>
       <a href="#terminology">3. Terminology (locked)</a>
       <a href="#nav">4. Nav System (locked)</a>
       <a href="#files">5. File Structure</a>
       <a href="#listings">6. Listings</a>
       <a href="#infra">7. Infrastructure</a>
       <a href="#quality">8. Quality Standard</a>
-      <a href="#features">9. Key Features & Pages</a>
-      <a href="#dead">10. Dead Offers & Outdated Docs</a>
-      <a href="#grey">11. Grey Areas & TBCs</a>
+      <a href="#features">9. Key Features &amp; Pages</a>
+      <a href="#dead">10. Dead Offers &amp; Outdated Docs</a>
+      <a href="#grey">11. Grey Areas &amp; TBCs</a>
       <a href="#tasks">12. Pending Tasks</a>
     </div>
   </div>
@@ -190,7 +205,7 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
   <!-- 1. PRICING -->
   <div class="section" id="pricing">
     <div class="section-label">Locked April 2026</div>
-    <h2 class="section-title">1. Pricing & Tier Structure</h2>
+    <h2 class="section-title">1. Pricing &amp; Tier Structure</h2>
 
     <div class="alert warn"><span class="alert-icon">&#9888;</span><div><strong>GST formatting:</strong> Always lowercase <code>+gst</code> in customer-facing content. Never <code>+GST</code>.</div></div>
 
@@ -233,7 +248,7 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
           <div class="feat"><i class="fy">&#10003;</i> Everything in Silver</div>
           <div class="feat"><i class="fy">&#10003;</i> Spotlight: top of primary subcategory</div>
           <div class="feat"><i class="fy">&#10003;</i> Photo gallery (logo + up to 9 images)</div>
-          <div class="feat"><i class="fy">&#10003;</i> AI-optimised FAQ & AEO schema</div>
+          <div class="feat"><i class="fy">&#10003;</i> AI-optimised FAQ &amp; AEO schema</div>
           <div class="feat"><i class="fy">&#10003;</i> Menu Add-On included free</div>
           <div class="feat"><i class="fy">&#10003;</i> Access to premium ad spots</div>
           <div class="feat"><i class="fy">&#10003;</i> Lifetime Price Lock</div>
@@ -251,11 +266,11 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
       </tbody>
     </table>
 
-    <div class="alert info"><span class="alert-icon">&#8505;</span><div><strong>Guarantees:</strong> Lifetime Price Lock = standard feature on both tiers, show everywhere. 2027 ROI Guarantee = sales tool only (PPP, scripts, landing pages). Not a refund; it's a free renewal year if no value felt. Do NOT show on organic/public pages.</div></div>
+    <div class="alert info"><span class="alert-icon">&#8505;</span><div><strong>Guarantees:</strong> Lifetime Price Lock = standard feature on both tiers, show everywhere. 2027 ROI Guarantee = sales tool only (PPP, scripts, landing pages). Not a refund; it&rsquo;s a free renewal year if no value felt. Do NOT show on organic/public pages.</div></div>
 
-    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:20px 0 10px;">Sales Funnel Offers (non-public)</h3>
+    <h3 class="subsection-title">Sales Funnel Offers (non-public)</h3>
     <div class="alert ok"><span class="alert-icon">1</span><div><strong>Standard:</strong> Free Silver listing on TaurangaNZ.info included with any paid Papamoa.info listing.</div></div>
-    <div class="alert warn"><span class="alert-icon">2</span><div><strong>Last-ditch only:</strong> "Pay Silver price, get Gold" -- $599+gst/yr unlocks full Gold. Final lever before dropout. Not offered by default.</div></div>
+    <div class="alert warn"><span class="alert-icon">2</span><div><strong>Last-ditch only:</strong> "Pay Silver price, get Gold" &mdash; $599+gst/yr unlocks full Gold. Final lever before dropout. Not offered by default.</div></div>
   </div>
 
   <!-- 2. DESIGN SYSTEM -->
@@ -264,16 +279,15 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
     <h2 class="section-title">2. Design System</h2>
 
     <div class="alert info"><span class="alert-icon">&#127912;</span><div><strong>Fonts:</strong> Figtree (body/UI) + Playfair Display (headings). NEVER use DM Sans, Fraunces, Inter, Libre Baskerville, Space Grotesk, Roboto, Arial, Outfit.</div></div>
-
     <div class="alert info"><span class="alert-icon">&#127968;</span><div><strong>Nav logo:</strong> Playfair Display bold "Papamoa" in white + <code>.info</code> span in <code>#3AABDE</code> (blue). Phone in nav: blue, NOT dune.</div></div>
 
-    <h3 style="font-size:13px;font-weight:700;color:var(--navy);margin:20px 0 12px;">Core Palette</h3>
+    <h3 class="subsection-title">Core Palette</h3>
     <div class="swatch-grid">
       <div class="swatch"><div class="swatch-color" style="background:#0D2B3E"></div><div class="swatch-info"><div class="swatch-name">Navy</div><div class="swatch-hex">#0D2B3E</div></div></div>
       <div class="swatch"><div class="swatch-color" style="background:#1B6B7D"></div><div class="swatch-info"><div class="swatch-name">Ocean</div><div class="swatch-hex">#1B6B7D</div></div></div>
       <div class="swatch"><div class="swatch-color" style="background:#0F4352"></div><div class="swatch-info"><div class="swatch-name">Ocean Deep</div><div class="swatch-hex">#0F4352</div></div></div>
       <div class="swatch"><div class="swatch-color" style="background:#3AABDE"></div><div class="swatch-info"><div class="swatch-name">Blue (accent)</div><div class="swatch-hex">#3AABDE</div></div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#F7F3ED"></div><div class="swatch-info"><div class="swatch-name">Sand</div><div class="swatch-hex">#F7F3ED</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F7F3ED;border:1px solid #E0D8CC"></div><div class="swatch-info"><div class="swatch-name">Sand</div><div class="swatch-hex">#F7F3ED</div></div></div>
       <div class="swatch"><div class="swatch-color" style="background:#C4985A"></div><div class="swatch-info"><div class="swatch-name">Dune</div><div class="swatch-hex">#C4985A</div></div></div>
       <div class="swatch"><div class="swatch-color" style="background:#B8840A"></div><div class="swatch-info"><div class="swatch-name">Gold</div><div class="swatch-hex">#B8840A</div></div></div>
       <div class="swatch"><div class="swatch-color" style="background:#5A7A8A"></div><div class="swatch-info"><div class="swatch-name">Silver</div><div class="swatch-hex">#5A7A8A</div></div></div>
@@ -284,7 +298,82 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
     </div>
 
     <div class="alert warn"><span class="alert-icon">&#9888;</span><div><strong>Homepage variant tokens are intentional:</strong> <code>--navy-mid:#2B3F5C</code>, <code>--gold-alt:#C8962A</code>, <code>--sand-alt:#F5EFE0</code> etc. are warmer variants used only on the homepage. Not bugs.</div></div>
-    <div class="alert warn"><span class="alert-icon">&#9888;</span><div><strong>Category hero gradients:</strong> Three conflicting sets exist (homepage, listing templates, styles.css). Need reconciling in design audit.</div></div>
+  </div>
+
+  <!-- 2.4 CATEGORY HERO COLOURS -->
+  <div class="section" id="category-heroes">
+    <div class="section-label">Locked April 13, 2026</div>
+    <h2 class="section-title">2.4 Category Page Hero Colours</h2>
+
+    <div class="alert ok"><span class="alert-icon">&#10003;</span><div><strong>Resolved.</strong> Five main category pages each have a locked hero gradient and accent colour. These are canonical. Do not change without updating this document and <code>assets/css/styles.css</code>. The <code>.hero-cat-*</code> classes in styles.css reflect these values.</div></div>
+
+    <div class="alert info"><span class="alert-icon">&#8505;</span><div><strong>Accent applies to:</strong> eyebrow text, <code>h1 em</code> italic, hero bottom bar, see-more button, sidebar bullet <code>›</code>, list CTA button colour.</div></div>
+
+    <div class="cat-hero-grid">
+
+      <div class="cat-hero-card">
+        <div class="cat-hero-preview" style="background:linear-gradient(135deg,#0A1A2E,#0D2840,#142A3A)">
+          <div class="cat-hero-preview" style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3AABDE,#1A7ABE);border-radius:0"></div>
+          <span class="cat-hero-label">Stay</span>
+        </div>
+        <div class="cat-hero-info">
+          <div class="cat-hero-page">Stay / Accommodation</div>
+          <div class="cat-hero-accent"><div class="cat-accent-dot" style="background:#3AABDE"></div>#3AABDE &mdash; --blue</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:4px;font-family:monospace">#0A1A2E &rarr; #142A3A</div>
+        </div>
+      </div>
+
+      <div class="cat-hero-card">
+        <div class="cat-hero-preview" style="background:linear-gradient(135deg,#0A2215,#0D3828,#0F4A30)">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7DC143,#4CAF50)"></div>
+          <span class="cat-hero-label">Do</span>
+        </div>
+        <div class="cat-hero-info">
+          <div class="cat-hero-page">Do / Activities</div>
+          <div class="cat-hero-accent"><div class="cat-accent-dot" style="background:#7DC143"></div>#7DC143 &mdash; --lime</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:4px;font-family:monospace">#0A2215 &rarr; #0F4A30</div>
+        </div>
+      </div>
+
+      <div class="cat-hero-card">
+        <div class="cat-hero-preview" style="background:linear-gradient(135deg,#1A1208,#2A2010,#1A0A08)">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#E07830,#C05A18)"></div>
+          <span class="cat-hero-label">Eat</span>
+        </div>
+        <div class="cat-hero-info">
+          <div class="cat-hero-page">Eat / Food &amp; Drink</div>
+          <div class="cat-hero-accent"><div class="cat-accent-dot" style="background:#E07830"></div>#E07830 &mdash; --cat-eat-accent</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:4px;font-family:monospace">#1A1208 &rarr; #1A0A08</div>
+        </div>
+      </div>
+
+      <div class="cat-hero-card">
+        <div class="cat-hero-preview" style="background:linear-gradient(135deg,#141820,#1E2535,#28334A)">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3AABDE,#1A7ABE)"></div>
+          <span class="cat-hero-label">Services</span>
+        </div>
+        <div class="cat-hero-info">
+          <div class="cat-hero-page">Services</div>
+          <div class="cat-hero-accent"><div class="cat-accent-dot" style="background:#3AABDE"></div>#3AABDE &mdash; --blue</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:4px;font-family:monospace">#141820 &rarr; #28334A</div>
+        </div>
+      </div>
+
+      <div class="cat-hero-card">
+        <div class="cat-hero-preview" style="background:linear-gradient(135deg,#1A1408,#2A1E0C,#3A2810)">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C8962A,#A07020)"></div>
+          <span class="cat-hero-label">Shop</span>
+        </div>
+        <div class="cat-hero-info">
+          <div class="cat-hero-page">Shop / Shopping</div>
+          <div class="cat-hero-accent"><div class="cat-accent-dot" style="background:#C8962A"></div>#C8962A &mdash; --gold-alt</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:4px;font-family:monospace">#1A1408 &rarr; #3A2810</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="alert warn"><span class="alert-icon">&#9888;</span><div><strong>Stay and Services</strong> share the <code>--blue</code> accent but have clearly distinct hero gradients (ocean blue vs dark charcoal). Homepage section gradients and listing template gradients are separate and have not yet been reconciled with these values.</div></div>
   </div>
 
   <!-- 3. TERMINOLOGY -->
@@ -299,7 +388,7 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
         <tr><td><strong>Spotlight</strong></td><td>Ad placements on category pages</td><td>Separate from listing tiers</td></tr>
         <tr><td><strong>Bronze</strong></td><td>Internal placeholder label</td><td>Never mentioned to prospects</td></tr>
         <tr><td><strong>GEO</strong></td><td>Generative Engine Optimisation</td><td>Umbrella term for all AI engines. Preferred over AEO.</td></tr>
-        <tr><td><strong>Papamoa</strong></td><td>Content spelling</td><td>Always with macron in body text. Domain: no macron.</td></tr>
+        <tr><td><strong>P&#257;p&#257;moa</strong></td><td>Content spelling</td><td>Always with macron in body text. Domain: no macron.</td></tr>
       </tbody>
     </table>
     <div class="alert info"><span class="alert-icon">&#9997;</span><div><strong>Listing voice:</strong> Third-party "they/them/call them". Never "we/us". Neutral editorial. Specific and honest. No em dashes. No dummy phone numbers.</div></div>
@@ -393,28 +482,29 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
   <div class="section" id="quality">
     <div class="section-label">Locked -- no exceptions</div>
     <h2 class="section-title">8. Quality Standard</h2>
-    <div class="alert info"><span class="alert-icon">&#9989;</span><div>Every page must have: specific <code>&lt;meta description&gt;</code>, <code>&lt;link rel="canonical"&gt;</code>, Open Graph tags, appropriate schema markup, AEO FAQ on category pages (min 4 questions), no tier labels on Bronze, no dummy phone numbers, correct design system applied throughout.</div></div>
+    <div class="alert info"><span class="alert-icon">&#9989;</span><div>Every page must have: specific <code>&lt;meta description&gt;</code>, <code>&lt;link rel="canonical"&gt;</code>, Open Graph tags (incl. <code>og:image</code>), appropriate schema markup, AEO FAQ on category pages (min 6 questions), no tier labels on Bronze, no dummy phone numbers, correct design system applied throughout.</div></div>
+    <div class="alert info"><span class="alert-icon">&#128207;</span><div><strong>Category pages additionally require:</strong> two-col layout (main + 300px sidebar), searchable subcat grid, see-more/show-less row logic, spotlight-avail sections, full PNF footer + contact modal, BreadcrumbList + FAQPage schema.</div></div>
   </div>
 
   <!-- 9. KEY FEATURES -->
   <div class="section" id="features">
     <div class="section-label">Reference</div>
-    <h2 class="section-title">9. Key Features & Pages</h2>
+    <h2 class="section-title">9. Key Features &amp; Pages</h2>
 
-    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:16px 0 8px;">Menu Add-On -- Known Bugs</h3>
+    <h3 class="subsection-title">Menu Add-On -- Known Bugs</h3>
     <div class="alert dead"><span class="alert-icon">1</span><div>Menu lightbox button crashes page on PPP and list-with-us. Quick fix: anchor link to menu section.</div></div>
     <div class="alert dead"><span class="alert-icon">2</span><div>Dietary filters (V, VG, GF, DF) hardcoded but non-functional. Make dynamic and wire up filtering.</div></div>
     <div class="alert warn"><span class="alert-icon">3</span><div>Menu item images need auto-discovery from <code>images/listings/{slug}/menu/</code>.</div></div>
 
-    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:16px 0 8px;">Search -- Known Bugs</h3>
+    <h3 class="subsection-title">Search -- Known Bugs</h3>
     <div class="alert dead"><span class="alert-icon">1</span><div><code>handleSearch()</code> uses undefined <code>ql</code> variable. Should be <code>q</code>.</div></div>
     <div class="alert dead"><span class="alert-icon">2</span><div>Weather widget fetches wrong coordinates directly from Open-Meteo. Should use Worker proxy.</div></div>
     <div class="alert dead"><span class="alert-icon">3</span><div>Duplicate script blocks with broken <code>&lt;script&gt;</code> tag.</div></div>
 
-    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:16px 0 8px;">404 Page -- Monthly Giveaway Concept</h3>
-    <div class="alert ok"><span class="alert-icon">&#127881;</span><div>Monthly sponsor provides prize + gets spotlight ad. Game re-themed to sponsor's business. Investigate SEO/GEO benefits of high-engagement 404 pages.</div></div>
+    <h3 class="subsection-title">404 Page -- Monthly Giveaway Concept</h3>
+    <div class="alert ok"><span class="alert-icon">&#127881;</span><div>Monthly sponsor provides prize + gets spotlight ad. Game re-themed to sponsor&rsquo;s business. Investigate SEO/GEO benefits of high-engagement 404 pages.</div></div>
 
-    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:16px 0 8px;">To Build</h3>
+    <h3 class="subsection-title">To Build</h3>
     <div class="alert info"><span class="alert-icon">&#128736;</span><div><strong>Social icons:</strong> All listings get icon slots (hidden until URL provided). Files at <code>/assets/sm-icons/</code>.</div></div>
     <div class="alert info"><span class="alert-icon">&#128736;</span><div><strong>Live reviews:</strong> Google/TripAdvisor widgets in hero. Live-check on load. Show/hide per URL availability.</div></div>
     <div class="alert info"><span class="alert-icon">&#128736;</span><div><strong>Sidebar categories:</strong> Gold: main + all subcats. Silver: main + 1 subcat. Automated from listing data.</div></div>
@@ -424,20 +514,20 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
   <!-- 10. DEAD OFFERS & OUTDATED DOCS -->
   <div class="section" id="dead">
     <div class="section-label">Archived -- do not use</div>
-    <h2 class="section-title">10. Dead Offers & Outdated Documents</h2>
+    <h2 class="section-title">10. Dead Offers &amp; Outdated Documents</h2>
 
-    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:0 0 10px;">Dead Offers</h3>
+    <h3 class="subsection-title">Dead Offers</h3>
     <div class="dead-list">
       <div class="dead-item"><span class="dead-strike">Gold-for-Silver-price as default Founding Member perk</span><span class="dead-reason">Last-ditch only</span></div>
       <div class="dead-item"><span class="dead-strike">Unlimited AI Sub-Pages / Sub-page add-on ($150+gst)</span><span class="dead-reason">Removed entirely</span></div>
       <div class="dead-item"><span class="dead-strike">Bronze as $99 lifetime product</span><span class="dead-reason">Internal only</span></div>
-      <div class="dead-item"><span class="dead-strike">Silver as one-off lifetime cost</span><span class="dead-reason">Annual</span></div>
+      <div class="dead-item"><span class="dead-strike">Silver as a one-off lifetime cost</span><span class="dead-reason">Annual</span></div>
       <div class="dead-item"><span class="dead-strike">"Founding Member" package concept</span><span class="dead-reason">Dead</span></div>
-      <div class="dead-item"><span class="dead-strike">Offers bank / situational incentives</span><span class="dead-reason">Deferred indefinitely</span></div>
-      <div class="dead-item"><span class="dead-strike">Glenn's Glass & The Phoenix as examples</span><span class="dead-reason">No longer needed</span></div>
+      <div class="dead-item"><span class="dead-strike">Offers bank / situational incentives</span><span class="dead-reason">Deferred</span></div>
+      <div class="dead-item"><span class="dead-strike">Glenn's Glass &amp; The Phoenix as examples</span><span class="dead-reason">No longer needed</span></div>
     </div>
 
-    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:20px 0 10px;">Outdated Documents (do not reference)</h3>
+    <h3 class="subsection-title">Outdated Documents (do not reference)</h3>
     <table class="data-table">
       <thead><tr><th>File</th><th>Why</th></tr></thead>
       <tbody>
@@ -454,9 +544,9 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
   <!-- 11. GREY AREAS -->
   <div class="section" id="grey">
     <div class="section-label">Needs decisions</div>
-    <h2 class="section-title">11. Grey Areas & TBCs</h2>
+    <h2 class="section-title">11. Grey Areas &amp; TBCs</h2>
 
-    <div class="grey"><div class="grey-title">Category hero gradients</div><div class="grey-body">Three conflicting colour sets across homepage, listing templates, and styles.css. Which set wins?</div></div>
+    <div class="grey resolved"><div class="grey-title">&#10003; Category hero gradients -- RESOLVED April 13, 2026</div><div class="grey-body">Five main category page hero gradients and accent colours are now locked. See Section 2.4 and <code>assets/css/styles.css</code>. Homepage section gradients and listing template gradients remain separate -- reconciliation still pending.</div></div>
     <div class="grey"><div class="grey-title">Homepage nav labels</div><div class="grey-body">Homepage uses full labels, nav.js uses locked short labels. Does homepage need updating?</div></div>
     <div class="grey"><div class="grey-title">Repo folder restructure</div><div class="grey-body">Move root pages into folder? Define articles vs community boundary? Major link-breaking change.</div></div>
     <div class="grey"><div class="grey-title">Business model</div><div class="grey-body">Revenue share with Carwyn (50/50) vs Jay operates independently. Decision pending.</div></div>
@@ -486,7 +576,7 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
     <div class="task-group">
       <div class="task-group-head tg-high">High Priority -- Pre-Launch</div>
       <div class="task-items">
-        <div class="task">Update <code>styles.css</code>, <code>nav-footer-snippet.html</code>, <code>README.md</code></div>
+        <div class="task"><code>nav-footer-snippet.html</code>: nested folder paths, short labels, articles/ &gt; community/, add legal.html</div>
         <div class="task">Fix listing template contact pattern (ci-text flex)</div>
         <div class="task">Site-wide +GST to +gst and articles/ to community/ fixes</div>
         <div class="task">Design system audit + pricing audit across all pages</div>
@@ -504,9 +594,9 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
       <div class="task-group-head tg-medium">Medium -- Post-Launch</div>
       <div class="task-items">
         <div class="task">nav.js rollout + sales pages rebuild + category glow-up</div>
-        <div class="task">Rename entertainment > things-to-do (fix all links)</div>
+        <div class="task">Rename entertainment &gt; things-to-do (fix all links)</div>
         <div class="task">Build search management system, menu image system, listing portal</div>
-        <div class="task">Self-upgrade flow (Silver > Gold, add-ons via Stripe)</div>
+        <div class="task">Self-upgrade flow (Silver &gt; Gold, add-ons via Stripe)</div>
         <div class="task">Brevo sequences + Google Analytics/Search Console</div>
         <div class="task">CRM dashboard rebuild + GitHub Actions sitemap</div>
       </div>
@@ -534,13 +624,15 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
         <div class="task done">lawn-mowing-papamoa.html deleted</div>
         <div class="task done">404.html built (gremlin game + leaderboard)</div>
         <div class="task done">Carwyn demo completed</div>
+        <div class="task done">All 5 main category pages rebuilt (Stay, Do, Eat, Services, Shop) -- standardised layout, sidebar, schema, FAQ, search grid</div>
+        <div class="task done">Category hero gradients &amp; accent colours locked -- styles.css updated, Section 2.4 added to Project Master</div>
       </div>
     </div>
 
   </div>
 
   <div class="doc-footer">
-    Papamoa.info -- Plain Black Creative -- Project Master v1 -- Consolidated April 9, 2026<br>
+    Papamoa.info &mdash; Plain Black Creative &mdash; Project Master v2 &mdash; Updated April 13, 2026<br>
     This document replaces all previous memory files, session exports, and project briefs.
   </div>
 
