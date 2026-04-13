@@ -419,45 +419,25 @@
 <!-- HERO -->
 <div class="page-hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">&#127829; Food &amp; Drink &middot; P&#257;p&#257;moa, Bay of Plenty</div>
-    <h1>Where to Eat<br><em>in Pāpāmoa</em></h1>
+    <div class="hero-eyebrow">&#127829; Food &amp; Drink &middot; P&#257;p&#257;moa</div>
+    <h1>Where to Eat in P&#257;p&#257;moa</h1>
     <p class="hero-sub">Every place to eat and drink in P&#257;p&#257;moa &mdash; from beachside restaurants and specialty cafes to gourmet pizza, Indian curry houses, sushi, fish &amp; chips and local bars.</p>
-    <div class="hero-chips">
-      <a href="#cafes" class="hchip">&#9749; Cafes &amp; brunch</a>
-      <a href="#restaurants" class="hchip">&#127829; Restaurants</a>
-      <a href="#bars" class="hchip">&#127867; Bars &amp; licensed</a>
-      <a href="#takeaways" class="hchip">&#127866; Takeaway &amp; delivery</a>
-      <a href="#burgers" class="hchip">&#127828; Burgers</a>
-      <a href="#indian" class="hchip">&#127858; Indian &amp; Asian</a>
-      <a href="#function-venues" class="hchip">&#127881; Function venues</a>
-      <a href="#supermarkets" class="hchip">&#128666; Supermarkets</a>
-    </div>
+
   </div>
 </div>
 
-<!-- CHIP BAR -->
+<!-- FILTER CHIPS BAR -->
 <div class="subcat-bar">
   <div class="subcat-inner">
-    <a href="#all" class="chip active">All food &amp; drink</a>
-    <a href="#restaurants" class="chip">Restaurants</a>
-    <a href="#cafes" class="chip">Cafes</a>
-    <a href="#bars" class="chip">Bars &amp; Pubs</a>
-    <a href="#pizza" class="chip">Pizza</a>
-    <a href="#burgers" class="chip">Burgers</a>
-    <a href="#indian" class="chip">Indian</a>
-    <a href="#thai" class="chip">Thai</a>
-    <a href="#japanese" class="chip">Japanese</a>
-    <a href="#vietnamese" class="chip">Vietnamese</a>
-    <a href="#turkish" class="chip">Turkish</a>
-    <a href="#mexican" class="chip">Mexican</a>
-    <a href="#italian" class="chip">Italian</a>
-    <a href="#fish-chips" class="chip">Fish &amp; Chips</a>
-    <a href="#bakeries" class="chip">Bakeries</a>
-    <a href="#vegan" class="chip">Vegan</a>
-    <a href="#takeaways" class="chip">Takeaways</a>
-    <a href="#fast-food" class="chip">Fast Food</a>
-    <a href="#function-venues" class="chip">Function Venues</a>
-    <a href="#supermarkets" class="chip">Supermarkets</a>
+    <button class="chip active" onclick="foodFilter(this,'all')">All food &amp; drink</button>
+    <button class="chip" onclick="foodFilter(this,'sitdown')">Restaurants</button>
+    <button class="chip" onclick="foodFilter(this,'cafe')">Cafes &amp; Brunch</button>
+    <button class="chip" onclick="foodFilter(this,'bar')">Bars &amp; Pubs</button>
+    <button class="chip" onclick="foodFilter(this,'pizza')">Pizza</button>
+    <button class="chip" onclick="foodFilter(this,'burger')">Burgers</button>
+    <button class="chip" onclick="foodFilter(this,'asian')">Indian &amp; Asian</button>
+    <button class="chip" onclick="foodFilter(this,'takeaway')">Takeaways</button>
+    <button class="chip" onclick="foodFilter(this,'other')">More</button>
   </div>
 </div>
 
@@ -471,61 +451,61 @@
       </div>
 
       <div class="subcat-grid" id="food-grid">
-        <a href="/papamoa-previews/categories/food-drink/restaurants-papamoa.html" class="subcat-card" data-tags="restaurant dining sit down dine in dinner lunch beachside casual">
+        <a href="/papamoa-previews/categories/food-drink/restaurants-papamoa.html" class="subcat-card" data-cat="sitdown" data-tags="restaurant dining sit down dine in dinner lunch beachside casual">
           <span class="sc-icon">&#127829;</span><div class="sc-body"><div class="sc-title">Restaurants</div><div class="sc-desc">Sit-down dining, from casual to beachside</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/cafe-papamoa.html" class="subcat-card" data-tags="cafe coffee brunch breakfast espresso flat white specialty neighbourhood">
+        <a href="/papamoa-previews/categories/food-drink/cafe-papamoa.html" class="subcat-card" data-cat="cafe" data-tags="cafe coffee brunch breakfast espresso flat white specialty neighbourhood">
           <span class="sc-icon">&#9749;</span><div class="sc-body"><div class="sc-title">Cafes</div><div class="sc-desc">Specialty coffee, brunch &amp; neighbourhood cafes</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/bar-papamoa.html" class="subcat-card" data-tags="bar pub drinks cocktails beer wine licensed sports evening after work">
+        <a href="/papamoa-previews/categories/food-drink/bar-papamoa.html" class="subcat-card" data-cat="bar" data-tags="bar pub drinks cocktails beer wine licensed sports evening after work">
           <span class="sc-icon">&#127867;</span><div class="sc-body"><div class="sc-title">Bars &amp; Pubs</div><div class="sc-desc">Local bars, sports pubs &amp; evening drinks</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/bakery-papamoa.html" class="subcat-card" data-tags="bakery bread pies pastries cakes baking fresh morning loaf rolls">
+        <a href="/papamoa-previews/categories/food-drink/bakery-papamoa.html" class="subcat-card" data-cat="cafe" data-tags="bakery bread pies pastries cakes baking fresh morning loaf rolls">
           <span class="sc-icon">&#127838;</span><div class="sc-body"><div class="sc-title">Bakeries</div><div class="sc-desc">Fresh bread, pies, pastries &amp; cakes</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/fish-and-chips-papamoa.html" class="subcat-card" data-tags="fish chips chippy takeaway seafood battered fried snapper cod">
+        <a href="/papamoa-previews/categories/food-drink/fish-and-chips-papamoa.html" class="subcat-card" data-cat="takeaway" data-tags="fish chips chippy takeaway seafood battered fried snapper cod">
           <span class="sc-icon">&#127866;</span><div class="sc-body"><div class="sc-title">Fish &amp; Chips</div><div class="sc-desc">Chippies, burgers &amp; seafood snacks</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/indian-restaurant-papamoa.html" class="subcat-card" data-tags="indian curry tandoor biryani naan korma masala south asian spice byo">
+        <a href="/papamoa-previews/categories/food-drink/indian-restaurant-papamoa.html" class="subcat-card" data-cat="asian" data-tags="indian curry tandoor biryani naan korma masala south asian spice byo">
           <span class="sc-icon">&#127858;</span><div class="sc-body"><div class="sc-title">Indian</div><div class="sc-desc">Curry houses, tandoor &amp; South Asian food</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/sushi-papamoa.html" class="subcat-card" data-tags="sushi japanese sashimi nigiri train rice rolls seaweed">
+        <a href="/papamoa-previews/categories/food-drink/sushi-papamoa.html" class="subcat-card" data-cat="asian" data-tags="sushi japanese sashimi nigiri train rice rolls seaweed">
           <span class="sc-icon">&#127843;</span><div class="sc-body"><div class="sc-title">Sushi</div><div class="sc-desc">Sushi trains, Japanese &amp; sushi takeaway</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/turkish-restaurant-papamoa.html" class="subcat-card" data-tags="turkish kebab doner mediterranean middle eastern falafel">
+        <a href="/papamoa-previews/categories/food-drink/turkish-restaurant-papamoa.html" class="subcat-card" data-cat="other" data-tags="turkish kebab doner mediterranean middle eastern falafel">
           <span class="sc-icon">&#129367;</span><div class="sc-body"><div class="sc-title">Turkish Food</div><div class="sc-desc">Kebabs, d&#246;ner &amp; Mediterranean dining</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/burgers-papamoa.html" class="subcat-card" data-tags="burger burgers gourmet smash patty beef chicken bun fries">
+        <a href="/papamoa-previews/categories/food-drink/burgers-papamoa.html" class="subcat-card" data-cat="burger" data-tags="burger burgers gourmet smash patty beef chicken bun fries">
           <span class="sc-icon">&#127828;</span><div class="sc-body"><div class="sc-title">Burgers</div><div class="sc-desc">Gourmet burgers, smash &amp; burger joints</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/thai-restaurant-papamoa.html" class="subcat-card" data-tags="thai thailand pad thai curry green red massaman noodles byo licensed">
+        <a href="/papamoa-previews/categories/food-drink/thai-restaurant-papamoa.html" class="subcat-card" data-cat="asian" data-tags="thai thailand pad thai curry green red massaman noodles byo licensed">
           <span class="sc-icon">&#127836;</span><div class="sc-body"><div class="sc-title">Thai Food</div><div class="sc-desc">Thai restaurants &amp; takeaways</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/japanese-restaurant-papamoa.html" class="subcat-card" data-tags="japanese japan ramen sushi noodles teriyaki tempura bento rice">
+        <a href="/papamoa-previews/categories/food-drink/japanese-restaurant-papamoa.html" class="subcat-card" data-cat="asian" data-tags="japanese japan ramen sushi noodles teriyaki tempura bento rice">
           <span class="sc-icon">&#127843;</span><div class="sc-body"><div class="sc-title">Japanese</div><div class="sc-desc">Ramen, Japanese dining &amp; sushi trains</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/vietnamese-restaurant-papamoa.html" class="subcat-card" data-tags="vietnamese vietnam southeast asian pho banh mi noodles rice paper rolls lantern">
+        <a href="/papamoa-previews/categories/food-drink/vietnamese-restaurant-papamoa.html" class="subcat-card" data-cat="asian" data-tags="vietnamese vietnam southeast asian pho banh mi noodles rice paper rolls lantern">
           <span class="sc-icon">&#127839;</span><div class="sc-body"><div class="sc-title">Vietnamese</div><div class="sc-desc">Southeast Asian &amp; Vietnamese dining</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/mexican-restaurant-papamoa.html" class="subcat-card" data-tags="mexican tacos burritos nachos latin tequila salsa guacamole rubys pablo">
+        <a href="/papamoa-previews/categories/food-drink/mexican-restaurant-papamoa.html" class="subcat-card" data-cat="other" data-tags="mexican tacos burritos nachos latin tequila salsa guacamole rubys pablo">
           <span class="sc-icon">&#127790;</span><div class="sc-body"><div class="sc-title">Mexican Food</div><div class="sc-desc">Tacos, burritos &amp; Latin dining</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/italian-restaurant-papamoa.html" class="subcat-card" data-tags="italian italy pasta pizza neapolitan basilico risotto tiramisu">
+        <a href="/papamoa-previews/categories/food-drink/italian-restaurant-papamoa.html" class="subcat-card" data-cat="pizza" data-tags="italian italy pasta pizza neapolitan basilico risotto tiramisu">
           <span class="sc-icon">&#127837;</span><div class="sc-body"><div class="sc-title">Italian</div><div class="sc-desc">Pasta, pizza &amp; Italian restaurants</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/vegan-papamoa.html" class="subcat-card" data-tags="vegan plant based vegetarian gluten free dairy free meat free">
+        <a href="/papamoa-previews/categories/food-drink/vegan-papamoa.html" class="subcat-card" data-cat="other" data-tags="vegan plant based vegetarian gluten free dairy free meat free">
           <span class="sc-icon">&#127807;</span><div class="sc-body"><div class="sc-title">Vegan &amp; Plant-Based</div><div class="sc-desc">Restaurants with genuine vegan menus</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/takeaways-papamoa.html" class="subcat-card" data-tags="takeaway takeout delivery order online pickup collection quick food">
+        <a href="/papamoa-previews/categories/food-drink/takeaways-papamoa.html" class="subcat-card" data-cat="takeaway" data-tags="takeaway takeout delivery order online pickup collection quick food">
           <span class="sc-icon">&#127860;</span><div class="sc-body"><div class="sc-title">Takeaways</div><div class="sc-desc">Every takeaway option in P&#257;p&#257;moa</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/fast-food-papamoa.html" class="subcat-card" data-tags="fast food mcdonalds kfc drive thru maccas burger king quick service">
+        <a href="/papamoa-previews/categories/food-drink/fast-food-papamoa.html" class="subcat-card" data-cat="takeaway" data-tags="fast food mcdonalds kfc drive thru maccas burger king quick service">
           <span class="sc-icon">&#127828;</span><div class="sc-body"><div class="sc-title">Fast Food &amp; Drive-Thru</div><div class="sc-desc">McDonald&rsquo;s, KFC &amp; drive-thru options</div></div>
         </a>
-        <a href="/papamoa-previews/categories/food-drink/function-venues-papamoa.html" class="subcat-card" data-tags="function venue event group booking private dining party celebration corporate">
+        <a href="/papamoa-previews/categories/food-drink/function-venues-papamoa.html" class="subcat-card" data-cat="other" data-tags="function venue event group booking private dining party celebration corporate">
           <span class="sc-icon">&#127881;</span><div class="sc-body"><div class="sc-title">Function Venues</div><div class="sc-desc">Private dining, events &amp; group bookings</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/supermarkets-papamoa.html" class="subcat-card" data-tags="supermarket grocery food shopping new world woolworths countdown pak n save sands plaza">
+        <a href="/papamoa-previews/categories/shops/supermarkets-papamoa.html" class="subcat-card" data-cat="other" data-tags="supermarket grocery food shopping new world woolworths countdown pak n save sands plaza">
           <span class="sc-icon">&#128666;</span><div class="sc-body"><div class="sc-title">Supermarkets</div><div class="sc-desc">Grocery stores &amp; food retailers</div></div>
         </a>
       </div>
@@ -1051,6 +1031,23 @@
 /* ── See More / Show Less ── */
 var FOOD_ROWS = 2;
 var foodMaxRow = FOOD_ROWS;
+
+/* ── Category Filter ── */
+function foodFilter(btn, cat) {
+  document.querySelectorAll('.subcat-bar .chip').forEach(function(c) { c.classList.remove('active'); });
+  btn.classList.add('active');
+  var cards = document.querySelectorAll('#food-grid .subcat-card');
+  cards.forEach(function(c) {
+    if (cat === 'all') { c.classList.remove('hidden'); }
+    else { c.classList.toggle('hidden', c.getAttribute('data-cat') !== cat); }
+    c.classList.remove('row-hidden');
+  });
+  var search = document.querySelector('.cat-search-input');
+  if (search) search.value = '';
+  var empty = document.getElementById('food-empty');
+  if (empty) empty.classList.remove('visible');
+  foodInitRows();
+}
 
 function foodCalcGrid() {
   var grid = document.getElementById('food-grid');
