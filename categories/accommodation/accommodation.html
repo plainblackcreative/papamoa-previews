@@ -896,4 +896,114 @@ window.addEventListener('resize', function() { accomCalcGrid(); accomApplyRows()
 </script>
 
 <footer class="site-footer">
-  <a href="/papamoa-previews/homepage.html">Papamoa.info</a> &mdash; The local directory for Pāpāmoa, Bay of Plenty, New Zealand. Accommodation information sourced from individual property websites and publicly available reviews. Always confirm avai
+  <a href="/papamoa-previews/homepage.html">Papamoa.info</a> &mdash; The local directory for Pāpāmoa, Bay of Plenty, New Zealand. Accommodation information sourced from individual property websites and publicly available reviews. Always confirm availability, pricing and booking conditions directly with the property.
+</footer>
+
+<script>
+/* ── See More / Show Less ── */
+var ACCOM_ROWS = 2;
+var accomMaxRow = ACCOM_ROWS;
+ 
+function accomCalcGrid() {
+  var grid = document.getElementById('accom-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card');
+  if (!cards.length) return;
+  cards.forEach(function(c) { c.classList.remove('row-hidden'); });
+  var firstTop = cards[0].getBoundingClientRect().top;
+  var cols = 0;
+  for (var i = 0; i < cards.length; i++) {
+    if (cards[i].getBoundingClientRect().top !== firstTop && cols === 0) { cols = i; break; }
+  }
+  if (!cols) cols = cards.length;
+  cards.forEach(function(c, idx) {
+    c.dataset.row = Math.floor(idx / cols) + 1;
+  });
+  return cols;
+}
+ 
+function accomApplyRows() {
+  var grid = document.getElementById('accom-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card');
+  var maxRow = 0;
+  cards.forEach(function(c) {
+    var r = parseInt(c.dataset.row || 0);
+    if (r > maxRow) maxRow = r;
+    c.classList.toggle('row-hidden', r > accomMaxRow);
+  });
+  var wrap = document.getElementById('accom-see-more');
+  if (!wrap) return;
+  if (maxRow <= ACCOM_ROWS) {
+    wrap.style.display = 'none';
+  } else {
+    wrap.style.display = '';
+    var isAll = accomMaxRow >= maxRow;
+    wrap.querySelector('.see-more-btn').textContent = isAll ? 'Show less' : 'See more types';
+    wrap.querySelector('.see-more-btn').onclick = isAll ? accomShowLess : accomSeeMore;
+  }
+}
+ 
+function accomSeeMore() {
+  accomMaxRow += ACCOM_ROWS;
+  accomApplyRows();
+}
+ 
+function accomShowLess() {
+  accomMaxRow = ACCOM_ROWS;
+  accomApplyRows();
+  var grid = document.getElementById('accom-grid');
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+ 
+function accomInitRows() {
+  accomMaxRow = ACCOM_ROWS;
+  document.querySelectorAll('#accom-grid .subcat-card').forEach(function(c) { c.classList.remove('row-hidden'); });
+  requestAnimationFrame(function() {
+    accomCalcGrid();
+    accomApplyRows();
+  });
+}
+ 
+/* ── Filter Chips (subcat bar) ── */
+function filterChip(btn, cat) {
+  document.querySelectorAll('.subcat-bar .chip').forEach(function(c) { c.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.listing-card, .placeholder-card').forEach(function(card) {
+    if (cat === 'all') { card.style.display = ''; return; }
+    var cardCat = card.getAttribute('data-cat') || '';
+    card.style.display = (cardCat === cat) ? '' : 'none';
+  });
+}
+ 
+/* ── Drawer ── */
+function pnfDrawerOpen() {
+  document.getElementById('pnf-drawer').classList.add('open');
+  document.getElementById('pnf-drawer-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function pnfDrawerClose() {
+  document.getElementById('pnf-drawer').classList.remove('open');
+  document.getElementById('pnf-drawer-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDrawerClose(); });
+ 
+/* ── Path rewrite ── */
+(function() {
+  var base = '/papamoa-previews';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:') || href.startsWith('#')) return;
+    if (href.startsWith('/') && !href.startsWith(base)) { e.preventDefault(); window.location.href = base + href; }
+  });
+})();
+ 
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', accomInitRows);
+window.addEventListener('resize', function() { accomCalcGrid(); accomApplyRows(); });
+</script>
+</body>
+</html>
