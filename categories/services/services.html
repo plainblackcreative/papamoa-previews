@@ -199,40 +199,32 @@ a{color:var(--blue);text-decoration:none}
 .list-cta-svc a{display:inline-block;background:var(--lime);color:var(--navy);font-weight:800;font-size:.8rem;padding:9px 16px;border-radius:6px;text-decoration:none}
 .list-cta-svc a:hover{background:#6DB03A}
 
-/* SEARCH RESULTS */
-.svc-search-results{display:none;margin-bottom:32px}
-.svc-search-results.visible{display:block}
-.svc-search-results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.svc-no-results{padding:20px 0;text-align:center;font-size:.84rem;color:var(--muted);display:none}
-.svc-no-results.visible{display:block}
-
-/* CATEGORY GROUP */
-.cat-group{margin-bottom:48px}
-.cat-group-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--border)}
-.cat-group-icon{font-size:1.5rem;flex-shrink:0}
-.cat-group-title{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--navy)}
-.cat-group-count{font-size:.72rem;font-weight:700;color:var(--muted);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:10px;margin-left:auto}
+/* SECTION */
+.section { margin-bottom: 36px; }
+.section-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
 
 /* SUBCAT GRID */
-.subcat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.subcat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 10px; margin-bottom: 6px; }
+.subcat-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 14px 13px; display: flex; align-items: center; gap: 11px; text-decoration: none; color: inherit; transition: all 0.15s; }
+.subcat-card:hover { border-color: var(--lime); box-shadow: 0 3px 10px rgba(125,193,67,0.1); transform: translateY(-1px); }
+.subcat-card.hidden { display: none; }
+.subcat-card.row-hidden { display: none; }
+.sc-icon { font-size: 1.35rem; flex-shrink: 0; }
+.sc-body { min-width: 0; }
+.sc-title { font-weight: 700; font-size: 0.86rem; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sc-desc { font-size: 0.71rem; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+.svc-empty { display: none; padding: 20px 0; text-align: center; font-size: 0.84rem; color: var(--muted); }
+.svc-empty.visible { display: block; }
 
-/* SUBCAT CARD */
-.subcat-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;gap:12px;align-items:flex-start;text-decoration:none;color:inherit;transition:border-color .15s,box-shadow .15s,transform .15s;position:relative}
-.subcat-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(58,171,222,.1);transform:translateY(-1px)}
-.subcat-card.has-listing{border-color:#BDD0D8}
-.subcat-card.has-listing:hover{border-color:var(--ocean)}
-.subcat-card.sc-hidden{display:none}
-.subcat-card.row-hidden{display:none}
-.sc-icon{font-size:1.4rem;flex-shrink:0;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--bg)}
-.sc-body{flex:1;min-width:0}
-.sc-title{font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.sc-sub{font-size:.73rem;color:var(--muted);line-height:1.45;margin-bottom:6px}
-.sc-badges{display:flex;gap:4px;flex-wrap:wrap}
-.sc-badge{font-size:.6rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:3px}
-.badge-gold{background:var(--gold-bg);color:var(--gold-alt);border:1px solid var(--gold-border)}
-.badge-silver{background:var(--silver-bg);color:var(--silver)}
-.badge-open{background:var(--green-bg);color:var(--green)}
-.badge-new{background:rgba(58,171,222,.1);color:#0A6090;border:1px solid rgba(58,171,222,.25)}
+/* SPOTLIGHT AVAILABLE */
+.spotlight-avail { background: var(--white); border: 1.5px dashed var(--dune); border-radius: 10px; padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start; margin-bottom: 10px; transition: border-color 0.15s; }
+.spotlight-avail:hover { border-color: var(--blue); border-style: solid; }
+.sa-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+.sa-body { flex: 1; min-width: 0; }
+.sa-body h4 { font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.sa-body p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 8px; }
+.sa-btn { display: inline-block; font-size: 0.75rem; font-weight: 700; color: var(--blue); background: rgba(58,171,222,0.08); border: 1px solid rgba(58,171,222,0.2); padding: 5px 12px; border-radius: 5px; text-decoration: none; font-family: var(--font-body); }
+.sa-btn:hover { background: rgba(58,171,222,0.15); }
 
 /* SEE MORE */
 .see-more-wrap{text-align:center;margin-top:14px}
@@ -242,8 +234,7 @@ a{color:var(--blue);text-decoration:none}
 /* FAQ */
 .faq-section{margin-top:48px;padding-top:36px;border-top:1px solid var(--border)}
 .faq-section h2{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:20px}
-.faq-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:720px){.faq-list{grid-template-columns:1fr}}
+.faq-list{display:flex;flex-direction:column;gap:8px}
 .faq-item{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden}
 .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;cursor:pointer;font-weight:600;font-size:.87rem;color:var(--navy);background:none;border:none;font-family:var(--font-body);text-align:left}
 .faq-q:hover{background:rgba(125,193,67,.04)}
@@ -393,373 +384,323 @@ a{color:var(--blue);text-decoration:none}
       <span class="fchip" onclick="filterGroup('family',this)">Family</span>
     </div>
 
-  <!-- SEARCH RESULTS (shown when searching) -->
-  <div class="svc-search-results" id="svc-search-results">
-    <div class="svc-search-results-grid" id="svc-results-grid"></div>
-    <div class="svc-no-results" id="svc-no-results">No results found &mdash; try a different keyword or <a href="#" onclick="clearSvcSearch()">browse all categories</a>.</div>
-  </div>
+    <!-- FLAT SUBCAT GRID -->
+    <div class="subcat-grid" id="svc-grid">
 
-  <!-- ══ TRADES & CONSTRUCTION ══ -->
-  <div class="cat-group" data-group="trades">
-    <div class="cat-group-head">
-      <span class="cat-group-icon">&#128736;</span>
-      <span class="cat-group-title">Trades &amp; Construction</span>
-      <span class="cat-group-count">12 categories</span>
-    </div>
-    <div class="subcat-grid">
-      <a href="/papamoa-previews/categories/services/plumber-papamoa.html" class="subcat-card has-listing" data-tags="plumber plumbing gasfitter drainage hot water pipes leak blocked drains">
-        <div class="sc-icon">&#128688;</div>
-        <div class="sc-body"><div class="sc-title">Plumber &amp; Gasfitter</div><div class="sc-sub">Plumbing, drainage, gas fitting, hot water systems</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <!-- TRADES -->
+      <a href="/papamoa-previews/categories/services/plumber-papamoa.html" class="subcat-card" data-cat="trades" data-tags="plumber plumbing gasfitter drainage hot water pipes leak">
+        <span class="sc-icon">&#128688;</span><div class="sc-body"><div class="sc-title">Plumber &amp; Gasfitter</div><div class="sc-desc">Plumbing, drainage, gas fitting</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/electrician-papamoa.html" class="subcat-card has-listing" data-tags="electrician electrical wiring ev charger solar switchboard power fault">
-        <div class="sc-icon">&#9889;</div>
-        <div class="sc-body"><div class="sc-title">Electrician</div><div class="sc-sub">Residential wiring, EV chargers, solar, switchboards</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/electrician-papamoa.html" class="subcat-card" data-cat="trades" data-tags="electrician electrical wiring ev charger solar switchboard">
+        <span class="sc-icon">&#9889;</span><div class="sc-body"><div class="sc-title">Electrician</div><div class="sc-desc">Wiring, EV chargers, solar</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/builders-papamoa.html" class="subcat-card has-listing" data-tags="builder building construction renovation extension lbp new build">
-        <div class="sc-icon">&#127968;</div>
-        <div class="sc-body"><div class="sc-title">Builders</div><div class="sc-sub">New builds, renovations, extensions, LBP licensed</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/builders-papamoa.html" class="subcat-card" data-cat="trades" data-tags="builder building construction renovation extension lbp new build">
+        <span class="sc-icon">&#127968;</span><div class="sc-body"><div class="sc-title">Builders</div><div class="sc-desc">New builds, renovations, LBP</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/painter-papamoa.html" class="subcat-card has-listing" data-tags="painter painting decorator interior exterior new build coastal property">
-        <div class="sc-icon">&#128396;</div>
-        <div class="sc-body"><div class="sc-title">Painters &amp; Decorators</div><div class="sc-sub">Interior, exterior, new builds, coastal property</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/painter-papamoa.html" class="subcat-card" data-cat="trades" data-tags="painter painting decorator interior exterior coastal">
+        <span class="sc-icon">&#128396;</span><div class="sc-body"><div class="sc-title">Painters &amp; Decorators</div><div class="sc-desc">Interior, exterior, new builds</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/roofing-papamoa.html" class="subcat-card" data-tags="roofing roof repair re-roofing new build">
-        <div class="sc-icon">&#127968;</div>
-        <div class="sc-body"><div class="sc-title">Roofing</div><div class="sc-sub">Roof repairs, re-roofing, new build roofing</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/roofing-papamoa.html" class="subcat-card" data-cat="trades" data-tags="roofing roof repair re-roofing new build">
+        <span class="sc-icon">&#127968;</span><div class="sc-body"><div class="sc-title">Roofing</div><div class="sc-desc">Repairs, re-roofing, new builds</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/fencing-papamoa.html" class="subcat-card has-listing" data-tags="fencing fence timber steel pool compliance">
-        <div class="sc-icon">&#129717;</div>
-        <div class="sc-body"><div class="sc-title">Fencing</div><div class="sc-sub">Timber, steel, pool fencing, compliance certification</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/fencing-papamoa.html" class="subcat-card" data-cat="trades" data-tags="fencing fence timber steel pool compliance">
+        <span class="sc-icon">&#129717;</span><div class="sc-body"><div class="sc-title">Fencing</div><div class="sc-desc">Timber, steel, pool fencing</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/architects-papamoa.html" class="subcat-card has-listing" data-tags="architect architectural design consent plans coastal homes designer">
-        <div class="sc-icon">&#128196;</div>
-        <div class="sc-body"><div class="sc-title">Architects &amp; Designers</div><div class="sc-sub">Architectural design, consent plans, coastal homes</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/architects-papamoa.html" class="subcat-card" data-cat="trades" data-tags="architect architectural design consent plans coastal homes">
+        <span class="sc-icon">&#128196;</span><div class="sc-body"><div class="sc-title">Architects &amp; Designers</div><div class="sc-desc">Design, consent plans</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/kitchens-bathrooms-papamoa.html" class="subcat-card has-listing" data-tags="kitchen bathroom laundry cabinetmaker renovation fit out design">
-        <div class="sc-icon">&#127981;</div>
-        <div class="sc-body"><div class="sc-title">Kitchens &amp; Bathrooms</div><div class="sc-sub">Design and fit-out, cabinetmaking, laundries</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/kitchens-bathrooms-papamoa.html" class="subcat-card" data-cat="trades" data-tags="kitchen bathroom laundry cabinetmaker renovation fit out">
+        <span class="sc-icon">&#127981;</span><div class="sc-body"><div class="sc-title">Kitchens &amp; Bathrooms</div><div class="sc-desc">Design, fit-out, cabinetmaking</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/earthmoving-papamoa.html" class="subcat-card" data-tags="earthmoving excavation concrete civil engineering subdivision digger">
-        <div class="sc-icon">&#128663;</div>
-        <div class="sc-body"><div class="sc-title">Earthmoving &amp; Civil</div><div class="sc-sub">Excavation, concrete, civil engineering, subdivisions</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/earthmoving-papamoa.html" class="subcat-card" data-cat="trades" data-tags="earthmoving excavation concrete civil engineering subdivision digger">
+        <span class="sc-icon">&#128663;</span><div class="sc-body"><div class="sc-title">Earthmoving &amp; Civil</div><div class="sc-desc">Excavation, concrete, civil</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/glazing-papamoa.html" class="subcat-card" data-tags="glazing glass window repair windscreen installation">
-        <div class="sc-icon">&#128683;</div>
-        <div class="sc-body"><div class="sc-title">Glass &amp; Glazing</div><div class="sc-sub">Window repair, windscreens, glass installation</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/glazing-papamoa.html" class="subcat-card" data-cat="trades" data-tags="glazing glass window repair windscreen installation">
+        <span class="sc-icon">&#128683;</span><div class="sc-body"><div class="sc-title">Glass &amp; Glazing</div><div class="sc-desc">Window repair, windscreens</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/scaffolding-papamoa.html" class="subcat-card" data-tags="scaffolding scaffold hire residential commercial">
-        <div class="sc-icon">&#128296;</div>
-        <div class="sc-body"><div class="sc-title">Scaffolding</div><div class="sc-sub">Residential and commercial scaffolding hire</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/scaffolding-papamoa.html" class="subcat-card" data-cat="trades" data-tags="scaffolding scaffold hire residential commercial">
+        <span class="sc-icon">&#128296;</span><div class="sc-body"><div class="sc-title">Scaffolding</div><div class="sc-desc">Residential &amp; commercial hire</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/solar-papamoa.html" class="subcat-card" data-tags="solar energy panels battery storage grid tied installation">
-        <div class="sc-icon">&#9728;</div>
-        <div class="sc-body"><div class="sc-title">Solar Energy</div><div class="sc-sub">Solar panel installation, battery storage, grid-tied</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/solar-papamoa.html" class="subcat-card" data-cat="trades" data-tags="solar energy panels battery storage grid installation">
+        <span class="sc-icon">&#9728;</span><div class="sc-body"><div class="sc-title">Solar Energy</div><div class="sc-desc">Panels, battery storage</div></div>
       </a>
-    </div>
-  </div>
 
-  <!-- ══ HEALTH & MEDICAL ══ -->
-  <div class="cat-group" data-group="health">
-    <div class="cat-group-head">
-      <span class="cat-group-icon">&#127973;</span>
-      <span class="cat-group-title">Health &amp; Medical</span>
-      <span class="cat-group-count">10 categories</span>
-    </div>
-    <div class="subcat-grid">
-      <a href="/papamoa-previews/categories/services/health-papamoa.html" class="subcat-card has-listing" data-tags="gp doctor medical centre general practice enrolled casual patient">
-        <div class="sc-icon">&#127973;</div>
-        <div class="sc-body"><div class="sc-title">GPs &amp; Medical Centres</div><div class="sc-sub">General practice, enrolled &amp; casual patients</div><div class="sc-badges"><span class="sc-badge badge-silver">2 listed</span></div></div>
+      <!-- HEALTH -->
+      <a href="/papamoa-previews/categories/services/health-papamoa.html" class="subcat-card" data-cat="health" data-tags="gp doctor medical centre general practice enrolled casual patient">
+        <span class="sc-icon">&#127973;</span><div class="sc-body"><div class="sc-title">GPs &amp; Medical Centres</div><div class="sc-desc">General practice, enrolled &amp; casual</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/dental-papamoa.html" class="subcat-card has-listing" data-tags="dentist dental teeth orthodontist implants cosmetic tara road">
-        <div class="sc-icon">&#129463;</div>
-        <div class="sc-body"><div class="sc-title">Dental</div><div class="sc-sub">General dentistry, cosmetic, orthodontics, implants</div><div class="sc-badges"><span class="sc-badge badge-gold">&#11088; Tara Road Dental</span></div></div>
+      <a href="/papamoa-previews/categories/services/dental-papamoa.html" class="subcat-card" data-cat="health" data-tags="dentist dental teeth orthodontist implants cosmetic tara road">
+        <span class="sc-icon">&#129463;</span><div class="sc-body"><div class="sc-title">Dental</div><div class="sc-desc">Dentistry, orthodontics, implants</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/gym-papamoa.html" class="subcat-card has-listing" data-tags="gym fitness centre 24 hour crossfit pilates training workout redefined wellbeing">
-        <div class="sc-icon">&#127947;</div>
-        <div class="sc-body"><div class="sc-title">Gyms &amp; Fitness</div><div class="sc-sub">24/7 gyms, CrossFit, hybrid training, Pilates</div><div class="sc-badges"><span class="sc-badge badge-gold">&#11088; ReDefined</span></div></div>
+      <a href="/papamoa-previews/categories/services/gym-papamoa.html" class="subcat-card" data-cat="health" data-tags="gym fitness centre 24 hour crossfit pilates training workout redefined">
+        <span class="sc-icon">&#127947;</span><div class="sc-body"><div class="sc-title">Gyms &amp; Fitness</div><div class="sc-desc">24/7 gyms, CrossFit, Pilates</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/physio-papamoa.html" class="subcat-card has-listing" data-tags="physio physiotherapy sports injury acc rehabilitation manual therapy">
-        <div class="sc-icon">&#129337;</div>
-        <div class="sc-body"><div class="sc-title">Physiotherapy</div><div class="sc-sub">Sports injury, ACC, rehabilitation, manual therapy</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/physio-papamoa.html" class="subcat-card" data-cat="health" data-tags="physio physiotherapy sports injury acc rehabilitation manual therapy">
+        <span class="sc-icon">&#129337;</span><div class="sc-body"><div class="sc-title">Physiotherapy</div><div class="sc-desc">Sports injury, ACC, rehab</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/wellness-papamoa.html" class="subcat-card" data-tags="wellness natural health massage acupuncture counselling life coaching">
-        <div class="sc-icon">&#129496;</div>
-        <div class="sc-body"><div class="sc-title">Wellness &amp; Natural Health</div><div class="sc-sub">Massage, acupuncture, counselling, life coaching</div><div class="sc-badges"><span class="sc-badge badge-new">New page</span></div></div>
+      <a href="/papamoa-previews/categories/services/wellness-papamoa.html" class="subcat-card" data-cat="health" data-tags="wellness natural health massage acupuncture counselling coaching">
+        <span class="sc-icon">&#129496;</span><div class="sc-body"><div class="sc-title">Wellness &amp; Natural Health</div><div class="sc-desc">Massage, acupuncture, counselling</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/health-papamoa.html#pharmacy" class="subcat-card has-listing" data-tags="pharmacy chemist dispensary unichem life pharmacy prescription vitamins">
-        <div class="sc-icon">&#128138;</div>
-        <div class="sc-body"><div class="sc-title">Pharmacy</div><div class="sc-sub">Unichem &amp; Life Pharmacy at P&#257;p&#257;moa Plaza</div><div class="sc-badges"><span class="sc-badge badge-silver">2 listed</span></div></div>
+      <a href="/papamoa-previews/categories/services/health-papamoa.html#pharmacy" class="subcat-card" data-cat="health" data-tags="pharmacy chemist dispensary unichem life pharmacy prescription vitamins">
+        <span class="sc-icon">&#128138;</span><div class="sc-body"><div class="sc-title">Pharmacy</div><div class="sc-desc">Unichem &amp; Life Pharmacy</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/retirement-services-papamoa.html" class="subcat-card has-listing" data-tags="retirement aged care village over 55 home care karaka pines">
-        <div class="sc-icon">&#127968;</div>
-        <div class="sc-body"><div class="sc-title">Retirement &amp; Aged Care</div><div class="sc-sub">Villages, home care, over-55 living</div><div class="sc-badges"><span class="sc-badge badge-gold">&#11088; Karaka Pines</span></div></div>
+      <a href="/papamoa-previews/categories/services/retirement-services-papamoa.html" class="subcat-card" data-cat="health" data-tags="retirement aged care village over 55 home care karaka pines">
+        <span class="sc-icon">&#127968;</span><div class="sc-body"><div class="sc-title">Retirement &amp; Aged Care</div><div class="sc-desc">Villages, home care, over-55</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/mobility-aids-papamoa.html" class="subcat-card" data-tags="mobility aids wheelchair walking frame equipment disability">
-        <div class="sc-icon">&#9855;</div>
-        <div class="sc-body"><div class="sc-title">Mobility Aids</div><div class="sc-sub">Mobility equipment, wheelchairs, walking aids</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/optometrist-papamoa.html" class="subcat-card" data-cat="health" data-tags="optometrist eye test glasses contact lenses specsavers vision">
+        <span class="sc-icon">&#128065;</span><div class="sc-body"><div class="sc-title">Optometrist</div><div class="sc-desc">Eye tests, glasses, contacts</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/optometrist-papamoa.html" class="subcat-card" data-tags="optometrist eye test glasses contact lenses specsavers vision">
-        <div class="sc-icon">&#128065;</div>
-        <div class="sc-body"><div class="sc-title">Optometrist</div><div class="sc-sub">Eye tests, glasses, contact lenses &mdash; Specsavers</div><div class="sc-badges"><span class="sc-badge badge-silver">Listed</span></div></div>
+      <a href="/papamoa-previews/categories/services/audiology-papamoa.html" class="subcat-card" data-cat="health" data-tags="audiology hearing test hearing aid audiologist">
+        <span class="sc-icon">&#128266;</span><div class="sc-body"><div class="sc-title">Audiology</div><div class="sc-desc">Hearing tests &amp; hearing aids</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/audiology-papamoa.html" class="subcat-card" data-tags="audiology hearing test hearing aid audiologist">
-        <div class="sc-icon">&#128266;</div>
-        <div class="sc-body"><div class="sc-title">Audiology</div><div class="sc-sub">Hearing tests, hearing aids, audiology services</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
-      </a>
-    </div>
-  </div>
 
-  <!-- ══ PROFESSIONAL SERVICES ══ -->
-  <div class="cat-group" data-group="professional">
-    <div class="cat-group-head">
-      <span class="cat-group-icon">&#128188;</span>
-      <span class="cat-group-title">Professional Services</span>
-      <span class="cat-group-count">8 categories</span>
-    </div>
-    <div class="subcat-grid">
-      <a href="/papamoa-previews/categories/services/real-estate-papamoa.html" class="subcat-card" data-tags="real estate agent property sales buy sell listing house papamoa">
-        <div class="sc-icon">&#127968;</div>
-        <div class="sc-body"><div class="sc-title">Real Estate</div><div class="sc-sub">Property sales &amp; management &mdash; one of NZ&rsquo;s most active markets</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <!-- PROFESSIONAL -->
+      <a href="/papamoa-previews/categories/services/real-estate-papamoa.html" class="subcat-card" data-cat="professional" data-tags="real estate agent property sales buy sell listing house papamoa">
+        <span class="sc-icon">&#127968;</span><div class="sc-body"><div class="sc-title">Real Estate</div><div class="sc-desc">Property sales &amp; management</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/property-management-papamoa.html" class="subcat-card" data-tags="property management rental tenancy landlord services">
-        <div class="sc-icon">&#128205;</div>
-        <div class="sc-body"><div class="sc-title">Property Management</div><div class="sc-sub">Rental management, tenancy, landlord services</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/property-management-papamoa.html" class="subcat-card" data-cat="professional" data-tags="property management rental tenancy landlord services">
+        <span class="sc-icon">&#128205;</span><div class="sc-body"><div class="sc-title">Property Management</div><div class="sc-desc">Rentals, tenancy, landlord</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/financial-services-papamoa.html" class="subcat-card" data-tags="mortgage broker financial adviser insurance financial planning">
-        <div class="sc-icon">&#128184;</div>
-        <div class="sc-body"><div class="sc-title">Financial Services</div><div class="sc-sub">Mortgage brokers, financial advisers, insurance</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/financial-services-papamoa.html" class="subcat-card" data-cat="professional" data-tags="mortgage broker financial adviser insurance planning">
+        <span class="sc-icon">&#128184;</span><div class="sc-body"><div class="sc-title">Financial Services</div><div class="sc-desc">Mortgage, advisers, insurance</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/accountant-papamoa.html" class="subcat-card" data-tags="accountant tax gst paye bookkeeping business accounting">
-        <div class="sc-icon">&#128202;</div>
-        <div class="sc-body"><div class="sc-title">Accountants</div><div class="sc-sub">Tax, GST, PAYE, business accounting</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/accountant-papamoa.html" class="subcat-card" data-cat="professional" data-tags="accountant tax gst paye bookkeeping business accounting">
+        <span class="sc-icon">&#128202;</span><div class="sc-body"><div class="sc-title">Accountants</div><div class="sc-desc">Tax, GST, PAYE, accounting</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/lawyer-papamoa.html" class="subcat-card" data-tags="lawyer solicitor conveyancing wills trusts family law legal">
-        <div class="sc-icon">&#128220;</div>
-        <div class="sc-body"><div class="sc-title">Lawyers &amp; Solicitors</div><div class="sc-sub">Conveyancing, wills, trusts, family law</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/lawyer-papamoa.html" class="subcat-card" data-cat="professional" data-tags="lawyer solicitor conveyancing wills trusts family law legal">
+        <span class="sc-icon">&#128220;</span><div class="sc-body"><div class="sc-title">Lawyers &amp; Solicitors</div><div class="sc-desc">Conveyancing, wills, family law</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/it-services-papamoa.html" class="subcat-card" data-tags="it tech support computer repair web developer technology">
-        <div class="sc-icon">&#128187;</div>
-        <div class="sc-body"><div class="sc-title">IT &amp; Tech Services</div><div class="sc-sub">IT support, computer repair, web developers</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/it-services-papamoa.html" class="subcat-card" data-cat="professional" data-tags="it tech support computer repair web developer technology">
+        <span class="sc-icon">&#128187;</span><div class="sc-body"><div class="sc-title">IT &amp; Tech Services</div><div class="sc-desc">IT support, computer repair</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/printing-papamoa.html" class="subcat-card" data-tags="printing print signage graphic design copy">
-        <div class="sc-icon">&#128247;</div>
-        <div class="sc-body"><div class="sc-title">Printing &amp; Signage</div><div class="sc-sub">Print, copy, signage, graphic design</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/printing-papamoa.html" class="subcat-card" data-cat="professional" data-tags="printing print signage graphic design copy">
+        <span class="sc-icon">&#128247;</span><div class="sc-body"><div class="sc-title">Printing &amp; Signage</div><div class="sc-desc">Print, copy, signage, design</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/security-papamoa.html" class="subcat-card has-listing" data-tags="security alarm cctv access control monitored systems">
-        <div class="sc-icon">&#128274;</div>
-        <div class="sc-body"><div class="sc-title">Security Systems</div><div class="sc-sub">Alarms, CCTV, access control, monitored security</div><div class="sc-badges"><span class="sc-badge badge-silver">4 listed</span></div></div>
+      <a href="/papamoa-previews/categories/services/security-papamoa.html" class="subcat-card" data-cat="professional" data-tags="security alarm cctv access control monitored systems">
+        <span class="sc-icon">&#128274;</span><div class="sc-body"><div class="sc-title">Security Systems</div><div class="sc-desc">Alarms, CCTV, access control</div></div>
       </a>
-    </div>
-  </div>
 
-  <!-- ══ AUTOMOTIVE ══ -->
-  <div class="cat-group" data-group="automotive">
-    <div class="cat-group-head">
-      <span class="cat-group-icon">&#128663;</span>
-      <span class="cat-group-title">Automotive</span>
-      <span class="cat-group-count">5 categories</span>
-    </div>
-    <div class="subcat-grid">
-      <a href="/papamoa-previews/categories/services/mechanic-papamoa.html" class="subcat-card has-listing" data-tags="mechanic wof warrant fitness car service tyres brakes auto coastal autos">
-        <div class="sc-icon">&#128295;</div>
-        <div class="sc-body"><div class="sc-title">Mechanic &amp; WOF</div><div class="sc-sub">Car servicing, WOF, tyres, brakes, auto electrical</div><div class="sc-badges"><span class="sc-badge badge-gold">&#11088; Coastal Autos</span></div></div>
+      <!-- AUTOMOTIVE -->
+      <a href="/papamoa-previews/categories/services/mechanic-papamoa.html" class="subcat-card" data-cat="automotive" data-tags="mechanic wof warrant fitness car service tyres brakes auto coastal autos">
+        <span class="sc-icon">&#128295;</span><div class="sc-body"><div class="sc-title">Mechanic &amp; WOF</div><div class="sc-desc">Servicing, WOF, tyres, brakes</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/panelbeaters-papamoa.html" class="subcat-card" data-tags="panelbeater smash repair auto body acc insurance">
-        <div class="sc-icon">&#128664;</div>
-        <div class="sc-body"><div class="sc-title">Panelbeaters</div><div class="sc-sub">Smash repairs, auto body, ACC &amp; insurance work</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/panelbeaters-papamoa.html" class="subcat-card" data-cat="automotive" data-tags="panelbeater smash repair auto body acc insurance">
+        <span class="sc-icon">&#128664;</span><div class="sc-body"><div class="sc-title">Panelbeaters</div><div class="sc-desc">Smash repairs, ACC &amp; insurance</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/auto-electrician-papamoa.html" class="subcat-card" data-tags="auto electrician vehicle electrical stereo ev hybrid car">
-        <div class="sc-icon">&#9889;</div>
-        <div class="sc-body"><div class="sc-title">Auto Electrician</div><div class="sc-sub">Vehicle electrical, stereos, EV &amp; hybrid systems</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/auto-electrician-papamoa.html" class="subcat-card" data-cat="automotive" data-tags="auto electrician vehicle electrical stereo ev hybrid car">
+        <span class="sc-icon">&#9889;</span><div class="sc-body"><div class="sc-title">Auto Electrician</div><div class="sc-desc">Vehicle electrical, EV &amp; hybrid</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/motorcycle-service-papamoa.html" class="subcat-card has-listing" data-tags="motorcycle service motorbike repair ashley place papamoa motorsports">
-        <div class="sc-icon">&#127949;</div>
-        <div class="sc-body"><div class="sc-title">Motorcycle Servicing</div><div class="sc-sub">P&#257;p&#257;moa Motorcycles &mdash; Ashley Place</div><div class="sc-badges"><span class="sc-badge badge-silver">Listed</span></div></div>
+      <a href="/papamoa-previews/categories/services/motorcycle-service-papamoa.html" class="subcat-card" data-cat="automotive" data-tags="motorcycle service motorbike repair papamoa motorsports">
+        <span class="sc-icon">&#127949;</span><div class="sc-body"><div class="sc-title">Motorcycle Servicing</div><div class="sc-desc">Motorbike repairs &amp; service</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/car-detailing-papamoa.html" class="subcat-card" data-tags="car wash detailing cleaning polish wax salty coastal">
-        <div class="sc-icon">&#10024;</div>
-        <div class="sc-body"><div class="sc-title">Car Washing &amp; Detailing</div><div class="sc-sub">Salty air means high demand for quality detailing</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/car-detailing-papamoa.html" class="subcat-card" data-cat="automotive" data-tags="car wash detailing cleaning polish wax salty coastal">
+        <span class="sc-icon">&#10024;</span><div class="sc-body"><div class="sc-title">Car Washing &amp; Detailing</div><div class="sc-desc">Detailing, wash &amp; polish</div></div>
       </a>
-    </div>
-  </div>
 
-  <!-- ══ HAIR & BEAUTY ══ -->
-  <div class="cat-group" data-group="beauty">
-    <div class="cat-group-head">
-      <span class="cat-group-icon">&#9986;&#65039;</span>
-      <span class="cat-group-title">Hair &amp; Beauty</span>
-      <span class="cat-group-count">6 categories</span>
-    </div>
-    <div class="subcat-grid">
-      <a href="/papamoa-previews/categories/services/hairdressers-papamoa.html" class="subcat-card" data-tags="hairdresser hair salon cut colour treatment styling">
-        <div class="sc-icon">&#9986;&#65039;</div>
-        <div class="sc-body"><div class="sc-title">Hair Salons</div><div class="sc-sub">Cuts, colour, treatments and styling</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <!-- BEAUTY -->
+      <a href="/papamoa-previews/categories/services/hairdressers-papamoa.html" class="subcat-card" data-cat="beauty" data-tags="hairdresser hair salon cut colour treatment styling">
+        <span class="sc-icon">&#9986;&#65039;</span><div class="sc-body"><div class="sc-title">Hair Salons</div><div class="sc-desc">Cuts, colour, treatments</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/barber-papamoa.html" class="subcat-card has-listing" data-tags="barber barbershop mens kids cut fade beard trim barber toms">
-        <div class="sc-icon">&#128084;</div>
-        <div class="sc-body"><div class="sc-title">Barbers</div><div class="sc-sub">Men&rsquo;s &amp; kids&rsquo; cuts, fades, beard trims</div><div class="sc-badges"><span class="sc-badge badge-silver">&#11088; Barber Toms</span></div></div>
+      <a href="/papamoa-previews/categories/services/barber-papamoa.html" class="subcat-card" data-cat="beauty" data-tags="barber barbershop mens kids cut fade beard trim barber toms">
+        <span class="sc-icon">&#128084;</span><div class="sc-body"><div class="sc-title">Barbers</div><div class="sc-desc">Cuts, fades, beard trims</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/beauty-grooming-papamoa.html" class="subcat-card has-listing" data-tags="beauty grooming facial waxing lash extensions spray tan nails kayco">
-        <div class="sc-icon">&#128133;</div>
-        <div class="sc-body"><div class="sc-title">Beauty &amp; Grooming</div><div class="sc-sub">Facials, waxing, lash extensions, spray tans, nails</div><div class="sc-badges"><span class="sc-badge badge-silver">Kayco Nails listed</span></div></div>
+      <a href="/papamoa-previews/categories/services/beauty-grooming-papamoa.html" class="subcat-card" data-cat="beauty" data-tags="beauty grooming facial waxing lash extensions spray tan nails kayco">
+        <span class="sc-icon">&#128133;</span><div class="sc-body"><div class="sc-title">Beauty &amp; Grooming</div><div class="sc-desc">Facials, nails, lash, spray tans</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/massage-papamoa.html" class="subcat-card" data-tags="massage remedial relaxation sports therapy">
-        <div class="sc-icon">&#129496;</div>
-        <div class="sc-body"><div class="sc-title">Massage</div><div class="sc-sub">Remedial, relaxation and sports massage</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/massage-papamoa.html" class="subcat-card" data-cat="beauty" data-tags="massage remedial relaxation sports therapy">
+        <span class="sc-icon">&#129496;</span><div class="sc-body"><div class="sc-title">Massage</div><div class="sc-desc">Remedial, relaxation, sports</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/tattoo-papamoa.html" class="subcat-card" data-tags="tattoo piercing studio ink">
-        <div class="sc-icon">&#128247;</div>
-        <div class="sc-body"><div class="sc-title">Tattoo &amp; Piercing</div><div class="sc-sub">Tattooing and piercing studios in P&#257;p&#257;moa</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/tattoo-papamoa.html" class="subcat-card" data-cat="beauty" data-tags="tattoo piercing studio ink">
+        <span class="sc-icon">&#128247;</span><div class="sc-body"><div class="sc-title">Tattoo &amp; Piercing</div><div class="sc-desc">Tattoo &amp; piercing studios</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/dog-grooming-papamoa.html" class="subcat-card" data-tags="dog grooming pet groomer wash trim clip">
-        <div class="sc-icon">&#128054;</div>
-        <div class="sc-body"><div class="sc-title">Dog Grooming</div><div class="sc-sub">Professional dog grooming in P&#257;p&#257;moa</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/dog-grooming-papamoa.html" class="subcat-card" data-cat="beauty" data-tags="dog grooming pet groomer wash trim clip">
+        <span class="sc-icon">&#128054;</span><div class="sc-body"><div class="sc-title">Dog Grooming</div><div class="sc-desc">Professional dog grooming</div></div>
       </a>
-    </div>
-  </div>
 
-  <!-- ══ HOME & GARDEN ══ -->
-  <div class="cat-group" data-group="home">
-    <div class="cat-group-head">
-      <span class="cat-group-icon">&#127968;</span>
-      <span class="cat-group-title">Home &amp; Garden</span>
-      <span class="cat-group-count">10 categories</span>
-    </div>
-    <div class="subcat-grid">
-      <a href="/papamoa-previews/categories/services/lawn-mowing-papamoa.html" class="subcat-card has-listing" data-tags="lawn mowing garden mow regular one off greencut grass">
-        <div class="sc-icon">&#127807;</div>
-        <div class="sc-body"><div class="sc-title">Lawn Mowing</div><div class="sc-sub">Regular &amp; one-off mowing across P&#257;p&#257;moa</div><div class="sc-badges"><span class="sc-badge badge-gold">&#11088; GreenCut</span></div></div>
+      <!-- HOME & GARDEN -->
+      <a href="/papamoa-previews/categories/services/lawn-mowing-papamoa.html" class="subcat-card" data-cat="home" data-tags="lawn mowing garden mow regular one off greencut grass">
+        <span class="sc-icon">&#127807;</span><div class="sc-body"><div class="sc-title">Lawn Mowing</div><div class="sc-desc">Regular &amp; one-off mowing</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/landscaping-papamoa.html" class="subcat-card has-listing" data-tags="landscaping garden design coastal planting deck driveway">
-        <div class="sc-icon">&#127795;</div>
-        <div class="sc-body"><div class="sc-title">Landscaping</div><div class="sc-sub">Garden design, coastal planting, decks, driveways</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/landscaping-papamoa.html" class="subcat-card" data-cat="home" data-tags="landscaping garden design coastal planting deck driveway">
+        <span class="sc-icon">&#127795;</span><div class="sc-body"><div class="sc-title">Landscaping</div><div class="sc-desc">Garden design, decks, driveways</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/cleaning-papamoa.html" class="subcat-card" data-tags="cleaning cleaner domestic commercial carpet exterior water blasting house">
-        <div class="sc-icon">&#129529;</div>
-        <div class="sc-body"><div class="sc-title">Cleaning</div><div class="sc-sub">Domestic, commercial, carpet, exterior &amp; water blasting</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/cleaning-papamoa.html" class="subcat-card" data-cat="home" data-tags="cleaning cleaner domestic commercial carpet exterior water blasting house">
+        <span class="sc-icon">&#129529;</span><div class="sc-body"><div class="sc-title">Cleaning</div><div class="sc-desc">Domestic, commercial, carpet</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/aircon-papamoa.html" class="subcat-card has-listing" data-tags="air conditioning heat pump aircon hvac installation authorised">
-        <div class="sc-icon">&#10052;&#65039;</div>
-        <div class="sc-body"><div class="sc-title">Aircon &amp; Heat Pumps</div><div class="sc-sub">Authorised heat pump and A/C installation</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/aircon-papamoa.html" class="subcat-card" data-cat="home" data-tags="air conditioning heat pump aircon hvac installation">
+        <span class="sc-icon">&#10052;&#65039;</span><div class="sc-body"><div class="sc-title">Aircon &amp; Heat Pumps</div><div class="sc-desc">Heat pump installation &amp; A/C</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/pest-control-papamoa.html" class="subcat-card" data-tags="pest control exterminator residential commercial rodent insect wasp">
-        <div class="sc-icon">&#128027;</div>
-        <div class="sc-body"><div class="sc-title">Pest Control</div><div class="sc-sub">Residential and commercial pest treatment</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/pest-control-papamoa.html" class="subcat-card" data-cat="home" data-tags="pest control exterminator residential commercial rodent insect wasp">
+        <span class="sc-icon">&#128027;</span><div class="sc-body"><div class="sc-title">Pest Control</div><div class="sc-desc">Residential &amp; commercial pest</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/pool-spa-papamoa.html" class="subcat-card" data-tags="pool spa swimming pool service chemical balance equipment maintenance">
-        <div class="sc-icon">&#128167;</div>
-        <div class="sc-body"><div class="sc-title">Pool &amp; Spa</div><div class="sc-sub">Pool servicing, chemical balancing, equipment</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/pool-spa-papamoa.html" class="subcat-card" data-cat="home" data-tags="pool spa swimming pool service chemical balance equipment">
+        <span class="sc-icon">&#128167;</span><div class="sc-body"><div class="sc-title">Pool &amp; Spa</div><div class="sc-desc">Pool servicing &amp; maintenance</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/rubbish-removal-papamoa.html" class="subcat-card" data-tags="rubbish removal junk skip hire hard rubbish collection waste">
-        <div class="sc-icon">&#128465;</div>
-        <div class="sc-body"><div class="sc-title">Rubbish Removal</div><div class="sc-sub">Junk removal, skip hire, hard rubbish collection</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/rubbish-removal-papamoa.html" class="subcat-card" data-cat="home" data-tags="rubbish removal junk skip hire hard rubbish collection waste">
+        <span class="sc-icon">&#128465;</span><div class="sc-body"><div class="sc-title">Rubbish Removal</div><div class="sc-desc">Junk removal &amp; skip hire</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/handyman-papamoa.html" class="subcat-card" data-tags="handyman property maintenance odd jobs repairs fix small job">
-        <div class="sc-icon">&#128295;</div>
-        <div class="sc-body"><div class="sc-title">Handyman</div><div class="sc-sub">Property maintenance, odd jobs, minor repairs</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/handyman-papamoa.html" class="subcat-card" data-cat="home" data-tags="handyman property maintenance odd jobs repairs fix small job">
+        <span class="sc-icon">&#128295;</span><div class="sc-body"><div class="sc-title">Handyman</div><div class="sc-desc">Maintenance &amp; minor repairs</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/arborist-papamoa.html" class="subcat-card" data-tags="arborist tree removal trimming stump grinding hedge">
-        <div class="sc-icon">&#127795;</div>
-        <div class="sc-body"><div class="sc-title">Arborist &amp; Tree Services</div><div class="sc-sub">Tree removal, trimming, stump grinding</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/arborist-papamoa.html" class="subcat-card" data-cat="home" data-tags="arborist tree removal trimming stump grinding hedge">
+        <span class="sc-icon">&#127795;</span><div class="sc-body"><div class="sc-title">Arborist &amp; Tree Services</div><div class="sc-desc">Tree removal, trimming, stumps</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/dry-cleaning-papamoa.html" class="subcat-card" data-tags="dry cleaning laundromat laundry self service">
-        <div class="sc-icon">&#128060;</div>
-        <div class="sc-body"><div class="sc-title">Dry Cleaning &amp; Laundromat</div><div class="sc-sub">Dry cleaning and self-service laundry</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/dry-cleaning-papamoa.html" class="subcat-card" data-cat="home" data-tags="dry cleaning laundromat laundry self service">
+        <span class="sc-icon">&#128060;</span><div class="sc-body"><div class="sc-title">Dry Cleaning &amp; Laundromat</div><div class="sc-desc">Dry cleaning &amp; self-service laundry</div></div>
       </a>
-    </div>
-  </div>
 
-  <!-- ══ FAMILY & COMMUNITY ══ -->
-  <div class="cat-group" data-group="family">
-    <div class="cat-group-head">
-      <span class="cat-group-icon">&#129309;</span>
-      <span class="cat-group-title">Family &amp; Community</span>
-      <span class="cat-group-count">6 categories</span>
-    </div>
-    <div class="subcat-grid">
-      <a href="/papamoa-previews/categories/services/childcare-papamoa.html" class="subcat-card has-listing" data-tags="childcare ece early childhood care kindergarten daycare preschool">
-        <div class="sc-icon">&#128231;</div>
-        <div class="sc-body"><div class="sc-title">Childcare &amp; ECE</div><div class="sc-sub">Licensed childcare, early learning, ECE centres</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <!-- FAMILY -->
+      <a href="/papamoa-previews/categories/services/childcare-papamoa.html" class="subcat-card" data-cat="family" data-tags="childcare ece early childhood care kindergarten daycare preschool">
+        <span class="sc-icon">&#128231;</span><div class="sc-body"><div class="sc-title">Childcare &amp; ECE</div><div class="sc-desc">Licensed childcare &amp; early learning</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/pet-services-papamoa.html" class="subcat-card" data-tags="pet services vet veterinarian dog grooming kennels boarding minder">
-        <div class="sc-icon">&#128054;</div>
-        <div class="sc-body"><div class="sc-title">Pet Services</div><div class="sc-sub">Vets, dog grooming, boarding kennels, pet minders</div><div class="sc-badges"><span class="sc-badge badge-new">New page</span></div></div>
+      <a href="/papamoa-previews/categories/services/pet-services-papamoa.html" class="subcat-card" data-cat="family" data-tags="pet services vet veterinarian dog grooming kennels boarding minder">
+        <span class="sc-icon">&#128054;</span><div class="sc-body"><div class="sc-title">Pet Services</div><div class="sc-desc">Vets, kennels, pet minders</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/events-hire-papamoa.html" class="subcat-card" data-tags="events party hire bouncy castle marquee pa system equipment">
-        <div class="sc-icon">&#127881;</div>
-        <div class="sc-body"><div class="sc-title">Events &amp; Party Hire</div><div class="sc-sub">Bouncy castles, marquees, party hire, PA systems</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/events-hire-papamoa.html" class="subcat-card" data-cat="family" data-tags="events party hire bouncy castle marquee pa system equipment">
+        <span class="sc-icon">&#127881;</span><div class="sc-body"><div class="sc-title">Events &amp; Party Hire</div><div class="sc-desc">Bouncy castles, marquees, PA</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/embroidery-papamoa.html" class="subcat-card" data-tags="embroidery custom apparel clothing uniform print workwear">
-        <div class="sc-icon">&#128085;</div>
-        <div class="sc-body"><div class="sc-title">Embroidery &amp; Custom Apparel</div><div class="sc-sub">Custom clothing, uniforms, embroidery &amp; printing</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/embroidery-papamoa.html" class="subcat-card" data-cat="family" data-tags="embroidery custom apparel clothing uniform print workwear">
+        <span class="sc-icon">&#128085;</span><div class="sc-body"><div class="sc-title">Embroidery &amp; Custom Apparel</div><div class="sc-desc">Custom clothing &amp; uniforms</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/engraving-papamoa.html" class="subcat-card" data-tags="trophy keys engraving awards key cutting">
-        <div class="sc-icon">&#127942;</div>
-        <div class="sc-body"><div class="sc-title">Trophies, Keys &amp; Engraving</div><div class="sc-sub">Key cutting, trophy engraving, awards</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/engraving-papamoa.html" class="subcat-card" data-cat="family" data-tags="trophy keys engraving awards key cutting">
+        <span class="sc-icon">&#127942;</span><div class="sc-body"><div class="sc-title">Trophies, Keys &amp; Engraving</div><div class="sc-desc">Key cutting, trophies, awards</div></div>
       </a>
-      <a href="/papamoa-previews/categories/services/upholstery-papamoa.html" class="subcat-card" data-tags="upholstery furniture vehicle marine fabric repair">
-        <div class="sc-icon">&#128085;</div>
-        <div class="sc-body"><div class="sc-title">Upholstery</div><div class="sc-sub">Furniture, vehicle and marine upholstery</div><div class="sc-badges"><span class="sc-badge badge-gold">Gold available</span></div></div>
+      <a href="/papamoa-previews/categories/services/upholstery-papamoa.html" class="subcat-card" data-cat="family" data-tags="upholstery furniture vehicle marine fabric repair">
+        <span class="sc-icon">&#128085;</span><div class="sc-body"><div class="sc-title">Upholstery</div><div class="sc-desc">Furniture, vehicle, marine</div></div>
       </a>
-    </div>
-  </div>
 
-  <!-- CTA STRIP -->
-  <div class="cta-strip">
-    <div class="cta-strip-body">
-      <h3>Own a service business in P&#257;p&#257;moa?</h3>
-      <p>One Gold Spotlight per sub-category. P&#257;p&#257;moa has 40,000+ residents and most positions are still unclaimed. Get found first &mdash; passive enquiries, 24/7.</p>
-    </div>
-    <a href="/papamoa-previews/sales/list-with-us.html" class="cta-strip-btn">See Gold Listing options &rarr;</a>
-  </div>
+    </div><!-- /svc-grid -->
+    <div class="see-more-wrap" id="svc-see-more"><button class="see-more-btn" onclick="svcSeeMore()">See more categories</button></div>
+    <div class="svc-empty" id="svc-empty">No results &mdash; <a href="/papamoa-previews/categories/services/services.html">browse all services</a></div>
 
-  <!-- FAQ -->
-  <div class="faq-section">
-    <h2>Services in P&#257;p&#257;moa &mdash; common questions</h2>
-    <div class="faq-list">
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Is there a plumber in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button>
-        <div class="faq-a">Yes. Several plumbers and gasfitters operate in P&#257;p&#257;moa and the surrounding Bay of Plenty area. They cover residential plumbing, drainage, gas fitting and hot water systems. See the <a href="/papamoa-previews/categories/services/plumber-papamoa.html">P&#257;p&#257;moa Plumbers page</a> for current listings.</div>
+    <!-- CATEGORY SECTIONS -->
+    <div class="section" style="margin-top:32px;" id="trades">
+      <div class="section-title">&#128736; Trades &amp; Construction</div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#128688;</div>
+        <div class="sa-body"><h4>Plumber &amp; Gasfitter in P&#257;p&#257;moa</h4><p>Plumbing, drainage, gas fitting, hot water systems. See the <a href="/papamoa-previews/categories/services/plumber-papamoa.html">Plumbers page</a>.</p><a href="/papamoa-previews/categories/services/plumber-papamoa.html" class="sa-btn">Browse Plumbers &rarr;</a></div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Is there a dentist in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button>
-        <div class="faq-a">Yes. Tara Road Dental is P&#257;p&#257;moa&rsquo;s Gold-listed dental practice, offering general dentistry, cosmetic work, orthodontics and implants. P&#257;p&#257;moa Orthodontist also serves the area. See the <a href="/papamoa-previews/categories/services/dental-papamoa.html">P&#257;p&#257;moa Dental page</a>.</div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#9889;</div>
+        <div class="sa-body"><h4>Electrician in P&#257;p&#257;moa</h4><p>Residential wiring, EV chargers, solar and switchboards. See the <a href="/papamoa-previews/categories/services/electrician-papamoa.html">Electricians page</a>.</p><a href="/papamoa-previews/categories/services/electrician-papamoa.html" class="sa-btn">Browse Electricians &rarr;</a></div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Is there a gym in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button>
-        <div class="faq-a">Yes. ReDefined Wellbeing is P&#257;p&#257;moa&rsquo;s Gold-listed gym and fitness centre, offering a range of training programmes and classes. See the <a href="/papamoa-previews/categories/services/gym-papamoa.html">P&#257;p&#257;moa Gyms page</a> for all options.</div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#127968;</div>
+        <div class="sa-body"><h4>Builders in P&#257;p&#257;moa</h4><p>New builds, renovations, extensions and LBP-licensed building work. See the <a href="/papamoa-previews/categories/services/builders-papamoa.html">Builders page</a>.</p><a href="/papamoa-previews/categories/services/builders-papamoa.html" class="sa-btn">Browse Builders &rarr;</a></div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Is there a mechanic or WOF station in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button>
-        <div class="faq-a">Yes. Coastal Autos is P&#257;p&#257;moa&rsquo;s Gold-listed automotive service centre, offering car servicing, WOF inspections, tyres, brakes and auto electrical work. See the <a href="/papamoa-previews/categories/services/mechanic-papamoa.html">P&#257;p&#257;moa Mechanics page</a>.</div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#128736;</div>
+        <div class="sa-body"><h4>Gold Spotlight available &mdash; Roofing, Solar, Scaffolding &amp; more</h4><p>Multiple trades categories have unclaimed Gold Spotlight positions. First to claim gets top placement for their sub-category.</p><a href="/papamoa-previews/sales/list-with-us.html" class="sa-btn">See listing options &rarr;</a></div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Is there a real estate agent in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button>
-        <div class="faq-a">Yes. Multiple real estate agencies operate in P&#257;p&#257;moa, one of New Zealand&rsquo;s most active property markets. See the <a href="/papamoa-previews/categories/services/real-estate-papamoa.html">P&#257;p&#257;moa Real Estate page</a> for current agents and property management services.</div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Is there lawn mowing or a garden service in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button>
-        <div class="faq-a">Yes. GreenCut is P&#257;p&#257;moa&rsquo;s Gold-listed lawn mowing service, offering regular and one-off mowing. Several landscaping and garden maintenance companies also operate in P&#257;p&#257;moa. See the <a href="/papamoa-previews/categories/services/lawn-mowing-papamoa.html">P&#257;p&#257;moa Lawn Mowing page</a>.</div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Is there a GP or medical centre in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button>
-        <div class="faq-a">Yes. P&#257;p&#257;moa has two medical centres serving enrolled and casual patients. See the <a href="/papamoa-previews/categories/services/health-papamoa.html">P&#257;p&#257;moa Medical page</a> for current practices, hours and enrolment information.</div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Is there a barber in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button>
-        <div class="faq-a">Yes. Barber Toms is a well-regarded barbershop in P&#257;p&#257;moa offering men&rsquo;s and kids&rsquo; cuts, fades and beard trims. See the <a href="/papamoa-previews/categories/services/barber-papamoa.html">P&#257;p&#257;moa Barbers page</a>.</div>
-      </div>
-
     </div>
-  </div>
+
+    <div class="section" id="health">
+      <div class="section-title">&#127973; Health &amp; Medical</div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#129463;</div>
+        <div class="sa-body"><h4>Dental in P&#257;p&#257;moa &mdash; Tara Road Dental</h4><p>General dentistry, cosmetic work, orthodontics and implants. P&#257;p&#257;moa Orthodontist also serves the area. See the <a href="/papamoa-previews/categories/services/dental-papamoa.html">Dental page</a>.</p><a href="/papamoa-previews/categories/services/dental-papamoa.html" class="sa-btn">Browse Dental &rarr;</a></div>
+      </div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#127947;</div>
+        <div class="sa-body"><h4>Gyms &amp; Fitness in P&#257;p&#257;moa &mdash; ReDefined Wellbeing</h4><p>24/7 gyms, CrossFit, hybrid training and Pilates. See the <a href="/papamoa-previews/categories/services/gym-papamoa.html">Gyms page</a>.</p><a href="/papamoa-previews/categories/services/gym-papamoa.html" class="sa-btn">Browse Gyms &rarr;</a></div>
+      </div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#127968;</div>
+        <div class="sa-body"><h4>Retirement &amp; Aged Care &mdash; Karaka Pines</h4><p>Over-55 villages, home care and aged care services in P&#257;p&#257;moa. See the <a href="/papamoa-previews/categories/services/retirement-services-papamoa.html">Retirement page</a>.</p><a href="/papamoa-previews/categories/services/retirement-services-papamoa.html" class="sa-btn">Browse Retirement &rarr;</a></div>
+      </div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#127973;</div>
+        <div class="sa-body"><h4>Gold Spotlight available &mdash; GPs, Physiotherapy, Wellness &amp; more</h4><p>Most health sub-categories have unclaimed Gold Spotlight positions available. See the <a href="/papamoa-previews/community/urgent-health.html">Urgent Health Guide</a> for immediate care options.</p><a href="/papamoa-previews/sales/list-with-us.html" class="sa-btn">Claim a Spotlight &rarr;</a></div>
+      </div>
+    </div>
+
+    <div class="section" id="professional">
+      <div class="section-title">&#128188; Professional Services</div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#127968;</div>
+        <div class="sa-body"><h4>Real Estate in P&#257;p&#257;moa</h4><p>P&#257;p&#257;moa is one of New Zealand&rsquo;s most active property markets. Multiple agencies operate across sales and property management. See the <a href="/papamoa-previews/categories/services/real-estate-papamoa.html">Real Estate page</a>.</p><a href="/papamoa-previews/categories/services/real-estate-papamoa.html" class="sa-btn">Browse Real Estate &rarr;</a></div>
+      </div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#128188;</div>
+        <div class="sa-body"><h4>Gold Spotlight available &mdash; Accountants, Lawyers, Financial Services &amp; more</h4><p>Professional services sub-categories have unclaimed Gold Spotlight positions. One per sub-category.</p><a href="/papamoa-previews/sales/list-with-us.html" class="sa-btn">Claim a Spotlight &rarr;</a></div>
+      </div>
+    </div>
+
+    <div class="section" id="automotive">
+      <div class="section-title">&#128663; Automotive</div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#128295;</div>
+        <div class="sa-body"><h4>Mechanic &amp; WOF in P&#257;p&#257;moa &mdash; Coastal Autos</h4><p>Car servicing, WOF inspections, tyres, brakes and auto electrical. See the <a href="/papamoa-previews/categories/services/mechanic-papamoa.html">Mechanics page</a>.</p><a href="/papamoa-previews/categories/services/mechanic-papamoa.html" class="sa-btn">Browse Mechanics &rarr;</a></div>
+      </div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#128663;</div>
+        <div class="sa-body"><h4>Gold Spotlight available &mdash; Panelbeaters, Auto Electrician, Detailing</h4><p>Several automotive sub-categories have unclaimed Gold Spotlight positions in P&#257;p&#257;moa.</p><a href="/papamoa-previews/sales/list-with-us.html" class="sa-btn">Claim a Spotlight &rarr;</a></div>
+      </div>
+    </div>
+
+    <div class="section" id="beauty">
+      <div class="section-title">&#9986;&#65039; Hair &amp; Beauty</div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#128084;</div>
+        <div class="sa-body"><h4>Barbers in P&#257;p&#257;moa &mdash; Barber Toms</h4><p>Men&rsquo;s and kids&rsquo; cuts, fades and beard trims. See the <a href="/papamoa-previews/categories/services/barber-papamoa.html">Barbers page</a>.</p><a href="/papamoa-previews/categories/services/barber-papamoa.html" class="sa-btn">Browse Barbers &rarr;</a></div>
+      </div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#128133;</div>
+        <div class="sa-body"><h4>Beauty &amp; Grooming in P&#257;p&#257;moa &mdash; Kayco Nails</h4><p>Facials, waxing, lash extensions, spray tans and nails. See the <a href="/papamoa-previews/categories/services/beauty-grooming-papamoa.html">Beauty page</a>.</p><a href="/papamoa-previews/categories/services/beauty-grooming-papamoa.html" class="sa-btn">Browse Beauty &rarr;</a></div>
+      </div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#9986;&#65039;</div>
+        <div class="sa-body"><h4>Gold Spotlight available &mdash; Hair Salons, Massage, Tattoo &amp; more</h4><p>Most hair and beauty sub-categories have unclaimed Gold Spotlight positions available.</p><a href="/papamoa-previews/sales/list-with-us.html" class="sa-btn">Claim a Spotlight &rarr;</a></div>
+      </div>
+    </div>
+
+    <div class="section" id="home-garden">
+      <div class="section-title">&#127968; Home &amp; Garden</div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#127807;</div>
+        <div class="sa-body"><h4>Lawn Mowing in P&#257;p&#257;moa &mdash; GreenCut</h4><p>Regular and one-off mowing across P&#257;p&#257;moa. See the <a href="/papamoa-previews/categories/services/lawn-mowing-papamoa.html">Lawn Mowing page</a>.</p><a href="/papamoa-previews/categories/services/lawn-mowing-papamoa.html" class="sa-btn">Browse Lawn Mowing &rarr;</a></div>
+      </div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#127968;</div>
+        <div class="sa-body"><h4>Gold Spotlight available &mdash; Cleaning, Landscaping, Handyman &amp; more</h4><p>Most home and garden sub-categories have unclaimed Gold Spotlight positions. One per sub-category.</p><a href="/papamoa-previews/sales/list-with-us.html" class="sa-btn">Claim a Spotlight &rarr;</a></div>
+      </div>
+    </div>
+
+    <div class="section" id="family-community">
+      <div class="section-title">&#129309; Family &amp; Community</div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#128231;</div>
+        <div class="sa-body"><h4>Childcare &amp; ECE in P&#257;p&#257;moa</h4><p>Licensed childcare, early learning and ECE centres. See the <a href="/papamoa-previews/categories/services/childcare-papamoa.html">Childcare page</a>.</p><a href="/papamoa-previews/categories/services/childcare-papamoa.html" class="sa-btn">Browse Childcare &rarr;</a></div>
+      </div>
+      <div class="spotlight-avail">
+        <div class="sa-icon">&#129309;</div>
+        <div class="sa-body"><h4>Gold Spotlight available &mdash; Pet Services, Events Hire &amp; more</h4><p>Family and community sub-categories have unclaimed Gold Spotlight positions available.</p><a href="/papamoa-previews/sales/list-with-us.html" class="sa-btn">Claim a Spotlight &rarr;</a></div>
+      </div>
+    </div>
+
+    <!-- CTA STRIP -->
+    <div class="cta-strip">
+      <div class="cta-strip-body">
+        <h3>Own a service business in P&#257;p&#257;moa?</h3>
+        <p>One Gold Spotlight per sub-category. P&#257;p&#257;moa has 40,000+ residents and most positions are still unclaimed. Get found first &mdash; passive enquiries, 24/7.</p>
+      </div>
+      <a href="/papamoa-previews/sales/list-with-us.html" class="cta-strip-btn">See Gold Listing options &rarr;</a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>Services in P&#257;p&#257;moa &mdash; common questions</h2>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there a plumber in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button><div class="faq-a">Yes. Several plumbers and gasfitters operate in P&#257;p&#257;moa. They cover residential plumbing, drainage, gas fitting and hot water systems. See the <a href="/papamoa-previews/categories/services/plumber-papamoa.html">P&#257;p&#257;moa Plumbers page</a>.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there a dentist in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button><div class="faq-a">Yes. Tara Road Dental offers general dentistry, cosmetic work, orthodontics and implants. See the <a href="/papamoa-previews/categories/services/dental-papamoa.html">P&#257;p&#257;moa Dental page</a>.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there a gym in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button><div class="faq-a">Yes. ReDefined Wellbeing is P&#257;p&#257;moa&rsquo;s Gold-listed gym and fitness centre. See the <a href="/papamoa-previews/categories/services/gym-papamoa.html">P&#257;p&#257;moa Gyms page</a>.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there a mechanic or WOF station in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button><div class="faq-a">Yes. Coastal Autos offers car servicing, WOF inspections, tyres, brakes and auto electrical. See the <a href="/papamoa-previews/categories/services/mechanic-papamoa.html">P&#257;p&#257;moa Mechanics page</a>.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there a real estate agent in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button><div class="faq-a">Yes. Multiple agencies operate in P&#257;p&#257;moa, one of New Zealand&rsquo;s most active property markets. See the <a href="/papamoa-previews/categories/services/real-estate-papamoa.html">Real Estate page</a>.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there lawn mowing or a garden service in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button><div class="faq-a">Yes. GreenCut is P&#257;p&#257;moa&rsquo;s Gold-listed lawn mowing service. See the <a href="/papamoa-previews/categories/services/lawn-mowing-papamoa.html">Lawn Mowing page</a>.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there a GP or medical centre in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button><div class="faq-a">Yes. P&#257;p&#257;moa has two medical centres. See the <a href="/papamoa-previews/categories/services/health-papamoa.html">Medical page</a> for hours and enrolment information.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there a barber in P&#257;p&#257;moa?<span class="faq-toggle">+</span></button><div class="faq-a">Yes. Barber Toms offers men&rsquo;s and kids&rsquo; cuts, fades and beard trims. See the <a href="/papamoa-previews/categories/services/barber-papamoa.html">Barbers page</a>.</div></div>
+      </div>
+    </div>
 
     </div><!-- /main-col -->
 
@@ -895,65 +836,15 @@ a{color:var(--blue);text-decoration:none}
 </div>
 
 <script>
-/* ── Search ── */
-function svcSearch(val) {
-  var q = val.trim().toLowerCase();
-  var resultsWrap = document.getElementById('svc-search-results');
-  var resultsGrid = document.getElementById('svc-results-grid');
-  var noResults = document.getElementById('svc-no-results');
-
-  if (!q) {
-    resultsWrap.classList.remove('visible');
-    document.querySelectorAll('.cat-group').forEach(function(g) { g.style.display = ''; });
-    document.querySelector('.cta-strip').style.display = '';
-    document.querySelector('.faq-section').style.display = '';
-    document.getElementById('svc-search').value = '';
-    return;
-  }
-
-  /* Hide groups and CTA when searching */
-  document.querySelectorAll('.cat-group').forEach(function(g) { g.style.display = 'none'; });
-  document.querySelector('.cta-strip').style.display = 'none';
-  document.querySelector('.faq-section').style.display = 'none';
-  resultsWrap.classList.add('visible');
-  resultsGrid.innerHTML = '';
-
-  var all = document.querySelectorAll('.subcat-card');
-  var matches = [];
-  all.forEach(function(card) {
-    var tags = (card.getAttribute('data-tags') || '').toLowerCase();
-    var title = (card.querySelector('.sc-title') ? card.querySelector('.sc-title').textContent : '').toLowerCase();
-    var sub = (card.querySelector('.sc-sub') ? card.querySelector('.sc-sub').textContent : '').toLowerCase();
-    if (tags.indexOf(q) > -1 || title.indexOf(q) > -1 || sub.indexOf(q) > -1) {
-      matches.push(card.cloneNode(true));
-    }
-  });
-
-  if (matches.length) {
-    matches.forEach(function(c) {
-      c.classList.remove('row-hidden', 'sc-hidden');
-      resultsGrid.appendChild(c);
-    });
-    noResults.classList.remove('visible');
-  } else {
-    noResults.classList.add('visible');
-  }
-}
-
-function clearSvcSearch() {
-  document.getElementById('svc-search').value = '';
-  svcSearch('');
-  return false;
-}
-
-/* ── See More / Show Less (per group) ── */
+/* ── See More / Show Less ── */
 var SVC_ROWS = 2;
-var svcMaxRows = {};
+var svcMaxRow = SVC_ROWS;
 
-function svcCalcGrid(grid) {
-  var cards = grid.querySelectorAll('.subcat-card');
-  if (!cards.length) return 0;
-  cards.forEach(function(c) { c.classList.remove('row-hidden'); });
+function svcCalcGrid() {
+  var grid = document.getElementById('svc-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card:not(.hidden)');
+  if (!cards.length) return;
   var firstTop = cards[0].getBoundingClientRect().top;
   var cols = 0;
   for (var i = 0; i < cards.length; i++) {
@@ -961,102 +852,84 @@ function svcCalcGrid(grid) {
   }
   if (!cols) cols = cards.length;
   cards.forEach(function(c, idx) { c.dataset.row = Math.floor(idx / cols) + 1; });
-  return cols;
 }
 
-function svcApplyRows(group) {
-  var el = document.querySelector('.cat-group[data-group="' + group + '"]');
-  if (!el) return;
-  var grid = el.querySelector('.subcat-grid');
+function svcApplyRows() {
+  var grid = document.getElementById('svc-grid');
   if (!grid) return;
-  var cards = grid.querySelectorAll('.subcat-card');
+  var cards = grid.querySelectorAll('.subcat-card:not(.hidden)');
   var maxRow = 0;
-  var limit = svcMaxRows[group] || SVC_ROWS;
   cards.forEach(function(c) {
     var r = parseInt(c.dataset.row || 0);
     if (r > maxRow) maxRow = r;
-    c.classList.toggle('row-hidden', r > limit);
+    c.classList.toggle('row-hidden', r > svcMaxRow);
   });
-  var wrap = el.querySelector('.see-more-wrap');
+  var wrap = document.getElementById('svc-see-more');
   if (!wrap) return;
   if (maxRow <= SVC_ROWS) { wrap.style.display = 'none'; return; }
   wrap.style.display = '';
-  var isAll = limit >= maxRow;
-  var btn = wrap.querySelector('.see-more-btn');
-  btn.textContent = isAll ? 'Show less' : 'See more';
-  btn.setAttribute('data-group', group);
+  var isAll = svcMaxRow >= maxRow;
+  wrap.querySelector('.see-more-btn').textContent = isAll ? 'Show less' : 'See more categories';
+  wrap.querySelector('.see-more-btn').onclick = isAll ? svcShowLess : svcSeeMore;
 }
 
-function svcToggle(btn) {
-  var group = btn.getAttribute('data-group');
-  var limit = svcMaxRows[group] || SVC_ROWS;
-  var el = document.querySelector('.cat-group[data-group="' + group + '"]');
-  var grid = el ? el.querySelector('.subcat-grid') : null;
-  if (!grid) return;
-  var cards = grid.querySelectorAll('.subcat-card');
-  var maxRow = 0;
-  cards.forEach(function(c) { var r = parseInt(c.dataset.row || 0); if (r > maxRow) maxRow = r; });
-  if (limit >= maxRow) {
-    svcMaxRows[group] = SVC_ROWS;
-    svcApplyRows(group);
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  } else {
-    svcMaxRows[group] = limit + SVC_ROWS;
-    svcApplyRows(group);
-  }
+function svcSeeMore() { svcMaxRow += SVC_ROWS; svcApplyRows(); }
+
+function svcShowLess() {
+  svcMaxRow = SVC_ROWS;
+  svcApplyRows();
+  var grid = document.getElementById('svc-grid');
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function svcInitAll() {
-  document.querySelectorAll('.cat-group').forEach(function(g) {
-    var group = g.dataset.group;
-    svcMaxRows[group] = SVC_ROWS;
-    var grid = g.querySelector('.subcat-grid');
-    if (!grid) return;
-    if (!g.querySelector('.see-more-wrap')) {
-      var wrap = document.createElement('div');
-      wrap.className = 'see-more-wrap';
-      wrap.innerHTML = '<button class="see-more-btn" data-group="' + group + '" onclick="svcToggle(this)">See more</button>';
-      grid.parentNode.insertBefore(wrap, grid.nextSibling);
-    }
-    svcCalcGrid(grid);
-    svcApplyRows(group);
+function svcInitRows() {
+  svcMaxRow = SVC_ROWS;
+  document.querySelectorAll('#svc-grid .subcat-card').forEach(function(c) { c.classList.remove('row-hidden'); });
+  requestAnimationFrame(function() { svcCalcGrid(); svcApplyRows(); });
+}
+
+/* ── Search ── */
+function svcSearch(val) {
+  var q = val.trim().toLowerCase();
+  var cards = document.querySelectorAll('#svc-grid .subcat-card');
+  var any = false;
+  cards.forEach(function(c) {
+    var tags = (c.getAttribute('data-tags') || '').toLowerCase();
+    var title = (c.querySelector('.sc-title') ? c.querySelector('.sc-title').textContent : '').toLowerCase();
+    var match = !q || tags.indexOf(q) > -1 || title.indexOf(q) > -1;
+    c.classList.toggle('hidden', !match);
+    c.classList.remove('row-hidden');
+    if (match) any = true;
   });
+  var empty = document.getElementById('svc-empty');
+  if (empty) empty.classList.toggle('visible', !any && q.length > 0);
+  var wrap = document.getElementById('svc-see-more');
+  if (q) { if (wrap) wrap.style.display = 'none'; } else { svcInitRows(); }
 }
 
 /* ── Filter Groups ── */
 function filterGroup(group, filterChipEl, heroChipEl) {
-  /* Update filter bar chip active state */
   document.querySelectorAll('#filter-chips .fchip').forEach(function(c) { c.classList.remove('active'); });
   if (filterChipEl) {
     filterChipEl.classList.add('active');
   } else {
-    /* Called from hero chip or programmatically -- find matching filter chip */
     document.querySelectorAll('#filter-chips .fchip').forEach(function(c) {
       var onclick = c.getAttribute('onclick') || '';
       if (group === 'all' && onclick.indexOf("'all'") > -1) c.classList.add('active');
       else if (onclick.indexOf("'" + group + "'") > -1) c.classList.add('active');
     });
   }
-  /* Show/hide groups */
-  document.querySelectorAll('.cat-group').forEach(function(g) {
-    g.style.display = (group === 'all' || g.dataset.group === group) ? '' : 'none';
+  var cards = document.querySelectorAll('#svc-grid .subcat-card');
+  cards.forEach(function(c) {
+    if (group === 'all') { c.classList.remove('hidden'); }
+    else { c.classList.toggle('hidden', c.getAttribute('data-cat') !== group); }
+    c.classList.remove('row-hidden');
   });
-  /* Clear search if active */
-  var searchInput = document.getElementById('svc-search');
-  if (searchInput && searchInput.value) {
-    searchInput.value = '';
-    document.getElementById('svc-search-results').classList.remove('visible');
-    document.querySelector('.cta-strip').style.display = '';
-    document.querySelector('.faq-section').style.display = '';
-  }
-  /* Re-init rows for visible groups */
-  requestAnimationFrame(function() {
-    document.querySelectorAll('.cat-group').forEach(function(g) {
-      if (g.style.display === 'none') return;
-      var grid = g.querySelector('.subcat-grid');
-      if (grid) { svcCalcGrid(grid); svcApplyRows(g.dataset.group); }
-    });
-  });
+  var search = document.getElementById('svc-search');
+  if (search) search.value = '';
+  var empty = document.getElementById('svc-empty');
+  if (empty) empty.classList.remove('visible');
+  svcInitRows();
 }
 
 /* ── FAQ ── */
@@ -1115,14 +988,8 @@ async function pnfSubmitContact(e) {
 })();
 
 /* ── Init ── */
-document.addEventListener('DOMContentLoaded', svcInitAll);
-window.addEventListener('resize', function() {
-  document.querySelectorAll('.cat-group').forEach(function(g) {
-    if (g.style.display === 'none') return;
-    var grid = g.querySelector('.subcat-grid');
-    if (grid) { svcCalcGrid(grid); svcApplyRows(g.dataset.group); }
-  });
-});
+document.addEventListener('DOMContentLoaded', svcInitRows);
+window.addEventListener('resize', function() { svcCalcGrid(); svcApplyRows(); });
 </script>
 </body>
 </html>
