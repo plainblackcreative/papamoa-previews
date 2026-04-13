@@ -231,6 +231,10 @@ a { color: var(--blue); text-decoration: none; }
 .sc-body { min-width: 0; }
 .sc-title { font-weight: 700; font-size: 0.88rem; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sc-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+.see-more-wrap { text-align: center; margin-top: 14px; }
+.see-more-btn { display: inline-block; font-family: 'Figtree', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--blue); background: rgba(58,171,222,0.06); border: 1px solid rgba(58,171,222,0.2); padding: 8px 22px; border-radius: 20px; cursor: pointer; transition: all 0.15s; }
+.see-more-btn:hover { background: rgba(58,171,222,0.12); border-color: var(--blue); }
+.subcat-card.row-hidden { display: none; }
 .subcat-empty { display: none; padding: 24px 0; text-align: center; font-size: 0.84rem; color: var(--muted); }
 .subcat-empty.visible { display: block; }
 
@@ -497,6 +501,7 @@ a { color: var(--blue); text-decoration: none; }
         </a>
 
       </div>
+      <div class="see-more-wrap" id="shop-see-more"><button class="see-more-btn" onclick="shopSeeMore()">See more categories</button></div>
       <div class="subcat-empty" id="shop-empty">No results &mdash; <a href="/papamoa-previews/categories/shops/shopping.html">browse all shops</a></div>
 
       <!-- SPOTLIGHT -->
@@ -669,6 +674,72 @@ a { color: var(--blue); text-decoration: none; }
 </div>
 
 <script>
+/* ── See More / Show Less ── */
+var SHOP_ROWS = 2;
+var shopMaxRow = SHOP_ROWS;
+ 
+function shopCalcGrid() {
+  var grid = document.getElementById('shop-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card:not(.hidden)');
+  if (!cards.length) return;
+  var firstTop = cards[0].getBoundingClientRect().top;
+  var cols = 0;
+  for (var i = 0; i < cards.length; i++) {
+    if (cards[i].getBoundingClientRect().top !== firstTop && cols === 0) { cols = i; break; }
+  }
+  if (!cols) cols = cards.length;
+  cards.forEach(function(c, idx) {
+    c.dataset.row = Math.floor(idx / cols) + 1;
+  });
+  return cols;
+}
+ 
+function shopApplyRows() {
+  var grid = document.getElementById('shop-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card:not(.hidden)');
+  var maxRow = 0;
+  cards.forEach(function(c) {
+    var r = parseInt(c.dataset.row || 0);
+    if (r > maxRow) maxRow = r;
+    c.classList.toggle('row-hidden', r > shopMaxRow);
+  });
+  var btn = document.getElementById('shop-see-more');
+  if (!btn) return;
+  if (maxRow <= SHOP_ROWS) {
+    btn.style.display = 'none';
+  } else {
+    btn.style.display = '';
+    var isAll = shopMaxRow >= maxRow;
+    btn.querySelector('.see-more-btn').textContent = isAll ? 'Show less' : 'See more categories';
+    btn.querySelector('.see-more-btn').onclick = isAll ? shopShowLess : shopSeeMore;
+  }
+}
+ 
+function shopSeeMore() {
+  shopMaxRow += SHOP_ROWS;
+  shopApplyRows();
+}
+ 
+function shopShowLess() {
+  shopMaxRow = SHOP_ROWS;
+  shopApplyRows();
+  var grid = document.getElementById('shop-grid');
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+ 
+function shopInitRows() {
+  shopMaxRow = SHOP_ROWS;
+  /* Temporarily show all to measure */
+  document.querySelectorAll('#shop-grid .subcat-card').forEach(function(c) { c.classList.remove('row-hidden'); });
+  requestAnimationFrame(function() {
+    shopCalcGrid();
+    shopApplyRows();
+  });
+}
+ 
+/* ── Search ── */
 function shopSearch(val) {
   var q = val.trim().toLowerCase();
   var cards = document.querySelectorAll('#shop-grid .subcat-card');
@@ -678,28 +749,43 @@ function shopSearch(val) {
     var title = (c.querySelector('.sc-title') ? c.querySelector('.sc-title').textContent : '').toLowerCase();
     var match = !q || tags.indexOf(q) > -1 || title.indexOf(q) > -1;
     c.classList.toggle('hidden', !match);
+    c.classList.remove('row-hidden');
     if (match) any = true;
   });
   var empty = document.getElementById('shop-empty');
   if (empty) empty.classList.toggle('visible', !any && q.length > 0);
+  var btn = document.getElementById('shop-see-more');
+  if (q) {
+    if (btn) btn.style.display = 'none';
+  } else {
+    shopInitRows();
+  }
 }
+ 
+/* ── Category Filter ── */
 function catFilter(btn, cat) {
   document.querySelectorAll('.subcat-bar .chip').forEach(function(c) { c.classList.remove('active'); });
   btn.classList.add('active');
   document.querySelectorAll('#shop-grid .subcat-card').forEach(function(c) {
     if (cat === 'all') { c.classList.remove('hidden'); }
     else { c.classList.toggle('hidden', c.getAttribute('data-cat') !== cat); }
+    c.classList.remove('row-hidden');
   });
   document.getElementById('shop-search').value = '';
   var empty = document.getElementById('shop-empty');
   if (empty) empty.classList.remove('visible');
+  shopInitRows();
 }
+ 
+/* ── FAQ ── */
 function toggleFaq(btn) {
   var item = btn.closest('.faq-item');
   var wasOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
   if (!wasOpen) item.classList.add('open');
 }
+ 
+/* ── Drawer ── */
 function pnfDrawerOpen() {
   document.getElementById('pnf-drawer').classList.add('open');
   document.getElementById('pnf-drawer-overlay').classList.add('open');
@@ -710,6 +796,8 @@ function pnfDrawerClose() {
   document.getElementById('pnf-drawer-overlay').classList.remove('open');
   document.body.style.overflow = '';
 }
+ 
+/* ── Contact Modal ── */
 function pnfOpenContact() {
   document.getElementById('pnf-contact-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -722,6 +810,7 @@ function pnfOverlayClick(e) {
   if (e.target === document.getElementById('pnf-contact-overlay')) pnfCloseContact();
 }
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { pnfDrawerClose(); pnfCloseContact(); } });
+ 
 async function pnfSubmitContact(e) {
   e.preventDefault();
   var btn = document.getElementById('pnf-cf-btn');
@@ -733,6 +822,8 @@ async function pnfSubmitContact(e) {
     else { btn.textContent = 'Try again'; btn.disabled = false; }
   } catch(err) { btn.textContent = 'Try again'; btn.disabled = false; }
 }
+ 
+/* ── Path rewrite ── */
 (function() {
   var base = '/papamoa-previews';
   document.addEventListener('click', function(e) {
@@ -743,6 +834,10 @@ async function pnfSubmitContact(e) {
     if (href.startsWith('/') && !href.startsWith(base)) { e.preventDefault(); window.location.href = base + href; }
   });
 })();
+ 
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', shopInitRows);
+window.addEventListener('resize', function() { shopCalcGrid(); shopApplyRows(); });
 </script>
 </body>
 </html>
