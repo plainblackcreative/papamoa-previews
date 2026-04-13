@@ -314,7 +314,30 @@
     .subcat-card { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:16px 14px; display:flex; align-items:center; gap:11px; text-decoration:none; color:inherit; transition:all 0.15s; }
     .subcat-card:hover { border-color:var(--blue); box-shadow:0 3px 10px rgba(58,171,222,0.08); transform:translateY(-1px); }
     .subcat-card.hidden { display:none; }
-    .subcat-card.capped { display:none; }
+    .subcat-card.row-hidden { display:none; }
+
+    /* ── SEE ALL CARD ── */
+    .subcat-card.see-all-card { background:linear-gradient(135deg,var(--bg),var(--white)); border:1.5px dashed var(--border); }
+    .subcat-card.see-all-card:hover { border-color:var(--blue); border-style:solid; }
+    .subcat-card.see-all-card .sc-title { color:var(--blue); }
+
+    /* ── SEE MORE BUTTON ── */
+    .see-more-btn { display:inline-flex; align-items:center; gap:6px; margin-top:10px; margin-bottom:8px; padding:8px 18px; font-family:'Figtree',sans-serif; font-size:0.8rem; font-weight:700; color:var(--blue); background:rgba(58,171,222,0.06); border:1px solid rgba(58,171,222,0.18); border-radius:8px; cursor:pointer; transition:all 0.15s; }
+    .see-more-btn:hover { background:rgba(58,171,222,0.12); border-color:rgba(58,171,222,0.3); }
+    .see-more-btn .arrow { transition:transform 0.2s; font-size:0.7rem; }
+    .see-more-btn.expanded .arrow { transform:rotate(180deg); }
+
+    /* ── INLINE LISTING RESULTS ── */
+    .cat-listing-results { margin-bottom:12px; }
+    .cat-listing-results:empty { margin-bottom:0; }
+    .cat-listing-results .clr-label { font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+    .cat-listing-results .clr-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:8px; }
+    .clr-card { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:10px 12px; display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; transition:all 0.15s; }
+    .clr-card:hover { border-color:var(--blue); box-shadow:0 2px 8px rgba(58,171,222,0.08); }
+    .clr-icon { font-size:1.1rem; flex-shrink:0; }
+    .clr-info { min-width:0; }
+    .clr-name { font-weight:700; font-size:0.82rem; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .clr-sub { font-size:0.68rem; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .sc-icon { font-size:1.4rem; flex-shrink:0; }
     .sc-body { min-width:0; }
     .sc-title { font-weight:700; font-size:0.88rem; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -756,66 +779,31 @@
     <div class="cat-search-wrap">
       <input type="text" class="cat-search-input" placeholder="Search food &amp; drink — try &ldquo;pizza&rdquo;, &ldquo;brunch&rdquo;, &ldquo;coffee&rdquo;&hellip;" oninput="catSearch('food',this.value)" autocomplete="off">
     </div>
-    <div class="subcat-grid" id="food-grid">
-      <a href="/papamoa-previews/categories/food-drink/restaurants-papamoa.html" class="subcat-card" data-tags="restaurants dining dinner lunch sit down meals dine in outdoor indoor seating fully licensed grill shared plates">
-        <span class="sc-icon">&#127829;</span><div class="sc-body"><div class="sc-title">Restaurants</div><div class="sc-desc">Sit-down dining in P&#257;p&#257;moa</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/cafe-papamoa.html" class="subcat-card" data-tags="cafe coffee flat white brunch breakfast morning tea espresso blackberry eatery all day generous portions weekend busy specialty">
-        <span class="sc-icon">&#9749;</span><div class="sc-body"><div class="sc-title">Cafes</div><div class="sc-desc">Specialty coffee &amp; brunch spots</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/bar-papamoa.html" class="subcat-card" data-tags="bar pub craft beer cocktail drinks nightlife licensed happy hour shared plates open late">
-        <span class="sc-icon">&#127867;</span><div class="sc-body"><div class="sc-title">Bars &amp; Pubs</div><div class="sc-desc">Craft beer, cocktails &amp; local pubs</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/burgers-papamoa.html" class="subcat-card" data-tags="burger burgers gourmet fresh handcrafted gluten free delivery takeaway dine in">
-        <span class="sc-icon">&#127828;</span><div class="sc-body"><div class="sc-title">Burgers</div><div class="sc-desc">Gourmet &amp; fast-casual burgers</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/fish-and-chips-papamoa.html" class="subcat-card" data-tags="fish and chips fish chips chippie takeaway battered deep fried seafood snapper">
-        <span class="sc-icon">&#127866;</span><div class="sc-body"><div class="sc-title">Fish &amp; Chips</div><div class="sc-desc">Fresh-battered chippies</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/sushi-papamoa.html" class="subcat-card" data-tags="sushi japanese sashimi rolls bento noodles ramen train rice nigiri temaki">
-        <span class="sc-icon">&#127843;</span><div class="sc-body"><div class="sc-title">Sushi</div><div class="sc-desc">Sushi trains &amp; Japanese dining</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/indian-restaurant-papamoa.html" class="subcat-card" data-tags="indian curry tandoor naan butter chicken tikka masala biryani spicy vegetarian vegan byo mumbai masala fashion island gravatt road 4.5 stars google 387 reviews dine in takeaway open 4:30pm">
-        <span class="sc-icon">&#127858;</span><div class="sc-body"><div class="sc-title">Indian Restaurants</div><div class="sc-desc">Curry, tandoor &amp; Indian cuisine</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/thai-restaurant-papamoa.html" class="subcat-card" data-tags="thai food thai restaurant pad thai curry stir fry byo wine lunch dinner takeaway">
-        <span class="sc-icon">&#127836;</span><div class="sc-body"><div class="sc-title">Thai Food</div><div class="sc-desc">Thai restaurants &amp; takeaways</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/mexican-restaurant-papamoa.html" class="subcat-card" data-tags="mexican tacos tequila burritos latin food dining dog friendly open late">
-        <span class="sc-icon">&#127790;</span><div class="sc-body"><div class="sc-title">Mexican &amp; Latin</div><div class="sc-desc">Tacos, burritos &amp; Latin dining</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/italian-restaurant-papamoa.html" class="subcat-card" data-tags="italian pizza pasta neapolitan dough deli order online dine in takeaway">
-        <span class="sc-icon">&#127837;</span><div class="sc-body"><div class="sc-title">Italian</div><div class="sc-desc">Pizza, pasta &amp; Italian restaurants</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/vegan-papamoa.html" class="subcat-card" data-tags="vegan plant based vegetarian dairy free gluten free plant based menu">
-        <span class="sc-icon">&#127807;</span><div class="sc-body"><div class="sc-title">Vegan &amp; Plant-Based</div><div class="sc-desc">Plant-based &amp; vegan-friendly dining</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/bakery-papamoa.html" class="subcat-card" data-tags="bakery bread pies pastries rolls buns fresh baked morning croissant muffin sweet treat">
-        <span class="sc-icon">&#127838;</span><div class="sc-body"><div class="sc-title">Bakeries</div><div class="sc-desc">Fresh bread, pies &amp; pastries</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/takeaways-papamoa.html" class="subcat-card" data-tags="takeaway takeaways delivery doordash uber eats delivereasy pizza pundits burgerfuel mumbai masala thai thani quick order online collect">
-        <span class="sc-icon">&#127860;</span><div class="sc-body"><div class="sc-title">Takeaways</div><div class="sc-desc">Every takeaway option in P&#257;p&#257;moa</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/turkish-restaurant-papamoa.html" class="subcat-card" data-tags="turkish kebab doner mediterranean food falafel pita">
-        <span class="sc-icon">&#129367;</span><div class="sc-body"><div class="sc-title">Turkish Food</div><div class="sc-desc">Kebabs &amp; Mediterranean dining</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/fast-food-papamoa.html" class="subcat-card capped" data-tags="fast food drive thru drive through mcdonalds kfc mcdonald's 7 gravatt road burgerfuel fashion island quick service">
-        <span class="sc-icon">&#127828;</span><div class="sc-body"><div class="sc-title">Fast Food &amp; Drive-Thru</div><div class="sc-desc">McDonald&rsquo;s, KFC &amp; more</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/function-venues-papamoa.html" class="subcat-card capped" data-tags="function venue private dining event space group booking birthday celebration pap house beachbar lantern hire">
-        <span class="sc-icon">&#127881;</span><div class="sc-body"><div class="sc-title">Function Venues</div><div class="sc-desc">Private dining &amp; event spaces</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/pizza-papamoa.html" class="subcat-card capped" data-tags="pizza gourmet delivery doordash uber eats gluten free house made pizza pundits 4.9 tripadvisor seven nights takeaway basilico 72 hour dough">
-        <span class="sc-icon">&#127829;</span><div class="sc-body"><div class="sc-title">Pizza</div><div class="sc-desc">Pizza Pundits &amp; Basilico</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/vietnamese-restaurant-papamoa.html" class="subcat-card capped" data-tags="vietnamese southeast asian lantern domain road summer rolls fish dumplings noodles fusion 4.8 stars">
-        <span class="sc-icon">&#127839;</span><div class="sc-body"><div class="sc-title">Vietnamese</div><div class="sc-desc">SE Asian fusion at Lantern</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/food-drink/japanese-restaurant-papamoa.html" class="subcat-card capped" data-tags="japanese ramen sushi noodles rice japanese food papamoa japanese restaurant">
-        <span class="sc-icon">&#127843;</span><div class="sc-body"><div class="sc-title">Japanese</div><div class="sc-desc">Japanese dining &amp; ramen</div></div>
-      </a>
+    <div class="cat-listing-results" id="food-listing-results"></div>
+    <div class="subcat-grid" id="food-grid" data-cat="food">
+      <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="subcat-card see-all-card" data-seeall="1" data-tags=""><span class="sc-icon">&#128204;</span><div class="sc-body"><div class="sc-title">See All Food &amp; Drink &rarr;</div><div class="sc-desc">Browse every listing &amp; subcategory</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/restaurants-papamoa.html" class="subcat-card" data-tags="restaurants dining dinner lunch sit down meals dine in outdoor indoor seating fully licensed grill shared plates"><span class="sc-icon">&#127829;</span><div class="sc-body"><div class="sc-title">Restaurants</div><div class="sc-desc">Sit-down dining in P&#257;p&#257;moa</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/cafe-papamoa.html" class="subcat-card" data-tags="cafe coffee flat white brunch breakfast morning tea espresso blackberry eatery all day generous portions weekend busy specialty"><span class="sc-icon">&#9749;</span><div class="sc-body"><div class="sc-title">Cafes</div><div class="sc-desc">Specialty coffee &amp; brunch spots</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/bar-papamoa.html" class="subcat-card" data-tags="bar pub craft beer cocktail drinks nightlife licensed happy hour shared plates open late"><span class="sc-icon">&#127867;</span><div class="sc-body"><div class="sc-title">Bars &amp; Pubs</div><div class="sc-desc">Craft beer, cocktails &amp; local pubs</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/takeaways-papamoa.html" class="subcat-card" data-tags="takeaway takeaways delivery doordash uber eats delivereasy pizza pundits burgerfuel mumbai masala thai thani quick order online collect"><span class="sc-icon">&#127860;</span><div class="sc-body"><div class="sc-title">Takeaways</div><div class="sc-desc">Every takeaway option in P&#257;p&#257;moa</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/pizza-papamoa.html" class="subcat-card" data-tags="pizza gourmet delivery doordash uber eats gluten free house made pizza pundits 4.9 tripadvisor seven nights takeaway basilico 72 hour dough"><span class="sc-icon">&#127829;</span><div class="sc-body"><div class="sc-title">Pizza</div><div class="sc-desc">Pizza Pundits &amp; Basilico</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/burgers-papamoa.html" class="subcat-card" data-tags="burger burgers gourmet fresh handcrafted gluten free delivery takeaway dine in"><span class="sc-icon">&#127828;</span><div class="sc-body"><div class="sc-title">Burgers</div><div class="sc-desc">Gourmet &amp; fast-casual burgers</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/indian-restaurant-papamoa.html" class="subcat-card" data-tags="indian curry tandoor naan butter chicken tikka masala biryani spicy vegetarian vegan byo mumbai masala fashion island gravatt road 4.5 stars google 387 reviews dine in takeaway open 4:30pm"><span class="sc-icon">&#127858;</span><div class="sc-body"><div class="sc-title">Indian Restaurants</div><div class="sc-desc">Curry, tandoor &amp; Indian cuisine</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/fish-and-chips-papamoa.html" class="subcat-card" data-tags="fish and chips fish chips chippie takeaway battered deep fried seafood snapper"><span class="sc-icon">&#127866;</span><div class="sc-body"><div class="sc-title">Fish &amp; Chips</div><div class="sc-desc">Fresh-battered chippies</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/sushi-papamoa.html" class="subcat-card" data-tags="sushi japanese sashimi rolls bento noodles ramen train rice nigiri temaki"><span class="sc-icon">&#127843;</span><div class="sc-body"><div class="sc-title">Sushi</div><div class="sc-desc">Sushi trains &amp; Japanese dining</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/thai-restaurant-papamoa.html" class="subcat-card" data-tags="thai food thai restaurant pad thai curry stir fry byo wine lunch dinner takeaway"><span class="sc-icon">&#127836;</span><div class="sc-body"><div class="sc-title">Thai Food</div><div class="sc-desc">Thai restaurants &amp; takeaways</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/mexican-restaurant-papamoa.html" class="subcat-card" data-tags="mexican tacos tequila burritos latin food dining dog friendly open late"><span class="sc-icon">&#127790;</span><div class="sc-body"><div class="sc-title">Mexican &amp; Latin</div><div class="sc-desc">Tacos, burritos &amp; Latin dining</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/italian-restaurant-papamoa.html" class="subcat-card" data-tags="italian pizza pasta neapolitan dough deli order online dine in takeaway"><span class="sc-icon">&#127837;</span><div class="sc-body"><div class="sc-title">Italian</div><div class="sc-desc">Pizza, pasta &amp; Italian restaurants</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/vegan-papamoa.html" class="subcat-card" data-tags="vegan plant based vegetarian dairy free gluten free plant based menu"><span class="sc-icon">&#127807;</span><div class="sc-body"><div class="sc-title">Vegan &amp; Plant-Based</div><div class="sc-desc">Plant-based &amp; vegan-friendly dining</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/bakery-papamoa.html" class="subcat-card" data-tags="bakery bread pies pastries rolls buns fresh baked morning croissant muffin sweet treat"><span class="sc-icon">&#127838;</span><div class="sc-body"><div class="sc-title">Bakeries</div><div class="sc-desc">Fresh bread, pies &amp; pastries</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/turkish-restaurant-papamoa.html" class="subcat-card" data-tags="turkish kebab doner mediterranean food falafel pita"><span class="sc-icon">&#129367;</span><div class="sc-body"><div class="sc-title">Turkish Food</div><div class="sc-desc">Kebabs &amp; Mediterranean dining</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/fast-food-papamoa.html" class="subcat-card" data-tags="fast food drive thru drive through mcdonalds kfc mcdonald's 7 gravatt road burgerfuel fashion island quick service"><span class="sc-icon">&#127828;</span><div class="sc-body"><div class="sc-title">Fast Food &amp; Drive-Thru</div><div class="sc-desc">McDonald&rsquo;s, KFC &amp; more</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/function-venues-papamoa.html" class="subcat-card" data-tags="function venue private dining event space group booking birthday celebration pap house beachbar lantern hire"><span class="sc-icon">&#127881;</span><div class="sc-body"><div class="sc-title">Function Venues</div><div class="sc-desc">Private dining &amp; event spaces</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/vietnamese-restaurant-papamoa.html" class="subcat-card" data-tags="vietnamese southeast asian lantern domain road summer rolls fish dumplings noodles fusion 4.8 stars"><span class="sc-icon">&#127839;</span><div class="sc-body"><div class="sc-title">Vietnamese</div><div class="sc-desc">SE Asian fusion at Lantern</div></div></a>
+      <a href="/papamoa-previews/categories/food-drink/japanese-restaurant-papamoa.html" class="subcat-card" data-tags="japanese ramen sushi noodles rice japanese food papamoa japanese restaurant"><span class="sc-icon">&#127843;</span><div class="sc-body"><div class="sc-title">Japanese</div><div class="sc-desc">Japanese dining &amp; ramen</div></div></a>
     </div>
     <div class="subcat-empty" id="food-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/food-drink/food-and-drink.html">browse all food &amp; drink &rarr;</a></div>
+    <button class="see-more-btn" id="food-more" onclick="toggleMore('food')"><span>See more</span> <span class="arrow">&#9660;</span></button>
     <div class="spotlight-ad">
       <div class="sa-label"><span class="sa-label-badge">&#11088; Spotlight Ad</span> Food &amp; Drink &mdash; Homepage</div>
       <div class="sa-name">PAP House</div>
@@ -836,7 +824,7 @@
     <div class="cat-hero-bar cat-hero-essential">
       <div class="breadcrumb-bar"><a href="/papamoa-previews/homepage.html">Home</a> / Services &amp; Trades</div>
       <h2>Services &amp; Trades</h2>
-      <p>Mechanics, tradespeople, health professionals and the services that keep Pāpāmoa running</p>
+      <p>Mechanics, tradespeople, health professionals and the services that keep P&#257;p&#257;moa running</p>
     </div>
     <div class="subcat-bar">
       <div class="subcat-inner">
@@ -846,7 +834,7 @@
         <a href="/papamoa-previews/categories/services/plumber-papamoa.html" class="chip">Plumbers</a>
         <a href="/papamoa-previews/categories/services/physio-papamoa.html" class="chip">Physio</a>
         <a href="/papamoa-previews/categories/services/gym-papamoa.html" class="chip">Gyms &amp; Fitness</a>
-        <a href="/papamoa-previews/categories/services/medical-centre-papamoa.html" class="chip">Medical</a>
+        <a href="/papamoa-previews/categories/services/health-papamoa.html" class="chip">Medical</a>
         <a href="/papamoa-previews/categories/services/painter-papamoa.html" class="chip">Painters</a>
         <a href="/papamoa-previews/categories/services/fencing-papamoa.html" class="chip">Fencing</a>
         <a href="/papamoa-previews/categories/services/aircon-papamoa.html" class="chip">Air Con</a>
@@ -859,58 +847,30 @@
     <div class="cat-search-wrap">
       <input type="text" class="cat-search-input" placeholder="Search services — try &ldquo;WOF&rdquo;, &ldquo;dentist&rdquo;, &ldquo;heat pump&rdquo;&hellip;" oninput="catSearch('services',this.value)" autocomplete="off">
     </div>
-    <div class="subcat-grid" id="services-grid">
-      <a href="/papamoa-previews/categories/services/mechanic-papamoa.html" class="subcat-card" data-tags="mechanic wof warrant of fitness service tyre tyres brake brakes auto car repair automotive coastal autos ashley place mta assured wheel alignment auto electrical vehicle licensing 12 month warranty 20000km">
-        <span class="sc-icon">🚗</span><div class="sc-body"><div class="sc-title">Mechanics &amp; Auto</div><div class="sc-desc">WOF, servicing &amp; tyres</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/electrician-papamoa.html" class="subcat-card" data-tags="electrician electrical wiring switchboard ev charger heat pump sparky registered install solar power board upgrade">
-        <span class="sc-icon">⚡</span><div class="sc-body"><div class="sc-title">Electricians</div><div class="sc-desc">Registered electricians &amp; EV chargers</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/plumber-papamoa.html" class="subcat-card" data-tags="plumber plumbing gasfitter gas pipe drain blocked hot water cylinder bathroom renovation leak burst">
-        <span class="sc-icon">🔧</span><div class="sc-body"><div class="sc-title">Plumbers</div><div class="sc-desc">Licensed plumbers &amp; gasfitters</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/physio-papamoa.html" class="subcat-card" data-tags="physio physiotherapy acc sports rehab injury back neck shoulder knee pain redefined wellbeing hub ashley place integrated wellbeing recovery pilates yoga">
-        <span class="sc-icon">🦴</span><div class="sc-body"><div class="sc-title">Physiotherapy</div><div class="sc-desc">ACC registered physio &amp; sports rehab</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/gym-papamoa.html" class="subcat-card" data-tags="gym fitness pilates yoga reformer weights classes personal training crossfit wellbeing redefined wellbeing hub ashley place physiotherapy nutrition massage counselling sauna ice bath recovery lab new zealand first integrated">
-        <span class="sc-icon">🏋</span><div class="sc-body"><div class="sc-title">Gyms &amp; Fitness</div><div class="sc-desc">24hr gyms, pilates &amp; group classes</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/medical-centre-papamoa.html" class="subcat-card" data-tags="medical centre gp doctor enrolled patient health care clinic dentist teeth dental orthodontist braces tara road dental 1g tara road implants veneers crowns iv sedation anxious patients general cosmetic family dr lloyd farrar papamoa orthodontist clear aligners invisalign early treatment ceramic metal nzao mon fri">
-        <span class="sc-icon">🏥</span><div class="sc-body"><div class="sc-title">Medical &amp; Dental</div><div class="sc-desc">GPs, dentists &amp; orthodontists</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/painter-papamoa.html" class="subcat-card" data-tags="painter painting decorator interior exterior house painting walls residential commercial colour consultation">
-        <span class="sc-icon">🎨</span><div class="sc-body"><div class="sc-title">Painters &amp; Decorators</div><div class="sc-desc">Interior &amp; exterior house painting</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/fencing-papamoa.html" class="subcat-card" data-tags="fencing fence timber steel pool gate boundary privacy installer post rail picket">
-        <span class="sc-icon">🪚</span><div class="sc-body"><div class="sc-title">Fencing</div><div class="sc-desc">Timber, steel &amp; pool fencing</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/aircon-papamoa.html" class="subcat-card capped" data-tags="air conditioning aircon heat pump mitsubishi fujitsu daikin hvac heating cooling install authorised supplier energy efficient">
-        <span class="sc-icon">❄️</span><div class="sc-body"><div class="sc-title">Air Conditioning</div><div class="sc-desc">Heat pump supply &amp; installation</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/childcare-papamoa.html" class="subcat-card capped" data-tags="childcare early childhood education ece kindy kindergarten creche daycare licensed under 5 toddler infant preschool">
-        <span class="sc-icon">👶</span><div class="sc-body"><div class="sc-title">Childcare &amp; ECE</div><div class="sc-desc">Licensed early learning centres</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/lawn-mowing.html" class="subcat-card capped" data-tags="lawn mowing garden maintenance landscaping hedge trimming weeding grass cut greencut vetted operators residential rental lifestyle block section clearing free quote 2 hours 0800">
-        <span class="sc-icon">🌿</span><div class="sc-body"><div class="sc-title">Lawn Mowing</div><div class="sc-desc">Lawn care &amp; garden maintenance</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/mechanic-papamoa.html" class="subcat-card capped" data-tags="screen fly screen insect screen security screen window door wardrobe speedy screens custom measure quote rob 16 years experience bay of plenty waihi waihau bay security door built in wardrobe nail kayco nails press on custom handmade barber toms haircut mens cuts beard trim fade walk in parton road">
-        <span class="sc-icon">🪟</span><div class="sc-body"><div class="sc-title">Home Services</div><div class="sc-desc">Screens, security &amp; home solutions</div></div>
-      </a>
+    <div class="cat-listing-results" id="services-listing-results"></div>
+    <div class="subcat-grid" id="services-grid" data-cat="services">
+      <a href="/papamoa-previews/categories/services/services.html" class="subcat-card see-all-card" data-seeall="1" data-tags=""><span class="sc-icon">&#128204;</span><div class="sc-body"><div class="sc-title">See All Services &rarr;</div><div class="sc-desc">Browse every listing &amp; subcategory</div></div></a>
+      <a href="/papamoa-previews/categories/services/mechanic-papamoa.html" class="subcat-card" data-tags="mechanic wof warrant of fitness service tyre tyres brake brakes auto car repair automotive coastal autos ashley place mta assured wheel alignment auto electrical vehicle licensing 12 month warranty 20000km"><span class="sc-icon">&#128663;</span><div class="sc-body"><div class="sc-title">Mechanics &amp; Auto</div><div class="sc-desc">WOF, servicing &amp; tyres</div></div></a>
+      <a href="/papamoa-previews/categories/services/dentist-papamoa.html" class="subcat-card" data-tags="dentist dental orthodontist braces invisalign implants veneers crowns iv sedation tara road dental papamoa orthodontist clear aligners early treatment"><span class="sc-icon">&#129463;</span><div class="sc-body"><div class="sc-title">Dentists &amp; Orthodontists</div><div class="sc-desc">General, cosmetic &amp; braces</div></div></a>
+      <a href="/papamoa-previews/categories/services/gym-papamoa.html" class="subcat-card" data-tags="gym fitness pilates yoga reformer weights classes personal training crossfit wellbeing redefined wellbeing hub ashley place physiotherapy nutrition massage counselling sauna ice bath recovery lab new zealand first integrated"><span class="sc-icon">&#127947;</span><div class="sc-body"><div class="sc-title">Gyms &amp; Fitness</div><div class="sc-desc">24hr gyms, pilates &amp; group classes</div></div></a>
+      <a href="/papamoa-previews/categories/services/beauty-grooming-papamoa.html" class="subcat-card" data-tags="barber haircut beard trim fade walk in nail salon press on custom nails beauty grooming kayco barber toms mens kids"><span class="sc-icon">&#9986;&#65039;</span><div class="sc-body"><div class="sc-title">Beauty &amp; Grooming</div><div class="sc-desc">Barbers, nails &amp; salons</div></div></a>
+      <a href="/papamoa-previews/categories/services/physio-papamoa.html" class="subcat-card" data-tags="physio physiotherapy acc sports rehab injury back neck shoulder knee pain redefined wellbeing hub ashley place integrated wellbeing recovery pilates yoga"><span class="sc-icon">&#129460;</span><div class="sc-body"><div class="sc-title">Physiotherapy</div><div class="sc-desc">ACC registered physio &amp; sports rehab</div></div></a>
+      <a href="/papamoa-previews/categories/services/health-papamoa.html" class="subcat-card" data-tags="medical centre gp doctor enrolled patient health care clinic dentist teeth dental orthodontist braces tara road dental 1g tara road implants veneers crowns iv sedation anxious patients general cosmetic family"><span class="sc-icon">&#127973;</span><div class="sc-body"><div class="sc-title">Medical &amp; Dental</div><div class="sc-desc">GPs, dentists &amp; orthodontists</div></div></a>
+      <a href="/papamoa-previews/categories/services/electrician-papamoa.html" class="subcat-card" data-tags="electrician electrical wiring switchboard ev charger heat pump sparky registered install solar power board upgrade"><span class="sc-icon">&#9889;</span><div class="sc-body"><div class="sc-title">Electricians</div><div class="sc-desc">Registered electricians &amp; EV chargers</div></div></a>
+      <a href="/papamoa-previews/categories/services/plumber-papamoa.html" class="subcat-card" data-tags="plumber plumbing gasfitter gas pipe drain blocked hot water cylinder bathroom renovation leak burst"><span class="sc-icon">&#128295;</span><div class="sc-body"><div class="sc-title">Plumbers</div><div class="sc-desc">Licensed plumbers &amp; gasfitters</div></div></a>
+      <a href="/papamoa-previews/categories/services/lawn-mowing.html" class="subcat-card" data-tags="lawn mowing garden maintenance landscaping hedge trimming weeding grass cut greencut vetted operators residential rental lifestyle block section clearing free quote 2 hours 0800"><span class="sc-icon">&#127807;</span><div class="sc-body"><div class="sc-title">Lawn Mowing</div><div class="sc-desc">Lawn care &amp; garden maintenance</div></div></a>
+      <a href="/papamoa-previews/categories/services/painter-papamoa.html" class="subcat-card" data-tags="painter painting decorator interior exterior house painting walls residential commercial colour consultation"><span class="sc-icon">&#127912;</span><div class="sc-body"><div class="sc-title">Painters &amp; Decorators</div><div class="sc-desc">Interior &amp; exterior house painting</div></div></a>
+      <a href="/papamoa-previews/categories/services/fencing-papamoa.html" class="subcat-card" data-tags="fencing fence timber steel pool gate boundary privacy installer post rail picket"><span class="sc-icon">&#129690;</span><div class="sc-body"><div class="sc-title">Fencing</div><div class="sc-desc">Timber, steel &amp; pool fencing</div></div></a>
+      <a href="/papamoa-previews/categories/services/aircon-papamoa.html" class="subcat-card" data-tags="air conditioning aircon heat pump mitsubishi fujitsu daikin hvac heating cooling install authorised supplier energy efficient"><span class="sc-icon">&#10052;&#65039;</span><div class="sc-body"><div class="sc-title">Air Conditioning</div><div class="sc-desc">Heat pump supply &amp; installation</div></div></a>
+      <a href="/papamoa-previews/categories/services/childcare-papamoa.html" class="subcat-card" data-tags="childcare early childhood education ece kindy kindergarten creche daycare licensed under 5 toddler infant preschool"><span class="sc-icon">&#128118;</span><div class="sc-body"><div class="sc-title">Childcare &amp; ECE</div><div class="sc-desc">Licensed early learning centres</div></div></a>
+      <a href="/papamoa-previews/categories/services/retirement-services-papamoa.html" class="subcat-card" data-tags="retirement village over 55 lifestyle village karaka pines capital gains aged care home care seniors"><span class="sc-icon">&#127969;</span><div class="sc-body"><div class="sc-title">Retirement Services</div><div class="sc-desc">Villages, care &amp; over-55 living</div></div></a>
     </div>
-      <a href="/papamoa-previews/categories/services/dentist-papamoa.html" class="subcat-card capped" data-tags="dentist dental orthodontist braces invisalign implants veneers crowns iv sedation tara road dental papamoa orthodontist clear aligners">
-        <span class="sc-icon">🦷</span><div class="sc-body"><div class="sc-title">Dentists &amp; Orthodontists</div><div class="sc-desc">General, cosmetic &amp; braces</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/beauty-grooming-papamoa.html" class="subcat-card capped" data-tags="barber haircut beard trim fade walk in nail salon press on custom nails beauty grooming kayco barber toms mens kids">
-        <span class="sc-icon">✂️</span><div class="sc-body"><div class="sc-title">Beauty &amp; Grooming</div><div class="sc-desc">Barbers, nails &amp; salons</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/services/retirement-services-papamoa.html" class="subcat-card capped" data-tags="retirement village over 55 lifestyle village karaka pines capital gains aged care home care seniors">
-        <span class="sc-icon">🏡</span><div class="sc-body"><div class="sc-title">Retirement Services</div><div class="sc-desc">Villages, care &amp; over-55 living</div></div>
-      </a>
-        <div class="subcat-empty" id="services-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/services/services.html">browse all services &rarr;</a></div>
+    <div class="subcat-empty" id="services-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/services/services.html">browse all services &rarr;</a></div>
+    <button class="see-more-btn" id="services-more" onclick="toggleMore('services')"><span>See more</span> <span class="arrow">&#9660;</span></button>
     <div class="spotlight-ad">
       <div class="sa-label"><span class="sa-label-badge">&#11088; Spotlight Ad</span> Services &amp; Trades &mdash; Homepage</div>
       <div class="sa-name">Coastal Autos</div>
-      <div class="sa-sub">&#128663; Mechanic &amp; WOF &middot; Ashley Place, Pāpāmoa</div>
+      <div class="sa-sub">&#128663; Mechanic &amp; WOF &middot; Ashley Place, P&#257;p&#257;moa</div>
       <p class="sa-desc">MTA Assured workshop — WOFs, servicing, tyres, brakes, auto electrical and vehicle licensing. Online bookings.</p>
       <a href="/papamoa-previews/listings/coastal-autos-papamoa.html" class="sa-link">View full listing &rarr;</a>
     </div>
@@ -927,15 +887,12 @@
     <div class="cat-hero-bar cat-hero-accom">
       <div class="breadcrumb-bar"><a href="/papamoa-previews/homepage.html">Home</a> / Accommodation</div>
       <h2>Where to Stay</h2>
-      <p>Motels, holiday parks, short stays and everywhere to rest your head in Pāpāmoa</p>
+      <p>Motels, holiday parks, short stays and everywhere to rest your head in P&#257;p&#257;moa</p>
     </div>
     <div class="subcat-bar">
       <div class="subcat-inner">
         <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="chip active">All accommodation</a>
         <a href="/papamoa-previews/categories/accommodation/holiday-parks-papamoa.html" class="chip">Holiday Parks</a>
-        <a href="/papamoa-previews/categories/accommodation/luxury-stays-papamoa.html" class="chip">Luxury Stays</a>
-        <a href="/papamoa-previews/categories/accommodation/holiday-homes-papamoa.html" class="chip">Holiday Homes</a>
-        <a href="/papamoa-previews/categories/accommodation/retirement-villages-papamoa.html" class="chip">Retirement Villages</a>
         <a href="/papamoa-previews/categories/accommodation/motels-papamoa.html" class="chip">Motels</a>
         <a href="/papamoa-previews/categories/accommodation/apartments-papamoa.html" class="chip">Apartments</a>
         <a href="/papamoa-previews/categories/accommodation/bed-and-breakfast-papamoa.html" class="chip">B&amp;Bs</a>
@@ -944,49 +901,34 @@
         <a href="/papamoa-previews/categories/accommodation/backpackers-papamoa.html" class="chip">Backpackers</a>
         <a href="/papamoa-previews/categories/accommodation/pet-friendly-accommodation-papamoa.html" class="chip">Pet Friendly</a>
         <a href="/papamoa-previews/categories/accommodation/rental-homes-papamoa.html" class="chip">Rental Homes</a>
+        <a href="/papamoa-previews/categories/accommodation/retirement-villages-papamoa.html" class="chip">Retirement Villages</a>
+        <a href="/papamoa-previews/categories/accommodation/luxury-stays-papamoa.html" class="chip">Luxury Stays</a>
+        <a href="/papamoa-previews/categories/accommodation/holiday-homes-papamoa.html" class="chip">Holiday Homes</a>
       </div>
     </div>
     <div class="cat-search-wrap">
       <input type="text" class="cat-search-input" placeholder="Search accommodation — try &ldquo;holiday park&rdquo;, &ldquo;motel&rdquo;, &ldquo;beach&rdquo;&hellip;" oninput="catSearch('accom',this.value)" autocomplete="off">
     </div>
-    <div class="subcat-grid" id="accom-grid">
-      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="subcat-card" data-tags="holiday park camping powered sites cabins family beach aims games pacific park christian 1944 tripadvisor number 1 rated smoke free vape free alcohol free group lodges motel units 321 reviews">
-        <span class="sc-icon">🏕</span><div class="sc-body"><div class="sc-title">Holiday Parks</div><div class="sc-desc">Camping, cabins &amp; powered sites</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/accommodation/motels-papamoa.html" class="subcat-card" data-tags="motel motor lodge self contained units beach house motel bay palm energy motor lodge short stay kitchenette pool spa">
-        <span class="sc-icon">🏨</span><div class="sc-body"><div class="sc-title">Motels</div><div class="sc-desc">Self-contained units &amp; short stays</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/accommodation/apartments-papamoa.html" class="subcat-card" data-tags="apartment beachfront the reef belle mer ocean views balcony self contained holiday apartment short stay">
-        <span class="sc-icon">🏢</span><div class="sc-body"><div class="sc-title">Apartments</div><div class="sc-desc">Beachfront &amp; holiday apartments</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/accommodation/bed-and-breakfast-papamoa.html" class="subcat-card" data-tags="b&b bed and breakfast boutique guesthouse royal palms beachside breakfast included personal hosted">
-        <span class="sc-icon">🛏</span><div class="sc-body"><div class="sc-title">B&amp;Bs</div><div class="sc-desc">Boutique bed &amp; breakfast</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/accommodation/rental-homes-papamoa.html" class="subcat-card" data-tags="rental homes property management eves rentals ray white long term tenancy landlord bach airbnb bookabach whole home">
-        <span class="sc-icon">🏡</span><div class="sc-body"><div class="sc-title">Rental Homes</div><div class="sc-desc">Long-term rentals &amp; property management</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/accommodation/self-contained-papamoa.html" class="subcat-card" data-tags="self contained unit studio kitchen private pacific palms full kitchen bathroom private entry independent stay">
-        <span class="sc-icon">🔑</span><div class="sc-body"><div class="sc-title">Self-contained</div><div class="sc-desc">Kitchen &amp; full facilities included</div></div>
-      </a>
+    <div class="cat-listing-results" id="accom-listing-results"></div>
+    <div class="subcat-grid" id="accom-grid" data-cat="accom">
+      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="subcat-card see-all-card" data-seeall="1" data-tags=""><span class="sc-icon">&#128204;</span><div class="sc-body"><div class="sc-title">See All Accommodation &rarr;</div><div class="sc-desc">Browse every listing &amp; subcategory</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/holiday-parks-papamoa.html" class="subcat-card" data-tags="holiday park camping powered sites cabins family beach aims games pacific park christian 1944 tripadvisor number 1 rated smoke free vape free alcohol free group lodges motel units 321 reviews"><span class="sc-icon">&#127957;</span><div class="sc-body"><div class="sc-title">Holiday Parks</div><div class="sc-desc">Camping, cabins &amp; powered sites</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/motels-papamoa.html" class="subcat-card" data-tags="motel motor lodge self contained units beach house motel bay palm energy motor lodge short stay kitchenette pool spa"><span class="sc-icon">&#127976;</span><div class="sc-body"><div class="sc-title">Motels</div><div class="sc-desc">Self-contained units &amp; short stays</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/apartments-papamoa.html" class="subcat-card" data-tags="apartment beachfront the reef belle mer ocean views balcony self contained holiday apartment short stay"><span class="sc-icon">&#127970;</span><div class="sc-body"><div class="sc-title">Apartments</div><div class="sc-desc">Beachfront &amp; holiday apartments</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/self-contained-papamoa.html" class="subcat-card" data-tags="self contained unit studio kitchen private pacific palms full kitchen bathroom private entry independent stay"><span class="sc-icon">&#128273;</span><div class="sc-body"><div class="sc-title">Self-contained</div><div class="sc-desc">Kitchen &amp; full facilities included</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/rental-homes-papamoa.html" class="subcat-card" data-tags="rental homes property management eves rentals ray white long term tenancy landlord bach airbnb bookabach whole home"><span class="sc-icon">&#127969;</span><div class="sc-body"><div class="sc-title">Rental Homes</div><div class="sc-desc">Long-term rentals &amp; property management</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/bed-and-breakfast-papamoa.html" class="subcat-card" data-tags="b&b bed and breakfast boutique guesthouse royal palms beachside breakfast included personal hosted"><span class="sc-icon">&#128716;</span><div class="sc-body"><div class="sc-title">B&amp;Bs</div><div class="sc-desc">Boutique bed &amp; breakfast</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/short-stays-papamoa.html" class="subcat-card" data-tags="short stay airbnb bookabach holiday home beyonder aims games bach private rental whole house family"><span class="sc-icon">&#127968;</span><div class="sc-body"><div class="sc-title">Short Stays</div><div class="sc-desc">Airbnb, baches &amp; holiday homes</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/backpackers-papamoa.html" class="subcat-card" data-tags="backpackers budget accommodation hostel surf travellers seasonal workers budget camping holiday park"><span class="sc-icon">&#127890;</span><div class="sc-body"><div class="sc-title">Backpackers</div><div class="sc-desc">Budget &amp; hostel-style stays</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/pet-friendly-accommodation-papamoa.html" class="subcat-card" data-tags="pet friendly dogs allowed accommodation holiday home private rental airbnb bookabach dog beach"><span class="sc-icon">&#128062;</span><div class="sc-body"><div class="sc-title">Pet Friendly</div><div class="sc-desc">Dogs welcome</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/retirement-villages-papamoa.html" class="subcat-card" data-tags="retirement village over 55 lifestyle karaka pines beachside capital gains aged care seniors"><span class="sc-icon">&#127960;</span><div class="sc-body"><div class="sc-title">Retirement Villages</div><div class="sc-desc">Over-55 living &amp; lifestyle</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/luxury-stays-papamoa.html" class="subcat-card" data-tags="luxury stay boutique premium beachfront accommodation short stay apartment high end"><span class="sc-icon">&#10024;</span><div class="sc-body"><div class="sc-title">Luxury Stays</div><div class="sc-desc">Premium &amp; boutique accommodation</div></div></a>
+      <a href="/papamoa-previews/categories/accommodation/holiday-homes-papamoa.html" class="subcat-card" data-tags="holiday home bach rental whole home airbnb short stay papamoa beach family groups"><span class="sc-icon">&#127958;</span><div class="sc-body"><div class="sc-title">Holiday Homes</div><div class="sc-desc">Baches &amp; whole-home rentals</div></div></a>
     </div>
-      <a href="/papamoa-previews/categories/accommodation/short-stays-papamoa.html" class="subcat-card capped" data-tags="short stay airbnb bookabach holiday home beyonder aims games bach private rental whole house family">
-        <span class="sc-icon">🏠</span><div class="sc-body"><div class="sc-title">Short Stays</div><div class="sc-desc">Airbnb, baches &amp; holiday homes</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/accommodation/backpackers-papamoa.html" class="subcat-card capped" data-tags="backpackers budget accommodation hostel surf travellers seasonal workers budget camping holiday park">
-        <span class="sc-icon">🎒</span><div class="sc-body"><div class="sc-title">Backpackers</div><div class="sc-desc">Budget &amp; hostel-style stays</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/accommodation/pet-friendly-accommodation-papamoa.html" class="subcat-card capped" data-tags="pet friendly dogs allowed accommodation holiday home private rental airbnb bookabach dog beach">
-        <span class="sc-icon">🐾</span><div class="sc-body"><div class="sc-title">Pet Friendly</div><div class="sc-desc">Dogs welcome</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/accommodation/retirement-villages-papamoa.html" class="subcat-card capped" data-tags="retirement village over 55 lifestyle karaka pines beachside capital gains aged care seniors">
-        <span class="sc-icon">🏘</span><div class="sc-body"><div class="sc-title">Retirement Villages</div><div class="sc-desc">Over-55 living &amp; lifestyle</div></div>
-      </a>
-        <div class="subcat-empty" id="accom-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/accommodation/accommodation.html">browse all accommodation &rarr;</a></div>
+    <div class="subcat-empty" id="accom-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/accommodation/accommodation.html">browse all accommodation &rarr;</a></div>
+    <button class="see-more-btn" id="accom-more" onclick="toggleMore('accom')"><span>See more</span> <span class="arrow">&#9660;</span></button>
     <div class="spotlight-ad-ghost">
-      <div class="sag-text">
-        <h3>&#11088; Homepage Spotlight Ad &mdash; Accommodation</h3>
-        <p>Premium homepage placement for accommodation businesses. Independent of listing tier.</p>
-      </div>
+      <div class="sag-text"><h3>&#11088; Homepage Spotlight Ad &mdash; Accommodation</h3><p>Premium homepage placement for accommodation businesses. Independent of listing tier.</p></div>
       <a href="/papamoa-previews/sales/claim.html?type=spotlight&amp;subcat=Accommodation&amp;cat=Accommodation" class="sag-cta">Enquire about this spot &rarr;</a>
     </div>
     <div class="cat-section-footer">
@@ -1002,7 +944,7 @@
     <div class="cat-hero-bar cat-hero-entertain">
       <div class="breadcrumb-bar"><a href="/papamoa-previews/homepage.html">Home</a> / Entertainment &amp; Activities</div>
       <h2>What to Do</h2>
-      <p>Things to do in Pāpāmoa &mdash; surf, fitness, indoor entertainment, tours and local attractions</p>
+      <p>Things to do in P&#257;p&#257;moa — surf, fitness, indoor entertainment, tours and local attractions</p>
     </div>
     <div class="subcat-bar">
       <div class="subcat-inner">
@@ -1021,52 +963,29 @@
     <div class="cat-search-wrap">
       <input type="text" class="cat-search-input" placeholder="Search activities — try &ldquo;surf&rdquo;, &ldquo;VR&rdquo;, &ldquo;kids&rdquo;&hellip;" oninput="catSearch('activities',this.value)" autocomplete="off">
     </div>
-    <div class="subcat-grid" id="activities-grid">
-      <a href="/papamoa-previews/categories/activities/surf-school-papamoa.html" class="subcat-card" data-tags="surf surfing lesson board hire paddleboard sup water sports beach waves beginner holiday programme">
-        <span class="sc-icon">🏄</span><div class="sc-body"><div class="sc-title">Surf &amp; Water Sports</div><div class="sc-desc">Lessons, board hire &amp; SUP</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/indoor-entertainment-papamoa.html" class="subcat-card" data-tags="vr virtual reality sim racing escape room gaming indoor entertainment birthday party corporate groups">
-        <span class="sc-icon">🎮</span><div class="sc-body"><div class="sc-title">Indoor &amp; VR</div><div class="sc-desc">VR, sim racing &amp; escape rooms</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/gym-fitness-papamoa.html" class="subcat-card" data-tags="gym fitness 24 hour weights strength cardio open gym personal training health club workout exercise">
-        <span class="sc-icon">🏋</span><div class="sc-body"><div class="sc-title">Gym &amp; Fitness</div><div class="sc-desc">24hr gyms &amp; fitness centres</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/yoga-pilates-papamoa.html" class="subcat-card" data-tags="yoga pilates reformer mat barre yin vinyasa studio classes wellness mindfulness stretch">
-        <span class="sc-icon">🧘</span><div class="sc-body"><div class="sc-title">Yoga &amp; Pilates</div><div class="sc-desc">Studios, classes &amp; reformer</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/golf-papamoa.html" class="subcat-card" data-tags="golf course 9 hole summerhill drive green fees tee times mini golf putt">
-        <span class="sc-icon">⛳</span><div class="sc-body"><div class="sc-title">Golf</div><div class="sc-desc">Local 9-hole course &amp; mini putt</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/fishing-papamoa.html" class="subcat-card" data-tags="fishing surf casting snapper kahawai trevally beach fishing charter boat tackle bait">
-        <span class="sc-icon">🎣</span><div class="sc-body"><div class="sc-title">Fishing</div><div class="sc-desc">Beach fishing &amp; charters</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/walking-trails-papamoa.html" class="subcat-card" data-tags="walking trails tracks papamoa hills gordon spratt reserve beach walk hike nature family">
-        <span class="sc-icon">🥾</span><div class="sc-body"><div class="sc-title">Walks &amp; Trails</div><div class="sc-desc">P&#257;p&#257;moa Hills &amp; beach walks</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/cycling-papamoa.html" class="subcat-card" data-tags="cycling mountain biking mtb bike trails cycle path family ride gordon spratt summerhill">
-        <span class="sc-icon">🚵</span><div class="sc-body"><div class="sc-title">Cycling &amp; MTB</div><div class="sc-desc">Trails, cycle paths &amp; hire</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/swimming-papamoa.html" class="subcat-card" data-tags="swimming swim beach pool patrolled flags rips family safe water surf lifesaving">
-        <span class="sc-icon">🏊</span><div class="sc-body"><div class="sc-title">Swimming</div><div class="sc-desc">Beach guide &amp; pools</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/family-activities-papamoa.html" class="subcat-card" data-tags="family kids children activities playground birthday party indoor outdoor wet day holiday">
-        <span class="sc-icon">👨‍👩‍👧</span><div class="sc-body"><div class="sc-title">Family Activities</div><div class="sc-desc">Kids, playgrounds &amp; wet-day options</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/sports-clubs-papamoa.html" class="subcat-card" data-tags="sports clubs football rugby netball cricket surf lifesaving community sport team join">
-        <span class="sc-icon">⚽</span><div class="sc-body"><div class="sc-title">Sports &amp; Clubs</div><div class="sc-desc">Local clubs &amp; community sport</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/kayaking-boating-papamoa.html" class="subcat-card capped" data-tags="kayaking kayak paddleboard sup boating boat hire coastal water paddle explore">
-        <span class="sc-icon">🚣</span><div class="sc-body"><div class="sc-title">Kayaking &amp; Boating</div><div class="sc-desc">Paddling &amp; boat hire</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/activities/maori-culture-papamoa.html" class="subcat-card capped" data-tags="maori culture heritage tours pa sites papamoa hills nga potiki ngai te rangi history guided cultural">
-        <span class="sc-icon">🪶</span><div class="sc-body"><div class="sc-title">M&#257;ori Culture</div><div class="sc-desc">Heritage &amp; cultural tours</div></div>
-      </a>
+    <div class="cat-listing-results" id="activities-listing-results"></div>
+    <div class="subcat-grid" id="activities-grid" data-cat="activities">
+      <a href="/papamoa-previews/categories/activities/entertainment.html" class="subcat-card see-all-card" data-seeall="1" data-tags=""><span class="sc-icon">&#128204;</span><div class="sc-body"><div class="sc-title">See All Activities &rarr;</div><div class="sc-desc">Browse every listing &amp; subcategory</div></div></a>
+      <a href="/papamoa-previews/categories/activities/surf-school-papamoa.html" class="subcat-card" data-tags="surf surfing lesson board hire paddleboard sup water sports beach waves beginner holiday programme"><span class="sc-icon">&#127940;</span><div class="sc-body"><div class="sc-title">Surf &amp; Water Sports</div><div class="sc-desc">Lessons, board hire &amp; SUP</div></div></a>
+      <a href="/papamoa-previews/categories/activities/indoor-entertainment-papamoa.html" class="subcat-card" data-tags="vr virtual reality sim racing escape room gaming indoor entertainment birthday party corporate groups"><span class="sc-icon">&#127918;</span><div class="sc-body"><div class="sc-title">Indoor &amp; VR</div><div class="sc-desc">VR, sim racing &amp; escape rooms</div></div></a>
+      <a href="/papamoa-previews/categories/activities/gym-fitness-papamoa.html" class="subcat-card" data-tags="gym fitness 24 hour weights strength cardio open gym personal training health club workout exercise"><span class="sc-icon">&#127947;</span><div class="sc-body"><div class="sc-title">Gym &amp; Fitness</div><div class="sc-desc">24hr gyms &amp; fitness centres</div></div></a>
+      <a href="/papamoa-previews/categories/activities/family-activities-papamoa.html" class="subcat-card" data-tags="family kids children activities playground birthday party indoor outdoor wet day holiday"><span class="sc-icon">&#128104;&#8205;&#128105;&#8205;&#128103;</span><div class="sc-body"><div class="sc-title">Family Activities</div><div class="sc-desc">Kids, playgrounds &amp; wet-day options</div></div></a>
+      <a href="/papamoa-previews/categories/activities/walking-trails-papamoa.html" class="subcat-card" data-tags="walking trails tracks papamoa hills gordon spratt reserve beach walk hike nature family"><span class="sc-icon">&#129406;</span><div class="sc-body"><div class="sc-title">Walks &amp; Trails</div><div class="sc-desc">P&#257;p&#257;moa Hills &amp; beach walks</div></div></a>
+      <a href="/papamoa-previews/categories/activities/yoga-pilates-papamoa.html" class="subcat-card" data-tags="yoga pilates reformer mat barre yin vinyasa studio classes wellness mindfulness stretch"><span class="sc-icon">&#129496;</span><div class="sc-body"><div class="sc-title">Yoga &amp; Pilates</div><div class="sc-desc">Studios, classes &amp; reformer</div></div></a>
+      <a href="/papamoa-previews/categories/activities/sports-clubs-papamoa.html" class="subcat-card" data-tags="sports clubs football rugby netball cricket surf lifesaving community sport team join"><span class="sc-icon">&#9917;</span><div class="sc-body"><div class="sc-title">Sports &amp; Clubs</div><div class="sc-desc">Local clubs &amp; community sport</div></div></a>
+      <a href="/papamoa-previews/categories/activities/fishing-papamoa.html" class="subcat-card" data-tags="fishing surf casting snapper kahawai trevally beach fishing charter boat tackle bait"><span class="sc-icon">&#127907;</span><div class="sc-body"><div class="sc-title">Fishing</div><div class="sc-desc">Beach fishing &amp; charters</div></div></a>
+      <a href="/papamoa-previews/categories/activities/golf-papamoa.html" class="subcat-card" data-tags="golf course 9 hole summerhill drive green fees tee times mini golf putt"><span class="sc-icon">&#9971;</span><div class="sc-body"><div class="sc-title">Golf</div><div class="sc-desc">Local 9-hole course &amp; mini putt</div></div></a>
+      <a href="/papamoa-previews/categories/activities/cycling-papamoa.html" class="subcat-card" data-tags="cycling mountain biking mtb bike trails cycle path family ride gordon spratt summerhill"><span class="sc-icon">&#128693;</span><div class="sc-body"><div class="sc-title">Cycling &amp; MTB</div><div class="sc-desc">Trails, cycle paths &amp; hire</div></div></a>
+      <a href="/papamoa-previews/categories/activities/swimming-papamoa.html" class="subcat-card" data-tags="swimming swim beach pool patrolled flags rips family safe water surf lifesaving"><span class="sc-icon">&#127946;</span><div class="sc-body"><div class="sc-title">Swimming</div><div class="sc-desc">Beach guide &amp; pools</div></div></a>
+      <a href="/papamoa-previews/categories/activities/kayaking-boating-papamoa.html" class="subcat-card" data-tags="kayaking kayak paddleboard sup boating boat hire coastal water paddle explore"><span class="sc-icon">&#128675;</span><div class="sc-body"><div class="sc-title">Kayaking &amp; Boating</div><div class="sc-desc">Paddling &amp; boat hire</div></div></a>
+      <a href="/papamoa-previews/categories/activities/maori-culture-papamoa.html" class="subcat-card" data-tags="maori culture heritage tours pa sites papamoa hills nga potiki ngai te rangi history guided cultural"><span class="sc-icon">&#129718;</span><div class="sc-body"><div class="sc-title">M&#257;ori Culture</div><div class="sc-desc">Heritage &amp; cultural tours</div></div></a>
     </div>
     <div class="subcat-empty" id="activities-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/activities/entertainment.html">browse all activities &rarr;</a></div>
+    <button class="see-more-btn" id="activities-more" onclick="toggleMore('activities')"><span>See more</span> <span class="arrow">&#9660;</span></button>
     <div class="spotlight-ad">
       <div class="sa-label"><span class="sa-label-badge">&#11088; Spotlight Ad</span> Things to Do &mdash; Homepage</div>
-      <div class="sa-name">The Cave Pāpāmoa</div>
-      <div class="sa-sub">&#127918; VR &amp; Sim Racing &middot; Ashley Place, Pāpāmoa</div>
+      <div class="sa-name">The Cave P&#257;p&#257;moa</div>
+      <div class="sa-sub">&#127918; VR &amp; Sim Racing &middot; Ashley Place, P&#257;p&#257;moa</div>
       <p class="sa-desc">Hosted VR, escape rooms and sim racing. Ages 10+. Great for birthdays and team events. All equipment provided.</p>
       <a href="/papamoa-previews/listings/the-cave-papamoa.html" class="sa-link">View full listing &rarr;</a>
     </div>
@@ -1083,7 +1002,7 @@
     <div class="cat-hero-bar cat-hero-shop">
       <div class="breadcrumb-bar"><a href="/papamoa-previews/homepage.html">Home</a> / Shopping &amp; Retail</div>
       <h2>Where to Shop</h2>
-      <p>Fashion, gifts, books, specialty stores and retail across Pāpāmoa</p>
+      <p>Fashion, gifts, books, specialty stores and retail across P&#257;p&#257;moa</p>
     </div>
     <div class="subcat-bar">
       <div class="subcat-inner">
@@ -1103,47 +1022,25 @@
     <div class="cat-search-wrap">
       <input type="text" class="cat-search-input" placeholder="Search shops — try &ldquo;books&rdquo;, &ldquo;supplements&rdquo;, &ldquo;hardware&rdquo;&hellip;" oninput="catSearch('shops',this.value)" autocomplete="off">
     </div>
-    <div class="subcat-grid" id="shops-grid">
-      <a href="/papamoa-previews/categories/shops/supermarkets-papamoa.html" class="subcat-card" data-tags="supermarket grocery countdown pak n save new world food store fresh produce the sands golden sands papamoa plaza">
-        <span class="sc-icon">🛒</span><div class="sc-body"><div class="sc-title">Supermarkets</div><div class="sc-desc">Countdown, New World &amp; more</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/shops/pharmacy-papamoa.html" class="subcat-card" data-tags="pharmacy chemist dispensary prescription medicine health vitamins over the counter">
-        <span class="sc-icon">💊</span><div class="sc-body"><div class="sc-title">Pharmacies</div><div class="sc-desc">Chemists &amp; dispensaries</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/shops/clothing-papamoa.html" class="subcat-card" data-tags="clothing fashion boutique apparel shoes accessories retail stores fashion island">
-        <span class="sc-icon">👗</span><div class="sc-body"><div class="sc-title">Clothing &amp; Fashion</div><div class="sc-desc">Boutiques &amp; clothing stores</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/shops/surf-skate-papamoa.html" class="subcat-card" data-tags="surf skate surfboard skateboard bodyboard hire rental beach wax leash fins rashvest wetsuit">
-        <span class="sc-icon">🏄</span><div class="sc-body"><div class="sc-title">Surf &amp; Skate</div><div class="sc-desc">Boards, gear &amp; beach supplies</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/shops/supplement-store-papamoa.html" class="subcat-card" data-tags="supplement sports nutrition vitamins protein creatine wellness health store pre workout whey mass gainer weight loss pro supplements">
-        <span class="sc-icon">💪</span><div class="sc-body"><div class="sc-title">Supplement Stores</div><div class="sc-desc">Sports nutrition &amp; vitamins</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/shops/liquor-papamoa.html" class="subcat-card" data-tags="liquor bottle store wine beer spirits alcohol off licence craft beer cider gin whisky">
-        <span class="sc-icon">🍷</span><div class="sc-body"><div class="sc-title">Liquor &amp; Bottle Stores</div><div class="sc-desc">Wine, beer &amp; spirits</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/shops/garden-centre-papamoa.html" class="subcat-card" data-tags="garden centre plants nursery trees shrubs pots soil gardening supplies seeds compost fertiliser">
-        <span class="sc-icon">🌿</span><div class="sc-body"><div class="sc-title">Garden Centres</div><div class="sc-desc">Plants, nurseries &amp; garden supplies</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/shops/building-supplies-papamoa.html" class="subcat-card" data-tags="building supplies hardware timber plasterboard roofing paint tools tradie merchant bunnings plumbing fittings fasteners">
-        <span class="sc-icon">🏗</span><div class="sc-body"><div class="sc-title">Building Supplies</div><div class="sc-desc">Hardware &amp; building merchants</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/shops/cars-papamoa.html" class="subcat-card capped" data-tags="cars car yard dealership used vehicles auto sales buy second hand finance trade in">
-        <span class="sc-icon">🚗</span><div class="sc-body"><div class="sc-title">Cars &amp; Dealerships</div><div class="sc-desc">Car yards &amp; used vehicles</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/shops/vape-shop-papamoa.html" class="subcat-card capped" data-tags="vape shop e-cigarette vaping device e-liquid pods nicotine disposable refillable">
-        <span class="sc-icon">💨</span><div class="sc-body"><div class="sc-title">Vape Shops</div><div class="sc-desc">E-cigarettes, devices &amp; e-liquids</div></div>
-      </a>
-      <a href="/papamoa-previews/categories/shops/shopping.html" class="subcat-card capped" data-tags="books second hand secondhand dvd cd collectibles used trade exchange xanadu book exchange 2c ashley place warehouse no book over 5 dollars records jigsaws only second hand bookstore bay of plenty">
-        <span class="sc-icon">📚</span><div class="sc-body"><div class="sc-title">Books &amp; Second-hand</div><div class="sc-desc">Used books, DVDs &amp; collectibles</div></div>
-      </a>
+    <div class="cat-listing-results" id="shops-listing-results"></div>
+    <div class="subcat-grid" id="shops-grid" data-cat="shops">
+      <a href="/papamoa-previews/categories/shops/shopping.html" class="subcat-card see-all-card" data-seeall="1" data-tags=""><span class="sc-icon">&#128204;</span><div class="sc-body"><div class="sc-title">See All Shops &rarr;</div><div class="sc-desc">Browse every listing &amp; subcategory</div></div></a>
+      <a href="/papamoa-previews/categories/shops/supermarkets-papamoa.html" class="subcat-card" data-tags="supermarket grocery countdown pak n save new world food store fresh produce the sands golden sands papamoa plaza"><span class="sc-icon">&#128722;</span><div class="sc-body"><div class="sc-title">Supermarkets</div><div class="sc-desc">Countdown, New World &amp; more</div></div></a>
+      <a href="/papamoa-previews/categories/shops/pharmacy-papamoa.html" class="subcat-card" data-tags="pharmacy chemist dispensary prescription medicine health vitamins over the counter"><span class="sc-icon">&#128138;</span><div class="sc-body"><div class="sc-title">Pharmacies</div><div class="sc-desc">Chemists &amp; dispensaries</div></div></a>
+      <a href="/papamoa-previews/categories/shops/supplement-store-papamoa.html" class="subcat-card" data-tags="supplement sports nutrition vitamins protein creatine wellness health store pre workout whey mass gainer weight loss pro supplements"><span class="sc-icon">&#128170;</span><div class="sc-body"><div class="sc-title">Supplement Stores</div><div class="sc-desc">Sports nutrition &amp; vitamins</div></div></a>
+      <a href="/papamoa-previews/categories/shops/clothing-papamoa.html" class="subcat-card" data-tags="clothing fashion boutique apparel shoes accessories retail stores fashion island"><span class="sc-icon">&#128087;</span><div class="sc-body"><div class="sc-title">Clothing &amp; Fashion</div><div class="sc-desc">Boutiques &amp; clothing stores</div></div></a>
+      <a href="/papamoa-previews/categories/shops/surf-skate-papamoa.html" class="subcat-card" data-tags="surf skate surfboard skateboard bodyboard hire rental beach wax leash fins rashvest wetsuit"><span class="sc-icon">&#127940;</span><div class="sc-body"><div class="sc-title">Surf &amp; Skate</div><div class="sc-desc">Boards, gear &amp; beach supplies</div></div></a>
+      <a href="/papamoa-previews/categories/shops/liquor-papamoa.html" class="subcat-card" data-tags="liquor bottle store wine beer spirits alcohol off licence craft beer cider gin whisky"><span class="sc-icon">&#127863;</span><div class="sc-body"><div class="sc-title">Liquor &amp; Bottle Stores</div><div class="sc-desc">Wine, beer &amp; spirits</div></div></a>
+      <a href="/papamoa-previews/categories/shops/garden-centre-papamoa.html" class="subcat-card" data-tags="garden centre plants nursery trees shrubs pots soil gardening supplies seeds compost fertiliser"><span class="sc-icon">&#127807;</span><div class="sc-body"><div class="sc-title">Garden Centres</div><div class="sc-desc">Plants, nurseries &amp; garden supplies</div></div></a>
+      <a href="/papamoa-previews/categories/shops/building-supplies-papamoa.html" class="subcat-card" data-tags="building supplies hardware timber plasterboard roofing paint tools tradie merchant bunnings plumbing fittings fasteners"><span class="sc-icon">&#127959;</span><div class="sc-body"><div class="sc-title">Building Supplies</div><div class="sc-desc">Hardware &amp; building merchants</div></div></a>
+      <a href="/papamoa-previews/categories/shops/cars-papamoa.html" class="subcat-card" data-tags="cars car yard dealership used vehicles auto sales buy second hand finance trade in"><span class="sc-icon">&#128663;</span><div class="sc-body"><div class="sc-title">Cars &amp; Dealerships</div><div class="sc-desc">Car yards &amp; used vehicles</div></div></a>
+      <a href="/papamoa-previews/categories/shops/vape-shop-papamoa.html" class="subcat-card" data-tags="vape shop e-cigarette vaping device e-liquid pods nicotine disposable refillable"><span class="sc-icon">&#128168;</span><div class="sc-body"><div class="sc-title">Vape Shops</div><div class="sc-desc">E-cigarettes, devices &amp; e-liquids</div></div></a>
+      <a href="/papamoa-previews/categories/shops/shopping.html" class="subcat-card" data-tags="books second hand secondhand dvd cd collectibles used trade exchange xanadu book exchange 2c ashley place warehouse no book over 5 dollars records jigsaws only second hand bookstore bay of plenty"><span class="sc-icon">&#128218;</span><div class="sc-body"><div class="sc-title">Books &amp; Second-hand</div><div class="sc-desc">Used books, DVDs &amp; collectibles</div></div></a>
     </div>
     <div class="subcat-empty" id="shops-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/shops/shopping.html">browse all shops &rarr;</a></div>
+    <button class="see-more-btn" id="shops-more" onclick="toggleMore('shops')"><span>See more</span> <span class="arrow">&#9660;</span></button>
     <div class="spotlight-ad-ghost">
-      <div class="sag-text">
-        <h3>&#11088; Homepage Spotlight Ad &mdash; Shopping &amp; Retail</h3>
-        <p>Premium homepage placement for retail businesses. Independent of listing tier.</p>
-      </div>
+      <div class="sag-text"><h3>&#11088; Homepage Spotlight Ad &mdash; Shopping &amp; Retail</h3><p>Premium homepage placement for retail businesses. Independent of listing tier.</p></div>
       <a href="/papamoa-previews/sales/claim.html?type=spotlight&amp;subcat=Shopping&amp;cat=Shopping" class="sag-cta">Enquire about this spot &rarr;</a>
     </div>
     <div class="cat-section-footer">
@@ -1699,13 +1596,98 @@ async function pnfSubmitContact(e) {
 </script>
 
 <script>
-// ── CATEGORY SECTION SEARCH ──
+
+// ── CATEGORY SECTION SEARCH + EXPAND/COLLAPSE ──
 var CAT_GRIDS = { food:'food-grid', services:'services-grid', accom:'accom-grid', activities:'activities-grid', shops:'shops-grid' };
 var CAT_EMPTY = { food:'food-empty', services:'services-empty', accom:'accom-empty', activities:'activities-empty', shops:'shops-empty' };
-// Stamp data-capped on all capped cards so we can restore after search clears
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.subcat-card.capped').forEach(function(c) { c.dataset.capped = '1'; });
-});
+var CAT_LISTING_RESULTS = { food:'food-listing-results', services:'services-listing-results', accom:'accom-listing-results', activities:'activities-listing-results', shops:'shops-listing-results' };
+var CAT_MORE_BTNS = { food:'food-more', services:'services-more', accom:'accom-more', activities:'activities-more', shops:'shops-more' };
+var rowsVisible = { food:2, services:2, accom:2, activities:2, shops:2 };
+
+function getColCount(gridId) {
+  var grid = document.getElementById(gridId);
+  if (!grid) return 4;
+  var cols = window.getComputedStyle(grid).getPropertyValue('grid-template-columns').split(' ').length;
+  return cols || 4;
+}
+
+function applyRowVisibility(cat) {
+  var gridId = CAT_GRIDS[cat];
+  var grid = document.getElementById(gridId);
+  var btn = document.getElementById(CAT_MORE_BTNS[cat]);
+  if (!grid || !btn) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.subcat-card:not(.hidden)'));
+  var cols = getColCount(gridId);
+  var maxVisible = rowsVisible[cat] * cols;
+  var totalCards = cards.length;
+  cards.forEach(function(card, i) {
+    if (i < maxVisible) { card.classList.remove('row-hidden'); }
+    else { card.classList.add('row-hidden'); }
+  });
+  if (totalCards <= cols * 2) { btn.style.display = 'none'; }
+  else if (totalCards <= maxVisible) {
+    btn.style.display = '';
+    btn.querySelector('span:first-child').textContent = 'Show less';
+    btn.classList.add('expanded');
+  } else {
+    btn.style.display = '';
+    btn.querySelector('span:first-child').textContent = 'See more';
+    btn.classList.remove('expanded');
+  }
+}
+
+function toggleMore(cat) {
+  var gridId = CAT_GRIDS[cat];
+  var grid = document.getElementById(gridId);
+  if (!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.subcat-card:not(.hidden)'));
+  var cols = getColCount(gridId);
+  var maxVisible = rowsVisible[cat] * cols;
+  if (cards.length <= maxVisible) { rowsVisible[cat] = 2; }
+  else { rowsVisible[cat] += 2; }
+  applyRowVisibility(cat);
+}
+
+// ── SCOPED LISTING SEARCH ──
+function getCatListings(cat, query) {
+  if (!query || query.length < 2 || typeof SEARCH_INDEX === 'undefined') return [];
+  var q = query.toLowerCase();
+  var catKeywords = {
+    food:'restaurant cafe bar burger pizza fish chips sushi indian thai mexican italian vegan bakery turkish takeaway food drink dining coffee brunch',
+    services:'mechanic wof electrician plumber painter fencing aircon physio gym fitness dentist orthodontist barber nail beauty medical lawn mowing childcare retirement screen',
+    accom:'accommodation motel holiday park camping cabin apartment b&b rental self contained backpacker pet friendly',
+    activities:'surf school vr sim racing gym fitness yoga pilates golf fishing walking trails cycling swimming kayak family sports clubs',
+    shops:'supermarket pharmacy clothing supplement surf skate liquor garden centre building supplies car dealership vape book'
+  };
+  var urlPaths = { food:'/food-drink/', services:'/services/', accom:'/accommodation/', activities:'/activities/', shops:'/shops/' };
+  var kw = catKeywords[cat] || '';
+  var urlPath = urlPaths[cat] || '';
+  return SEARCH_INDEX.filter(function(item) {
+    if (item.type !== 'listing') return false;
+    var inCatUrl = item.url.indexOf(urlPath) > -1;
+    var inListings = item.url.indexOf('/listings/') > -1;
+    if (!inCatUrl && inListings) {
+      var hasOverlap = false;
+      kw.split(' ').forEach(function(k) { if (k && item.keywords.indexOf(k) > -1) hasOverlap = true; });
+      if (!hasOverlap) return false;
+    } else if (!inCatUrl) { return false; }
+    return item.keywords.indexOf(q) > -1 || item.title.toLowerCase().indexOf(q) > -1;
+  }).slice(0, 6);
+}
+
+function renderListingResults(cat, query) {
+  var container = document.getElementById(CAT_LISTING_RESULTS[cat]);
+  if (!container) return;
+  var results = getCatListings(cat, query);
+  if (!results.length) { container.innerHTML = ''; return; }
+  var html = '<div class="clr-label">Matching businesses</div><div class="clr-grid">';
+  results.forEach(function(item) {
+    html += '<a href="' + item.url + '" class="clr-card"><span class="clr-icon">' + item.icon + '</span><div class="clr-info"><div class="clr-name">' + escHtml(item.title) + '</div><div class="clr-sub">' + escHtml(item.sub) + '</div></div></a>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
 function catSearch(cat, val) {
   var q = val.trim().toLowerCase();
   var grid = document.getElementById(CAT_GRIDS[cat]);
@@ -1713,50 +1695,42 @@ function catSearch(cat, val) {
   if (!grid) return;
   var cards = grid.querySelectorAll('.subcat-card');
   var anyVisible = false;
+  renderListingResults(cat, q);
   cards.forEach(function(card) {
+    if (card.hasAttribute('data-seeall')) { card.classList.remove('hidden','row-hidden'); return; }
     var tags = (card.getAttribute('data-tags') || '').toLowerCase();
     var title = (card.querySelector('.sc-title') ? card.querySelector('.sc-title').textContent : '').toLowerCase();
     var match = !q || tags.indexOf(q) > -1 || title.indexOf(q) > -1;
-    if (q) {
-      // During active search: show all matches, hide non-matches
-      card.classList.toggle('hidden', !match);
-      if (match) card.classList.remove('capped');
-    } else {
-      // Search cleared: restore original capped/visible state
-      card.classList.remove('hidden');
-      if (card.dataset.capped) card.classList.add('capped');
-    }
-    if (match && !card.classList.contains('capped') && !card.classList.contains('hidden')) anyVisible = true;
+    card.classList.toggle('hidden', !match);
+    if (match) { card.classList.remove('row-hidden'); anyVisible = true; }
   });
-  if (empty) empty.classList.toggle('visible', !anyVisible && q.length > 0);
+  var hasListingResults = getCatListings(cat, q).length > 0;
+  if (empty) empty.classList.toggle('visible', !anyVisible && q.length > 0 && !hasListingResults);
+  var btn = document.getElementById(CAT_MORE_BTNS[cat]);
+  if (q) {
+    if (btn) btn.style.display = 'none';
+    cards.forEach(function(card) { if (!card.classList.contains('hidden')) card.classList.remove('row-hidden'); });
+  } else {
+    rowsVisible[cat] = 2;
+    applyRowVisibility(cat);
+  }
 }
 
-var HW_WMO = {
-  0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',
-  45:'Foggy',48:'Icy fog',
-  51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',
-  61:'Light rain',63:'Rain',65:'Heavy rain',
-  71:'Light snow',73:'Snow',75:'Heavy snow',
-  80:'Light showers',81:'Showers',82:'Heavy showers',
-  95:'Thunderstorm',96:'Thunderstorm w/ hail',99:'Thunderstorm, heavy hail'
-};
-var HW_EMOJI = {
-  0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',
-  51:'🌦️',53:'🌦️',55:'🌧️',61:'🌦️',63:'🌧️',65:'🌧️',
-  71:'🌨️',73:'❄️',75:'❄️',77:'🌨️',80:'🌦️',81:'🌧️',82:'⛈️',
-  85:'🌨️',86:'🌨️',95:'⛈️',96:'⛈️',99:'⛈️'
-};
-function hwUvClass(uv) {
-  if (uv <= 2) return 'uv-low';
-  if (uv <= 5) return 'uv-mod';
-  if (uv <= 7) return 'uv-high';
-  if (uv <= 10) return 'uv-vhigh';
-  return 'uv-extreme';
-}
-function hwWindDir(deg) {
-  var dirs = ['N','NE','E','SE','S','SW','W','NW'];
-  return dirs[Math.round(deg / 45) % 8];
-}
+document.addEventListener('DOMContentLoaded', function() {
+  ['food','services','accom','activities','shops'].forEach(function(cat) { applyRowVisibility(cat); });
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      ['food','services','accom','activities','shops'].forEach(function(cat) { applyRowVisibility(cat); });
+    }, 200);
+  });
+});
+
+var HW_WMO = {0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Foggy',48:'Icy fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',71:'Light snow',73:'Snow',75:'Heavy snow',80:'Light showers',81:'Showers',82:'Heavy showers',95:'Thunderstorm',96:'Thunderstorm w/ hail',99:'Thunderstorm, heavy hail'};
+var HW_EMOJI = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌦️',63:'🌧️',65:'🌧️',71:'🌨️',73:'❄️',75:'❄️',77:'🌨️',80:'🌦️',81:'🌧️',82:'⛈️',85:'🌨️',86:'🌨️',95:'⛈️',96:'⛈️',99:'⛈️'};
+function hwUvClass(uv) { if(uv<=2)return'uv-low';if(uv<=5)return'uv-mod';if(uv<=7)return'uv-high';if(uv<=10)return'uv-vhigh';return'uv-extreme'; }
+function hwWindDir(deg) { var dirs=['N','NE','E','SE','S','SW','W','NW']; return dirs[Math.round(deg/45)%8]; }
 async function loadHeroWeather() {
   var strip = document.getElementById('hw-strip');
   if (!strip) return;
@@ -1765,26 +1739,14 @@ async function loadHeroWeather() {
     .then(function(d) {
       var c = d.current;
       var uv = d.daily && d.daily.uv_index_max ? Math.round(d.daily.uv_index_max[0]) : 0;
-      strip.innerHTML =
-        '<div class="hw-current">'
-        + '<span class="hw-icon">' + (HW_EMOJI[c.weather_code] || '🌤️') + '</span>'
-        + '<span class="hw-temp">' + Math.round(c.temperature_2m) + '°</span>'
-        + '<div class="hw-detail">'
-        + '<span class="hw-condition">' + (HW_WMO[c.weather_code] || '') + '</span>'
-        + '<span class="hw-sub">Feels ' + Math.round(c.apparent_temperature) + '° &mdash; Pāpāmoa Beach</span>'
-        + '</div>'
-        + '</div>'
-        + '<div class="hw-stats">'
-        + '<div class="hw-stat"><span class="hw-stat-label">Wind</span><span class="hw-stat-value">' + Math.round(c.wind_speed_10m) + ' km/h ' + hwWindDir(c.wind_direction_10m) + '</span></div>'
-        + '<div class="hw-stat"><span class="hw-stat-label">UV Index</span><span class="hw-stat-value ' + hwUvClass(uv) + '">' + uv + '</span></div>'
-        + '</div>'
-        + '<a href="/papamoa-previews/community/weather.html" class="hw-link">Full forecast &rarr;</a>';
+      strip.innerHTML = '<div class="hw-current"><span class="hw-icon">' + (HW_EMOJI[c.weather_code]||'🌤️') + '</span><span class="hw-temp">' + Math.round(c.temperature_2m) + '°</span><div class="hw-detail"><span class="hw-condition">' + (HW_WMO[c.weather_code]||'') + '</span><span class="hw-sub">Feels ' + Math.round(c.apparent_temperature) + '° — P\u0101p\u0101moa Beach</span></div></div><div class="hw-stats"><div class="hw-stat"><span class="hw-stat-label">Wind</span><span class="hw-stat-value">' + Math.round(c.wind_speed_10m) + ' km/h ' + hwWindDir(c.wind_direction_10m) + '</span></div><div class="hw-stat"><span class="hw-stat-label">UV Index</span><span class="hw-stat-value ' + hwUvClass(uv) + '">' + uv + '</span></div></div><a href="/papamoa-previews/community/weather.html" class="hw-link">Full forecast &rarr;</a>';
     })
     .catch(function() {
       strip.innerHTML = '<span class="hw-loading"><a href="/papamoa-previews/community/weather.html" style="color:var(--lime)">View weather forecast &rarr;</a></span>';
     });
 }
 loadHeroWeather();
+
 </script>
 <script>
 // ── MOUSE DRAG SCROLLING ──
