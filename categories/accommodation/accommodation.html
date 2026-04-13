@@ -67,6 +67,19 @@
     .section { margin-bottom: 40px; }
     .section-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px; }
 
+    /* SUBCAT GRID */
+    .subcat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-bottom: 8px; }
+    .subcat-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px 14px; display: flex; align-items: center; gap: 11px; text-decoration: none; color: inherit; transition: all 0.15s; }
+    .subcat-card:hover { border-color: var(--blue); box-shadow: 0 3px 10px rgba(58,171,222,0.08); transform: translateY(-1px); }
+    .subcat-card.row-hidden { display: none; }
+    .sc-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .sc-body { min-width: 0; }
+    .sc-title { font-weight: 700; font-size: 0.88rem; color: var(--navy); }
+    .sc-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+    .see-more-wrap { text-align: center; margin: 14px 0 24px; }
+    .see-more-btn { display: inline-block; font-family: 'Figtree', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--blue); background: rgba(58,171,222,0.06); border: 1px solid rgba(58,171,222,0.2); padding: 8px 22px; border-radius: 20px; cursor: pointer; transition: all 0.15s; }
+    .see-more-btn:hover { background: rgba(58,171,222,0.12); border-color: var(--blue); }
+
     /* GOLD SPOTLIGHT — single-column, pill amenities */
     .gold-spotlight { background: linear-gradient(160deg, #1A2A3A 0%, #0D1B2A 100%); border: 1px solid rgba(200,150,42,0.35); border-radius: 14px; overflow: hidden; margin-bottom: 24px; }
     .gs-top { padding: 12px 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(200,150,42,0.15); }
@@ -357,6 +370,41 @@
         </div>
       </div>
 
+            <!-- BROWSE BY TYPE -->
+      <div class="section">
+        <div class="section-title">&#127968; Browse by Type</div>
+        <div class="subcat-grid" id="accom-grid">
+          <a href="#holiday-parks" class="subcat-card">
+            <span class="sc-icon">&#127959;</span><div class="sc-body"><div class="sc-title">Holiday Parks</div><div class="sc-desc">Campsites, cabins &amp; villas</div></div>
+          </a>
+          <a href="#motels" class="subcat-card">
+            <span class="sc-icon">&#127963;</span><div class="sc-body"><div class="sc-title">Motels</div><div class="sc-desc">Motor lodges &amp; motel units</div></div>
+          </a>
+          <a href="#apartments" class="subcat-card">
+            <span class="sc-icon">&#127970;</span><div class="sc-body"><div class="sc-title">Apartments</div><div class="sc-desc">Beachfront &amp; self-contained</div></div>
+          </a>
+          <a href="#bbs" class="subcat-card">
+            <span class="sc-icon">&#9749;</span><div class="sc-body"><div class="sc-title">B&amp;Bs</div><div class="sc-desc">Bed &amp; breakfasts</div></div>
+          </a>
+          <a href="#short-stay" class="subcat-card">
+            <span class="sc-icon">&#127968;</span><div class="sc-body"><div class="sc-title">Short-Stay</div><div class="sc-desc">Holiday homes &amp; Airbnb</div></div>
+          </a>
+          <a href="#rental" class="subcat-card">
+            <span class="sc-icon">&#127968;</span><div class="sc-body"><div class="sc-title">Rental Homes</div><div class="sc-desc">Baches &amp; holiday rentals</div></div>
+          </a>
+          <a href="#self-contained" class="subcat-card">
+            <span class="sc-icon">&#127981;</span><div class="sc-body"><div class="sc-title">Self-Contained</div><div class="sc-desc">Kitchen &amp; private entrance</div></div>
+          </a>
+          <a href="#backpackers" class="subcat-card">
+            <span class="sc-icon">&#127908;</span><div class="sc-body"><div class="sc-title">Backpackers</div><div class="sc-desc">Budget &amp; hostel stays</div></div>
+          </a>
+          <a href="#groups" class="subcat-card">
+            <span class="sc-icon">&#127978;</span><div class="sc-body"><div class="sc-title">Groups &amp; Camps</div><div class="sc-desc">School, church &amp; team camps</div></div>
+          </a>
+        </div>
+        <div class="see-more-wrap" id="accom-see-more"><button class="see-more-btn" onclick="accomSeeMore()">See more types</button></div>
+      </div>
+
       <!-- GOLD SPOTLIGHT: PACIFIC PARK -->
       <div class="section">
         <div class="section-title">&#11088; Gold Listing</div>
@@ -422,7 +470,7 @@
 
       <!-- HOLIDAY PARKS -->
       <div class="section">
-        <div class="section-title">&#127959; Holiday Parks</div>
+        <div class="section-title" id="holiday-parks">&#127959; Holiday Parks</div>
         <div class="listing-grid">
 
           <div class="listing-card" data-cat="holiday-park">
@@ -445,7 +493,7 @@
 
       <!-- MOTELS -->
       <div class="section">
-        <div class="section-title">&#127963; Motels &amp; Motor Lodges</div>
+        <div class="section-title" id="motels">&#127963; Motels &amp; Motor Lodges</div>
         <div class="listing-grid">
 
           <div class="listing-card" data-cat="motel">
@@ -490,7 +538,7 @@
 
       <!-- APARTMENTS & BEACHFRONT -->
       <div class="section">
-        <div class="section-title">&#127970; Beachfront Apartments</div>
+        <div class="section-title" id="apartments">&#127970; Beachfront Apartments</div>
         <div class="listing-grid">
 
           <div class="listing-card" data-cat="apartment">
@@ -524,7 +572,7 @@
 
       <!-- B&Bs -->
       <div class="section">
-        <div class="section-title">&#9749; Bed &amp; Breakfasts</div>
+        <div class="section-title" id="bbs">&#9749; Bed &amp; Breakfasts</div>
         <div class="listing-grid">
 
           <div class="listing-card" data-cat="bb">
@@ -556,7 +604,7 @@
 
       <!-- SHORT STAY -->
       <div class="section">
-        <div class="section-title">&#127968; Short-Stay &amp; Holiday Homes</div>
+        <div class="section-title" id="short-stay">&#127968; Short-Stay &amp; Holiday Homes</div>
         <div class="listing-grid">
 
           <div class="listing-card" data-cat="short-stay">
@@ -670,7 +718,7 @@
 
       <!-- GROUP & CAMPS -->
       <div class="section">
-        <div class="section-title">&#127978; Groups, Camps &amp; Retreats</div>
+        <div class="section-title" id="groups">&#127978; Groups, Camps &amp; Retreats</div>
         <p style="font-size:0.86rem;color:var(--muted);margin-bottom:14px;line-height:1.65">Pacific Park (see Gold Spotlight above) is the primary option for groups, school camps, sports teams and church retreats in Pāpāmoa. Their self-contained group lodges accommodate large parties and their alcohol-free environment suits school and youth groups. Contact Pacific Park directly for group bookings and rates.</p>
         <div class="placeholder-card" data-cat="group">
           <div class="ph-icon">&#127978;</div>
@@ -750,6 +798,102 @@
     </div>
   </div>
 </div>
+
+<script>
+/* ── See More / Show Less ── */
+var ACCOM_ROWS = 2;
+var accomMaxRow = ACCOM_ROWS;
+ 
+function accomCalcGrid() {
+  var grid = document.getElementById('accom-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card');
+  if (!cards.length) return;
+  cards.forEach(function(c) { c.classList.remove('row-hidden'); });
+  var firstTop = cards[0].getBoundingClientRect().top;
+  var cols = 0;
+  for (var i = 0; i < cards.length; i++) {
+    if (cards[i].getBoundingClientRect().top !== firstTop && cols === 0) { cols = i; break; }
+  }
+  if (!cols) cols = cards.length;
+  cards.forEach(function(c, idx) {
+    c.dataset.row = Math.floor(idx / cols) + 1;
+  });
+  return cols;
+}
+ 
+function accomApplyRows() {
+  var grid = document.getElementById('accom-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card');
+  var maxRow = 0;
+  cards.forEach(function(c) {
+    var r = parseInt(c.dataset.row || 0);
+    if (r > maxRow) maxRow = r;
+    c.classList.toggle('row-hidden', r > accomMaxRow);
+  });
+  var wrap = document.getElementById('accom-see-more');
+  if (!wrap) return;
+  if (maxRow <= ACCOM_ROWS) {
+    wrap.style.display = 'none';
+  } else {
+    wrap.style.display = '';
+    var isAll = accomMaxRow >= maxRow;
+    wrap.querySelector('.see-more-btn').textContent = isAll ? 'Show less' : 'See more types';
+    wrap.querySelector('.see-more-btn').onclick = isAll ? accomShowLess : accomSeeMore;
+  }
+}
+ 
+function accomSeeMore() {
+  accomMaxRow += ACCOM_ROWS;
+  accomApplyRows();
+}
+ 
+function accomShowLess() {
+  accomMaxRow = ACCOM_ROWS;
+  accomApplyRows();
+  var grid = document.getElementById('accom-grid');
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+ 
+function accomInitRows() {
+  accomMaxRow = ACCOM_ROWS;
+  document.querySelectorAll('#accom-grid .subcat-card').forEach(function(c) { c.classList.remove('row-hidden'); });
+  requestAnimationFrame(function() {
+    accomCalcGrid();
+    accomApplyRows();
+  });
+}
+ 
+/* ── Drawer ── */
+function pnfDrawerOpen() {
+  document.getElementById('pnf-drawer').classList.add('open');
+  document.getElementById('pnf-drawer-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function pnfDrawerClose() {
+  document.getElementById('pnf-drawer').classList.remove('open');
+  document.getElementById('pnf-drawer-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDrawerClose(); });
+ 
+/* ── Path rewrite ── */
+(function() {
+  var base = '/papamoa-previews';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:') || href.startsWith('#')) return;
+    if (href.startsWith('/') && !href.startsWith(base)) { e.preventDefault(); window.location.href = base + href; }
+  });
+})();
+ 
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', accomInitRows);
+window.addEventListener('resize', function() { accomCalcGrid(); accomApplyRows(); });
+</script>
 
 <footer class="site-footer">
   <a href="/papamoa-previews/homepage.html">Papamoa.info</a> &mdash; The local directory for Pāpāmoa, Bay of Plenty, New Zealand. Accommodation information sourced from individual property websites and publicly available reviews. Always confirm avai
