@@ -10,6 +10,7 @@
 <meta property="og:url" content="https://papamoa.info/categories/shops/shopping.html">
 <meta property="og:title" content="Where to Shop in Pāpāmoa — Retail &amp; Shopping Centres">
 <meta property="og:description" content="Every place to shop in Pāpāmoa — supermarkets, pharmacy, clothing, books, surf gear, home interiors, gifts, outdoors and more.">
+<meta property="og:image" content="https://papamoa.info/images/og/shopping.jpg">
 <meta property="og:site_name" content="Papamoa.info">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,12 +100,10 @@
 <style>
 :root {
   --navy: #0D2B3E;
-  --navy-mid: #2B3F5C;
   --ocean: #1B6B7D;
   --ocean-deep: #0F4352;
   --blue: #3AABDE;
   --sand: #F7F3ED;
-  --sand-alt: #F5EFE0;
   --sand-dark: #EDE7DB;
   --dune: #C4985A;
   --dune-light: #F5EDD8;
@@ -112,7 +111,6 @@
   --text: #1A2832;
   --muted: #5A6E78;
   --border: #D8E4E8;
-  --border-alt: #DDE5EE;
   --bg: #F4F7FA;
   --gold: #B8840A;
   --gold-bg: #FBF3E2;
@@ -122,6 +120,8 @@
   --lime: #7DC143;
   --green: #1E6B3C;
   --green-bg: #E6F4EC;
+  --font-body: 'Figtree', sans-serif;
+  --font-display: 'Playfair Display', serif;
   --pnf-navy: #0D2B3E;
   --pnf-accent: #3AABDE;
   --pnf-dune: #C4985A;
@@ -129,18 +129,17 @@
   --pnf-muted: rgba(255,255,255,0.45);
   --pnf-font: 'Figtree', sans-serif;
   --pnf-display: 'Playfair Display', serif;
-  /* Shop-specific hero colours */
   --shop-dark: #1A1408;
   --shop-mid: #2A1E0C;
   --shop-accent: #C8962A;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
-body { font-family: 'Figtree', sans-serif; background: var(--sand); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+body { font-family: var(--font-body); background: var(--sand); color: var(--text); line-height: 1.65; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { color: var(--blue); text-decoration: none; }
 
 /* NAV */
-.pnf-nav { background: var(--pnf-navy); height: 56px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.25); gap: 16px; width: 100%; }
+.pnf-nav { background: var(--pnf-navy); height: 56px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.25); gap: 16px; width: 100%; box-sizing: border-box; }
 .pnf-logo { font-family: var(--pnf-display); font-weight: 700; font-size: 15px; color: var(--pnf-white); text-decoration: none; flex-shrink: 0; }
 .pnf-logo span { color: var(--pnf-accent); }
 .pnf-links { display: flex; align-items: center; gap: 2px; flex: 1; overflow-x: auto; scrollbar-width: none; }
@@ -154,17 +153,14 @@ a { color: var(--blue); text-decoration: none; }
 .pnf-fb:hover { background: #1877F2; color: var(--pnf-white); }
 .pnf-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 7px; cursor: pointer; padding: 0 9px; flex-shrink: 0; }
 .pnf-hamburger span { display: block; height: 2px; background: rgba(255,255,255,0.75); border-radius: 2px; transition: all 0.25s; }
-.pnf-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.pnf-hamburger.open span:nth-child(2) { opacity: 0; }
-.pnf-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 .pnf-drawer-overlay { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 190; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
 .pnf-drawer-overlay.open { opacity: 1; pointer-events: all; }
-.pnf-drawer { position: fixed; top: 0; left: 0; bottom: 0; width: min(300px,85vw); background: var(--pnf-navy); z-index: 201; transform: translateX(-100%); transition: transform 0.28s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; box-shadow: 4px 0 24px rgba(0,0,0,0.35); }
+.pnf-drawer { position: fixed; top: 0; left: 0; bottom: 0; width: min(300px,85vw); background: var(--pnf-navy); z-index: 201; transform: translateX(-100%); transition: transform 0.28s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; box-shadow: 4px 0 24px rgba(0,0,0,0.35); overflow: hidden; }
 .pnf-drawer.open { transform: translateX(0); }
 .pnf-drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 0 18px; height: 56px; border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
 .pnf-drawer-logo { font-family: var(--pnf-display); font-weight: 700; font-size: 15px; color: var(--pnf-white); text-decoration: none; }
 .pnf-drawer-logo span { color: var(--pnf-accent); }
-.pnf-drawer-close { background: rgba(255,255,255,0.08); border: none; color: rgba(255,255,255,0.6); width: 30px; height: 30px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.pnf-drawer-close { background: rgba(255,255,255,0.08); border: none; color: rgba(255,255,255,0.6); width: 30px; height: 30px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; }
 .pnf-drawer-nav { flex: 1; overflow-y: auto; padding: 10px 0; }
 .pnf-drawer-nav a { display: flex; align-items: center; gap: 12px; padding: 13px 20px; font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; border-left: 3px solid transparent; transition: all 0.15s; }
 .pnf-drawer-nav a:hover, .pnf-drawer-nav a.active { color: var(--pnf-white); background: rgba(255,255,255,0.05); border-left-color: var(--pnf-accent); }
@@ -172,23 +168,17 @@ a { color: var(--blue); text-decoration: none; }
 .pnf-drawer-foot { padding: 16px 18px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
 .pnf-drawer-cta { display: block; text-align: center; background: var(--pnf-accent); color: var(--pnf-white); font-size: 14px; font-weight: 700; padding: 11px; border-radius: 8px; text-decoration: none; }
 .pnf-drawer-fb { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; }
-@media (max-width: 640px) {
-  .pnf-links { display: none; }
-  .pnf-fb { display: none; }
-  .pnf-cta { display: none; }
-  .pnf-nav { padding: 0 16px; }
-  .pnf-hamburger { display: flex; }
-}
+@media (max-width: 640px) { .pnf-links { display: none; } .pnf-fb { display: none; } .pnf-cta { display: none; } .pnf-nav { padding: 0 16px; } .pnf-hamburger { display: flex; } }
 
 /* HERO */
-.page-hero { background: linear-gradient(135deg, var(--shop-dark) 0%, var(--shop-mid) 60%, #3A2810 100%); padding: 48px 24px 44px; position: relative; overflow: hidden; }
+.page-hero { background: linear-gradient(135deg, var(--shop-dark) 0%, var(--shop-mid) 60%, #3A2810 100%); padding: 52px 24px 44px; position: relative; overflow: hidden; }
 .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--shop-accent), #A07020); }
 .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 .breadcrumb { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
 .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
 .breadcrumb a:hover { color: #fff; }
 .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--shop-accent); margin-bottom: 10px; }
-.page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.12; margin-bottom: 12px; }
+.page-hero h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.12; margin-bottom: 12px; }
 .page-hero h1 em { font-style: italic; color: var(--shop-accent); }
 .hero-desc { font-size: 0.92rem; color: rgba(255,255,255,0.6); max-width: 600px; line-height: 1.75; margin-bottom: 22px; }
 .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -199,7 +189,7 @@ a { color: var(--blue); text-decoration: none; }
 .subcat-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 10px 20px; overflow-x: auto; scrollbar-width: none; position: sticky; top: 56px; z-index: 90; }
 .subcat-bar::-webkit-scrollbar { display: none; }
 .subcat-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 6px; }
-.chip { font-size: 0.74rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; white-space: nowrap; font-family: 'Figtree', sans-serif; transition: all 0.15s; text-decoration: none; }
+.chip { font-size: 0.74rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; white-space: nowrap; font-family: var(--font-body); transition: all 0.15s; text-decoration: none; }
 .chip:hover { border-color: var(--blue); color: var(--blue); }
 .chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
 
@@ -208,33 +198,42 @@ a { color: var(--blue); text-decoration: none; }
 .two-col { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
 .main-col { min-width: 0; }
 .side-col { display: flex; flex-direction: column; gap: 16px; }
-@media (max-width: 840px) { .two-col { grid-template-columns: 1fr; } .side-col { order: -1; } }
 
 /* CATEGORY SEARCH */
-.search-wrap { position: relative; margin-bottom: 20px; }
+.search-wrap { position: relative; margin-bottom: 16px; }
 .search-wrap::before { content: ''; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7' stroke='%235A6E78' stroke-width='2'/%3E%3Cpath stroke='%235A6E78' stroke-width='2' stroke-linecap='round' d='m16 16 4 4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: contain; pointer-events: none; }
-.search-input { width: 100%; padding: 10px 12px 10px 34px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Figtree', sans-serif; font-size: 0.88rem; color: var(--text); background: var(--white); transition: all 0.15s; }
+.search-input { width: 100%; padding: 10px 12px 10px 34px; border: 1.5px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 0.88rem; color: var(--text); background: var(--white); transition: all 0.15s; }
 .search-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(58,171,222,0.1); }
 .search-input::placeholder { color: var(--muted); }
 
+/* SPOTLIGHT AVAILABLE */
+.spotlight-avail { background: var(--white); border: 1.5px dashed var(--dune); border-radius: 10px; padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start; margin-bottom: 10px; transition: border-color 0.15s; }
+.spotlight-avail:hover { border-color: var(--blue); border-style: solid; }
+.sa-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+.sa-body { flex: 1; min-width: 0; }
+.sa-body h4 { font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.sa-body p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 8px; }
+.sa-btn { display: inline-block; font-size: 0.75rem; font-weight: 700; color: var(--blue); background: rgba(58,171,222,0.08); border: 1px solid rgba(58,171,222,0.2); padding: 5px 12px; border-radius: 5px; text-decoration: none; font-family: var(--font-body); }
+.sa-btn:hover { background: rgba(58,171,222,0.15); }
+
 /* SECTION */
 .section { margin-bottom: 40px; }
-.section-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.section-title a { font-size: 0.78rem; font-weight: 700; color: var(--blue); font-family: 'Figtree', sans-serif; }
+.section-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.section-title a { font-size: 0.78rem; font-weight: 700; color: var(--blue); font-family: var(--font-body); }
 
 /* SUBCAT GRID */
-.subcat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-bottom: 6px; }
+.subcat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 10px; margin-bottom: 6px; }
 .subcat-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px 14px; display: flex; align-items: center; gap: 11px; text-decoration: none; color: inherit; transition: all 0.15s; }
 .subcat-card:hover { border-color: var(--blue); box-shadow: 0 3px 10px rgba(58,171,222,0.08); transform: translateY(-1px); }
 .subcat-card.hidden { display: none; }
+.subcat-card.row-hidden { display: none; }
 .sc-icon { font-size: 1.4rem; flex-shrink: 0; }
 .sc-body { min-width: 0; }
 .sc-title { font-weight: 700; font-size: 0.88rem; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sc-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; margin-top: 2px; }
-.see-more-wrap { text-align: center; margin-top: 14px; }
-.see-more-btn { display: inline-block; font-family: 'Figtree', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--blue); background: rgba(58,171,222,0.06); border: 1px solid rgba(58,171,222,0.2); padding: 8px 22px; border-radius: 20px; cursor: pointer; transition: all 0.15s; }
+.see-more-wrap { text-align: center; margin-top: 14px; margin-bottom: 20px; }
+.see-more-btn { display: inline-block; font-family: var(--font-body); font-size: 0.82rem; font-weight: 700; color: var(--blue); background: rgba(58,171,222,0.06); border: 1px solid rgba(58,171,222,0.2); padding: 8px 22px; border-radius: 20px; cursor: pointer; transition: all 0.15s; }
 .see-more-btn:hover { background: rgba(58,171,222,0.12); border-color: var(--blue); }
-.subcat-card.row-hidden { display: none; }
 .subcat-empty { display: none; padding: 24px 0; text-align: center; font-size: 0.84rem; color: var(--muted); }
 .subcat-empty.visible { display: block; }
 
@@ -242,55 +241,52 @@ a { color: var(--blue); text-decoration: none; }
 .spotlight-ad { background: linear-gradient(135deg, #1A1A2A, #0D1218); border-radius: 10px; padding: 20px; margin-top: 20px; border: 1px solid rgba(200,150,42,0.2); }
 .sa-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
 .sa-label-badge { background: linear-gradient(135deg, var(--gold-alt), #A07020); color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 0.58rem; }
-.sa-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.sa-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
 .sa-sub { font-size: 0.72rem; color: var(--gold-alt); margin-bottom: 8px; font-weight: 600; }
 .sa-desc { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 12px; }
 .sa-link { display: inline-block; background: linear-gradient(135deg, var(--gold-alt), #A07020); color: #fff; font-size: 0.78rem; font-weight: 700; padding: 8px 16px; border-radius: 5px; text-decoration: none; }
-.spotlight-ghost { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 10px; padding: 18px 20px; margin-top: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.sg-text h3 { font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-.sg-text p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
-.sg-cta { display: inline-block; font-size: 0.78rem; font-weight: 700; color: var(--blue); background: rgba(58,171,222,0.08); border: 1px solid rgba(58,171,222,0.2); padding: 8px 16px; border-radius: 5px; text-decoration: none; white-space: nowrap; }
-.sg-cta:hover { background: rgba(58,171,222,0.15); }
-
-/* SECTION FOOTER */
-.section-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; flex-wrap: wrap; gap: 10px; }
-.see-all { font-size: 0.84rem; font-weight: 700; color: var(--blue); text-decoration: none; }
-.see-all:hover { text-decoration: underline; }
-.spotlight-note { font-size: 0.74rem; color: var(--muted); text-decoration: none; }
-.spotlight-note:hover { color: var(--navy); }
-
-/* SIDEBAR */
-.fact-box { background: var(--navy); border-radius: 10px; padding: 18px; }
-.fact-box h4 { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
-.fact-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.fact-list li { font-size: 0.8rem; color: rgba(255,255,255,0.65); display: flex; gap: 8px; line-height: 1.45; }
-.fact-list li::before { content: '›'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
-.fact-list li strong { color: #fff; }
-.side-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-.side-card-title { font-family: 'Playfair Display', serif; font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
-.link-list { display: flex; flex-direction: column; gap: 7px; }
-.link-list a { font-size: 0.81rem; font-weight: 600; color: var(--blue); text-decoration: none; }
-.link-list a:hover { text-decoration: underline; }
-.list-cta { background: linear-gradient(135deg, var(--navy), #1A2A40); border-radius: 10px; padding: 16px; text-align: center; }
-.list-cta p { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-bottom: 10px; line-height: 1.55; }
-.list-cta a { display: inline-block; background: var(--lime); color: #fff; font-weight: 700; font-size: 0.81rem; padding: 8px 16px; border-radius: 6px; text-decoration: none; }
 
 /* FAQ */
-.faq-section { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
-.faq-section h2 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+.faq-section { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
+.faq-section h2 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
 .faq-item { border-bottom: 1px solid var(--border); }
-.faq-q { width: 100%; text-align: left; background: none; border: none; padding: 16px 0; font-family: 'Figtree', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--navy); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.faq-q::after { content: '+'; font-size: 1.2rem; color: var(--blue); flex-shrink: 0; transition: transform 0.2s; }
+.faq-q { width: 100%; text-align: left; background: none; border: none; padding: 16px 0; font-family: var(--font-body); font-size: 0.9rem; font-weight: 700; color: var(--navy); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.faq-q::after { content: '+'; font-size: 1.2rem; color: var(--shop-accent); flex-shrink: 0; transition: transform 0.2s; }
 .faq-item.open .faq-q::after { transform: rotate(45deg); }
 .faq-a { display: none; padding: 0 0 16px; font-size: 0.85rem; color: var(--muted); line-height: 1.75; max-width: 640px; }
 .faq-item.open .faq-a { display: block; }
 
+/* SIDEBAR */
+.fact-box { background: var(--navy); border-radius: 10px; padding: 18px; }
+.fact-box h4 { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+.fact-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.fact-list li { font-size: 0.79rem; color: rgba(255,255,255,0.6); line-height: 1.5; padding-left: 14px; position: relative; }
+.fact-list li::before { content: '›'; color: var(--shop-accent); font-weight: 700; position: absolute; left: 0; }
+.fact-list li strong { color: #fff; font-weight: 700; }
+
+.ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
+.ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+.ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.ad-inner { padding: 16px; background: var(--white); }
+.ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
+.ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+.ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); }
+
+.side-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.side-card-title { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.link-list { display: flex; flex-direction: column; gap: 7px; }
+.link-list a { font-size: 0.81rem; font-weight: 600; color: var(--blue); text-decoration: none; }
+.link-list a:hover { color: var(--navy); }
+
+.list-cta { background: linear-gradient(135deg, var(--shop-dark), var(--shop-mid)); border-radius: 10px; padding: 16px; text-align: center; }
+.list-cta p { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-bottom: 10px; line-height: 1.55; }
+.list-cta a { display: inline-block; background: var(--shop-accent); color: #fff; font-weight: 700; font-size: 0.81rem; padding: 8px 16px; border-radius: 6px; text-decoration: none; }
+.list-cta a:hover { opacity: 0.88; }
+
 /* FOOTER */
 .pnf-footer { background: var(--pnf-navy); padding: 48px 28px 24px; }
 .pnf-footer-inner { max-width: 1200px; margin: 0 auto; }
-.pnf-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 36px; margin-bottom: 36px; }
-@media (max-width: 900px) { .pnf-footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
-@media (max-width: 480px) { .pnf-footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; } }
+.pnf-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 36px; margin-bottom: 36px; }
 .pnf-footer-brand { font-family: var(--pnf-display); font-size: 1.1rem; font-weight: 700; color: var(--pnf-white); margin-bottom: 8px; }
 .pnf-footer-brand span { color: var(--pnf-accent); }
 .pnf-footer-tagline { font-size: 12.5px; color: rgba(255,255,255,0.38); line-height: 1.7; margin-bottom: 18px; max-width: 280px; }
@@ -300,6 +296,7 @@ a { color: var(--blue); text-decoration: none; }
 .pnf-contact-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--pnf-accent); cursor: pointer; background: none; border: none; padding: 0; font-family: var(--pnf-font); appearance: none; }
 .pnf-contact-link:hover { color: var(--pnf-white); }
 .pnf-footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+.pnf-footer-col h4 + h4 { margin-top: 20px; }
 .pnf-footer-links { list-style: none; display: flex; flex-direction: column; gap: 7px; }
 .pnf-footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
 .pnf-footer-links a:hover { color: var(--pnf-white); }
@@ -315,17 +312,16 @@ a { color: var(--blue); text-decoration: none; }
 .pnf-modal-head { background: #0D2B3E; padding: 22px 28px 18px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .pnf-modal-head h2 { font-family: var(--pnf-display); font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
 .pnf-modal-head p { font-size: 12.5px; color: rgba(255,255,255,0.5); }
-.pnf-modal-close { background: rgba(255,255,255,0.1); border: none; color: rgba(255,255,255,0.6); width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.pnf-modal-close { background: rgba(255,255,255,0.1); border: none; color: rgba(255,255,255,0.6); width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; line-height: 1; }
 .pnf-modal-close:hover { background: rgba(255,255,255,0.2); color: #fff; }
 .pnf-modal-body { padding: 24px 28px 28px; }
 .pnf-cf { display: flex; flex-direction: column; gap: 14px; }
 .pnf-cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media (max-width: 420px) { .pnf-cf-row { grid-template-columns: 1fr; } }
 .pnf-cf label { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #5A6E78; margin-bottom: 5px; display: block; }
-.pnf-cf input, .pnf-cf select, .pnf-cf textarea { width: 100%; padding: 11px 14px; border: 1.5px solid #D8E4E8; border-radius: 7px; font-family: 'Figtree', sans-serif; font-size: 14px; color: #1A2832; background: #F7F3ED; outline: none; transition: border-color 0.2s; }
-.pnf-cf input:focus, .pnf-cf select:focus, .pnf-cf textarea:focus { border-color: #1B6B7D; background: #fff; }
+.pnf-cf input, .pnf-cf textarea { width: 100%; padding: 11px 14px; border: 1.5px solid #D8E4E8; border-radius: 7px; font-family: var(--pnf-font); font-size: 14px; color: #1A2832; background: #F7F3ED; outline: none; transition: border-color 0.2s; }
+.pnf-cf input:focus, .pnf-cf textarea:focus { border-color: #1B6B7D; background: #fff; }
 .pnf-cf textarea { resize: vertical; min-height: 80px; line-height: 1.55; }
-.pnf-cf-submit { width: 100%; background: #1B6B7D; color: #fff; border: none; padding: 13px; border-radius: 8px; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+.pnf-cf-submit { width: 100%; background: #1B6B7D; color: #fff; border: none; padding: 13px; border-radius: 8px; font-family: var(--pnf-font); font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
 .pnf-cf-submit:hover { background: #0F4352; }
 .pnf-cf-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 .pnf-cf-fine { font-size: 11.5px; color: #5A6E78; text-align: center; margin-top: 6px; }
@@ -333,6 +329,10 @@ a { color: var(--blue); text-decoration: none; }
 .pnf-cf-success .pnf-tick { font-size: 40px; margin-bottom: 10px; }
 .pnf-cf-success h3 { font-size: 18px; font-weight: 700; color: #1E6B3C; margin-bottom: 6px; }
 .pnf-cf-success p { font-size: 13.5px; color: #5A6E78; line-height: 1.6; }
+
+@media (max-width: 900px) { .pnf-footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+@media (max-width: 840px) { .two-col { grid-template-columns: 1fr; } .side-col { order: -1; } }
+@media (max-width: 480px) { .pnf-footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; } .pnf-cf-row { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -429,38 +429,38 @@ a { color: var(--blue); text-decoration: none; }
         <a href="/papamoa-previews/categories/shops/supermarkets-papamoa.html" class="subcat-card" data-cat="everyday" data-tags="supermarket grocery woolworths countdown pak n save new world food store the sands plaza east">
           <span class="sc-icon">&#127978;</span><div class="sc-body"><div class="sc-title">Supermarkets</div><div class="sc-desc">Woolworths, PAK'nSAVE, New World</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/pharmacy-papamoa.html" class="subcat-card" data-cat="everyday" data-tags="pharmacy chemist dispensary prescription vitamins health unichem my pharmacy paper plus">
+        <a href="/papamoa-previews/categories/shops/pharmacy-papamoa.html" class="subcat-card" data-cat="everyday" data-tags="pharmacy chemist dispensary prescription vitamins health unichem my pharmacy">
           <span class="sc-icon">&#128138;</span><div class="sc-body"><div class="sc-title">Pharmacy</div><div class="sc-desc">Unichem, My Pharmacy &amp; more</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/liquor-papamoa.html" class="subcat-card" data-cat="everyday" data-tags="liquor bottle store wine beer spirits alcohol off licence super liquor sandhurst">
+        <a href="/papamoa-previews/categories/shops/liquor-papamoa.html" class="subcat-card" data-cat="everyday" data-tags="liquor bottle store wine beer spirits alcohol off licence super liquor">
           <span class="sc-icon">&#127863;</span><div class="sc-body"><div class="sc-title">Liquor &amp; Bottle Stores</div><div class="sc-desc">Super Liquor, Papamoa Liquor Centre</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/stationery-papamoa.html" class="subcat-card" data-cat="everyday" data-tags="stationery office supplies paper plus printing copy centre pens notebooks school supplies">
+        <a href="/papamoa-previews/categories/shops/stationery-papamoa.html" class="subcat-card" data-cat="everyday" data-tags="stationery office supplies paper plus printing copy pens notebooks school">
           <span class="sc-icon">&#128221;</span><div class="sc-body"><div class="sc-title">Stationery &amp; Printing</div><div class="sc-desc">Paper Plus, print &amp; copy services</div></div>
         </a>
 
         <!-- FASHION & BEAUTY -->
-        <a href="/papamoa-previews/categories/shops/clothing-papamoa.html" class="subcat-card" data-cat="fashion" data-tags="clothing fashion boutique cotton on puma under armour skechers decjuba bendon fashion island apparel shoes">
+        <a href="/papamoa-previews/categories/shops/clothing-papamoa.html" class="subcat-card" data-cat="fashion" data-tags="clothing fashion boutique cotton on puma under armour skechers decjuba fashion island apparel shoes">
           <span class="sc-icon">&#128248;</span><div class="sc-body"><div class="sc-title">Clothing &amp; Fashion</div><div class="sc-desc">Fashion Island &amp; boutiques</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/jewellery-papamoa.html" class="subcat-card" data-cat="fashion" data-tags="jewellery jewelry rings necklaces gold silver fashion island goldsmith watch repair">
+        <a href="/papamoa-previews/categories/shops/jewellery-papamoa.html" class="subcat-card" data-cat="fashion" data-tags="jewellery jewelry rings necklaces gold silver fashion island goldsmith watch">
           <span class="sc-icon">&#128141;</span><div class="sc-body"><div class="sc-title">Jewellery</div><div class="sc-desc">Jewellers at Fashion Island &amp; local</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/gifts-papamoa.html" class="subcat-card" data-cat="fashion" data-tags="gifts souvenirs gift shop beach tourist presents homeware candles nz made local">
+        <a href="/papamoa-previews/categories/shops/gifts-papamoa.html" class="subcat-card" data-cat="fashion" data-tags="gifts souvenirs gift shop beach tourist presents homeware candles nz made">
           <span class="sc-icon">&#127873;</span><div class="sc-body"><div class="sc-title">Gifts &amp; Souvenirs</div><div class="sc-desc">Beach gifts &amp; NZ souvenirs</div></div>
         </a>
         <a href="/papamoa-previews/categories/shops/florist-papamoa.html" class="subcat-card" data-cat="fashion" data-tags="florist flowers flower shop bouquet arrangement delivery wedding funeral">
           <span class="sc-icon">&#127800;</span><div class="sc-body"><div class="sc-title">Flowers &amp; Florists</div><div class="sc-desc">Florists &amp; flower delivery</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/arts-crafts-papamoa.html" class="subcat-card" data-cat="fashion" data-tags="arts crafts art supplies painting drawing knitting wool fabric sewing hobby craft shop">
+        <a href="/papamoa-previews/categories/shops/arts-crafts-papamoa.html" class="subcat-card" data-cat="fashion" data-tags="arts crafts art supplies painting drawing knitting wool fabric sewing hobby">
           <span class="sc-icon">&#127912;</span><div class="sc-body"><div class="sc-title">Arts &amp; Crafts</div><div class="sc-desc">Art supplies &amp; craft stores</div></div>
         </a>
 
         <!-- HOME -->
-        <a href="/papamoa-previews/categories/shops/home-interiors-papamoa.html" class="subcat-card" data-cat="home" data-tags="home interiors decor furnishings furniture beds bedding homewares lamps rugs cushions warehouse">
+        <a href="/papamoa-previews/categories/shops/home-interiors-papamoa.html" class="subcat-card" data-cat="home" data-tags="home interiors decor furnishings furniture beds bedding homewares lamps rugs cushions">
           <span class="sc-icon">&#127968;</span><div class="sc-body"><div class="sc-title">Home &amp; Interiors</div><div class="sc-desc">Furniture, decor &amp; homewares</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/garden-centre-papamoa.html" class="subcat-card" data-cat="home" data-tags="garden centre plants nursery trees shrubs pots soil gardening supplies seeds compost">
+        <a href="/papamoa-previews/categories/shops/garden-centre-papamoa.html" class="subcat-card" data-cat="home" data-tags="garden centre plants nursery trees shrubs pots soil gardening supplies seeds">
           <span class="sc-icon">&#127807;</span><div class="sc-body"><div class="sc-title">Garden Centres</div><div class="sc-desc">Pacifica Garden Centre &amp; nurseries</div></div>
         </a>
 
@@ -468,10 +468,10 @@ a { color: var(--blue); text-decoration: none; }
         <a href="/papamoa-previews/categories/shops/surf-skate-papamoa.html" class="subcat-card" data-cat="sport" data-tags="surf skate surfboard skateboard bodyboard wetsuit wax leash fins backdoor switch stance">
           <span class="sc-icon">&#127940;</span><div class="sc-body"><div class="sc-title">Surf, Skate &amp; Snow</div><div class="sc-desc">Backdoor &amp; Switch Stance</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/sporting-equipment-papamoa.html" class="subcat-card" data-cat="sport" data-tags="sporting equipment sports gear team sports cricket football rugby netball gym fitness equipment">
+        <a href="/papamoa-previews/categories/shops/sporting-equipment-papamoa.html" class="subcat-card" data-cat="sport" data-tags="sporting equipment sports gear team sports cricket football rugby netball gym fitness">
           <span class="sc-icon">&#9917;</span><div class="sc-body"><div class="sc-title">Sporting Equipment</div><div class="sc-desc">Team sports &amp; fitness gear</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/outdoors-adventure-papamoa.html" class="subcat-card" data-cat="sport" data-tags="outdoors adventure camping hunting fishing tackle gear tent sleeping bag boots backpack hunting supplies">
+        <a href="/papamoa-previews/categories/shops/outdoors-adventure-papamoa.html" class="subcat-card" data-cat="sport" data-tags="outdoors adventure camping hunting fishing tackle gear tent sleeping bag boots backpack">
           <span class="sc-icon">&#9968;</span><div class="sc-body"><div class="sc-title">Outdoors &amp; Adventure</div><div class="sc-desc">Camping, hunting &amp; fishing gear</div></div>
         </a>
         <a href="/papamoa-previews/categories/shops/powersports-papamoa.html" class="subcat-card" data-cat="sport" data-tags="motorcycles jetski quad bike powersports motorbike atv ashley place papamoa motorsports">
@@ -482,21 +482,21 @@ a { color: var(--blue); text-decoration: none; }
         </a>
 
         <!-- SPECIALIST -->
-        <a href="/papamoa-previews/categories/shops/books-secondhand-papamoa.html" class="subcat-card" data-cat="specialist" data-tags="books second hand secondhand xanadu book exchange dvd cd records jigsaws no book over 5 dollars ashley place bay of plenty">
+        <a href="/papamoa-previews/categories/shops/books-secondhand-papamoa.html" class="subcat-card" data-cat="specialist" data-tags="books second hand secondhand xanadu book exchange dvd cd records jigsaws ashley place">
           <span class="sc-icon">&#128218;</span><div class="sc-body"><div class="sc-title">Books &amp; Second-hand</div><div class="sc-desc">Xanadu Book Exchange &amp; op shops</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/computers-phones-papamoa.html" class="subcat-card" data-cat="specialist" data-tags="computers phones mobile phone pc laptop repair accessories the warehouse domain road kiosk tech">
+        <a href="/papamoa-previews/categories/shops/computers-phones-papamoa.html" class="subcat-card" data-cat="specialist" data-tags="computers phones mobile phone pc laptop repair accessories the warehouse tech kiosk">
           <span class="sc-icon">&#128187;</span><div class="sc-body"><div class="sc-title">Computers &amp; Mobile Phones</div><div class="sc-desc">The Warehouse, mobile &amp; PC stores</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/supplement-store-papamoa.html" class="subcat-card" data-cat="specialist" data-tags="supplements sports nutrition vitamins protein creatine wellness health store pre workout whey">
+        <a href="/papamoa-previews/categories/shops/supplement-store-papamoa.html" class="subcat-card" data-cat="specialist" data-tags="supplements sports nutrition vitamins protein creatine wellness health pre workout whey">
           <span class="sc-icon">&#128170;</span><div class="sc-body"><div class="sc-title">Supplement Stores</div><div class="sc-desc">Sports nutrition &amp; vitamins</div></div>
         </a>
-        <a href="/papamoa-previews/categories/shops/vape-shop-papamoa.html" class="subcat-card" data-cat="specialist" data-tags="vape shop e-cigarette vaping device e-liquid pods nicotine disposable 18 plus age verified">
+        <a href="/papamoa-previews/categories/shops/vape-shop-papamoa.html" class="subcat-card" data-cat="specialist" data-tags="vape shop e-cigarette vaping device e-liquid pods nicotine disposable">
           <span class="sc-icon">&#128168;</span><div class="sc-body"><div class="sc-title">Vape Shops</div><div class="sc-desc">E-cigarettes, devices &amp; e-liquids</div></div>
         </a>
 
         <!-- TRADE & HARDWARE -->
-        <a href="/papamoa-previews/categories/shops/building-supplies-papamoa.html" class="subcat-card" data-cat="trade" data-tags="building supplies hardware timber plasterboard roofing paint tools mitre 10 mega the sands kitchens bathrooms benchtops flooring outdoor power">
+        <a href="/papamoa-previews/categories/shops/building-supplies-papamoa.html" class="subcat-card" data-cat="trade" data-tags="building supplies hardware timber plasterboard roofing paint tools mitre 10 mega sands trade">
           <span class="sc-icon">&#127959;</span><div class="sc-body"><div class="sc-title">Building Supplies</div><div class="sc-desc">Mitre 10 MEGA &amp; trade merchants</div></div>
         </a>
 
@@ -511,6 +511,159 @@ a { color: var(--blue); text-decoration: none; }
         <div class="sa-sub">&#128218; Second-hand Books &middot; 2C Ashley Place, P&#257;p&#257;moa East</div>
         <p class="sa-desc">The Bay of Plenty&rsquo;s only warehouse-scale second-hand bookstore. Around 10,000 books at any time, all colour-coded by price &mdash; no book over $5. Also stocks DVDs, CDs, vinyl records and jigsaws. Cash or store credit paid for quality used books.</p>
         <a href="/papamoa-previews/listings/xanadu-book-exchange-papamoa.html" class="sa-link">View full listing &rarr;</a>
+      </div>
+
+      <!-- CATEGORY SECTIONS -->
+      <div class="section" style="margin-top:32px;" id="everyday">
+        <div class="section-title">&#127978; Everyday Shopping</div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#127978;</div>
+          <div class="sa-body">
+            <h4>Supermarkets in P&#257;p&#257;moa</h4>
+            <p>Woolworths and PAK&rsquo;nSAVE at P&#257;p&#257;moa Plaza, New World The Sands (opened late 2024) and convenience stores throughout the suburb. See the <a href="/papamoa-previews/categories/shops/supermarkets-papamoa.html">Supermarkets page</a> for hours and locations.</p>
+            <a href="/papamoa-previews/categories/shops/supermarkets-papamoa.html" class="sa-btn">Browse Supermarkets &rarr;</a>
+          </div>
+        </div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#128138;</div>
+          <div class="sa-body">
+            <h4>Pharmacy in P&#257;p&#257;moa</h4>
+            <p>Unichem and My Pharmacy both operate at P&#257;p&#257;moa Plaza. Dispensing, vitamins, health products and beauty. See the <a href="/papamoa-previews/categories/shops/pharmacy-papamoa.html">Pharmacy page</a>.</p>
+            <a href="/papamoa-previews/categories/shops/pharmacy-papamoa.html" class="sa-btn">Browse Pharmacy &rarr;</a>
+          </div>
+        </div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#128221;</div>
+          <div class="sa-body">
+            <h4>Stationery &amp; Printing in P&#257;p&#257;moa</h4>
+            <p>Paper Plus at P&#257;p&#257;moa Plaza for stationery, office supplies, gifts and print services. See the <a href="/papamoa-previews/categories/shops/stationery-papamoa.html">Stationery page</a>.</p>
+            <a href="/papamoa-previews/categories/shops/stationery-papamoa.html" class="sa-btn">Browse Stationery &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="fashion">
+        <div class="section-title">&#128248; Fashion &amp; Beauty</div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#128248;</div>
+          <div class="sa-body">
+            <h4>Clothing &amp; Fashion &mdash; Fashion Island</h4>
+            <p>Fashion Island at 42 Gravatt Road is P&#257;p&#257;moa&rsquo;s factory outlet village with 18+ stores including Cotton On, Puma, Under Armour, Skechers, Bendon and Decjuba. See the <a href="/papamoa-previews/categories/shops/clothing-papamoa.html">Clothing page</a>.</p>
+            <a href="/papamoa-previews/categories/shops/clothing-papamoa.html" class="sa-btn">Browse Clothing &rarr;</a>
+          </div>
+        </div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#128141;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Jewellery</h4>
+            <p>No Gold Spotlight claimed for jewellery in P&#257;p&#257;moa. Several jewellers operate at Fashion Island. See the <a href="/papamoa-previews/categories/shops/jewellery-papamoa.html">Jewellery page</a>.</p>
+            <a href="/papamoa-previews/sales/claim.html?type=spotlight&cat=jewellery" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#127873;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Gifts &amp; Souvenirs</h4>
+            <p>No Gold Spotlight claimed for gifts and souvenirs in P&#257;p&#257;moa. See the <a href="/papamoa-previews/categories/shops/gifts-papamoa.html">Gifts page</a>.</p>
+            <a href="/papamoa-previews/sales/claim.html?type=spotlight&cat=gifts" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="home">
+        <div class="section-title">&#127968; Home &amp; Garden</div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#127968;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Home &amp; Interiors</h4>
+            <p>No Gold Spotlight claimed for home and interiors retailers in P&#257;p&#257;moa. See the <a href="/papamoa-previews/categories/shops/home-interiors-papamoa.html">Home &amp; Interiors page</a>.</p>
+            <a href="/papamoa-previews/sales/claim.html?type=spotlight&cat=home-interiors" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#127807;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Garden Centres</h4>
+            <p>Pacifica Garden Centre is P&#257;p&#257;moa&rsquo;s local nursery. See the <a href="/papamoa-previews/categories/shops/garden-centre-papamoa.html">Garden Centres page</a> for all options.</p>
+            <a href="/papamoa-previews/sales/claim.html?type=spotlight&cat=garden" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="sport">
+        <div class="section-title">&#127940; Sport &amp; Outdoors</div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#127940;</div>
+          <div class="sa-body">
+            <h4>Surf, Skate &amp; Snow in P&#257;p&#257;moa</h4>
+            <p>Backdoor Surf at P&#257;p&#257;moa Plaza and Switch Stance on Ashley Place both stock boards, wetsuits, surf accessories and skate gear. See the <a href="/papamoa-previews/categories/shops/surf-skate-papamoa.html">Surf &amp; Skate page</a>.</p>
+            <a href="/papamoa-previews/categories/shops/surf-skate-papamoa.html" class="sa-btn">Browse Surf &amp; Skate &rarr;</a>
+          </div>
+        </div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#9968;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Outdoors &amp; Adventure</h4>
+            <p>No Gold Spotlight claimed for outdoor, camping and adventure gear in P&#257;p&#257;moa. See the <a href="/papamoa-previews/categories/shops/outdoors-adventure-papamoa.html">Outdoors page</a>.</p>
+            <a href="/papamoa-previews/sales/claim.html?type=spotlight&cat=outdoors" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#127949;</div>
+          <div class="sa-body">
+            <h4>Motorcycles, Jetskis &amp; Quads</h4>
+            <p>P&#257;p&#257;moa Motorsports stocks motorcycles, jetskis and quad bikes with new and used stock and servicing. See the <a href="/papamoa-previews/categories/shops/powersports-papamoa.html">Powersports page</a>.</p>
+            <a href="/papamoa-previews/categories/shops/powersports-papamoa.html" class="sa-btn">Browse Powersports &rarr;</a>
+          </div>
+        </div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#128663;</div>
+          <div class="sa-body">
+            <h4>Cars &amp; Dealerships in P&#257;p&#257;moa</h4>
+            <p>Used car yards and dealerships serving P&#257;p&#257;moa and the Bay of Plenty. See the <a href="/papamoa-previews/categories/shops/cars-papamoa.html">Cars page</a> for current listings.</p>
+            <a href="/papamoa-previews/categories/shops/cars-papamoa.html" class="sa-btn">Browse Cars &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="specialist">
+        <div class="section-title">&#128218; Specialist Retail</div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#128218;</div>
+          <div class="sa-body">
+            <h4>Books &amp; Second-hand in P&#257;p&#257;moa</h4>
+            <p>Xanadu Book Exchange at 2C Ashley Place is the Bay of Plenty&rsquo;s only warehouse-scale second-hand bookstore &mdash; around 10,000 books, no book over $5. See the <a href="/papamoa-previews/categories/shops/books-secondhand-papamoa.html">Books page</a>.</p>
+            <a href="/papamoa-previews/categories/shops/books-secondhand-papamoa.html" class="sa-btn">Browse Books &rarr;</a>
+          </div>
+        </div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#128170;</div>
+          <div class="sa-body">
+            <h4>Gold Spotlight available &mdash; Supplement Stores</h4>
+            <p>No Gold Spotlight claimed for sports nutrition and supplement stores in P&#257;p&#257;moa. See the <a href="/papamoa-previews/categories/shops/supplement-store-papamoa.html">Supplement Stores page</a>.</p>
+            <a href="/papamoa-previews/sales/claim.html?type=spotlight&cat=supplements" class="sa-btn">Claim this Spotlight &rarr;</a>
+          </div>
+        </div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#128187;</div>
+          <div class="sa-body">
+            <h4>Computers &amp; Mobile Phones in P&#257;p&#257;moa</h4>
+            <p>The Warehouse at P&#257;p&#257;moa Plaza stocks electronics, phones and accessories. See the <a href="/papamoa-previews/categories/shops/computers-phones-papamoa.html">Computers &amp; Phones page</a>.</p>
+            <a href="/papamoa-previews/categories/shops/computers-phones-papamoa.html" class="sa-btn">Browse Tech &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="trade">
+        <div class="section-title">&#127959; Trade &amp; Hardware</div>
+        <div class="spotlight-avail">
+          <div class="sa-icon">&#127959;</div>
+          <div class="sa-body">
+            <h4>Building Supplies &mdash; Mitre 10 P&#257;p&#257;moa</h4>
+            <p>Mitre 10 P&#257;p&#257;moa is currently at 14 Gravatt Road. A Mitre 10 MEGA of 10,580sqm is under construction at The Sands in P&#257;p&#257;moa East, expected 2026. See the <a href="/papamoa-previews/categories/shops/building-supplies-papamoa.html">Building Supplies page</a>.</p>
+            <a href="/papamoa-previews/categories/shops/building-supplies-papamoa.html" class="sa-btn">Browse Building Supplies &rarr;</a>
+          </div>
+        </div>
       </div>
 
       <!-- FAQ -->
@@ -549,32 +702,37 @@ a { color: var(--blue); text-decoration: none; }
       <div class="fact-box">
         <h4>&#128204; Shopping in P&#257;p&#257;moa</h4>
         <ul class="fact-list">
-          <li><strong>P&#257;p&#257;moa Plaza</strong> &mdash; Gravatt Rd, main centre</li>
-          <li><strong>Fashion Island</strong> &mdash; 42 Gravatt Rd, outlets</li>
-          <li><strong>The Sands</strong> &mdash; P&#257;p&#257;moa East (opening in stages)</li>
-          <li><strong>Xanadu Books</strong> &mdash; 2C Ashley Place, &lt;$5/book</li>
-          <li><strong>Mitre 10</strong> &mdash; 14 Gravatt Rd (MEGA coming 2026)</li>
-          <li><strong>Powersports</strong> &mdash; Ashley Place (bikes, jetskis, quads)</li>
-          <li>Bayfair Mall &mdash; Mount Maunganui, 15 min</li>
+          <li><strong>3 supermarkets</strong> &mdash; Woolworths, PAK&rsquo;nSAVE, New World</li>
+          <li><strong>P&#257;p&#257;moa Plaza</strong> &mdash; main retail centre, Gravatt Road</li>
+          <li><strong>Fashion Island</strong> &mdash; 18+ outlet stores on Gravatt Road</li>
+          <li><strong>The Sands</strong> &mdash; P&#257;p&#257;moa East&rsquo;s new town centre (2024)</li>
+          <li><strong>Mitre 10 MEGA</strong> opening at The Sands in 2026</li>
+          <li><strong>Bayfair Mall</strong> &mdash; Mount Maunganui, 15 min away</li>
+          <li><strong>Most stores</strong> open 7 days, hours vary by retailer</li>
         </ul>
       </div>
-      <div class="spotlight-ghost">
-        <div class="sg-text">
-          <h3>&#11088; Retail Spotlight Ad</h3>
-          <p>Premium placement on this page. Independent of listing tier.</p>
+
+      <div class="ad-spot">
+        <div class="ad-label">Spotlight</div>
+        <div class="ad-inner">
+          <div class="ad-placeholder">
+            <p>&#128717; Retail business &mdash; P&#257;p&#257;moa</p>
+            <a href="/papamoa-previews/sales/claim.html?type=adspot&page=shopping">Claim this spot &rarr;</a>
+          </div>
         </div>
-        <a href="/papamoa-previews/sales/claim.html?type=spotlight&amp;cat=Shopping" class="sg-cta">Enquire &rarr;</a>
       </div>
+
       <div class="side-card">
         <div class="side-card-title">Related pages</div>
         <div class="link-list">
+          <a href="https://papamoaplaza.nz" target="_blank" rel="noopener">P&#257;p&#257;moa Plaza</a>
           <a href="/papamoa-previews/community/shopping-centres.html">Shopping Centres Guide</a>
           <a href="/papamoa-previews/community/op-shops-papamoa.html">Op Shops &amp; Second-hand</a>
           <a href="/papamoa-previews/community/easter-trading-hours.html">Easter Trading Hours</a>
-          <a href="/papamoa-previews/listings/xanadu-book-exchange-papamoa.html">Xanadu Book Exchange listing</a>
           <a href="/papamoa-previews/community/new-developments-papamoa.html">The Sands Development</a>
         </div>
       </div>
+
       <div class="list-cta">
         <p>Got a retail business in P&#257;p&#257;moa? Get listed and reach locals searching for what you sell.</p>
         <a href="/papamoa-previews/sales/list-with-us.html">List your business &rarr;</a>
@@ -589,12 +747,12 @@ a { color: var(--blue); text-decoration: none; }
     <div class="pnf-footer-grid">
       <div>
         <div class="pnf-footer-brand">Papamoa<span>.info</span></div>
-        <p class="pnf-footer-tagline">P&#257;p&#257;moa&rsquo;s independent local business directory. Every listing written editorially &mdash; built for Google, AI engines, and the people who live here.</p>
-        <div class="pnf-footer-social"><a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-social-btn"><span class="fb-icon" style="font-weight:800;font-size:14px;">f</span> Facebook</a></div>
+        <p class="pnf-footer-tagline">P&#257;p&#257;moa&rsquo;s independent local business directory. Every listing written editorially &mdash; built for locals, visitors and AI search engines alike.</p>
+        <div class="pnf-footer-social"><a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-social-btn"><span style="font-weight:800;font-size:14px;">f</span> Facebook</a></div>
         <button class="pnf-contact-link" onclick="pnfOpenContact()">&#9993; Get in touch</button>
       </div>
       <div class="pnf-footer-col">
-        <h4>Shop categories</h4>
+        <h4>Shop Categories</h4>
         <ul class="pnf-footer-links">
           <li><a href="/papamoa-previews/categories/shops/supermarkets-papamoa.html">Supermarkets</a></li>
           <li><a href="/papamoa-previews/categories/shops/pharmacy-papamoa.html">Pharmacy</a></li>
@@ -608,7 +766,7 @@ a { color: var(--blue); text-decoration: none; }
         </ul>
       </div>
       <div class="pnf-footer-col">
-        <h4>More shopping</h4>
+        <h4>More Shopping</h4>
         <ul class="pnf-footer-links">
           <li><a href="/papamoa-previews/categories/shops/jewellery-papamoa.html">Jewellery</a></li>
           <li><a href="/papamoa-previews/categories/shops/gifts-papamoa.html">Gifts &amp; Souvenirs</a></li>
@@ -618,21 +776,21 @@ a { color: var(--blue); text-decoration: none; }
           <li><a href="/papamoa-previews/categories/shops/vape-shop-papamoa.html">Vape Shops</a></li>
           <li><a href="/papamoa-previews/categories/shops/cars-papamoa.html">Cars &amp; Dealerships</a></li>
           <li><a href="/papamoa-previews/categories/shops/arts-crafts-papamoa.html">Arts &amp; Crafts</a></li>
-          <li><a href="/papamoa-previews/categories/shops/stationery-papamoa.html">Stationery &amp; Printing</a></li>
         </ul>
       </div>
       <div class="pnf-footer-col">
-        <h4>For businesses</h4>
+        <h4>For Businesses</h4>
         <ul class="pnf-footer-links">
           <li><a href="/papamoa-previews/sales/list-with-us.html">List Your Business</a></li>
           <li><a href="/papamoa-previews/sales/spotlight-ads.html">Spotlight Ad Spots</a></li>
-          <li><a href="/papamoa-previews/sales/menu-addon.html">Menu Add-On</a></li>
-        </ul>
-        <h4 style="margin-top:20px">Directory</h4>
-        <ul class="pnf-footer-links">
-          <li><a href="/papamoa-previews/homepage.html">Homepage</a></li>
-          <li><a href="/papamoa-previews/community/essential-info.html">Essential Info</a></li>
           <li><a href="/papamoa-previews/legal.html">Privacy &amp; Terms</a></li>
+        </ul>
+        <h4 style="margin-top:20px;">Browse Directory</h4>
+        <ul class="pnf-footer-links">
+          <li><a href="/papamoa-previews/categories/accommodation/accommodation.html">Stay</a></li>
+          <li><a href="/papamoa-previews/categories/activities/entertainment.html">Things to Do</a></li>
+          <li><a href="/papamoa-previews/categories/food-drink/food-and-drink.html">Eat</a></li>
+          <li><a href="/papamoa-previews/categories/services/services.html">Services</a></li>
         </ul>
       </div>
     </div>
@@ -677,7 +835,7 @@ a { color: var(--blue); text-decoration: none; }
 /* ── See More / Show Less ── */
 var SHOP_ROWS = 2;
 var shopMaxRow = SHOP_ROWS;
- 
+
 function shopCalcGrid() {
   var grid = document.getElementById('shop-grid');
   if (!grid) return;
@@ -689,12 +847,10 @@ function shopCalcGrid() {
     if (cards[i].getBoundingClientRect().top !== firstTop && cols === 0) { cols = i; break; }
   }
   if (!cols) cols = cards.length;
-  cards.forEach(function(c, idx) {
-    c.dataset.row = Math.floor(idx / cols) + 1;
-  });
+  cards.forEach(function(c, idx) { c.dataset.row = Math.floor(idx / cols) + 1; });
   return cols;
 }
- 
+
 function shopApplyRows() {
   var grid = document.getElementById('shop-grid');
   if (!grid) return;
@@ -716,29 +872,22 @@ function shopApplyRows() {
     btn.querySelector('.see-more-btn').onclick = isAll ? shopShowLess : shopSeeMore;
   }
 }
- 
-function shopSeeMore() {
-  shopMaxRow += SHOP_ROWS;
-  shopApplyRows();
-}
- 
+
+function shopSeeMore() { shopMaxRow += SHOP_ROWS; shopApplyRows(); }
+
 function shopShowLess() {
   shopMaxRow = SHOP_ROWS;
   shopApplyRows();
   var grid = document.getElementById('shop-grid');
   if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
- 
+
 function shopInitRows() {
   shopMaxRow = SHOP_ROWS;
-  /* Temporarily show all to measure */
   document.querySelectorAll('#shop-grid .subcat-card').forEach(function(c) { c.classList.remove('row-hidden'); });
-  requestAnimationFrame(function() {
-    shopCalcGrid();
-    shopApplyRows();
-  });
+  requestAnimationFrame(function() { shopCalcGrid(); shopApplyRows(); });
 }
- 
+
 /* ── Search ── */
 function shopSearch(val) {
   var q = val.trim().toLowerCase();
@@ -755,13 +904,9 @@ function shopSearch(val) {
   var empty = document.getElementById('shop-empty');
   if (empty) empty.classList.toggle('visible', !any && q.length > 0);
   var btn = document.getElementById('shop-see-more');
-  if (q) {
-    if (btn) btn.style.display = 'none';
-  } else {
-    shopInitRows();
-  }
+  if (q) { if (btn) btn.style.display = 'none'; } else { shopInitRows(); }
 }
- 
+
 /* ── Category Filter ── */
 function catFilter(btn, cat) {
   document.querySelectorAll('.subcat-bar .chip').forEach(function(c) { c.classList.remove('active'); });
@@ -776,7 +921,7 @@ function catFilter(btn, cat) {
   if (empty) empty.classList.remove('visible');
   shopInitRows();
 }
- 
+
 /* ── FAQ ── */
 function toggleFaq(btn) {
   var item = btn.closest('.faq-item');
@@ -784,7 +929,7 @@ function toggleFaq(btn) {
   document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
   if (!wasOpen) item.classList.add('open');
 }
- 
+
 /* ── Drawer ── */
 function pnfDrawerOpen() {
   document.getElementById('pnf-drawer').classList.add('open');
@@ -796,7 +941,7 @@ function pnfDrawerClose() {
   document.getElementById('pnf-drawer-overlay').classList.remove('open');
   document.body.style.overflow = '';
 }
- 
+
 /* ── Contact Modal ── */
 function pnfOpenContact() {
   document.getElementById('pnf-contact-overlay').classList.add('open');
@@ -810,7 +955,7 @@ function pnfOverlayClick(e) {
   if (e.target === document.getElementById('pnf-contact-overlay')) pnfCloseContact();
 }
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { pnfDrawerClose(); pnfCloseContact(); } });
- 
+
 async function pnfSubmitContact(e) {
   e.preventDefault();
   var btn = document.getElementById('pnf-cf-btn');
@@ -818,11 +963,13 @@ async function pnfSubmitContact(e) {
   try {
     var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(document.getElementById('pnf-contact-form')) });
     var json = await res.json();
-    if (json.success) { document.getElementById('pnf-contact-form').style.display = 'none'; document.getElementById('pnf-cf-success').style.display = 'block'; }
-    else { btn.textContent = 'Try again'; btn.disabled = false; }
+    if (json.success) {
+      document.getElementById('pnf-contact-form').style.display = 'none';
+      document.getElementById('pnf-cf-success').style.display = 'block';
+    } else { btn.textContent = 'Try again'; btn.disabled = false; }
   } catch(err) { btn.textContent = 'Try again'; btn.disabled = false; }
 }
- 
+
 /* ── Path rewrite ── */
 (function() {
   var base = '/papamoa-previews';
@@ -834,7 +981,7 @@ async function pnfSubmitContact(e) {
     if (href.startsWith('/') && !href.startsWith(base)) { e.preventDefault(); window.location.href = base + href; }
   });
 })();
- 
+
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', shopInitRows);
 window.addEventListener('resize', function() { shopCalcGrid(); shopApplyRows(); });
