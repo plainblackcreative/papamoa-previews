@@ -163,7 +163,9 @@ a{color:var(--svc-accent);text-decoration:none}
 .svc-search-input{width:100%;padding:10px 12px 10px 34px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:.88rem;color:var(--text);background:var(--white);transition:all .15s}
 .svc-search-input:focus{outline:none;border-color:var(--svc-accent);box-shadow:0 0 0 3px rgba(58,171,222,.12)}
 .svc-search-input::placeholder{color:var(--muted)}
-.filter-chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap;background:var(--white);border-bottom:1px solid var(--border);padding:12px 20px}
+.filter-chips-outer{background:var(--white);border-bottom:1px solid var(--border);padding:0 20px;overflow-x:auto;scrollbar-width:none;position:sticky;top:56px;z-index:100}
+.filter-chips-outer::-webkit-scrollbar{display:none}
+.filter-chips{display:flex;gap:6px;flex-wrap:nowrap;max-width:1200px;margin:0 auto;padding:10px 0}
 .filter-chips::-webkit-scrollbar{display:none}
 .fchip{font-size:.74rem;font-weight:700;padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--muted);white-space:nowrap;font-family:var(--font-body);transition:all .15s;cursor:pointer}
 .fchip:hover{border-color:var(--svc-accent);color:var(--svc-accent)}
@@ -364,7 +366,7 @@ a{color:var(--svc-accent);text-decoration:none}
   </div>
 </div>
 
-<div class="filter-chips" id="filter-chips">
+<div class="filter-chips-outer"><div class="filter-chips" id="filter-chips">
   <span class="fchip active" onclick="filterGroup('all',this)">All categories</span>
   <span class="fchip" onclick="filterGroup('trades',this)">Trades</span>
   <span class="fchip" onclick="filterGroup('health',this)">Health</span>
@@ -373,7 +375,7 @@ a{color:var(--svc-accent);text-decoration:none}
   <span class="fchip" onclick="filterGroup('beauty',this)">Beauty</span>
   <span class="fchip" onclick="filterGroup('home',this)">Home &amp; Garden</span>
   <span class="fchip" onclick="filterGroup('family',this)">Family</span>
-</div>
+</div></div>
 
 <div class="page-wrap">
   <div class="two-col">
