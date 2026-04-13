@@ -236,7 +236,10 @@
     .subcat-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 15px 13px; display: flex; align-items: center; gap: 11px; text-decoration: none; color: inherit; transition: all 0.15s; }
     .subcat-card:hover { border-color: var(--blue); box-shadow: 0 3px 10px rgba(58,171,222,0.08); transform: translateY(-1px); }
     .subcat-card.hidden { display: none; }
-    .subcat-card.capped { display: none; }
+    .subcat-card.row-hidden { display: none; }
+    .see-more-wrap { text-align: center; margin-top: 14px; margin-bottom: 24px; }
+    .see-more-btn { display: inline-block; font-family: var(--font-body); font-size: 0.82rem; font-weight: 700; color: var(--lime); background: rgba(125,193,67,0.06); border: 1px solid rgba(125,193,67,0.2); padding: 8px 22px; border-radius: 20px; cursor: pointer; transition: all 0.15s; }
+    .see-more-btn:hover { background: rgba(125,193,67,0.12); border-color: var(--lime); }
     .sc-icon { font-size: 1.35rem; flex-shrink: 0; }
     .sc-body { min-width: 0; }
     .sc-title { font-weight: 700; font-size: 0.86rem; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -494,6 +497,7 @@
           <span class="sc-icon">&#127863;</span><div class="sc-body"><div class="sc-title">Winery Tours</div><div class="sc-desc">Bay of Plenty wine country</div></div>
         </a>
       </div>
+      
       <div class="subcat-empty" id="act-empty">No results &mdash; <a href="/papamoa-previews/categories/activities/entertainment.html">browse all activities &rarr;</a></div>
 
       <!-- SURF & WATER -->
@@ -882,65 +886,136 @@
   </div>
 </footer>
 
-<script>
-  function pnfDrawerOpen() {
-    document.getElementById('pnf-drawer').classList.add('open');
-    document.getElementById('pnf-drawer-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
+<div class="see-more-wrap" id="act-see-more"><button class="see-more-btn" onclick="actSeeMore()">See more activities</button></div>
+ <script>
+/* ── See More / Show Less ── */
+var ACT_ROWS = 2;
+var actMaxRow = ACT_ROWS;
+ 
+function actCalcGrid() {
+  var grid = document.getElementById('act-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card:not(.hidden)');
+  if (!cards.length) return;
+  /* Temporarily show all to measure */
+  cards.forEach(function(c) { c.classList.remove('row-hidden'); });
+  var firstTop = cards[0].getBoundingClientRect().top;
+  var cols = 0;
+  for (var i = 0; i < cards.length; i++) {
+    if (cards[i].getBoundingClientRect().top !== firstTop && cols === 0) { cols = i; break; }
   }
-  function pnfDrawerClose() {
-    document.getElementById('pnf-drawer').classList.remove('open');
-    document.getElementById('pnf-drawer-overlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDrawerClose(); });
-
-  function toggleFaq(el) {
-    el.closest('.faq-item').classList.toggle('open');
-  }
-
-  // Category search
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.subcat-card.capped').forEach(function(c) { c.dataset.capped = '1'; });
+  if (!cols) cols = cards.length;
+  cards.forEach(function(c, idx) {
+    c.dataset.row = Math.floor(idx / cols) + 1;
   });
-
-  function catSearch(val) {
-    var q = val.trim().toLowerCase();
-    var grid = document.getElementById('act-grid');
-    var empty = document.getElementById('act-empty');
-    var cards = grid.querySelectorAll('.subcat-card');
-    var anyVisible = false;
-    cards.forEach(function(card) {
-      var tags = (card.getAttribute('data-tags') || '').toLowerCase();
-      var title = (card.querySelector('.sc-title') ? card.querySelector('.sc-title').textContent : '').toLowerCase();
-      var match = !q || tags.indexOf(q) > -1 || title.indexOf(q) > -1;
-      if (q) {
-        card.classList.toggle('hidden', !match);
-        if (match) card.classList.remove('capped');
-      } else {
-        card.classList.remove('hidden');
-        if (card.dataset.capped) card.classList.add('capped');
-      }
-      if (match && !card.classList.contains('capped') && !card.classList.contains('hidden')) anyVisible = true;
-    });
-    if (empty) empty.classList.toggle('visible', !anyVisible && q.length > 0);
+  return cols;
+}
+ 
+function actApplyRows() {
+  var grid = document.getElementById('act-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card:not(.hidden)');
+  var maxRow = 0;
+  cards.forEach(function(c) {
+    var r = parseInt(c.dataset.row || 0);
+    if (r > maxRow) maxRow = r;
+    c.classList.toggle('row-hidden', r > actMaxRow);
+  });
+  var wrap = document.getElementById('act-see-more');
+  if (!wrap) return;
+  if (maxRow <= ACT_ROWS) {
+    wrap.style.display = 'none';
+  } else {
+    wrap.style.display = '';
+    var isAll = actMaxRow >= maxRow;
+    wrap.querySelector('.see-more-btn').textContent = isAll ? 'Show less' : 'See more activities';
+    wrap.querySelector('.see-more-btn').onclick = isAll ? actShowLess : actSeeMore;
   }
-</script>
-
-<script>
-  (function() {
-    var base = '/papamoa-previews';
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('http')) {
-        e.preventDefault();
-        window.location.href = base + href;
-      }
-    });
-  })();
+}
+ 
+function actSeeMore() {
+  actMaxRow += ACT_ROWS;
+  actApplyRows();
+}
+ 
+function actShowLess() {
+  actMaxRow = ACT_ROWS;
+  actApplyRows();
+  var grid = document.getElementById('act-grid');
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+ 
+function actInitRows() {
+  actMaxRow = ACT_ROWS;
+  document.querySelectorAll('#act-grid .subcat-card').forEach(function(c) {
+    c.classList.remove('row-hidden', 'capped');
+  });
+  requestAnimationFrame(function() {
+    actCalcGrid();
+    actApplyRows();
+  });
+}
+ 
+/* ── Search ── */
+function catSearch(val) {
+  var q = val.trim().toLowerCase();
+  var grid = document.getElementById('act-grid');
+  var empty = document.getElementById('act-empty');
+  var cards = grid.querySelectorAll('.subcat-card');
+  var any = false;
+  cards.forEach(function(card) {
+    var tags = (card.getAttribute('data-tags') || '').toLowerCase();
+    var title = (card.querySelector('.sc-title') ? card.querySelector('.sc-title').textContent : '').toLowerCase();
+    var match = !q || tags.indexOf(q) > -1 || title.indexOf(q) > -1;
+    card.classList.toggle('hidden', !match);
+    card.classList.remove('row-hidden');
+    if (match) any = true;
+  });
+  if (empty) empty.classList.toggle('visible', !any && q.length > 0);
+  var wrap = document.getElementById('act-see-more');
+  if (q) {
+    if (wrap) wrap.style.display = 'none';
+  } else {
+    actInitRows();
+  }
+}
+ 
+/* ── FAQ ── */
+function toggleFaq(el) {
+  el.closest('.faq-item').classList.toggle('open');
+}
+ 
+/* ── Drawer ── */
+function pnfDrawerOpen() {
+  document.getElementById('pnf-drawer').classList.add('open');
+  document.getElementById('pnf-drawer-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function pnfDrawerClose() {
+  document.getElementById('pnf-drawer').classList.remove('open');
+  document.getElementById('pnf-drawer-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDrawerClose(); });
+ 
+/* ── Path rewrite ── */
+(function() {
+  var base = '/papamoa-previews';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('http')) {
+      e.preventDefault();
+      window.location.href = base + href;
+    }
+  });
+})();
+ 
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', actInitRows);
+window.addEventListener('resize', function() { actCalcGrid(); actApplyRows(); });
 </script>
 
 </body>
