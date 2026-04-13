@@ -139,6 +139,12 @@
     .sc-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--navy); line-height: 1.2; }
     .sc-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.5; }
     .sc-arrow { font-size: 0.72rem; font-weight: 700; color: var(--amber); margin-top: auto; padding-top: 6px; }
+    
+    /* SEE MORE */
+    .see-more-wrap { text-align: center; margin-top: 14px; }
+    .see-more-btn { display: inline-block; font-family: 'Figtree', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--amber); background: rgba(224,120,48,0.06); border: 1px solid rgba(224,120,48,0.2); padding: 8px 22px; border-radius: 20px; cursor: pointer; transition: all 0.15s; }
+    .see-more-btn:hover { background: rgba(224,120,48,0.12); border-color: var(--amber); }
+    .subcat-card.row-hidden { display: none; }
 
     /* GOLD SPOTLIGHT — single-column, no cramped two-col split */
     .gold-spotlight { background: linear-gradient(160deg, #1A1208 0%, #0D1B2A 100%); border: 1px solid rgba(200,150,42,0.35); border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
@@ -565,6 +571,7 @@
             <span class="sc-arrow">Browse &rarr;</span>
           </a>
         </div>
+        <div class="see-more-wrap" id="food-see-more"><button class="see-more-btn" onclick="foodSeeMore()">See more categories</button></div>
         <p style="font-size:0.8rem;color:var(--muted);margin-top:10px;">Missing a category? <a href="/papamoa-previews/sales/list-with-us.html">List your business &rarr;</a></p>
       </div>
 
@@ -993,24 +1000,108 @@
 </footer>
 
 <script>
-  document.querySelectorAll('.faq-q').forEach(function(q) {
-    q.addEventListener('click', function() {
-      this.closest('.faq-item').classList.toggle('open');
-    });
+/* ── See More / Show Less for subcat grid ── */
+var FOOD_ROWS = 2;
+var foodMaxRow = FOOD_ROWS;
+ 
+function foodCalcGrid() {
+  var grid = document.querySelector('.subcat-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card');
+  if (!cards.length) return;
+  var firstTop = cards[0].getBoundingClientRect().top;
+  var cols = 0;
+  for (var i = 0; i < cards.length; i++) {
+    if (cards[i].getBoundingClientRect().top !== firstTop && cols === 0) { cols = i; break; }
+  }
+  if (!cols) cols = cards.length;
+  cards.forEach(function(c, idx) {
+    c.dataset.row = Math.floor(idx / cols) + 1;
   });
-  (function() {
-    var base = '/papamoa-previews';
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('http')) {
-        e.preventDefault();
-        window.location.href = base + href;
-      }
-    });
-  })();
+  return cols;
+}
+ 
+function foodApplyRows() {
+  var grid = document.querySelector('.subcat-grid');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.subcat-card');
+  var maxRow = 0;
+  cards.forEach(function(c) {
+    var r = parseInt(c.dataset.row || 0);
+    if (r > maxRow) maxRow = r;
+    c.classList.toggle('row-hidden', r > foodMaxRow);
+  });
+  var wrap = document.getElementById('food-see-more');
+  if (!wrap) return;
+  if (maxRow <= FOOD_ROWS) {
+    wrap.style.display = 'none';
+  } else {
+    wrap.style.display = '';
+    var isAll = foodMaxRow >= maxRow;
+    wrap.querySelector('.see-more-btn').textContent = isAll ? 'Show less' : 'See more categories';
+    wrap.querySelector('.see-more-btn').onclick = isAll ? foodShowLess : foodSeeMore;
+  }
+}
+ 
+function foodSeeMore() {
+  foodMaxRow += FOOD_ROWS;
+  foodApplyRows();
+}
+ 
+function foodShowLess() {
+  foodMaxRow = FOOD_ROWS;
+  foodApplyRows();
+  var grid = document.querySelector('.subcat-grid');
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+ 
+function foodInitRows() {
+  foodMaxRow = FOOD_ROWS;
+  document.querySelectorAll('.subcat-grid .subcat-card').forEach(function(c) { c.classList.remove('row-hidden'); });
+  requestAnimationFrame(function() {
+    foodCalcGrid();
+    foodApplyRows();
+  });
+}
+ 
+/* ── FAQ ── */
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    this.closest('.faq-item').classList.toggle('open');
+  });
+});
+ 
+/* ── Drawer (PNF) ── */
+function pnfDrawerOpen() {
+  document.getElementById('pnf-drawer').classList.add('open');
+  document.getElementById('pnf-drawer-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function pnfDrawerClose() {
+  document.getElementById('pnf-drawer').classList.remove('open');
+  document.getElementById('pnf-drawer-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDrawerClose(); });
+ 
+/* ── Path rewrite ── */
+(function() {
+  var base = '/papamoa-previews';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('http')) {
+      e.preventDefault();
+      window.location.href = base + href;
+    }
+  });
+})();
+ 
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', foodInitRows);
+window.addEventListener('resize', function() { foodCalcGrid(); foodApplyRows(); });
 </script>
 </body>
 </html>
