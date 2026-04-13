@@ -50,12 +50,19 @@
   --green:       #1E6B3C;
   --green-bg:    #E6F4EC;
   --green-pulse: #7DC143;   /* live indicator, lime accent */
-  --lime:        #7DC143;   /* alias -- used in homepage */
+  --lime:        #7DC143;   /* alias -- used in Do category pages and homepage */
   --red:         #8B2020;
   --red-bg:      #FAEAEA;
   --amber:       #8A5A00;
   --amber-bg:    #FFF8E6;
   --coral:       #E8344A;   /* homepage alert/error */
+
+  /* -- Category page accent colours (LOCKED April 2026) -- */
+  --cat-stay-accent:     #3AABDE;   /* Stay/Accommodation -- same as --blue */
+  --cat-do-accent:       #7DC143;   /* Do/Activities -- same as --lime */
+  --cat-eat-accent:      #E07830;   /* Eat/Food & Drink -- warm amber */
+  --cat-services-accent: #3AABDE;   /* Services -- same as --blue */
+  --cat-shop-accent:     #C8962A;   /* Shop -- warm gold, same as --gold-alt */
 
   /* -- Typography -- */
   --font-body:    'Figtree', sans-serif;
@@ -367,18 +374,66 @@ label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08e
 */
 
 /* ============================================================
-   CATEGORY COLOUR CLASSES (hero backgrounds -- LOCKED)
-   NOTE: Three sets exist across the codebase. These are the
-   styles.css canonical set. Homepage and listing templates
-   use different gradients. Reconciliation needed.
+   CATEGORY PAGE HERO GRADIENTS (LOCKED April 2026)
+
+   These are the canonical hero gradients for the five main
+   category pages. Use ONLY these values. Do not invent new
+   category gradients -- if a new category page is needed,
+   pick the closest match from this set and add a new entry here.
+
+   Accent colour = eyebrow text, h1 em italic, see-more button,
+   hero bar underline, sidebar bullet, list CTA button colour.
    ============================================================ */
 
-.hero-cat-food        { background: linear-gradient(135deg, #5C2D1E, #8B4513); }
-.hero-cat-services    { background: linear-gradient(135deg, #0F3352, #1B5F7D); }
-.hero-cat-shopping    { background: linear-gradient(135deg, #3D2B6E, #6A4CA0); }
-.hero-cat-activities  { background: linear-gradient(135deg, #1A4A2E, #2E7D50); }
-.hero-cat-accommodation { background: linear-gradient(135deg, #2B3A5C, #3D5A8A); }
-.hero-cat-community   { background: linear-gradient(135deg, #0D2B3E, #1B6B7D); }
+/* Stay / Accommodation -- ocean blue + --blue accent */
+.hero-cat-accommodation {
+  background: linear-gradient(135deg, #0A1A2E 0%, #0D2840 55%, #142A3A 100%);
+}
+.hero-cat-accommodation::after {
+  background: linear-gradient(90deg, #3AABDE, #1A7ABE);
+}
+/* accent: --blue #3AABDE */
+
+/* Do / Activities -- dark green + --lime accent */
+.hero-cat-activities {
+  background: linear-gradient(135deg, #0A2215 0%, #0D3828 55%, #0F4A30 100%);
+}
+.hero-cat-activities::after {
+  background: linear-gradient(90deg, #7DC143, #4CAF50);
+}
+/* accent: --lime #7DC143 */
+
+/* Eat / Food & Drink -- dark amber/brown + amber accent */
+.hero-cat-food {
+  background: linear-gradient(135deg, #1A1208 0%, #2A2010 55%, #1A0A08 100%);
+}
+.hero-cat-food::after {
+  background: linear-gradient(90deg, #E07830, #C05A18);
+}
+/* accent: #E07830 (--cat-eat-accent) */
+
+/* Services -- dark charcoal + --blue accent */
+.hero-cat-services {
+  background: linear-gradient(135deg, #141820 0%, #1E2535 55%, #28334A 100%);
+}
+.hero-cat-services::after {
+  background: linear-gradient(90deg, #3AABDE, #1A7ABE);
+}
+/* accent: --blue #3AABDE */
+
+/* Shop / Shopping -- dark brown/gold + --gold-alt accent */
+.hero-cat-shopping {
+  background: linear-gradient(135deg, #1A1408 0%, #2A1E0C 55%, #3A2810 100%);
+}
+.hero-cat-shopping::after {
+  background: linear-gradient(90deg, #C8962A, #A07020);
+}
+/* accent: --gold-alt #C8962A (--cat-shop-accent) */
+
+/* Community pages -- navy/ocean (unchanged) */
+.hero-cat-community {
+  background: linear-gradient(135deg, #0D2B3E, #1B6B7D);
+}
 
 /* ============================================================
    UTILITY

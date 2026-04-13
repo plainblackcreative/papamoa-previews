@@ -1,6 +1,6 @@
 # Papamoa.info -- Project Master
 ## Single Source of Truth
-### Consolidated April 9, 2026 | Replaces all previous memory files
+### Consolidated April 9, 2026 | Updated April 13, 2026 | Replaces all previous memory files
 
 ---
 
@@ -180,6 +180,24 @@ The homepage uses slightly different colour temperatures by design. These are do
 **Set 3: styles.css `.hero-cat-*` classes** -- uses a third palette (richest colours)
 
 These three sets need reconciling in a design audit. The styles.css set is the most distinct (e.g., purple for shopping `#3D2B6E`, brown for food `#5C2D1E`).
+
+### 4.4 Category Page Hero Colours (LOCKED April 2026)
+
+The five main category pages each have a distinct hero gradient and accent colour. These are locked and canonical. Do not change them without updating this document and `assets/css/styles.css`.
+
+| Page | Hero gradient | Accent colour | Accent token |
+|------|--------------|---------------|-------------|
+| **Stay** (Accommodation) | `#0A1A2E → #0D2840 → #142A3A` | #3AABDE | `--blue` |
+| **Do** (Activities) | `#0A2215 → #0D3828 → #0F4A30` | #7DC143 | `--lime` |
+| **Eat** (Food & Drink) | `#1A1208 → #2A2010 → #1A0A08` | #E07830 | `--cat-eat-accent` |
+| **Services** | `#141820 → #1E2535 → #28334A` | #3AABDE | `--blue` |
+| **Shop** | `#1A1408 → #2A1E0C → #3A2810` | #C8962A | `--gold-alt` |
+
+**Accent colour applies to:** eyebrow text, `h1 em` italic, hero bottom bar, see-more button, sidebar bullet `›`, list CTA button.
+
+**Stay and Services** share the `--blue` accent but have clearly distinct hero gradients (ocean blue vs dark charcoal).
+
+The `assets/css/styles.css` `.hero-cat-*` classes reflect these values and are the authoritative reference for any new pages.
 
 ---
 
@@ -509,8 +527,8 @@ These files exist in the repo or in session history. They are all superseded by 
 
 These items need decisions or investigation before they can be locked:
 
-### 17.1 Category hero gradients (three conflicting sets)
-Three different gradient colour sets exist across homepage sections, listing templates, and styles.css. Need reconciling in a design audit. Which set wins?
+### 17.1 Category hero gradients ~~(three conflicting sets)~~ -- RESOLVED April 2026
+The five main category page hero gradients and accent colours are now locked. See Section 4.4. The `styles.css` `.hero-cat-*` classes are the canonical reference. Homepage section gradients and listing template gradients remain separate and have not been reconciled -- this is still pending for a future design audit pass.
 
 ### 17.2 Scored search algorithm
 The homepage search uses simple substring matching. A scored version was discussed but status is unclear. Is the scored version in the repo, or still pending?
