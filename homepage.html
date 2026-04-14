@@ -1504,7 +1504,7 @@ var SEARCH_INDEX = [
   {type:'cat',icon:'👕',title:'Embroidery & Custom Apparel',sub:'Uniforms & branded clothing',url:'/papamoa-previews/categories/services/embroidery-papamoa.html',keywords:'embroidery custom apparel clothing uniform print workwear sports teams schools branded merchandise papamoa'},
   {type:'cat',icon:'🏆',title:'Trophies, Keys & Engraving',sub:'Key cutting, trophies & awards',url:'/papamoa-previews/categories/services/engraving-papamoa.html',keywords:'trophy key cutting engraving awards laser trophies medals plaques locksmith personalised gifts papamoa'},
   {type:'cat',icon:'🎪',title:'Events & Party Hire',sub:'Marquees, bouncy castles & PA systems',url:'/papamoa-previews/categories/services/events-hire-papamoa.html',keywords:'events party hire bouncy castle marquee pa system equipment tables chairs lighting birthday wedding corporate papamoa'},
-  {type:'cat',icon:'🛋',title:'Upholstery',sub:'Furniture, vehicle & marine upholstery',url:'/papamoa-previews/categories/services/upholstery-papamoa.html',keywords:'upholstery furniture vehicle marine fabric repair boat sofa chair coastal boating papamoa'},
+  {type:'cat',icon:'🛋',title:'Upholstery',sub:'Furniture, vehicle & marine upholstery',url:'/papamoa-previews/categories/services/upholstery-papamoa.html',keywords:'upholstery furniture vehicle marine fabric repair sofa chair lounge coastal marine vessel papamoa'},
   
   // ── TOOLS ──
   {type:'tool',icon:'💰',title:'PAYE & GST Calculator',sub:'Tax calculator · KiwiSaver',url:'/papamoa-previews/community/tax-kiwisaver.html',keywords:'tax paye gst calculator kiwisaver income ird salary take home pay'},
@@ -1803,7 +1803,7 @@ function getCatListings(cat, query) {
     var inListings = item.url.indexOf('/listings/') > -1;
     if (!inCatUrl && inListings) {
       var hasOverlap = false;
-      kw.split(' ').forEach(function(k) { if (k && item.keywords.indexOf(k) > -1) hasOverlap = true; });
+      kw.split(' ').forEach(function(k) { if (k && k.length > 3 && new RegExp('\\b' + k + '\\b').test(item.keywords)) hasOverlap = true; });
       if (!hasOverlap) return false;
     } else if (!inCatUrl) { return false; }
     return item.keywords.indexOf(q) > -1 || item.title.toLowerCase().indexOf(q) > -1;
