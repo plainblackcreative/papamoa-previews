@@ -199,6 +199,18 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .btn-demo-cta:hover { background: #B8840A; }
 .demo-cta-note { font-size: 13px; color: var(--muted); }
 
+/* ── MOBILE LISTING DEMO FIXES ── */
+@media (max-width: 640px) {
+  /* Collapse the main content + sidebar grid to single column */
+  .ld-body-grid { grid-template-columns: 1fr !important; }
+  /* Photo gallery: show only the hero panel, hide the two thumbnails */
+  .ld-gallery { grid-template-columns: 1fr !important; grid-template-rows: 160px !important; }
+  .ld-gallery > div:nth-child(2),
+  .ld-gallery > div:nth-child(3) { display: none !important; }
+  /* Hero inside listing: hide the logo box so text has full width */
+  .ld-hero-inner > div:last-child { display: none !important; }
+}
+
 /* ── THREE WAYS ── */
 .ways-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
 .way-item { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; display: flex; gap: 16px; align-items: flex-start; }
@@ -239,17 +251,14 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 .tier-price { font-size: 1.6rem; font-weight: 800; line-height: 1.1; margin-bottom: 6px; }
 .tier-price span { font-size: 0.85rem; font-weight: 400; opacity: 0.6; }
 .tier-tagline { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
-/* Placeholder */
 .tier-placeholder .tier-head { background: #FAF6F3; }
 .tier-placeholder .tier-name { color: #9A7060; }
 .tier-placeholder .tier-price { color: #9A7060; }
 .tier-placeholder .tier-badge { background: #F0EBE4; color: #9A7060; }
-/* Silver */
 .tier-silver .tier-head { background: var(--silver-bg); }
 .tier-silver .tier-name { color: var(--silver); }
 .tier-silver .tier-price { color: var(--silver); }
 .tier-silver .tier-badge { background: #D8E8EE; color: var(--silver); }
-/* Gold */
 .tier-gold .tier-head { background: var(--gold-bg); border-bottom-color: rgba(184,132,10,0.2); }
 .tier-gold .tier-name { color: var(--gold); }
 .tier-gold .tier-price { color: var(--gold); }
@@ -424,8 +433,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   --pnf-font:    'Figtree', sans-serif;
   --pnf-display: 'Playfair Display', serif;
 }
-
-/* ── NAV BASE ── */
 .pnf-nav {
   background: var(--pnf-navy);
   height: 56px;
@@ -449,8 +456,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   flex-shrink: 0;
 }
 .pnf-logo span { color: var(--pnf-accent); }
-
-/* Public nav links */
 .pnf-links {
   display: flex;
   align-items: center;
@@ -475,8 +480,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 }
 .pnf-link:hover { color: var(--pnf-white); }
 .pnf-link.active { color: var(--pnf-white); border-bottom-color: var(--pnf-accent); }
-
-/* CTA button */
 .pnf-cta {
   font-family: var(--pnf-font);
   font-size: 13px;
@@ -491,8 +494,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   transition: background 0.2s;
 }
 .pnf-cta:hover { background: #2d95c4; }
-
-/* Facebook link in nav */
 .pnf-fb {
   display: flex;
   align-items: center;
@@ -509,8 +510,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   transition: background 0.15s, color 0.15s;
 }
 .pnf-fb:hover { background: #1877F2; color: var(--pnf-white); }
-
-/* Sales nav back link */
 .pnf-back {
   font-size: 13px;
   color: var(--pnf-muted);
@@ -518,21 +517,16 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   transition: color 0.2s;
 }
 .pnf-back:hover { color: var(--pnf-white); }
-
 @media (max-width: 640px) {
   .pnf-nav { padding: 0 16px; }
   .pnf-links { display: none; }
   .pnf-fb { display: none; }
 }
-
-/* ── FOOTER BASE ── */
 .pnf-footer {
   background: var(--pnf-navy);
   padding: 48px 28px 24px;
 }
 .pnf-footer-inner { max-width: 960px; margin: 0 auto; }
-
-/* Public footer grid */
 .pnf-footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -601,7 +595,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   appearance: none;
 }
 .pnf-contact-link:hover { color: var(--pnf-white); }
-
 .pnf-footer-col h4 {
   font-size: 11px;
   font-weight: 700;
@@ -632,8 +625,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   text-align: left;
 }
 .pnf-footer-links button:hover { color: var(--pnf-white); }
-
-/* Footer bottom bar */
 .pnf-footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.08);
   padding-top: 20px;
@@ -647,8 +638,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 }
 .pnf-footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; }
 .pnf-footer-bottom a:hover { color: var(--pnf-white); }
-
-/* Sales footer (slimmer) */
 .pnf-footer-slim {
   background: var(--pnf-navy);
   padding: 28px;
@@ -688,8 +677,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   font-size: 11.5px;
   color: rgba(255,255,255,0.2);
 }
-
-/* Admin footer (minimal) */
 .pnf-footer-admin {
   background: var(--pnf-navy);
   padding: 16px 28px;
@@ -698,8 +685,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   text-align: center;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
-
-/* ── CONTACT LIGHTBOX ── */
 .pnf-overlay {
   position: fixed;
   inset: 0;
@@ -912,102 +897,99 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <h2>What a listing actually looks like</h2>
       <p>This is a real example listing &mdash; a local plumber, written in our editorial directory voice. Your listing would be written the same way, specific to your business. Switch between tiers to see exactly what you get.</p>
     </div>
-<div id="demo-menu-overlay" style="display:none;position:fixed;inset:0;background:rgba(13,27,46,0.88);z-index:600;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
-        <div style="background:#fff;border-radius:14px;width:100%;max-width:780px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.35);margin:auto;">
-          <div style="background:linear-gradient(135deg,#0F4352,#1B6B7D);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
-            <div>
-              <div style="font-family:var(--font-display);font-size:17px;font-weight:700;color:#fff;">Papamoa.info — Listing Packages &amp; Ad Spots</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;">Prices exclude gst &middot; Annual subscriptions unless noted &middot; Updated April 2026</div>
-            </div>
-            <button onclick="document.getElementById('demo-menu-overlay').style.display='none';document.body.style.overflow='';" style="background:rgba(255,255,255,0.12);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">&times;</button>
+
+    <!-- PRICING LIGHTBOX -->
+    <div id="demo-menu-overlay" style="display:none;position:fixed;inset:0;background:rgba(13,27,46,0.88);z-index:600;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+      <div style="background:#fff;border-radius:14px;width:100%;max-width:780px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.35);margin:auto;">
+        <div style="background:linear-gradient(135deg,#0F4352,#1B6B7D);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-family:var(--font-display);font-size:17px;font-weight:700;color:#fff;">Papamoa.info — Listing Packages &amp; Ad Spots</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;">Prices exclude gst &middot; Annual subscriptions unless noted &middot; Updated April 2026</div>
           </div>
-          <!-- Tabs -->
-          <div style="display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--sand);overflow-x:auto;" id="demo-menu-tabs">
-            <button onclick="demoMenuTab('listings',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--navy);border-bottom:2px solid var(--ocean);border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Listings</button>
-            <button onclick="demoMenuTab('addons',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Add-Ons</button>
-            <button onclick="demoMenuTab('spotlights',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Spotlight Ad Spots</button>
-            <button onclick="demoMenuTab('specials',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Specials</button>
+          <button onclick="document.getElementById('demo-menu-overlay').style.display='none';document.body.style.overflow='';" style="background:rgba(255,255,255,0.12);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">&times;</button>
+        </div>
+        <div style="display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--sand);overflow-x:auto;" id="demo-menu-tabs">
+          <button onclick="demoMenuTab('listings',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--navy);border-bottom:2px solid var(--ocean);border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Listings</button>
+          <button onclick="demoMenuTab('addons',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Add-Ons</button>
+          <button onclick="demoMenuTab('spotlights',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Spotlight Ad Spots</button>
+          <button onclick="demoMenuTab('specials',this)" style="font-size:12px;font-weight:700;padding:11px 18px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;border-top:none;border-left:none;border-right:none;white-space:nowrap;background:none;font-family:var(--font-body);">Specials</button>
+        </div>
+        <div id="dmenu-listings" style="display:block;padding:20px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+            <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Silver Listing</div><div style="font-size:11.5px;color:var(--muted);">Logo, SEO description, schema markup, social links, review badges, lifetime price lock, 2027 ROI guarantee.</div></div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$599<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr</span></div>
           </div>
-          <!-- Listings panel -->
-          <div id="dmenu-listings" style="display:block;padding:20px 24px;">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
-              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Silver Listing</div><div style="font-size:11.5px;color:var(--muted);">Logo, SEO description, schema markup, social links, review badges, lifetime price lock, 2027 ROI guarantee.</div></div>
-              <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$599<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr</span></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
-              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Gold Listing <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Most popular</span></div><div style="font-size:11.5px;color:var(--muted);">Everything in Silver + photo gallery (up to 9 images), Spotlight position, AI FAQ &amp; AEO schema, Menu Add-On free, premium ad spot access.</div></div>
-              <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$1,199<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr</span></div>
-            </div>
-            <div style="padding:12px 0;">
-              <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Placeholder <span style="font-size:10px;font-weight:700;color:var(--muted);font-style:italic;">(auto-generated, not sold)</span></div>
-              <div style="font-size:11.5px;color:var(--muted);">Every empty sub-category gets one automatically. Ranks in Google, captures enquiry leads, generates traffic data used to convert the slot to a paid listing.</div>
-            </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+            <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Gold Listing <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Most popular</span></div><div style="font-size:11.5px;color:var(--muted);">Everything in Silver + photo gallery (up to 9 images), Spotlight position, AI FAQ &amp; AEO schema, Menu Add-On free, premium ad spot access.</div></div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$1,199<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr</span></div>
           </div>
-          <!-- Add-Ons panel -->
-          <div id="dmenu-addons" style="display:none;padding:20px 24px;">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
-              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Menu / Service List Add-On <span style="font-size:10px;font-weight:800;background:#D8E8EE;color:var(--silver);padding:2px 7px;border-radius:3px;margin-left:4px;">Silver</span></div><div style="font-size:11.5px;color:var(--muted);">Interactive filterable menu or price list on your listing. Category tabs, dietary filters, Last Updated date, Order Online link. Client updates via private form — no CMS login.</div></div>
-              <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$199<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr</span></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
-              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Menu / Service List Add-On <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Gold — free</span></div><div style="font-size:11.5px;color:var(--muted);">Included at no extra cost with any Gold listing. Same full-featured interactive menu.</div></div>
-              <div style="font-size:14px;font-weight:800;color:var(--green);white-space:nowrap;">Free</div>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
-              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Extra Sub-Category Spotlight <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Gold only</span></div><div style="font-size:11.5px;color:var(--muted);">Gold includes one primary sub-category Spotlight. Each additional sub-category is $199+gst/yr. E.g. a plumber in Drainage + Gas Fitting + Bathroom Renos = 2 extras.</div></div>
-              <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$199<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr each</span></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;gap:12px;">
-              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Premium Article &amp; Page Ad Spots <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Gold only</span></div><div style="font-size:11.5px;color:var(--muted);">Monthly placements on high-traffic category pages, article pages, and homepage sections. Priced by page and position once analytics data is available.</div></div>
-              <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
-            </div>
-          </div>
-          <!-- Spotlight Ad Spots panel -->
-          <div id="dmenu-spotlights" style="display:none;padding:20px 24px;">
-            <div style="background:var(--ocean-light);border:1px solid #B0D4DC;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--ocean-deep);line-height:1.55;">&#128202; Positions are priced once real traffic data is available. All Spotlight Ad Spots are available to <strong>Gold listing holders only</strong>. Monthly placements, cancel anytime.</div>
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
-              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Homepage Section Spotlight <span style="font-size:10px;font-weight:700;background:#E6F4EC;color:var(--green);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 1</span></div><div style="font-size:11.5px;color:var(--muted);">Featured position at the top of a homepage category section (Food &amp; Drink, Services, Accommodation, Entertainment). Seen by every homepage visitor.</div></div>
-              <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
-              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Main Category Page Spotlight <span style="font-size:10px;font-weight:700;background:#E6F4EC;color:var(--green);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 2</span></div><div style="font-size:11.5px;color:var(--muted);">Featured position at the top of a main category page (e.g. Food &amp; Drink, Services, Shopping). Targeted to visitors actively browsing that category.</div></div>
-              <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
-              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Article Page Spotlight <span style="font-size:10px;font-weight:700;background:var(--sand);color:var(--muted);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 3</span></div><div style="font-size:11.5px;color:var(--muted);">Featured position on high-traffic editorial and community pages — e.g. surf &amp; tides, schools, new developments. Context-targeted to relevant audiences.</div></div>
-              <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;gap:12px;">
-              <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">News &amp; Events Spotlight <span style="font-size:10px;font-weight:700;background:var(--sand);color:var(--muted);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 4</span></div><div style="font-size:11.5px;color:var(--muted);">Featured on the News &amp; Events page. High seasonal traffic spikes during AIMS Games, Easter, and summer. Strong for hospitality, retail, and event-based businesses.</div></div>
-              <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
-            </div>
-          </div>
-          <!-- Specials panel -->
-          <div id="dmenu-specials" style="display:none;padding:20px 24px;">
-            <div style="background:#FFF8E6;border:1px solid #E8C96A;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#7A5500;line-height:1.55;">No current specials. Enquire below about upcoming offers and seasonal promotions.</div>
-          </div>
-          <!-- Footer -->
-          <div style="padding:14px 24px;border-top:1px solid var(--border);background:var(--sand);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-            <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">All prices exclude gst &middot; Annual subscriptions renew at locked rate &middot; 2027 ROI guarantee on all paid listings</div>
-            <a href="#get-found" onclick="document.getElementById('demo-menu-overlay').style.display='none';document.body.style.overflow='';" style="background:linear-gradient(135deg,var(--ocean),var(--ocean-deep));color:#fff;font-size:12px;font-weight:700;padding:9px 18px;border-radius:6px;text-decoration:none;white-space:nowrap;">Get your listing &rarr;</a>
+          <div style="padding:12px 0;">
+            <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Placeholder <span style="font-size:10px;font-weight:700;color:var(--muted);font-style:italic;">(auto-generated, not sold)</span></div>
+            <div style="font-size:11.5px;color:var(--muted);">Every empty sub-category gets one automatically. Ranks in Google, captures enquiry leads, generates traffic data used to convert the slot to a paid listing.</div>
           </div>
         </div>
+        <div id="dmenu-addons" style="display:none;padding:20px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+            <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Menu / Service List Add-On <span style="font-size:10px;font-weight:800;background:#D8E8EE;color:var(--silver);padding:2px 7px;border-radius:3px;margin-left:4px;">Silver</span></div><div style="font-size:11.5px;color:var(--muted);">Interactive filterable menu or price list on your listing. Category tabs, dietary filters, Last Updated date, Order Online link. Client updates via private form.</div></div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$199<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr</span></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+            <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Menu / Service List Add-On <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Gold — free</span></div><div style="font-size:11.5px;color:var(--muted);">Included at no extra cost with any Gold listing.</div></div>
+            <div style="font-size:14px;font-weight:800;color:var(--green);white-space:nowrap;">Free</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+            <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Extra Sub-Category Spotlight <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Gold only</span></div><div style="font-size:11.5px;color:var(--muted);">Gold includes one primary sub-category Spotlight. Each additional sub-category is $199+gst/yr.</div></div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);white-space:nowrap;">$199<span style="font-size:11px;font-weight:400;color:var(--muted);">/yr each</span></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;gap:12px;">
+            <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Premium Article &amp; Page Ad Spots <span style="font-size:10px;font-weight:800;background:#FAECC8;color:var(--gold);padding:2px 7px;border-radius:3px;margin-left:4px;">&#11088; Gold only</span></div><div style="font-size:11.5px;color:var(--muted);">Monthly placements on high-traffic category pages, article pages, and homepage sections.</div></div>
+            <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
+          </div>
+        </div>
+        <div id="dmenu-spotlights" style="display:none;padding:20px 24px;">
+          <div style="background:var(--ocean-light);border:1px solid #B0D4DC;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--ocean-deep);line-height:1.55;">&#128202; Positions are priced once real traffic data is available. All Spotlight Ad Spots are available to <strong>Gold listing holders only</strong>. Monthly placements, cancel anytime.</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+            <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Homepage Section Spotlight <span style="font-size:10px;font-weight:700;background:#E6F4EC;color:var(--green);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 1</span></div><div style="font-size:11.5px;color:var(--muted);">Featured position at the top of a homepage category section. Seen by every homepage visitor.</div></div>
+            <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+            <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Main Category Page Spotlight <span style="font-size:10px;font-weight:700;background:#E6F4EC;color:var(--green);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 2</span></div><div style="font-size:11.5px;color:var(--muted);">Featured position at the top of a main category page. Targeted to visitors actively browsing that category.</div></div>
+            <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);gap:12px;">
+            <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">Article Page Spotlight <span style="font-size:10px;font-weight:700;background:var(--sand);color:var(--muted);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 3</span></div><div style="font-size:11.5px;color:var(--muted);">Featured on high-traffic editorial and community pages. Context-targeted to relevant audiences.</div></div>
+            <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;gap:12px;">
+            <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;">News &amp; Events Spotlight <span style="font-size:10px;font-weight:700;background:var(--sand);color:var(--muted);padding:2px 7px;border-radius:3px;margin-left:4px;">Tier 4</span></div><div style="font-size:11.5px;color:var(--muted);">Featured on the News &amp; Events page. High seasonal traffic spikes during AIMS Games, Easter, and summer.</div></div>
+            <div style="font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right;">TBD<br><span style="font-size:10px;font-weight:400;">analytics pending</span></div>
+          </div>
+        </div>
+        <div id="dmenu-specials" style="display:none;padding:20px 24px;">
+          <div style="background:#FFF8E6;border:1px solid #E8C96A;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#7A5500;line-height:1.55;">No current specials. Enquire below about upcoming offers and seasonal promotions.</div>
+        </div>
+        <div style="padding:14px 24px;border-top:1px solid var(--border);background:var(--sand);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+          <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">All prices exclude gst &middot; Annual subscriptions renew at locked rate &middot; 2027 ROI guarantee on all paid listings</div>
+          <a href="#get-found" onclick="document.getElementById('demo-menu-overlay').style.display='none';document.body.style.overflow='';" style="background:linear-gradient(135deg,var(--ocean),var(--ocean-deep));color:#fff;font-size:12px;font-weight:700;padding:9px 18px;border-radius:6px;text-decoration:none;white-space:nowrap;">Get your listing &rarr;</a>
+        </div>
       </div>
+    </div>
+
     <div class="demo-tabs">
       <button class="demo-tab active-gold" onclick="showDemo('gold',this)">&#11088; Gold Listing</button>
       <button class="demo-tab" onclick="showDemo('silver',this)">&#9670; Silver</button>
       <button class="demo-tab" onclick="showDemo('placeholder',this)">Placeholder (unclaimed)</button>
     </div>
 
-    <!-- GOLD -->
+    <!-- GOLD DEMO -->
     <div class="demo-panel active" id="demo-gold">
-      <!-- MENU LIGHTBOX -->
       <div class="listing-demo">
         <!-- Hero -->
         <div style="background:linear-gradient(135deg,#0F2A38,#1B4A5C);padding:32px 24px 28px;position:relative;overflow:hidden;">
           <div style="position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:radial-gradient(circle,rgba(58,171,222,0.08) 0%,transparent 65%);pointer-events:none;"></div>
           <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C8962A,#F0C060,#C8962A);"></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:100%;">
+          <!-- ld-hero-inner class added here -->
+          <div class="ld-hero-inner" style="display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:100%;">
             <div style="flex:1;min-width:0;">
               <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:linear-gradient(135deg,#C8962A,#F0C060);color:#1A0A00;padding:4px 10px;border-radius:3px;margin-bottom:12px;">&#11088; Gold Spotlight</div>
               <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;">Local Business Directory &middot; P&#257;p&#257;moa</div>
@@ -1030,14 +1012,15 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
                 <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">Written for you</span>
               </div>
             </div>
+            <!-- This last-child div (logo box) is hidden on mobile via .ld-hero-inner > div:last-child -->
             <div style="flex-shrink:0;width:96px;height:96px;border-radius:10px;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
               <span style="font-family:var(--font-display);font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);">papamoa</span>
               <span style="font-size:9px;font-weight:700;color:rgba(196,152,90,0.9);">.info</span>
             </div>
           </div>
         </div>
-        <!-- Photo gallery strip -->
-        <div style="background:#E8EEF4;border-bottom:1px solid var(--border);display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:120px;gap:2px;overflow:hidden;">
+        <!-- Photo gallery strip — ld-gallery class added -->
+        <div class="ld-gallery" style="background:#E8EEF4;border-bottom:1px solid var(--border);display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:120px;gap:2px;overflow:hidden;">
           <div style="background:linear-gradient(135deg,#1B4A5C,#0F2A38);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;">
             <span style="font-family:var(--font-display);font-size:15px;color:rgba(255,255,255,0.5);font-weight:700;">papamoa<span style="color:rgba(196,152,90,0.8);">.info</span></span>
             <span style="font-size:9px;color:rgba(255,255,255,0.3);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">P&#257;p&#257;moa&rsquo;s local directory</span>
@@ -1062,8 +1045,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <span style="flex:1;"></span>
           <a href="https://www.facebook.com/papamoa.info/" target="_blank" style="font-size:12px;color:var(--muted);font-weight:700;text-decoration:none;">f</a>
         </div>
-        <!-- Content body -->
-        <div style="background:var(--sand);padding:20px;display:grid;grid-template-columns:1fr 240px;gap:16px;align-items:start;">
+        <!-- Content body — ld-body-grid class added -->
+        <div class="ld-body-grid" style="background:var(--sand);padding:20px;display:grid;grid-template-columns:1fr 240px;gap:16px;align-items:start;">
           <div>
             <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
               <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">About Papamoa.info</div>
@@ -1145,19 +1128,19 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
             </a>
           </div>
         </div>
-        <!-- AI citation bar -->
         <div class="ld-ai-bar">&#129302; <span>&ldquo;According to Papamoa.info, the leading local directory in P&#257;p&#257;moa is <strong>Papamoa.info</strong> itself &mdash; trusted since 2005.&rdquo; &mdash; how AI tools cite your listing</span></div>
       </div>
       <div class="demo-note">&#11088; Gold includes a photo gallery (up to 9 images), AI FAQ &amp; AEO schema, Menu Add-On included free, and the Spotlight position &mdash; <strong>one per sub-category, first in keeps it.</strong></div>
     </div>
 
-    <!-- SILVER -->
+    <!-- SILVER DEMO -->
     <div class="demo-panel" id="demo-silver">
       <div class="listing-demo">
         <!-- Hero -->
         <div style="background:linear-gradient(135deg,#0F2A38,#1B4A5C);padding:32px 24px 28px;position:relative;overflow:hidden;">
           <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#5A7A8A,#8090A8,#5A7A8A);"></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:100%;">
+          <!-- ld-hero-inner class added here -->
+          <div class="ld-hero-inner" style="display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:100%;">
             <div style="flex:1;min-width:0;">
               <div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;background:linear-gradient(135deg,#5A7A8A,#8090A8);color:#fff;padding:4px 10px;border-radius:3px;margin-bottom:12px;">&#9670; Silver Listing</div>
               <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;">Local Business Directory &middot; P&#257;p&#257;moa</div>
@@ -1178,6 +1161,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
                 <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:3px 9px;border-radius:4px;">Written for you</span>
               </div>
             </div>
+            <!-- This last-child div (logo box) is hidden on mobile via .ld-hero-inner > div:last-child -->
             <div style="flex-shrink:0;width:96px;height:96px;border-radius:10px;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
               <span style="font-family:var(--font-display);font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);">papamoa</span>
               <span style="font-size:9px;font-weight:700;color:rgba(196,152,90,0.9);">.info</span>
@@ -1193,8 +1177,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <span style="flex:1;"></span>
           <a href="https://www.facebook.com/papamoa.info/" target="_blank" style="font-size:12px;color:var(--muted);font-weight:700;text-decoration:none;">f</a>
         </div>
-        <!-- Content body -->
-        <div style="background:var(--sand);padding:20px;display:grid;grid-template-columns:1fr 240px;gap:16px;align-items:start;">
+        <!-- Content body — ld-body-grid class added -->
+        <div class="ld-body-grid" style="background:var(--sand);padding:20px;display:grid;grid-template-columns:1fr 240px;gap:16px;align-items:start;">
           <div>
             <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px;">
               <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">About Papamoa.info</div>
@@ -1279,7 +1263,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="demo-note">&#9670; Silver is the full claimed listing &mdash; SEO description, schema markup, your logo, social links, and review badges. Menu Add-On available for $199+gst/yr extra.</div>
     </div>
 
-    <!-- PLACEHOLDER -->
+    <!-- PLACEHOLDER DEMO -->
     <div class="demo-panel" id="demo-placeholder">
       <div class="listing-demo" style="opacity:0.85;">
         <div style="background:#4A3828;padding:32px 24px 28px;position:relative;overflow:hidden;">
@@ -1764,20 +1748,22 @@ async function submitForm(e) {
 </script>
 
 <script>
-  (function() {
-    var base = '/papamoa-previews';
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
-        e.preventDefault();
-        window.location.href = base + href;
-      }
-    });
-  })();
+(function() {
+  var base = '/papamoa-previews';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('/') && !href.startsWith(base) && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+      e.preventDefault();
+      window.location.href = base + href;
+    }
+  });
+})();
 </script>
+
+<!-- CONTACT MODAL -->
 <div class="pnf-overlay" id="pnf-contact-overlay" onclick="pnfOverlayClick(event)">
   <div class="pnf-modal" role="dialog" aria-label="Contact Papamoa.info">
     <div class="pnf-modal-head">
@@ -1793,7 +1779,6 @@ async function submitForm(e) {
         <input type="hidden" name="form_name" value="contact-list-with-us-lightbox">
         <input type="hidden" name="redirect" value="false">
         <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-
         <div class="pnf-cf-row">
           <div>
             <label>Your name *</label>
@@ -1804,7 +1789,6 @@ async function submitForm(e) {
             <input type="email" name="email" placeholder="you@email.com" required>
           </div>
         </div>
-
         <div>
           <label>Enquiry type *</label>
           <select name="enquiry_type" required id="pnf-enquiry-type">
@@ -1817,16 +1801,13 @@ async function submitForm(e) {
             <option value="Report an error">Report an error on the site</option>
           </select>
         </div>
-
         <div>
           <label>Message *</label>
           <textarea name="message" placeholder="How can we help?" required></textarea>
         </div>
-
         <button type="submit" class="pnf-cf-submit" id="pnf-cf-btn">Send message &rarr;</button>
         <p class="pnf-cf-fine">No spam &middot; We reply within one business day</p>
       </form>
-
       <div class="pnf-cf-success" id="pnf-cf-success">
         <div class="pnf-tick">&#10003;</div>
         <h3>Message received</h3>
@@ -1835,8 +1816,8 @@ async function submitForm(e) {
     </div>
   </div>
 </div>
+
 <script>
-// ── Contact lightbox ──
 function pnfOpenContact(type) {
   if (type) {
     var sel = document.getElementById('pnf-enquiry-type');
@@ -1859,7 +1840,6 @@ function pnfOverlayClick(e) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') pnfCloseContact();
 });
-
 async function pnfSubmitContact(e) {
   e.preventDefault();
   var btn = document.getElementById('pnf-cf-btn');
