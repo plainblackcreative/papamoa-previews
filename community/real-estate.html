@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Papamoa Real Estate — Property Market, Agents &amp; Listings | Papamoa.info</title>
 <meta name="description" content="Your local guide to the Papamoa property market. Agent recommendations, monthly market reports, neighbourhood breakdowns, and buying and selling advice from people who know this coastline.">
+<link rel="canonical" href="https://papamoa.info/community/real-estate-papamoa.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://papamoa.info/community/real-estate-papamoa.html">
+<meta property="og:title" content="Papamoa Real Estate — Property Market, Agents &amp; Listings">
+<meta property="og:description" content="Monthly market reports, neighbourhood breakdowns, and trusted agent recommendations for buyers and sellers in Pāpāmoa, Bay of Plenty.">
+<meta property="og:site_name" content="Papamoa.info">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -14,6 +20,7 @@
   --ocean: #1B6B7D;
   --ocean-deep: #0F4352;
   --ocean-light: #E4F2F5;
+  --blue: #3AABDE;
   --sand: #F7F3ED;
   --sand-dark: #EDE7DB;
   --dune: #C4985A;
@@ -23,10 +30,18 @@
   --text: #1A2832;
   --muted: #5A6E78;
   --border: #D8E4E8;
+  --bg: #F4F7FA;
   --gold: #B8840A;
   --gold-bg: #FBF3E2;
   --font-body: 'Figtree', sans-serif;
   --font-display: 'Playfair Display', serif;
+  /* PNF nav tokens */
+  --pnf-navy: #0D2B3E;
+  --pnf-accent: #3AABDE;
+  --pnf-white: #FFFFFF;
+  --pnf-muted: rgba(255,255,255,0.45);
+  --pnf-font: 'Figtree', sans-serif;
+  --pnf-display: 'Playfair Display', serif;
 }
 html { scroll-behavior: smooth; }
 body {
@@ -36,45 +51,211 @@ body {
   font-size: 15px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* NAV */
-.site-nav {
-  background: var(--navy);
-  padding: 0 24px;
+/* ── STANDARD PNF NAV ── */
+.pnf-nav {
+  background: var(--pnf-navy);
+  height: 56px;
+  padding: 0 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 200;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+  gap: 16px;
+  width: 100%;
 }
-.nav-brand {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  color: var(--white);
+.pnf-logo {
+  font-family: var(--pnf-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--pnf-white);
   text-decoration: none;
-  letter-spacing: 0.01em;
+  flex-shrink: 0;
 }
-.nav-brand span { color: var(--dune); }
-.nav-links { display: flex; gap: 24px; list-style: none; }
-.nav-links a {
-  color: rgba(255,255,255,0.7);
-  text-decoration: none;
+/* FIXED: .info span uses --blue (#3AABDE), not --dune */
+.pnf-logo span { color: var(--pnf-accent); }
+.pnf-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pnf-links::-webkit-scrollbar { display: none; }
+.pnf-link {
   font-size: 13px;
   font-weight: 500;
-  transition: color 0.2s;
+  color: var(--pnf-muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color .15s;
 }
-.nav-links a:hover { color: var(--white); }
-.nav-cta {
-  background: var(--dune);
-  color: var(--white) !important;
-  padding: 7px 14px;
-  border-radius: 5px;
-  font-weight: 600 !important;
+.pnf-link:hover { color: #fff; }
+.pnf-link.active { color: #fff; border-bottom-color: var(--pnf-accent); }
+.pnf-cta {
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--pnf-accent);
+  color: var(--pnf-white);
+  padding: 8px 18px;
+  border-radius: 100px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background .2s;
 }
-@media (max-width: 680px) { .nav-links { display: none; } }
+.pnf-cta:hover { background: #2d95c4; }
+.pnf-fb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(255,255,255,.08);
+  color: var(--pnf-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: background .15s, color .15s;
+}
+.pnf-fb:hover { background: #1877F2; color: #fff; }
+.pnf-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 7px;
+  cursor: pointer;
+  padding: 0 9px;
+  flex-shrink: 0;
+}
+.pnf-hamburger span {
+  display: block;
+  height: 2px;
+  background: rgba(255,255,255,.75);
+  border-radius: 2px;
+  transition: all .25s;
+}
+.pnf-drawer-overlay {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 190;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+}
+.pnf-drawer-overlay.open { opacity: 1; pointer-events: all; }
+.pnf-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: min(300px,85vw);
+  background: var(--pnf-navy);
+  z-index: 201;
+  transform: translateX(-100%);
+  transition: transform .28s cubic-bezier(.4,0,.2,1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 24px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+.pnf-drawer.open { transform: translateX(0); }
+.pnf-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  height: 56px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  flex-shrink: 0;
+}
+.pnf-drawer-close {
+  background: rgba(255,255,255,.08);
+  border: none;
+  color: rgba(255,255,255,.6);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.pnf-drawer-nav { flex: 1; overflow-y: auto; padding: 10px 0; }
+.pnf-drawer-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all .15s;
+}
+.pnf-drawer-nav a:hover, .pnf-drawer-nav a.active {
+  color: #fff;
+  background: rgba(255,255,255,.05);
+  border-left-color: var(--pnf-accent);
+}
+.pnf-drawer-nav a .dn-icon { font-size: 17px; width: 22px; text-align: center; flex-shrink: 0; }
+.pnf-drawer-foot {
+  padding: 16px 18px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.pnf-drawer-cta {
+  display: block;
+  text-align: center;
+  background: var(--pnf-accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 11px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.pnf-drawer-fb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,.45);
+  text-decoration: none;
+}
+@media(max-width:640px) {
+  .pnf-links { display: none; }
+  .pnf-fb { display: none; }
+  .pnf-cta { display: none; }
+  .pnf-nav { padding: 0 16px; }
+  .pnf-hamburger { display: flex; }
+}
 
 /* HERO */
 .hero {
@@ -126,15 +307,8 @@ body {
   line-height: 1.65;
   margin-bottom: 32px;
 }
-.hero-stats {
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-.stat {
-  display: flex;
-  flex-direction: column;
-}
+.hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+.stat { display: flex; flex-direction: column; }
 .stat-num {
   font-family: var(--font-display);
   font-size: 1.6rem;
@@ -168,7 +342,6 @@ body {
 }
 
 /* MAIN CONTENT */
-.content-main {}
 .section { margin-bottom: 52px; }
 .section-eyebrow {
   font-size: 10px;
@@ -223,10 +396,7 @@ body {
   font-weight: 700;
   margin-bottom: 6px;
 }
-.report-card-head p {
-  font-size: 13px;
-  color: rgba(255,255,255,0.6);
-}
+.report-card-head p { font-size: 13px; color: rgba(255,255,255,0.6); }
 .report-metrics {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -335,7 +505,6 @@ body {
   font-size: 20px;
   flex-shrink: 0;
 }
-.at-content {}
 .at-label {
   font-size: 10px;
   font-weight: 700;
@@ -356,101 +525,6 @@ body {
 
 /* SIDEBAR */
 .sidebar { display: flex; flex-direction: column; gap: 20px; }
-
-/* FEATURED AGENT SPOTLIGHT */
-.agent-spotlight {
-  background: var(--white);
-  border: 2px solid var(--dune);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(196,152,90,0.15);
-}
-.agent-spotlight-head {
-  background: linear-gradient(135deg, var(--gold-bg), #FDF7E8);
-  padding: 16px 20px 14px;
-  border-bottom: 1px solid rgba(196,152,90,0.2);
-}
-.spotlight-badge {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.spotlight-badge::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--dune);
-  border-radius: 50%;
-}
-.agent-spotlight-head h3 {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  color: var(--navy);
-  font-weight: 700;
-}
-.agent-body { padding: 20px; }
-.agent-avatar {
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(135deg, var(--ocean-light), var(--sand-dark));
-  border-radius: 50%;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  border: 2px solid var(--border);
-}
-.agent-name {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 2px;
-}
-.agent-title { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
-.agent-desc { font-size: 13px; color: var(--text); line-height: 1.6; margin-bottom: 16px; }
-.agent-cta {
-  display: block;
-  background: var(--navy);
-  color: var(--white);
-  text-align: center;
-  padding: 11px 16px;
-  border-radius: 7px;
-  font-weight: 700;
-  font-size: 13px;
-  text-decoration: none;
-  transition: background 0.2s;
-  margin-bottom: 10px;
-}
-.agent-cta:hover { background: var(--ocean-deep); }
-.agent-cta-secondary {
-  display: block;
-  text-align: center;
-  padding: 9px 16px;
-  border-radius: 7px;
-  font-weight: 600;
-  font-size: 13px;
-  text-decoration: none;
-  border: 1px solid var(--border);
-  color: var(--ocean);
-  transition: border-color 0.2s, background 0.2s;
-}
-.agent-cta-secondary:hover { border-color: var(--ocean); background: var(--ocean-light); }
-.agent-disclaimer {
-  font-size: 11px;
-  color: var(--muted);
-  text-align: center;
-  margin-top: 10px;
-  line-height: 1.5;
-}
 
 /* SPOTLIGHT AVAILABLE */
 .spotlight-available {
@@ -549,43 +623,96 @@ body {
 .ms-area { color: var(--text); font-weight: 500; }
 .ms-val { font-weight: 700; color: var(--navy); }
 
-/* FOOTER */
-.site-footer {
-  background: var(--navy);
-  padding: 32px 24px;
-  text-align: center;
-  font-size: 12px;
-  color: rgba(255,255,255,0.35);
+/* AD SPOTS */
+.ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
+.ad-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 6px 14px;
+  background: #FAFAF7;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-.site-footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
-.site-footer a:hover { color: var(--white); }
+.ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.ad-inner { padding: 16px; background: var(--white); }
+.ad-placeholder {
+  background: var(--bg);
+  border: 1.5px dashed var(--dune);
+  border-radius: 7px;
+  padding: 18px;
+  text-align: center;
+}
+.ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+.ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-decoration: none; }
 
-    .ad-spot { border-radius: 10px; overflow: hidden; border: 1px solid var(--dune); }
-    .ad-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 6px 14px; background: #FAFAF7; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
-    .ad-label::before, .ad-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .ad-inner { padding: 16px; background: var(--white); }
-    .ad-placeholder { background: var(--bg); border: 1.5px dashed var(--dune); border-radius: 7px; padding: 18px; text-align: center; }
-    .ad-placeholder p { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
-    .ad-placeholder a { font-size: 0.78rem; font-weight: 700; color: var(--blue); text-decoration: none; }
-  </style>
+/* FOOTER */
+.pnf-footer { background: var(--navy); padding: 32px 24px; text-align: center; }
+.pnf-footer-brand { font-family: var(--pnf-display); font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.pnf-footer-brand span { color: var(--pnf-accent); }
+.pnf-footer-tagline { font-size: 12px; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+.pnf-footer-links-row { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 14px; }
+.pnf-footer-links-row a { font-size: 12px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .15s; }
+.pnf-footer-links-row a:hover { color: #fff; }
+.pnf-footer-bottom { font-size: 11.5px; color: rgba(255,255,255,.2); }
+</style>
 </head>
 <body>
 
-<nav class="site-nav">
-  <a href="/homepage.html" class="nav-brand">Papamoa<span>.info</span></a>
-  <ul class="nav-links">
-    <li><a href="/homepage.html">Home</a></li>
-    <li><a href="/homepage.html">Directory</a></li>
-    <li><a href="/categories/real-estate.html">Real Estate</a></li>
-    <li><a href="/sales/landing.html" class="nav-cta">List Your Business</a></li>
-  </ul>
+<!-- STANDARD PNF NAV -->
+<nav class="pnf-nav">
+  <a href="/papamoa-previews/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
+  <div class="pnf-links">
+    <a href="/papamoa-previews/homepage.html" class="pnf-link">Home</a>
+    <a href="/papamoa-previews/community/essential-info.html" class="pnf-link">Info</a>
+    <a href="/papamoa-previews/community/community.html" class="pnf-link">Community</a>
+    <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="pnf-link">Stay</a>
+    <a href="/papamoa-previews/categories/activities/entertainment.html" class="pnf-link">Do</a>
+    <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="pnf-link">Eat</a>
+    <a href="/papamoa-previews/categories/services/services.html" class="pnf-link">Services</a>
+    <a href="/papamoa-previews/categories/shops/shopping.html" class="pnf-link">Shop</a>
+  </div>
+  <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-fb">f</a>
+  <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-cta">List Your Business</a>
+  <button class="pnf-hamburger" id="pnf-hamburger" aria-label="Open menu" onclick="pnfDrawerOpen()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="pnf-drawer-overlay" id="pnf-drawer-overlay" onclick="pnfDrawerClose()"></div>
+<div class="pnf-drawer" id="pnf-drawer">
+  <div class="pnf-drawer-head">
+    <a href="/papamoa-previews/homepage.html" class="pnf-logo">Papamoa<span>.info</span></a>
+    <button class="pnf-drawer-close" onclick="pnfDrawerClose()">&#10005;</button>
+  </div>
+  <nav class="pnf-drawer-nav">
+    <a href="/papamoa-previews/homepage.html"><span class="dn-icon">&#127968;</span>Home</a>
+    <a href="/papamoa-previews/community/essential-info.html"><span class="dn-icon">&#128205;</span>Info</a>
+    <a href="/papamoa-previews/community/community.html"><span class="dn-icon">&#129309;</span>Community</a>
+    <a href="/papamoa-previews/categories/accommodation/accommodation.html"><span class="dn-icon">&#127968;</span>Stay</a>
+    <a href="/papamoa-previews/categories/activities/entertainment.html"><span class="dn-icon">&#127918;</span>Do</a>
+    <a href="/papamoa-previews/categories/food-drink/food-and-drink.html"><span class="dn-icon">&#127829;</span>Eat</a>
+    <a href="/papamoa-previews/categories/services/services.html"><span class="dn-icon">&#128295;</span>Services</a>
+    <a href="/papamoa-previews/categories/shops/shopping.html"><span class="dn-icon">&#128717;</span>Shop</a>
+  </nav>
+  <div class="pnf-drawer-foot">
+    <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-drawer-cta">List Your Business</a>
+    <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-drawer-fb">
+      <span style="font-weight:800;font-size:15px">f</span> Follow on Facebook
+    </a>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-breadcrumb">
-      <a href="/homepage.html">Home</a> &rsaquo; Real Estate
+      <a href="/papamoa-previews/homepage.html">Home</a> &rsaquo; Real Estate
     </div>
     <div class="hero-label">Property &amp; Real Estate</div>
     <h1>Papamoa Property Market</h1>
@@ -619,13 +746,13 @@ body {
     <!-- MONTHLY MARKET REPORT -->
     <div class="section">
       <div class="section-eyebrow">Latest Report</div>
-      <h2 class="section-title">Papamoa Property Market — March 2026</h2>
+      <h2 class="section-title">Papamoa Property Market &mdash; March 2026</h2>
 
       <div class="report-card">
         <div class="report-card-head">
           <div class="report-badge">March 2026 Market Report</div>
           <h3>A steady market with motivated sellers and a window for buyers who move quickly</h3>
-          <p>Monthly data compiled in partnership with Papamoa.info's featured local agent</p>
+          <p>Monthly data compiled in partnership with Papamoa.info&rsquo;s featured local agent</p>
         </div>
         <div class="report-metrics">
           <div class="metric">
@@ -653,13 +780,13 @@ body {
           <p>March has brought more breathing room to the Papamoa market. Listing numbers are up, giving buyers more to choose from, while properties that are well-presented and priced realistically are still moving at a solid pace. For sellers, the message is simple: condition and price still win.</p>
           <p>The median sale price has softened slightly compared to February, but this reflects a broader mix of stock rather than any underlying weakness. The beachside and canal-front pockets of Papamoa continue to hold firm, with strong competition for anything under $850,000.</p>
 
-          <h4>The Buyer's View</h4>
+          <h4>The Buyer&rsquo;s View</h4>
           <p>If you have been waiting for more listings to appear, March has delivered. There is more to look at across all price bands, from entry-level townhouses near Papamoa Plaza through to larger family homes in The Lakes and Golden Sands.</p>
           <div class="tip-box"><strong>Buyer tip:</strong> Well-priced homes in the $750k to $950k range are attracting multiple offers within the first two weeks. If you find something you like, act on it. The window is shorter than the days-on-market figure suggests.</div>
 
-          <h4>The Seller's View</h4>
+          <h4>The Seller&rsquo;s View</h4>
           <p>Papamoa buyers in 2026 are well-researched. They are comparing your property against every other listing in the area and they know what things are selling for. Overpriced properties are sitting. Well-presented homes at market value are selling.</p>
-          <p>Spring energy is still carrying into early autumn, with lifestyle buyers from Auckland and Hamilton continuing to enquire. The Papamoa lifestyle, beaches, schools, and the Mount Maunganui commute, remains a compelling drawcard. If you have been thinking about listing, the first half of autumn is historically one of the stronger windows.</p>
+          <p>Spring energy is still carrying into early autumn, with lifestyle buyers from Auckland and Hamilton continuing to enquire. The Papamoa lifestyle &mdash; beaches, schools, and the Mount Maunganui commute &mdash; remains a compelling drawcard. If you have been thinking about listing, the first half of autumn is historically one of the stronger windows.</p>
 
           <h4>By Neighbourhood</h4>
           <table class="neighbourhood-table">
@@ -683,9 +810,9 @@ body {
 
           <h4>Looking Ahead to April</h4>
           <p>As autumn settles in, listing volumes typically ease heading into May and June. Sellers who are serious about moving before winter should aim to be on the market by mid-April to catch the remaining warmth in buyer activity.</p>
-          <p>The Reserve Bank's next OCR review is worth watching. The current expectation is stability, which would be a positive signal through autumn. One to watch: the new residential development on Papamoa's eastern fringe is expected to release a new stage in Q2, adding fresh supply to the new-build market.</p>
+          <p>The Reserve Bank&rsquo;s next OCR review is worth watching. The current expectation is stability, which would be a positive signal through autumn. One to watch: the new residential development on Papamoa&rsquo;s eastern fringe is expected to release a new stage in Q2, adding fresh supply to the new-build market.</p>
         </div>
-        <div class="report-footer">Market data is indicative and based on available local sales information for March 2026. Figures are rounded and intended as a general guide only. This report is prepared in partnership with Papamoa.info's featured real estate agent. It does not constitute financial or investment advice.</div>
+        <div class="report-footer">Market data is indicative and based on available local sales information for March 2026. Figures are rounded and intended as a general guide only. This report is prepared in partnership with Papamoa.info&rsquo;s featured real estate agent. It does not constitute financial or investment advice.</div>
       </div>
     </div>
 
@@ -693,10 +820,10 @@ body {
     <div class="section">
       <div class="section-eyebrow">This Month</div>
       <h2 class="section-title">Quick Tips for March Movers</h2>
-      <div class="tip-box" style="margin-bottom:12px"><strong>Get a current market appraisal</strong> before you set your price, even if you had one six months ago. The market has moved.</div>
-      <div class="tip-box" style="margin-bottom:12px"><strong>First impressions online are everything.</strong> High-quality photography and a well-written listing description can reduce your days on market significantly.</div>
-      <div class="tip-box" style="margin-bottom:12px"><strong>If you are buying,</strong> have your finance pre-approved and your lawyer briefed before you go to open homes. When the right home appears, speed matters.</div>
-      <div class="tip-box" style="margin-bottom:12px"><strong>Autumn is a good time to buy.</strong> Buyer competition eases slightly, and motivated sellers are still in the market.</div>
+      <div class="tip-box"><strong>Get a current market appraisal</strong> before you set your price, even if you had one six months ago. The market has moved.</div>
+      <div class="tip-box"><strong>First impressions online are everything.</strong> High-quality photography and a well-written listing description can reduce your days on market significantly.</div>
+      <div class="tip-box"><strong>If you are buying,</strong> have your finance pre-approved and your lawyer briefed before you go to open homes. When the right home appears, speed matters.</div>
+      <div class="tip-box"><strong>Autumn is a good time to buy.</strong> Buyer competition eases slightly, and motivated sellers are still in the market.</div>
       <div class="tip-box"><strong>Ask your agent what has sold recently</strong> and what it actually sold for, not just the asking price. That is the real data.</div>
     </div>
 
@@ -706,23 +833,23 @@ body {
       <h2 class="section-title">Buying &amp; Selling in Papamoa</h2>
       <div class="article-list">
         <a href="#" class="article-teaser">
-          <div class="at-icon">🏠</div>
+          <div class="at-icon">&#127968;</div>
           <div class="at-content">
-            <div class="at-label">Buyer's Guide</div>
+            <div class="at-label">Buyer&rsquo;s Guide</div>
             <div class="at-title">First Home Buyers in Papamoa: What to Know Before You Bid</div>
             <div class="at-desc">A practical walkthrough of the Papamoa buying process, from pre-approval to settlement day.</div>
           </div>
         </a>
         <a href="#" class="article-teaser">
-          <div class="at-icon">📋</div>
+          <div class="at-icon">&#128203;</div>
           <div class="at-content">
-            <div class="at-label">Seller's Guide</div>
+            <div class="at-label">Seller&rsquo;s Guide</div>
             <div class="at-title">How to Prepare Your Papamoa Home for Market in 2026</div>
             <div class="at-desc">Presentation, pricing, and timing advice from people who know this market.</div>
           </div>
         </a>
         <a href="#" class="article-teaser">
-          <div class="at-icon">🗺️</div>
+          <div class="at-icon">&#128506;</div>
           <div class="at-content">
             <div class="at-label">Neighbourhood Guide</div>
             <div class="at-title">The Lakes vs Golden Sands vs Papamoa Beach: Which Suburb Is Right for You?</div>
@@ -730,11 +857,11 @@ body {
           </div>
         </a>
         <a href="#" class="article-teaser">
-          <div class="at-icon">📈</div>
+          <div class="at-icon">&#128200;</div>
           <div class="at-content">
             <div class="at-label">Market Archive</div>
             <div class="at-title">Previous Market Reports</div>
-            <div class="at-desc">Review past monthly market snapshots to track trends across Papamoa's different neighbourhoods.</div>
+            <div class="at-desc">Review past monthly market snapshots to track trends across Papamoa&rsquo;s different neighbourhoods.</div>
           </div>
         </a>
       </div>
@@ -745,26 +872,23 @@ body {
   <!-- SIDEBAR -->
   <aside class="sidebar">
 
-      <!-- SPOTLIGHT AD SPOT — real estate agent -->
-      <div class="ad-spot">
-        <div class="ad-label">Spotlight</div>
-        <div class="ad-inner">
-          <div class="ad-placeholder">
-            <p>&#127968; Real estate agent &mdash; P&#257;p&#257;moa specialist</p>
-            <a href="/sales/claim.html?type=adspot&page=real-estate">Claim this spot &rarr;</a>
-          </div>
+    <!-- SPOTLIGHT AD SPOT -->
+    <div class="ad-spot">
+      <div class="ad-label">Spotlight</div>
+      <div class="ad-inner">
+        <div class="ad-placeholder">
+          <p>&#127968; Real estate agent &mdash; P&#257;p&#257;moa specialist</p>
+          <a href="/papamoa-previews/sales/claim.html?type=adspot&page=real-estate">Claim this spot &rarr;</a>
         </div>
       </div>
+    </div>
 
-
-
-    <!-- FEATURED AGENT OR SPOTLIGHT AVAILABLE -->
-    <!-- Swap this block once agent signed -->
+    <!-- FEATURED AGENT SPOT -->
     <div class="spotlight-available">
-      <div class="sa-icon">🏡</div>
-      <div class="sa-title">Papamoa's Featured Agent Spot is Available</div>
+      <div class="sa-icon">&#127969;</div>
+      <div class="sa-title">Papamoa&rsquo;s Featured Agent Spot is Available</div>
       <div class="sa-desc">One local real estate agent is recommended exclusively by Papamoa.info. That position is currently open. Your name, your listings, your market reports.</div>
-      <a href="/sales/partners/real-estate-agent.html" class="sa-link">Learn More</a>
+      <a href="/papamoa-previews/sales/partners/real-estate-agent.html" class="sa-link">Learn More</a>
     </div>
 
     <!-- MARKET SNAPSHOT -->
@@ -786,10 +910,10 @@ body {
     <div class="quick-links">
       <div class="ql-head">On This Page</div>
       <ul class="ql-list">
-        <li><a href="#"><span>📊</span> March Market Report</a></li>
-        <li><a href="#"><span>💡</span> Tips for Buyers &amp; Sellers</a></li>
-        <li><a href="#"><span>🗺️</span> Neighbourhood Guide</a></li>
-        <li><a href="#"><span>📰</span> Past Market Reports</a></li>
+        <li><a href="#"><span>&#128202;</span> March Market Report</a></li>
+        <li><a href="#"><span>&#128161;</span> Tips for Buyers &amp; Sellers</a></li>
+        <li><a href="#"><span>&#128506;</span> Neighbourhood Guide</a></li>
+        <li><a href="#"><span>&#128240;</span> Past Market Reports</a></li>
       </ul>
     </div>
 
@@ -798,31 +922,53 @@ body {
       <div style="font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--ocean);margin-bottom:8px;">Business Owner?</div>
       <div style="font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:8px;">Get found on Papamoa.info</div>
       <div style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:14px;">Join local businesses already reaching Papamoa residents every day.</div>
-      <a href="/sales/landing.html" style="display:block;background:var(--ocean);color:var(--white);padding:10px 16px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;">List Your Business</a>
+      <a href="/papamoa-previews/sales/list-with-us.html" style="display:block;background:var(--ocean);color:var(--white);padding:10px 16px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;">List Your Business</a>
     </div>
 
   </aside>
 </div>
 
-<footer class="site-footer">
-  <p>&copy; 2026 Papamoa.info &bull; <a href="/homepage.html">Home</a> &bull; <a href="/homepage.html">Directory</a> &bull; <a href="/sales/landing.html">List Your Business</a></p>
-  <p style="margin-top:8px">Proudly serving the Pāpāmoa community &bull; Bay of Plenty, New Zealand</p>
+<!-- FOOTER -->
+<footer class="pnf-footer">
+  <div class="pnf-footer-brand">Papamoa<span>.info</span></div>
+  <p class="pnf-footer-tagline">P&#257;p&#257;moa&rsquo;s independent local directory &middot; Bay of Plenty, New Zealand</p>
+  <div class="pnf-footer-links-row">
+    <a href="/papamoa-previews/homepage.html">Home</a>
+    <a href="/papamoa-previews/homepage.html">Directory</a>
+    <a href="/papamoa-previews/sales/list-with-us.html">List Your Business</a>
+    <a href="/papamoa-previews/legal.html">Privacy &amp; Terms</a>
+  </div>
+  <div class="pnf-footer-bottom">&copy; 2026 Papamoa.info</div>
 </footer>
 
 <script>
-  (function() {
-    var base = '/papamoa-previews';
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('/') && !href.startsWith(base)) {
-        e.preventDefault();
-        window.location.href = base + href;
-      }
-    });
-  })();
+/* ── Nav drawer ── */
+function pnfDrawerOpen() {
+  document.getElementById('pnf-drawer').classList.add('open');
+  document.getElementById('pnf-drawer-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function pnfDrawerClose() {
+  document.getElementById('pnf-drawer').classList.remove('open');
+  document.getElementById('pnf-drawer-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDrawerClose(); });
+
+/* ── Path rewriter ── */
+(function() {
+  var base = '/papamoa-previews';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:') || href.startsWith('#')) return;
+    if (href.startsWith('/') && !href.startsWith(base)) {
+      e.preventDefault();
+      window.location.href = base + href;
+    }
+  });
+})();
 </script>
 </body>
 </html>
