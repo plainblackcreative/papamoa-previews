@@ -40,7 +40,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 
 /* NAV */
 .nav { background: var(--navy); padding: 0 32px; height: 58px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
-.nav-logo { font-family: var(--font-body); font-weight: 700; font-size: 15px; color: var(--white); text-decoration: none; }
+/* FIXED: font-display (Playfair Display) + capital P */
+.nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--white); text-decoration: none; }
 .nav-logo span { color: var(--ocean-accent); }
 .nav-contact { font-size: 13px; color: rgba(255,255,255,0.5); }
 .nav-contact a { color: var(--ocean-accent); text-decoration: none; font-weight: 600; transition: color 0.15s; }
@@ -206,8 +207,9 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
 </head>
 <body>
 
+<!-- NAV: FIXED font-display + capital P, correct email encoding -->
 <nav class="nav">
-  <a href="/homepage.html" class="nav-logo">papamoa<span>.info</span></a>
+  <a href="/papamoa-previews/homepage.html" class="nav-logo">Papamoa<span>.info</span></a>
   <div class="nav-contact">Questions? <a href="tel:+64275332970">027 533 2970</a></div>
 </nav>
 
@@ -215,12 +217,13 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <div class="ph-inner">
     <div class="ph-eyebrow"><span class="pulse"></span> Following up from our conversation</div>
     <h1 class="ph-title">Here are the details for <span class="biz-name">[BUSINESS NAME]</span></h1>
-    <p class="ph-sub">As discussed, your listing options on Papamoa.info are below. Everything is written and ready for you &mdash; just choose your tier and we'll have your listing live within 24 hours of sign-off.</p>
+    <p class="ph-sub">As discussed, your listing options on Papamoa.info are below. Everything is written and ready for you &mdash; just choose your tier and we&rsquo;ll have your listing live within 24 hours of sign-off.</p>
     <div class="ph-from">
-      <div class="ph-avatar">P</div>
+      <div class="ph-avatar">J</div>
       <div class="ph-from-text">
-        <strong>Papamoa.info &mdash; Local Business Directory</strong>
-        <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="600a011904050e20100110010d0f014e090e060f">[email&#160;protected]</a> &middot; 027 533 2970</span>
+        <!-- FIXED: &#64; entity encoding instead of Cloudflare obfuscation -->
+        <strong>Papamoa.info &mdash; Jayden Brown</strong>
+        <span>jayden&#64;papamoa.info &middot; 027 533 2970</span>
       </div>
     </div>
   </div>
@@ -231,8 +234,9 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <div class="urgency-banner">
     <span class="ub-icon">&#9876;</span>
     <div class="ub-text">
+      <!-- [SUBCATEGORY] is a template variable -- fill in per prospect -->
       <strong>Gold Spotlight &mdash; [SUBCATEGORY] is still available</strong>
-      <span>One Gold Spotlight per sub-category. Once another business in [SUBCATEGORY] claims it, it's gone for good. First in keeps the top position.</span>
+      <span>One Gold Spotlight per sub-category. Once another business in [SUBCATEGORY] claims it, it&rsquo;s gone for good. First in keeps the top position.</span>
     </div>
   </div>
 
@@ -245,7 +249,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="tier-head">
         <div class="tier-badge">&#9670; Silver</div>
         <div class="tier-name">Silver Listing</div>
-        <div class="tier-price">$599 <span>+GST / yr</span></div>
+        <!-- FIXED: +gst lowercase -->
+        <div class="tier-price">$599 <span>+gst / yr</span></div>
         <div class="tier-tagline">Full claimed listing. SEO-optimised, logo, all your contact details &mdash; live within 24 hours.</div>
       </div>
       <div class="tier-body">
@@ -258,7 +263,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <li><i class="fi fi-yes">&#10003;</i> Facebook welcome post</li>
           <li><i class="fi fi-yes">&#10003;</i> Lifetime price lock</li>
           <li><i class="fi fi-yes">&#10003;</i> 2027 ROI guarantee</li>
-          <li><i class="fi fi-note">+</i> Menu Add-On: $199+GST/yr</li>
+          <!-- FIXED: +gst lowercase -->
+          <li><i class="fi fi-note">+</i> Menu Add-On: $199+gst/yr</li>
           <li><i class="fi fi-no">&#10007;</i> Spotlight position</li>
         </ul>
       </div>
@@ -270,9 +276,11 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     <!-- GOLD -->
     <div class="tier-card tier-gold featured">
       <div class="tier-head">
-        <div class="tier-badge">&#11088; Gold Spotlight</div>
+        <!-- FIXED: 'Gold Spotlight' tier badge -> 'Gold Listing' -->
+        <div class="tier-badge">&#11088; Gold Listing</div>
         <div class="tier-name">Gold Listing</div>
-        <div class="tier-price">$1,199 <span>+GST / yr</span></div>
+        <!-- FIXED: +gst lowercase -->
+        <div class="tier-price">$1,199 <span>+gst / yr</span></div>
         <div class="tier-tagline">Top of your sub-category. Photo gallery. Menu Add-On included free. Premium ad spot access.</div>
       </div>
       <div class="tier-body">
@@ -285,7 +293,8 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <li><i class="fi fi-yes">&#10003;</i> Access to premium article &amp; page ad spots</li>
           <li><i class="fi fi-yes">&#10003;</i> Lifetime price lock</li>
           <li><i class="fi fi-yes">&#10003;</i> 2027 ROI guarantee</li>
-          <li><i class="fi fi-note">+</i> Extra sub-category Spotlights: $199+GST/yr each</li>
+          <!-- FIXED: +gst lowercase -->
+          <li><i class="fi fi-note">+</i> Extra sub-category Spotlights: $199+gst/yr each</li>
         </ul>
       </div>
       <div class="tier-footer">
@@ -303,14 +312,14 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <div class="sr-num">1</div>
       <div class="sr-body">
         <strong>GST invoice sent within 2 hours</strong>
-        <span>You'll receive a tax invoice for your chosen tier. Annual subscription, billed upfront.</span>
+        <span>You&rsquo;ll receive a tax invoice for your chosen tier. Annual subscription, billed upfront.</span>
       </div>
     </div>
     <div class="step-row">
       <div class="sr-num">2</div>
       <div class="sr-body">
         <strong>Listing draft sent within 24 hours</strong>
-        <span>We research your business and write your full SEO listing. You'll receive a preview link to review before anything goes live.</span>
+        <span>We research your business and write your full SEO listing. You&rsquo;ll receive a preview link to review before anything goes live.</span>
       </div>
     </div>
     <div class="step-row">
@@ -350,7 +359,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
       <span class="gc-icon">&#9997;&#65039;</span>
       <div class="gc-body">
         <h4>Done-for-You</h4>
-        <p>We write everything. You review and approve. You don't touch a single line of code.</p>
+        <p>We write everything. You review and approve. You don&rsquo;t touch a single line of code.</p>
       </div>
     </div>
     <div class="guarantee-card">
@@ -363,20 +372,36 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   </div>
 
   <!-- CONTACT -->
+  <!-- FIXED: &#64; entity encoding, removed CF obfuscation -->
   <div class="contact-strip" id="contact">
-    <div class="cs-avatar">P</div>
+    <div class="cs-avatar">J</div>
     <div class="cs-body">
       <strong>Ready to go? Get in touch</strong>
-      <span>Reply by email or call &mdash; we'll get your invoice out and listing started today.</span>
+      <span>Reply by email or call &mdash; we&rsquo;ll get your invoice out and listing started today.</span>
     </div>
     <div class="cs-links">
-      <a href="/cdn-cgi/l/email-protection#6208031b06070c22120312030f0d034c0b0c040d" class="cs-link">&#9993; <span class="__cf_email__" data-cfemail="0b616a726f6e654b7b6a7b6a66646a2562656d64">[email&#160;protected]</span></a>
+      <a href="mailto:jayden&#64;papamoa.info" class="cs-link">&#9993; jayden&#64;papamoa.info</a>
       <a href="tel:+64275332970" class="cs-link">&#128222; 027 533 2970</a>
     </div>
   </div>
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  (function() {
-    var base = '/papamoa-previe
+<script>
+/* ── Path rewriter (FIXED: was truncated) ── */
+(function() {
+  var base = '/papamoa-previews';
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:') || href.startsWith('#')) return;
+    if (href.startsWith('/') && !href.startsWith(base)) {
+      e.preventDefault();
+      window.location.href = base + href;
+    }
+  });
+})();
+</script>
+</body>
+</html>
