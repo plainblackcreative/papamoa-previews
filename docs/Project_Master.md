@@ -59,7 +59,7 @@ Source of truth: `docs/pricing-master.html` (needs updating per conflicts below)
 | Bronze | Free / internal only | Never sold. Placeholder listings. |
 
 ### GST formatting
-Always lowercase `+gst` in customer-facing content. Never `+GST`.
+Always lowercase `+gst` in customer-facing content. Never `+gst`.
 
 ### Guarantees (active on both tiers)
 - **Lifetime Price Lock:** Renewal price stays the same as long as they renew consecutively. Standard feature. Show everywhere.
@@ -576,7 +576,7 @@ Referenced in pricing-master update list and task-plan. Exists in repo per task-
 - [ ] Update `nav-footer-snippet.html`: nested folder paths, short labels, `articles/` > `community/`, add `legal.html`
 - [ ] Update `README.md`: index.html description, missing folders, TaurangaNZ URL typo
 - [ ] Fix listing template contact pattern: `ci-label/ci-value` grid > `ci-text` flex
-- [ ] Site-wide `+GST` > `+gst` find-and-replace
+- [ ] Site-wide `+gst` > `+gst` find-and-replace
 - [ ] Site-wide `articles/` > `community/` link fix
 - [ ] Design system audit: Figtree + Playfair Display throughout, no DM Sans/Fraunces remnants
 - [ ] Pricing audit: $599 Silver, $1,199 Gold, $199 Menu Add-On, $199 Extra Spotlight across all pages

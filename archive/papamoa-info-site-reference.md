@@ -548,7 +548,7 @@ No structured data (JSON-LD, Microdata, or RDFa) was detected in the listing pag
 - Current paid listings appear to be fewer than 5, meaning ~249 Spotlight slots are open
 - Services has 127 subcategories (the largest pool of Spotlight opportunities)
 - A business can be listed in MULTIPLE subcategories (The Wagon appears in 7)
-- Gold gets primary subcategory included; additional subcategories cost $99+GST each
+- Gold gets primary subcategory included; additional subcategories cost $99+gst each
 
 ### Onboarding Form Mapping
 The listing field map above directly maps to the onboarding form fields:
