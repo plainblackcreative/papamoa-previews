@@ -1,0 +1,17 @@
+name = "papamoa-scratchpad"
+main = "src/index.js"
+compatibility_date = "2024-10-01"
+
+# KV namespace — created via:
+#   npx wrangler kv namespace create SCRATCHPAD_KV
+# then paste the returned `id` below.
+[[kv_namespaces]]
+binding = "SCRATCHPAD_KV"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[vars]
+ALLOWED_ORIGINS = "https://www.papamoa.info,https://papamoa.info,https://plainblackcreative.github.io,http://localhost:8765"
+
+# Secret (NOT in this file — set with `wrangler secret put`):
+#   SCRATCHPAD_TOKEN  — long random string. Paste it once into the
+#   browser when prompted on first focus of the scratchpad input.

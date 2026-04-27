@@ -178,7 +178,7 @@
     </button>
     <div class="scratchpad-body" id="scratchpad-body">
       <div class="sp-input-row">
-        <input type="text" class="sp-text-input" id="sp-input" placeholder="Brain dump here - idea, to-do, bug, note..." onkeydown="spKeydown(event)">
+        <input type="text" class="sp-text-input" id="sp-input" placeholder="Brain dump here - idea, to-do, bug, note..." onkeydown="spKeydown(event)" onfocus="spOnFocus()">
         <select class="sp-tag-select" id="sp-tag">
           <option value="todo">To-do</option>
           <option value="idea">Idea</option>
@@ -222,7 +222,7 @@
           <a href="https://dash.cloudflare.com/13e541077f6e7848ad3eb3d0cd2004c7/workers" target="_blank" rel="noopener" class="qa-btn">&#9729; Cloudflare Worker</a>
           <a href="https://console.cloud.google.com/welcome?project=papamoa-info" target="_blank" rel="noopener" class="qa-btn">&#9729; Google Cloud</a>
           <a href="https://plainblackcreative.github.io/papamoa-previews/admin/search-analytics.html" target="_blank" class="qa-btn">&#128269; Search Analytics</a>
-          <a href="https://jsonbin.io/app/dashboard" target="_blank" rel="noopener" class="qa-btn">&#128193; JSONbin</a>
+          <a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages" target="_blank" rel="noopener" class="qa-btn">&#9729; Workers</a>
         </div>
       </div>
     </div>
@@ -1319,16 +1319,32 @@
 
 <script>
 // ============================================================
-// SCRATCHPAD — JSONBin shared sync (read/write, all devices)
+// SCRATCHPAD — papamoa-scratchpad Cloudflare Worker (bearer-token gated)
 // ============================================================
-// SETUP: Create a free bin at https://jsonbin.io
-// 1. Sign up free → New Bin → paste: {"notes":[]} → Save
-// 2. Copy the Bin ID (looks like 6619abc123...)
-// 3. Copy your Master API Key from Account > API Keys
-// 4. Paste both below:
-var JSONBIN_BIN_ID  = '69db824036566621a8a52ebd';
-var JSONBIN_API_KEY = '$2a$10$ut1FATX8950uykBW2KhtbuX26okziekhT.7zVgo.7S9S3Ncjss/Ee';
-var JSONBIN_URL     = 'https://api.jsonbin.io/v3/b/' + JSONBIN_BIN_ID;
+// Worker URL + bearer token are stored in localStorage per device.
+// First focus on the input triggers a one-shot setup prompt.
+// See worker/scratchpad/README.md for deploy steps.
+var SCRATCHPAD_URL_KEY   = 'pm-scratchpad-url';
+var SCRATCHPAD_TOKEN_KEY = 'pm-scratchpad-token';
+function getScratchpadConfig() {
+  return {
+    url:   localStorage.getItem(SCRATCHPAD_URL_KEY)   || '',
+    token: localStorage.getItem(SCRATCHPAD_TOKEN_KEY) || ''
+  };
+}
+function setScratchpadConfig(url, token) {
+  if (url)   localStorage.setItem(SCRATCHPAD_URL_KEY,   url.replace(/\/+$/, ''));
+  if (token) localStorage.setItem(SCRATCHPAD_TOKEN_KEY, token);
+}
+async function scratchpadSetupPrompt() {
+  var existing = getScratchpadConfig();
+  var url = prompt('Scratchpad Worker URL\n(e.g. https://papamoa-scratchpad.YOUR-SUBDOMAIN.workers.dev)', existing.url || '');
+  if (url === null) return false;
+  var token = prompt('Scratchpad bearer token\n(the SCRATCHPAD_TOKEN you set with wrangler secret put)', existing.token || '');
+  if (token === null) return false;
+  setScratchpadConfig(url.trim(), token.trim());
+  return true;
+}
 
 var spOpen = false;
 var spNotes = [];   // in-memory cache
@@ -1368,43 +1384,52 @@ function setSpStatus(msg, isError) {
 }
 
 async function fetchNotes() {
-  if (JSONBIN_BIN_ID === 'PASTE_BIN_ID_HERE') {
-    setSpStatus('⚠ Add your JSONBin credentials to enable sync', true);
+  var cfg = getScratchpadConfig();
+  if (!cfg.url || !cfg.token) {
+    var raw = localStorage.getItem('pm-scratchpad-local');
+    spNotes = raw ? JSON.parse(raw) : [];
+    renderNotes();
+    setSpStatus('Local-only — focus the input to connect Worker');
     return;
   }
   setSpStatus('Syncing...');
   try {
-    var res = await fetch(JSONBIN_URL + '/latest', {
-      headers: { 'X-Master-Key': JSONBIN_API_KEY }
-    });
+    var res = await fetch(cfg.url + '/', { headers: { 'Authorization': 'Bearer ' + cfg.token } });
+    if (res.status === 401) throw new Error('unauthorized — token wrong');
     if (!res.ok) throw new Error('HTTP ' + res.status);
     var data = await res.json();
-    spNotes = (data.record && Array.isArray(data.record.notes)) ? data.record.notes : [];
+    spNotes = Array.isArray(data.notes) ? data.notes : [];
     renderNotes();
     setSpStatus('Synced');
   } catch(e) {
-    setSpStatus('Sync failed - check credentials', true);
+    var raw = localStorage.getItem('pm-scratchpad-local');
+    spNotes = raw ? JSON.parse(raw) : [];
+    renderNotes();
+    setSpStatus('Sync failed (' + e.message + ') — using local copy', true);
   }
 }
 
 async function saveNotes() {
-  if (JSONBIN_BIN_ID === 'PASTE_BIN_ID_HERE') return;
+  try { localStorage.setItem('pm-scratchpad-local', JSON.stringify(spNotes)); } catch(_){}
+  var cfg = getScratchpadConfig();
+  if (!cfg.url || !cfg.token) {
+    setSpStatus('Saved locally — focus the input to connect Worker');
+    return;
+  }
   if (spSaving) return;
   spSaving = true;
   setSpStatus('Saving...');
   try {
-    var res = await fetch(JSONBIN_URL, {
+    var res = await fetch(cfg.url + '/', {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_API_KEY
-      },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + cfg.token },
       body: JSON.stringify({ notes: spNotes })
     });
+    if (res.status === 401) throw new Error('unauthorized — token wrong');
     if (!res.ok) throw new Error('HTTP ' + res.status);
     setSpStatus('Saved');
   } catch(e) {
-    setSpStatus('Save failed', true);
+    setSpStatus('Save failed: ' + e.message + ' (kept locally)', true);
   } finally {
     spSaving = false;
   }
@@ -1440,6 +1465,19 @@ async function toggleDone(idx) {
 }
 
 function spKeydown(e) { if (e.key === 'Enter') addNote(); }
+async function spOnFocus() {
+  var cfg = getScratchpadConfig();
+  if (cfg.url && cfg.token) return;
+  var ok = await scratchpadSetupPrompt();
+  if (ok) await fetchNotes();
+}
+// Shift-click the scratchpad header to re-prompt for URL + token
+document.addEventListener('click', function(e){
+  if (e.shiftKey && e.target.closest('#sp-toggle-btn')) {
+    e.preventDefault(); e.stopPropagation();
+    scratchpadSetupPrompt().then(function(ok){ if (ok) fetchNotes(); });
+  }
+}, true);
 
 function toggleScratchpad() {
   spOpen = !spOpen;
@@ -1450,14 +1488,20 @@ function toggleScratchpad() {
 
 // Load count on page load without opening the panel
 (function initScratchpad() {
-  if (JSONBIN_BIN_ID === 'PASTE_BIN_ID_HERE') {
-    updateCount([]);
+  var cfg = getScratchpadConfig();
+  if (!cfg.url || !cfg.token) {
+    try {
+      var raw = localStorage.getItem('pm-scratchpad-local');
+      var notes = raw ? JSON.parse(raw) : [];
+      spNotes = notes;
+      updateCount(notes);
+    } catch(_){ updateCount([]); }
     return;
   }
-  fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_API_KEY } })
-    .then(function(r){ return r.json(); })
+  fetch(cfg.url + '/', { headers: { 'Authorization': 'Bearer ' + cfg.token } })
+    .then(function(r){ return r.ok ? r.json() : { notes: [] }; })
     .then(function(data){
-      spNotes = (data.record && Array.isArray(data.record.notes)) ? data.record.notes : [];
+      spNotes = Array.isArray(data.notes) ? data.notes : [];
       updateCount(spNotes);
     })
     .catch(function(){ updateCount([]); });
