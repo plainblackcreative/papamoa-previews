@@ -398,6 +398,157 @@
 
       .info-grid { grid-template-columns:1fr; }
     }
+
+    /* ============================================================
+       HOMEPAGE V2 — UI/UX UPGRADE
+       ============================================================ */
+
+    /* HERO V2 — photo background with overlay */
+    .hero-v2 { position:relative; min-height:520px; overflow:hidden; background:linear-gradient(180deg,#83bcd6 0%,#a5cdde 28%,#c4d8d8 54%,#d8c89c 78%,#bf9d62 100%); }
+    .hero-v2-bg { position:absolute; inset:0; background-image:linear-gradient(180deg,rgba(13,43,62,0) 0%,rgba(13,43,62,0.05) 60%,rgba(13,43,62,0.18) 100%),url('images/hero/papamoa-beach.png'); background-size:cover; background-position:center 45%; background-repeat:no-repeat; }
+    .hero-v2-inner { position:relative; max-width:1200px; margin:0 auto; padding:60px 28px 110px; z-index:1; }
+    .hero-v2 h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4.6vw,3.2rem); font-weight:700; color:var(--navy); line-height:1.08; margin-bottom:18px; max-width:680px; letter-spacing:-0.01em; }
+    .hero-v2-desc { font-size:1rem; color:var(--body); line-height:1.65; max-width:480px; margin-bottom:28px; font-weight:500; }
+
+    /* Hero search bar */
+    .hero-v2-search { background:#fff; border-radius:14px; padding:6px; box-shadow:0 8px 28px rgba(13,43,62,0.18); display:flex; gap:0; max-width:560px; align-items:stretch; }
+    .hero-v2-search-wrap { flex:1; position:relative; display:flex; align-items:center; min-width:0; }
+    .hero-v2-search-wrap .search-results { position:absolute; top:calc(100% + 10px); left:-6px; right:-6px; background:#fff; border:1px solid var(--border); border-radius:10px; box-shadow:0 12px 32px rgba(13,43,62,0.18); z-index:50; max-height:340px; overflow-y:auto; display:none; }
+    .hero-v2-search-wrap .search-results.visible { display:block; }
+    .hero-v2-search-wrap::before { content:''; position:absolute; left:18px; width:18px; height:18px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7' stroke='%23607080' stroke-width='2'/%3E%3Cpath stroke='%23607080' stroke-width='2' stroke-linecap='round' d='m16 16 4 4'/%3E%3C/svg%3E"); pointer-events:none; }
+    .hero-v2-search-input { flex:1; min-width:0; border:none; outline:none; font-family:'Figtree',sans-serif; font-size:0.95rem; padding:14px 16px 14px 48px; background:transparent; color:var(--body); border-radius:10px; }
+    .hero-v2-search-input::placeholder { color:var(--muted); }
+    .hero-v2-search-btn { background:var(--navy); color:#fff; border:none; border-radius:10px; padding:0 24px; font-family:'Figtree',sans-serif; font-weight:700; font-size:0.9rem; cursor:pointer; transition:background 0.2s; flex-shrink:0; }
+    .hero-v2-search-btn:hover { background:#1a3a52; }
+
+    /* Hero quick-search chips */
+    .hero-v2-chips { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; max-width:680px; }
+    .hero-v2-chip { display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,0.92); border:1px solid rgba(255,255,255,0.6); color:var(--body); font-family:'Figtree',sans-serif; font-size:0.82rem; font-weight:600; padding:8px 14px; border-radius:24px; cursor:pointer; text-decoration:none; transition:all 0.15s; box-shadow:0 2px 8px rgba(13,43,62,0.08); }
+    .hero-v2-chip:hover { background:#fff; transform:translateY(-1px); box-shadow:0 4px 12px rgba(13,43,62,0.14); color:var(--navy); }
+    .hero-v2-chip-icon { display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; color:var(--navy); }
+    .hero-v2-chip-icon svg { width:100%; height:100%; }
+    .hero-v2-info-icon { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; color:var(--navy); }
+    .hero-v2-info-icon svg { width:100%; height:100%; }
+    .cat-icon-v2 svg { width:30px; height:30px; }
+    .cat-icon-v2.bg-eat { color:#1E6B3C; }
+    .cat-icon-v2.bg-svc { color:#8A6A2A; }
+    .cat-icon-v2.bg-shop { color:#A06820; }
+    .cat-icon-v2.bg-do { color:#1B6B7D; }
+    .cat-icon-v2.bg-stay { color:#5A4FA0; }
+    .einfo-card-icon svg { width:16px; height:16px; }
+    .einfo-card-icon.icon-emerg { color:#C92E44; }
+    .einfo-card-icon.icon-surf { color:#1B6B7D; }
+    .einfo-card-icon.icon-sun { color:#C8962A; }
+    .einfo-card-icon.icon-school { color:#1E6B3C; }
+    .einfo-card-icon.icon-rubbish { color:#5A6E80; }
+    .einfo-card-icon.icon-dog { color:#8A6A2A; }
+    .biz-cta-icon svg { width:24px; height:24px; color:#1E5A2A; }
+    .flb-card-img-fallback-icon { width:46px; height:46px; color:var(--navy); opacity:0.55; }
+    .flb-card-img-fallback-icon svg { width:100%; height:100%; }
+
+    /* Floating info cards (weather + community) */
+    .hero-v2-floating { position:absolute; right:28px; bottom:36px; display:flex; gap:12px; flex-wrap:wrap; max-width:440px; z-index:2; }
+    .hero-v2-info-card { background:#fff; border-radius:12px; padding:14px 18px; box-shadow:0 6px 22px rgba(13,43,62,0.18); flex:1; min-width:200px; }
+    .hero-v2-info-top { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+    .hero-v2-info-icon { font-size:1.7rem; line-height:1; }
+    .hero-v2-info-num-wrap { display:flex; flex-direction:column; }
+    .hero-v2-info-num { font-size:1.45rem; font-weight:800; color:var(--navy); line-height:1; }
+    .hero-v2-info-num-sub { font-size:0.7rem; color:var(--muted); font-weight:600; margin-top:2px; }
+    .hero-v2-info-label { font-size:0.78rem; color:var(--body); font-weight:600; margin-bottom:4px; }
+    .hero-v2-info-link { font-size:0.74rem; color:var(--blue); font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px; }
+    .hero-v2-info-link:hover { text-decoration:underline; }
+
+    @media (max-width:780px) {
+      .hero-v2-floating { position:static; max-width:none; padding:0 28px; margin-top:24px; right:auto; bottom:auto; }
+      .hero-v2-inner { padding:48px 28px 32px; }
+      .hero-v2 { min-height:auto; padding-bottom:28px; }
+    }
+    @media (max-width:480px) {
+      .hero-v2-info-card { min-width:0; flex:1 1 100%; }
+    }
+
+    /* BROWSE CATEGORIES V2 */
+    .cat-browse-v2 { background:var(--sand); padding:54px 28px 44px; }
+    .cat-browse-v2-inner { max-width:1200px; margin:0 auto; }
+    .cat-browse-v2 h2 { font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:700; color:var(--navy); margin-bottom:22px; }
+    .cat-grid-v2 { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+    .cat-card-v2 { background:#fff; border-radius:14px; padding:28px 18px 22px; text-align:center; text-decoration:none; color:inherit; transition:all 0.2s; border:1px solid transparent; display:flex; flex-direction:column; align-items:center; gap:12px; }
+    .cat-card-v2:hover { border-color:rgba(58,171,222,0.25); transform:translateY(-3px); box-shadow:0 8px 24px rgba(13,43,62,0.1); }
+    .cat-icon-v2 { width:62px; height:62px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.65rem; line-height:1; }
+    .cat-icon-v2.bg-eat { background:#D9F0DC; }
+    .cat-icon-v2.bg-svc { background:#F0EAD8; }
+    .cat-icon-v2.bg-shop { background:#FFEDC8; }
+    .cat-icon-v2.bg-do { background:#D6ECF7; }
+    .cat-icon-v2.bg-stay { background:#E4DEF6; }
+    .cat-card-v2 h3 { font-size:1.02rem; font-weight:700; color:var(--navy); margin-bottom:2px; }
+    .cat-card-v2 p { font-size:0.76rem; color:var(--muted); line-height:1.45; max-width:170px; }
+    .cat-card-v2-arrow { width:30px; height:30px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--blue); font-size:0.78rem; margin-top:4px; transition:all 0.2s; }
+    .cat-card-v2:hover .cat-card-v2-arrow { background:var(--blue); border-color:var(--blue); color:#fff; }
+
+    @media (max-width:980px) { .cat-grid-v2 { grid-template-columns:repeat(3,1fr); } }
+    @media (max-width:640px) { .cat-grid-v2 { grid-template-columns:repeat(2,1fr); gap:10px; } .cat-card-v2 { padding:20px 12px 16px; } .cat-icon-v2 { width:54px; height:54px; font-size:1.4rem; } }
+
+    /* ESSENTIAL LOCAL INFO chip row */
+    .einfo-row { background:var(--sand); padding:0 28px 50px; }
+    .einfo-row-inner { max-width:1200px; margin:0 auto; }
+    .einfo-row h2 { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:var(--navy); margin-bottom:14px; }
+    .einfo-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; }
+    .einfo-card { display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--border); border-radius:10px; padding:11px 14px; text-decoration:none; color:inherit; transition:all 0.15s; min-width:0; }
+    .einfo-card:hover { border-color:var(--blue); box-shadow:0 2px 10px rgba(58,171,222,0.1); transform:translateY(-1px); }
+    .einfo-card-icon { width:32px; height:32px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; line-height:1; }
+    .einfo-card-icon.icon-emerg { background:rgba(232,52,74,0.12); }
+    .einfo-card-icon.icon-surf { background:rgba(58,171,222,0.14); }
+    .einfo-card-icon.icon-sun { background:rgba(255,200,80,0.22); }
+    .einfo-card-icon.icon-school { background:rgba(125,193,67,0.18); }
+    .einfo-card-icon.icon-rubbish { background:rgba(90,110,140,0.14); }
+    .einfo-card-icon.icon-dog { background:rgba(196,152,90,0.2); }
+    .einfo-card-body { min-width:0; flex:1; }
+    .einfo-card-title { font-size:0.82rem; font-weight:700; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .einfo-card-sub { font-size:0.68rem; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    @media (max-width:980px) { .einfo-grid { grid-template-columns:repeat(3,1fr); } }
+    @media (max-width:540px) { .einfo-grid { grid-template-columns:repeat(2,1fr); } }
+
+    /* FEATURED LOCAL BUSINESSES */
+    .flb { background:var(--bg); padding:54px 28px 36px; }
+    .flb-inner { max-width:1200px; margin:0 auto; }
+    .flb-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:18px; flex-wrap:wrap; gap:8px; }
+    .flb-head h2 { font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:700; color:var(--navy); }
+    .flb-badge { font-size:0.66rem; font-weight:700; color:var(--gold); background:rgba(200,150,42,0.1); border:1px solid rgba(200,150,42,0.25); padding:3px 10px; border-radius:4px; letter-spacing:0.04em; text-transform:uppercase; }
+    .flb-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:18px; }
+    .flb-card { background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; display:flex; gap:0; transition:all 0.2s; text-decoration:none; color:inherit; min-height:160px; }
+    .flb-card:hover { border-color:var(--blue); transform:translateY(-2px); box-shadow:0 6px 20px rgba(13,43,62,0.08); }
+    .flb-card-img { flex:0 0 130px; background:var(--sand); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+    .flb-card-img img { width:100%; height:100%; object-fit:cover; }
+    .flb-card-img-fallback { font-family:'Playfair Display',serif; font-weight:700; font-size:0.86rem; color:var(--navy); text-align:center; line-height:1.2; padding:0 6px; letter-spacing:0.05em; }
+    .flb-card-body { flex:1; padding:18px 18px 16px; min-width:0; display:flex; flex-direction:column; }
+    .flb-card-body h3 { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--navy); margin-bottom:3px; }
+    .flb-card-cat { font-size:0.74rem; color:var(--muted); font-weight:600; margin-bottom:9px; }
+    .flb-card-cat .dot { color:var(--border); margin:0 5px; }
+    .flb-card-desc { font-size:0.82rem; color:var(--body); line-height:1.55; margin-bottom:12px; flex:1; }
+    .flb-card-cta { display:inline-block; align-self:flex-start; font-size:0.76rem; font-weight:700; color:var(--blue); border:1px solid rgba(58,171,222,0.3); padding:6px 14px; border-radius:5px; background:rgba(58,171,222,0.04); transition:all 0.15s; }
+    .flb-card:hover .flb-card-cta { background:var(--blue); color:#fff; border-color:var(--blue); }
+    .flb-more { text-align:center; }
+    .flb-more a { font-size:0.86rem; font-weight:700; color:var(--blue); text-decoration:none; }
+    .flb-more a:hover { text-decoration:underline; }
+
+    @media (max-width:980px) { .flb-grid { grid-template-columns:1fr 1fr; } .flb-card:nth-child(3) { display:none; } }
+    @media (max-width:640px) { .flb-grid { grid-template-columns:1fr; } .flb-card:nth-child(3) { display:flex; } .flb-card-img { flex:0 0 110px; } }
+
+    /* OWN A BUSINESS CTA */
+    .biz-cta-wrap { background:var(--bg); padding:0 28px 56px; }
+    .biz-cta { background:rgba(125,193,67,0.09); border:1px solid rgba(125,193,67,0.22); border-radius:14px; max-width:1200px; margin:0 auto; padding:22px 26px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+    .biz-cta-icon { width:54px; height:54px; border-radius:12px; background:rgba(125,193,67,0.18); display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0; line-height:1; }
+    .biz-cta-text { flex:1; min-width:240px; }
+    .biz-cta-text h3 { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:var(--navy); margin-bottom:4px; }
+    .biz-cta-text p { font-size:0.86rem; color:var(--muted); line-height:1.5; }
+    .biz-cta-btns { display:flex; gap:10px; flex-wrap:wrap; }
+    .biz-cta-btn-primary { background:#1E5A2A; color:#fff; padding:11px 22px; border-radius:8px; font-family:'Figtree',sans-serif; font-size:0.88rem; font-weight:700; text-decoration:none; transition:background 0.2s; }
+    .biz-cta-btn-primary:hover { background:#164520; }
+    .biz-cta-btn-secondary { background:#fff; color:var(--navy); border:1.5px solid var(--border); padding:11px 22px; border-radius:8px; font-family:'Figtree',sans-serif; font-size:0.88rem; font-weight:700; text-decoration:none; transition:border-color 0.2s; }
+    .biz-cta-btn-secondary:hover { border-color:var(--navy); }
+
+    @media (max-width:640px) { .biz-cta { padding:20px; } .biz-cta-btns { width:100%; } .biz-cta-btn-primary, .biz-cta-btn-secondary { flex:1; text-align:center; } }
   </style>
 
   <!-- PNF NAV + FOOTER STYLES -->
@@ -568,16 +719,208 @@
   </div>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Pāpāmoa, Bay of Plenty &mdash; 37,800 residents</div>
-    <h1>Discover Pāpāmoa,<br><em>from the locals who know it</em></h1>
-    <p class="hero-desc">Pāpāmoa's independent local directory — restaurants, trades, accommodation, community guides and real information for the 37,800 people who live here and the visitors who come to the beach.</p>
+<!-- HERO V2 -->
+<div class="hero-v2">
+  <div class="hero-v2-bg"></div>
+  <div class="hero-v2-inner">
+    <h1>Discover Pāpāmoa,<br>from the locals who know it</h1>
+    <p class="hero-v2-desc">Your local guide to the best restaurants, trusted trades, accommodation, community guides and everything you need in Pāpāmoa.</p>
 
-    <!-- WEATHER STRIP -->
-    <div class="hero-weather" id="hw-strip">
-      <span class="hw-live-dot"></span><span class="hw-loading">Loading weather&hellip;</span>
+    <!-- SEARCH -->
+    <div class="hero-v2-search" style="position:relative;">
+      <div class="hero-v2-search-wrap">
+        <input type="text" class="hero-v2-search-input" id="site-search" placeholder="Search restaurants, services, schools, beaches&hellip;" autocomplete="off" oninput="handleSearch(this.value)" onkeydown="handleSearchKey(event)">
+        <div class="search-results" id="search-results"></div>
+      </div>
+      <button class="hero-v2-search-btn" onclick="submitSearch()">Search</button>
+    </div>
+
+    <!-- QUICK CHIPS -->
+    <div class="hero-v2-chips" id="hero-quick-chips">
+      <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span>Restaurants</a>
+      <a href="/papamoa-previews/categories/services/services.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>Plumbers</a>
+      <a href="/papamoa-previews/community/weather.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.95 12.65a4 4 0 0 0-5.93-4.13"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></svg></span>Weather</a>
+      <a href="/papamoa-previews/community/schools.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>Schools</a>
+      <a href="/papamoa-previews/community/dogs-papamoa.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.05Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg></span>Dog Beaches</a>
+    </div>
+  </div>
+
+  <!-- FLOATING INFO CARDS -->
+  <div class="hero-v2-floating">
+    <a href="/papamoa-previews/community/weather.html" class="hero-v2-info-card" id="hw-strip" style="text-decoration:none;color:inherit;">
+      <div class="hero-v2-info-top">
+        <span class="hero-v2-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.95 12.65a4 4 0 0 0-5.93-4.13"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></svg></span>
+        <div class="hero-v2-info-num-wrap">
+          <span class="hero-v2-info-num"><span id="hw-temp-v2">21°</span></span>
+          <span class="hero-v2-info-num-sub" id="hw-cond-v2">Mostly sunny</span>
+        </div>
+      </div>
+      <div class="hero-v2-info-label">Pāpāmoa Beach</div>
+      <span class="hero-v2-info-link">View full forecast →</span>
+    </a>
+    <a href="/papamoa-previews/community/population-statistics.html" class="hero-v2-info-card" style="text-decoration:none;color:inherit;">
+      <div class="hero-v2-info-top">
+        <span class="hero-v2-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <div class="hero-v2-info-num-wrap">
+          <span class="hero-v2-info-num">37,800</span>
+          <span class="hero-v2-info-num-sub">residents</span>
+        </div>
+      </div>
+      <div class="hero-v2-info-label">Pāpāmoa Community Trust Area (2023)</div>
+      <span class="hero-v2-info-link">About our community →</span>
+    </a>
+  </div>
+</div>
+
+<!-- CATEGORY BROWSE V2 -->
+<div class="cat-browse-v2">
+  <div class="cat-browse-v2-inner">
+    <h2>Browse Categories</h2>
+    <div class="cat-grid-v2">
+      <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="cat-card-v2">
+        <span class="cat-icon-v2 bg-eat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span>
+        <h3>Where to Eat</h3>
+        <p>Cafés, restaurants, takeaways &amp; more</p>
+        <span class="cat-card-v2-arrow">→</span>
+      </a>
+      <a href="/papamoa-previews/categories/services/services.html" class="cat-card-v2">
+        <span class="cat-icon-v2 bg-svc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+        <h3>Services &amp; Trades</h3>
+        <p>Local experts for every job</p>
+        <span class="cat-card-v2-arrow">→</span>
+      </a>
+      <a href="/papamoa-previews/categories/shops/shopping.html" class="cat-card-v2">
+        <span class="cat-icon-v2 bg-shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+        <h3>Where to Shop</h3>
+        <p>Local stores, boutiques &amp; everyday essentials</p>
+        <span class="cat-card-v2-arrow">→</span>
+      </a>
+      <a href="/papamoa-previews/categories/activities/entertainment.html" class="cat-card-v2">
+        <span class="cat-icon-v2 bg-do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg></span>
+        <h3>What to Do</h3>
+        <p>Activities, attractions &amp; local experiences</p>
+        <span class="cat-card-v2-arrow">→</span>
+      </a>
+      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="cat-card-v2">
+        <span class="cat-icon-v2 bg-stay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg></span>
+        <h3>Where to Stay</h3>
+        <p>Accommodation for every kind of stay</p>
+        <span class="cat-card-v2-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ESSENTIAL LOCAL INFO chip row -->
+<div class="einfo-row">
+  <div class="einfo-row-inner">
+    <h2>Essential local info</h2>
+    <div class="einfo-grid">
+      <a href="/papamoa-previews/community/weather.html" class="einfo-card">
+        <span class="einfo-card-icon icon-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></span>
+        <div class="einfo-card-body">
+          <div class="einfo-card-title">Weather</div>
+          <div class="einfo-card-sub">Current &amp; forecast</div>
+        </div>
+      </a>
+      <a href="/papamoa-previews/community/surf-tides.html" class="einfo-card">
+        <span class="einfo-card-icon icon-surf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg></span>
+        <div class="einfo-card-body">
+          <div class="einfo-card-title">Surf &amp; Tides</div>
+          <div class="einfo-card-sub">Conditions &amp; tide times</div>
+        </div>
+      </a>
+      <a href="/papamoa-previews/community/schools.html" class="einfo-card">
+        <span class="einfo-card-icon icon-school"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>
+        <div class="einfo-card-body">
+          <div class="einfo-card-title">Schools</div>
+          <div class="einfo-card-sub">Pāpāmoa schools</div>
+        </div>
+      </a>
+      <a href="/papamoa-previews/community/rubbish-recycling.html" class="einfo-card">
+        <span class="einfo-card-icon icon-rubbish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
+        <div class="einfo-card-body">
+          <div class="einfo-card-title">Rubbish &amp; Recycling</div>
+          <div class="einfo-card-sub">Collection schedules</div>
+        </div>
+      </a>
+      <a href="/papamoa-previews/community/emergencies.html" class="einfo-card">
+        <span class="einfo-card-icon icon-emerg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 8v8"/><path d="M8 12h8"/></svg></span>
+        <div class="einfo-card-body">
+          <div class="einfo-card-title">Emergency</div>
+          <div class="einfo-card-sub">Important contacts</div>
+        </div>
+      </a>
+      <a href="/papamoa-previews/community/dogs-papamoa.html" class="einfo-card">
+        <span class="einfo-card-icon icon-dog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.05Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg></span>
+        <div class="einfo-card-body">
+          <div class="einfo-card-title">Dogs in Papamoa</div>
+          <div class="einfo-card-sub">Rules &amp; dog beaches</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED LOCAL BUSINESSES -->
+<div class="flb">
+  <div class="flb-inner">
+    <div class="flb-head">
+      <h2>Featured local businesses</h2>
+      <span class="flb-badge">Featured local business</span>
+    </div>
+    <div class="flb-grid">
+      <a href="/papamoa-previews/listings/pap-house.html" class="flb-card">
+        <div class="flb-card-img">
+          <span class="flb-card-img-fallback">PAP<br>HOUSE</span>
+        </div>
+        <div class="flb-card-body">
+          <h3>PAP House</h3>
+          <div class="flb-card-cat">Kitchens<span class="dot">•</span>Interiors<span class="dot">•</span>Joinery</div>
+          <p class="flb-card-desc">Beautifully crafted kitchens and interiors, designed and built right here in Pāpāmoa.</p>
+          <span class="flb-card-cta">View Business →</span>
+        </div>
+      </a>
+      <a href="/papamoa-previews/listings/coastal-autos.html" class="flb-card">
+        <div class="flb-card-img">
+          <span class="flb-card-img-fallback">COASTAL<br>AUTOS</span>
+        </div>
+        <div class="flb-card-body">
+          <h3>Coastal Autos</h3>
+          <div class="flb-card-cat">WOF<span class="dot">•</span>Servicing<span class="dot">•</span>Repairs</div>
+          <p class="flb-card-desc">Trusted local mechanics keeping Pāpāmoa moving safely since 2008.</p>
+          <span class="flb-card-cta">View Business →</span>
+        </div>
+      </a>
+      <a href="/papamoa-previews/listings/beach-retreats.html" class="flb-card">
+        <div class="flb-card-img">
+          <span class="flb-card-img-fallback">BEACH<br>RETREATS</span>
+        </div>
+        <div class="flb-card-body">
+          <h3>Beach Retreats</h3>
+          <div class="flb-card-cat">Holiday Homes</div>
+          <p class="flb-card-desc">Handpicked holiday homes just minutes from the beach. Relax. Unwind. Enjoy.</p>
+          <span class="flb-card-cta">View Business →</span>
+        </div>
+      </a>
+    </div>
+    <div class="flb-more">
+      <a href="/papamoa-previews/listings/index.html">View more local businesses →</a>
+    </div>
+  </div>
+</div>
+
+<!-- OWN A BUSINESS CTA -->
+<div class="biz-cta-wrap">
+  <div class="biz-cta">
+    <span class="biz-cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2 2 2 0 0 1-2-2V7"/><path d="M18 12a2 2 0 0 1-2-2V7"/><path d="M14 12a2 2 0 0 1-2-2V7"/><path d="M10 12a2 2 0 0 1-2-2V7"/><path d="M6 12a2 2 0 0 1-2-2V7"/></svg></span>
+    <div class="biz-cta-text">
+      <h3>Own a Pāpāmoa business?</h3>
+      <p>Get found by locals and visitors. Join the Papamoa.info directory and grow your business in our community.</p>
+    </div>
+    <div class="biz-cta-btns">
+      <a href="/papamoa-previews/sales/list-with-us.html" class="biz-cta-btn-primary">List your business</a>
+      <a href="/papamoa-previews/sales/spotlight-options.html" class="biz-cta-btn-secondary">View spotlight options</a>
     </div>
   </div>
 </div>
@@ -586,35 +929,6 @@
 <div style="background:var(--white);border-bottom:1px solid var(--border);padding:22px 20px">
   <div style="max-width:1200px;margin:0 auto;font-size:0.88rem;color:var(--muted);line-height:1.8">
     <strong style="color:var(--body)">About Pāpāmoa:</strong> A coastal suburb of Tauranga, Bay of Plenty, stretching 16 kilometres along the Pacific Ocean. Home to around 37,800 residents and one of New Zealand's fastest-growing communities. Located 15 minutes east of Tauranga city centre and 10 minutes from Mount Maunganui. Known for its white sand beach, family-friendly feel, surf, and as the host area for the Zespri AIMS Games each September. Major retail centres include Pāpāmoa Plaza, Fashion Island, and The Sands at Golden Sands. New development continues at Pāpāmoa East and Te Tumu. <a href="/papamoa-previews/community/population-statistics.html" style="color:var(--blue);font-weight:600">Population &amp; stats &rarr;</a>
-  </div>
-</div>
-
-<!-- SEARCH -->
-<div class="search-bar">
-  <div class="search-bar-inner">
-    <div class="search-input-wrap">
-      <input type="text" class="search-input" id="site-search" placeholder="Search businesses, services, local info&hellip;" autocomplete="off" oninput="handleSearch(this.value)" onkeydown="handleSearchKey(event)">
-      <div class="search-results" id="search-results"></div>
-    </div>
-    <button class="search-btn" onclick="submitSearch()">Search</button>
-  </div>
-  <div class="search-bar-inner" style="padding-top:0">
-    <div class="search-suggestions" id="search-suggestions"></div>
-  </div>
-</div>
-
-<!-- CATEGORY BROWSE -->
-<div class="cat-browse">
-  <div class="cat-browse-inner">
-    <div class="section-heading"><h2>Browse Categories</h2></div>
-    <p class="section-sub">Restaurants, trades, shops, things to do and places to stay &mdash; everything in Pāpāmoa in one place</p>
-    <div class="cat-row">
-      <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="cat-card"><span class="cat-icon">&#127829;</span><div class="cat-info"><h3>Where to Eat</h3><p>Cafes, restaurants, bars and takeaways</p></div><span class="cat-arrow">&rarr;</span></a>
-      <a href="/papamoa-previews/categories/services/services.html" class="cat-card"><span class="cat-icon">&#128295;</span><div class="cat-info"><h3>Services</h3><p>Trades, health, mechanics and more</p></div><span class="cat-arrow">&rarr;</span></a>
-      <a href="/papamoa-previews/categories/shops/shopping.html" class="cat-card"><span class="cat-icon">&#128717;</span><div class="cat-info"><h3>Where to Shop</h3><p>Retail, specialty stores and supermarkets</p></div><span class="cat-arrow">&rarr;</span></a>
-      <a href="/papamoa-previews/categories/activities/entertainment.html" class="cat-card"><span class="cat-icon">&#127918;</span><div class="cat-info"><h3>What to Do</h3><p>Surf, fitness, indoor activities and events</p></div><span class="cat-arrow">&rarr;</span></a>
-      <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="cat-card"><span class="cat-icon">&#127968;</span><div class="cat-info"><h3>Where to Stay</h3><p>Holiday parks, motels and apartments</p></div><span class="cat-arrow">&rarr;</span></a>
-    </div>
   </div>
 </div>
 
@@ -1659,8 +1973,9 @@ document.addEventListener('click', function(e) {
   if (pill) { fillSearch(pill.getAttribute('data-fill')); return; }
   var clr = e.target.closest('[data-clear-recent]');
   if (clr) { clearRecent(); return; }
-  if (!e.target.closest('.search-input-wrap') && !e.target.closest('.search-suggestions')) {
-    document.getElementById('search-results').classList.remove('visible');
+  if (!e.target.closest('.search-input-wrap') && !e.target.closest('.search-suggestions') && !e.target.closest('.hero-v2-search-wrap') && !e.target.closest('.hero-v2-chips')) {
+    var sr = document.getElementById('search-results');
+    if (sr) sr.classList.remove('visible');
   }
 });
 
@@ -1867,18 +2182,18 @@ var HW_EMOJI = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫�
 function hwUvClass(uv) { if(uv<=2)return'uv-low';if(uv<=5)return'uv-mod';if(uv<=7)return'uv-high';if(uv<=10)return'uv-vhigh';return'uv-extreme'; }
 function hwWindDir(deg) { var dirs=['N','NE','E','SE','S','SW','W','NW']; return dirs[Math.round(deg/45)%8]; }
 async function loadHeroWeather() {
-  var strip = document.getElementById('hw-strip');
-  if (!strip) return;
+  var tempEl = document.getElementById('hw-temp-v2');
+  var condEl = document.getElementById('hw-cond-v2');
+  if (!tempEl || !condEl) return;
   fetch('https://papamoa-claude-proxy.jkbrownnz.workers.dev/weather')
     .then(function(res) { return res.json(); })
     .then(function(d) {
       var c = d.current;
-      var uv = d.daily && d.daily.uv_index_max ? Math.round(d.daily.uv_index_max[0]) : 0;
-      strip.innerHTML = '<div class="hw-current"><span class="hw-icon">' + (HW_EMOJI[c.weather_code]||'🌤️') + '</span><span class="hw-temp">' + Math.round(c.temperature_2m) + '°</span><div class="hw-detail"><span class="hw-condition">' + (HW_WMO[c.weather_code]||'') + '</span><span class="hw-sub">Feels ' + Math.round(c.apparent_temperature) + '° — P\u0101p\u0101moa Beach</span></div></div><div class="hw-stats"><div class="hw-stat"><span class="hw-stat-label">Wind</span><span class="hw-stat-value">' + Math.round(c.wind_speed_10m) + ' km/h ' + hwWindDir(c.wind_direction_10m) + '</span></div><div class="hw-stat"><span class="hw-stat-label">UV Index</span><span class="hw-stat-value ' + hwUvClass(uv) + '">' + uv + '</span></div></div><a href="/papamoa-previews/community/weather.html" class="hw-link">Full forecast &rarr;</a>';
+      var cond = HW_WMO[c.weather_code] || 'Mostly sunny';
+      tempEl.textContent = Math.round(c.temperature_2m) + '°';
+      condEl.textContent = cond;
     })
-    .catch(function() {
-      strip.innerHTML = '<span class="hw-loading"><a href="/papamoa-previews/community/weather.html" style="color:var(--lime)">View weather forecast &rarr;</a></span>';
-    });
+    .catch(function() { /* leave defaults */ });
 }
 loadHeroWeather();
 
