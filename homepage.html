@@ -347,11 +347,12 @@
     .hero-v2-bg { position:absolute; inset:0; overflow:hidden; background-image:linear-gradient(180deg,rgba(36,59,89,0) 0%,rgba(36,59,89,0.05) 60%,rgba(36,59,89,0.18) 100%),url('images/hero/papamoa-hero-afternoon.webp'); background-size:cover; background-position:center 45%; background-repeat:no-repeat; transition:background-image 0.6s ease-in-out; }
     .hero-v2-inner { position:relative; max-width:1200px; margin:0 auto; padding:60px 28px 110px; z-index:1; }
     .hero-v2 h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4.6vw,3.2rem); font-weight:700; color:var(--navy); line-height:1.08; margin-bottom:14px; max-width:680px; letter-spacing:-0.01em; text-shadow:0 1px 2px rgba(255,255,255,0.55), 0 0 28px rgba(255,255,255,0.45); }
-    .hero-v2-prompt { display:block; font-family:'Figtree',sans-serif; font-size:1.05rem; font-weight:700; color:var(--navy); margin-bottom:10px; text-shadow:0 1px 2px rgba(255,255,255,0.65), 0 0 12px rgba(255,255,255,0.5); }
+    .hero-v2-desc { font-size:0.95rem; color:var(--body); line-height:1.6; max-width:560px; margin-bottom:22px; font-weight:500; text-shadow:0 1px 2px rgba(255,255,255,0.65), 0 0 14px rgba(255,255,255,0.5); }
+    .hero-v2-prompt { display:block; font-family:'Figtree',sans-serif; font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:10px; text-shadow:0 1px 2px rgba(255,255,255,0.65), 0 0 12px rgba(255,255,255,0.5); }
     .hero-v2-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(100deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.18) 28%,rgba(255,255,255,0) 55%); pointer-events:none; }
 
     /* Hero search bar */
-    .hero-v2-search { background:#fff; border-radius:14px; padding:7px; box-shadow:0 10px 32px rgba(36,59,89,0.22); display:flex; gap:0; max-width:620px; align-items:stretch; }
+    .hero-v2-search { background:#fff; border-radius:14px; padding:7px; box-shadow:0 10px 32px rgba(36,59,89,0.22); display:flex; gap:0; max-width:780px; align-items:stretch; }
     .hero-v2-search-wrap { flex:1; position:relative; display:flex; align-items:center; min-width:0; }
     .hero-v2-search-wrap .search-results { position:absolute; top:calc(100% + 10px); left:-6px; right:-6px; background:#fff; border:1px solid var(--border); border-radius:10px; box-shadow:0 12px 32px rgba(36,59,89,0.18); z-index:50; max-height:340px; overflow-y:auto; display:none; }
     .hero-v2-search-wrap .search-results.visible { display:block; }
@@ -682,6 +683,31 @@
 .pnf-footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:12px; color:rgba(255,255,255,0.25); }
 .pnf-footer-bottom a { color:rgba(255,255,255,0.35); text-decoration:none; }
 .pnf-footer-bottom a:hover { color:var(--pnf-white); }
+
+/* Trust bullets in brand column */
+.pnf-footer-trust { margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; gap:6px; list-style:none; }
+.pnf-footer-trust li { font-size:11.5px; color:rgba(255,255,255,0.55); display:flex; align-items:center; gap:8px; line-height:1.5; }
+.pnf-footer-trust li::before { content:''; width:5px; height:5px; border-radius:50%; background:#89BE43; flex-shrink:0; }
+
+/* Footer CTA (compact business invite) */
+.pnf-footer-cta { background:linear-gradient(135deg,rgba(137,190,67,0.13),rgba(137,190,67,0.04)); border:1px solid rgba(137,190,67,0.25); border-radius:10px; padding:18px 22px; margin:0 0 30px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+.pnf-footer-cta-text { flex:1; min-width:240px; }
+.pnf-footer-cta-text strong { color:var(--pnf-white); font-size:14.5px; display:block; margin-bottom:4px; font-weight:700; }
+.pnf-footer-cta-text p { font-size:12.5px; color:rgba(255,255,255,0.55); line-height:1.65; }
+.pnf-footer-cta-btns { display:flex; gap:8px; flex-wrap:wrap; }
+.pnf-footer-cta-btns a { font-size:12.5px; font-weight:700; padding:9px 16px; border-radius:7px; text-decoration:none; white-space:nowrap; transition:all 0.15s; }
+.pnf-footer-cta-btn-primary { background:#1E5A2A; color:#fff !important; }
+.pnf-footer-cta-btn-primary:hover { background:#164520; color:#fff !important; }
+.pnf-footer-cta-btn-secondary { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.85) !important; border:1px solid rgba(255,255,255,0.18); }
+.pnf-footer-cta-btn-secondary:hover { background:rgba(255,255,255,0.15); color:#fff !important; }
+
+/* Popular searches row */
+.pnf-footer-popular { margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.08); }
+.pnf-footer-popular h4 { font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:12px; }
+.pnf-footer-popular-list { font-size:12.5px; line-height:2; color:rgba(255,255,255,0.4); }
+.pnf-footer-popular-list a { color:rgba(255,255,255,0.6); text-decoration:none; transition:color 0.15s; }
+.pnf-footer-popular-list a:hover { color:var(--pnf-white); text-decoration:underline; }
+.pnf-footer-popular-list .sep { margin:0 8px; color:rgba(255,255,255,0.18); }
 .pnf-overlay { position:fixed; inset:0; background:rgba(36,59,89,0.7); backdrop-filter:blur(4px); z-index:1000; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity 0.2s; }
 .pnf-overlay.open { opacity:1; pointer-events:all; }
 .pnf-modal { background:#fff; border-radius:16px; width:100%; max-width:520px; overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,0.3); transform:translateY(16px); transition:transform 0.25s; }
@@ -774,6 +800,7 @@
   <div class="hero-v2-bg"></div>
   <div class="hero-v2-inner">
     <h1>Discover Pāpāmoa,<br>from the locals who know it</h1>
+    <p class="hero-v2-desc">Your local guide to the best restaurants, trusted trades, accommodation and everything you need in Pāpāmoa.</p>
 
     <!-- SEARCH (primary action) -->
     <label for="site-search" class="hero-v2-prompt">What are you looking for in Pāpāmoa?</label>
@@ -1136,62 +1163,106 @@
 <!-- FOOTER -->
 <footer class="pnf-footer">
   <div class="pnf-footer-inner">
+
+    <!-- COMPACT BUSINESS CTA -->
+    <div class="pnf-footer-cta">
+      <div class="pnf-footer-cta-text">
+        <strong>Own a Pāpāmoa business?</strong>
+        <p>Get found by locals, visitors, Google and AI search.</p>
+      </div>
+      <div class="pnf-footer-cta-btns">
+        <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-footer-cta-btn-primary">List your business</a>
+        <a href="/papamoa-previews/sales/spotlight-options.html" class="pnf-footer-cta-btn-secondary">Advertise</a>
+      </div>
+    </div>
+
     <div class="pnf-footer-grid">
+      <!-- BRAND + TRUST -->
       <div class="pnf-footer-brand-col">
         <div class="pnf-footer-brand">Papamoa<span>.info</span></div>
-        <p class="pnf-footer-tagline">Pāpāmoa&rsquo;s independent local business directory. Every listing written editorially &mdash; built for Google, AI engines, and the people who live here.</p>
-        <div class="pnf-footer-social"><a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-social-btn"><span class="fb-icon">f</span> Facebook</a><a href="https://www.instagram.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-social-btn is-ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> Instagram</a></div>
+        <p class="pnf-footer-tagline">Independent local guide to Pāpāmoa &mdash; helping residents, visitors and local businesses find what they need faster.</p>
+        <div class="pnf-footer-social">
+          <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-social-btn"><span class="fb-icon">f</span> Facebook</a>
+          <a href="https://www.instagram.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-social-btn is-ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> Instagram</a>
+        </div>
         <button class="pnf-contact-link" onclick="pnfOpenContact()">&#9993; Get in touch</button>
-      </div>
-      <div class="pnf-footer-col">
-        <h4>Browse</h4>
-        <ul class="pnf-footer-links">
-          <li><a href="/papamoa-previews/categories/food-drink/food-and-drink.html">Where to Eat</a></li>
-          <li><a href="/papamoa-previews/categories/accommodation/accommodation.html">Where to Stay</a></li>
-          <li><a href="/papamoa-previews/categories/services/services.html">Services &amp; Trades</a></li>
-          <li><a href="/papamoa-previews/categories/shops/shopping.html">Where to Shop</a></li>
-          <li><a href="/papamoa-previews/categories/activities/entertainment.html">What to Do</a></li>
-          <li><a href="/papamoa-previews/categories/food-drink/restaurants-papamoa.html">Restaurants</a></li>
-          <li><a href="/papamoa-previews/categories/food-drink/cafe-papamoa.html">Cafes</a></li>
-          <li><a href="/papamoa-previews/categories/services/mechanic-papamoa.html">Mechanics &amp; WOF</a></li>
-          <li><a href="/papamoa-previews/categories/services/plumber-papamoa.html">Plumbers</a></li>
-          <li><a href="/papamoa-previews/categories/services/gym-papamoa.html">Gyms &amp; Fitness</a></li>
+        <ul class="pnf-footer-trust">
+          <li>Independent local directory</li>
+          <li>Built for residents and visitors</li>
+          <li>Updated with practical local info</li>
         </ul>
       </div>
+
+      <!-- EXPLORE -->
+      <div class="pnf-footer-col">
+        <h4>Explore</h4>
+        <ul class="pnf-footer-links">
+          <li><a href="/papamoa-previews/categories/food-drink/food-and-drink.html">Eat &amp; Drink</a></li>
+          <li><a href="/papamoa-previews/categories/services/services.html">Services &amp; Trades</a></li>
+          <li><a href="/papamoa-previews/categories/activities/entertainment.html">Things to Do</a></li>
+          <li><a href="/papamoa-previews/categories/accommodation/accommodation.html">Where to Stay</a></li>
+          <li><a href="/papamoa-previews/categories/shops/shopping.html">Shopping</a></li>
+        </ul>
+      </div>
+
+      <!-- LOCAL INFO -->
       <div class="pnf-footer-col">
         <h4>Local Info</h4>
         <ul class="pnf-footer-links">
-          <li><a href="/papamoa-previews/community/weather.html">Pāpāmoa Weather</a></li>
+          <li><a href="/papamoa-previews/community/weather.html">Weather</a></li>
           <li><a href="/papamoa-previews/community/surf-tides.html">Surf &amp; Tides</a></li>
-          <li><a href="/papamoa-previews/community/urgent-health.html">Urgent Health</a></li>
           <li><a href="/papamoa-previews/community/schools-papamoa.html">Schools</a></li>
-          <li><a href="/papamoa-previews/community/school-terms-holidays.html">School Terms 2026</a></li>
-          <li><a href="/papamoa-previews/community/aims-games.html">AIMS Games 2026</a></li>
-          <li><a href="/papamoa-previews/community/fuel-prices.html">Fuel Prices</a></li>
-          <li><a href="/papamoa-previews/community/dogs-papamoa.html">Dogs in Pāpāmoa</a></li>
           <li><a href="/papamoa-previews/community/rubbish-recycling-papamoa.html">Rubbish &amp; Recycling</a></li>
+          <li><a href="/papamoa-previews/community/emergencies.html">Emergency</a></li>
+          <li><a href="/papamoa-previews/community/dogs-papamoa.html">Dogs in Pāpāmoa</a></li>
         </ul>
       </div>
+
+      <!-- FOR BUSINESSES -->
       <div class="pnf-footer-col">
         <h4>For Businesses</h4>
         <ul class="pnf-footer-links">
           <li><a href="/papamoa-previews/sales/list-with-us.html">List Your Business</a></li>
-          <li><a href="/papamoa-previews/sales/menu-addon.html">Menu Add-On</a></li>
-          <li><a href="/papamoa-previews/sales/spotlight-ads.html">Spotlight Ad Spots</a></li>
+          <li><a href="/papamoa-previews/sales/spotlight-options.html">Advertise</a></li>
+          <li><a href="/papamoa-previews/sales/spotlight-ads.html">Spotlight Options</a></li>
+          <li><a href="/papamoa-previews/sales/list-with-us.html">Update a Listing</a></li>
+          <li><button onclick="pnfOpenContact()">Contact</button></li>
         </ul>
       </div>
+
+      <!-- ABOUT -->
       <div class="pnf-footer-col">
-        <h4>Network</h4>
+        <h4>About Papamoa.info</h4>
         <ul class="pnf-footer-links">
+          <li><a href="/papamoa-previews/editorial-policy.html">Editorial Policy</a></li>
+          <li><a href="/papamoa-previews/legal.html">Privacy Policy</a></li>
+          <li><a href="/papamoa-previews/legal.html#terms">Terms</a></li>
+          <li><a href="/papamoa-previews/index.html">Sitemap</a></li>
           <li><a href="https://tauranganz.info" target="_blank" rel="noopener">TaurangaNZ.info</a></li>
-          <li><button onclick="pnfOpenContact()">Contact Us</button></li>
-          <li><a href="/papamoa-previews/legal.html">Privacy &amp; Terms</a></li>
         </ul>
       </div>
     </div>
+
+    <!-- POPULAR SEARCHES (SEO/AEO) -->
+    <div class="pnf-footer-popular">
+      <h4>Popular searches</h4>
+      <div class="pnf-footer-popular-list">
+        <a href="/papamoa-previews/categories/food-drink/restaurants-papamoa.html">Restaurants in Pāpāmoa</a><span class="sep">·</span>
+        <a href="/papamoa-previews/community/weather.html">Pāpāmoa weather</a><span class="sep">·</span>
+        <a href="/papamoa-previews/community/surf-tides.html">Pāpāmoa surf report</a><span class="sep">·</span>
+        <a href="/papamoa-previews/community/schools-papamoa.html">Pāpāmoa schools</a><span class="sep">·</span>
+        <a href="/papamoa-previews/community/dogs-papamoa.html">Dog beaches in Pāpāmoa</a><span class="sep">·</span>
+        <a href="/papamoa-previews/categories/activities/entertainment.html">Things to do in Pāpāmoa</a><span class="sep">·</span>
+        <a href="/papamoa-previews/categories/accommodation/accommodation.html">Pāpāmoa accommodation</a><span class="sep">·</span>
+        <a href="/papamoa-previews/community/shopping-centres.html">Pāpāmoa shopping centres</a><span class="sep">·</span>
+        <a href="/papamoa-previews/community/aims-games.html">AIMS Games 2026</a><span class="sep">·</span>
+        <a href="/papamoa-previews/community/rubbish-recycling-papamoa.html">Pāpāmoa rubbish day</a>
+      </div>
+    </div>
+
     <div class="pnf-footer-bottom">
-      <span>&copy; 2026 Papamoa.info &middot; Pāpāmoa&rsquo;s Local Business Directory</span>
-      <span><a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener">Facebook</a> &middot; <a href="https://www.instagram.com/papamoa.info/" target="_blank" rel="noopener">Instagram</a> &middot; <a href="/papamoa-previews/legal.html">Privacy &amp; Terms</a> &middot; <button onclick="pnfOpenContact()" style="background:none;border:none;padding:0;cursor:pointer;font-family:inherit;font-size:inherit;color:inherit;">Contact</button></span>
+      <span>&copy; 2026 Papamoa.info &middot; Pāpāmoa&rsquo;s independent local directory</span>
+      <span><a href="/papamoa-previews/legal.html">Privacy</a> &middot; <a href="/papamoa-previews/legal.html#terms">Terms</a> &middot; <a href="/papamoa-previews/index.html">Sitemap</a> &middot; <a href="/papamoa-previews/editorial-policy.html">Editorial Policy</a></span>
     </div>
   </div>
 </footer>
