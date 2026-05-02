@@ -16,13 +16,13 @@
 :root {
 
   /* -- Core palette -- */
-  --navy:        #0D2B3E;   /* darkest -- nav bg, headings, dark sections */
-  --navy-mid:    #2B3F5C;   /* homepage hero bg */
+  --navy:        #243B59;   /* darkest -- nav bg, headings, dark sections */
+  --navy-mid:    #243B59;   /* homepage hero bg */
   --ocean:       #1B6B7D;   /* primary brand colour */
   --ocean-deep:  #0F4352;   /* darker ocean -- hero gradients, form bg */
   --ocean-mid:   #1A5F70;   /* mid gradient stop */
   --ocean-light: #E4F2F5;   /* tinted bg for tags, badges, highlights */
-  --blue:        #3AABDE;   /* accent -- CTAs, links, active states, .info in logo */
+  --blue:        #359FE8;   /* accent -- CTAs, links, active states, .info in logo */
   --sand:        #F7F3ED;   /* page background */
   --sand-alt:    #F5EFE0;   /* homepage body bg (slightly warmer) */
   --sand-dark:   #EDE7DB;   /* darker sand -- section dividers, input bg */
@@ -49,8 +49,8 @@
   /* -- Status colours -- */
   --green:       #1E6B3C;
   --green-bg:    #E6F4EC;
-  --green-pulse: #7DC143;   /* live indicator, lime accent */
-  --lime:        #7DC143;   /* alias -- used in Do category pages and homepage */
+  --green-pulse: #89BE43;   /* live indicator, lime accent */
+  --lime:        #89BE43;   /* alias -- used in Do category pages and homepage */
   --red:         #8B2020;
   --red-bg:      #FAEAEA;
   --amber:       #8A5A00;
@@ -58,10 +58,10 @@
   --coral:       #E8344A;   /* homepage alert/error */
 
   /* -- Category page accent colours (LOCKED April 2026) -- */
-  --cat-stay-accent:     #3AABDE;   /* Stay/Accommodation -- same as --blue */
-  --cat-do-accent:       #7DC143;   /* Do/Activities -- same as --lime */
+  --cat-stay-accent:     #359FE8;   /* Stay/Accommodation -- same as --blue */
+  --cat-do-accent:       #89BE43;   /* Do/Activities -- same as --lime */
   --cat-eat-accent:      #E07830;   /* Eat/Food & Drink -- warm amber */
-  --cat-services-accent: #3AABDE;   /* Services -- same as --blue */
+  --cat-services-accent: #359FE8;   /* Services -- same as --blue */
   --cat-shop-accent:     #C8962A;   /* Shop -- warm gold, same as --gold-alt */
 
   /* -- Typography -- */
@@ -78,8 +78,8 @@
   --content-width: 960px;  /* sales/listing pages */
 
   /* -- PNF nav/footer system tokens (used by nav.js) -- */
-  --pnf-navy:    #0D2B3E;
-  --pnf-accent:  #3AABDE;
+  --pnf-navy:    #243B59;
+  --pnf-accent:  #359FE8;
   --pnf-dune:    #C4985A;
   --pnf-white:   #FFFFFF;
   --pnf-muted:   rgba(255,255,255,0.45);
@@ -112,9 +112,9 @@ img { max-width: 100%; height: auto; }
    ============================================================ */
 
 /*
-  .pnf-nav          -- sticky top nav bar, bg: --pnf-navy (#0D2B3E), height: 56px
+  .pnf-nav          -- sticky top nav bar, bg: --pnf-navy (#243B59), height: 56px
   .pnf-logo         -- "Papamoa" in white Playfair Display 15px bold
-  .pnf-logo span    -- ".info" in --pnf-accent (#3AABDE)
+  .pnf-logo span    -- ".info" in --pnf-accent (#359FE8)
   .pnf-link         -- nav links, Figtree 13px, color: --pnf-muted
   .pnf-link.active  -- white text + --pnf-accent underline
   .pnf-cta          -- pill CTA button, bg: --pnf-accent, white text, 100px radius
@@ -125,7 +125,7 @@ img { max-width: 100%; height: auto; }
     <a class="pnf-logo" href="/papamoa-previews/homepage.html">Papamoa<span>.info</span></a>
 
   Phone number in nav (post-call-landing only):
-    Color: --blue (#3AABDE) -- NOT dune/gold
+    Color: --blue (#359FE8) -- NOT dune/gold
 */
 
 /* ============================================================
@@ -202,7 +202,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 15% 50%, rgba(58,171,222,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 15% 50%, rgba(53,159,232,0.08) 0%, transparent 60%),
     radial-gradient(ellipse at 85% 20%, rgba(196,152,90,0.08) 0%, transparent 50%);
   pointer-events: none;
 }
@@ -345,13 +345,13 @@ label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08e
 .search-bar { background: var(--white); border-bottom: 1px solid var(--border-alt); padding: 18px 20px; position: relative; z-index: 51; }
 .search-bar-inner { max-width: var(--max-width); margin: 0 auto; display: flex; gap: 10px; align-items: center; }
 .search-input { width: 100%; padding: 11px 14px 11px 40px; border: 1.5px solid var(--border-alt); border-radius: var(--radius); font-family: var(--font-body); font-size: 0.95rem; color: var(--body); background: var(--bg); transition: all 0.15s; outline: none; }
-.search-input:focus { border-color: var(--blue); background: var(--white); box-shadow: 0 0 0 3px rgba(58,171,222,0.1); }
+.search-input:focus { border-color: var(--blue); background: var(--white); box-shadow: 0 0 0 3px rgba(53,159,232,0.1); }
 .search-btn { padding: 11px 22px; background: var(--blue); color: var(--white); font-family: var(--font-body); font-weight: 700; font-size: 0.88rem; border: none; border-radius: var(--radius); cursor: pointer; white-space: nowrap; transition: background 0.15s; flex-shrink: 0; }
 .search-btn:hover { background: #2A8FBE; }
 
 .search-suggestion { font-size: 0.74rem; font-weight: 600; color: var(--muted-alt); background: var(--bg); border: 1px solid var(--border-alt); border-radius: 20px; padding: 3px 11px; cursor: pointer; transition: all 0.15s; font-family: var(--font-body); white-space: nowrap; flex-shrink: 0; }
 .search-suggestion:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
-.search-suggestion-recent { background: rgba(58,171,222,0.08); border-color: rgba(58,171,222,0.25); color: var(--blue); }
+.search-suggestion-recent { background: rgba(53,159,232,0.08); border-color: rgba(53,159,232,0.25); color: var(--blue); }
 
 /* ============================================================
    FOOTER (pnf-footer system -- injected manually from snippet)
@@ -390,18 +390,18 @@ label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08e
   background: linear-gradient(135deg, #0A1A2E 0%, #0D2840 55%, #142A3A 100%);
 }
 .hero-cat-accommodation::after {
-  background: linear-gradient(90deg, #3AABDE, #1A7ABE);
+  background: linear-gradient(90deg, #359FE8, #1A7ABE);
 }
-/* accent: --blue #3AABDE */
+/* accent: --blue #359FE8 */
 
 /* Do / Activities -- dark green + --lime accent */
 .hero-cat-activities {
   background: linear-gradient(135deg, #0A2215 0%, #0D3828 55%, #0F4A30 100%);
 }
 .hero-cat-activities::after {
-  background: linear-gradient(90deg, #7DC143, #4CAF50);
+  background: linear-gradient(90deg, #89BE43, #4CAF50);
 }
-/* accent: --lime #7DC143 */
+/* accent: --lime #89BE43 */
 
 /* Eat / Food & Drink -- dark amber/brown + amber accent */
 .hero-cat-food {
@@ -417,9 +417,9 @@ label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08e
   background: linear-gradient(135deg, #141820 0%, #1E2535 55%, #28334A 100%);
 }
 .hero-cat-services::after {
-  background: linear-gradient(90deg, #3AABDE, #1A7ABE);
+  background: linear-gradient(90deg, #359FE8, #1A7ABE);
 }
-/* accent: --blue #3AABDE */
+/* accent: --blue #359FE8 */
 
 /* Shop / Shopping -- dark brown/gold + --gold-alt accent */
 .hero-cat-shopping {
@@ -432,7 +432,7 @@ label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08e
 
 /* Community pages -- navy/ocean (unchanged) */
 .hero-cat-community {
-  background: linear-gradient(135deg, #0D2B3E, #1B6B7D);
+  background: linear-gradient(135deg, #243B59, #1B6B7D);
 }
 
 /* ============================================================

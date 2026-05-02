@@ -102,9 +102,9 @@
 
 <style>
 :root {
-  --navy:#0D2B3E; --navy-mid:#2B3F5C;
+  --navy:#243B59; --navy-mid:#243B59;
   --ocean:#1B6B7D; --ocean-deep:#0F4352;
-  --blue:#3AABDE; --sand:#F7F3ED; --sand-dark:#EDE7DB;
+  --blue:#359FE8; --sand:#F7F3ED; --sand-dark:#EDE7DB;
   --eat-accent:#E07830;
   --eat-dark:#B05010;
   --dune:#C4985A; --dune-light:#F5EDD8; --white:#FFFFFF;
@@ -112,9 +112,9 @@
   --border:#D8E4E8; --bg:#F4F7FA;
   --gold:#B8840A; --gold-bg:#FBF3E2;
   --silver:#5A7A8A; --silver-bg:#EDF3F6;
-  --lime:#7DC143; --green:#1E6B3C; --green-bg:#E6F4EC;
+  --lime:#89BE43; --green:#1E6B3C; --green-bg:#E6F4EC;
   --font-body:'Figtree',sans-serif; --font-display:'Playfair Display',serif;
-  --pnf-navy:#0D2B3E; --pnf-accent:#3AABDE;
+  --pnf-navy:#243B59; --pnf-accent:#359FE8;
   --pnf-white:#FFFFFF; --pnf-muted:rgba(255,255,255,0.45);
   --pnf-font:'Figtree',sans-serif; --pnf-display:'Playfair Display',serif;
 }
@@ -251,11 +251,11 @@ a{color:var(--eat-accent);text-decoration:none}
 .pnf-footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:11.5px;color:rgba(255,255,255,.22)}
 .pnf-footer-bottom a{color:rgba(255,255,255,.32);text-decoration:none}
 .pnf-footer-bottom a:hover{color:#fff}
-.pnf-overlay{position:fixed;inset:0;background:rgba(13,43,62,.7);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+.pnf-overlay{position:fixed;inset:0;background:rgba(36,59,89,.7);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
 .pnf-overlay.open{opacity:1;pointer-events:all}
 .pnf-modal{background:#fff;border-radius:14px;width:100%;max-width:500px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);transform:translateY(14px);transition:transform .25s}
 .pnf-overlay.open .pnf-modal{transform:translateY(0)}
-.pnf-modal-head{background:#0D2B3E;padding:20px 24px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.pnf-modal-head{background:#243B59;padding:20px 24px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 .pnf-modal-head h2{font-family:var(--pnf-display);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:2px}
 .pnf-modal-head p{font-size:12px;color:rgba(255,255,255,.45)}
 .pnf-modal-close{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
@@ -277,6 +277,38 @@ a{color:var(--eat-accent);text-decoration:none}
 .pnf-cf-success p{font-size:13px;color:#5A6E78;line-height:1.6}
 @media(max-width:760px){.pnf-footer-grid{grid-template-columns:1fr 1fr;gap:20px}}
 @media(max-width:480px){.pnf-footer-grid{grid-template-columns:1fr}.pnf-cf-row{grid-template-columns:1fr}}
+
+/* ── Quick subcategory widget ── */
+.cat-widget { max-width:1200px; margin:0 auto; padding:24px 20px 8px; }
+.cat-widget .subcat-bar { background:transparent; padding:0 0 14px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; width:100%; box-sizing:border-box; }
+.cat-widget .subcat-bar::-webkit-scrollbar { display:none; }
+.cat-widget .subcat-inner { display:flex; gap:8px; flex-wrap:nowrap; min-width:max-content; }
+.cat-widget .chip { font-size:0.75rem; font-weight:700; padding:5px 14px; border-radius:20px; border:1px solid var(--border); background:#fff; color:var(--muted); cursor:pointer; white-space:nowrap; font-family:'Figtree',sans-serif; transition:all 0.15s; text-decoration:none; }
+.cat-widget .chip.active { background:var(--navy); color:#fff; border-color:var(--navy); }
+.cat-widget .cat-search-wrap { position:relative; margin-bottom:18px; }
+.cat-widget .cat-search-wrap::before { content:''; position:absolute; left:12px; top:50%; transform:translateY(-50%); width:14px; height:14px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7' stroke='%23607080' stroke-width='2'/%3E%3Cpath stroke='%23607080' stroke-width='2' stroke-linecap='round' d='m16 16 4 4'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-size:contain; pointer-events:none; }
+.cat-widget .cat-search-input { width:100%; padding:10px 12px 10px 34px; border:1.5px solid var(--border); border-radius:8px; font-family:'Figtree',sans-serif; font-size:0.88rem; color:var(--body); background:#fff; transition:all 0.15s; }
+.cat-widget .cat-search-input:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(53,159,232,0.1); }
+.cat-widget .cat-search-input::placeholder { color:var(--muted); }
+.cat-widget .subcat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:10px; margin-bottom:8px; }
+.cat-widget .subcat-card { background:#fff; border:1px solid var(--border); border-radius:10px; padding:16px 14px; display:flex; align-items:center; gap:11px; text-decoration:none; color:inherit; transition:all 0.15s; }
+.cat-widget .subcat-card:hover { border-color:var(--blue); box-shadow:0 3px 10px rgba(53,159,232,0.08); transform:translateY(-1px); }
+.cat-widget .subcat-card.hidden, .cat-widget .subcat-card.row-hidden { display:none; }
+.cat-widget .subcat-card.see-all-card { background:linear-gradient(135deg,var(--bg),#fff); border:1.5px dashed var(--border); }
+.cat-widget .subcat-card.see-all-card:hover { border-color:var(--blue); border-style:solid; }
+.cat-widget .subcat-card.see-all-card .sc-title { color:var(--blue); }
+.cat-widget .sc-icon { font-size:1.4rem; flex-shrink:0; }
+.cat-widget .sc-body { min-width:0; }
+.cat-widget .sc-title { font-weight:700; font-size:0.88rem; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cat-widget .sc-desc { font-size:0.72rem; color:var(--muted); line-height:1.4; margin-top:2px; }
+.cat-widget .subcat-empty { display:none; padding:24px 0; text-align:center; font-size:0.84rem; color:var(--muted); }
+.cat-widget .subcat-empty.visible { display:block; }
+.cat-widget .see-more-btn { display:inline-flex; align-items:center; gap:6px; margin-top:6px; padding:8px 18px; font-family:'Figtree',sans-serif; font-size:0.8rem; font-weight:700; color:var(--blue); background:rgba(53,159,232,0.06); border:1px solid rgba(53,159,232,0.18); border-radius:8px; cursor:pointer; transition:all 0.15s; }
+.cat-widget .see-more-btn:hover { background:rgba(53,159,232,0.12); border-color:rgba(53,159,232,0.3); }
+.cat-widget .see-more-btn .arrow { transition:transform 0.2s; font-size:0.7rem; }
+.cat-widget .see-more-btn.expanded .arrow { transform:rotate(180deg); }
+@media(max-width:540px){ .cat-widget .subcat-grid { grid-template-columns:1fr 1fr; } }
+
 </style>
 </head>
 <body>
@@ -338,6 +370,58 @@ a{color:var(--eat-accent);text-decoration:none}
       <a href="#section-more" class="hchip">&#127881; More categories</a>
     </div>
   </div>
+</div>
+
+
+<!-- QUICK SUBCATEGORY WIDGET (moved from homepage) -->
+<div class="cat-widget">
+  <div class="subcat-bar">
+    <div class="subcat-inner">
+      <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="chip active">All food &amp; drink</a>
+      <a href="/papamoa-previews/categories/food-drink/restaurants-papamoa.html" class="chip">Restaurants</a>
+      <a href="/papamoa-previews/categories/food-drink/cafe-papamoa.html" class="chip">Cafes</a>
+      <a href="/papamoa-previews/categories/food-drink/bar-papamoa.html" class="chip">Bars &amp; Pubs</a>
+      <a href="/papamoa-previews/categories/food-drink/burgers-papamoa.html" class="chip">Burgers</a>
+      <a href="/papamoa-previews/categories/food-drink/pizza-papamoa.html" class="chip">Pizza</a>
+      <a href="/papamoa-previews/categories/food-drink/fish-and-chips-papamoa.html" class="chip">Fish &amp; Chips</a>
+      <a href="/papamoa-previews/categories/food-drink/sushi-papamoa.html" class="chip">Sushi</a>
+      <a href="/papamoa-previews/categories/food-drink/indian-restaurant-papamoa.html" class="chip">Indian</a>
+      <a href="/papamoa-previews/categories/food-drink/thai-restaurant-papamoa.html" class="chip">Thai</a>
+      <a href="/papamoa-previews/categories/food-drink/mexican-restaurant-papamoa.html" class="chip">Mexican</a>
+      <a href="/papamoa-previews/categories/food-drink/italian-restaurant-papamoa.html" class="chip">Italian</a>
+      <a href="/papamoa-previews/categories/food-drink/vegan-papamoa.html" class="chip">Vegan</a>
+      <a href="/papamoa-previews/categories/food-drink/bakery-papamoa.html" class="chip">Bakeries</a>
+      <a href="/papamoa-previews/categories/food-drink/turkish-restaurant-papamoa.html" class="chip">Turkish</a>
+      <a href="/papamoa-previews/categories/food-drink/takeaways-papamoa.html" class="chip">Takeaways</a>
+    </div>
+  </div>
+  <div class="cat-search-wrap">
+    <input type="text" class="cat-search-input" placeholder="Search food &amp; drink &mdash; try &ldquo;pizza&rdquo;, &ldquo;brunch&rdquo;, &ldquo;coffee&rdquo;&hellip;" oninput="catWidgetSearch(this)" autocomplete="off">
+  </div>
+  <div class="subcat-grid">
+    <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="subcat-card see-all-card" data-seeall="1" data-tags=""><span class="sc-icon">&#128204;</span><div class="sc-body"><div class="sc-title">See All Food &amp; Drink &rarr;</div><div class="sc-desc">Browse every listing &amp; subcategory</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/restaurants-papamoa.html" class="subcat-card" data-tags="restaurants dining dinner lunch sit down meals dine in outdoor indoor seating fully licensed grill shared plates"><span class="sc-icon">&#127829;</span><div class="sc-body"><div class="sc-title">Restaurants</div><div class="sc-desc">Sit-down dining in P&#257;p&#257;moa</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/cafe-papamoa.html" class="subcat-card" data-tags="cafe coffee flat white brunch breakfast morning tea espresso blackberry eatery all day generous portions weekend busy specialty"><span class="sc-icon">&#9749;</span><div class="sc-body"><div class="sc-title">Cafes</div><div class="sc-desc">Specialty coffee &amp; brunch spots</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/bar-papamoa.html" class="subcat-card" data-tags="bar pub craft beer cocktail drinks nightlife licensed happy hour shared plates open late"><span class="sc-icon">&#127867;</span><div class="sc-body"><div class="sc-title">Bars &amp; Pubs</div><div class="sc-desc">Craft beer, cocktails &amp; local pubs</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/takeaways-papamoa.html" class="subcat-card" data-tags="takeaway takeaways delivery doordash uber eats delivereasy pizza pundits burgerfuel mumbai masala thai thani quick order online collect"><span class="sc-icon">&#127860;</span><div class="sc-body"><div class="sc-title">Takeaways</div><div class="sc-desc">Every takeaway option in P&#257;p&#257;moa</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/pizza-papamoa.html" class="subcat-card" data-tags="pizza gourmet delivery doordash uber eats gluten free house made pizza pundits 4.9 tripadvisor seven nights takeaway basilico 72 hour dough"><span class="sc-icon">&#127829;</span><div class="sc-body"><div class="sc-title">Pizza</div><div class="sc-desc">Pizza Pundits &amp; Basilico</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/burgers-papamoa.html" class="subcat-card" data-tags="burger burgers gourmet fresh handcrafted gluten free delivery takeaway dine in"><span class="sc-icon">&#127828;</span><div class="sc-body"><div class="sc-title">Burgers</div><div class="sc-desc">Gourmet &amp; fast-casual burgers</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/indian-restaurant-papamoa.html" class="subcat-card" data-tags="indian curry tandoor naan butter chicken tikka masala biryani spicy vegetarian vegan byo mumbai masala fashion island gravatt road 4.5 stars google 387 reviews dine in takeaway open 4:30pm"><span class="sc-icon">&#127858;</span><div class="sc-body"><div class="sc-title">Indian Restaurants</div><div class="sc-desc">Curry, tandoor &amp; Indian cuisine</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/fish-and-chips-papamoa.html" class="subcat-card" data-tags="fish and chips fish chips chippie takeaway battered deep fried seafood snapper"><span class="sc-icon">&#127866;</span><div class="sc-body"><div class="sc-title">Fish &amp; Chips</div><div class="sc-desc">Fresh-battered chippies</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/sushi-papamoa.html" class="subcat-card" data-tags="sushi japanese sashimi rolls bento noodles ramen train rice nigiri temaki"><span class="sc-icon">&#127843;</span><div class="sc-body"><div class="sc-title">Sushi</div><div class="sc-desc">Sushi trains &amp; Japanese dining</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/thai-restaurant-papamoa.html" class="subcat-card" data-tags="thai food thai restaurant pad thai curry stir fry byo wine lunch dinner takeaway"><span class="sc-icon">&#127836;</span><div class="sc-body"><div class="sc-title">Thai Food</div><div class="sc-desc">Thai restaurants &amp; takeaways</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/mexican-restaurant-papamoa.html" class="subcat-card" data-tags="mexican tacos tequila burritos latin food dining dog friendly open late"><span class="sc-icon">&#127790;</span><div class="sc-body"><div class="sc-title">Mexican &amp; Latin</div><div class="sc-desc">Tacos, burritos &amp; Latin dining</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/italian-restaurant-papamoa.html" class="subcat-card" data-tags="italian pizza pasta neapolitan dough deli order online dine in takeaway"><span class="sc-icon">&#127837;</span><div class="sc-body"><div class="sc-title">Italian</div><div class="sc-desc">Pizza, pasta &amp; Italian restaurants</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/vegan-papamoa.html" class="subcat-card" data-tags="vegan plant based vegetarian dairy free gluten free plant based menu"><span class="sc-icon">&#127807;</span><div class="sc-body"><div class="sc-title">Vegan &amp; Plant-Based</div><div class="sc-desc">Plant-based &amp; vegan-friendly dining</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/bakery-papamoa.html" class="subcat-card" data-tags="bakery bread pies pastries rolls buns fresh baked morning croissant muffin sweet treat"><span class="sc-icon">&#127838;</span><div class="sc-body"><div class="sc-title">Bakeries</div><div class="sc-desc">Fresh bread, pies &amp; pastries</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/turkish-restaurant-papamoa.html" class="subcat-card" data-tags="turkish kebab doner mediterranean food falafel pita"><span class="sc-icon">&#129367;</span><div class="sc-body"><div class="sc-title">Turkish Food</div><div class="sc-desc">Kebabs &amp; Mediterranean dining</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/fast-food-papamoa.html" class="subcat-card" data-tags="fast food drive thru drive through mcdonalds kfc mcdonald's 7 gravatt road burgerfuel fashion island quick service"><span class="sc-icon">&#127828;</span><div class="sc-body"><div class="sc-title">Fast Food &amp; Drive-Thru</div><div class="sc-desc">McDonald&rsquo;s, KFC &amp; more</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/function-venues-papamoa.html" class="subcat-card" data-tags="function venue private dining event space group booking birthday celebration pap house beachbar lantern hire"><span class="sc-icon">&#127881;</span><div class="sc-body"><div class="sc-title">Function Venues</div><div class="sc-desc">Private dining &amp; event spaces</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/vietnamese-restaurant-papamoa.html" class="subcat-card" data-tags="vietnamese southeast asian lantern domain road summer rolls fish dumplings noodles fusion 4.8 stars"><span class="sc-icon">&#127839;</span><div class="sc-body"><div class="sc-title">Vietnamese</div><div class="sc-desc">SE Asian fusion at Lantern</div></div></a>
+    <a href="/papamoa-previews/categories/food-drink/japanese-restaurant-papamoa.html" class="subcat-card" data-tags="japanese ramen sushi noodles rice japanese food papamoa japanese restaurant"><span class="sc-icon">&#127843;</span><div class="sc-body"><div class="sc-title">Japanese</div><div class="sc-desc">Japanese dining &amp; ramen</div></div></a>
+  </div>
+  <div class="subcat-empty">No results for that search &mdash; <a href="/papamoa-previews/categories/food-drink/food-and-drink.html">browse all food &amp; drink &rarr;</a></div>
+  <button class="see-more-btn" onclick="catWidgetToggleMore(this)"><span>See more</span> <span class="arrow">&#9660;</span></button>
 </div>
 
 <!-- SEARCH BAR -->
@@ -720,6 +804,81 @@ async function pnfSubmitContact(e) {
     if (href.startsWith('/') && !href.startsWith(base)) { e.preventDefault(); window.location.href = base + href; }
   });
 })();
+</script>
+<script>
+/* ── Quick subcategory widget: chip filter, search, see-more ── */
+(function() {
+  var ROWS_INITIAL = 2;
+  var widgetState = new WeakMap();
+  function getState(w) { var s = widgetState.get(w); if (!s) { s = { rows: ROWS_INITIAL }; widgetState.set(w, s); } return s; }
+  function getColCount(grid) {
+    var styles = window.getComputedStyle(grid);
+    var cols = styles.getPropertyValue('grid-template-columns').split(' ').filter(Boolean).length;
+    return cols || 6;
+  }
+  function applyVisibility(widget) {
+    var grid = widget.querySelector('.subcat-grid');
+    var btn = widget.querySelector('.see-more-btn');
+    if (!grid || !btn) return;
+    var s = getState(widget);
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.subcat-card:not(.hidden)'));
+    var cols = getColCount(grid);
+    var max = s.rows * cols;
+    cards.forEach(function(c, i) { c.classList.toggle('row-hidden', i >= max); });
+    if (cards.length > max) {
+      btn.style.display = '';
+      btn.querySelector('span:first-child').textContent = 'See more (' + (cards.length - max) + ')';
+      btn.classList.remove('expanded');
+    } else if (s.rows > ROWS_INITIAL && cards.length > ROWS_INITIAL * cols) {
+      btn.style.display = '';
+      btn.querySelector('span:first-child').textContent = 'See less';
+      btn.classList.add('expanded');
+    } else {
+      btn.style.display = 'none';
+    }
+  }
+  window.catWidgetToggleMore = function(btn) {
+    var w = btn.closest('.cat-widget');
+    if (!w) return;
+    var grid = w.querySelector('.subcat-grid');
+    var s = getState(w);
+    var cols = getColCount(grid);
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.subcat-card:not(.hidden)'));
+    var max = s.rows * cols;
+    if (cards.length <= max) s.rows = ROWS_INITIAL;
+    else s.rows += 2;
+    applyVisibility(w);
+  };
+  window.catWidgetSearch = function(input) {
+    var w = input.closest('.cat-widget');
+    if (!w) return;
+    var grid = w.querySelector('.subcat-grid');
+    var empty = w.querySelector('.subcat-empty');
+    var btn = w.querySelector('.see-more-btn');
+    var s = getState(w);
+    var q = (input.value || '').trim().toLowerCase();
+    var cards = grid.querySelectorAll('.subcat-card');
+    var anyVisible = false;
+    cards.forEach(function(c) {
+      if (c.hasAttribute('data-seeall')) { c.classList.remove('hidden','row-hidden'); return; }
+      var tags = (c.getAttribute('data-tags') || '').toLowerCase();
+      var titleEl = c.querySelector('.sc-title');
+      var title = titleEl ? titleEl.textContent.toLowerCase() : '';
+      var match = !q || tags.indexOf(q) > -1 || title.indexOf(q) > -1;
+      c.classList.toggle('hidden', !match);
+      if (match) { c.classList.remove('row-hidden'); anyVisible = true; }
+    });
+    if (empty) empty.classList.toggle('visible', !anyVisible && q.length > 0);
+    if (q) { if (btn) btn.style.display = 'none'; }
+    else { s.rows = ROWS_INITIAL; applyVisibility(w); }
+  };
+  function init() { document.querySelectorAll('.cat-widget').forEach(applyVisibility); }
+  document.addEventListener('DOMContentLoaded', init);
+  if (document.readyState !== 'loading') init();
+  var rt;
+  window.addEventListener('resize', function() { clearTimeout(rt); rt = setTimeout(init, 150); });
+})();
+
 </script>
 </body>
 </html>

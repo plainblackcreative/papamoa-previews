@@ -29,7 +29,7 @@
   // ── SHARED CSS (injected once) ──────────────────────────────────────────
   var style = document.createElement('style');
   style.textContent = [
-    ':root{--pnf-navy:#0D2B3E;--pnf-accent:#3AABDE;--pnf-dune:#C4985A;--pnf-white:#FFFFFF;--pnf-muted:rgba(255,255,255,0.45);--pnf-font:\'Figtree\',sans-serif;--pnf-display:\'Playfair Display\',serif;}',
+    ':root{--pnf-navy:#243B59;--pnf-accent:#359FE8;--pnf-dune:#C4985A;--pnf-white:#FFFFFF;--pnf-muted:rgba(255,255,255,0.45);--pnf-font:\'Figtree\',sans-serif;--pnf-display:\'Playfair Display\',serif;}',
     '.pnf-nav{background:var(--pnf-navy);height:56px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.25);gap:16px;width:100%;box-sizing:border-box;}',
     '.pnf-logo{font-family:var(--pnf-display);font-weight:700;font-size:15px;color:var(--pnf-white);text-decoration:none;flex-shrink:0;}',
     '.pnf-logo span{color:var(--pnf-accent);}',
