@@ -532,7 +532,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <div class="task-section">
     <div class="ts-head">
       <div class="ts-title">&#9881;&#65039; 4. Tech &amp; Automation</div>
-      <div class="ts-meta"><span class="ts-count" id="c4">0 / 9 done</span><span class="ts-priority priority-medium">Medium</span></div>
+      <div class="ts-meta"><span class="ts-count" id="c4">0 / 10 done</span><span class="ts-priority priority-medium">Medium</span></div>
     </div>
     <div class="task-list" id="s4">
 
@@ -615,6 +615,15 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <div class="task-title">Auto-update homepage hero quick chips from analytics</div>
           <div class="task-desc">Currently the 5 hero chips (Weather, Surf &amp; Tides, What&rsquo;s On, Schools, Rubbish Day) are hardcoded in <code>homepage.html</code>. Wire them to real data so they reflect the actual top 5 most-visited community/info pages. Path: Cloudflare Analytics or KV-counter on the existing Worker &rarr; JSON endpoint (e.g. <code>/api/top-info-pages</code>) &rarr; small JS that rewrites the chip list on load. Keep the current 5 as a static fallback for cold loads / fetch failure. Optional: time/season-aware overrides (AIMS Games in September, etc.).</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-content">Content</span></div>
+        </div>
+      </div>
+
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Auto-feed homepage News &amp; Events from a single source</div>
+          <div class="task-desc">The 3 news items and 3 upcoming events on the homepage <code>What&rsquo;s happening in P&#257;p&#257;moa</code> section are currently hand-curated in <code>homepage.html</code>, duplicated from <code>community/news-events.html</code>. They&rsquo;ll go stale unless wired to a single source. Path: extract news + events into a JSON file (e.g. <code>data/news-events.json</code>) or a Worker endpoint, then have <i>both</i> the homepage section and the full <code>news-events.html</code> page render from it. Sort by date, slice top 3 for the homepage. Bonus: regenerate the Event JSON-LD schema in <code>&lt;head&gt;</code> from the same source so SEO/AGO data never drifts.</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-content">Content</span><span class="task-tag tag-seo">SEO</span></div>
         </div>
       </div>
     </div>
