@@ -532,7 +532,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
   <div class="task-section">
     <div class="ts-head">
       <div class="ts-title">&#9881;&#65039; 4. Tech &amp; Automation</div>
-      <div class="ts-meta"><span class="ts-count" id="c4">0 / 8 done</span><span class="ts-priority priority-medium">Medium</span></div>
+      <div class="ts-meta"><span class="ts-count" id="c4">0 / 9 done</span><span class="ts-priority priority-medium">Medium</span></div>
     </div>
     <div class="task-list" id="s4">
 
@@ -606,6 +606,15 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <div class="task-title">Live Check button for listings</div>
           <div class="task-desc">Add a "Live Check" function per listing that verifies current accuracy: hours, Google rating, address, content, menu changes. Surfaces stale listings. Could run via the Cloudflare Worker calling Google Places API or a Claude prompt against the business website. Flag listings that haven't been verified recently.</div>
           <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-listing">Listing</span></div>
+        </div>
+      </div>
+
+      <div class="task-item">
+        <div class="task-check" onclick="toggle(this)"></div>
+        <div class="task-body">
+          <div class="task-title">Auto-update homepage hero quick chips from analytics</div>
+          <div class="task-desc">Currently the 5 hero chips (Weather, Surf &amp; Tides, What&rsquo;s On, Schools, Rubbish Day) are hardcoded in <code>homepage.html</code>. Wire them to real data so they reflect the actual top 5 most-visited community/info pages. Path: Cloudflare Analytics or KV-counter on the existing Worker &rarr; JSON endpoint (e.g. <code>/api/top-info-pages</code>) &rarr; small JS that rewrites the chip list on load. Keep the current 5 as a static fallback for cold loads / fetch failure. Optional: time/season-aware overrides (AIMS Games in September, etc.).</div>
+          <div class="task-tags"><span class="task-tag tag-automation">Automation</span><span class="task-tag tag-tech">Tech</span><span class="task-tag tag-content">Content</span></div>
         </div>
       </div>
     </div>
