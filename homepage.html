@@ -399,10 +399,18 @@
     .hero-v2-info-link { font-size:0.74rem; color:var(--blue); font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px; }
     .hero-v2-info-link:hover { text-decoration:underline; }
 
-    @media (max-width:780px) {
-      .hero-v2-floating { position:static; max-width:none; padding:0 28px; margin-top:24px; right:auto; bottom:auto; }
-      .hero-v2-inner { padding:48px 28px 32px; }
+    /* Below 1240px the floating weather + community cards would overlap the
+       search bar (max 780) + chips, so drop them inline below instead.
+       NOTE: use position:relative (not static) so z-index keeps the cards
+       above the absolute hero-v2-bg photo. */
+    @media (max-width:1240px) {
+      .hero-v2-floating { position:relative; z-index:3; max-width:none; padding:0 28px; margin-top:24px; right:auto; bottom:auto; justify-content:flex-start; }
+      .hero-v2-info-card { max-width:280px; flex:0 1 auto; }
+      .hero-v2-inner { padding:48px 28px 28px; }
       .hero-v2 { min-height:auto; padding-bottom:28px; }
+    }
+    @media (max-width:780px) {
+      .hero-v2-info-card { max-width:none; flex:1 1 calc(50% - 6px); }
     }
     @media (max-width:480px) {
       .hero-v2-info-card { min-width:0; flex:1 1 100%; }
