@@ -405,7 +405,7 @@
 
     /* HERO V2 — photo background with overlay */
     .hero-v2 { position:relative; min-height:520px; background:linear-gradient(180deg,#83bcd6 0%,#a5cdde 28%,#c4d8d8 54%,#d8c89c 78%,#bf9d62 100%); }
-    .hero-v2-bg { position:absolute; inset:0; overflow:hidden; background-image:linear-gradient(180deg,rgba(36,59,89,0) 0%,rgba(36,59,89,0.05) 60%,rgba(36,59,89,0.18) 100%),url('images/hero/papamoa-beach.png'); background-size:cover; background-position:center 45%; background-repeat:no-repeat; }
+    .hero-v2-bg { position:absolute; inset:0; overflow:hidden; background-image:linear-gradient(180deg,rgba(36,59,89,0) 0%,rgba(36,59,89,0.05) 60%,rgba(36,59,89,0.18) 100%),url('images/hero/papamoa-hero-afternoon.webp'); background-size:cover; background-position:center 45%; background-repeat:no-repeat; transition:background-image 0.6s ease-in-out; }
     .hero-v2-inner { position:relative; max-width:1200px; margin:0 auto; padding:60px 28px 110px; z-index:1; }
     .hero-v2 h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4.6vw,3.2rem); font-weight:700; color:var(--navy); line-height:1.08; margin-bottom:18px; max-width:680px; letter-spacing:-0.01em; text-shadow:0 1px 2px rgba(255,255,255,0.55), 0 0 28px rgba(255,255,255,0.45); }
     .hero-v2-desc { font-size:1rem; color:var(--body); line-height:1.65; max-width:480px; margin-bottom:28px; font-weight:600; text-shadow:0 1px 2px rgba(255,255,255,0.65), 0 0 16px rgba(255,255,255,0.5); }
@@ -2193,6 +2193,31 @@ var HW_WMO = {0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'
 var HW_EMOJI = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌦️',63:'🌧️',65:'🌧️',71:'🌨️',73:'❄️',75:'❄️',77:'🌨️',80:'🌦️',81:'🌧️',82:'⛈️',85:'🌨️',86:'🌨️',95:'⛈️',96:'⛈️',99:'⛈️'};
 function hwUvClass(uv) { if(uv<=2)return'uv-low';if(uv<=5)return'uv-mod';if(uv<=7)return'uv-high';if(uv<=10)return'uv-vhigh';return'uv-extreme'; }
 function hwWindDir(deg) { var dirs=['N','NE','E','SE','S','SW','W','NW']; return dirs[Math.round(deg/45)%8]; }
+// ── HERO IMAGE: time-of-day + weather aware ──
+var HW_RAIN_CODES = {51:1,53:1,55:1,61:1,63:1,65:1,80:1,81:1,82:1,95:1,96:1,99:1};
+function heroPathForTime() {
+  // Pacific/Auckland local hour
+  var hour;
+  try {
+    hour = parseInt(new Intl.DateTimeFormat('en-NZ', { hour:'numeric', hour12:false, timeZone:'Pacific/Auckland' }).format(new Date()), 10);
+  } catch(e) { hour = new Date().getHours(); }
+  if (hour >= 5 && hour < 11)  return 'images/hero/papamoa-hero-morning.webp';
+  if (hour >= 11 && hour < 17) return 'images/hero/papamoa-hero-afternoon.webp';
+  return 'images/hero/papamoa-hero-evening.webp'; // 17–05 covers dusk + night
+}
+function setHeroImage(path) {
+  var bg = document.querySelector('.hero-v2-bg');
+  if (!bg) return;
+  // Preload to avoid flash, then swap once decoded
+  var img = new Image();
+  img.onload = function() {
+    bg.style.backgroundImage = "linear-gradient(180deg,rgba(36,59,89,0) 0%,rgba(36,59,89,0.05) 60%,rgba(36,59,89,0.18) 100%),url('" + path + "')";
+  };
+  img.src = path;
+}
+// Set initial image based on time of day immediately
+setHeroImage(heroPathForTime());
+
 async function loadHeroWeather() {
   var tempEl = document.getElementById('hw-temp-v2');
   var condEl = document.getElementById('hw-cond-v2');
@@ -2204,8 +2229,12 @@ async function loadHeroWeather() {
       var cond = HW_WMO[c.weather_code] || 'Mostly sunny';
       tempEl.textContent = Math.round(c.temperature_2m) + '°';
       condEl.textContent = cond;
+      // Override hero image with rain variant if it's actually raining
+      if (HW_RAIN_CODES[c.weather_code]) {
+        setHeroImage('images/hero/papamoa-hero-rain.webp');
+      }
     })
-    .catch(function() { /* leave defaults */ });
+    .catch(function() { /* leave time-of-day default in place */ });
 }
 loadHeroWeather();
 
