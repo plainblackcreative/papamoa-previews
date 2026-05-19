@@ -489,7 +489,6 @@
           <p>Community events, sports fixtures, markets, concerts, fundraisers, charity events &mdash; if it&rsquo;s happening in or around P&#257;p&#257;moa and it&rsquo;s open to the public, submit it here. The Papamoa.info team reviews all submissions. Listings are free.</p>
 
           <form id="event-form">
-            <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
             <input type="hidden" name="subject" value="New Event Submission &mdash; Papamoa.info">
             <input type="hidden" name="from_name" value="Papamoa.info Events">
             <input type="hidden" name="redirect" value="false">
@@ -676,7 +675,7 @@ document.getElementById('event-form').addEventListener('submit', async function(
   btn.textContent = 'Sending\u2026';
   btn.disabled = true;
   try {
-    var res = await fetch('https://api.web3forms.com/submit', {
+    var res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', {
       method: 'POST',
       body: new FormData(this)
     });

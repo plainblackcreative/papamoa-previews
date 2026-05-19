@@ -379,7 +379,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <h2 id="form-heading">Lock in your spot</h2>
         <p id="form-subtext">Fill in your details and we&rsquo;ll build your listing preview within 24 hours. You approve it before anything goes live or costs you anything.</p>
         <form class="vis-form" id="claim-form-el" onsubmit="submitClaim(event)">
-          <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
           <input type="hidden" name="form_name" value="claim" id="hidden-form-name">
           <input type="hidden" name="subject" value="New claim — Papamoa.info" id="hidden-subject">
           <input type="hidden" name="redirect" value="false">
@@ -499,7 +498,7 @@ async function submitClaim(e) {
   btn.textContent = 'Sending\u2026';
   btn.disabled = true;
   try {
-    var res = await fetch('https://api.web3forms.com/submit', {
+    var res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', {
       method: 'POST',
       body: new FormData(document.getElementById('claim-form-el'))
     });

@@ -446,7 +446,6 @@
     </div>
     <div class="sd-body">
       <form class="sd-cf" id="sd-form" onsubmit="submitDates(event)">
-        <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
         <input type="hidden" name="form_name" value="school-dates-submission">
         <input type="hidden" name="subject" value="School dates submission — Papamoa.info">
         <input type="hidden" name="redirect" value="false">
@@ -550,12 +549,12 @@ async function submitDates(e) {
   btn.textContent = 'Sending\u2026';
   btn.disabled = true;
   try {
-    var res = await fetch('https://api.web3forms.com/submit', {
+    var res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', {
       method: 'POST',
       body: new FormData(document.getElementById('sd-form'))
     });
     var json = await res.json();
-    if (json.success) {
+    if (json.ok) {
       document.getElementById('sd-form').style.display = 'none';
       document.getElementById('sd-success').style.display = 'block';
     } else {

@@ -259,7 +259,6 @@
               <input type="text" id="your-name" name="name" placeholder="Optional">
             </div>
           </div>
-          <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
           <input type="hidden" name="subject" value="Fuel price submission &mdash; Papamoa.info">
           <input type="hidden" name="from_name" value="Papamoa.info Fuel Prices">
           <input type="hidden" name="redirect" value="false">
@@ -340,9 +339,9 @@ document.getElementById('price-form').addEventListener('submit', async function(
   btn.disabled = true;
   var data = new FormData(this);
   try {
-    var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+    var res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', { method: 'POST', body: data });
     var json = await res.json();
-    if (json.success) {
+    if (json.ok) {
       document.getElementById('success-msg').style.display = 'block';
       this.reset();
     } else {

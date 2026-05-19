@@ -608,7 +608,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <span><strong>This is not a generic demo.</strong> Your preview uses your real business name, website, photos and local search data &mdash; built specifically for your business.</span>
       </div>
       <form class="vis-form" id="preview-form" onsubmit="submitPreview(event)">
-        <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
         <input type="hidden" name="form_name" value="funnel-landing">
         <input type="hidden" name="subject" value="New preview request -- Papamoa.info funnel">
         <input type="hidden" name="redirect" value="false">
@@ -718,7 +717,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
     </div>
     <div class="pnf-modal-body">
       <form class="pnf-cf" id="pnf-contact-form" onsubmit="pnfSubmitContact(event)">
-        <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
         <input type="hidden" name="form_name" value="contact-landing-lightbox">
         <input type="hidden" name="redirect" value="false">
         <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
@@ -794,12 +792,12 @@ async function submitPreview(e) {
   btn.textContent = 'Sending\u2026';
   btn.disabled = true;
   try {
-    var res = await fetch('https://api.web3forms.com/submit', {
+    var res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', {
       method: 'POST',
       body: new FormData(document.getElementById('preview-form'))
     });
     var json = await res.json();
-    if (json.success) {
+    if (json.ok) {
       document.getElementById('preview-form').style.display = 'none';
       var success = document.getElementById('success-msg');
       success.style.display = 'block';
@@ -836,12 +834,12 @@ async function pnfSubmitContact(e) {
   btn.textContent = 'Sending\u2026';
   btn.disabled = true;
   try {
-    var res = await fetch('https://api.web3forms.com/submit', {
+    var res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', {
       method: 'POST',
       body: new FormData(document.getElementById('pnf-contact-form'))
     });
     var json = await res.json();
-    if (json.success) {
+    if (json.ok) {
       document.getElementById('pnf-contact-form').style.display = 'none';
       document.getElementById('pnf-cf-success').style.display = 'block';
     } else {

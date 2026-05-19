@@ -455,7 +455,6 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
           <div class="amf-form-step"><span class="amf-form-step-n">5</span>Goes live</div>
         </div>
         <form class="amf-cf" id="amf-form" onsubmit="submitAddMenu(event)">
-          <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
           <input type="hidden" name="form_name" value="add-menu-to-listing">
           <input type="hidden" name="subject" value="Menu Add-On request — Papamoa.info">
           <input type="hidden" name="redirect" value="false">
@@ -797,9 +796,9 @@ async function submitAddMenu(e) {
   }
 
   try {
-    var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+    var res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', { method: 'POST', body: fd });
     var json = await res.json();
-    if (json.success) {
+    if (json.ok) {
       document.getElementById('amf-form').style.display = 'none';
       document.getElementById('amf-success').style.display = 'block';
     } else {

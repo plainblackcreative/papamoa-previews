@@ -33,8 +33,8 @@ Do not use any of the following as reference: `Project_Memory.rtf`, `papamoa-pro
 | Jay email (admin) | `jkbrownnz@gmail.com` |
 | Jay phone | 027 533 2970 |
 | Facebook | `https://www.facebook.com/papamoa.info/` |
-| Web3Forms key | `37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78` |
-| Web3Forms notifications | `jkbrownnz@gmail.com` |
+| Form endpoint | `pb-forms.jkbrownnz.workers.dev/submit?client=papamoa` |
+| Form notifications | `info@plainblackcreative.com` (via Resend) |
 | Cloudflare Worker URL | `papamoa-claude-proxy.jkbrownnz.workers.dev` |
 | CRM Google Sheet ID | `1X5i40RLF-r-yLRbm_XCgVyzJAkgO_o6whaoCzdC3SiM` |
 | CRM lead count | 97 (PPI-001 to PPI-097), next ID: PPI-098 |
@@ -465,7 +465,7 @@ Category-scoped search bars (e.g., Food & Drink section search only shows food r
 ## 15. KEY PAGES REFERENCE
 
 ### 404 page (404.html)
-Gremlin-catching game with 20 gremlins, phase 2 at 10, fairy trap at 18. JSONBin shared leaderboard. Auto-reports broken links via Web3Forms. Confetti on win.
+Gremlin-catching game with 20 gremlins, phase 2 at 10, fairy trap at 18. JSONBin shared leaderboard. Auto-reports broken links to the pb-forms worker. Confetti on win.
 
 **Monthly giveaway concept:** One sponsor per month provides a prize and gets a spotlight ad on the 404 page. The game is re-themed to match the sponsor's business (e.g., Pizza Pundits month = pizza-themed game, highest score wins $200 voucher). Investigate whether high-engagement 404 pages can benefit SEO/GEO rankings.
 
@@ -583,7 +583,7 @@ Referenced in pricing-master update list and task-plan. Exists in repo per task-
 - [ ] "Claim this listing" CTAs on Gold listings should not show (already paid)
 - [ ] Menu Add-On audit: Silver CTA should show purchase option for $199+gst/yr, NOT upgrade-to-Gold prompt
 - [ ] Add `legal.html` link to all page footers (do via nav.js rollout)
-- [ ] Web3Forms verification
+- [ ] Smoke-test pb-forms papamoa client end-to-end (404 bot + sales/contact forms)
 - [ ] Build `sales/list-with-us.html` "best of 4" rebuild
 - [ ] Build `/onboarding/add-menu.html`
 - [ ] Add social media icon slots to all listings (hidden until URL provided), upload icons to `/assets/sm-icons/`

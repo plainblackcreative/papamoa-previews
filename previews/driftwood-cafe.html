@@ -1157,12 +1157,12 @@ async function checkSearchTerm() {
     result.innerHTML = `<div class="result-headline">Search check coming soon</div><div class="result-body">We're still fine-tuning this feature — check back in a day or two and it'll be ready to go. In the meantime, feel free to call or email if you have questions.</div><button class="btn-retry" onclick="resetSearch()">Try again</button>`;
     result.className = 'search-result negative'; result.style.display = 'block';
     // Silent notification to Jayden
-    fetch('https://api.web3forms.com/submit', {
+    fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        access_key: '37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78',
-        subject: 'Search checker error — ' + BUSINESS.name + ' — Papamoa.info',
+        
+        subject: 'Search checker error - ' + BUSINESS.name + ' — Papamoa.info',
         form_name: 'ppp-search-error',
         business: BUSINESS.name,
         search_term: term,

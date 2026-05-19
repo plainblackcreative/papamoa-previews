@@ -672,8 +672,8 @@
         </ul>
         <div class="code-block">https://papamoa-claude-proxy.jkbrownnz.workers.dev</div>
         <ul>
-          <li><strong>Web3Forms key:</strong> <code style="font-size:0.78rem;color:#80C8E8">37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78</code></li>
-          <li><strong>Submissions go to:</strong> jkbrownnz@gmail.com</li>
+          <li><strong>Form endpoint:</strong> <code style="font-size:0.78rem;color:#80C8E8">pb-forms.jkbrownnz.workers.dev/submit?client=papamoa</code></li>
+          <li><strong>Submissions go to:</strong> info@plainblackcreative.com (via Resend)</li>
           <li>The Claude proxy handles the API key — no key lives in this file</li>
           <li>Password is stored in localStorage — clear browser data to reset</li>
           <li>This page has <code>noindex, nofollow</code> — it won't appear in Google</li>
@@ -702,7 +702,6 @@
 // ════════════════════════════════════════
 const ADMIN_PASSWORD   = 'papinfo2026!';
 const CLAUDE_PROXY_URL = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
-const WEB3FORMS_KEY    = '37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78';
 const ADMIN_EMAIL      = 'jkbrownnz@gmail.com';
 const SESSION_KEY      = 'papamoa_admin_auth';
 
@@ -882,7 +881,6 @@ async function submitNews() {
   spinner.style.display = 'inline-block';
 
   const body = new FormData();
-  body.append('access_key', WEB3FORMS_KEY);
   body.append('subject', `[Papamoa.info Admin] New news item — ${headline}`);
   body.append('from_name', 'Papamoa.info Admin');
   body.append('type', 'News item');
@@ -893,7 +891,7 @@ async function submitNews() {
   body.append('category', category);
 
   try {
-    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body });
+    const res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', { method: 'POST', body });
     if (res.ok) {
       addHistory('news', headline);
       showAlert('news-success', null, true);
@@ -943,7 +941,6 @@ async function submitEvent() {
   hideAlert('event-error');
 
   const body = new FormData();
-  body.append('access_key', WEB3FORMS_KEY);
   body.append('subject', `[Papamoa.info Admin] New event — ${name}`);
   body.append('from_name', 'Papamoa.info Admin');
   body.append('type', 'Event');
@@ -957,7 +954,7 @@ async function submitEvent() {
   body.append('recurring', recurring);
 
   try {
-    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body });
+    const res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', { method: 'POST', body });
     if (res.ok) {
       addHistory('event', name);
       showAlert('event-success', null, true);

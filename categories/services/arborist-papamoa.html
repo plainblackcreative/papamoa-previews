@@ -445,7 +445,6 @@ a{color:var(--svc-accent);text-decoration:none}
     </div>
     <div class="pnf-modal-body">
       <form class="pnf-cf" id="pnf-contact-form" onsubmit="pnfSubmitContact(event)">
-        <input type="hidden" name="access_key" value="37f6bfe1-3ae3-4c71-a1a4-07c83d6d8e78">
         <input type="hidden" name="form_name" value="contact-arborist-papamoa">
         <input type="hidden" name="redirect" value="false">
         <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
@@ -469,7 +468,7 @@ function pnfOpenContact(){document.getElementById('pnf-contact-overlay').classLi
 function pnfCloseContact(){document.getElementById('pnf-contact-overlay').classList.remove('open');document.body.style.overflow=''}
 function pnfOverlayClick(e){if(e.target===document.getElementById('pnf-contact-overlay'))pnfCloseContact()}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){pnfDrawerClose();pnfCloseContact()}});
-async function pnfSubmitContact(e){e.preventDefault();var btn=document.getElementById('pnf-cf-btn');btn.textContent='Sending…';btn.disabled=true;try{var res=await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(document.getElementById('pnf-contact-form'))});var json=await res.json();if(json.success){document.getElementById('pnf-contact-form').style.display='none';document.getElementById('pnf-cf-success').style.display='block'}else{btn.textContent='Try again';btn.disabled=false}}catch(err){btn.textContent='Try again';btn.disabled=false}}
+async function pnfSubmitContact(e){e.preventDefault();var btn=document.getElementById('pnf-cf-btn');btn.textContent='Sending…';btn.disabled=true;try{var res=await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa',{method:'POST',body:new FormData(document.getElementById('pnf-contact-form'))});var json=await res.json();if(json.ok){document.getElementById('pnf-contact-form').style.display='none';document.getElementById('pnf-cf-success').style.display='block'}else{btn.textContent='Try again';btn.disabled=false}}catch(err){btn.textContent='Try again';btn.disabled=false}}
 (function(){var base='/papamoa-previews';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var href=a.getAttribute('href');if(!href||href.startsWith('http')||href.startsWith('tel:')||href.startsWith('mailto:')||href.startsWith('#'))return;if(href.startsWith('/')&&!href.startsWith(base)){e.preventDefault();window.location.href=base+href}})})(  );
 </script>
 </body>
