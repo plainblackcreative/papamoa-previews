@@ -46,7 +46,7 @@ Do not use any of the following as reference: `Project_Memory.rtf`, `papamoa-pro
 
 ## 3. PRICING (LOCKED)
 
-Source of truth: `docs/pricing-master.html` (needs updating per conflicts below)
+Source of truth: this document, §3 below. (Earlier `docs/pricing-master.html` was absorbed into this doc on 2026-06-02 and then deleted.)
 
 | Product | Price | Notes |
 |---------|-------|-------|
@@ -386,7 +386,22 @@ URL: `papamoa-claude-proxy.jkbrownnz.workers.dev`
 ### Email
 - Brevo under `jkbrownnz@gmail.com`, company Plain Black
 - Sending domain: `papamoa.info`
-- DNS records (SPF, DKIM, DMARC): pending
+- DNS records (SPF, DKIM, DMARC): **pending — values below, ready to paste in a single DNS session with Carwyn**
+
+### DNS records to add (single session with Carwyn)
+
+All records below should land in one 15-minute session. Brevo auth can take up to 48 hours to propagate after adding.
+
+| # | Purpose | Type | Name | Value | Notes |
+|---|---|---|---|---|---|
+| 1 | GitHub Pages preview subdomain | CNAME | `preview` | `plainblackcreative.github.io` | TTL 3600 or Auto |
+| 2 | Brevo domain verification | TXT | `@` | `brevo-code:fe02c41a77fa17740f1b2071d2ac3af4` | |
+| 3 | DKIM 1 (Brevo email signing) | CNAME | `brevo1._domainkey` | `b1.papamoa-info.dkim.brevo.com` | |
+| 4 | DKIM 2 (Brevo email signing) | CNAME | `brevo2._domainkey` | `b2.papamoa-info.dkim.brevo.com` | |
+| 5 | DMARC | TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com` | |
+| 6 | SPF (Gmail + Brevo) | TXT | `@` | `v=spf1 include:_spf.google.com include:spf.brevo.com ~all` | **Only one SPF record allowed on `@`** — if one already exists, merge these `include:` directives into it, don't add a second record |
+
+After the session: verify in Brevo dashboard once propagation completes, then activate sending domain in Brevo. Until then, Day 0/3/6/10 sequences can fire from the Gmail send domain as a stopgap.
 
 ### Payments
 - Stripe: prepared, not active at launch
@@ -552,19 +567,29 @@ Appears in footer and README. Refers to the original Drupal site's domain histor
 Consider: moving root-level pages (homepage.html, search.html, legal.html) into a dedicated folder. Define boundary between "articles" and "community" pages, or merge into a single "pages" folder. This is a major link-breaking change requiring full site-wide URL fix afterwards. Needs a clear decision before executing.
 
 ### 17.9 Business model decision
-Revenue share with Carwyn (50/50, Carwyn invoices) vs Jay operates independently (full revenue, full cost). Decision pending from task-plan.html.
+Two options on the table, decision pending:
+
+- **Option A — Revenue share with Carwyn.** 50/50 split, costs shared, Carwyn invoices the client. Lower risk, shared upside.
+- **Option B — Jay operates independently.** Jay owns the directory outright, full revenue, full cost.
+
+The current manual launch gameplan (§19) assumes Option A — Carwyn invoices on each close. Switching to B would push invoicing through Plain Black Creative and change the customer-facing entity on receipts and footers.
 
 ### 17.10 `sales/post-call-landing.html`
 Referenced in pricing-master update list and task-plan. Exists in repo per task-plan (has "Gold Spotlight" naming issues). Not found in file structure listings from session files. Confirm status.
 
+### 17.11 Premium Spotlight Ad Spot pricing model
+Locked in §3 as POA/TBC — variable by impressions/traffic, not publicly shown. The actual pricing model is unresolved: per-impression, flat monthly, tiered by page traffic, or hybrid. Decision deferred until there's enough live analytics to set a rate. Needs a small dashboard to manage availability + price per slot.
+
+### 17.12 CRM / Ad Spot automation platform
+Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-forms via a `/crm-write` style Worker route (see §18 Medium). Still open: whether the same dashboard runs Premium Ad Spot availability and revenue tracking, or whether ad-spot management gets its own surface. Deferred until §17.11 lands.
+
 ---
 
-## 18. PENDING TASKS (consolidated from all sessions + task-plan.html)
+## 18. PENDING TASKS (consolidated from all sessions; task-plan.html + pricing-master.html absorbed and deleted 2026-06-02)
 
 ### Critical (before launch)
-- [ ] Update `docs/pricing-master.html`: Silver images (logo only), Extra Spotlight price ($199), +gst formatting, Gold images (up to 9 not unlimited)
 - [ ] Replace `Project_Memory.rtf` with this document
-- [ ] Rotate Claude API key in `console.anthropic.com`, update in Cloudflare Worker env vars
+- [ ] Rotate Claude API key in `console.anthropic.com`, update in Cloudflare Worker env vars (do after all build work is complete)
 - [ ] Fix menu lightbox crash on PPP and list-with-us pages (change to anchor link as quick fix)
 - [ ] Fix menu dietary filters: make dynamic (only show tags in menu data), wire up actual filtering
 
@@ -574,7 +599,24 @@ Referenced in pricing-master update list and task-plan. Exists in repo per task-
 - [ ] Update `README.md`: index.html description, missing folders, TaurangaNZ URL typo
 - [ ] Fix listing template contact pattern: `ci-label/ci-value` grid > `ci-text` flex
 - [ ] Design system audit: Figtree + Playfair Display throughout, no DM Sans/Fraunces remnants
-- [ ] Pricing audit: $599 Silver, $1,199 Gold, $199 Menu Add-On, $199 Extra Spotlight across all pages
+- [ ] Pricing audit: verify Silver $599+gst/yr, Gold $1,199+gst/yr, Menu Add-On $199+gst/yr, Extra Spotlight $199+gst/yr across all pages. Per the pricing-master audit, these files specifically still need a pass:
+  - **High priority — prospect-facing:**
+    - [ ] `sales/list-with-us.html` — full tier comparison, offer language, pricing table
+    - [ ] `sales/landing.html` — pricing table, tier descriptions, offer language
+    - [ ] `previews/driftwood-cafe.html` — PPP template, tier comparison table embedded
+  - **Medium priority — sales collateral + listing upsells:**
+    - [ ] `sales/menu-addon.html` — Menu Add-On pricing and availability by tier
+    - [ ] `sales/why-list.html` — editorial with tier references
+    - [ ] `sales/followup-emails.html` — email sequences with offer language
+    - [ ] `sales/sales-scripts.html` — scripts referencing offers and tier structure
+    - [ ] `listings/the-wagon-papamoa.html` — tier upsell block
+    - [ ] `listings/speedy-screens-papamoa.html` — tier upsell block
+    - [ ] `listings/greencut-papamoa.html` — tier comparison block
+  - **Lower priority — internal / admin:**
+    - [ ] `admin/sales-funnel.html` — funnel steps reference old offer structure
+    - [ ] `docs/crm-sheet-reference.html` — may reference old offer structure
+    - [ ] `community/fishing.html` — check Spotlight ad upsell language
+    - [ ] `community/gardening.html` — check Spotlight ad upsell language
 - [ ] "Claim this listing" CTAs on Gold listings should not show (already paid)
 - [ ] Menu Add-On audit: Silver CTA should show purchase option for $199+gst/yr, NOT upgrade-to-Gold prompt
 - [ ] Add `legal.html` link to remaining page footers (homepage, sales pages, community pages — listings + search done 2026-06-02)
@@ -588,7 +630,7 @@ Referenced in pricing-master update list and task-plan. Exists in repo per task-
 - [ ] Build admin new-listing intake form/checklist (collects all required data before build)
 - [ ] Site-wide style/layout audit: scan all HTML, upgrade to current design system (width, nav, category colours, sidebar)
 - [ ] DNS consolidation session with Carwyn (GitHub CNAME, Brevo auth: DKIM, DMARC, SPF)
-- [ ] Activate Stripe: create Silver ($599) and Gold ($1,199) payment links
+- [ ] Activate Stripe: create Silver ($599) and Gold ($1,199) payment links, then swap `STRIPE_GOLD_URL`/`STRIPE_SILVER_URL` in `previews/driftwood-cafe.html` PPP template (currently fall back to `sales/landing.html`)
 
 ### Medium priority (post-launch infrastructure)
 - [ ] nav.js rollout to all pages (after all content work done)
@@ -597,13 +639,15 @@ Referenced in pricing-master update list and task-plan. Exists in repo per task-
 - [ ] Rename `entertainment.html` > `things-to-do.html` (do last, fix all links)
 - [ ] Gallery placeholder tiles retrofit to Gold listings missing them (papamoa-orthodontist confirmed)
 - [ ] Homepage: merge real estate content
-- [ ] CRM dashboard rebuild (route Google API through Worker)
-- [ ] Admin `sales-funnel.html`: fix truncated JS + update copy
+- [ ] CRM dashboard rebuild (route Google API through Worker). Note: a hardcoded Google API key was previously exposed in `admin/crm-dashboard.html` and revoked — never hardcode, key lives in Worker env vars only.
+- [ ] Admin `sales-funnel.html`: fix truncated `updateUI()` function (buttons/navigation broken) + update "What Happens Next" Month 3 copy from "Gold Founding Member two-for-one bonus" to "included free with any paid listing"
 - [ ] Fix `docs/crm-sheet-reference.html`: remove Bronze from dropdowns, remove Sub-Pages column
 - [ ] Build `sales/spotlight-ads.html` properly (stub exists)
 - [ ] Google Analytics + Search Console setup
-- [ ] Switch GitHub Pages from "Deploy from branch" to "GitHub Actions"
+- [ ] Switch GitHub Pages from "Deploy from branch" to "GitHub Actions" — and add a workflow that auto-regenerates `sitemap.html` on every push to main (scans `.html` files, no more manual sitemap updates)
 - [ ] Brevo Day 0/3/6/10 email sequences setup
+- [ ] Auto-update homepage hero quick chips from analytics. Currently the 5 chips (Weather, Surf & Tides, What's On, Schools, Rubbish Day) are hardcoded in `homepage.html`. Wire to top-5 most-visited community/info pages: Cloudflare Analytics or a KV-counter on the existing Worker → JSON endpoint (e.g. `/api/top-info-pages`) → small JS rewrites the chip list on load. Keep current 5 as static fallback. Optional: time/season-aware overrides (AIMS Games in September, etc.)
+- [ ] Auto-feed homepage News & Events from a single source. The 3 news items and 3 upcoming events on the homepage are currently hand-curated in `homepage.html`, duplicated from `community/news-events.html`. Extract to `data/news-events.json` (or a Worker endpoint), then have both the homepage section and `news-events.html` render from it. Sort by date, slice top 3 for homepage. Regenerate the Event JSON-LD schema in `<head>` from the same source so SEO/GEO data never drifts.
 - [ ] Build search management system (feeder page/portal for updating search index as content grows)
 - [ ] Build menu item image system (auto-discover from `images/listings/{slug}/menu/`)
 - [ ] Build listing management portal (magic-link per listing for owner updates)
@@ -612,10 +656,10 @@ Referenced in pricing-master update list and task-plan. Exists in repo per task-
 ### Deferred (game plan / future phases)
 - [ ] Repo folder restructure (move root pages into folder, define articles vs community, fix all links)
 - [ ] Investigate scored search algorithm
-- [ ] Fuel Stations page with live AI update (Gaspy NZ API or crowd-source)
+- [ ] Fuel Stations page with live AI update (Gaspy NZ API or crowd-source via pb-forms + GitHub Actions). Worker route pattern already established from the existing `/fishing-data` endpoint.
 - [ ] index.html star persistence upgrade (localStorage > KV)
-- [ ] Sub-cat pill auto-discovery (detect new subcat pages, inject pills dynamically)
-- [ ] Live Check button for listings (verify hours, rating, address accuracy)
+- [ ] Sub-cat pill auto-discovery (detect new subcat pages, inject pills dynamically). Approach: build step or JS fetch of the sitemap that finds `/categories/FOLDER/` pages and renders the pill list.
+- [ ] Live Check button for listings (verify hours, rating, address accuracy). Implementation: Worker route calling Google Places API for ratings/hours, or a Claude prompt against the business website for content drift. Flag listings not verified recently.
 - [ ] PPP BUSINESS object generator (admin page: URL in, paste-ready object out)
 - [ ] Mumbai Masala menu test (photo-to-menu pipeline validation)
 - [ ] Photo/content upload pipeline test end-to-end
@@ -651,5 +695,59 @@ Referenced in pricing-master update list and task-plan. Exists in repo per task-
 
 ---
 
-*Papamoa.info -- Plain Black Creative -- Consolidated April 9, 2026*
+## 19. LAUNCH PLAN
+
+### Deployment & scale roadmap
+
+1. **Ready GitHub site.** Current static site on GitHub Pages — all content and listing pages live at `plainblackcreative.github.io/papamoa-previews/`.
+2. **Astro migration.** Rebuild on a custom domain (`papamoa.info`), still hosted on GitHub Pages. Performance + cleaner architecture before any paid acquisition runs.
+3. **30-day organic test.** No paid ads, no automated funnel. Let the site index and rank. Measure organic traffic and self-convert rate. This is the window during which the manual gameplan below applies.
+4. **Then scale.** Activate Brevo Day 0/3/6/10 sequences, paid ads, Outscraper outreach.
+
+### 30-day manual gameplan
+
+During the organic-test window, conversions are handled by hand — no automated funnel is wired up yet:
+
+- Business finds the site organically and submits via `sales/list-with-us.html` or `sales/claim.html`.
+- Jay contacts them manually, sends a demo listing (the PPP at `previews/driftwood-cafe.html`), closes the sale.
+- Carwyn invoices the client (assumes §17.9 Option A; if Option B is chosen, invoicing routes through Plain Black Creative instead).
+- Facebook: start a Pāpāmoa Community Info group separate from the directory page — articles, events, community content. Drives organic traffic and brand awareness. 30 posts ready in `sales/facebook-posts.html`.
+
+### What flips the switch from manual to scale
+
+Trigger to leave the 30-day window: enough organic conversion data to know the funnel works without paid inputs. Once Brevo sequences and Outscraper outreach turn on, the manual contact step is replaced by automated PPP send + Brevo Day 0.
+
+---
+
+## 20. PRE-LAUNCH QA
+
+Verify-before-flip checklist. §10 sets the per-page minimum bar at build time. This is the site-wide sweep before public launch.
+
+### Design system
+Figtree + Playfair Display everywhere. No DM Sans / Fraunces / Inter / Outfit remnants. CSS variables match `assets/css/styles.css`. Nav logo: Playfair Display bold "Papamoa" in white + `.info` span in `--blue` (#3AABDE).
+
+### Internal links
+No `href="#"` remaining (except intentional JS handlers like `svcClear()`). No flat `/slug` paths — all should be `/papamoa-previews/categories/folder/slug.html` for GH Pages or stripped at custom-domain launch. No dead Claim / Advertise / Home links.
+
+### Pricing accuracy
+Silver $599+gst/yr. Gold $1,199+gst/yr. Menu Add-On $199+gst/yr (Silver paid add-on, free with Gold). Extra Spotlights $199+gst/yr each (Gold only, first included). No Bronze as a paid product. No sub-pages add-on. All `+gst` lowercase, no space.
+
+### Forms & APIs
+Test pb-forms from each active form type on live GitHub Pages: 404 broken-link bot, sales/contact forms (homepage, list-with-us, claim), admin/upload, admin/add-lead. Verify the email lands at `info@plainblackcreative.com` via Resend. Cloudflare Worker: test via PPP search-visibility checker and the fishing page Update button.
+
+### Mobile rendering
+Every page tested at 375px. Two-col layouts collapse cleanly. Tables scroll horizontally without breaking layout. No horizontal page overflow. Nav drawer opens, closes, and traps focus correctly.
+
+### SEO basics
+Every page has a unique `<title>`. `<meta name="description">` present and not templated. No duplicate H1s. `noindex` only on admin, sales, stub, and internal-doc pages. `sitemap.html` current (per §18, this should be auto-regenerated once GitHub Actions is wired up).
+
+### Editorial voice
+Listing copy is third-party: never "we / us / our", always "they / them / call them / visit them". Macron on **Pāpāmoa** in body text. Domain stays **Papamoa.info** (no macron). No em dashes. No "Jayden" or first-person references on public-facing pages.
+
+### Security
+Claude API key rotated post-build (see §18 Critical). Admin password changed in `admin/upload.html`. No API keys hardcoded in HTML — all live in Cloudflare Worker env vars only. CRM dashboard Google Sheets calls routed through the Worker, never direct.
+
+---
+
+*Papamoa.info -- Plain Black Creative -- Consolidated April 9, 2026 -- Last updated 2026-06-02*
 *This document replaces all previous memory files, session exports, and project briefs.*

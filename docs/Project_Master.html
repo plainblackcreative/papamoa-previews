@@ -199,6 +199,8 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
       <a href="#dead">10. Dead Offers &amp; Outdated Docs</a>
       <a href="#grey">11. Grey Areas &amp; TBCs</a>
       <a href="#tasks">12. Pending Tasks</a>
+      <a href="#launch-plan">13. Launch Plan</a>
+      <a href="#qa">14. Pre-Launch QA</a>
     </div>
   </div>
 
@@ -218,7 +220,7 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
         </div>
         <div class="tier-body">
           <div class="feat"><i class="fy">&#10003;</i> Name, address, phone, website link</div>
-          <div class="feat"><i class="fy">&#10003;</i> Ranks in Google, captures leads via Web3Forms</div>
+          <div class="feat"><i class="fy">&#10003;</i> Ranks in Google, routes prospects to the sales funnel</div>
           <div class="feat"><i class="fn">&#10005;</i> SEO description, images, schema, review badges</div>
         </div>
       </div>
@@ -471,11 +473,27 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
         <tr><td><strong>Claude model (Worker)</strong></td><td><code>claude-haiku-4-5-20251001</code></td></tr>
         <tr><td><strong>Form endpoint</strong></td><td><code>pb-forms.jkbrownnz.workers.dev/submit?client=papamoa</code> (Cloudflare Worker, sends via Resend to info@plainblackcreative.com)</td></tr>
         <tr><td><strong>CRM Sheet ID</strong></td><td><code>1X5i40RLF-r-yLRbm_XCgVyzJAkgO_o6whaoCzdC3SiM</code></td></tr>
-        <tr><td><strong>Brevo</strong></td><td>Under <code>jkbrownnz@gmail.com</code>, sending domain pending DNS</td></tr>
+        <tr><td><strong>Brevo</strong></td><td>Under <code>jkbrownnz@gmail.com</code>, sending domain pending DNS (records ready &mdash; see table below)</td></tr>
         <tr><td><strong>Stripe</strong></td><td>Prepared, not active. Placeholder URLs in PPP.</td></tr>
         <tr><td><strong>Coordinates</strong></td><td>-37.7167, 176.3167 (NOT -37.6833, 176.1833)</td></tr>
       </tbody>
     </table>
+
+    <h3 class="subsection-title" style="margin-top:24px;">DNS records to add (single session with Carwyn)</h3>
+    <p style="margin-bottom:12px;">All records land in one 15-minute session. Brevo auth can take up to 48 hours to propagate.</p>
+    <table>
+      <thead><tr><th>#</th><th>Purpose</th><th>Type</th><th>Name</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>GitHub Pages preview subdomain</td><td>CNAME</td><td><code>preview</code></td><td><code>plainblackcreative.github.io</code></td></tr>
+        <tr><td>2</td><td>Brevo domain verification</td><td>TXT</td><td><code>@</code></td><td><code>brevo-code:fe02c41a77fa17740f1b2071d2ac3af4</code></td></tr>
+        <tr><td>3</td><td>DKIM 1 (Brevo email signing)</td><td>CNAME</td><td><code>brevo1._domainkey</code></td><td><code>b1.papamoa-info.dkim.brevo.com</code></td></tr>
+        <tr><td>4</td><td>DKIM 2 (Brevo email signing)</td><td>CNAME</td><td><code>brevo2._domainkey</code></td><td><code>b2.papamoa-info.dkim.brevo.com</code></td></tr>
+        <tr><td>5</td><td>DMARC</td><td>TXT</td><td><code>_dmarc</code></td><td><code>v=DMARC1; p=none; rua=mailto:rua&#64;dmarc.brevo.com</code></td></tr>
+        <tr><td>6</td><td>SPF (Gmail + Brevo)</td><td>TXT</td><td><code>@</code></td><td><code>v=spf1 include:_spf.google.com include:spf.brevo.com ~all</code></td></tr>
+      </tbody>
+    </table>
+    <div class="alert info" style="margin-top:12px;"><span class="alert-icon">&#9888;</span><div><strong>Only one SPF record allowed on <code>@</code>.</strong> If one already exists, merge these <code>include:</code> directives into it &mdash; don't add a second record.</div></div>
+    <p style="margin-top:12px;">After the session: verify in Brevo dashboard once propagation completes, then activate sending domain in Brevo. Until then, Day 0/3/6/10 sequences can fire from the Gmail send domain as a stopgap.</p>
   </div>
 
   <!-- 8. QUALITY STANDARD -->
@@ -549,9 +567,11 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
     <div class="grey resolved"><div class="grey-title">&#10003; Category hero gradients -- RESOLVED April 13, 2026</div><div class="grey-body">Five main category page hero gradients and accent colours are now locked. See Section 2.4 and <code>assets/css/styles.css</code>. Homepage section gradients and listing template gradients remain separate -- reconciliation still pending.</div></div>
     <div class="grey"><div class="grey-title">Homepage nav labels</div><div class="grey-body">Homepage uses full labels, nav.js uses locked short labels. Does homepage need updating?</div></div>
     <div class="grey"><div class="grey-title">Repo folder restructure</div><div class="grey-body">Move root pages into folder? Define articles vs community boundary? Major link-breaking change.</div></div>
-    <div class="grey"><div class="grey-title">Business model</div><div class="grey-body">Revenue share with Carwyn (50/50) vs Jay operates independently. Decision pending.</div></div>
+    <div class="grey"><div class="grey-title">Business model</div><div class="grey-body"><strong>Option A &mdash; Rev share with Carwyn:</strong> 50/50 split, costs shared, Carwyn invoices the client. Lower risk, shared upside. <strong>Option B &mdash; Jay independent:</strong> Jay owns the directory outright, full revenue, full cost. Manual launch gameplan (§13) currently assumes Option A &mdash; switching to B routes invoicing through Plain Black Creative. Decision pending.</div></div>
     <div class="grey"><div class="grey-title">sales/post-call-landing.html</div><div class="grey-body">Referenced in task-plan but not found in file structure listings. Confirm status.</div></div>
     <div class="grey"><div class="grey-title">Scored search algorithm</div><div class="grey-body">Discussed but unclear if implemented. Current search uses simple substring matching.</div></div>
+    <div class="grey"><div class="grey-title">Premium Spotlight Ad Spot pricing model</div><div class="grey-body">Locked in §1 as POA/TBC &mdash; variable by impressions/traffic, not publicly shown. The actual model is unresolved: per-impression, flat monthly, tiered by page traffic, or hybrid. Deferred until there's enough live analytics to set a rate. Needs a small dashboard to manage availability + price per slot.</div></div>
+    <div class="grey"><div class="grey-title">CRM / Ad Spot automation platform</div><div class="grey-body">Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-forms via a <code>/crm-write</code> style Worker route (see §12 Medium). Still open: whether the same dashboard runs Premium Ad Spot availability + revenue tracking, or whether ad-spot management gets its own surface. Deferred until the pricing model above lands.</div></div>
   </div>
 
   <!-- 12. TASKS -->
@@ -562,55 +582,85 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
     <div class="task-group">
       <div class="task-group-head tg-critical">Critical -- Before Launch</div>
       <div class="task-items">
-        <div class="task">Update <code>pricing-master.html</code>: Silver images (logo only), Extra Spotlight $199, +gst, Gold images cap</div>
         <div class="task">Replace <code>Project_Memory.rtf</code> with Project_Master.md</div>
-        <div class="task">Fix search.html bugs (undefined ql, weather widget, duplicate scripts)</div>
-        <div class="task">Rotate Claude API key, update in Cloudflare Worker env vars</div>
-        <div class="task">Fix <code>href="#"</code> in 20+ subcategory pages</div>
-        <div class="task">Fix "Gold Spotlight" naming everywhere it appears as a product name</div>
-        <div class="task">Fix menu lightbox crash (anchor link as quick fix)</div>
-        <div class="task">Fix menu dietary filters (make dynamic, wire up filtering)</div>
+        <div class="task">Rotate Claude API key in <code>console.anthropic.com</code>, update in Cloudflare Worker env vars (do after all build work is complete)</div>
+        <div class="task">Fix menu lightbox crash on PPP and list-with-us pages (change to anchor link as quick fix)</div>
+        <div class="task">Fix menu dietary filters: make dynamic (only show tags in menu data), wire up actual filtering</div>
       </div>
     </div>
 
     <div class="task-group">
       <div class="task-group-head tg-high">High Priority -- Pre-Launch</div>
       <div class="task-items">
-        <div class="task"><code>nav-footer-snippet.html</code>: nested folder paths, short labels, articles/ &gt; community/, add legal.html</div>
-        <div class="task">Fix listing template contact pattern (ci-text flex)</div>
-        <div class="task">Site-wide +gst to +gst and articles/ to community/ fixes</div>
-        <div class="task">Design system audit + pricing audit across all pages</div>
+        <div class="task">Update <code>assets/css/styles.css</code>: Extra Spotlight price comment ($99 &gt; $199), reconcile category hero colours</div>
+        <div class="task">Update <code>nav-footer-snippet.html</code>: nested folder paths, short labels, add <code>legal.html</code></div>
+        <div class="task">Update <code>README.md</code>: index.html description, missing folders, TaurangaNZ URL typo</div>
+        <div class="task">Fix listing template contact pattern: <code>ci-label/ci-value</code> grid &gt; <code>ci-text</code> flex</div>
+        <div class="task">Design system audit: Figtree + Playfair Display throughout, no DM Sans/Fraunces remnants</div>
+        <div class="task">Pricing audit (Silver $599+gst, Gold $1,199+gst, Menu Add-On $199+gst, Extra Spotlight $199+gst). Per pricing-master audit, these files still need a pass: <br>
+          <strong>High &mdash; prospect-facing:</strong> <code>sales/list-with-us.html</code>, <code>sales/landing.html</code>, <code>previews/driftwood-cafe.html</code><br>
+          <strong>Med &mdash; sales collateral + listing upsells:</strong> <code>sales/menu-addon.html</code>, <code>sales/why-list.html</code>, <code>sales/followup-emails.html</code>, <code>sales/sales-scripts.html</code>, <code>listings/the-wagon-papamoa.html</code>, <code>listings/speedy-screens-papamoa.html</code>, <code>listings/greencut-papamoa.html</code><br>
+          <strong>Low &mdash; internal / admin:</strong> <code>admin/sales-funnel.html</code>, <code>docs/crm-sheet-reference.html</code>, <code>community/fishing.html</code>, <code>community/gardening.html</code>
+        </div>
+        <div class="task">"Claim this listing" CTAs on Gold listings should not show (already paid)</div>
+        <div class="task">Menu Add-On audit: Silver CTA should show purchase option for $199+gst/yr, NOT upgrade-to-Gold prompt</div>
+        <div class="task">Add <code>legal.html</code> link to remaining page footers (homepage, sales, community pages &mdash; listings + search done 2026-06-02)</div>
+        <div class="task">Add footer to 3 stub listings (<code>barber-toms</code>, <code>pacific-palms</code>, <code>papamoa-beach-resort</code>) &mdash; currently no footer at all</div>
+        <div class="task">Smoke-test pb-forms papamoa client end-to-end (404 bot + sales/contact forms)</div>
+        <div class="task">Build <code>sales/list-with-us.html</code> "best of 4" rebuild</div>
+        <div class="task">Build <code>/onboarding/add-menu.html</code></div>
+        <div class="task">Add social media icon slots to all listings (hidden until URL provided), upload icons to <code>/assets/sm-icons/</code></div>
+        <div class="task">Build live review widgets (Google/TripAdvisor) for listing hero sections</div>
+        <div class="task">Implement automated listing sidebar categories (Gold: main + all subcats, Silver: main + 1 subcat)</div>
+        <div class="task">Build admin new-listing intake form/checklist (collects all required data before build)</div>
         <div class="task">Site-wide style/layout audit (width, nav, category colours, sidebar)</div>
-        <div class="task">Menu Add-On audit: Silver CTA = purchase option, NOT upgrade prompt</div>
-        <div class="task">Add social icon slots + live review widgets to listings</div>
-        <div class="task">Implement automated sidebar categories (Gold: all subcats, Silver: 1)</div>
-        <div class="task">Build admin new-listing intake form/checklist</div>
-        <div class="task">DNS consolidation + Stripe activation</div>
-        <div class="task">Build <code>list-with-us.html</code> rebuild + <code>/onboarding/add-menu.html</code></div>
+        <div class="task">DNS consolidation session with Carwyn (GitHub CNAME + Brevo DKIM/DMARC/SPF &mdash; values in §7)</div>
+        <div class="task">Activate Stripe: create Silver ($599) + Gold ($1,199) payment links, then swap <code>STRIPE_GOLD_URL</code>/<code>STRIPE_SILVER_URL</code> in <code>previews/driftwood-cafe.html</code> PPP template (currently fall back to <code>sales/landing.html</code>)</div>
       </div>
     </div>
 
     <div class="task-group">
       <div class="task-group-head tg-medium">Medium -- Post-Launch</div>
       <div class="task-items">
-        <div class="task">nav.js rollout + sales pages rebuild + category glow-up</div>
-        <div class="task">Rename entertainment &gt; things-to-do (fix all links)</div>
-        <div class="task">Build search management system, menu image system, listing portal</div>
-        <div class="task">Self-upgrade flow (Silver &gt; Gold, add-ons via Stripe)</div>
-        <div class="task">Brevo sequences + Google Analytics/Search Console</div>
-        <div class="task">CRM dashboard rebuild + GitHub Actions sitemap</div>
+        <div class="task"><code>nav.js</code> rollout to all pages (after content work)</div>
+        <div class="task">Sales pages rebuild</div>
+        <div class="task">Category pages glow-up (main pages need updating for new subcat pages)</div>
+        <div class="task">Rename <code>entertainment.html</code> &gt; <code>things-to-do.html</code> (do last, fix all links)</div>
+        <div class="task">Gallery placeholder tiles retrofit to Gold listings missing them (papamoa-orthodontist confirmed)</div>
+        <div class="task">Homepage: merge real estate content</div>
+        <div class="task">CRM dashboard rebuild (route Google API through Worker). Note: a hardcoded Google API key was previously exposed in <code>admin/crm-dashboard.html</code> and revoked &mdash; never hardcode, key lives in Worker env vars only.</div>
+        <div class="task">Admin <code>sales-funnel.html</code>: fix truncated <code>updateUI()</code> function (buttons/navigation broken) + update Month 3 copy from "Gold Founding Member two-for-one bonus" to "included free with any paid listing"</div>
+        <div class="task">Fix <code>docs/crm-sheet-reference.html</code>: remove Bronze from dropdowns, remove Sub-Pages column</div>
+        <div class="task">Build <code>sales/spotlight-ads.html</code> properly (stub exists)</div>
+        <div class="task">Google Analytics + Search Console setup</div>
+        <div class="task">Switch GitHub Pages from "Deploy from branch" to "GitHub Actions" + auto-regenerate <code>sitemap.html</code> on every push to main</div>
+        <div class="task">Brevo Day 0/3/6/10 email sequences setup</div>
+        <div class="task">Auto-update homepage hero quick chips from analytics. Chips currently hardcoded in <code>homepage.html</code>. Wire to top-5 most-visited community/info pages via Worker JSON endpoint, JS rewrites chip list on load. Keep current 5 as static fallback.</div>
+        <div class="task">Auto-feed homepage News &amp; Events from a single source. Extract to <code>data/news-events.json</code> or Worker endpoint, render both homepage section and <code>news-events.html</code> from it. Regenerate Event JSON-LD schema from same source.</div>
+        <div class="task">Build search management system (feeder portal for updating search index)</div>
+        <div class="task">Build menu item image system (auto-discover from <code>images/listings/{slug}/menu/</code>)</div>
+        <div class="task">Build listing management portal (magic-link per listing for owner updates)</div>
+        <div class="task">Build self-upgrade flow (Silver &gt; Gold, add Menu Add-On, add Extra Spotlights via Stripe)</div>
       </div>
     </div>
 
     <div class="task-group">
       <div class="task-group-head tg-deferred">Deferred -- Game Plan</div>
       <div class="task-items">
-        <div class="task">Repo folder restructure (major link-breaking change)</div>
-        <div class="task">Sub-cat pill auto-discovery + Live Check button</div>
-        <div class="task">PPP BUSINESS object generator + Mumbai Masala menu test</div>
-        <div class="task">Outscraper lead scrape + first cold email batch + Facebook growth</div>
-        <div class="task">404 monthly giveaway system + investigate SEO/GEO impact</div>
-        <div class="task">Fuel Stations live data + index.html star persistence</div>
+        <div class="task">Repo folder restructure (move root pages into folder, define articles vs community, fix all links)</div>
+        <div class="task">Investigate scored search algorithm</div>
+        <div class="task">Fuel Stations page with live AI update (Gaspy NZ API or crowd-source via pb-forms + GitHub Actions). Worker route pattern already established from <code>/fishing-data</code>.</div>
+        <div class="task"><code>index.html</code> star persistence upgrade (localStorage &gt; KV)</div>
+        <div class="task">Sub-cat pill auto-discovery (build step or JS fetch of sitemap that finds <code>/categories/FOLDER/</code> pages)</div>
+        <div class="task">Live Check button for listings (Worker route calling Google Places API for ratings/hours, or Claude prompt against business website for content drift)</div>
+        <div class="task">PPP BUSINESS object generator (admin page: URL in, paste-ready object out)</div>
+        <div class="task">Mumbai Masala menu test (photo-to-menu pipeline validation)</div>
+        <div class="task">Photo/content upload pipeline test end-to-end</div>
+        <div class="task">Outscraper lead scrape (first 200 Papamoa records) + first cold email batch (20 businesses) + Facebook growth (target 500 followers)</div>
+        <div class="task">Named placeholder listings for active outreach targets</div>
+        <div class="task">Upgrade sales email automation (personalise with listing data, dynamic PPP links)</div>
+        <div class="task">404 page monthly giveaway system + investigate 404 engagement impact on SEO/GEO</div>
+        <div class="task">CRM platform decision + setup (Google Sheets + custom dashboard)</div>
       </div>
     </div>
 
@@ -618,21 +668,90 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
       <div class="task-group-head tg-done">Completed</div>
       <div class="task-items">
         <div class="task done">Admin password changed</div>
-        <div class="task done">community.html typo fixed</div>
+        <div class="task done">community.html typo fixed (was comunity.html)</div>
         <div class="task done">electricians/plumbers duplicates deleted</div>
-        <div class="task done">health/ folder moved to services/</div>
-        <div class="task done">lawn-mowing-papamoa.html deleted</div>
+        <div class="task done">categories/health/ folder moved to categories/services/</div>
+        <div class="task done">listings/lawn-mowing-papamoa.html deleted</div>
         <div class="task done">404.html built (gremlin game + leaderboard)</div>
         <div class="task done">Carwyn demo completed</div>
         <div class="task done">All 5 main category pages rebuilt (Stay, Do, Eat, Services, Shop) -- standardised layout, sidebar, schema, FAQ, search grid</div>
-        <div class="task done">Category hero gradients &amp; accent colours locked -- styles.css updated, Section 2.4 added to Project Master</div>
+        <div class="task done">Category hero gradients &amp; accent colours locked -- styles.css updated, §2.4 added</div>
+        <div class="task done">Site-wide <code>articles/</code> &rarr; <code>community/</code> link fix (verified 0 matches 2026-06-02)</div>
+        <div class="task done">All forms migrated Web3Form &rarr; pb-forms papamoa client (commit a55df7d, 132 pages)</div>
+        <div class="task done">Launch-readiness sweep: paths, canonicals, broken links, a11y (commit 34edecf)</div>
+        <div class="task done">Stub listings noindexed + leaky strategy docs hidden (commit 56983d2)</div>
+        <div class="task done">Site-wide <code>+gst</code> &rarr; <code>+gst</code> find-and-replace (commit bf73bae + final cleanup of one <code>+ GST</code> capital instance 2026-06-02)</div>
+        <div class="task done">Fix <code>href="#"</code> dead CTAs in subcategory pages &rarr; <code>/papamoa-previews/sales/landing.html</code> with biz slugs where derivable (2026-06-02)</div>
+        <div class="task done">Fix "Gold Spotlight" as tier-name across sales/admin/community pages &mdash; feature-shorthand usage kept per §3 (2026-06-02)</div>
+        <div class="task done"><code>search.html</code>: weather widget routed through Worker, duplicate drawer/modal scripts removed (broken <code>&lt;script&gt;</code> opener killed), Privacy &amp; Terms link added to footer (2026-06-02)</div>
+        <div class="task done"><code>search.html</code> <code>ql</code> was never a bug &mdash; defined at line 757; entry was stale (verified 2026-06-02)</div>
+        <div class="task done"><code>legal.html</code> link added to all 17 live listing footers (2026-06-02)</div>
+        <div class="task done">Root-relative path leftovers prefixed (<code>/assets/css/styles.css</code> in 5 pages, plus <code>/admin/</code> and <code>/listings/</code> link refs) (2026-06-02)</div>
+        <div class="task done">task-plan.html and pricing-master.html absorbed into this document (2026-06-02)</div>
       </div>
     </div>
 
   </div>
 
+  <!-- 13. LAUNCH PLAN -->
+  <div class="section" id="launch-plan">
+    <div class="section-label">Rollout sequence</div>
+    <h2 class="section-title">13. Launch Plan</h2>
+
+    <h3 class="subsection-title">Deployment &amp; Scale Roadmap</h3>
+    <ol style="margin:0 0 18px 18px;padding:0;line-height:1.7;">
+      <li><strong>Ready GitHub site.</strong> Current static site on GitHub Pages &mdash; content and listing pages live at <code>plainblackcreative.github.io/papamoa-previews/</code>.</li>
+      <li><strong>Astro migration.</strong> Rebuild on the custom <code>papamoa.info</code> domain, still hosted on GitHub Pages. Performance + cleaner architecture before any paid acquisition.</li>
+      <li><strong>30-day organic test.</strong> No paid ads, no automated funnel. Let the site index and rank. Measure organic traffic and self-convert rate. This is the window during which the manual gameplan below applies.</li>
+      <li><strong>Then scale.</strong> Activate Brevo Day 0/3/6/10 sequences, paid ads, Outscraper outreach.</li>
+    </ol>
+
+    <h3 class="subsection-title">30-Day Manual Gameplan</h3>
+    <p>During the organic-test window, conversions are handled by hand &mdash; no automated funnel is wired up yet:</p>
+    <ul style="margin:8px 0 18px 18px;padding:0;line-height:1.7;">
+      <li>Business finds the site organically and submits via <code>sales/list-with-us.html</code> or <code>sales/claim.html</code>.</li>
+      <li>Jay contacts them manually, sends a demo listing (the PPP at <code>previews/driftwood-cafe.html</code>), closes the sale.</li>
+      <li>Carwyn invoices the client (assumes §11 Option A &mdash; if Option B is chosen, invoicing routes through Plain Black Creative instead).</li>
+      <li>Facebook: start a Pāpāmoa Community Info group separate from the directory page &mdash; articles, events, community content. Drives organic traffic and brand awareness. 30 posts ready in <code>sales/facebook-posts.html</code>.</li>
+    </ul>
+
+    <h3 class="subsection-title">What Flips the Switch from Manual to Scale</h3>
+    <p>Trigger to leave the 30-day window: enough organic conversion data to know the funnel works without paid inputs. Once Brevo sequences and Outscraper outreach turn on, the manual contact step is replaced by automated PPP send + Brevo Day 0.</p>
+  </div>
+
+  <!-- 14. PRE-LAUNCH QA -->
+  <div class="section" id="qa">
+    <div class="section-label">Verify before flip</div>
+    <h2 class="section-title">14. Pre-Launch QA</h2>
+    <p style="margin-bottom:18px;">§8 sets the per-page minimum bar at build time. This is the site-wide sweep before public launch.</p>
+
+    <h3 class="subsection-title">Design System</h3>
+    <p>Figtree + Playfair Display everywhere. No DM Sans / Fraunces / Inter / Outfit remnants. CSS variables match <code>assets/css/styles.css</code>. Nav logo: Playfair Display bold "Papamoa" in white + <code>.info</code> span in <code>--blue</code> (#3AABDE).</p>
+
+    <h3 class="subsection-title">Internal Links</h3>
+    <p>No <code>href="#"</code> remaining (except intentional JS handlers like <code>svcClear()</code>). No flat <code>/slug</code> paths &mdash; all should be <code>/papamoa-previews/categories/folder/slug.html</code> for GH Pages or stripped at custom-domain launch. No dead Claim / Advertise / Home links.</p>
+
+    <h3 class="subsection-title">Pricing Accuracy</h3>
+    <p>Silver $599+gst/yr. Gold $1,199+gst/yr. Menu Add-On $199+gst/yr (Silver paid add-on, free with Gold). Extra Spotlights $199+gst/yr each (Gold only, first included). No Bronze as a paid product. No sub-pages add-on. All <code>+gst</code> lowercase, no space.</p>
+
+    <h3 class="subsection-title">Forms &amp; APIs</h3>
+    <p>Test pb-forms from each active form type on live GitHub Pages: 404 broken-link bot, sales/contact forms (homepage, list-with-us, claim), admin/upload, admin/add-lead. Verify the email lands at <code>info@plainblackcreative.com</code> via Resend. Cloudflare Worker: test via PPP search-visibility checker and the fishing page Update button.</p>
+
+    <h3 class="subsection-title">Mobile Rendering</h3>
+    <p>Every page tested at 375px. Two-col layouts collapse cleanly. Tables scroll horizontally without breaking layout. No horizontal page overflow. Nav drawer opens, closes, and traps focus correctly.</p>
+
+    <h3 class="subsection-title">SEO Basics</h3>
+    <p>Every page has a unique <code>&lt;title&gt;</code>. <code>&lt;meta name="description"&gt;</code> present and not templated. No duplicate H1s. <code>noindex</code> only on admin, sales, stub, and internal-doc pages. <code>sitemap.html</code> current (per §12, this should be auto-regenerated once GitHub Actions is wired up).</p>
+
+    <h3 class="subsection-title">Editorial Voice</h3>
+    <p>Listing copy is third-party: never "we / us / our", always "they / them / call them / visit them". Macron on <strong>Pāpāmoa</strong> in body text. Domain stays <strong>Papamoa.info</strong> (no macron). No em dashes. No "Jayden" or first-person references on public-facing pages.</p>
+
+    <h3 class="subsection-title">Security</h3>
+    <p>Claude API key rotated post-build (see §12 Critical). Admin password changed in <code>admin/upload.html</code>. No API keys hardcoded in HTML &mdash; all live in Cloudflare Worker env vars only. CRM dashboard Google Sheets calls routed through the Worker, never direct.</p>
+  </div>
+
   <div class="doc-footer">
-    Papamoa.info &mdash; Plain Black Creative &mdash; Project Master v2 &mdash; Updated April 13, 2026<br>
+    Papamoa.info &mdash; Plain Black Creative &mdash; Project Master v2 &mdash; Updated 2026-06-02<br>
     This document replaces all previous memory files, session exports, and project briefs.
   </div>
 
