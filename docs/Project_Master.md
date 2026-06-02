@@ -634,7 +634,7 @@ Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-f
 
 ### Medium priority (post-launch infrastructure)
 - [ ] nav.js rollout to all pages (after all content work done)
-- [ ] Sales pages rebuild
+- [ ] Sales pages rebuild. Reference for the pricing page layout/comparison pass: `https://devonport.net.au/get-listed` (Carwyn flagged this as a useful structural reference for comparing layout, features and prices when we rebuild the pricing surface)
 - [ ] Category pages glow-up (main category pages need updating for new subcat pages)
 - [ ] Rename `entertainment.html` > `things-to-do.html` (do last, fix all links)
 - [ ] Gallery placeholder tiles retrofit to Gold listings missing them (papamoa-orthodontist confirmed)
@@ -663,9 +663,9 @@ Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-f
 - [ ] PPP BUSINESS object generator (admin page: URL in, paste-ready object out)
 - [ ] Mumbai Masala menu test (photo-to-menu pipeline validation)
 - [ ] Photo/content upload pipeline test end-to-end
-- [ ] Outscraper lead scrape (first 200 Papamoa records)
+- [ ] Outscraper lead scrape (first 200 Papamoa records). Complementary local-directory sources to scrape for business listings as a cross-reference: `https://www.bayofplentynz.com/`, `https://baythrive.nz/`, `https://bizwin.co.nz/tauranga-business-directory/`
 - [ ] First cold email batch (20 businesses, track opens)
-- [ ] Facebook growth (30 posts ready in `sales/facebook-posts.html`, target 500 followers)
+- [ ] Facebook growth (30 posts ready in `sales/facebook-posts.html`, target 500 followers). Discovery list of existing Pāpāmoa / Mt Maunganui groups + business pages worth joining/engaging: `https://www.facebook.com/search/pages/?q=Papamoa`
 - [ ] Named placeholder listings for active outreach targets
 - [ ] Upgrade sales email automation (personalise with listing data, dynamic PPP links)
 - [ ] 404 page monthly giveaway system (sponsor themes game, provides prize, gets spotlight ad)
