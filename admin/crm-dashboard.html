@@ -695,7 +695,7 @@
       <div class="panel-actions">
         <a class="panel-btn panel-btn-secondary" id="btn-call" href="#">📞 Call</a>
         <a class="panel-btn panel-btn-secondary" id="btn-email" href="#">✉️ Email</a>
-        <a class="panel-btn panel-btn-gold" id="btn-ppp" href="#" target="_blank">👁 View Preview</a>
+        <a class="panel-btn panel-btn-gold" id="btn-ppp" href="#" target="_blank" rel="noopener">👁 View Preview</a>
       </div>
     </div>
 
@@ -958,8 +958,8 @@ function makeCard(lead) {
       '<div class="card-footer">' +
         '<span class="card-sub">' + (lead.source || '') + '</span>' +
         '<div class="card-actions">' +
-          (lead.website ? '<a class="card-action-btn btn-link" href="' + lead.website + '" target="_blank" onclick="event.stopPropagation()">🌐 Site</a>' : '') +
-          (lead.preview ? '<a class="card-action-btn btn-link" href="' + lead.preview + '" target="_blank" onclick="event.stopPropagation()">👁 PPP</a>' : '') +
+          (lead.website ? '<a class="card-action-btn btn-link" href="' + lead.website + '" target="_blank" onclick="event.stopPropagation()" rel="noopener">🌐 Site</a>' : '') +
+          (lead.preview ? '<a class="card-action-btn btn-link" href="' + lead.preview + '" target="_blank" onclick="event.stopPropagation()" rel="noopener">👁 PPP</a>' : '') +
         '</div>' +
       '</div>';
   }
@@ -1002,7 +1002,7 @@ function openPanel(lead) {
   if (lead.slug) links.push({icon:'📄', label:'Live Listing', url: 'https://papamoa.info/listings/'+lead.slug});
 
   var linksHtml = links.map(function(l) {
-    return '<div class="panel-link-row"><span class="link-icon">'+l.icon+'</span><div class="link-text"><div class="link-label">'+l.label+'</div><div class="link-url">'+l.url+'</div></div><a href="'+l.url+'" target="_blank">Open ↗</a></div>';
+    return '<div class="panel-link-row"><span class="link-icon">'+l.icon+'</span><div class="link-text"><div class="link-label">'+l.label+'</div><div class="link-url">'+l.url+'</div></div><a href="'+l.url+'" target="_blank" rel="noopener">Open ↗</a></div>';
   }).join('');
   document.getElementById('panel-links').innerHTML = linksHtml || '<div style="font-size:12px;color:var(--text-light);">No links on this lead yet.</div>';
 
