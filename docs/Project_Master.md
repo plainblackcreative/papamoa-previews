@@ -15,7 +15,7 @@ Do not use any of the following as reference: `Project_Memory.rtf`, `papamoa-pro
 ## 1. PROJECT OVERVIEW
 
 **Site:** Papamoa.info -- commercial local business directory for Papamoa, Bay of Plenty, NZ
-**Owner/operator:** Jayden Brown (Jay) / Plain Black Creative
+**Owner/operator:** Jayden Brown (Jay) / PlainBlack
 **Client/investor:** Carwyn (site owner, DNS access holder)
 **Sister site:** TaurangaNZ.info
 **Domain:** papamoa.info (no macron). Content spelling: always **Papamoa** (with macron) in body text.
@@ -572,7 +572,7 @@ Two options on the table, decision pending:
 - **Option A — Revenue share with Carwyn.** 50/50 split, costs shared, Carwyn invoices the client. Lower risk, shared upside.
 - **Option B — Jay operates independently.** Jay owns the directory outright, full revenue, full cost.
 
-The current manual launch gameplan (§19) assumes Option A — Carwyn invoices on each close. Switching to B would push invoicing through Plain Black Creative and change the customer-facing entity on receipts and footers.
+The current manual launch gameplan (§19) assumes Option A — Carwyn invoices on each close. Switching to B would push invoicing through PlainBlack and change the customer-facing entity on receipts and footers.
 
 ### 17.10 `sales/post-call-landing.html`
 Referenced in pricing-master update list and task-plan. Exists in repo per task-plan (has "Gold Spotlight" naming issues). Not found in file structure listings from session files. Confirm status.
@@ -710,7 +710,7 @@ During the organic-test window, conversions are handled by hand — no automated
 
 - Business finds the site organically and submits via `sales/list-with-us.html` or `sales/claim.html`.
 - Jay contacts them manually, sends a demo listing (the PPP at `previews/driftwood-cafe.html`), closes the sale.
-- Carwyn invoices the client (assumes §17.9 Option A; if Option B is chosen, invoicing routes through Plain Black Creative instead).
+- Carwyn invoices the client (assumes §17.9 Option A; if Option B is chosen, invoicing routes through PlainBlack instead).
 - Facebook: start a Pāpāmoa Community Info group separate from the directory page — articles, events, community content. Drives organic traffic and brand awareness. 30 posts ready in `sales/facebook-posts.html`.
 
 ### What flips the switch from manual to scale
@@ -749,5 +749,5 @@ Claude API key rotated post-build (see §18 Critical). Admin password changed in
 
 ---
 
-*Papamoa.info -- Plain Black Creative -- Consolidated April 9, 2026 -- Last updated 2026-06-02*
+*Papamoa.info -- PlainBlack -- Consolidated April 9, 2026 -- Last updated 2026-06-02*
 *This document replaces all previous memory files, session exports, and project briefs.*
