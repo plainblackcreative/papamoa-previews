@@ -564,25 +564,21 @@ Referenced in pricing-master update list and task-plan. Exists in repo per task-
 ### Critical (before launch)
 - [ ] Update `docs/pricing-master.html`: Silver images (logo only), Extra Spotlight price ($199), +gst formatting, Gold images (up to 9 not unlimited)
 - [ ] Replace `Project_Memory.rtf` with this document
-- [ ] Fix search.html bugs (undefined `ql`, weather widget, duplicate scripts)
 - [ ] Rotate Claude API key in `console.anthropic.com`, update in Cloudflare Worker env vars
-- [ ] Fix `href="#"` in 20+ subcategory pages (all should point to `/sales/landing.html`)
-- [ ] Fix "Gold Spotlight" naming: replace with "Gold Listing" in `sales/list-with-us.html`, `sales/post-call-landing.html`, and anywhere else it appears as a product name
 - [ ] Fix menu lightbox crash on PPP and list-with-us pages (change to anchor link as quick fix)
 - [ ] Fix menu dietary filters: make dynamic (only show tags in menu data), wire up actual filtering
 
 ### High priority (pre-launch)
 - [ ] Update `assets/css/styles.css`: Extra Spotlight price comment ($99 > $199), reconcile category hero colours
-- [ ] Update `nav-footer-snippet.html`: nested folder paths, short labels, `articles/` > `community/`, add `legal.html`
+- [ ] Update `nav-footer-snippet.html`: nested folder paths, short labels, add `legal.html`
 - [ ] Update `README.md`: index.html description, missing folders, TaurangaNZ URL typo
 - [ ] Fix listing template contact pattern: `ci-label/ci-value` grid > `ci-text` flex
-- [ ] Site-wide `+gst` > `+gst` find-and-replace
-- [ ] Site-wide `articles/` > `community/` link fix
 - [ ] Design system audit: Figtree + Playfair Display throughout, no DM Sans/Fraunces remnants
 - [ ] Pricing audit: $599 Silver, $1,199 Gold, $199 Menu Add-On, $199 Extra Spotlight across all pages
 - [ ] "Claim this listing" CTAs on Gold listings should not show (already paid)
 - [ ] Menu Add-On audit: Silver CTA should show purchase option for $199+gst/yr, NOT upgrade-to-Gold prompt
-- [ ] Add `legal.html` link to all page footers (do via nav.js rollout)
+- [ ] Add `legal.html` link to remaining page footers (homepage, sales pages, community pages — listings + search done 2026-06-02)
+- [ ] Add footer to 3 stub listings (barber-toms, pacific-palms, papamoa-beach-resort) — currently no footer at all
 - [ ] Smoke-test pb-forms papamoa client end-to-end (404 bot + sales/contact forms)
 - [ ] Build `sales/list-with-us.html` "best of 4" rebuild
 - [ ] Build `/onboarding/add-menu.html`
@@ -641,6 +637,17 @@ Referenced in pricing-master update list and task-plan. Exists in repo per task-
 - [x] `listings/lawn-mowing-papamoa.html` deleted
 - [x] 404.html page built (gremlin game with leaderboard)
 - [x] Carwyn demo completed
+- [x] Site-wide `articles/` → `community/` link fix (verified 0 matches 2026-06-02)
+- [x] All forms migrated Web3Form → pb-forms papamoa client (commit a55df7d, 132 pages)
+- [x] Launch-readiness sweep: paths, canonicals, broken links, a11y (commit 34edecf)
+- [x] Stub listings noindexed + leaky strategy docs hidden (commit 56983d2)
+- [x] Site-wide `+gst` → `+gst` find-and-replace (commit bf73bae + final cleanup of one `+ GST` capital instance 2026-06-02)
+- [x] Fix `href="#"` dead CTAs in subcategory pages → `/papamoa-previews/sales/landing.html` with biz slugs where derivable (2026-06-02)
+- [x] Fix "Gold Spotlight" as tier-name across sales/admin/community pages — feature-shorthand usage kept per §5 (2026-06-02)
+- [x] `search.html`: weather widget routed through Worker, dedupe drawer/modal scripts (broken `<script>` opener removed), Privacy & Terms link added to footer (2026-06-02)
+- [x] `search.html` `ql` was never a bug — defined at line 757; entry was stale (verified 2026-06-02)
+- [x] `legal.html` link added to all 17 live listing footers (2026-06-02)
+- [x] Root-relative path leftovers prefixed (`/assets/css/styles.css` in 5 pages, plus `/admin/` and `/listings/` link refs) (2026-06-02)
 
 ---
 
