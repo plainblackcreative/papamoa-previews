@@ -201,6 +201,7 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
       <a href="#tasks">12. Pending Tasks</a>
       <a href="#launch-plan">13. Launch Plan</a>
       <a href="#qa">14. Pre-Launch QA</a>
+      <a href="#carwyn">15. Carwyn's Requirements</a>
     </div>
   </div>
 
@@ -304,10 +305,12 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
 
   <!-- 2.4 CATEGORY HERO COLOURS -->
   <div class="section" id="category-heroes">
-    <div class="section-label">Locked April 13, 2026</div>
+    <div class="section-label">Partially unlocked 2026-06-02</div>
     <h2 class="section-title">2.4 Category Page Hero Colours</h2>
 
-    <div class="alert ok"><span class="alert-icon">&#10003;</span><div><strong>Resolved.</strong> Five main category pages each have a locked hero gradient and accent colour. These are canonical. Do not change without updating this document and <code>assets/css/styles.css</code>. The <code>.hero-cat-*</code> classes in styles.css reflect these values.</div></div>
+    <div class="alert" style="background:#FFF8E6;border-color:#E0C460;color:#8A5A00;padding:14px 18px;border-radius:6px;margin-bottom:14px;"><span class="alert-icon" style="color:#8A5A00;">&#9888;</span><div><strong>EAT and SHOP need rework.</strong> Carwyn's 2026-06-02 feedback locks the brand palette to <strong>blue and green shades only — no brown / beige</strong>. EAT (browns + orange) and SHOP (browns + gold) violate the rule and need new hero treatments. Direction: use <strong>imagery</strong> to differentiate the pages, not colour. See <a href="#carwyn" style="color:#8A5A00;font-weight:700;">&sect;15 Carwyn's Requirements</a> for the full context. <code>assets/css/styles.css</code> still reflects the old values until the rework lands.</div></div>
+
+    <div class="alert info"><span class="alert-icon">&#10003;</span><div><strong>Stay, Do and Services remain locked</strong> &mdash; all are blue / green / dark-charcoal family and compliant with the Carwyn rule.</div></div>
 
     <div class="alert info"><span class="alert-icon">&#8505;</span><div><strong>Accent applies to:</strong> eyebrow text, <code>h1 em</code> italic, hero bottom bar, see-more button, sidebar bullet <code>›</code>, list CTA button colour.</div></div>
 
@@ -572,6 +575,8 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
     <div class="grey"><div class="grey-title">Scored search algorithm</div><div class="grey-body">Discussed but unclear if implemented. Current search uses simple substring matching.</div></div>
     <div class="grey"><div class="grey-title">Premium Spotlight Ad Spot pricing model</div><div class="grey-body">Locked in §1 as POA/TBC &mdash; variable by impressions/traffic, not publicly shown. The actual model is unresolved: per-impression, flat monthly, tiered by page traffic, or hybrid. Deferred until there's enough live analytics to set a rate. Needs a small dashboard to manage availability + price per slot.</div></div>
     <div class="grey"><div class="grey-title">CRM / Ad Spot automation platform</div><div class="grey-body">Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-forms via a <code>/crm-write</code> style Worker route (see §12 Medium). Still open: whether the same dashboard runs Premium Ad Spot availability + revenue tracking, or whether ad-spot management gets its own surface. Deferred until the pricing model above lands.</div></div>
+    <div class="grey"><div class="grey-title">Gold Listings &mdash; rotation vs fixed top-spot <em>(raised by Carwyn 2026-06-02)</em></div><div class="grey-body">Carwyn asked whether Gold Listings should let multiple businesses rotate randomly through the slot. Conflicts directly with §1's locked <strong>"one Gold per sub-category"</strong> scarcity model. Trade-off: locked = stronger scarcity story, easier sales; rotation = uncapped revenue per category but dilutes scarcity + complicates Lifetime Price Lock. Needs a PB position before reply &mdash; if we agree to rotation, §1 needs substantial rewrite. See <a href="#carwyn">&sect;15</a>.</div></div>
+    <div class="grey"><div class="grey-title">Annual vs monthly billing direction <em>(raised by Carwyn 2026-06-02)</em></div><div class="grey-body">Carwyn asked about monthly payment options for businesses that can't afford up-front. §1 currently locks annual subs ($599/yr Silver, $1,199/yr Gold) with Lifetime Price Lock; Dead Offers list killed "Silver as one-off lifetime cost." Recommended path: <strong>annual contracts with Stripe instalment plans (4-12 monthly payments)</strong> &mdash; commitment + cashflow accommodation, no §1 rewrite needed. Alternatives: hold annual-only, or add real monthly variants (~$60/mo Silver, ~$120/mo Gold). Also: multiple hub items have recently surfaced alternative pricing models ($690/$1,380 lifetime; $29/$59/$99 monthly) &mdash; pattern suggests locked $599/$1,199 annual model may need a sanity-check.</div></div>
   </div>
 
   <!-- 12. TASKS -->
@@ -582,6 +587,11 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
     <div class="task-group">
       <div class="task-group-head tg-critical">Critical -- Before Launch</div>
       <div class="task-items">
+        <div class="task"><strong>Draft + send response to Carwyn's feedback email.</strong> Source: <code>docs/carwyn-feedback-2026-06-02.md</code> · 10 open questions catalogued in <a href="#carwyn">&sect;15</a>. <strong>No design work ships before the reply.</strong> The answers (especially rotation, monthly billing, CMS scope, multi-site cost, AI billing) define actual scope.</div>
+        <div class="task">Rework EAT and SHOP category page heroes per Carwyn's brand rule (blue/green only, imagery-led differentiation). See <a href="#category-heroes">&sect;2.4</a> partially-unlocked status.</div>
+        <div class="task">Homepage simplification pass per Carwyn's "KISS" feedback: hide secondary content in dropdowns, reduce Essential Info, single clear CTA, beach slideshow / imagery-heavy hero, local imagery + news touches. Reference family: aucklandnz.com, australia.com Gold Coast, visitlondon.com.</div>
+        <div class="task">Header redesign per Carwyn: main page tabs more visible, more visual appeal. Pairs with homepage pass.</div>
+        <div class="task">Each page gets imagery placeholders representing what the page is (Activities, Accommodation, etc.) &mdash; imagery-led differentiation replaces colour-led differentiation.</div>
         <div class="task">Replace <code>Project_Memory.rtf</code> with Project_Master.md</div>
         <div class="task">Rotate Claude API key in <code>console.anthropic.com</code>, update in Cloudflare Worker env vars (do after all build work is complete)</div>
         <div class="task">Fix menu lightbox crash on PPP and list-with-us pages (change to anchor link as quick fix)</div>
@@ -748,6 +758,64 @@ body{font-family:var(--font-body);background:var(--sand);color:var(--text);font-
 
     <h3 class="subsection-title">Security</h3>
     <p>Claude API key rotated post-build (see §12 Critical). Admin password changed in <code>admin/upload.html</code>. No API keys hardcoded in HTML &mdash; all live in Cloudflare Worker env vars only. CRM dashboard Google Sheets calls routed through the Worker, never direct.</p>
+  </div>
+
+  <!-- 15. CARWYN'S REQUIREMENTS -->
+  <div class="section" id="carwyn">
+    <div class="section-label">Client brief &middot; canonical</div>
+    <h2 class="section-title">15. Carwyn's Requirements</h2>
+
+    <div class="alert info"><span class="alert-icon">&#9733;</span><div>Source: <code>docs/carwyn-feedback-2026-06-02.md</code> (verbatim email captured 2026-06-02). When locked sections of this document conflict with Carwyn's stated direction, the conflict resolves in <a href="#grey">&sect;11</a> Grey Areas first &mdash; see the Rotation and Monthly Billing entries.</div></div>
+
+    <h3 class="subsection-title">15.1 Locked design direction (Carwyn stated, we accept)</h3>
+    <table>
+      <thead><tr><th>#</th><th>Direction</th><th>Reflects in</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Imagery first &mdash; a lot more of it. Placeholders representing what each page is (Activities, Accommodation, etc.)</td><td>&sect;12 Critical</td></tr>
+        <tr><td>2</td><td>Hero slideshow / beach imagery on homepage. "Shouts Papamoa" the moment you land</td><td>&sect;12 Critical</td></tr>
+        <tr><td>3</td><td>Header visual lift &mdash; main page tabs more visible, more visual appeal</td><td>&sect;12 Critical</td></tr>
+        <tr><td>4</td><td>KISS homepage &mdash; clear single CTA, hide secondary content in dropdowns or "more info" links</td><td>&sect;12 Critical</td></tr>
+        <tr><td>5</td><td>Local touch on homepage &mdash; local images, local news stories</td><td>&sect;12 Critical</td></tr>
+        <tr><td>6</td><td>Balance info + imagery on every page</td><td>&sect;12 Critical + Medium</td></tr>
+        <tr><td>7</td><td><strong>Blue and green shades only. No brown / beige.</strong></td><td><a href="#category-heroes">&sect;2.4</a> (EAT + SHOP unlocked)</td></tr>
+        <tr><td>8</td><td>Use imagery to differentiate pages, not colour</td><td>&sect;2.4 + &sect;12 Critical</td></tr>
+        <tr><td>9</td><td>Essential Info block on homepage is too busy &mdash; trim or move</td><td>&sect;12 Critical</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-title">15.2 Reference set (sites the deliverable should feel like)</h3>
+    <ul style="margin:8px 0 18px 18px;line-height:1.7;">
+      <li><a href="https://www.aucklandnz.com/" target="_blank" rel="noopener">aucklandnz.com</a></li>
+      <li><a href="https://www.australia.com/en-nz/places/gold-coast-and-surrounds/guide-to-the-gold-coast.html" target="_blank" rel="noopener">australia.com / Gold Coast guide</a></li>
+      <li><a href="https://www.visitlondon.com/" target="_blank" rel="noopener">visitlondon.com</a></li>
+      <li><a href="https://devonport.net.au/" target="_blank" rel="noopener">devonport.net.au</a> &mdash; Jay's structural reference, surfaced separately; consistent direction</li>
+    </ul>
+    <p>All four are tourism / destination-style local sites: photo-heavy heroes, simple primary navigation, light secondary content, strong sense of place. The deliverable should feel like that family of site, not like a transactional yellow-pages directory.</p>
+
+    <h3 class="subsection-title">15.3 Open questions PB needs a position on before reply</h3>
+    <table>
+      <thead><tr><th>#</th><th>Question</th><th>Where the answer lives</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Can we see the CMS? How do we manage / update pages?</td><td>&sect;12 Critical: CMS plan decision</td></tr>
+        <tr><td>2</td><td>I will process the migration via Astro?</td><td>&sect;12 Critical: Astro migration ownership</td></tr>
+        <tr><td>3</td><td>What does monthly hosting cost?</td><td>&sect;12 Critical: hosting + AI cost reassurance sheet</td></tr>
+        <tr><td>4</td><td>How secure / reliable is the hosting platform?</td><td>Same one-pager</td></tr>
+        <tr><td>5</td><td>What does the AI model cost? Monthly / per sale / annual?</td><td>Same one-pager</td></tr>
+        <tr><td>6</td><td>How does it work if we want another site in another town or city?</td><td>&sect;12 Medium: multi-site rollout templating</td></tr>
+        <tr><td>7</td><td>Who monitors / approves public-submitted content?</td><td>&sect;12 Medium: content moderation flow</td></tr>
+        <tr><td>8</td><td>How do renewals work when a CC has expired?</td><td>&sect;12 Medium: Stripe expired-CC dunning</td></tr>
+        <tr><td>9</td><td>Monthly payment options for businesses that can't afford up-front?</td><td><a href="#grey">&sect;11 Grey: Annual vs monthly</a></td></tr>
+        <tr><td>10</td><td>Should Gold Listings rotate randomly between multiple buyers per slot?</td><td><a href="#grey">&sect;11 Grey: Rotation vs fixed</a></td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-title">15.4 Strategic signals to read into the reply</h3>
+    <ul style="margin:8px 0 18px 18px;line-height:1.7;">
+      <li>He still expects <strong>direct sales</strong> to businesses (cold outreach), not pure organic. The 30-day organic test in &sect;13 is still valid as a measurement window, but the answer to "how do we get sales" stays "we sell to them" not "we wait for them to come."</li>
+      <li><strong>Self-signup is a bonus</strong> if social marketing brings prospects in, not the primary funnel.</li>
+      <li>He sees <strong>himself as the design authority</strong>. <em>"Designers are always going to disagree on certain things."</em> Meet that respectfully in the reply &mdash; don't argue brand direction; explain trade-offs where we'd diverge.</li>
+      <li>He runs <strong>Dot Info Marketing Ltd</strong>, a full marketing services agency. The reply's bar is set by who he is, not the project's size.</li>
+    </ul>
   </div>
 
   <div class="doc-footer">

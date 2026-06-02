@@ -83,6 +83,33 @@ Always lowercase `+gst` in customer-facing content. Never `+gst`.
 - Organic/cold CTAs: `sales/list-with-us.html`
 - Warm/outbound CTAs: `sales/landing.html?biz=X&cat=Y`
 
+### Sales pitch toolkit (reusable language for list-with-us / landing / PPP / cold outreach)
+
+These were pulled out of the hub triage on 2026-06-02 (see `docs/carwyn-feedback-2026-06-02.md` and the hub items closed in the same pass). Use verbatim where they fit; adapt for tone where they don't.
+
+**Traffic-cascade rationale (Carwyn's own framing, accommodation tier).**
+> "Your Spotlight doesn't just sell your rooms. It drives traffic to every other Papamoa.info business, which is why we want the right brands paying for the slot."
+*Use:* explaining why accommodation Spotlights are paid not free. Carwyn's intel was 3-4 pages per session, so accommodation listings act as platform value-drivers.
+
+**"We SEO for the category" framing.**
+Papamoa.info ranks for category-level queries ("massage Papamoa", "tire repair Papamoa", "best cafe Pāpāmoa"). Listed businesses get the click-through without paying for the SEO themselves. Stronger than generic "we'll help you rank" because it's true and self-evident from the page.
+
+**Orchestrator of every directory.**
+Papamoa.info is the front door to every relevant directory, not one of many. Standard offer already includes a free TaurangaNZ.info listing (§3 above). Future enhancement candidate: extend to free bayofplentynz.com listing too (if Catherine channel opens; current intel says BOPNZ listings are free and same-client-on-both is fine). Pitch shape: *"You don't choose between Papamoa.info and the others. You get on Papamoa.info and we get you onto the rest."*
+
+**Menu Add-On as live demo (hospitality vertical only).**
+Show-don't-tell. The menu function on a Papamoa.info hospo listing is itself the sales demo for two products at once:
+
+1. **Membership** — "the menu alone is worth being on this site"
+2. **Standalone build** — "and just by showing you, you want one on yours. I can sort that for you."
+
+Closed loop: prospect joins the directory OR commissions a standalone build. Either is a yes.
+- Standalone build price band: **$500–$1k** per build
+- Standalone lives on Papamoa.info (not a separate domain)
+- Carwyn IP / commission: split, negotiated case by case
+- Warmest hospo prospects to demo first: The Wagon, Blackberry Eatery, The Pizza Pundits, Aunty's Fish & Chips, Grill & Green
+- Voice: *"I can sort that for you."* Direct, calm, capable. PlainBlack voice.
+
 ---
 
 ## 4. DESIGN SYSTEM (LOCKED)
@@ -181,23 +208,27 @@ The homepage uses slightly different colour temperatures by design. These are do
 
 These three sets need reconciling in a design audit. The styles.css set is the most distinct (e.g., purple for shopping `#3D2B6E`, brown for food `#5C2D1E`).
 
-### 4.4 Category Page Hero Colours (LOCKED April 2026)
+### 4.4 Category Page Hero Colours (PARTIALLY UNLOCKED 2026-06-02 — see warning)
 
-The five main category pages each have a distinct hero gradient and accent colour. These are locked and canonical. Do not change them without updating this document and `assets/css/styles.css`.
+The five main category pages each had a distinct hero gradient and accent colour, locked April 2026. **Two of them now violate a client-stated brand rule** (Carwyn email, captured in §21):
 
-| Page | Hero gradient | Accent colour | Accent token |
-|------|--------------|---------------|-------------|
-| **Stay** (Accommodation) | `#0A1A2E → #0D2840 → #142A3A` | #3AABDE | `--blue` |
-| **Do** (Activities) | `#0A2215 → #0D3828 → #0F4A30` | #7DC143 | `--lime` |
-| **Eat** (Food & Drink) | `#1A1208 → #2A2010 → #1A0A08` | #E07830 | `--cat-eat-accent` |
-| **Services** | `#141820 → #1E2535 → #28334A` | #3AABDE | `--blue` |
-| **Shop** | `#1A1408 → #2A1E0C → #3A2810` | #C8962A | `--gold-alt` |
+> *"Can we also stick to the Brand colours Blue, Green shades — Not brown / Beige like the EAT page. Use imagery to differentiate between pages instead of colours."*
 
-**Accent colour applies to:** eyebrow text, `h1 em` italic, hero bottom bar, see-more button, sidebar bullet `›`, list CTA button.
+Status per page:
 
-**Stay and Services** share the `--blue` accent but have clearly distinct hero gradients (ocean blue vs dark charcoal).
+| Page | Hero gradient | Accent colour | Accent token | Status |
+|------|--------------|---------------|-------------|--------|
+| **Stay** (Accommodation) | `#0A1A2E → #0D2840 → #142A3A` | #3AABDE | `--blue` | LOCKED — Carwyn-compliant (blue family) |
+| **Do** (Activities) | `#0A2215 → #0D3828 → #0F4A30` | #7DC143 | `--lime` | LOCKED — Carwyn-compliant (green family) |
+| **Eat** (Food & Drink) | `#1A1208 → #2A2010 → #1A0A08` | #E07830 | `--cat-eat-accent` | **NEEDS REWORK** — browns + orange violate the blue/green rule. Was the page Carwyn called out specifically. |
+| **Services** | `#141820 → #1E2535 → #28334A` | #3AABDE | `--blue` | LOCKED — dark charcoal + blue accent, broadly compliant |
+| **Shop** | `#1A1408 → #2A1E0C → #3A2810` | #C8962A | `--gold-alt` | **NEEDS REWORK** — browns + gold accent violate the blue/green rule. Same family of palette as EAT. |
 
-The `assets/css/styles.css` `.hero-cat-*` classes reflect these values and are the authoritative reference for any new pages.
+**Direction for the rework (per Carwyn):** use **imagery** to differentiate the pages, not colour. The hero treatment for all five should converge on the blue/green palette and lean on photography (beach, food shots, activity shots, services hero photography, shopping district photography) to give each page its identity.
+
+The `assets/css/styles.css` `.hero-cat-*` classes still reflect the original values until the rework lands. Treat the .css as historical until §18 ships the new heroes.
+
+**Accent colour applies to:** eyebrow text, `h1 em` italic, hero bottom bar, see-more button, sidebar bullet `›`, list CTA button. The accent slot stays as a concept; the specific accent token per page is what's being reworked.
 
 ---
 
@@ -583,17 +614,66 @@ Locked in §3 as POA/TBC — variable by impressions/traffic, not publicly shown
 ### 17.12 CRM / Ad Spot automation platform
 Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-forms via a `/crm-write` style Worker route (see §18 Medium). Still open: whether the same dashboard runs Premium Ad Spot availability and revenue tracking, or whether ad-spot management gets its own surface. Deferred until §17.11 lands.
 
+### 17.13 Gold Listings — rotation vs fixed top-spot (raised by Carwyn 2026-06-02)
+Carwyn asked, in his feedback email (see §21 and `docs/carwyn-feedback-2026-06-02.md`):
+> *"Should GOLD Listings allow for other business to be included and ROTATE randomly like we currently have set up?"*
+
+This conflicts directly with §3, which locks **"one Gold Listing per sub-category"** as a scarcity offer ("first in keeps it"). A rotation model would mean multiple Gold buyers per sub-category share the slot via random rotation on page load. Trade-off:
+
+- **Locked model (one Gold per sub-cat):** stronger scarcity, easier sales pitch, but caps total Gold revenue per category at one buyer.
+- **Rotation model (multiple Gold per sub-cat, rotated):** uncaps revenue, but dilutes the scarcity story and complicates the Lifetime Price Lock guarantee (renewal commitment from each rotating buyer).
+
+Needs a PlainBlack position before replying to Carwyn. If we agree to rotation, §3 needs a substantial rewrite. If we hold on the locked model, the reply needs to explain *why* scarcity is the more valuable framing for both Carwyn and the buyer.
+
+### 17.14 Annual vs monthly billing direction (raised by Carwyn 2026-06-02)
+Carwyn asked:
+> *"What about the monthly payment options for business who can't afford up front payments?"*
+
+§3 currently locks Silver $599+gst/yr and Gold $1,199+gst/yr as **annual** subscriptions with Lifetime Price Lock on renewal. The §3 Dead Offers list also explicitly killed "Silver as one-off lifetime cost."
+
+Stripe supports monthly billing trivially. Options:
+
+- **Hold annual-only.** Cleaner accounting, stronger commitment, Lifetime Price Lock makes more sense at annual cadence.
+- **Add monthly variants.** ~$60/mo Silver, ~$120/mo Gold (slight uplift to cover transaction overhead and churn risk). Removes the up-front friction. Risk: monthly churn rate eats the unit economics.
+- **Annual with payment-plan option.** Stripe handles 4-12 monthly instalments under one annual contract. Best of both: commitment + cashflow accommodation. Recommended path; needs Stripe configuration but no §3 pricing rewrite.
+
+Multiple hub items (#7, #16 from the 2026-06-02 triage) also surfaced alternative pricing models (lifetime $690/$1380; monthly $29/$59/$99). The pattern of repeated alternative pricing suggests the locked §3 model may not be fully internalised. Worth a sanity-check before the Carwyn reply: are we sure annual subs at $599/$1,199 is the right starting model, or is one of the alternative shapes worth re-examining?
+
 ---
 
 ## 18. PENDING TASKS (consolidated from all sessions; task-plan.html + pricing-master.html absorbed and deleted 2026-06-02)
 
 ### Critical (before launch)
+- [ ] **Draft and send the response to Carwyn's feedback email.** See `docs/carwyn-feedback-2026-06-02.md` for the verbatim source and §21 for the 10 open questions. No design work ships before this reply is sent: the answers (especially §17.13 rotation, §17.14 monthly billing, CMS scope, multi-site cost, AI billing) define the actual scope.
+- [ ] Rework EAT and SHOP category page heroes per Carwyn's brand rule (blue/green palette only, imagery-led differentiation). See §4.4 for the unlocked status and direction. Same rework may extend to other category surfaces using the same brown/beige palette.
+- [ ] Homepage simplification pass per Carwyn's "KISS" feedback: hide secondary content in dropdowns or "more info" links, reduce the Essential Info block, clearer single primary CTA, beach slideshow / imagery-heavy hero ("the moment people land it shouts Papamoa"), local imagery + news touches. Reference sites Carwyn likes: aucklandnz.com, australia.com Gold Coast guide, visitlondon.com.
+- [ ] Header redesign per Carwyn: main page tabs more visible, more visual appeal. Pairs with the homepage pass.
+- [ ] Each page gets imagery placeholders representing what the page is (Activities, Accommodation, etc.) — imagery-led differentiation replaces colour-led differentiation across the category tree.
 - [ ] Replace `Project_Memory.rtf` with this document
 - [ ] Rotate Claude API key in `console.anthropic.com`, update in Cloudflare Worker env vars (do after all build work is complete)
 - [ ] Fix menu lightbox crash on PPP and list-with-us pages (change to anchor link as quick fix)
 - [ ] Fix menu dietary filters: make dynamic (only show tags in menu data), wire up actual filtering
 
 ### High priority (pre-launch)
+
+#### Functional fixes + integration tests
+- [ ] **Spotlight Silver listings not clickable** — bug surfaced during testing, prospect-facing, fix before any demo.
+- [ ] **Form success snap too low on mobile** across the sales-flow funnel (list-with-us, menu-addon, claim, spotlights, landing, PPP). UX bug.
+- [ ] **Post-email user journey design.** Today: prospect submits form → email arrives → no defined next step. Decide and build: do they get a preview link? A scheduled PPP send? Open/intent/pay tracking pixels? This is a real funnel-design gap, not just a polish task.
+- [ ] **End-to-end integration test.** Run a real Silver listing and a real Gold listing through the full funnel: form submission → listing appears on category + subcategory + search → CRM Sheet captures the lead → confirmation flow. Document what breaks.
+- [ ] Add `llms.txt` at the repo root. Plain-text summary of directory purpose/structure for AI crawlers. Small file, real GEO win.
+- [ ] **Easter trading hours block is now stale** — remove or update across community pages where it lingers. Same pattern likely on other date-specific content; bundle into a community content sweep.
+- [ ] **Add favicon.** Currently no favicon; visible polish gap on every browser tab.
+- [ ] External links audit site-wide: all `<a>` to off-site URLs should have `target="_blank" rel="noopener"`.
+
+#### Subcat + landing surface polish
+- [ ] **Subcat pages full polish pass:** site-width / CSS / nav / footer consistency match the main 5 category pages, populate each subcat with the real listings it should surface. Currently inconsistent.
+- [ ] **Home + Category + Subcategory pages — surface real existing listings on each level.** Landing pages should show concrete listings, not abstract category cards. Proves the directory's value at first glance.
+
+#### Carwyn-question answer prep
+- [ ] **CMS plan decision.** Carwyn asked to see the CMS. Either: (a) build a minimal admin (GitHub commits via Cloudflare Worker, gated form), or (b) document the "no CMS, hand-edit + redeploy" flow with screenshots. Decision blocks the Carwyn reply.
+- [ ] **Astro migration ownership decision.** Carwyn offered: *"I will process the migration via Astro."* Confirm scope before reply — does PB hand off the static repo for him, does PB do the migration, or hybrid?
+- [ ] **One-page hosting + AI cost reassurance sheet** for the Carwyn reply: GitHub Pages free, Cloudflare Worker free at current volume, security/SLA, AI billing model (currently absorbed; flat-per-site if scaled), multi-site rollout cost band.
 - [ ] Update `assets/css/styles.css`: Extra Spotlight price comment ($99 > $199), reconcile category hero colours
 - [ ] Update `nav-footer-snippet.html`: nested folder paths, short labels, add `legal.html`
 - [ ] Update `README.md`: index.html description, missing folders, TaurangaNZ URL typo
@@ -618,7 +698,7 @@ Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-f
     - [ ] `community/fishing.html` — check Spotlight ad upsell language
     - [ ] `community/gardening.html` — check Spotlight ad upsell language
 - [ ] "Claim this listing" CTAs on Gold listings should not show (already paid)
-- [ ] Menu Add-On audit: Silver CTA should show purchase option for $199+gst/yr, NOT upgrade-to-Gold prompt
+- [ ] Menu Add-On audit: Silver CTA should show purchase option for $199+gst/yr, NOT upgrade-to-Gold prompt. While in there, replace placeholder menu content on the demo with a real menu + real images (closer to what a real Silver/Gold customer would see).
 - [ ] Add `legal.html` link to remaining page footers (homepage, sales pages, community pages — listings + search done 2026-06-02)
 - [ ] Add footer to 3 stub listings (barber-toms, pacific-palms, papamoa-beach-resort) — currently no footer at all
 - [ ] Smoke-test pb-forms papamoa client end-to-end (404 bot + sales/contact forms)
@@ -630,9 +710,25 @@ Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-f
 - [ ] Build admin new-listing intake form/checklist (collects all required data before build)
 - [ ] Site-wide style/layout audit: scan all HTML, upgrade to current design system (width, nav, category colours, sidebar)
 - [ ] DNS consolidation session with Carwyn (GitHub CNAME, Brevo auth: DKIM, DMARC, SPF)
-- [ ] Activate Stripe: create Silver ($599) and Gold ($1,199) payment links, then swap `STRIPE_GOLD_URL`/`STRIPE_SILVER_URL` in `previews/driftwood-cafe.html` PPP template (currently fall back to `sales/landing.html`)
+- [ ] Activate Stripe: create Silver ($599) and Gold ($1,199) payment links, then swap `STRIPE_GOLD_URL`/`STRIPE_SILVER_URL` in `previews/driftwood-cafe.html` PPP template (currently fall back to `sales/landing.html`). Also create a `JBTEST` 100%-off coupon code for Jay's end-to-end QA testing without spending real money.
 
 ### Medium priority (post-launch infrastructure)
+
+#### Carwyn-question follow-through (after the reply lands)
+- [ ] Content moderation flow (if/when public submissions are added). Submit-to-queue mechanic, operator notification, approve-before-publish. Not in v1 but Carwyn asked.
+- [ ] Stripe expired-CC dunning + manual recovery flow (Carwyn asked how renewals work when a card expires). Stripe default + operator flag on dunning failure.
+- [ ] Multi-site rollout templating documentation: clone-repo + brand-swap + redeploy pattern, plus the price band for spinning up a TaurangaNZ.info equivalent (the Carwyn reply needs a number).
+- [ ] Build a sample "Ad spot demo article" — a fake article that says *"this is what an ad spot looks like. This one is yours. It got X impressions. CTA → "*. Sales-demo asset that proves the value of every other community page. Ties into §17.11 (Premium Spotlight pricing model still deferred until analytics).
+
+#### Content + structure
+- [ ] **Community & Info content audit.** Sweep all 50+ `community/` pages for stale content (Easter hours, dated event references, broken external links, copy that needs refreshing). Surface anything that's gone obviously out of date.
+- [ ] Area sub-pages — neighbourhood-level targeting for Papamoa Beach, Papamoa East, Golden Sands. Either as standalone `community/area-*.html` pages or a small `areas/` folder. Helps with hyper-local AI/Google search queries.
+- [ ] Editorial guide pages — "Best Cafes in Papamoa", "New Businesses Opening 2026", local guides. Lives in `community/` or a dedicated `guides/` folder. Strong GEO surface for AI citation.
+- [ ] FB "Welcome post" pinned to the top of the Papamoa.info Facebook page. Sits alongside the 30 posts already drafted in `sales/facebook-posts.html`.
+
+#### AI / structured data
+- [ ] Structured JSON feed / API endpoint AI agents can parse. Cloudflare Worker route returning a clean JSON index of listings + categories + community pages, plus an `/llms.txt`-shaped summary at `/api/structure`.
+
 - [ ] nav.js rollout to all pages (after all content work done)
 - [ ] Sales pages rebuild. Reference for the pricing page layout/comparison pass: `https://devonport.net.au/get-listed` (Carwyn flagged this as a useful structural reference for comparing layout, features and prices when we rebuild the pricing surface)
 - [ ] Category pages glow-up (main category pages need updating for new subcat pages)
@@ -697,6 +793,21 @@ Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-f
 
 ## 19. LAUNCH PLAN
 
+### Design direction (the hybrid Jay is delivering)
+
+The deliverable is a hybrid of three reference points. None of the three on its own is the answer:
+
+1. **`devonport.net.au`** as a structural model — layout, page count, pricing surface, listing-density patterns. (See `sales/list-with-us.html` rebuild in §18.)
+2. **Carwyn's current `papamoa.info`** for the patterns Carwyn is emotionally attached to and wants preserved — brand palette (blue / green / koru), header treatment, the "tourism-friendly" feel.
+3. **The papamoa-previews repo** for modern upgrades — schema, AEO FAQ blocks, responsive nav, listing template polish, dashboard.html operator surface.
+
+Carwyn's three named tourism references for visual inspiration:
+- https://www.aucklandnz.com/
+- https://www.australia.com/en-nz/places/gold-coast-and-surrounds/guide-to-the-gold-coast.html
+- https://www.visitlondon.com/
+
+What survives the blend, and what gets dropped, is exactly what Phase B (Carwyn's bar — see project session notes) is for. The reference set is the input; the punch list is the output.
+
 ### Deployment & scale roadmap
 
 1. **Ready GitHub site.** Current static site on GitHub Pages — all content and listing pages live at `plainblackcreative.github.io/papamoa-previews/`.
@@ -711,7 +822,7 @@ During the organic-test window, conversions are handled by hand — no automated
 - Business finds the site organically and submits via `sales/list-with-us.html` or `sales/claim.html`.
 - Jay contacts them manually, sends a demo listing (the PPP at `previews/driftwood-cafe.html`), closes the sale.
 - Carwyn invoices the client (assumes §17.9 Option A; if Option B is chosen, invoicing routes through PlainBlack instead).
-- Facebook: start a Pāpāmoa Community Info group separate from the directory page — articles, events, community content. Drives organic traffic and brand awareness. 30 posts ready in `sales/facebook-posts.html`.
+- Facebook: start a Pāpāmoa Community Info group separate from the directory page — articles, events, community content. Drives organic traffic and brand awareness. Proposed URL: `facebook.com/groups/papamoa.info`. 30 posts ready in `sales/facebook-posts.html`.
 
 ### What flips the switch from manual to scale
 
@@ -746,6 +857,59 @@ Listing copy is third-party: never "we / us / our", always "they / them / call t
 
 ### Security
 Claude API key rotated post-build (see §18 Critical). Admin password changed in `admin/upload.html`. No API keys hardcoded in HTML — all live in Cloudflare Worker env vars only. CRM dashboard Google Sheets calls routed through the Worker, never direct.
+
+---
+
+## 21. CARWYN'S REQUIREMENTS
+
+The client brief, structured. Sourced verbatim from `docs/carwyn-feedback-2026-06-02.md`. When the locked sections of this document conflict with Carwyn's stated direction, the conflict resolves in §17 (Grey Areas) before either side wins — see §17.13 and §17.14 for the two big ones.
+
+### 21.1 Locked design direction (he stated; we accept)
+
+| # | Direction | Reflects in |
+|---|---|---|
+| 1 | Imagery first — a lot more of it. Placeholders representing what each page is (Activities, Accommodation, etc.) | §18 Critical Carwyn-driven implementation block |
+| 2 | Hero slideshow / beach imagery on homepage. "Shouts Papamoa" the moment you land | §18 Critical |
+| 3 | Header visual lift — main page tabs more visible, more visual appeal | §18 Critical |
+| 4 | KISS homepage — clear single CTA, hide secondary content in dropdowns or "more info" links | §18 Critical |
+| 5 | Local touch on homepage — local images, local news stories | §18 Critical |
+| 6 | Balance info + imagery on every page | §18 Critical (homepage) + §18 Medium (subcat polish) |
+| 7 | **Blue and green shades only.** No brown / beige. | §4.4 (EAT + SHOP unlocked) |
+| 8 | Use imagery to differentiate pages, not colour | §4.4 + §18 Critical |
+| 9 | Essential Info block on homepage is too busy — trim or move | §18 Critical |
+
+### 21.2 Reference set (sites Carwyn wants the deliverable to feel like)
+
+- https://www.aucklandnz.com/
+- https://www.australia.com/en-nz/places/gold-coast-and-surrounds/guide-to-the-gold-coast.html
+- https://www.visitlondon.com/
+- https://devonport.net.au/ (Jay's structural reference, surfaced separately; consistent direction)
+
+All four are tourism / destination-style local sites: photo-heavy heroes, simple primary navigation, light secondary content, strong sense of place. The deliverable should feel like that family of site, not like a transactional yellow-pages directory.
+
+### 21.3 Open questions PB needs a position on before reply
+
+Each of these blocks the reply. Detailed notes for answering them live in `docs/carwyn-feedback-2026-06-02.md` and the §17 grey areas; this is the index.
+
+| # | Question | Where the answer lives |
+|---|---|---|
+| 1 | Can we see the CMS? How do we manage / update pages? | §18 Critical: CMS plan decision |
+| 2 | I will process the migration via Astro? | §18 Critical: Astro migration ownership decision |
+| 3 | What does monthly hosting cost? | §18 Critical: hosting + AI cost reassurance sheet |
+| 4 | How secure / reliable is the hosting platform? | Same one-pager |
+| 5 | What does the AI model cost? Monthly / per sale / annual? | Same one-pager |
+| 6 | How does it work if we want another site in another town or city? | §18 Medium: multi-site rollout templating |
+| 7 | Who monitors / approves public-submitted content? | §18 Medium: content moderation flow |
+| 8 | How do renewals work when a CC has expired? | §18 Medium: Stripe expired-CC dunning |
+| 9 | Monthly payment options for businesses that can't afford up-front? | §17.14 (decision pending) |
+| 10 | Should Gold Listings rotate randomly between multiple buyers per slot? | §17.13 (decision pending — major scope shift) |
+
+### 21.4 Strategic signals to read into the reply
+
+- He still expects **direct sales** to businesses (cold outreach), not pure organic. The 30-day organic test in §19 is still valid as a measurement window, but the answer to "how do we get sales" stays "we sell to them" not "we wait for them to come."
+- **Self-signup is a bonus** if social marketing brings prospects in, not the primary funnel.
+- He sees **himself as the design authority** — *"Designers are always going to disagree on certain things."* Meet that respectfully in the reply. Don't argue brand direction; explain trade-offs where we'd diverge.
+- He runs **Dot Info Marketing Ltd** — a full marketing services agency. The reply's bar is set by who he is, not by the size of the project.
 
 ---
 
