@@ -222,6 +222,17 @@ a{color:var(--eat-accent);text-decoration:none}
 .svc-no-results.visible{display:block}
 .svc-no-results p{font-size:.88rem;color:var(--muted);margin-bottom:8px}
 .svc-no-results a{font-size:.84rem;font-weight:700;color:var(--eat-accent)}
+.cat-filter{position:sticky;top:64px;z-index:90;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 3px 10px rgba(36,59,89,0.05);padding:11px 24px}
+.cat-filter-inner{max-width:1200px;margin:0 auto;position:relative;display:flex;align-items:center}
+.cat-filter-icon{position:absolute;left:15px;width:17px;height:17px;color:var(--muted);pointer-events:none}
+.cat-filter-input{width:100%;padding:12px 42px;border:1.5px solid var(--border);border-radius:10px;font-family:'Figtree',sans-serif;font-size:0.95rem;color:var(--text);background:var(--sand);outline:none;transition:border-color 0.15s,box-shadow 0.15s,background 0.15s}
+.cat-filter-input::placeholder{color:var(--muted)}
+.cat-filter-input:focus{border-color:var(--eat-accent);background:#fff;box-shadow:0 0 0 3px rgba(53,159,232,0.12)}
+.cat-filter-clear{display:none;position:absolute;right:10px;width:26px;height:26px;align-items:center;justify-content:center;background:none;border:none;color:var(--muted);cursor:pointer;border-radius:50%}
+.cat-filter-clear:hover{background:rgba(0,0,0,0.05);color:var(--text)}
+.cat-filter-clear.visible{display:flex}
+@media(max-width:640px){.cat-filter{padding:9px 16px}}
+
 .faq-section{margin-top:48px;padding-top:36px;border-top:1px solid var(--border)}
 .faq-section h2{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:20px}
 .faq-list{display:flex;flex-direction:column;gap:8px}
@@ -330,6 +341,15 @@ a{color:var(--eat-accent);text-decoration:none}
   </div>
 </div>
 
+
+<!-- STICKY PAGE FILTER -->
+<div class="cat-filter">
+  <div class="cat-filter-inner">
+    <svg class="cat-filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+    <input id="catf-input" type="text" class="cat-filter-input" placeholder="Search food &amp; drink - try &ldquo;restaurant&rdquo;, &ldquo;cafe&rdquo;, &ldquo;thai&rdquo;, &ldquo;bakery&rdquo;&hellip;" oninput="catPageFilter(this.value)" autocomplete="off" aria-label="Filter food &amp; drink">
+    <button id="catf-clear" class="cat-filter-clear" onclick="catPageClear()" aria-label="Clear filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+  </div>
+</div>
 
 <!-- QUICK SUBCATEGORY WIDGET (moved from homepage) -->
 <div class="cat-widget">
@@ -815,5 +835,14 @@ async function pnfSubmitContact(e) {
 
 </script>
 <script src="/papamoa-previews/nav.js"></script>
+<script>
+function catPageFilter(val){
+  var q=(val||'');
+  if(window.catWidgetSearch) window.catWidgetSearch({value:q, closest:function(){return document.querySelector('.cat-widget');}});
+  if(window.svcSearch) svcSearch(q);
+  var cb=document.getElementById('catf-clear'); if(cb) cb.classList.toggle('visible', q.trim().length>0);
+}
+function catPageClear(){ var i=document.getElementById('catf-input'); if(i){ i.value=''; catPageFilter(''); i.focus(); } }
+</script>
 </body>
 </html>
