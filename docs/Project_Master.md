@@ -611,6 +611,8 @@ Referenced in pricing-master update list and task-plan. Exists in repo per task-
 ### 17.11 Premium Spotlight Ad Spot pricing model
 Locked in §3 as POA/TBC — variable by impressions/traffic, not publicly shown. The actual pricing model is unresolved: per-impression, flat monthly, tiered by page traffic, or hybrid. Decision deferred until there's enough live analytics to set a rate. Needs a small dashboard to manage availability + price per slot.
 
+**Direction added 2026-06-03 (Jay):** move to **self-serve, transparent, duration-based** ad spots. Show the available Spotlight / Ad slots site-wide; a visitor clicks a spot to see its **monthly impressions**, then **buys that spot for a fixed duration — 1 / 3 / 6 / 12 months** (via Stripe). This replaces the POA-only framing with a self-purchase flow. Still needs the availability + price/impressions dashboard (ties into §17.12) and live analytics to set per-slot rates.
+
 ### 17.12 CRM / Ad Spot automation platform
 Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-forms via a `/crm-write` style Worker route (see §18 Medium). Still open: whether the same dashboard runs Premium Ad Spot availability and revenue tracking, or whether ad-spot management gets its own surface. Deferred until §17.11 lands.
 
@@ -639,6 +641,15 @@ Stripe supports monthly billing trivially. Options:
 
 Multiple hub items (#7, #16 from the 2026-06-02 triage) also surfaced alternative pricing models (lifetime $690/$1380; monthly $29/$59/$99). The pattern of repeated alternative pricing suggests the locked §3 model may not be fully internalised. Worth a sanity-check before the Carwyn reply: are we sure annual subs at $599/$1,199 is the right starting model, or is one of the alternative shapes worth re-examining?
 
+### 17.15 Free Bronze / Basic listings — push back on Carwyn's "no free listings" (Jay's position, 2026-06-03)
+Jay wants a **free Bronze (Basic) tier** as the bottom of the ladder: **Gold | Silver | Bronze**. Carwyn's brief opposed free listings. Jay's argument: **Bronze is the best lead-gen opportunity** — let site visitors self-create a free Basic listing, which feeds an **automated lead-gen funnel**, and *more listings = more leads, more SEO surface, more visibility* (every free listing is an indexable page + a warm upsell target for Silver/Gold).
+
+Conflicts to resolve:
+- **§3** locked the paid Silver/Gold model and the Dead Offers list killed "Bronze" as a *paid* product. A *free* Bronze is a new, different thing (lead-gen, not revenue) — needs an explicit §3 addition, not just a price.
+- **Carwyn** explicitly didn't want free listings. This is a position to make in the reply (data/SEO/funnel argument), respectfully, since he sees himself as the design/commercial authority (§21.4).
+
+Decision pending. If accepted, Bronze becomes the self-serve auto-create tier (see §18 "Listings & sales direction"); AI-generated listings are deferred in favour of visitor self-creation (pending admin approval).
+
 ---
 
 ## 18. PENDING TASKS (consolidated from all sessions; task-plan.html + pricing-master.html absorbed and deleted 2026-06-02)
@@ -654,6 +665,18 @@ Multiple hub items (#7, #16 from the 2026-06-02 triage) also surfaced alternativ
 - [ ] Rotate Claude API key in `console.anthropic.com`, update in Cloudflare Worker env vars (do after all build work is complete)
 - [ ] Fix menu lightbox crash on PPP and list-with-us pages (change to anchor link as quick fix)
 - [ ] Fix menu dietary filters: make dynamic (only show tags in menu data), wire up actual filtering
+
+### Listings & sales direction (added 2026-06-03, Jay)
+
+The listing ladder is **Gold | Silver | Bronze**. Near-term focus is Bronze self-serve + locking Gold/Silver; AI-generated listings and Menu are deferred.
+
+- [ ] **Lock Gold & Silver listing spec** — pin down the style, design, layout and the required-data/content for each tier (what a buyer gets, what we collect to build it). These become the canonical build templates. Reference: `listing-gold-template.html`, `listing-silver-template.html`, the live listings, and §4/§10 quality bar.
+- [ ] **Bronze (free Basic) self-serve auto-create** — let a site visitor create a free Bronze listing themselves; it **auto-publishes pending admin approval** (moderation gate). This is the priority listing build. Pairs with the lead-gen funnel below. Decision dependency: §17.15 (free-tier pushback to Carwyn).
+- [ ] **Automated lead-gen funnel off Bronze** — free listing signup → captured lead (CRM) → automated nurture toward Silver/Gold upsell. The "more listings = more leads + SEO + visibility" play. Ties into §18 Medium (CRM, Brevo sequences) and the post-email journey item.
+- [ ] **Self-serve Spotlights / Ad Spots** — surface available ad/spotlight slots site-wide; visitor clicks a slot to see its **monthly impressions** and buys it for a **fixed duration (1 / 3 / 6 / 12 months)** via Stripe. See §17.11 for the model + dashboard need.
+- [ ] **Audit + consolidate the sales pages** — review all `sales/*` pages, simplify and de-duplicate (likely overlapping content across list-with-us / landing / why-list / spotlight-ads / menu-addon). Goal: fewer, clearer prospect-facing pages aligned to the Gold/Silver/Bronze ladder.
+- [ ] *(Deferred)* AI-generated listings — hold all AI auto-generation of listings for now; Bronze visitor self-create (above) is the path instead.
+- [ ] *(Deferred)* Menu / Menu Add-On work — parked for now.
 
 ### High priority (pre-launch)
 
