@@ -206,7 +206,7 @@
     var head = el('div', { 'class': 'pnf-drawer-head' });
     var l = el('a', { href: BASE + '/homepage.html', 'class': 'pnf-drawer-logo', 'aria-label': 'Papamoa.info home' });
     l.innerHTML = '<img src="' + BASE + '/assets/papamoa-info-asset-pack/logo/papamoa-info-logo-transparent-400w.png" alt="Papamoa.info" class="pnf-drawer-logo-img">';
-    var close = el('button', { 'class': 'pnf-drawer-close', 'aria-label': 'Close menu', html: '&#10005;' });
+    var close = el('button', { 'class': 'pnf-drawer-close', 'aria-label': 'Close menu', html: '<svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg>' });
     close.addEventListener('click', pnfDrawerClose);
     head.appendChild(l);
     head.appendChild(close);
