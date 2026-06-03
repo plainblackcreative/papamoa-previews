@@ -647,8 +647,9 @@ Multiple hub items (#7, #16 from the 2026-06-02 triage) also surfaced alternativ
 - [ ] **Draft and send the response to Carwyn's feedback email** *after* the demo-site polish is in (homepage simplification, EAT/SHOP hero rework, header redesign, imagery placeholders). Sequencing decided 2026-06-02: ship the visible changes first so the reply leads with proof (*"I heard you, here's what's done"*) rather than promises. Reply still has to answer the 10 operational questions in §21 — the polish is the cover letter, the answers are the body. Source brief: `docs/carwyn-feedback-2026-06-02.md`. Decisions still needed before reply: §17.13 (rotation), §17.14 (monthly billing), plus CMS scope, multi-site cost, AI billing model.
 - [ ] Rework EAT and SHOP category page heroes per Carwyn's brand rule (blue/green palette only, imagery-led differentiation). See §4.4 for the unlocked status and direction. Same rework may extend to other category surfaces using the same brown/beige palette.
 - [ ] Homepage simplification pass per Carwyn's "KISS" feedback: hide secondary content in dropdowns or "more info" links, reduce the Essential Info block, clearer single primary CTA, beach slideshow / imagery-heavy hero ("the moment people land it shouts Papamoa"), local imagery + news touches. Reference sites Carwyn likes: aucklandnz.com, australia.com Gold Coast guide, visitlondon.com.
-- [ ] Header redesign per Carwyn: main page tabs more visible, more visual appeal. Pairs with the homepage pass.
+- [x] Header redesign per Carwyn: main page tabs more visible, more visual appeal (2026-06-03, session 2). The header/nav is now the locked flat tab bar on every public page via `nav.js` (64px, FB + IG icons, clear active tab, mobile drawer). Satisfies Carwyn req #3. Same lock also unified the mobile menu and footer shell. See `docs/nav-usage.md`.
 - [ ] Each page gets imagery placeholders representing what the page is (Activities, Accommodation, etc.) — imagery-led differentiation replaces colour-led differentiation across the category tree.
+- [ ] **Footer lock — finish the remaining systems** (session-2 follow-up). The homepage footer shell is now locked onto 120 grid footers (`bffe868`). Still to do: (1) 23 compact (no-grid) footers — some carry page-specific content (e.g. weather page's data attribution), need per-page handling; (2) `site-footer` (38 pages) + other footer systems (36) not yet unified onto `pnf-footer`; (3) the canonical bottom-bar "Sitemap" link points at `index.html` (internal dashboard) — no public sitemap exists, repoint or drop site-wide. See `docs/nav-usage.md` "Footer follow-ups".
 - [ ] Replace `Project_Memory.rtf` with this document
 - [ ] Rotate Claude API key in `console.anthropic.com`, update in Cloudflare Worker env vars (do after all build work is complete)
 - [ ] Fix menu lightbox crash on PPP and list-with-us pages (change to anchor link as quick fix)
@@ -729,7 +730,7 @@ Multiple hub items (#7, #16 from the 2026-06-02 triage) also surfaced alternativ
 #### AI / structured data
 - [ ] Structured JSON feed / API endpoint AI agents can parse. Cloudflare Worker route returning a clean JSON index of listings + categories + community pages, plus an `/llms.txt`-shaped summary at `/api/structure`.
 
-- [ ] nav.js rollout to all pages (after all content work done)
+- [x] nav.js rollout to all pages (2026-06-03, session 2) — done across all 225 public pages; nav.js is now the single locked source for nav + drawer + footer styling + breadcrumb strip + contact modal. See `docs/nav-usage.md`.
 - [ ] Sales pages rebuild. Reference for the pricing page layout/comparison pass: `https://devonport.net.au/get-listed` (Carwyn flagged this as a useful structural reference for comparing layout, features and prices when we rebuild the pricing surface)
 - [ ] Category pages glow-up (main category pages need updating for new subcat pages)
 - [ ] Rename `entertainment.html` > `things-to-do.html` (do last, fix all links)

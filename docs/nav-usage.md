@@ -86,19 +86,32 @@ preview). At custom-domain launch, set the base to empty **before** the script:
 
 Or do a single find-and-replace across the repo when going live.
 
-## Rollout status (2026-06-03)
+## Rollout status (2026-06-03) — COMPLETE
 
-- ✅ **161 public pages** converted to the placeholder + script pattern:
-  `homepage.html`, `search.html`, all category + subcategory pages, all community
-  / info pages, and the `sales/` pages that already used `pnf-nav`.
-- ⏳ **Listings** (`listings/*.html`) and the listing templates still use the
-  separate `listing-nav` (breadcrumb) markup — pending conversion decision
-  (flat nav drops the per-listing breadcrumb).
-- ⏳ Misc utility pages still on other nav markup: `legal.html`,
-  `editorial-policy.html`, `404.html`, some `sales/` collateral.
+- ✅ **225 public pages** on the placeholder + script pattern — every public page.
+  All legacy nav systems converted: `pnf-nav`+drawer, `pnf-nav`-only, `listing-nav`
+  (→ flat nav + breadcrumb strip), `site-nav`, `nav`, classless `<nav>`, and pages
+  that had no top nav (nav inserted). Secondary section navs (`tab-nav`, `page-nav`,
+  `category-nav` pills) were preserved everywhere they existed.
+- ✅ **Contact modal** injected by nav.js (guarded) so the footer's "Get in touch"
+  works on every page, including the ~23 that had no inline modal. Pages with an
+  inline modal are untouched (no double-inject).
+- ✅ **Footer shell** locked to the homepage canonical (logo, tagline, FB + IG,
+  "Get in touch", trust bullets + Privacy/Terms/Sitemap/Editorial bottom bar) on
+  **120 grid footers**, with each page's contextual columns kept. Footer CSS is
+  single-source via nav.js.
 - ⛔ Excluded by scope: `index.html` (Project Dashboard), `dashboard.html`,
-  `admin/*`, `docs/*`. Reference snippet `assets/nav-footer-snippet.html` left
-  as-is.
-- 🔒 Footer **shell** (brand col, social, trust bullets, legal bottom bar) still
-  drifts in *markup* across some pages — normalisation pass pending; the CSS is
-  already single-source via nav.js.
+  `admin/*`, `docs/*`, the `assets/nav-footer-snippet.html` reference snippet's
+  *nav* (its footer was normalised), and internal reference docs
+  (`sales/facebook-posts`, `email-follow-up`, `followup-emails`, `sales-scripts`,
+  `partners/real-estate-outreach`, `previews/driftwood-cafe` PPP).
+
+### Footer follow-ups (not yet done)
+
+- **23 compact footers** (no column grid; some carry page-specific content like
+  the weather page's data attribution) — still on the old compact shell, need
+  per-page handling.
+- **`site-footer` (38) + other footer systems (36)** — separate footer markup,
+  not yet unified onto `pnf-footer`.
+- **"Sitemap" link** in the canonical bottom bar points at `index.html` (the
+  internal dashboard); no public sitemap exists. Repoint or drop site-wide.

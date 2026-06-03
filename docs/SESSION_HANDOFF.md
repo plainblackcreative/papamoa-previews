@@ -1,8 +1,10 @@
 # Session handoff — papamoa-previews
 
-**Last updated:** 2026-06-03 by Jay + Claude
-**Last commit:** `4caf571` brand: ban ✉ envelope icon site-wide
+**Last updated:** 2026-06-03 (session 2) by Jay + Claude
+**Last commit:** `80799b5` fix: restore 3 truncated community pages + convert to locked nav.js (#1)
 **Branch:** `main` (pushed)
+
+> **Session 2 headline (the nav/footer lock):** `nav.js` is now the single locked source for the nav, mobile drawer, and footer styling — and is loaded on **every one of the 225 public pages**. The footer shell was upgraded to the homepage canonical (logo, tagline, FB + IG, "Get in touch", trust bullets) on 120 grid footers while keeping each page's contextual columns, and nav.js injects the contact modal so "Get in touch" works everywhere. See `docs/nav-usage.md` for the full spec + remaining footer follow-ups.
 
 > Read this if you're a new Claude session picking up work on this repo. It's the fastest path from cold to useful.
 
@@ -67,6 +69,23 @@ Phase C kickoff — homepage walkthrough + simplification per Carwyn's "too busy
 
 Net homepage: 4294px → 3819px (~11% shorter). Brand consistency: koru on every public page.
 
+### Today (2026-06-03) — session 2: the nav / drawer / footer lock
+
+Jay's ask: *"LOCK the Nav, Mobile Menu and Footer. Update nav-usage.md, then deploy site-wide."* Done, in four commits.
+
+| SHA | What |
+|---|---|
+| `f11fef4` | `nav.js` rewritten as the locked single source (nav 64px + FB/IG, icon-free drawer, footer CSS, robust active-tab detection, data-driven breadcrumb strip). Rolled out to the first 179 public pages (categories, subcats, community, search, listings). |
+| `2970862` | Legacy nav sweep — `site-nav` / `nav` / classless-`<nav>` / no-nav pages all converted. Every public page now on nav.js (225). Secondary section navs preserved. |
+| `bffe868` | Footer shell locked to homepage canonical on 119 grid footers (logo, FB **+ IG**, "Get in touch", trust bullets, normalised bottom bar) keeping contextual columns; nav.js now injects the contact modal (guarded) so "Get in touch" works everywhere. |
+| `80799b5` | Fixed 3 truncated community pages (`local-government`, `notable-people`, `maori-history`) — restored closing markup + footer, converted to nav.js. (Was PR #1, spawned mid-session.) |
+
+**Decisions Jay made this session:** mechanism = nav.js single source · scope = public-facing only · category/listing nav = flat tabs everywhere (Carwyn req #3) · listings = flat nav + breadcrumb strip · footer = lock shell, keep columns · footer canonical = upgrade all to homepage shell.
+
+**Net:** one file (`nav.js`) now owns the nav, drawer, footer styling, breadcrumb strip, and contact modal for the whole public site. Change it once → changes everywhere. No more per-page nav/footer drift.
+
+**Footer follow-ups still open** (see `docs/nav-usage.md` "Footer follow-ups"): 23 compact (no-grid) footers; `site-footer` (38) + other footer systems (36); and the bottom-bar "Sitemap" link points at `index.html` (internal dashboard — no public sitemap exists; repoint or drop).
+
 ---
 
 ## 3. What's actively open
@@ -121,7 +140,8 @@ None of these can move without him:
 
 Likely next items if Jay just says "keep going":
 
-- **EAT/SHOP category page hero rework** — biggest visible remaining Carwyn-fix. Brown/orange palette swap to blue/green family. Pair with the imagery rule.
+- **Finish the footer lock** — the remaining footer follow-ups from session 2: the 23 compact (no-grid) footers, the `site-footer`/other footer systems (74 pages), and the "Sitemap → index.html" link fix. See `docs/nav-usage.md` "Footer follow-ups". Natural continuation of this session.
+- **EAT/SHOP category page hero rework** — biggest visible remaining Carwyn-fix. Brown/orange palette swap to blue/green family. Pair with the imagery rule. (Header/nav visual-lift is now DONE via the nav lock — Carwyn req #3 satisfied.)
 - **Phase A2: operator guide for Carwyn** — solo writing task. ~1 page document explaining how the site is managed, what each section does, how to add a lead / confirm a listing / find pricing. Fills the "How this site works" placeholder tile on `dashboard.html`.
 - **Spotlight Silver clickability bug** (in §18 High) — Jay knows the surface where it lives; needs his pointer.
 
@@ -134,8 +154,8 @@ Likely next items if Jay just says "keep going":
 - **Don't use the ✉ envelope unicode** anywhere. Hard ban — see `feedback_no_envelope_icon.md` in auto-memory. Existing 134 occurrences were stripped in `4caf571`. Don't re-introduce.
 - **Don't use em dashes** in client copy, comments, or code (existing memory rule).
 - **Don't auto-renew Carwyn's nav-text logo** — every public page now uses the brand image (`assets/papamoa-macron.png`). If you regenerate any page, pull the image, not the text.
-- **Don't sweep CSS across pages indiscriminately** — many pages have bespoke `<style>` blocks with their own variants. Use inline styles on `<img>` tags (the pattern in `b430823`) when you need consistency without per-page CSS surgery.
-- **Don't assume `nav.js` is widely used** — only 1 page currently uses the `data-nav` injection system. The other ~162 use inline nav markup. nav.js still needs syncing as a future state but for now per-page sweeps are how site-wide changes happen.
+- **Don't edit nav / drawer / footer markup or CSS per-page anymore** — as of session 2 (`f11fef4`→`bffe868`), `nav.js` is the single locked source for the nav, mobile drawer, footer styling, breadcrumb strip, and contact modal, loaded on all 225 public pages via `<div id="pnf-nav-placeholder"></div>` + `<script src="/papamoa-previews/nav.js">`. To change the nav/drawer/footer site-wide, edit `nav.js` once. Per-page footer *column* content (contextual links) still lives inline. See `docs/nav-usage.md`. (Leftover inline nav/footer CSS in old `<style>` blocks is dead weight overridden by nav.js — safe to strip in a later cleanup, don't rely on it.)
+- **Don't sweep other CSS across pages indiscriminately** — many pages still have bespoke `<style>` blocks with their own variants for non-nav content.
 
 ---
 
