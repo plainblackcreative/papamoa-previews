@@ -191,7 +191,7 @@
   }
   function logo(href) {
     var a = el('a', { href: href || BASE + '/homepage.html', 'class': 'pnf-logo', 'aria-label': 'Papamoa.info home' });
-    a.innerHTML = '<img src="' + BASE + '/assets/papamoa-macron.png" alt="Papamoa.info — Our Local Directory Online" class="pnf-logo-img">';
+    a.innerHTML = '<img src="' + BASE + '/assets/papamoa-info-asset-pack/logo/papamoa-info-logo-transparent-400w.png" alt="Papamoa.info — Our Local Directory Online" class="pnf-logo-img">';
     return a;
   }
   function hamburger() {
@@ -203,7 +203,7 @@
   function drawerHead() {
     var head = el('div', { 'class': 'pnf-drawer-head' });
     var l = el('a', { href: BASE + '/homepage.html', 'class': 'pnf-drawer-logo', 'aria-label': 'Papamoa.info home' });
-    l.innerHTML = '<img src="' + BASE + '/assets/papamoa-macron.png" alt="Papamoa.info" class="pnf-drawer-logo-img">';
+    l.innerHTML = '<img src="' + BASE + '/assets/papamoa-info-asset-pack/logo/papamoa-info-logo-transparent-400w.png" alt="Papamoa.info" class="pnf-drawer-logo-img">';
     var close = el('button', { 'class': 'pnf-drawer-close', 'aria-label': 'Close menu', html: '&#10005;' });
     close.addEventListener('click', pnfDrawerClose);
     head.appendChild(l);
