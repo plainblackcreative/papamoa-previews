@@ -374,12 +374,6 @@
     .hero-v2-chip-icon svg { width:100%; height:100%; }
     .hero-v2-info-icon { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; color:var(--navy); }
     .hero-v2-info-icon svg { width:100%; height:100%; }
-    .cat-icon-v2 svg { width:30px; height:30px; }
-    .cat-icon-v2.bg-eat { color:#1E6B3C; }
-    .cat-icon-v2.bg-svc { color:#8A6A2A; }
-    .cat-icon-v2.bg-shop { color:#A06820; }
-    .cat-icon-v2.bg-do { color:#1B6B7D; }
-    .cat-icon-v2.bg-stay { color:#5A4FA0; }
     .biz-cta-icon svg { width:24px; height:24px; color:#1E5A2A; }
     .flb-card-img-fallback-icon { width:46px; height:46px; color:var(--navy); opacity:0.55; }
     .flb-card-img-fallback-icon svg { width:100%; height:100%; }
@@ -418,18 +412,16 @@
     .cat-browse-v2-inner { max-width:1200px; margin:0 auto; }
     .cat-browse-v2 h2 { font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:700; color:var(--navy); margin-bottom:22px; }
     .cat-grid-v2 { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
-    .cat-card-v2 { background:#fff; border-radius:14px; padding:28px 18px 22px; text-align:center; text-decoration:none; color:inherit; transition:all 0.2s; border:1px solid transparent; display:flex; flex-direction:column; align-items:center; gap:12px; }
-    .cat-card-v2:hover { border-color:rgba(53,159,232,0.25); transform:translateY(-3px); box-shadow:0 8px 24px rgba(36,59,89,0.1); }
-    .cat-icon-v2 { width:62px; height:62px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.65rem; line-height:1; }
-    .cat-icon-v2.bg-eat { background:#D9F0DC; }
-    .cat-icon-v2.bg-svc { background:#F0EAD8; }
-    .cat-icon-v2.bg-shop { background:#FFEDC8; }
-    .cat-icon-v2.bg-do { background:#D6ECF7; }
-    .cat-icon-v2.bg-stay { background:#E4DEF6; }
-    .cat-card-v2 h3 { font-size:1.02rem; font-weight:700; color:var(--navy); margin-bottom:2px; }
-    .cat-card-v2 p { font-size:0.76rem; color:var(--muted); line-height:1.45; max-width:170px; }
-    .cat-card-v2-arrow { width:30px; height:30px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--blue); font-size:0.78rem; margin-top:4px; transition:all 0.2s; }
-    .cat-card-v2:hover .cat-card-v2-arrow { background:var(--blue); border-color:var(--blue); color:#fff; }
+    /* IMAGE-AS-BACKGROUND CARDS — Carwyn rule: imagery to differentiate pages, not colour */
+    .cat-card-v2 { position:relative; border-radius:14px; overflow:hidden; aspect-ratio:4/5; text-decoration:none; color:#fff; transition:transform 0.2s, box-shadow 0.2s; display:block; min-height:220px; background:#1B4259; }
+    .cat-card-v2:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(13,43,62,0.22); }
+    .cat-card-v2-img { position:absolute; inset:0; background-size:cover; background-position:center; transition:transform 0.4s ease; }
+    .cat-card-v2:hover .cat-card-v2-img { transform:scale(1.04); }
+    .cat-card-v2-overlay { position:absolute; left:0; right:0; bottom:0; padding:20px 18px 18px; background:linear-gradient(to top, rgba(13,43,62,0.92) 0%, rgba(13,43,62,0.6) 55%, rgba(13,43,62,0) 100%); }
+    .cat-card-v2 h3 { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:#fff; margin-bottom:4px; line-height:1.2; }
+    .cat-card-v2 p { font-size:0.78rem; color:rgba(255,255,255,0.82); line-height:1.45; margin-bottom:10px; }
+    .cat-card-v2-arrow { display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#fff; padding:6px 12px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); border-radius:6px; backdrop-filter:blur(4px); transition:background 0.15s; }
+    .cat-card-v2:hover .cat-card-v2-arrow { background:rgba(255,255,255,0.32); }
 
     @media (max-width:980px) { .cat-grid-v2 { grid-template-columns:repeat(3,1fr); } }
     @media (max-width:640px) { .cat-grid-v2 { grid-template-columns:repeat(2,1fr); gap:10px; } .cat-card-v2 { padding:20px 12px 16px; } .cat-icon-v2 { width:54px; height:54px; font-size:1.4rem; } }
@@ -827,40 +819,56 @@
   </div>
 </div>
 
-<!-- CATEGORY BROWSE V2 -->
+<!-- CATEGORY BROWSE V2 — imagery-led cards per Carwyn brand rule (blue/green palette, imagery to differentiate not colour). -->
+<!-- TODO (Jay): swap placeholder images for category-specific local photos. Current placeholders noted per card. -->
 <div class="cat-browse-v2">
   <div class="cat-browse-v2-inner">
     <h2>Browse Categories</h2>
     <div class="cat-grid-v2">
+      <!-- TODO photo: a Pāpāmoa food/cafe shot (currently The Wagon ad-1 as on-theme placeholder) -->
       <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="cat-card-v2">
-        <span class="cat-icon-v2 bg-eat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span>
-        <h3>Where to Eat</h3>
-        <p>Cafés, restaurants, takeaways &amp; more</p>
-        <span class="cat-card-v2-arrow">→</span>
+        <div class="cat-card-v2-img" style="background-image:url('images/listings/the-wagon-papamoa/ad-1.png');"></div>
+        <div class="cat-card-v2-overlay">
+          <h3>Where to Eat</h3>
+          <p>Cafés, restaurants, takeaways &amp; more</p>
+          <span class="cat-card-v2-arrow">Browse →</span>
+        </div>
       </a>
+      <!-- TODO photo: a tradie/workshop/service shot (currently Speedy Screens hero-1 as on-theme placeholder) -->
       <a href="/papamoa-previews/categories/services/services.html" class="cat-card-v2">
-        <span class="cat-icon-v2 bg-svc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-        <h3>Services &amp; Trades</h3>
-        <p>Local experts for every job</p>
-        <span class="cat-card-v2-arrow">→</span>
+        <div class="cat-card-v2-img" style="background-image:url('images/listings/speedy-screens-papamoa/hero-1.jpg');"></div>
+        <div class="cat-card-v2-overlay">
+          <h3>Services &amp; Trades</h3>
+          <p>Local experts for every job</p>
+          <span class="cat-card-v2-arrow">Browse →</span>
+        </div>
       </a>
+      <!-- TODO photo: a Pāpāmoa shopping centre / retail shot (currently beach-evening placeholder, needs real shop photo) -->
       <a href="/papamoa-previews/categories/shops/shopping.html" class="cat-card-v2">
-        <span class="cat-icon-v2 bg-shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-        <h3>Where to Shop</h3>
-        <p>Local stores, boutiques &amp; everyday essentials</p>
-        <span class="cat-card-v2-arrow">→</span>
+        <div class="cat-card-v2-img" style="background-image:url('images/hero/papamoa-hero-evening.webp');"></div>
+        <div class="cat-card-v2-overlay">
+          <h3>Where to Shop</h3>
+          <p>Local stores, boutiques &amp; everyday essentials</p>
+          <span class="cat-card-v2-arrow">Browse →</span>
+        </div>
       </a>
+      <!-- TODO photo: a surf/beach/activity shot (currently beach-morning placeholder — on-theme but generic) -->
       <a href="/papamoa-previews/categories/activities/entertainment.html" class="cat-card-v2">
-        <span class="cat-icon-v2 bg-do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg></span>
-        <h3>What to Do</h3>
-        <p>Activities, attractions &amp; local experiences</p>
-        <span class="cat-card-v2-arrow">→</span>
+        <div class="cat-card-v2-img" style="background-image:url('images/hero/papamoa-hero-morning.webp');"></div>
+        <div class="cat-card-v2-overlay">
+          <h3>What to Do</h3>
+          <p>Activities, attractions &amp; local experiences</p>
+          <span class="cat-card-v2-arrow">Browse →</span>
+        </div>
       </a>
+      <!-- TODO photo: an accommodation exterior shot (currently Karaka Pines hero-1 as on-theme placeholder) -->
       <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="cat-card-v2">
-        <span class="cat-icon-v2 bg-stay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg></span>
-        <h3>Where to Stay</h3>
-        <p>Accommodation for every kind of stay</p>
-        <span class="cat-card-v2-arrow">→</span>
+        <div class="cat-card-v2-img" style="background-image:url('images/listings/karaka-pines-papamoa/hero-1.png');"></div>
+        <div class="cat-card-v2-overlay">
+          <h3>Where to Stay</h3>
+          <p>Accommodation for every kind of stay</p>
+          <span class="cat-card-v2-arrow">Browse →</span>
+        </div>
       </a>
     </div>
   </div>
