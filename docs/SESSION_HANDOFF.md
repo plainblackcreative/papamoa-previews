@@ -1,7 +1,7 @@
 # Session handoff — papamoa-previews
 
 **Last updated:** 2026-06-03 (session 2) by Jay + Claude
-**Last commit:** `80799b5` fix: restore 3 truncated community pages + convert to locked nav.js (#1)
+**Last commit:** `90b55db` brand: swap to new pāpāmoa.info logo + favicon asset pack
 **Branch:** `main` (pushed)
 
 > **Session 2 headline (the nav/footer lock):** `nav.js` is now the single locked source for the nav, mobile drawer, and footer styling — and is loaded on **every one of the 225 public pages**. The footer shell was upgraded to the homepage canonical (logo, tagline, FB + IG, "Get in touch", trust bullets) on 120 grid footers while keeping each page's contextual columns, and nav.js injects the contact modal so "Get in touch" works everywhere. See `docs/nav-usage.md` for the full spec + remaining footer follow-ups.
@@ -79,6 +79,7 @@ Jay's ask: *"LOCK the Nav, Mobile Menu and Footer. Update nav-usage.md, then dep
 | `2970862` | Legacy nav sweep — `site-nav` / `nav` / classless-`<nav>` / no-nav pages all converted. Every public page now on nav.js (225). Secondary section navs preserved. |
 | `bffe868` | Footer shell locked to homepage canonical on 119 grid footers (logo, FB **+ IG**, "Get in touch", trust bullets, normalised bottom bar) keeping contextual columns; nav.js now injects the contact modal (guarded) so "Get in touch" works everywhere. |
 | `80799b5` | Fixed 3 truncated community pages (`local-government`, `notable-people`, `maori-history`) — restored closing markup + footer, converted to nav.js. (Was PR #1, spawned mid-session.) |
+| `90b55db` | Brand asset refresh — Jay dropped `assets/papamoa-info-asset-pack/`. Swapped the new combined koru + "pāpāmoa.info" logo site-wide (nav.js + 143 footer refs), replaced root favicons + added android-chrome/manifest (PWA), removed old `papamoa-macron.png`/`papamoa.png`. Made `.claude/launch.json` portable. |
 
 **Decisions Jay made this session:** mechanism = nav.js single source · scope = public-facing only · category/listing nav = flat tabs everywhere (Carwyn req #3) · listings = flat nav + breadcrumb strip · footer = lock shell, keep columns · footer canonical = upgrade all to homepage shell.
 
@@ -153,7 +154,7 @@ Likely next items if Jay just says "keep going":
 - **Don't touch §3 pricing copy** until §17.13 (rotation) and §17.14 (monthly billing) decisions land. The locked $599 Silver / $1,199 Gold annual model is intact for now.
 - **Don't use the ✉ envelope unicode** anywhere. Hard ban — see `feedback_no_envelope_icon.md` in auto-memory. Existing 134 occurrences were stripped in `4caf571`. Don't re-introduce.
 - **Don't use em dashes** in client copy, comments, or code (existing memory rule).
-- **Don't auto-renew Carwyn's nav-text logo** — every public page now uses the brand image (`assets/papamoa-macron.png`). If you regenerate any page, pull the image, not the text.
+- **Don't use a text logo** — every public page uses the brand image logo (`assets/papamoa-info-asset-pack/logo/papamoa-info-logo-transparent-400w.png`), injected by `nav.js` in the nav/drawer and referenced inline in footers. If you regenerate any page, pull the image, not text.
 - **Don't edit nav / drawer / footer markup or CSS per-page anymore** — as of session 2 (`f11fef4`→`bffe868`), `nav.js` is the single locked source for the nav, mobile drawer, footer styling, breadcrumb strip, and contact modal, loaded on all 225 public pages via `<div id="pnf-nav-placeholder"></div>` + `<script src="/papamoa-previews/nav.js">`. To change the nav/drawer/footer site-wide, edit `nav.js` once. Per-page footer *column* content (contextual links) still lives inline. See `docs/nav-usage.md`. (Leftover inline nav/footer CSS in old `<style>` blocks is dead weight overridden by nav.js — safe to strip in a later cleanup, don't rely on it.)
 - **Don't sweep other CSS across pages indiscriminately** — many pages still have bespoke `<style>` blocks with their own variants for non-nav content.
 
@@ -161,8 +162,8 @@ Likely next items if Jay just says "keep going":
 
 ## 7. Repo gotchas worth knowing
 
-- **`assets/papamoa.png` (no macron) and `assets/papamoa-macron.png` (with macrons)** — only the macron version is in use site-wide. The plain version was the source for generating the macron version (Python + Pillow script).
-- **`favicon.ico` + favicon PNGs at repo root** — generated from cropping the koru out of the logo PNG. Auto-discovered + explicitly linked on every page.
+- **Brand assets live in `assets/papamoa-info-asset-pack/`** (the full pack Jay dropped 2026-06-03, session 2). The site logo is `logo/papamoa-info-logo-transparent-400w.png` (combined koru + "pāpāmoa.info" mark) — referenced by `nav.js` (nav + drawer) and every inline footer brand image. The old `papamoa-macron.png` / `papamoa.png` were removed in `90b55db`. The pack also has wordmark-only, koru-icon-only, and other logo widths if needed. To change the logo site-wide, swap the path in `nav.js` + the inline footer refs (or just drop a new file at the same path).
+- **Favicon / PWA at repo root** — `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, `android-chrome-192/512.png`, `site.webmanifest`, all from the asset pack (`90b55db`). Linked in every page `<head>` (favicons + `<link rel="manifest">`). Manifest icon paths are relative so they work at both `/papamoa-previews/` preview and custom-domain launch; theme colour is brand navy `#243B59`.
 - **`llms.txt` at repo root** — AI crawler brief. If site content or pricing changes substantially, update this too.
 - **`docs/carwyn-feedback-2026-06-02.md`** — verbatim email + structured read. The structured read sources §21 of Project_Master. If the structured read changes, §21 likely needs an update too.
 - **The path-rewriter script** at the bottom of most pages only handles click events, not asset loads. Use `/papamoa-previews/` prefix for image / favicon / stylesheet refs explicitly.
