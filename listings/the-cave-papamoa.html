@@ -184,19 +184,9 @@
     @media(max-width:720px){.two-col{grid-template-columns:1fr;}.side-col{order:-1;}.hours-grid{grid-template-columns:1fr;}}
   </style>
 </head>
-<body>
+<body data-nav="default" data-breadcrumb="Activities &amp; Entertainment|/papamoa-previews/categories/activities/entertainment.html,The Cave">
 
-<nav class="listing-nav">
-  <a href="/papamoa-previews/homepage.html" class="listing-nav-logo" aria-label="Papamoa.info home"><img src="/papamoa-previews/assets/papamoa-macron.png" alt="Papamoa.info" style="height:40px;width:auto;max-width:280px;display:block;vertical-align:middle;"></a>
-  <div class="listing-nav-bc">
-    <a href="/papamoa-previews/homepage.html">Home</a>
-    <span class="sep">/</span>
-    <a href="/papamoa-previews/categories/activities/entertainment.html">Activities &amp; Entertainment</a>
-    <span class="sep">/</span>
-    <span class="current">The Cave</span>
-  </div>
-  <a href="/papamoa-previews/sales/list-with-us.html" class="listing-nav-cta">List Your Business</a>
-</nav>
+<div id="pnf-nav-placeholder"></div>
 
 <div class="page-hero">
   <div class="hero-inner">
@@ -455,5 +445,6 @@ document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('clic
 (function(){var faqs=[];document.querySelectorAll('.faq-item').forEach(function(item){var q=item.querySelector('.faq-q');var a=item.querySelector('.faq-a');if(q&&a)faqs.push({'@type':'Question','name':q.childNodes[0].textContent.trim(),'acceptedAnswer':{'@type':'Answer','text':a.textContent.trim()}});});if(faqs.length){var el=document.getElementById('schema-faq');if(el)el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':faqs});}})();
 (function(){var base='/papamoa-previews';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var href=a.getAttribute('href');if(!href)return;if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){e.preventDefault();window.location.href=base+href;}});})();
 </script>
+<script src="/papamoa-previews/nav.js"></script>
 </body>
 </html>

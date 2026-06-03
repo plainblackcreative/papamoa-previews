@@ -716,56 +716,10 @@
   <meta name="twitter:title" content="Pāpāmoa Local Directory — Businesses, Services &amp; Local Info">
   <meta name="twitter:description" content="Pāpāmoa's independent local directory — restaurants, trades, accommodation, community guides and local information.">
 </head>
-<body>
+<body data-nav="default">
 
-<!-- NAV -->
-<nav class="pnf-nav">
-  <a href="/papamoa-previews/homepage.html" class="pnf-logo" aria-label="Papamoa.info home"><img src="/papamoa-previews/assets/papamoa-macron.png" alt="Papamoa.info — Our Local Directory Online" class="pnf-logo-img"></a>
-  <div class="pnf-links">
-    <a href="/papamoa-previews/homepage.html" class="pnf-link active">Home</a>
-    <a href="/papamoa-previews/community/essential-info.html" class="pnf-link">Info</a>
-    <a href="/papamoa-previews/community/community.html" class="pnf-link">Community</a>
-    <a href="/papamoa-previews/categories/accommodation/accommodation.html" class="pnf-link">Stay</a>
-    <a href="/papamoa-previews/categories/activities/entertainment.html" class="pnf-link">Do</a>
-    <a href="/papamoa-previews/categories/food-drink/food-and-drink.html" class="pnf-link">Eat</a>
-    <a href="/papamoa-previews/categories/services/services.html" class="pnf-link">Services</a>
-    <a href="/papamoa-previews/categories/shops/shopping.html" class="pnf-link">Shop</a>
-  </div>
-  <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-fb" title="Papamoa.info on Facebook">f</a>
-  <a href="https://www.instagram.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-ig" title="Papamoa.info on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-  <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-cta">List Your Business</a>
-  <button class="pnf-hamburger" id="pnf-hamburger" aria-label="Open menu" onclick="pnfDrawerOpen()">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- MOBILE DRAWER -->
-<div class="pnf-drawer-overlay" id="pnf-drawer-overlay" onclick="pnfDrawerClose()"></div>
-<div class="pnf-drawer" id="pnf-drawer">
-  <div class="pnf-drawer-head">
-    <a href="/papamoa-previews/homepage.html" class="pnf-drawer-logo" aria-label="Papamoa.info home"><img src="/papamoa-previews/assets/papamoa-macron.png" alt="Papamoa.info" class="pnf-drawer-logo-img"></a>
-    <button class="pnf-drawer-close" onclick="pnfDrawerClose()" aria-label="Close menu">&#10005;</button>
-  </div>
-  <nav class="pnf-drawer-nav">
-    <a href="/papamoa-previews/homepage.html" class="active">Home</a>
-    <a href="/papamoa-previews/community/essential-info.html">Info</a>
-    <a href="/papamoa-previews/community/community.html">Community</a>
-    <a href="/papamoa-previews/categories/accommodation/accommodation.html">Stay</a>
-    <a href="/papamoa-previews/categories/activities/entertainment.html">Do</a>
-    <a href="/papamoa-previews/categories/food-drink/food-and-drink.html">Eat</a>
-    <a href="/papamoa-previews/categories/services/services.html">Services</a>
-    <a href="/papamoa-previews/categories/shops/shopping.html">Shop</a>
-  </nav>
-  <div class="pnf-drawer-foot">
-    <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-drawer-cta">List Your Business</a>
-    <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-drawer-fb">
-      <span style="font-weight:800;font-size:15px;">f</span> Follow on Facebook
-    </a>
-    <a href="https://www.instagram.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-drawer-fb">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> Follow on Instagram
-    </a>
-  </div>
-</div>
+<!-- NAV + MOBILE DRAWER — injected by nav.js (locked single source) -->
+<div id="pnf-nav-placeholder"></div>
 
 <!-- HERO V2 -->
 <div class="hero-v2">
@@ -1660,43 +1614,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-// ── MOBILE DRAWER ──
-function pnfDrawerOpen() {
-  document.getElementById('pnf-drawer').classList.add('open');
-  document.getElementById('pnf-drawer-overlay').classList.add('open');
-  document.getElementById('pnf-hamburger').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function pnfDrawerClose() {
-  document.getElementById('pnf-drawer').classList.remove('open');
-  document.getElementById('pnf-drawer-overlay').classList.remove('open');
-  document.getElementById('pnf-hamburger').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDrawerClose(); });
-(function() {
-  var drawer = document.getElementById('pnf-drawer');
-  var startX = 0, startY = 0, dragging = false;
-  drawer.addEventListener('touchstart', function(e) {
-    startX = e.touches[0].clientX; startY = e.touches[0].clientY; dragging = true;
-  }, { passive: true });
-  drawer.addEventListener('touchmove', function(e) {
-    if (!dragging) return;
-    var dx = e.touches[0].clientX - startX;
-    var dy = Math.abs(e.touches[0].clientY - startY);
-    if (dx < -10 && dy < 40) { drawer.style.transform = 'translateX(' + Math.min(0, dx) + 'px)'; }
-  }, { passive: true });
-  drawer.addEventListener('touchend', function(e) {
-    if (!dragging) return;
-    dragging = false;
-    var dx = e.changedTouches[0].clientX - startX;
-    drawer.style.transform = '';
-    if (dx < -60) pnfDrawerClose();
-  }, { passive: true });
-})();
-</script>
-
-<script>
 // ── CONTACT MODAL ──
 function pnfOpenContact(type) {
   if (type) { var sel = document.getElementById('pnf-enquiry-type'); if (sel) { for (var i=0;i<sel.options.length;i++) { if(sel.options[i].value===type){sel.selectedIndex=i;break;} } } }
@@ -1980,5 +1897,6 @@ loadHeroWeather();
   }
 })();
 </script>
+<script src="/papamoa-previews/nav.js"></script>
 </body>
 </html>

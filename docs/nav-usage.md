@@ -1,85 +1,83 @@
-# nav.js — Implementation Guide
+# nav.js — Implementation Guide (LOCKED single source)
+
+`nav.js` is the **single source of truth** for the site nav, mobile drawer, and
+footer *styling*. The markup + CSS it injects are the LOCKED versions captured
+from `homepage.html` on 2026-06-03. Do not fork per-page nav/drawer markup again
+— change it here and it changes everywhere.
+
+## What nav.js owns
+
+| Element | Owned by nav.js | Notes |
+|---|---|---|
+| Top nav (`.pnf-nav`) | ✅ markup + CSS | Flat tab bar, 64px, FB **+ IG** icons, "List Your Business" CTA. Active tab auto-computed from the URL. |
+| Mobile drawer (`.pnf-drawer*`) | ✅ markup + CSS | Plain text links (no emoji icons), FB + IG "Follow" links in the foot. |
+| Footer **styling** (`.pnf-footer*`) | ✅ CSS only | The footer **markup stays inline** per page so each page keeps its contextual columns (e.g. a category's subcategory links). nav.js only injects the CSS so the look is consistent. |
+| Contact modal (`.pnf-overlay/.pnf-modal/.pnf-cf`) | ❌ | Stays inline per page (markup + CSS + the `pnfOpenContact()` JS). |
 
 ## Setup
 
-1. Add `nav.js` to your repo root (or `/assets/js/nav.js`)
-2. On each page, **remove** the existing hardcoded `<nav>`, drawer overlay, and drawer HTML
-3. Add the placeholder div and script tag at the top of `<body>`
-
----
-
-## Minimal page template
+On each public page:
 
 ```html
 <body data-nav="default">
 
-  <!-- Nav placeholder — nav.js replaces this -->
+  <!-- nav.js injects nav + drawer here, then removes this placeholder -->
   <div id="pnf-nav-placeholder"></div>
 
-  <!-- Page content here -->
+  <!-- page content, including the inline <footer class="pnf-footer"> ... </footer> -->
 
   <script src="/papamoa-previews/nav.js"></script>
 </body>
 ```
 
----
+That's it. `nav.js` injects the nav, the drawer + overlay, and all `.pnf-*` CSS
+(nav, drawer, footer). It exposes `window.pnfDrawerOpen` / `window.pnfDrawerClose`
+so any legacy inline `onclick="pnfDrawerOpen()"` left in old markup still works.
 
-## Nav variants
+## Nav variant — flat everywhere (locked)
 
-### Default (homepage, community, info pages)
+Every public page uses **`data-nav="default"`** — the flat tab bar (Home, Info,
+Community, Stay, Do, Eat, Services, Shop). This is deliberate: Carwyn's brief #3
+is *"main page tabs more visible"*, so the tabs stay visible on every page and
+only the **active** tab changes.
+
+The active tab is computed from the URL:
+- Category links (`/categories/FOLDER/...`) highlight on the category page **and**
+  all of that category's subcategory pages.
+- Home / Info / Community highlight on their exact page.
+- Detection is robust to dev servers that strip `.html` from the address bar.
+
+### Retained but NOT deployed: `category` / `sales` variants
+
+`nav.js` still contains `buildCategory()` (logo + breadcrumb + CTA) and
+`buildSales()` (logo + ← Directory + custom CTA) for possible future use, but
+they are **not deployed** — flat is the locked site-wide nav. If breadcrumb
+wayfinding is wanted on deep pages later, add it as a thin strip *under* the flat
+nav rather than replacing the tab bar.
+
+## What to remove when converting a page
+
 ```html
-<body data-nav="default">
-```
-Full nav with all links, Facebook icon, "List Your Business" CTA, full drawer.
+<!-- Remove the inline nav -->
+<nav class="pnf-nav"> ... </nav>
 
----
+<!-- Remove the inline drawer (overlay + drawer) if present -->
+<div class="pnf-drawer-overlay" ...></div>
+<div class="pnf-drawer" id="pnf-drawer"> ... </div>
 
-### Category / Listing pages
-```html
-<body
-  data-nav="category"
-  data-breadcrumb="Food & Drink|/papamoa-previews/categories/food-drink/food-and-drink.html,Mumbai Masala"
->
+<!-- Remove the inline drawer JS (nav.js owns it) -->
+<script>function pnfDrawerOpen(){...}function pnfDrawerClose(){...}</script>
 ```
 
-**Breadcrumb format** — `data-breadcrumb` is a comma-separated list of segments:
-- `Label|/path` — a linked crumb (parent pages)
-- `Label` — the current page (no link, shown bold)
-
-Home is always prepended automatically. Examples:
-
-```
-// Category page
-data-breadcrumb="Food & Drink"
-
-// Subcategory page
-data-breadcrumb="Food & Drink|/papamoa-previews/categories/food-drink/food-and-drink.html,Restaurants"
-
-// Listing page
-data-breadcrumb="Food & Drink|/papamoa-previews/categories/food-drink/food-and-drink.html,Restaurants|/papamoa-previews/categories/food-drink/restaurants-papamoa.html,Mumbai Masala"
-```
-
----
-
-### Sales / Business pages
-```html
-<body
-  data-nav="sales"
-  data-cta-href="#contact"
-  data-cta-label="Get started →"
->
-```
-
-- `data-cta-href` — where the CTA button links (usually an anchor to the form on that page)
-- `data-cta-label` — button text (defaults to "Get started →" if omitted)
-
----
+**Keep** the inline `<footer class="pnf-footer">` markup, the contact modal
+markup, and `pnfOpenContact()`. Inline nav/drawer/footer **CSS** left in a page's
+`<style>` block is harmless — nav.js injects the authoritative copy last, so it
+wins — but it's dead weight and can be stripped in a later cleanup pass.
 
 ## Base path override
 
-By default `nav.js` uses `/papamoa-previews` as the path prefix (for GitHub Pages preview).
-
-At custom domain launch, add this **before** the nav.js script tag on every page:
+By default `nav.js` uses `/papamoa-previews` as the path prefix (GitHub Pages
+preview). At custom-domain launch, set the base to empty **before** the script:
 
 ```html
 <script>var PNF_BASE = '';</script>
@@ -88,38 +86,19 @@ At custom domain launch, add this **before** the nav.js script tag on every page
 
 Or do a single find-and-replace across the repo when going live.
 
----
+## Rollout status (2026-06-03)
 
-## What to remove from each page
-
-When retrofitting existing pages, remove:
-
-```html
-<!-- Remove this block entirely -->
-<nav class="pnf-nav">
-  ...
-</nav>
-
-<!-- Remove this block entirely -->
-<div class="pnf-drawer-overlay" ...></div>
-<div class="pnf-drawer" ...>
-  ...
-</div>
-```
-
-Also remove the nav/drawer **CSS** from the page `<style>` block — all CSS is now injected by `nav.js`. The CSS variables and classes to remove are prefixed with `.pnf-nav`, `.pnf-logo`, `.pnf-links`, `.pnf-link`, `.pnf-cta`, `.pnf-fb`, `.pnf-hamburger`, `.pnf-drawer*`.
-
-Keep the `.pnf-footer`, `.pnf-overlay` (contact modal), and `.pnf-modal` CSS — those are not part of nav.js.
-
----
-
-## Existing pages that need updating
-
-### Use `data-nav="default"`
-All community pages, homepage, info pages — just swap in the placeholder, no breadcrumb needed.
-
-### Use `data-nav="category"`
-All category pages, subcategory pages, listing pages — set breadcrumb per page.
-
-### Use `data-nav="sales"`
-`sales/list-with-us.html`, `sales/landing.html`, `sales/post-call-landing.html` — set `data-cta-href` to the form anchor on each page.
+- ✅ **161 public pages** converted to the placeholder + script pattern:
+  `homepage.html`, `search.html`, all category + subcategory pages, all community
+  / info pages, and the `sales/` pages that already used `pnf-nav`.
+- ⏳ **Listings** (`listings/*.html`) and the listing templates still use the
+  separate `listing-nav` (breadcrumb) markup — pending conversion decision
+  (flat nav drops the per-listing breadcrumb).
+- ⏳ Misc utility pages still on other nav markup: `legal.html`,
+  `editorial-policy.html`, `404.html`, some `sales/` collateral.
+- ⛔ Excluded by scope: `index.html` (Project Dashboard), `dashboard.html`,
+  `admin/*`, `docs/*`. Reference snippet `assets/nav-footer-snippet.html` left
+  as-is.
+- 🔒 Footer **shell** (brand col, social, trust bullets, legal bottom bar) still
+  drifts in *markup* across some pages — normalisation pass pending; the CSS is
+  already single-source via nav.js.

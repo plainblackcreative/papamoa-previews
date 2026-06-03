@@ -1,19 +1,25 @@
 /**
- * Papamoa.info — Shared Nav
- * Injects the correct nav variant based on data-nav attribute on <body>.
+ * Papamoa.info — Shared Nav + Mobile Drawer (LOCKED)
  *
- * Usage:
- *   <body data-nav="default">          — Full nav (homepage, community, info pages)
- *   <body data-nav="category" data-breadcrumb="Food & Drink|/papamoa-previews/categories/food-drink/food-and-drink.html,Mumbai Masala">
- *                                      — Logo + breadcrumb + List Your Business CTA
- *   <body data-nav="sales" data-cta-label="Get started →" data-cta-href="#contact">
- *                                      — Logo + ← Directory + Get started CTA
+ * Single source of truth for the site nav, mobile drawer, and footer styling.
+ * The markup + CSS here are the LOCKED versions captured from homepage.html
+ * (2026-06-03). Do not fork per-page nav/drawer markup again — change it here.
  *
- * Breadcrumb format (data-breadcrumb):
- *   Comma-separated segments. Each segment is either:
- *     "Label|/path"   — linked crumb
- *     "Label"         — current page (no link, shown as active)
- *   Home is always prepended automatically.
+ * Usage (every public page):
+ *   <body data-nav="default">
+ *   <div id="pnf-nav-placeholder"></div>
+ *   ...page content (including the inline <footer class="pnf-footer">)...
+ *   <script src="/papamoa-previews/nav.js"></script>
+ *
+ * Nav variant: flat tabs on every page (Carwyn req #3 — main page tabs always
+ *   visible). The active tab is computed from the URL. The category/sales
+ *   builders below are retained for optional future use but are NOT deployed;
+ *   default (flat) is the locked site-wide nav.
+ *
+ * Footer: nav.js injects the footer CSS (.pnf-footer*) so the shell + styling
+ *   are single-source. The footer MARKUP stays inline per page so each page can
+ *   keep its contextual columns (e.g. category subcategory links). The contact
+ *   modal (.pnf-overlay/.pnf-modal/.pnf-cf) is NOT owned here — it stays inline.
  *
  * Base path:
  *   Set PNF_BASE in a <script> before nav.js to override the path prefix.
@@ -30,22 +36,27 @@
   var style = document.createElement('style');
   style.textContent = [
     ':root{--pnf-navy:#243B59;--pnf-accent:#359FE8;--pnf-dune:#C4985A;--pnf-white:#FFFFFF;--pnf-muted:rgba(255,255,255,0.45);--pnf-font:\'Figtree\',sans-serif;--pnf-display:\'Playfair Display\',serif;}',
-    '.pnf-nav{background:var(--pnf-navy);height:56px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.25);gap:16px;width:100%;box-sizing:border-box;}',
+    // ── NAV (locked: 64px) ──
+    '.pnf-nav{background:var(--pnf-navy);height:64px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.25);gap:18px;width:100%;box-sizing:border-box;}',
     '.pnf-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;line-height:0;}',
-    '.pnf-logo-img{height:44px;width:auto;max-width:300px;display:block;vertical-align:middle;}',
+    '.pnf-logo-img{height:44px;width:auto;max-width:300px;display:block;}',
     '@media (max-width:520px){.pnf-logo-img{height:36px;max-width:230px;}}',
     // Default nav links
-    '.pnf-links{display:flex;align-items:center;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}',
+    '.pnf-links{display:flex;align-items:center;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none;}',
     '.pnf-links::-webkit-scrollbar{display:none;}',
-    '.pnf-link{font-family:var(--pnf-font);font-size:13px;font-weight:500;color:var(--pnf-muted);text-decoration:none;padding:6px 12px;white-space:nowrap;transition:color 0.15s;border-bottom:2px solid transparent;}',
-    '.pnf-link:hover{color:var(--pnf-white);}',
-    '.pnf-link.active{color:var(--pnf-white);border-bottom-color:var(--pnf-accent);}',
+    '.pnf-link{font-family:var(--pnf-font);font-size:14.5px;font-weight:600;color:rgba(255,255,255,0.78);text-decoration:none;padding:9px 14px;white-space:nowrap;transition:color 0.15s,background 0.15s;border-bottom:2px solid transparent;border-radius:6px 6px 0 0;}',
+    '.pnf-link:hover{color:var(--pnf-white);background:rgba(255,255,255,0.06);}',
+    '.pnf-link.active{color:var(--pnf-white);border-bottom-color:var(--pnf-accent);background:rgba(53,159,232,0.08);}',
     // CTA button
     '.pnf-cta{font-family:var(--pnf-font);font-size:13px;font-weight:700;background:var(--pnf-accent);color:var(--pnf-white);padding:8px 18px;border-radius:100px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:background 0.2s;}',
     '.pnf-cta:hover{background:#2d95c4;}',
     // Facebook icon
     '.pnf-fb{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.08);color:var(--pnf-muted);text-decoration:none;font-size:13px;font-weight:700;flex-shrink:0;transition:background 0.15s,color 0.15s;}',
     '.pnf-fb:hover{background:#1877F2;color:var(--pnf-white);}',
+    // Instagram icon
+    '.pnf-ig{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.08);color:var(--pnf-muted);text-decoration:none;flex-shrink:0;transition:background 0.15s,color 0.15s;}',
+    '.pnf-ig svg{width:16px;height:16px;}',
+    '.pnf-ig:hover{background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF);color:var(--pnf-white);}',
     // Hamburger
     '.pnf-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:7px;cursor:pointer;padding:0 9px;flex-shrink:0;}',
     '.pnf-hamburger span{display:block;height:2px;background:rgba(255,255,255,0.75);border-radius:2px;transition:all 0.25s;}',
@@ -53,16 +64,23 @@
     '.pnf-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}',
     '.pnf-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}',
     '.pnf-hamburger.open{opacity:0;pointer-events:none;}',
-    // Breadcrumb (category/listing nav)
+    // Breadcrumb strip (slim wayfinding bar under the flat nav — listings)
+    '.pnf-bcstrip{display:flex;align-items:center;flex-wrap:wrap;background:#fff;border-bottom:1px solid #E8E2D8;padding:10px 28px;font-family:var(--pnf-font);font-size:12.5px;color:#6A7A85;}',
+    '.pnf-bcstrip a{color:#6A7A85;text-decoration:none;transition:color 0.15s;}',
+    '.pnf-bcstrip a:hover{color:var(--pnf-accent);}',
+    '.pnf-bcstrip .pnf-bcsep{margin:0 8px;color:#C2CCD2;}',
+    '.pnf-bcstrip .pnf-bccurrent{color:var(--pnf-navy);font-weight:600;}',
+    '@media (max-width:520px){.pnf-bcstrip{padding:9px 16px;font-size:12px;}}',
+    // Breadcrumb (category/listing nav — retained, not deployed)
     '.pnf-breadcrumb{display:flex;align-items:center;gap:0;flex:1;overflow:hidden;font-size:12.5px;color:rgba(255,255,255,0.45);white-space:nowrap;min-width:0;}',
     '.pnf-breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.15s;flex-shrink:0;}',
     '.pnf-breadcrumb a:hover{color:var(--pnf-white);}',
     '.pnf-breadcrumb-sep{margin:0 6px;opacity:0.3;flex-shrink:0;}',
     '.pnf-breadcrumb-current{color:rgba(255,255,255,0.85);font-weight:600;overflow:hidden;text-overflow:ellipsis;min-width:0;}',
-    // Back link (sales nav)
+    // Back link (sales nav — retained, not deployed)
     '.pnf-back{font-family:var(--pnf-font);font-size:13px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.15s;position:absolute;left:50%;transform:translateX(-50%);}',
     '.pnf-back:hover{color:var(--pnf-white);}',
-    '.pnf-nav-sales{position:relative;}', // needed for absolute-centred back link
+    '.pnf-nav-sales{position:relative;}',
     // Drawer
     '.pnf-drawer-overlay{display:block;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:190;opacity:0;pointer-events:none;transition:opacity 0.25s;}',
     '.pnf-drawer-overlay.open{opacity:1;pointer-events:all;}',
@@ -70,30 +88,71 @@
     '.pnf-drawer.open{transform:translateX(0);}',
     '.pnf-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:0 18px;height:56px;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;}',
     '.pnf-drawer-logo{display:flex;align-items:center;text-decoration:none;line-height:0;}',
-    '.pnf-drawer-logo-img{height:34px;width:auto;max-width:220px;display:block;vertical-align:middle;}',
+    '.pnf-drawer-logo-img{height:34px;width:auto;max-width:220px;display:block;}',
     '.pnf-drawer-close{background:rgba(255,255,255,0.08);border:none;color:rgba(255,255,255,0.6);width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;}',
     '.pnf-drawer-nav{flex:1;overflow-y:auto;padding:10px 0;}',
     '.pnf-drawer-nav a{display:flex;align-items:center;gap:12px;padding:13px 20px;font-family:var(--pnf-font);font-size:15px;font-weight:500;color:rgba(255,255,255,0.65);text-decoration:none;border-left:3px solid transparent;transition:all 0.15s;}',
     '.pnf-drawer-nav a:hover,.pnf-drawer-nav a.active{color:var(--pnf-white);background:rgba(255,255,255,0.05);border-left-color:var(--pnf-accent);}',
-    '.pnf-drawer-nav a .dn-icon{font-size:17px;width:22px;text-align:center;flex-shrink:0;}',
     '.pnf-drawer-foot{padding:16px 18px;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:10px;flex-shrink:0;}',
     '.pnf-drawer-cta{display:block;text-align:center;background:var(--pnf-accent);color:var(--pnf-white);font-family:var(--pnf-font);font-size:14px;font-weight:700;padding:11px;border-radius:8px;text-decoration:none;}',
     '.pnf-drawer-fb{display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--pnf-font);font-size:13px;font-weight:600;color:rgba(255,255,255,0.45);text-decoration:none;}',
     '.pnf-drawer-fb:hover{color:var(--pnf-white);}',
+    '.pnf-drawer-fb svg{width:14px;height:14px;}',
     '.pnf-drawer-link-sm{font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;text-align:center;padding:4px 0;font-family:var(--pnf-font);}',
     '.pnf-drawer-link-sm:hover{color:rgba(255,255,255,0.7);}',
     // Mobile breakpoint
     '@media(max-width:640px){',
     '.pnf-links{display:none;}',
     '.pnf-fb{display:none;}',
+    '.pnf-ig{display:none;}',
     '.pnf-cta{display:none;}',
     '.pnf-nav{padding:0 16px;}',
     '.pnf-hamburger{display:flex;}',
-    '}'
+    '}',
+    // ── FOOTER (locked shell styling; markup stays inline per page) ──
+    '.pnf-footer{background:var(--pnf-navy);padding:48px 28px 24px;overflow:hidden;}',
+    '.pnf-footer-inner{max-width:1200px;margin:0 auto;}',
+    '.pnf-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px;}',
+    '.pnf-footer-brand-col{grid-column:1;}',
+    '@media (max-width:900px){.pnf-footer-grid{grid-template-columns:1fr 1fr;gap:24px 28px;}.pnf-footer-brand-col{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:0 28px;align-items:start;}.pnf-footer-brand-col .pnf-footer-tagline{max-width:none;}}',
+    '@media (max-width:480px){.pnf-footer-grid{grid-template-columns:1fr 1fr;gap:20px 20px;}.pnf-footer-brand-col{grid-column:1 / -1;display:block;margin-bottom:4px;}.pnf-footer-brand-col .pnf-footer-tagline{display:none;}}',
+    '.pnf-footer-brand{margin-bottom:12px;line-height:0;}',
+    '.pnf-footer-brand-img{height:54px;width:auto;max-width:320px;display:block;}',
+    '.pnf-footer-brand span{color:var(--pnf-accent);}',
+    '.pnf-footer-tagline{font-size:12.5px;color:rgba(255,255,255,0.38);line-height:1.7;margin-bottom:18px;max-width:280px;}',
+    '.pnf-footer-social{display:flex;gap:8px;margin-bottom:16px;}',
+    '.pnf-social-btn{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:7px;padding:7px 12px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.15s;}',
+    '.pnf-social-btn:hover{background:#1877F2;border-color:#1877F2;color:var(--pnf-white);}',
+    '.pnf-social-btn.is-ig:hover{background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF);border-color:#DD2A7B;}',
+    '.pnf-social-btn .fb-icon{font-size:14px;font-weight:800;}',
+    '.pnf-social-btn svg{width:14px;height:14px;}',
+    '.pnf-contact-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--pnf-accent);cursor:pointer;background:none;border:none;padding:0;margin:0;font-family:var(--pnf-font);line-height:1.5;appearance:none;}',
+    '.pnf-contact-link:hover{color:var(--pnf-white);}',
+    '.pnf-footer-col h4{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;}',
+    '.pnf-footer-col h4+h4{margin-top:20px;}',
+    '.pnf-footer-links{list-style:none;display:flex;flex-direction:column;gap:7px;}',
+    '.pnf-footer-links a{font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.15s;}',
+    '.pnf-footer-links a:hover{color:var(--pnf-white);}',
+    '.pnf-footer-links button{font-size:13px;color:rgba(255,255,255,0.5);background:none;border:none;padding:0;cursor:pointer;font-family:var(--pnf-font);transition:color 0.15s;text-align:left;}',
+    '.pnf-footer-links button:hover{color:var(--pnf-white);}',
+    '.pnf-footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:rgba(255,255,255,0.25);}',
+    '.pnf-footer-bottom a{color:rgba(255,255,255,0.35);text-decoration:none;}',
+    '.pnf-footer-bottom a:hover{color:var(--pnf-white);}',
+    '.pnf-footer-trust{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:6px;list-style:none;}',
+    '.pnf-footer-trust li{font-size:11.5px;color:rgba(255,255,255,0.55);display:flex;align-items:center;gap:8px;line-height:1.5;}',
+    '.pnf-footer-trust li::before{content:\'\';width:5px;height:5px;border-radius:50%;background:#89BE43;flex-shrink:0;}',
+    '.pnf-footer-popular{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);}',
+    '.pnf-footer-popular h4{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;}',
+    '.pnf-footer-popular-list{font-size:12.5px;line-height:2;color:rgba(255,255,255,0.4);}',
+    '.pnf-footer-popular-list a{color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.15s;}',
+    '.pnf-footer-popular-list a:hover{color:var(--pnf-white);text-decoration:underline;}',
+    '.pnf-footer-popular-list .sep{margin:0 8px;color:rgba(255,255,255,0.18);}'
   ].join('');
   document.head.appendChild(style);
 
   // ── HELPERS ─────────────────────────────────────────────────────────────
+  var IG_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>';
+
   function el(tag, attrs, inner) {
     var e = document.createElement(tag);
     if (attrs) Object.keys(attrs).forEach(function(k) {
@@ -106,7 +165,7 @@
   }
   function logo(href) {
     var a = el('a', { href: href || BASE + '/homepage.html', 'class': 'pnf-logo', 'aria-label': 'Papamoa.info home' });
-    a.innerHTML = '<img src="' + BASE + '/assets/papamoa-macron.png" alt="Papamoa.info — Our Local Directory Online" class="pnf-logo-img" style="height:44px;width:auto;max-width:300px;display:block;vertical-align:middle;">';
+    a.innerHTML = '<img src="' + BASE + '/assets/papamoa-macron.png" alt="Papamoa.info — Our Local Directory Online" class="pnf-logo-img">';
     return a;
   }
   function hamburger() {
@@ -118,13 +177,84 @@
   function drawerHead() {
     var head = el('div', { 'class': 'pnf-drawer-head' });
     var l = el('a', { href: BASE + '/homepage.html', 'class': 'pnf-drawer-logo', 'aria-label': 'Papamoa.info home' });
-    l.innerHTML = '<img src="' + BASE + '/assets/papamoa-macron.png" alt="Papamoa.info" class="pnf-drawer-logo-img" style="height:34px;width:auto;max-width:220px;display:block;vertical-align:middle;">';
+    l.innerHTML = '<img src="' + BASE + '/assets/papamoa-macron.png" alt="Papamoa.info" class="pnf-drawer-logo-img">';
     var close = el('button', { 'class': 'pnf-drawer-close', 'aria-label': 'Close menu', html: '&#10005;' });
     close.addEventListener('click', pnfDrawerClose);
     head.appendChild(l);
     head.appendChild(close);
     return head;
   }
+  // Locked drawer (flat link list, no icons) + FB/IG follow links
+  function defaultDrawer(currentPath) {
+    var overlay = el('div', { 'class': 'pnf-drawer-overlay', id: 'pnf-drawer-overlay' });
+    overlay.addEventListener('click', pnfDrawerClose);
+
+    var drawer = el('div', { 'class': 'pnf-drawer', id: 'pnf-drawer' });
+    drawer.appendChild(drawerHead());
+
+    var dnav = el('nav', { 'class': 'pnf-drawer-nav' });
+    var cur = normPath(currentPath);
+    NAV_LINKS.forEach(function(item) {
+      var isActive = isActiveItem(item.href, cur);
+      dnav.appendChild(el('a', { href: item.href, 'class': isActive ? 'active' : '', text: item.label }));
+    });
+    drawer.appendChild(dnav);
+
+    var foot = el('div', { 'class': 'pnf-drawer-foot' });
+    foot.appendChild(el('a', { href: BASE + '/sales/list-with-us.html', 'class': 'pnf-drawer-cta', text: 'List Your Business' }));
+    var fbLink = el('a', { href: 'https://www.facebook.com/papamoa.info/', target: '_blank', rel: 'noopener', 'class': 'pnf-drawer-fb' });
+    fbLink.innerHTML = '<span style="font-weight:800;font-size:15px;">f</span> Follow on Facebook';
+    foot.appendChild(fbLink);
+    var igLink = el('a', { href: 'https://www.instagram.com/papamoa.info/', target: '_blank', rel: 'noopener', 'class': 'pnf-drawer-fb' });
+    igLink.innerHTML = IG_SVG + ' Follow on Instagram';
+    foot.appendChild(igLink);
+    drawer.appendChild(foot);
+
+    return [overlay, drawer];
+  }
+
+  // Active-tab detection (robust to .html stripping by dev servers + subcategory pages)
+  function normPath(p) {
+    return p.replace(/\/index\.html$/, '/').replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+  }
+  function isActiveItem(href, cur) {
+    var h = normPath(href);
+    var catMatch = href.match(/\/categories\/[^/]+/);
+    if (catMatch) {
+      var prefix = normPath(BASE + catMatch[0]);
+      return cur === prefix || cur.indexOf(prefix + '/') === 0;
+    }
+    return cur === h;
+  }
+
+  // Slim breadcrumb strip under the flat nav, built from body[data-breadcrumb].
+  // Format: comma-separated segments, each "Label|/path" (linked) or "Label" (current).
+  // Home is prepended automatically. Returns null when no data-breadcrumb is set.
+  function breadcrumbStrip() {
+    var raw = body.getAttribute('data-breadcrumb');
+    if (!raw) return null;
+    var strip = el('nav', { 'class': 'pnf-bcstrip', 'aria-label': 'Breadcrumb' });
+    strip.appendChild(el('a', { href: BASE + '/homepage.html', text: 'Home' }));
+    raw.split(',').forEach(function(segment) {
+      strip.appendChild(el('span', { 'class': 'pnf-bcsep', html: '/' }));
+      var parts = segment.split('|');
+      if (parts.length === 2) strip.appendChild(el('a', { href: parts[1].trim(), text: parts[0].trim() }));
+      else strip.appendChild(el('span', { 'class': 'pnf-bccurrent', text: parts[0].trim() }));
+    });
+    return strip;
+  }
+
+  // Locked nav link set (flat tabs)
+  var NAV_LINKS = [
+    { label: 'Home',      href: BASE + '/homepage.html' },
+    { label: 'Info',      href: BASE + '/community/essential-info.html' },
+    { label: 'Community', href: BASE + '/community/community.html' },
+    { label: 'Stay',      href: BASE + '/categories/accommodation/accommodation.html' },
+    { label: 'Do',        href: BASE + '/categories/activities/entertainment.html' },
+    { label: 'Eat',       href: BASE + '/categories/food-drink/food-and-drink.html' },
+    { label: 'Services',  href: BASE + '/categories/services/services.html' },
+    { label: 'Shop',      href: BASE + '/categories/shops/shopping.html' }
+  ];
 
   // ── DRAWER OPEN / CLOSE ─────────────────────────────────────────────────
   function pnfDrawerOpen() {
@@ -145,6 +275,9 @@
     if (h) h.classList.remove('open');
     document.body.style.overflow = '';
   }
+  // Expose for any inline onclick="pnfDrawerOpen()" left in legacy markup
+  window.pnfDrawerOpen = pnfDrawerOpen;
+  window.pnfDrawerClose = pnfDrawerClose;
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDrawerClose(); });
   // Swipe to close
   (function() {
@@ -163,7 +296,7 @@
     }, { passive: true });
   })();
 
-  // ── NAV: DEFAULT ────────────────────────────────────────────────────────
+  // ── NAV: DEFAULT (locked flat nav, deployed site-wide) ──────────────────
   function buildDefault() {
     var currentPath = window.location.pathname;
     var nav = el('nav', { 'class': 'pnf-nav' });
@@ -173,26 +306,18 @@
 
     // Links
     var links = el('div', { 'class': 'pnf-links' });
-    var navLinks = [
-      { label: 'Home',      href: BASE + '/homepage.html' },
-      { label: 'Info',      href: BASE + '/community/essential-info.html' },
-      { label: 'Community', href: BASE + '/community/community.html' },
-      { label: 'Stay',      href: BASE + '/categories/accommodation/accommodation.html' },
-      { label: 'Do',        href: BASE + '/categories/activities/entertainment.html' },
-      { label: 'Eat',       href: BASE + '/categories/food-drink/food-and-drink.html' },
-      { label: 'Services',  href: BASE + '/categories/services/services.html' },
-      { label: 'Shop',      href: BASE + '/categories/shops/shopping.html' }
-    ];
-    navLinks.forEach(function(item) {
-      var isActive = currentPath === item.href || currentPath.indexOf(item.href) === 0;
-      var a = el('a', { href: item.href, 'class': 'pnf-link' + (isActive ? ' active' : ''), text: item.label });
-      links.appendChild(a);
+    var cur = normPath(currentPath);
+    NAV_LINKS.forEach(function(item) {
+      var isActive = isActiveItem(item.href, cur);
+      links.appendChild(el('a', { href: item.href, 'class': 'pnf-link' + (isActive ? ' active' : ''), text: item.label }));
     });
     nav.appendChild(links);
 
     // Facebook
-    var fb = el('a', { href: 'https://www.facebook.com/papamoa.info/', target: '_blank', rel: 'noopener', 'class': 'pnf-fb', title: 'Papamoa.info on Facebook', html: 'f' });
-    nav.appendChild(fb);
+    nav.appendChild(el('a', { href: 'https://www.facebook.com/papamoa.info/', target: '_blank', rel: 'noopener', 'class': 'pnf-fb', title: 'Papamoa.info on Facebook', html: 'f' }));
+
+    // Instagram
+    nav.appendChild(el('a', { href: 'https://www.instagram.com/papamoa.info/', target: '_blank', rel: 'noopener', 'class': 'pnf-ig', title: 'Papamoa.info on Instagram', html: IG_SVG }));
 
     // CTA
     nav.appendChild(el('a', { href: BASE + '/sales/list-with-us.html', 'class': 'pnf-cta', text: 'List Your Business' }));
@@ -200,186 +325,54 @@
     // Hamburger
     nav.appendChild(hamburger());
 
-    // Overlay + Drawer (default — full)
-    var overlay = el('div', { 'class': 'pnf-drawer-overlay', id: 'pnf-drawer-overlay' });
-    overlay.addEventListener('click', pnfDrawerClose);
-
-    var drawer = el('div', { 'class': 'pnf-drawer', id: 'pnf-drawer' });
-    drawer.appendChild(drawerHead());
-
-    var dnav = el('nav', { 'class': 'pnf-drawer-nav' });
-    var drawerLinks = [
-      { label: 'Home',      href: BASE + '/homepage.html',                                       icon: '&#127968;' },
-      { label: 'Info',      href: BASE + '/community/essential-info.html',                       icon: '&#128205;' },
-      { label: 'Community', href: BASE + '/community/community.html',                            icon: '&#129309;' },
-      { label: 'Stay',      href: BASE + '/categories/accommodation/accommodation.html',          icon: '&#127968;' },
-      { label: 'Do',        href: BASE + '/categories/activities/entertainment.html',             icon: '&#127918;' },
-      { label: 'Eat',       href: BASE + '/categories/food-drink/food-and-drink.html',            icon: '&#127829;' },
-      { label: 'Services',  href: BASE + '/categories/services/services.html',                   icon: '&#128295;' },
-      { label: 'Shop',      href: BASE + '/categories/shops/shopping.html',                      icon: '&#128717;' }
-    ];
-    drawerLinks.forEach(function(item) {
-      var isActive = currentPath === item.href;
-      var a = el('a', { href: item.href, 'class': isActive ? 'active' : '' });
-      a.innerHTML = '<span class="dn-icon">' + item.icon + '</span>' + item.label;
-      dnav.appendChild(a);
-    });
-    drawer.appendChild(dnav);
-
-    var foot = el('div', { 'class': 'pnf-drawer-foot' });
-    foot.appendChild(el('a', { href: BASE + '/sales/list-with-us.html', 'class': 'pnf-drawer-cta', text: 'List Your Business' }));
-    var fbLink = el('a', { href: 'https://www.facebook.com/papamoa.info/', target: '_blank', rel: 'noopener', 'class': 'pnf-drawer-fb' });
-    fbLink.innerHTML = '<span style="font-weight:800;font-size:15px;">f</span> Follow on Facebook';
-    foot.appendChild(fbLink);
-    drawer.appendChild(foot);
-
-    return [nav, overlay, drawer];
+    return [nav, breadcrumbStrip()].filter(Boolean).concat(defaultDrawer(currentPath));
   }
 
-  // ── NAV: CATEGORY / LISTING ─────────────────────────────────────────────
+  // ── NAV: CATEGORY / LISTING (retained, not deployed) ────────────────────
   function buildCategory() {
     var nav = el('nav', { 'class': 'pnf-nav' });
-
-    // Logo
     nav.appendChild(logo());
 
-    // Breadcrumb
     var bc = el('div', { 'class': 'pnf-breadcrumb' });
     var rawCrumbs = body.getAttribute('data-breadcrumb') || '';
-
-    // Always start with Home
-    var homeA = el('a', { href: BASE + '/homepage.html', text: 'Home' });
-    bc.appendChild(homeA);
-
+    bc.appendChild(el('a', { href: BASE + '/homepage.html', text: 'Home' }));
     if (rawCrumbs) {
       rawCrumbs.split(',').forEach(function(segment) {
-        var sep = el('span', { 'class': 'pnf-breadcrumb-sep', html: '/' });
-        bc.appendChild(sep);
+        bc.appendChild(el('span', { 'class': 'pnf-breadcrumb-sep', html: '/' }));
         var parts = segment.split('|');
-        if (parts.length === 2) {
-          // Linked crumb
-          bc.appendChild(el('a', { href: parts[1].trim(), text: parts[0].trim() }));
-        } else {
-          // Current page (last crumb, no link)
-          bc.appendChild(el('span', { 'class': 'pnf-breadcrumb-current', text: parts[0].trim() }));
-        }
+        if (parts.length === 2) bc.appendChild(el('a', { href: parts[1].trim(), text: parts[0].trim() }));
+        else bc.appendChild(el('span', { 'class': 'pnf-breadcrumb-current', text: parts[0].trim() }));
       });
     }
     nav.appendChild(bc);
-
-    // CTA
     nav.appendChild(el('a', { href: BASE + '/sales/list-with-us.html', 'class': 'pnf-cta', text: 'List Your Business' }));
-
-    // Hamburger
     nav.appendChild(hamburger());
-
-    // Overlay + Drawer (full default drawer)
-    var overlay = el('div', { 'class': 'pnf-drawer-overlay', id: 'pnf-drawer-overlay' });
-    overlay.addEventListener('click', pnfDrawerClose);
-
-    var drawer = el('div', { 'class': 'pnf-drawer', id: 'pnf-drawer' });
-    drawer.appendChild(drawerHead());
-
-    var dnav = el('nav', { 'class': 'pnf-drawer-nav' });
-    var drawerLinks = [
-      { label: 'Home',      href: BASE + '/homepage.html',                                       icon: '&#127968;' },
-      { label: 'Info',      href: BASE + '/community/essential-info.html',                       icon: '&#128205;' },
-      { label: 'Community', href: BASE + '/community/community.html',                            icon: '&#129309;' },
-      { label: 'Stay',      href: BASE + '/categories/accommodation/accommodation.html',          icon: '&#127968;' },
-      { label: 'Do',        href: BASE + '/categories/activities/entertainment.html',             icon: '&#127918;' },
-      { label: 'Eat',       href: BASE + '/categories/food-drink/food-and-drink.html',            icon: '&#127829;' },
-      { label: 'Services',  href: BASE + '/categories/services/services.html',                   icon: '&#128295;' },
-      { label: 'Shop',      href: BASE + '/categories/shops/shopping.html',                      icon: '&#128717;' }
-    ];
-    drawerLinks.forEach(function(item) {
-      var a = el('a', { href: item.href });
-      a.innerHTML = '<span class="dn-icon">' + item.icon + '</span>' + item.label;
-      dnav.appendChild(a);
-    });
-    drawer.appendChild(dnav);
-
-    var foot = el('div', { 'class': 'pnf-drawer-foot' });
-    foot.appendChild(el('a', { href: BASE + '/sales/list-with-us.html', 'class': 'pnf-drawer-cta', text: 'List Your Business' }));
-    drawer.appendChild(foot);
-
-    return [nav, overlay, drawer];
+    return [nav].concat(defaultDrawer(window.location.pathname));
   }
 
-  // ── NAV: SALES ──────────────────────────────────────────────────────────
+  // ── NAV: SALES (retained, not deployed) ─────────────────────────────────
   function buildSales() {
     var nav = el('nav', { 'class': 'pnf-nav pnf-nav-sales' });
-
-    // Logo
     nav.appendChild(logo());
-
-    // Back link (centred via absolute positioning in CSS)
     nav.appendChild(el('a', { href: BASE + '/homepage.html', 'class': 'pnf-back', html: '&larr; Directory' }));
-
-    // CTA
     var ctaHref = body.getAttribute('data-cta-href') || '#contact';
-    var ctaLabel = body.getAttribute('data-cta-label') || 'Get started \u2192';
+    var ctaLabel = body.getAttribute('data-cta-label') || 'Get started →';
     nav.appendChild(el('a', { href: ctaHref, 'class': 'pnf-cta', text: ctaLabel }));
-
-    // Hamburger
     nav.appendChild(hamburger());
-
-    // Overlay + Drawer (sales — simplified)
-    var overlay = el('div', { 'class': 'pnf-drawer-overlay', id: 'pnf-drawer-overlay' });
-    overlay.addEventListener('click', pnfDrawerClose);
-
-    var drawer = el('div', { 'class': 'pnf-drawer', id: 'pnf-drawer' });
-    drawer.appendChild(drawerHead());
-
-    var dnav = el('nav', { 'class': 'pnf-drawer-nav' });
-    var salesLinks = [
-      { label: 'List Your Business', href: BASE + '/sales/list-with-us.html',   icon: '&#11088;' },
-      { label: 'Menu Add-On',        href: BASE + '/sales/menu-addon.html',      icon: '&#128203;' },
-      { label: 'Spotlight Ad Spots', href: BASE + '/sales/spotlight-ads.html',   icon: '&#128161;' }
-    ];
-    salesLinks.forEach(function(item) {
-      var a = el('a', { href: item.href });
-      a.innerHTML = '<span class="dn-icon">' + item.icon + '</span>' + item.label;
-      dnav.appendChild(a);
-    });
-    drawer.appendChild(dnav);
-
-    var foot = el('div', { 'class': 'pnf-drawer-foot' });
-    foot.appendChild(el('a', { href: ctaHref, 'class': 'pnf-drawer-cta', text: ctaLabel }));
-    // Contact + Legal as small links
-    var contactBtn = document.createElement('button');
-    contactBtn.className = 'pnf-drawer-link-sm';
-    contactBtn.style.cssText = 'background:none;border:none;cursor:pointer;width:100%;';
-    contactBtn.textContent = 'Contact Us';
-    contactBtn.addEventListener('click', function() {
-      pnfDrawerClose();
-      if (typeof pnfOpenContact === 'function') pnfOpenContact();
-    });
-    foot.appendChild(contactBtn);
-    foot.appendChild(el('a', { href: BASE + '/legal.html', 'class': 'pnf-drawer-link-sm', text: 'Privacy & Terms' }));
-    drawer.appendChild(foot);
-
-    return [nav, overlay, drawer];
+    return [nav].concat(defaultDrawer(window.location.pathname));
   }
 
   // ── INJECT ───────────────────────────────────────────────────────────────
   var placeholder = document.getElementById('pnf-nav-placeholder');
-  var insertBefore = placeholder || document.body.firstChild;
 
   var elements;
-  if (navType === 'category') {
-    elements = buildCategory();
-  } else if (navType === 'sales') {
-    elements = buildSales();
-  } else {
-    elements = buildDefault();
-  }
+  if (navType === 'category') elements = buildCategory();
+  else if (navType === 'sales') elements = buildSales();
+  else elements = buildDefault();
 
-  elements.forEach(function(el) {
-    if (placeholder) {
-      placeholder.parentNode.insertBefore(el, placeholder);
-    } else {
-      document.body.insertBefore(el, document.body.firstChild);
-    }
+  elements.forEach(function(node) {
+    if (placeholder) placeholder.parentNode.insertBefore(node, placeholder);
+    else document.body.insertBefore(node, document.body.firstChild);
   });
 
   if (placeholder) placeholder.parentNode.removeChild(placeholder);

@@ -190,22 +190,9 @@
     @media (max-width:720px) { .two-col { grid-template-columns:1fr; } .side-col { order:-1; } .hours-grid { grid-template-columns:1fr; } }
   </style>
 </head>
-<body>
+<body data-nav="default" data-breadcrumb="Accommodation|/papamoa-previews/categories/accommodation/accommodation.html,Retirement Villages|/papamoa-previews/categories/accommodation/retirement-villages-papamoa.html,Karaka Pines Papamoa">
 
-<!-- NAV -->
-<nav class="listing-nav">
-  <a href="/papamoa-previews/homepage.html" class="listing-nav-logo" aria-label="Papamoa.info home"><img src="/papamoa-previews/assets/papamoa-macron.png" alt="Papamoa.info" style="height:40px;width:auto;max-width:280px;display:block;vertical-align:middle;"></a>
-  <div class="listing-nav-bc">
-    <a href="/papamoa-previews/homepage.html">Home</a>
-    <span class="sep">/</span>
-    <a href="/papamoa-previews/categories/accommodation/accommodation.html">Accommodation</a>
-    <span class="sep">/</span>
-    <a href="/papamoa-previews/categories/accommodation/retirement-villages-papamoa.html">Retirement Villages</a>
-    <span class="sep">/</span>
-    <span class="current">Karaka Pines Papamoa</span>
-  </div>
-  <a href="/papamoa-previews/sales/list-with-us.html" class="listing-nav-cta">List Your Business</a>
-</nav>
+<div id="pnf-nav-placeholder"></div>
 
 <!-- HERO -->
 <div class="page-hero">
@@ -464,5 +451,6 @@ document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('clic
 (function(){var faqs=[];document.querySelectorAll('.faq-item').forEach(function(item){var q=item.querySelector('.faq-q');var a=item.querySelector('.faq-a');if(q&&a)faqs.push({'@type':'Question','name':q.childNodes[0].textContent.trim(),'acceptedAnswer':{'@type':'Answer','text':a.textContent.trim()}});});if(faqs.length){var el=document.getElementById('schema-faq');if(el)el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':faqs});}})();
 (function(){var base='/papamoa-previews';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var href=a.getAttribute('href');if(!href)return;if(href.startsWith('/')&&!href.startsWith(base)&&!href.startsWith('http')){e.preventDefault();window.location.href=base+href;}});})();
 </script>
+<script src="/papamoa-previews/nav.js"></script>
 </body>
 </html>
