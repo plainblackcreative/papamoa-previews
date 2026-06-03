@@ -1,10 +1,12 @@
 # Session handoff — papamoa-previews
 
-**Last updated:** 2026-06-03 (session 2) by Jay + Claude
-**Last commit:** `90b55db` brand: swap to new pāpāmoa.info logo + favicon asset pack
-**Branch:** `main` (pushed)
+**Last updated:** 2026-06-03 (session 3) by Jay + Claude
+**Last commit:** `3e263e3` categories: sticky page-filter on all 5 category pages
+**Branch:** `main` (pushed, tree clean)
 
-> **Session 2 headline (the nav/footer lock):** `nav.js` is now the single locked source for the nav, mobile drawer, and footer styling — and is loaded on **every one of the 225 public pages**. The footer shell was upgraded to the homepage canonical (logo, tagline, FB + IG, "Get in touch", trust bullets) on 120 grid footers while keeping each page's contextual columns, and nav.js injects the contact modal so "Get in touch" works everywhere. See `docs/nav-usage.md` for the full spec + remaining footer follow-ups.
+> **Session 3 headline (visual polish + brand consistency):** category pages, homepage, brand assets and copy all got a big polish pass. New brand logo + favicon pack site-wide; all 5 category pages rebuilt to one clean template (photo hero + single card-grid navigator with custom line icons + sticky page-filter); category accents locked to the logo palette (blue: Stay/Eat/Shop, green: Do/Services); **all emojis replaced with custom inline SVG icons** site-wide; **all em dashes removed** site-wide. Plus Jay's listings/sales strategy notes captured in Project_Master §18 + §17.15.
+
+> **Session 2 headline (the nav/footer lock):** `nav.js` is the single locked source for the nav, mobile drawer, and footer styling — loaded on every public page. See `docs/nav-usage.md`.
 
 > Read this if you're a new Claude session picking up work on this repo. It's the fastest path from cold to useful.
 
@@ -87,6 +89,26 @@ Jay's ask: *"LOCK the Nav, Mobile Menu and Footer. Update nav-usage.md, then dep
 
 **Footer follow-ups still open** (see `docs/nav-usage.md` "Footer follow-ups"): 23 compact (no-grid) footers; `site-footer` (38) + other footer systems (36); and the bottom-bar "Sitemap" link points at `index.html` (internal dashboard — no public sitemap exists; repoint or drop).
 
+### Today (2026-06-03) — session 3: visual polish, brand consistency, category template
+
+| SHA | What |
+|---|---|
+| `90b55db` | New brand asset pack wired site-wide: combined koru + "pāpāmoa.info" logo (`assets/papamoa-info-asset-pack/`) replaces the old `papamoa-macron.png` everywhere; new favicons + android-chrome + `site.webmanifest`; old logo files removed; `launch.json` made portable. |
+| `ada5719` / `c4bc0d1` | Homepage Browse Categories: real category photos (portrait crops) + evened descriptions so cards align. |
+| `b817a61` | Homepage hero: white text + soft navy left-scrim, removed the washed-out white overlay (readability fix). |
+| `34e3b69` / `4848330` | **All 5 category heroes → imagery-led photo + navy scrim + white text.** EAT/SHOP de-browned to blue; Stay/Do/Services kept their accents. |
+| `1f3753c` | **Removed all em dashes site-wide** (3,359 → hyphens, 238 files). Hard brand rule. docs/ excluded. |
+| `1104255`→`5188718` | **Category-page template** built on Stay, rolled out to all 5: clean hero, single card-grid navigator (hero chips + pill bar + duplicate search removed), **custom SVG line icons** (emoji removed from cards), uniform cards, no title truncation, even descriptions. Footer "Sitemap" link removed site-wide. Services accent teal → **logo green**. |
+| `b12500a` / `e3f5e66` | **All emojis → custom inline SVG icons site-wide** (~4,400 across ~230 public pages). nav.js injects a shared `.pnf-i` inline-icon style. Text-node-only (scripts/attributes untouched). |
+| `fd0b1f1` | Captured Jay's listings/sales **strategy notes** into Project_Master §18 (Listings & sales direction) + §17.15 (free Bronze tier) + §17.11 (self-serve spotlights). |
+| `3e263e3` | **Sticky page-filter** on all 5 category pages — one clean search field that live-filters cards + listings together (solves the long-scroll problem, esp. Services' 57 subcats). |
+
+**Locked this session:**
+- **Category-page template** — photo hero + sticky page-filter + single card-grid (custom line icons, uniform cards) + listings. This is now the pattern for all 5.
+- **Category accent palette (logo only):** Blue `#359FE8` = Stay, Eat, Shop · Green `#89BE43` = Do, Services. No teal/brown.
+- **Icons:** `nav.js` injects `.pnf-i` (inline SVG icon, sizes to text, inherits colour). No emoji in visible content on public pages.
+- **No em dashes, no emoji** anywhere in public copy (both swept this session).
+
 ---
 
 ## 3. What's actively open
@@ -139,12 +161,16 @@ None of these can move without him:
 2. **Open the live demo** at `https://plainblackcreative.github.io/papamoa-previews/homepage.html` to see what the user is looking at.
 3. **Ask Jay what's first** — don't assume. Today's session shipped 9 commits in one stretch; that pace is sustainable only when each step is clearly aligned with him. The default cadence is propose → confirm → execute → verify → commit → push.
 
-Likely next items if Jay just says "keep going":
+Likely next items if Jay just says "keep going" (the listings/sales build is the live thread — see Project_Master §18 "Listings & sales direction"):
 
-- **Finish the footer lock** — the remaining footer follow-ups from session 2: the 23 compact (no-grid) footers, the `site-footer`/other footer systems (74 pages), and the "Sitemap → index.html" link fix. See `docs/nav-usage.md` "Footer follow-ups". Natural continuation of this session.
-- **EAT/SHOP category page hero rework** — biggest visible remaining Carwyn-fix. Brown/orange palette swap to blue/green family. Pair with the imagery rule. (Header/nav visual-lift is now DONE via the nav lock — Carwyn req #3 satisfied.)
-- **Phase A2: operator guide for Carwyn** — solo writing task. ~1 page document explaining how the site is managed, what each section does, how to add a lead / confirm a listing / find pricing. Fills the "How this site works" placeholder tile on `dashboard.html`.
-- **Spotlight Silver clickability bug** (in §18 High) — Jay knows the surface where it lives; needs his pointer.
+1. **Lock the Gold & Silver listing spec** — pin style/design/layout + the required data/content per tier; these become the canonical build templates (`listing-gold-template.html`, `listing-silver-template.html`). The natural starting point for the listings build.
+2. **Bronze (free Basic) self-serve auto-create** — visitor creates a free listing, auto-publishes pending admin approval. Priority per Jay. Depends on the §17.15 free-tier decision (Jay's pushback on Carwyn's "no free listings").
+3. **Audit + consolidate the sales pages** (`sales/*`) — simplify/de-duplicate, align to the Gold|Silver|Bronze ladder.
+4. **Self-serve Spotlights / Ad Spots** — click a slot → see monthly impressions → buy 1/3/6/12mo (§17.11).
+
+Smaller carry-overs: finish the **footer follow-ups** (23 compact footers, site-footer/other systems — `docs/nav-usage.md`); **3 stub-listing footers**; **Phase A2 operator guide** for Carwyn; **Spotlight Silver clickability bug** (§18 High).
+
+Deferred per Jay (2026-06-03): **AI-generated listings**, **Menu / Menu Add-On** work.
 
 ---
 
@@ -153,7 +179,10 @@ Likely next items if Jay just says "keep going":
 - **Don't reply to Carwyn** until demo-site polish ships. Sequencing locked 2026-06-02.
 - **Don't touch §3 pricing copy** until §17.13 (rotation) and §17.14 (monthly billing) decisions land. The locked $599 Silver / $1,199 Gold annual model is intact for now.
 - **Don't use the ✉ envelope unicode** anywhere. Hard ban — see `feedback_no_envelope_icon.md` in auto-memory. Existing 134 occurrences were stripped in `4caf571`. Don't re-introduce.
-- **Don't use em dashes** in client copy, comments, or code (existing memory rule).
+- **Don't use em dashes** in client copy, comments, or code (existing memory rule). Site was swept clean in `1f3753c` — don't re-introduce; use a hyphen.
+- **Don't use emoji in public content** — they were all replaced with custom inline SVG icons in `b12500a`/`e3f5e66`. Use the `.pnf-i` icon system (see gotchas) instead of an emoji. Don't paste emoji into a public page.
+- **Don't add per-category colours outside the logo palette** — Blue `#359FE8` = Stay/Eat/Shop, Green `#89BE43` = Do/Services. No teal/brown/orange (Carwyn rule, locked session 3).
+- **Don't re-add the old category clutter** — category pages are now: photo hero → sticky page-filter → single card-grid → listings. Don't reintroduce hero chip rows, a sticky pill bar, or a second search.
 - **Don't use a text logo** — every public page uses the brand image logo (`assets/papamoa-info-asset-pack/logo/papamoa-info-logo-transparent-400w.png`), injected by `nav.js` in the nav/drawer and referenced inline in footers. If you regenerate any page, pull the image, not text.
 - **Don't edit nav / drawer / footer markup or CSS per-page anymore** — as of session 2 (`f11fef4`→`bffe868`), `nav.js` is the single locked source for the nav, mobile drawer, footer styling, breadcrumb strip, and contact modal, loaded on all 225 public pages via `<div id="pnf-nav-placeholder"></div>` + `<script src="/papamoa-previews/nav.js">`. To change the nav/drawer/footer site-wide, edit `nav.js` once. Per-page footer *column* content (contextual links) still lives inline. See `docs/nav-usage.md`. (Leftover inline nav/footer CSS in old `<style>` blocks is dead weight overridden by nav.js — safe to strip in a later cleanup, don't rely on it.)
 - **Don't sweep other CSS across pages indiscriminately** — many pages still have bespoke `<style>` blocks with their own variants for non-nav content.
@@ -164,10 +193,13 @@ Likely next items if Jay just says "keep going":
 
 - **Brand assets live in `assets/papamoa-info-asset-pack/`** (the full pack Jay dropped 2026-06-03, session 2). The site logo is `logo/papamoa-info-logo-transparent-400w.png` (combined koru + "pāpāmoa.info" mark) — referenced by `nav.js` (nav + drawer) and every inline footer brand image. The old `papamoa-macron.png` / `papamoa.png` were removed in `90b55db`. The pack also has wordmark-only, koru-icon-only, and other logo widths if needed. To change the logo site-wide, swap the path in `nav.js` + the inline footer refs (or just drop a new file at the same path).
 - **Favicon / PWA at repo root** — `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, `android-chrome-192/512.png`, `site.webmanifest`, all from the asset pack (`90b55db`). Linked in every page `<head>` (favicons + `<link rel="manifest">`). Manifest icon paths are relative so they work at both `/papamoa-previews/` preview and custom-domain launch; theme colour is brand navy `#243B59`.
+- **Custom icon system (`.pnf-i`)** — `nav.js` injects a `.pnf-i` class (inline SVG: `width/height:1em`, `vertical-align:-0.125em`, `stroke:currentColor`). To add an icon, drop `<svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true">…paths…</svg>` inline — it sizes to the text and inherits its colour. This replaced all emoji site-wide. The emoji→icon swap was **text-node-only** (never inside `<script>`/`<style>`/`<title>`/attributes) — if you ever script a bulk text replace, mask those first (a naive global replace broke JSON-LD/search-index once this session before it was fixed).
+- **Category-page template** — all 5 category landing pages share: photo hero (landscape crop from `assets/papamoa-category-card-backgrounds/` + navy scrim + white text) → **sticky page-filter** (`.cat-filter`, `catPageFilter()` drives `catWidgetSearch` for cards + `svcSearch` for listings) → **card-grid navigator** (`.subcat-card`, custom `.pnf-i` icons, uniform `min-height:118px`) → listings. Subcategory pages NOT yet on this template (still their own orange/gold accents + emoji-free now).
+- **Subcategory pages still pending** — the food-drink/shops subcats keep their own `:root` accents (a later sweep); category *landing* pages are done.
 - **`llms.txt` at repo root** — AI crawler brief. If site content or pricing changes substantially, update this too.
 - **`docs/carwyn-feedback-2026-06-02.md`** — verbatim email + structured read. The structured read sources §21 of Project_Master. If the structured read changes, §21 likely needs an update too.
 - **The path-rewriter script** at the bottom of most pages only handles click events, not asset loads. Use `/papamoa-previews/` prefix for image / favicon / stylesheet refs explicitly.
-- **`launch.json`** lives in `.claude/` at the parent `GitHub/` dir, not in this repo. Servers configured: `plainblack-site`, `plainblack-admin` (serves parent), `themarshallmethod`. Use `plainblack-admin` to preview this project at `http://localhost:8767/papamoa-previews/`.
+- **Preview server:** the repo's `.claude/launch.json` now defines **`plainblack-admin`** (port 8767, serves `..` = parent so the `/papamoa-previews/` absolute paths resolve) alongside `papamoa-static` (8766, repo root — does NOT resolve the prefix). **Use `plainblack-admin`** to preview at `http://localhost:8767/papamoa-previews/homepage.html`. The 8766 server 404s the `/papamoa-previews/` paths. (Parent `GitHub/.claude/launch.json` also has these.)
 - **`docs/Project_Master.html` §12 Pending Tasks block** mirrors `.md §18`. Both updated together. The HTML's section numbers (§11 / §12 / §13 / §14 / §15) map to the .md's (§17 / §18 / §19 / §20 / §21).
 
 ---
