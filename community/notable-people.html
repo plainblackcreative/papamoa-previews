@@ -64,11 +64,8 @@
     @media(max-width:680px){.page-layout{grid-template-columns:1fr}.pc-avatar{width:56px}}
   </style>
 </head>
-<body>
-<nav class="site-nav">
-  <a href="/papamoa-previews/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
-  <span class="breadcrumb"><a href="/papamoa-previews/homepage.html">Home</a><span>/</span><a href="/papamoa-previews/community/local-government.html">Local Info</a><span>/</span>Notable People</span>
-</nav>
+<body data-nav="default">
+<div id="pnf-nav-placeholder"></div>
 <header class="hero">
   <div class="hero-inner">
     <div class="hero-eye">People of Pāpāmoa · Bay of Plenty · New Zealand</div>
@@ -163,4 +160,29 @@
         <ul class="sidebar-list">
           <li><a href="/papamoa-previews/community/maori-history.html">Māori History of Pāpāmoa</a></li>
           <li><a href="/papamoa-previews/community/population-statistics.html">Population & Statistics</a></li>
-          <li><a href="/papamoa-previews/community/local-government.html">Local Government</a></li
+          <li><a href="/papamoa-previews/community/local-government.html">Local Government</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer class="site-footer">
+  <a href="/papamoa-previews/homepage.html">Papamoa.info</a> — Notable people from Pāpāmoa is an editorial directory based on publicly verifiable information. To suggest an addition or report an error, email <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a>.
+</footer>
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
+<script src="/papamoa-previews/nav.js"></script>
+</body></html>

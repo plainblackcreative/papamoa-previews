@@ -68,11 +68,8 @@
     @media(max-width:720px){.two-col{grid-template-columns:1fr}.rep-grid{grid-template-columns:1fr}}
   </style>
 </head>
-<body>
-<nav class="site-nav">
-  <a href="/papamoa-previews/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
-  <span class="breadcrumb"><a href="/papamoa-previews/homepage.html">Home</a><span>/</span>Local Government</span>
-</nav>
+<body data-nav="default">
+<div id="pnf-nav-placeholder"></div>
 
 <header class="hero">
   <div class="hero-inner">
@@ -192,4 +189,24 @@
       </div>
     </aside>
   </div>
-</di
+</div>
+<footer class="site-footer">
+  <a href="/papamoa-previews/homepage.html">Papamoa.info</a> — Local government and elected representative details for Pāpāmoa. Elected positions change at each local and general election; always confirm current representatives at <a href="https://www.tauranga.govt.nz" target="_blank" rel="noopener">tauranga.govt.nz</a>, <a href="https://www.boprc.govt.nz" target="_blank" rel="noopener">boprc.govt.nz</a> and <a href="https://www.parliament.nz" target="_blank" rel="noopener">parliament.nz</a>.
+</footer>
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
+<script src="/papamoa-previews/nav.js"></script>
+</body></html>
