@@ -76,12 +76,9 @@
     @media(max-width:720px){.sidebar-wrap{grid-template-columns:1fr}.side-col{order:-1}.iwi-grid{grid-template-columns:1fr}}
   </style>
 </head>
-<body>
+<body data-nav="default">
 
-<nav class="site-nav">
-  <a href="/papamoa-previews/homepage.html" class="nav-brand">Papamoa<em>.info</em></a>
-  <span class="breadcrumb"><a href="/papamoa-previews/homepage.html">Home</a><span>/</span><a href="/papamoa-previews/community/local-government.html">Local Info</a><span>/</span>Māori History</span>
-</nav>
+<div id="pnf-nav-placeholder"></div>
 
 <header class="hero">
   <div class="hero-inner">
@@ -263,4 +260,22 @@
 </div>
 
 <footer class="site-footer">
-  <a href="/papamoa-previews/homepage.html">Papamoa.info</a> — Written in the third-person editorial voice of the directory. Sources: BOPRC, Stats NZ 2023 Census, Wikipedia, Te Ara Enc
+  <a href="/papamoa-previews/homepage.html">Papamoa.info</a> — Written in the third-person editorial voice of the directory. Sources: BOPRC, Stats NZ 2023 Census, Wikipedia, Te Ara Encyclopedia of New Zealand. This summary acknowledges the mana whenua of Tauranga Moana; errors or omissions can be reported to <a href="mailto:jayden@papamoa.info">jayden@papamoa.info</a> for correction.
+</footer>
+<script>
+  (function() {
+    var base = '/papamoa-previews';
+    document.addEventListener('click', function(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('/') && !href.startsWith(base)) {
+        e.preventDefault();
+        window.location.href = base + href;
+      }
+    });
+  })();
+</script>
+<script src="/papamoa-previews/nav.js"></script>
+</body></html>
