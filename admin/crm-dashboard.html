@@ -698,7 +698,7 @@
       <div class="panel-section-title">Quick Actions</div>
       <div class="panel-actions">
         <a class="panel-btn panel-btn-secondary" id="btn-call" href="#">📞 Call</a>
-        <a class="panel-btn panel-btn-secondary" id="btn-email" href="#">✉️ Email</a>
+        <a class="panel-btn panel-btn-secondary" id="btn-email" href="#">Email</a>
         <a class="panel-btn panel-btn-gold" id="btn-ppp" href="#" target="_blank" rel="noopener">👁 View Preview</a>
       </div>
     </div>
@@ -938,7 +938,7 @@ function makeCard(lead) {
   var contactHtml = '';
   if (lead.contact) contactHtml += '<span><span class="card-icon">👤</span>' + lead.contact + '</span>';
   if (lead.phone)   contactHtml += '<span><span class="card-icon">📞</span><a href="tel:' + lead.phone + '" onclick="event.stopPropagation()">' + lead.phone + '</a></span>';
-  if (lead.email)   contactHtml += '<span><span class="card-icon">✉️</span><a href="mailto:' + lead.email + '" onclick="event.stopPropagation()">' + lead.email + '</a></span>';
+  if (lead.email)   contactHtml += '<span><a href="mailto:' + lead.email + '" onclick="event.stopPropagation()">' + lead.email + '</a></span>';
 
   var notesHtml = lead.notes ? '<div class="card-notes">' + lead.notes + '</div>' : '';
   var callbackHtml = lead.callback ? '<div class="card-callback">📅 Callback: ' + lead.callback + '</div>' : '';
