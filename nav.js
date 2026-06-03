@@ -146,7 +146,33 @@
     '.pnf-footer-popular-list{font-size:12.5px;line-height:2;color:rgba(255,255,255,0.4);}',
     '.pnf-footer-popular-list a{color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.15s;}',
     '.pnf-footer-popular-list a:hover{color:var(--pnf-white);text-decoration:underline;}',
-    '.pnf-footer-popular-list .sep{margin:0 8px;color:rgba(255,255,255,0.18);}'
+    '.pnf-footer-popular-list .sep{margin:0 8px;color:rgba(255,255,255,0.18);}',
+    // ── CONTACT MODAL (footer "Get in touch") ──
+    '.pnf-overlay{position:fixed;inset:0;background:rgba(36,59,89,0.7);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.2s;}',
+    '.pnf-overlay.open{opacity:1;pointer-events:all;}',
+    '.pnf-modal{background:#fff;border-radius:16px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.3);transform:translateY(16px);transition:transform 0.25s;}',
+    '.pnf-overlay.open .pnf-modal{transform:translateY(0);}',
+    '.pnf-modal-head{background:#243B59;padding:22px 28px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}',
+    '.pnf-modal-head h2{font-family:var(--pnf-display);font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:3px;}',
+    '.pnf-modal-head p{font-size:12.5px;color:rgba(255,255,255,0.5);}',
+    '.pnf-modal-close{background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.6);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;line-height:1;}',
+    '.pnf-modal-close:hover{background:rgba(255,255,255,0.2);color:#fff;}',
+    '.pnf-modal-body{padding:24px 28px 28px;}',
+    '.pnf-cf{display:flex;flex-direction:column;gap:14px;}',
+    '.pnf-cf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}',
+    '@media (max-width:420px){.pnf-cf-row{grid-template-columns:1fr;}}',
+    '.pnf-cf label{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5A6E78;margin-bottom:5px;display:block;}',
+    '.pnf-cf input,.pnf-cf select,.pnf-cf textarea{width:100%;padding:11px 14px;border:1.5px solid #D8E4E8;border-radius:7px;font-family:var(--pnf-font);font-size:14px;color:#1A2832;background:#F7F3ED;outline:none;transition:border-color 0.2s;}',
+    '.pnf-cf input:focus,.pnf-cf select:focus,.pnf-cf textarea:focus{border-color:#1B6B7D;background:#fff;}',
+    '.pnf-cf textarea{resize:vertical;min-height:80px;line-height:1.55;}',
+    '.pnf-cf-submit{width:100%;background:#1B6B7D;color:#fff;border:none;padding:13px;border-radius:8px;font-family:var(--pnf-font);font-size:15px;font-weight:700;cursor:pointer;transition:background 0.2s;margin-top:2px;}',
+    '.pnf-cf-submit:hover{background:#0F4352;}',
+    '.pnf-cf-submit:disabled{opacity:0.6;cursor:not-allowed;}',
+    '.pnf-cf-fine{font-size:11.5px;color:#5A6E78;text-align:center;margin-top:6px;}',
+    '.pnf-cf-success{display:none;text-align:center;padding:16px 0 8px;}',
+    '.pnf-cf-success .pnf-tick{font-size:40px;margin-bottom:10px;}',
+    '.pnf-cf-success h3{font-size:18px;font-weight:700;color:#1E6B3C;margin-bottom:6px;}',
+    '.pnf-cf-success p{font-size:13.5px;color:#5A6E78;line-height:1.6;}'
   ].join('');
   document.head.appendChild(style);
 
@@ -362,6 +388,81 @@
     return [nav].concat(defaultDrawer(window.location.pathname));
   }
 
+  // ── CONTACT MODAL (footer "Get in touch") ──────────────────────────────
+  // Injected only where a page doesn't already have it inline, so the footer's
+  // pnfOpenContact() works everywhere. Guarded so inline-modal pages are untouched.
+  function pnfEnsureContactModal() {
+    if (document.getElementById('pnf-contact-overlay')) return;
+    var html =
+      '<div class="pnf-overlay" id="pnf-contact-overlay" onclick="pnfOverlayClick(event)">' +
+        '<div class="pnf-modal" role="dialog" aria-label="Contact Papamoa.info">' +
+          '<div class="pnf-modal-head">' +
+            '<div><h2>Get in touch</h2><p>We&rsquo;ll get back to you within one business day.</p></div>' +
+            '<button class="pnf-modal-close" onclick="pnfCloseContact()" aria-label="Close">&times;</button>' +
+          '</div>' +
+          '<div class="pnf-modal-body">' +
+            '<form class="pnf-cf" id="pnf-contact-form" onsubmit="pnfSubmitContact(event)">' +
+              '<input type="hidden" name="form_name" value="contact-lightbox">' +
+              '<input type="hidden" name="redirect" value="false">' +
+              '<input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">' +
+              '<div class="pnf-cf-row">' +
+                '<div><label>Your name *</label><input type="text" name="name" placeholder="Sarah" required></div>' +
+                '<div><label>Email *</label><input type="email" name="email" placeholder="you@email.com" required></div>' +
+              '</div>' +
+              '<div><label>Enquiry type *</label>' +
+                '<select name="enquiry_type" required id="pnf-enquiry-type">' +
+                  '<option value="" disabled selected>Select a topic</option>' +
+                  '<option value="General enquiry">General enquiry</option>' +
+                  '<option value="Listing enquiry">Listing enquiry &mdash; I want to get listed</option>' +
+                  '<option value="Listing support">Listing support &mdash; update or change my listing</option>' +
+                  '<option value="Media enquiry">Media enquiry</option>' +
+                  '<option value="News &amp; community notice">News &amp; community notice</option>' +
+                  '<option value="Report an error">Report an error on the site</option>' +
+                '</select>' +
+              '</div>' +
+              '<div><label>Message *</label><textarea name="message" placeholder="How can we help?" required></textarea></div>' +
+              '<button type="submit" class="pnf-cf-submit" id="pnf-cf-btn">Send message &rarr;</button>' +
+              '<p class="pnf-cf-fine">No spam &middot; We reply within one business day</p>' +
+            '</form>' +
+            '<div class="pnf-cf-success" id="pnf-cf-success">' +
+              '<div class="pnf-tick">&#10003;</div>' +
+              '<h3>Message received</h3>' +
+              '<p>We&rsquo;ll be in touch within one business day.</p>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    var wrap = document.createElement('div');
+    wrap.innerHTML = html;
+    document.body.appendChild(wrap.firstChild);
+
+    if (typeof window.pnfOpenContact !== 'function') window.pnfOpenContact = function (type) {
+      if (type) { var sel = document.getElementById('pnf-enquiry-type'); if (sel) { for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].value === type) { sel.selectedIndex = i; break; } } } }
+      document.getElementById('pnf-contact-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    if (typeof window.pnfCloseContact !== 'function') window.pnfCloseContact = function () {
+      document.getElementById('pnf-contact-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    if (typeof window.pnfOverlayClick !== 'function') window.pnfOverlayClick = function (e) {
+      if (e.target === document.getElementById('pnf-contact-overlay')) window.pnfCloseContact();
+    };
+    if (typeof window.pnfSubmitContact !== 'function') window.pnfSubmitContact = function (e) {
+      e.preventDefault();
+      var btn = document.getElementById('pnf-cf-btn');
+      btn.textContent = 'Sending…'; btn.disabled = true;
+      fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', { method: 'POST', body: new FormData(document.getElementById('pnf-contact-form')) })
+        .then(function (res) { return res.json(); })
+        .then(function (json) {
+          if (json.ok) { document.getElementById('pnf-contact-form').style.display = 'none'; document.getElementById('pnf-cf-success').style.display = 'block'; }
+          else { btn.textContent = 'Try again'; btn.disabled = false; }
+        })
+        .catch(function () { btn.textContent = 'Try again'; btn.disabled = false; });
+    };
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && typeof window.pnfCloseContact === 'function') window.pnfCloseContact(); });
+  }
+
   // ── INJECT ───────────────────────────────────────────────────────────────
   var placeholder = document.getElementById('pnf-nav-placeholder');
 
@@ -376,5 +477,7 @@
   });
 
   if (placeholder) placeholder.parentNode.removeChild(placeholder);
+
+  pnfEnsureContactModal();
 
 })();
