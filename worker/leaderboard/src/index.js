@@ -1,4 +1,4 @@
-// Papamoa.info Gremlin Hunt leaderboard — Cloudflare Worker
+// Papamoa.info Gremlin Hunt leaderboard - Cloudflare Worker
 // Stores top-10 scores in Workers KV.
 // Public endpoints (no auth) but POST is rate-limited per IP.
 

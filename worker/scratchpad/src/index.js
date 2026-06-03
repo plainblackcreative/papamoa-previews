@@ -1,4 +1,4 @@
-// Papamoa.info scratchpad — Cloudflare Worker
+// Papamoa.info scratchpad - Cloudflare Worker
 // Stores a single shared notes blob in Workers KV.
 // Auth: bearer token (set as SCRATCHPAD_TOKEN secret).
 

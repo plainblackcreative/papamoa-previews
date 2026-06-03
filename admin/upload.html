@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin — News & Events Upload | Papamoa.info</title>
+  <title>Admin - News & Events Upload | Papamoa.info</title>
   <link rel="icon" type="image/x-icon" href="/papamoa-previews/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/papamoa-previews/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/papamoa-previews/favicon-16x16.png">
@@ -462,12 +462,12 @@
       </div>
 
       <div class="field-group">
-        <label class="field-label">Headline (optional — leave blank to auto-generate)</label>
+        <label class="field-label">Headline (optional - leave blank to auto-generate)</label>
         <input
           type="text"
           class="field-input"
           id="news-headline"
-          placeholder="Leave blank — Claude will suggest one"
+          placeholder="Leave blank - Claude will suggest one"
         >
       </div>
 
@@ -587,7 +587,7 @@
         <div class="field-group">
           <label class="field-label">Recurring?</label>
           <select class="field-input field-select" id="ev-recurring">
-            <option value="no">No — one-off</option>
+            <option value="no">No - one-off</option>
             <option value="weekly">Weekly</option>
             <option value="fortnightly">Fortnightly</option>
             <option value="monthly">Monthly</option>
@@ -618,7 +618,7 @@
     <div class="panel" id="panel-history">
 
       <div class="panel-title">Submission history</div>
-      <p class="panel-sub">Items submitted this session. History is session-only — it clears when you close the tab. Check jkbrownnz@gmail.com for the full record.</p>
+      <p class="panel-sub">Items submitted this session. History is session-only - it clears when you close the tab. Check jkbrownnz@gmail.com for the full record.</p>
 
       <table class="history-table" id="history-table">
         <thead>
@@ -648,10 +648,10 @@
         <h3>📰 News workflow</h3>
         <ul>
           <li>Paste a URL from any public news source</li>
-          <li>Click <strong>Summarise with Claude</strong> — the article is fetched and passed to Claude via the Cloudflare proxy</li>
+          <li>Click <strong>Summarise with Claude</strong> - the article is fetched and passed to Claude via the Cloudflare proxy</li>
           <li>Claude writes a 2–3 sentence summary in the Papamoa.info editorial voice (third-person, factual)</li>
           <li>Edit the headline and summary as needed</li>
-          <li>Click <strong>Submit for publishing</strong> — sends to jkbrownnz@gmail.com via Web3Forms</li>
+          <li>Click <strong>Submit for publishing</strong> - sends to jkbrownnz@gmail.com via Web3Forms</li>
           <li>Manually copy the summary into news-events.html, or wait for the GitHub Actions workflow (Phase 2)</li>
         </ul>
       </div>
@@ -664,7 +664,7 @@
           <li>Fill in the event details and click <strong>Submit event</strong></li>
           <li>Sends to jkbrownnz@gmail.com via Web3Forms</li>
           <li>Review in email, then manually add to the news-events.html upcoming events section</li>
-          <li>Phase 2: GitHub Actions will automate this — submissions will write directly to a JSON file and the page rebuilds</li>
+          <li>Phase 2: GitHub Actions will automate this - submissions will write directly to a JSON file and the page rebuilds</li>
         </ul>
       </div>
 
@@ -679,9 +679,9 @@
         <ul>
           <li><strong>Form endpoint:</strong> <code style="font-size:0.78rem;color:#80C8E8">pb-forms.jkbrownnz.workers.dev/submit?client=papamoa</code></li>
           <li><strong>Submissions go to:</strong> info@plainblackcreative.com (via Resend)</li>
-          <li>The Claude proxy handles the API key — no key lives in this file</li>
-          <li>Password is stored in localStorage — clear browser data to reset</li>
-          <li>This page has <code>noindex, nofollow</code> — it won't appear in Google</li>
+          <li>The Claude proxy handles the API key - no key lives in this file</li>
+          <li>Password is stored in localStorage - clear browser data to reset</li>
+          <li>This page has <code>noindex, nofollow</code> - it won't appear in Google</li>
         </ul>
       </div>
 
@@ -691,7 +691,7 @@
         <h3>🔐 Password management</h3>
         <ul>
           <li>Change the password in the JS below (<code style="font-size:0.78rem;color:#80C8E8">ADMIN_PASSWORD</code> constant)</li>
-          <li>Current password is set in the source — update it before deploying to GitHub</li>
+          <li>Current password is set in the source - update it before deploying to GitHub</li>
           <li>For higher security, move password check to the Cloudflare Worker (Phase 2)</li>
         </ul>
       </div>
@@ -703,7 +703,7 @@
 
 <script>
 // ════════════════════════════════════════
-// CONFIG — update password before deploy
+// CONFIG - update password before deploy
 // ════════════════════════════════════════
 const ADMIN_PASSWORD   = 'papinfo2026!';
 const CLAUDE_PROXY_URL = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
@@ -785,7 +785,7 @@ function escapeHtml(str) {
 }
 
 // ════════════════════════════════════════
-// NEWS — SUMMARISE
+// NEWS - SUMMARISE
 // ════════════════════════════════════════
 async function summariseArticle() {
   const url      = document.getElementById('news-url').value.trim();
@@ -822,7 +822,7 @@ Your task:
 Rules:
 - Use third-person editorial voice ("Tauranga City Council has announced..." not "We...")
 - Never reproduce more than 10 words verbatim from the source
-- Be factual and specific — no generalities
+- Be factual and specific - no generalities
 - If the article is not directly relevant to Pāpāmoa, note that briefly
 - Do NOT make up facts not in the article
 
@@ -869,7 +869,7 @@ Respond ONLY with valid JSON in this exact format (no markdown, no backticks):
 }
 
 // ════════════════════════════════════════
-// NEWS — SUBMIT
+// NEWS - SUBMIT
 // ════════════════════════════════════════
 async function submitNews() {
   const headline = document.getElementById('ai-headline').value.trim();
@@ -886,7 +886,7 @@ async function submitNews() {
   spinner.style.display = 'inline-block';
 
   const body = new FormData();
-  body.append('subject', `[Papamoa.info Admin] New news item — ${headline}`);
+  body.append('subject', `[Papamoa.info Admin] New news item - ${headline}`);
   body.append('from_name', 'Papamoa.info Admin');
   body.append('type', 'News item');
   body.append('headline', headline);
@@ -922,7 +922,7 @@ function resetNews() {
 }
 
 // ════════════════════════════════════════
-// EVENT — SUBMIT
+// EVENT - SUBMIT
 // ════════════════════════════════════════
 async function submitEvent() {
   const name      = document.getElementById('ev-name').value.trim();
@@ -946,7 +946,7 @@ async function submitEvent() {
   hideAlert('event-error');
 
   const body = new FormData();
-  body.append('subject', `[Papamoa.info Admin] New event — ${name}`);
+  body.append('subject', `[Papamoa.info Admin] New event - ${name}`);
   body.append('from_name', 'Papamoa.info Admin');
   body.append('type', 'Event');
   body.append('event_name', name);

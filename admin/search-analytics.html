@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search Analytics — Papamoa.info Admin</title>
+  <title>Search Analytics - Papamoa.info Admin</title>
   <link rel="icon" type="image/x-icon" href="/papamoa-previews/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/papamoa-previews/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/papamoa-previews/favicon-16x16.png">
@@ -150,7 +150,7 @@
 
   <div class="page-head">
     <h1>Search Analytics</h1>
-    <p>Every search submitted on Papamoa.info — what people are looking for, what's missing, and what to build next.</p>
+    <p>Every search submitted on Papamoa.info - what people are looking for, what's missing, and what to build next.</p>
   </div>
 
   <!-- DATE FILTER -->
@@ -165,10 +165,10 @@
 
   <!-- STAT CARDS -->
   <div class="stat-row" id="stat-row">
-    <div class="stat-card"><div class="stat-label">Total Searches</div><div class="stat-value" id="stat-total">—</div><div class="stat-sub">in selected period</div></div>
-    <div class="stat-card"><div class="stat-label">Unique Terms</div><div class="stat-value" id="stat-unique">—</div><div class="stat-sub">distinct queries</div></div>
-    <div class="stat-card"><div class="stat-label">Zero-Result Terms</div><div class="stat-value" id="stat-zero" style="color:var(--amber)">—</div><div class="stat-sub">content gap alerts</div></div>
-    <div class="stat-card"><div class="stat-label">Top Term</div><div class="stat-value" id="stat-top" style="font-size:1rem;padding-top:4px">—</div><div class="stat-sub" id="stat-top-count"></div></div>
+    <div class="stat-card"><div class="stat-label">Total Searches</div><div class="stat-value" id="stat-total">-</div><div class="stat-sub">in selected period</div></div>
+    <div class="stat-card"><div class="stat-label">Unique Terms</div><div class="stat-value" id="stat-unique">-</div><div class="stat-sub">distinct queries</div></div>
+    <div class="stat-card"><div class="stat-label">Zero-Result Terms</div><div class="stat-value" id="stat-zero" style="color:var(--amber)">-</div><div class="stat-sub">content gap alerts</div></div>
+    <div class="stat-card"><div class="stat-label">Top Term</div><div class="stat-value" id="stat-top" style="font-size:1rem;padding-top:4px">-</div><div class="stat-sub" id="stat-top-count"></div></div>
   </div>
 
   <!-- TOP SEARCH TERMS TABLE -->
@@ -176,7 +176,7 @@
     <div class="section-head">
       <div>
         <h2>Top Search Terms</h2>
-        <p>Most searched queries — these drive the homepage pills</p>
+        <p>Most searched queries - these drive the homepage pills</p>
       </div>
     </div>
     <div class="section-body">
@@ -186,12 +186,12 @@
     </div>
   </div>
 
-  <!-- ZERO-RESULT TERMS — CONTENT GAPS -->
+  <!-- ZERO-RESULT TERMS - CONTENT GAPS -->
   <div class="section-card">
     <div class="section-head">
       <div>
         <h2>Content Gap Alert <span class="badge-new">Action Required</span></h2>
-        <p>Terms searched but returning zero results — these are pages you should build</p>
+        <p>Terms searched but returning zero results - these are pages you should build</p>
       </div>
     </div>
     <div class="section-body">
@@ -201,7 +201,7 @@
     </div>
   </div>
 
-  <!-- RECENT SEARCHES — RAW LOG -->
+  <!-- RECENT SEARCHES - RAW LOG -->
   <div class="section-card">
     <div class="section-head">
       <div>
@@ -221,7 +221,7 @@
     <div class="section-head">
       <div>
         <h2>Search Index Entry Generator</h2>
-        <p>Fill in the details of a new page — get a ready-to-paste SEARCH_INDEX entry</p>
+        <p>Fill in the details of a new page - get a ready-to-paste SEARCH_INDEX entry</p>
       </div>
     </div>
     <div class="section-body">
@@ -252,7 +252,7 @@
           <input type="text" id="gen-url" placeholder="/papamoa-previews/categories/services/hairdressers-papamoa.html" oninput="genPreview()">
         </div>
         <div class="full">
-          <label>Keywords (space or comma separated — think: what would someone type?)</label>
+          <label>Keywords (space or comma separated - think: what would someone type?)</label>
           <textarea id="gen-keywords" placeholder="hairdresser hair salon cut colour highlights blow dry womens mens papamoa" oninput="genPreview()"></textarea>
         </div>
         <div class="full">
@@ -278,7 +278,7 @@ var SHEET_TAB   = 'Search Logs';
 var activeFilter = 7; // days
 var allRows = [];
 
-// ── SEARCH INDEX (same as homepage — used for zero-result detection) ──
+// ── SEARCH INDEX (same as homepage - used for zero-result detection) ──
 // Paste the full SEARCH_INDEX keywords array here as a flat string for matching
 // For the admin tool, we just need to know what terms return results.
 // We reuse the homepage index by running the same filter logic.
@@ -538,9 +538,9 @@ function renderRecent(rows) {
 
   var html = '<table class="data-table"><thead><tr><th>Time (NZT approx)</th><th>Search Term</th><th>Source Page</th><th>Results?</th></tr></thead><tbody>';
   recent.forEach(function(r) {
-    var ts   = r[0] ? new Date(r[0]).toLocaleString('en-NZ', {timeZone:'Pacific/Auckland',hour12:false,year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
-    var term = r[1] || '—';
-    var page = r[3] || '—';
+    var ts   = r[0] ? new Date(r[0]).toLocaleString('en-NZ', {timeZone:'Pacific/Auckland',hour12:false,year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '-';
+    var term = r[1] || '-';
+    var page = r[3] || '-';
     var hasResults = termHasResults((r[2] || r[1] || '').toLowerCase());
     var badge = hasResults
       ? '<span style="font-size:0.7rem;color:var(--green);font-weight:700">✓</span>'

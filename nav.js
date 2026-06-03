@@ -1,9 +1,9 @@
 /**
- * Papamoa.info — Shared Nav + Mobile Drawer (LOCKED)
+ * Papamoa.info - Shared Nav + Mobile Drawer (LOCKED)
  *
  * Single source of truth for the site nav, mobile drawer, and footer styling.
  * The markup + CSS here are the LOCKED versions captured from homepage.html
- * (2026-06-03). Do not fork per-page nav/drawer markup again — change it here.
+ * (2026-06-03). Do not fork per-page nav/drawer markup again - change it here.
  *
  * Usage (every public page):
  *   <body data-nav="default">
@@ -11,7 +11,7 @@
  *   ...page content (including the inline <footer class="pnf-footer">)...
  *   <script src="/papamoa-previews/nav.js"></script>
  *
- * Nav variant: flat tabs on every page (Carwyn req #3 — main page tabs always
+ * Nav variant: flat tabs on every page (Carwyn req #3 - main page tabs always
  *   visible). The active tab is computed from the URL. The category/sales
  *   builders below are retained for optional future use but are NOT deployed;
  *   default (flat) is the locked site-wide nav.
@@ -19,7 +19,7 @@
  * Footer: nav.js injects the footer CSS (.pnf-footer*) so the shell + styling
  *   are single-source. The footer MARKUP stays inline per page so each page can
  *   keep its contextual columns (e.g. category subcategory links). The contact
- *   modal (.pnf-overlay/.pnf-modal/.pnf-cf) is NOT owned here — it stays inline.
+ *   modal (.pnf-overlay/.pnf-modal/.pnf-cf) is NOT owned here - it stays inline.
  *
  * Base path:
  *   Set PNF_BASE in a <script> before nav.js to override the path prefix.
@@ -64,20 +64,20 @@
     '.pnf-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}',
     '.pnf-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}',
     '.pnf-hamburger.open{opacity:0;pointer-events:none;}',
-    // Breadcrumb strip (slim wayfinding bar under the flat nav — listings)
+    // Breadcrumb strip (slim wayfinding bar under the flat nav - listings)
     '.pnf-bcstrip{display:flex;align-items:center;flex-wrap:wrap;background:#fff;border-bottom:1px solid #E8E2D8;padding:10px 28px;font-family:var(--pnf-font);font-size:12.5px;color:#6A7A85;}',
     '.pnf-bcstrip a{color:#6A7A85;text-decoration:none;transition:color 0.15s;}',
     '.pnf-bcstrip a:hover{color:var(--pnf-accent);}',
     '.pnf-bcstrip .pnf-bcsep{margin:0 8px;color:#C2CCD2;}',
     '.pnf-bcstrip .pnf-bccurrent{color:var(--pnf-navy);font-weight:600;}',
     '@media (max-width:520px){.pnf-bcstrip{padding:9px 16px;font-size:12px;}}',
-    // Breadcrumb (category/listing nav — retained, not deployed)
+    // Breadcrumb (category/listing nav - retained, not deployed)
     '.pnf-breadcrumb{display:flex;align-items:center;gap:0;flex:1;overflow:hidden;font-size:12.5px;color:rgba(255,255,255,0.45);white-space:nowrap;min-width:0;}',
     '.pnf-breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.15s;flex-shrink:0;}',
     '.pnf-breadcrumb a:hover{color:var(--pnf-white);}',
     '.pnf-breadcrumb-sep{margin:0 6px;opacity:0.3;flex-shrink:0;}',
     '.pnf-breadcrumb-current{color:rgba(255,255,255,0.85);font-weight:600;overflow:hidden;text-overflow:ellipsis;min-width:0;}',
-    // Back link (sales nav — retained, not deployed)
+    // Back link (sales nav - retained, not deployed)
     '.pnf-back{font-family:var(--pnf-font);font-size:13px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.15s;position:absolute;left:50%;transform:translateX(-50%);}',
     '.pnf-back:hover{color:var(--pnf-white);}',
     '.pnf-nav-sales{position:relative;}',
@@ -191,7 +191,7 @@
   }
   function logo(href) {
     var a = el('a', { href: href || BASE + '/homepage.html', 'class': 'pnf-logo', 'aria-label': 'Papamoa.info home' });
-    a.innerHTML = '<img src="' + BASE + '/assets/papamoa-info-asset-pack/logo/papamoa-info-logo-transparent-400w.png" alt="Papamoa.info — Our Local Directory Online" class="pnf-logo-img">';
+    a.innerHTML = '<img src="' + BASE + '/assets/papamoa-info-asset-pack/logo/papamoa-info-logo-transparent-400w.png" alt="Papamoa.info - Our Local Directory Online" class="pnf-logo-img">';
     return a;
   }
   function hamburger() {
@@ -413,8 +413,8 @@
                 '<select name="enquiry_type" required id="pnf-enquiry-type">' +
                   '<option value="" disabled selected>Select a topic</option>' +
                   '<option value="General enquiry">General enquiry</option>' +
-                  '<option value="Listing enquiry">Listing enquiry &mdash; I want to get listed</option>' +
-                  '<option value="Listing support">Listing support &mdash; update or change my listing</option>' +
+                  '<option value="Listing enquiry">Listing enquiry - I want to get listed</option>' +
+                  '<option value="Listing support">Listing support - update or change my listing</option>' +
                   '<option value="Media enquiry">Media enquiry</option>' +
                   '<option value="News &amp; community notice">News &amp; community notice</option>' +
                   '<option value="Report an error">Report an error on the site</option>' +

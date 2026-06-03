@@ -1286,7 +1286,7 @@
 
 <script>
 // ============================================================
-// SCRATCHPAD — papamoa-scratchpad Cloudflare Worker (bearer-token gated)
+// SCRATCHPAD - papamoa-scratchpad Cloudflare Worker (bearer-token gated)
 // ============================================================
 // Worker URL + bearer token are stored in localStorage per device.
 // First focus on the input triggers a one-shot setup prompt.
@@ -1356,13 +1356,13 @@ async function fetchNotes() {
     var raw = localStorage.getItem('pm-scratchpad-local');
     spNotes = raw ? JSON.parse(raw) : [];
     renderNotes();
-    setSpStatus('Local-only — focus the input to connect Worker');
+    setSpStatus('Local-only - focus the input to connect Worker');
     return;
   }
   setSpStatus('Syncing...');
   try {
     var res = await fetch(cfg.url + '/', { headers: { 'Authorization': 'Bearer ' + cfg.token } });
-    if (res.status === 401) throw new Error('unauthorized — token wrong');
+    if (res.status === 401) throw new Error('unauthorized - token wrong');
     if (!res.ok) throw new Error('HTTP ' + res.status);
     var data = await res.json();
     spNotes = Array.isArray(data.notes) ? data.notes : [];
@@ -1372,7 +1372,7 @@ async function fetchNotes() {
     var raw = localStorage.getItem('pm-scratchpad-local');
     spNotes = raw ? JSON.parse(raw) : [];
     renderNotes();
-    setSpStatus('Sync failed (' + e.message + ') — using local copy', true);
+    setSpStatus('Sync failed (' + e.message + ') - using local copy', true);
   }
 }
 
@@ -1380,7 +1380,7 @@ async function saveNotes() {
   try { localStorage.setItem('pm-scratchpad-local', JSON.stringify(spNotes)); } catch(_){}
   var cfg = getScratchpadConfig();
   if (!cfg.url || !cfg.token) {
-    setSpStatus('Saved locally — focus the input to connect Worker');
+    setSpStatus('Saved locally - focus the input to connect Worker');
     return;
   }
   if (spSaving) return;
@@ -1392,7 +1392,7 @@ async function saveNotes() {
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + cfg.token },
       body: JSON.stringify({ notes: spNotes })
     });
-    if (res.status === 401) throw new Error('unauthorized — token wrong');
+    if (res.status === 401) throw new Error('unauthorized - token wrong');
     if (!res.ok) throw new Error('HTTP ' + res.status);
     setSpStatus('Saved');
   } catch(e) {

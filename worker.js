@@ -319,7 +319,7 @@ export default {
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
         max_tokens: 600,
-        system: 'You are a local search visibility checker for Papamoa.info, a business directory in Papamoa, New Zealand. Always return valid JSON only — no markdown, no preamble, no explanation outside the JSON.',
+        system: 'You are a local search visibility checker for Papamoa.info, a business directory in Papamoa, New Zealand. Always return valid JSON only - no markdown, no preamble, no explanation outside the JSON.',
         messages: [{
           role: 'user',
           content: `Check local search visibility for this business:
