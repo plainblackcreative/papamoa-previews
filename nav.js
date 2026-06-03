@@ -31,8 +31,9 @@
   style.textContent = [
     ':root{--pnf-navy:#243B59;--pnf-accent:#359FE8;--pnf-dune:#C4985A;--pnf-white:#FFFFFF;--pnf-muted:rgba(255,255,255,0.45);--pnf-font:\'Figtree\',sans-serif;--pnf-display:\'Playfair Display\',serif;}',
     '.pnf-nav{background:var(--pnf-navy);height:56px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.25);gap:16px;width:100%;box-sizing:border-box;}',
-    '.pnf-logo{font-family:var(--pnf-display);font-weight:700;font-size:15px;color:var(--pnf-white);text-decoration:none;flex-shrink:0;}',
-    '.pnf-logo span{color:var(--pnf-accent);}',
+    '.pnf-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;line-height:0;}',
+    '.pnf-logo-img{height:44px;width:auto;max-width:300px;display:block;vertical-align:middle;}',
+    '@media (max-width:520px){.pnf-logo-img{height:36px;max-width:230px;}}',
     // Default nav links
     '.pnf-links{display:flex;align-items:center;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}',
     '.pnf-links::-webkit-scrollbar{display:none;}',
@@ -68,8 +69,8 @@
     '.pnf-drawer{position:fixed;top:0;left:0;bottom:0;width:min(300px,85vw);background:var(--pnf-navy);z-index:201;transform:translateX(-100%);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;box-shadow:4px 0 24px rgba(0,0,0,0.35);overflow:hidden;}',
     '.pnf-drawer.open{transform:translateX(0);}',
     '.pnf-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:0 18px;height:56px;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;}',
-    '.pnf-drawer-logo{font-family:var(--pnf-display);font-weight:700;font-size:15px;color:var(--pnf-white);text-decoration:none;}',
-    '.pnf-drawer-logo span{color:var(--pnf-accent);}',
+    '.pnf-drawer-logo{display:flex;align-items:center;text-decoration:none;line-height:0;}',
+    '.pnf-drawer-logo-img{height:34px;width:auto;max-width:220px;display:block;vertical-align:middle;}',
     '.pnf-drawer-close{background:rgba(255,255,255,0.08);border:none;color:rgba(255,255,255,0.6);width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;}',
     '.pnf-drawer-nav{flex:1;overflow-y:auto;padding:10px 0;}',
     '.pnf-drawer-nav a{display:flex;align-items:center;gap:12px;padding:13px 20px;font-family:var(--pnf-font);font-size:15px;font-weight:500;color:rgba(255,255,255,0.65);text-decoration:none;border-left:3px solid transparent;transition:all 0.15s;}',
@@ -104,8 +105,8 @@
     return e;
   }
   function logo(href) {
-    var a = el('a', { href: href || BASE + '/homepage.html', 'class': 'pnf-logo' });
-    a.innerHTML = 'Papamoa<span>.info</span>';
+    var a = el('a', { href: href || BASE + '/homepage.html', 'class': 'pnf-logo', 'aria-label': 'Papamoa.info home' });
+    a.innerHTML = '<img src="' + BASE + '/assets/papamoa-macron.png" alt="Papamoa.info — Our Local Directory Online" class="pnf-logo-img" style="height:44px;width:auto;max-width:300px;display:block;vertical-align:middle;">';
     return a;
   }
   function hamburger() {
@@ -116,8 +117,8 @@
   }
   function drawerHead() {
     var head = el('div', { 'class': 'pnf-drawer-head' });
-    var l = el('a', { href: BASE + '/homepage.html', 'class': 'pnf-drawer-logo' });
-    l.innerHTML = 'Papamoa<span>.info</span>';
+    var l = el('a', { href: BASE + '/homepage.html', 'class': 'pnf-drawer-logo', 'aria-label': 'Papamoa.info home' });
+    l.innerHTML = '<img src="' + BASE + '/assets/papamoa-macron.png" alt="Papamoa.info" class="pnf-drawer-logo-img" style="height:34px;width:auto;max-width:220px;display:block;vertical-align:middle;">';
     var close = el('button', { 'class': 'pnf-drawer-close', 'aria-label': 'Close menu', html: '&#10005;' });
     close.addEventListener('click', pnfDrawerClose);
     head.appendChild(l);
