@@ -231,10 +231,10 @@ body { font-family:var(--font-body); background:var(--sand); color:var(--text); 
 
 <script>
 // ── Bronze self-serve create form ──
-// v1 SUBMIT: posts to pb-forms (emails the operator via Resend) so the loop works today.
-// When the Sheet+queue Worker is deployed (Project_Master §8.2 step 3), swap SUBMIT_URL
-// to the /bronze-submit route - the field names below are already the Sheet/template contract.
-var SUBMIT_URL = 'https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa';
+// Posts to the Bronze Worker route /bronze-submit (deployed 2026-06-04): validates,
+// appends a pending row to the Bronze Sheet, and (if RESEND_API_KEY is set) emails the operator.
+// Field names match the Sheet/template contract (Project_Master §8.2).
+var SUBMIT_URL = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev/bronze-submit';
 
 var CATEGORY_LABELS = {
   'accommodation':'Accommodation', 'food-drink':'Food & Drink', 'services':'Services & Trades',

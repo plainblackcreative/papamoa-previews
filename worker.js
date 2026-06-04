@@ -202,7 +202,7 @@ export default {
     //  RESEND_API_KEY (optional - operator email).
     // ══════════════════════════════════════════════════════════════════
     const BRONZE = {
-      sheetId:       '<<SET_BRONZE_SHEET_ID>>',     // Google Sheet id (cols: id,ts,status,name,category,subcat,address,phone,website,email,blurb,slug,url)
+      sheetId:       '11sn0WgZaJwbsEG3Kqjpb-mWmiKkiVQ8LgGw_SAMDIrw',     // Google Sheet id (cols: id,ts,status,name,category,subcat,address,phone,website,email,blurb,slug,url)
       tab:           'Bronze Listings',             // tab name
       saEmail:       'papamoa-sheets-writer@papamoa-info.iam.gserviceaccount.com',
       ghOwner:       'plainblackcreative',
