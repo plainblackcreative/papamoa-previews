@@ -4,6 +4,467 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get Your Free Pāpāmoa Listing Preview - Papamoa.info</title>
+  <link rel="icon" type="image/x-icon" href="/papamoa-previews/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/papamoa-previews/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/papamoa-previews/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/papamoa-previews/apple-touch-icon.png">
+  <link rel="manifest" href="/papamoa-previews/site.webmanifest">
+<meta name="description" content="See exactly how your business will look on Papamoa.info before you commit. Free personalised preview within 24 hours.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ocean: #1B6B7D;
+  --ocean-deep: #0F4352;
+  --ocean-mid: #1A5F70;
+  --ocean-light: #E4F2F5;
+  --ocean-accent: #359FE8;
+  --sand: #F7F3ED;
+  --sand-dark: #EDE7DB;
+  --dune: #C4985A;
+  --dune-light: #F5EDD8;
+  --navy: #243B59;
+  --white: #FFFFFF;
+  --text: #1A2832;
+  --muted: #5A6E78;
+  --border: #D8E4E8;
+  --silver: #5A7A8A;
+  --silver-bg: #EDF3F6;
+  --gold: #B8840A;
+  --gold-bg: #FBF3E2;
+  --green: #1E6B3C;
+  --green-bg: #E6F4EC;
+  --green-pulse: #89BE43;
+  --font-body: 'Figtree', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--sand); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--ocean-deep);
+  padding: 84px 24px 108px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 50%, rgba(53,159,232,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 20%, rgba(196,152,90,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 80px;
+  background: var(--sand);
+  clip-path: ellipse(65% 100% at 50% 100%);
+}
+.hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.pulse { width: 7px; height: 7px; background: var(--green-pulse); border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--white);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+.hero h1 em { color: var(--ocean-accent); font-style: italic; }
+.hero-sub {
+  color: rgba(255,255,255,0.65);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 44px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-stat { text-align: center; }
+.hs-num { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 5px; }
+.hs-num span { color: var(--ocean-accent); }
+.hs-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ocean-accent);
+  color: var(--white);
+  padding: 16px 34px;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 8px 32px rgba(53,159,232,0.3);
+}
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(53,159,232,0.4); background: #2d95c4; }
+.hero-cta-sub { display: block; margin-top: 14px; font-size: 12px; color: rgba(255,255,255,0.38); letter-spacing: 0.04em; }
+
+/* Personalised hero */
+.hero-personal { display: none; }
+.hero-personal-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(196,152,90,0.15);
+  border: 1px solid rgba(196,152,90,0.3);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+.hero-biz-name { color: var(--dune); font-weight: 700; }
+
+/* ── TRUST BAR ── */
+.trust-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.trust-icon { color: var(--dune); font-size: 13px; }
+
+/* ── SHARED LAYOUT ── */
+.container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 72px 0; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocean); margin-bottom: 10px; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--navy); margin-bottom: 16px; line-height: 1.25; }
+.section-sub { font-size: 1rem; color: var(--muted); max-width: 600px; line-height: 1.7; margin-bottom: 40px; }
+
+/* ── SCARCITY BANNER ── */
+.scarcity-banner {
+  display: none;
+  background: var(--gold-bg);
+  border: 1px solid rgba(184,132,10,0.3);
+  border-left: 4px solid var(--gold);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-top: 40px;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13.5px;
+}
+.sb-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+.sb-text strong { color: var(--gold); display: block; margin-bottom: 3px; font-weight: 700; }
+.sb-text span { color: var(--text); opacity: 0.8; line-height: 1.55; }
+.js-cat { font-weight: 700; }
+
+/* ── TIERS ── */
+.tiers-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; max-width: 720px; margin-left: auto; margin-right: auto; }
+@media (max-width: 600px) { .tiers-grid { grid-template-columns: 1fr; } }
+.tier-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+.tier-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(15,67,82,0.12); }
+.tier-card.featured { border-color: var(--dune); box-shadow: 0 6px 30px rgba(196,152,90,0.18); }
+.tier-head { padding: 24px 24px 20px; border-bottom: 1px solid var(--border); }
+.tier-badge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: 12px; }
+.tier-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+.tier-price { font-size: 1.6rem; font-weight: 800; line-height: 1.1; margin-bottom: 6px; }
+.tier-price span { font-size: 0.85rem; font-weight: 400; opacity: 0.6; }
+.tier-tagline { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.tier-silver .tier-head { background: var(--silver-bg); }
+.tier-silver .tier-name { color: var(--silver); }
+.tier-silver .tier-price { color: var(--silver); }
+.tier-silver .tier-badge { background: #D8E8EE; color: var(--silver); }
+.tier-gold .tier-head { background: var(--gold-bg); border-bottom-color: rgba(184,132,10,0.2); }
+.tier-gold .tier-name { color: var(--gold); }
+.tier-gold .tier-price { color: var(--gold); }
+.tier-gold .tier-badge { background: #FAECC8; color: var(--gold); }
+.tier-gold.featured .tier-head { background: linear-gradient(135deg, #FBF3E2, #FEF8EC); }
+.tier-body { padding: 20px 24px; flex: 1; }
+.feat-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.feat-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; line-height: 1.45; }
+.fi { flex-shrink: 0; font-style: normal; font-size: 13px; margin-top: 1px; font-weight: 700; }
+.fi-yes { color: var(--green); }
+.fi-no { color: #C0C8CC; }
+.fi-note { color: var(--dune); }
+.tier-footer { padding: 16px 24px 20px; }
+.tier-cta { display: block; text-align: center; padding: 11px 20px; border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none; transition: all 0.2s; }
+.tier-cta-silver { background: var(--silver-bg); color: var(--silver); border: 1px solid #BDD0D8; }
+.tier-cta-silver:hover { background: var(--silver); color: var(--white); }
+.tier-cta-gold { background: var(--gold); color: var(--white); }
+.tier-cta-gold:hover { background: #9A6E08; }
+.scarcity-note { margin-top: 10px; font-size: 11.5px; color: var(--gold); font-weight: 600; text-align: center; }
+.addon-strip { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-top: 20px; display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+.addon-strip-icon { font-size: 28px; flex-shrink: 0; }
+.addon-strip-body { flex: 1; min-width: 200px; }
+.addon-strip-body h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.addon-strip-body p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.addon-strip-price { flex-shrink: 0; text-align: right; }
+.addon-strip-price strong { display: block; font-size: 15px; font-weight: 800; color: var(--ocean); }
+.addon-strip-price span { font-size: 11px; color: var(--muted); }
+.addon-strip-price a { display: inline-block; margin-top: 6px; font-size: 12px; color: var(--ocean); text-decoration: none; font-weight: 600; }
+.addon-strip-price a:hover { text-decoration: underline; }
+
+/* ── GUARANTEES ── */
+.guarantees-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+@media (max-width: 600px) { .guarantees-grid { grid-template-columns: 1fr; } }
+.guarantee-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; display: flex; gap: 16px; }
+.gc-icon { font-size: 26px; flex-shrink: 0; }
+.gc-body h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.gc-body p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+/* ── HOW IT WORKS ── */
+.steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+@media (max-width: 700px) { .steps-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 400px) { .steps-grid { grid-template-columns: 1fr; } }
+.step-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; }
+.step-num { width: 36px; height: 36px; background: var(--ocean-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: var(--ocean); margin-bottom: 14px; }
+.step-card h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.step-card p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+.step-time { font-size: 11px; font-weight: 700; color: var(--ocean-accent); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px; }
+
+/* ── FORM ── */
+.form-section { background: linear-gradient(140deg, var(--ocean-deep), var(--ocean-mid)); padding: 72px 24px; }
+.form-section-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+.form-section .section-label { color: rgba(255,255,255,0.45); }
+.form-section h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--white); margin-bottom: 10px; line-height: 1.25; }
+.form-section > .form-section-inner > p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.vis-box { background: var(--white); border-radius: 14px; padding: 36px; text-align: left; }
+.vis-box h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--navy); margin-bottom: 6px; }
+.vis-box .vis-box-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+.vis-note { background: rgba(27,107,125,0.08); border: 1px solid rgba(27,107,125,0.15); border-radius: 8px; padding: 12px 16px; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 24px; font-size: 13px; color: var(--ocean-deep); line-height: 1.55; }
+.vis-note-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.vis-form { display: flex; flex-direction: column; gap: 16px; }
+.vis-field { display: flex; flex-direction: column; gap: 5px; }
+.vis-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.vis-label .req { color: var(--ocean); margin-left: 2px; }
+.vis-form input, .vis-form select, .vis-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--sand);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.vis-form input:focus, .vis-form select:focus, .vis-form textarea:focus { border-color: var(--ocean); background: var(--white); }
+.vis-form textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+.vis-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 480px) { .vis-form-row { grid-template-columns: 1fr; } }
+.vis-submit {
+  background: var(--ocean-accent);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 15px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  width: 100%;
+  margin-top: 4px;
+}
+.vis-submit:hover { background: #2d95c4; transform: translateY(-1px); }
+.vis-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.vis-fine { font-size: 11.5px; color: var(--muted); margin-top: 8px; text-align: center; }
+.success-msg {
+  display: none;
+  background: var(--green-bg);
+  border: 1px solid #9ED0B4;
+  border-radius: 10px;
+  padding: 24px 20px;
+  text-align: center;
+}
+.success-msg .success-tick { font-size: 40px; margin-bottom: 10px; }
+.success-msg h3 { font-size: 18px; font-weight: 700; color: var(--green); margin-bottom: 6px; }
+.success-msg p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+/* ── JAYDEN ── */
+.jayden-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 48px auto;
+  max-width: 720px;
+}
+.jayden-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--ocean-deep);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--ocean-accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.jayden-text { flex: 1; min-width: 180px; }
+.jayden-text strong { display: block; font-size: 15px; color: var(--navy); margin-bottom: 5px; }
+.jayden-text p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.jayden-contact { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+.jayden-btn { display: inline-block; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; text-align: center; transition: all 0.2s; }
+.jayden-btn.primary { background: var(--ocean-deep); color: var(--white); }
+.jayden-btn.primary:hover { background: var(--ocean); }
+.jayden-btn.secondary { background: var(--sand); color: var(--ocean-deep); border: 1px solid var(--sand-dark); }
+.jayden-btn.secondary:hover { background: var(--sand-dark); }
+@media (max-width: 560px) { .jayden-section { flex-direction: column; text-align: center; } .jayden-contact { flex-direction: row; justify-content: center; } }
+
+/* ── NAV / FOOTER ── */
+:root {
+  --pnf-navy:    #243B59;
+  --pnf-accent:  #359FE8;
+  --pnf-white:   #FFFFFF;
+  --pnf-muted:   rgba(255,255,255,0.45);
+  --pnf-font:    'Figtree', sans-serif;
+  --pnf-display: 'Playfair Display', serif;
+}
+.pnf-nav { background: var(--pnf-navy); height: 56px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.25); gap: 16px; }
+.pnf-logo { font-family: var(--pnf-display); font-weight: 700; font-size: 15px; color: var(--pnf-white); text-decoration: none; flex-shrink: 0; }
+.pnf-logo span { color: var(--pnf-accent); }
+.pnf-back { font-size: 13px; color: var(--pnf-muted); text-decoration: none; transition: color 0.2s; }
+.pnf-back:hover { color: var(--pnf-white); }
+.pnf-cta { font-family: var(--pnf-font); font-size: 13px; font-weight: 700; background: var(--pnf-accent); color: var(--pnf-white); padding: 8px 18px; border-radius: 100px; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
+.pnf-cta:hover { background: #2d95c4; }
+@media (max-width: 640px) { .pnf-nav { padding: 0 16px; } }
+.pnf-footer-slim { background: var(--pnf-navy); padding: 28px; text-align: center; }
+.pnf-footer-brand { font-family: var(--pnf-display); font-size: 1.1rem; font-weight: 700; color: var(--pnf-white); margin-bottom: 6px; display: inline-block; }
+.pnf-footer-brand span { color: var(--pnf-accent); }
+.pnf-footer-tagline { font-size: 12.5px; color: rgba(255,255,255,0.38); line-height: 1.7; text-align: center; margin: 0 auto 16px; }
+.pnf-footer-slim-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+.pnf-footer-slim-links a, .pnf-footer-slim-links button { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; background: none; border: none; padding: 0; cursor: pointer; font-family: var(--pnf-font); transition: color 0.15s; }
+.pnf-footer-slim-links a:hover, .pnf-footer-slim-links button:hover { color: var(--pnf-white); }
+.pnf-footer-slim-bottom { font-size: 11.5px; color: rgba(255,255,255,0.2); }
+.pnf-overlay { position: fixed; inset: 0; background: rgba(36,59,89,0.7); backdrop-filter: blur(4px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+.pnf-overlay.open { opacity: 1; pointer-events: all; }
+.pnf-modal { background: #fff; border-radius: 16px; width: 100%; max-width: 520px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.3); transform: translateY(16px); transition: transform 0.25s; }
+.pnf-overlay.open .pnf-modal { transform: translateY(0); }
+.pnf-modal-head { background: var(--pnf-navy); padding: 22px 28px 18px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.pnf-modal-head h2 { font-family: var(--pnf-display); font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.pnf-modal-head p { font-size: 12.5px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+.pnf-modal-close { background: rgba(255,255,255,0.1); border: none; color: rgba(255,255,255,0.6); width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.pnf-modal-close:hover { background: rgba(255,255,255,0.2); color: #fff; }
+.pnf-modal-body { padding: 24px 28px 28px; }
+.pnf-cf { display: flex; flex-direction: column; gap: 14px; }
+.pnf-cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 420px) { .pnf-cf-row { grid-template-columns: 1fr; } }
+.pnf-cf label { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #5A6E78; margin-bottom: 5px; display: block; }
+.pnf-cf input, .pnf-cf textarea { width: 100%; padding: 11px 14px; border: 1.5px solid #D8E4E8; border-radius: 7px; font-family: var(--pnf-font); font-size: 14px; color: #1A2832; background: #F7F3ED; outline: none; transition: border-color 0.2s; }
+.pnf-cf input:focus, .pnf-cf textarea:focus { border-color: #1B6B7D; background: #fff; }
+.pnf-cf textarea { resize: vertical; min-height: 80px; line-height: 1.55; }
+.pnf-cf-submit { width: 100%; background: #1B6B7D; color: #fff; border: none; padding: 13px; border-radius: 8px; font-family: var(--pnf-font); font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; margin-top: 2px; }
+.pnf-cf-submit:hover { background: #0F4352; }
+.pnf-cf-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.pnf-cf-fine { font-size: 11.5px; color: #5A6E78; text-align: center; margin-top: 6px; }
+.pnf-cf-success { display: none; text-align: center; padding: 16px 0 8px; }
+.pnf-cf-success .pnf-tick { font-size: 40px; margin-bottom: 10px; }
+.pnf-cf-success h3 { font-size: 18px; font-weight: 700; color: #1E6B3C; margin-bottom: 6px; }
+.pnf-cf-success p { font-size: 13.5px; color: #5A6E78; line-height: 1.6; }
+
+@media (max-width: 600px) {
+  .hero { padding: 60px 20px 90px; }
+  .section { padding: 48px 0; }
+  .form-section { padding: 48px 20px; }
+  .vis-box { padding: 24px 20px; }
+}
+</style>
+</head>
+<body data-nav="default">
+
+<div id="pnf-nav-placeholder"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+
+    <!-- Generic (no params) -->
+    <div id="hero-generic">
+      <div class="hero-eyebrow"><span class="pulse"></span>P&#257;p&#257;moa&rsquo;s local business directory &middot; Since 2005</div>
+      <h1>See exactly how your<br>business looks on <em>Papamoa.info</em></h1>
+      <p class="hero-sub">Free personalised preview within 24 hours. Your real business details, your SEO score, your listing - before you spend a cent.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hs-num">37<span>,800</span></div><div class="hs-label">P&#257;p&#257;moa residents</div></div>
+        <div class="hero-stat"><div class="hs-num">20<span>yrs</span></div><div class="hs-label">Domain authority</div></div>
+        <div class="hero-stat"><div class="hs-num">88<span>%</span></div><div class="hs-label">Searches show AI Overviews</div></div>
+      </div>
+      <a href="#get-preview" class="hero-cta">Get your free preview &rarr;</a>
+      <span class="hero-cta-sub">Takes 60 seconds &middot; No obligation &middot; Your preview within 24 hours</span>
+    </div>
+
+    <!-- Personalised (when ?biz= param present) -->
+    <div id="hero-personal" class="hero-personal">
+      <div class="hero-personal-tag"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.3 9.2a3 3 0 0 1 5.5 1.2c0 1.8-2.8 2.3-2.8 4"/><path d="M12 17h.01"/></svg> Following up on our conversation</div>
+      <h1>Great talking, <em class="js-biz hero-biz-name"></em></h1>
+      <p class="hero-sub">Here are your listing options. Fill in your details below and we&rsquo;ll have your personalised preview ready within 24 hours - showing exactly how your listing will look, built for your actual business.</p>
+      <a href="#get-preview" class="hero-cta">See my listing preview &rarr;</a>
+      <span class="hero-cta-sub">Free preview &middot; No obligation &middot; Your real listing, your real data</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg></span> We write your listing for you</div>
+  <div class="trust-item"><span class="trust-icon"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg></span> Live within 24 hours</div>
+  <div class="trust-item"><span class="trust-icon"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg></span> Lifetime price lock</div>
+  <div class="trust-item"><span class="trust-icon"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg></span> 2027 ROI guarantee</div>
+  <div class="trust-item"><span class="trust-icon"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg></span> No commitment to view your preview</div>
+</div>
+
+<div class="container">
+
+  <!-- SCARCITY BANNER -->
+  <div class="scarcity-banner" id="scarcity-banner">
+    <span class="sb-icon"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.6 5L19 9.6 13.6 11 12 16l-1.6-5L5 9.6 10.4 8Z"/><path d="M18 3.5v3M19.5 5h-3"/></svg></span>
+    <div class="sb-text">
+      <strong>Gold Listing - <span class="js-cat"></span> is still available</strong>
+      <span>Gold gives you the top position in your sub-category <em>and</em> access to premium ad spots on our highest-traffic pages - those positions are genuinely limited. Once another <span class="js-cat"></span> business claims Gold, the Spotlight is gone.</span>
+    </div>
+  </div>
+
+  <!-- TIERS -->
+  <div class="section" id="pricing">
+    <div class="section-label">Listing options</div>
+    <h2 class="section-title">Simple, honest pricing.</h2>
+    <p class="section-sub">Silver gets you found and credible. Gold puts you at the top of your sub-category, adds a photo gallery, unlocks premium ad spots, and includes the Menu Add-On free. One Gold Spotlight per sub-category - first in keeps it.</p>
+
+    <div class="tiers-grid">
+
+      <!-- SILVER -->
+      <div class="tier-card tier-silver">
+        <div class="tier-head">
+          <div class="tier-badge">Most popular</div>
+          <div class="tier-name">Silver Listing</div>
+          <div class="tier-price">$599 <span>+gst / yr</span></div>
+          <div class="tier-tagline">Full claimed listing. SEO-optimised, your logo, all contact details - live within 24 hours.</div>
+        </div>
+        <div class="tier-body">
+          <ul class="feat-list">
+            <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> SEO-optimised description (we write it)</li>
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> Logo</li>
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> Schema markup</li>
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> All contact &amp; social links</li>
@@ -11,6 +472,7 @@
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> Facebook welcome post</li>
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> Lifetime price lock</li>
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> 2027 ROI guarantee</li>
+            <li><i class="fi fi-note">+</i> Menu Add-On: $199+gst/yr</li>
             <li><i class="fi fi-no"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></i> Spotlight position</li>
             <li><i class="fi fi-no"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></i> Photo gallery</li>
           </ul>
@@ -34,6 +496,7 @@
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> Photo gallery - logo + up to 9 images</li>
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> Spotlight - top of your sub-category</li>
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> AI-optimised FAQ &amp; AEO schema</li>
+            <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> Menu Add-On included free</li>
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> Access to premium ad spots on high-traffic pages</li>
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> Lifetime price lock</li>
             <li><i class="fi fi-yes"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i> 2027 ROI guarantee</li>
@@ -57,7 +520,7 @@
       <div class="addon-strip-price">
         <strong>$199+gst/yr</strong>
         <span>Included free with Gold</span>
-        
+        <a href="/papamoa-previews/sales/menu-addon.html">See how it works &rarr;</a>
       </div>
     </div>
   </div>
