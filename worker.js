@@ -364,7 +364,7 @@ export default {
         if (cat) items = items.filter(r => r.category === cat);
         if (subcat) items = items.filter(r => (r.subcat_path || '').toLowerCase() === subcat.toLowerCase());
         // public-safe fields only (no email)
-        const out = items.map(r => ({ name: r.business_name, subcategory: r.subcat_name || r.subcategory, address: r.address, phone: r.phone, website: r.website, slug: r.slug }));
+        const out = items.map(r => ({ name: r.business_name, subcategory: r.subcat_name || r.subcategory, address: r.address, phone: r.phone, website: r.website, blurb: r.blurb, slug: r.slug }));
         const body = JSON.stringify({ ok: true, items: out });
         const resp = new Response(body, { headers: { 'Content-Type':'application/json', 'Access-Control-Allow-Origin':'*', 'Cache-Control':'public, max-age=300' } });
         ctx.waitUntil(cache.put(cacheKey, resp.clone()));

@@ -486,3 +486,41 @@
   pnfEnsureContactModal();
 
 })();
+
+
+/* ── Bronze free listings into the subcategory "More [subcat]" section (Project_Master §8.2 step 5) ──
+   Self-contained, isolated. On a subcategory page that has a .ghost-grid, fetches the live free
+   Bronze listings for that subcat and prepends them as ghost-card-style cards (name links to the
+   listing, NO "Claim listing" link). Placeholder ghosts are left in place. No-op otherwise. */
+(function () {
+  var WORKER = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
+  var BASE = '/papamoa-previews';
+  var m = location.pathname.match(/\/categories\/([a-z0-9-]+)\/([a-z0-9-]+)(?:\.html)?$/);
+  if (!m) return;
+  var LANDINGS = { 'accommodation':1, 'food-and-drink':1, 'services':1, 'shopping':1, 'entertainment':1 };
+  if (LANDINGS[m[2]]) return;
+  var subcatPath = m[1] + '/' + m[2];
+  function esc(s) { var x = document.createElement('div'); x.textContent = (s == null ? '' : s); return x.innerHTML; }
+  function go() {
+    var grid = document.querySelector('.ghost-grid');
+    if (!grid) return;
+    fetch(WORKER + '/bronze-public?subcat=' + encodeURIComponent(subcatPath))
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (d && d.ok && d.items && d.items.length) inject(grid, d.items); })
+      .catch(function () {});
+  }
+  function inject(grid, items) {
+    var pin = '<svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+    var html = items.map(function (it) {
+      var href = BASE + '/listings/' + esc(it.slug) + '.html';
+      return '<div class="ghost-card pnf-bz-live">'
+        + '<a class="gc-name" href="' + href + '" style="text-decoration:none;color:inherit">' + esc(it.name) + '</a>'
+        + '<div class="gc-sub">' + pin + ' ' + esc(it.address || 'Pāpāmoa') + '</div>'
+        + (it.blurb ? '<p class="gc-desc">' + esc(it.blurb) + '</p>' : '')
+        + '<a href="' + href + '" class="gc-cta">View listing &rarr;</a>'
+        + '</div>';
+    }).join('');
+    grid.insertAdjacentHTML('afterbegin', html);   // real listings before the placeholder ghosts
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+})();
