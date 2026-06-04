@@ -305,6 +305,16 @@ export default {
         await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}!C${idx + 1}?valueInputOption=USER_ENTERED`, {
           method: 'PUT', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` }, body: JSON.stringify({ values: [['live']] }),
         });
+        // Lead-funnel first touch: tell the owner it's live + nudge the upgrade (full Brevo nurture = Phase E).
+        if (env.RESEND_API_KEY && rec.email) {
+          const upUrl = `https://papamoa.info/sales/list-with-us.html?claim=${rec.slug}&biz=${encodeURIComponent(rec.business_name)}`;
+          ctx.waitUntil(fetch('https://api.resend.com/emails', {
+            method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${env.RESEND_API_KEY}` },
+            body: JSON.stringify({ from: 'Papamoa.info <noreply@papamoa.info>', to: [rec.email],
+              subject: `Your free Papamoa.info listing is live - ${rec.business_name}`,
+              text: `Kia ora,\n\nGood news - your free listing for ${rec.business_name} is now live on Papamoa.info:\nhttps://papamoa.info/listings/${rec.slug}.html\n\nWant photos, reviews, your logo and a full write-up so you stand out? Upgrade to a Silver or Gold listing any time:\n${upUrl}\n\nCheers,\nThe Papamoa.info team` }),
+          }).catch(() => {}));
+        }
         return bronzeJSON({ ok: true, url: `/listings/${rec.slug}.html` });
       } catch (e) { return bronzeJSON({ ok: false, error: e.message }, 500); }
     }
@@ -324,6 +334,29 @@ export default {
         });
         return bronzeJSON({ ok: true });
       } catch (e) { return bronzeJSON({ ok: false, error: e.message }, 500); }
+    }
+
+    // ── /bronze-public (public, cached) ── live Bronze listings for category-page cards
+    if (url.pathname === '/bronze-public' && request.method === 'GET') {
+      const cat = (url.searchParams.get('cat') || '').trim();
+      const subcat = (url.searchParams.get('subcat') || '').toLowerCase().trim();
+      const cache = caches.default;
+      const cacheKey = new Request('https://papamoa-internal/bronze-public?cat=' + encodeURIComponent(cat) + '&subcat=' + encodeURIComponent(subcat));
+      const hit = await cache.match(cacheKey);
+      if (hit) return new Response(await hit.text(), { headers: { 'Content-Type':'application/json', 'Access-Control-Allow-Origin':'*' } });
+      try {
+        const token = await getServiceAccountToken(BRONZE.saEmail, env.GOOGLE_SERVICE_ACCOUNT_KEY, 'https://www.googleapis.com/auth/spreadsheets.readonly');
+        const rows = ((await (await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}`, { headers: { 'Authorization':`Bearer ${token}` } })).json()).values || []).slice(1);
+        let items = rows.map(bronzeRowToObj).filter(r => r && r.status === 'live');
+        if (cat) items = items.filter(r => r.category === cat);
+        if (subcat) items = items.filter(r => (r.subcategory || '').toLowerCase().indexOf(subcat) > -1);
+        // public-safe fields only (no email)
+        const out = items.map(r => ({ name: r.business_name, subcategory: r.subcategory, address: r.address, phone: r.phone, website: r.website, slug: r.slug }));
+        const body = JSON.stringify({ ok: true, items: out });
+        const resp = new Response(body, { headers: { 'Content-Type':'application/json', 'Access-Control-Allow-Origin':'*', 'Cache-Control':'public, max-age=300' } });
+        ctx.waitUntil(cache.put(cacheKey, resp.clone()));
+        return resp;
+      } catch (e) { return bronzeJSON({ ok: false, items: [], error: e.message }); }
     }
 
     // ── Fishing data ──────────────────────────────────

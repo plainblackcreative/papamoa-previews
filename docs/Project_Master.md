@@ -494,13 +494,13 @@ Goal: a visitor creates a free Bronze listing themselves; it **auto-publishes pe
 2. Create-Bronze form + preview — *infra-free, build now (POST contract defined).*
 3. `/bronze-submit` route + Sheet append + operator email — *needs Jay's Sheet + Worker.*
 4. Admin moderation queue + `/bronze-approve` commit-on-approve — *needs Jay's GitHub PAT + Worker.*
-5. Subcategory surfacing + lead-funnel tie-in.
+5. Subcategory/category surfacing + lead-funnel first touch. ✅ built (session 5).
 
 Steps 1–2 build with no infra; 3–5 are gated on Jay provisioning the GitHub PAT, the Sheet, and the Worker deploy.
 
 #### v1 deploy checklist (steps ③④ code is built — `worker.js` routes + `admin/bronze-queue.html`)
 
-The Worker routes live in **`worker.js`** (the `papamoa-claude-proxy` worker) reusing its existing service-account Sheets pattern. Routes added: `/bronze-submit` (public POST), `/bronze-list` (admin GET), `/bronze-approve` (admin POST), `/bronze-reject` (admin POST). Admin routes auth via `?key=BRONZE_ADMIN_TOKEN`. To go live:
+The Worker routes live in **`worker.js`** (the `papamoa-claude-proxy` worker) reusing its existing service-account Sheets pattern. Routes added: `/bronze-submit` (public POST), `/bronze-public` (public GET, cached - powers category-page cards), `/bronze-list` (admin GET), `/bronze-approve` (admin POST), `/bronze-reject` (admin POST). Admin routes auth via `?key=BRONZE_ADMIN_TOKEN`. To go live:
 
 1. **Google Sheet.** Create a sheet; add a tab named **`Bronze Listings`** with header row: `id | ts | status | business_name | category | subcategory | address | phone | website | email | blurb | slug | url`. Share it as **Editor** with the service account `papamoa-sheets-writer@papamoa-info.iam.gserviceaccount.com`. Put its id in `worker.js` → `BRONZE.sheetId` (replace `<<SET_BRONZE_SHEET_ID>>`).
 2. **GitHub PAT.** Create a fine-grained token scoped to `plainblackcreative/papamoa-previews`, **Contents: Read and write**. Set as a Worker secret: `wrangler secret put GITHUB_TOKEN`.
@@ -510,7 +510,9 @@ The Worker routes live in **`worker.js`** (the `papamoa-claude-proxy` worker) re
 6. **Point the form at the route.** In `sales/create-bronze-listing.html`, change `SUBMIT_URL` from the pb-forms endpoint to `https://papamoa-claude-proxy.jkbrownnz.workers.dev/bronze-submit`.
 7. **Moderate.** Open `admin/bronze-queue.html`, enter `BRONZE_ADMIN_TOKEN`, approve → commits `/listings/SLUG.html` (Pages rebuilds in ~1 min).
 
-**Notes / v1 limitations:** submit values are sanitised (strips `< > { } " \``) so token substitution is safe in HTML + JSON-LD contexts; free-text subcategory maps to the category landing page for breadcrumb/related links (admin can refine the published file); per-IP throttle is best-effort via the cache API (KV/Durable Object would be sturdier); approval renders from the live `listing-bronze-template.html` on GitHub raw. **Untested end-to-end** — pending the Sheet + PAT + deploy above. ⑤ (subcategory card surfacing + lead-funnel nurture) still to build.
+**Notes / v1 limitations:** submit values are sanitised (strips `< > { } " \``) so token substitution is safe in HTML + JSON-LD contexts; free-text subcategory maps to the category landing page for breadcrumb/related links (admin can refine the published file); per-IP throttle is best-effort via the cache API (KV/Durable Object would be sturdier); approval renders from the live `listing-bronze-template.html` on GitHub raw. **Untested end-to-end** — pending the Sheet + PAT + deploy above.
+
+**⑤ surfacing + lead-funnel first touch — built (session 5).** Approved (live) Bronze listings surface as plain directory cards (no tier label, §8) in a "More Pāpāmoa businesses" band on the 5 main category landing pages (accommodation, food-drink, services, shops, activities) - rendered client-side by `assets/bronze-cards.js` from the public, cached `/bronze-public?cat=` route, with an "Add your business - free" CTA (the lead-gen flywheel). The slot is `<div id="bronze-listings-slot" data-bronze-cat="…"></div>` + the script; it is a safe no-op until the Worker route is live. On approval, `/bronze-approve` emails the owner a "your listing is live + upgrade to Silver/Gold" message (RESEND_API_KEY) - the lead-funnel first touch; the full Day 0/3/6/10 nurture remains §18 Phase E (Brevo). **Coverage gap:** health / real-estate / default Bronze listings get their own `/listings/SLUG.html` page but are not yet surfaced on a category page (no dedicated landing page in the 5); add a slot there later if wanted.
 
 ---
 
