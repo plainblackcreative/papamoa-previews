@@ -3,7 +3,7 @@
 **For:** Jay's review before sending
 **Source brief:** `docs/carwyn-feedback-2026-06-02.md`
 **Open questions catalogue:** Project_Master §21.3
-**Status:** Draft. **Do not send** until Jay has locked positions on §17.13 (Gold rotation) and §17.14 (monthly billing), and signed off on the answers below.
+**Status:** Draft. Positions on §17.13 + §17.14 **locked 2026-06-04 (session 7 extended)** — see updated answers below. **Reply is not for sending yet** — Jay's call: "the site still has ALOT more work" before this goes out. Hold until the demo is closer to launch-ready, then revisit. DNS delegation explicitly *not* in the reply ("DNS is the last step").
 
 ---
 
@@ -110,31 +110,27 @@ This is straightforward Stripe setup. Already on the post-launch task list.
 
 ### Q9 — "Monthly payment options for businesses that can't afford up-front?" (§17.14)
 
-**Position (recommended): Annual contracts with optional Stripe instalment plans.** *Do NOT add monthly variants.*
+**Position LOCKED 2026-06-04: Annual contracts with Stripe instalment plans.**
 
-Reasoning:
-- Annual ($599 Silver / $1,199 Gold) is the commitment level that makes the Lifetime Price Lock guarantee meaningful
-- Monthly billing tends to drive higher churn (customers cancel after 2-3 months of "not seeing results")
-- Stripe supports 4 or 12-month instalment plans under one annual contract — this gives Carwyn the *answer he needs* ("yes we can split it monthly") without breaking the annual model
-- The instalment plan is invisible to the customer's mental model — they're still buying a year, just paying over time
+Customer can split annual into 4 or 12 monthly instalments under one annual contract. Same commitment, same revenue, same churn dynamics — but Carwyn can answer "yes you can pay monthly" on the call. See §17.14 in Project_Master for the full resolution.
 
-This way Carwyn can sell on either cadence: "annual, $599 up-front" or "annual, 12 instalments of $50". Same commitment, same revenue, same churn dynamics.
+**Reply framing:** lead with the customer-friendly version. *"You can split it monthly — Stripe handles 4 or 12 instalments under the annual contract. Same product, just paid over time."* Don't get into churn dynamics or Lifetime Price Lock reasoning unless Carwyn pushes.
 
-**Action needed:** Jay sign-off on holding the annual model + adding the instalment-plan option.
+**Setup work still pending before this is true:** Configure Stripe instalment plans alongside the annual product; update checkout URLs. Already on §18.
 
 ### Q10 — "Should Gold Listings ROTATE between businesses?" (§17.13)
 
-**Position (recommended): Hold the locked scarcity model. One Gold per sub-category.**
+**Position LOCKED 2026-06-04: drop scarcity from the tier ladder entirely. Scarcity moves to Ad Spots.**
 
-Reasoning (this is the harder one to push back on, so the framing matters):
-- The Gold pitch is *"the only one in this sub-cat — first in keeps it."* That scarcity is what makes Gold worth $1,199 instead of $599
-- Rotation dilutes scarcity and changes Gold from "I bought the top spot" to "I bought a 50% chance at the top spot" — same money, less perceived value
-- Rotation also breaks the Lifetime Price Lock story (if a second buyer joins the rotation, they pay current price; the first buyer's lock becomes confusing)
-- For sub-categories where there's strong competition for the slot, we have a better answer: **a paid Silver upgrade path** ($599 → $1,199 Gold) when the current Gold lapses, plus a waitlist Carwyn can sell from
+The cleaner answer: Gold/Silver are *product tiers* (features + content quality + placement priority within the sub-cat). No per-sub-cat cap — anyone can buy either. The urgency premium ("only one, real impressions, time-bound") sits on **Ad Spots** instead. That gives Carwyn a rotation answer without folding to literal rotation — the thing he's trying to share among multiple businesses *is* the ad inventory, and that's a separate product.
 
-**Acceptable counter-position if Carwyn pushes hard:** offer rotation as a *Silver* feature ("Silver rotates among up to 3 businesses per sub-cat at a slight discount, $499 each"), keeping Gold as the locked single-buyer scarcity slot. That preserves both models.
+See §17.13 + §17.11 in Project_Master for the full resolution.
 
-**Action needed:** Jay decide — hold scarcity, or fold to rotation, or split-the-baby (Silver rotates, Gold stays locked).
+**Reply framing for this question:**
+
+> Good question — and it ties into how we've structured the ladder. Gold and Silver are product tiers (Gold = full hero, gallery, FAQ, editorial write-up; Silver = listed properly with a logo). Anyone can buy either — there's no per-sub-cat cap. The thing that's actually scarce, and where the urgency premium lives, is **Ad Spots**: time-bound, inventory-limited slots like the top-of-page Spotlight on a category page, or a Hero Spotlight on a community article. Real impressions data, real urgency, real "first-in" mechanic. So instead of rotating Gold among 3 businesses for $799 each, we sell Gold to all 3 at $1,199 (they all get the Gold feature set) and the Ad Spot above goes to whichever of them buys it first. Cleaner pitch, cleaner pricing, uncapped revenue ceiling per sub-cat.
+
+**Heads-up for the reply:** the existing §3 customer-facing copy and `sales/internal/` scripts still carry the old "one Gold per sub-cat" scarcity framing. That copy needs a sweep before the reply goes out, so a prospect Carwyn forwards the demo URL to doesn't see scarcity language that contradicts the reply. Queued in §18 as the §3 rewrite.
 
 ---
 
@@ -175,9 +171,9 @@ Reasoning (this is the harder one to push back on, so the framing matters):
 >
 > **Renewals / expired cards.** Stripe handles dunning automatically (4 retries over 2 weeks, auto-email to customer, subscription pauses on failure, listing drops to Bronze on lapse). For stuck cases, operator gets a flag and reaches out manually. Stripe also has a Customer Portal so customers can update cards themselves.
 >
-> **Monthly payment options.** My read: hold annual subscriptions as the model, but enable Stripe instalment plans so customers can split the annual into 4 or 12 monthly payments. Same commitment, same revenue, same churn dynamics — but the customer hears "yes you can pay monthly." Annual-only is what makes the Lifetime Price Lock work; switching to true monthly billing would undermine that.
+> **Monthly payment options.** Yes — customers can split annual into 4 or 12 monthly instalments under one annual contract via Stripe. Same product, same renewal cadence, just paid over time. Means we can sell on either pitch: "$1,199 up-front" or "$100/mo for a year". Annual contract is what makes the Lifetime Price Lock work cleanly, so we're keeping that as the contract shape — but the payment cadence is flexible.
 >
-> **Gold rotation.** This one I'd push back on. The whole pitch for Gold at $1,199 is "the only one in this sub-cat — first in keeps it." Rotation dilutes that scarcity and changes Gold from "I bought the top spot" to "I bought a 50% chance at the top spot" — same money, less perceived value. It also makes the Lifetime Price Lock guarantee confusing if rotators come and go. I'd rather keep Gold scarce and use a Silver-to-Gold upgrade path when slots lapse. **If you've got a specific case where rotation feels right, talk me through it — happy to revisit.**
+> **Gold rotation.** Good question, and it changes how the ladder is structured. Gold and Silver are product tiers — Gold = full hero treatment, photo gallery, FAQ, editorial write-up; Silver = listed properly with a logo. Anyone can buy either, no per-sub-cat cap. The thing that's actually scarce — and where the urgency premium lives — is **Ad Spots**: time-bound, inventory-limited slots like the top-of-page Spotlight on a category page or a Hero Spotlight on a community article. Real impressions data, real urgency, real "first-in" mechanic. So instead of rotating Gold among 3 businesses for $799 each, we sell Gold to all 3 at $1,199 (they all get the Gold feature set) and the Ad Spot above goes to whichever of them buys it first. Cleaner pitch, cleaner pricing, uncapped revenue per sub-cat.
 >
 > Let me know your reads on the two open commercial calls (monthly billing approach, Gold rotation) and I'll lock §3 accordingly. Everything else above is shipped or ready to ship.
 >

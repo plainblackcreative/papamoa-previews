@@ -738,33 +738,54 @@ Locked in §3 as POA/TBC — variable by impressions/traffic, not publicly shown
 
 **Phase 1 scope (locked 2026-06-04):** ad spots are the *only* upsell beyond the tiers in Phase 1, and they are **claimable by any business with a Silver or Gold listing** (a perk of being listed — no separate charge yet). The paid, duration-based self-serve purchase model above is the Phase 2 evolution once analytics exist. So Phase 1 = "claim an open spot if you're Silver/Gold"; Phase 2 = "buy a spot for a set duration."
 
+**Promotion to scarcity product (locked 2026-06-04, session 7 extended — resolves §17.13):** Ad Spots are now **the** scarcity product across the platform. Gold and Silver tiers have no per-sub-cat slot cap (anyone can buy either); the urgency premium ("only one, real impressions, time-bound") sits on ad inventory instead. This makes §17.11 load-bearing for revenue, not a Phase 2 evolution — the availability + impressions dashboard and the duration-based self-serve purchase flow need to land sooner than originally planned. Sales pitch shape: *"Silver gets you listed properly. Gold gets you the full hero treatment. An Ad Spot gets you in front of every visitor on this page."*
+
 ### 17.12 CRM / Ad Spot automation platform
 Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-forms via a `/crm-write` style Worker route (see §18 Medium). Still open: whether the same dashboard runs Premium Ad Spot availability and revenue tracking, or whether ad-spot management gets its own surface. Deferred until §17.11 lands.
 
-### 17.13 Gold Listings — rotation vs fixed top-spot (raised by Carwyn 2026-06-02)
-Carwyn asked, in his feedback email (see §21 and `docs/carwyn-feedback-2026-06-02.md`):
-> *"Should GOLD Listings allow for other business to be included and ROTATE randomly like we currently have set up?"*
+### 17.13 Gold Listings — rotation vs fixed top-spot — RESOLVED 2026-06-04 ✅
 
-This conflicts directly with §3, which locks **"one Gold Listing per sub-category"** as a scarcity offer ("first in keeps it"). A rotation model would mean multiple Gold buyers per sub-category share the slot via random rotation on page load. Trade-off:
+**Decision: drop scarcity from the tier ladder entirely. Scarcity moves to Ad Spots.** Jay's call (session 7 extended).
 
-- **Locked model (one Gold per sub-cat):** stronger scarcity, easier sales pitch, but caps total Gold revenue per category at one buyer.
-- **Rotation model (multiple Gold per sub-cat, rotated):** uncaps revenue, but dilutes the scarcity story and complicates the Lifetime Price Lock guarantee (renewal commitment from each rotating buyer).
+The cleaner model:
+- **Gold + Silver = product tiers** differentiated by features, content depth, and placement priority *within* a sub-category. Anyone can buy either. No "one per sub-cat" cap. Multiple Golds in the same sub-cat is fine — they all carry the Gold feature set (gallery, FAQ, full editorial, hero treatment) and rank above Silver, which ranks above Bronze.
+- **Ad Spots = the scarce product.** Hero Spotlights, sub-cat top-of-page slots, community-page sidebars — these are inventory-limited and duration-bound. The urgency premium ("only one slot, first in wins, real impressions data") lives here, not in Gold/Silver. See §17.11 for the duration-based self-serve model.
 
-Needs a PlainBlack position before replying to Carwyn. If we agree to rotation, §3 needs a substantial rewrite. If we hold on the locked model, the reply needs to explain *why* scarcity is the more valuable framing for both Carwyn and the buyer.
+Why this works better:
+- Sales pitch stays clean: "Silver gets you listed properly with a logo; Gold gets you the full hero treatment, gallery, FAQ; an Ad Spot gets you in front of every visitor."
+- Revenue ceiling per sub-cat is uncapped on tiers (more Gold buyers possible) AND on ad spots (limited inventory at premium pricing).
+- Lifetime Price Lock stays clean — it's a tier-level guarantee, not a slot-level one.
+- Resolves Carwyn's rotation concern without folding to literal rotation. The answer to "should Gold rotate?" becomes "Gold doesn't need to rotate — anyone can buy Gold. The thing you're trying to share with rotation is the Ad Spot, and that's a separate product."
 
-### 17.14 Annual vs monthly billing direction (raised by Carwyn 2026-06-02)
-Carwyn asked:
-> *"What about the monthly payment options for business who can't afford up front payments?"*
+**§3 implications (still to land):**
+- Remove "one Gold per sub-cat / first in keeps it" framing wherever it lives in customer-facing copy
+- §3 pricing table: Gold and Silver descriptions need to drop scarcity language; Ad Spots need to be repositioned from "Phase 1 perk" to "the scarce product, duration-based purchase"
+- §17.11 (Premium Spotlight pricing) becomes the load-bearing piece — the duration-based self-serve model is now the *primary* monetisation mechanism, not a Phase 2 evolution. Needs the availability/impressions dashboard sooner than originally planned.
+- Sales scripts + landing copy in `sales/internal/` need a pass to strip scarcity-on-Gold language
 
-§3 currently locks Silver $599+gst/yr and Gold $1,199+gst/yr as **annual** subscriptions with Lifetime Price Lock on renewal. The §3 Dead Offers list also explicitly killed "Silver as one-off lifetime cost."
+**§3 rewrite is a follow-on task** — captured here so the decision is durable; the actual customer-facing copy sweep is queued in §18.
 
-Stripe supports monthly billing trivially. Options:
+### 17.14 Annual vs monthly billing direction — RESOLVED 2026-06-04 ✅
 
-- **Hold annual-only.** Cleaner accounting, stronger commitment, Lifetime Price Lock makes more sense at annual cadence.
-- **Add monthly variants.** ~$60/mo Silver, ~$120/mo Gold (slight uplift to cover transaction overhead and churn risk). Removes the up-front friction. Risk: monthly churn rate eats the unit economics.
-- **Annual with payment-plan option.** Stripe handles 4-12 monthly instalments under one annual contract. Best of both: commitment + cashflow accommodation. Recommended path; needs Stripe configuration but no §3 pricing rewrite.
+**Decision: Annual contracts with Stripe instalment plans.** Jay's call (session 7 extended).
 
-Multiple hub items (#7, #16 from the 2026-06-02 triage) also surfaced alternative pricing models (lifetime $690/$1380; monthly $29/$59/$99). The pattern of repeated alternative pricing suggests the locked §3 model may not be fully internalised. Worth a sanity-check before the Carwyn reply: are we sure annual subs at $599/$1,199 is the right starting model, or is one of the alternative shapes worth re-examining?
+Customer can split annual into 4 or 12 monthly instalments under one annual contract. Same commitment, same revenue, same churn dynamics — but the customer hears "yes you can pay monthly" on the call.
+
+Why this beats true monthly billing:
+- Annual cadence keeps the Lifetime Price Lock guarantee meaningful (locked at renewal)
+- Churn dynamics stay annual-shaped, not monthly-shaped (monthly billing typically drives 3-6mo cancels)
+- Carwyn can sell on either cadence: "annual, $599 up-front" or "annual, 12 instalments of $50". Same product
+- No §3 pricing rewrite — the price stays $599/yr and $1,199/yr; only the payment cadence varies
+
+**§3 implications:**
+- Add "Stripe instalments available (4mo / 12mo)" as a billing-option note under Silver and Gold rows
+- No change to the prices themselves
+- Sales scripts can lead with either cadence depending on what the prospect needs to hear
+
+**Setup work pending:**
+- Configure Stripe instalment plans alongside the annual product
+- Update the `STRIPE_SILVER_URL` / `STRIPE_GOLD_URL` checkout flows to surface the instalment option
+- Already on §18 high-priority list under "Activate Stripe"
 
 ### 17.15 Free Bronze / Basic listings — RESOLVED 2026-06-04 ✅
 **Decision: Bronze = Free, locked.** Jay's position carried — the ladder is **Gold | Silver | Bronze** with Bronze a free, self-serve, auto-publish-pending-approval lead-gen tier (now in §3). Still to communicate to Carwyn in the reply (the "no free listings" pushback, framed on lead-gen / SEO / funnel value). Original rationale kept below for the reply.
