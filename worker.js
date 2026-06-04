@@ -307,13 +307,15 @@ export default {
         if (category) rec.category = category;
 
         // Invalidate the /bronze-public cache for this sub-cat so the new listing
-        // appears on the next page load (cache TTL is 5 min otherwise).
+        // appears on the next page load (cache TTL is 5 min otherwise). The cache
+        // key in /bronze-public lowercases the subcat, so we lowercase to match.
         try {
           const cache = caches.default;
-          const cacheKey = new Request('https://papamoa-internal/bronze-public?cat=' + encodeURIComponent(rec.category || '') + '&subcat=' + encodeURIComponent(subcatPath));
+          const sp = String(subcatPath).toLowerCase();
+          const cacheKey = new Request('https://papamoa-internal/bronze-public?cat=' + encodeURIComponent(rec.category || '') + '&subcat=' + encodeURIComponent(sp));
           await cache.delete(cacheKey);
-          // Also nuke the all-subcats variant just in case
-          await cache.delete(new Request('https://papamoa-internal/bronze-public?cat=&subcat=' + encodeURIComponent(subcatPath)));
+          // Also nuke the all-subcats variant (nav.js sends no cat= param).
+          await cache.delete(new Request('https://papamoa-internal/bronze-public?cat=&subcat=' + encodeURIComponent(sp)));
         } catch (_) {}
 
         await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values:batchUpdate`, {
@@ -384,17 +386,19 @@ export default {
         try {
           const cache = caches.default;
           var paths = {};
-          if (before && before.subcat_path) paths[before.subcat_path] = true;
-          if (present.subcat_path) paths[present.subcat_path] = true;
+          if (before && before.subcat_path) paths[String(before.subcat_path).toLowerCase()] = true;
+          if (present.subcat_path)          paths[String(present.subcat_path).toLowerCase()] = true;
           var cats = {};
           if (before && before.category) cats[before.category] = true;
           if (present.category) cats[present.category] = true;
-          cats[''] = true; // also nuke the cat-empty cache variant
+          cats[''] = true; // /bronze-public is fetched by nav.js with no cat= param, so this is the live key
+          var deletes = [];
           Object.keys(paths).forEach(function (p) {
             Object.keys(cats).forEach(function (c) {
-              cache.delete(new Request('https://papamoa-internal/bronze-public?cat=' + encodeURIComponent(c) + '&subcat=' + encodeURIComponent(p)));
+              deletes.push(cache.delete(new Request('https://papamoa-internal/bronze-public?cat=' + encodeURIComponent(c) + '&subcat=' + encodeURIComponent(p))));
             });
           });
+          await Promise.all(deletes);  // await so the cache deletes actually complete before the Worker shuts down
         } catch (_) {}
 
         return bronzeJSON({ ok: true, updated: Object.keys(present) });
