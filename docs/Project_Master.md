@@ -265,30 +265,24 @@ The homepage uses slightly different colour temperatures by design. These are do
 
 These three sets need reconciling in a design audit. The styles.css set is the most distinct (e.g., purple for shopping `#3D2B6E`, brown for food `#5C2D1E`).
 
-### 4.4 Category Page Hero Colours (PARTIALLY UNLOCKED 2026-06-02 — see warning)
+### 4.4 Category Page Hero Colours (RESOLVED 2026-06-05 — all five image-hero + blue/green)
 
-The five main category pages each had a distinct hero gradient and accent colour, locked April 2026. **Two of them now violate a client-stated brand rule** (Carwyn email, captured in §21):
+The five category landing pages now all use a **navy photo-overlay hero** --
+`linear-gradient(105deg, rgba(20,38,58,0.92) → 0.52)` over a category photo --
+with blue or green accents. Imagery differentiates the pages; colour is the
+shared blue/green logo palette. This satisfies Carwyn's rule (§21):
 
 > *"Can we also stick to the Brand colours Blue, Green shades — Not brown / Beige like the EAT page. Use imagery to differentiate between pages instead of colours."*
 
-> **Logo re-anchor (2026-06-04):** the compliant accents in the table map to
-> the logo palette — blue accent → `--blue #00B0F8`, green accent →
-> `--green-light #8FDB4D`. The EAT/Shop rework drops brown/orange/gold for
-> these. Hexes below are the pre-re-anchor record, cleared in the site-wide sweep.
+| Page | Hero | Accent | Status |
+|------|------|--------|--------|
+| **Stay** (Accommodation) | navy overlay + photo | `--blue #00B0F8` | DONE |
+| **Do** (Activities) | navy overlay + photo | `--green-light #8FDB4D` | DONE |
+| **Eat** (Food & Drink) | navy overlay + photo | `--eat-accent #00B0F8` | DONE — Carwyn's called-out page; residual brown CTA bands fixed 2026-06-05 |
+| **Services** | navy overlay + photo | `--blue #00B0F8` | DONE |
+| **Shop** | navy overlay + photo | `--shop-accent #00B0F8` | DONE |
 
-Status per page:
-
-| Page | Hero gradient | Accent colour | Accent token | Status |
-|------|--------------|---------------|-------------|--------|
-| **Stay** (Accommodation) | `#0A1A2E → #0D2840 → #142A3A` | #3AABDE | `--blue` | LOCKED — Carwyn-compliant (blue family) |
-| **Do** (Activities) | `#0A2215 → #0D3828 → #0F4A30` | #7DC143 | `--lime` | LOCKED — Carwyn-compliant (green family) |
-| **Eat** (Food & Drink) | `#1A1208 → #2A2010 → #1A0A08` | #E07830 | `--cat-eat-accent` | **NEEDS REWORK** — browns + orange violate the blue/green rule. Was the page Carwyn called out specifically. |
-| **Services** | `#141820 → #1E2535 → #28334A` | #3AABDE | `--blue` | LOCKED — dark charcoal + blue accent, broadly compliant |
-| **Shop** | `#1A1408 → #2A1E0C → #3A2810` | #C8962A | `--gold-alt` | **NEEDS REWORK** — browns + gold accent violate the blue/green rule. Same family of palette as EAT. |
-
-**Direction for the rework (per Carwyn):** use **imagery** to differentiate the pages, not colour. The hero treatment for all five should converge on the blue/green palette and lean on photography (beach, food shots, activity shots, services hero photography, shopping district photography) to give each page its identity.
-
-The `assets/css/styles.css` `.hero-cat-*` classes still reflect the original values until the rework lands. Treat the .css as historical until §18 ships the new heroes.
+The `assets/css/styles.css` `.hero-cat-*` classes are legacy and not used by these pages.
 
 **Accent colour applies to:** eyebrow text, `h1 em` italic, hero bottom bar, see-more button, sidebar bullet `›`, list CTA button. The accent slot stays as a concept; the specific accent token per page is what's being reworked.
 
