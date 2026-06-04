@@ -51,7 +51,7 @@
     :root {
       --navy:#145079; --blue:#00B0F8; --lime:#6CB71E; --sand:#F2FAFE;
       --dune:#62C000; --white:#fff; --body:#1E2D3E; --muted:#607080;
-      --border:#DDE5EE; --bg:#F4F7FA; --gold:#C8962A; --gold2:#F0C060;
+      --border:#DDE5EE; --bg:#F4F7FA; --gold:#00B0F8; --gold2:#6FC5EF;
     }
     *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; overflow-x:hidden; }
@@ -71,7 +71,7 @@
     .listing-nav-cta:hover { background:#0096DC; }
 
     /* HERO */
-    .page-hero { background:linear-gradient(135deg,#1A1208,#2A2010); padding:44px 24px 40px; position:relative; overflow:hidden; }
+    .page-hero { background:linear-gradient(135deg,#0D2840,#0D2840); padding:44px 24px 40px; position:relative; overflow:hidden; }
     .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold)); }
     .hero-inner { max-width:960px; margin:0 auto; position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:28px; }
     .hero-text { flex:1; min-width:0; }
@@ -80,7 +80,7 @@
     .hero-logo-empty { font-size:2rem; opacity:0.3; line-height:1; }
     .hero-logo-label { font-size:0.94rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.28); text-align:center; }
     @media (max-width:540px) { .hero-logo { display:none; } }
-    .hero-badge { display:inline-flex; align-items:center; gap:6px; font-size:0.94rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; background:linear-gradient(135deg,var(--gold),var(--gold2)); color:#1A0A00; padding:4px 10px; border-radius:3px; margin-bottom:12px; }
+    .hero-badge { display:inline-flex; align-items:center; gap:6px; font-size:0.94rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; background:linear-gradient(135deg,var(--gold),var(--gold2)); color:#0D2840; padding:4px 10px; border-radius:3px; margin-bottom:12px; }
     .hero-eyebrow { font-size:0.94rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-bottom:8px; }
     .page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; color:#fff; line-height:1.12; margin-bottom:10px; }
     .hero-tagline { font-size:0.95rem; color:rgba(255,255,255,0.62); max-width:560px; line-height:1.72; margin-bottom:18px; }
@@ -125,7 +125,7 @@
     /* ACTION BAR */
     .action-bar { background:var(--white); border-bottom:1px solid var(--border); padding:14px 24px; }
     .action-bar-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-    .btn-primary { background:linear-gradient(135deg,var(--gold),#A07020); color:#fff; font-family:'Figtree',sans-serif; font-weight:700; font-size:0.94rem; padding:10px 20px; border-radius:7px; text-decoration:none; transition:filter 0.2s; white-space:nowrap; }
+    .btn-primary { background:linear-gradient(135deg,var(--gold),#0F86B9); color:#fff; font-family:'Figtree',sans-serif; font-weight:700; font-size:0.94rem; padding:10px 20px; border-radius:7px; text-decoration:none; transition:filter 0.2s; white-space:nowrap; }
     .btn-primary:hover { filter:brightness(1.1); }
     .btn-secondary { background:transparent; color:var(--body); font-family:'Figtree',sans-serif; font-weight:600; font-size:0.94rem; padding:10px 18px; border-radius:7px; border:1.5px solid var(--border); text-decoration:none; transition:all 0.2s; white-space:nowrap; }
     .btn-secondary:hover { border-color:var(--blue); color:var(--blue); }
@@ -185,7 +185,7 @@
     @media (max-width:540px) { .menu-items { grid-template-columns:1fr; } }
     .menu-item { background:var(--bg); border-radius:9px; overflow:hidden; display:flex; flex-direction:column; }
     .menu-item.hidden { display:none; }
-    .menu-item-img { height:72px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#1a2038,#2B3060); font-size:1.6rem; }
+    .menu-item-img { height:72px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#145079,#145079); font-size:1.6rem; }
     .menu-item-body { padding:10px 12px; flex:1; }
     .menu-item-name { font-size:15px; font-weight:700; color:var(--body); margin-bottom:3px; }
     .menu-item-desc { font-size:15px; color:var(--muted); line-height:1.45; margin-bottom:6px; }
@@ -449,7 +449,7 @@
   var galleryEl=document.getElementById('photo-gallery');
   if(!galleryEl)return;
 
-  var phIcons=['&#9978;','&#127956;','&#9918;','&#128247;','&#127968;','&#127795;','&#9968;','&#128008;','&#127759;'];
+  var phIcons=['&#9978;','&#127956;','&#9918;','&#128247;','&#145079;','&#127795;','&#9968;','&#128008;','&#127759;'];
   // Always render 5 slots: main + 3 + see-all. First 4 show images or empty tiles.
   var TOTAL_SLOTS=5;
   var grid=document.createElement('div');
@@ -583,9 +583,9 @@ var MENU_DATA = {
     {cat:'garden',  name:'The Vegan Med Burger',          desc:'Falafel, tomato, red onion, lettuce, black olives, cucumber, coconut yoghurt tzatziki & harissa paste',   price:'$23.30', tags:['vg'],           emoji:'&#127807;'},
     {cat:'garden',  name:'Vegan Portobello Burger',       desc:'Roast squash, portobello mushroom, tomato, red onion, lettuce, fried capers, BBQ sauces & basil mayo',    price:'$24.40', tags:['vg'],           emoji:'&#127807;'},
     {cat:'garden',  name:'Portobello Road Burger',        desc:'Goat cheese, roast squash, portobello, mushroom, tomato, red onion, mesclun, fried capers & basil mayo',  price:'$25.40', tags:['v'],            emoji:'&#127807;'},
-    {cat:'ribs',    name:'Oriental Ribs',                 desc:'Juicy pork ribs with house made oriental rib sauce, fries, side salad & aioli',                          price:'$38.20', tags:[],               emoji:'&#129385;'},
+    {cat:'ribs',    name:'Oriental Ribs',                 desc:'Juicy pork ribs with house made oriental rib sauce, fries, side salad & aioli',                          price:'$38.20', tags:[],               emoji:'&#0F86B9;'},
     {cat:'ribs',    name:'Grilled BBQ Chicken',           desc:'BBQ chicken glazed & marinated in Filipino style smoky sauce, side salad & choice of rice or fries',     price:'$27.60', tags:[],               emoji:'&#127831;'},
-    {cat:'ribs',    name:'Grilled BBQ Pork Belly',        desc:'BBQ pork belly glazed and marinated in Filipino style smoky sauce, side salad & choice of rice or fries', price:'$27.60', tags:[],               emoji:'&#129385;'},
+    {cat:'ribs',    name:'Grilled BBQ Pork Belly',        desc:'BBQ pork belly glazed and marinated in Filipino style smoky sauce, side salad & choice of rice or fries', price:'$27.60', tags:[],               emoji:'&#0F86B9;'},
     {cat:'wings',   name:'Asian Wings',                   desc:'5 x sweet and spicy asian wings',                                                                         price:'$23.30', tags:[],               emoji:'&#127831;'},
     {cat:'wings',   name:'Honey Soy Garlic Wings',        desc:'5 x honey soy garlic wings',                                                                              price:'$23.30', tags:[],               emoji:'&#127831;'},
     {cat:'wings',   name:'Spicy US Buffalo Wings',        desc:'5 x spicy US wings',                                                                                      price:'$23.30', tags:[],               emoji:'&#127831;'},
@@ -597,7 +597,7 @@ var MENU_DATA = {
     {cat:'sides',   name:'Cheese Sticks',                 desc:'Crispy outside, gooey inside with mango dip',                                                             price:'$13.50', tags:['v'],            emoji:'&#129472;'},
     {cat:'sides',   name:'Cheese Balls',                  desc:'Crispy and filled with melty cheese and jalapenos',                                                       price:'$13.50', tags:['v'],            emoji:'&#129472;'},
     {cat:'sides',   name:'Popcorn Chicken',               desc:'',                                                                                                         price:'$20.10', tags:[],               emoji:'&#127831;'},
-    {cat:'platter', name:'Wagon Platter',                 desc:'2x single classic cheese burgers, oriental ribs, buffalo wings, straight cut fries, coleslaw, tomato sauce & aioli', price:'$71.00', tags:[], emoji:'&#127869;'},
+    {cat:'platter', name:'Wagon Platter',                 desc:'2x single classic cheese burgers, oriental ribs, buffalo wings, straight cut fries, coleslaw, tomato sauce & aioli', price:'$71.00', tags:[], emoji:'&#145079;'},
     {cat:'platter', name:'Extra Takeaway Boxes',          desc:'Extra takeaway boxes for platter',                                                                        price:'$2.50',  tags:[],               emoji:'&#128230;'},
     {cat:'kids',    name:'Kids Corndog & Fries',          desc:'4x battered hotdogs & fries',                                                                             price:'$19.10', tags:[],               emoji:'&#127821;'},
     {cat:'kids',    name:'Kids Cheese Burger & Fries',    desc:'Flame grilled patty, cheese, mayo, tomato sauce & fries',                                                price:'$19.10', tags:[],               emoji:'&#127828;'},
@@ -608,7 +608,7 @@ var MENU_DATA = {
     {cat:'desserts',name:'Chocolate Mudcake',             desc:'Warm, moist chocolate mud cake with ice cream',                                                           price:'$13.80', tags:['v'],            emoji:'&#127856;'},
     {cat:'juices',  name:'Keri Apple Juice',              desc:'',                                                                                                         price:'$4.00',  tags:['vg','gf','df'], emoji:'&#127821;'},
     {cat:'juices',  name:'Keri Apple Blackcurrant Juice', desc:'',                                                                                                         price:'$4.00',  tags:['vg','gf','df'], emoji:'&#127821;'},
-    {cat:'juices',  name:'Gold Kiwifruit NZ Juice',       desc:'Bottled NZ juice',                                                                                        price:'$4.50',  tags:['vg','gf','df'], emoji:'&#129373;'},
+    {cat:'juices',  name:'Gold Kiwifruit NZ Juice',       desc:'Bottled NZ juice',                                                                                        price:'$4.50',  tags:['vg','gf','df'], emoji:'&#0F86B9;'},
     {cat:'juices',  name:'Gold Peach NZ Juice',           desc:'Bottled NZ juice',                                                                                        price:'$4.50',  tags:['vg','gf','df'], emoji:'&#127825;'},
     {cat:'juices',  name:'Carrot & Beetroot NZ Juice',    desc:'Bottled NZ juice',                                                                                        price:'$4.50',  tags:['vg','gf','df'], emoji:'&#129365;'},
     {cat:'juices',  name:'Organic Apple, Orange & Mango', desc:'',                                                                                                         price:'$6.00',  tags:['vg','gf','df'], emoji:'&#127818;'},
@@ -620,15 +620,15 @@ var MENU_DATA = {
     {cat:'addons',  name:'Blue Cheese',                   desc:'',                                                                                                         price:'$4.00',  tags:['v','gf'],       emoji:'&#129472;'},
     {cat:'addons',  name:'Camembert Cheese',              desc:'',                                                                                                         price:'$4.00',  tags:['v','gf'],       emoji:'&#129472;'},
     {cat:'addons',  name:'Goats Cheese',                  desc:'',                                                                                                         price:'$4.00',  tags:['v','gf'],       emoji:'&#129472;'},
-    {cat:'addons',  name:'Caramelised Onion',             desc:'',                                                                                                         price:'$3.00',  tags:['vg','gf'],      emoji:'&#129381;'},
-    {cat:'addons',  name:'Olives',                        desc:'',                                                                                                         price:'$2.00',  tags:['vg','gf','df'], emoji:'&#129373;'},
+    {cat:'addons',  name:'Caramelised Onion',             desc:'',                                                                                                         price:'$3.00',  tags:['vg','gf'],      emoji:'&#0F86B9;'},
+    {cat:'addons',  name:'Olives',                        desc:'',                                                                                                         price:'$2.00',  tags:['vg','gf','df'], emoji:'&#0F86B9;'},
     {cat:'addons',  name:'Rice',                          desc:'',                                                                                                         price:'$4.00',  tags:['vg','gf','df'], emoji:'&#127859;'},
     {cat:'addons',  name:'Extra Sauce',                   desc:'',                                                                                                         price:'$2.10',  tags:['vg'],           emoji:'&#129517;'},
-    {cat:'addons',  name:'Lettuce',                       desc:'',                                                                                                         price:'$3.20',  tags:['vg','gf','df'], emoji:'&#129388;'},
-    {cat:'addons',  name:'Beetroot',                      desc:'',                                                                                                         price:'$3.20',  tags:['vg','gf','df'], emoji:'&#129381;'},
+    {cat:'addons',  name:'Lettuce',                       desc:'',                                                                                                         price:'$3.20',  tags:['vg','gf','df'], emoji:'&#0F86B9;'},
+    {cat:'addons',  name:'Beetroot',                      desc:'',                                                                                                         price:'$3.20',  tags:['vg','gf','df'], emoji:'&#0F86B9;'},
     {cat:'addons',  name:'Pickles',                       desc:'',                                                                                                         price:'$3.20',  tags:['vg','gf','df'], emoji:'&#129372;'},
     {cat:'addons',  name:'Tomato',                        desc:'',                                                                                                         price:'$2.00',  tags:['vg','gf','df'], emoji:'&#127813;'},
-    {cat:'addons',  name:'Bacon',                         desc:'',                                                                                                         price:'$4.20',  tags:['gf','df'],      emoji:'&#129385;'},
+    {cat:'addons',  name:'Bacon',                         desc:'',                                                                                                         price:'$4.20',  tags:['gf','df'],      emoji:'&#0F86B9;'},
     {cat:'addons',  name:'Cheese',                        desc:'',                                                                                                         price:'$4.00',  tags:['v','gf'],       emoji:'&#129472;'},
     {cat:'addons',  name:'Egg',                           desc:'',                                                                                                         price:'$4.20',  tags:['v','gf'],       emoji:'&#129371;'},
     {cat:'addons',  name:'Jalapenos',                     desc:'',                                                                                                         price:'$4.20',  tags:['vg','gf','df'], emoji:'&#127798;'},

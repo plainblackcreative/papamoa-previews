@@ -70,7 +70,7 @@
     '.pnf-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}',
     '.pnf-hamburger.open{opacity:0;pointer-events:none;}',
     // Breadcrumb strip (slim wayfinding bar under the flat nav - listings)
-    '.pnf-bcstrip{display:flex;align-items:center;flex-wrap:wrap;background:#fff;border-bottom:1px solid #E8E2D8;padding:10px 28px;font-family:var(--pnf-font);font-size:15px;color:#6A7A85;}',
+    '.pnf-bcstrip{display:flex;align-items:center;flex-wrap:wrap;background:#fff;border-bottom:1px solid #EAF4FA;padding:10px 28px;font-family:var(--pnf-font);font-size:15px;color:#6A7A85;}',
     '.pnf-bcstrip a{color:#6A7A85;text-decoration:none;transition:color 0.15s;}',
     '.pnf-bcstrip a:hover{color:var(--pnf-accent);}',
     '.pnf-bcstrip .pnf-bcsep{margin:0 8px;color:#C2CCD2;}',
