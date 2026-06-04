@@ -18,8 +18,8 @@
   ║                                                                            ║
   ║  MENU LOGIC (automatic)                                                   ║
   ║  hasMenu: true  → "View menu" button → opens lightbox (add-on purchased) ║
-  ║  hasMenu: false → purchase CTA for $199+gst/yr → /sales/menu-addon.html  ║
-  ║                    (category-specific label rendered by JS)               ║
+  ║  hasMenu: false → no menu CTA (Menu Add-On deferred to Phase 2)          ║
+  ║                                                                            ║
   ║                                                                            ║
   ║  HERO CATEGORY CLASSES                                                     ║
   ║  hero-cat-food | hero-cat-services | hero-cat-accommodation               ║
@@ -379,8 +379,7 @@
     <a href="WEBSITE_URL" target="_blank" rel="noopener" class="btn-secondary"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg> Visit website</a>
     <!-- Menu button slot - rendered by JS based on BUSINESS.hasMenu:
          true  → "View menu" button opening the lightbox
-         false → purchase CTA linking to /sales/menu-addon.html ($199+gst/yr)
-         Label is category-specific (see JS below) -->
+         false → no menu CTA shown (Menu Add-On deferred to Phase 2) -->
     <span id="menu-btn-slot"></span>
     <div class="action-spacer"></div>
     <!-- Social icons - rendered by JS from SOCIAL object. Hidden when URL is empty. -->
@@ -559,8 +558,7 @@
 })();
 
 // ── MENU BUTTON - purchase CTA or active "View menu" based on hasMenu ──
-// Silver: when hasMenu is false, shows a purchase CTA for $199+gst/yr
-//         linking to /sales/menu-addon.html (NOT a Gold upgrade prompt)
+// Silver: when hasMenu is false, no menu CTA is shown (Menu Add-On deferred to Phase 2)
 // Silver: when hasMenu is true, shows "View menu" button opening the lightbox
 (function(){
   var slot = document.getElementById('menu-btn-slot');
@@ -586,16 +584,8 @@
       document.body.style.overflow = 'hidden';
     });
     slot.appendChild(btn);
-  } else {
-    // Menu Add-On not purchased - show $199+gst/yr purchase CTA
-    // Links to /sales/menu-addon.html (NOT a Gold upgrade prompt)
-    var label = purchaseLabels[BUSINESS.category] || purchaseLabels['default'];
-    var cta = document.createElement('a');
-    cta.className = 'btn-menu-purchase';
-    cta.href = '/papamoa-previews/sales/menu-addon.html';
-    cta.innerHTML = label;
-    slot.appendChild(cta);
   }
+  // Menu Add-On deferred to Phase 2 - no menu CTA shown for listings without a menu.
 })();
 
 // ── MENU LIGHTBOX ──
