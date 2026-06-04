@@ -38,6 +38,9 @@
     ':root{--pnf-navy:#243B59;--pnf-accent:#359FE8;--pnf-dune:#C4985A;--pnf-white:#FFFFFF;--pnf-muted:rgba(255,255,255,0.45);--pnf-font:\'Figtree\',sans-serif;--pnf-display:\'Playfair Display\',serif;}',
     // Inline icon (replaces decorative emoji) — sizes to text, inherits colour
     '.pnf-i{display:inline-block;width:1em;height:1em;vertical-align:-0.125em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}',
+    // Menu feature deferred to Phase 2 — hide all menu UI (View-menu button, JS-rendered upsell, lightbox)
+    '#menu-btn-slot,.btn-menu,.btn-upsell,.btn-menu-upsell,.menu-lightbox{display:none !important;}',
+    'a[href*="menu-addon"]{display:none !important;}',
     // ── NAV (locked: 64px) ──
     '.pnf-nav{background:var(--pnf-navy);height:64px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.25);gap:18px;width:100%;box-sizing:border-box;}',
     '.pnf-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;line-height:0;}',
