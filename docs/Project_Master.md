@@ -395,6 +395,69 @@ karaka-pines-papamoa, pacific-park-papamoa, the-wagon-papamoa
 - Bronze/placeholder/directory listing: NO tier label shown. Plain directory card only.
 - "Basic" is never rendered in HTML.
 
+### 8.1 Listing spec (LOCKED 2026-06-04) — canonical build contract for Gold & Silver
+
+The two template files are the **canonical build artifacts**: `listing-gold-template.html`, `listing-silver-template.html`. This spec pins down *what a buyer gets per tier* and *what we collect to build it*. It is the direct input to (a) the sales Get-listed form (`sales/list-with-us.html`) and (b) the Bronze self-serve build. Every built listing must also clear the §10 quality bar and use the §4 design tokens.
+
+#### Required intake data (what we collect)
+
+**Core fields — collected for both Gold and Silver** (ALLCAPS tokens in the template body / `BUSINESS.*` in head):
+
+| Field | Token(s) | Notes |
+|---|---|---|
+| Business name | `BUSINESS_NAME` / `BUSINESS.name` | Hero + title + schema |
+| Slug | `BUSINESS_SLUG` / `BUSINESS.slug` | URL + image folder name |
+| Category | `CATEGORY_SLUG` / `BUSINESS.category` | One of: `food-drink` `services` `accommodation` `health` `entertainment` `shopping` `real-estate` `default` (drives hero accent class) |
+| Subcategory | `BUSINESS.subcat` | Title + breadcrumb |
+| Tagline | `TAGLINE` | Hero |
+| Meta description | `BUSINESS.metaDesc` | Specific, not templated (§10) |
+| Address | `ADDRESS` | |
+| Phone | `PHONE` | Real numbers only; omit `tel:` if unconfirmed (§10) |
+| Website | `WEBSITE` | |
+| Email | `EMAIL` | Contact (collected; rendered in sidebar) |
+| Hours | `HOURS` | |
+| Editorial description | `DESCRIPTION` | Third-party editorial voice, specific + honest (§10) |
+| Logo | `images/listings/SLUG/logo.png` | 1 image, both tiers |
+| Social URLs | `SOCIAL{}` | facebook / instagram / tiktok / youtube / linkedin / twitter — blank = icon hidden |
+| Review widgets | `REVIEWS{}` | google + trip: url / rating / count — blank = widget hidden |
+
+**Gold-only extras:**
+
+| Field | Token | Notes |
+|---|---|---|
+| Photo gallery | `PHOTOS[]` | Logo **+ up to 9 hero images** (`hero-1.jpg`…`hero-9.jpg`) each with alt text |
+| FAQ | `BUSINESS.faqs[]` | **Min 4 Q&A pairs**, real search queries — feeds the FAQPage / AEO schema |
+
+**Silver:** logo only (no gallery), **no FAQ section**. `MENU_DATA` / `hasMenu` exist in the template but the **Menu Add-On is deferred to Phase 2** — keep `hasMenu:false`; no menu CTA renders.
+
+**Bronze (free, per §3):** business name + category + phone + website + location/map + a 1–2 line blurb only. **No** logo, gallery, editorial write-up, or rich schema. Built by the Bronze self-serve flow (auto-publish pending admin approval), **not** these templates.
+
+#### Page sections per tier
+
+| Section | Gold | Silver |
+|---|---|---|
+| Hero (name, tagline, subcat, review widgets) | ✓ | ✓ |
+| Photo gallery (up to 9) | ✓ | — (logo only) |
+| About / editorial | ✓ | ✓ |
+| Hours | ✓ | ✓ |
+| Reviews (Google / TripAdvisor badges) | ✓ | ✓ |
+| FAQ (AEO) | ✓ | — |
+| Sidebar: contact (`ci-text` flex pattern, locked) + map | ✓ | ✓ |
+
+#### Schema per tier
+- **Gold:** `LocalBusiness` + `FAQPage` + `ImageObject`.
+- **Silver:** `LocalBusiness` only.
+- Plus the §10 bar on every build: specific `meta description`, `canonical`, Open Graph tags, correct design tokens (§4), third-party editorial voice, no dummy `tel:` links.
+
+#### Image storage
+Repo path now: `/images/listings/SLUG/` (`logo.png`, `hero-1.jpg`…`hero-9.jpg`). Future CDN: `images.papamoa.info/listings/SLUG/` (Cloudflare R2) — find-replace the path prefix site-wide when switching.
+
+#### Tier labels (recap of §8)
+Gold = "Gold Listing" star badge · Silver = "Silver Listing" diamond badge · Bronze / placeholder = **no** tier label.
+
+#### Known divergence (not blocking the lock)
+The Gold template configures content via ALLCAPS body tokens + `PHOTOS`/`faqs`; Silver via ALLCAPS tokens + a `BUSINESS{}` object. Both share the same core field set above. Unifying them into one shared config object is an **optional later refactor**, explicitly out of scope for this spec lock.
+
 ---
 
 ## 9. INFRASTRUCTURE
@@ -677,7 +740,7 @@ Decision pending. If accepted, Bronze becomes the self-serve auto-create tier (s
 
 The listing ladder is **Gold | Silver | Bronze**. Near-term focus is Bronze self-serve + locking Gold/Silver; AI-generated listings and Menu are deferred.
 
-- [ ] **Lock Gold & Silver listing spec** — pin down the style, design, layout and the required-data/content for each tier (what a buyer gets, what we collect to build it). These become the canonical build templates. Reference: `listing-gold-template.html`, `listing-silver-template.html`, the live listings, and §4/§10 quality bar.
+- [x] **Lock Gold & Silver listing spec — DONE 2026-06-04 (session 5).** Canonical build contract written at **§8.1** (required intake fields, page sections, schema, and the Gold deltas: photo gallery + AEO FAQ). The two template files are confirmed canonical. Feeds the Get-listed form + the Bronze self-serve build.
 - [ ] **Bronze (free Basic) self-serve auto-create** — let a site visitor create a free Bronze listing themselves; it **auto-publishes pending admin approval** (moderation gate). This is the priority listing build. Pairs with the lead-gen funnel below. ✅ Tier locked free 2026-06-04 (§17.15 resolved, §3 updated) — unblocked.
 - [ ] **Automated lead-gen funnel off Bronze** — free listing signup → captured lead (CRM) → automated nurture toward Silver/Gold upsell. The "more listings = more leads + SEO + visibility" play. Ties into §18 Medium (CRM, Brevo sequences) and the post-email journey item.
 - [ ] **Self-serve Spotlights / Ad Spots** — surface available ad/spotlight slots site-wide; visitor clicks a slot to see its **monthly impressions** and buys it for a **fixed duration (1 / 3 / 6 / 12 months)** via Stripe. See §17.11 for the model + dashboard need.

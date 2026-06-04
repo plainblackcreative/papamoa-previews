@@ -168,11 +168,11 @@ None of these can move without him:
 **#1 LIVE TASK — sales-page consolidation into `list-with-us`** — ✅ **DONE (session 5).** Both stages shipped in 5 commits (`72535f6` Stage A, `4cf170c` hotfix, `e56222a` hub rework, `cffa18c` consolidation). The single CTA destination `sales/list-with-us.html` is now the Gold | Silver | Bronze hub with one merged Get-listed form; `landing.html` + `claim.html` deleted; `why-list` trimmed to an SEO article; all listing CTAs repointed; Menu copy purged from the rewritten pages. See the session-5 headline at the top for the full breakdown, including the `e1ba5a0` breakage that was found and fixed. Follow-up (session 5): the Menu feature was then **fully stripped** from `driftwood-cafe.html` + `post-call-landing.html` and the `menu-addon.html` upsell links removed/suppressed sitewide; `menu-addon.html` stays parked for the Phase-2 decision. The §18 "Spotlight Silver not clickable" bug was verified non-reproducing and marked resolved.
 
 **Then (the listings build — now the front of the queue):**
-1. **Lock the Gold & Silver listing spec** (style/design/required data → canonical templates `listing-gold-template.html`, `listing-silver-template.html`).
-2. **Bronze self-serve auto-create** — visitor creates a free Bronze listing, auto-publishes pending admin approval. ✅ Unblocked (tier locked).
+1. ✅ **Lock the Gold & Silver listing spec — DONE (session 5).** Canonical build contract at **Project_Master §8.1** (required intake fields, page sections, schema, Gold deltas = photo gallery + AEO FAQ). Templates confirmed canonical.
+2. **Bronze self-serve auto-create** — visitor creates a free Bronze listing, auto-publishes pending admin approval. ✅ Unblocked (tier locked). **Now the front of the queue.** Intake fields per §8.1 Bronze row.
 3. **Self-serve Spotlights / Ad Spots** — Phase 2 (Phase 1 = Silver/Gold claim open slots). §17.11.
 
-Smaller carry-overs: **footer follow-ups** (23 compact footers, site-footer/other systems — `docs/nav-usage.md`); **3 stub-listing footers**; subcategory pages still on old orange/gold accents; **Phase A2 operator guide**; **Spotlight Silver clickability bug** (§18 High).
+Smaller carry-overs: **footer follow-ups** (23 compact footers, site-footer/other systems — `docs/nav-usage.md`); **3 stub-listing footers**; subcategory pages still on old orange/gold accents; **Phase A2 operator guide**. (✅ Spotlight Silver clickability bug verified non-reproducing — resolved, see §18.)
 
 Deferred per Jay: **AI-generated listings**, **Menu** (now hidden; Phase 2 rebuild or full source strip).
 
