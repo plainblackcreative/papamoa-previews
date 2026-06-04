@@ -320,6 +320,10 @@ function bzEditOpen(id){
     scSel.innerHTML = '<option value="">— none —</option>' + subcatListFor(catSel.value).map(function(sc){ return '<option value="'+esc(sc.path)+'">'+esc(sc.name)+'</option>'; }).join('');
   };
   document.getElementById('bz-mod-err').textContent = '';
+  // Reset the Save button -- a prior successful save closes the modal without
+  // re-enabling it (only the catch path does), so it can be left stuck on "Saving…".
+  var saveBtn = document.getElementById('bz-save');
+  saveBtn.disabled = false; saveBtn.textContent = 'Save';
   document.getElementById('bz-ov').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
