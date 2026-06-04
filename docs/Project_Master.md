@@ -48,15 +48,17 @@ Do not use any of the following as reference: `Project_Memory.rtf`, `papamoa-pro
 
 Source of truth: this document, §3 below. (Earlier `docs/pricing-master.html` was absorbed into this doc on 2026-06-02 and then deleted.)
 
+**The ladder (locked 2026-06-04): Gold | Silver | Bronze.**
+
 | Product | Price | Notes |
 |---------|-------|-------|
+| Gold Listing | $1,199+gst/yr | 1 logo + up to 9 hero images (gallery). Annual subscription. Top of ladder. |
 | Silver Listing | $599+gst/yr | Logo only (1 image). Annual subscription. |
-| Gold Listing | $1,199+gst/yr | 1 logo + up to 9 hero images (gallery). Annual subscription. |
-| Menu Add-On | $199+gst/yr | Silver: paid add-on ($199+gst/yr). Gold: included free. |
+| Bronze (Basic) | **Free** | **Locked 2026-06-04.** Free self-serve listing that auto-publishes *pending admin approval*. The lead-gen tier (every free listing = an indexable page + a warm upsell target). Resolves §17.15 — Jay's pushback on Carwyn's "no free listings" won. Not the dead $99 Bronze (that stays dead). |
+| Spotlight / Ad Spots | Included perk (Phase 1) | **Phase 1:** ad/spotlight slots scattered site-wide are **claimable by any Silver or Gold listing** (no separate charge). The self-serve, duration-based purchase model (1 / 3 / 6 / 12 mo, impressions shown) is a later evolution — see §17.11. |
 | Extra Subcategory Spotlight | $199+gst/yr each | Gold only. First Spotlight included with Gold. |
-| Spotlight Ad Spots | POA/TBC | Variable pricing based on impressions. Not publicly shown. |
 | Featured Agent Position | Bespoke | Not published. Conversation-first. |
-| Bronze | Free / internal only | Never sold. Placeholder listings. |
+| Menu Add-On | — (DEFERRED to Phase 2) | **Menu feature hidden site-wide 2026-06-04** (`e1ba5a0`). Not offered in Phase 1. The Menu Add-On product + the "menu as live demo" pitch below are parked until Phase 2. |
 
 ### GST formatting
 Always lowercase `+gst` in customer-facing content. Never `+gst`.
@@ -80,8 +82,8 @@ Always lowercase `+gst` in customer-facing content. Never `+gst`.
 - Glenn's Glass & The Phoenix as listing examples
 
 ### CTA Destinations
-- Organic/cold CTAs: `sales/list-with-us.html`
-- Warm/outbound CTAs: `sales/landing.html?biz=X&cat=Y`
+- **Single destination (locked 2026-06-04): `sales/list-with-us.html`.** All sales CTAs across the site point here — it's the consolidated tiers/pricing hub (Gold | Silver | Bronze) with the Get-listed form. `landing.html` + `claim.html` are being merged into it; `why-list.html` becomes a lean SEO article linking back here.
+- (Legacy: warm/outbound previously used `landing.html?biz=X&cat=Y` — folded into the hub.)
 
 ### Sales pitch toolkit (reusable language for list-with-us / landing / PPP / cold outreach)
 
@@ -97,7 +99,7 @@ Papamoa.info ranks for category-level queries ("massage Papamoa", "tire repair P
 **Orchestrator of every directory.**
 Papamoa.info is the front door to every relevant directory, not one of many. Standard offer already includes a free TaurangaNZ.info listing (§3 above). Future enhancement candidate: extend to free bayofplentynz.com listing too (if Catherine channel opens; current intel says BOPNZ listings are free and same-client-on-both is fine). Pitch shape: *"You don't choose between Papamoa.info and the others. You get on Papamoa.info and we get you onto the rest."*
 
-**Menu Add-On as live demo (hospitality vertical only).**
+**Menu Add-On as live demo (hospitality vertical only).** *(DEFERRED to Phase 2 — Menu hidden site-wide 2026-06-04. Keep for when the Menu feature returns.)*
 Show-don't-tell. The menu function on a Papamoa.info hospo listing is itself the sales demo for two products at once:
 
 1. **Membership** — "the menu alone is worth being on this site"
@@ -613,6 +615,8 @@ Locked in §3 as POA/TBC — variable by impressions/traffic, not publicly shown
 
 **Direction added 2026-06-03 (Jay):** move to **self-serve, transparent, duration-based** ad spots. Show the available Spotlight / Ad slots site-wide; a visitor clicks a spot to see its **monthly impressions**, then **buys that spot for a fixed duration — 1 / 3 / 6 / 12 months** (via Stripe). This replaces the POA-only framing with a self-purchase flow. Still needs the availability + price/impressions dashboard (ties into §17.12) and live analytics to set per-slot rates.
 
+**Phase 1 scope (locked 2026-06-04):** ad spots are the *only* upsell beyond the tiers in Phase 1, and they are **claimable by any business with a Silver or Gold listing** (a perk of being listed — no separate charge yet). The paid, duration-based self-serve purchase model above is the Phase 2 evolution once analytics exist. So Phase 1 = "claim an open spot if you're Silver/Gold"; Phase 2 = "buy a spot for a set duration."
+
 ### 17.12 CRM / Ad Spot automation platform
 Direction is locked: Google Sheets + custom GitHub-hosted dashboard, fed by pb-forms via a `/crm-write` style Worker route (see §18 Medium). Still open: whether the same dashboard runs Premium Ad Spot availability and revenue tracking, or whether ad-spot management gets its own surface. Deferred until §17.11 lands.
 
@@ -641,7 +645,10 @@ Stripe supports monthly billing trivially. Options:
 
 Multiple hub items (#7, #16 from the 2026-06-02 triage) also surfaced alternative pricing models (lifetime $690/$1380; monthly $29/$59/$99). The pattern of repeated alternative pricing suggests the locked §3 model may not be fully internalised. Worth a sanity-check before the Carwyn reply: are we sure annual subs at $599/$1,199 is the right starting model, or is one of the alternative shapes worth re-examining?
 
-### 17.15 Free Bronze / Basic listings — push back on Carwyn's "no free listings" (Jay's position, 2026-06-03)
+### 17.15 Free Bronze / Basic listings — RESOLVED 2026-06-04 ✅
+**Decision: Bronze = Free, locked.** Jay's position carried — the ladder is **Gold | Silver | Bronze** with Bronze a free, self-serve, auto-publish-pending-approval lead-gen tier (now in §3). Still to communicate to Carwyn in the reply (the "no free listings" pushback, framed on lead-gen / SEO / funnel value). Original rationale kept below for the reply.
+
+
 Jay wants a **free Bronze (Basic) tier** as the bottom of the ladder: **Gold | Silver | Bronze**. Carwyn's brief opposed free listings. Jay's argument: **Bronze is the best lead-gen opportunity** — let site visitors self-create a free Basic listing, which feeds an **automated lead-gen funnel**, and *more listings = more leads, more SEO surface, more visibility* (every free listing is an indexable page + a warm upsell target for Silver/Gold).
 
 Conflicts to resolve:
@@ -671,12 +678,12 @@ Decision pending. If accepted, Bronze becomes the self-serve auto-create tier (s
 The listing ladder is **Gold | Silver | Bronze**. Near-term focus is Bronze self-serve + locking Gold/Silver; AI-generated listings and Menu are deferred.
 
 - [ ] **Lock Gold & Silver listing spec** — pin down the style, design, layout and the required-data/content for each tier (what a buyer gets, what we collect to build it). These become the canonical build templates. Reference: `listing-gold-template.html`, `listing-silver-template.html`, the live listings, and §4/§10 quality bar.
-- [ ] **Bronze (free Basic) self-serve auto-create** — let a site visitor create a free Bronze listing themselves; it **auto-publishes pending admin approval** (moderation gate). This is the priority listing build. Pairs with the lead-gen funnel below. Decision dependency: §17.15 (free-tier pushback to Carwyn).
+- [ ] **Bronze (free Basic) self-serve auto-create** — let a site visitor create a free Bronze listing themselves; it **auto-publishes pending admin approval** (moderation gate). This is the priority listing build. Pairs with the lead-gen funnel below. ✅ Tier locked free 2026-06-04 (§17.15 resolved, §3 updated) — unblocked.
 - [ ] **Automated lead-gen funnel off Bronze** — free listing signup → captured lead (CRM) → automated nurture toward Silver/Gold upsell. The "more listings = more leads + SEO + visibility" play. Ties into §18 Medium (CRM, Brevo sequences) and the post-email journey item.
 - [ ] **Self-serve Spotlights / Ad Spots** — surface available ad/spotlight slots site-wide; visitor clicks a slot to see its **monthly impressions** and buys it for a **fixed duration (1 / 3 / 6 / 12 months)** via Stripe. See §17.11 for the model + dashboard need.
 - [ ] **Audit + consolidate the sales pages** — review all `sales/*` pages, simplify and de-duplicate (likely overlapping content across list-with-us / landing / why-list / spotlight-ads / menu-addon). Goal: fewer, clearer prospect-facing pages aligned to the Gold/Silver/Bronze ladder.
 - [ ] *(Deferred)* AI-generated listings — hold all AI auto-generation of listings for now; Bronze visitor self-create (above) is the path instead.
-- [ ] *(Deferred)* Menu / Menu Add-On work — parked for now.
+- [x] Menu / Menu Add-On — **hidden site-wide 2026-06-04** (`e1ba5a0`): all visible menu UI removed/CSS-hidden (View-menu buttons, upsells, lightbox, footer/page links), `menu-addon.html` noindexed, feature deferred to Phase 2. Remaining woven "Menu Add-On" sentence copy in the 4 sales pages + `driftwood-cafe` is purged during the sales consolidation below. (Phase 2: rebuild/restore the menu feature properly, or fully strip the inert lightbox source.)
 
 ### High priority (pre-launch)
 
