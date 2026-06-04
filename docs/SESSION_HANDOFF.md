@@ -1,7 +1,59 @@
 # Session handoff — papamoa-previews
 
-**Last updated:** 2026-06-04 (session 7 extended) by Jay + Claude
-**Last commit:** `e98b6a9` bronze: lock Bronze-as-CARD model (retire the page-per-listing flow)
+**Last updated:** 2026-06-04 (session 7 extended -- end-of-session wrap) by Jay + Claude
+**Last commit:** `9ebccba` admin: add the canonical brand logo to bronze-queue + add-lead + listing-health + upload
+**Branch:** `main` (tree clean, all 40 session-7-extended commits pushed)
+
+> **★ FIRST THING NEXT SESSION: nothing in the repo is blocked, but ONE Jay-side action is pending:**
+>
+> **Run `wrangler deploy` from the repo root** to push the new Cloudflare Worker code to production. The new `worker.js` covers two material changes that won't take effect until deploy:
+> 1. `e98b6a9` -- `/bronze-approve` rewritten for the Bronze-as-card model (no longer commits HTML pages to `/listings/<slug>.html`; just marks Sheet row live + invalidates `/bronze-public` cache + sends owner welcome email pointing to the sub-cat page)
+> 2. `1c6202a` -- new `/bronze-update` endpoint that the Edit modal on `admin/bronze-queue.html` calls when an operator saves a field change. Until deploy, clicking Save in the Edit modal will fail (404 from the worker).
+>
+> **The static side of both changes IS already live on GitHub Pages** -- nav.js renders the new full-info Bronze cards + lightbox, the queue page shows the Edit modal, the list-with-us tier copy is updated. Only the *worker-backed actions* need the deploy.
+>
+> **After deploy:**
+> - The `GITHUB_TOKEN` Worker secret can be revoked (`wrangler secret delete GITHUB_TOKEN`).
+> - The fine-grained PAT named `papamoa-bronze-worker` can be deleted in GitHub settings.
+> - End-to-end smoke test: open `admin/bronze-queue.html`, hit Edit on a row, change a field, Save. Should round-trip cleanly + invalidate the `/bronze-public` cache for the affected sub-cat.
+
+> **Session 7 extended -- final tally: 40 commits shipped (`4da41cc` → `9ebccba`).** Tree clean. The session covered:
+>
+> **Strategy + positioning:**
+> - §17.13 (no tier scarcity, scarcity moves to Ad Spots) + §17.14 (annual contracts + Stripe instalments) locked
+> - §3 customer-facing scarcity-language sweep across 8 files (sales pages + internal scripts)
+> - PPP (Personalised Preview Page) retired entirely; 1062 lines + the form/submitForm/JS gone
+> - **Bronze model locked as CARD not PAGE** (the load-bearing decision of this session) -- see §8.2 in Project_Master for the full rationale + architecture
+>
+> **Build:**
+> - Hero accent fix on 61 sub-cat pages (food-drink, shops, activities) to navy + locked brand accents
+> - §17.11 Phase 1A: Spotlight Ad Spot Claim CTAs wired through contact modal with sub-cat context pre-fill
+> - Legacy inline contact-modal sweep: 152 pages stripped (~4377 lines removed), nav.js owns the modal markup + CSS + behaviour
+> - Bronze info-card rendering + lightbox in nav.js (replaces the old "View listing →" link approach)
+> - Editable Bronze listings: `/bronze-update` worker endpoint + Edit modal on the admin queue (all 11 fields + cache invalidation)
+>
+> **Dashboard polish:**
+> - Operator status panel on `index.html` (Bronze inbox + canonical doc chips)
+> - Page-card deep clean: 9 dead anchor cards + 4 duplicate cards removed (200 cards now, all resolve)
+> - GitHub shortcuts removed, scratchpad killed, Previews + Assets sections retired, Admin section cleaned up (Bronze Queue added, broken-tagged the unfixed ones, Confirm Listing + Sales Funnel removed)
+> - Counter drift fixed (215 → 200 indexed pages, stats line matches DOM counts)
+>
+> **Homepage polish:**
+> - Single CTA on "Own a Pāpāmoa business?" block (drops the `spotlight-ads.html` deviation; locks the single-destination rule)
+> - "What is Pāpāmoa?" FAQ dropped (visible + schema)
+> - "37,800 residents in the Pāpāmoa Community Trust Area" → "Pāpāmoa residents"
+> - At-a-glance "Read more about Pāpāmoa" link sits where Population & stats was; bottom prose disclosure removed
+>
+> **Admin pages:**
+> - Canonical brand logo image rolled out to `bronze-queue` + `listing-health` + `add-lead` + `upload`. `crm-dashboard` + `search-analytics` already had it. Skipped `confirm-listing` (customer-facing) + `sales-funnel` (stale demo).
+> - Bronze token now persists in localStorage (was sessionStorage)
+>
+> **Other:**
+> - Carwyn reply prep drafted (`docs/carwyn-reply-prep-2026-06-04.md`) -- marked Do-Not-Send pending more demo polish
+> - Bronze nurture Resend runbook drafted (`docs/bronze-nurture-resend-runbook.md`) -- execution deferred per Jay until DNS sorted post-Carwyn
+> - tauranga.png staged for the future TaurangaNZ.info template clone
+> - 3 stub-listing footers got the canonical pnf-footer block
+> - supermarkets-papamoa.html legacy template rewritten
 
 > **Session 7 extended -- post-handoff additions (commits `4ddc71e` through `e98b6a9`):**
 > (a) `4ddc71e` -- §17.11 Phase 1A Spotlight CTAs wired through contact modal; (b) `e35475f` -- 152-page inline contact-modal strip, nav.js owns the modal; (c) `4c5af81` -- PPP retired; (d) `f0aba7e` -- homepage single CTA only; (e) `1cdfb52` -- 'What is Pāpāmoa?' FAQ dropped; (f) `f762f1c` -- '37,800 Pāpāmoa residents' label (drop 'Community Trust Area'); (g) `75a2708` -- at-a-glance 'Read more' link sits where Population & stats was; (h) `3bba4a8` + `8ac085d` -- index dashboard ops panel + Admin cleanup (Bronze Queue card added, broken tags on CRM Dashboard + Add Lead, Confirm Listing + Sales Funnel removed, GitHub shortcuts gone); (i) `9c0172f` -- scratchpad killed; (j) `b4fc9e1` -- index page-card deep-clean (200 cards, dead anchor cards + duplicate cards gone); (k) `e98b6a9` (this) -- **Bronze model LOCKED as card-not-page**.
@@ -203,14 +255,17 @@ None of these can move without him:
 14. ✅ **§17.11 Phase 1A -- Spotlight Ad Spot inventory surface live (session 7 extended, `4ddc71e`).** Every sub-cat page's existing "Gold Spotlight - one position available" placeholder is now a real Claim CTA that routes through the contact modal with sub-cat context pre-filled. **What shipped:** (a) `nav.js` -- enhanced `pnfOpenContact(type, ctx)` to accept `{name, path}` context and pre-fill the message textarea with `"Hi - I'd like to enquire about the [name] Spotlight Ad Spot (https://papamoa.info/[path]). Please send details on availability, duration options and pricing."` + added "Spotlight Ad Spot" to the enquiry-type dropdown. (b) 61 sub-cat pages -- Claim CTA rewired from a static link to `sales/list-with-us.html` into an onclick calling `pnfOpenContact('Spotlight Ad Spot', {name, path})`. Section-title and adjacent h3 reframed from "Gold Spotlight" to "Spotlight Ad Spot" for page-local consistency. (c) 111 pages with legacy inline `pnfOpenContact()` (predates nav.js taking ownership; guarded so inline wins) patched to accept the same `(type, ctx)` signature. **What it enables on a sales call:** prospect lands on say `categories/services/plumber-papamoa.html`, sees "Spotlight Ad Spot - Plumbers & Gasfitters", clicks Claim, contact modal opens with the message pre-filled with the sub-cat name + canonical URL. Operator gets a tagged lead. **What's NOT in Phase 1A (deferred):** real impressions data per slot (needs analytics tracking); availability/inventory tracking (which slots are currently booked, expiry dates); Stripe duration-based purchase (1/3/6/12mo); admin queue to manage bookings; cron to auto-expire and re-open. Those are Phase 1B/2.
 15. ✅ **Legacy inline contact-modal sweep -- DONE (session 7 extended, `e35475f`).** Phase 1A exposed a long-standing architecture issue: nav.js's `pnfOpenContact(type, ctx)` + contact modal markup were behind `if not already defined` guards, so pages that shipped inline copies (predating session-2's nav.js lock) won and the new `(type, ctx)` signature never took effect. **152 pages swept** -- removed inline `<div class="pnf-overlay" id="pnf-contact-overlay">...</div>` markup, `pnfDrawerOpen/Close`, `pnfOpenContact/Close`, `pnfOverlayClick`, `pnfSubmitContact`, and the inline Escape-key listener. nav.js's `pnfEnsureContactModal()` now finds no inline modal on load and injects its own (with the enquiry-type dropdown). Net: **4,377 lines removed** (~30 duplicate lines × 152 pages), single source of truth for the contact modal restored. **Verified live:** plumber sub-cat page (Spotlight CTA → modal with enquiry-type pre-selected + message pre-filled), community/weather page (general modal opens cleanly), listings/blackberry-eatery (renders normally), no console errors. Inline modal CSS in `<style>` blocks left in place -- dead but harmless, separate cleanup later. **Kept per page:** FAQ accordion IIFE + path-rewriter IIFE (page-specific behaviour, not duplicated by nav.js).
 16. **★ NEXT real work options** (sequencing reflects Jay's "site has alot more work" framing):
+    - **(0) [JAY-SIDE] `wrangler deploy` from repo root** -- pushes the new `worker.js` to prod. Covers both the Bronze-as-card `/bronze-approve` rewrite and the new `/bronze-update` endpoint that the Edit modal calls. Until deploy: the Edit modal's Save 404s, and new Bronze approvals still write stale `/listings/<slug>.html` pages. Static side is already live. **5 minutes of Jay's time.**
     - (a) **§17.11 Phase 1B -- Spotlight inventory admin page.** Internal admin page showing which sub-cats have Spotlights claimed, who holds them, when they expire, with a "release" button. Manual tracking, no Stripe yet. Pairs with the Phase 1A claim flow.
     - (b) **§17.11 Phase 2 -- Stripe duration-based Spotlight purchase.** Self-serve buy flow (1 / 3 / 6 / 12 mo) with real impressions data shown. Significant build.
     - (c) **Inline modal CSS cleanup.** 152 pages still carry dead `.pnf-overlay` / `.pnf-modal` / `.pnf-cf` CSS in their `<style>` blocks. nav.js now injects these. Mechanical Python sweep.
-    - (d) **Footer migration tranche 2 -- 29 community pages still on site-footer.** Each likely needs a contextual column 3 (related community pages by topic). ~1-2h.
-    - (e) **Phase A2 "How this site works" operator guide** for Carwyn dashboard.
-    - (f) **Phase D CRM dashboard rebuild** through worker.
-    - (g) **Phase E Brevo Day 0/3/6/10 sequences** -- gated on DNS sorted post-Carwyn.
-    - (h) **Site-wide Carwyn brand-rule audit** -- with tier-positioning + PPP retirement + nav/modal consolidation now landed, time to re-run the Carwyn req #1-#8 audit on what's actually shipped vs what the reply prep claims.
+    - (d) **§3 / `sales/list-with-us.html` polish.** With the Bronze-as-card model locked, the "How a paid Silver or Gold listing comes together" steps may need another pass; the demo section can lean into the inline-card Bronze story too if Jay wants to show Bronze visually distinct from Silver/Gold on that page.
+    - (e) **Footer migration tranche 2 -- 29 community pages still on site-footer.** Each likely needs a contextual column 3 (related community pages by topic). ~1-2h.
+    - (f) **Phase A2 "How this site works" operator guide** for Carwyn dashboard.
+    - (g) **Phase D CRM dashboard rebuild** through worker (currently flagged Broken on the dashboard).
+    - (h) **Phase E Brevo Day 0/3/6/10 sequences** -- gated on DNS sorted post-Carwyn.
+    - (i) **Site-wide Carwyn brand-rule audit** -- with tier-positioning + PPP retirement + nav/modal consolidation + Bronze-as-card all landed, time to re-run the Carwyn req #1-#8 audit on what's actually shipped vs what the reply prep claims.
+    - (j) **`sales-funnel.html` deletion sweep** -- card removed from dashboard, file still on disk. If you don't want to keep the stale demo around, delete + audit refs.
 12. **Self-serve Spotlights / Ad Spots** — Phase 2 (Phase 1 = Silver/Gold claim open slots). §17.11.
 
 Smaller carry-overs: **footer follow-ups** (23 compact footers, site-footer/other systems — `docs/nav-usage.md`); **3 stub-listing footers**; **Phase A2 operator guide**. (✅ Spotlight Silver clickability bug verified non-reproducing — resolved, see §18.) (✅ Subcat orange/gold accents — partially done; hero accent fix above is the remaining piece.)
