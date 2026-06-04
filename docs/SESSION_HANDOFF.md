@@ -1,10 +1,12 @@
 # Session handoff — papamoa-previews
 
-**Last updated:** 2026-06-03 (session 3) by Jay + Claude
-**Last commit:** `3e263e3` categories: sticky page-filter on all 5 category pages
+**Last updated:** 2026-06-04 (session 4) by Jay + Claude
+**Last commit:** `c6ceeb3` docs: lock Bronze (Basic) tier contents
 **Branch:** `main` (pushed, tree clean)
 
-> **Session 3 headline (visual polish + brand consistency):** category pages, homepage, brand assets and copy all got a big polish pass. New brand logo + favicon pack site-wide; all 5 category pages rebuilt to one clean template (photo hero + single card-grid navigator with custom line icons + sticky page-filter); category accents locked to the logo palette (blue: Stay/Eat/Shop, green: Do/Services); **all emojis replaced with custom inline SVG icons** site-wide; **all em dashes removed** site-wide. Plus Jay's listings/sales strategy notes captured in Project_Master §18 + §17.15.
+> **Session 4 headline (listings/sales groundwork):** Two decisions executed before the sales rebuild. **(1) Menu feature hidden site-wide** (`e1ba5a0`) — deferred to Phase 2; View-menu buttons/upsells/lightbox/links removed or CSS-hidden via nav.js, `menu-addon.html` noindexed. **(2) Tiers locked** (`ce193c6`,`c6ceeb3`): **Gold $1,199 | Silver $599 | Bronze FREE** (Bronze = NAP + link + short blurb, auto-publish pending admin approval); Menu→Phase 2; ad spots = Phase 1 claimable perk for Silver/Gold; single CTA = `list-with-us`. §17.15 resolved (free-tier pushback won). **NEXT (not started): the sales-page consolidation** — see "Next moves".
+
+> **Session 3 headline (visual polish):** all 5 category pages rebuilt to one clean template (photo hero + card-grid + custom line icons + sticky page-filter); category accents locked to the logo palette (blue: Stay/Eat/Shop, green: Do/Services); all emojis → custom SVG icons site-wide; all em dashes removed; new brand logo + favicon pack.
 
 > **Session 2 headline (the nav/footer lock):** `nav.js` is the single locked source for the nav, mobile drawer, and footer styling — loaded on every public page. See `docs/nav-usage.md`.
 
@@ -161,16 +163,19 @@ None of these can move without him:
 2. **Open the live demo** at `https://plainblackcreative.github.io/papamoa-previews/homepage.html` to see what the user is looking at.
 3. **Ask Jay what's first** — don't assume. Today's session shipped 9 commits in one stretch; that pace is sustainable only when each step is clearly aligned with him. The default cadence is propose → confirm → execute → verify → commit → push.
 
-Likely next items if Jay just says "keep going" (the listings/sales build is the live thread — see Project_Master §18 "Listings & sales direction"):
+**#1 LIVE TASK — sales-page consolidation into `list-with-us`** (audit done, plan approved, tiers locked — just execute). Two stages:
 
-1. **Lock the Gold & Silver listing spec** — pin style/design/layout + the required data/content per tier; these become the canonical build templates (`listing-gold-template.html`, `listing-silver-template.html`). The natural starting point for the listings build.
-2. **Bronze (free Basic) self-serve auto-create** — visitor creates a free listing, auto-publishes pending admin approval. Priority per Jay. Depends on the §17.15 free-tier decision (Jay's pushback on Carwyn's "no free listings").
-3. **Audit + consolidate the sales pages** (`sales/*`) — simplify/de-duplicate, align to the Gold|Silver|Bronze ladder.
-4. **Self-serve Spotlights / Ad Spots** — click a slot → see monthly impressions → buy 1/3/6/12mo (§17.11).
+- **Stage A (mechanical, safe):** move internal tools → `sales/internal/` (`sales-scripts.html`, `facebook-posts.html`, the two email files, `partners/real-estate-outreach.html`); their only inbound links are `index.html` + `docs/Project_Master.html` — fix those. **Merge the two follow-up email files** (`email-follow-up.html` single template + `followup-emails.html` sequence) into one.
+- **Stage B (the big rewrite):** rebuild `sales/list-with-us.html` (1867L) as the **Gold | Silver | Bronze** 3-tier hub (Bronze spec in §3: NAP + link + blurb); fold in `why-list`'s "why / AI-search" content; **merge `landing.html` + `claim.html` into one Get-listed form**; trim `why-list.html` to a lean SEO article linking the hub; **repoint every site CTA to `list-with-us`**; purge the leftover "Menu Add-On" sentence copy on these pages as they're rewritten. `spotlight-ads.html` rebuild stays deferred. Match the current site style; bring the hub back for review before deleting/merging anything destructive.
 
-Smaller carry-overs: finish the **footer follow-ups** (23 compact footers, site-footer/other systems — `docs/nav-usage.md`); **3 stub-listing footers**; **Phase A2 operator guide** for Carwyn; **Spotlight Silver clickability bug** (§18 High).
+**Then (the listings build):**
+1. **Lock the Gold & Silver listing spec** (style/design/required data → canonical templates `listing-gold-template.html`, `listing-silver-template.html`).
+2. **Bronze self-serve auto-create** — visitor creates a free Bronze listing, auto-publishes pending admin approval. ✅ Unblocked (tier locked).
+3. **Self-serve Spotlights / Ad Spots** — Phase 2 (Phase 1 = Silver/Gold claim open slots). §17.11.
 
-Deferred per Jay (2026-06-03): **AI-generated listings**, **Menu / Menu Add-On** work.
+Smaller carry-overs: **footer follow-ups** (23 compact footers, site-footer/other systems — `docs/nav-usage.md`); **3 stub-listing footers**; subcategory pages still on old orange/gold accents; **Phase A2 operator guide**; **Spotlight Silver clickability bug** (§18 High).
+
+Deferred per Jay: **AI-generated listings**, **Menu** (now hidden; Phase 2 rebuild or full source strip).
 
 ---
 
