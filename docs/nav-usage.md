@@ -104,7 +104,7 @@ Or do a single find-and-replace across the repo when going live.
   `admin/*`, `docs/*`, the `assets/nav-footer-snippet.html` reference snippet's
   *nav* (its footer was normalised), and internal reference docs
   (`sales/facebook-posts`, `email-follow-up`, `followup-emails`, `sales-scripts`,
-  `partners/real-estate-outreach`, `previews/driftwood-cafe` PPP).
+  `partners/real-estate-outreach`).
 
 ### Footer follow-ups (not yet done)
 

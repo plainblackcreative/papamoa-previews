@@ -243,7 +243,7 @@ The `assets/css/styles.css` `.hero-cat-*` classes still reflect the original val
 | Spotlight | Ad placements on category/article pages | Separate concept from listing tiers |
 | Gold Spotlight | Acceptable shorthand for the Spotlight position feature within Gold | Only in context of the feature, not the tier |
 | Bronze | Internal placeholder label | Never mentioned to prospects or shown on public pages |
-| PPP | Personalised Preview Page | The sales demo page at `previews/driftwood-cafe.html` |
+| PPP | Personalised Preview Page | ~~The sales demo page at `previews/driftwood-cafe.html`~~ **RETIRED 2026-06-04** — see §13 for reasoning. Term no longer in use. |
 | GEO | Generative Engine Optimisation | Umbrella term for all AI answer engines. Preferred over AEO. |
 | AEO | Answer Engine Optimisation | Google-specific subset of GEO |
 
@@ -339,8 +339,7 @@ papamoa-previews/
       real-estate-outreach.html
     partners/
       real-estate-agent.html   -- public partner landing page
-  previews/
-    driftwood-cafe.html        -- PPP master template
+  previews/                    -- EMPTY (PPP retired 2026-06-04, see §13)
   admin/                       -- 6 internal tool pages
   docs/                        -- 6 HTML + 9 markdown reference docs
   images/
@@ -604,14 +603,30 @@ Every page built must meet this minimum bar, no exceptions (from Jay's instructi
 
 ---
 
-## 13. PPP (Personalised Preview Page)
+## 13. PPP (Personalised Preview Page) — RETIRED 2026-06-04 ✅
 
-**Master template:** `previews/driftwood-cafe.html`
-- Single `BUSINESS` data object at top = only per-PPP change needed
-- Includes: SEO score card, live search checker (via Cloudflare Worker), tier comparison, Gold/Silver listing mockups, menu add-on demo, Spotlight subcategory selector with live price calculator, Stripe payment CTAs
-- Stripe payment links are placeholders (pointing to `/sales/list-with-us.html`)
-- Uses correct design system tokens (ocean-deep palette)
-- `PRICE_EXTRA = 199` (correct, matches $199+gst/yr for Extra Spotlights)
+**Decision:** the entire PPP flow is removed. Jay's call (session 7 extended).
+
+Reasoning:
+- Bronze self-serve already covers "try us for free" instantly. PPP duplicated that with a 24-hour SLA and AI-quality risk.
+- AI-generated "here's what we wrote about your business" from automated input is high-risk — hallucination, misrepresentation, miscategorisation all land as "this is insulting" not "this is helpful." One viral screenshot of a botched PPP kills the launch.
+- Every form submission committed PB to manual fulfillment within 24h. Operational treadmill at any real traffic.
+- Doesn't fit the new model cleanly: Bronze = self-serve free, Silver/Gold = paid (built manually by PB per prospect), Spotlight Ad Spot = scarce upsell. PPP had no slot.
+
+**What was deleted:**
+- `previews/driftwood-cafe.html` (the PPP master template)
+- `sales/list-with-us.html` form section (`#get-found`), `submitForm`, `presetTier`, and warm-deep-link form-prefill JS
+- Index dashboard "Previews & PPPs" section block
+
+**What replaced it on `sales/list-with-us.html`:**
+- Hero CTA → `Get listed in 2 minutes →` pointing direct to `sales/create-bronze-listing.html` (Bronze self-serve)
+- Demo section retained as a static "what each tier looks like" showcase (no `data-biz` placeholders, no PPP framing)
+- Silver/Gold tier CTAs → `Talk to us about [tier] →` triggering the contact modal (`pnfOpenContact()`)
+
+**Sales process implications:**
+- Cold leads (Bronze): self-serve. Submit Bronze form, auto-publish pending approval.
+- Warm leads (Silver/Gold): Jay contacts manually, points them to a real live Gold listing as the demo, builds their listing manually on close.
+- Spotlight Ad Spot prospects: discussed on the call, manual fulfillment until §17.11 self-serve flow ships.
 
 ---
 
@@ -855,7 +870,6 @@ The listing ladder is **Gold | Silver | Bronze**. Near-term focus is Bronze self
 - [ ] Pricing audit: verify Silver $599+gst/yr, Gold $1,199+gst/yr, Menu Add-On $199+gst/yr, Extra Spotlight $199+gst/yr across all pages. Per the pricing-master audit, these files specifically still need a pass:
   - **High priority — prospect-facing:**
     - [ ] `sales/list-with-us.html` — full tier comparison, offer language, pricing table
-    - [ ] `previews/driftwood-cafe.html` — PPP template, tier comparison table embedded
   - **Medium priority — sales collateral + listing upsells:**
     - [ ] `sales/menu-addon.html` — Menu Add-On pricing and availability by tier
     - [ ] `sales/why-list.html` — editorial with tier references
@@ -882,7 +896,7 @@ The listing ladder is **Gold | Silver | Bronze**. Near-term focus is Bronze self
 - [ ] Build admin new-listing intake form/checklist (collects all required data before build)
 - [ ] Site-wide style/layout audit: scan all HTML, upgrade to current design system (width, nav, category colours, sidebar)
 - [ ] DNS consolidation session with Carwyn (GitHub CNAME, Brevo auth: DKIM, DMARC, SPF)
-- [ ] Activate Stripe: create Silver ($599) and Gold ($1,199) payment links, then swap `STRIPE_GOLD_URL`/`STRIPE_SILVER_URL` in `previews/driftwood-cafe.html` PPP template (currently fall back to `sales/list-with-us.html`). Also create a `JBTEST` 100%-off coupon code for Jay's end-to-end QA testing without spending real money.
+- [ ] Activate Stripe: create Silver ($599) and Gold ($1,199) payment links (annual + 4mo/12mo instalment variants per §17.14), plus duration-based Spotlight Ad Spot products per §17.11 when that flow lands. Wire CTAs on `sales/list-with-us.html` Silver/Gold tier cards. Also create a `JBTEST` 100%-off coupon code for Jay's end-to-end QA testing without spending real money. (PPP swap requirement removed — PPP retired, see §13.)
 
 ### Medium priority (post-launch infrastructure)
 
@@ -992,7 +1006,7 @@ What survives the blend, and what gets dropped, is exactly what Phase B (Carwyn'
 During the organic-test window, conversions are handled by hand — no automated funnel is wired up yet:
 
 - Business finds the site organically and submits via `sales/list-with-us.html`.
-- Jay contacts them manually, sends a demo listing (the PPP at `previews/driftwood-cafe.html`), closes the sale.
+- Jay contacts them manually, points them to a real live Gold listing in the repo as the demo (PPP retired per §13), closes the sale.
 - Carwyn invoices the client (assumes §17.9 Option A; if Option B is chosen, invoicing routes through PlainBlack instead).
 - Facebook: start a Pāpāmoa Community Info group separate from the directory page — articles, events, community content. Drives organic traffic and brand awareness. Proposed URL: `facebook.com/groups/papamoa.info`. 30 posts ready in `sales/internal/facebook-posts.html`.
 
