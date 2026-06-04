@@ -195,7 +195,7 @@ async function load(){
     var data = await api('/bronze-list', { method:'GET' });
     if (!data.ok) throw new Error(data.error || 'load failed');
     state.items = data.items || [];
-    sessionStorage.setItem('bronzeToken', state.token);
+    localStorage.setItem('bronzeToken', state.token);
     $('filters').style.display = 'flex';
     render();
     setStatus(state.items.length + ' total submission(s).');
@@ -410,7 +410,7 @@ $('filters').addEventListener('click', function(e){
 $('tok').addEventListener('keydown', function(e){ if(e.key==='Enter') $('connect').click(); });
 
 // restore token from session (convenience)
-var saved = sessionStorage.getItem('bronzeToken');
+var saved = localStorage.getItem('bronzeToken');
 if (saved) { $('tok').value = saved; state.token = saved; load(); }
 </script>
 </body>
