@@ -130,28 +130,59 @@ Closed loop: prospect joins the directory OR commissions a standalone build. Eit
 
 ### Nav Logo Pattern (LOCKED)
 - **Playfair Display bold** "Papamoa" in white
-- `.info` span in `--blue` (#3AABDE)
-- Phone in nav (if shown): `--blue` (#3AABDE), NOT dune
+- `.info` span in `--blue` (#00B0F8 — the logo cyan)
+- Phone in nav (if shown): `--blue` (#00B0F8), NOT dune
 - NOT Figtree for logo. NOT ocean for .info span. No "www" prefix.
 
-### CSS Design Tokens (canonical from `assets/css/styles.css`)
+### CSS Design Tokens (canonical — re-anchored to the logo 2026-06-04)
 
-#### Core palette
+> **The logo is the source of truth for brand colour.** These hexes are
+> sampled directly from
+> `assets/papamoa-info-asset-pack/logo/papamoa-info-logo-transparent-master.png`.
+> Blue + green shades only — no brown/beige (Carwyn rule §21).
+> **The live `.html`/`.css` files still render the older drifted values**
+> (see the migration map) until the site-wide sweep lands.
+
+#### Brand palette (sampled from the logo — canonical)
 ```css
---navy:        #0D2B3E;   /* darkest -- nav bg, headings */
---navy-mid:    #2B3F5C;   /* homepage hero bg (intentional variant) */
---ocean:       #1B6B7D;   /* primary brand colour */
---ocean-deep:  #0F4352;   /* darker ocean -- hero gradients */
---ocean-mid:   #1A5F70;   /* mid gradient stop */
---ocean-light: #E4F2F5;   /* tinted bg */
---blue:        #3AABDE;   /* accent -- CTAs, links, .info in logo */
---sand:        #F7F3ED;   /* page background */
---sand-alt:    #F5EFE0;   /* homepage body bg (warmer variant) */
---sand-dark:   #EDE7DB;   /* section dividers */
---dune:        #C4985A;   /* warm gold -- secondary accent */
---dune-light:  #F5EDD8;   /* dune tint bg */
+--blue:        #00B0F8;   /* signature cyan -- ".info" wordmark + koru highlight; primary accent, CTAs, links */
+--blue-bright: #00C8F8;   /* lightest koru cyan highlight */
+--ocean:       #0F86B9;   /* koru mid-blue -- primary brand mid-tone, gradient mid stop */
+--teal-deep:   #004878;   /* koru dark ring -- darkest brand colour; nav bg, headings, hero base */
+--green:       #62C000;   /* leaf green -- "pāpāmoa" wordmark; secondary brand accent */
+--green-deep:  #4F9E00;   /* wordmark gradient bottom -- darker leaf */
+--green-light: #8FDB4D;   /* koru lime highlight -- live indicator, light green accent */
 --white:       #FFFFFF;
 ```
+*Hero gradients build from `--teal-deep → --ocean` (blue pages) or
+`--green-deep → --green` (green pages); pair with photography per §4.4.*
+
+#### Migration map — current code value → logo target (for the sweep)
+The code renders muted/desaturated stand-ins for the logo hues. The
+site-wide sweep replaces left → right:
+
+| Role | Current in code | ~Occurrences | → Logo target |
+|---|---|---|---|
+| Blue accent | `#359FE8` | 635 | `#00B0F8` (`--blue`) |
+| Navy / dark | `#243B59` | 607 | `#004878` (`--teal-deep`) |
+| Ocean mid | `#1B6B7D` | 483 | `#0F86B9` (`--ocean`) |
+| Green (Do / live) | `#89BE43` | 257 | `#8FDB4D` (`--green-light`) |
+| Green (dark) | `#1E6B3C` | 191 | `#4F9E00` (`--green-deep`) |
+| Mid-blue gradient | `#2D95C4` | 215 | `#0F86B9` (`--ocean`) |
+| ~~Sand bg~~ | `#F7F3ED` | 283 | drop → `#FFFFFF` / cool tint `#F2FAFE` |
+| ~~Dune gold~~ | `#C4985A` | 172 | drop (non-logo, warm) |
+
+> ⚠ The previously-documented `--navy #0D2B3E`, `--blue #3AABDE`, and
+> `--lime #7DC143` were **never the real code values** (each appears 0–1×
+> in `.html`/`.css`) and are removed. The doc now states what the logo
+> specifies; the migration map is what's actually in the files today.
+
+#### Warm tones — DEPRECATED (not in the logo)
+`--sand*` / `--dune*` are beige/gold tints that appear nowhere in the logo
+and violate Carwyn's "blue and green shades only — no brown/beige" rule
+(§21, §4.4). Page backgrounds → white or a cool tint; dune/gold secondary
+accents → logo green or deep teal. (The **Gold listing tier** swatch is a
+separate, intentional UI signal — see Tier colours, keep it.)
 
 #### Text & borders
 ```css
@@ -177,30 +208,38 @@ Closed loop: prospect joins the directory OR commissions a standalone build. Eit
 
 #### Status colours
 ```css
---green:       #1E6B3C;
---green-bg:    #E6F4EC;
---green-pulse: #7DC143;   /* live indicator, lime accent */
---lime:        #7DC143;   /* alias for green-pulse */
---red:         #8B2020;
+/* Success/live = logo green family. Success TEXT uses --green-deep (#4F9E00,
+   the leaf darkened for AA contrast); --green (#62C000) is the brand leaf above. */
+--green-bg:    #ECF7DC;   /* logo-green tint -- success bg (was #E6F4EC) */
+--green-pulse: #8FDB4D;   /* live indicator -- logo koru lime (was #7DC143) */
+--lime:        #8FDB4D;   /* alias for green-pulse (was #7DC143) */
+--red:         #8B2020;   /* error -- functional, kept */
 --red-bg:      #FAEAEA;
---amber:       #8A5A00;
+--amber:       #8A5A00;   /* warning -- functional, kept */
 --amber-bg:    #FFF8E6;
---coral:       #E8344A;   /* homepage alert/error */
+--coral:       #E8344A;   /* homepage alert/error -- functional, kept */
 ```
 
 #### PNF nav/footer system tokens
 ```css
---pnf-navy:    #0D2B3E;
---pnf-accent:  #3AABDE;
---pnf-dune:    #C4985A;
+--pnf-navy:    #004878;   /* logo deep teal -- nav/footer bg (was #0D2B3E; code renders #243B59) */
+--pnf-accent:  #00B0F8;   /* logo cyan -- ".info", links (was #3AABDE; code renders #359FE8) */
+--pnf-green:   #62C000;   /* logo leaf -- replaces the deprecated --pnf-dune warm gold */
 --pnf-white:   #FFFFFF;
 --pnf-muted:   rgba(255,255,255,0.45);
 --pnf-font:    'Figtree', sans-serif;
 --pnf-display: 'Playfair Display', serif;
 ```
+*`--pnf-dune` (#C4985A) is deprecated — warm gold, not in the logo. Footer
+columns that used it move to `--pnf-green` or `--pnf-accent`.*
 
 ### Homepage variant tokens (intentional, not bugs)
 The homepage uses slightly different colour temperatures by design. These are documented as `-alt`, `-mid`, and `--bg` tokens in the stylesheet. The homepage's `--navy-mid: #2B3F5C` and `--gold-alt: #C8962A` are intentional variants, not errors.
+
+> **Logo re-anchor (2026-06-04):** these warm variants reconcile to the
+> logo palette in the sweep — `--navy-mid` → a mid teal between `--teal-deep`
+> and `--ocean`; `--gold-alt` → drop (warm gold, non-logo). They stay
+> documented here only until the site-wide sweep lands.
 
 ### Category hero gradients (THREE sets exist -- need reconciling)
 
@@ -215,6 +254,11 @@ These three sets need reconciling in a design audit. The styles.css set is the m
 The five main category pages each had a distinct hero gradient and accent colour, locked April 2026. **Two of them now violate a client-stated brand rule** (Carwyn email, captured in §21):
 
 > *"Can we also stick to the Brand colours Blue, Green shades — Not brown / Beige like the EAT page. Use imagery to differentiate between pages instead of colours."*
+
+> **Logo re-anchor (2026-06-04):** the compliant accents in the table map to
+> the logo palette — blue accent → `--blue #00B0F8`, green accent →
+> `--green-light #8FDB4D`. The EAT/Shop rework drops brown/orange/gold for
+> these. Hexes below are the pre-re-anchor record, cleared in the site-wide sweep.
 
 Status per page:
 
