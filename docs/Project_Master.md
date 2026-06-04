@@ -333,12 +333,14 @@ papamoa-previews/
     menu-addon.html
     why-list.html
     spotlight-ads.html
-    facebook-posts.html
-    followup-emails.html
-    sales-scripts.html
-    partners/
-      real-estate-agent.html
+    post-call-landing.html
+    internal/                  -- non-public sales tools (noindex)
+      sales-scripts.html
+      facebook-posts.html
+      follow-up-emails.html    -- Day 0 post-call template + Day 3/6/10 sequence + ROI explainer (merged 2026-06-04)
       real-estate-outreach.html
+    partners/
+      real-estate-agent.html   -- public partner landing page
   previews/
     driftwood-cafe.html        -- PPP master template
   admin/                       -- 6 internal tool pages
@@ -718,8 +720,8 @@ The listing ladder is **Gold | Silver | Bronze**. Near-term focus is Bronze self
   - **Medium priority — sales collateral + listing upsells:**
     - [ ] `sales/menu-addon.html` — Menu Add-On pricing and availability by tier
     - [ ] `sales/why-list.html` — editorial with tier references
-    - [ ] `sales/followup-emails.html` — email sequences with offer language
-    - [ ] `sales/sales-scripts.html` — scripts referencing offers and tier structure
+    - [ ] `sales/internal/follow-up-emails.html` — email sequences with offer language
+    - [ ] `sales/internal/sales-scripts.html` — scripts referencing offers and tier structure
     - [ ] `listings/the-wagon-papamoa.html` — tier upsell block
     - [ ] `listings/speedy-screens-papamoa.html` — tier upsell block
     - [ ] `listings/greencut-papamoa.html` — tier comparison block
@@ -755,7 +757,7 @@ The listing ladder is **Gold | Silver | Bronze**. Near-term focus is Bronze self
 - [ ] **Community & Info content audit.** Sweep all 50+ `community/` pages for stale content (Easter hours, dated event references, broken external links, copy that needs refreshing). Surface anything that's gone obviously out of date.
 - [ ] Area sub-pages — neighbourhood-level targeting for Papamoa Beach, Papamoa East, Golden Sands. Either as standalone `community/area-*.html` pages or a small `areas/` folder. Helps with hyper-local AI/Google search queries.
 - [ ] Editorial guide pages — "Best Cafes in Papamoa", "New Businesses Opening 2026", local guides. Lives in `community/` or a dedicated `guides/` folder. Strong GEO surface for AI citation.
-- [ ] FB "Welcome post" pinned to the top of the Papamoa.info Facebook page. Sits alongside the 30 posts already drafted in `sales/facebook-posts.html`.
+- [ ] FB "Welcome post" pinned to the top of the Papamoa.info Facebook page. Sits alongside the 30 posts already drafted in `sales/internal/facebook-posts.html`.
 
 #### AI / structured data
 - [ ] Structured JSON feed / API endpoint AI agents can parse. Cloudflare Worker route returning a clean JSON index of listings + categories + community pages, plus an `/llms.txt`-shaped summary at `/api/structure`.
@@ -792,7 +794,7 @@ The listing ladder is **Gold | Silver | Bronze**. Near-term focus is Bronze self
 - [ ] Photo/content upload pipeline test end-to-end
 - [ ] Outscraper lead scrape (first 200 Papamoa records). Complementary local-directory sources to scrape for business listings as a cross-reference: `https://www.bayofplentynz.com/`, `https://baythrive.nz/`, `https://bizwin.co.nz/tauranga-business-directory/`
 - [ ] First cold email batch (20 businesses, track opens)
-- [ ] Facebook growth (30 posts ready in `sales/facebook-posts.html`, target 500 followers). Discovery list of existing Pāpāmoa / Mt Maunganui groups + business pages worth joining/engaging: `https://www.facebook.com/search/pages/?q=Papamoa`
+- [ ] Facebook growth (30 posts ready in `sales/internal/facebook-posts.html`, target 500 followers). Discovery list of existing Pāpāmoa / Mt Maunganui groups + business pages worth joining/engaging: `https://www.facebook.com/search/pages/?q=Papamoa`
 - [ ] Named placeholder listings for active outreach targets
 - [ ] Upgrade sales email automation (personalise with listing data, dynamic PPP links)
 - [ ] 404 page monthly giveaway system (sponsor themes game, provides prize, gets spotlight ad)
@@ -853,7 +855,7 @@ During the organic-test window, conversions are handled by hand — no automated
 - Business finds the site organically and submits via `sales/list-with-us.html` or `sales/claim.html`.
 - Jay contacts them manually, sends a demo listing (the PPP at `previews/driftwood-cafe.html`), closes the sale.
 - Carwyn invoices the client (assumes §17.9 Option A; if Option B is chosen, invoicing routes through PlainBlack instead).
-- Facebook: start a Pāpāmoa Community Info group separate from the directory page — articles, events, community content. Drives organic traffic and brand awareness. Proposed URL: `facebook.com/groups/papamoa.info`. 30 posts ready in `sales/facebook-posts.html`.
+- Facebook: start a Pāpāmoa Community Info group separate from the directory page — articles, events, community content. Drives organic traffic and brand awareness. Proposed URL: `facebook.com/groups/papamoa.info`. 30 posts ready in `sales/internal/facebook-posts.html`.
 
 ### What flips the switch from manual to scale
 
