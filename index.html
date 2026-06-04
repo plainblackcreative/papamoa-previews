@@ -34,42 +34,6 @@
   .nav-right a { color:rgba(255,255,255,0.5); transition:color 0.15s; }
   .nav-right a:hover { color:#fff; }
 
-  /* SCRATCHPAD */
-  .scratchpad-wrap { background:linear-gradient(135deg,#243B59,#1B3D52); border-bottom:2px solid rgba(53,159,232,0.25); }
-  .scratchpad-inner { max-width:1100px; margin:0 auto; padding:0 28px; }
-  .scratchpad-toggle { display:flex; align-items:center; gap:10px; padding:12px 0; cursor:pointer; user-select:none; border:none; background:none; width:100%; text-align:left; color:#fff; font-family:'Figtree',sans-serif; }
-  .scratchpad-toggle:hover .sp-label { color:#359FE8; }
-  .sp-icon { font-size:1.1rem; }
-  .sp-label { font-size:13px; font-weight:700; color:rgba(255,255,255,0.9); transition:color 0.15s; }
-  .sp-count { font-size:11px; background:rgba(53,159,232,0.2); border:1px solid rgba(53,159,232,0.3); color:#359FE8; padding:1px 8px; border-radius:10px; }
-  .sp-toggle-icon { margin-left:auto; font-size:11px; color:rgba(255,255,255,0.4); transition:transform 0.2s; }
-  .scratchpad-body { display:none; padding-bottom:20px; }
-  .scratchpad-body.open { display:block; }
-  .sp-input-row { display:flex; gap:8px; margin-bottom:14px; }
-  .sp-text-input { flex:1; padding:9px 13px; border-radius:7px; border:1.5px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.07); color:#fff; font-family:'Figtree',sans-serif; font-size:13px; outline:none; transition:border-color 0.15s; }
-  .sp-text-input::placeholder { color:rgba(255,255,255,0.35); }
-  .sp-text-input:focus { border-color:#359FE8; background:rgba(255,255,255,0.1); }
-  .sp-tag-select { padding:9px 10px; border-radius:7px; border:1.5px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.07); color:#fff; font-family:'Figtree',sans-serif; font-size:12px; cursor:pointer; outline:none; }
-  .sp-tag-select option { background:#243B59; }
-  .sp-add-btn { padding:9px 18px; border-radius:7px; background:#359FE8; border:none; color:#fff; font-family:'Figtree',sans-serif; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap; transition:background 0.15s; }
-  .sp-add-btn:hover { background:#2E96C8; }
-  .sp-notes-list { display:flex; flex-direction:column; gap:6px; max-height:300px; overflow-y:auto; }
-  .sp-note { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:9px 12px; display:flex; align-items:flex-start; gap:10px; transition:all 0.15s; }
-  .sp-note.done { opacity:0.5; }
-  .sp-note.done .sp-note-text { text-decoration:line-through; color:rgba(255,255,255,0.4); }
-  .sp-note-tag { font-size:0.6rem; font-weight:800; padding:2px 7px; border-radius:3px; white-space:nowrap; flex-shrink:0; margin-top:2px; text-transform:uppercase; letter-spacing:0.06em; }
-  .tag-idea { background:rgba(196,152,90,0.25); color:#C4985A; border:1px solid rgba(196,152,90,0.35); }
-  .tag-todo { background:rgba(53,159,232,0.2); color:#359FE8; border:1px solid rgba(53,159,232,0.3); }
-  .tag-bug { background:rgba(232,52,74,0.2); color:#F07080; border:1px solid rgba(232,52,74,0.3); }
-  .tag-note { background:rgba(137,190,67,0.15); color:#89BE43; border:1px solid rgba(137,190,67,0.25); }
-  .sp-note-body { flex:1; min-width:0; }
-  .sp-note-text { font-size:13px; color:rgba(255,255,255,0.9); line-height:1.5; word-break:break-word; }
-  .sp-note-time { font-size:10px; color:rgba(255,255,255,0.3); margin-top:2px; }
-  .sp-note-actions { display:flex; gap:6px; flex-shrink:0; }
-  .sp-btn { background:none; border:none; cursor:pointer; font-size:13px; opacity:0.4; padding:2px 4px; border-radius:3px; transition:opacity 0.15s; line-height:1; }
-  .sp-btn:hover { opacity:0.9; }
-  .sp-empty { font-size:12px; color:rgba(255,255,255,0.3); padding:12px 0; text-align:center; }
-
   /* HERO */
   .page-hero { background:var(--navy); padding:32px 28px 28px; }
   .hero-inner { max-width:1100px; margin:0 auto; }
@@ -156,7 +120,6 @@
     .cards-grid { grid-template-columns:1fr; }
     .page-hero { padding:24px 16px; }
     .site-nav { padding:0 16px; }
-    .scratchpad-inner { padding:0 16px; }
     .quick-actions { gap:6px; }
     .qa-btn { font-size:11px; padding:6px 10px; }
   }
@@ -171,33 +134,6 @@
   </div>
 </nav>
 
-<!-- SCRATCHPAD -->
-<div class="scratchpad-wrap">
-  <div class="scratchpad-inner">
-    <button class="scratchpad-toggle" onclick="toggleScratchpad()" id="sp-toggle-btn">
-      <span class="sp-icon">&#9998;</span>
-      <span class="sp-label">Quick Notes &amp; Scratchpad</span>
-      <span class="sp-count" id="sp-count">0 notes</span>
-      <span class="sp-toggle-icon" id="sp-toggle-icon">&#9660; open</span>
-    </button>
-    <div class="scratchpad-body" id="scratchpad-body">
-      <div class="sp-input-row">
-        <input type="text" class="sp-text-input" id="sp-input" placeholder="Brain dump here - idea, to-do, bug, note..." onkeydown="spKeydown(event)" onfocus="spOnFocus()">
-        <select class="sp-tag-select" id="sp-tag">
-          <option value="todo">To-do</option>
-          <option value="idea">Idea</option>
-          <option value="bug">Bug</option>
-          <option value="note">Note</option>
-        </select>
-        <button class="sp-add-btn" onclick="addNote()">+ Add</button>
-      </div>
-      <div id="sp-status" style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:10px;min-height:16px;"></div>
-      <div class="sp-notes-list" id="sp-notes-list">
-        <div class="sp-empty" id="sp-empty">No notes yet. Brain dump away.</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- HERO -->
 <div class="page-hero">
@@ -330,7 +266,7 @@
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/index.html" target="_blank" data-section="root" data-keywords="site index internal dashboard pages starred" rel="noopener">
       <span class="pc-icon">&#128290;</span>
-      <div class="pc-body"><div class="pc-title">Project Dashboard (this page)</div><div class="pc-path">index.html</div><div class="pc-desc">Internal dashboard. All pages, scratchpad, starred tracking and filter.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
+      <div class="pc-body"><div class="pc-title">Project Dashboard (this page)</div><div class="pc-path">index.html</div><div class="pc-desc">Internal dashboard. All pages, ops status panel, starred tracking and filter.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
     </a>
     <a class="page-card" href="https://plainblackcreative.github.io/papamoa-previews/search.html" target="_blank" data-section="root" data-keywords="search results site query" rel="noopener">
       <span class="pc-icon">&#128269;</span>
@@ -1291,10 +1227,6 @@
       <span class="pc-icon">&#128202;</span>
       <div class="pc-body"><div class="pc-title">worker/leaderboard/README.md</div><div class="pc-path">worker/leaderboard/README.md</div><div class="pc-desc">404 gremlin game leaderboard Worker. KV-backed shared leaderboard, replaces the original JSONBin integration.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
     </a>
-    <a class="page-card asset-card" href="#" data-section="assets" data-keywords="worker scratchpad bearer token kv notes">
-      <span class="pc-icon">&#128196;</span>
-      <div class="pc-body"><div class="pc-title">worker/scratchpad/README.md</div><div class="pc-path">worker/scratchpad/README.md</div><div class="pc-desc">Scratchpad Worker - bearer-token gated KV store powering the index dashboard's scratchpad panel. Deploy steps.</div><div class="pc-tags"><span class="pc-tag tag-internal">Internal</span></div></div>
-    </a>
     </div>
   </div>
 
@@ -1302,195 +1234,6 @@
 </div><!-- /page-wrap -->
 
 <script>
-// ============================================================
-// SCRATCHPAD - papamoa-scratchpad Cloudflare Worker (bearer-token gated)
-// ============================================================
-// Worker URL + bearer token are stored in localStorage per device.
-// First focus on the input triggers a one-shot setup prompt.
-// See worker/scratchpad/README.md for deploy steps.
-var SCRATCHPAD_URL_KEY   = 'pm-scratchpad-url';
-var SCRATCHPAD_TOKEN_KEY = 'pm-scratchpad-token';
-function getScratchpadConfig() {
-  return {
-    url:   localStorage.getItem(SCRATCHPAD_URL_KEY)   || '',
-    token: localStorage.getItem(SCRATCHPAD_TOKEN_KEY) || ''
-  };
-}
-function setScratchpadConfig(url, token) {
-  if (url)   localStorage.setItem(SCRATCHPAD_URL_KEY,   url.replace(/\/+$/, ''));
-  if (token) localStorage.setItem(SCRATCHPAD_TOKEN_KEY, token);
-}
-async function scratchpadSetupPrompt() {
-  var existing = getScratchpadConfig();
-  var url = prompt('Scratchpad Worker URL\n(e.g. https://papamoa-scratchpad.YOUR-SUBDOMAIN.workers.dev)', existing.url || '');
-  if (url === null) return false;
-  var token = prompt('Scratchpad bearer token\n(the SCRATCHPAD_TOKEN you set with wrangler secret put)', existing.token || '');
-  if (token === null) return false;
-  setScratchpadConfig(url.trim(), token.trim());
-  return true;
-}
-
-var spOpen = false;
-var spNotes = [];   // in-memory cache
-var spSaving = false;
-
-function escHtml(str) { return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-function updateCount(notes) {
-  var pending = notes.filter(function(n){ return !n.done; }).length;
-  document.getElementById('sp-count').textContent =
-    notes.length + ' note' + (notes.length !== 1 ? 's' : '') +
-    (pending > 0 ? ' (' + pending + ' open)' : '');
-}
-
-function renderNotes() {
-  var notes = spNotes;
-  updateCount(notes);
-  var list = document.getElementById('sp-notes-list');
-  if (notes.length === 0) { list.innerHTML = '<div class="sp-empty">No notes yet. Brain dump away.</div>'; return; }
-  list.innerHTML = notes.map(function(note, i) {
-    var tagClass = 'tag-' + note.tag;
-    return '<div class="sp-note' + (note.done ? ' done' : '') + '">' +
-      '<span class="sp-note-tag ' + tagClass + '">' + note.tag + '</span>' +
-      '<div class="sp-note-body"><div class="sp-note-text">' + escHtml(note.text) + '</div><div class="sp-note-time">' + escHtml(note.time) + (note.author ? ' &middot; ' + escHtml(note.author) : '') + '</div></div>' +
-      '<div class="sp-note-actions">' +
-        (note.tag === 'todo' ? '<button class="sp-btn" title="' + (note.done ? 'Reopen' : 'Mark done') + '" onclick="toggleDone(' + i + ')">' + (note.done ? '&#9898;' : '&#10003;') + '</button>' : '') +
-        '<button class="sp-btn" title="Delete" onclick="deleteNote(' + i + ')">&#128465;</button>' +
-      '</div></div>';
-  }).join('');
-}
-
-function setSpStatus(msg, isError) {
-  var el = document.getElementById('sp-status');
-  if (!el) return;
-  el.textContent = msg;
-  el.style.color = isError ? '#F07080' : 'rgba(255,255,255,0.4)';
-}
-
-async function fetchNotes() {
-  var cfg = getScratchpadConfig();
-  if (!cfg.url || !cfg.token) {
-    var raw = localStorage.getItem('pm-scratchpad-local');
-    spNotes = raw ? JSON.parse(raw) : [];
-    renderNotes();
-    setSpStatus('Local-only - focus the input to connect Worker');
-    return;
-  }
-  setSpStatus('Syncing...');
-  try {
-    var res = await fetch(cfg.url + '/', { headers: { 'Authorization': 'Bearer ' + cfg.token } });
-    if (res.status === 401) throw new Error('unauthorized - token wrong');
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    var data = await res.json();
-    spNotes = Array.isArray(data.notes) ? data.notes : [];
-    renderNotes();
-    setSpStatus('Synced');
-  } catch(e) {
-    var raw = localStorage.getItem('pm-scratchpad-local');
-    spNotes = raw ? JSON.parse(raw) : [];
-    renderNotes();
-    setSpStatus('Sync failed (' + e.message + ') - using local copy', true);
-  }
-}
-
-async function saveNotes() {
-  try { localStorage.setItem('pm-scratchpad-local', JSON.stringify(spNotes)); } catch(_){}
-  var cfg = getScratchpadConfig();
-  if (!cfg.url || !cfg.token) {
-    setSpStatus('Saved locally - focus the input to connect Worker');
-    return;
-  }
-  if (spSaving) return;
-  spSaving = true;
-  setSpStatus('Saving...');
-  try {
-    var res = await fetch(cfg.url + '/', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + cfg.token },
-      body: JSON.stringify({ notes: spNotes })
-    });
-    if (res.status === 401) throw new Error('unauthorized - token wrong');
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    setSpStatus('Saved');
-  } catch(e) {
-    setSpStatus('Save failed: ' + e.message + ' (kept locally)', true);
-  } finally {
-    spSaving = false;
-  }
-}
-
-async function addNote() {
-  var input = document.getElementById('sp-input');
-  var tag = document.getElementById('sp-tag').value;
-  var text = input.value.trim();
-  if (!text) { input.focus(); return; }
-  var now = new Date();
-  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  spNotes.unshift({
-    text: text, tag: tag,
-    time: now.getDate() + ' ' + months[now.getMonth()] + ', ' + now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0'),
-    done: false
-  });
-  input.value = ''; input.focus();
-  renderNotes();
-  await saveNotes();
-}
-
-async function deleteNote(idx) {
-  spNotes.splice(idx, 1);
-  renderNotes();
-  await saveNotes();
-}
-
-async function toggleDone(idx) {
-  spNotes[idx].done = !spNotes[idx].done;
-  renderNotes();
-  await saveNotes();
-}
-
-function spKeydown(e) { if (e.key === 'Enter') addNote(); }
-async function spOnFocus() {
-  var cfg = getScratchpadConfig();
-  if (cfg.url && cfg.token) return;
-  var ok = await scratchpadSetupPrompt();
-  if (ok) await fetchNotes();
-}
-// Shift-click the scratchpad header to re-prompt for URL + token
-document.addEventListener('click', function(e){
-  if (e.shiftKey && e.target.closest('#sp-toggle-btn')) {
-    e.preventDefault(); e.stopPropagation();
-    scratchpadSetupPrompt().then(function(ok){ if (ok) fetchNotes(); });
-  }
-}, true);
-
-function toggleScratchpad() {
-  spOpen = !spOpen;
-  document.getElementById('scratchpad-body').classList.toggle('open', spOpen);
-  document.getElementById('sp-toggle-icon').innerHTML = spOpen ? '&#9650; close' : '&#9660; open';
-  if (spOpen) fetchNotes();
-}
-
-// Load count on page load without opening the panel
-(function initScratchpad() {
-  var cfg = getScratchpadConfig();
-  if (!cfg.url || !cfg.token) {
-    try {
-      var raw = localStorage.getItem('pm-scratchpad-local');
-      var notes = raw ? JSON.parse(raw) : [];
-      spNotes = notes;
-      updateCount(notes);
-    } catch(_){ updateCount([]); }
-    return;
-  }
-  fetch(cfg.url + '/', { headers: { 'Authorization': 'Bearer ' + cfg.token } })
-    .then(function(r){ return r.ok ? r.json() : { notes: [] }; })
-    .then(function(data){
-      spNotes = Array.isArray(data.notes) ? data.notes : [];
-      updateCount(spNotes);
-    })
-    .catch(function(){ updateCount([]); });
-})();
-
 // ============================================================
 // PAGE INDEX
 // ============================================================
