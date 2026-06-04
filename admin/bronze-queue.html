@@ -57,7 +57,8 @@ body { font-family:var(--font-body); background:var(--sand); color:var(--text); 
 .card-grid a { color:var(--ocean); text-decoration:none; word-break:break-word; }
 .card-blurb { font-size:13.5px; color:var(--text); background:var(--sand); border-radius:8px; padding:11px 14px; margin-bottom:14px; line-height:1.6; }
 .card-actions { display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
-.sc-assign { display:flex; flex-direction:column; gap:5px; width:100%; max-width:360px; }
+.sc-assign-row { display:flex; gap:14px; flex-wrap:wrap; width:100%; }
+.sc-assign { display:flex; flex-direction:column; gap:5px; flex:1; min-width:220px; }
 .sc-assign-label { font-size:11px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted); }
 .sc-assign-label .req { color:var(--red); }
 .sc-select { width:100%; padding:9px 12px; border:1.5px solid var(--border); border-radius:8px; font-family:var(--font-body); font-size:13.5px; background:var(--white); color:var(--text); outline:none; }
@@ -153,11 +154,29 @@ function render(){
   });
 }
 
-function subcatOptions(cat, id){
-  var list = SUBCATS[cat] || (CAT_FALLBACK[cat] ? [CAT_FALLBACK[cat]] : []);
+// Categories, alphabetical by label
+var CAT_LIST = [
+  ['accommodation','Accommodation'], ['entertainment','Activities & Entertainment'],
+  ['food-drink','Food & Drink'], ['health','Health & Wellness'], ['default','Other'],
+  ['real-estate','Real Estate'], ['services','Services & Trades'], ['shopping','Shopping & Retail']
+];
+function categoryOptions(cat, id){
+  var opts = CAT_LIST.map(function(c){ return '<option value="'+c[0]+'"'+(c[0]===cat?' selected':'')+'>'+esc(c[1])+'</option>'; }).join('');
+  return '<select class="sc-select" id="cat-'+esc(id)+'" onchange="bzCatChange(\''+esc(id)+'\')">'+opts+'</select>';
+}
+function subcatListFor(cat){
+  var list = (SUBCATS[cat] || (CAT_FALLBACK[cat] ? [CAT_FALLBACK[cat]] : [])).slice();
+  list.sort(function(a,b){ return a.name.localeCompare(b.name); });   // A-Z
+  return list;
+}
+function subcatOptionsHtml(cat){
   var opts = '<option value="" disabled selected>Choose subcategory…</option>';
-  list.forEach(function(sc){ opts += '<option value="'+esc(sc.path)+'">'+esc(sc.name)+'</option>'; });
-  return '<select class="sc-select" id="sc-'+esc(id)+'">'+opts+'</select>';
+  subcatListFor(cat).forEach(function(sc){ opts += '<option value="'+esc(sc.path)+'">'+esc(sc.name)+'</option>'; });
+  return opts;
+}
+function bzCatChange(id){
+  var c = document.getElementById('cat-'+id), s = document.getElementById('sc-'+id);
+  if (c && s) s.innerHTML = subcatOptionsHtml(c.value);
 }
 
 function cardHtml(it){
@@ -165,8 +184,10 @@ function cardHtml(it){
   var web = it.website ? (/^https?:\/\//i.test(it.website)?it.website:'https://'+it.website) : '';
   var actions = '';
   if (status==='pending') {
-    actions = '<div class="sc-assign"><span class="sc-assign-label">Assign subcategory <span class="req">*</span></span>'
-            + subcatOptions(it.category, it.id) + '</div>'
+    actions = '<div class="sc-assign-row">'
+            + '<div class="sc-assign"><span class="sc-assign-label">Category <span class="req">*</span></span>' + categoryOptions(it.category, it.id) + '</div>'
+            + '<div class="sc-assign"><span class="sc-assign-label">Subcategory <span class="req">*</span></span><select class="sc-select" id="sc-'+esc(it.id)+'">' + subcatOptionsHtml(it.category) + '</select></div>'
+            + '</div>'
             + '<div class="sc-btns"><button class="btn btn-approve" id="ap-'+esc(it.id)+'">Approve &amp; publish</button>'
             + '<button class="btn btn-reject" id="rj-'+esc(it.id)+'">Reject</button></div>';
   } else if (status==='live') {
@@ -190,14 +211,16 @@ function cardHtml(it){
 }
 
 async function approve(id){
+  var catSel = document.getElementById('cat-'+id);
   var sel = document.getElementById('sc-'+id);
+  var category = catSel ? catSel.value : '';
   var subcatPath = sel ? sel.value : '';
   if (!subcatPath) { setStatus('Pick a subcategory before approving.', true); if (sel) sel.focus(); return; }
   var subcatName = sel.options[sel.selectedIndex].text;
   if (!confirm('Approve and publish under "'+subcatName+'"? This commits a live page to the site.')) return;
   setStatus('Publishing…');
   try {
-    var data = await api('/bronze-approve', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id, subcat_path:subcatPath, subcat_name:subcatName }) });
+    var data = await api('/bronze-approve', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id, category:category, subcat_path:subcatPath, subcat_name:subcatName }) });
     if (!data.ok) throw new Error(data.error || 'approve failed');
     var it = state.items.find(function(x){ return x.id===id; });
     if (it) it.status='live';

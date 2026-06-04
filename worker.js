@@ -283,6 +283,7 @@ export default {
         const id = (body.id || '').trim();
         const subcatPath = bronzeSanitise(body.subcat_path).slice(0, 80);
         const subcatName = bronzeSanitise(body.subcat_name).slice(0, 60);
+        const category = bronzeSanitise(body.category).slice(0, 30);
         if (!id) return bronzeJSON({ ok: false, error: 'missing id' }, 400);
         if (!subcatPath) return bronzeJSON({ ok: false, error: 'subcategory not assigned' }, 400);
         const token = await getServiceAccountToken(BRONZE.saEmail, env.GOOGLE_SERVICE_ACCOUNT_KEY, 'https://www.googleapis.com/auth/spreadsheets');
@@ -293,6 +294,7 @@ export default {
         if (rec.status === 'live') return bronzeJSON({ ok: false, error: 'already live', url: `/listings/${rec.slug}.html` }, 409);
         rec.subcat_path = subcatPath;
         rec.subcat_name = subcatName || rec.subcategory;
+        if (category) rec.category = category;
 
         const tplResp = await fetch(BRONZE.templateUrl);
         if (!tplResp.ok) return bronzeJSON({ ok: false, error: 'template fetch failed' }, 502);
@@ -312,6 +314,7 @@ export default {
           method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` },
           body: JSON.stringify({ valueInputOption: 'USER_ENTERED', data: [
             { range: `${BRONZE.tab}!C${idx + 1}`, values: [['live']] },
+            { range: `${BRONZE.tab}!E${idx + 1}`, values: [[rec.category]] },
             { range: `${BRONZE.tab}!N${idx + 1}:O${idx + 1}`, values: [[rec.subcat_path, rec.subcat_name]] },
           ] }),
         });
