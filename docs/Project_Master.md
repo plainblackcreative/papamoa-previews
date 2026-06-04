@@ -54,7 +54,7 @@ Source of truth: this document, §3 below. (Earlier `docs/pricing-master.html` w
 |---------|-------|-------|
 | Gold Listing | $1,199+gst/yr | 1 logo + up to 9 hero images (gallery). Annual subscription. Top of ladder. |
 | Silver Listing | $599+gst/yr | Logo only (1 image). Annual subscription. |
-| Bronze (Basic) | **Free** | **Locked 2026-06-04.** Free self-serve listing, auto-publishes *pending admin approval*. **Includes:** business name, category, phone, website link, location/map + a 1-2 line blurb. **Excludes** (Silver+ only): logo, photo gallery, editorial write-up, rich schema. The lead-gen tier (indexable page + warm upsell hook). Resolves §17.15. Not the dead $99 Bronze. |
+| Bronze (Basic) | **Free** | **Locked 2026-06-04.** Free self-serve listing, auto-publishes *pending admin approval*. **Surfaces as an info-card** on the assigned sub-category page (NOT a dedicated page — Silver/Gold structural difference, locked session 7 extended; see §8.2). **Includes:** business name, category, phone, website link, location/map + a 1-2 line blurb (rendered inline + in the "More info" lightbox). **Excludes** (Silver+ only): your own listing page, logo, photo gallery, editorial write-up, rich schema. The lead-gen tier (card on the page + warm upsell hook). Resolves §17.15. Not the dead $99 Bronze. |
 | Spotlight / Ad Spots | Included perk (Phase 1) | **Phase 1:** ad/spotlight slots scattered site-wide are **claimable by any Silver or Gold listing** (no separate charge). The self-serve, duration-based purchase model (1 / 3 / 6 / 12 mo, impressions shown) is a later evolution — see §17.11. |
 | Extra Subcategory Spotlight | $199+gst/yr each | Gold only. First Spotlight included with Gold. |
 | Featured Agent Position | Bespoke | Not published. Conversation-first. |
@@ -457,63 +457,61 @@ Gold = "Gold Listing" star badge · Silver = "Silver Listing" diamond badge · B
 #### Known divergence (not blocking the lock)
 The Gold template configures content via ALLCAPS body tokens + `PHOTOS`/`faqs`; Silver via ALLCAPS tokens + a `BUSINESS{}` object. Both share the same core field set above. Unifying them into one shared config object is an **optional later refactor**, explicitly out of scope for this spec lock.
 
-### 8.2 Bronze self-serve auto-create — build architecture (LOCKED 2026-06-04, session 5)
+### 8.2 Bronze self-serve auto-create — build architecture (LOCKED 2026-06-04)
 
-Goal: a visitor creates a free Bronze listing themselves; it **auto-publishes pending admin approval** (also answers Carwyn Q#7 on content moderation). The submission also captures a lead for Silver/Gold nurture (§18). Bronze content fields per the §8.1 Bronze row.
+**Model: Bronze is a CARD, not a page.** Locked session 7 extended, 2026-06-04. Jay's call.
 
-**Architecture (locked):**
-- **Publish = static page committed via the GitHub Contents API.** On approval, a Worker renders the Bronze HTML from `listing-bronze-template.html` and commits it to `/listings/SLUG.html`; GitHub Pages rebuilds and it goes live. A real indexable page — that is Bronze's whole value (§3).
-- **Queue + moderation store = a Google Sheet** (reuses the existing `/sheets` Worker proxy; matches the locked §17.12 CRM direction). One sheet is both the moderation queue and the lead-gen funnel source.
-- **Build a lean v1 first**, then automate/polish.
+A visitor creates a free Bronze listing themselves; on operator approval it **surfaces as an info-card** on the assigned sub-category page (rendered by `nav.js` from the worker's `/bronze-public` endpoint). **No `/listings/<slug>.html` page is generated for Bronze.** Silver/Gold remain the only tiers that get their own dedicated listing page; this is the structural ladder difference between them.
 
-**Data flow:**
-1. Visitor fills the Create-Bronze form, sees a preview, confirms.
-2. POST to a Worker route (`/bronze-submit`) → honeypot + per-IP rate-limit + sanitise → append a row to the Sheet with status `pending` → email the operator (Resend, via pb-forms pattern).
-3. Operator opens the moderation queue (admin page), previews, clicks Approve (or Reject).
-4. Token-gated Worker route (`/bronze-approve`) reads the row → renders the bronze template → commits `/listings/SLUG.html` via GitHub API → sets the Sheet row to `live`. Reject → `rejected`.
-5. The live listing surfaces as a **plain directory card** on its subcategory page (no tier label, per §8).
+#### Why card-not-page (decision rationale)
 
-**Components + who builds:**
+- **Coherent sales ladder.** Silver/Gold = you HAVE a page on the directory. Bronze = you APPEAR on the directory. Shape change, not tier downgrade. Easier upsell from Bronze to Silver.
+- **SEO/AEO safer at scale.** Hundreds of thin auto-generated Bronze pages (5 fields each) is exactly the pattern Google flags as thin-content auto-generation. AI search engines cite the sub-cat page that aggregates many Bronzes ("plumbers in Pāpāmoa") rather than any individual entry. Data enriching existing high-quality pages > new weak pages.
+- **Lower maintenance surface.** No `listing-bronze-template.html`, no GitHub-Contents-API commit logic per approval, no `/listings/<slug>.html` URL space, no auto-publish ordering.
 
-| Piece | Owner | Notes |
-|---|---|---|
-| `listing-bronze-template.html` | Claude | Minimal page: §8.1 Bronze + §10 bar, `LocalBusiness` schema, **no tier label**, no logo/gallery/FAQ |
-| Create-Bronze form + preview/confirm | Claude | Dedicated page; the hub's Bronze CTA points here |
-| Worker routes `/bronze-submit` + `/bronze-approve` | Claude writes the code; **Jay deploys** | |
-| Admin moderation queue page | Claude | Build on `admin/confirm-listing.html` if usable |
-| Subcategory-page surfacing of Bronze cards | Claude | |
-| **GitHub fine-scoped PAT (contents:write)** as a Worker secret | **Jay** | Required for commit-on-approve |
-| **Google Sheet + sheet id / range / write access** | **Jay** | Queue + funnel |
-| **Worker deploy + secrets** | **Jay** | |
+#### Architecture
 
-**Anti-abuse:** honeypot (existing pb-forms pattern) + per-IP rate-limit; **admin approval is the backstop — nothing auto-publishes without it.**
+- **Source of truth:** the Google Sheet `Papamoa.info Bronze Listings` (id `11sn0WgZaJwbsEG3Kqjpb-mWmiKkiVQ8LgGw_SAMDIrw`). Columns: `id | ts | status | name | category | subcategory | address | phone | website | email | blurb | slug | url | subcat_path | subcat_name`.
+- **Public read:** `/bronze-public?subcat=<cat>/<slug>` (cached, 5min TTL) returns `{ ok, items: [...] }` of live Bronze rows for that sub-cat. Public-safe fields only (name, subcategory, address, phone, website, blurb, slug). Email is never exposed publicly.
+- **Card render:** `nav.js` detects sub-cat pages, fetches `/bronze-public`, prepends full info-cards into `.ghost-grid` (name + address pin + blurb + phone/website icon row + "More info →" button). Click "More info" opens a lightbox (modal — same overlay/modal shell as the contact modal) with the full record + a Silver/Gold upsell footer link.
+- **Submit flow:** `sales/create-bronze-listing.html` → `/bronze-submit` (public POST, honeypot + per-IP rate-limit + sanitise) → appends pending row to Sheet → emails operator (if `RESEND_API_KEY` set).
+- **Moderation:** `admin/bronze-queue.html` → operator assigns Category + Subcategory from A-Z dropdowns → `/bronze-approve` (admin-token-gated) marks the row `live`, writes the chosen category + `subcat_path`/`subcat_name` back to the Sheet, invalidates the `/bronze-public` cache for that sub-cat, and emails the owner the "card is live + upgrade nudge" first touch.
 
-**Lean v1 sequence:**
-1. `listing-bronze-template.html` — *infra-free, build now.*
-2. Create-Bronze form + preview — *infra-free, build now (POST contract defined).*
-3. `/bronze-submit` route + Sheet append + operator email — *needs Jay's Sheet + Worker.*
-4. Admin moderation queue + `/bronze-approve` commit-on-approve — *needs Jay's GitHub PAT + Worker.*
-5. Subcategory surfacing + lead-funnel first touch. Backend DEPLOYED + LIVE; front-end subcat-section design locked, build pending (subcat structural pass).
+#### Worker routes (`worker.js`, `papamoa-claude-proxy`)
 
-Steps 1–2 build with no infra; 3–5 are gated on Jay provisioning the GitHub PAT, the Sheet, and the Worker deploy.
+| Route | Method | Auth | Purpose |
+|---|---|---|---|
+| `/bronze-submit` | POST | public (honeypot + rate-limit) | Append pending row |
+| `/bronze-public` | GET | public, cached 5min | Card data per sub-cat |
+| `/bronze-list` | GET | `BRONZE_ADMIN_TOKEN` | Admin queue rows |
+| `/bronze-approve` | POST | `BRONZE_ADMIN_TOKEN` | Mark live + cache invalidate + welcome email |
+| `/bronze-reject` | POST | `BRONZE_ADMIN_TOKEN` | Mark rejected |
 
-#### v1 deploy checklist (steps ③④ code is built — `worker.js` routes + `admin/bronze-queue.html`)
+#### Secrets (already deployed on `papamoa-claude-proxy`)
 
-The Worker routes live in **`worker.js`** (the `papamoa-claude-proxy` worker) reusing its existing service-account Sheets pattern. Routes added: `/bronze-submit` (public POST), `/bronze-public` (public GET, cached - powers category-page cards), `/bronze-list` (admin GET), `/bronze-approve` (admin POST), `/bronze-reject` (admin POST). Admin routes auth via `?key=BRONZE_ADMIN_TOKEN`. To go live:
+- `GOOGLE_SERVICE_ACCOUNT_KEY` — Sheets API (still needed)
+- `BRONZE_ADMIN_TOKEN` — admin route auth (still needed)
+- `RESEND_API_KEY` — owner welcome email (optional)
+- ~~`GITHUB_TOKEN`~~ — **no longer needed.** Worker no longer commits HTML pages. Jay: feel free to revoke the `papamoa-bronze-worker` fine-grained PAT after the next worker deploy.
 
-1. **Google Sheet.** Create a sheet; add a tab named **`Bronze Listings`** with header row: `id | ts | status | business_name | category | subcategory | address | phone | website | email | blurb | slug | url`. Share it as **Editor** with the service account `papamoa-sheets-writer@papamoa-info.iam.gserviceaccount.com`. Put its id in `worker.js` → `BRONZE.sheetId` (replace `<<SET_BRONZE_SHEET_ID>>`).
-2. **GitHub PAT.** Create a fine-grained token scoped to `plainblackcreative/papamoa-previews`, **Contents: Read and write**. Set as a Worker secret: `wrangler secret put GITHUB_TOKEN`.
-3. **Admin token.** `wrangler secret put BRONZE_ADMIN_TOKEN` (any long random string — used to log into `admin/bronze-queue.html`).
-4. **Operator email (optional).** `wrangler secret put RESEND_API_KEY` to email the operator on each submission (skipped if unset; the Sheet/queue still works). `GOOGLE_SERVICE_ACCOUNT_KEY` is already set.
-5. **Deploy.** `wrangler deploy`.
-6. **Point the form at the route.** In `sales/create-bronze-listing.html`, change `SUBMIT_URL` from the pb-forms endpoint to `https://papamoa-claude-proxy.jkbrownnz.workers.dev/bronze-submit`.
-7. **Moderate.** Open `admin/bronze-queue.html`, enter `BRONZE_ADMIN_TOKEN`, approve → commits `/listings/SLUG.html` (Pages rebuilds in ~1 min).
+#### What was deleted (Bronze-as-card pass, session 7 extended)
 
-**Notes / v1 limitations:** submit values are sanitised (strips `< > { } " \``) so token substitution is safe in HTML + JSON-LD contexts; free-text subcategory maps to the category landing page for breadcrumb/related links (admin can refine the published file); per-IP throttle is best-effort via the cache API (KV/Durable Object would be sturdier); approval renders from the live `listing-bronze-template.html` on GitHub raw. **Untested end-to-end** — pending the Sheet + PAT + deploy above.
+- `listing-bronze-template.html` (15KB Mustache-style template) — retired.
+- `worker.js` helpers `bronzeRender()`, `bronzeB64Utf8()`, `BRONZE_CATEGORY` map — retired.
+- `worker.js` `/bronze-approve` GitHub Contents API commit logic — retired.
+- BRONZE config: `ghOwner`, `ghRepo`, `ghBranch`, `templateUrl` fields — retired.
+- `admin/bronze-queue.html` instruction box "publishes a real static page to /listings/SLUG.html via a commit" → rewritten to reflect the card model.
+- `admin/bronze-queue.html` live-row "Live: /listings/X.html →" link → repointed to `/categories/<subcat_path>.html` (where the card now appears).
 
-**⑤ DEPLOYED + LIVE (session 5, 2026-06-04).** The full pipeline runs in production: visitor submits via `create-bronze-listing.html` → `/bronze-submit` appends a pending row to the live "Papamoa.info Bronze Listings" Sheet → operator opens `admin/bronze-queue.html`, **assigns Category + Subcategory** from A-Z dropdowns (the visitor's free-text "what you do" is just a hint) → `/bronze-approve` renders the page with the correct breadcrumb, commits `/listings/SLUG.html`, stores `subcat_path`/`subcat_name` (Sheet cols N/O) + the chosen category (col E), and emails the owner the "live + upgrade" first touch. Verified end-to-end. Worker version 6e8babdf; secrets `GITHUB_TOKEN` + `BRONZE_ADMIN_TOKEN` set; `GOOGLE_SERVICE_ACCOUNT_KEY` reused; `RESEND_API_KEY` not set yet (emails skipped, loop still works).
+#### Deploy
 
-**Front-end surfacing — INJECTOR SHIPPED (2026-06-04); full structural pass still pending.** The first attempt (a separate "More Pāpāmoa businesses" band on the 5 main category pages) was **removed** — wrong shape. **Shipped:** `nav.js` now injects live Bronze listings *inside* each subcategory page's existing `.ghost-grid` ("More [subcat]" section) as ghost-card-style cards (name + "View listing →" to the listing, **no "Claim listing" link**), prepended before the placeholder ghosts; fed by `/bronze-public?subcat=<cat>/<slug>` (which now also returns `blurb`); no-op on landings / pages without a grid. Proven end-to-end on the Plumbers page. **Still pending (the structural pass):** the Gold/Silver full-width tiers above it, the empty-state "claim this spot / add your business" card for subcats with no grid/listings, and rolling the section onto every subcat page (only ~13 have a `.ghost-grid` today). **Locked design (Jay, 2026-06-04):** each **subcategory** page is a Gold (full-width) → Silver (full-width) → **Bronze (small cards)** stack, where the Bronze tier IS the existing "More [subcat] in Pāpāmoa" section. Bronze cards are fed dynamically from `/bronze-public?subcat=<cat>/<slug>` (exact match on `subcat_path`), have **no "Claim listing" link**, and sit above the funnel CTA ("Are you a Pāpāmoa <subcat>? add your free listing"). Keep the current static placeholder *ghosts* for now; when a subcat has nothing, show a single **"Claim this spot / add your business"** placeholder card. (Long-term: drop the fake ghosts entirely.) **Reality to handle:** the "More [subcat]" `ghost-grid` section exists on only ~13 subcat pages today, the ghost cards carry Claim-listing links, there are no real Gold/Silver tiers on subcat pages yet, and subcat pages are inconsistent (handoff: pending polish). So this is a **sizable structural pass across the subcat pages**, overlapping the §18 subcat-polish task — to be scoped/built as its own effort. The `/bronze-public` route, `subcat_path` data model, and `assets/bronze-subcats.json` map are all in place to feed it.
+The worker source is `worker.js` at the repo root. After this commit, **Jay needs to run `wrangler deploy` from the repo root** to update production. Until that deploy, the deployed worker continues writing pages, so:
+
+- Any Bronze approval that happens between now and deploy will produce a stale `/listings/<slug>.html` page. Fine — these pages are still valid HTML and will resolve. After deploy they stop being generated.
+- The new card rendering in `nav.js` works against the existing `/bronze-public` data shape (no breaking changes there), so it ships as soon as Pages rebuilds — no deploy dependency.
+- The new `admin/bronze-queue.html` copy is purely descriptive, ships immediately, no deploy dependency.
+
+After Jay deploys: `GITHUB_TOKEN` secret can be revoked, `papamoa-bronze-worker` fine-grained PAT can be deleted in GitHub settings.
 
 ---
 
@@ -806,7 +804,7 @@ Why this beats true monthly billing:
 **Decision: Bronze = Free, locked.** Jay's position carried — the ladder is **Gold | Silver | Bronze** with Bronze a free, self-serve, auto-publish-pending-approval lead-gen tier (now in §3). Still to communicate to Carwyn in the reply (the "no free listings" pushback, framed on lead-gen / SEO / funnel value). Original rationale kept below for the reply.
 
 
-Jay wants a **free Bronze (Basic) tier** as the bottom of the ladder: **Gold | Silver | Bronze**. Carwyn's brief opposed free listings. Jay's argument: **Bronze is the best lead-gen opportunity** — let site visitors self-create a free Basic listing, which feeds an **automated lead-gen funnel**, and *more listings = more leads, more SEO surface, more visibility* (every free listing is an indexable page + a warm upsell target for Silver/Gold).
+Jay wants a **free Bronze (Basic) tier** as the bottom of the ladder: **Gold | Silver | Bronze**. Carwyn's brief opposed free listings. Jay's argument: **Bronze is the best lead-gen opportunity** — let site visitors self-create a free Basic listing, which feeds an **automated lead-gen funnel**, and *more listings = more leads, more SEO surface, more visibility* (every free listing surfaces as a card on the sub-cat page enriching that page's content + a warm upsell target for Silver/Gold). *(Note: Bronze model later locked as card-not-page, session 7 extended -- see §8.2 for the SEO/AEO reasoning behind the structural difference.)*
 
 Conflicts to resolve:
 - **§3** locked the paid Silver/Gold model and the Dead Offers list killed "Bronze" as a *paid* product. A *free* Bronze is a new, different thing (lead-gen, not revenue) — needs an explicit §3 addition, not just a price.

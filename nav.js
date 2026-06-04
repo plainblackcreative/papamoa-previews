@@ -184,13 +184,37 @@
     '.pnf-more-section .section{margin-bottom:36px;}',
     '.pnf-more-section .section-title{font-family:\'Playfair Display\',serif;font-size:1.15rem;font-weight:700;color:var(--navy,#243B59);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border,#DDE5EE);}',
     '.ghost-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:16px;}',
-    '.ghost-card{background:#fff;border:1px solid var(--border,#DDE5EE);border-radius:9px;padding:14px 16px;}',
+    '.ghost-card{background:#fff;border:1px solid var(--border,#DDE5EE);border-radius:9px;padding:14px 16px;display:flex;flex-direction:column;}',
     '.ghost-card.gc-empty{display:block;border-style:dashed;border-color:rgba(53,159,232,.3);background:rgba(53,159,232,.03);text-align:center;padding:20px 16px;}',
-    '.gc-name{font-family:\'Playfair Display\',serif;font-size:.9rem;font-weight:700;color:var(--navy,#243B59);margin-bottom:2px;}',
-    '.gc-sub{font-size:.7rem;color:var(--muted,#607080);margin-bottom:6px;}',
+    '.gc-name{font-family:\'Playfair Display\',serif;font-size:.95rem;font-weight:700;color:var(--navy,#243B59);margin-bottom:3px;line-height:1.2;}',
+    '.gc-sub{font-size:.7rem;color:var(--muted,#607080);margin-bottom:8px;display:flex;align-items:center;gap:4px;}',
     '.gc-desc{font-size:.78rem;color:var(--muted,#607080);line-height:1.55;margin-bottom:10px;}',
     '.gc-cta{font-size:.72rem;font-weight:700;color:var(--blue,#359FE8);}',
     '.gc-cta:hover{text-decoration:underline;}',
+    // ── BRONZE-AS-CARD enrichment (Project_Master §8.2 locked 2026-06-04) ──
+    // Bronze listings render fully inline in the sub-cat .ghost-grid (no separate page).
+    // The 'More info' button opens the pnf-bz-modal lightbox with the full record.
+    '.pnf-bz-live{border-color:rgba(53,159,232,.35);background:linear-gradient(135deg,#fff,#F8FCFF);}',
+    '.pnf-bz-meta{display:flex;flex-direction:column;gap:5px;font-size:.74rem;color:var(--text,#1A2832);line-height:1.4;margin-bottom:10px;}',
+    '.pnf-bz-meta a{color:var(--ocean,#1B6B7D);text-decoration:none;display:inline-flex;align-items:center;gap:5px;}',
+    '.pnf-bz-meta a:hover{text-decoration:underline;}',
+    '.pnf-bz-meta .pnf-i{width:0.85em;height:0.85em;flex-shrink:0;}',
+    '.pnf-bz-more{margin-top:auto;background:rgba(53,159,232,.08);border:1px solid rgba(53,159,232,.25);color:var(--blue,#359FE8);font-family:\'Figtree\',sans-serif;font-size:.72rem;font-weight:700;padding:6px 12px;border-radius:5px;cursor:pointer;align-self:flex-start;transition:background .15s;}',
+    '.pnf-bz-more:hover{background:rgba(53,159,232,.16);}',
+    // Lightbox (uses the same overlay/modal shell as the contact modal)
+    '.pnf-bz-modal h2{font-family:var(--pnf-display);font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.2;}',
+    '.pnf-bz-modal .pnf-bz-modal-eyebrow{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:7px;}',
+    '.pnf-bz-modal .pnf-bz-modal-sub{font-size:12.5px;color:rgba(255,255,255,.55);margin-top:4px;}',
+    '.pnf-bz-modal-body{padding:24px 28px 26px;}',
+    '.pnf-bz-blurb{font-size:14px;color:var(--text,#1A2832);line-height:1.7;margin-bottom:18px;}',
+    '.pnf-bz-contact{border-top:1px solid var(--border,#DDE5EE);padding-top:16px;display:flex;flex-direction:column;gap:10px;}',
+    '.pnf-bz-ci{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--text,#1A2832);line-height:1.5;}',
+    '.pnf-bz-ci .pnf-i{color:var(--ocean,#1B6B7D);width:1.05em;height:1.05em;flex-shrink:0;margin-top:1px;}',
+    '.pnf-bz-ci a{color:var(--ocean,#1B6B7D);text-decoration:none;font-weight:600;}',
+    '.pnf-bz-ci a:hover{text-decoration:underline;}',
+    '.pnf-bz-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--border,#DDE5EE);font-size:12px;color:var(--muted,#607080);line-height:1.55;font-style:italic;}',
+    '.pnf-bz-foot a{color:var(--ocean,#1B6B7D);font-weight:600;text-decoration:none;}',
+    '.pnf-bz-foot a:hover{text-decoration:underline;}',
     '.pnf-more-cta{background:var(--navy,#243B59);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}',
     '.pnf-more-cta-body{flex:1;}',
     '.pnf-more-cta-body h3{font-family:\'Playfair Display\',serif;font-size:1.05rem;color:#fff;margin-bottom:4px;}',
@@ -516,39 +540,117 @@
 })();
 
 
-/* ── Bronze free listings into the subcategory "More [subcat]" section (Project_Master §8.2 step 5) ──
-   Self-contained, isolated. On a subcategory page that has a .ghost-grid, fetches the live free
-   Bronze listings for that subcat and prepends them as ghost-card-style cards (name links to the
-   listing, NO "Claim listing" link). Placeholder ghosts are left in place. No-op otherwise. */
+/* ── Bronze free listings into the subcategory "More [subcat]" section ──
+   Bronze-as-card model locked 2026-06-04 (Project_Master §8.2). On a sub-cat page
+   that has a .ghost-grid, fetches /bronze-public for that sub-cat and renders the
+   live free listings as full info-cards (name + address + phone + website + blurb
+   + "More info" button that opens the pnf-bz-modal lightbox). No /listings/<slug>.html
+   pages exist for Bronze under this model. Placeholder ghosts left in place. */
 (function () {
   var WORKER = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
-  var BASE = '/papamoa-previews';
   var m = location.pathname.match(/\/categories\/([a-z0-9-]+)\/([a-z0-9-]+)(?:\.html)?$/);
   if (!m) return;
   var LANDINGS = { 'accommodation':1, 'food-and-drink':1, 'services':1, 'shopping':1, 'entertainment':1 };
   if (LANDINGS[m[2]]) return;
   var subcatPath = m[1] + '/' + m[2];
+  var BZ = []; // module-scope cache so the lightbox can look up by index
+
   function esc(s) { var x = document.createElement('div'); x.textContent = (s == null ? '' : s); return x.innerHTML; }
+  function normUrl(u) { u = String(u || '').trim(); if (!u) return ''; return /^https?:\/\//i.test(u) ? u : 'https://' + u; }
+  function displayUrl(u) { return u.replace(/^https?:\/\//, '').replace(/\/$/, ''); }
+
+  var ICONS = {
+    pin:   '<svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+    phone: '<svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+    web:   '<svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>'
+  };
+
   function go() {
     var grid = document.querySelector('.ghost-grid');
     if (!grid) return;
     fetch(WORKER + '/bronze-public?subcat=' + encodeURIComponent(subcatPath))
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (d && d.ok && d.items && d.items.length) inject(grid, d.items); })
+      .then(function (d) {
+        if (d && d.ok && d.items && d.items.length) {
+          BZ = d.items;
+          inject(grid, BZ);
+          ensureModal();
+        }
+      })
       .catch(function () {});
   }
+
   function inject(grid, items) {
-    var pin = '<svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
-    var html = items.map(function (it) {
-      var href = BASE + '/listings/' + esc(it.slug) + '.html';
+    var html = items.map(function (it, idx) {
+      var phone = String(it.phone || '').trim();
+      var website = normUrl(it.website);
+      var rows = [];
+      if (phone)   rows.push('<a href="tel:' + esc(phone.replace(/[^0-9+]/g, '')) + '">' + ICONS.phone + ' ' + esc(phone) + '</a>');
+      if (website) rows.push('<a href="' + esc(website) + '" target="_blank" rel="noopener">' + ICONS.web + ' ' + esc(displayUrl(website)) + '</a>');
       return '<div class="ghost-card pnf-bz-live">'
-        + '<a class="gc-name" href="' + href + '" style="text-decoration:none;color:inherit">' + esc(it.name) + '</a>'
-        + '<div class="gc-sub">' + pin + ' ' + esc(it.address || 'Pāpāmoa') + '</div>'
+        + '<div class="gc-name">' + esc(it.name) + '</div>'
+        + '<div class="gc-sub">' + ICONS.pin + esc(it.address || 'Pāpāmoa') + '</div>'
         + (it.blurb ? '<p class="gc-desc">' + esc(it.blurb) + '</p>' : '')
-        + '<a href="' + href + '" class="gc-cta">View listing &rarr;</a>'
+        + (rows.length ? '<div class="pnf-bz-meta">' + rows.join('') + '</div>' : '')
+        + '<button type="button" class="pnf-bz-more" onclick="pnfBzOpen(' + idx + ')">More info &rarr;</button>'
         + '</div>';
     }).join('');
-    grid.insertAdjacentHTML('afterbegin', html);   // real listings before the placeholder ghosts
+    grid.insertAdjacentHTML('afterbegin', html);
   }
+
+  // ── Lightbox -------------------------------------------------------------
+  function ensureModal() {
+    if (document.getElementById('pnf-bz-overlay')) return;
+    var wrap = document.createElement('div');
+    wrap.innerHTML =
+      '<div class="pnf-overlay" id="pnf-bz-overlay" onclick="pnfBzOverlayClick(event)">' +
+        '<div class="pnf-modal pnf-bz-modal" role="dialog" aria-label="Listing details">' +
+          '<div class="pnf-modal-head">' +
+            '<div>' +
+              '<div class="pnf-bz-modal-eyebrow" id="pnf-bz-eyebrow">Free listing &middot; Pāpāmoa</div>' +
+              '<h2 id="pnf-bz-name"></h2>' +
+              '<p class="pnf-bz-modal-sub" id="pnf-bz-sub"></p>' +
+            '</div>' +
+            '<button class="pnf-modal-close" onclick="pnfBzClose()" aria-label="Close">&times;</button>' +
+          '</div>' +
+          '<div class="pnf-bz-modal-body">' +
+            '<p class="pnf-bz-blurb" id="pnf-bz-blurb"></p>' +
+            '<div class="pnf-bz-contact" id="pnf-bz-contact"></div>' +
+            '<p class="pnf-bz-foot">This is a free Bronze listing on Papamoa.info. Business owners: want photos, a logo, an editorial write-up and your own dedicated page? <a href="/papamoa-previews/sales/list-with-us.html">See Silver &amp; Gold &rarr;</a></p>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(wrap.firstChild);
+
+    window.pnfBzOpen = function (idx) {
+      var it = BZ[idx]; if (!it) return;
+      document.getElementById('pnf-bz-name').textContent = it.name || '';
+      var subParts = [];
+      if (it.subcategory) subParts.push(it.subcategory);
+      if (it.address) subParts.push(it.address);
+      document.getElementById('pnf-bz-sub').textContent = subParts.join(' · ');
+      document.getElementById('pnf-bz-blurb').textContent = it.blurb || '';
+      var phone = String(it.phone || '').trim();
+      var website = normUrl(it.website);
+      var rows = [];
+      if (phone)       rows.push('<div class="pnf-bz-ci">' + ICONS.phone + '<span><a href="tel:' + esc(phone.replace(/[^0-9+]/g, '')) + '">' + esc(phone) + '</a></span></div>');
+      if (website)     rows.push('<div class="pnf-bz-ci">' + ICONS.web   + '<span><a href="' + esc(website) + '" target="_blank" rel="noopener">' + esc(displayUrl(website)) + '</a></span></div>');
+      if (it.address)  rows.push('<div class="pnf-bz-ci">' + ICONS.pin   + '<span><a href="https://maps.google.com/?q=' + encodeURIComponent(it.address + ', Papamoa, New Zealand') + '" target="_blank" rel="noopener">' + esc(it.address) + '</a></span></div>');
+      document.getElementById('pnf-bz-contact').innerHTML = rows.join('');
+      document.getElementById('pnf-bz-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    window.pnfBzClose = function () {
+      var ov = document.getElementById('pnf-bz-overlay'); if (ov) ov.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    window.pnfBzOverlayClick = function (e) {
+      if (e.target === document.getElementById('pnf-bz-overlay')) window.pnfBzClose();
+    };
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.getElementById('pnf-bz-overlay').classList.contains('open')) window.pnfBzClose();
+    });
+  }
+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();

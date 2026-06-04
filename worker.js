@@ -196,20 +196,26 @@ export default {
 
     // ══════════════════════════════════════════════════════════════════
     //  BRONZE SELF-SERVE LISTINGS (Project_Master §8.2)
-    //  Config below - Jay edits to match the provisioned Sheet + repo.
+    //  Model: Bronze is a CARD on the sub-cat page, NOT a separate /listings/<slug>.html
+    //  page. Locked 2026-06-04. Sheet is source of truth; /bronze-public returns the
+    //  card data; nav.js renders the cards into the sub-cat .ghost-grid.
+    //
     //  Secrets (wrangler secret put ...): GOOGLE_SERVICE_ACCOUNT_KEY (exists),
-    //  GITHUB_TOKEN (fine-scoped, contents:write on the repo), BRONZE_ADMIN_TOKEN,
-    //  RESEND_API_KEY (optional - operator email).
+    //  BRONZE_ADMIN_TOKEN, RESEND_API_KEY (optional - owner welcome email).
+    //  GITHUB_TOKEN is no longer needed -- the worker no longer commits to the repo
+    //  (this used to render listing-bronze-template.html and PUT it as
+    //  listings/<slug>.html via the GitHub Contents API; both gone now).
+    //  Jay: feel free to revoke the GITHUB_TOKEN secret + the papamoa-bronze-worker
+    //  fine-grained PAT after deploying this version.
     // ══════════════════════════════════════════════════════════════════
     const BRONZE = {
       sheetId:       '11sn0WgZaJwbsEG3Kqjpb-mWmiKkiVQ8LgGw_SAMDIrw',     // Google Sheet id (cols: id,ts,status,name,category,subcat,address,phone,website,email,blurb,slug,url)
       tab:           'Bronze Listings',             // tab name
       saEmail:       'papamoa-sheets-writer@papamoa-info.iam.gserviceaccount.com',
-      ghOwner:       'plainblackcreative',
-      ghRepo:        'papamoa-previews',
-      ghBranch:      'main',
-      templateUrl:   'https://raw.githubusercontent.com/plainblackcreative/papamoa-previews/main/listing-bronze-template.html',
       operatorEmail: 'info@plainblackcreative.com',
+      // Bronze is a card on the sub-cat page (Project_Master §8.2 -- "Bronze-as-card",
+      // locked 2026-06-04). The Sheet is source of truth; nav.js fetches /bronze-public
+      // to render the cards. No template render, no /listings/<slug>.html commits.
     };
     const bronzeJSON = (obj, status) => new Response(JSON.stringify(obj), { status: status || 200, headers: { 'Content-Type':'application/json', 'Access-Control-Allow-Origin':'*' } });
     const bronzeAuthed = (req) => {
@@ -275,7 +281,10 @@ export default {
       } catch (e) { return bronzeJSON({ ok: false, error: e.message }, 500); }
     }
 
-    // ── /bronze-approve (admin) ── render template -> commit /listings/SLUG.html -> mark live
+    // ── /bronze-approve (admin) ── mark Sheet row live + send owner welcome.
+    // Bronze is a CARD on the sub-cat page (rendered by nav.js from /bronze-public),
+    // NOT a separate /listings/SLUG.html page. No template fetch, no GitHub commit.
+    // Locked 2026-06-04 -- Project_Master §8.2 ("Bronze-as-card" model).
     if (url.pathname === '/bronze-approve' && request.method === 'POST') {
       if (!bronzeAuthed(request)) return bronzeJSON({ ok: false, error: 'unauthorized' }, 401);
       try {
@@ -291,24 +300,21 @@ export default {
         let idx = -1; for (let i = 1; i < rows.length; i++) { if ((rows[i][0] || '') === id) { idx = i; break; } }
         if (idx < 0) return bronzeJSON({ ok: false, error: 'id not found' }, 404);
         const rec = bronzeRowToObj(rows[idx]);
-        if (rec.status === 'live') return bronzeJSON({ ok: false, error: 'already live', url: `/listings/${rec.slug}.html` }, 409);
+        const subcatUrl = `https://papamoa.info/categories/${subcatPath}.html`;
+        if (rec.status === 'live') return bronzeJSON({ ok: false, error: 'already live', url: subcatUrl }, 409);
         rec.subcat_path = subcatPath;
         rec.subcat_name = subcatName || rec.subcategory;
         if (category) rec.category = category;
 
-        const tplResp = await fetch(BRONZE.templateUrl);
-        if (!tplResp.ok) return bronzeJSON({ ok: false, error: 'template fetch failed' }, 502);
-        const html = bronzeRender(await tplResp.text(), rec);
-
-        const path = `listings/${rec.slug}.html`;
-        const ghBase = `https://api.github.com/repos/${BRONZE.ghOwner}/${BRONZE.ghRepo}/contents/${path}`;
-        const ghHeaders = { 'Authorization':`Bearer ${env.GITHUB_TOKEN}`, 'Accept':'application/vnd.github+json', 'User-Agent':'papamoa-bronze-worker', 'Content-Type':'application/json' };
-        let sha; const exist = await fetch(`${ghBase}?ref=${BRONZE.ghBranch}`, { headers: ghHeaders });
-        if (exist.status === 200) sha = (await exist.json()).sha;
-        const commit = await fetch(ghBase, { method: 'PUT', headers: ghHeaders, body: JSON.stringify({
-          message: `bronze: publish listing ${rec.slug} (approved)`, content: bronzeB64Utf8(html), branch: BRONZE.ghBranch, ...(sha ? { sha } : {}),
-        }) });
-        if (!commit.ok) return bronzeJSON({ ok: false, error: 'github commit failed: ' + (await commit.text()).slice(0, 180) }, 502);
+        // Invalidate the /bronze-public cache for this sub-cat so the new listing
+        // appears on the next page load (cache TTL is 5 min otherwise).
+        try {
+          const cache = caches.default;
+          const cacheKey = new Request('https://papamoa-internal/bronze-public?cat=' + encodeURIComponent(rec.category || '') + '&subcat=' + encodeURIComponent(subcatPath));
+          await cache.delete(cacheKey);
+          // Also nuke the all-subcats variant just in case
+          await cache.delete(new Request('https://papamoa-internal/bronze-public?cat=&subcat=' + encodeURIComponent(subcatPath)));
+        } catch (_) {}
 
         await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values:batchUpdate`, {
           method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` },
@@ -318,17 +324,17 @@ export default {
             { range: `${BRONZE.tab}!N${idx + 1}:O${idx + 1}`, values: [[rec.subcat_path, rec.subcat_name]] },
           ] }),
         });
-        // Lead-funnel first touch: tell the owner it's live + nudge the upgrade (full Brevo nurture = Phase E).
+        // Lead-funnel first touch: tell the owner their card is live on the sub-cat page + nudge the upgrade.
         if (env.RESEND_API_KEY && rec.email) {
           const upUrl = `https://papamoa.info/sales/list-with-us.html?claim=${rec.slug}&biz=${encodeURIComponent(rec.business_name)}`;
           ctx.waitUntil(fetch('https://api.resend.com/emails', {
             method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${env.RESEND_API_KEY}` },
             body: JSON.stringify({ from: 'Papamoa.info <noreply@papamoa.info>', to: [rec.email],
               subject: `Your free Papamoa.info listing is live - ${rec.business_name}`,
-              text: `Kia ora,\n\nGood news - your free listing for ${rec.business_name} is now live on Papamoa.info:\nhttps://papamoa.info/listings/${rec.slug}.html\n\nWant photos, reviews, your logo and a full write-up so you stand out? Upgrade to a Silver or Gold listing any time:\n${upUrl}\n\nCheers,\nThe Papamoa.info team` }),
+              text: `Kia ora,\n\nGood news - your free listing for ${rec.business_name} is now live on Papamoa.info. Find your card on the ${rec.subcat_name || subcatName} sub-category page:\n${subcatUrl}\n\nLook for your business name in the "More ${rec.subcat_name || subcatName}" section. Locals searching for ${rec.subcat_name || subcatName} in Pāpāmoa will see your details there.\n\nWant your own dedicated page with photos, reviews, your logo and a full editorial write-up? Upgrade to a Silver or Gold listing any time:\n${upUrl}\n\nCheers,\nThe Papamoa.info team` }),
           }).catch(() => {}));
         }
-        return bronzeJSON({ ok: true, url: `/listings/${rec.slug}.html` });
+        return bronzeJSON({ ok: true, url: subcatUrl });
       } catch (e) { return bronzeJSON({ ok: false, error: e.message }, 500); }
     }
 
@@ -630,16 +636,6 @@ function bronzeSlugify(name) {
   return String(name).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
     .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) + '-papamoa';
 }
-const BRONZE_CATEGORY = {
-  'accommodation': { name: 'Accommodation', path: 'accommodation/accommodation' },
-  'food-drink':    { name: 'Food & Drink', path: 'food-drink/food-and-drink' },
-  'services':      { name: 'Services', path: 'services/services' },
-  'health':        { name: 'Health & Wellness', path: 'health/health-papamoa' },
-  'entertainment': { name: 'Activities & Entertainment', path: 'activities/entertainment' },
-  'shopping':      { name: 'Shopping', path: 'shops/shopping' },
-  'real-estate':   { name: 'Real Estate', path: 'community/real-estate' },
-  'default':       { name: 'Local Business', path: 'homepage' },
-};
 function bronzeRowToObj(row) {
   if (!row || !row[0]) return null;
   return { id: row[0], ts: row[1], status: row[2] || 'pending', business_name: row[3], category: row[4],
@@ -648,28 +644,4 @@ function bronzeRowToObj(row) {
 function bronzeNormaliseUrl(u) {
   u = String(u || '').trim(); if (!u) return '';
   return /^https?:\/\//i.test(u) ? u : 'https://' + u;
-}
-function bronzeRender(tpl, rec) {
-  tpl = tpl.replace(/<!--\s*╔[\s\S]*?╝[\s\S]*?-->\s*/, ''); // strip instruction box (╔...╝)
-  const cat = BRONZE_CATEGORY[rec.category] || BRONZE_CATEGORY['default'];
-  const phone = bronzeSanitise(rec.phone), website = bronzeNormaliseUrl(rec.website);
-  [['PHONE', !!phone], ['WEBSITE', !!website]].forEach(([n, keep]) => {
-    const re = new RegExp('<!--\\{\\{#' + n + '\\}\\}-->([\\s\\S]*?)<!--\\{\\{/' + n + '\\}\\}-->', 'g');
-    tpl = tpl.replace(re, keep ? '$1' : '');
-  });
-  const tokens = {
-    BUSINESS_NAME: rec.business_name, BUSINESS_NAME_ENC: encodeURIComponent(rec.business_name), SLUG: rec.slug,
-    META_DESC: (rec.business_name + ' - ' + rec.blurb).slice(0, 155),
-    CATEGORY_NAME: cat.name, CATEGORY_PATH: cat.path, SUBCAT_NAME: rec.subcat_name || rec.subcategory, SUBCAT_PATH: rec.subcat_path || cat.path,
-    BLURB: rec.blurb, PHONE_DIGITS: phone.replace(/[^0-9+]/g, ''), PHONE_DISPLAY: phone,
-    WEBSITE_URL: website, WEBSITE_DISPLAY: website.replace(/^https?:\/\//, '').replace(/\/$/, ''),
-    FULL_ADDRESS: rec.address, GOOGLE_MAPS_URL: 'https://maps.google.com/?q=' + encodeURIComponent(rec.address + ', Papamoa, New Zealand'),
-  };
-  Object.keys(tokens).forEach(k => { tpl = tpl.split('{{' + k + '}}').join(tokens[k]); });
-  return tpl;
-}
-function bronzeB64Utf8(str) {
-  const bytes = new TextEncoder().encode(str); let bin = '';
-  bytes.forEach(b => bin += String.fromCharCode(b));
-  return btoa(bin);
 }

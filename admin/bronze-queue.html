@@ -77,7 +77,7 @@ body { font-family:var(--font-body); background:var(--sand); color:var(--text); 
 
 <div class="wrap">
   <div class="note">
-    <strong>Moderation queue for free Bronze listings.</strong> Approve publishes a real static page to <code>/listings/SLUG.html</code> via a commit (allow ~1 minute for GitHub Pages to rebuild). Reject marks the row rejected. Nothing goes live without approval. Requires the admin token + the Bronze Worker deployed (Project_Master §8.2).
+    <strong>Moderation queue for free Bronze listings.</strong> Approve marks the row live and surfaces the listing as a card on the assigned sub-category page (rendered by nav.js from <code>/bronze-public</code>; takes effect on next page load once the worker cache is invalidated). Reject marks the row rejected. Nothing goes live without approval. Requires the admin token + the Bronze Worker deployed (Project_Master §8.2 -- Bronze-as-card model locked 2026-06-04).
   </div>
 
   <div class="auth">
@@ -191,7 +191,10 @@ function cardHtml(it){
             + '<div class="sc-btns"><button class="btn btn-approve" id="ap-'+esc(it.id)+'">Approve &amp; publish</button>'
             + '<button class="btn btn-reject" id="rj-'+esc(it.id)+'">Reject</button></div>';
   } else if (status==='live') {
-    actions = '<span class="live-url">Live: <a href="/papamoa-previews/listings/'+esc(it.slug)+'.html" target="_blank" rel="noopener">/listings/'+esc(it.slug)+'.html &rarr;</a></span>';
+    var subUrl = it.subcat_path ? ('/papamoa-previews/categories/'+esc(it.subcat_path)+'.html') : '';
+    actions = subUrl
+      ? '<span class="live-url">Live on <a href="'+subUrl+'" target="_blank" rel="noopener">'+esc(it.subcat_name||it.subcat_path||'sub-category')+' &rarr;</a></span>'
+      : '<span class="live-url">Live (sub-category not recorded)</span>';
   } else {
     actions = '<button class="btn btn-approve" id="ap-'+esc(it.id)+'">Approve anyway</button>';
   }
