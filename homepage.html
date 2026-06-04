@@ -344,6 +344,7 @@
     .hero-v2-bg { position:absolute; inset:0; overflow:hidden; background-image:linear-gradient(180deg,rgba(20,80,121,0) 0%,rgba(20,80,121,0.05) 60%,rgba(20,80,121,0.18) 100%),url('images/hero/papamoa-hero-afternoon.webp'); background-size:cover; background-position:center 45%; background-repeat:no-repeat; transition:background-image 0.6s ease-in-out; }
     .hero-v2-inner { position:relative; max-width:1200px; margin:0 auto; padding:60px 28px 110px; z-index:1; }
     .hero-v2 h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4.6vw,3.2rem); font-weight:700; color:#fff; line-height:1.08; margin-bottom:14px; max-width:680px; letter-spacing:-0.01em; text-shadow:0 2px 16px rgba(13,30,48,0.6), 0 1px 3px rgba(13,30,48,0.45); }
+    .hero-v2 h1 em { color:var(--green-deep); font-style:normal; }
     .hero-v2-desc { font-size:0.95rem; color:rgba(255,255,255,0.94); line-height:1.6; max-width:560px; margin-bottom:22px; font-weight:500; text-shadow:0 1px 4px rgba(13,30,48,0.6); }
     .hero-v2-prompt { display:block; font-family:'Figtree',sans-serif; font-size:1rem; font-weight:700; color:#fff; margin-bottom:10px; text-shadow:0 1px 4px rgba(13,30,48,0.6); }
     .hero-v2-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(100deg,rgba(13,30,48,0.78) 0%,rgba(13,30,48,0.55) 30%,rgba(13,30,48,0.25) 50%,rgba(13,30,48,0) 72%); pointer-events:none; }
@@ -360,7 +361,7 @@
     .hero-v2-search-btn:hover { background:#1a3a52; }
 
     /* Hero quick-search chips */
-    .hero-v2-chips { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; max-width:680px; }
+    .hero-v2-chips { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; max-width:780px; }
     .hero-v2-chip { display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,0.92); border:1px solid rgba(255,255,255,0.6); color:var(--body); font-family:'Figtree',sans-serif; font-size:0.94rem; font-weight:600; padding:8px 14px; border-radius:24px; cursor:pointer; text-decoration:none; transition:all 0.15s; box-shadow:0 2px 8px rgba(20,80,121,0.08); }
     .hero-v2-chip:hover { background:#fff; transform:translateY(-1px); box-shadow:0 4px 12px rgba(20,80,121,0.14); color:var(--navy); }
     .hero-v2-chip-icon { display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; color:var(--navy); }
@@ -435,7 +436,7 @@
     .flb-card-img { position:absolute; inset:0; background:var(--sand); }
     .flb-card-img img { width:100%; height:100%; object-fit:cover; display:block; }
     .flb-card-img::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(20,80,121,0) 50%,rgba(20,80,121,0.18) 100%); pointer-events:none; }
-    .flb-card-body { position:absolute; left:14px; right:14px; bottom:14px; background:rgba(255,255,255,0.78); backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); border:1px solid rgba(255,255,255,0.55); border-radius:11px; padding:14px 16px; display:flex; flex-direction:column; gap:5px; box-shadow:0 4px 20px rgba(20,80,121,0.16); }
+    .flb-card-body { position:absolute; left:14px; right:14px; bottom:14px; background:rgba(255,255,255,0.92); backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); border:1px solid rgba(255,255,255,0.55); border-radius:11px; padding:14px 16px; display:flex; flex-direction:column; gap:5px; box-shadow:0 4px 20px rgba(20,80,121,0.16); }
     .flb-card-body h3 { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--navy); margin:0; line-height:1.2; }
     .flb-card-cat { font-size:0.94rem; color:var(--muted); font-weight:700; margin:0; }
     .flb-card-cat .dot { color:var(--border); margin:0 5px; }
@@ -704,9 +705,14 @@
   <meta property="og:title" content="Pāpāmoa Local Directory - Businesses, Services &amp; Local Info">
   <meta property="og:description" content="Pāpāmoa's independent local directory. Listings written editorially - not by the businesses. Local guides kept current for residents and visitors.">
   <meta property="og:site_name" content="Papamoa.info">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://papamoa.info/images/og/papamoa-home-1200x630.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pāpāmoa Beach at golden hour — Papamoa.info local directory">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Pāpāmoa Local Directory - Businesses, Services &amp; Local Info">
   <meta name="twitter:description" content="Pāpāmoa's independent local directory - restaurants, trades, accommodation, community guides and local information.">
+  <meta name="twitter:image" content="https://papamoa.info/images/og/papamoa-home-1200x630.jpg">
 </head>
 <body data-nav="default">
 
@@ -717,7 +723,7 @@
 <div class="hero-v2">
   <div class="hero-v2-bg"></div>
   <div class="hero-v2-inner">
-    <h1>Discover Pāpāmoa,<br>from the locals who know it</h1>
+    <h1>Discover <em>Pāpāmoa</em>,<br>from the locals who know it</h1>
     <p class="hero-v2-desc">Your local guide to the best restaurants, trusted trades, accommodation and everything you need in Pāpāmoa.</p>
 
     <!-- SEARCH (primary action) -->
@@ -730,13 +736,14 @@
       <button class="hero-v2-search-btn" onclick="submitSearch()">Search</button>
     </div>
 
-    <!-- QUICK CHIPS - top 5 info/community pages -->
+    <!-- QUICK CHIPS - top 6 info/community pages -->
     <div class="hero-v2-chips" id="hero-quick-chips">
       <a href="/papamoa-previews/community/weather.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.95 12.65a4 4 0 0 0-5.93-4.13"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></svg></span>Weather</a>
       <a href="/papamoa-previews/community/surf-tides.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg></span>Surf &amp; Tides</a>
       <a href="/papamoa-previews/community/news-events.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span>What&rsquo;s On</a>
       <a href="/papamoa-previews/community/schools-papamoa.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>Schools</a>
       <a href="/papamoa-previews/community/rubbish-recycling-papamoa.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>Rubbish Day</a>
+      <a href="/papamoa-previews/community/dogs-papamoa.html" class="hero-v2-chip"><span class="hero-v2-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg></span>Dogs</a>
     </div>
   </div>
 
@@ -889,7 +896,6 @@
   <div class="wh-inner">
     <div class="wh-head">
       <h2>What&rsquo;s <em>happening</em> in Pāpāmoa</h2>
-      <a href="/papamoa-previews/community/news-events.html" class="wh-more">Full news &amp; events calendar →</a>
     </div>
     <p class="wh-sub">Recent local news and upcoming events from across the community.</p>
 
@@ -929,7 +935,7 @@
       <div class="wh-card">
         <div class="wh-card-head">
           <h3>Upcoming events</h3>
-          <a href="/papamoa-previews/community/news-events.html">Full calendar →</a>
+          <a href="/papamoa-previews/community/news-events.html#tab-upcoming">Full calendar →</a>
         </div>
         <div class="events-list">
           <a href="/papamoa-previews/community/aims-games.html" class="event-row">
@@ -1052,9 +1058,8 @@
         <h4>For Businesses</h4>
         <ul class="pnf-footer-links">
           <li><a href="/papamoa-previews/sales/list-with-us.html">List Your Business</a></li>
+          <li><a href="/papamoa-previews/sales/why-list.html">Why List?</a></li>
           <li><a href="/papamoa-previews/sales/spotlight-ads.html">Advertise</a></li>
-          <li><a href="/papamoa-previews/sales/spotlight-ads.html">Spotlight Options</a></li>
-          <li><a href="/papamoa-previews/sales/list-with-us.html">Update a Listing</a></li>
           <li><button onclick="pnfOpenContact()">Contact</button></li>
         </ul>
       </div>

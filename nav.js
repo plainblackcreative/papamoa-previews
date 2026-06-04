@@ -454,10 +454,10 @@
               '<input type="hidden" name="redirect" value="false">' +
               '<input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">' +
               '<div class="pnf-cf-row">' +
-                '<div><label>Your name *</label><input type="text" name="name" placeholder="Sarah" required></div>' +
-                '<div><label>Email *</label><input type="email" name="email" placeholder="you@email.com" required></div>' +
+                '<div><label for="pnf-cf-name">Your name *</label><input id="pnf-cf-name" type="text" name="name" placeholder="Sarah" required></div>' +
+                '<div><label for="pnf-cf-email">Email *</label><input id="pnf-cf-email" type="email" name="email" placeholder="you@email.com" required></div>' +
               '</div>' +
-              '<div><label>Enquiry type *</label>' +
+              '<div><label for="pnf-enquiry-type">Enquiry type *</label>' +
                 '<select name="enquiry_type" required id="pnf-enquiry-type">' +
                   '<option value="" disabled selected>Select a topic</option>' +
                   '<option value="General enquiry">General enquiry</option>' +
@@ -469,7 +469,7 @@
                   '<option value="Report an error">Report an error on the site</option>' +
                 '</select>' +
               '</div>' +
-              '<div><label>Message *</label><textarea name="message" placeholder="How can we help?" required></textarea></div>' +
+              '<div><label for="pnf-cf-message">Message *</label><textarea id="pnf-cf-message" name="message" placeholder="How can we help?" required></textarea></div>' +
               '<button type="submit" class="pnf-cf-submit" id="pnf-cf-btn">Send message &rarr;</button>' +
               '<p class="pnf-cf-fine">No spam &middot; We reply within one business day</p>' +
             '</form>' +
