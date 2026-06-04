@@ -1529,6 +1529,7 @@ body { font-family: var(--font-body); background: var(--sand); color: var(--text
         <input type="hidden" name="claim_slug" id="f-claim-slug" value="">
         <input type="hidden" name="claim_subcat" id="f-claim-subcat" value="">
         <input type="hidden" name="source_page" id="f-source-page" value="">
+        <input type="hidden" name="listing_type" id="f-listing-type" value="">
         <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <div class="vis-form-row">
           <div class="vis-field">
@@ -1682,7 +1683,8 @@ function presetTier(tier) {
   var cat = p.get('cat') || p.get('category');
   var slug = p.get('claim') || p.get('slug');
   var subcat = p.get('subcat');
-  var from = p.get('from') || p.get('source');
+  var from = p.get('from') || p.get('source') || p.get('page');
+  var type = p.get('type');
   if (biz) {
     var bn = document.getElementById('f-business-name');
     if (bn) bn.value = biz;
@@ -1706,6 +1708,21 @@ function presetTier(tier) {
   }
   if (subcat) { var sc = document.getElementById('f-claim-subcat'); if (sc) sc.value = subcat; }
   if (from) { var sp = document.getElementById('f-source-page'); if (sp) sp.value = from; }
+  // Spotlight / ad-spot enquiries (formerly landing.html?type=spotlight and claim.html?type=adspot)
+  // land here too now - keep the enquiry type so the CRM still knows what they asked about.
+  if (type) {
+    var lt = document.getElementById('f-listing-type'); if (lt) lt.value = type;
+    var subj2 = document.querySelector('#list-with-us-form input[name="subject"]');
+    if (subj2 && (type === 'spotlight' || type === 'adspot')) {
+      subj2.value = (type === 'adspot' ? 'Ad-spot' : 'Spotlight') + ' enquiry - Papamoa.info' + (from ? ' (' + from + ')' : (subcat ? ' (' + subcat + ')' : ''));
+    }
+    var ts = document.getElementById('f-tier');
+    if (ts && (type === 'spotlight' || type === 'adspot')) {
+      for (var k = 0; k < ts.options.length; k++) {
+        if (ts.options[k].value.indexOf('Gold') === 0) { ts.selectedIndex = k; break; }
+      }
+    }
+  }
 })();
 </script>
 

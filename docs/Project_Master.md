@@ -82,7 +82,7 @@ Always lowercase `+gst` in customer-facing content. Never `+gst`.
 - Glenn's Glass & The Phoenix as listing examples
 
 ### CTA Destinations
-- **Single destination (locked 2026-06-04): `sales/list-with-us.html`.** All sales CTAs across the site point here — it's the consolidated tiers/pricing hub (Gold | Silver | Bronze) with the Get-listed form. `landing.html` + `claim.html` are being merged into it; `why-list.html` becomes a lean SEO article linking back here.
+- **Single destination (locked 2026-06-04): `sales/list-with-us.html`.** All sales CTAs across the site point here — it's the consolidated tiers/pricing hub (Gold | Silver | Bronze) with the Get-listed form. `landing.html` + `claim.html` were merged into it and deleted (2026-06-04); `why-list.html` is now a lean SEO article linking back here.
 - (Legacy: warm/outbound previously used `landing.html?biz=X&cat=Y` — folded into the hub.)
 
 ### Sales pitch toolkit (reusable language for list-with-us / landing / PPP / cold outreach)
@@ -327,9 +327,7 @@ papamoa-previews/
   community/                   -- 50+ info/article pages (ALL moved from articles/)
   listings/                    -- 20 live listings + 2 templates
   sales/
-    list-with-us.html          -- Organic full pitch page
-    landing.html               -- Funnel/outreach page
-    claim.html
+    list-with-us.html          -- Consolidated Gold|Silver|Bronze hub + Get-listed form (single CTA destination)
     menu-addon.html
     why-list.html
     spotlight-ads.html
@@ -490,7 +488,7 @@ Every page built must meet this minimum bar, no exceptions (from Jay's instructi
 **Master template:** `previews/driftwood-cafe.html`
 - Single `BUSINESS` data object at top = only per-PPP change needed
 - Includes: SEO score card, live search checker (via Cloudflare Worker), tier comparison, Gold/Silver listing mockups, menu add-on demo, Spotlight subcategory selector with live price calculator, Stripe payment CTAs
-- Stripe payment links are placeholders (pointing to `/sales/landing.html`)
+- Stripe payment links are placeholders (pointing to `/sales/list-with-us.html`)
 - Uses correct design system tokens (ocean-deep palette)
 - `PRICE_EXTRA = 199` (correct, matches $199+gst/yr for Extra Spotlights)
 
@@ -715,7 +713,6 @@ The listing ladder is **Gold | Silver | Bronze**. Near-term focus is Bronze self
 - [ ] Pricing audit: verify Silver $599+gst/yr, Gold $1,199+gst/yr, Menu Add-On $199+gst/yr, Extra Spotlight $199+gst/yr across all pages. Per the pricing-master audit, these files specifically still need a pass:
   - **High priority — prospect-facing:**
     - [ ] `sales/list-with-us.html` — full tier comparison, offer language, pricing table
-    - [ ] `sales/landing.html` — pricing table, tier descriptions, offer language
     - [ ] `previews/driftwood-cafe.html` — PPP template, tier comparison table embedded
   - **Medium priority — sales collateral + listing upsells:**
     - [ ] `sales/menu-addon.html` — Menu Add-On pricing and availability by tier
@@ -743,7 +740,7 @@ The listing ladder is **Gold | Silver | Bronze**. Near-term focus is Bronze self
 - [ ] Build admin new-listing intake form/checklist (collects all required data before build)
 - [ ] Site-wide style/layout audit: scan all HTML, upgrade to current design system (width, nav, category colours, sidebar)
 - [ ] DNS consolidation session with Carwyn (GitHub CNAME, Brevo auth: DKIM, DMARC, SPF)
-- [ ] Activate Stripe: create Silver ($599) and Gold ($1,199) payment links, then swap `STRIPE_GOLD_URL`/`STRIPE_SILVER_URL` in `previews/driftwood-cafe.html` PPP template (currently fall back to `sales/landing.html`). Also create a `JBTEST` 100%-off coupon code for Jay's end-to-end QA testing without spending real money.
+- [ ] Activate Stripe: create Silver ($599) and Gold ($1,199) payment links, then swap `STRIPE_GOLD_URL`/`STRIPE_SILVER_URL` in `previews/driftwood-cafe.html` PPP template (currently fall back to `sales/list-with-us.html`). Also create a `JBTEST` 100%-off coupon code for Jay's end-to-end QA testing without spending real money.
 
 ### Medium priority (post-launch infrastructure)
 
@@ -852,7 +849,7 @@ What survives the blend, and what gets dropped, is exactly what Phase B (Carwyn'
 
 During the organic-test window, conversions are handled by hand — no automated funnel is wired up yet:
 
-- Business finds the site organically and submits via `sales/list-with-us.html` or `sales/claim.html`.
+- Business finds the site organically and submits via `sales/list-with-us.html`.
 - Jay contacts them manually, sends a demo listing (the PPP at `previews/driftwood-cafe.html`), closes the sale.
 - Carwyn invoices the client (assumes §17.9 Option A; if Option B is chosen, invoicing routes through PlainBlack instead).
 - Facebook: start a Pāpāmoa Community Info group separate from the directory page — articles, events, community content. Drives organic traffic and brand awareness. Proposed URL: `facebook.com/groups/papamoa.info`. 30 posts ready in `sales/internal/facebook-posts.html`.
