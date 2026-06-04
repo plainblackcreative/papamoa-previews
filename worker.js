@@ -279,14 +279,20 @@ export default {
     if (url.pathname === '/bronze-approve' && request.method === 'POST') {
       if (!bronzeAuthed(request)) return bronzeJSON({ ok: false, error: 'unauthorized' }, 401);
       try {
-        const id = ((await request.json()).id || '').trim();
+        const body = await request.json();
+        const id = (body.id || '').trim();
+        const subcatPath = bronzeSanitise(body.subcat_path).slice(0, 80);
+        const subcatName = bronzeSanitise(body.subcat_name).slice(0, 60);
         if (!id) return bronzeJSON({ ok: false, error: 'missing id' }, 400);
+        if (!subcatPath) return bronzeJSON({ ok: false, error: 'subcategory not assigned' }, 400);
         const token = await getServiceAccountToken(BRONZE.saEmail, env.GOOGLE_SERVICE_ACCOUNT_KEY, 'https://www.googleapis.com/auth/spreadsheets');
         const rows = ((await (await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}`, { headers: { 'Authorization':`Bearer ${token}` } })).json()).values || []);
         let idx = -1; for (let i = 1; i < rows.length; i++) { if ((rows[i][0] || '') === id) { idx = i; break; } }
         if (idx < 0) return bronzeJSON({ ok: false, error: 'id not found' }, 404);
         const rec = bronzeRowToObj(rows[idx]);
         if (rec.status === 'live') return bronzeJSON({ ok: false, error: 'already live', url: `/listings/${rec.slug}.html` }, 409);
+        rec.subcat_path = subcatPath;
+        rec.subcat_name = subcatName || rec.subcategory;
 
         const tplResp = await fetch(BRONZE.templateUrl);
         if (!tplResp.ok) return bronzeJSON({ ok: false, error: 'template fetch failed' }, 502);
@@ -302,8 +308,12 @@ export default {
         }) });
         if (!commit.ok) return bronzeJSON({ ok: false, error: 'github commit failed: ' + (await commit.text()).slice(0, 180) }, 502);
 
-        await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}!C${idx + 1}?valueInputOption=USER_ENTERED`, {
-          method: 'PUT', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` }, body: JSON.stringify({ values: [['live']] }),
+        await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values:batchUpdate`, {
+          method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` },
+          body: JSON.stringify({ valueInputOption: 'USER_ENTERED', data: [
+            { range: `${BRONZE.tab}!C${idx + 1}`, values: [['live']] },
+            { range: `${BRONZE.tab}!N${idx + 1}:O${idx + 1}`, values: [[rec.subcat_path, rec.subcat_name]] },
+          ] }),
         });
         // Lead-funnel first touch: tell the owner it's live + nudge the upgrade (full Brevo nurture = Phase E).
         if (env.RESEND_API_KEY && rec.email) {
@@ -349,9 +359,9 @@ export default {
         const rows = ((await (await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}`, { headers: { 'Authorization':`Bearer ${token}` } })).json()).values || []).slice(1);
         let items = rows.map(bronzeRowToObj).filter(r => r && r.status === 'live');
         if (cat) items = items.filter(r => r.category === cat);
-        if (subcat) items = items.filter(r => (r.subcategory || '').toLowerCase().indexOf(subcat) > -1);
+        if (subcat) items = items.filter(r => (r.subcat_path || '').toLowerCase() === subcat.toLowerCase());
         // public-safe fields only (no email)
-        const out = items.map(r => ({ name: r.business_name, subcategory: r.subcategory, address: r.address, phone: r.phone, website: r.website, slug: r.slug }));
+        const out = items.map(r => ({ name: r.business_name, subcategory: r.subcat_name || r.subcategory, address: r.address, phone: r.phone, website: r.website, slug: r.slug }));
         const body = JSON.stringify({ ok: true, items: out });
         const resp = new Response(body, { headers: { 'Content-Type':'application/json', 'Access-Control-Allow-Origin':'*', 'Cache-Control':'public, max-age=300' } });
         ctx.waitUntil(cache.put(cacheKey, resp.clone()));
@@ -630,7 +640,7 @@ const BRONZE_CATEGORY = {
 function bronzeRowToObj(row) {
   if (!row || !row[0]) return null;
   return { id: row[0], ts: row[1], status: row[2] || 'pending', business_name: row[3], category: row[4],
-    subcategory: row[5], address: row[6], phone: row[7], website: row[8], email: row[9], blurb: row[10], slug: row[11], url: row[12] };
+    subcategory: row[5], address: row[6], phone: row[7], website: row[8], email: row[9], blurb: row[10], slug: row[11], url: row[12], subcat_path: row[13] || '', subcat_name: row[14] || '' };
 }
 function bronzeNormaliseUrl(u) {
   u = String(u || '').trim(); if (!u) return '';
@@ -647,7 +657,7 @@ function bronzeRender(tpl, rec) {
   const tokens = {
     BUSINESS_NAME: rec.business_name, BUSINESS_NAME_ENC: encodeURIComponent(rec.business_name), SLUG: rec.slug,
     META_DESC: (rec.business_name + ' - ' + rec.blurb).slice(0, 155),
-    CATEGORY_NAME: cat.name, CATEGORY_PATH: cat.path, SUBCAT_NAME: rec.subcategory, SUBCAT_PATH: cat.path,
+    CATEGORY_NAME: cat.name, CATEGORY_PATH: cat.path, SUBCAT_NAME: rec.subcat_name || rec.subcategory, SUBCAT_PATH: rec.subcat_path || cat.path,
     BLURB: rec.blurb, PHONE_DIGITS: phone.replace(/[^0-9+]/g, ''), PHONE_DISPLAY: phone,
     WEBSITE_URL: website, WEBSITE_DISPLAY: website.replace(/^https?:\/\//, '').replace(/\/$/, ''),
     FULL_ADDRESS: rec.address, GOOGLE_MAPS_URL: 'https://maps.google.com/?q=' + encodeURIComponent(rec.address + ', Papamoa, New Zealand'),

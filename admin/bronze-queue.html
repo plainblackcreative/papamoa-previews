@@ -56,7 +56,13 @@ body { font-family:var(--font-body); background:var(--sand); color:var(--text); 
 .card-grid .k { color:var(--muted); }
 .card-grid a { color:var(--ocean); text-decoration:none; word-break:break-word; }
 .card-blurb { font-size:13.5px; color:var(--text); background:var(--sand); border-radius:8px; padding:11px 14px; margin-bottom:14px; line-height:1.6; }
-.card-actions { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.card-actions { display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+.sc-assign { display:flex; flex-direction:column; gap:5px; width:100%; max-width:360px; }
+.sc-assign-label { font-size:11px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted); }
+.sc-assign-label .req { color:var(--red); }
+.sc-select { width:100%; padding:9px 12px; border:1.5px solid var(--border); border-radius:8px; font-family:var(--font-body); font-size:13.5px; background:var(--white); color:var(--text); outline:none; }
+.sc-select:focus { border-color:var(--ocean); }
+.sc-btns { display:flex; gap:10px; flex-wrap:wrap; }
 .card-actions .live-url { font-size:12.5px; color:var(--green); }
 .card-actions .live-url a { color:var(--green); font-weight:700; }
 .empty { text-align:center; color:var(--muted); padding:40px 0; font-size:14px; }
@@ -96,6 +102,13 @@ body { font-family:var(--font-body); background:var(--sand); color:var(--text); 
 <script>
 var API = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
 var state = { items: [], filter: 'pending', token: '' };
+var SUBCATS = {};   // category -> [{path,name}] (loaded from bronze-subcats.json)
+// Fallback for categories without a dedicated subcat list (use the category landing page)
+var CAT_FALLBACK = {
+  health:        { path:'health/health-papamoa', name:'Health & Wellness' },
+  'real-estate': { path:'community/real-estate',  name:'Real Estate' },
+  default:       { path:'homepage',               name:'Local Business' }
+};
 
 function $(id){ return document.getElementById(id); }
 function esc(s){ var d=document.createElement('div'); d.textContent = (s==null?'':s); return d.innerHTML; }
@@ -114,6 +127,9 @@ async function api(path, opts){
 async function load(){
   setStatus('Loading…');
   try {
+    if (!Object.keys(SUBCATS).length) {
+      SUBCATS = await fetch('/papamoa-previews/assets/bronze-subcats.json').then(function(r){ return r.json(); }).catch(function(){ return {}; });
+    }
     var data = await api('/bronze-list', { method:'GET' });
     if (!data.ok) throw new Error(data.error || 'load failed');
     state.items = data.items || [];
@@ -137,13 +153,22 @@ function render(){
   });
 }
 
+function subcatOptions(cat, id){
+  var list = SUBCATS[cat] || (CAT_FALLBACK[cat] ? [CAT_FALLBACK[cat]] : []);
+  var opts = '<option value="" disabled selected>Choose subcategory…</option>';
+  list.forEach(function(sc){ opts += '<option value="'+esc(sc.path)+'">'+esc(sc.name)+'</option>'; });
+  return '<select class="sc-select" id="sc-'+esc(id)+'">'+opts+'</select>';
+}
+
 function cardHtml(it){
   var status = it.status||'pending';
   var web = it.website ? (/^https?:\/\//i.test(it.website)?it.website:'https://'+it.website) : '';
   var actions = '';
   if (status==='pending') {
-    actions = '<button class="btn btn-approve" id="ap-'+esc(it.id)+'">Approve &amp; publish</button>'
-            + '<button class="btn btn-reject" id="rj-'+esc(it.id)+'">Reject</button>';
+    actions = '<div class="sc-assign"><span class="sc-assign-label">Assign subcategory <span class="req">*</span></span>'
+            + subcatOptions(it.category, it.id) + '</div>'
+            + '<div class="sc-btns"><button class="btn btn-approve" id="ap-'+esc(it.id)+'">Approve &amp; publish</button>'
+            + '<button class="btn btn-reject" id="rj-'+esc(it.id)+'">Reject</button></div>';
   } else if (status==='live') {
     actions = '<span class="live-url">Live: <a href="/papamoa-previews/listings/'+esc(it.slug)+'.html" target="_blank" rel="noopener">/listings/'+esc(it.slug)+'.html &rarr;</a></span>';
   } else {
@@ -165,10 +190,14 @@ function cardHtml(it){
 }
 
 async function approve(id){
-  if (!confirm('Approve and publish this listing? This commits a live page to the site.')) return;
+  var sel = document.getElementById('sc-'+id);
+  var subcatPath = sel ? sel.value : '';
+  if (!subcatPath) { setStatus('Pick a subcategory before approving.', true); if (sel) sel.focus(); return; }
+  var subcatName = sel.options[sel.selectedIndex].text;
+  if (!confirm('Approve and publish under "'+subcatName+'"? This commits a live page to the site.')) return;
   setStatus('Publishing…');
   try {
-    var data = await api('/bronze-approve', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id }) });
+    var data = await api('/bronze-approve', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id, subcat_path:subcatPath, subcat_name:subcatName }) });
     if (!data.ok) throw new Error(data.error || 'approve failed');
     var it = state.items.find(function(x){ return x.id===id; });
     if (it) it.status='live';

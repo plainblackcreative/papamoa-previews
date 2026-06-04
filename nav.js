@@ -486,3 +486,75 @@
   pnfEnsureContactModal();
 
 })();
+
+
+/* ── Bronze community listings on SUBCATEGORY pages (Project_Master §8.2 step 5) ──
+   Self-contained, isolated from the nav IIFE above. No-op unless the page is a
+   subcategory page (/categories/CAT/SUBCAT.html, not a main landing) AND has live
+   Bronze listings. Renders a "More Pāpāmoa businesses" band just above the footer. */
+(function () {
+  var WORKER = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
+  var BASE = '/papamoa-previews';
+  var m = location.pathname.match(/\/categories\/([a-z0-9-]+)\/([a-z0-9-]+)\.html$/);
+  if (!m) return;
+  var LANDINGS = { 'accommodation':1, 'food-and-drink':1, 'services':1, 'shopping':1, 'entertainment':1 };
+  if (LANDINGS[m[2]]) return;                 // main category landing page - skip
+  var subcatPath = m[1] + '/' + m[2];         // e.g. "services/plumber-papamoa"
+
+  function esc(s) { var x = document.createElement('div'); x.textContent = (s == null ? '' : s); return x.innerHTML; }
+  function nurl(u) { u = String(u || '').trim(); if (!u) return ''; return /^https?:\/\//i.test(u) ? u : 'https://' + u; }
+
+  function start() {
+    fetch(WORKER + '/bronze-public?subcat=' + encodeURIComponent(subcatPath))
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (d && d.ok && d.items && d.items.length) render(d.items); })
+      .catch(function () {});
+  }
+  function render(items) {
+    injectCss();
+    var cards = items.map(function (it) {
+      var web = nurl(it.website), a = '';
+      a += '<a class="pnf-bz-card-link" href="' + BASE + '/listings/' + esc(it.slug) + '.html">View listing &rarr;</a>';
+      if (it.phone) a += '<a class="pnf-bz-card-sec" href="tel:' + esc(String(it.phone).replace(/[^0-9+]/g, '')) + '">' + esc(it.phone) + '</a>';
+      if (web) a += '<a class="pnf-bz-card-sec" href="' + esc(web) + '" target="_blank" rel="noopener">Website</a>';
+      return '<div class="pnf-bz-card"><a class="pnf-bz-name" href="' + BASE + '/listings/' + esc(it.slug) + '.html">' + esc(it.name) + '</a>'
+        + (it.subcategory ? '<div class="pnf-bz-sub">' + esc(it.subcategory) + '</div>' : '')
+        + (it.address ? '<div class="pnf-bz-addr">' + esc(it.address) + '</div>' : '')
+        + '<div class="pnf-bz-actions">' + a + '</div></div>';
+    }).join('');
+    var sec = document.createElement('div');
+    sec.className = 'pnf-bz-band';
+    sec.innerHTML = '<div class="pnf-bz-inner"><div class="pnf-bz-head">'
+      + '<h2 class="pnf-bz-title">More Pāpāmoa businesses</h2>'
+      + '<p class="pnf-bz-note">Free community listings added by local businesses.</p></div>'
+      + '<div class="pnf-bz-grid">' + cards + '</div>'
+      + '<a class="pnf-bz-add" href="' + BASE + '/sales/create-bronze-listing.html">Add your business - free &rarr;</a></div>';
+    var footer = document.querySelector('footer.pnf-footer') || document.querySelector('.pnf-footer') || document.querySelector('footer');
+    if (footer && footer.parentNode) footer.parentNode.insertBefore(sec, footer);
+    else document.body.appendChild(sec);
+  }
+  function injectCss() {
+    if (document.getElementById('pnf-bz-style')) return;
+    var css =
+      '.pnf-bz-band{background:#EDE7DB;border-top:1px solid #D8E4E8;}' +
+      '.pnf-bz-inner{max-width:1100px;margin:0 auto;padding:44px 24px;}' +
+      '.pnf-bz-head{margin-bottom:20px;}' +
+      ".pnf-bz-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;color:#243B59;margin:0 0 4px;}" +
+      '.pnf-bz-note{font-size:14px;color:#5A6E78;margin:0;}' +
+      '.pnf-bz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-bottom:22px;}' +
+      '.pnf-bz-card{background:#fff;border:1px solid #D8E4E8;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:4px;}' +
+      ".pnf-bz-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#243B59;text-decoration:none;line-height:1.25;}" +
+      '.pnf-bz-name:hover{color:#1B6B7D;}' +
+      '.pnf-bz-sub{font-size:12px;font-weight:600;color:#1B6B7D;text-transform:uppercase;letter-spacing:0.04em;}' +
+      '.pnf-bz-addr{font-size:13px;color:#5A6E78;line-height:1.5;margin-top:2px;}' +
+      '.pnf-bz-actions{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:10px;}' +
+      '.pnf-bz-card-link{font-size:13px;font-weight:700;color:#1B6B7D;text-decoration:none;}' +
+      '.pnf-bz-card-link:hover{text-decoration:underline;}' +
+      '.pnf-bz-card-sec{font-size:12.5px;color:#5A6E78;text-decoration:none;}' +
+      '.pnf-bz-card-sec:hover{color:#1B6B7D;}' +
+      '.pnf-bz-add{display:inline-block;font-size:13.5px;font-weight:700;color:#fff;background:#1B6B7D;padding:11px 22px;border-radius:8px;text-decoration:none;}' +
+      '.pnf-bz-add:hover{background:#0F4352;}';
+    var st = document.createElement('style'); st.id = 'pnf-bz-style'; st.textContent = css; document.head.appendChild(st);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
