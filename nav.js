@@ -177,7 +177,26 @@
     '.pnf-cf-success{display:none;text-align:center;padding:16px 0 8px;}',
     '.pnf-cf-success .pnf-tick{font-size:40px;margin-bottom:10px;}',
     '.pnf-cf-success h3{font-size:18px;font-weight:700;color:#1E6B3C;margin-bottom:6px;}',
-    '.pnf-cf-success p{font-size:13.5px;color:#5A6E78;line-height:1.6;}'
+    '.pnf-cf-success p{font-size:13.5px;color:#5A6E78;line-height:1.6;}',
+    // ── MORE [SUBCAT] SECTION (Bronze tier + free-listing CTA) ──
+    '.pnf-more-section{padding:0 24px 44px;}',
+    '.pnf-more-inner{max-width:1200px;margin:0 auto;}',
+    '.pnf-more-section .section{margin-bottom:36px;}',
+    '.pnf-more-section .section-title{font-family:\'Playfair Display\',serif;font-size:1.15rem;font-weight:700;color:var(--navy,#243B59);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border,#DDE5EE);}',
+    '.ghost-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:16px;}',
+    '.ghost-card{background:#fff;border:1px solid var(--border,#DDE5EE);border-radius:9px;padding:14px 16px;}',
+    '.ghost-card.gc-empty{display:block;border-style:dashed;border-color:rgba(53,159,232,.3);background:rgba(53,159,232,.03);text-align:center;padding:20px 16px;}',
+    '.gc-name{font-family:\'Playfair Display\',serif;font-size:.9rem;font-weight:700;color:var(--navy,#243B59);margin-bottom:2px;}',
+    '.gc-sub{font-size:.7rem;color:var(--muted,#607080);margin-bottom:6px;}',
+    '.gc-desc{font-size:.78rem;color:var(--muted,#607080);line-height:1.55;margin-bottom:10px;}',
+    '.gc-cta{font-size:.72rem;font-weight:700;color:var(--blue,#359FE8);}',
+    '.gc-cta:hover{text-decoration:underline;}',
+    '.pnf-more-cta{background:var(--navy,#243B59);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}',
+    '.pnf-more-cta-body{flex:1;}',
+    '.pnf-more-cta-body h3{font-family:\'Playfair Display\',serif;font-size:1.05rem;color:#fff;margin-bottom:4px;}',
+    '.pnf-more-cta-body p{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.55;}',
+    '.pnf-more-cta-btn{background:#89BE43;color:#243B59;font-size:.8rem;font-weight:800;padding:10px 22px;border-radius:7px;text-decoration:none;white-space:nowrap;transition:background .2s;flex-shrink:0;}',
+    '.pnf-more-cta-btn:hover{background:#6DB03A;}'
   ].join('');
   document.head.appendChild(style);
 
