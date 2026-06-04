@@ -54,7 +54,7 @@ Source of truth: this document, §3 below. (Earlier `docs/pricing-master.html` w
 |---------|-------|-------|
 | Gold Listing | $1,199+gst/yr | 1 logo + up to 9 hero images (gallery). Annual subscription. Top of ladder. |
 | Silver Listing | $599+gst/yr | Logo only (1 image). Annual subscription. |
-| Bronze (Basic) | **Free** | **Locked 2026-06-04.** Free self-serve listing that auto-publishes *pending admin approval*. The lead-gen tier (every free listing = an indexable page + a warm upsell target). Resolves §17.15 — Jay's pushback on Carwyn's "no free listings" won. Not the dead $99 Bronze (that stays dead). |
+| Bronze (Basic) | **Free** | **Locked 2026-06-04.** Free self-serve listing, auto-publishes *pending admin approval*. **Includes:** business name, category, phone, website link, location/map + a 1-2 line blurb. **Excludes** (Silver+ only): logo, photo gallery, editorial write-up, rich schema. The lead-gen tier (indexable page + warm upsell hook). Resolves §17.15. Not the dead $99 Bronze. |
 | Spotlight / Ad Spots | Included perk (Phase 1) | **Phase 1:** ad/spotlight slots scattered site-wide are **claimable by any Silver or Gold listing** (no separate charge). The self-serve, duration-based purchase model (1 / 3 / 6 / 12 mo, impressions shown) is a later evolution — see §17.11. |
 | Extra Subcategory Spotlight | $199+gst/yr each | Gold only. First Spotlight included with Gold. |
 | Featured Agent Position | Bespoke | Not published. Conversation-first. |
