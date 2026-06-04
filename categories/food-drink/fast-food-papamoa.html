@@ -346,7 +346,6 @@ a{color:var(--eat-accent);text-decoration:none}
   </div>
 </div>
 
-
 <div class="faq-section">
         <h2>Fast food in P&#257;p&#257;moa - common questions</h2>
         <div class="faq-list">
@@ -467,43 +466,10 @@ a{color:var(--eat-accent);text-decoration:none}
 </footer>
 
 <!-- CONTACT MODAL -->
-<div class="pnf-overlay" id="pnf-contact-overlay" onclick="pnfOverlayClick(event)">
-  <div class="pnf-modal" role="dialog" aria-label="Contact Papamoa.info">
-    <div class="pnf-modal-head">
-      <div><h2>Get in touch</h2><p>We&rsquo;ll reply within one business day.</p></div>
-      <button class="pnf-modal-close" onclick="pnfCloseContact()">&times;</button>
-    </div>
-    <div class="pnf-modal-body">
-      <form class="pnf-cf" id="pnf-contact-form" onsubmit="pnfSubmitContact(event)">
-        <input type="hidden" name="form_name" value="contact-fast-food-papamoa">
-        <input type="hidden" name="redirect" value="false">
-        <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-        <div class="pnf-cf-row">
-          <div><label>Name *</label><input type="text" name="name" placeholder="Sarah" required></div>
-          <div><label>Email *</label><input type="email" name="email" placeholder="you&#64;email.com" required></div>
-        </div>
-        <div><label>Message *</label><textarea name="message" placeholder="How can we help?" required></textarea></div>
-        <button type="submit" class="pnf-cf-submit" id="pnf-cf-btn">Send message &rarr;</button>
-        <p class="pnf-cf-fine">No spam &middot; Reply within one business day</p>
-      </form>
-      <div class="pnf-cf-success" id="pnf-cf-success">
-        <div class="tick"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <h3>Message received</h3>
-        <p>We&rsquo;ll be in touch within one business day.</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
 function toggleFaq(el){el.closest('.faq-item').classList.toggle('open')}
-function pnfDrawerOpen(){document.getElementById('pnf-drawer').classList.add('open');document.getElementById('pnf-drawer-overlay').classList.add('open');document.body.style.overflow='hidden'}
-function pnfDrawerClose(){document.getElementById('pnf-drawer').classList.remove('open');document.getElementById('pnf-drawer-overlay').classList.remove('open');document.body.style.overflow=''}
-function pnfOpenContact(type,ctx){if(ctx&&ctx.name){var msg=document.querySelector('#pnf-contact-form textarea[name="message"]');if(msg&&!msg.value){var url=ctx.path?('https://papamoa.info/'+ctx.path.replace(/^\//,'')):'';msg.value="Hi - I'd like to enquire about the "+ctx.name+" Spotlight Ad Spot"+(url?' ('+url+')':'')+". Please send details on availability, duration options and pricing.";}}document.getElementById('pnf-contact-overlay').classList.add('open');document.body.style.overflow='hidden'}
-function pnfCloseContact(){document.getElementById('pnf-contact-overlay').classList.remove('open');document.body.style.overflow=''}
-function pnfOverlayClick(e){if(e.target===document.getElementById('pnf-contact-overlay'))pnfCloseContact()}
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){pnfDrawerClose();pnfCloseContact()}});
-async function pnfSubmitContact(e){e.preventDefault();var btn=document.getElementById('pnf-cf-btn');btn.textContent='Sending\u2026';btn.disabled=true;try{var res=await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa',{method:'POST',body:new FormData(document.getElementById('pnf-contact-form'))});var json=await res.json();if(json.ok){document.getElementById('pnf-contact-form').style.display='none';document.getElementById('pnf-cf-success').style.display='block'}else{btn.textContent='Try again';btn.disabled=false}}catch(err){btn.textContent='Try again';btn.disabled=false}}
+
 (function(){var base='/papamoa-previews';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var href=a.getAttribute('href');if(!href||href.startsWith('http')||href.startsWith('tel:')||href.startsWith('mailto:')||href.startsWith('#'))return;if(href.startsWith('/')&&!href.startsWith(base)){e.preventDefault();window.location.href=base+href}})})();
 </script>
 <script src="/papamoa-previews/nav.js"></script>

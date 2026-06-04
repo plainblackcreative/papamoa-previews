@@ -486,8 +486,6 @@ a { color:var(--blue); text-decoration:none; }
   </div>
 </div>
 
-
-
 <!-- STATS -->
 <div class="stats-section">
   <div class="stats-inner">
@@ -552,7 +550,6 @@ a { color:var(--blue); text-decoration:none; }
     </div>
   </div>
 </div>
-
 
 <div class="crosslink">
   <div class="crosslink-inner">
@@ -630,46 +627,6 @@ a { color:var(--blue); text-decoration:none; }
 </footer>
 
 <!-- CONTACT MODAL -->
-<div class="pnf-overlay" id="pnf-contact-overlay" onclick="pnfOverlayClick(event)">
-  <div class="pnf-modal" role="dialog" aria-label="Contact Papamoa.info">
-    <div class="pnf-modal-head">
-      <div><h2>Get in touch</h2><p>We&rsquo;ll get back to you within one business day.</p></div>
-      <button class="pnf-modal-close" onclick="pnfCloseContact()" aria-label="Close">&times;</button>
-    </div>
-    <div class="pnf-modal-body">
-      <form class="pnf-cf" id="pnf-contact-form" onsubmit="pnfSubmitContact(event)">
-        <input type="hidden" name="form_name" value="contact-lightbox">
-        <input type="hidden" name="redirect" value="false">
-        <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-        <div class="pnf-cf-row">
-          <div><label>Your name *</label><input type="text" name="name" placeholder="Sarah" required></div>
-          <div><label>Email *</label><input type="email" name="email" placeholder="you@email.com" required></div>
-        </div>
-        <div>
-          <label>Enquiry type *</label>
-          <select name="enquiry_type" required id="pnf-enquiry-type">
-            <option value="" disabled selected>Select a topic</option>
-            <option value="General enquiry">General enquiry</option>
-            <option value="Listing enquiry">Listing enquiry - I want to get listed</option>
-            <option value="Listing support">Listing support - update or change my listing</option>
-            <option value="Media enquiry">Media enquiry</option>
-            <option value="News &amp; community notice">News &amp; community notice</option>
-            <option value="Report an error">Report an error on the site</option>
-          </select>
-        </div>
-        <div><label>Message *</label><textarea name="message" placeholder="How can we help?" required></textarea></div>
-        <button type="submit" class="pnf-cf-submit" id="pnf-cf-btn">Send message &rarr;</button>
-        <p class="pnf-cf-fine">No spam &middot; We reply within one business day</p>
-      </form>
-      <div class="pnf-cf-success" id="pnf-cf-success">
-        <div class="pnf-tick"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <h3>Message received</h3>
-        <p>We&rsquo;ll be in touch within one business day.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <script>
 
@@ -679,18 +636,7 @@ function faqToggle(btn) {
 }
 
 // ── MOBILE DRAWER ──
-function pnfDrawerOpen() {
-  document.getElementById('pnf-drawer').classList.add('open');
-  document.getElementById('pnf-drawer-overlay').classList.add('open');
-  document.getElementById('pnf-hamburger').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function pnfDrawerClose() {
-  document.getElementById('pnf-drawer').classList.remove('open');
-  document.getElementById('pnf-drawer-overlay').classList.remove('open');
-  document.getElementById('pnf-hamburger').classList.remove('open');
-  document.body.style.overflow = '';
-}
+
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDrawerClose(); });
 (function() {
   var drawer = document.getElementById('pnf-drawer');
@@ -716,25 +662,9 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfDr
 
 <script>
 // ── CONTACT MODAL ──
-function pnfOpenContact(type) {
-  if (type) { var sel = document.getElementById('pnf-enquiry-type'); if (sel) { for (var i=0;i<sel.options.length;i++) { if(sel.options[i].value===type){sel.selectedIndex=i;break;} } } }
-  document.getElementById('pnf-contact-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function pnfCloseContact() { document.getElementById('pnf-contact-overlay').classList.remove('open'); document.body.style.overflow = ''; }
-function pnfOverlayClick(e) { if (e.target === document.getElementById('pnf-contact-overlay')) pnfCloseContact(); }
+
 document.addEventListener('keydown', function(e) { if (e.key==='Escape') pnfCloseContact(); });
-async function pnfSubmitContact(e) {
-  e.preventDefault();
-  var btn = document.getElementById('pnf-cf-btn');
-  btn.textContent = 'Sending…'; btn.disabled = true;
-  try {
-    var res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', { method:'POST', body:new FormData(document.getElementById('pnf-contact-form')) });
-    var json = await res.json();
-    if (json.ok) { document.getElementById('pnf-contact-form').style.display='none'; document.getElementById('pnf-cf-success').style.display='block'; }
-    else { btn.textContent='Try again'; btn.disabled=false; }
-  } catch(err) { btn.textContent='Try again'; btn.disabled=false; }
-}
+
 </script>
 <script src="/papamoa-previews/nav.js"></script>
 </body>

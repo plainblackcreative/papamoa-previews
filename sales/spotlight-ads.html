@@ -336,61 +336,6 @@
 </footer>
 
 <!-- CONTACT LIGHTBOX -->
-<div class="pnf-overlay" id="pnf-contact-overlay" onclick="pnfOverlayClick(event)">
-  <div class="pnf-modal" role="dialog" aria-label="Contact Papamoa.info">
-    <div class="pnf-modal-head">
-      <div>
-        <h2>Register interest</h2>
-        <p>We&rsquo;ll be in touch when Spotlight Ad Spot pricing is live.</p>
-      </div>
-      <button class="pnf-modal-close" onclick="pnfCloseContact()" aria-label="Close">&times;</button>
-    </div>
-    <div class="pnf-modal-body">
-      <form class="pnf-cf" id="pnf-contact-form" onsubmit="pnfSubmitContact(event)">
-        <input type="hidden" name="form_name" value="spotlight-interest">
-        <input type="hidden" name="subject" value="Spotlight Ad Spot interest - Papamoa.info">
-        <input type="hidden" name="redirect" value="false">
-        <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-        <div class="pnf-cf-row">
-          <div>
-            <label>Your name *</label>
-            <input type="text" name="name" placeholder="Sarah" required>
-          </div>
-          <div>
-            <label>Business name *</label>
-            <input type="text" name="business" placeholder="Coastal Plumbing" required>
-          </div>
-        </div>
-        <div>
-          <label>Email *</label>
-          <input type="email" name="email" placeholder="you@email.com" required>
-        </div>
-        <div>
-          <label>Phone</label>
-          <input type="tel" name="phone" placeholder="027 xxx xxxx">
-        </div>
-        <div>
-          <label>Which placement interests you?</label>
-          <select name="placement">
-            <option value="" disabled selected>Select a placement type</option>
-            <option>Homepage Section Spotlight</option>
-            <option>Category Page Spotlight</option>
-            <option>Article Page Ad Spot</option>
-            <option>News &amp; Events Spotlight</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <button type="submit" class="pnf-cf-submit" id="pnf-cf-btn">Register my interest &rarr;</button>
-        <p class="pnf-cf-fine">No spam &middot; We&rsquo;ll contact you when pricing is confirmed</p>
-      </form>
-      <div class="pnf-cf-success" id="pnf-cf-success">
-        <div class="pnf-tick"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <h3>Registered</h3>
-        <p>We&rsquo;ll be in touch when Spotlight Ad Spot pricing is live.<br>For anything urgent call <a href="tel:+64275332970" style="color:#1B6B7D">027 533 2970</a>.</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
   (function() {
@@ -407,44 +352,14 @@
     });
   })();
 
-  function pnfOpenContact() {
-    document.getElementById('pnf-contact-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function pnfCloseContact() {
-    document.getElementById('pnf-contact-overlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  function pnfOverlayClick(e) {
-    if (e.target === document.getElementById('pnf-contact-overlay')) pnfCloseContact();
-  }
+  
+  
+  
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') pnfCloseContact();
   });
 
-  async function pnfSubmitContact(e) {
-    e.preventDefault();
-    var btn = document.getElementById('pnf-cf-btn');
-    btn.textContent = 'Sending\u2026';
-    btn.disabled = true;
-    try {
-      var res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', {
-        method: 'POST',
-        body: new FormData(document.getElementById('pnf-contact-form'))
-      });
-      var json = await res.json();
-      if (json.ok) {
-        document.getElementById('pnf-contact-form').style.display = 'none';
-        document.getElementById('pnf-cf-success').style.display = 'block';
-      } else {
-        btn.textContent = 'Try again';
-        btn.disabled = false;
-      }
-    } catch(err) {
-      btn.textContent = 'Try again';
-      btn.disabled = false;
-    }
-  }
+  
 </script>
 
 <script src="/papamoa-previews/nav.js"></script>

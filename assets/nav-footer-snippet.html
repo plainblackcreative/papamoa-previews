@@ -25,7 +25,6 @@
   ============================================================
 -->
 
-
 <!-- ============================================================
      SHARED CSS - include in ALL pages
      (tokens + contact lightbox)
@@ -132,7 +131,6 @@
 .pnf-cf-success p { font-size: 13.5px; color: #5A6E78; line-height: 1.6; }
 </style>
 
-
 <!-- ============================================================
      VARIANT A - PUBLIC NAV
      Use on: homepage, categories, listings, community
@@ -155,7 +153,6 @@
   <a href="/papamoa-previews/sales/list-with-us.html" class="pnf-cta">List Your Business</a>
 </nav>
 
-
 <!-- ============================================================
      VARIANT B - SALES NAV
      ============================================================ -->
@@ -165,7 +162,6 @@
   <a href="#get-found" class="pnf-cta">Get started &rarr;</a>
 </nav>
 
-
 <!-- ============================================================
      VARIANT C - ADMIN/PREVIEW NAV
      ============================================================ -->
@@ -173,7 +169,6 @@
   <a href="/papamoa-previews/homepage.html" class="pnf-logo" aria-label="Papamoa.info home"><img src="/papamoa-previews/assets/papamoa-info-asset-pack/logo/papamoa-info-logo-transparent-400w.png" alt="Papamoa.info - Our Local Directory Online" class="pnf-logo-img" style="height:44px;width:auto;max-width:300px;display:block;vertical-align:middle;"></a>
   <a href="/papamoa-previews/index.html" class="pnf-back" style="margin-left:auto;">&larr; Site index</a>
 </nav>
-
 
 <!-- ============================================================
      VARIANT A - PUBLIC FOOTER (5-column)
@@ -258,7 +253,6 @@
   </div>
 </footer>
 
-
 <!-- ============================================================
      VARIANT B - SALES FOOTER
      ============================================================ -->
@@ -277,7 +271,6 @@
   </div>
 </footer>
 
-
 <!-- ============================================================
      VARIANT C - ADMIN FOOTER
      ============================================================ -->
@@ -285,88 +278,18 @@
   Papamoa.info -- Internal use only &middot; PlainBlack &middot; 2026
 </footer>
 
-
 <!-- ============================================================
      CONTACT LIGHTBOX
      Include once per page, before </body>.
      Triggered by: onclick="pnfOpenContact()"
      ============================================================ -->
-<div class="pnf-overlay" id="pnf-contact-overlay" onclick="pnfOverlayClick(event)">
-  <div class="pnf-modal" role="dialog" aria-label="Contact Papamoa.info">
-    <div class="pnf-modal-head">
-      <div>
-        <h2>Get in touch</h2>
-        <p>We'll get back to you within one business day.</p>
-      </div>
-      <button class="pnf-modal-close" onclick="pnfCloseContact()" aria-label="Close">&times;</button>
-    </div>
-    <div class="pnf-modal-body">
-      <form class="pnf-cf" id="pnf-contact-form" onsubmit="pnfSubmitContact(event)">
-        <input type="hidden" name="form_name" value="contact-lightbox">
-        <input type="hidden" name="redirect" value="false">
-        <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-        <div class="pnf-cf-row">
-          <div><label>Your name *</label><input type="text" name="name" placeholder="Sarah" required></div>
-          <div><label>Email *</label><input type="email" name="email" placeholder="you&#64;email.com" required></div>
-        </div>
-        <div>
-          <label>Enquiry type *</label>
-          <select name="enquiry_type" required id="pnf-enquiry-type">
-            <option value="" disabled selected>Select a topic</option>
-            <option value="General enquiry">General enquiry</option>
-            <option value="Listing enquiry">Listing enquiry -- I want to get listed</option>
-            <option value="Listing support">Listing support -- update or change my listing</option>
-            <option value="Media enquiry">Media enquiry</option>
-            <option value="News &amp; community notice">News &amp; community notice</option>
-            <option value="Report an error">Report an error on the site</option>
-          </select>
-        </div>
-        <div><label>Message *</label><textarea name="message" placeholder="How can we help?" required></textarea></div>
-        <button type="submit" class="pnf-cf-submit" id="pnf-cf-btn">Send message &rarr;</button>
-        <p class="pnf-cf-fine">No spam &middot; We reply within one business day</p>
-      </form>
-      <div class="pnf-cf-success" id="pnf-cf-success">
-        <div class="pnf-tick">&#10003;</div>
-        <h3>Message received</h3>
-        <p>We'll be in touch within one business day.<br>For urgent listing support call <a href="tel:+64275332970" style="color:#1B6B7D">027 533 2970</a>.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <!-- ============================================================
      SHARED JS - include once per page, before </body>
      ============================================================ -->
 <script>
-function pnfOpenContact(type) {
-  if (type) {
-    var sel = document.getElementById('pnf-enquiry-type');
-    if (sel) { for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].value === type) { sel.selectedIndex = i; break; } } }
-  }
-  document.getElementById('pnf-contact-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function pnfCloseContact() {
-  document.getElementById('pnf-contact-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function pnfOverlayClick(e) {
-  if (e.target === document.getElementById('pnf-contact-overlay')) pnfCloseContact();
-}
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfCloseContact(); });
 
-async function pnfSubmitContact(e) {
-  e.preventDefault();
-  var btn = document.getElementById('pnf-cf-btn');
-  btn.textContent = 'Sending\u2026'; btn.disabled = true;
-  try {
-    var res = await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa', { method: 'POST', body: new FormData(document.getElementById('pnf-contact-form')) });
-    var json = await res.json();
-    if (json.ok) { document.getElementById('pnf-contact-form').style.display = 'none'; document.getElementById('pnf-cf-success').style.display = 'block'; }
-    else { btn.textContent = 'Try again'; btn.disabled = false; }
-  } catch(err) { btn.textContent = 'Try again'; btn.disabled = false; }
-}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') pnfCloseContact(); });
 
 if (window.location.pathname.indexOf('contact') !== -1) pnfOpenContact();
 </script>
