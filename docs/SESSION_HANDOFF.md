@@ -1,8 +1,10 @@
 # Session handoff — papamoa-previews
 
-**Last updated:** 2026-06-04 (session 4) by Jay + Claude
-**Last commit:** `c6ceeb3` docs: lock Bronze (Basic) tier contents
-**Branch:** `main` (pushed, tree clean)
+**Last updated:** 2026-06-04 (session 5) by Jay + Claude
+**Last commit:** `cffa18c` sales: consolidate funnel into list-with-us
+**Branch:** `main` (tree clean)
+
+> **Session 5 headline (the sales-page consolidation — DONE):** The whole sales funnel now lives at one destination, `sales/list-with-us.html`. **Stage A** (`72535f6`): internal tools moved to `sales/internal/` (`sales-scripts`, `facebook-posts`, `real-estate-outreach`; `real-estate-agent` stays — it's public), and the two follow-up email files merged into one complete `sales/internal/follow-up-emails.html` (Day 0 + 3/6/10 + ROI explainer; fixed a pre-existing truncation). **Stage B** (`e56222a` + `cffa18c`): `list-with-us` rebuilt as the **Gold | Silver | Bronze** hub (free Bronze card per §3), `landing.html` + `claim.html` merged into one Get-listed form (tier selector + warm `?biz/cat/claim/subcat/type/page` deep-link prefill), **all Menu copy purged**, the menu-lightbox crash removed; **346 `landing` + 82 `claim` CTAs across 112 pages repointed** to the hub (params preserved; spotlight/adspot deep-links handled by the form); `why-list` trimmed to a lean SEO article; `landing.html` + `claim.html` **deleted**. **⚠️ Found + fixed (`4cf170c`):** commit `e1ba5a0` (session-4 menu-hide sweep) had silently gutted `list-with-us.html` (1866→628 lines, head/style/body gone) and `landing.html` — the main CTA page had been serving broken HTML unnoticed; both recovered from `e3f5e66` then reworked. **Carry-overs:** woven Menu copy still in `previews/driftwood-cafe.html` (PPP) + `sales/menu-addon.html` (the deferred Menu product page) — left for the Phase-2 menu decision.
 
 > **Session 4 headline (listings/sales groundwork):** Two decisions executed before the sales rebuild. **(1) Menu feature hidden site-wide** (`e1ba5a0`) — deferred to Phase 2; View-menu buttons/upsells/lightbox/links removed or CSS-hidden via nav.js, `menu-addon.html` noindexed. **(2) Tiers locked** (`ce193c6`,`c6ceeb3`): **Gold $1,199 | Silver $599 | Bronze FREE** (Bronze = NAP + link + short blurb, auto-publish pending admin approval); Menu→Phase 2; ad spots = Phase 1 claimable perk for Silver/Gold; single CTA = `list-with-us`. §17.15 resolved (free-tier pushback won). **NEXT (not started): the sales-page consolidation** — see "Next moves".
 
@@ -163,12 +165,9 @@ None of these can move without him:
 2. **Open the live demo** at `https://plainblackcreative.github.io/papamoa-previews/homepage.html` to see what the user is looking at.
 3. **Ask Jay what's first** — don't assume. Today's session shipped 9 commits in one stretch; that pace is sustainable only when each step is clearly aligned with him. The default cadence is propose → confirm → execute → verify → commit → push.
 
-**#1 LIVE TASK — sales-page consolidation into `list-with-us`** (audit done, plan approved, tiers locked — just execute). Two stages:
+**#1 LIVE TASK — sales-page consolidation into `list-with-us`** — ✅ **DONE (session 5).** Both stages shipped in 5 commits (`72535f6` Stage A, `4cf170c` hotfix, `e56222a` hub rework, `cffa18c` consolidation). The single CTA destination `sales/list-with-us.html` is now the Gold | Silver | Bronze hub with one merged Get-listed form; `landing.html` + `claim.html` deleted; `why-list` trimmed to an SEO article; all listing CTAs repointed; Menu copy purged from the rewritten pages. See the session-5 headline at the top for the full breakdown, including the `e1ba5a0` breakage that was found and fixed. Two **Menu-copy carry-overs** remain for the Phase-2 menu decision: `previews/driftwood-cafe.html` and `sales/menu-addon.html`.
 
-- **Stage A (mechanical, safe):** move internal tools → `sales/internal/` (`sales-scripts.html`, `facebook-posts.html`, the two email files, `partners/real-estate-outreach.html`); their only inbound links are `index.html` + `docs/Project_Master.html` — fix those. **Merge the two follow-up email files** (`email-follow-up.html` single template + `followup-emails.html` sequence) into one.
-- **Stage B (the big rewrite):** rebuild `sales/list-with-us.html` (1867L) as the **Gold | Silver | Bronze** 3-tier hub (Bronze spec in §3: NAP + link + blurb); fold in `why-list`'s "why / AI-search" content; **merge `landing.html` + `claim.html` into one Get-listed form**; trim `why-list.html` to a lean SEO article linking the hub; **repoint every site CTA to `list-with-us`**; purge the leftover "Menu Add-On" sentence copy on these pages as they're rewritten. `spotlight-ads.html` rebuild stays deferred. Match the current site style; bring the hub back for review before deleting/merging anything destructive.
-
-**Then (the listings build):**
+**Then (the listings build — now the front of the queue):**
 1. **Lock the Gold & Silver listing spec** (style/design/required data → canonical templates `listing-gold-template.html`, `listing-silver-template.html`).
 2. **Bronze self-serve auto-create** — visitor creates a free Bronze listing, auto-publishes pending admin approval. ✅ Unblocked (tier locked).
 3. **Self-serve Spotlights / Ad Spots** — Phase 2 (Phase 1 = Silver/Gold claim open slots). §17.11.
