@@ -154,23 +154,39 @@ Closed loop: prospect joins the directory OR commissions a standalone build. Eit
 --green-light: #8FDB4D;   /* koru lime highlight -- live indicator, light green accent */
 --white:       #FFFFFF;
 ```
-*Hero gradients build from `--teal-deep → --ocean` (blue pages) or
-`--green-deep → --green` (green pages); pair with photography per §4.4.*
+*Hero gradients build from `--navy-fill → --ocean-fill` (blue pages) or
+`--green-deep → --green-fill` (green pages); pair with photography per §4.4.*
+
+#### Two-tier application (LOCKED 2026-06-05 per Jay)
+**Accents / text / small elements → punchy logo hexes above. Large fills
+→ slightly-muted variants below** (saturation ×0.72, lightness +4% off the
+logo accent). Same hue, lower intensity, so big nav/hero/section fills
+don't read neon.
+```css
+/* Large-fill tier (backgrounds, hero gradients, full-width bands) */
+--blue-fill:   #2FABDD;   /* muted --blue -- large blue fills (≈ today's #359FE8) */
+--ocean-fill:  #2B89B2;   /* muted --ocean -- gradient mid fills */
+--navy-fill:   #145079;   /* muted --teal-deep -- nav/footer bg, hero base */
+--green-fill:  #6CB71E;   /* muted --green -- large green fills/bands */
+--bg-cool:     #F2FAFE;   /* cool off-white -- replaces --sand page bg */
+```
+**Rule of thumb:** `color` / `border` / small SVG `fill` / eyebrow / `h1 em`
+/ bullets / button text → accent tier (punchy). `background` /
+`background-color` / `linear-gradient()` / full-width band → fill tier (muted).
 
 #### Migration map — current code value → logo target (for the sweep)
-The code renders muted/desaturated stand-ins for the logo hues. The
-site-wide sweep replaces left → right:
+The code renders muted/desaturated stand-ins for the logo hues. The sweep
+splits each by context (accent vs fill):
 
-| Role | Current in code | ~Occurrences | → Logo target |
-|---|---|---|---|
-| Blue accent | `#359FE8` | 635 | `#00B0F8` (`--blue`) |
-| Navy / dark | `#243B59` | 607 | `#004878` (`--teal-deep`) |
-| Ocean mid | `#1B6B7D` | 483 | `#0F86B9` (`--ocean`) |
-| Green (Do / live) | `#89BE43` | 257 | `#8FDB4D` (`--green-light`) |
-| Green (dark) | `#1E6B3C` | 191 | `#4F9E00` (`--green-deep`) |
-| Mid-blue gradient | `#2D95C4` | 215 | `#0F86B9` (`--ocean`) |
-| ~~Sand bg~~ | `#F7F3ED` | 283 | drop → `#FFFFFF` / cool tint `#F2FAFE` |
-| ~~Dune gold~~ | `#C4985A` | 172 | drop (non-logo, warm) |
+| Role | Current in code | ~Occ | → Accent (small) | → Fill (large) |
+|---|---|---|---|---|
+| Blue | `#359FE8` | 635 | `#00B0F8` | `#2FABDD` |
+| Navy / dark | `#243B59` | 607 | `#004878` | `#145079` |
+| Ocean mid | `#1B6B7D` + `#2D95C4` | ~698 | `#0F86B9` | `#2B89B2` |
+| Green (Do / live) | `#89BE43` | 257 | `#62C000` / `#8FDB4D` | `#6CB71E` |
+| Green (dark) | `#1E6B3C` | 191 | `#4F9E00` | `#4F9E00` |
+| Sand bg | `#F7F3ED` | 283 | — | `#F2FAFE` (cool off-white) |
+| Dune gold | `#C4985A` | 172 | `#62C000` (logo green) | `#6CB71E` |
 
 > ⚠ The previously-documented `--navy #0D2B3E`, `--blue #3AABDE`, and
 > `--lime #7DC143` were **never the real code values** (each appears 0–1×
