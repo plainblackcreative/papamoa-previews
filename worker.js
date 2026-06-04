@@ -338,6 +338,69 @@ export default {
       } catch (e) { return bronzeJSON({ ok: false, error: e.message }, 500); }
     }
 
+    // ── /bronze-update (admin) ── edit any whitelisted field on a Bronze row
+    // Body: { id: "...", fields: { name?, category?, subcategory?, address?, phone?,
+    //         website?, email?, blurb?, subcat_path?, subcat_name?, status? } }
+    // Slug / id / ts are immutable. Cache invalidated for old + new sub-cat paths.
+    if (url.pathname === '/bronze-update' && request.method === 'POST') {
+      if (!bronzeAuthed(request)) return bronzeJSON({ ok: false, error: 'unauthorized' }, 401);
+      try {
+        const body = await request.json();
+        const id = (body.id || '').trim();
+        const fields = body.fields || {};
+        if (!id) return bronzeJSON({ ok: false, error: 'missing id' }, 400);
+        // Field -> Sheet column letter map. Slug/id/ts intentionally excluded.
+        var COL = { name:'D', category:'E', subcategory:'F', address:'G', phone:'H',
+          website:'I', email:'J', blurb:'K', subcat_path:'N', subcat_name:'O', status:'C' };
+        var updates = [];
+        var present = {};
+        Object.keys(fields).forEach(function (k) {
+          if (!COL[k]) return; // ignore unknown / immutable
+          var v = bronzeSanitise(fields[k]);
+          if (v == null) return;
+          present[k] = v;
+        });
+        if (!Object.keys(present).length) return bronzeJSON({ ok: false, error: 'no editable fields supplied' }, 400);
+        if (present.status && present.status !== 'pending' && present.status !== 'live' && present.status !== 'rejected') {
+          return bronzeJSON({ ok: false, error: 'invalid status (pending|live|rejected)' }, 400);
+        }
+
+        const token = await getServiceAccountToken(BRONZE.saEmail, env.GOOGLE_SERVICE_ACCOUNT_KEY, 'https://www.googleapis.com/auth/spreadsheets');
+        const rows = ((await (await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}`, { headers: { 'Authorization':`Bearer ${token}` } })).json()).values || []);
+        let idx = -1; for (let i = 1; i < rows.length; i++) { if ((rows[i][0] || '') === id) { idx = i; break; } }
+        if (idx < 0) return bronzeJSON({ ok: false, error: 'id not found' }, 404);
+        const before = bronzeRowToObj(rows[idx]);
+
+        Object.keys(present).forEach(function (k) {
+          updates.push({ range: BRONZE.tab + '!' + COL[k] + (idx + 1), values: [[present[k]]] });
+        });
+        const sheetResp = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values:batchUpdate`, {
+          method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` },
+          body: JSON.stringify({ valueInputOption: 'USER_ENTERED', data: updates }),
+        });
+        if (!sheetResp.ok) return bronzeJSON({ ok: false, error: 'sheet update failed: ' + (await sheetResp.text()).slice(0, 180) }, 502);
+
+        // Invalidate /bronze-public cache for any sub-cat the row touched (before + after).
+        try {
+          const cache = caches.default;
+          var paths = {};
+          if (before && before.subcat_path) paths[before.subcat_path] = true;
+          if (present.subcat_path) paths[present.subcat_path] = true;
+          var cats = {};
+          if (before && before.category) cats[before.category] = true;
+          if (present.category) cats[present.category] = true;
+          cats[''] = true; // also nuke the cat-empty cache variant
+          Object.keys(paths).forEach(function (p) {
+            Object.keys(cats).forEach(function (c) {
+              cache.delete(new Request('https://papamoa-internal/bronze-public?cat=' + encodeURIComponent(c) + '&subcat=' + encodeURIComponent(p)));
+            });
+          });
+        } catch (_) {}
+
+        return bronzeJSON({ ok: true, updated: Object.keys(present) });
+      } catch (e) { return bronzeJSON({ ok: false, error: e.message }, 500); }
+    }
+
     // ── /bronze-reject (admin) ── mark rejected
     if (url.pathname === '/bronze-reject' && request.method === 'POST') {
       if (!bronzeAuthed(request)) return bronzeJSON({ ok: false, error: 'unauthorized' }, 401);

@@ -67,6 +67,30 @@ body { font-family:var(--font-body); background:var(--sand); color:var(--text); 
 .card-actions .live-url { font-size:12.5px; color:var(--green); }
 .card-actions .live-url a { color:var(--green); font-weight:700; }
 .empty { text-align:center; color:var(--muted); padding:40px 0; font-size:14px; }
+
+/* Edit modal */
+.btn-edit { background:transparent; color:var(--ocean); border:1px solid var(--border); font-weight:600; padding:5px 12px; font-size:11.5px; border-radius:6px; }
+.btn-edit:hover { border-color:var(--ocean); background:rgba(27,107,125,0.05); }
+.card-head .btn-edit { margin-left:6px; align-self:flex-start; }
+.bz-ov { position:fixed; inset:0; background:rgba(15,35,45,0.55); backdrop-filter:blur(3px); z-index:1000; display:none; align-items:flex-start; justify-content:center; padding:32px 16px; overflow-y:auto; }
+.bz-ov.open { display:flex; }
+.bz-mod { background:#fff; border-radius:14px; width:100%; max-width:640px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.3); margin:auto; }
+.bz-mod-head { background:var(--navy); padding:18px 24px 16px; display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+.bz-mod-head h2 { font-family:var(--font-display); font-size:1.15rem; color:#fff; }
+.bz-mod-head p { font-size:12px; color:rgba(255,255,255,0.55); margin-top:3px; }
+.bz-mod-close { background:rgba(255,255,255,0.1); border:none; color:rgba(255,255,255,0.7); width:30px; height:30px; border-radius:50%; font-size:17px; cursor:pointer; line-height:1; flex-shrink:0; }
+.bz-mod-close:hover { background:rgba(255,255,255,0.2); color:#fff; }
+.bz-mod-body { padding:22px 24px; }
+.bz-edit-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 16px; }
+.bz-edit-field { display:flex; flex-direction:column; gap:4px; }
+.bz-edit-field.full { grid-column:1 / -1; }
+.bz-edit-field label { font-size:11px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted); }
+.bz-edit-field input, .bz-edit-field select, .bz-edit-field textarea { font-family:var(--font-body); font-size:13px; padding:9px 12px; border:1.5px solid var(--border); border-radius:7px; background:#fff; color:var(--text); outline:none; }
+.bz-edit-field input:focus, .bz-edit-field select:focus, .bz-edit-field textarea:focus { border-color:var(--ocean); }
+.bz-edit-field textarea { resize:vertical; min-height:72px; line-height:1.5; }
+.bz-mod-foot { padding:16px 24px 22px; display:flex; gap:10px; justify-content:flex-end; border-top:1px solid var(--border); background:var(--sand); }
+.bz-mod-err { font-size:12.5px; color:var(--red); margin-right:auto; align-self:center; }
+@media (max-width:560px){ .bz-edit-grid { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -98,6 +122,43 @@ body { font-family:var(--font-body); background:var(--sand); color:var(--text); 
 
   <div class="status-msg" id="status"></div>
   <div id="list"></div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="bz-ov" id="bz-ov" onclick="bzEditOverlayClick(event)">
+  <div class="bz-mod" role="dialog" aria-label="Edit Bronze listing">
+    <div class="bz-mod-head">
+      <div>
+        <h2>Edit listing</h2>
+        <p id="bz-mod-sub"></p>
+      </div>
+      <button class="bz-mod-close" type="button" onclick="bzEditClose()" aria-label="Close">&times;</button>
+    </div>
+    <form id="bz-edit-form" onsubmit="bzEditSave(event)">
+      <input type="hidden" id="bz-edit-id">
+      <div class="bz-mod-body">
+        <div class="bz-edit-grid">
+          <div class="bz-edit-field full"><label>Business name</label><input type="text" id="bz-f-name" maxlength="80"></div>
+          <div class="bz-edit-field full"><label>Address</label><input type="text" id="bz-f-address" maxlength="120"></div>
+          <div class="bz-edit-field"><label>Phone</label><input type="text" id="bz-f-phone" maxlength="30"></div>
+          <div class="bz-edit-field"><label>Website</label><input type="text" id="bz-f-website" maxlength="120" placeholder="example.co.nz"></div>
+          <div class="bz-edit-field"><label>Email (private)</label><input type="email" id="bz-f-email" maxlength="80"></div>
+          <div class="bz-edit-field"><label>Status</label>
+            <select id="bz-f-status"><option value="pending">pending</option><option value="live">live</option><option value="rejected">rejected</option></select>
+          </div>
+          <div class="bz-edit-field"><label>Category</label><select id="bz-f-category"></select></div>
+          <div class="bz-edit-field"><label>Sub-category</label><select id="bz-f-subcat_path"></select></div>
+          <div class="bz-edit-field full"><label>Subcategory (free-text, from submitter)</label><input type="text" id="bz-f-subcategory" maxlength="60" placeholder="optional hint"></div>
+          <div class="bz-edit-field full"><label>Blurb</label><textarea id="bz-f-blurb" maxlength="320"></textarea></div>
+        </div>
+      </div>
+      <div class="bz-mod-foot">
+        <span class="bz-mod-err" id="bz-mod-err"></span>
+        <button type="button" class="btn btn-ghost" onclick="bzEditClose()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="bz-save">Save</button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script>
@@ -201,7 +262,10 @@ function cardHtml(it){
   return '<div class="card">'
     + '<div class="card-head"><div><div class="card-name">'+esc(it.business_name)+'</div>'
     + '<div class="card-sub">'+esc(it.subcategory)+' · '+esc(it.category)+' · '+fmtDate(it.ts)+'</div></div>'
-    + '<span class="pill pill-'+status+'">'+status+'</span></div>'
+    + '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">'
+    + '<span class="pill pill-'+status+'">'+status+'</span>'
+    + '<button class="btn btn-edit" data-edit="'+esc(it.id)+'">Edit</button>'
+    + '</div></div>'
     + '<div class="card-grid">'
     + '<div><span class="k">Address:</span> '+esc(it.address)+'</div>'
     + '<div><span class="k">Phone:</span> '+(it.phone?esc(it.phone):'<span class="k">-</span>')+'</div>'
@@ -220,17 +284,106 @@ async function approve(id){
   var subcatPath = sel ? sel.value : '';
   if (!subcatPath) { setStatus('Pick a subcategory before approving.', true); if (sel) sel.focus(); return; }
   var subcatName = sel.options[sel.selectedIndex].text;
-  if (!confirm('Approve and publish under "'+subcatName+'"? This commits a live page to the site.')) return;
+  if (!confirm('Approve and surface as a card on "'+subcatName+'"?')) return;
   setStatus('Publishing…');
   try {
     var data = await api('/bronze-approve', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id, category:category, subcat_path:subcatPath, subcat_name:subcatName }) });
     if (!data.ok) throw new Error(data.error || 'approve failed');
     var it = state.items.find(function(x){ return x.id===id; });
-    if (it) it.status='live';
+    if (it) { it.status='live'; it.category=category; it.subcat_path=subcatPath; it.subcat_name=subcatName; }
     render();
-    setStatus('Published ' + (data.url||'') + ' - allow ~1 min for the page to build.');
+    setStatus('Live. Card appears on ' + (data.url||'') + ' on the next page load (cache invalidated).');
   } catch(e){ setStatus(e.message, true); }
 }
+
+// ── EDIT MODAL ──────────────────────────────────────────────────────────
+function bzEditOpen(id){
+  var it = state.items.find(function(x){ return x.id===id; });
+  if (!it) return;
+  document.getElementById('bz-edit-id').value = id;
+  document.getElementById('bz-mod-sub').textContent = (it.business_name||'') + ' · ' + (it.id||'');
+  document.getElementById('bz-f-name').value = it.business_name||'';
+  document.getElementById('bz-f-address').value = it.address||'';
+  document.getElementById('bz-f-phone').value = it.phone||'';
+  document.getElementById('bz-f-website').value = it.website||'';
+  document.getElementById('bz-f-email').value = it.email||'';
+  document.getElementById('bz-f-blurb').value = it.blurb||'';
+  document.getElementById('bz-f-subcategory').value = it.subcategory||'';
+  document.getElementById('bz-f-status').value = it.status||'pending';
+  // Category + subcat dropdowns
+  var catSel = document.getElementById('bz-f-category');
+  catSel.innerHTML = CAT_LIST.map(function(c){ return '<option value="'+c[0]+'"'+(c[0]===(it.category||'')?' selected':'')+'>'+esc(c[1])+'</option>'; }).join('');
+  var scSel = document.getElementById('bz-f-subcat_path');
+  scSel.innerHTML = '<option value="">— none —</option>' + subcatListFor(catSel.value).map(function(sc){ return '<option value="'+esc(sc.path)+'"'+(sc.path===(it.subcat_path||'')?' selected':'')+'>'+esc(sc.name)+'</option>'; }).join('');
+  catSel.onchange = function(){
+    scSel.innerHTML = '<option value="">— none —</option>' + subcatListFor(catSel.value).map(function(sc){ return '<option value="'+esc(sc.path)+'">'+esc(sc.name)+'</option>'; }).join('');
+  };
+  document.getElementById('bz-mod-err').textContent = '';
+  document.getElementById('bz-ov').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function bzEditClose(){
+  document.getElementById('bz-ov').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function bzEditOverlayClick(e){ if (e.target.id === 'bz-ov') bzEditClose(); }
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && document.getElementById('bz-ov').classList.contains('open')) bzEditClose();
+});
+async function bzEditSave(e){
+  e.preventDefault();
+  var id = document.getElementById('bz-edit-id').value;
+  var scSel = document.getElementById('bz-f-subcat_path');
+  var subcatName = '';
+  if (scSel.value) { var opt = scSel.options[scSel.selectedIndex]; subcatName = opt ? opt.text : ''; }
+  var fields = {
+    name:           document.getElementById('bz-f-name').value,
+    address:        document.getElementById('bz-f-address').value,
+    phone:          document.getElementById('bz-f-phone').value,
+    website:        document.getElementById('bz-f-website').value,
+    email:          document.getElementById('bz-f-email').value,
+    blurb:          document.getElementById('bz-f-blurb').value,
+    subcategory:    document.getElementById('bz-f-subcategory').value,
+    category:       document.getElementById('bz-f-category').value,
+    subcat_path:    scSel.value,
+    subcat_name:    subcatName,
+    status:         document.getElementById('bz-f-status').value
+  };
+  var saveBtn = document.getElementById('bz-save');
+  var errEl = document.getElementById('bz-mod-err');
+  saveBtn.disabled = true; saveBtn.textContent = 'Saving…'; errEl.textContent = '';
+  try {
+    var data = await api('/bronze-update', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id, fields:fields }) });
+    if (!data.ok) throw new Error(data.error || 'update failed');
+    // Patch local state with the fields we sent.
+    var it = state.items.find(function(x){ return x.id===id; });
+    if (it) {
+      if (fields.name)        it.business_name = fields.name;
+      if (fields.address)     it.address = fields.address;
+      if (fields.phone)       it.phone = fields.phone;
+      if (fields.website)     it.website = fields.website;
+      if (fields.email)       it.email = fields.email;
+      if (fields.blurb)       it.blurb = fields.blurb;
+      if (fields.subcategory) it.subcategory = fields.subcategory;
+      if (fields.category)    it.category = fields.category;
+      if (fields.subcat_path) it.subcat_path = fields.subcat_path;
+      if (fields.subcat_name) it.subcat_name = fields.subcat_name;
+      if (fields.status)      it.status = fields.status;
+    }
+    render();
+    bzEditClose();
+    setStatus('Saved. Cache invalidated for the affected sub-category.');
+  } catch(err){
+    errEl.textContent = err.message;
+    saveBtn.disabled = false; saveBtn.textContent = 'Save';
+  }
+}
+// Delegate Edit clicks (buttons are re-rendered on every render() call).
+document.getElementById('list').addEventListener('click', function(e){
+  var b = e.target.closest('[data-edit]');
+  if (!b) return;
+  bzEditOpen(b.getAttribute('data-edit'));
+});
 
 async function reject(id){
   if (!confirm('Reject this submission?')) return;
