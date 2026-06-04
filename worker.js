@@ -194,6 +194,138 @@ export default {
       }
     }
 
+    // ══════════════════════════════════════════════════════════════════
+    //  BRONZE SELF-SERVE LISTINGS (Project_Master §8.2)
+    //  Config below - Jay edits to match the provisioned Sheet + repo.
+    //  Secrets (wrangler secret put ...): GOOGLE_SERVICE_ACCOUNT_KEY (exists),
+    //  GITHUB_TOKEN (fine-scoped, contents:write on the repo), BRONZE_ADMIN_TOKEN,
+    //  RESEND_API_KEY (optional - operator email).
+    // ══════════════════════════════════════════════════════════════════
+    const BRONZE = {
+      sheetId:       '<<SET_BRONZE_SHEET_ID>>',     // Google Sheet id (cols: id,ts,status,name,category,subcat,address,phone,website,email,blurb,slug,url)
+      tab:           'Bronze Listings',             // tab name
+      saEmail:       'papamoa-sheets-writer@papamoa-info.iam.gserviceaccount.com',
+      ghOwner:       'plainblackcreative',
+      ghRepo:        'papamoa-previews',
+      ghBranch:      'main',
+      templateUrl:   'https://raw.githubusercontent.com/plainblackcreative/papamoa-previews/main/listing-bronze-template.html',
+      operatorEmail: 'info@plainblackcreative.com',
+    };
+    const bronzeJSON = (obj, status) => new Response(JSON.stringify(obj), { status: status || 200, headers: { 'Content-Type':'application/json', 'Access-Control-Allow-Origin':'*' } });
+    const bronzeAuthed = (req) => {
+      const tok = req.headers.get('X-Admin-Token') || new URL(req.url).searchParams.get('key') || '';
+      return !!env.BRONZE_ADMIN_TOKEN && tok === env.BRONZE_ADMIN_TOKEN;
+    };
+
+    // ── /bronze-submit (public) ── visitor creates a free listing -> pending row + operator email
+    if (url.pathname === '/bronze-submit' && request.method === 'POST') {
+      try {
+        let f; const ct = request.headers.get('Content-Type') || '';
+        if (ct.includes('application/json')) { f = await request.json(); }
+        else { const fd = await request.formData(); f = {}; for (const [k,v] of fd.entries()) f[k] = v; }
+        if ((f.botcheck || '').toString().trim()) return bronzeJSON({ ok: true, success: true }); // honeypot: accept + drop
+
+        const clean = (v, n) => bronzeSanitise(v).slice(0, n);
+        const data = {
+          business_name: clean(f.business_name, 80), category: clean(f.category, 30), subcategory: clean(f.subcategory, 50),
+          address: clean(f.address, 120), phone: clean(f.phone, 24), website: clean(f.website, 120),
+          email: clean(f.email, 120), blurb: clean(f.blurb, 220),
+        };
+        if (!data.business_name || !data.category || !data.subcategory || !data.address || !data.blurb || !data.email)
+          return bronzeJSON({ ok: false, error: 'missing required fields' }, 400);
+        if (!data.phone && !data.website) return bronzeJSON({ ok: false, error: 'phone or website required' }, 400);
+
+        const ts = new Date().toISOString();
+        const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+        const id = await hashString(ip + ts + data.business_name);
+        const slug = bronzeSlugify(data.business_name);
+
+        // best-effort per-IP throttle (KV/Durable Object would be sturdier)
+        const throttleKey = new Request('https://papamoa-internal/bronze-throttle/' + await hashString(ip));
+        if (await caches.default.match(throttleKey)) return bronzeJSON({ ok: false, error: 'please wait a minute before submitting again' }, 429);
+        ctx.waitUntil(caches.default.put(throttleKey, new Response('1', { headers: { 'Cache-Control': 'max-age=60' } })));
+
+        const token = await getServiceAccountToken(BRONZE.saEmail, env.GOOGLE_SERVICE_ACCOUNT_KEY, 'https://www.googleapis.com/auth/spreadsheets');
+        const row = [id, ts, 'pending', data.business_name, data.category, data.subcategory, data.address, data.phone, data.website, data.email, data.blurb, slug, ''];
+        const ar = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}:append?valueInputOption=USER_ENTERED`, {
+          method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` }, body: JSON.stringify({ values: [row] }),
+        });
+        if (!ar.ok) return bronzeJSON({ ok: false, error: 'sheet append failed: ' + (await ar.text()).slice(0, 180) }, 502);
+
+        if (env.RESEND_API_KEY) {
+          ctx.waitUntil(fetch('https://api.resend.com/emails', {
+            method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${env.RESEND_API_KEY}` },
+            body: JSON.stringify({ from: 'Papamoa.info <noreply@papamoa.info>', to: [BRONZE.operatorEmail],
+              subject: `New free Bronze listing pending: ${data.business_name}`,
+              text: `A free Bronze listing is awaiting review.\n\nBusiness: ${data.business_name}\nCategory: ${data.category} / ${data.subcategory}\nAddress: ${data.address}\nPhone: ${data.phone || '-'}\nWebsite: ${data.website || '-'}\nEmail: ${data.email}\nBlurb: ${data.blurb}\n\nApprove/reject in the queue: https://papamoa.info/admin/bronze-queue.html` }),
+          }).catch(() => {}));
+        }
+        return bronzeJSON({ ok: true, success: true, id });
+      } catch (e) { return bronzeJSON({ ok: false, error: e.message }, 400); }
+    }
+
+    // ── /bronze-list (admin) ── rows for the moderation queue
+    if (url.pathname === '/bronze-list' && request.method === 'GET') {
+      if (!bronzeAuthed(request)) return bronzeJSON({ ok: false, error: 'unauthorized' }, 401);
+      try {
+        const token = await getServiceAccountToken(BRONZE.saEmail, env.GOOGLE_SERVICE_ACCOUNT_KEY, 'https://www.googleapis.com/auth/spreadsheets.readonly');
+        const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}`, { headers: { 'Authorization':`Bearer ${token}` } });
+        const rows = ((await r.json()).values || []).slice(1);
+        return bronzeJSON({ ok: true, items: rows.map(bronzeRowToObj).filter(Boolean) });
+      } catch (e) { return bronzeJSON({ ok: false, error: e.message }, 500); }
+    }
+
+    // ── /bronze-approve (admin) ── render template -> commit /listings/SLUG.html -> mark live
+    if (url.pathname === '/bronze-approve' && request.method === 'POST') {
+      if (!bronzeAuthed(request)) return bronzeJSON({ ok: false, error: 'unauthorized' }, 401);
+      try {
+        const id = ((await request.json()).id || '').trim();
+        if (!id) return bronzeJSON({ ok: false, error: 'missing id' }, 400);
+        const token = await getServiceAccountToken(BRONZE.saEmail, env.GOOGLE_SERVICE_ACCOUNT_KEY, 'https://www.googleapis.com/auth/spreadsheets');
+        const rows = ((await (await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}`, { headers: { 'Authorization':`Bearer ${token}` } })).json()).values || []);
+        let idx = -1; for (let i = 1; i < rows.length; i++) { if ((rows[i][0] || '') === id) { idx = i; break; } }
+        if (idx < 0) return bronzeJSON({ ok: false, error: 'id not found' }, 404);
+        const rec = bronzeRowToObj(rows[idx]);
+        if (rec.status === 'live') return bronzeJSON({ ok: false, error: 'already live', url: `/listings/${rec.slug}.html` }, 409);
+
+        const tplResp = await fetch(BRONZE.templateUrl);
+        if (!tplResp.ok) return bronzeJSON({ ok: false, error: 'template fetch failed' }, 502);
+        const html = bronzeRender(await tplResp.text(), rec);
+
+        const path = `listings/${rec.slug}.html`;
+        const ghBase = `https://api.github.com/repos/${BRONZE.ghOwner}/${BRONZE.ghRepo}/contents/${path}`;
+        const ghHeaders = { 'Authorization':`Bearer ${env.GITHUB_TOKEN}`, 'Accept':'application/vnd.github+json', 'User-Agent':'papamoa-bronze-worker', 'Content-Type':'application/json' };
+        let sha; const exist = await fetch(`${ghBase}?ref=${BRONZE.ghBranch}`, { headers: ghHeaders });
+        if (exist.status === 200) sha = (await exist.json()).sha;
+        const commit = await fetch(ghBase, { method: 'PUT', headers: ghHeaders, body: JSON.stringify({
+          message: `bronze: publish listing ${rec.slug} (approved)`, content: bronzeB64Utf8(html), branch: BRONZE.ghBranch, ...(sha ? { sha } : {}),
+        }) });
+        if (!commit.ok) return bronzeJSON({ ok: false, error: 'github commit failed: ' + (await commit.text()).slice(0, 180) }, 502);
+
+        await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}!C${idx + 1}?valueInputOption=USER_ENTERED`, {
+          method: 'PUT', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` }, body: JSON.stringify({ values: [['live']] }),
+        });
+        return bronzeJSON({ ok: true, url: `/listings/${rec.slug}.html` });
+      } catch (e) { return bronzeJSON({ ok: false, error: e.message }, 500); }
+    }
+
+    // ── /bronze-reject (admin) ── mark rejected
+    if (url.pathname === '/bronze-reject' && request.method === 'POST') {
+      if (!bronzeAuthed(request)) return bronzeJSON({ ok: false, error: 'unauthorized' }, 401);
+      try {
+        const id = ((await request.json()).id || '').trim();
+        if (!id) return bronzeJSON({ ok: false, error: 'missing id' }, 400);
+        const token = await getServiceAccountToken(BRONZE.saEmail, env.GOOGLE_SERVICE_ACCOUNT_KEY, 'https://www.googleapis.com/auth/spreadsheets');
+        const rows = ((await (await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}`, { headers: { 'Authorization':`Bearer ${token}` } })).json()).values || []);
+        let idx = -1; for (let i = 1; i < rows.length; i++) { if ((rows[i][0] || '') === id) { idx = i; break; } }
+        if (idx < 0) return bronzeJSON({ ok: false, error: 'id not found' }, 404);
+        await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${BRONZE.sheetId}/values/${encodeURIComponent(BRONZE.tab)}!C${idx + 1}?valueInputOption=USER_ENTERED`, {
+          method: 'PUT', headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` }, body: JSON.stringify({ values: [['rejected']] }),
+        });
+        return bronzeJSON({ ok: true });
+      } catch (e) { return bronzeJSON({ ok: false, error: e.message }, 500); }
+    }
+
     // ── Fishing data ──────────────────────────────────
     if (url.pathname === '/fishing-data') {
       if (!env.CLAUDE_API_KEY) {
@@ -443,4 +575,55 @@ async function hashString(str) {
 
 function capitalise(str) {
   return String(str).split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+}
+// ── Bronze self-serve helpers (Project_Master §8.2) ───
+function bronzeSanitise(v) {
+  return String(v == null ? '' : v).replace(/[<>{}`"]/g, '').replace(/\s+/g, ' ').trim();
+}
+function bronzeSlugify(name) {
+  return String(name).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) + '-papamoa';
+}
+const BRONZE_CATEGORY = {
+  'accommodation': { name: 'Accommodation', path: 'accommodation/accommodation' },
+  'food-drink':    { name: 'Food & Drink', path: 'food-drink/food-and-drink' },
+  'services':      { name: 'Services', path: 'services/services' },
+  'health':        { name: 'Health & Wellness', path: 'health/health-papamoa' },
+  'entertainment': { name: 'Activities & Entertainment', path: 'activities/entertainment' },
+  'shopping':      { name: 'Shopping', path: 'shops/shopping' },
+  'real-estate':   { name: 'Real Estate', path: 'community/real-estate' },
+  'default':       { name: 'Local Business', path: 'homepage' },
+};
+function bronzeRowToObj(row) {
+  if (!row || !row[0]) return null;
+  return { id: row[0], ts: row[1], status: row[2] || 'pending', business_name: row[3], category: row[4],
+    subcategory: row[5], address: row[6], phone: row[7], website: row[8], email: row[9], blurb: row[10], slug: row[11], url: row[12] };
+}
+function bronzeNormaliseUrl(u) {
+  u = String(u || '').trim(); if (!u) return '';
+  return /^https?:\/\//i.test(u) ? u : 'https://' + u;
+}
+function bronzeRender(tpl, rec) {
+  tpl = tpl.replace(/<!--\s*╔[\s\S]*?╝[\s\S]*?-->\s*/, ''); // strip instruction box (╔...╝)
+  const cat = BRONZE_CATEGORY[rec.category] || BRONZE_CATEGORY['default'];
+  const phone = bronzeSanitise(rec.phone), website = bronzeNormaliseUrl(rec.website);
+  [['PHONE', !!phone], ['WEBSITE', !!website]].forEach(([n, keep]) => {
+    const re = new RegExp('<!--\\{\\{#' + n + '\\}\\}-->([\\s\\S]*?)<!--\\{\\{/' + n + '\\}\\}-->', 'g');
+    tpl = tpl.replace(re, keep ? '$1' : '');
+  });
+  const tokens = {
+    BUSINESS_NAME: rec.business_name, BUSINESS_NAME_ENC: encodeURIComponent(rec.business_name), SLUG: rec.slug,
+    META_DESC: (rec.business_name + ' - ' + rec.blurb).slice(0, 155),
+    CATEGORY_NAME: cat.name, CATEGORY_PATH: cat.path, SUBCAT_NAME: rec.subcategory, SUBCAT_PATH: cat.path,
+    BLURB: rec.blurb, PHONE_DIGITS: phone.replace(/[^0-9+]/g, ''), PHONE_DISPLAY: phone,
+    WEBSITE_URL: website, WEBSITE_DISPLAY: website.replace(/^https?:\/\//, '').replace(/\/$/, ''),
+    FULL_ADDRESS: rec.address, GOOGLE_MAPS_URL: 'https://maps.google.com/?q=' + encodeURIComponent(rec.address + ', Papamoa, New Zealand'),
+  };
+  Object.keys(tokens).forEach(k => { tpl = tpl.split('{{' + k + '}}').join(tokens[k]); });
+  return tpl;
+}
+function bronzeB64Utf8(str) {
+  const bytes = new TextEncoder().encode(str); let bin = '';
+  bytes.forEach(b => bin += String.fromCharCode(b));
+  return btoa(bin);
 }

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bronze Listing Queue | Papamoa.info Admin</title>
+<link rel="icon" type="image/x-icon" href="/papamoa-previews/favicon.ico">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+:root {
+  --navy:#243B59; --ocean:#1B6B7D; --ocean-deep:#0F4352; --blue:#359FE8; --sand:#F7F3ED; --white:#fff;
+  --text:#1A2832; --muted:#5A6E78; --border:#D8E4E8;
+  --green:#1E6B3C; --green-bg:#E6F4EC; --red:#8B2020; --red-bg:#FAEAEA; --warn:#7A5500; --warn-bg:#FFF8E6;
+  --font-body:'Figtree',sans-serif; --font-display:'Playfair Display',serif;
+}
+body { font-family:var(--font-body); background:var(--sand); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+.topbar { background:var(--navy); padding:14px 28px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.topbar .tb-title { color:#fff; font-weight:700; font-size:15px; }
+.topbar .tb-title span { color:var(--blue); }
+.tb-badge { background:var(--ocean); color:#fff; font-size:10px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:3px; }
+.wrap { max-width:880px; margin:0 auto; padding:28px 24px 64px; }
+.note { background:var(--warn-bg); border:1px solid #E8C96A; color:var(--warn); border-radius:8px; padding:12px 16px; font-size:13px; margin-bottom:20px; line-height:1.55; }
+
+.auth { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:22px; display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; }
+.auth label { font-size:11px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:5px; }
+.auth input { padding:10px 13px; border:1.5px solid var(--border); border-radius:8px; font-family:var(--font-body); font-size:14px; min-width:240px; outline:none; }
+.auth input:focus { border-color:var(--ocean); }
+.btn { font-family:var(--font-body); font-weight:700; font-size:13px; padding:10px 18px; border-radius:8px; border:none; cursor:pointer; text-decoration:none; display:inline-block; }
+.btn-primary { background:var(--blue); color:#fff; } .btn-primary:hover { background:#2d95c4; }
+.btn-approve { background:var(--green); color:#fff; } .btn-approve:hover { filter:brightness(1.08); }
+.btn-reject { background:transparent; color:var(--red); border:1.5px solid #E0B4B4; } .btn-reject:hover { background:var(--red-bg); }
+.btn-ghost { background:var(--white); color:var(--ocean); border:1.5px solid var(--border); }
+.btn:disabled { opacity:0.55; cursor:not-allowed; }
+
+.filters { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.filter { font-size:12.5px; font-weight:700; padding:7px 16px; border-radius:100px; border:1.5px solid var(--border); background:var(--white); color:var(--muted); cursor:pointer; }
+.filter.active { background:var(--navy); color:#fff; border-color:var(--navy); }
+
+.status-msg { font-size:13px; color:var(--muted); margin-bottom:16px; }
+.status-msg.err { color:var(--red); }
+
+.card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:14px; }
+.card-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+.card-name { font-family:var(--font-display); font-size:1.15rem; color:var(--navy); }
+.card-sub { font-size:12.5px; color:var(--muted); margin-top:2px; }
+.pill { font-size:10px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:3px; white-space:nowrap; }
+.pill-pending { background:var(--warn-bg); color:var(--warn); }
+.pill-live { background:var(--green-bg); color:var(--green); }
+.pill-rejected { background:var(--red-bg); color:var(--red); }
+.card-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px 18px; font-size:13px; margin:10px 0 12px; }
+@media (max-width:560px){ .card-grid { grid-template-columns:1fr; } }
+.card-grid .k { color:var(--muted); }
+.card-grid a { color:var(--ocean); text-decoration:none; word-break:break-word; }
+.card-blurb { font-size:13.5px; color:var(--text); background:var(--sand); border-radius:8px; padding:11px 14px; margin-bottom:14px; line-height:1.6; }
+.card-actions { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.card-actions .live-url { font-size:12.5px; color:var(--green); }
+.card-actions .live-url a { color:var(--green); font-weight:700; }
+.empty { text-align:center; color:var(--muted); padding:40px 0; font-size:14px; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="tb-title">papamoa<span>.info</span> Admin</div>
+  <div class="tb-badge">Bronze Listing Queue</div>
+</div>
+
+<div class="wrap">
+  <div class="note">
+    <strong>Moderation queue for free Bronze listings.</strong> Approve publishes a real static page to <code>/listings/SLUG.html</code> via a commit (allow ~1 minute for GitHub Pages to rebuild). Reject marks the row rejected. Nothing goes live without approval. Requires the admin token + the Bronze Worker deployed (Project_Master §8.2).
+  </div>
+
+  <div class="auth">
+    <div>
+      <label for="tok">Admin token</label>
+      <input type="password" id="tok" placeholder="BRONZE_ADMIN_TOKEN" autocomplete="off">
+    </div>
+    <button class="btn btn-primary" id="connect">Connect &amp; load</button>
+  </div>
+
+  <div class="filters" id="filters" style="display:none;">
+    <button class="filter active" data-f="pending">Pending</button>
+    <button class="filter" data-f="live">Live</button>
+    <button class="filter" data-f="rejected">Rejected</button>
+    <button class="filter" data-f="all">All</button>
+    <button class="btn btn-ghost" id="refresh" style="margin-left:auto;">Refresh</button>
+  </div>
+
+  <div class="status-msg" id="status"></div>
+  <div id="list"></div>
+</div>
+
+<script>
+var API = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
+var state = { items: [], filter: 'pending', token: '' };
+
+function $(id){ return document.getElementById(id); }
+function esc(s){ var d=document.createElement('div'); d.textContent = (s==null?'':s); return d.innerHTML; }
+function setStatus(msg, err){ var el=$('status'); el.textContent=msg||''; el.className='status-msg'+(err?' err':''); }
+
+function fmtDate(iso){ if(!iso) return ''; var d=new Date(iso); return isNaN(d)?iso:d.toLocaleString('en-NZ',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); }
+
+async function api(path, opts){
+  var sep = path.indexOf('?')>-1 ? '&' : '?';
+  var res = await fetch(API + path + sep + 'key=' + encodeURIComponent(state.token), opts || {});
+  var data = await res.json().catch(function(){ return { ok:false, error:'bad response' }; });
+  if (res.status === 401) throw new Error('Unauthorized - check the admin token.');
+  return data;
+}
+
+async function load(){
+  setStatus('Loading…');
+  try {
+    var data = await api('/bronze-list', { method:'GET' });
+    if (!data.ok) throw new Error(data.error || 'load failed');
+    state.items = data.items || [];
+    sessionStorage.setItem('bronzeToken', state.token);
+    $('filters').style.display = 'flex';
+    render();
+    setStatus(state.items.length + ' total submission(s).');
+  } catch(e) { setStatus(e.message, true); }
+}
+
+function render(){
+  var list = $('list');
+  var items = state.items.filter(function(it){ return state.filter==='all' ? true : (it.status||'pending')===state.filter; });
+  items.sort(function(a,b){ return (b.ts||'').localeCompare(a.ts||''); });
+  if (!items.length){ list.innerHTML = '<div class="empty">No '+state.filter+' listings.</div>'; return; }
+  list.innerHTML = items.map(cardHtml).join('');
+  items.forEach(function(it){
+    var ap=$('ap-'+it.id), rj=$('rj-'+it.id);
+    if(ap) ap.onclick=function(){ approve(it.id); };
+    if(rj) rj.onclick=function(){ reject(it.id); };
+  });
+}
+
+function cardHtml(it){
+  var status = it.status||'pending';
+  var web = it.website ? (/^https?:\/\//i.test(it.website)?it.website:'https://'+it.website) : '';
+  var actions = '';
+  if (status==='pending') {
+    actions = '<button class="btn btn-approve" id="ap-'+esc(it.id)+'">Approve &amp; publish</button>'
+            + '<button class="btn btn-reject" id="rj-'+esc(it.id)+'">Reject</button>';
+  } else if (status==='live') {
+    actions = '<span class="live-url">Live: <a href="/papamoa-previews/listings/'+esc(it.slug)+'.html" target="_blank" rel="noopener">/listings/'+esc(it.slug)+'.html &rarr;</a></span>';
+  } else {
+    actions = '<button class="btn btn-approve" id="ap-'+esc(it.id)+'">Approve anyway</button>';
+  }
+  return '<div class="card">'
+    + '<div class="card-head"><div><div class="card-name">'+esc(it.business_name)+'</div>'
+    + '<div class="card-sub">'+esc(it.subcategory)+' · '+esc(it.category)+' · '+fmtDate(it.ts)+'</div></div>'
+    + '<span class="pill pill-'+status+'">'+status+'</span></div>'
+    + '<div class="card-grid">'
+    + '<div><span class="k">Address:</span> '+esc(it.address)+'</div>'
+    + '<div><span class="k">Phone:</span> '+(it.phone?esc(it.phone):'<span class="k">-</span>')+'</div>'
+    + '<div><span class="k">Website:</span> '+(web?'<a href="'+esc(web)+'" target="_blank" rel="noopener">'+esc(it.website)+'</a>':'<span class="k">-</span>')+'</div>'
+    + '<div><span class="k">Email:</span> '+esc(it.email)+'</div>'
+    + '</div>'
+    + '<div class="card-blurb">'+esc(it.blurb)+'</div>'
+    + '<div class="card-actions">'+actions+'</div>'
+    + '</div>';
+}
+
+async function approve(id){
+  if (!confirm('Approve and publish this listing? This commits a live page to the site.')) return;
+  setStatus('Publishing…');
+  try {
+    var data = await api('/bronze-approve', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id }) });
+    if (!data.ok) throw new Error(data.error || 'approve failed');
+    var it = state.items.find(function(x){ return x.id===id; });
+    if (it) it.status='live';
+    render();
+    setStatus('Published ' + (data.url||'') + ' - allow ~1 min for the page to build.');
+  } catch(e){ setStatus(e.message, true); }
+}
+
+async function reject(id){
+  if (!confirm('Reject this submission?')) return;
+  setStatus('Rejecting…');
+  try {
+    var data = await api('/bronze-reject', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id }) });
+    if (!data.ok) throw new Error(data.error || 'reject failed');
+    var it = state.items.find(function(x){ return x.id===id; });
+    if (it) it.status='rejected';
+    render();
+    setStatus('Rejected.');
+  } catch(e){ setStatus(e.message, true); }
+}
+
+$('connect').onclick = function(){ state.token = $('tok').value.trim(); if(!state.token){ setStatus('Enter the admin token.', true); return; } load(); };
+$('refresh').onclick = load;
+$('filters').addEventListener('click', function(e){
+  var b = e.target.closest('.filter'); if(!b) return;
+  state.filter = b.getAttribute('data-f');
+  document.querySelectorAll('.filter').forEach(function(x){ x.classList.remove('active'); });
+  b.classList.add('active');
+  render();
+});
+$('tok').addEventListener('keydown', function(e){ if(e.key==='Enter') $('connect').click(); });
+
+// restore token from session (convenience)
+var saved = sessionStorage.getItem('bronzeToken');
+if (saved) { $('tok').value = saved; state.token = saved; load(); }
+</script>
+</body>
+</html>
