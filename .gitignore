@@ -3,3 +3,8 @@
 # Node / Cloudflare Workers
 node_modules/
 .wrangler/
+
+# Local-only self-referential symlink (mirrors the /papamoa-previews/ path for the
+# local preview server). MUST stay out of git — GitHub Pages follows it into an
+# infinite recursion (papamoa-previews/papamoa-previews/...) and the build hangs.
+/papamoa-previews
