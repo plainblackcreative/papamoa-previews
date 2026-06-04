@@ -336,9 +336,6 @@ papamoa-previews/
       sales-scripts.html
       facebook-posts.html
       follow-up-emails.html    -- Day 0 post-call template + Day 3/6/10 sequence + ROI explainer (merged 2026-06-04)
-      real-estate-outreach.html
-    partners/
-      real-estate-agent.html   -- public partner landing page
   previews/                    -- EMPTY (PPP retired 2026-06-04, see §13)
   admin/                       -- 6 internal tool pages
   docs/                        -- 6 HTML + 9 markdown reference docs
@@ -350,7 +347,6 @@ papamoa-previews/
 ### Key path rules
 - `articles/` folder is EMPTY. Everything moved to `community/`. Any link pointing to `articles/` is broken.
 - Categories use nested folders: `categories/food-drink/cafe-papamoa.html`
-- Real estate sales pages are in `sales/partners/`, NOT `partners/` or `admin/`
 - `entertainment.html` stays as filename (rename to `things-to-do.html` deferred). Nav label is "Do", H1 is "What to Do in Papamoa"
 
 ### Internal link prefix
