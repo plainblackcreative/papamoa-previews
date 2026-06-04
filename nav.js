@@ -438,6 +438,7 @@
                   '<option value="" disabled selected>Select a topic</option>' +
                   '<option value="General enquiry">General enquiry</option>' +
                   '<option value="Listing enquiry">Listing enquiry - I want to get listed</option>' +
+                  '<option value="Spotlight Ad Spot">Spotlight Ad Spot - I want the top-of-sub-category slot</option>' +
                   '<option value="Listing support">Listing support - update or change my listing</option>' +
                   '<option value="Media enquiry">Media enquiry</option>' +
                   '<option value="News &amp; community notice">News &amp; community notice</option>' +
@@ -460,8 +461,16 @@
     wrap.innerHTML = html;
     document.body.appendChild(wrap.firstChild);
 
-    if (typeof window.pnfOpenContact !== 'function') window.pnfOpenContact = function (type) {
+    if (typeof window.pnfOpenContact !== 'function') window.pnfOpenContact = function (type, ctx) {
       if (type) { var sel = document.getElementById('pnf-enquiry-type'); if (sel) { for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].value === type) { sel.selectedIndex = i; break; } } } }
+      // Pre-fill the message field when a Spotlight sub-cat context is passed.
+      if (ctx && ctx.name) {
+        var msg = document.querySelector('#pnf-contact-form textarea[name="message"]');
+        if (msg && !msg.value) {
+          var url = ctx.path ? ('https://papamoa.info/' + ctx.path.replace(/^\//, '')) : '';
+          msg.value = "Hi - I'd like to enquire about the " + ctx.name + " Spotlight Ad Spot" + (url ? ' (' + url + ')' : '') + ". Please send details on availability, duration options and pricing.";
+        }
+      }
       document.getElementById('pnf-contact-overlay').classList.add('open');
       document.body.style.overflow = 'hidden';
     };

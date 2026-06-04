@@ -219,11 +219,11 @@ a{color:var(--blue);text-decoration:none}
 </div>
 <div class="page-body">
   <div class="section" id="listed">
-    <div class="section-title"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg> Gold Spotlight</div>
+    <div class="section-title"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg> Spotlight Ad Spot</div>
     <div class="gold-available" style="background:linear-gradient(135deg,#0A1808,#142210)">
-      <h3><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.5" cy="11.5" r="1.7"/><circle cx="10" cy="6.8" r="1.7"/><circle cx="14" cy="6.8" r="1.7"/><circle cx="17.5" cy="11.5" r="1.7"/><path d="M8.6 15.4c1-1.7 1.9-2.8 3.4-2.8s2.4 1.1 3.4 2.8c.8 1.4.3 2.9-1.3 3.3-.9.2-1.6-.3-2.1-.3s-1.2.5-2.1.3c-1.6-.4-2.1-1.9-1.3-3.3Z"/></svg> Gold Spotlight - Pet Services, P&#257;p&#257;moa</h3>
+      <h3><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.5" cy="11.5" r="1.7"/><circle cx="10" cy="6.8" r="1.7"/><circle cx="14" cy="6.8" r="1.7"/><circle cx="17.5" cy="11.5" r="1.7"/><path d="M8.6 15.4c1-1.7 1.9-2.8 3.4-2.8s2.4 1.1 3.4 2.8c.8 1.4.3 2.9-1.3 3.3-.9.2-1.6-.3-2.1-.3s-1.2.5-2.1.3c-1.6-.4-2.1-1.9-1.3-3.3Z"/></svg> Spotlight Ad Spot - Pet Services, P&#257;p&#257;moa</h3>
       <p>P&#257;p&#257;moa is a family-heavy suburb with one of the highest rates of pet ownership in the Bay of Plenty. The Gold Spotlight for Pet Services is available - top position on this page. One position only.</p>
-      <a href="/papamoa-previews/sales/list-with-us.html?type=spotlight&cat=pet-services" class="ga-btn">Claim this Spotlight &rarr;</a>
+      <a href="#" onclick="pnfOpenContact('Spotlight Ad Spot',{name:'Pet Services',path:'categories/services/pet-services-papamoa.html'});return false;" class="ga-btn">Claim this Spotlight &rarr;</a>
     </div>
     <div class="info-box">
       <h3><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.5" cy="11.5" r="1.7"/><circle cx="10" cy="6.8" r="1.7"/><circle cx="14" cy="6.8" r="1.7"/><circle cx="17.5" cy="11.5" r="1.7"/><path d="M8.6 15.4c1-1.7 1.9-2.8 3.4-2.8s2.4 1.1 3.4 2.8c.8 1.4.3 2.9-1.3 3.3-.9.2-1.6-.3-2.1-.3s-1.2.5-2.1.3c-1.6-.4-2.1-1.9-1.3-3.3Z"/></svg> Keeping pets safe at P&#257;p&#257;moa Beach</h3>
@@ -356,7 +356,7 @@ a{color:var(--blue);text-decoration:none}
 (function(){document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('click',function(){this.closest('.faq-item').classList.toggle('open')})})})();
 function pnfDrawerOpen(){document.getElementById('pnf-drawer').classList.add('open');document.getElementById('pnf-drawer-overlay').classList.add('open');document.body.style.overflow='hidden'}
 function pnfDrawerClose(){document.getElementById('pnf-drawer').classList.remove('open');document.getElementById('pnf-drawer-overlay').classList.remove('open');document.body.style.overflow=''}
-function pnfOpenContact(){document.getElementById('pnf-contact-overlay').classList.add('open');document.body.style.overflow='hidden'}
+function pnfOpenContact(type,ctx){if(ctx&&ctx.name){var msg=document.querySelector('#pnf-contact-form textarea[name="message"]');if(msg&&!msg.value){var url=ctx.path?('https://papamoa.info/'+ctx.path.replace(/^\//,'')):'';msg.value="Hi - I'd like to enquire about the "+ctx.name+" Spotlight Ad Spot"+(url?' ('+url+')':'')+". Please send details on availability, duration options and pricing.";}}document.getElementById('pnf-contact-overlay').classList.add('open');document.body.style.overflow='hidden'}
 function pnfCloseContact(){document.getElementById('pnf-contact-overlay').classList.remove('open');document.body.style.overflow=''}
 function pnfOverlayClick(e){if(e.target===document.getElementById('pnf-contact-overlay'))pnfCloseContact()}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){pnfDrawerClose();pnfCloseContact()}});

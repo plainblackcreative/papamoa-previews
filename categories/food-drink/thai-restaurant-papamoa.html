@@ -295,11 +295,11 @@ a{color:var(--eat-accent);text-decoration:none}
 
       <!-- GOLD SPOTLIGHT -->
       <div class="section">
-        <div class="section-title"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg> Gold Spotlight</div>
+        <div class="section-title"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg> Spotlight Ad Spot</div>
         <div class="gold-available">
-          <h3><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8M4.5 3v4a2.5 2.5 0 0 0 5 0V3M7 11v10"/><path d="M17 3c-1.4 0-2.5 2-2.5 5s1 4 1 4V21"/></svg> Gold Spotlight - Thai Food in P&#257;p&#257;moa</h3>
+          <h3><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8M4.5 3v4a2.5 2.5 0 0 0 5 0V3M7 11v10"/><path d="M17 3c-1.4 0-2.5 2-2.5 5s1 4 1 4V21"/></svg> Spotlight Ad Spot - Thai Food in P&#257;p&#257;moa</h3>
           <p>The Gold Spotlight for this page is available. Be the first Thai restaurant seen by every person searching in P&#257;p&#257;moa. One position only.</p>
-          <a href="/papamoa-previews/sales/list-with-us.html?cat=thai-restaurant-papamoa" class="ga-btn">Claim this Spotlight &rarr;</a>
+          <a href="#" onclick="pnfOpenContact('Spotlight Ad Spot',{name:'Thai Food in P&#257;p&#257;moa',path:'categories/food-drink/thai-restaurant-papamoa.html'});return false;" class="ga-btn">Claim this Spotlight &rarr;</a>
         </div>
       </div>
 
@@ -515,7 +515,7 @@ a{color:var(--eat-accent);text-decoration:none}
 function toggleFaq(el){el.closest('.faq-item').classList.toggle('open')}
 function pnfDrawerOpen(){document.getElementById('pnf-drawer').classList.add('open');document.getElementById('pnf-drawer-overlay').classList.add('open');document.body.style.overflow='hidden'}
 function pnfDrawerClose(){document.getElementById('pnf-drawer').classList.remove('open');document.getElementById('pnf-drawer-overlay').classList.remove('open');document.body.style.overflow=''}
-function pnfOpenContact(){document.getElementById('pnf-contact-overlay').classList.add('open');document.body.style.overflow='hidden'}
+function pnfOpenContact(type,ctx){if(ctx&&ctx.name){var msg=document.querySelector('#pnf-contact-form textarea[name="message"]');if(msg&&!msg.value){var url=ctx.path?('https://papamoa.info/'+ctx.path.replace(/^\//,'')):'';msg.value="Hi - I'd like to enquire about the "+ctx.name+" Spotlight Ad Spot"+(url?' ('+url+')':'')+". Please send details on availability, duration options and pricing.";}}document.getElementById('pnf-contact-overlay').classList.add('open');document.body.style.overflow='hidden'}
 function pnfCloseContact(){document.getElementById('pnf-contact-overlay').classList.remove('open');document.body.style.overflow=''}
 function pnfOverlayClick(e){if(e.target===document.getElementById('pnf-contact-overlay'))pnfCloseContact()}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){pnfDrawerClose();pnfCloseContact()}});

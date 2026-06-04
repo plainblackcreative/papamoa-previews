@@ -318,11 +318,11 @@ a{color:var(--blue);text-decoration:none}
 
   <!-- GOLD SPOTLIGHT -->
   <div class="section" id="gold">
-    <div class="section-title"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg> Gold Spotlight</div>
+    <div class="section-title"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg> Spotlight Ad Spot</div>
     <div class="gold-available">
-      <h3><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10.5 9-7.5 9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/><path d="M9.5 21v-6h5v6"/></svg> Gold Spotlight - Holiday Homes &amp; Baches, P&#257;p&#257;moa</h3>
+      <h3><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10.5 9-7.5 9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/><path d="M9.5 21v-6h5v6"/></svg> Spotlight Ad Spot - Holiday Homes &amp; Baches, P&#257;p&#257;moa</h3>
       <p>The Gold Spotlight for the Holiday Homes sub-category is available. Top position on this page, seen first by every visitor searching for a whole-home rental in P&#257;p&#257;moa. One Spotlight position only.</p>
-      <a href="/papamoa-previews/sales/list-with-us.html?type=spotlight&cat=holiday-homes-papamoa" class="ga-btn">Claim this Spotlight &rarr;</a>
+      <a href="#" onclick="pnfOpenContact('Spotlight Ad Spot',{name:'Holiday Homes &amp; Baches, P&#257;p&#257;moa',path:'categories/accommodation/holiday-homes-papamoa.html'});return false;" class="ga-btn">Claim this Spotlight &rarr;</a>
     </div>
   </div>
 
@@ -515,7 +515,7 @@ function pnfDrawerOpen(){document.getElementById('pnf-drawer').classList.add('op
 function pnfDrawerClose(){document.getElementById('pnf-drawer').classList.remove('open');document.getElementById('pnf-drawer-overlay').classList.remove('open');document.body.style.overflow=''}
 
 /* ── Contact Modal ── */
-function pnfOpenContact(){document.getElementById('pnf-contact-overlay').classList.add('open');document.body.style.overflow='hidden'}
+function pnfOpenContact(type,ctx){if(ctx&&ctx.name){var msg=document.querySelector('#pnf-contact-form textarea[name="message"]');if(msg&&!msg.value){var url=ctx.path?('https://papamoa.info/'+ctx.path.replace(/^\//,'')):'';msg.value="Hi - I'd like to enquire about the "+ctx.name+" Spotlight Ad Spot"+(url?' ('+url+')':'')+". Please send details on availability, duration options and pricing.";}}document.getElementById('pnf-contact-overlay').classList.add('open');document.body.style.overflow='hidden'}
 function pnfCloseContact(){document.getElementById('pnf-contact-overlay').classList.remove('open');document.body.style.overflow=''}
 function pnfOverlayClick(e){if(e.target===document.getElementById('pnf-contact-overlay'))pnfCloseContact()}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){pnfDrawerClose();pnfCloseContact()}});

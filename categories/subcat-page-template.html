@@ -244,9 +244,9 @@ a{color:var(--blue);text-decoration:none}
       Gold Spotlight
     </div>
     <div class="gold-available">
-      <h3>Gold Spotlight - [SUBCAT_TITLE], P&#257;p&#257;moa</h3>
+      <h3>Spotlight Ad Spot - [SUBCAT_TITLE], P&#257;p&#257;moa</h3>
       <p>Top position on this page - seen first by every person in P&#257;p&#257;moa searching for [SUBCAT_SLUG]. 40,000+ residents. One position only.</p>
-      <a href="/papamoa-previews/sales/list-with-us.html?type=spotlight&cat=[SUBCAT_SLUG]" class="ga-btn">Claim this Spotlight &rarr;</a>
+      <a href="#" onclick="pnfOpenContact('Spotlight Ad Spot',{name:'[SUBCAT_TITLE], P&#257;p&#257;moa',path:'categories/subcat-page-template.html'});return false;" class="ga-btn">Claim this Spotlight &rarr;</a>
     </div>
   </div>
 
@@ -411,7 +411,7 @@ a{color:var(--blue);text-decoration:none}
 })();
 function pnfDrawerOpen(){document.getElementById('pnf-drawer').classList.add('open');document.getElementById('pnf-drawer-overlay').classList.add('open');document.body.style.overflow='hidden'}
 function pnfDrawerClose(){document.getElementById('pnf-drawer').classList.remove('open');document.getElementById('pnf-drawer-overlay').classList.remove('open');document.body.style.overflow=''}
-function pnfOpenContact(){document.getElementById('pnf-contact-overlay').classList.add('open');document.body.style.overflow='hidden'}
+function pnfOpenContact(type,ctx){if(ctx&&ctx.name){var msg=document.querySelector('#pnf-contact-form textarea[name="message"]');if(msg&&!msg.value){var url=ctx.path?('https://papamoa.info/'+ctx.path.replace(/^\//,'')):'';msg.value="Hi - I'd like to enquire about the "+ctx.name+" Spotlight Ad Spot"+(url?' ('+url+')':'')+". Please send details on availability, duration options and pricing.";}}document.getElementById('pnf-contact-overlay').classList.add('open');document.body.style.overflow='hidden'}
 function pnfCloseContact(){document.getElementById('pnf-contact-overlay').classList.remove('open');document.body.style.overflow=''}
 function pnfOverlayClick(e){if(e.target===document.getElementById('pnf-contact-overlay'))pnfCloseContact()}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){pnfDrawerClose();pnfCloseContact()}});
