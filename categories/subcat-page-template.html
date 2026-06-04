@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- TEMPLATE TOKENS (replace before publishing):
+  [SUBCAT_TITLE]   e.g. "Plumbers & Gasfitters"
+  [SUBCAT_SLUG]    e.g. "plumber"  (used in CTA links + schema URL)
+  [SUBCAT_PATH]    e.g. "services/plumber-papamoa"  (canonical path, no leading slash)
+  [CATEGORY_NAME]  e.g. "Services"
+  [CATEGORY_SLUG]  e.g. "services"  (folder name)
+  [EYEBROW]        e.g. "Trades · Pāpāmoa"
+  [HERO_SUB]       e.g. "Registered plumbers and gasfitters..."
+  [CHIP_1..3]      hero chips (name only, no SVG — nav.js does icons)
+  [MORE_TITLE]     section heading, e.g. "More Plumbers in Pāpāmoa"
+  [CLAIM_LABEL]    CTA label, e.g. "Are you a Pāpāmoa plumber?"
+  [CLAIM_SUB]      CTA sub-text, e.g. "Add your free listing..."
+  [FAQ_Q1..3]      FAQ question text
+  [FAQ_A1..3]      FAQ answer text
+  [SCHEMA_DESC]    CollectionPage description for JSON-LD
+  [FOOTER_COL_*]   footer contextual columns (keep page-specific)
+-->
+<title>[SUBCAT_TITLE] in Pāpāmoa | Papamoa.info</title>
+<link rel="icon" type="image/x-icon" href="/papamoa-previews/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/papamoa-previews/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/papamoa-previews/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/papamoa-previews/apple-touch-icon.png">
+<link rel="manifest" href="/papamoa-previews/site.webmanifest">
+<meta name="description" content="Find [SUBCAT_TITLE] in Pāpāmoa. [HERO_SUB]">
+<link rel="canonical" href="https://papamoa.info/categories/[SUBCAT_PATH].html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://papamoa.info/categories/[SUBCAT_PATH].html">
+<meta property="og:title" content="[SUBCAT_TITLE] in Pāpāmoa | Papamoa.info">
+<meta property="og:description" content="[SCHEMA_DESC]">
+<meta property="og:site_name" content="Papamoa.info">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":"[SUBCAT_TITLE] in Pāpāmoa","url":"https://papamoa.info/categories/[SUBCAT_PATH].html","description":"[SCHEMA_DESC]","breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://papamoa.info/"},{"@type":"ListItem","position":2,"name":"[CATEGORY_NAME]","item":"https://papamoa.info/categories/[CATEGORY_SLUG]/[CATEGORY_SLUG].html"},{"@type":"ListItem","position":3,"name":"[SUBCAT_TITLE]","item":"https://papamoa.info/categories/[SUBCAT_PATH].html"}]}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"[FAQ_Q1]","acceptedAnswer":{"@type":"Answer","text":"[FAQ_A1]"}},{"@type":"Question","name":"[FAQ_Q2]","acceptedAnswer":{"@type":"Answer","text":"[FAQ_A2]"}},{"@type":"Question","name":"[FAQ_Q3]","acceptedAnswer":{"@type":"Answer","text":"[FAQ_A3]"}}]}
+</script>
+
+<style>
+/* === DESIGN TOKENS === */
+:root{
+  --navy:#243B59;--blue:#359FE8;--sand:#F7F3ED;
+  --white:#FFFFFF;--text:#1A2832;--muted:#607080;--soft:#4a5a6a;
+  --border:#DDE5EE;--bg:#F4F7FA;
+  --gold:#C8962A;--gold-bg:#FBF3E2;--gold-border:#E8C96A;
+  --silver:#5A7A8A;--silver-bg:#EDF3F6;--silver-border:#B0C8D4;
+  --lime:#89BE43;
+  /* PNF tokens — nav.js reads these */
+  --pnf-navy:#243B59;--pnf-accent:#359FE8;--pnf-display:'Playfair Display',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--blue);text-decoration:none}
+
+/* === HERO === */
+.page-hero{background:linear-gradient(135deg,#0A1825 0%,#0F2030 60%,#102025 100%);padding:52px 24px 44px;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#1B6B7D,var(--blue))}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:12px}
+.breadcrumb a{color:rgba(255,255,255,.5)}
+.breadcrumb a:hover{color:#fff}
+.hero-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);color:#fff;font-weight:800;line-height:1.12;margin-bottom:12px}
+.page-hero h1 em{font-style:italic;color:#7ECFBF;font-weight:400}
+.hero-sub{color:rgba(255,255,255,.5);font-size:.92rem;max-width:580px;line-height:1.7;margin-bottom:18px}
+.hero-chips{display:flex;gap:7px;flex-wrap:wrap}
+.hchip{font-size:.7rem;font-weight:600;color:rgba(255,255,255,.65);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:4px 11px;border-radius:4px}
+
+/* === FILTER BAR === */
+.filter-bar{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:56px;z-index:100}
+.filter-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;height:48px;align-items:center}
+.filter-inner::-webkit-scrollbar{display:none}
+.chip{font-size:.72rem;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--border);padding:5px 12px;border-radius:100px;white-space:nowrap;text-decoration:none;transition:all .15s}
+.chip:hover{color:var(--navy);border-color:var(--blue)}
+
+/* === PAGE BODY === */
+.page-body{max-width:1200px;margin:0 auto;padding:36px 24px 80px}
+.section{margin-bottom:44px}
+.section-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+
+/* === GOLD SECTION === */
+.gold-available{background:linear-gradient(135deg,#0F1C2A,#1A2A3A);border:2px dashed rgba(200,150,42,.4);border-radius:12px;padding:28px;text-align:center;margin-bottom:16px}
+.gold-available h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:6px}
+.gold-available p{font-size:.83rem;color:rgba(255,255,255,.45);margin-bottom:16px;line-height:1.6;max-width:480px;margin-left:auto;margin-right:auto}
+.ga-btn{display:inline-block;background:rgba(200,150,42,.15);border:1px solid rgba(200,150,42,.5);color:var(--gold);padding:9px 22px;border-radius:7px;font-size:.8rem;font-weight:700;text-decoration:none;transition:all .2s}
+.ga-btn:hover{background:rgba(200,150,42,.28)}
+
+/* === SILVER SECTION (populated listing) === */
+.listing-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px;display:flex;transition:box-shadow .2s}
+.listing-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.09)}
+.listing-card.gold-card{border-color:var(--gold-border);box-shadow:0 2px 16px rgba(200,150,42,.12)}
+.listing-card.gold-card:hover{box-shadow:0 6px 28px rgba(200,150,42,.2)}
+.lc-thumb{width:80px;min-height:90px;background:linear-gradient(135deg,#0A1825,#0F2535);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+.lc-body{padding:14px 18px;flex:1}
+.lc-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:3px}
+.lc-meta{font-size:.72rem;color:var(--muted);margin-bottom:7px}
+.lc-desc{font-size:.83rem;color:var(--soft);line-height:1.65;margin-bottom:9px}
+.lc-tags{display:flex;gap:5px;flex-wrap:wrap}
+.lc-tag{font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:3px}
+.tag-gold{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(200,150,42,.25)}
+.tag-silver{background:var(--silver-bg);color:var(--silver);border:1px solid rgba(90,122,138,.2)}
+
+/* === SILVER AVAILABLE (no Silver listing yet) === */
+.silver-available{background:var(--silver-bg);border:2px dashed var(--silver-border);border-radius:12px;padding:22px 28px;display:flex;align-items:center;gap:20px;margin-bottom:16px;flex-wrap:wrap}
+.sa-body{flex:1}
+.sa-body h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--silver);margin-bottom:4px}
+.sa-body p{font-size:.82rem;color:var(--muted);line-height:1.55;max-width:520px}
+.sa-btn{font-size:.78rem;font-weight:700;background:#fff;border:1px solid var(--silver-border);color:var(--silver);padding:9px 20px;border-radius:7px;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.sa-btn:hover{background:var(--silver);color:#fff}
+
+/* === BRONZE / MORE SECTION === */
+.ghost-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:16px}
+.ghost-card{background:#fff;border:1px solid var(--border);border-radius:9px;padding:14px 16px}
+.gc-name{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:2px}
+.gc-sub{font-size:.7rem;color:var(--muted);margin-bottom:6px}
+.gc-desc{font-size:.78rem;color:var(--muted);line-height:1.55;margin-bottom:10px}
+.gc-cta{font-size:.72rem;font-weight:700;color:var(--blue)}
+.gc-cta:hover{text-decoration:underline}
+
+/* === EMPTY-STATE GHOST CARD === */
+.ghost-card.gc-empty{display:block;border-style:dashed;border-color:rgba(53,159,232,.3);background:rgba(53,159,232,.03);text-align:center;padding:20px 16px}
+.gc-empty .gc-name{color:var(--muted);font-style:italic}
+.gc-empty .gc-cta{display:inline-block;margin-top:4px;font-size:.75rem}
+
+/* === FREE LISTING CTA STRIP === */
+.cta-strip{background:var(--navy);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:20px;margin-bottom:36px;flex-wrap:wrap}
+.cta-strip-body{flex:1}
+.cta-strip-body h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:4px}
+.cta-strip-body p{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.55}
+.cta-strip-btn{background:var(--lime);color:var(--navy);font-size:.8rem;font-weight:800;padding:10px 22px;border-radius:7px;text-decoration:none;white-space:nowrap;transition:background .2s}
+.cta-strip-btn:hover{background:#6DB03A}
+
+/* === FAQ === */
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:13px 0;cursor:pointer;font-size:.88rem;font-weight:600;color:var(--navy);gap:12px;user-select:none}
+.faq-q:hover{color:var(--blue)}
+.faq-chevron{flex-shrink:0;font-size:.75rem;color:var(--muted);transition:transform .2s}
+.faq-item.open .faq-chevron{transform:rotate(180deg)}
+.faq-a{font-size:.84rem;color:var(--muted);line-height:1.7;padding-bottom:14px;display:none}
+.faq-item.open .faq-a{display:block}
+.faq-a a{color:var(--blue)}
+
+/* === FOOTER (nav.js injects shell; columns below are page-specific) === */
+.pnf-footer{background:var(--pnf-navy);padding:44px 28px 24px}
+.pnf-footer-inner{max-width:1200px;margin:0 auto}
+.pnf-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+@media(max-width:760px){.pnf-footer-grid{grid-template-columns:1fr 1fr;gap:20px}}
+.pnf-footer-brand{font-family:var(--pnf-display);font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:7px}
+.pnf-footer-brand span{color:var(--pnf-accent)}
+.pnf-footer-tagline{font-size:12px;color:rgba(255,255,255,.35);line-height:1.7;margin-bottom:14px;max-width:260px}
+.pnf-footer-social{display:flex;gap:8px;margin-bottom:12px}
+.pnf-social-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 11px;font-size:12px;font-weight:600;color:rgba(255,255,255,.55);text-decoration:none;transition:all .15s}
+.pnf-social-btn:hover{background:#1877F2;border-color:#1877F2;color:#fff}
+.pnf-contact-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--pnf-accent);cursor:pointer;background:none;border:none;padding:0;font-family:'Figtree',sans-serif}
+.pnf-contact-btn:hover{color:#fff}
+.pnf-footer-col h4{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:10px}
+.pnf-footer-links{list-style:none;display:flex;flex-direction:column;gap:6px}
+.pnf-footer-links a{font-size:12.5px;color:rgba(255,255,255,.5);text-decoration:none;transition:color .15s}
+.pnf-footer-links a:hover{color:#fff}
+.pnf-footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:11.5px;color:rgba(255,255,255,.22)}
+.pnf-footer-bottom a{color:rgba(255,255,255,.32);text-decoration:none}
+.pnf-footer-bottom a:hover{color:#fff}
+
+/* === CONTACT MODAL === */
+.pnf-overlay{position:fixed;inset:0;background:rgba(36,59,89,.7);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+.pnf-overlay.open{opacity:1;pointer-events:all}
+.pnf-modal{background:#fff;border-radius:14px;width:100%;max-width:500px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);transform:translateY(14px);transition:transform .25s}
+.pnf-overlay.open .pnf-modal{transform:translateY(0)}
+.pnf-modal-head{background:#243B59;padding:20px 24px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.pnf-modal-head h2{font-family:var(--pnf-display);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:2px}
+.pnf-modal-head p{font-size:12px;color:rgba(255,255,255,.45)}
+.pnf-modal-close{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pnf-modal-close:hover{background:rgba(255,255,255,.2);color:#fff}
+.pnf-modal-body{padding:20px 24px 24px}
+.pnf-cf{display:flex;flex-direction:column;gap:12px}
+.pnf-cf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:400px){.pnf-cf-row{grid-template-columns:1fr}}
+.pnf-cf label{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#5A6E78;margin-bottom:4px;display:block}
+.pnf-cf input,.pnf-cf textarea{width:100%;padding:10px 13px;border:1.5px solid #D8E4E8;border-radius:7px;font-family:'Figtree',sans-serif;font-size:14px;color:#1A2832;background:#F7F3ED;outline:none;transition:border-color .2s}
+.pnf-cf input:focus,.pnf-cf textarea:focus{border-color:#1B6B7D;background:#fff}
+.pnf-cf textarea{resize:vertical;min-height:75px;line-height:1.5}
+.pnf-cf-submit{width:100%;background:#1B6B7D;color:#fff;border:none;padding:12px;border-radius:7px;font-family:'Figtree',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s;margin-top:2px}
+.pnf-cf-submit:hover{background:#0F4352}
+.pnf-cf-submit:disabled{opacity:.6;cursor:not-allowed}
+.pnf-cf-fine{font-size:11px;color:#5A6E78;text-align:center;margin-top:4px}
+.pnf-cf-success{display:none;text-align:center;padding:14px 0 6px}
+.pnf-cf-success .tick{font-size:36px;margin-bottom:8px}
+.pnf-cf-success h3{font-size:17px;font-weight:700;color:#1E6B3C;margin-bottom:5px}
+.pnf-cf-success p{font-size:13px;color:#5A6E78;line-height:1.6}
+</style>
+</head>
+<body data-nav="default">
+
+<div id="pnf-nav-placeholder"></div>
+
+<!-- ===================== HERO ===================== -->
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="/papamoa-previews/homepage.html">Home</a> &rsaquo;
+      <a href="/papamoa-previews/categories/[CATEGORY_SLUG]/[CATEGORY_SLUG].html">[CATEGORY_NAME]</a> &rsaquo;
+      [SUBCAT_TITLE]
+    </div>
+    <div class="hero-eyebrow">[EYEBROW]</div>
+    <h1>[SUBCAT_TITLE]<br><em>in P&#257;p&#257;moa</em></h1>
+    <p class="hero-sub">[HERO_SUB]</p>
+    <div class="hero-chips">
+      <span class="hchip">[CHIP_1]</span>
+      <span class="hchip">[CHIP_2]</span>
+      <span class="hchip">[CHIP_3]</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FILTER BAR ===================== -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <a href="#gold" class="chip">Gold Spotlight</a>
+    <a href="#silver" class="chip">Silver listings</a>
+    <a href="#more" class="chip">More [SUBCAT_TITLE]</a>
+    <a href="#faq" class="chip">FAQ</a>
+  </div>
+</div>
+
+<!-- ===================== PAGE BODY ===================== -->
+<div class="page-body">
+
+  <!-- GOLD SECTION -->
+  <!-- When a Gold listing is claimed, replace .gold-available with a .listing-card.gold-card -->
+  <div class="section" id="gold">
+    <div class="section-title">
+      <svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z"/></svg>
+      Gold Spotlight
+    </div>
+    <div class="gold-available">
+      <h3>Gold Spotlight - [SUBCAT_TITLE], P&#257;p&#257;moa</h3>
+      <p>Top position on this page - seen first by every person in P&#257;p&#257;moa searching for [SUBCAT_SLUG]. 40,000+ residents. One position only.</p>
+      <a href="/papamoa-previews/sales/list-with-us.html?type=spotlight&cat=[SUBCAT_SLUG]" class="ga-btn">Claim this Spotlight &rarr;</a>
+    </div>
+  </div>
+
+  <!-- SILVER SECTION -->
+  <!-- When a Silver listing is claimed, replace .silver-available with a .listing-card -->
+  <div class="section" id="silver">
+    <div class="section-title">
+      <svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.6 5L19 9.6 13.6 11 12 16l-1.6-5L5 9.6 10.4 8Z"/><path d="M18 3.5v3M19.5 5h-3"/></svg>
+      Silver Listings
+    </div>
+    <div class="silver-available">
+      <div class="sa-body">
+        <h3>Silver Listing - [SUBCAT_TITLE]</h3>
+        <p>Be the first [SUBCAT_SLUG] with a full listing here - logo, description, contact details and direct placement in Pāpāmoa search results.</p>
+      </div>
+      <a href="/papamoa-previews/sales/list-with-us.html?type=silver&cat=[SUBCAT_SLUG]" class="sa-btn">Get a Silver listing &rarr;</a>
+    </div>
+  </div>
+
+  <!-- BRONZE / MORE SECTION — nav.js injects live Bronze listings into .ghost-grid -->
+  <!-- When no Bronze listings exist, show the .gc-empty empty-state card below -->
+  <!-- When Bronze listings arrive via nav.js, they are prepended before the ghost cards -->
+  <!-- Long-term: drop static ghost cards once real listings fill the grid -->
+  <div class="section" id="more">
+    <div class="section-title">
+      <!-- Use a relevant icon SVG for this subcat -->
+      [MORE_TITLE]
+    </div>
+
+    <div class="ghost-grid">
+      <!-- EMPTY-STATE: replace with real ghost cards once you have business names for this subcat -->
+      <div class="ghost-card gc-empty">
+        <div class="gc-name">Your business here</div>
+        <div class="gc-sub">P&#257;p&#257;moa</div>
+        <p class="gc-desc">Add your free listing - name, phone, website and a short blurb. Takes 2 minutes.</p>
+        <a href="/papamoa-previews/sales/create-bronze-listing.html?cat=[SUBCAT_SLUG]" class="gc-cta">Add your business &rarr;</a>
+      </div>
+    </div>
+
+    <div class="cta-strip">
+      <div class="cta-strip-body">
+        <h3>[CLAIM_LABEL]</h3>
+        <p>[CLAIM_SUB]</p>
+      </div>
+      <a href="/papamoa-previews/sales/create-bronze-listing.html?cat=[SUBCAT_SLUG]" class="cta-strip-btn">Add a free listing &rarr;</a>
+    </div>
+  </div>
+
+  <!-- FAQ SECTION -->
+  <div class="section" id="faq">
+    <div class="section-title">
+      <svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.3 9.2a3 3 0 0 1 5.5 1.2c0 1.8-2.8 2.3-2.8 4"/><path d="M12 17h.01"/></svg>
+      Common Questions
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">[FAQ_Q1]<span class="faq-chevron">&#9660;</span></div>
+      <div class="faq-a">[FAQ_A1]</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">[FAQ_Q2]<span class="faq-chevron">&#9660;</span></div>
+      <div class="faq-a">[FAQ_A2]</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">[FAQ_Q3]<span class="faq-chevron">&#9660;</span></div>
+      <div class="faq-a">[FAQ_A3]</div>
+    </div>
+  </div>
+
+</div>
+<!-- end page-body -->
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="pnf-footer">
+  <div class="pnf-footer-inner">
+    <div class="pnf-footer-grid">
+      <div class="pnf-footer-brand-col">
+        <a href="/papamoa-previews/homepage.html" class="pnf-footer-brand" aria-label="Papamoa.info home">
+          <img src="/papamoa-previews/assets/papamoa-info-asset-pack/logo/papamoa-info-logo-transparent-400w.png" alt="Papamoa.info - Our Local Directory Online" class="pnf-footer-brand-img">
+        </a>
+        <p class="pnf-footer-tagline">Independent local guide to P&#257;p&#257;moa - helping residents, visitors and local businesses find what they need faster.</p>
+        <div class="pnf-footer-social">
+          <a href="https://www.facebook.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-social-btn"><span class="fb-icon">f</span> Facebook</a>
+          <a href="https://www.instagram.com/papamoa.info/" target="_blank" rel="noopener" class="pnf-social-btn is-ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> Instagram</a>
+        </div>
+        <button class="pnf-contact-link" onclick="pnfOpenContact()">Get in touch</button>
+        <ul class="pnf-footer-trust">
+          <li>Independent local directory</li>
+          <li>Built for residents and visitors</li>
+          <li>Updated with practical local info</li>
+        </ul>
+      </div>
+
+      <!-- REPLACE these columns with page-relevant links -->
+      <div class="pnf-footer-col">
+        <h4>[CATEGORY_NAME]</h4>
+        <ul class="pnf-footer-links">
+          <li><a href="/papamoa-previews/categories/[CATEGORY_SLUG]/[CATEGORY_SLUG].html">All [CATEGORY_NAME]</a></li>
+          <!-- Add 3-4 sibling subcats here -->
+        </ul>
+      </div>
+      <div class="pnf-footer-col">
+        <h4>Related</h4>
+        <ul class="pnf-footer-links">
+          <!-- Add 2-3 related subcats here -->
+        </ul>
+      </div>
+      <div class="pnf-footer-col">
+        <h4>For businesses</h4>
+        <ul class="pnf-footer-links">
+          <li><a href="/papamoa-previews/sales/list-with-us.html">List Your Business</a></li>
+          <li><a href="/papamoa-previews/sales/spotlight-ads.html">Spotlight Ads</a></li>
+          <li><a href="/papamoa-previews/legal.html">Privacy &amp; Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pnf-footer-bottom">
+      <span>&copy; 2026 Papamoa.info &middot; P&#257;p&#257;moa&rsquo;s independent local directory</span>
+      <span>
+        <a href="/papamoa-previews/legal.html">Privacy</a> &middot;
+        <a href="/papamoa-previews/legal.html#terms">Terms</a> &middot;
+        <a href="/papamoa-previews/editorial-policy.html">Editorial Policy</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== CONTACT OVERLAY ===================== -->
+<div class="pnf-overlay" id="pnf-contact-overlay" onclick="pnfOverlayClick(event)">
+  <div class="pnf-modal">
+    <div class="pnf-modal-head">
+      <div><h2>Get in touch</h2><p>We&rsquo;ll reply within one business day.</p></div>
+      <button class="pnf-modal-close" onclick="pnfCloseContact()">&times;</button>
+    </div>
+    <div class="pnf-modal-body">
+      <form class="pnf-cf" id="pnf-contact-form" onsubmit="pnfSubmitContact(event)">
+        <input type="hidden" name="form_name" value="contact-[SUBCAT_SLUG]">
+        <input type="hidden" name="redirect" value="false">
+        <input type="text" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="pnf-cf-row">
+          <div><label>Name *</label><input type="text" name="name" required></div>
+          <div><label>Email *</label><input type="email" name="email" required></div>
+        </div>
+        <div><label>Message *</label><textarea name="message" required></textarea></div>
+        <button type="submit" class="pnf-cf-submit" id="pnf-cf-btn">Send message &rarr;</button>
+        <p class="pnf-cf-fine">No spam &middot; Reply within one business day</p>
+      </form>
+      <div class="pnf-cf-success" id="pnf-cf-success">
+        <div class="tick"><svg class="pnf-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Message received</h3>
+        <p>We&rsquo;ll be in touch within one business day.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+(function(){
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){this.closest('.faq-item').classList.toggle('open')});
+  });
+})();
+function pnfDrawerOpen(){document.getElementById('pnf-drawer').classList.add('open');document.getElementById('pnf-drawer-overlay').classList.add('open');document.body.style.overflow='hidden'}
+function pnfDrawerClose(){document.getElementById('pnf-drawer').classList.remove('open');document.getElementById('pnf-drawer-overlay').classList.remove('open');document.body.style.overflow=''}
+function pnfOpenContact(){document.getElementById('pnf-contact-overlay').classList.add('open');document.body.style.overflow='hidden'}
+function pnfCloseContact(){document.getElementById('pnf-contact-overlay').classList.remove('open');document.body.style.overflow=''}
+function pnfOverlayClick(e){if(e.target===document.getElementById('pnf-contact-overlay'))pnfCloseContact()}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){pnfDrawerClose();pnfCloseContact()}});
+async function pnfSubmitContact(e){
+  e.preventDefault();
+  var btn=document.getElementById('pnf-cf-btn');
+  btn.textContent='Sending…';btn.disabled=true;
+  try{
+    var res=await fetch('https://pb-forms.jkbrownnz.workers.dev/submit?client=papamoa',{method:'POST',body:new FormData(document.getElementById('pnf-contact-form'))});
+    var json=await res.json();
+    if(json.ok){document.getElementById('pnf-contact-form').style.display='none';document.getElementById('pnf-cf-success').style.display='block'}
+    else{btn.textContent='Try again';btn.disabled=false}
+  }catch(err){btn.textContent='Try again';btn.disabled=false}
+}
+(function(){
+  var base='/papamoa-previews';
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a');
+    if(!a)return;
+    var href=a.getAttribute('href');
+    if(!href||href.startsWith('http')||href.startsWith('tel:')||href.startsWith('mailto:')||href.startsWith('#'))return;
+    if(href.startsWith('/')&&!href.startsWith(base)){e.preventDefault();window.location.href=base+href}
+  });
+})();
+</script>
+<script src="/papamoa-previews/nav.js"></script>
+</body>
+</html>
