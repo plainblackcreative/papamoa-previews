@@ -458,6 +458,46 @@ Gold = "Gold Listing" star badge · Silver = "Silver Listing" diamond badge · B
 #### Known divergence (not blocking the lock)
 The Gold template configures content via ALLCAPS body tokens + `PHOTOS`/`faqs`; Silver via ALLCAPS tokens + a `BUSINESS{}` object. Both share the same core field set above. Unifying them into one shared config object is an **optional later refactor**, explicitly out of scope for this spec lock.
 
+### 8.2 Bronze self-serve auto-create — build architecture (LOCKED 2026-06-04, session 5)
+
+Goal: a visitor creates a free Bronze listing themselves; it **auto-publishes pending admin approval** (also answers Carwyn Q#7 on content moderation). The submission also captures a lead for Silver/Gold nurture (§18). Bronze content fields per the §8.1 Bronze row.
+
+**Architecture (locked):**
+- **Publish = static page committed via the GitHub Contents API.** On approval, a Worker renders the Bronze HTML from `listing-bronze-template.html` and commits it to `/listings/SLUG.html`; GitHub Pages rebuilds and it goes live. A real indexable page — that is Bronze's whole value (§3).
+- **Queue + moderation store = a Google Sheet** (reuses the existing `/sheets` Worker proxy; matches the locked §17.12 CRM direction). One sheet is both the moderation queue and the lead-gen funnel source.
+- **Build a lean v1 first**, then automate/polish.
+
+**Data flow:**
+1. Visitor fills the Create-Bronze form, sees a preview, confirms.
+2. POST to a Worker route (`/bronze-submit`) → honeypot + per-IP rate-limit + sanitise → append a row to the Sheet with status `pending` → email the operator (Resend, via pb-forms pattern).
+3. Operator opens the moderation queue (admin page), previews, clicks Approve (or Reject).
+4. Token-gated Worker route (`/bronze-approve`) reads the row → renders the bronze template → commits `/listings/SLUG.html` via GitHub API → sets the Sheet row to `live`. Reject → `rejected`.
+5. The live listing surfaces as a **plain directory card** on its subcategory page (no tier label, per §8).
+
+**Components + who builds:**
+
+| Piece | Owner | Notes |
+|---|---|---|
+| `listing-bronze-template.html` | Claude | Minimal page: §8.1 Bronze + §10 bar, `LocalBusiness` schema, **no tier label**, no logo/gallery/FAQ |
+| Create-Bronze form + preview/confirm | Claude | Dedicated page; the hub's Bronze CTA points here |
+| Worker routes `/bronze-submit` + `/bronze-approve` | Claude writes the code; **Jay deploys** | |
+| Admin moderation queue page | Claude | Build on `admin/confirm-listing.html` if usable |
+| Subcategory-page surfacing of Bronze cards | Claude | |
+| **GitHub fine-scoped PAT (contents:write)** as a Worker secret | **Jay** | Required for commit-on-approve |
+| **Google Sheet + sheet id / range / write access** | **Jay** | Queue + funnel |
+| **Worker deploy + secrets** | **Jay** | |
+
+**Anti-abuse:** honeypot (existing pb-forms pattern) + per-IP rate-limit; **admin approval is the backstop — nothing auto-publishes without it.**
+
+**Lean v1 sequence:**
+1. `listing-bronze-template.html` — *infra-free, build now.*
+2. Create-Bronze form + preview — *infra-free, build now (POST contract defined).*
+3. `/bronze-submit` route + Sheet append + operator email — *needs Jay's Sheet + Worker.*
+4. Admin moderation queue + `/bronze-approve` commit-on-approve — *needs Jay's GitHub PAT + Worker.*
+5. Subcategory surfacing + lead-funnel tie-in.
+
+Steps 1–2 build with no infra; 3–5 are gated on Jay provisioning the GitHub PAT, the Sheet, and the Worker deploy.
+
 ---
 
 ## 9. INFRASTRUCTURE
