@@ -6,7 +6,9 @@
 
 > **⚠ DASHBOARD MOVED (2026-06-05): the internal ops dashboard is now `ops.html`, NOT `index.html`.** To keep the client (Carwyn) out of it, `index.html` was demoted to a tiny noindex **redirect to `homepage.html`** (so the GitHub Pages root `/papamoa-previews/` and any `/index.html` guess both land on the public homepage, never the dashboard). **Jay's dashboard is now `https://plainblackcreative.github.io/papamoa-previews/ops.html`** (update your bookmark). No public page links to `ops.html`; only `dashboard.html` + `assets/nav-footer-snippet.html` reference it. Anywhere below that says "index.html = internal dashboard" now means `ops.html`.
 
-> **★ FIRST THING NEXT SESSION: nothing in the repo is blocked, but ONE Jay-side action is pending:**
+> **✅ RESOLVED 2026-06-05 — Jay ran `wrangler deploy` (the prior day).** The new `worker.js` is live in prod: `/bronze-approve` (Bronze-as-card) + `/bronze-update` (Edit-modal Save) both work. **Optional post-deploy cleanup that may still be outstanding:** revoke the `GITHUB_TOKEN` worker secret (`wrangler secret delete GITHUB_TOKEN`) + delete the `papamoa-bronze-worker` fine-grained PAT in GitHub settings (no longer needed). Original deploy notes kept below for reference.
+>
+> ~~**★ FIRST THING NEXT SESSION: nothing in the repo is blocked, but ONE Jay-side action is pending:**~~
 >
 > **Run `wrangler deploy` from the repo root** to push the new Cloudflare Worker code to production. The new `worker.js` covers two material changes that won't take effect until deploy:
 > 1. `e98b6a9` -- `/bronze-approve` rewritten for the Bronze-as-card model (no longer commits HTML pages to `/listings/<slug>.html`; just marks Sheet row live + invalidates `/bronze-public` cache + sends owner welcome email pointing to the sub-cat page)
