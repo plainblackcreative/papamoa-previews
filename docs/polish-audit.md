@@ -15,7 +15,7 @@
 6. `categories/food-drink/food-and-drink.html`
 7. `categories/services/services.html`
 8. `categories/shops/shopping.html`
-9. `sales/list-with-us.html`
+9. `sales/list-with-us.html` ← audited + DEPLOYED
 
 ---
 
@@ -225,3 +225,22 @@ GEO artefact (item #1, HIGH): declarative-question headers + structured entity f
 - Verified: grids fill `2fr 1fr 1fr 1fr 1fr`, no console errors, no overflow.
 
 **Task 3 — Community hero:** removed the redundant safety/crime/tsunami paragraph (already covered more thoroughly by the page FAQs + FAQPage JSON-LD). ✅ deployed.
+
+---
+
+## Page 9 — `sales/list-with-us.html` ← AUDITED + DEPLOYED 2026-06-05
+
+**Verdict:** Strong conversion page (clear value prop, stats, pricing tiers, guarantees, brand-consistent blue accent, appropriate slim footer) — but it was **SEO-thin**. Fixed.
+
+### 🟢 Already good
+- No console/network errors; 0 broken images, 0 missing alt, 0 tiny fonts, no overflow. Single `<h1>`, rich heading outline, good title + meta description.
+
+### ✅ Deployed
+- **Canonical** added (`…/sales/list-with-us.html`).
+- **OG + Twitter** added using user-supplied `list-with-us.png` → optimised `assets/list-with-us-og-1200x630.jpg` (2.16 MB → 207 KB), `summary_large_image`.
+- **JSON-LD** added: `BreadcrumbList` + `Service` (Pāpāmoa Business Listing) with three `Offer`s — Bronze $0 / Silver $599 / Gold $1,199 NZD (per-year, GST-exclusive). Strong AEO for "cost to list on Papamoa.info".
+- **CTA semantics:** the 4 modal-opening `href="#"` CTAs ("Enquire about Gold" ×2, "Talk to us about Silver/Gold") → `<button type="button">`; normalised `.tier-cta` (`font-family:inherit; border:0; cursor:pointer; width:100%; box-sizing:border-box`) so buttons render identically. Verified: Figtree font preserved, modal still opens on click, 0 `href="#"` left.
+
+### Notes
+- Source `list-with-us.png` (2.16 MB) left untracked (the optimised JPEG is used).
+- The contact form (modal) handles all enquiries; slim footer kept (sales-page conversion pattern).
