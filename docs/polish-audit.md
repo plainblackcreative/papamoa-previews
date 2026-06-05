@@ -288,3 +288,5 @@ Shared `pg-` category-landing template. Audited accommodation as representative;
 **Production reality / dependency:** image-backed tiles need ~6–12 photos per category × 5 = a real asset cost. Options: authentic local photos (best for SEO + trust), curated stock, or AI-generated. Decide the imagery source before building.
 
 **Open questions for the build phase:** real listing counts available per sub-category? Featured/Spotlight data source? One template applied to all 5 (recommended) vs per-category tweaks?
+
+**Per-category OG cards (user-provided, 2026-06-05):** user dropped 5 spec-perfect cards (1200×630 JPEG, 150–239KB) in `assets/category-og/`. Wired each page's `og:image` off the homepage fallback to its real card + added `og:image:width/height/alt` and a full `summary_large_image` Twitter card (twitter:title/description/image reusing the page's og values). Mapping: accommodation→accommodation.jpg, entertainment→activities.jpg, food-and-drink→food-and-drink.jpg, services→services.jpg, shops→shopping.jpg.
