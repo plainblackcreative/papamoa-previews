@@ -208,3 +208,20 @@ GEO artefact (item #1, HIGH): declarative-question headers + structured entity f
 ### 🟡 Polish / Phase 2
 3. **No `BreadcrumbList` in JSON-LD** (essential-info now has one). *Optional: add `BreadcrumbList` (Home → Community) to match.*
 4. Long page (4705px) but well-structured; sparse imagery (3 images) — Phase-2 imagery is a general theme.
+
+---
+
+## Cross-page tasks (user notes, 2026-06-05)
+
+**Task 1 — Homepage footer:** "Dogs in Pāpāmoa" → "News & Events" (`news-events.html`) in the Local Info column. ✅ deployed (batch 1).
+
+**Task 2 — Uniform nav & footer (9 pages):**
+- **Nav:** already uniform (all 9 driven by `nav.js`, `data-nav="default"`, no hardcoded nav). No change needed.
+- **Footer:** standardised to a **uniform shell + page-specific columns**. Canonical shell = brand block + [page col 1] + [page col 2] + **For Businesses** (List Your Business · Why List? · Advertise · Contact) + **About Papamoa.info** (Editorial Policy · Privacy · Terms · TaurangaNZ.info) + bottom bar (© · Privacy · Terms · Editorial Policy).
+  - Homepage: already canonical (reference).
+  - essential-info + community: split the crammed "For Businesses"+"Network" column into For Businesses + About. ✅ batch 1.
+  - 5 category pages (accommodation, entertainment, food-drink, services, shops): standardised For Businesses + replaced/added About; **dropped the redundant "Browse Directory" cross-links** (Do/Eat/Services/Shop still in the top nav) per user OK. Each keeps its 2 category sub-category columns (SEO). ✅ batch 2.
+  - **`list-with-us`: kept its deliberate SLIM footer** (sales-page conversion pattern) per user decision — NOT converted to the full footer.
+- Verified: grids fill `2fr 1fr 1fr 1fr 1fr`, no console errors, no overflow.
+
+**Task 3 — Community hero:** removed the redundant safety/crime/tsunami paragraph (already covered more thoroughly by the page FAQs + FAQPage JSON-LD). ✅ deployed.
