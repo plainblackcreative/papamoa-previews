@@ -24,16 +24,16 @@ Full per-page detail lives in **[docs/polish-audit.md](docs/polish-audit.md)**. 
 - **No specific business names in general category copy** (sections, sidebars, alt, FAQ incl. JSON-LD) — independent/editorial directory. Generic only; named businesses live in listings + labelled Spotlight/Featured. Now also in `editorial-policy.html`.
 - CSS for shared components goes in `nav.js`, not per-page.
 
-## ▶ MAIN PENDING TASK: roll the image-led feature rows to the other 4 category pages
-`entertainment.html` (Do) · `food-and-drink.html` (Eat) · `services.html` · `shopping.html`.
-**Reference implementation:** `categories/accommodation/accommodation.html` — copy that pattern.
+## ✅ DONE (2026-06-05): merged image-led directory rolled to all 5 category pages
+Commit `188619d`. The icon-tile grid and the editorial rows were **both just routers to the same sub-cat pages** (double-listing → page felt heavy). Per user's call, **merged them into ONE image-led directory**: dropped the `.cat-widget` icon grid; each editorial group is now a single `.spotlight-avail.has-photo` row (Stay-style photo/placeholder + GENERIC summary + `.sa-chips` chips to every sub-cat in the group + combined `data-tags`). The search bar (`#catf-input` → `catPageFilter` → `svcSearch`) stays and filters the rows; the dead grid JS no-ops (no `.cat-widget`).
+- **accommodation** — removed 14-tile grid (rows were already image-led).
+- **services** 57 tiles+57 rows → **7 rows**; **entertainment** 16+23 → **8**; **food-and-drink** 20+24 → **7**; **shopping** 22+21 → **6**.
+- **Editorial neutrality from the start:** genericised every summary, sidebar fact-box, **hero subtitle**, and rewrote FAQs (visible + FAQPage JSON-LD) with no business names; stripped business names from `data-tags` too. Shopping-centre **landmarks kept** (Fashion Island, Pāpāmoa Plaza, The Sands, Bayfair) as geographic refs.
+- **Chip palette fix (Carwyn):** recoloured EAT brown (`rgba(224,120,48)`) and SHOP gold (`rgba(200,150,42)`) `.sa-btn` tints → brand blue `rgba(0,176,248)`.
+- **Photos:** one hero-ish row per page → webp in `assets/category-features/` (`services-trades`, `activities-what-to-do`, `food-where-to-eat`, `shopping-where-to-shop`); **all other rows are gradient `sa-photo-ph` placeholders.** Source JPEGs in `assets/papamoa-category-card-backgrounds/` left untracked.
+- Verified each: search filter, no overflow/console errors, 375px mobile stacks photo-on-top, JSON-LD valid.
 
-Per page:
-1. **Add the CSS** for `.spotlight-avail.has-photo`, `.sa-photo`, `.sa-photo-ph`, `.sa-chips` — copy the block from accommodation's `<style>` (search `image-led feature row`).
-2. **Replace the editorial `.section` blocks** (everything from the first section comment up to `<!-- NO RESULTS -->`) with **one `.spotlight-avail has-photo` feature row per section**: keep the `<h2 class="section-title">` (icon + title); row = photo/placeholder panel + a tight **GENERIC summary (NO business names)** + a `.sa-chips` row of `<a class="sa-btn">` Browse links (one per sub-category, hrefs from the existing per-card browse links) + **combined `data-tags`** (union of the section's old card tags, for search). A Python regex `<!-- FIRST SECTION COMMENT -->.*?(?=<!-- NO RESULTS -->)` did this cleanly on accommodation.
-3. **Photos:** optimise `assets/papamoa-category-card-backgrounds/{what-to-do,where-to-eat,services-trades,where-to-shop}.jpeg` → webp in `assets/category-features/` for a hero-ish row each; **gradient placeholders (`sa-photo-ph` + icon)** for the rest (or all placeholders to start).
-4. **Genericise the FAQ** (visible accordion + FAQPage JSON-LD) — remove business names, keep Q&As that have none.
-5. **Verify:** search filter works (`catPageFilter`/`svcSearch`), no overflow/console errors, mobile stacks photo-on-top; commit, push, poll build, cache-busted curl.
+**Build method (reusable):** `build_merge.py` helper + per-page `cfg_*.py` (deleted after run) — drops grid by slicing `<!-- QUICK SUBCATEGORY WIDGET ... <div class="page-wrap">`, replaces `<!-- FIRST SECTION --> ... <!-- NO RESULTS -->` with generated rows, swaps whole FAQ blocks, asserts every change. Re-derive from git if needed.
 
 ## Other backlog
 - Swap the 4 gradient placeholders on the Stay page for real sub-category photos (give the user ChatGPT prompts like the OG cards).
