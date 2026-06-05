@@ -189,6 +189,8 @@ GEO artefact (item #1, HIGH): declarative-question headers + structured entity f
 **Verdict:** In good shape already — the strongest baseline of the three so far. Proper heading outline, canonical, and JSON-LD (incl. FAQPage) are all present. Main gaps mirror the prepped assets: no hero image, no `og:image`.
 
 > **✅ DEPLOYED — 2026-06-05.** Hero BG → `assets/community-hero.webp` (2.95 MB PNG → 220 KB) with navy overlay; `og:image`/`twitter:image` added + `summary_large_image` → `assets/community-og-1200x630.jpg` (**user re-exporting the designed card at 1200×630**); BreadcrumbList already existed (no change). **Bonus fix:** `.con-card { min-width:0 }` resolves a pre-existing mobile grid blowout (Key Contacts overflowed ~47px at 375px). Verified: no console/network errors, no overflow desktop/mobile, hero legible. ⏳ Pending: drop the 1200×630 OG export at `assets/community-og-1200x630.jpg`.
+>
+> **Spotlight-card polish (user notes, 2026-06-05):** hid the dev URL paths (`.hub-path { display:none }`); made the 4 card icons white (`.old-hub-top { color:#fff }` — `.pnf-i` uses `stroke:currentColor`); recoloured the "Community Groups & Volunteering" card header from green → blue (`#145079,#0F86B9`) to match Police & Emergency. (Note: Neighbourhood Support card uses a very slightly different blue `#1a3a50,#2a6a96` — left as-is; offer to unify.)
 
 ### 🟢 Already good
 - No console/network errors; 0 broken images, 0 missing `alt`, 0 empty links (of 83), 0 sub-15px text; no horizontal overflow.
