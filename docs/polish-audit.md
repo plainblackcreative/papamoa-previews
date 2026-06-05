@@ -260,5 +260,5 @@ Shared `pg-` category-landing template. Audited accommodation as representative;
 2. **og:image 404 fix** — all 5 referenced non-existent `images/og/{name}.jpg`; repointed to the existing `images/og/papamoa-home-1200x630.jpg` (fallback per user). *Swap to per-category cards later when assets are provided.*
 
 ### 🟡 Remaining (deferred)
-- "Clear search and show all" uses `href="#"`+onclick → could be `<button>` (minor a11y, template-wide).
+- ✅ "Clear search and show all" → <button> (a11y) across all 5 (2026-06-05).
 - Per-category OG cards (currently using the homepage fallback).
