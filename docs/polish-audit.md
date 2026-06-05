@@ -246,3 +246,7 @@ GEO artefact (item #1, HIGH): declarative-question headers + structured entity f
 - The contact form (modal) handles all enquiries; slim footer kept (sales-page conversion pattern).
 
 **Pricing-tier card alignment (user note, 2026-06-05):** the 3 tier cards looked uneven. Equalised the `.tier-head` height (`.tier-tagline { min-height:4.5em }` + tightened the over-long Bronze tagline to ~3 lines) so dividers + feature lists align, and made `.tier-footer { display:flex; flex-direction:column-reverse; gap:10px }` so the CTA buttons bottom-align across all three (sub-notes sit above each button). Verified: head/featTop/CTA-bottom ranges all = 0px; no overflow desktop/mobile.
+
+**Evergreen years + final CTA (user notes, 2026-06-05):**
+- Genericised dated copy so a Dec sign-up isn't confused: "2027 ROI guarantee/Guarantee" → "12-month / 12-Month ROI Guarantee" (×6); guarantee body → "...within your first 12 months, your next year's renewal is free"; AI-search line "In 2026, when someone searches" → "Today, ...". Kept the conventional `© 2026` copyright.
+- Converted the bottom "run by locals" block into a primary CTA: kept the trust text + avatar, replaced Jayden's phone/email with **"Get your free listing →"** (→ `create-bronze-listing.html`) + **"Talk to us about Gold & Silver →"** (→ contact modal). Added button-compat to `.jayden-btn` (font-family:inherit, border:0, cursor) so the modal CTA is a real `<button>`; on mobile the two CTAs stack full-width. Verified: modal opens, Figtree font, no overflow desktop/mobile.
