@@ -4,6 +4,8 @@
 **Last commit:** `9ebccba` admin: add the canonical brand logo to bronze-queue + add-lead + listing-health + upload
 **Branch:** `main` (tree clean, all 40 session-7-extended commits pushed)
 
+> **⚠ DASHBOARD MOVED (2026-06-05): the internal ops dashboard is now `ops.html`, NOT `index.html`.** To keep the client (Carwyn) out of it, `index.html` was demoted to a tiny noindex **redirect to `homepage.html`** (so the GitHub Pages root `/papamoa-previews/` and any `/index.html` guess both land on the public homepage, never the dashboard). **Jay's dashboard is now `https://plainblackcreative.github.io/papamoa-previews/ops.html`** (update your bookmark). No public page links to `ops.html`; only `dashboard.html` + `assets/nav-footer-snippet.html` reference it. Anywhere below that says "index.html = internal dashboard" now means `ops.html`.
+
 > **★ FIRST THING NEXT SESSION: nothing in the repo is blocked, but ONE Jay-side action is pending:**
 >
 > **Run `wrangler deploy` from the repo root** to push the new Cloudflare Worker code to production. The new `worker.js` covers two material changes that won't take effect until deploy:
