@@ -262,3 +262,29 @@ Shared `pg-` category-landing template. Audited accommodation as representative;
 ### 🟡 Remaining (deferred)
 - ✅ "Clear search and show all" → <button> (a11y) across all 5 (2026-06-05).
 - Per-category OG cards (currently using the homepage fallback).
+
+---
+
+## Category-page redesign — design brief (2026-06-05, "next" work)
+
+**Goal:** Carwyn wants more imagery on the category landing pages. His current site is a decorative grid of images linking to sub-cat pages. We want the visual appeal of a destination site (refs: visitnoosa.com.au, aucklandnz.com, sunshinecoast.com) **without losing the directory's job** (route to listings) or its SEO/AEO strengths.
+
+**Core thesis — a "visual directory", not a decorative image grid.** A pure image grid is pretty but low-utility and weak for SEO (alt text only). Ours = image tiles that are *also* functional (labelled, counted, filterable, linking to real filtered listings) + editorial local-expertise copy + featured listings. Visual appeal AND utility/SEO.
+
+**Proposed page skeleton (top → bottom):**
+1. **Full-bleed photographic hero** (category-specific) + headline (blue accent) + a prominent search/filter bar + 1 stat. Keep it.
+2. **Visual sub-category tiles** (the upgrade): replace text/icon cards with **image-backed tiles** — representative photo + label + live **count** (e.g. "Motels · 6") → filtered view. Better than Carwyn's grid because each tile is labelled, counted, and leads somewhere real.
+3. **Intent filter chips** (cross-cutting): Beachfront · Pet-friendly · Budget · Luxury · Family — instant filtering of the listings below.
+4. **Featured / Spotlight listings** with photos (monetisation + real content + imagery) — a few Gold/Spotlight cards near the top.
+5. **Editorial sections** (keep for SEO/AEO local expertise) but lighter: one image per section, tightened copy, "Browse X →" CTA. Balances Carwyn's "more imagery / less busy" with answer-engine value.
+6. **Local-context sidebar** (AIMS Games / seasonal / booking tips) — keep (utility + AEO).
+7. **FAQ** (FAQPage JSON-LD) — keep.
+8. **Listing-acquisition CTA band** ("Run accommodation in Pāpāmoa?") — keep, make it a clear band.
+
+**Look/feel:** more imagery, more white space, less text density; warm + local + inviting (not "corporate directory"); brand blue/green/navy; consistent card system; mobile-first.
+
+**Don't lose (SEO/AEO):** the new `<h2>` section outline, editorial copy (answer-engine fodder), CollectionPage + FAQPage JSON-LD; add ImageObject/alt for new imagery; consider an ItemList of sub-categories.
+
+**Production reality / dependency:** image-backed tiles need ~6–12 photos per category × 5 = a real asset cost. Options: authentic local photos (best for SEO + trust), curated stock, or AI-generated. Decide the imagery source before building.
+
+**Open questions for the build phase:** real listing counts available per sub-category? Featured/Spotlight data source? One template applied to all 5 (recommended) vs per-category tweaks?
