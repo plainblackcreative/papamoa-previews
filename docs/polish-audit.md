@@ -244,3 +244,5 @@ GEO artefact (item #1, HIGH): declarative-question headers + structured entity f
 ### Notes
 - Source `list-with-us.png` (2.16 MB) left untracked (the optimised JPEG is used).
 - The contact form (modal) handles all enquiries; slim footer kept (sales-page conversion pattern).
+
+**Pricing-tier card alignment (user note, 2026-06-05):** the 3 tier cards looked uneven. Equalised the `.tier-head` height (`.tier-tagline { min-height:4.5em }` + tightened the over-long Bronze tagline to ~3 lines) so dividers + feature lists align, and made `.tier-footer { display:flex; flex-direction:column-reverse; gap:10px }` so the CTA buttons bottom-align across all three (sub-notes sit above each button). Verified: head/featTop/CTA-bottom ranges all = 0px; no overflow desktop/mobile.
