@@ -9,7 +9,7 @@
 **Scope — 9 pages:**
 1. `homepage.html` ← audited + Phase 1 DEPLOYED
 2. `community/essential-info.html` ← audited
-3. `community/community.html`
+3. `community/community.html` ← audited
 4. `categories/accommodation/accommodation.html`
 5. `categories/activities/entertainment.html`
 6. `categories/food-drink/food-and-drink.html`
@@ -181,3 +181,26 @@ GEO artefact (item #1, HIGH): declarative-question headers + structured entity f
 ### Notes / open questions
 - Confirm the canonical URL form for community pages (`papamoa.info/community/...` vs github.io demo path).
 - "ALSO IN THE DIRECTORY → Community" is the only cross-sell; could surface more sibling hubs.
+
+---
+
+## Page 3 — `community/community.html` ← AUDITED 2026-06-05
+
+**Verdict:** In good shape already — the strongest baseline of the three so far. Proper heading outline, canonical, and JSON-LD (incl. FAQPage) are all present. Main gaps mirror the prepped assets: no hero image, no `og:image`.
+
+> **✅ DEPLOYED — 2026-06-05.** Hero BG → `assets/community-hero.webp` (2.95 MB PNG → 220 KB) with navy overlay; `og:image`/`twitter:image` added + `summary_large_image` → `assets/community-og-1200x630.jpg` (**user re-exporting the designed card at 1200×630**); BreadcrumbList already existed (no change). **Bonus fix:** `.con-card { min-width:0 }` resolves a pre-existing mobile grid blowout (Key Contacts overflowed ~47px at 375px). Verified: no console/network errors, no overflow desktop/mobile, hero legible. ⏳ Pending: drop the 1200×630 OG export at `assets/community-og-1200x630.jpg`.
+
+### 🟢 Already good
+- No console/network errors; 0 broken images, 0 missing `alt`, 0 empty links (of 83), 0 sub-15px text; no horizontal overflow.
+- Single `<h1>`; **strong heading outline** — H1 → H2 Key Contacts → H2 People & Safety (now `<h2>`) → H2 Safety & Support Spotlight Pages (H3 children) → H2 Common Questions (FAQ) → H3 Essential Info. Already navigable.
+- **`canonical` present** (`…/community/community.html`); good `meta description`.
+- **JSON-LD present**: `WebPage` + `FAQPage`.
+
+### 🟠 Should-fix (matches prepped assets)
+1. **Hero is still the navy gradient** (`.hub-hero` line 29: `linear-gradient(135deg,#1B3A5C,#2B4F70)`). *Swap to `assets/community-hero.png` (2.95 MB → encoded WebP **220 KB** at `assets/community-hero.webp`) with a navy overlay for white-text contrast — same treatment as essential-info.*
+2. **`og:image` / `twitter:image` missing**, and `twitter:card` is the small `summary` (line 240). *Add image tags using the prepped OG asset + upgrade to `summary_large_image`.*
+   - ⚠ **OG asset caveat:** `assets/community-og.png` is **1359×1158 (~1.17:1, near-square) and 2.68 MB**. For `summary_large_image` (wants ~1.91:1) it'll be **center-cropped** on most platforms, and 2.68 MB is heavy. *Decision needed (see below).*
+
+### 🟡 Polish / Phase 2
+3. **No `BreadcrumbList` in JSON-LD** (essential-info now has one). *Optional: add `BreadcrumbList` (Home → Community) to match.*
+4. Long page (4705px) but well-structured; sparse imagery (3 images) — Phase-2 imagery is a general theme.
