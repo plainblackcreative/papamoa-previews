@@ -49,7 +49,7 @@
 **C1 — Hero H1: accent the word "Pāpāmoa" in deep green.**
 - **File:** `homepage.html`
 - **HTML (line ~720):** `<h1>Discover <em>Pāpāmoa</em>,<br>from the locals who know it</h1>` (wrap only the word, not the comma).
-- **CSS (add next to `.hero-v2 h1`, line ~346):** `.hero-v2 h1 em { color:var(--green-deep); font-style:normal; }`
+- **CSS (next to `.hero-v2 h1`):** `.hero-v2 h1 em { color:var(--blue); font-style:normal; }` — **revised 2026-06-05: green → `--blue` `#00B0F8` (the logo's ".info" blue, sampled from the wordmark PNG) per user; shipped "as-is" without a scrim boost.**
 - **Rationale:** reuses the established site-wide heading-accent pattern (`<em>` → `--green-deep` `#5B9230`, non-italic, bold). Inherits the H1's `font-weight:700` + `text-shadow`, so legibility over the photo is preserved.
 - **Companion (recommended, ties to polish #4):** add a subtle dark gradient scrim to the hero so the green word stays legible over the brighter **mobile** sunset crop. *Optional — confirm if wanted.*
 - **Acceptance:** only "Pāpāmoa" renders green; rest of H1 stays white; legible at desktop and 375px. Verified via temporary live preview — reads well on the desktop crop.
