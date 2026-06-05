@@ -7,8 +7,8 @@
 **Severity key:** 🔴 must-fix · 🟠 should-fix · 🟡 polish/nice-to-have · 🟢 already good
 
 **Scope — 9 pages:**
-1. `homepage.html` ← audited
-2. `community/essential-info.html`
+1. `homepage.html` ← audited + Phase 1 DEPLOYED
+2. `community/essential-info.html` ← audited
 3. `community/community.html`
 4. `categories/accommodation/accommodation.html`
 5. `categories/activities/entertainment.html`
@@ -155,3 +155,29 @@ GEO artefact (item #1, HIGH): declarative-question headers + structured entity f
 ### Notes / open questions for the user
 - Confirm the contact form's Worker proxy endpoint (`papamoa-claude-proxy.jkbrownnz.workers.dev`) is the intended production endpoint.
 - "Own a Pāpāmoa business?" CTA card sits inside the Featured grid — intentional placement? Reads fine, just semantically a CTA among listings.
+
+---
+
+## Page 2 — `community/essential-info.html` ← AUDITED 2026-06-05
+
+**Verdict:** Clean and well-organised visually, but **structurally hollow** — a 29-card, 2559px page with almost no heading outline, and missing the SEO basics the homepage has. Carwyn's "too busy" is partly a *structure* problem (no real section headings to chunk it).
+
+> **✅ DEPLOYED — 2026-06-05.** Per user notes: hero BG now uses `assets/essential-info-hero.webp` (optimised from the 2.5 MB `essential-info-hero.png` → 226 KB) with a green overlay for text contrast; OG/Twitter tags added using `assets/essential-info-og.jpeg`; `canonical` added; JSON-LD added (BreadcrumbList + CollectionPage→ItemList of 28 guides); the 4 `pg-section-label` divs → `<h2>` (and the 1 on `community.html`). Verified in preview (no console/network errors, valid JSON-LD, headings H1→4×H2, hero legible desktop+mobile). 🟡 #5 (card density/imagery) remains a Phase-2 item.
+
+### 🟢 Already good
+- No console/network errors; 0 broken images, 0 missing `alt`, 0 empty links (of 80), 0 sub-15px text; no horizontal overflow desktop **or** 375px mobile.
+- Single correct `<h1>`; clean breadcrumb (Home / Essential Info); good `meta description`.
+- Content logically grouped into labelled card groups; mobile stacks to one column cleanly.
+
+### 🔴 Should-fix (structure/SEO)
+1. **Section labels are non-semantic `<div class="pg-section-label">`, not headings.** Group titles — BEACH & OUTDOORS, HEALTH SAFETY & SERVICES, PROPERTY & SHOPPING, GETTING AROUND & NEARBY, ALSO IN THE DIRECTORY — are divs. The only content heading is a stray `<h3>Community</h3>`. So the page is H1 + (effectively) nothing. *Fix: convert `.pg-section-label` group titles to `<h2>` (move the class onto `<h2>`, keep the uppercase styling). Helps SEO outline, screen-reader heading nav, AND scannability.* **Scope: same `pg-section-label` div pattern is on `community.html` (Page 3) — fix both with one change. `pg-section-label` is always a `<div>`, never used on the category pages.**
+2. **No `<link rel="canonical">`** (homepage has one). *Add `https://papamoa.info/community/essential-info.html` — confirm production canonical form.*
+3. **No JSON-LD** (homepage ships rich structured data). *Add `BreadcrumbList` (Home → Essential Info) + an `ItemList` of the info categories (or `CollectionPage`). High AEO value for an info hub.*
+4. **No `og:image` / OG tags.** *Add OG + Twitter image (reuse homepage 1200×630 card or page-specific), same pattern as homepage C6.*
+
+### 🟡 Polish / Phase 2 (Carwyn "too busy" + "use imagery")
+5. **29 visually-identical text cards** = dense. The heading fix (#1) chunks it structurally; beyond that, imagery/visual differentiation or collapsing low-traffic groups is a Phase-2 design call. Only 3 images on the whole page.
+
+### Notes / open questions
+- Confirm the canonical URL form for community pages (`papamoa.info/community/...` vs github.io demo path).
+- "ALSO IN THE DIRECTORY → Community" is the only cross-sell; could surface more sibling hubs.
