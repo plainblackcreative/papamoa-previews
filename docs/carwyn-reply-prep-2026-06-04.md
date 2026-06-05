@@ -144,10 +144,10 @@ See §17.13 + §17.11 in Project_Master for the full resolution.
 >
 > **What's changed on the demo site:**
 >
-> - **Brand palette locked to blue + green.** Brown/orange gone from EAT, the shops pages, and the activities subcats. Every category surface now uses the locked navy + brand-accent palette per your rule.
+> - **Imagery on every category page — this was the big one.** All 5 category pages (Stay, Do, Eat, Services, Shop) rebuilt into a single image-led directory: each sub-category group is now a photo + a short plain-English summary + the links to browse it, with a real representative image on every row. That's the "a lot more imagery / placeholders that represent what each page is" you asked for, applied right through Activities, Accommodation, Food, Services and Shopping. Search/filter and the SEO structure are kept underneath.
+> - **Brand palette locked to blue + green.** Brown/orange gone everywhere, including the EAT and SHOP pages you called out specifically — their chips and accents were still brown/gold, now blue. Every category surface uses the locked navy + brand-accent palette.
 > - **Header redesigned.** The main page tabs are now the visible flat bar you see on every public page — bigger, higher contrast, clear active state. Mobile gets a slide-in drawer with the same tabs.
 > - **Homepage simplified.** Killed two duplicate CTA blocks, slimmed the hero (~90px shorter), tightened the FAQ, moved Browse Categories to imagery-led cards. The Essential Info block came out. ~11% shorter overall.
-> - **Imagery-led category pages.** All 5 main category landings rebuilt — photo hero, sticky filter, single card-grid with custom line icons. No more emoji.
 > - **Free Bronze tier live.** Self-serve form → moderation queue → auto-publish. The free-listing lead-gen funnel you'd expect.
 > - **Footer locked + nav locked.** Single source of truth across all 225 public pages. No more drift.
 >
