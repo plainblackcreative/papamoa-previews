@@ -10,12 +10,7 @@
 1. `homepage.html` ← audited + Phase 1 DEPLOYED
 2. `community/essential-info.html` ← audited
 3. `community/community.html` ← audited
-4. `categories/accommodation/accommodation.html`
-5. `categories/activities/entertainment.html`
-6. `categories/food-drink/food-and-drink.html`
-7. `categories/services/services.html`
-8. `categories/shops/shopping.html`
-9. `sales/list-with-us.html` ← audited + DEPLOYED
+4. `categories/accommodation/accommodation.html` ← audited5. `categories/activities/entertainment.html` ← audited6. `categories/food-drink/food-and-drink.html` ← audited7. `categories/services/services.html` ← audited8. `categories/shops/shopping.html` ← audited9. `sales/list-with-us.html` ← audited + DEPLOYED
 
 ---
 
@@ -250,3 +245,20 @@ GEO artefact (item #1, HIGH): declarative-question headers + structured entity f
 **Evergreen years + final CTA (user notes, 2026-06-05):**
 - Genericised dated copy so a Dec sign-up isn't confused: "2027 ROI guarantee/Guarantee" → "12-month / 12-Month ROI Guarantee" (×6); guarantee body → "...within your first 12 months, your next year's renewal is free"; AI-search line "In 2026, when someone searches" → "Today, ...". Kept the conventional `© 2026` copyright.
 - Converted the bottom "run by locals" block into a primary CTA: kept the trust text + avatar, replaced Jayden's phone/email with **"Get your free listing →"** (→ `create-bronze-listing.html`) + **"Talk to us about Gold & Silver →"** (→ contact modal). Added button-compat to `.jayden-btn` (font-family:inherit, border:0, cursor) so the modal CTA is a real `<button>`; on mobile the two CTAs stack full-width. Verified: modal opens, Figtree font, no overflow desktop/mobile.
+
+---
+
+## Pages 4–8 — category landing pages (accommodation · entertainment · food-drink · services · shops) ← AUDITED + DEPLOYED 2026-06-05
+
+Shared `pg-` category-landing template. Audited accommodation as representative; checks applied to all 5.
+
+### 🟢 Already good (all 5)
+- canonical ✓, JSON-LD (CollectionPage + FAQPage) ✓, hero with photo + brand-blue accent, rich sub-category sections + AIMS Games sidebar + FAQ, good titles/meta. No console/network errors, 0 broken images, 0 missing alt, 0 sub-15px text, no overflow.
+
+### ✅ Deployed (template-wide, all 5)
+1. **Section titles `<div class="section-title">` → `<h2>`** — 7/8/7/7/6 per page (~35 total). Each page went from 1 `<h2>` to a full H1→H2 outline (SEO/AEO/a11y/scannability). Added `margin-top:0` to `.section-title` so the UA `<h2>` margin doesn't shift layout — verified visually identical (Playfair, navy, icon, border-bottom).
+2. **og:image 404 fix** — all 5 referenced non-existent `images/og/{name}.jpg`; repointed to the existing `images/og/papamoa-home-1200x630.jpg` (fallback per user). *Swap to per-category cards later when assets are provided.*
+
+### 🟡 Remaining (deferred)
+- "Clear search and show all" uses `href="#"`+onclick → could be `<button>` (minor a11y, template-wide).
+- Per-category OG cards (currently using the homepage fallback).
