@@ -370,9 +370,9 @@
       <div class="hub-head"><span class="hub-title">The Site</span></div>
       <div class="tilegrid">
         <a class="tile" href="/papamoa-previews/homepage.html" target="_blank" rel="noopener"><div class="tile-ic">🏠</div><div class="tile-body"><div class="tile-title">Homepage</div><div class="tile-sub">Hero, weather, search, category tour</div></div></a>
-        <a class="tile" href="/papamoa-previews/categories/accommodation/accommodation.html" target="_blank" rel="noopener"><div class="tile-ic">🏨</div><div class="tile-body"><div class="tile-title">Accommodation</div><div class="tile-sub">7 sub-categories</div></div></a>
+        <a class="tile" href="/papamoa-previews/categories/accommodation/accommodation.html" target="_blank" rel="noopener"><div class="tile-ic">🏨</div><div class="tile-body"><div class="tile-title">Accommodation</div><div class="tile-sub">Motels, holiday parks &amp; stays</div></div></a>
         <a class="tile" href="/papamoa-previews/categories/activities/entertainment.html" target="_blank" rel="noopener"><div class="tile-ic">🎉</div><div class="tile-body"><div class="tile-title">Activities</div><div class="tile-sub">Entertainment &amp; things to do</div></div></a>
-        <a class="tile" href="/papamoa-previews/categories/food-drink/food-and-drink.html" target="_blank" rel="noopener"><div class="tile-ic">🍽️</div><div class="tile-body"><div class="tile-title">Food &amp; Drink</div><div class="tile-sub">8 sub-categories</div></div></a>
+        <a class="tile" href="/papamoa-previews/categories/food-drink/food-and-drink.html" target="_blank" rel="noopener"><div class="tile-ic">🍽️</div><div class="tile-body"><div class="tile-title">Food &amp; Drink</div><div class="tile-sub">Cafés, restaurants &amp; takeaways</div></div></a>
         <a class="tile" href="/papamoa-previews/categories/services/services.html" target="_blank" rel="noopener"><div class="tile-ic">🔧</div><div class="tile-body"><div class="tile-title">Services</div><div class="tile-sub">Trades, health, professional</div></div></a>
         <a class="tile" href="/papamoa-previews/categories/shops/shopping.html" target="_blank" rel="noopener"><div class="tile-ic">🛍️</div><div class="tile-body"><div class="tile-title">Shops</div><div class="tile-sub">Retail &amp; shopping centres</div></div></a>
         <a class="tile" href="/papamoa-previews/community/community.html" target="_blank" rel="noopener"><div class="tile-ic">🌏</div><div class="tile-body"><div class="tile-title">Essential Info</div><div class="tile-sub">50+ community pages</div></div></a>
@@ -482,8 +482,8 @@
       <div class="form-sec">
         <h4>Photos</h4>
         <div class="field row">
-          <div><label>Logo</label><div class="dropzone sm" onclick="toast('Logo upload — demo only')">Upload logo</div></div>
-          <div><label>Gallery <span class="opt" id="galCount"></span></label><div class="dropzone sm" onclick="toast('Photo upload — demo only')">Add gallery photos<br><span style="font-size:11px">up to 9 images</span></div></div>
+          <div><label>Logo</label><div class="dropzone sm" onclick="toast('Logo upload is available in the full platform')">Upload logo</div></div>
+          <div><label>Gallery <span class="opt" id="galCount"></span></label><div class="dropzone sm" onclick="toast('Photo upload is available in the full platform')">Add gallery photos<br><span style="font-size:11px">up to 9 images</span></div></div>
         </div>
       </div>
 
@@ -658,7 +658,10 @@ function enrich(l){
 /* ---------------- State ---------------- */
 const KEY='papamoa-cms-demo-v1';
 let DB, pending=0;
-function load(){ try{ DB=JSON.parse(localStorage.getItem(KEY)) }catch(e){} if(!DB||!DB.listings){ DB=JSON.parse(JSON.stringify(SEED)); } DB.listings.forEach(enrich); }
+function load(){ try{ DB=JSON.parse(localStorage.getItem(KEY)) }catch(e){} if(!DB||!DB.listings){ DB=JSON.parse(JSON.stringify(SEED)); } DB.listings.forEach(enrich); syncPendingUI(); }
+// Re-derive the unpublished-changes count from the data so a page refresh can't
+// leave the Publish button saying "nothing to publish" while Draft rows are visible.
+function syncPendingUI(){ pending=DB.listings.filter(l=>l.status==='Draft').length; var pill=document.getElementById('pubPill'), btn=document.getElementById('publishBtn'); if(pill) pill.textContent=pending; if(btn) btn.classList.toggle('has-changes', pending>0); }
 function save(){ localStorage.setItem(KEY, JSON.stringify(DB)); }
 function nextId(){ return DB.listings.reduce((m,l)=>Math.max(m,l.id),0)+1; }
 function logActivity(t){ DB.activity.unshift({t,when:'Just now'}); DB.activity=DB.activity.slice(0,8); }
@@ -691,7 +694,9 @@ function renderDashboard(){
 /* ---------------- Listings ---------------- */
 function renderListings(){
   const f=document.getElementById('catFilter');
-  if(f.options.length<=1){ f.innerHTML='<option value="">All categories</option>'+DB.categories.map(c=>`<option>${esc(c.name)}</option>`).join(''); }
+  const curFilter=f.value;
+  f.innerHTML='<option value="">All categories</option>'+DB.categories.map(c=>`<option>${esc(c.name)}</option>`).join('');
+  f.value=curFilter;   // preserve selection across rebuilds (so a newly-added category shows up)
   const q=(document.getElementById('searchInput').value||'').toLowerCase();
   const cf=f.value;
   const rows=DB.listings.filter(l=>(!cf||l.cat===cf)&&(!q||l.name.toLowerCase().includes(q)||(l.tag||'').toLowerCase().includes(q)));
@@ -763,14 +768,14 @@ function saveListing(){
 }
 function delListing(id){
   const l=DB.listings.find(x=>x.id===id);
-  if(!confirm(`Delete “${l.name}”? This can't be undone in the demo.`)) return;
+  if(!confirm(`Delete “${l.name}”? This will remove the listing.`)) return;
   DB.listings=DB.listings.filter(x=>x.id!==id); logActivity(`${l.name} removed`); save(); markPending(); renderListings(); toast('Listing deleted','tick');
 }
 
 /* ---------------- Categories ---------------- */
 function renderCategories(){
   document.getElementById('catList').innerHTML=DB.categories.map((c,i)=>`<div class="cat-card">
-    <div class="cat-top"><div class="cat-ic">${c.icon||'📁'}</div>
+    <div class="cat-top"><div class="cat-ic">${esc(c.icon||'📁')}</div>
       <div><h3>${esc(c.name)}</h3><div class="meta">${c.subs.length} subcategories · ${DB.listings.filter(l=>l.cat===c.name).length} listings</div></div>
       <button class="btn btn-sm btn-danger" onclick="delCategory(${i})">Remove</button></div>
     <div class="subchips">${c.subs.map((s,j)=>`<span class="chip">${esc(s)}<button class="x" title="Remove" onclick="delSub(${i},${j})">×</button></span>`).join('')}
@@ -801,7 +806,7 @@ function publish(){
     DB.listings.forEach(l=>l.status='Live'); save();
     pending=0; b.classList.remove('has-changes'); document.getElementById('pubPill').textContent='0';
     if(document.getElementById('view-listings').classList.contains('active')) renderListings();
-    toast(`Published — ${n} change${n>1?'s':''} now live`,'tick');
+    toast(`Published ${n} change${n>1?'s':''} — demo only, nothing sent to the live site`,'tick');
   },1100);
 }
 function resetDemo(){ if(!confirm('Reset the whole demo (Listings, Categories and the Bronze Queue) back to its starting state?'))return; localStorage.removeItem(KEY); if(window.bzResetDemo) window.bzResetDemo(); load(); pending=0; document.getElementById('publishBtn').classList.remove('has-changes'); document.getElementById('pubPill').textContent='0'; document.getElementById('catFilter').innerHTML=''; go('dashboard'); toast('Demo reset','tick'); }
@@ -944,7 +949,12 @@ load(); go('dashboard');
         ? '<span class="live-url">Live on <a href="'+subUrl+'" target="_blank" rel="noopener">'+esc(it.subcat_name||it.subcat_path||'sub-category')+' &rarr;</a></span>'
         : '<span class="live-url">Live (sub-category not recorded)</span>';
     } else {
-      actions = '<button class="btn btn-approve" id="ap-'+esc(it.id)+'">Approve anyway</button>';
+      // rejected — still offer a category/subcategory so "Approve anyway" can actually publish
+      actions = '<div class="sc-assign-row">'
+              + '<div class="sc-assign"><span class="sc-assign-label">Category <span class="req">*</span></span>' + categoryOptions(it.category, it.id) + '</div>'
+              + '<div class="sc-assign"><span class="sc-assign-label">Subcategory <span class="req">*</span></span><select class="sc-select" id="sc-'+esc(it.id)+'">' + subcatOptionsHtml(it.category) + '</select></div>'
+              + '</div>'
+              + '<div class="sc-btns"><button class="btn btn-approve" id="ap-'+esc(it.id)+'">Approve anyway</button></div>';
     }
     return '<div class="card">'
       + '<div class="card-head"><div><div class="card-name">'+esc(it.business_name)+'</div>'
