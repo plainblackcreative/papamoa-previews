@@ -402,7 +402,7 @@
   <div class="modal sm ai-modal">
     <div class="modal-head"><h2><svg width="20" height="20" viewBox="0 0 24 24" fill="#6B4FC4"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9z"/></svg> Write with AI <span class="demo-badge">Demo</span></h2><button class="close" onclick="closeModal('aiModal')">×</button></div>
     <div class="modal-body">
-      <p class="ai-sub">Generating the <span class="ai-target" id="aiTargetLabel">field</span>. Paste the business's website, or jot a few notes, and <strong id="aiNameLbl">Papāmoa AI</strong> writes it for you.</p>
+      <p class="ai-sub">Generating the <span class="ai-target" id="aiTargetLabel">field</span>. Paste the business's website, or jot a few notes, and <strong id="aiNameLbl">PlainBlack AI</strong> writes it for you.</p>
       <div class="field"><label>Website URL or a few notes</label><textarea id="aiInput" placeholder="e.g.  blackberryeatery.co.nz   —   or:   cosy beachfront café, great coffee, brunch, open 7 days"></textarea></div>
       <div id="aiResult"></div>
     </div>
@@ -630,7 +630,7 @@ function publish(){
 function resetDemo(){ if(!confirm('Reset the demo back to its starting state?'))return; localStorage.removeItem(KEY); load(); pending=0; document.getElementById('publishBtn').classList.remove('has-changes'); document.getElementById('pubPill').textContent='0'; document.getElementById('catFilter').innerHTML=''; go('dashboard'); toast('Demo reset','tick'); }
 
 /* ---------------- AI assist (demo — not connected) ---------------- */
-const AI_NAME='Papāmoa AI';   // ← rename to brand your assistant (e.g. 'PlainBlack AI')
+const AI_NAME='PlainBlack AI';   // ← rename to brand your assistant
 let aiField='field';
 function openAI(label){
   aiField=label;
