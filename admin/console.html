@@ -240,14 +240,10 @@
   .toast .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .6s linear infinite}
   @keyframes sp{to{transform:rotate(360deg)}}
 
-  /* ================= BRONZE QUEUE (live) — scoped to #view-bronze ================= */
-  #view-bronze .live-banner{background:var(--green-bg);border:1px solid rgba(79,158,0,.3);color:#3A6E00;border-radius:var(--radius-lg);padding:13px 16px;font-size:13.5px;margin-bottom:18px;line-height:1.55;display:flex;gap:10px;align-items:flex-start}
-  #view-bronze .live-banner .ic{flex-shrink:0;font-size:16px;line-height:1.3}
-  #view-bronze .live-banner code{background:rgba(79,158,0,.12);padding:1px 5px;border-radius:4px;font-size:12px}
-  #view-bronze .auth{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:20px;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;box-shadow:var(--shadow-sm)}
-  #view-bronze .auth label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
-  #view-bronze .auth input{padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius);font-family:var(--font-body);font-size:14px;min-width:240px;outline:none}
-  #view-bronze .auth input:focus{border-color:var(--ocean)}
+  /* ================= BRONZE QUEUE (sample-data demo) — scoped to #view-bronze ================= */
+  #view-bronze .demo-note{background:var(--cream);border:1px solid var(--border);color:var(--teal-dark);border-radius:var(--radius-lg);padding:13px 16px;font-size:13.5px;margin-bottom:18px;line-height:1.55;display:flex;gap:10px;align-items:flex-start}
+  #view-bronze .demo-note .ic{flex-shrink:0;font-size:16px;line-height:1.3}
+  #view-bronze .demo-note strong{color:var(--teal-dark)}
   #view-bronze .filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
   #view-bronze .filter{font-size:13px;font-weight:700;padding:7px 16px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer}
   #view-bronze .filter.active{background:var(--navy);color:#fff;border-color:var(--navy)}
@@ -335,9 +331,8 @@
 </div>
 
 <div class="demo-bar">
-  <strong>Operator console preview.</strong>
-  <span>Listings &amp; Categories are a clickable demo — they save to your browser only.</span>
-  <span class="live-tag"><span class="d"></span> Bronze Queue is live — wired to the real backend.</span>
+  <strong>Interactive demo.</strong>
+  <span>Have a play — add a listing, edit one, approve a Bronze submission. Everything runs on sample data in your browser; nothing here touches the live site.</span>
   <a onclick="resetDemo()">Reset demo ↺</a>
 </div>
 
@@ -359,7 +354,6 @@
     <button class="nav-item" data-view="bronze" onclick="go('bronze')">
       <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4 8 4 8-4Z"/><path d="M4 7v6l8 4 8-4V7"/></svg>
       <span>Bronze Queue</span>
-      <span class="live-dot" title="Live — connected to the backend"></span>
     </button>
   </nav>
 
@@ -415,21 +409,13 @@
 
     <!-- BRONZE QUEUE (live) -->
     <section class="view" id="view-bronze">
-      <div class="page-head"><h1>Bronze Queue</h1><p>Moderation queue for free Bronze listings — connected to the live backend.</p></div>
-      <div class="live-banner">
-        <span class="ic">⚡</span>
-        <div><strong>This view is live.</strong> Approve marks a submission live and surfaces it as a card on the assigned sub-category page (rendered from <code>/bronze-public</code>; takes effect on the next page load once the worker cache clears). Reject marks it rejected. Nothing goes live without approval. Requires the admin token.</div>
+      <div class="page-head"><h1>Bronze Queue</h1><p>Moderation queue for the free Bronze listings people submit from the site.</p></div>
+      <div class="demo-note">
+        <span class="ic">🛡️</span>
+        <div><strong>How it works.</strong> Free Bronze listings submitted from the site land here as <em>pending</em>. Approve assigns the listing to a sub-category and surfaces it as a card on that page; Reject declines it. Nothing goes live without your approval. The submissions below are sample data so you can try the flow — approve, reject and edit all work.</div>
       </div>
 
-      <div class="auth">
-        <div>
-          <label for="tok">Admin token</label>
-          <input type="password" id="tok" placeholder="BRONZE_ADMIN_TOKEN" autocomplete="off">
-        </div>
-        <button class="btn btn-primary" id="connect">Connect &amp; load</button>
-      </div>
-
-      <div class="filters" id="bzFilters" style="display:none;">
+      <div class="filters" id="bzFilters">
         <button class="filter active" data-f="pending">Pending</button>
         <button class="filter" data-f="live">Live</button>
         <button class="filter" data-f="rejected">Rejected</button>
@@ -818,7 +804,7 @@ function publish(){
     toast(`Published — ${n} change${n>1?'s':''} now live`,'tick');
   },1100);
 }
-function resetDemo(){ if(!confirm('Reset the Listings & Categories demo back to its starting state? (The Bronze Queue is live and is not affected.)'))return; localStorage.removeItem(KEY); load(); pending=0; document.getElementById('publishBtn').classList.remove('has-changes'); document.getElementById('pubPill').textContent='0'; document.getElementById('catFilter').innerHTML=''; go('dashboard'); toast('Demo reset','tick'); }
+function resetDemo(){ if(!confirm('Reset the whole demo (Listings, Categories and the Bronze Queue) back to its starting state?'))return; localStorage.removeItem(KEY); if(window.bzResetDemo) window.bzResetDemo(); load(); pending=0; document.getElementById('publishBtn').classList.remove('has-changes'); document.getElementById('pubPill').textContent='0'; document.getElementById('catFilter').innerHTML=''; go('dashboard'); toast('Demo reset','tick'); }
 
 /* ---------------- AI assist (demo — not connected) ---------------- */
 const AI_NAME='PlainBlack AI';   // ← rename to brand your assistant
@@ -854,16 +840,30 @@ load(); go('dashboard');
 
 
 /* ============================================================
-   BRONZE QUEUE (live backend) — isolated in its own scope so
+   BRONZE QUEUE (sample-data demo) — isolated in its own scope so
    its load()/esc()/$ etc. never clobber the CMS demo globals.
-   Only the handful of functions referenced by inline onclick
-   in the markup are exposed on window (bz* prefix).
+   This is a SAFE DEMO: it runs entirely on local sample data and
+   never calls the live backend. Approve / Reject / Edit mutate the
+   in-browser copy only (persisted to localStorage, cleared by Reset).
+   The real moderation queue (admin/bronze-queue.html) is token-gated.
+   Only functions referenced by inline onclick are exposed on window.
    ============================================================ */
 (function(){
-  var API = 'https://papamoa-claude-proxy.jkbrownnz.workers.dev';
-  var state = { items: [], filter: 'pending', token: '' };
-  var SUBCATS = {};   // category -> [{path,name}] (loaded from bronze-subcats.json)
+  var KEY = 'papamoa-bronze-demo-v1';
+  var state = { items: [], filter: 'pending' };
   var inited = false;
+
+  // Inlined sub-category options (a trimmed copy of bronze-subcats.json) so the
+  // demo is fully self-contained — no network calls of any kind.
+  var SUBCATS = {
+    accommodation: [ {path:'accommodation/motels-papamoa',name:'Motels'}, {path:'accommodation/holiday-parks-papamoa',name:'Holiday Parks'}, {path:'accommodation/holiday-homes-papamoa',name:'Holiday Homes'} ],
+    'food-drink':  [ {path:'food-drink/cafe-papamoa',name:'Cafes'}, {path:'food-drink/restaurants-papamoa',name:'Restaurants'}, {path:'food-drink/takeaways-papamoa',name:'Takeaways'}, {path:'food-drink/bakery-papamoa',name:'Bakeries'} ],
+    entertainment: [ {path:'activities/things-to-do-papamoa',name:'Things To Do'}, {path:'activities/entertainment-papamoa',name:'Entertainment'} ],
+    health:        [ {path:'health/health-papamoa',name:'Health & Wellness'}, {path:'health/pilates-papamoa',name:'Pilates & Yoga'}, {path:'health/physio-papamoa',name:'Physio'} ],
+    services:      [ {path:'services/plumber-papamoa',name:'Plumbers'}, {path:'services/beauty-papamoa',name:'Beauty & Barbers'}, {path:'services/mechanic-papamoa',name:'Mechanics'}, {path:'services/electrician-papamoa',name:'Electricians'} ],
+    shopping:      [ {path:'shops/shopping-papamoa',name:'Shops'}, {path:'shops/gifts-papamoa',name:'Gifts'} ],
+    'real-estate': [ {path:'community/real-estate',name:'Real Estate'} ]
+  };
   // Fallback for categories without a dedicated subcat list (use the category landing page)
   var CAT_FALLBACK = {
     health:        { path:'health/health-papamoa', name:'Health & Wellness' },
@@ -871,34 +871,23 @@ load(); go('dashboard');
     default:       { path:'homepage',               name:'Local Business' }
   };
 
+  // Sample submissions so Carwyn can try the moderation flow end-to-end.
+  var SEED = [
+    {id:'bz1', business_name:'Tay Street Beach Café', category:'food-drink', subcategory:'café', address:'2 Tay St, Pāpāmoa', phone:'07 542 1180', website:'taystreetcafe.co.nz', email:'hello@taystreetcafe.co.nz', blurb:'Beachfront café doing all-day brunch, single-origin coffee and house-baked treats. Dog-friendly courtyard.', status:'pending', ts:'2026-06-07T21:40:00Z', subcat_path:'', subcat_name:''},
+    {id:'bz2', business_name:'Pāpāmoa Pilates Studio', category:'health', subcategory:'pilates', address:'14 Gravatt Rd, Pāpāmoa', phone:'021 555 0142', website:'papamoapilates.co.nz', email:'studio@papamoapilates.co.nz', blurb:'Reformer and mat Pilates for all levels. Small classes, qualified instructors, beginners welcome.', status:'pending', ts:'2026-06-07T19:05:00Z', subcat_path:'', subcat_name:''},
+    {id:'bz3', business_name:'Coastline Plumbing & Gas', category:'services', subcategory:'plumber', address:'Pāpāmoa (mobile)', phone:'027 555 8890', website:'', email:'jobs@coastlineplumbing.nz', blurb:'Local plumber and gasfitter — repairs, hot water, bathroom renos. Fast callouts across Pāpāmoa.', status:'pending', ts:'2026-06-06T08:15:00Z', subcat_path:'', subcat_name:''},
+    {id:'bz4', business_name:'Sandbar Barbers', category:'services', subcategory:'barber', address:'Fashion Island, Pāpāmoa', phone:'07 542 7711', website:'sandbarbarbers.co.nz', email:'cuts@sandbarbarbers.co.nz', blurb:'Walk-in barbershop — cuts, fades and hot-towel shaves.', status:'live', ts:'2026-06-04T03:20:00Z', subcat_path:'services/beauty-papamoa', subcat_name:'Beauty & Barbers'},
+    {id:'bz5', business_name:'QuickCash Loans', category:'default', subcategory:'finance', address:'(not provided)', phone:'', website:'quickcash-loans.example', email:'promo@quickcash.example', blurb:'Fast cash, no credit checks!! Apply now!!!', status:'rejected', ts:'2026-06-03T11:00:00Z', subcat_path:'', subcat_name:''}
+  ];
+
   function $(id){ return document.getElementById(id); }
   function esc(s){ var d=document.createElement('div'); d.textContent = (s==null?'':s); return d.innerHTML; }
   function setStatus(msg, err){ var el=$('status'); el.textContent=msg||''; el.className='status-msg'+(err?' err':''); }
   function fmtDate(iso){ if(!iso) return ''; var d=new Date(iso); return isNaN(d)?iso:d.toLocaleString('en-NZ',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); }
 
-  async function api(path, opts){
-    var sep = path.indexOf('?')>-1 ? '&' : '?';
-    var res = await fetch(API + path + sep + 'key=' + encodeURIComponent(state.token), opts || {});
-    var data = await res.json().catch(function(){ return { ok:false, error:'bad response' }; });
-    if (res.status === 401) throw new Error('Unauthorized - check the admin token.');
-    return data;
-  }
-
-  async function bzLoad(){
-    setStatus('Loading…');
-    try {
-      if (!Object.keys(SUBCATS).length) {
-        SUBCATS = await fetch('/papamoa-previews/assets/bronze-subcats.json').then(function(r){ return r.json(); }).catch(function(){ return {}; });
-      }
-      var data = await api('/bronze-list', { method:'GET' });
-      if (!data.ok) throw new Error(data.error || 'load failed');
-      state.items = data.items || [];
-      localStorage.setItem('bronzeToken', state.token);
-      $('bzFilters').style.display = 'flex';
-      render();
-      setStatus(state.items.length + ' total submission(s).');
-    } catch(e) { setStatus(e.message, true); }
-  }
+  function bzSave(){ try{ localStorage.setItem(KEY, JSON.stringify(state.items)); }catch(e){} }
+  function bzReset(){ state.items = JSON.parse(JSON.stringify(SEED)); bzSave(); }
+  function bzLoadLocal(){ try{ var s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.length){ state.items=s; return; } }catch(e){} bzReset(); }
 
   function render(){
     var list = $('list');
@@ -975,7 +964,7 @@ load(); go('dashboard');
       + '</div>';
   }
 
-  async function approve(id){
+  function approve(id){
     var catSel = document.getElementById('cat-'+id);
     var sel = document.getElementById('sc-'+id);
     var category = catSel ? catSel.value : '';
@@ -983,15 +972,10 @@ load(); go('dashboard');
     if (!subcatPath) { setStatus('Pick a subcategory before approving.', true); if (sel) sel.focus(); return; }
     var subcatName = sel.options[sel.selectedIndex].text;
     if (!confirm('Approve and surface as a card on "'+subcatName+'"?')) return;
-    setStatus('Publishing…');
-    try {
-      var data = await api('/bronze-approve', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id, category:category, subcat_path:subcatPath, subcat_name:subcatName }) });
-      if (!data.ok) throw new Error(data.error || 'approve failed');
-      var it = state.items.find(function(x){ return x.id===id; });
-      if (it) { it.status='live'; it.category=category; it.subcat_path=subcatPath; it.subcat_name=subcatName; }
-      render();
-      setStatus('Live. Card appears on ' + (data.url||'') + ' on the next page load (cache invalidated).');
-    } catch(e){ setStatus(e.message, true); }
+    var it = state.items.find(function(x){ return x.id===id; });
+    if (it) { it.status='live'; it.category=category; it.subcat_path=subcatPath; it.subcat_name=subcatName; }
+    bzSave(); render();
+    setStatus('Approved — in the live platform this publishes a card on “'+subcatName+'”. (Demo: nothing was sent.)');
   }
 
   // ── EDIT MODAL ──────────────────────────────────────────────────────────
@@ -1029,74 +1013,44 @@ load(); go('dashboard');
     document.body.style.overflow = '';
   }
   function bzEditOverlayClick(e){ if (e.target.id === 'bz-ov') bzEditClose(); }
-  async function bzEditSave(e){
+  function bzEditSave(e){
     e.preventDefault();
     var id = document.getElementById('bz-edit-id').value;
     var scSel = document.getElementById('bz-f-subcat_path');
     var subcatName = '';
     if (scSel.value) { var opt = scSel.options[scSel.selectedIndex]; subcatName = opt ? opt.text : ''; }
-    var fields = {
-      name:           document.getElementById('bz-f-name').value,
-      address:        document.getElementById('bz-f-address').value,
-      phone:          document.getElementById('bz-f-phone').value,
-      website:        document.getElementById('bz-f-website').value,
-      email:          document.getElementById('bz-f-email').value,
-      blurb:          document.getElementById('bz-f-blurb').value,
-      subcategory:    document.getElementById('bz-f-subcategory').value,
-      category:       document.getElementById('bz-f-category').value,
-      subcat_path:    scSel.value,
-      subcat_name:    subcatName,
-      status:         document.getElementById('bz-f-status').value
-    };
-    var saveBtn = document.getElementById('bz-save');
-    var errEl = document.getElementById('bz-mod-err');
-    saveBtn.disabled = true; saveBtn.textContent = 'Saving…'; errEl.textContent = '';
-    try {
-      var data = await api('/bronze-update', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id, fields:fields }) });
-      if (!data.ok) throw new Error(data.error || 'update failed');
-      // Patch local state with the fields we sent.
-      var it = state.items.find(function(x){ return x.id===id; });
-      if (it) {
-        if (fields.name)        it.business_name = fields.name;
-        if (fields.address)     it.address = fields.address;
-        if (fields.phone)       it.phone = fields.phone;
-        if (fields.website)     it.website = fields.website;
-        if (fields.email)       it.email = fields.email;
-        if (fields.blurb)       it.blurb = fields.blurb;
-        if (fields.subcategory) it.subcategory = fields.subcategory;
-        if (fields.category)    it.category = fields.category;
-        if (fields.subcat_path) it.subcat_path = fields.subcat_path;
-        if (fields.subcat_name) it.subcat_name = fields.subcat_name;
-        if (fields.status)      it.status = fields.status;
-      }
-      render();
-      bzEditClose();
-      setStatus('Saved. Cache invalidated for the affected sub-category.');
-    } catch(err){
-      errEl.textContent = err.message;
-      saveBtn.disabled = false; saveBtn.textContent = 'Save';
+    var it = state.items.find(function(x){ return x.id===id; });
+    if (it) {
+      it.business_name = document.getElementById('bz-f-name').value;
+      it.address       = document.getElementById('bz-f-address').value;
+      it.phone         = document.getElementById('bz-f-phone').value;
+      it.website       = document.getElementById('bz-f-website').value;
+      it.email         = document.getElementById('bz-f-email').value;
+      it.blurb         = document.getElementById('bz-f-blurb').value;
+      it.subcategory   = document.getElementById('bz-f-subcategory').value;
+      it.category      = document.getElementById('bz-f-category').value;
+      it.subcat_path   = scSel.value;
+      it.subcat_name   = subcatName;
+      it.status        = document.getElementById('bz-f-status').value;
     }
+    bzSave(); render(); bzEditClose();
+    setStatus('Saved. (Demo — changes are kept in this browser only.)');
   }
 
-  async function reject(id){
+  function reject(id){
     if (!confirm('Reject this submission?')) return;
-    setStatus('Rejecting…');
-    try {
-      var data = await api('/bronze-reject', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id:id }) });
-      if (!data.ok) throw new Error(data.error || 'reject failed');
-      var it = state.items.find(function(x){ return x.id===id; });
-      if (it) it.status='rejected';
-      render();
-      setStatus('Rejected.');
-    } catch(e){ setStatus(e.message, true); }
+    var it = state.items.find(function(x){ return x.id===id; });
+    if (it) it.status='rejected';
+    bzSave(); render();
+    setStatus('Rejected.');
   }
 
   // One-time wiring; called the first time the Bronze view is opened.
   function bzInit(){
     if (inited) return;
     inited = true;
-    $('connect').onclick = function(){ state.token = $('tok').value.trim(); if(!state.token){ setStatus('Enter the admin token.', true); return; } bzLoad(); };
-    $('refresh').onclick = bzLoad;
+    bzLoadLocal();
+    $('refresh').onclick = function(){ render(); setStatus(state.items.length + ' sample submission(s).'); };
     $('bzFilters').addEventListener('click', function(e){
       var b = e.target.closest('.filter'); if(!b) return;
       state.filter = b.getAttribute('data-f');
@@ -1104,7 +1058,6 @@ load(); go('dashboard');
       b.classList.add('active');
       render();
     });
-    $('tok').addEventListener('keydown', function(e){ if(e.key==='Enter') $('connect').click(); });
     // Delegate Edit clicks (buttons are re-rendered on every render() call).
     $('list').addEventListener('click', function(e){
       var b = e.target.closest('[data-edit]');
@@ -1114,17 +1067,23 @@ load(); go('dashboard');
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape' && document.getElementById('bz-ov').classList.contains('open')) bzEditClose();
     });
-    // restore token from session (convenience)
-    var saved = localStorage.getItem('bronzeToken');
-    if (saved) { $('tok').value = saved; state.token = saved; bzLoad(); }
+    render();
+    setStatus(state.items.length + ' sample submission(s).');
   }
 
-  // Expose only what inline onclick handlers in the markup need.
+  // Expose only what inline onclick handlers / the Reset button need.
   window.bzInit = bzInit;
   window.bzCatChange = bzCatChange;
   window.bzEditClose = bzEditClose;
   window.bzEditOverlayClick = bzEditOverlayClick;
   window.bzEditSave = bzEditSave;
+  window.bzResetDemo = function(){
+    bzReset(); state.filter='pending';
+    if(inited){
+      document.querySelectorAll('#bzFilters .filter').forEach(function(x){ x.classList.toggle('active', x.getAttribute('data-f')==='pending'); });
+      render(); setStatus(state.items.length + ' sample submission(s).');
+    }
+  };
 })();
 </script>
 </body>
