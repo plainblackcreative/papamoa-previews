@@ -164,6 +164,30 @@
   .toast .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .6s linear infinite}
   @keyframes sp{to{transform:rotate(360deg)}}
 
+  /* ---- Sectioned edit form ---- */
+  .modal.lg{max-width:660px}
+  .form-sec{border-top:1px solid var(--border);padding:18px 0 6px}
+  .form-sec:first-of-type{border-top:none;padding-top:0}
+  .form-sec h4{font-family:var(--font-body);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ocean);font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .gold-only{font-size:10px;background:var(--gold-bg);color:var(--gold);padding:2px 8px;border-radius:20px;letter-spacing:.02em;font-weight:700;text-transform:none}
+  .tier-tag{margin-left:10px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em}
+  .tier-tag.b-gold{background:var(--gold-bg);color:var(--gold)}.tier-tag.b-silver{background:var(--silver-bg);color:var(--silver)}.tier-tag.b-bronze{background:var(--bronze-bg);color:var(--bronze)}
+  .hours-edit{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .hrow{display:flex;align-items:center;gap:10px}
+  .hrow .hday{width:34px;font-size:12.5px;font-weight:700;color:var(--muted)}
+  .hrow input{flex:1;padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px}
+  .hrow input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,176,248,.13)}
+  .chip-input{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;min-height:8px}
+  .chip-add-row{display:flex;gap:8px}
+  .chip-add-row input{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius)}
+  .chip-add-row input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,176,248,.13)}
+  .muted-note{color:var(--muted);font-size:13px;font-style:italic}
+  .dropzone.sm{padding:16px;font-size:12.5px}
+  .faq-edit{border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px;background:var(--sand)}
+  .faq-edit input,.faq-edit textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;background:var(--white)}
+  .faq-edit textarea{min-height:50px;resize:vertical}
+  .faq-edit .btn{align-self:flex-start}
+
   @media(max-width:860px){
     .sidebar{width:64px;padding:18px 8px}
     .side-label,.nav-item span{display:none}
@@ -175,6 +199,8 @@
     .hide-sm{display:none}
     .main{padding:16px 12px}
     thead th:nth-child(3),tbody td:nth-child(3){display:none}
+    .field.row{flex-direction:column;gap:0}
+    .hours-edit{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -255,30 +281,79 @@
 
 <!-- LISTING MODAL -->
 <div class="overlay" id="listingModal">
-  <div class="modal">
-    <div class="modal-head"><h2 id="listingTitle">Add listing</h2><button class="close" onclick="closeModal('listingModal')">×</button></div>
+  <div class="modal lg">
+    <div class="modal-head"><h2 id="listingTitle">Add listing</h2><span class="tier-tag" id="tierTag"></span><button class="close" onclick="closeModal('listingModal')">×</button></div>
     <div class="modal-body">
       <input type="hidden" id="f-id">
-      <div class="field"><label>Business name</label><input type="text" id="f-name" placeholder="e.g. Blackberry Eatery"></div>
-      <div class="field"><label>Tagline <span class="opt">— one short line</span></label><input type="text" id="f-tag" placeholder="e.g. All-day brunch on the beachfront"></div>
-      <div class="field row">
-        <div><label>Category</label><select id="f-cat" onchange="syncSubcats()"></select></div>
-        <div><label>Subcategory</label><select id="f-sub"></select></div>
-      </div>
-      <div class="field">
-        <label>Listing tier</label>
-        <div class="tier-pick" id="tierPick">
-          <button type="button" class="tier-opt" data-tier="Gold" onclick="pickTier('Gold')">Gold<small>Full feature</small></button>
-          <button type="button" class="tier-opt" data-tier="Silver" onclick="pickTier('Silver')">Silver<small>Logo + details</small></button>
-          <button type="button" class="tier-opt" data-tier="Bronze" onclick="pickTier('Bronze')">Bronze<small>Free listing</small></button>
+
+      <div class="form-sec">
+        <h4>Basics</h4>
+        <div class="field"><label>Business name</label><input type="text" id="f-name" placeholder="e.g. Blackberry Eatery"></div>
+        <div class="field"><label>Tagline <span class="opt">— the hero line</span></label><input type="text" id="f-tag" placeholder="e.g. All-day brunch on the beachfront"></div>
+        <div class="field row">
+          <div><label>Category</label><select id="f-cat" onchange="syncSubcats()"></select></div>
+          <div><label>Subcategory</label><select id="f-sub"></select></div>
+        </div>
+        <div class="field"><label>Listing tier</label>
+          <div class="tier-pick" id="tierPick">
+            <button type="button" class="tier-opt" data-tier="Gold" onclick="pickTier('Gold')">Gold<small>Full feature page</small></button>
+            <button type="button" class="tier-opt" data-tier="Silver" onclick="pickTier('Silver')">Silver<small>Logo + details</small></button>
+            <button type="button" class="tier-opt" data-tier="Bronze" onclick="pickTier('Bronze')">Bronze<small>Free basic listing</small></button>
+          </div>
         </div>
       </div>
-      <div class="field"><label>Description</label><textarea id="f-desc" placeholder="A short write-up about the business…"></textarea></div>
-      <div class="field row">
-        <div><label>Phone <span class="opt">— optional</span></label><input type="text" id="f-phone" placeholder="07 …"></div>
-        <div><label>Website <span class="opt">— optional</span></label><input type="text" id="f-web" placeholder="https://"></div>
+
+      <div class="form-sec">
+        <h4>About</h4>
+        <div class="field"><label>Description</label><textarea id="f-desc" placeholder="A short write-up about the business…"></textarea></div>
       </div>
-      <div class="field"><label>Photos</label><div class="dropzone" onclick="toast('Photo upload — demo only','tick')">Drag photos here, or click to browse<br><span style="font-size:11px">JPG / PNG · up to 8 images</span></div></div>
+
+      <div class="form-sec">
+        <h4>Contact &amp; location</h4>
+        <div class="field row">
+          <div><label>Phone</label><input type="text" id="f-phone" placeholder="07 …"></div>
+          <div><label>Email</label><input type="text" id="f-email" placeholder="hello@…"></div>
+        </div>
+        <div class="field"><label>Website</label><input type="text" id="f-web" placeholder="www…"></div>
+        <div class="field"><label>Address</label><input type="text" id="f-addr" placeholder="Street, Pāpāmoa"></div>
+      </div>
+
+      <div class="form-sec">
+        <h4>Opening hours</h4>
+        <div class="hours-edit" id="hoursEdit"></div>
+      </div>
+
+      <div class="form-sec">
+        <h4>Services &amp; features</h4>
+        <div class="chip-input" id="svcWrap"></div>
+        <div class="chip-add-row"><input type="text" id="svcInput" placeholder="Add a service or feature…" onkeydown="if(event.key==='Enter'){event.preventDefault();addSvc()}"><button class="btn btn-sm" type="button" onclick="addSvc()">Add</button></div>
+      </div>
+
+      <div class="form-sec">
+        <h4>Photos</h4>
+        <div class="field row">
+          <div><label>Logo</label><div class="dropzone sm" onclick="toast('Logo upload — demo only')">Upload logo</div></div>
+          <div><label>Gallery <span class="opt" id="galCount"></span></label><div class="dropzone sm" onclick="toast('Photo upload — demo only')">Add gallery photos<br><span style="font-size:11px">up to 9 images</span></div></div>
+        </div>
+      </div>
+
+      <div class="form-sec">
+        <h4>Social links</h4>
+        <div class="field row"><div><label>Facebook</label><input type="text" id="f-fb" placeholder="facebook.com/…"></div><div><label>Instagram</label><input type="text" id="f-ig" placeholder="@handle"></div></div>
+        <div class="field row"><div><label>TikTok</label><input type="text" id="f-tt" placeholder="@handle"></div><div><label>YouTube</label><input type="text" id="f-yt" placeholder="youtube.com/@…"></div></div>
+      </div>
+
+      <div class="form-sec">
+        <h4>Reviews</h4>
+        <div class="field row"><div><label>Google rating</label><input type="text" id="f-grate" placeholder="4.8"></div><div><label>Review count</label><input type="text" id="f-gcount" placeholder="127 reviews"></div></div>
+      </div>
+
+      <div class="form-sec" id="faqSec">
+        <h4>FAQ <span class="gold-only">Gold only</span></h4>
+        <div id="faqWrap"></div>
+        <button class="btn btn-sm" type="button" onclick="addFaq()">+ Add question</button>
+      </div>
+
     </div>
     <div class="modal-foot"><button class="btn" onclick="closeModal('listingModal')">Cancel</button><button class="btn btn-primary" onclick="saveListing()">Save listing</button></div>
   </div>
@@ -350,10 +425,37 @@ const SEED = {
   ],
 };
 
+/* ---------------- Field enrichment (so Edit opens onto real content) ---------------- */
+const DEFAULT_HOURS=[['Mon','9am–5pm'],['Tue','9am–5pm'],['Wed','9am–5pm'],['Thu','9am–5pm'],['Fri','9am–5pm'],['Sat','9am–4pm'],['Sun','Closed']];
+const CAT_SERVICES={
+  'Food & Drink':['Dine-in','Takeaway','Coffee','Vegetarian options'],
+  'Accommodation':['Free WiFi','Parking','Family friendly','Pet friendly'],
+  'Activities':['Beginner friendly','Group bookings','Gear provided','Kids welcome'],
+  'Services':['Online bookings','Eftpos','Locally owned','Free quotes'],
+  'Shops':['In-store','Gift cards','Local pickup','Eftpos'],
+};
+const ROADS=['Papāmoa Beach Rd','Domain Rd','Gravatt Rd','Parton Rd','Tara Rd','Te Okuroa Dr','Motiti Rd','Emerald Shores Dr'];
+function slugify(n){ return (n||'').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+function enrich(l){
+  const s=slugify(l.name);
+  if(l.desc==null)  l.desc=`${l.tag}. A local Pāpāmoa favourite — listed in the ${l.sub} section of the directory.`;
+  if(l.phone==null) l.phone='07 542 '+String(1000+l.id*7).slice(0,4);
+  if(l.email==null) l.email='hello@'+s+'.co.nz';
+  if(l.web==null)   l.web='www.'+s+'.co.nz';
+  if(l.addr==null)  l.addr=(10+l.id*3)+' '+ROADS[l.id%ROADS.length]+', Pāpāmoa';
+  if(!l.hours)      l.hours=DEFAULT_HOURS.map(h=>h.slice());
+  if(!l.services)   l.services=(CAT_SERVICES[l.cat]||[]).slice(0, l.tier==='Bronze'?2:4);
+  if(!l.social)     l.social={ facebook:l.tier!=='Bronze'?'facebook.com/'+s:'', instagram:l.tier!=='Bronze'?'@'+s.replace(/-/g,''):'', tiktok:'', youtube:'' };
+  if(!l.reviews)    l.reviews= l.tier==='Gold'?{grate:'4.8',gcount:(80+l.id*3)+' reviews'} : l.tier==='Silver'?{grate:'4.6',gcount:(20+l.id)+' reviews'} : {grate:'',gcount:''};
+  if(l.photos==null) l.photos= l.tier==='Gold'?6 : l.tier==='Silver'?3 : 1;
+  if(!l.faqs)       l.faqs= l.tier==='Gold'?[{q:'Do you take bookings?',a:'Yes — give us a call or book online.'},{q:'Where are you located?',a:l.addr}] : [];
+  return l;
+}
+
 /* ---------------- State ---------------- */
 const KEY='papamoa-cms-demo-v1';
 let DB, pending=0;
-function load(){ try{ DB=JSON.parse(localStorage.getItem(KEY)) }catch(e){} if(!DB||!DB.listings){ DB=JSON.parse(JSON.stringify(SEED)); } }
+function load(){ try{ DB=JSON.parse(localStorage.getItem(KEY)) }catch(e){} if(!DB||!DB.listings){ DB=JSON.parse(JSON.stringify(SEED)); } DB.listings.forEach(enrich); }
 function save(){ localStorage.setItem(KEY, JSON.stringify(DB)); }
 function nextId(){ return DB.listings.reduce((m,l)=>Math.max(m,l.id),0)+1; }
 function logActivity(t){ DB.activity.unshift({t,when:'Just now'}); DB.activity=DB.activity.slice(0,8); }
@@ -402,40 +504,58 @@ function renderListings(){
     </div></td></tr>`).join('');
 }
 
-let selTier='Silver';
-function pickTier(t){ selTier=t; document.querySelectorAll('.tier-opt').forEach(b=>b.classList.toggle('sel', b.dataset.tier===t)); }
-function syncSubcats(){
-  const cat=DB.categories.find(c=>c.name===document.getElementById('f-cat').value);
-  document.getElementById('f-sub').innerHTML=(cat?cat.subs:[]).map(s=>`<option>${esc(s)}</option>`).join('');
+let selTier='Silver', editing=null;
+const $=id=>document.getElementById(id);
+function pickTier(t){
+  selTier=t; if(editing) editing.tier=t;
+  document.querySelectorAll('.tier-opt').forEach(b=>b.classList.toggle('sel', b.dataset.tier===t));
+  $('faqSec').style.display = t==='Gold'?'block':'none';
+  const tag=$('tierTag'); tag.className='tier-tag b-'+t.toLowerCase(); tag.textContent=t+' listing';
 }
+function syncSubcats(){
+  const cat=DB.categories.find(c=>c.name===$('f-cat').value);
+  $('f-sub').innerHTML=(cat?cat.subs:[]).map(s=>`<option>${esc(s)}</option>`).join('');
+}
+function blankListing(){ return { id:0, name:'', tag:'', cat:DB.categories[0].name, sub:'', tier:'Silver', status:'Draft',
+  desc:'', phone:'', email:'', web:'', addr:'', hours:DEFAULT_HOURS.map(h=>h.slice()), services:[],
+  social:{facebook:'',instagram:'',tiktok:'',youtube:''}, reviews:{grate:'',gcount:''}, photos:0, faqs:[] }; }
 function openListing(id){
-  document.getElementById('f-cat').innerHTML=DB.categories.map(c=>`<option>${esc(c.name)}</option>`).join('');
-  if(id){
-    const l=DB.listings.find(x=>x.id===id);
-    document.getElementById('listingTitle').textContent='Edit listing';
-    document.getElementById('f-id').value=l.id;
-    document.getElementById('f-name').value=l.name; document.getElementById('f-tag').value=l.tag||'';
-    document.getElementById('f-cat').value=l.cat; syncSubcats(); document.getElementById('f-sub').value=l.sub;
-    document.getElementById('f-desc').value=l.desc||''; document.getElementById('f-phone').value=l.phone||''; document.getElementById('f-web').value=l.web||'';
-    pickTier(l.tier);
-  }else{
-    document.getElementById('listingTitle').textContent='Add listing';
-    ['f-id','f-name','f-tag','f-desc','f-phone','f-web'].forEach(i=>document.getElementById(i).value='');
-    syncSubcats(); pickTier('Silver');
-  }
+  $('f-cat').innerHTML=DB.categories.map(c=>`<option>${esc(c.name)}</option>`).join('');
+  if(id){ editing=JSON.parse(JSON.stringify(DB.listings.find(x=>x.id===id))); $('listingTitle').textContent='Edit listing'; }
+  else  { editing=blankListing(); $('listingTitle').textContent='Add listing'; }
+  $('f-id').value=editing.id||'';
+  $('f-name').value=editing.name; $('f-tag').value=editing.tag||'';
+  $('f-cat').value=editing.cat; syncSubcats(); if(editing.sub) $('f-sub').value=editing.sub;
+  $('f-desc').value=editing.desc||''; $('f-phone').value=editing.phone||''; $('f-email').value=editing.email||'';
+  $('f-web').value=editing.web||''; $('f-addr').value=editing.addr||'';
+  $('f-fb').value=editing.social.facebook||''; $('f-ig').value=editing.social.instagram||''; $('f-tt').value=editing.social.tiktok||''; $('f-yt').value=editing.social.youtube||'';
+  $('f-grate').value=editing.reviews.grate||''; $('f-gcount').value=editing.reviews.gcount||'';
+  $('galCount').textContent= editing.photos?`— ${editing.photos} uploaded`:'';
+  pickTier(editing.tier); renderHours(); renderSvc(); renderFaq();
   openModal('listingModal');
 }
+function renderHours(){ $('hoursEdit').innerHTML=editing.hours.map((h,i)=>`<div class="hrow"><span class="hday">${h[0]}</span><input type="text" value="${esc(h[1])}" placeholder="9am–5pm" oninput="setHour(${i},this.value)"></div>`).join(''); }
+function setHour(i,v){ editing.hours[i][1]=v; }
+function renderSvc(){ $('svcWrap').innerHTML=editing.services.length? editing.services.map((s,i)=>`<span class="chip">${esc(s)}<button class="x" onclick="removeSvc(${i})">×</button></span>`).join('') : '<span class="muted-note">No services added yet.</span>'; }
+function addSvc(){ const v=$('svcInput').value.trim(); if(!v)return; editing.services.push(v); $('svcInput').value=''; renderSvc(); }
+function removeSvc(i){ editing.services.splice(i,1); renderSvc(); }
+function renderFaq(){ $('faqWrap').innerHTML=editing.faqs.map((f,i)=>`<div class="faq-edit"><input type="text" value="${esc(f.q)}" placeholder="Question" oninput="setFaqQ(${i},this.value)"><textarea placeholder="Answer" oninput="setFaqA(${i},this.value)">${esc(f.a)}</textarea><button class="btn btn-sm btn-danger" type="button" onclick="removeFaq(${i})">Remove</button></div>`).join(''); }
+function setFaqQ(i,v){ editing.faqs[i].q=v; } function setFaqA(i,v){ editing.faqs[i].a=v; }
+function addFaq(){ editing.faqs.push({q:'',a:''}); renderFaq(); }
+function removeFaq(i){ editing.faqs.splice(i,1); renderFaq(); }
 function saveListing(){
-  const name=document.getElementById('f-name').value.trim();
+  const name=$('f-name').value.trim();
   if(!name){ toast('Add a business name','warn'); return; }
-  const id=document.getElementById('f-id').value;
-  const data={ name, tag:document.getElementById('f-tag').value.trim(), cat:document.getElementById('f-cat').value,
-    sub:document.getElementById('f-sub').value, tier:selTier, status:'Draft',
-    desc:document.getElementById('f-desc').value.trim(), phone:document.getElementById('f-phone').value.trim(), web:document.getElementById('f-web').value.trim() };
-  if(id){ const l=DB.listings.find(x=>x.id==id); Object.assign(l,data); logActivity(`${name} edited`); }
-  else{ DB.listings.unshift(Object.assign({id:nextId()},data)); logActivity(`${name} added (${selTier})`); }
+  Object.assign(editing,{ name, tag:$('f-tag').value.trim(), cat:$('f-cat').value, sub:$('f-sub').value, tier:selTier, status:'Draft',
+    desc:$('f-desc').value.trim(), phone:$('f-phone').value.trim(), email:$('f-email').value.trim(), web:$('f-web').value.trim(), addr:$('f-addr').value.trim(),
+    social:{ facebook:$('f-fb').value.trim(), instagram:$('f-ig').value.trim(), tiktok:$('f-tt').value.trim(), youtube:$('f-yt').value.trim() },
+    reviews:{ grate:$('f-grate').value.trim(), gcount:$('f-gcount').value.trim() } });
+  if(selTier!=='Gold') editing.faqs=[];
+  const idv=$('f-id').value;
+  if(idv){ const l=DB.listings.find(x=>x.id==idv); Object.assign(l,editing); logActivity(`${name} edited`); }
+  else   { editing.id=nextId(); DB.listings.unshift(editing); logActivity(`${name} added (${selTier})`); }
   save(); markPending(); closeModal('listingModal'); renderListings();
-  toast(id?'Listing updated':'Listing added','tick');
+  toast(idv?'Listing updated':'Listing added','tick');
 }
 function delListing(id){
   const l=DB.listings.find(x=>x.id===id);
