@@ -188,6 +188,20 @@
   .faq-edit textarea{min-height:50px;resize:vertical}
   .faq-edit .btn{align-self:flex-start}
 
+  /* ---- AI assist ---- */
+  .ai-btn{display:inline-flex;align-items:center;gap:5px;border:1px solid #C9BEF0;background:linear-gradient(95deg,#F2ECFF,#E9F3FF);color:#6B4FC4;border-radius:20px;font-size:11px;font-weight:700;padding:3px 10px;margin-left:8px;cursor:pointer;vertical-align:middle;text-transform:none;letter-spacing:0}
+  .ai-btn:hover{filter:brightness(1.03);box-shadow:0 1px 5px rgba(107,79,196,.22)}
+  .ai-btn svg{width:12px;height:12px}
+  .ai-modal .modal-head h2{display:flex;align-items:center;gap:9px}
+  .ai-sub{color:var(--muted);font-size:13.5px;margin-bottom:16px;line-height:1.5}
+  .ai-target{color:var(--navy);font-weight:700;text-transform:capitalize}
+  .demo-badge{background:#5B3FB0;color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:5px;vertical-align:middle}
+  .ai-callout{margin-top:16px;border:1px solid #C9BEF0;background:linear-gradient(180deg,#F6F2FF,#EDF4FF);border-radius:var(--radius);padding:14px 16px;display:flex;gap:11px;align-items:flex-start;animation:fade .2s ease}
+  .ai-callout .ai-ic{font-size:18px;line-height:1.3}
+  .ai-callout h5{font-size:13.5px;color:#5B3FB0;margin-bottom:4px;font-family:var(--font-body);font-weight:800}
+  .ai-callout p{font-size:12.5px;color:var(--muted);line-height:1.55}
+  .btn .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .6s linear infinite;display:inline-block;vertical-align:middle;margin-right:5px}
+
   @media(max-width:860px){
     .sidebar{width:64px;padding:18px 8px}
     .side-label,.nav-item span{display:none}
@@ -289,7 +303,7 @@
       <div class="form-sec">
         <h4>Basics</h4>
         <div class="field"><label>Business name</label><input type="text" id="f-name" placeholder="e.g. Blackberry Eatery"></div>
-        <div class="field"><label>Tagline <span class="opt">— the hero line</span></label><input type="text" id="f-tag" placeholder="e.g. All-day brunch on the beachfront"></div>
+        <div class="field"><label>Tagline <span class="opt">— the hero line</span> <button class="ai-btn" type="button" onclick="openAI('tagline')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9z"/></svg> AI</button></label><input type="text" id="f-tag" placeholder="e.g. All-day brunch on the beachfront"></div>
         <div class="field row">
           <div><label>Category</label><select id="f-cat" onchange="syncSubcats()"></select></div>
           <div><label>Subcategory</label><select id="f-sub"></select></div>
@@ -305,7 +319,7 @@
 
       <div class="form-sec">
         <h4>About</h4>
-        <div class="field"><label>Description</label><textarea id="f-desc" placeholder="A short write-up about the business…"></textarea></div>
+        <div class="field"><label>Description <button class="ai-btn" type="button" onclick="openAI('description')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9z"/></svg> Write with AI</button></label><textarea id="f-desc" placeholder="A short write-up about the business…"></textarea></div>
       </div>
 
       <div class="form-sec">
@@ -380,6 +394,19 @@
       <div class="field"><label>Subcategory name</label><input type="text" id="s-name" placeholder="e.g. Day Spas"></div>
     </div>
     <div class="modal-foot"><button class="btn" onclick="closeModal('subModal')">Cancel</button><button class="btn btn-primary" onclick="saveSubcat()">Add subcategory</button></div>
+  </div>
+</div>
+
+<!-- AI ASSIST MODAL -->
+<div class="overlay" id="aiModal">
+  <div class="modal sm ai-modal">
+    <div class="modal-head"><h2><svg width="20" height="20" viewBox="0 0 24 24" fill="#6B4FC4"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9z"/></svg> Write with AI <span class="demo-badge">Demo</span></h2><button class="close" onclick="closeModal('aiModal')">×</button></div>
+    <div class="modal-body">
+      <p class="ai-sub">Generating the <span class="ai-target" id="aiTargetLabel">field</span>. Paste the business's website, or jot a few notes, and <strong id="aiNameLbl">Papāmoa AI</strong> writes it for you.</p>
+      <div class="field"><label>Website URL or a few notes</label><textarea id="aiInput" placeholder="e.g.  blackberryeatery.co.nz   —   or:   cosy beachfront café, great coffee, brunch, open 7 days"></textarea></div>
+      <div id="aiResult"></div>
+    </div>
+    <div class="modal-foot"><button class="btn" onclick="closeModal('aiModal')">Cancel</button><button class="btn btn-primary" id="aiGenBtn" onclick="aiGenerate()"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9z"/></svg>Generate</button></div>
   </div>
 </div>
 
@@ -539,7 +566,7 @@ function setHour(i,v){ editing.hours[i][1]=v; }
 function renderSvc(){ $('svcWrap').innerHTML=editing.services.length? editing.services.map((s,i)=>`<span class="chip">${esc(s)}<button class="x" onclick="removeSvc(${i})">×</button></span>`).join('') : '<span class="muted-note">No services added yet.</span>'; }
 function addSvc(){ const v=$('svcInput').value.trim(); if(!v)return; editing.services.push(v); $('svcInput').value=''; renderSvc(); }
 function removeSvc(i){ editing.services.splice(i,1); renderSvc(); }
-function renderFaq(){ $('faqWrap').innerHTML=editing.faqs.map((f,i)=>`<div class="faq-edit"><input type="text" value="${esc(f.q)}" placeholder="Question" oninput="setFaqQ(${i},this.value)"><textarea placeholder="Answer" oninput="setFaqA(${i},this.value)">${esc(f.a)}</textarea><button class="btn btn-sm btn-danger" type="button" onclick="removeFaq(${i})">Remove</button></div>`).join(''); }
+function renderFaq(){ $('faqWrap').innerHTML=editing.faqs.map((f,i)=>`<div class="faq-edit"><input type="text" value="${esc(f.q)}" placeholder="Question" oninput="setFaqQ(${i},this.value)"><textarea placeholder="Answer" oninput="setFaqA(${i},this.value)">${esc(f.a)}</textarea><div style="display:flex;gap:8px;align-items:center"><button class="ai-btn" type="button" onclick="openAI('answer')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9z"/></svg> AI</button><button class="btn btn-sm btn-danger" type="button" onclick="removeFaq(${i})">Remove</button></div></div>`).join(''); }
 function setFaqQ(i,v){ editing.faqs[i].q=v; } function setFaqA(i,v){ editing.faqs[i].a=v; }
 function addFaq(){ editing.faqs.push({q:'',a:''}); renderFaq(); }
 function removeFaq(i){ editing.faqs.splice(i,1); renderFaq(); }
@@ -601,6 +628,26 @@ function publish(){
   },1100);
 }
 function resetDemo(){ if(!confirm('Reset the demo back to its starting state?'))return; localStorage.removeItem(KEY); load(); pending=0; document.getElementById('publishBtn').classList.remove('has-changes'); document.getElementById('pubPill').textContent='0'; document.getElementById('catFilter').innerHTML=''; go('dashboard'); toast('Demo reset','tick'); }
+
+/* ---------------- AI assist (demo — not connected) ---------------- */
+const AI_NAME='Papāmoa AI';   // ← rename to brand your assistant (e.g. 'PlainBlack AI')
+let aiField='field';
+function openAI(label){
+  aiField=label;
+  $('aiTargetLabel').textContent=label;
+  $('aiNameLbl').textContent=AI_NAME;
+  $('aiInput').value=''; $('aiResult').innerHTML='';
+  const b=$('aiGenBtn'); b.disabled=false; b.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9z"/></svg>Generate';
+  openModal('aiModal');
+}
+function aiGenerate(){
+  const btn=$('aiGenBtn');
+  btn.disabled=true; btn.innerHTML='<span class="spin"></span>Generating…';
+  setTimeout(()=>{
+    btn.disabled=false; btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9z"/></svg>Generate';
+    $('aiResult').innerHTML='<div class="ai-callout"><span class="ai-ic">⚡</span><div><h5>'+esc(AI_NAME)+' isn’t connected in this demo</h5><p>This preview isn’t wired to the AI. In your live platform, '+esc(AI_NAME)+' reads the website or notes above and writes the '+esc(aiField)+' for you in seconds — you just review and save.</p></div></div>';
+  },750);
+}
 
 /* ---------------- Helpers ---------------- */
 function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
